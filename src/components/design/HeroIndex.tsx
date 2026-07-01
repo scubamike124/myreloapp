@@ -1,4 +1,6 @@
 import Link from "next/link";
+import HeroVideo from "@/components/design/HeroVideo";
+import HeroMenu from "@/components/design/HeroMenu";
 
 const LOGOS = [
   {
@@ -25,8 +27,9 @@ const LOGOS = [
 
 export default function HeroIndex() {
   return (
-    <section className="relative z-[4] mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-8 px-8 pb-8 pt-10 lg:grid-cols-[1.05fr_.95fr]">
+    <section className="relative z-[4] mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-10 px-8 pb-8 pt-6 lg:grid-cols-2">
       <div>
+        <HeroMenu />
         <div className="mb-4 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em]" style={{ color: "#ff5663" }}>
           <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#ff3645", boxShadow: "0 0 10px #ff3645" }} />
           AI Video Creation, Reimagined
@@ -82,23 +85,9 @@ export default function HeroIndex() {
         </div>
       </div>
 
-      {/* Brand "R" chip — blended into the page background */}
-      <div aria-hidden className="hidden lg:block">
-        <img
-          src="/assets/hero R.gif"
-          alt=""
-          className="hero-chip ml-auto w-full max-w-[440px] select-none"
-          style={{
-            // Black areas of the GIF take the page background; reds stay exact.
-            mixBlendMode: "lighten",
-            // Soft-fade the edges to the nearest box side so there is no visible
-            // image boundary (kills the hard top/bottom rectangle line).
-            WebkitMaskImage:
-              "radial-gradient(closest-side at 50% 50%, #000 38%, transparent 86%)",
-            maskImage:
-              "radial-gradient(closest-side at 50% 50%, #000 38%, transparent 86%)",
-          }}
-        />
+      {/* Hero video player */}
+      <div className="self-end">
+        <HeroVideo />
       </div>
     </section>
   );

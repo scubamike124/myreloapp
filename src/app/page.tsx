@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import HeroIndex from "@/components/design/HeroIndex";
 import FeatureGrid from "@/components/design/FeatureGrid";
 import SpeedBand from "@/components/design/SpeedBand";
@@ -27,7 +26,6 @@ export default function Home() {
       />
 
       <div className="relative z-[1]">
-        <Header />
         <main className="flex-1">
           <HeroIndex />
           <Reveal>
