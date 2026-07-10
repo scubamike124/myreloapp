@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const SRC = "/assets/hero-video.mp4";
+const SRC = "/assets/hero-launch.mp4";
 
 function fmt(t: number) {
   if (!Number.isFinite(t)) return "0:00";

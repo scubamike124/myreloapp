@@ -62,7 +62,7 @@ export const TOOLS: Tool[] = [
     fields: [
       { kind: "upload", name: "photo", label: "Upload your photo", hint: "We build a reusable avatar from this." },
       { kind: "text", name: "name", label: "Avatar name", placeholder: "e.g. Brand Spokesperson" },
-      { kind: "select", name: "style", label: "Style", options: ["Realistic", "Cinematic", "Studio", "Corporate", "Luxury"] },
+      { kind: "select", name: "style", label: "Style", options: ["3D Character", "Cartoon", "Anime", "Realistic Studio", "Cinematic"] },
     ],
   },
   {

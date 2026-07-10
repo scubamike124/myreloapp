@@ -7,7 +7,7 @@ type Step = "input" | "scanning" | "detected" | "generating" | "result";
 type UploadStage = "connecting" | "uploading" | "posted";
 
 const RESULT_VIDEO = "/assets/hero-video.mp4";
-const MAX_SECONDS = 30; // hard cap — commercials never exceed 30s (cost + quality)
+const MAX_SECONDS = 8; // single cinematic clip length (test mode)
 
 const SCAN_TASKS = [
   "Fetching your website…",
@@ -57,6 +57,11 @@ export default function WebsiteCommercial() {
   const [brand, setBrand] = useState("");
   const [about, setAbout] = useState("");
   const [style, setStyle] = useState("Cinematic");
+  const [script, setScript] = useState("");
+  const [ideas, setIdeas] = useState<string[]>([]);
+  const [category, setCategory] = useState("");
+  const [err, setErr] = useState<string | null>(null);
+  const [videoUrl, setVideoUrl] = useState("");
 
   const [progress, setProgress] = useState(0);
   const [muted, setMuted] = useState(true);
@@ -70,41 +75,62 @@ export default function WebsiteCommercial() {
 
   const renderStage = RENDER_STAGES[Math.min(RENDER_STAGES.length - 1, Math.floor((progress / 100) * RENDER_STAGES.length))];
 
-  const analyze = () => {
+  const analyze = async () => {
     if (!url.trim()) return;
-    const name = brandFromUrl(url);
+    setErr(null);
     setStep("scanning");
     setScanIdx(0);
     if (scanTimer.current) clearInterval(scanTimer.current);
-    scanTimer.current = setInterval(() => {
-      setScanIdx((i) => {
-        if (i >= SCAN_TASKS.length) {
-          if (scanTimer.current) clearInterval(scanTimer.current);
-          setBrand(name);
-          setAbout(`${name} is a modern brand. This commercial showcases your hero products, your core value, and a strong call to action — built to convert on social.`);
-          setStep("detected");
-          return i;
-        }
-        return i + 1;
-      });
-    }, 620);
+    // Advance the scan checklist while the real request is in flight.
+    scanTimer.current = setInterval(() => setScanIdx((i) => (i >= SCAN_TASKS.length ? i : i + 1)), 700);
+
+    try {
+      const [res] = await Promise.all([
+        fetch("/api/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url }) }),
+        new Promise((r) => setTimeout(r, 1600)),
+      ]);
+      const data = await res.json();
+      if (scanTimer.current) clearInterval(scanTimer.current);
+      if (!res.ok || !data.ok) throw new Error(data.error || "Analysis failed.");
+      setBrand(data.businessName || brandFromUrl(url));
+      setAbout(data.about || "");
+      setScript(data.script || "");
+      setIdeas(Array.isArray(data.ideas) ? data.ideas : []);
+      setCategory(data.category || "");
+      setStep("detected");
+    } catch (e) {
+      if (scanTimer.current) clearInterval(scanTimer.current);
+      setErr(e instanceof Error ? e.message : "Analysis failed.");
+      setBrand(brandFromUrl(url));
+      setAbout("We couldn't reach the AI just now — edit the details below and generate anyway.");
+      setScript("");
+      setIdeas([]);
+      setCategory("");
+      setStep("detected");
+    }
   };
 
-  const generate = () => {
+  const generate = async () => {
     setUpload(null);
+    setErr(null);
     setStep("generating");
     setProgress(0);
     if (genTimer.current) clearInterval(genTimer.current);
-    genTimer.current = setInterval(() => {
-      setProgress((p) => {
-        if (p >= 100) {
-          if (genTimer.current) clearInterval(genTimer.current);
-          setStep("result");
-          return 100;
-        }
-        return p + 2;
-      });
-    }, 75);
+    // Ease toward 95% while the real (multi-minute) render runs.
+    genTimer.current = setInterval(() => setProgress((p) => Math.min(95, p + 1)), 2400);
+    try {
+      const res = await fetch("/api/generate-video", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url }) });
+      const data = await res.json();
+      if (genTimer.current) clearInterval(genTimer.current);
+      if (!res.ok || !data.ok) throw new Error(data.error || "Video generation failed.");
+      setVideoUrl(data.videoUrl);
+      setProgress(100);
+      setStep("result");
+    } catch (e) {
+      if (genTimer.current) clearInterval(genTimer.current);
+      setErr(e instanceof Error ? e.message : "Video generation failed.");
+      setStep("detected");
+    }
   };
 
   const startOver = () => {
@@ -231,10 +257,17 @@ export default function WebsiteCommercial() {
         {/* ---------- DETECTED (auto-filled, editable = manual option) ---------- */}
         {step === "detected" && (
           <div className="mx-auto max-w-[620px]">
-            <div className="mb-5 flex items-center gap-2 rounded-xl px-3.5 py-2.5 text-sm" style={{ border: "1px solid rgba(46,204,113,.3)", background: "rgba(46,204,113,.08)", color: "#8ff0b5" }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6 9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              We scanned <strong className="mx-1 text-white">{url}</strong> — here&apos;s what we found. Tweak anything, or just generate.
-            </div>
+            {err ? (
+              <div className="mb-5 flex items-center gap-2 rounded-xl px-3.5 py-2.5 text-sm" style={{ border: "1px solid rgba(255,159,67,.35)", background: "rgba(255,159,67,.08)", color: "#ffcf9a" }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 9v4M12 17h.01" /><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" /></svg>
+                {err}
+              </div>
+            ) : (
+              <div className="mb-5 flex items-center gap-2 rounded-xl px-3.5 py-2.5 text-sm" style={{ border: "1px solid rgba(46,204,113,.3)", background: "rgba(46,204,113,.08)", color: "#8ff0b5" }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6 9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                We scanned <strong className="mx-1 text-white">{url}</strong>{category ? <> · detected <strong className="mx-1 text-white">{category}</strong></> : null} — tweak anything, or just generate.
+              </div>
+            )}
 
             <div className="space-y-5 rounded-3xl border border-white/10 bg-black/40 p-6 backdrop-blur-md">
               <div>
@@ -261,6 +294,29 @@ export default function WebsiteCommercial() {
                 </div>
               </div>
 
+              {/* AI-written commercial script */}
+              {script && (
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-white/85">Commercial script <span className="text-white/40">· AI-written</span></label>
+                  <textarea rows={4} value={script} onChange={(e) => setScript(e.target.value)} className="w-full resize-none rounded-xl px-4 py-3 text-sm leading-relaxed text-white outline-none" style={inputStyle} />
+                </div>
+              )}
+
+              {/* 20 AI video ideas */}
+              {ideas.length > 0 && (
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-white/85">{ideas.length} video ideas <span className="text-white/40">· generated for {brand}</span></label>
+                  <div className="max-h-44 space-y-1.5 overflow-y-auto rounded-xl p-2" style={inputStyle}>
+                    {ideas.map((idea, i) => (
+                      <div key={i} className="flex items-start gap-2 rounded-lg px-2 py-1.5 text-[13px] text-white/80">
+                        <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded text-[10px] font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>{i + 1}</span>
+                        {idea}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* 30s hard cap */}
               <div className="flex items-center justify-between rounded-xl px-4 py-3" style={{ border: "1px solid rgba(255,70,85,.25)", background: "rgba(255,60,75,.05)" }}>
                 <div className="flex items-center gap-2.5">
@@ -275,7 +331,7 @@ export default function WebsiteCommercial() {
 
               <button onClick={generate} className="flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-bold text-white transition-transform hover:scale-[1.01]" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 10px 28px -8px rgba(225,29,42,.6)" }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
-                Generate 30s Cinematic Commercial
+                Generate {MAX_SECONDS}s Cinematic Commercial
               </button>
               <button onClick={startOver} className="w-full text-center text-xs font-semibold text-white/45 hover:text-white">← Use a different website</button>
             </div>
@@ -295,7 +351,8 @@ export default function WebsiteCommercial() {
                 </div>
               </div>
             </div>
-            <p className="mt-4 text-sm" style={{ color: "#a99a9c" }}>Directing a cinematic 30-second spot for <span className="text-white">{brand}</span>…</p>
+            <p className="mt-4 text-sm" style={{ color: "#a99a9c" }}>Directing a cinematic {MAX_SECONDS}-second spot for <span className="text-white">{brand}</span>…</p>
+            <p className="mt-1 text-xs text-white/40">Generating real AI video — this takes ~1–2 minutes. Keep this tab open.</p>
           </div>
         )}
 
@@ -304,14 +361,14 @@ export default function WebsiteCommercial() {
           <div className="mx-auto max-w-[480px]">
             <div className="mb-4 flex items-center gap-2 rounded-xl px-3.5 py-2.5 text-sm" style={{ border: "1px solid rgba(255,70,85,.3)", background: "rgba(255,70,85,.1)", color: "#ffb3b9" }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6 9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              Your 30-second cinematic commercial for <strong className="mx-1 text-white">{brand}</strong> is ready!
+              Your cinematic commercial for <strong className="mx-1 text-white">{brand}</strong> is ready!
             </div>
 
             <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-black">
-              <video ref={videoRef} src={RESULT_VIDEO} className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline />
+              <video ref={videoRef} src={videoUrl || RESULT_VIDEO} className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline />
               {!upload && (
                 <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-3">
-                  <span className="rounded-md px-2 py-1 text-[11px] font-semibold text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>0:30 · {style}</span>
+                  <span className="rounded-md px-2 py-1 text-[11px] font-semibold text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>0:0{MAX_SECONDS} · {style}</span>
                   <button onClick={toggleMute} aria-label={muted ? "Unmute" : "Mute"} className="grid h-9 w-9 place-items-center rounded-full text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>
                     {muted ? (
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" /><path d="M22 9l-6 6M16 9l6 6" /></svg>
@@ -362,10 +419,10 @@ export default function WebsiteCommercial() {
                   ))}
                 </div>
                 <div className="grid grid-cols-3 gap-2">
-                  <button className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
+                  <a href={videoUrl || RESULT_VIDEO} download className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
                     Download
-                  </button>
+                  </a>
                   <button onClick={copyLink} className="flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-semibold hover:bg-white/10">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1" /></svg>
                     {copied ? "Copied!" : "Link"}
