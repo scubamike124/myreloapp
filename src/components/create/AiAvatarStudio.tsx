@@ -58,11 +58,16 @@ export default function AiAvatarStudio() {
     }
   }, []);
 
-  // Initial load.
-  useEffect(() => { fetchAvatars(0, true, "", ""); }, [fetchAvatars]);
-
-  // Debounced re-query on search / gender change.
+  // Initial load + debounced re-query on search/gender. One effect handles both
+  // so mount fires a single request (two effects meant two identical fetches of
+  // a slow endpoint). First run is immediate; later ones debounce.
+  const firstLoad = useRef(true);
   useEffect(() => {
+    if (firstLoad.current) {
+      firstLoad.current = false;
+      fetchAvatars(0, true, "", "");
+      return;
+    }
     const t = setTimeout(() => fetchAvatars(0, true, q, gender), 300);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -167,12 +172,17 @@ export default function AiAvatarStudio() {
 
               {/* avatar grid */}
               <div className="mt-4 grid max-h-[440px] grid-cols-3 gap-2.5 overflow-y-auto pr-1 sm:grid-cols-4 md:grid-cols-5">
+                {/* First load: show placeholders so the grid never looks empty/broken. */}
+                {loading && avatars.length === 0 &&
+                  Array.from({ length: 15 }).map((_, i) => (
+                    <div key={`sk${i}`} className="aspect-[3/4] w-full animate-pulse rounded-xl" style={{ background: "rgba(255,70,85,.07)", border: "1px solid rgba(255,70,85,.12)" }} />
+                  ))}
                 {avatars.map((a) => {
                   const on = selected?.avatarId === a.avatarId;
                   return (
                     <button key={a.avatarId} onClick={() => setSelected(a)} title={a.name} className="group relative overflow-hidden rounded-xl transition" style={{ border: on ? "2px solid #ff3645" : "1px solid rgba(255,70,85,.15)" }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={a.image} alt={a.name} loading="lazy" className="aspect-[3/4] w-full object-cover transition group-hover:scale-105" style={{ background: "#1a1012" }} />
+                      <img src={a.image} alt={a.name} loading="lazy" decoding="async" className="aspect-[3/4] w-full object-cover transition group-hover:scale-105" style={{ background: "#1a1012" }} />
                       <span className="absolute inset-x-0 bottom-0 truncate bg-gradient-to-t from-black/80 to-transparent px-1.5 pb-1 pt-3 text-left text-[10px] font-medium text-white/90">{a.name}</span>
                       {on && <span className="absolute right-1 top-1 grid h-5 w-5 place-items-center rounded-full" style={{ background: "#ff3645" }}><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3"><path d="M20 6 9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" /></svg></span>}
                     </button>
