@@ -1,8 +1,15 @@
 import { NextResponse } from "next/server";
+import { UnsafeUrlError, assertSafeUrl, clientId, createDailyLimiter } from "@/lib/api-guard";
 
 export const runtime = "nodejs";
 
 const MODEL = "gemini-2.5-flash";
+
+// Scanning a site costs a Gemini call, so cap it per user per day.
+const limiter = createDailyLimiter(Number(process.env.ANALYZE_DAILY_LIMIT ?? 25));
+
+// Refuse to buffer an unbounded response from a hostile or huge page.
+const MAX_HTML_BYTES = 2 * 1024 * 1024;
 
 const SCHEMA = {
   type: "object",
@@ -17,18 +24,25 @@ const SCHEMA = {
   required: ["businessName", "about", "tone", "script", "ideas"],
 };
 
-function normalizeUrl(raw: string) {
-  let u = raw.trim();
-  if (!/^https?:\/\//i.test(u)) u = "https://" + u;
-  return new URL(u).toString();
-}
-
 async function scrape(url: string): Promise<string> {
   const res = await fetch(url, {
     headers: { "user-agent": "Mozilla/5.0 (compatible; ReeloBot/1.0)" },
     signal: AbortSignal.timeout(12000),
+    redirect: "follow",
   });
-  const html = await res.text();
+
+  // Only parse HTML, and only up to a bounded size.
+  const type = res.headers.get("content-type") ?? "";
+  if (type && !/text\/html|application\/xhtml|text\/plain/i.test(type)) {
+    throw new Error("That URL isn't a web page.");
+  }
+  const declared = Number(res.headers.get("content-length") ?? 0);
+  if (Number.isFinite(declared) && declared > MAX_HTML_BYTES) {
+    throw new Error("That page is too large to scan.");
+  }
+
+  const buf = await res.arrayBuffer();
+  const html = new TextDecoder().decode(buf.slice(0, MAX_HTML_BYTES));
   const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? "";
   const desc = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i)?.[1] ?? "";
   const body = html
@@ -45,12 +59,25 @@ export async function POST(req: Request) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) return NextResponse.json({ error: "GEMINI_API_KEY is not set in .env.local" }, { status: 500 });
 
+  const id = clientId(req);
+  const remainingToday = limiter.consume(id);
+  if (remainingToday === null) {
+    return NextResponse.json(
+      { error: `Daily limit reached — up to ${limiter.limit} scans per day. Try again tomorrow.` },
+      { status: 429 },
+    );
+  }
+
+  // Validate BEFORE fetching: this URL is attacker-controlled and the fetch
+  // runs from inside our network.
   let url: string;
   try {
     const body = await req.json();
-    url = normalizeUrl(body.url);
-  } catch {
-    return NextResponse.json({ error: "Invalid URL." }, { status: 400 });
+    url = await assertSafeUrl(String(body.url ?? ""));
+  } catch (e) {
+    limiter.refund(id);
+    const msg = e instanceof UnsafeUrlError ? e.message : "Invalid URL.";
+    return NextResponse.json({ error: msg }, { status: 400 });
   }
 
   let siteText = "";

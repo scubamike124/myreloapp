@@ -1,11 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "reelo-admin";
-const AUTH_KEY = "reelo-admin-auth";
+import { usePathname, useRouter } from "next/navigation";
 
 const NAV = [
   { href: "/admin", label: "Overview", icon: <><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" /></> },
@@ -13,58 +9,20 @@ const NAV = [
   { href: "/admin/payments", label: "Payments", icon: <><rect x="2.5" y="5" width="19" height="14" rx="2.5" /><path d="M2.5 10h19" /></> },
   { href: "/admin/plans", label: "Plans", icon: <><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 20l-4.9 2.6.9-5.5-4-3.9L9.5 7z" /></> },
   { href: "/admin/gateways", label: "Payment gateways", icon: <><rect x="2.5" y="5" width="19" height="14" rx="2.5" /><path d="M6.5 15h4M15 15h2.5" /><circle cx="12" cy="12" r="0.5" /></> },
+  { href: "/admin/vault", label: "Key vault", icon: <><rect x="3.5" y="10.5" width="17" height="10" rx="2.5" /><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5" /><circle cx="12" cy="15.5" r="1.4" /></> },
 ];
 
 export default function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [authed, setAuthed] = useState<boolean | null>(null);
-  const [pw, setPw] = useState("");
-  const [err, setErr] = useState(false);
+  const router = useRouter();
 
-  useEffect(() => {
-    setAuthed(sessionStorage.getItem(AUTH_KEY) === "1");
-  }, []);
-
-  const login = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (pw === ADMIN_PASSWORD) {
-      sessionStorage.setItem(AUTH_KEY, "1");
-      setAuthed(true);
-      setErr(false);
-    } else {
-      setErr(true);
-    }
+  // Access is enforced server-side in proxy.ts before this ever renders, so the
+  // shell only needs to end the session and let the redirect happen.
+  const logout = async () => {
+    await fetch("/api/admin/login", { method: "DELETE" });
+    router.replace("/admin/login");
+    router.refresh();
   };
-  const logout = () => {
-    sessionStorage.removeItem(AUTH_KEY);
-    setAuthed(false);
-    setPw("");
-  };
-
-  // Avoid a flash before we know auth state.
-  if (authed === null) return <div className="min-h-screen" style={{ background: "#0a0607" }} />;
-
-  if (!authed) {
-    return (
-      <div className="grid min-h-screen place-items-center px-4 text-white" style={{ background: "#0a0607" }}>
-        <div aria-hidden className="pointer-events-none fixed inset-0" style={{ backgroundImage: "radial-gradient(900px 500px at 50% -5%,rgba(225,29,42,.18),transparent 60%)" }} />
-        <form onSubmit={login} className="relative w-full max-w-[380px] rounded-3xl border border-white/10 bg-black/50 p-7 backdrop-blur-md">
-          <div className="mb-5 flex items-center gap-2">
-            <span className="font-display grid h-9 w-9 place-items-center rounded-xl text-lg font-bold" style={{ background: "linear-gradient(135deg,#ff3645,#b3121d)", boxShadow: "0 0 22px rgba(225,29,42,.55)" }}>R</span>
-            <div>
-              <div className="font-display text-lg font-bold leading-none">Reelo Admin</div>
-              <div className="text-xs text-white/45">Restricted access</div>
-            </div>
-          </div>
-          <label className="mb-2 block text-sm font-semibold text-white/85">Admin password</label>
-          <input autoFocus type="password" value={pw} onChange={(e) => { setPw(e.target.value); setErr(false); }} placeholder="Enter password" className="w-full rounded-xl px-4 py-3 text-sm text-white outline-none" style={{ border: `1px solid ${err ? "#ff3645" : "rgba(255,70,85,.22)"}`, background: "rgba(255,60,75,.04)" }} />
-          {err && <p className="mt-2 text-xs font-medium text-[#ff6673]">Incorrect password. Try again.</p>}
-          <button type="submit" className="mt-4 w-full rounded-xl px-6 py-3 text-sm font-bold text-white transition-transform hover:scale-[1.01]" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 10px 28px -8px rgba(225,29,42,.6)" }}>Unlock dashboard</button>
-          <p className="mt-4 text-center text-[11px] text-white/30">Demo access — default password: reelo-admin</p>
-        </form>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen text-white" style={{ background: "#0a0607" }}>
@@ -96,16 +54,20 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         </aside>
 
         {/* content */}
-        <div className="flex-1">
+        {/* min-w-0 lets this shrink below its content width — without it the
+            mobile nav strip and the wide data tables stretched the whole admin
+            area and scrolled the page sideways instead of scrolling
+            themselves. */}
+        <div className="min-w-0 flex-1">
           {/* mobile top nav */}
-          <div className="flex items-center gap-1 overflow-x-auto border-b border-white/10 bg-black/40 px-3 py-2 backdrop-blur-md md:hidden">
+          <div className="scroll-fade-x flex items-center gap-1 overflow-x-auto border-b border-white/10 bg-black/40 px-3 py-2 backdrop-blur-md md:hidden">
             {NAV.map((n) => {
               const active = n.href === "/admin" ? pathname === "/admin" : pathname.startsWith(n.href);
               return <Link key={n.href} href={n.href} className="whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-semibold" style={active ? { background: "rgba(255,70,85,.14)", color: "#fff" } : { color: "#a99a9c" }}>{n.label}</Link>;
             })}
             <button onClick={logout} className="ml-auto whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-semibold text-white/50">Log out</button>
           </div>
-          <main className="mx-auto max-w-[1150px] px-5 py-7 sm:px-8">{children}</main>
+          <main className="amber-safe mx-auto max-w-[1150px] px-5 py-7 sm:px-8">{children}</main>
         </div>
       </div>
     </div>

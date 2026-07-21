@@ -143,11 +143,16 @@ export default function BusinessCenterPage() {
         </div>
 
         <div className="flex flex-col rounded-2xl p-5" style={{ border: "1px solid rgba(255,70,85,.24)", background: "radial-gradient(360px 160px at 90% 10%,rgba(225,29,42,.2),transparent 70%),rgba(14,6,8,.55)" }}>
-          <div className="mb-1 flex items-center justify-between"><span className="font-display font-bold">What&apos;s New in Reelo</span><span className="text-xs" style={{ color: "#ff5663" }}>View All</span></div>
-          <span className="mt-2 w-fit rounded-md px-2 py-0.5 text-[10px] font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>NEW</span>
+          <div className="mb-1 flex items-center justify-between">
+            <span className="font-display font-bold">What&apos;s New in Reelo</span>
+            <Link href="/roadmap" className="text-xs hover:underline" style={{ color: "#ff5663" }}>Roadmap</Link>
+          </div>
+          {/* Was badged NEW with a "Try It Now" button for a feature that does
+              not exist. It is on the roadmap, so it is labelled as such. */}
+          <span className="mt-2 w-fit rounded-md px-2 py-0.5 text-[10px] font-bold" style={{ color: "#c98", background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.12)" }}>PLANNED</span>
           <div className="font-display mt-2 text-2xl font-extrabold leading-none">ASSETS<br />MANAGER</div>
           <p className="mt-2 text-[13px]" style={{ color: "#a99a9c" }}>Organize, find, and reuse your media faster than ever.</p>
-          <button className="mt-3 w-fit rounded-lg px-4 py-2 text-sm font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>Try It Now</button>
+          <Link href="/roadmap" className="mt-3 w-fit rounded-lg px-4 py-2 text-sm font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>See the roadmap</Link>
         </div>
       </div>
 

@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server";
+import { PayloadTooLarge, clientId, createDailyLimiter, readJsonLimited } from "@/lib/api-guard";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
+
+// Every call here starts a paid Veo render, so it must be metered.
+const limiter = createDailyLimiter(Number(process.env.VIDEO_DAILY_LIMIT ?? 5));
+// Uploaded photos arrive base64-encoded in the JSON body.
+const MAX_BODY = 12 * 1024 * 1024;
 
 const VEO_MODEL = "veo-3.1-fast-generate-preview";
 const BASE = "https://generativelanguage.googleapis.com/v1beta";
@@ -51,15 +57,28 @@ export async function POST(req: Request) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) return NextResponse.json({ error: "GEMINI_API_KEY is not set in .env.local" }, { status: 500 });
 
+  const id = clientId(req);
+  const remainingToday = limiter.consume(id);
+  if (remainingToday === null) {
+    return NextResponse.json(
+      { error: `Daily limit reached — up to ${limiter.limit} videos per day. Try again tomorrow.` },
+      { status: 429 },
+    );
+  }
+
   let imageBase64: string, mimeType: string, prompt: string;
   try {
-    const body = await req.json();
-    imageBase64 = body.imageBase64;
-    mimeType = body.mimeType || "image/jpeg";
-    prompt = (body.prompt || "").trim();
+    const body = (await readJsonLimited(req, MAX_BODY)) as Record<string, unknown>;
+    imageBase64 = String(body.imageBase64 ?? "");
+    mimeType = String(body.mimeType || "image/jpeg");
+    prompt = String(body.prompt ?? "").trim();
     if (!imageBase64) throw new Error("no image");
     if (!prompt) prompt = "The person in the photo comes to life with natural, expressive motion.";
-  } catch {
+  } catch (e) {
+    limiter.refund(id); // nothing was rendered — don't charge the quota unit
+    if (e instanceof PayloadTooLarge) {
+      return NextResponse.json({ error: "That photo is too large. Try one under 10MB." }, { status: 413 });
+    }
     return NextResponse.json({ error: "Please upload a photo first." }, { status: 400 });
   }
 
@@ -70,8 +89,13 @@ export async function POST(req: Request) {
     const r = await fetch(`${uri}&key=${encodeURIComponent(key)}`, { signal: AbortSignal.timeout(90000) });
     const buf = Buffer.from(await r.arrayBuffer());
 
-    return NextResponse.json({ ok: true, videoUrl: `data:video/mp4;base64,${buf.toString("base64")}` });
+    return NextResponse.json({
+      ok: true,
+      remainingToday,
+      videoUrl: `data:video/mp4;base64,${buf.toString("base64")}`,
+    });
   } catch (e) {
+    limiter.refund(id); // render failed — give the quota unit back
     return NextResponse.json({ error: e instanceof Error ? e.message : "Generation failed." }, { status: 502 });
   }
 }

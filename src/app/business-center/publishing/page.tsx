@@ -38,10 +38,10 @@ export default function PublishingPage() {
           ))}
         </div>
         <div className="mt-4 flex flex-wrap gap-3">
-          <button className="flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 8px 20px -6px rgba(225,29,42,.6)" }}>
+          <button disabled title="Publishing isn't connected yet" className="flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 8px 20px -6px rgba(225,29,42,.6)" }}>
             <BIcon name="rocket" size={16} color="#fff" glow={false} /> Publish Now
           </button>
-          <button className="flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-bold" style={{ border: "1px solid rgba(255,70,85,.3)", color: "#f3e9e9" }}>
+          <button disabled title="Scheduling isn't connected yet" className="flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-bold disabled:cursor-not-allowed disabled:opacity-50" style={{ border: "1px solid rgba(255,70,85,.3)", color: "#f3e9e9" }}>
             <BIcon name="calendar" size={16} glow={false} /> Schedule
           </button>
         </div>

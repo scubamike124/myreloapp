@@ -17,10 +17,8 @@ export default function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setShown(true);
-      return;
-    }
+    // Reduced motion is handled entirely in CSS (see .reveal in globals.css),
+    // which forces the revealed state regardless of this class.
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {

@@ -65,16 +65,36 @@ const PLAN_LIST = PLANS.map((p) => p.name);
 const pick = <T,>(arr: T[], i: number) => arr[((i % arr.length) + arr.length) % arr.length];
 const pad = (n: number) => n.toString().padStart(2, "0");
 // Spread dates across the first half of 2026, deterministically.
+//
+// NOTE: callers must step the seed by a value coprime with 6, or `seed % 6`
+// only ever reaches a subset of the months. Stepping by 2 yielded Feb/Apr/Jun
+// only, which left the revenue chart with three permanently empty bars.
 const dateFrom = (seed: number) => {
   const month = 1 + (seed % 6); // Jan–Jun 2026
   const day = 1 + (seed * 7) % 27;
   return `2026-${pad(month)}-${pad(day)}`;
 };
 
+// Plan mix, weighted like a real SaaS funnel. Picking plans with `i * 4 + 3`
+// put exactly 6 users on each of the 7 tiers — a perfectly flat "Users by plan"
+// chart that read as broken rather than as data.
+const PLAN_WEIGHTS: [PlanName, number][] = [
+  ["FREE", 14],
+  ["CORE", 9],
+  ["PLUS", 7],
+  ["PRO", 5],
+  ["ELITE", 3],
+  ["BUSINESS CENTER", 3],
+  ["BUSINESS CENTER PRO", 1],
+];
+const PLAN_POOL: PlanName[] = PLAN_WEIGHTS.flatMap(([name, n]) => Array<PlanName>(n).fill(name));
+
 export const USERS: AdminUser[] = Array.from({ length: 42 }, (_, i) => {
   const first = pick(FIRST, i * 3 + 1);
   const last = pick(LAST, i * 5 + 2);
-  const plan = pick(PLAN_LIST, i * 4 + 3) as PlanName;
+  // 13 is coprime with the 42-entry pool, so every entry is used exactly once —
+  // the weighting is preserved and the order still looks unsorted.
+  const plan = PLAN_POOL[(i * 13 + 7) % PLAN_POOL.length];
   const suspended = i % 11 === 4; // ~4 suspended
   const months = 1 + (i % 12);
   const spend = Number((PLAN_PRICE[plan] * months).toFixed(2));
@@ -85,7 +105,7 @@ export const USERS: AdminUser[] = Array.from({ length: 42 }, (_, i) => {
     plan,
     tokens: pick([5, 12, 25, 40, 75, 120, 175, 300], i * 2 + 1),
     status: suspended ? "suspended" : "active",
-    joined: dateFrom(i * 3 + 2),
+    joined: dateFrom(i * 7 + 2),
     lastActive: dateFrom(i * 5 + 20),
     spend,
     country: pick(COUNTRY, i * 2 + 1),
@@ -103,7 +123,7 @@ export const TRANSACTIONS: Transaction[] = Array.from({ length: 64 }, (_, i) => 
     plan,
     amount: PLAN_PRICE[plan],
     status,
-    date: dateFrom(i * 2 + 1),
+    date: dateFrom(i * 7 + 3),
     method: pick(METHODS, i),
   };
 });

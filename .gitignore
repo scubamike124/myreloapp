@@ -44,3 +44,8 @@ next-env.d.ts
 # runtime-generated videos
 /public/generated/
 /public/assets/veo-test.mp4
+
+# responsive audit output
+.responsive-audit/
+.responsive-audit.json
+.interaction-audit.json

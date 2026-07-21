@@ -145,3 +145,33 @@ export const TOOLS: Tool[] = [
 export function getTool(slug: string): Tool | undefined {
   return TOOLS.find((t) => t.slug === slug);
 }
+
+// ---------------------------------------------------------------------------
+// Which tools actually have a working generation backend.
+//
+// Single source of truth: the tool pages use it to decide whether to enable the
+// form, and Amber uses it so she never tells someone to use a tool that cannot
+// run. Add a slug here only once its route genuinely generates something.
+// ---------------------------------------------------------------------------
+
+/** Tools backed by Veo image-to-video. */
+export const VIDEO_TOOLS = new Set(["talking-photo", "dancing-photo", "ai-avatar-studio"]);
+
+/** Tools backed by Gemini image generation. */
+export const IMAGE_TOOLS = new Set(["custom-avatar-creator"]);
+
+/** Every tool that can currently produce a result. */
+export const LIVE_TOOLS = new Set<string>([...VIDEO_TOOLS, ...IMAGE_TOOLS, "website-commercial"]);
+
+export function isToolLive(slug: string): boolean {
+  return LIVE_TOOLS.has(slug);
+}
+
+/** Which external service a live tool depends on — used for Amber's guidance. */
+export const TOOL_SERVICE: Record<string, "gemini" | "heygen"> = {
+  "talking-photo": "gemini",
+  "dancing-photo": "gemini",
+  "custom-avatar-creator": "gemini",
+  "ai-avatar-studio": "heygen",
+  "website-commercial": "heygen",
+};

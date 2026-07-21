@@ -48,7 +48,7 @@ export default function SocialPage() {
             {ch.connected ? (
               <span className="rounded-md px-2.5 py-1 text-[11px] font-bold" style={{ color: "#5fd08a", background: "rgba(95,208,138,.14)" }}>Connected</span>
             ) : (
-              <button className="rounded-lg px-3.5 py-1.5 text-xs font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>Connect</button>
+              <button disabled title="Social account connections aren't available yet" className="rounded-lg px-3.5 py-1.5 text-xs font-bold text-white disabled:cursor-not-allowed disabled:opacity-50" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>Connect</button>
             )}
           </div>
         ))}

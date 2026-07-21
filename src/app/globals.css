@@ -176,3 +176,30 @@ a:active {
     animation: none;
   }
 }
+
+/* ---- horizontally scrollable strips (tab rows, chip rows) ----
+   Hides the scrollbar and fades the trailing edge so a partially visible
+   item reads as "there's more, scroll" rather than as clipped content. */
+.scroll-fade-x {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%);
+  mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%);
+}
+.scroll-fade-x::-webkit-scrollbar {
+  display: none;
+}
+/* Once everything fits there is nothing to scroll, so drop the fade. */
+@media (min-width: 640px) {
+  .scroll-fade-x {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+/* ---- Amber launcher safe area ----
+   AmberDock is fixed at the bottom-right of every page, so page content needs
+   reserved space underneath or the last row sits behind it. */
+.amber-safe {
+  padding-bottom: 6.5rem;
+}

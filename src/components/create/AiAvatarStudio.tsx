@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { recordCreation } from "@/lib/workspace";
 
 type Avatar = { avatarId: string; name: string; gender: string; image: string; video: string };
 type Status = "idle" | "generating" | "done";
@@ -122,11 +123,28 @@ export default function AiAvatarStudio() {
       setVideoUrl(finalUrl);
       setProgress(100);
       setStatus("done");
+      recordCreation({
+        toolSlug: "ai-avatar-studio",
+        toolTitle: "AI Avatar Studio",
+        title: script.trim().slice(0, 60) || "Avatar video",
+        status: "completed",
+        kind: "video",
+        mediaUrl: finalUrl,
+      });
     } catch (e) {
       if (genTimer.current) clearInterval(genTimer.current);
       if (pollTimer.current) clearInterval(pollTimer.current);
-      setErr(e instanceof Error ? e.message : "Generation failed.");
+      const message = e instanceof Error ? e.message : "Generation failed.";
+      setErr(message);
       setStatus("idle");
+      recordCreation({
+        toolSlug: "ai-avatar-studio",
+        toolTitle: "AI Avatar Studio",
+        title: script.trim().slice(0, 60) || "Avatar video",
+        status: "failed",
+        kind: "video",
+        error: message,
+      });
     }
   };
 

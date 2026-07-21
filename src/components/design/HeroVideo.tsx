@@ -4,6 +4,25 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const SRC = "/assets/hero-launch.mp4";
 
+/**
+ * The hero clip is large (see README — it wants re-encoding). Until then, skip
+ * autoplay for people who have asked not to pay for it: Save-Data, a metered or
+ * slow connection, or reduced-motion. They get the first frame and a play
+ * button instead of an unrequested multi-megabyte download.
+ */
+function shouldAutoplay(): boolean {
+  if (typeof window === "undefined") return false;
+  if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return false;
+
+  const conn = (navigator as Navigator & {
+    connection?: { saveData?: boolean; effectiveType?: string };
+  }).connection;
+  if (conn?.saveData) return false;
+  if (conn?.effectiveType && /(^|-)2g$/.test(conn.effectiveType)) return false;
+
+  return true;
+}
+
 function fmt(t: number) {
   if (!Number.isFinite(t)) return "0:00";
   const m = Math.floor(t / 60);
@@ -16,7 +35,9 @@ export default function HeroVideo() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
 
-  const [playing, setPlaying] = useState(true);
+  // Starts false and only flips true once play() actually resolves, so the
+  // control icon always reflects reality — including when autoplay is skipped.
+  const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -30,6 +51,9 @@ export default function HeroVideo() {
     v.muted = true;
     v.setAttribute("muted", "");
     v.defaultMuted = true;
+
+    // Leave it paused; `playing` already defaults to false.
+    if (!shouldAutoplay()) return;
 
     const tryPlay = () => {
       v.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
@@ -117,11 +141,14 @@ export default function HeroVideo() {
           ref={videoRef}
           src={SRC}
           className="block aspect-[8/7] w-full cursor-pointer bg-black object-cover"
-          autoPlay
+          // No autoPlay attribute: playback is started by the effect above so
+          // that Save-Data / slow-connection / reduced-motion users are not
+          // forced into a large download. preload="metadata" keeps the initial
+          // request to the header rather than eagerly buffering the whole clip.
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
           onTimeUpdate={(e) => setCurrent(e.currentTarget.currentTime)}
           onClick={togglePlay}
@@ -132,7 +159,7 @@ export default function HeroVideo() {
           className="absolute inset-x-3 bottom-3 flex items-center gap-3 rounded-xl px-3 py-2.5"
           style={{ background: "rgba(10,6,8,.72)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,70,85,.18)" }}
         >
-          <button type="button" onClick={togglePlay} aria-label={playing ? "Pause" : "Play"} className="shrink-0 text-white">
+          <button type="button" onClick={togglePlay} aria-label={playing ? "Pause" : "Play"} className="-m-1.5 shrink-0 p-1.5 text-white">
             {playing ? (
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
             ) : (
@@ -155,7 +182,7 @@ export default function HeroVideo() {
             <div className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow" style={{ left: `${pct}%` }} />
           </div>
 
-          <button type="button" onClick={toggleMute} aria-label={muted ? "Unmute" : "Mute"} className="shrink-0 text-white/90">
+          <button type="button" onClick={toggleMute} aria-label={muted ? "Unmute" : "Mute"} className="-m-1.5 shrink-0 p-1.5 text-white/90">
             {muted ? (
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" /><path d="M22 9l-6 6M16 9l6 6" /></svg>
             ) : (
@@ -163,7 +190,7 @@ export default function HeroVideo() {
             )}
           </button>
 
-          <button type="button" onClick={toggleFullscreen} aria-label="Fullscreen" className="shrink-0 text-white/90">
+          <button type="button" onClick={toggleFullscreen} aria-label="Fullscreen" className="-m-1.5 shrink-0 p-1.5 text-white/90">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M3 16v3a2 2 0 0 0 2 2h3" /></svg>
           </button>
         </div>

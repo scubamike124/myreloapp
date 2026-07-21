@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Manrope } from "next/font/google";
 import "./globals.css";
+import AmberDock from "@/components/amber/AmberDock";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -33,6 +34,8 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
+        {/* There is only one Amber, mounted once for the whole platform. */}
+        <AmberDock />
       </body>
     </html>
   );

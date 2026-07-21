@@ -4,18 +4,10 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Tool, Field } from "@/lib/tools";
+import { TOOLS, IMAGE_TOOLS, LIVE_TOOLS, VIDEO_TOOLS } from "@/lib/tools";
+import { recordCreation } from "@/lib/workspace";
 
 type Status = "idle" | "generating" | "done";
-type UploadStage = "connecting" | "uploading" | "posted";
-
-const RESULT_VIDEO = "/assets/hero-video.mp4";
-
-const PLATFORMS: { name: string; bg: string; icon: string }[] = [
-  { name: "TikTok", bg: "#000000", icon: "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" },
-  { name: "Instagram", bg: "linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)", icon: "M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077" },
-  { name: "YouTube", bg: "#FF0000", icon: "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" },
-  { name: "Facebook", bg: "#1877F2", icon: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" },
-];
 
 function stagesFor(slug: string): string[] {
   if (slug === "website-commercial" || slug === "shorts-20")
@@ -25,10 +17,8 @@ function stagesFor(slug: string): string[] {
   return ["Preparing your assets…", "Generating motion…", "Syncing audio…", "Rendering frames…", "Finalizing your video…"];
 }
 
-// Tools that generate a REAL video (Veo image-to-video) from a photo or preset avatar.
-const VIDEO_TOOLS = new Set(["talking-photo", "dancing-photo", "ai-avatar-studio"]);
-// Tools that generate a REAL avatar IMAGE from the uploaded photo.
-const IMAGE_TOOLS = new Set(["custom-avatar-creator"]);
+// Tool availability lives in lib/tools.ts so this page and Amber can never
+// disagree about which tools actually work.
 
 function avatarPrompt(slug: string, values: Record<string, string>): string {
   if (slug === "dancing-photo") {
@@ -84,18 +74,25 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
   const [multi, setMulti] = useState<Record<string, string[]>>({});
   const [status, setStatus] = useState<Status>("idle");
   const [progress, setProgress] = useState(0);
-  const [copied, setCopied] = useState(false);
   const [muted, setMuted] = useState(true);
-  const [upload, setUpload] = useState<{ platform: string; bg: string; stage: UploadStage; pct: number } | null>(null);
   const [videoUrl, setVideoUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [err, setErr] = useState<string | null>(null);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
-  const upTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const filesRef = useRef<Record<string, File>>({});
   const isVideoTool = VIDEO_TOOLS.has(tool.slug);
   const isImageTool = IMAGE_TOOLS.has(tool.slug);
+  const isLive = LIVE_TOOLS.has(tool.slug);
+
+  /** Short label for the workspace entry — the script's opening, or the input. */
+  const creationTitle = (): string => {
+    const script = (values.script || values.prompt || values.topic || "").trim();
+    if (script) return script.length > 60 ? `${script.slice(0, 57)}…` : script;
+    if (values.name) return values.name;
+    if (values.url) return values.url;
+    return tool.title;
+  };
 
   const stages = stagesFor(tool.slug);
   const stageText = stages[Math.min(stages.length - 1, Math.floor((progress / 100) * stages.length))];
@@ -115,7 +112,6 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
   };
 
   const generate = async () => {
-    setUpload(null);
     setErr(null);
 
     // Real image-to-video path (Dancing / Talking Photo, AI Avatar Studio).
@@ -160,10 +156,27 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
         setVideoUrl(data.videoUrl);
         setProgress(100);
         setStatus("done");
+        recordCreation({
+          toolSlug: tool.slug,
+          toolTitle: tool.title,
+          title: creationTitle(),
+          status: "completed",
+          kind: "video",
+          mediaUrl: data.videoUrl,
+        });
       } catch (e) {
         if (timer.current) clearInterval(timer.current);
-        setErr(e instanceof Error ? e.message : "Generation failed.");
+        const message = e instanceof Error ? e.message : "Generation failed.";
+        setErr(message);
         setStatus("idle");
+        recordCreation({
+          toolSlug: tool.slug,
+          toolTitle: tool.title,
+          title: creationTitle(),
+          status: "failed",
+          kind: "video",
+          error: message,
+        });
       }
       return;
     }
@@ -193,64 +206,43 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
         setImageUrl(data.imageUrl);
         setProgress(100);
         setStatus("done");
+        recordCreation({
+          toolSlug: tool.slug,
+          toolTitle: tool.title,
+          title: creationTitle(),
+          status: "completed",
+          kind: "image",
+          mediaUrl: data.imageUrl,
+        });
       } catch (e) {
         if (timer.current) clearInterval(timer.current);
-        setErr(e instanceof Error ? e.message : "Generation failed.");
+        const message = e instanceof Error ? e.message : "Generation failed.";
+        setErr(message);
         setStatus("idle");
+        recordCreation({
+          toolSlug: tool.slug,
+          toolTitle: tool.title,
+          title: creationTitle(),
+          status: "failed",
+          kind: "image",
+          error: message,
+        });
       }
       return;
     }
 
-    // Simulated path (other tools).
-    setStatus("generating");
-    setProgress(0);
-    if (timer.current) clearInterval(timer.current);
-    timer.current = setInterval(() => {
-      setProgress((p) => {
-        if (p >= 100) {
-          if (timer.current) clearInterval(timer.current);
-          setStatus("done");
-          return 100;
-        }
-        return p + 2;
-      });
-    }, 70);
-  };
-  const reset = () => {
-    if (timer.current) clearInterval(timer.current);
-    if (upTimer.current) clearInterval(upTimer.current);
-    setStatus("idle");
-    setProgress(0);
-    setUpload(null);
-  };
-  const copyLink = () => {
-    try {
-      navigator.clipboard?.writeText(`https://reelo.app/v/${tool.slug}-demo`);
-    } catch {}
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1600);
+    // No other tool has a generation backend yet. Previously this ran a fake
+    // progress bar and presented a stock demo clip as the user's result.
+    setErr("This tool isn't available yet — nothing was generated.");
   };
 
-  const startUpload = (platform: string, bg: string) => {
-    if (upTimer.current) clearInterval(upTimer.current);
-    setUpload({ platform, bg, stage: "connecting", pct: 0 });
-    let tick = 0;
-    upTimer.current = setInterval(() => {
-      tick++;
-      setUpload((u) => {
-        if (!u) return u;
-        if (u.stage === "connecting") return tick > 13 ? { ...u, stage: "uploading", pct: 0 } : u;
-        if (u.stage === "uploading") {
-          const np = u.pct + 4;
-          if (np >= 100) {
-            if (upTimer.current) clearInterval(upTimer.current);
-            return { ...u, stage: "posted", pct: 100 };
-          }
-          return { ...u, pct: np };
-        }
-        return u;
-      });
-    }, 90);
+  const reset = () => {
+    if (timer.current) clearInterval(timer.current);
+    setStatus("idle");
+    setProgress(0);
+    setVideoUrl("");
+    setImageUrl("");
+    setErr(null);
   };
 
   const toggleMute = () => {
@@ -286,13 +278,18 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
           {/* form */}
           <div className="lg:col-span-3">
             <div className="space-y-6 rounded-3xl border border-white/10 bg-black/40 p-6 backdrop-blur-md sm:p-7">
-              {tool.fields.map((f) => (
-                <FieldView key={f.name} field={f} value={values[f.name] ?? ""} preview={previews[f.name]} selected={multi[f.name] ?? []} onChange={(v) => set(f.name, v)} onFile={(file) => onFile(f.name, file)} onToggle={(opt) => toggleMulti(f.name, opt)} />
-              ))}
-              <button onClick={generate} disabled={status === "generating"} className="flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-bold text-white transition-transform hover:scale-[1.01] disabled:opacity-60" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 10px 28px -8px rgba(225,29,42,.6)" }}>
-                {status === "generating" ? <><Spinner /> Generating…</> : <><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>{status === "done" ? "Regenerate" : tool.cta}</>}
+              {!isLive && <ComingSoon tool={tool} />}
+              {/* A disabled fieldset natively disables every control inside, so
+                  an unavailable tool cannot collect input it will never use. */}
+              <fieldset disabled={!isLive} className="space-y-6 border-0 p-0 disabled:opacity-55">
+                {tool.fields.map((f) => (
+                  <FieldView key={f.name} field={f} value={values[f.name] ?? ""} preview={previews[f.name]} selected={multi[f.name] ?? []} onChange={(v) => set(f.name, v)} onFile={(file) => onFile(f.name, file)} onToggle={(opt) => toggleMulti(f.name, opt)} />
+                ))}
+              </fieldset>
+              <button onClick={generate} disabled={status === "generating" || !isLive} className="flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-bold text-white transition-transform hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 10px 28px -8px rgba(225,29,42,.6)" }}>
+                {status === "generating" ? <><Spinner /> Generating…</> : <><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>{!isLive ? "Not available yet" : status === "done" ? "Regenerate" : tool.cta}</>}
               </button>
-              {err && <p className="text-sm font-medium text-[#ff8a92]">{err}</p>}
+              {err && <p role="alert" className="text-sm font-medium text-[#ff8a92]">{err}</p>}
               {isVideoTool && status !== "generating" && !err && (
                 <p className="text-center text-xs text-white/40">Generates a real AI video from your photo (~1–2 min).</p>
               )}
@@ -311,7 +308,7 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={imageUrl} alt="Generated avatar" className="absolute inset-0 h-full w-full object-cover" />
                 ) : status === "done" ? (
-                  <video ref={videoRef} src={videoUrl || RESULT_VIDEO} className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline />
+                  <video ref={videoRef} src={videoUrl} className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline />
                 ) : (
                   <Image src={tool.poster} alt="" fill className={`object-cover transition ${status === "generating" ? "opacity-25" : "opacity-100"}`} />
                 )}
@@ -329,7 +326,7 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
                 )}
 
                 {/* done: minimal player controls (video only) */}
-                {status === "done" && !upload && !isImageTool && (
+                {status === "done" && !isImageTool && (
                   <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-3">
                     <span className="rounded-md px-2 py-1 text-[11px] font-semibold text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>Preview</span>
                     <button onClick={toggleMute} aria-label={muted ? "Unmute" : "Mute"} className="grid h-9 w-9 place-items-center rounded-full text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>
@@ -342,76 +339,27 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
                   </div>
                 )}
 
-                {/* upload flow overlay */}
-                {upload && (
-                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 p-6 text-center" style={{ background: "rgba(6,3,4,.86)", backdropFilter: "blur(6px)" }}>
-                    {upload.stage === "connecting" && (
-                      <>
-                        <PlatBadge bg={upload.bg} />
-                        <Spinner large />
-                        <p className="text-sm font-semibold">Connecting to {upload.platform}…</p>
-                      </>
-                    )}
-                    {upload.stage === "uploading" && (
-                      <>
-                        <PlatBadge bg={upload.bg} />
-                        <p className="text-sm font-semibold">Uploading to {upload.platform}…</p>
-                        <div className="w-3/4">
-                          <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/15"><div className="h-full rounded-full" style={{ width: `${upload.pct}%`, background: "linear-gradient(90deg,#ff3645,#c4101c)" }} /></div>
-                          <p className="mt-2 text-xs text-white/55">{upload.pct}%</p>
-                        </div>
-                      </>
-                    )}
-                    {upload.stage === "posted" && (
-                      <>
-                        <span className="grid h-16 w-16 place-items-center rounded-full" style={{ background: "rgba(46,204,113,.15)", border: "2px solid #2ecc71" }}>
-                          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
-                        </span>
-                        <div>
-                          <p className="text-[15px] font-bold">Published to {upload.platform}!</p>
-                          <p className="mt-1 text-xs text-white/55">Your video is now live on your {upload.platform} account.</p>
-                        </div>
-                        <div className="flex flex-col items-center gap-2">
-                          <a href="#" onClick={(e) => e.preventDefault()} className="inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-sm font-bold text-white" style={{ background: upload.bg }}>
-                            View post
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
-                          </a>
-                          <button onClick={() => setUpload(null)} className="text-xs font-semibold text-white/55 hover:text-white">Done</button>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                )}
               </div>
 
-              {status === "done" && !upload && (
+              {status === "done" && (
                 <div className="mt-4 space-y-3">
                   <div className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm" style={{ border: "1px solid rgba(255,70,85,.3)", background: "rgba(255,70,85,.1)", color: "#ffb3b9" }}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6 9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                     Your {tool.title.toLowerCase()} is ready!
                   </div>
 
-                  <div>
-                    <p className="mb-1.5 text-xs font-semibold text-white/55">Upload to your social media — one click</p>
-                    <div className="grid grid-cols-2 gap-2">
-                      {PLATFORMS.map((p) => (
-                        <button key={p.name} onClick={() => startUpload(p.name, p.bg)} className="flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-white transition-transform hover:-translate-y-0.5" style={{ background: p.bg }}>
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d={p.icon} /></svg>
-                          {p.name}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                  {/* Download it and post it yourself — Reelo has no social
+                      publishing integration, so we do not pretend to have one. */}
+                  <p className="text-xs leading-relaxed text-white/45">
+                    Download your {isImageTool ? "image" : "video"} to post it. Direct publishing to TikTok, Instagram
+                    and YouTube isn&apos;t connected yet.
+                  </p>
 
-                  <div className="grid grid-cols-3 gap-2">
-                    <a href={isImageTool ? imageUrl : videoUrl || RESULT_VIDEO} download className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
+                  <div className="grid grid-cols-2 gap-2">
+                    <a href={isImageTool ? imageUrl : videoUrl} download={`reelo-${tool.slug}.${isImageTool ? "png" : "mp4"}`} className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
                       Download
                     </a>
-                    <button onClick={copyLink} className="flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-semibold hover:bg-white/10">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1" /></svg>
-                      {copied ? "Copied!" : "Link"}
-                    </button>
                     <button onClick={reset} className="flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-semibold hover:bg-white/10">
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 4v4h-4" strokeLinecap="round" strokeLinejoin="round" /></svg>
                       New
@@ -427,16 +375,36 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
   );
 }
 
-function PlatBadge({ bg }: { bg: string }) {
-  return <span className="grid h-12 w-12 place-items-center rounded-2xl" style={{ background: bg, boxShadow: "0 8px 24px -6px rgba(0,0,0,.6)" }} />;
-}
-
-function Action({ label, icon, primary }: { label: string; icon: React.ReactNode; primary?: boolean }) {
+/**
+ * Shown for tools that have no generation backend yet. Says so directly and
+ * points at the tools that do work, instead of leaving a dead-end page.
+ */
+function ComingSoon({ tool }: { tool: Tool }) {
+  const live = TOOLS.filter((t) => LIVE_TOOLS.has(t.slug) && t.slug !== tool.slug).slice(0, 3);
   return (
-    <button className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold transition-transform hover:scale-[1.02]" style={primary ? { background: "linear-gradient(135deg,#ff3645,#c4101c)", color: "#fff" } : { border: "1px solid rgba(255,255,255,.15)", background: "rgba(255,255,255,.05)" }}>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{icon}</svg>
-      {label}
-    </button>
+    <div
+      className="rounded-2xl px-4 py-3.5"
+      style={{ border: "1px solid rgba(255,159,67,.3)", background: "rgba(255,159,67,.07)" }}
+    >
+      <p className="text-sm font-bold" style={{ color: "#ffcf9a" }}>
+        {tool.title} isn&apos;t available yet
+      </p>
+      <p className="mt-1 text-xs leading-relaxed text-white/55">
+        You can see the inputs it will take, but generation isn&apos;t connected — so nothing here will produce a video
+        yet. These tools work right now:
+      </p>
+      <div className="mt-2.5 flex flex-wrap gap-2">
+        {live.map((t) => (
+          <Link
+            key={t.slug}
+            href={`/create/${t.slug}`}
+            className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/80 transition-colors hover:border-[rgba(255,70,85,.45)] hover:text-white"
+          >
+            {t.title}
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -501,7 +469,13 @@ function FieldView({ field, value, preview, selected, onChange, onFile, onToggle
           <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
             {field.options.map((o) => { const on = value === o.value; return (
               <button key={o.value} onClick={() => onChange(o.value)} className="flex flex-col items-center gap-1.5 rounded-2xl p-3 text-center transition" style={on ? { border: "1px solid #ff3645", background: "rgba(255,70,85,.1)" } : { border: "1px solid rgba(255,70,85,.15)", background: "rgba(255,60,75,.03)" }}>
-                {o.img ? <span className="h-14 w-14 overflow-hidden rounded-xl">{/* eslint-disable-next-line @next/next/no-img-element */}<img src={o.img} alt={o.label} className="h-full w-full object-cover" /></span> : <span className="text-2xl">{o.icon}</span>}
+                {o.img ? (
+                  <span className="relative h-14 w-14 overflow-hidden rounded-xl">
+                    <Image src={o.img} alt={o.label} fill sizes="56px" className="object-cover" />
+                  </span>
+                ) : (
+                  <span className="text-2xl">{o.icon}</span>
+                )}
                 <span className="text-xs font-medium" style={{ color: on ? "#ffb3b9" : "#b9a9ab" }}>{o.label}</span>
               </button>
             ); })}

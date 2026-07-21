@@ -8,8 +8,8 @@ const NAV: NavItem[] = [
   { key: "overview", label: "Overview", href: "/business-center", icon: "home" },
   { key: "create", label: "Create", href: "/create", icon: "pen" },
   { key: "library", label: "Video Library", href: "/library", icon: "film" },
-  { key: "brand", label: "Brand Kit", href: "#", icon: "palette" },
-  { key: "assets", label: "Assets", href: "#", icon: "folder" },
+  // Brand Kit and Assets were listed here pointing at "#". Both features are
+  // unbuilt, so they are omitted rather than shown as dead nav items.
   { key: "social", label: "Social", href: "/business-center/social", icon: "share" },
   { key: "publishing", label: "Publishing", href: "/business-center/publishing", icon: "rocket" },
   { key: "scheduling", label: "Scheduling", href: "/business-center/scheduling", icon: "calendar" },
@@ -110,8 +110,46 @@ export default function BusinessShell({
           </Link>
         </div>
 
-        <div className="px-5 pb-16 pt-2 sm:px-8">{children}</div>
+        <div className="amber-safe px-5 pt-2 sm:px-8">
+          <PreviewNotice />
+          {children}
+        </div>
       </main>
+    </div>
+  );
+}
+
+/**
+ * The Business Center is a designed preview: publishing, scheduling, analytics,
+ * revenue and social connections have no backend yet. Saying so once here is
+ * more honest than scattering buttons that quietly do nothing.
+ */
+function PreviewNotice() {
+  return (
+    <div
+      className="mb-5 flex items-start gap-2.5 rounded-xl px-4 py-3 text-xs leading-relaxed"
+      style={{ border: "1px solid rgba(255,159,67,.3)", background: "rgba(255,159,67,.07)", color: "#ffcf9a" }}
+    >
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="mt-px shrink-0"
+        aria-hidden
+      >
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 8h.01M11 12h1v4h1" />
+      </svg>
+      <span>
+        <strong className="font-bold">Preview.</strong> The Business Center isn&apos;t connected to live data yet —
+        figures shown are examples, and publishing, scheduling and social connections aren&apos;t active. Video
+        generation in <Link href="/create" className="underline underline-offset-2">Create</Link> is fully working.
+      </span>
     </div>
   );
 }
