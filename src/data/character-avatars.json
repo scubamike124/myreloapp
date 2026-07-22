@@ -1,0 +1,1230 @@
+[
+  {
+    "avatarId": "char_apple",
+    "name": "Apple",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/apple.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "healthy",
+      "red"
+    ]
+  },
+  {
+    "avatarId": "char_banana",
+    "name": "Banana",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/banana.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "yellow"
+    ]
+  },
+  {
+    "avatarId": "char_orange",
+    "name": "Orange",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/orange.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "citrus"
+    ]
+  },
+  {
+    "avatarId": "char_strawberry",
+    "name": "Strawberry",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/strawberry.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "berry",
+      "red"
+    ]
+  },
+  {
+    "avatarId": "char_watermelon",
+    "name": "Watermelon",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/watermelon.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "summer"
+    ]
+  },
+  {
+    "avatarId": "char_pineapple",
+    "name": "Pineapple",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/pineapple.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "tropical"
+    ]
+  },
+  {
+    "avatarId": "char_grapes",
+    "name": "Grapes",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/grapes.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "purple"
+    ]
+  },
+  {
+    "avatarId": "char_lemon",
+    "name": "Lemon",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/lemon.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "citrus",
+      "yellow"
+    ]
+  },
+  {
+    "avatarId": "char_peach",
+    "name": "Peach",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/peach.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit"
+    ]
+  },
+  {
+    "avatarId": "char_cherry",
+    "name": "Cherry",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/cherry.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "berry",
+      "red"
+    ]
+  },
+  {
+    "avatarId": "char_mango",
+    "name": "Mango",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/mango.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "tropical"
+    ]
+  },
+  {
+    "avatarId": "char_avocado",
+    "name": "Avocado",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/avocado.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food",
+      "healthy"
+    ],
+    "tags": [
+      "fruit",
+      "green",
+      "healthy"
+    ]
+  },
+  {
+    "avatarId": "char_carrot",
+    "name": "Carrot",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/carrot.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable",
+      "orange",
+      "healthy"
+    ]
+  },
+  {
+    "avatarId": "char_broccoli",
+    "name": "Broccoli",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/broccoli.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food",
+      "healthy"
+    ],
+    "tags": [
+      "vegetable",
+      "green",
+      "healthy"
+    ]
+  },
+  {
+    "avatarId": "char_tomato",
+    "name": "Tomato",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/tomato.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable",
+      "red"
+    ]
+  },
+  {
+    "avatarId": "char_corn",
+    "name": "Corn",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/corn.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable",
+      "yellow"
+    ]
+  },
+  {
+    "avatarId": "char_potato",
+    "name": "Potato",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/potato.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable"
+    ]
+  },
+  {
+    "avatarId": "char_bell-pepper",
+    "name": "Bell Pepper",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/bell-pepper.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable",
+      "red"
+    ]
+  },
+  {
+    "avatarId": "char_eggplant",
+    "name": "Eggplant",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/eggplant.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable",
+      "purple"
+    ]
+  },
+  {
+    "avatarId": "char_mushroom",
+    "name": "Mushroom",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/mushroom.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable"
+    ]
+  },
+  {
+    "avatarId": "char_pumpkin",
+    "name": "Pumpkin",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/pumpkin.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food",
+      "holiday"
+    ],
+    "tags": [
+      "vegetable",
+      "orange",
+      "halloween"
+    ]
+  },
+  {
+    "avatarId": "char_onion",
+    "name": "Onion",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/onion.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable"
+    ]
+  },
+  {
+    "avatarId": "char_pizza-slice",
+    "name": "Pizza Slice",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/pizza-slice.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "food",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "pizza",
+      "fast-food"
+    ]
+  },
+  {
+    "avatarId": "char_hamburger",
+    "name": "Hamburger",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/hamburger.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "food",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "burger",
+      "fast-food"
+    ]
+  },
+  {
+    "avatarId": "char_french-fries",
+    "name": "French Fries",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/french-fries.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "food",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fries",
+      "fast-food"
+    ]
+  },
+  {
+    "avatarId": "char_hot-dog",
+    "name": "Hot Dog",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/hot-dog.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "food",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fast-food"
+    ]
+  },
+  {
+    "avatarId": "char_coffee-cup",
+    "name": "Coffee Cup",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/coffee-cup.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "food",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "coffee",
+      "drink"
+    ]
+  },
+  {
+    "avatarId": "char_ice-cream-cone",
+    "name": "Ice Cream Cone",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/ice-cream-cone.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "food",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "dessert",
+      "sweet"
+    ]
+  },
+  {
+    "avatarId": "char_birthday-cake",
+    "name": "Birthday Cake",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/birthday-cake.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "food",
+    "secondary": [
+      "food",
+      "holiday"
+    ],
+    "tags": [
+      "dessert",
+      "birthday",
+      "sweet"
+    ]
+  },
+  {
+    "avatarId": "char_donut",
+    "name": "Donut",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/donut.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "food",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "dessert",
+      "bakery",
+      "sweet"
+    ]
+  },
+  {
+    "avatarId": "char_red-dragon",
+    "name": "Red Dragon",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/red-dragon.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dragons",
+    "secondary": [
+      "fantasy",
+      "characters"
+    ],
+    "tags": [
+      "dragon",
+      "fire",
+      "red"
+    ]
+  },
+  {
+    "avatarId": "char_ice-dragon",
+    "name": "Ice Dragon",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/ice-dragon.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dragons",
+    "secondary": [
+      "fantasy",
+      "characters"
+    ],
+    "tags": [
+      "dragon",
+      "ice",
+      "blue"
+    ]
+  },
+  {
+    "avatarId": "char_golden-dragon",
+    "name": "Golden Dragon",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/golden-dragon.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dragons",
+    "secondary": [
+      "fantasy",
+      "characters"
+    ],
+    "tags": [
+      "dragon",
+      "gold"
+    ]
+  },
+  {
+    "avatarId": "char_baby-dragon",
+    "name": "Baby Dragon",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/baby-dragon.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dragons",
+    "secondary": [
+      "fantasy",
+      "characters"
+    ],
+    "tags": [
+      "dragon",
+      "cute"
+    ]
+  },
+  {
+    "avatarId": "char_warlord",
+    "name": "Warlord",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/warlord.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "fantasy",
+      "characters"
+    ],
+    "tags": [
+      "warlord",
+      "armour",
+      "battle"
+    ]
+  },
+  {
+    "avatarId": "char_barbarian-warlord",
+    "name": "Barbarian Warlord",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/barbarian-warlord.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "fantasy",
+      "characters"
+    ],
+    "tags": [
+      "warlord",
+      "barbarian"
+    ]
+  },
+  {
+    "avatarId": "char_armoured-knight",
+    "name": "Armoured Knight",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/armoured-knight.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "fantasy",
+      "characters",
+      "historical"
+    ],
+    "tags": [
+      "knight",
+      "armour"
+    ]
+  },
+  {
+    "avatarId": "char_viking-warrior",
+    "name": "Viking Warrior",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/viking-warrior.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "fantasy",
+      "characters",
+      "historical"
+    ],
+    "tags": [
+      "viking",
+      "warrior"
+    ]
+  },
+  {
+    "avatarId": "char_samurai",
+    "name": "Samurai",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/samurai.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "characters",
+      "historical"
+    ],
+    "tags": [
+      "samurai",
+      "warrior"
+    ]
+  },
+  {
+    "avatarId": "char_wizard",
+    "name": "Wizard",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/wizard.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fantasy",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "wizard",
+      "magic"
+    ]
+  },
+  {
+    "avatarId": "char_sorceress",
+    "name": "Sorceress",
+    "gender": "female",
+    "premium": false,
+    "image": "/assets/characters/sorceress.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fantasy",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "witch",
+      "magic",
+      "female"
+    ]
+  },
+  {
+    "avatarId": "char_witch",
+    "name": "Witch",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/witch.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fantasy",
+    "secondary": [
+      "characters",
+      "holiday"
+    ],
+    "tags": [
+      "witch",
+      "halloween",
+      "magic"
+    ]
+  },
+  {
+    "avatarId": "char_elf-archer",
+    "name": "Elf Archer",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/elf-archer.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fantasy",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "elf",
+      "archer"
+    ]
+  },
+  {
+    "avatarId": "char_orc-chieftain",
+    "name": "Orc Chieftain",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/orc-chieftain.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fantasy",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "orc",
+      "monster"
+    ]
+  },
+  {
+    "avatarId": "char_phoenix",
+    "name": "Phoenix",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/phoenix.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fantasy",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "phoenix",
+      "fire",
+      "bird"
+    ]
+  },
+  {
+    "avatarId": "char_mermaid",
+    "name": "Mermaid",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/mermaid.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fantasy",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "mermaid",
+      "ocean"
+    ]
+  },
+  {
+    "avatarId": "char_pirate-captain",
+    "name": "Pirate Captain",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/pirate-captain.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "characters",
+    "secondary": [
+      "fantasy",
+      "historical"
+    ],
+    "tags": [
+      "pirate"
+    ]
+  },
+  {
+    "avatarId": "char_cowboy",
+    "name": "Cowboy",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/cowboy.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "characters",
+    "secondary": [
+      "historical"
+    ],
+    "tags": [
+      "cowboy",
+      "western"
+    ]
+  },
+  {
+    "avatarId": "char_superhero",
+    "name": "Superhero",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/superhero.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "superheroes",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "superhero",
+      "cape"
+    ]
+  },
+  {
+    "avatarId": "char_supervillain",
+    "name": "Supervillain",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/supervillain.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "villains",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "villain"
+    ]
+  },
+  {
+    "avatarId": "char_friendly-robot",
+    "name": "Friendly Robot",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/friendly-robot.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "robots",
+    "secondary": [
+      "characters",
+      "sci-fi"
+    ],
+    "tags": [
+      "robot",
+      "sci-fi"
+    ]
+  },
+  {
+    "avatarId": "char_alien-visitor",
+    "name": "Alien Visitor",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/alien-visitor.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "aliens",
+    "secondary": [
+      "characters",
+      "sci-fi"
+    ],
+    "tags": [
+      "alien",
+      "sci-fi"
+    ]
+  },
+  {
+    "avatarId": "char_vampire",
+    "name": "Vampire",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/vampire.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "characters",
+      "holiday"
+    ],
+    "tags": [
+      "vampire",
+      "halloween"
+    ]
+  },
+  {
+    "avatarId": "char_zombie",
+    "name": "Zombie",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/zombie.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "characters",
+      "holiday"
+    ],
+    "tags": [
+      "zombie",
+      "halloween"
+    ]
+  },
+  {
+    "avatarId": "char_friendly-ghost",
+    "name": "Friendly Ghost",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/friendly-ghost.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "characters",
+      "holiday"
+    ],
+    "tags": [
+      "ghost",
+      "halloween"
+    ]
+  },
+  {
+    "avatarId": "char_king",
+    "name": "King",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/king.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "royalty",
+    "secondary": [
+      "characters",
+      "historical"
+    ],
+    "tags": [
+      "king",
+      "crown"
+    ]
+  },
+  {
+    "avatarId": "char_queen",
+    "name": "Queen",
+    "gender": "female",
+    "premium": false,
+    "image": "/assets/characters/queen.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "royalty",
+    "secondary": [
+      "characters",
+      "historical"
+    ],
+    "tags": [
+      "queen",
+      "crown",
+      "female"
+    ]
+  },
+  {
+    "avatarId": "char_princess",
+    "name": "Princess",
+    "gender": "female",
+    "premium": false,
+    "image": "/assets/characters/princess.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "royalty",
+    "secondary": [
+      "characters",
+      "fantasy"
+    ],
+    "tags": [
+      "princess",
+      "female"
+    ]
+  },
+  {
+    "avatarId": "char_golden-retriever",
+    "name": "Golden Retriever",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/golden-retriever.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "animals",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "dog",
+      "pet",
+      "friendly"
+    ]
+  },
+  {
+    "avatarId": "char_tabby-cat",
+    "name": "Tabby Cat",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/tabby-cat.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "animals",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "cat",
+      "pet"
+    ]
+  },
+  {
+    "avatarId": "char_lion",
+    "name": "Lion",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/lion.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "animals",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "lion",
+      "jungle"
+    ]
+  },
+  {
+    "avatarId": "char_brown-bear",
+    "name": "Brown Bear",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/brown-bear.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "animals",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "bear",
+      "forest"
+    ]
+  },
+  {
+    "avatarId": "char_red-fox",
+    "name": "Red Fox",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/red-fox.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "animals",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "fox",
+      "forest"
+    ]
+  },
+  {
+    "avatarId": "char_wise-owl",
+    "name": "Wise Owl",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/wise-owl.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "animals",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "owl",
+      "bird"
+    ]
+  },
+  {
+    "avatarId": "char_dolphin",
+    "name": "Dolphin",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/dolphin.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "animals",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "dolphin",
+      "ocean"
+    ]
+  },
+  {
+    "avatarId": "char_shark",
+    "name": "Shark",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/shark.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "animals",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "shark",
+      "ocean"
+    ]
+  },
+  {
+    "avatarId": "char_t-rex",
+    "name": "T-Rex",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/t-rex.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dinosaurs",
+    "secondary": [
+      "animals",
+      "characters"
+    ],
+    "tags": [
+      "dinosaur",
+      "t-rex"
+    ]
+  },
+  {
+    "avatarId": "char_triceratops",
+    "name": "Triceratops",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/triceratops.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dinosaurs",
+    "secondary": [
+      "animals",
+      "characters"
+    ],
+    "tags": [
+      "dinosaur"
+    ]
+  },
+  {
+    "avatarId": "char_farm-cow",
+    "name": "Farm Cow",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/farm-cow.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "animals",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "cow",
+      "farm"
+    ]
+  },
+  {
+    "avatarId": "char_rooster",
+    "name": "Rooster",
+    "gender": "",
+    "premium": false,
+    "image": "/assets/characters/rooster.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "animals",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "rooster",
+      "farm",
+      "bird"
+    ]
+  }
+]

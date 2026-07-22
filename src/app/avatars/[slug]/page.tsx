@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import AppShell from "@/components/design/AppShell";
-import AvatarLibrary from "@/components/avatars/AvatarLibrary";
-import { ALL_AVATARS, avatarsIn, getCategory, uncategorized } from "@/lib/avatar-categories";
+import AvatarList from "@/components/avatars/AvatarList";
+import { CATALOG, COUNTS, search } from "@/lib/avatar-catalog";
+import { getPrimary, getFilter } from "@/lib/avatar-taxonomy";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   if (slug === "all") return { title: "All Avatars — Reelo" };
-  if (slug === "other") return { title: "Everyone Else — Reelo" };
-  const cat = getCategory(slug);
-  return { title: cat ? `${cat.name} Avatars — Reelo` : "Avatars — Reelo" };
+  const p = getPrimary(slug);
+  return { title: p ? `${p.name} Avatars — Reelo` : "Avatars — Reelo" };
 }
 
 export default async function AvatarCategoryPage({
@@ -17,53 +17,51 @@ export default async function AvatarCategoryPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{ q?: string; filter?: string }>;
 }) {
   const { slug } = await params;
-  const { q } = await searchParams;
+  const { q, filter } = await searchParams;
 
-  // Counts come from the catalog every time this renders.
   let title: string;
   let icon: string;
-  let description: string;
   let count: number;
 
   if (slug === "all") {
     title = "All avatars";
     icon = "🌟";
-    description = "Every avatar in the catalog.";
-    count = ALL_AVATARS.length;
-  } else if (slug === "other") {
-    title = "Everyone else";
-    icon = "👤";
-    description = "Avatars whose names don't place them in a category yet.";
-    count = uncategorized().length;
+    count = filter ? search({ filter }, CATALOG).length : COUNTS.total;
   } else {
-    const cat = getCategory(slug);
-    if (!cat) notFound();
-    title = cat.name;
-    icon = cat.icon;
-    description = cat.description;
-    count = avatarsIn(slug).length;
+    const p = getPrimary(slug);
+    if (!p) notFound();
+    title = p.name;
+    icon = p.icon;
+    count = search({ primary: slug }, CATALOG).length;
   }
+
+  const activeFilter = filter ? getFilter(filter) : undefined;
 
   return (
     <AppShell active="avatars">
-      <div className="mb-6">
+      <div className="mb-5">
         <Link href="/avatars" className="text-[13px] font-semibold" style={{ color: "#ff8892" }}>
           ← All categories
         </Link>
-        <h1 className="font-display mt-2 flex items-center gap-2.5 text-3xl font-extrabold tracking-[-0.02em] text-white sm:text-4xl">
+        <h1 className="font-display mt-2 flex flex-wrap items-center gap-2.5 text-2xl font-extrabold tracking-[-0.02em] text-white sm:text-3xl">
           <span aria-hidden>{icon}</span>
           {title}
-          <span className="text-2xl font-bold sm:text-3xl" style={{ color: "#ff8892" }}>
+          {activeFilter && <span className="text-white/40">· {activeFilter.name}</span>}
+          <span className="text-xl font-bold sm:text-2xl" style={{ color: "#ff8892" }}>
             ({count.toLocaleString()})
           </span>
         </h1>
-        <p className="mt-2 max-w-[620px] text-[15px] leading-[1.6] text-white/55">{description}</p>
+        {activeFilter && (
+          <Link href={`/avatars/${slug}`} className="mt-1 inline-block text-[12.5px]" style={{ color: "#ff8892" }}>
+            Clear the {activeFilter.name} filter
+          </Link>
+        )}
       </div>
 
-      <AvatarLibrary category={slug} initialQuery={q ?? ""} />
+      <AvatarList primary={slug} initialQuery={q ?? ""} />
     </AppShell>
   );
 }
