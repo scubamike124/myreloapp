@@ -47,7 +47,7 @@ const STYLE =
   "Premium 3D illustrated dashboard scene, in the style of a glossy dark app card. " +
   "The ENTIRE background is solid pure black (#050303), edge to edge, in every corner — never white, grey or light. " +
   "Crimson and scarlet red colour scheme " +
-  "with bright neon red rim lighting and a soft red glow. Subtle white and silver highlights. " +
+  "with bright neon red rim lighting and a soft red glow. Keep everything in red and black tones — no large silver, chrome, grey or white objects. " +
   // The old prompt said "floating, generous empty margin", and that is exactly
   // why the tiles came back as a small object adrift on black. The mockup art
   // is a rich, detailed scene that fills its frame; this asks for that instead.
@@ -71,7 +71,7 @@ const TILES = [
   // --- Business Center overview (11) ---
   ["create", "a glossy red film clapperboard with a curling film strip and several glowing video thumbnail frames arranged around it, a movie-making scene"],
   ["video-library", "a rich fanned stack of many glossy red video thumbnail cards with glowing play triangles, overlapping like a media library, filling the frame"],
-  ["brand-kit", "a red artist paint palette with round colour swatches, a set of brushes and a plain circular brand disc, an art scene"],
+  ["brand-kit", "a red artist paint palette with round red colour swatches, glossy red paint blobs and a few brushes, an art scene, all red tones, no metal, no silver, no chrome, no grey"],
   ["assets", "several open red file folders overflowing with glossy photos, film clips and music notes, a media asset scene filling the frame"],
   ["social", "a dense cluster of many glossy red rounded app icons showing generic heart, chat, play and camera symbols, connected by glowing light trails (no real brand logos)"],
   ["publishing", "a glossy red rocket launching from a small pad with billowing light trails and sparks, filling the frame"],
