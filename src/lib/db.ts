@@ -13,15 +13,33 @@ import { neon } from "@neondatabase/serverless";
 // features that need accounts say so, everything else keeps working.
 // ---------------------------------------------------------------------------
 
+/**
+ * The connection string, under whichever name it arrived.
+ *
+ * Provisioning Postgres from the Vercel dashboard injects POSTGRES_URL (and
+ * sometimes DATABASE_URL); Neon's own dashboard gives you DATABASE_URL. Reading
+ * all of them means it works however it was set up, instead of failing over a
+ * variable name.
+ */
+function connectionString(): string | undefined {
+  return (
+    process.env.DATABASE_URL ||
+    process.env.POSTGRES_URL ||
+    process.env.NEON_DATABASE_URL ||
+    process.env.POSTGRES_PRISMA_URL ||
+    undefined
+  );
+}
+
 export function dbConfigured(): boolean {
-  return Boolean(process.env.DATABASE_URL);
+  return Boolean(connectionString());
 }
 
 type Row = Record<string, unknown>;
 
 /** Tagged-template query. Parameters are bound, never interpolated. */
 export function sql() {
-  const url = process.env.DATABASE_URL;
+  const url = connectionString();
   if (!url) return null;
   return neon(url);
 }
