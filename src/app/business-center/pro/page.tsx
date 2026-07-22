@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import BusinessShell from "@/components/design/BusinessShell";
 import BIcon, { type IconKey } from "@/components/design/BIcon";
 
@@ -15,31 +16,31 @@ const HIGHLIGHTS: { icon: IconKey; t: string; d: string }[] = [
 
 // href = this exists today and the card opens it. planned = it does not, and
 // the card says so rather than looking clickable and doing nothing.
-const CARDS: { n: number; icon: IconKey; t: string; d: string; href?: string; planned?: boolean }[] = [
-  { n: 1, icon: "chip", t: "Advanced AI Suite", d: "Access the most powerful AI models for videos, voices, scripts and more.", href: "/create" },
-  { n: 2, icon: "users", t: "Team Collaboration", d: "Invite unlimited team members and work together in real time.", planned: true },
-  { n: 3, icon: "lock", t: "Brand Vault Pro", d: "Store unlimited brands, templates, logos, fonts and color palettes.", planned: true },
-  { n: 4, icon: "layers", t: "Content Templates", d: "Access 1000+ premium templates for every industry and niche.", planned: true },
-  { n: 5, icon: "grid", t: "Bulk Creation", d: "Create hundreds of videos at once with bulk upload, scripts and automation.", planned: true },
-  { n: 6, icon: "cc", t: "Auto Subtitles", d: "Auto-generate accurate subtitles in 100+ languages.", planned: true },
-  { n: 7, icon: "mic", t: "Voice Cloning Pro", d: "Clone voices or create custom AI voices for your brand.", planned: true },
-  { n: 8, icon: "globe", t: "Translate & Dub", d: "Translate and dub your videos into 100+ languages instantly.", planned: true },
-  { n: 9, icon: "scissors", t: "Smart Cut & Edit", d: "AI-powered editing tools to cut, trim and enhance videos automatically.", planned: true },
-  { n: 10, icon: "image", t: "Thumbnail Maker", d: "AI creates high-converting thumbnails that get more clicks.", planned: true },
-  { n: 11, icon: "stack", t: "Stock Media Pro", d: "Unlimited access to premium stock videos, images and music.", planned: true },
-  { n: 12, icon: "magic", t: "Background Remover", d: "Remove or replace backgrounds with one click.", planned: true },
-  { n: 13, icon: "pen", t: "AI Script Writer", d: "Generate viral scripts, hooks and captions in seconds.", href: "/create/shorts-20" },
-  { n: 14, icon: "refresh", t: "Automated Reposting", d: "Automatically repost your best content across all platforms.", planned: true },
-  { n: 15, icon: "chart", t: "Detailed Analytics", d: "Deep insights on every video, audience and revenue stream.", planned: true },
-  { n: 16, icon: "target", t: "Competitor Tracker", d: "Track competitors, keywords and top performing content.", planned: true },
-  { n: 17, icon: "contact", t: "Lead Capture & CRM", d: "Capture leads, manage contacts and nurture your audience.", planned: true },
-  { n: 18, icon: "tag", t: "White Label Options", d: "Rebrand Reelo with your own logo, domain and custom colors.", planned: true },
-  { n: 19, icon: "code", t: "API Access", d: "Integrate Reelo with your apps and workflows using our API.", planned: true },
-  { n: 20, icon: "plug", t: "Webhooks", d: "Connect and automate with 3rd party apps seamlessly.", planned: true },
-  { n: 21, icon: "cloud", t: "Unlimited Storage", d: "Store all your videos, assets and projects with no limits.", planned: true },
-  { n: 22, icon: "gauge", t: "Priority Rendering", d: "Your videos render faster with top priority servers.", planned: true },
-  { n: 23, icon: "doc", t: "Detailed Revenue Reports", d: "Track earnings, refunds and growth with detailed financial reports.", planned: true },
-  { n: 24, icon: "headset", t: "Dedicated Account Manager", d: "Get a dedicated expert to help you grow and succeed.", planned: true },
+const CARDS: { n: number; icon: IconKey; art: string; t: string; d: string; href?: string; planned?: boolean }[] = [
+  { n: 1, icon: "chip", art: "advanced-ai-suite", t: "Advanced AI Suite", d: "Access the most powerful AI models for videos, voices, scripts and more.", href: "/create" },
+  { n: 2, icon: "users", art: "team-collaboration", t: "Team Collaboration", d: "Invite unlimited team members and work together in real time.", planned: true },
+  { n: 3, icon: "lock", art: "brand-vault-pro", t: "Brand Vault Pro", d: "Store unlimited brands, templates, logos, fonts and color palettes.", planned: true },
+  { n: 4, icon: "layers", art: "content-templates", t: "Content Templates", d: "Access 1000+ premium templates for every industry and niche.", planned: true },
+  { n: 5, icon: "grid", art: "bulk-creation", t: "Bulk Creation", d: "Create hundreds of videos at once with bulk upload, scripts and automation.", planned: true },
+  { n: 6, icon: "cc", art: "auto-subtitles", t: "Auto Subtitles", d: "Auto-generate accurate subtitles in 100+ languages.", planned: true },
+  { n: 7, icon: "mic", art: "voice-cloning", t: "Voice Cloning Pro", d: "Clone voices or create custom AI voices for your brand.", planned: true },
+  { n: 8, icon: "globe", art: "translate-dub", t: "Translate & Dub", d: "Translate and dub your videos into 100+ languages instantly.", planned: true },
+  { n: 9, icon: "scissors", art: "smart-cut-edit", t: "Smart Cut & Edit", d: "AI-powered editing tools to cut, trim and enhance videos automatically.", planned: true },
+  { n: 10, icon: "image", art: "thumbnail-maker", t: "Thumbnail Maker", d: "AI creates high-converting thumbnails that get more clicks.", planned: true },
+  { n: 11, icon: "stack", art: "stock-media-pro", t: "Stock Media Pro", d: "Unlimited access to premium stock videos, images and music.", planned: true },
+  { n: 12, icon: "magic", art: "background-remover", t: "Background Remover", d: "Remove or replace backgrounds with one click.", planned: true },
+  { n: 13, icon: "pen", art: "ai-script-writer", t: "AI Script Writer", d: "Generate viral scripts, hooks and captions in seconds.", href: "/create/shorts-20" },
+  { n: 14, icon: "refresh", art: "automated-reposting", t: "Automated Reposting", d: "Automatically repost your best content across all platforms.", planned: true },
+  { n: 15, icon: "chart", art: "detailed-analytics", t: "Detailed Analytics", d: "Deep insights on every video, audience and revenue stream.", planned: true },
+  { n: 16, icon: "target", art: "competitor-tracker", t: "Competitor Tracker", d: "Track competitors, keywords and top performing content.", planned: true },
+  { n: 17, icon: "contact", art: "lead-capture-crm", t: "Lead Capture & CRM", d: "Capture leads, manage contacts and nurture your audience.", planned: true },
+  { n: 18, icon: "tag", art: "white-label", t: "White Label Options", d: "Rebrand Reelo with your own logo, domain and custom colors.", planned: true },
+  { n: 19, icon: "code", art: "api-access", t: "API Access", d: "Integrate Reelo with your apps and workflows using our API.", planned: true },
+  { n: 20, icon: "plug", art: "webhooks", t: "Webhooks", d: "Connect and automate with 3rd party apps seamlessly.", planned: true },
+  { n: 21, icon: "cloud", art: "unlimited-storage", t: "Unlimited Storage", d: "Store all your videos, assets and projects with no limits.", planned: true },
+  { n: 22, icon: "gauge", art: "priority-rendering", t: "Priority Rendering", d: "Your videos render faster with top priority servers.", planned: true },
+  { n: 23, icon: "doc", art: "revenue-reports", t: "Detailed Revenue Reports", d: "Track earnings, refunds and growth with detailed financial reports.", planned: true },
+  { n: 24, icon: "headset", art: "account-manager", t: "Dedicated Account Manager", d: "Get a dedicated expert to help you grow and succeed.", planned: true },
 ];
 
 const FOOTER: { icon: IconKey; t: string; d: string }[] = [
@@ -76,16 +77,27 @@ export default function BusinessCenterProPage() {
         Everything Included in Business Center Pro
       </div>
 
-      {/* 24 cards. Nine open something that works today; the rest are labelled
-          PLANNED, because a card that looks clickable and is not is worse than
-          one that tells you where it stands. */}
+      {/* 24 cards. Two open a feature that genuinely does what the card claims;
+          the other 22 are labelled PLANNED and open the roadmap. A card that
+          looks clickable and lies is worse than one that tells you where it
+          stands. */}
       <div className="mb-7 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {CARDS.map((c) => {
           const inner = (
             <>
-              <div className="mb-3 flex items-center justify-between">
+              <div className="mb-2 flex items-center justify-between">
                 <span className="grid h-6 w-6 place-items-center rounded-full text-xs font-bold" style={{ border: "1px solid rgba(255,70,85,.5)", color: "#ff5663" }}>{c.n}</span>
-                <BIcon name={c.icon} size={24} />
+                <BIcon name={c.icon} size={20} />
+              </div>
+              {/* Square art in a square frame, object-contain — nothing cropped. */}
+              <div className="mb-3 grid h-[112px] place-items-center overflow-hidden rounded-xl" style={{ background: "radial-gradient(circle at 50% 40%,rgba(225,29,42,.14),transparent 70%)", border: "1px solid rgba(255,70,85,.1)" }}>
+                <Image
+                  src={"/assets/tiles/" + c.art + ".webp"}
+                  alt=""
+                  width={256}
+                  height={256}
+                  className="h-full w-full object-contain"
+                />
               </div>
               <h3 className="font-display text-[13px] font-bold uppercase tracking-wide">{c.t}</h3>
               <p className="mt-1 text-[12px] leading-[1.45]" style={{ color: "#9a8b8d" }}>{c.d}</p>
