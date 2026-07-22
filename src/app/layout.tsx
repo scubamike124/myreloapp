@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Manrope } from "next/font/google";
 import "./globals.css";
 import AmberDock from "@/components/amber/AmberDock";
+import MotherboardBackground from "@/components/design/MotherboardBackground";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -33,6 +34,10 @@ export default function RootLayout({
         className="min-h-full flex flex-col text-foreground"
         suppressHydrationWarning
       >
+        {/* The living board, mounted once behind every route. globals.css
+            already reserves this: html carries the deep backdrop colour and
+            body is transparent so the canvas shows through. */}
+        <MotherboardBackground />
         {children}
         {/* There is only one Amber, mounted once for the whole platform. */}
         <AmberDock />

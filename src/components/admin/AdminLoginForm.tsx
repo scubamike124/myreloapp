@@ -41,8 +41,10 @@ export default function AdminLoginForm({
     }
   };
 
+  // No background fill here: html already carries #0a0607, and an opaque fill
+  // would paint straight over the motherboard canvas behind every page.
   return (
-    <div className="grid min-h-screen place-items-center px-4 text-white" style={{ background: "#0a0607" }}>
+    <div className="grid min-h-screen place-items-center px-4 text-white">
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0"
