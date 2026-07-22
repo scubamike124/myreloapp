@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import AmberNavButton from "@/components/amber/AmberNavButton";
+import AppMobileNav from "@/components/design/AppMobileNav";
 
 type NavKey = "home" | "create" | "videos" | "trends" | "business" | "settings";
 
@@ -20,6 +21,10 @@ export default function AppShell({ active, children }: { active: NavKey; childre
   return (
     <div className="relative flex min-h-screen">
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0" style={{ backgroundImage: "radial-gradient(900px 500px at 70% -5%,rgba(225,29,42,.13),transparent 60%)" }} />
+
+      {/* Below md the rail below is hidden and was the only nav here, leaving
+          /dashboard, /trends and /account with nothing to navigate by. */}
+      <AppMobileNav active={active} links={NAV.map((n) => ({ key: n.key, href: n.href, title: n.title }))} />
 
       {/* sidebar */}
       <aside className="sticky top-0 z-[5] hidden h-screen w-[72px] flex-shrink-0 flex-col items-center gap-2 py-5 md:flex" style={{ borderRight: "1px solid rgba(255,70,85,.12)", background: "rgba(14,7,9,.6)", backdropFilter: "blur(6px)" }}>

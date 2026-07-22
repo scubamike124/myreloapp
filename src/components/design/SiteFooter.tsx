@@ -100,9 +100,11 @@ export default function SiteFooter() {
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-6 text-[13px] sm:flex-row" style={{ borderColor: "rgba(255,70,85,.1)", color: "#7e7173" }}>
           <span>© 2026 Reelo. All rights reserved.</span>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Link href="/#faq" className="transition-colors hover:text-white">Privacy</Link>
-            <Link href="/#faq" className="transition-colors hover:text-white">Terms</Link>
-            <Link href="/#faq" className="transition-colors hover:text-white">Support</Link>
+            {/* These three all pointed at /#faq, which is not any of them. */}
+            <Link href="/privacy" className="transition-colors hover:text-white">Privacy</Link>
+            <Link href="/terms" className="transition-colors hover:text-white">Terms</Link>
+            <Link href="/refunds" className="transition-colors hover:text-white">Refunds</Link>
+            <Link href="/support" className="transition-colors hover:text-white">Support</Link>
           </div>
         </div>
       </div>
