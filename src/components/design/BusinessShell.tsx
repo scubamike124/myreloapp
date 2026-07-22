@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import BIcon, { type IconKey } from "@/components/design/BIcon";
+import BusinessMobileNav from "@/components/design/BusinessMobileNav";
 
 type NavItem = { key: string; label: string; href: string; icon: IconKey };
 
@@ -97,7 +98,15 @@ export default function BusinessShell({
       {/* main */}
       <main className="relative min-w-0 flex-1">
         {/* top profile chip */}
-        <div className="flex justify-end px-5 pt-5 sm:px-8">
+        <div className="flex items-center justify-end px-5 pt-5 sm:px-8">
+          {/* Invisible on desktop, so this row looks exactly as it did. */}
+          <BusinessMobileNav
+            active={active}
+            items={NAV.map((n) => ({
+              ...n,
+              badge: variant === "pro" ? (n.key === "overview" ? null : "PRO") : OVERVIEW_BADGES[n.key] ?? null,
+            }))}
+          />
           <Link href="/account" className="flex items-center gap-2.5 rounded-xl px-3 py-2 transition-colors hover:border-[rgba(255,70,85,.45)]" style={{ border: "1px solid rgba(255,70,85,.2)", background: "rgba(14,6,8,.6)" }}>
             <span className="relative h-9 w-9 overflow-hidden rounded-full" style={{ border: "1px solid rgba(255,70,85,.4)" }}>
               <Image src="/assets/spokesperson.jpg" alt="Profile" fill sizes="36px" className="object-cover" />
