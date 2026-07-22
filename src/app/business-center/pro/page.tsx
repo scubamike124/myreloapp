@@ -95,6 +95,7 @@ export default function BusinessCenterProPage() {
                   width={512}
                   height={288}
                   className="h-full w-full object-cover"
+                  unoptimized
                 />
                 <span className="absolute left-1.5 top-1.5 z-10 grid h-5 w-5 place-items-center rounded-full bg-black/60 text-[10px] font-bold backdrop-blur-sm" style={{ border: "1px solid rgba(255,70,85,.5)", color: "#ff5663" }}>{c.n}</span>
                 <span className="absolute right-1.5 top-1.5 z-10 grid place-items-center rounded-md bg-black/50 p-0.5 backdrop-blur-sm">

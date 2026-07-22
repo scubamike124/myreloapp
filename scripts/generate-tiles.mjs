@@ -45,7 +45,8 @@ const MAX_ATTEMPTS = 3;
 // unrelated pictures. Matches the site: crimson, near-black, glowing edges.
 const STYLE =
   "Premium 3D illustrated dashboard scene, in the style of a glossy dark app card. " +
-  "Deep near-black background. Crimson and scarlet red colour scheme " +
+  "The ENTIRE background is solid pure black (#050303), edge to edge, in every corner — never white, grey or light. " +
+  "Crimson and scarlet red colour scheme " +
   "with bright neon red rim lighting and a soft red glow. Subtle white and silver highlights. " +
   // The old prompt said "floating, generous empty margin", and that is exactly
   // why the tiles came back as a small object adrift on black. The mockup art
@@ -152,10 +153,26 @@ for (const [slug, subject] of work) {
       // The model returns a ~1MB PNG. Thirty-five of those is 38MB in the repo
       // and on every page load, for artwork that is displayed at 84px.
       const webp = await sharp(buf).resize(512, 512, { fit: "inside" }).webp({ quality: 82 }).toBuffer();
+
+      // Reject a light background before it ships. The prompt asks for near-black,
+      // but the model sometimes renders a scene on white, and against the dark
+      // grid that one tile glares. Corner brightness above ~120 means the
+      // backdrop is not dark; retry rather than accept it.
+      const { data: px, info: pi } = await sharp(webp).resize(24, 24).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+      const corner = [0, (pi.width - 1) * pi.channels, (pi.height - 1) * pi.width * pi.channels, (pi.height * pi.width - 1) * pi.channels]
+        .reduce((sum, k) => sum + (px[k] + px[k + 1] + px[k + 2]) / 3, 0) / 4;
+      if (corner > 120) {
+        if (attempt < MAX_ATTEMPTS) {
+          await sleep(1500);
+          continue;
+        }
+        console.log(`  ! ${slug.padEnd(24)} still light after ${MAX_ATTEMPTS} tries (corner ${corner.toFixed(0)})`);
+      }
+
       writeFileSync(file, webp);
       made++;
       done = true;
-      console.log(`  + ${slug.padEnd(24)} ${(webp.length / 1024).toFixed(0)} KB`);
+      console.log(`  + ${slug.padEnd(24)} ${(webp.length / 1024).toFixed(0)} KB  corner ${corner.toFixed(0)}`);
     } catch (e) {
       if (attempt === MAX_ATTEMPTS) {
         failed++;
