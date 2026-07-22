@@ -27,6 +27,16 @@ type Book = {
 
 const THEMES = ["Superhero", "Explorer", "Astronaut", "Pirate", "Knight", "Wizard", "Detective", "Animal friend"];
 
+/** Examples, not a menu — the story follows whatever the parent writes. */
+const PROMPT_EXAMPLES = [
+  "Being brave on the first day at a new school",
+  "Sharing toys with a new baby brother",
+  "Not being scared of the dark",
+  "A red ball that rolls away",
+  "Learning to ride a bike without stabilisers",
+  "Saying goodbye to a dummy",
+];
+
 function fileToBase64(file: Blob): Promise<string> {
   return new Promise((resolve, reject) => {
     const r = new FileReader();
@@ -149,17 +159,39 @@ export default function StoryBook() {
             />
           </div>
 
+          {/* The heart of the tool: whatever is written here is what the book
+              is actually about. Emphasised, with examples that can be tapped,
+              because a single fixed placeholder read as a fixed subject. */}
           <div>
-            <label htmlFor="sb-idea" className="mb-1.5 block text-[13px] font-semibold text-white/80">What should it be about?</label>
+            <label htmlFor="sb-idea" className="mb-1 block text-[13px] font-semibold text-white/80">
+              What should the story be about? <span style={{ color: "#ff8892" }}>★</span>
+            </label>
+            <p className="mb-1.5 text-[11.5px] leading-relaxed text-white/40">
+              Anything you like — a worry they have, something they love, a lesson for tonight. This is what the book
+              will be about.
+            </p>
             <textarea
               id="sb-idea"
               value={idea}
               onChange={(e) => setIdea(e.target.value)}
               rows={3}
-              placeholder="A story about a red ball that rolls away"
+              placeholder={PROMPT_EXAMPLES[0]}
               className="w-full resize-none rounded-xl px-3.5 py-2.5 text-sm text-white outline-none placeholder:text-white/25"
-              style={{ border: "1px solid rgba(255,70,85,.22)", background: "rgba(255,60,75,.05)" }}
+              style={{ border: "1px solid rgba(255,70,85,.3)", background: "rgba(255,60,75,.07)" }}
             />
+            <div className="mt-1.5 flex flex-wrap gap-1.5">
+              {PROMPT_EXAMPLES.map((ex) => (
+                <button
+                  key={ex}
+                  type="button"
+                  onClick={() => setIdea(ex)}
+                  className="rounded-md px-2 py-1 text-left text-[11px] text-white/45 transition-colors hover:text-white"
+                  style={{ border: "1px solid rgba(255,255,255,.08)" }}
+                >
+                  {ex}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div>
