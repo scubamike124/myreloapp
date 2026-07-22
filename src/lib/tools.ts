@@ -30,7 +30,7 @@ const LANGS = ["English", "Spanish", "French", "German", "Hindi", "Arabic", "Jap
 
 export const TOOLS: Tool[] = [
   {
-    slug: "bedtime-storybook", title: "Bedtime Storybook", tagline: "Your child as the hero of their own picture book.", icon: "doc", poster: "/assets/storybook.webp", credits: creditLabel("bedtime-storybook"), cta: "Make the book",
+    slug: "bedtime-storybook", title: "Bedtime Storybook", tagline: "One picture book, finished tonight, starring your child.", icon: "doc", poster: "/assets/storybook.webp", credits: creditLabel("bedtime-storybook"), cta: "Make the book",
     // StoryBook renders its own interface; these fields describe the tool for
     // the Create page and for Amber, so both stay in step with what it needs.
     fields: [
@@ -119,12 +119,16 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "ai-story-maker", title: "AI Story Maker", tagline: "Multi-episode AI stories with memory.", icon: "sparkle", poster: "/assets/commercials.jpg", credits: "Pricing to be confirmed", cta: "Generate story",
+    slug: "ai-story-maker", title: "AI Story Maker", tagline: "Any character — even a banana — starring in a long-running series.", icon: "sparkle", poster: "/assets/commercials.jpg", credits: creditLabel("ai-story-maker"), cta: "Start the series",
+    // StoryMaker renders its own interface; these fields describe the tool for
+    // the Create page and for Amber.
     fields: [
-      { kind: "textarea", name: "prompt", label: "Story prompt", placeholder: "A young inventor discovers a hidden city beneath the ocean…" },
-      { kind: "select", name: "genre", label: "Genre", options: ["Family", "Fantasy", "Anime", "Children's", "Tribute", "Adventure"] },
-      { kind: "slider", name: "episodes", label: "Episodes", min: 1, max: 10, step: 1, default: 3 },
-      { kind: "select", name: "voice", label: "Narration voice", options: VOICES },
+      { kind: "upload", name: "character", label: "Your star", hint: "Upload a photo, or pick any Reelo character — a banana, a dragon, a warlord." },
+      { kind: "text", name: "characterName", label: "Their name", placeholder: "Barry the Banana" },
+      { kind: "textarea", name: "premise", label: "What is the series about?", placeholder: "Barry escapes the fruit bowl and sets out to find the legendary Golden Orchard…" },
+      { kind: "select", name: "genre", label: "Genre", options: ["Adventure", "Fantasy", "Comedy", "Anime", "Mystery", "Sci-Fi", "Family", "Children's"] },
+      { kind: "slider", name: "scenes", label: "Scenes per episode", min: 6, max: 10, step: 1, default: 8 },
+      { kind: "select", name: "language", label: "Language", options: LANGS },
     ],
   },
   {
@@ -144,7 +148,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "story-memory-generator", title: "Story & Memory Generator", tagline: "Turn memories into cinematic stories.", icon: "sparkle", poster: "/assets/dancing-grandpa.jpg", credits: "Pricing to be confirmed", cta: "Generate story",
+    slug: "story-memory-generator", title: "Story & Memory Generator", tagline: "Your own photos, cut into one narrated memory film.", icon: "sparkle", poster: "/assets/dancing-grandpa.jpg", credits: "Pricing to be confirmed", cta: "Generate memory film",
     fields: [
       { kind: "choices", name: "type", label: "Story type", options: [
         { label: "Family", value: "family", icon: "👨‍👩‍👧" }, { label: "Pet", value: "pet", icon: "🐶" }, { label: "Fantasy", value: "fantasy", icon: "🐉" },
@@ -177,7 +181,7 @@ export const VIDEO_TOOLS = new Set(["talking-photo", "dancing-photo", "ai-avatar
 export const IMAGE_TOOLS = new Set(["custom-avatar-creator"]);
 
 /** Every tool that can currently produce a result. */
-export const LIVE_TOOLS = new Set<string>([...VIDEO_TOOLS, ...IMAGE_TOOLS, "website-commercial", "bedtime-storybook"]);
+export const LIVE_TOOLS = new Set<string>([...VIDEO_TOOLS, ...IMAGE_TOOLS, "website-commercial", "bedtime-storybook", "ai-story-maker"]);
 
 export function isToolLive(slug: string): boolean {
   return LIVE_TOOLS.has(slug);
@@ -186,6 +190,7 @@ export function isToolLive(slug: string): boolean {
 /** Which external service a live tool depends on — used for Amber's guidance. */
 export const TOOL_SERVICE: Record<string, "gemini" | "heygen"> = {
   "bedtime-storybook": "gemini",
+  "ai-story-maker": "gemini",
   "talking-photo": "gemini",
   "dancing-photo": "gemini",
   "custom-avatar-creator": "gemini",

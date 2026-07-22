@@ -83,6 +83,14 @@ export const COST_LINES: CostLine[] = [
     detail: "6 illustrations + story",
   },
   {
+    action: "ai-story-maker",
+    label: "AI Story Maker",
+    // One episode at the default eight scenes. Ten scenes — the maximum — costs
+    // $0.41 and still clears 66% on the cheapest tier.
+    cost: PROVIDER.geminiImage * 8 + textCall(2500, 6000),
+    detail: "8 illustrations + long episode",
+  },
+  {
     action: "analyze",
     label: "Website scan",
     cost: textCall(8000, 1500),

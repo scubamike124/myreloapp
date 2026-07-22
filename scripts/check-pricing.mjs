@@ -59,6 +59,7 @@ const LINES = [
   { label: "Website Commercial", cost: P.heygenPerMin * 0.5 + text(8000, 1500), tokens: 3 },
   { label: "Custom Avatar Creator", cost: P.image, tokens: 1 },
   { label: "Bedtime Storybook", cost: P.image * 6 + text(1200, 2500), tokens: 2 },
+  { label: "AI Story Maker", cost: P.image * 10 + text(2500, 6000), tokens: 3 }, // worst case: 10 scenes
 ];
 
 const FLOOR = 0.5; // the stated target is 50-70%

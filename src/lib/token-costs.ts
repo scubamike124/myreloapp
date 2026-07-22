@@ -16,6 +16,10 @@ export const TOKEN_COST: Record<string, number> = {
   "ai-avatar-studio": 3,
   "website-commercial": 3,
   "bedtime-storybook": 2,
+  // Per EPISODE, not per series. Eight scenes of long narration plus eight
+  // illustrations; at the ten-scene maximum this still holds 66% on the
+  // cheapest tier, where 2 tokens would fall to 49% and break the floor.
+  "ai-story-maker": 3,
   "custom-avatar-creator": 1,
   // Free by design. All three are cheap text or transcription calls guarded by
   // their own daily caps, and charging for them would be worse than pointless:
@@ -46,6 +50,7 @@ export const TOKEN_UNIT: Record<string, string> = {
   "ai-avatar-studio": "video",
   "website-commercial": "commercial",
   "bedtime-storybook": "book",
+  "ai-story-maker": "episode",
   "custom-avatar-creator": "avatar",
   analyze: "scan",
 };

@@ -5,6 +5,7 @@ import ToolStudio from "@/components/create/ToolStudio";
 import WebsiteCommercial from "@/components/create/WebsiteCommercial";
 import AiAvatarStudio from "@/components/create/AiAvatarStudio";
 import StoryBook from "@/components/create/StoryBook";
+import StoryMaker from "@/components/create/StoryMaker";
 import BackButton from "@/components/design/BackButton";
 
 export function generateStaticParams() {
@@ -26,7 +27,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
   // through a shell, so Back is added here — these are the pages people most
   // need to get out of.
   const studio =
-    slug === "bedtime-storybook" ? <StoryBook /> : slug === "website-commercial" ? <WebsiteCommercial /> : slug === "ai-avatar-studio" ? <AiAvatarStudio /> : <ToolStudio tool={tool} />;
+    slug === "bedtime-storybook" ? <StoryBook /> : slug === "ai-story-maker" ? <StoryMaker /> : slug === "website-commercial" ? <WebsiteCommercial /> : slug === "ai-avatar-studio" ? <AiAvatarStudio /> : <ToolStudio tool={tool} />;
 
   // Most studios open with their own sticky header carrying a "← Create" link.
   // Floating a second Back button over that both duplicated the control and,
