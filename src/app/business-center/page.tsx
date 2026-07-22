@@ -27,18 +27,20 @@ const STATS: { icon: IconKey; value: string; label: string }[] = [
   { icon: "dollar", value: "$12.4K", label: "Revenue" },
 ];
 
-const CARDS: { n: number; icon: IconKey; title: string; desc: string; badge?: string; href?: string }[] = [
-  { n: 1, icon: "pen", title: "Create", desc: "Make amazing videos in minutes.", href: "/create" },
-  { n: 2, icon: "film", title: "Video Library", desc: "Manage and organize all your creations.", href: "/library" },
-  { n: 3, icon: "palette", title: "Brand Kit", desc: "Store your logos, colors, fonts, and brand assets." },
-  { n: 4, icon: "folder", title: "Assets", desc: "Access and manage all your media and resources.", badge: "NEW" },
-  { n: 5, icon: "share", title: "Social", desc: "Connect and grow your social channels.", href: "/business-center/social" },
-  { n: 6, icon: "rocket", title: "Publishing", desc: "Publish your content everywhere.", href: "/business-center/publishing" },
-  { n: 7, icon: "calendar", title: "Scheduling", desc: "Schedule posts and never miss a beat.", href: "/business-center/scheduling" },
-  { n: 8, icon: "chart", title: "Analytics", desc: "Track performance and grow faster.", href: "/business-center/analytics" },
-  { n: 9, icon: "dollar", title: "Revenue", desc: "Monitor earnings and growth.", href: "/business-center/revenue" },
-  { n: 10, icon: "brain", title: "Trend AI", desc: "Discover trending topics and ideas.", href: "/trends" },
-  { n: 11, icon: "crown", title: "Hub Pro", desc: "Unlock all pro tools and advanced features.", href: "/business-center/pro" },
+// Each card carries a real photo rather than a line icon. The icon stays as a
+// small overlay badge, so the card still reads at a glance.
+const CARDS: { n: number; icon: IconKey; title: string; desc: string; img: string; badge?: string; href?: string }[] = [
+  { n: 1, icon: "pen", title: "Create", desc: "Make amazing videos in minutes.", img: "/assets/talking-photo.jpg", href: "/create" },
+  { n: 2, icon: "film", title: "Video Library", desc: "Manage and organize all your creations.", img: "/assets/shorts.jpg", href: "/library" },
+  { n: 3, icon: "palette", title: "Brand Kit", desc: "Store your logos, colors, fonts, and brand assets.", img: "/assets/website commershial.png" },
+  { n: 4, icon: "folder", title: "Assets", desc: "Access and manage all your media and resources.", img: "/assets/product.jpg", badge: "NEW" },
+  { n: 5, icon: "share", title: "Social", desc: "Connect and grow your social channels.", img: "/assets/talking-selfie.jpg", href: "/business-center/social" },
+  { n: 6, icon: "rocket", title: "Publishing", desc: "Publish your content everywhere.", img: "/assets/commercials.jpg", href: "/business-center/publishing" },
+  { n: 7, icon: "calendar", title: "Scheduling", desc: "Schedule posts and never miss a beat.", img: "/assets/dancing.jpg", href: "/business-center/scheduling" },
+  { n: 8, icon: "chart", title: "Analytics", desc: "Track performance and grow faster.", img: "/assets/product-skincare.jpg", href: "/business-center/analytics" },
+  { n: 9, icon: "dollar", title: "Revenue", desc: "Monitor earnings and growth.", img: "/assets/spokesperson.jpg", href: "/business-center/revenue" },
+  { n: 10, icon: "brain", title: "Trend AI", desc: "Discover trending topics and ideas.", img: "/assets/dancing-grandpa.jpg", href: "/trends" },
+  { n: 11, icon: "crown", title: "Hub Pro", desc: "Unlock all pro tools and advanced features.", img: "/assets/avatar-business.jpg", href: "/business-center/pro" },
 ];
 
 const ACTIVITY = [
@@ -61,10 +63,23 @@ const FOOTER: { icon: IconKey; t: string; d: string }[] = [
   { icon: "chip", t: "AI Powered", d: "Next-gen AI to boost your content." },
 ];
 
-function Tile({ icon }: { icon: IconKey }) {
+/**
+ * A real photo for each card, with the line icon kept as a small corner badge.
+ * The card previously showed only the icon, which read as a placeholder.
+ */
+function PhotoTile({ img, icon, alt }: { img: string; icon: IconKey; alt: string }) {
   return (
-    <div className="mb-3 grid h-[84px] place-items-center rounded-xl" style={{ background: "radial-gradient(circle at 50% 40%,rgba(225,29,42,.16),transparent 70%)", border: "1px solid rgba(255,70,85,.12)" }}>
-      <BIcon name={icon} size={38} />
+    <div className="relative mb-3 h-[84px] overflow-hidden rounded-xl" style={{ border: "1px solid rgba(255,70,85,.12)" }}>
+      <Image src={img} alt={alt} fill sizes="(max-width:640px) 100vw, (max-width:1280px) 33vw, 25vw" className="object-cover" />
+      {/* Tint so white-ish photos never fight the red UI, and the title below
+          keeps its contrast. */}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(12,5,7,.15),rgba(12,5,7,.72))" }} />
+      <span
+        className="absolute bottom-2 right-2 grid h-7 w-7 place-items-center rounded-lg"
+        style={{ background: "rgba(10,5,7,.72)", border: "1px solid rgba(255,70,85,.35)" }}
+      >
+        <BIcon name={icon} size={16} />
+      </span>
     </div>
   );
 }
@@ -99,7 +114,7 @@ export default function BusinessCenterPage() {
             <>
               <span className="absolute left-3 top-3 grid h-6 w-6 place-items-center rounded-full text-xs font-bold" style={{ border: "1px solid rgba(255,70,85,.5)", color: "#ff5663" }}>{c.n}</span>
               {c.badge && <span className="absolute right-3 top-3 rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase" style={c.badge === "NEW" ? { color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" } : { color: "#c98", background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.1)" }}>{c.badge}</span>}
-              <Tile icon={c.icon} />
+              <PhotoTile img={c.img} icon={c.icon} alt={c.title} />
               <h3 className="font-display text-base font-bold">{c.title}</h3>
               <p className="mt-1 text-[13px] leading-[1.5]" style={{ color: "#9a8b8d" }}>{c.desc}</p>
             </>
