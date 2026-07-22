@@ -127,13 +127,6 @@ const PACKS = [
   { t: "1,000 TKN", p: "$449.99", save: "SAVE 55%" },
 ];
 
-const GUARANTEES = [
-  { t: "30-Day Money Back Guarantee", d: "Not satisfied? Get a full refund within 30 days.", icon: <><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z" /><path d="M9 12l2 2 4-4" /></> },
-  { t: "Secure Payments", d: "Your payment info is always protected.", icon: <><rect x="4" y="10" width="16" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></> },
-  { t: "Cancel Anytime", d: "No contracts. Cancel whenever you want.", icon: <><circle cx="12" cy="12" r="10" /><path d="M8 8l8 8M16 8l-8 8" /></> },
-  { t: "Priority Support", d: "Get expert help whenever you need it.", icon: <><path d="M4 14v-2a8 8 0 0 1 16 0v2" /><rect x="2.5" y="13" width="4" height="7" rx="1.6" /><rect x="17.5" y="13" width="4" height="7" rx="1.6" /><path d="M20 20a4 4 0 0 1-4 3h-2" /></> },
-];
-
 function Check({ stroke }: { stroke: string }) {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="mt-px shrink-0">
@@ -215,18 +208,10 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* guarantees */}
-        <div className="grid grid-cols-2 gap-3.5 rounded-2xl px-[22px] py-5 sm:grid-cols-4" style={{ border: "1px solid rgba(255,70,85,.14)", background: "linear-gradient(180deg,rgba(22,12,14,.55),rgba(10,7,9,.45))" }}>
-          {GUARANTEES.map((g) => (
-            <div key={g.t}>
-              <div className="mb-2">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff5663" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{g.icon}</svg>
-              </div>
-              <div className="mb-1 text-[11.5px] font-bold leading-tight">{g.t}</div>
-              <div className="text-[10.5px] leading-[1.4]" style={{ color: "#8e7f81" }}>{g.d}</div>
-            </div>
-          ))}
-        </div>
+        {/* The guarantee badges lived here — a 30-day money-back guarantee,
+            secure payments, cancel anytime, priority support. Removed: there is
+            no checkout, so none of them could be honoured, and a refund promise
+            is a commitment the business had not made. */}
       </div>
 
       <div className="px-8 pb-[30px] pt-1.5 text-center text-[12.5px]" style={{ color: "#76696b" }}>
