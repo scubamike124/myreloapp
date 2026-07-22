@@ -17,7 +17,8 @@ import Link from "next/link";
 
 type Avatar = { avatarId: string; name: string; gender: string; premium: boolean; image: string; video: string };
 
-const PAGE = 60;
+// The API clamps limit to 96; asking for more would silently get 96 back.
+const PAGE = 96;
 
 export default function AvatarLibrary() {
   const [avatars, setAvatars] = useState<Avatar[]>([]);
@@ -132,32 +133,32 @@ export default function AvatarLibrary() {
         </p>
       )}
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <div className="grid gap-2" style={{ gridTemplateColumns: "repeat(auto-fill,minmax(112px,1fr))" }}>
         {avatars.map((a) => (
           <Link
             key={a.avatarId}
             href={`/create/ai-avatar-studio?avatar=${encodeURIComponent(a.avatarId)}`}
             onMouseEnter={() => setHovered(a.avatarId)}
             onMouseLeave={() => setHovered((h) => (h === a.avatarId ? null : h))}
-            className="group relative block overflow-hidden rounded-xl transition-transform hover:-translate-y-0.5"
+            className="group relative block overflow-hidden rounded-lg transition-transform hover:-translate-y-0.5 hover:z-10 hover:scale-[1.06]"
             style={{ border: "1px solid rgba(255,70,85,.16)" }}
           >
-            <div className="relative aspect-[3/4] bg-black/40">
+            <div className="relative aspect-square bg-black/40">
               {/* Video preview only on hover — 1,264 autoplaying videos would
                   melt the page. */}
               {hovered === a.avatarId && a.video ? (
-                <video src={a.video} poster={a.image} muted autoPlay loop playsInline className="absolute inset-0 h-full w-full object-cover" />
+                <video src={a.video} poster={a.image} muted autoPlay loop playsInline className="absolute inset-0 h-full w-full object-cover object-top" />
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={a.image} alt={a.name} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+                <img src={a.image} alt={a.name} loading="lazy" className="absolute inset-0 h-full w-full object-cover object-top" />
               )}
               {a.premium && (
                 <span className="absolute right-1.5 top-1.5 rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
                   Pro
                 </span>
               )}
-              <div className="absolute inset-x-0 bottom-0 p-2" style={{ background: "linear-gradient(180deg,transparent,rgba(8,4,5,.9))" }}>
-                <p className="truncate text-[11.5px] font-semibold text-white">{a.name}</p>
+              <div className="absolute inset-x-0 bottom-0 px-1.5 py-1" style={{ background: "linear-gradient(180deg,transparent,rgba(8,4,5,.9))" }}>
+                <p className="truncate text-[10px] font-semibold text-white">{a.name}</p>
               </div>
             </div>
           </Link>
