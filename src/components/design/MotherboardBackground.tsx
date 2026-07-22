@@ -5,11 +5,15 @@ import { useEffect, useRef } from "react";
 // ---------------------------------------------------------------------------
 // The living board behind every page.
 //
-// Real 3D: traces, pads and chips are defined in world space on the y=0 plane
-// and run through a perspective camera each frame, so depth, convergence and
-// parallax are genuine rather than faked with stacked divs. Canvas 2D rather
-// than WebGL — this sits behind EVERY page, and three + fiber + postprocessing
-// is ~700KB of JS to ship on every route for a backdrop.
+// A POPULATED motherboard, not a wireframe: dense fine traces, IC packages
+// with pin rows, SMD parts, electrolytic caps, a hero processor, and bokeh
+// for the parts drifting past the near plane. Everything lives in world space
+// on the y=0 plane and runs through a perspective camera each frame, so depth,
+// convergence and parallax are genuine.
+//
+// Canvas 2D rather than WebGL: this sits behind EVERY page, and
+// three + fiber + postprocessing is ~700KB of JS to ship on every route
+// for a backdrop.
 //
 // Rules it must obey:
 //   - never compete with foreground text (low alpha, vignette, no hard edges)
@@ -18,9 +22,14 @@ import { useEffect, useRef } from "react";
 // ---------------------------------------------------------------------------
 
 type Vec3 = { x: number; y: number; z: number };
-type Trace = { pts: Vec3[]; seg: number[]; len: number; depth: number };
+type Trace = { pts: Vec3[]; seg: number[]; len: number; w: number };
 type Pulse = { t: number; d: number; speed: number; hue: number; size: number };
-type Chip = { x: number; z: number; w: number; d: number; h: number; leds: number };
+type Pad = { x: number; z: number; r: number };
+type Part =
+  | { kind: "ic"; x: number; z: number; w: number; d: number; h: number; rot: boolean; pins: number }
+  | { kind: "smd"; x: number; z: number; w: number; d: number; h: number; lit: number }
+  | { kind: "cap"; x: number; z: number; r: number; h: number }
+  | { kind: "hero"; x: number; z: number; w: number; h: number };
 type Led = { x: number; z: number; phase: number; rate: number; hue: number };
 
 /** Reelo red, through orange, to a hot white core — the pulse travels this. */
@@ -68,25 +77,26 @@ export default function MotherboardBackground() {
 
     let W = 0;
     let H = 0;
-    let dpr = 1;
     let raf = 0;
     let running = true;
     const rnd = (a: number, b: number) => a + Math.random() * (b - a);
 
     // --- world ------------------------------------------------------------
-    const EXTENT = 300; // board half-size in world units
+    const EXTENT = 155; // board half-size in world units
+    const GRID = 7; // routing pitch — fine, so the board reads as dense
     let traces: Trace[] = [];
     let pulses: Pulse[] = [];
-    let chips: Chip[] = [];
+    let pads: Pad[] = [];
+    let parts: Part[] = [];
     let leds: Led[] = [];
 
-    const camera = { x: 0, y: 62, z: 150, yaw: 0, pitch: 0.42, focal: 0 };
+    const camera = { x: 0, y: 52, z: 112, yaw: 0, pitch: 0.52, focal: 0 };
 
     function project(p: Vec3) {
       const dx = p.x - camera.x;
       const dy = p.y - camera.y;
-      // Forward is -Z: the camera sits at +z and looks back toward the board,
-      // so a point in front must yield a POSITIVE depth or it gets culled.
+      // Forward is -Z: the camera sits at +z looking back toward the board, so
+      // a point in front must yield a POSITIVE depth or it gets culled.
       const dz = camera.z - p.z;
 
       const cy = Math.cos(camera.yaw);
@@ -94,40 +104,113 @@ export default function MotherboardBackground() {
       const rx = dx * cy - dz * sy;
       const rz = dx * sy + dz * cy;
 
-      // Pitch tilts the camera DOWN toward the board. Getting these signs the
-      // other way round throws the whole plane below the viewport — it still
-      // renders, just nowhere you can see it.
+      // Pitch tilts the camera DOWN toward the board. These signs the other way
+      // round throw the whole plane below the viewport — it still renders, just
+      // nowhere you can see it.
       const cp = Math.cos(camera.pitch);
       const sp = Math.sin(camera.pitch);
       const ry = dy * cp + rz * sp;
       const rd = -dy * sp + rz * cp;
 
-      if (rd < 6) return null; // behind or too close to the lens
+      if (rd < 10) return null;
       const s = camera.focal / rd;
       return { x: W / 2 + rx * s, y: H / 2 - ry * s, depth: rd, scale: s };
+    }
+
+    /** Does a footprint overlap something already placed? Keeps parts apart. */
+    function free(taken: { x: number; z: number; r: number }[], x: number, z: number, r: number) {
+      for (const t of taken) {
+        if (Math.hypot(t.x - x, t.z - z) < t.r + r) return false;
+      }
+      return true;
     }
 
     function build() {
       traces = [];
       pulses = [];
-      chips = [];
+      pads = [];
+      parts = [];
       leds = [];
 
-      const GRID = 22;
-      // Scale density to the viewport so a phone does not draw a desktop's worth.
-      const count = Math.round(Math.max(26, Math.min(80, (W * H) / 26000)));
+      const area = W * H;
+      const taken: { x: number; z: number; r: number }[] = [];
 
-      for (let i = 0; i < count; i++) {
+      // --- hero processor, dead centre -----------------------------------
+      parts.push({ kind: "hero", x: -74, z: -34, w: 34, h: 7 });
+      taken.push({ x: -74, z: -34, r: 30 });
+
+      // --- IC packages ----------------------------------------------------
+      const icCount = Math.round(Math.max(9, Math.min(22, area / 90000)));
+      for (let i = 0; i < icCount; i++) {
+        for (let tries = 0; tries < 14; tries++) {
+          const w = rnd(16, 34);
+          const d = w * rnd(0.55, 1.05);
+          const x = rnd(-EXTENT * 0.92, EXTENT * 0.92);
+          const z = rnd(-EXTENT * 0.95, EXTENT * 0.45);
+          const r = Math.max(w, d) * 0.75;
+          if (!free(taken, x, z, r)) continue;
+          taken.push({ x, z, r });
+          parts.push({
+            kind: "ic",
+            x,
+            z,
+            w,
+            d,
+            h: rnd(4, 9),
+            rot: Math.random() < 0.5,
+            pins: Math.round(rnd(5, 11)),
+          });
+          break;
+        }
+      }
+
+      // --- electrolytic capacitors ---------------------------------------
+      const capCount = Math.round(Math.max(8, Math.min(24, area / 78000)));
+      for (let i = 0; i < capCount; i++) {
+        for (let tries = 0; tries < 12; tries++) {
+          const r = rnd(3, 5.5);
+          const x = rnd(-EXTENT * 0.95, EXTENT * 0.95);
+          const z = rnd(-EXTENT, EXTENT * 0.5);
+          if (!free(taken, x, z, r * 1.6)) continue;
+          taken.push({ x, z, r: r * 1.6 });
+          parts.push({ kind: "cap", x, z, r, h: rnd(6, 13) });
+          break;
+        }
+      }
+
+      // --- small SMD parts, the scatter that sells the density -------------
+      const smdCount = Math.round(Math.max(50, Math.min(190, area / 11000)));
+      for (let i = 0; i < smdCount; i++) {
+        const x = rnd(-EXTENT, EXTENT);
+        const z = rnd(-EXTENT, EXTENT * 0.55);
+        if (!free(taken, x, z, 3)) continue;
+        const long = rnd(2.4, 5.5);
+        const horiz = Math.random() < 0.5;
+        parts.push({
+          kind: "smd",
+          x,
+          z,
+          w: horiz ? long : long * 0.42,
+          d: horiz ? long * 0.42 : long,
+          h: rnd(1.2, 2.6),
+          lit: Math.random() < 0.22 ? rnd(0.4, 1) : 0,
+        });
+      }
+
+      // --- routing --------------------------------------------------------
+      // Many short traces on a fine pitch reads as a real board; a few long
+      // ones read as a wireframe grid, which is what this used to look like.
+      const traceCount = Math.round(Math.max(150, Math.min(460, area / 3400)));
+      for (let i = 0; i < traceCount; i++) {
         const pts: Vec3[] = [];
         let cx = Math.round(rnd(-EXTENT, EXTENT) / GRID) * GRID;
-        let cz = Math.round(rnd(-EXTENT, EXTENT * 0.6) / GRID) * GRID;
+        let cz = Math.round(rnd(-EXTENT, EXTENT * 0.5) / GRID) * GRID;
         pts.push({ x: cx, y: 0, z: cz });
 
-        // Manhattan routing with 45° jogs — reads as PCB, not as random lines.
-        const steps = Math.floor(rnd(3, 8));
+        const steps = Math.floor(rnd(2, 6));
         let horiz = Math.random() < 0.5;
         for (let s = 0; s < steps; s++) {
-          const dist = Math.round(rnd(1, 6)) * GRID * (Math.random() < 0.5 ? 1 : -1);
+          const dist = Math.round(rnd(1, 7)) * GRID * (Math.random() < 0.5 ? 1 : -1);
           if (horiz) cx += dist;
           else cz += dist;
           cx = Math.max(-EXTENT, Math.min(EXTENT, cx));
@@ -143,49 +226,37 @@ export default function MotherboardBackground() {
           seg.push(l);
           len += l;
         }
-        if (len < GRID * 2) continue;
-        traces.push({ pts, seg, len, depth: pts[0].z });
+        if (len < GRID) continue;
+        traces.push({ pts, seg, len, w: rnd(0.5, 1.5) });
+        pads.push({ x: pts[0].x, z: pts[0].z, r: rnd(1.1, 2.2) });
+        pads.push({ x: pts[pts.length - 1].x, z: pts[pts.length - 1].z, r: rnd(1.1, 2.2) });
       }
 
-      // Roughly one travelling pulse per two traces.
-      const pc = Math.max(10, Math.round(traces.length * 0.5));
+      const pc = Math.round(Math.max(14, Math.min(46, traces.length * 0.12)));
       for (let i = 0; i < pc; i++) {
         pulses.push({
           t: Math.floor(rnd(0, traces.length)),
           d: rnd(0, 400),
-          speed: rnd(28, 78),
+          speed: rnd(26, 72),
           hue: rnd(0, 1),
-          size: rnd(0.8, 2.1),
+          size: rnd(0.9, 2.2),
         });
       }
 
-      const chipCount = Math.round(Math.max(5, Math.min(14, (W * H) / 150000)));
-      for (let i = 0; i < chipCount; i++) {
-        const w = rnd(26, 62);
-        chips.push({
-          x: rnd(-EXTENT * 0.85, EXTENT * 0.85),
-          z: rnd(-EXTENT * 0.9, EXTENT * 0.5),
-          w,
-          d: w * rnd(0.6, 1.15),
-          h: rnd(5, 13),
-          leds: Math.floor(rnd(2, 6)),
-        });
-      }
-
-      const ledCount = Math.round(Math.max(18, Math.min(60, (W * H) / 42000)));
+      const ledCount = Math.round(Math.max(22, Math.min(70, area / 34000)));
       for (let i = 0; i < ledCount; i++) {
         leds.push({
           x: rnd(-EXTENT, EXTENT),
-          z: rnd(-EXTENT, EXTENT * 0.6),
+          z: rnd(-EXTENT, EXTENT * 0.5),
           phase: rnd(0, Math.PI * 2),
-          rate: rnd(0.6, 3.4),
+          rate: rnd(0.5, 3.2),
           hue: rnd(0, 1),
         });
       }
     }
 
     function resize() {
-      dpr = Math.min(1.75, window.devicePixelRatio || 1);
+      const dpr = Math.min(1.75, window.devicePixelRatio || 1);
       W = window.innerWidth;
       H = window.innerHeight;
       canvas!.width = Math.floor(W * dpr);
@@ -211,6 +282,60 @@ export default function MotherboardBackground() {
       return tr.pts[tr.pts.length - 1];
     }
 
+    /** Fill the projected quad of a box's top face. */
+    function topFace(x: number, z: number, w: number, d: number, h: number) {
+      const c = [
+        project({ x: x - w / 2, y: h, z: z - d / 2 }),
+        project({ x: x + w / 2, y: h, z: z - d / 2 }),
+        project({ x: x + w / 2, y: h, z: z + d / 2 }),
+        project({ x: x - w / 2, y: h, z: z + d / 2 }),
+      ];
+      if (c.some((p) => !p)) return null;
+      return c as NonNullable<(typeof c)[0]>[];
+    }
+
+    function drawBox(
+      x: number,
+      z: number,
+      w: number,
+      d: number,
+      h: number,
+      fade: number,
+      topFill: string,
+      sideFill: string,
+      edge: string | null,
+    ) {
+      const top = topFace(x, z, w, d, h);
+      if (!top) return null;
+
+      // Front wall gives the extrusion its solidity.
+      const fl = project({ x: x - w / 2, y: 0, z: z + d / 2 });
+      const fr = project({ x: x + w / 2, y: 0, z: z + d / 2 });
+      if (fl && fr) {
+        ctx!.beginPath();
+        ctx!.moveTo(top[3].x, top[3].y);
+        ctx!.lineTo(top[2].x, top[2].y);
+        ctx!.lineTo(fr.x, fr.y);
+        ctx!.lineTo(fl.x, fl.y);
+        ctx!.closePath();
+        ctx!.fillStyle = sideFill;
+        ctx!.fill();
+      }
+
+      ctx!.beginPath();
+      ctx!.moveTo(top[0].x, top[0].y);
+      for (let i = 1; i < 4; i++) ctx!.lineTo(top[i].x, top[i].y);
+      ctx!.closePath();
+      ctx!.fillStyle = topFill;
+      ctx!.fill();
+      if (edge) {
+        ctx!.strokeStyle = edge;
+        ctx!.lineWidth = 0.7;
+        ctx!.stroke();
+      }
+      return top;
+    }
+
     function draw(time: number) {
       const t = time / 1000;
       const hb = heartbeat(t);
@@ -218,17 +343,34 @@ export default function MotherboardBackground() {
       // Slow camera drift. Parallax falls out of the projection for free:
       // near geometry sweeps further across the screen than far geometry.
       if (!reduce) {
-        camera.x = Math.sin(t * 0.045) * 46;
-        camera.z = 150 + Math.cos(t * 0.033) * 26;
-        camera.yaw = Math.sin(t * 0.021) * 0.10;
-        camera.pitch = 0.42 + Math.sin(t * 0.027) * 0.03;
+        camera.x = Math.sin(t * 0.045) * 22;
+        camera.z = 112 + Math.cos(t * 0.033) * 14;
+        camera.yaw = Math.sin(t * 0.021) * 0.09;
+        camera.pitch = 0.52 + Math.sin(t * 0.027) * 0.02;
       }
 
       ctx!.clearRect(0, 0, W, H);
 
-      // No full-screen wash here — an opaque haze over the whole viewport turns
-      // the board to brown fog. Depth comes from per-element distance fade
-      // instead, which keeps the blacks black.
+      // --- substrate ------------------------------------------------------
+      // A dark board surface so parts sit ON something rather than floating in
+      // the void. Drawn as one big quad in world space.
+      const board = [
+        project({ x: -EXTENT, y: -0.5, z: -EXTENT }),
+        project({ x: EXTENT, y: -0.5, z: -EXTENT }),
+        project({ x: EXTENT, y: -0.5, z: EXTENT }),
+        project({ x: -EXTENT, y: -0.5, z: EXTENT }),
+      ];
+      if (board.every(Boolean)) {
+        ctx!.beginPath();
+        ctx!.moveTo(board[0]!.x, board[0]!.y);
+        for (let i = 1; i < 4; i++) ctx!.lineTo(board[i]!.x, board[i]!.y);
+        ctx!.closePath();
+        const g = ctx!.createLinearGradient(0, H * 0.15, 0, H);
+        g.addColorStop(0, "rgba(24,8,11,0.55)");
+        g.addColorStop(1, "rgba(11,5,7,0.85)");
+        ctx!.fillStyle = g;
+        ctx!.fill();
+      }
 
       // --- traces ---------------------------------------------------------
       ctx!.lineCap = "round";
@@ -249,74 +391,228 @@ export default function MotherboardBackground() {
             ctx!.lineTo(q.x, q.y);
           }
         }
-        const mid = project(tr.pts[0]);
-        // Fade with distance so the board recedes convincingly.
-        const fade = mid ? Math.max(0, Math.min(1, 1 - mid.depth / 620)) : 0;
-        // Etched copper: a wide dim body with a brighter core, which reads as a
-        // real trace rather than a hairline.
-        ctx!.strokeStyle = `rgba(196,32,45,${0.04 + fade * 0.11})`;
-        ctx!.lineWidth = 1.6 + fade * 3.2;
+        const head = project(tr.pts[0]);
+        const fade = head ? Math.max(0, Math.min(1, 1 - head.depth / 400)) : 0;
+        if (fade <= 0.01) continue;
+        ctx!.strokeStyle = `rgba(168,32,40,${0.07 + fade * 0.20})`;
+        ctx!.lineWidth = (0.9 + fade * 2.1) * tr.w;
         ctx!.stroke();
-        ctx!.strokeStyle = `rgba(255,86,99,${0.05 + fade * 0.17 * (0.7 + hb * 0.5)})`;
-        ctx!.lineWidth = 0.5 + fade * 1.2;
+        ctx!.strokeStyle = `rgba(255,104,88,${0.06 + fade * 0.22 * (0.7 + hb * 0.5)})`;
+        ctx!.lineWidth = (0.35 + fade * 0.85) * tr.w;
         ctx!.stroke();
       }
 
-      // --- chips ----------------------------------------------------------
-      // Painter's algorithm: far chips first so near ones overlap correctly.
-      const ordered = [...chips].sort((a, b) => b.z - a.z);
-      for (const c of ordered) {
-        const corners: Vec3[] = [
-          { x: c.x - c.w / 2, y: c.h, z: c.z - c.d / 2 },
-          { x: c.x + c.w / 2, y: c.h, z: c.z - c.d / 2 },
-          { x: c.x + c.w / 2, y: c.h, z: c.z + c.d / 2 },
-          { x: c.x - c.w / 2, y: c.h, z: c.z + c.d / 2 },
-        ];
-        const top = corners.map(project);
-        if (top.some((p) => !p)) continue;
+      // --- solder pads / vias ---------------------------------------------
+      for (const p of pads) {
+        const q = project({ x: p.x, y: 0.2, z: p.z });
+        if (!q) continue;
+        const fade = Math.max(0, Math.min(1, 1 - q.depth / 360));
+        if (fade <= 0.03) continue;
+        const r = Math.min(4, Math.max(0.4, q.scale * p.r));
+        ctx!.beginPath();
+        ctx!.arc(q.x, q.y, r, 0, Math.PI * 2);
+        ctx!.fillStyle = `rgba(214,80,64,${0.22 * fade})`;
+        ctx!.fill();
+      }
 
-        const front = [
-          { x: c.x - c.w / 2, y: 0, z: c.z + c.d / 2 },
-          { x: c.x + c.w / 2, y: 0, z: c.z + c.d / 2 },
-        ].map(project);
+      // --- parts, far to near so near ones overlap correctly ---------------
+      const ordered = [...parts].sort((a, b) => a.z - b.z);
+      for (const part of ordered) {
+        const probe = project({ x: part.x, y: 0, z: part.z });
+        if (!probe) continue;
+        const fade = Math.max(0, Math.min(1, 1 - probe.depth / 420));
+        if (fade <= 0.02) continue;
 
-        const depth = top[0]!.depth;
-        const fade = Math.max(0, Math.min(1, 1 - depth / 700));
-        if (fade <= 0.01) continue;
-
-        // Extruded side wall, darker than the top face.
-        if (front[0] && front[1]) {
+        // Anything this close to the lens is out of focus — draw it as bokeh
+        // instead of geometry. This is what gives the board its photographic
+        // depth rather than a flat CAD look.
+        if (probe.depth < 58) {
+          const blurR = Math.min(130, (58 - probe.depth) * 2.2 + 16);
+          const [r, g, b] = ramp(0.15);
+          const bk = ctx!.createRadialGradient(probe.x, probe.y, 0, probe.x, probe.y, blurR);
+          bk.addColorStop(0, `rgba(${r},${g},${b},0.055)`);
+          bk.addColorStop(1, "rgba(0,0,0,0)");
+          ctx!.fillStyle = bk;
           ctx!.beginPath();
-          ctx!.moveTo(top[3]!.x, top[3]!.y);
-          ctx!.lineTo(top[2]!.x, top[2]!.y);
-          ctx!.lineTo(front[1].x, front[1].y);
-          ctx!.lineTo(front[0].x, front[0].y);
-          ctx!.closePath();
-          ctx!.fillStyle = `rgba(10,5,7,${0.5 * fade})`;
+          ctx!.arc(probe.x, probe.y, blurR, 0, Math.PI * 2);
           ctx!.fill();
+          continue;
         }
 
-        ctx!.beginPath();
-        ctx!.moveTo(top[0]!.x, top[0]!.y);
-        for (let i = 1; i < 4; i++) ctx!.lineTo(top[i]!.x, top[i]!.y);
-        ctx!.closePath();
-        ctx!.fillStyle = `rgba(17,9,12,${0.66 * fade})`;
-        ctx!.fill();
-        ctx!.strokeStyle = `rgba(255,70,85,${0.1 + 0.2 * fade * (0.5 + hb * 0.5)})`;
-        ctx!.lineWidth = 0.8;
-        ctx!.stroke();
+        if (part.kind === "smd") {
+          const top = drawBox(
+            part.x,
+            part.z,
+            part.w,
+            part.d,
+            part.h,
+            fade,
+            `rgba(34,26,27,${0.9 * fade})`,
+            `rgba(15,10,11,${0.88 * fade})`,
+            `rgba(236,104,84,${0.42 * fade})`,
+          );
+          if (top && part.lit > 0) {
+            const cx = (top[0].x + top[2].x) / 2;
+            const cy = (top[0].y + top[2].y) / 2;
+            const [r, g, b] = ramp(0.25 + part.lit * 0.5);
+            const rad = Math.min(11, Math.max(1, probe.scale * 2.4));
+            const gl = ctx!.createRadialGradient(cx, cy, 0, cx, cy, rad);
+            gl.addColorStop(0, `rgba(${r},${g},${b},${0.5 * part.lit * fade * (0.5 + hb * 0.6)})`);
+            gl.addColorStop(1, "rgba(0,0,0,0)");
+            ctx!.fillStyle = gl;
+            ctx!.beginPath();
+            ctx!.arc(cx, cy, rad, 0, Math.PI * 2);
+            ctx!.fill();
+          }
+          continue;
+        }
+
+        if (part.kind === "cap") {
+          // Electrolytic: a squat cylinder. Top ellipse plus a body quad.
+          const base = project({ x: part.x, y: 0, z: part.z });
+          const cap = project({ x: part.x, y: part.h, z: part.z });
+          if (!base || !cap) continue;
+          const rx = Math.min(26, Math.max(1.2, cap.scale * part.r));
+          const ry = rx * 0.42;
+
+          ctx!.beginPath();
+          ctx!.moveTo(base.x - rx, base.y);
+          ctx!.lineTo(base.x + rx, base.y);
+          ctx!.lineTo(cap.x + rx, cap.y);
+          ctx!.lineTo(cap.x - rx, cap.y);
+          ctx!.closePath();
+          const body = ctx!.createLinearGradient(cap.x - rx, 0, cap.x + rx, 0);
+          body.addColorStop(0, `rgba(18,11,13,${0.92 * fade})`);
+          body.addColorStop(0.45, `rgba(44,30,29,${0.94 * fade})`);
+          body.addColorStop(1, `rgba(14,9,10,${0.92 * fade})`);
+          ctx!.fillStyle = body;
+          ctx!.fill();
+
+          ctx!.beginPath();
+          ctx!.ellipse(cap.x, cap.y, rx, ry, 0, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(52,36,34,${0.95 * fade})`;
+          ctx!.fill();
+          ctx!.strokeStyle = `rgba(255,120,96,${0.4 * fade})`;
+          ctx!.lineWidth = 0.8;
+          ctx!.stroke();
+          continue;
+        }
+
+        if (part.kind === "ic") {
+          // Pin rows first, so the package body sits on top of them.
+          const half = part.rot ? part.d / 2 : part.w / 2;
+          const span = part.rot ? part.w : part.d;
+          for (let side = -1; side <= 1; side += 2) {
+            for (let i = 0; i < part.pins; i++) {
+              const f = (i + 0.5) / part.pins - 0.5;
+              const px = part.rot ? part.x + f * span : part.x + side * (half + 2.4);
+              const pz = part.rot ? part.z + side * (half + 2.4) : part.z + f * span;
+              const a = project({ x: px, y: 0.4, z: pz });
+              if (!a) continue;
+              const r = Math.min(3, Math.max(0.35, a.scale * 0.9));
+              ctx!.beginPath();
+              ctx!.arc(a.x, a.y, r, 0, Math.PI * 2);
+              ctx!.fillStyle = `rgba(232,150,104,${0.5 * fade})`;
+              ctx!.fill();
+            }
+          }
+
+          const top = drawBox(
+            part.x,
+            part.z,
+            part.w,
+            part.d,
+            part.h,
+            fade,
+            `rgba(27,21,23,${0.96 * fade})`,
+            `rgba(13,9,10,${0.94 * fade})`,
+            `rgba(255,116,96,${0.55 * fade})`,
+          );
+          // A soft specular streak keeps the package from reading as flat.
+          if (top) {
+            const cx = (top[0].x + top[2].x) / 2;
+            const cy = (top[0].y + top[2].y) / 2;
+            const rad = Math.max(4, Math.hypot(top[0].x - top[2].x, top[0].y - top[2].y) * 0.4);
+            const sh = ctx!.createRadialGradient(cx - rad * 0.3, cy - rad * 0.3, 0, cx, cy, rad);
+            sh.addColorStop(0, `rgba(255,158,136,${0.10 * fade})`);
+            sh.addColorStop(1, "rgba(0,0,0,0)");
+            ctx!.fillStyle = sh;
+            ctx!.beginPath();
+            ctx!.arc(cx, cy, rad, 0, Math.PI * 2);
+            ctx!.fill();
+          }
+          continue;
+        }
+
+        // --- hero processor -------------------------------------------------
+        const w = part.w;
+        // Pin fields on all four edges.
+        for (let side = -1; side <= 1; side += 2) {
+          for (let i = 0; i < 16; i++) {
+            const f = (i + 0.5) / 16 - 0.5;
+            for (const [px, pz] of [
+              [part.x + f * w, part.z + side * (w / 2 + 4)],
+              [part.x + side * (w / 2 + 4), part.z + f * w],
+            ]) {
+              const a = project({ x: px, y: 0.4, z: pz });
+              if (!a) continue;
+              const r = Math.min(3.2, Math.max(0.4, a.scale * 1));
+              ctx!.beginPath();
+              ctx!.arc(a.x, a.y, r, 0, Math.PI * 2);
+              ctx!.fillStyle = `rgba(226,146,104,${0.34 * fade})`;
+              ctx!.fill();
+            }
+          }
+        }
+
+        const top = drawBox(
+          part.x,
+          part.z,
+          w,
+          w,
+          part.h,
+          fade,
+          `rgba(26,20,22,${0.96 * fade})`,
+          `rgba(12,8,9,${0.95 * fade})`,
+          `rgba(255,72,72,${(0.3 + hb * 0.4) * fade})`,
+        );
+
+        if (top) {
+          const cx = (top[0].x + top[2].x) / 2;
+          const cy = (top[0].y + top[2].y) / 2;
+          const size = Math.hypot(top[0].x - top[2].x, top[0].y - top[2].y);
+
+          // Heartbeat halo under the die.
+          const halo = ctx!.createRadialGradient(cx, cy, 0, cx, cy, size * 0.9);
+          halo.addColorStop(0, `rgba(255,58,60,${(0.06 + hb * 0.14) * fade})`);
+          halo.addColorStop(1, "rgba(0,0,0,0)");
+          ctx!.fillStyle = halo;
+          ctx!.beginPath();
+          ctx!.arc(cx, cy, size * 0.9, 0, Math.PI * 2);
+          ctx!.fill();
+
+          // The R, breathing with the beat.
+          const fs = Math.max(6, size * 0.42);
+          ctx!.save();
+          ctx!.font = `800 ${fs}px "Space Grotesk", ui-sans-serif, system-ui, sans-serif`;
+          ctx!.textAlign = "center";
+          ctx!.textBaseline = "middle";
+          ctx!.shadowColor = `rgba(255,60,64,${0.75 * fade})`;
+          ctx!.shadowBlur = fs * (0.3 + hb * 0.45);
+          ctx!.fillStyle = `rgba(255,${Math.round(96 + hb * 90)},${Math.round(96 + hb * 80)},${(0.26 + hb * 0.2) * fade})`;
+          ctx!.fillText("R", cx, cy + fs * 0.04);
+          ctx!.restore();
+        }
       }
 
-      // --- LEDs -----------------------------------------------------------
+      // --- LEDs -------------------------------------------------------------
       for (const l of leds) {
         const q = project({ x: l.x, y: 1.5, z: l.z });
-        if (!q) continue;
-        const fade = Math.max(0, Math.min(1, 1 - q.depth / 640));
+        if (!q || q.depth < 38) continue;
+        const fade = Math.max(0, Math.min(1, 1 - q.depth / 380));
         if (fade <= 0.02) continue;
         const flick = reduce ? 0.6 : 0.35 + 0.65 * Math.abs(Math.sin(t * l.rate + l.phase));
         const [r, g, b] = ramp(l.hue * 0.6 + hb * 0.3);
-        // q.scale is pixels-per-world-unit, so the LED is sized in world units
-        // (~1.6) and clamped — otherwise a near LED becomes a screen-wide wash.
         const rad = Math.min(5.5, Math.max(0.6, q.scale * 1.1)) * (0.6 + flick * 0.4);
         const halo = Math.min(26, rad * 4);
         const glow = ctx!.createRadialGradient(q.x, q.y, 0, q.x, q.y, halo);
@@ -329,23 +625,21 @@ export default function MotherboardBackground() {
         ctx!.fill();
       }
 
-      // --- travelling pulses ----------------------------------------------
+      // --- travelling pulses -------------------------------------------------
       for (const p of pulses) {
         const tr = traces[p.t];
         if (!tr) continue;
         if (!reduce) p.d += (p.speed * (0.55 + hb * 0.9)) / 60;
 
-        // A short comet tail, brightest at the head.
         const TAIL = 7;
         for (let i = 0; i < TAIL; i++) {
-          const q = project(pointAt(tr, p.d - i * 5));
-          if (!q) continue;
-          const fade = Math.max(0, Math.min(1, 1 - q.depth / 660));
+          const q = project(pointAt(tr, p.d - i * 4));
+          if (!q || q.depth < 36) continue;
+          const fade = Math.max(0, Math.min(1, 1 - q.depth / 400));
           if (fade <= 0.02) continue;
           const k = 1 - i / TAIL;
           const [r, g, b] = ramp(p.hue * 0.4 + k * 0.6);
           const a = 0.5 * k * k * fade * (0.45 + hb * 0.75);
-          // Sized in world units like the LEDs, and clamped for the same reason.
           const rad = Math.min(6.5, Math.max(0.5, q.scale * p.size * 0.6)) * (0.45 + k * 0.75);
           const halo = Math.min(30, rad * 4);
           const glow = ctx!.createRadialGradient(q.x, q.y, 0, q.x, q.y, halo);
@@ -406,7 +700,7 @@ export default function MotherboardBackground() {
     <canvas
       ref={ref}
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 h-full w-full opacity-70"
+      className="pointer-events-none fixed inset-0 -z-10 h-full w-full opacity-[0.62]"
     />
   );
 }
