@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Tool, Field } from "@/lib/tools";
@@ -110,6 +110,41 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
     set(name, file.name);
     setErr(null);
   };
+
+  // Arriving from the Avatar Library with ?avatar=<id>: load that character's
+  // image straight into the tool's photo field, so picking a dragon in the
+  // library actually starts a video with the dragon. Without this the link
+  // promised something the page did not deliver.
+  //
+  // window.location rather than useSearchParams(): these routes are statically
+  // prerendered, and useSearchParams() without a Suspense boundary breaks the
+  // production build.
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get("avatar");
+    if (!wanted) return;
+    const field = tool.fields.find((f) => f.kind === "upload");
+    if (!field) return;
+
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`/api/avatars?id=${encodeURIComponent(wanted)}`);
+        const data = await res.json();
+        if (!res.ok || !data.avatar?.image || cancelled) return;
+        const img = await fetch(data.avatar.image);
+        const blob = await img.blob();
+        if (cancelled) return;
+        const ext = blob.type.includes("webp") ? "webp" : "png";
+        onFile(field.name, new File([blob], `${data.avatar.name}.${ext}`, { type: blob.type || "image/png" }));
+      } catch {
+        /* the normal upload control still works */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const generate = async () => {
     setErr(null);

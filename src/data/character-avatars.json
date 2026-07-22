@@ -104,23 +104,6 @@
     ]
   },
   {
-    "avatarId": "char_grapes",
-    "name": "Grapes",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/grapes.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "fruit",
-    "secondary": [
-      "food"
-    ],
-    "tags": [
-      "fruit",
-      "purple"
-    ]
-  },
-  {
     "avatarId": "char_lemon",
     "name": "Lemon",
     "gender": "",
@@ -155,24 +138,6 @@
     ]
   },
   {
-    "avatarId": "char_cherry",
-    "name": "Cherry",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/cherry.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "fruit",
-    "secondary": [
-      "food"
-    ],
-    "tags": [
-      "fruit",
-      "berry",
-      "red"
-    ]
-  },
-  {
     "avatarId": "char_mango",
     "name": "Mango",
     "gender": "",
@@ -187,25 +152,6 @@
     "tags": [
       "fruit",
       "tropical"
-    ]
-  },
-  {
-    "avatarId": "char_avocado",
-    "name": "Avocado",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/avocado.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "fruit",
-    "secondary": [
-      "food",
-      "healthy"
-    ],
-    "tags": [
-      "fruit",
-      "green",
-      "healthy"
     ]
   },
   {
@@ -365,22 +311,6 @@
     ]
   },
   {
-    "avatarId": "char_onion",
-    "name": "Onion",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/onion.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "vegetables",
-    "secondary": [
-      "food"
-    ],
-    "tags": [
-      "vegetable"
-    ]
-  },
-  {
     "avatarId": "char_pizza-slice",
     "name": "Pizza Slice",
     "gender": "",
@@ -448,23 +378,6 @@
     ]
   },
   {
-    "avatarId": "char_coffee-cup",
-    "name": "Coffee Cup",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/coffee-cup.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "food",
-    "secondary": [
-      "food"
-    ],
-    "tags": [
-      "coffee",
-      "drink"
-    ]
-  },
-  {
     "avatarId": "char_ice-cream-cone",
     "name": "Ice Cream Cone",
     "gender": "",
@@ -497,24 +410,6 @@
     "tags": [
       "dessert",
       "birthday",
-      "sweet"
-    ]
-  },
-  {
-    "avatarId": "char_donut",
-    "name": "Donut",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/donut.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "food",
-    "secondary": [
-      "food"
-    ],
-    "tags": [
-      "dessert",
-      "bakery",
       "sweet"
     ]
   },
@@ -593,25 +488,6 @@
     ]
   },
   {
-    "avatarId": "char_warlord",
-    "name": "Warlord",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/warlord.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "warriors",
-    "secondary": [
-      "fantasy",
-      "characters"
-    ],
-    "tags": [
-      "warlord",
-      "armour",
-      "battle"
-    ]
-  },
-  {
     "avatarId": "char_barbarian-warlord",
     "name": "Barbarian Warlord",
     "gender": "",
@@ -627,44 +503,6 @@
     "tags": [
       "warlord",
       "barbarian"
-    ]
-  },
-  {
-    "avatarId": "char_armoured-knight",
-    "name": "Armoured Knight",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/armoured-knight.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "warriors",
-    "secondary": [
-      "fantasy",
-      "characters",
-      "historical"
-    ],
-    "tags": [
-      "knight",
-      "armour"
-    ]
-  },
-  {
-    "avatarId": "char_viking-warrior",
-    "name": "Viking Warrior",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/viking-warrior.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "warriors",
-    "secondary": [
-      "fantasy",
-      "characters",
-      "historical"
-    ],
-    "tags": [
-      "viking",
-      "warrior"
     ]
   },
   {
@@ -721,25 +559,6 @@
     ]
   },
   {
-    "avatarId": "char_witch",
-    "name": "Witch",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/witch.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "fantasy",
-    "secondary": [
-      "characters",
-      "holiday"
-    ],
-    "tags": [
-      "witch",
-      "halloween",
-      "magic"
-    ]
-  },
-  {
     "avatarId": "char_elf-archer",
     "name": "Elf Archer",
     "gender": "",
@@ -754,23 +573,6 @@
     "tags": [
       "elf",
       "archer"
-    ]
-  },
-  {
-    "avatarId": "char_orc-chieftain",
-    "name": "Orc Chieftain",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/orc-chieftain.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "fantasy",
-    "secondary": [
-      "characters"
-    ],
-    "tags": [
-      "orc",
-      "monster"
     ]
   },
   {
@@ -843,39 +645,6 @@
     ]
   },
   {
-    "avatarId": "char_superhero",
-    "name": "Superhero",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/superhero.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "superheroes",
-    "secondary": [
-      "characters"
-    ],
-    "tags": [
-      "superhero",
-      "cape"
-    ]
-  },
-  {
-    "avatarId": "char_supervillain",
-    "name": "Supervillain",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/supervillain.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "villains",
-    "secondary": [
-      "characters"
-    ],
-    "tags": [
-      "villain"
-    ]
-  },
-  {
     "avatarId": "char_friendly-robot",
     "name": "Friendly Robot",
     "gender": "",
@@ -891,42 +660,6 @@
     "tags": [
       "robot",
       "sci-fi"
-    ]
-  },
-  {
-    "avatarId": "char_alien-visitor",
-    "name": "Alien Visitor",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/alien-visitor.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "aliens",
-    "secondary": [
-      "characters",
-      "sci-fi"
-    ],
-    "tags": [
-      "alien",
-      "sci-fi"
-    ]
-  },
-  {
-    "avatarId": "char_vampire",
-    "name": "Vampire",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/vampire.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "monsters",
-    "secondary": [
-      "characters",
-      "holiday"
-    ],
-    "tags": [
-      "vampire",
-      "halloween"
     ]
   },
   {
@@ -948,24 +681,6 @@
     ]
   },
   {
-    "avatarId": "char_friendly-ghost",
-    "name": "Friendly Ghost",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/friendly-ghost.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "monsters",
-    "secondary": [
-      "characters",
-      "holiday"
-    ],
-    "tags": [
-      "ghost",
-      "halloween"
-    ]
-  },
-  {
     "avatarId": "char_king",
     "name": "King",
     "gender": "",
@@ -981,25 +696,6 @@
     "tags": [
       "king",
       "crown"
-    ]
-  },
-  {
-    "avatarId": "char_queen",
-    "name": "Queen",
-    "gender": "female",
-    "premium": false,
-    "image": "/assets/characters/queen.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "royalty",
-    "secondary": [
-      "characters",
-      "historical"
-    ],
-    "tags": [
-      "queen",
-      "crown",
-      "female"
     ]
   },
   {
@@ -1190,23 +886,6 @@
     ],
     "tags": [
       "dinosaur"
-    ]
-  },
-  {
-    "avatarId": "char_farm-cow",
-    "name": "Farm Cow",
-    "gender": "",
-    "premium": false,
-    "image": "/assets/characters/farm-cow.webp",
-    "video": "",
-    "source": "reelo",
-    "primary": "animals",
-    "secondary": [
-      "mascots"
-    ],
-    "tags": [
-      "cow",
-      "farm"
     ]
   },
   {
