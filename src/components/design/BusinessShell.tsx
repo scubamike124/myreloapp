@@ -96,37 +96,6 @@ export default function BusinessShell({
 
       {/* main */}
       <main className="relative min-w-0 flex-1">
-        {/* Mobile / tablet navigation.
-            The sidebar above is `hidden lg:flex` and was the ONLY nav in this
-            shell, so below 1024px the whole Business Center had no way to move
-            between sections — every link was unreachable, not just small. This
-            renders the same NAV array so the two can never drift apart. */}
-        <div className="sticky top-0 z-30 border-b border-white/8 lg:hidden" style={{ background: "rgba(10,6,7,.92)", backdropFilter: "blur(8px)" }}>
-          <nav aria-label="Business Center sections" className="flex gap-1.5 overflow-x-auto px-4 py-2.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {NAV.map((n) => {
-              const on = n.key === active;
-              const badge = variant === "pro" ? (n.key === "overview" ? null : "PRO") : OVERVIEW_BADGES[n.key];
-              return (
-                <Link
-                  key={n.key}
-                  href={n.href}
-                  aria-current={on ? "page" : undefined}
-                  className="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-xl px-3 py-2 text-[13px] font-semibold transition-colors"
-                  style={
-                    on
-                      ? { color: "#fff", background: "linear-gradient(135deg,rgba(255,54,69,.22),rgba(196,16,28,.14))", border: "1px solid rgba(255,70,85,.4)" }
-                      : { color: "#b9a9ab", border: "1px solid rgba(255,255,255,.08)" }
-                  }
-                >
-                  <BIcon name={n.icon} size={15} color={on ? "#ff5663" : "#9a8b8d"} glow={on} />
-                  {n.label}
-                  {badge && <Badge text={badge} />}
-                </Link>
-              );
-            })}
-          </nav>
-        </div>
-
         {/* top profile chip */}
         <div className="flex justify-end px-5 pt-5 sm:px-8">
           <Link href="/account" className="flex items-center gap-2.5 rounded-xl px-3 py-2 transition-colors hover:border-[rgba(255,70,85,.45)]" style={{ border: "1px solid rgba(255,70,85,.2)", background: "rgba(14,6,8,.6)" }}>
