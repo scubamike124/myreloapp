@@ -20,6 +20,9 @@ import { TOKEN_COST } from "@/lib/tokens";
 // Re-check these when a provider changes pricing; they are the only inputs.
 // ---------------------------------------------------------------------------
 
+/** Clip length actually requested by /api/generate-avatar. */
+export const VIDEO_SECONDS = Number(process.env.VIDEO_SECONDS ?? 6);
+
 export const PROVIDER = {
   veoFastPerSecond720: 0.1,
   veoFastPerSecond1080: 0.12,
@@ -45,14 +48,14 @@ export const COST_LINES: CostLine[] = [
   {
     action: "talking-photo",
     label: "Talking Photo",
-    cost: PROVIDER.veoFastPerSecond720 * 8,
-    detail: "Veo 3.1 Fast, 8s at 720p",
+    cost: PROVIDER.veoFastPerSecond720 * VIDEO_SECONDS,
+    detail: `Veo 3.1 Fast, ${VIDEO_SECONDS}s at 720p`,
   },
   {
     action: "dancing-photo",
     label: "Dancing Photo",
-    cost: PROVIDER.veoFastPerSecond720 * 8,
-    detail: "Veo 3.1 Fast, 8s at 720p",
+    cost: PROVIDER.veoFastPerSecond720 * VIDEO_SECONDS,
+    detail: `Veo 3.1 Fast, ${VIDEO_SECONDS}s at 720p`,
   },
   {
     action: "ai-avatar-studio",
@@ -91,17 +94,17 @@ export type Tier = { name: string; kind: "plan" | "pack"; price: number; tokens:
 
 export const TIERS: Tier[] = [
   { name: "Core", kind: "plan", price: 14.99, tokens: 25 },
-  { name: "Plus", kind: "plan", price: 29.99, tokens: 75 },
-  { name: "Pro", kind: "plan", price: 49.99, tokens: 175 },
-  { name: "Elite", kind: "plan", price: 79.99, tokens: 350 },
-  { name: "Business Center", kind: "plan", price: 149.99, tokens: 1000 },
-  { name: "Business Center Pro", kind: "plan", price: 299.99, tokens: 3000 },
-  { name: "10 tokens", kind: "pack", price: 9.99, tokens: 10 },
-  { name: "50 tokens", kind: "pack", price: 39.99, tokens: 50 },
-  { name: "100 tokens", kind: "pack", price: 69.99, tokens: 100 },
-  { name: "250 tokens", kind: "pack", price: 149.99, tokens: 250 },
-  { name: "500 tokens", kind: "pack", price: 249.99, tokens: 500 },
-  { name: "1,000 tokens", kind: "pack", price: 449.99, tokens: 1000 },
+  { name: "Plus", kind: "plan", price: 29.99, tokens: 55 },
+  { name: "Pro", kind: "plan", price: 49.99, tokens: 100 },
+  { name: "Elite", kind: "plan", price: 79.99, tokens: 175 },
+  { name: "Business Center", kind: "plan", price: 149.99, tokens: 340 },
+  { name: "Business Center Pro", kind: "plan", price: 299.99, tokens: 750 },
+  { name: "10 tokens", kind: "pack", price: 6.99, tokens: 10 },
+  { name: "25 tokens", kind: "pack", price: 14.99, tokens: 25 },
+  { name: "60 tokens", kind: "pack", price: 32.99, tokens: 60 },
+  { name: "150 tokens", kind: "pack", price: 74.99, tokens: 150 },
+  { name: "400 tokens", kind: "pack", price: 179.99, tokens: 400 },
+  { name: "1,000 tokens", kind: "pack", price: 399.99, tokens: 1000 },
 ];
 
 export function revenuePerToken(tier: Tier): number {

@@ -14,12 +14,15 @@ import { sql, ensureSchema } from "@/lib/db";
 
 /** What each generation costs. Kept here so pricing lives in one place. */
 export const TOKEN_COST: Record<string, number> = {
-  "talking-photo": 1,
-  "dancing-photo": 1,
-  "ai-avatar-studio": 2,
+  // Set so every generation clears ~50-70% margin at EVERY tier, including the
+  // cheapest. See src/lib/costs.ts for the workings; changing one without the
+  // other is how a product ends up selling videos below cost.
+  "talking-photo": 4,
+  "dancing-photo": 4,
+  "ai-avatar-studio": 3,
+  "website-commercial": 3,
+  "bedtime-storybook": 2,
   "custom-avatar-creator": 1,
-  "website-commercial": 2,
-  "bedtime-storybook": 3,
   transcribe: 0,
   captions: 0,
   analyze: 1,

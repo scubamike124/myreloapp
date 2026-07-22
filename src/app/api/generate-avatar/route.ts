@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { PayloadTooLarge, clientId, createDailyLimiter, readJsonLimited } from "@/lib/api-guard";
+import { chargeFor, refundCharge } from "@/lib/charge";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -10,6 +11,7 @@ const limiter = createDailyLimiter(Number(process.env.VIDEO_DAILY_LIMIT ?? 5));
 const MAX_BODY = 12 * 1024 * 1024;
 
 const VEO_MODEL = "veo-3.1-fast-generate-preview";
+const VIDEO_SECONDS = Number(process.env.VIDEO_SECONDS ?? 6);
 const BASE = "https://generativelanguage.googleapis.com/v1beta";
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -22,7 +24,11 @@ async function startVeo(key: string, prompt: string, imageBase64: string, mimeTy
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         instances: [{ prompt: `${prompt}\n\n${STYLE}`, image: { bytesBase64Encoded: imageBase64, mimeType } }],
-        parameters: { aspectRatio: "9:16" },
+        // Veo bills per second, so clip length is a direct cost lever: 6s
+        // instead of the 8s default is a 25% saving ($0.80 -> $0.60 at the Fast
+        // 720p rate) and still a natural length for short-form video.
+        // durationSeconds accepts 5-8.
+        parameters: { aspectRatio: "9:16", durationSeconds: VIDEO_SECONDS },
       }),
       signal: AbortSignal.timeout(30000),
     });
@@ -66,12 +72,15 @@ export async function POST(req: Request) {
     );
   }
 
-  let imageBase64: string, mimeType: string, prompt: string;
+  let imageBase64: string, mimeType: string, prompt: string, action: string;
   try {
     const body = (await readJsonLimited(req, MAX_BODY)) as Record<string, unknown>;
     imageBase64 = String(body.imageBase64 ?? "");
     mimeType = String(body.mimeType || "image/jpeg");
     prompt = String(body.prompt ?? "").trim();
+    // Which tool asked, so the ledger names the charge correctly. Both Veo
+    // tools cost the same, so an unexpected value cannot under-charge.
+    action = body.action === "dancing-photo" ? "dancing-photo" : "talking-photo";
     if (!imageBase64) throw new Error("no image");
     if (!prompt) prompt = "The person in the photo comes to life with natural, expressive motion.";
   } catch (e) {
@@ -80,6 +89,18 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "That photo is too large. Try one under 10MB." }, { status: 413 });
     }
     return NextResponse.json({ error: "Please upload a photo first." }, { status: 400 });
+  }
+
+  // Charged after validation and before the paid render begins. Without a
+  // database, or with nobody signed in, this takes nothing and the per-IP cap
+  // above is still the limit.
+  const charged = await chargeFor(action);
+  if (!charged.ok) {
+    limiter.refund(id);
+    return NextResponse.json(
+      { error: charged.error, needed: charged.needed, balance: charged.balance },
+      { status: 402 },
+    );
   }
 
   try {
@@ -92,10 +113,13 @@ export async function POST(req: Request) {
     return NextResponse.json({
       ok: true,
       remainingToday,
+      tokensCharged: charged.charge.charged,
+      balance: charged.charge.balance,
       videoUrl: `data:video/mp4;base64,${buf.toString("base64")}`,
     });
   } catch (e) {
     limiter.refund(id); // render failed — give the quota unit back
+    await refundCharge(charged.charge); // and the tokens with it
     return NextResponse.json({ error: e instanceof Error ? e.message : "Generation failed." }, { status: 502 });
   }
 }

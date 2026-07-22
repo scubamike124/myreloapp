@@ -72,7 +72,7 @@ const TIERS: Tier[] = [
     btnBg: "linear-gradient(135deg,#ff3645,#c4101c)", btnColor: "#fff", btnShadow: "0 8px 20px rgba(225,29,42,.35)",
   },
   {
-    name: "PLUS", blurb: "For growing creators", price: "$29.99", tokens: "75", icon: "bolt", iconFill: true,
+    name: "PLUS", blurb: "For growing creators", price: "$29.99", tokens: "55", icon: "bolt", iconFill: true,
     accent: "#5fb0ff", checkStroke: "#5fb0ff",
     cardBg: "linear-gradient(180deg,rgba(12,22,42,.7),rgba(8,10,16,.55))", cardBorder: "1px solid rgba(59,158,255,.5)", cardShadow: "0 0 26px rgba(59,158,255,.16),inset 0 0 30px rgba(59,158,255,.05)",
     ringBorder: "1.5px solid rgba(59,158,255,.55)", ringShadow: "0 0 18px rgba(59,158,255,.3)", tokenBorder: "1px solid rgba(59,158,255,.4)", tokenColor: "#5fb0ff", tokenLabelColor: "#bcc7d6",
@@ -81,7 +81,7 @@ const TIERS: Tier[] = [
     btnBg: "linear-gradient(135deg,#3b9eff,#1c63d6)", btnColor: "#fff", btnShadow: "0 8px 20px rgba(59,158,255,.3)",
   },
   {
-    name: "PRO", blurb: "For professionals & businesses", price: "$49.99", tokens: "175", icon: "crown",
+    name: "PRO", blurb: "For professionals & businesses", price: "$49.99", tokens: "100", icon: "crown",
     accent: "#e26bea", checkStroke: "#e26bea", badge: "Most Popular", badgeBg: "linear-gradient(135deg,#d633e0,#9d1fb0)", badgeColor: "#fff",
     cardBg: "linear-gradient(180deg,rgba(34,12,40,.78),rgba(12,7,14,.6))", cardBorder: "1px solid rgba(214,51,224,.62)", cardShadow: "0 0 40px rgba(214,51,224,.28),inset 0 0 34px rgba(214,51,224,.07)",
     ringBorder: "1.5px solid rgba(214,51,224,.6)", ringShadow: "0 0 20px rgba(214,51,224,.35)", tokenBorder: "1px solid rgba(214,51,224,.45)", tokenColor: "#e26bea", tokenLabelColor: "#d6c2da",
@@ -90,7 +90,7 @@ const TIERS: Tier[] = [
     btnBg: "linear-gradient(135deg,#d633e0,#9d1fb0)", btnColor: "#fff", btnShadow: "0 8px 22px rgba(214,51,224,.4)",
   },
   {
-    name: "ELITE", blurb: "For teams & agencies", price: "$79.99", tokens: "350", icon: "diamond",
+    name: "ELITE", blurb: "For teams & agencies", price: "$79.99", tokens: "175", icon: "diamond",
     accent: "#f0b94f", checkStroke: "#f0b94f",
     cardBg: "linear-gradient(180deg,rgba(38,28,8,.7),rgba(14,11,6,.55))", cardBorder: "1px solid rgba(240,185,79,.5)", cardShadow: "0 0 26px rgba(240,185,79,.16),inset 0 0 30px rgba(240,185,79,.05)",
     ringBorder: "1.5px solid rgba(240,185,79,.55)", ringShadow: "0 0 18px rgba(240,185,79,.3)", tokenBorder: "1px solid rgba(240,185,79,.4)", tokenColor: "#f0b94f", tokenLabelColor: "#d6cbb0",
@@ -99,7 +99,7 @@ const TIERS: Tier[] = [
     btnBg: "linear-gradient(135deg,#f0b94f,#d39322)", btnColor: "#1c1407", btnShadow: "0 8px 20px rgba(240,185,79,.3)",
   },
   {
-    name: "BUSINESS CENTER", blurb: "For small businesses & teams", price: "$149.99", tokens: "1,000", icon: "briefcase", small: true,
+    name: "BUSINESS CENTER", blurb: "For small businesses & teams", price: "$149.99", tokens: "340", icon: "briefcase", small: true,
     accent: "#4fdc8c", checkStroke: "#4fdc8c", badge: "Business", badgeBg: "linear-gradient(135deg,#3ad17a,#1f9b54)", badgeColor: "#06210f",
     cardBg: "linear-gradient(180deg,rgba(10,32,20,.7),rgba(7,14,10,.55))", cardBorder: "1px solid rgba(58,209,122,.5)", cardShadow: "0 0 26px rgba(58,209,122,.16),inset 0 0 30px rgba(58,209,122,.05)",
     ringBorder: "1.5px solid rgba(58,209,122,.55)", ringShadow: "0 0 18px rgba(58,209,122,.3)", tokenBorder: "1px solid rgba(58,209,122,.4)", tokenColor: "#4fdc8c", tokenLabelColor: "#bcd6c6",
@@ -108,7 +108,7 @@ const TIERS: Tier[] = [
     btnBg: "linear-gradient(135deg,#3ad17a,#1f9b54)", btnColor: "#06210f", btnShadow: "0 8px 20px rgba(58,209,122,.3)",
   },
   {
-    name: "BUSINESS CENTER PRO", blurb: "For agencies & large organizations", price: "$299.99", tokens: "3,000", icon: "building", small: true,
+    name: "BUSINESS CENTER PRO", blurb: "For agencies & large organizations", price: "$299.99", tokens: "750", icon: "building", small: true,
     accent: "#c89bff", checkStroke: "#c89bff", badge: "Enterprise", badgeBg: "linear-gradient(135deg,#b76bff,#7d34d6)", badgeColor: "#fff",
     cardBg: "linear-gradient(180deg,rgba(26,14,40,.74),rgba(11,7,16,.58))", cardBorder: "1px solid rgba(183,107,255,.55)", cardShadow: "0 0 28px rgba(183,107,255,.2),inset 0 0 32px rgba(183,107,255,.06)",
     ringBorder: "1.5px solid rgba(183,107,255,.6)", ringShadow: "0 0 18px rgba(183,107,255,.35)", tokenBorder: "1px solid rgba(183,107,255,.45)", tokenColor: "#c89bff", tokenLabelColor: "#cdc0db",
@@ -119,12 +119,12 @@ const TIERS: Tier[] = [
 ];
 
 const PACKS = [
-  { t: "10 TOKENS", p: "$9.99" },
-  { t: "50 TOKENS", p: "$39.99", save: "SAVE 20%" },
-  { t: "100 TOKENS", p: "$69.99", save: "SAVE 30%" },
-  { t: "250 TOKENS", p: "$149.99", save: "SAVE 40%" },
-  { t: "500 TOKENS", p: "$249.99", save: "SAVE 50%" },
-  { t: "1,000 TKN", p: "$449.99", save: "SAVE 55%" },
+  { t: "10 TOKENS", p: "$6.99" },
+  { t: "25 TOKENS", p: "$14.99", save: "SAVE 14%" },
+  { t: "60 TOKENS", p: "$32.99", save: "SAVE 21%" },
+  { t: "150 TOKENS", p: "$74.99", save: "SAVE 28%" },
+  { t: "400 TOKENS", p: "$179.99", save: "SAVE 36%" },
+  { t: "1,000 TKN", p: "$399.99", save: "SAVE 43%" },
 ];
 
 function Check({ stroke }: { stroke: string }) {
