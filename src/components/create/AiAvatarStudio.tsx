@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { recordCreation } from "@/lib/workspace";
 
 type Avatar = { avatarId: string; name: string; gender: string; image: string; video: string };
@@ -31,9 +30,12 @@ export default function AiAvatarStudio() {
 
   // Arriving from the Avatar Library with ?avatar=<id>: fetch that one avatar
   // directly so it is selected without paging through the catalog to find it.
-  const searchParams = useSearchParams();
-  const wantedId = searchParams.get("avatar");
+  //
+  // Read from window rather than useSearchParams(): this component is rendered
+  // by a statically prerendered route, and useSearchParams() without a Suspense
+  // boundary fails the production build ("Error occurred prerendering page").
   useEffect(() => {
+    const wantedId = new URLSearchParams(window.location.search).get("avatar");
     if (!wantedId) return;
     let cancelled = false;
     (async () => {
@@ -48,7 +50,7 @@ export default function AiAvatarStudio() {
     return () => {
       cancelled = true;
     };
-  }, [wantedId]);
+  }, []);
 
   // --- generation state ---
   const [script, setScript] = useState("Hi! I'm your AI presenter. Let me show you how easy it is to create studio-quality videos with Reelo.");

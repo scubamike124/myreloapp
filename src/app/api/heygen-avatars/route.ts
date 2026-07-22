@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import snapshot from "@/data/heygen-avatars.json";
+import { CATEGORIES, getCategory, matches } from "@/lib/avatar-categories";
 
 export const runtime = "nodejs";
 
@@ -77,6 +78,20 @@ export async function GET(req: Request) {
     }
 
     const totalAll = list.length;
+
+    // Category filter. "all" is everything; "other" is whatever matches no
+    // category, so no avatar is unreachable from the UI.
+    const category = (sp.get("category") ?? "").trim();
+    if (category && category !== "all") {
+      if (category === "other") {
+        list = list.filter((a) => !CATEGORIES.some((c) => matches(a, c)));
+      } else {
+        const cat = getCategory(category);
+        if (!cat) return NextResponse.json({ error: "Unknown category." }, { status: 404 });
+        list = list.filter((a) => matches(a, cat));
+      }
+    }
+
     if (!includePremium) list = list.filter((a) => !a.premium); // trial-safe by default
     if (gender) list = list.filter((a) => a.gender.toLowerCase() === gender);
     if (q) list = list.filter((a) => a.name.toLowerCase().includes(q));

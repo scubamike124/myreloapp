@@ -20,12 +20,12 @@ type Avatar = { avatarId: string; name: string; gender: string; premium: boolean
 // The API clamps limit to 96; asking for more would silently get 96 back.
 const PAGE = 96;
 
-export default function AvatarLibrary() {
+export default function AvatarLibrary({ category = "all", initialQuery = "" }: { category?: string; initialQuery?: string } = {}) {
   const [avatars, setAvatars] = useState<Avatar[]>([]);
   const [total, setTotal] = useState(0);
   const [totalAll, setTotalAll] = useState(0);
   const [offset, setOffset] = useState(0);
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState(initialQuery);
   const [gender, setGender] = useState("");
   const [premium, setPremium] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -42,6 +42,7 @@ export default function AvatarLibrary() {
       setErr(null);
       try {
         const params = new URLSearchParams({ offset: String(nextOffset), limit: String(PAGE) });
+        if (category && category !== "all") params.set("category", category);
         if (query) params.set("q", query);
         if (g) params.set("gender", g);
         if (prem) params.set("includePremium", "1");
@@ -62,7 +63,7 @@ export default function AvatarLibrary() {
         if (ticket === reqRef.current) setLoading(false);
       }
     },
-    [],
+    [category],
   );
 
   // Debounced so typing does not fire a request per keystroke.
@@ -78,7 +79,7 @@ export default function AvatarLibrary() {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search avatars by name…"
+            placeholder="Search these avatars by name…"
             aria-label="Search avatars"
             className="w-full rounded-xl px-4 py-2.5 text-sm text-white outline-none placeholder:text-white/30"
             style={{ border: "1px solid rgba(255,70,85,.22)", background: "rgba(255,60,75,.05)" }}
