@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { recordCreation } from "@/lib/workspace";
 
 type Avatar = { avatarId: string; name: string; gender: string; image: string; video: string };
@@ -27,6 +28,27 @@ export default function AiAvatarStudio() {
   const [gender, setGender] = useState("");
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<Avatar | null>(null);
+
+  // Arriving from the Avatar Library with ?avatar=<id>: fetch that one avatar
+  // directly so it is selected without paging through the catalog to find it.
+  const searchParams = useSearchParams();
+  const wantedId = searchParams.get("avatar");
+  useEffect(() => {
+    if (!wantedId) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`/api/heygen-avatars?id=${encodeURIComponent(wantedId)}`);
+        const data = await res.json();
+        if (!cancelled && res.ok && data.avatar) setSelected(data.avatar as Avatar);
+      } catch {
+        /* the gallery below still works; no need to surface this */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [wantedId]);
 
   // --- generation state ---
   const [script, setScript] = useState("Hi! I'm your AI presenter. Let me show you how easy it is to create studio-quality videos with Reelo.");
@@ -186,7 +208,13 @@ export default function AiAvatarStudio() {
                   ))}
                 </div>
               </div>
-              <p className="mt-2.5 text-xs text-white/40">{total.toLocaleString()} avatars{q ? ` matching “${q}”` : ""}{gender ? ` · ${gender}` : ""}{selected ? ` · selected: ${selected.name}` : ""}</p>
+              <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2">
+                <p className="text-xs text-white/40">{total.toLocaleString()} avatars{q ? ` matching “${q}”` : ""}{gender ? ` · ${gender}` : ""}{selected ? ` · selected: ${selected.name}` : ""}</p>
+                {/* The full catalog, browsable at a comfortable size. */}
+                <Link href="/avatars" className="text-xs font-semibold underline underline-offset-2" style={{ color: "#ff8892" }}>
+                  Browse the full Avatar Library →
+                </Link>
+              </div>
 
               {/* avatar grid */}
               <div className="mt-4 grid max-h-[440px] grid-cols-3 gap-2.5 overflow-y-auto pr-1 sm:grid-cols-4 md:grid-cols-5">

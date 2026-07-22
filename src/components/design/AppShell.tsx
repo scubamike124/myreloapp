@@ -3,7 +3,7 @@ import Link from "next/link";
 import AmberNavButton from "@/components/amber/AmberNavButton";
 import AppMobileNav from "@/components/design/AppMobileNav";
 
-type NavKey = "home" | "create" | "videos" | "trends" | "business" | "settings";
+type NavKey = "home" | "create" | "avatars" | "videos" | "trends" | "business" | "settings";
 
 const ICON_CLS = "grid h-11 w-11 place-items-center rounded-xl transition-colors";
 const IDLE = { color: "#9a8b8d" } as const;
@@ -11,6 +11,7 @@ const IDLE = { color: "#9a8b8d" } as const;
 const NAV: { key: NavKey; href: string; title: string; bottom?: boolean; icon: React.ReactNode }[] = [
   { key: "home", href: "/dashboard", title: "Home", icon: <><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /></> },
   { key: "create", href: "/create", title: "Create", icon: <path d="M12 5v14M5 12h14" /> },
+  { key: "avatars", href: "/avatars", title: "Avatar Library", icon: <><circle cx="12" cy="8" r="3.4" /><path d="M5 20a7 7 0 0 1 14 0" /></> },
   { key: "videos", href: "/library", title: "Your videos", icon: <><rect x="3" y="5" width="14" height="14" rx="2" /><path d="M21 7l-4 3 4 3z" /></> },
   { key: "trends", href: "/trends", title: "Trends", icon: <><path d="M3 17l6-6 4 4 8-8" /><path d="M17 7h4v4" /></> },
   { key: "business", href: "/business-center", title: "Business Center", icon: <path d="M3 8l4 4 5-7 5 7 4-4-2 11H5L3 8z" /> },

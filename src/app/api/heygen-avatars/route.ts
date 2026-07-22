@@ -51,6 +51,18 @@ export async function GET(req: Request) {
     const offset = Math.max(0, Number(sp.get("offset") ?? 0) || 0);
     const limit = Math.min(96, Math.max(1, Number(sp.get("limit") ?? 48) || 48));
 
+    // Single-avatar lookup, so /avatars can deep-link a choice into the studio
+    // (?avatar=<id>) and the studio can restore it without paging the catalog.
+    const id = (sp.get("id") ?? "").trim();
+    if (id) {
+      const found = SNAPSHOT.find((a) => a.avatarId === id);
+      if (!found) return NextResponse.json({ error: "Avatar not found." }, { status: 404 });
+      return NextResponse.json(
+        { ok: true, avatar: found },
+        { headers: { "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800" } },
+      );
+    }
+
     let list: Avatar[] = SNAPSHOT;
     let source = "snapshot";
     if (sp.get("refresh") === "1") {
