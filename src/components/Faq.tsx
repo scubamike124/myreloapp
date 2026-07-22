@@ -6,7 +6,7 @@ const FAQS: [string, string][] = [
   ["What is Reelo?", "Reelo is an AI-powered video creation platform that turns ideas, photos, and scripts into professional videos in minutes — no editing skills required."],
   ["How does Reelo work?", "Choose your content, customize the voice, style, and music, then let AI generate your video. Download and share anywhere in 3–4 clicks."],
   ["Can I use my own photos?", "Yes. Upload any photo to create talking photos, dancing photos, or use it as a base for AI avatars and commercials."],
-  ["Do I need editing skills?", "Not at all. Reelo handles cuts, captions, voiceovers, and pacing automatically. If you can describe it, you can make it."],
+  ["Do I need editing skills?", "Not at all. You describe what you want and Reelo generates the video — no timeline, no editing software. Amber can also write your caption and pull current hashtags for you to post with it."],
   ["What video formats are supported?", "Export in vertical, square, and widescreen up to 4K — ready for TikTok, Instagram, YouTube, and more."],
   ["Can I cancel anytime?", "Yes. There are no contracts. Cancel anytime from your account settings, and your plan stays active until the end of the billing cycle."],
   ["Is there a watermark?", "The Free plan includes a Reelo watermark. All paid plans export watermark-free."],

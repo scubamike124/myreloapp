@@ -97,8 +97,10 @@ export async function POST(req: Request) {
             ],
           },
         ],
-        // Transcription is not a creative task.
-        generationConfig: { temperature: 0, maxOutputTokens: 1024 },
+        // Transcription is not a creative task, and thinking tokens are billed
+        // against maxOutputTokens — left on, they can consume the whole budget
+        // and truncate a long transcript before it is written.
+        generationConfig: { temperature: 0, thinkingConfig: { thinkingBudget: 0 }, maxOutputTokens: 2048 },
       }),
       signal: AbortSignal.timeout(45_000),
     });

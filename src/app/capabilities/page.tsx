@@ -1,5 +1,7 @@
+import Link from "next/link";
 import DesignShell from "@/components/design/DesignShell";
 import BIcon, { type IconKey } from "@/components/design/BIcon";
+import { TOOLS, LIVE_TOOLS } from "@/lib/tools";
 
 export const metadata = { title: "Master Feature List — Reelo" };
 
@@ -65,13 +67,36 @@ export default function CapabilitiesPage() {
     <DesignShell glow="radial-gradient(900px 450px at 50% -10%,rgba(225,29,42,.22),transparent 65%),radial-gradient(700px 500px at 100% 30%,rgba(140,12,20,.12),transparent 60%)">
       {/* hero */}
       <section className="mx-auto max-w-[1100px] px-8 pb-4 pt-10 text-center">
-        <div className="mb-3 text-xs font-bold uppercase tracking-[0.25em]" style={{ color: "#ff5663" }}>Reelo Master Feature List</div>
+        <div className="mb-3 text-xs font-bold uppercase tracking-[0.25em]" style={{ color: "#ff5663" }}>Reelo Product Roadmap</div>
         <h1 className="font-display text-4xl font-extrabold uppercase tracking-tight sm:text-[52px] sm:leading-[1.04]">
-          Everything Reelo <span style={{ color: "#ff2d3f" }}>Can Do</span>
+          Where Reelo Is <span style={{ color: "#ff2d3f" }}>Going</span>
         </h1>
-        <p className="mx-auto mt-4 max-w-[520px] text-[16px]" style={{ color: "#a99a9c" }}>
-          One platform. {SECTIONS.length} categories. {TOTAL}+ capabilities — from AI creation to publishing, battles, and enterprise tools.
+        <p className="mx-auto mt-4 max-w-[560px] text-[16px]" style={{ color: "#a99a9c" }}>
+          The full vision — {SECTIONS.length} categories, {TOTAL}+ planned capabilities. Most of this is not built yet.
+          Here is what you can actually use today:
         </p>
+
+        {/* Driven by LIVE_TOOLS so this can never drift from what really runs. */}
+        <div className="mx-auto mt-6 max-w-[720px] rounded-2xl p-4" style={{ border: "1px solid rgba(95,208,138,.28)", background: "rgba(95,208,138,.06)" }}>
+          <div className="mb-2.5 text-[11px] font-bold uppercase tracking-[0.14em]" style={{ color: "#5fd08a" }}>
+            Live today
+          </div>
+          <div className="flex flex-wrap justify-center gap-2">
+            {TOOLS.filter((t) => LIVE_TOOLS.has(t.slug)).map((t) => (
+              <Link
+                key={t.slug}
+                href={`/create/${t.slug}`}
+                className="rounded-full px-3 py-1.5 text-[12.5px] font-semibold text-white transition-colors hover:bg-white/10"
+                style={{ border: "1px solid rgba(255,255,255,.16)" }}
+              >
+                {t.title}
+              </Link>
+            ))}
+            <span className="rounded-full px-3 py-1.5 text-[12.5px] font-semibold text-white" style={{ border: "1px solid rgba(255,255,255,.16)" }}>
+              Amber (trends, scripts, captions)
+            </span>
+          </div>
+        </div>
 
         {/* jump index */}
         <div className="mx-auto mt-8 flex max-w-[940px] flex-wrap justify-center gap-2">

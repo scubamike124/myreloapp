@@ -107,9 +107,63 @@ export default function LibraryGrid() {
   );
 }
 
+type CaptionResult = { captions: string[]; hashtags: string[]; note: string | null };
+
+const PLATFORMS: { id: string; label: string }[] = [
+  { id: "tiktok", label: "TikTok" },
+  { id: "reels", label: "Reels" },
+  { id: "shorts", label: "Shorts" },
+];
+
 function Card({ creation, onDelete }: { creation: Creation; onDelete: () => void }) {
   const poster = POSTER_BY_SLUG.get(creation.toolSlug) ?? "/assets/commercials.jpg";
   const failed = creation.status === "failed";
+
+  const [showCaptions, setShowCaptions] = useState(false);
+  const [platform, setPlatform] = useState("tiktok");
+  const [result, setResult] = useState<CaptionResult | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [captionError, setCaptionError] = useState<string | null>(null);
+  const [copied, setCopied] = useState<string | null>(null);
+
+  async function generate(target: string) {
+    setLoading(true);
+    setCaptionError(null);
+    setResult(null);
+    try {
+      const res = await fetch("/api/captions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          topic: creation.title,
+          toolTitle: creation.toolTitle,
+          platform: target,
+          // Best guess at the audience; the server prefers its edge header.
+          country: navigator.language?.includes("-") ? navigator.language.split("-")[1] : undefined,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setCaptionError(data.error || "Couldn't generate captions.");
+        return;
+      }
+      setResult({ captions: data.captions ?? [], hashtags: data.hashtags ?? [], note: data.note ?? null });
+    } catch {
+      setCaptionError("Network error. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function copy(text: string, label: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(label);
+      setTimeout(() => setCopied((c) => (c === label ? null : c)), 1600);
+    } catch {
+      setCaptionError("Couldn't copy — your browser blocked clipboard access.");
+    }
+  }
 
   return (
     <div className="group overflow-hidden rounded-2xl border border-white/10 bg-black/45 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-amber-400/40">
@@ -150,6 +204,19 @@ function Card({ creation, onDelete }: { creation: Creation; onDelete: () => void
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
+          {!failed && (
+            <button
+              onClick={() => {
+                const next = !showCaptions;
+                setShowCaptions(next);
+                if (next && !result && !loading) void generate(platform);
+              }}
+              aria-expanded={showCaptions}
+              className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold hover:bg-white/10"
+            >
+              Caption
+            </button>
+          )}
           {creation.mediaUrl ? (
             <a
               href={creation.mediaUrl}
@@ -177,6 +244,88 @@ function Card({ creation, onDelete }: { creation: Creation; onDelete: () => void
           </button>
         </div>
       </div>
+
+      {showCaptions && (
+        <div className="border-t border-white/10 px-4 pb-4 pt-3">
+          <div className="mb-3 flex flex-wrap items-center gap-1.5">
+            {PLATFORMS.map((p) => (
+              <button
+                key={p.id}
+                onClick={() => {
+                  setPlatform(p.id);
+                  void generate(p.id);
+                }}
+                disabled={loading}
+                className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition-colors disabled:opacity-50 ${
+                  platform === p.id
+                    ? "bg-amber-400/20 text-amber-200"
+                    : "border border-white/12 text-white/55 hover:text-white"
+                }`}
+              >
+                {p.label}
+              </button>
+            ))}
+            {result && !loading && (
+              <button
+                onClick={() => void generate(platform)}
+                className="ml-auto text-[11px] font-semibold text-white/45 hover:text-white"
+              >
+                Regenerate
+              </button>
+            )}
+          </div>
+
+          {loading && <p className="text-xs text-white/50">Checking what&apos;s working right now…</p>}
+
+          {captionError && (
+            <p role="alert" className="text-xs text-[#ff9aa3]">
+              {captionError}
+            </p>
+          )}
+
+          {result && !loading && (
+            <div className="space-y-3">
+              {result.captions.map((c, i) => (
+                <div key={i} className="rounded-xl border border-white/10 bg-white/[.03] p-2.5">
+                  <p className="text-[12.5px] leading-relaxed text-white/85">{c}</p>
+                  <button
+                    onClick={() => void copy(c, `caption-${i}`)}
+                    className="mt-1.5 text-[11px] font-semibold text-amber-300/80 hover:text-amber-200"
+                  >
+                    {copied === `caption-${i}` ? "Copied" : "Copy caption"}
+                  </button>
+                </div>
+              ))}
+
+              {result.hashtags.length > 0 && (
+                <div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {result.hashtags.map((h) => (
+                      <span key={h} className="rounded-md bg-white/[.06] px-1.5 py-0.5 text-[11px] text-white/70">
+                        #{h}
+                      </span>
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => void copy(result.hashtags.map((h) => `#${h}`).join(" "), "tags")}
+                    className="mt-2 text-[11px] font-semibold text-amber-300/80 hover:text-amber-200"
+                  >
+                    {copied === "tags" ? "Copied" : "Copy all hashtags"}
+                  </button>
+                </div>
+              )}
+
+              {result.note && <p className="text-[11px] leading-relaxed text-white/45">{result.note}</p>}
+
+              {/* Reelo does not attach these to the video — be explicit, so the
+                  feature does not read as "already applied". */}
+              <p className="text-[11px] text-white/30">
+                Copy these into the app when you post — Reelo doesn&apos;t attach them to the video.
+              </p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

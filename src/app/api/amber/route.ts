@@ -107,7 +107,11 @@ export async function POST(req: Request) {
         // whether a search is warranted, so ordinary product questions still
         // answer straight from the prompt.
         tools: [{ google_search: {} }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 800 },
+        // 800 was not enough: a grounded trend answer runs well past it, and
+        // thinking tokens are billed against this same budget, so replies were
+        // being truncated mid-sentence. Thinking stays on — it improves the
+        // answer — but the ceiling now leaves room for both.
+        generationConfig: { temperature: 0.7, maxOutputTokens: 2048 },
       }),
       signal: AbortSignal.timeout(45_000),
     });
