@@ -58,6 +58,7 @@ const LINES = [
   { label: "AI Avatar Studio", cost: P.heygenPerMin * 0.5, tokens: 3 },
   { label: "Website Commercial", cost: P.heygenPerMin * 0.5 + text(8000, 1500), tokens: 3 },
   { label: "Product Commercial", cost: P.veo720 * VIDEO_SECONDS + text(3000, 800), tokens: 4 },
+  { label: "20 Shorts Generator", cost: text(8000, 12000), tokens: 2 },
   { label: "Story & Memory Generator", cost: text(12 * 300 + 1500, 1500), tokens: 1 },
   { label: "Custom Avatar Creator", cost: P.image, tokens: 1 },
   { label: "Bedtime Storybook", cost: P.image * 6 + text(1200, 2500), tokens: 2 },

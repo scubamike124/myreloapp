@@ -77,6 +77,13 @@ export const COST_LINES: CostLine[] = [
     detail: `Veo 3.1 Fast ${VIDEO_SECONDS}s + concept`,
   },
   {
+    action: "shorts-20",
+    label: "20 Shorts Generator",
+    // One large text call: a site's worth of input, thirty full scripts out.
+    cost: textCall(8000, 12000),
+    detail: "reads a site, writes 20 scripts",
+  },
+  {
     action: "story-memory-generator",
     label: "Story & Memory Generator",
     // Vision input for up to 12 photos plus the narration. No video render:
@@ -117,7 +124,11 @@ export type Tier = { name: string; kind: "plan" | "pack"; price: number; tokens:
 
 /** Title case for a plan name, so "BUSINESS CENTER PRO" reads as a heading. */
 function titled(name: string): string {
-  return name.toLowerCase().replace(/w/g, (c) => c.toUpperCase());
+  return name
+    .toLowerCase()
+    .split(" ")
+    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(" ");
 }
 
 // Both lists are derived from src/lib/plans.ts, so a margin worked out here is

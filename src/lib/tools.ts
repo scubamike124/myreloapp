@@ -99,9 +99,9 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "shorts-20", title: "20 Shorts Generator", tagline: "A month of shorts from a website or prompt.", icon: "grid", poster: "/assets/shorts.jpg", credits: "Pricing to be confirmed", cta: "Generate shorts",
+    slug: "shorts-20", title: "20 Shorts Generator", tagline: "A month of shorts, scripted and ready to film.", icon: "grid", poster: "/assets/shorts.jpg", credits: creditLabel("shorts-20"), cta: "Generate shorts",
     fields: [
-      { kind: "segment", name: "source", label: "Source", options: ["Website", "Prompt", "Photos"] },
+      { kind: "segment", name: "source", label: "Source", options: ["Website", "Prompt"] },
       { kind: "url", name: "url", label: "Website URL", placeholder: "https://yourbrand.com" },
       { kind: "textarea", name: "prompt", label: "Topic or prompt", placeholder: "e.g. healthy meal-prep tips for busy parents" },
       { kind: "slider", name: "count", label: "How many shorts", min: 5, max: 30, step: 5, default: 20 },
@@ -181,7 +181,7 @@ export const VIDEO_TOOLS = new Set(["talking-photo", "dancing-photo", "ai-avatar
 export const IMAGE_TOOLS = new Set(["custom-avatar-creator"]);
 
 /** Every tool that can currently produce a result. */
-export const LIVE_TOOLS = new Set<string>([...VIDEO_TOOLS, ...IMAGE_TOOLS, "website-commercial", "bedtime-storybook", "ai-story-maker", "product-commercial", "story-memory-generator"]);
+export const LIVE_TOOLS = new Set<string>([...VIDEO_TOOLS, ...IMAGE_TOOLS, "website-commercial", "bedtime-storybook", "ai-story-maker", "product-commercial", "story-memory-generator", "shorts-20"]);
 
 export function isToolLive(slug: string): boolean {
   return LIVE_TOOLS.has(slug);
@@ -193,6 +193,7 @@ export const TOOL_SERVICE: Record<string, "gemini" | "heygen"> = {
   "ai-story-maker": "gemini",
   "product-commercial": "gemini",
   "story-memory-generator": "gemini",
+  "shorts-20": "gemini",
   "talking-photo": "gemini",
   "dancing-photo": "gemini",
   "custom-avatar-creator": "gemini",

@@ -25,6 +25,9 @@ export const TOKEN_COST: Record<string, number> = {
   "ai-story-maker": 3,
   // One text call that reads every photo. The film itself is drawn in the
   // browser from photos the customer already has, so there is no render cost.
+  // A month of scripts from one text call. No render — each short is filmed
+  // later, in the studio that suits it, and charged there.
+  "shorts-20": 2,
   "story-memory-generator": 1,
   "custom-avatar-creator": 1,
   // Free by design. All three are cheap text or transcription calls guarded by
@@ -60,6 +63,7 @@ export const TOKEN_UNIT: Record<string, string> = {
   "ai-story-maker": "episode",
   "custom-avatar-creator": "avatar",
   "story-memory-generator": "film",
+  "shorts-20": "batch",
   analyze: "scan",
 };
 
