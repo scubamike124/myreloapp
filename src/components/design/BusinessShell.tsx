@@ -113,11 +113,14 @@ export default function BusinessShell({
             <span className="relative h-9 w-9 overflow-hidden rounded-full" style={{ border: "1px solid rgba(255,70,85,.4)" }}>
               <Image src="/assets/spokesperson.jpg" alt="Profile" fill sizes="36px" className="object-cover" />
             </span>
-            <div className="leading-tight">
+            {/* Hidden on the narrowest phones: with Back and the menu button
+                also in this row, 320px could not fit the chip, and the overflow
+                pushed Back off the left edge entirely. */}
+            <div className="hidden leading-tight min-[380px]:block">
               <div className="text-sm font-bold">ReeloMaster</div>
               <div className="text-[11px]" style={{ color: "#ff5663" }}>Pro Plan</div>
             </div>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9a8b8d" strokeWidth="2"><path d="m6 9 6 6 6-6" /></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9a8b8d" strokeWidth="2" className="hidden min-[380px]:block"><path d="m6 9 6 6 6-6" /></svg>
           </Link>
         </div>
 
