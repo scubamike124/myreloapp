@@ -70,7 +70,7 @@ const STATUS: Record<string, string> = { completed: "#5fd08a", failed: "#ff8892"
  */
 function Tile({ art }: { art: string }) {
   return (
-    <div className="relative mb-2 grid aspect-[16/9] w-full place-items-center overflow-hidden rounded-xl" style={{ background: "radial-gradient(circle at 50% 40%,rgba(225,29,42,.16),transparent 70%)", border: "1px solid rgba(255,70,85,.12)" }}>
+    <div className="relative mb-1.5 grid aspect-[2/1] w-full place-items-center overflow-hidden rounded-xl" style={{ background: "radial-gradient(circle at 50% 40%,rgba(225,29,42,.16),transparent 70%)", border: "1px solid rgba(255,70,85,.12)" }}>
       <Image
         src={"/assets/tiles/wide/" + art + ".webp"}
         alt=""
@@ -88,27 +88,27 @@ export default async function BusinessCenterPage() {
   return (
     <BusinessShell active="overview" variant="overview">
       {/* header */}
-      <div className="relative mb-6 overflow-hidden rounded-2xl px-6 py-8 text-center" style={{ border: "1px solid rgba(255,70,85,.18)", background: "radial-gradient(700px 220px at 50% -20%,rgba(225,29,42,.3),transparent 70%),rgba(12,6,8,.6)" }}>
+      <div className="relative mb-2.5 overflow-hidden rounded-2xl px-6 py-3 text-center" style={{ border: "1px solid rgba(255,70,85,.18)", background: "radial-gradient(700px 220px at 50% -20%,rgba(225,29,42,.3),transparent 70%),rgba(12,6,8,.6)" }}>
         <Skyline />
-        <h1 className="font-display relative text-4xl font-extrabold uppercase tracking-tight sm:text-5xl">Business Center</h1>
-        <p className="relative mt-2 text-[15px]" style={{ color: "#cabcbe" }}>Everything you need to create, manage, and grow your content empire.</p>
+        <h1 className="font-display relative text-2xl font-extrabold uppercase tracking-tight sm:text-[32px]">Business Center</h1>
+        <p className="relative mt-0.5 text-[12.5px]" style={{ color: "#cabcbe" }}>Everything you need to create, manage, and grow your content empire.</p>
       </div>
 
       {/* stats — the signed-in customer's own, or dashes. Never invented. */}
-      <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+      <div className="mb-2.5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
         {stats.map((s, i) => (
-          <div key={s.label} className="flex items-center gap-3 rounded-2xl px-4 py-4" style={{ border: "1px solid rgba(255,70,85,.16)", background: "rgba(255,60,75,.03)" }}>
+          <div key={s.label} className="flex items-center gap-2.5 rounded-xl px-3 py-2.5" style={{ border: "1px solid rgba(255,70,85,.16)", background: "rgba(255,60,75,.03)" }}>
             <BIcon name={STAT_ICONS[i] ?? "film"} size={26} />
             <div>
-              <div className="font-display text-2xl font-bold">{s.value}</div>
-              <div className="text-xs" style={{ color: "#8e7f81" }}>{s.label}</div>
+              <div className="font-display text-xl font-bold leading-none">{s.value}</div>
+              <div className="mt-0.5 text-[10.5px]" style={{ color: "#8e7f81" }}>{s.label}</div>
             </div>
           </div>
         ))}
       </div>
 
       {!personal && (
-        <div className="mb-6 flex flex-wrap items-center gap-3 rounded-2xl px-4 py-3.5" style={{ border: "1px solid rgba(255,70,85,.2)", background: "rgba(255,60,75,.04)" }}>
+        <div className="mb-2.5 flex flex-wrap items-center gap-2.5 rounded-lg px-3 py-1.5" style={{ border: "1px solid rgba(255,70,85,.2)", background: "rgba(255,60,75,.04)" }}>
           <p className="flex-1 text-[13.5px] text-white/60">
             {signedIn ? "Your figures will appear here once you make something." : "Sign in to see your own numbers here."}
           </p>
@@ -126,12 +126,12 @@ export default async function BusinessCenterPage() {
           which is why a plain grid-cols-4 looked nothing like it. Flex with an
           explicit basis reproduces the two rows exactly on wide screens and
           still stacks sensibly on a phone. */}
-      <div className="mb-7 flex flex-wrap gap-3">
+      <div className="mb-2.5 flex flex-wrap gap-2">
         {CARDS.map((c) => (
           <Link
             key={c.n}
             href={c.href}
-            className={`relative block flex-1 rounded-2xl p-3 transition-all hover:-translate-y-1 hover:border-[rgba(255,70,85,.45)] basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-2.25rem)/4)] ${
+            className={`relative block flex-1 rounded-xl p-2.5 transition-all hover:-translate-y-1 hover:border-[rgba(255,70,85,.45)] basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-2.25rem)/4)] ${
               c.n <= 5 ? "lg:basis-[calc((100%-3rem)/5)]" : "lg:basis-[calc((100%-3.75rem)/6)]"
             }`}
             style={{ border: "1px solid rgba(255,70,85,.18)", background: "linear-gradient(180deg,rgba(24,9,12,.5),rgba(10,5,7,.5))" }}
@@ -142,14 +142,14 @@ export default async function BusinessCenterPage() {
             )}
             <Tile art={c.art} />
             <h3 className="font-display text-[14px] font-bold leading-tight">{c.title}</h3>
-            <p className="mt-0.5 line-clamp-2 text-[11.5px] leading-[1.4]" style={{ color: "#9a8b8d" }}>{c.desc}</p>
+            <p className="mt-0.5 line-clamp-1 text-[11px] leading-[1.35]" style={{ color: "#9a8b8d" }}>{c.desc}</p>
           </Link>
         ))}
       </div>
 
       {/* activity / quick / whatsnew */}
-      <div className="mb-7 grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <div className="rounded-2xl p-5" style={{ border: "1px solid rgba(255,70,85,.16)", background: "rgba(255,60,75,.03)" }}>
+      <div className="mb-2.5 grid grid-cols-1 gap-3 lg:grid-cols-3">
+        <div className="rounded-xl p-3" style={{ border: "1px solid rgba(255,70,85,.16)", background: "rgba(255,60,75,.03)" }}>
           <div className="mb-3 flex items-center justify-between">
             <span className="font-display font-bold">Recent Activity</span>
             <Link href="/library" className="text-xs hover:underline" style={{ color: "#ff5663" }}>View All</Link>
@@ -160,9 +160,9 @@ export default async function BusinessCenterPage() {
               <Link href="/create" className="underline underline-offset-2 hover:text-white">Create</Link> shows up here.
             </p>
           ) : (
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-2">
               {recent.map((a) => (
-                <div key={a.id} className="flex items-center gap-3">
+                <div key={a.id} className="flex items-center gap-2">
                   <span className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-lg bg-black/40">
                     {a.mediaUrl && a.kind === "image" ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -182,14 +182,14 @@ export default async function BusinessCenterPage() {
           )}
         </div>
 
-        <div className="rounded-2xl p-5" style={{ border: "1px solid rgba(255,70,85,.16)", background: "rgba(255,60,75,.03)" }}>
+        <div className="rounded-xl p-3" style={{ border: "1px solid rgba(255,70,85,.16)", background: "rgba(255,60,75,.03)" }}>
           <div className="font-display mb-3 font-bold">Quick Actions</div>
-          <div className="grid grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-3 gap-2">
             {QUICK.map((q) => (
               <Link
                 key={q.label}
                 href={q.href}
-                className="flex flex-col items-center gap-1.5 rounded-xl px-2 py-3 text-center transition-colors hover:bg-white/5"
+                className="flex flex-col items-center gap-1 rounded-lg px-1.5 py-2 text-center transition-colors hover:bg-white/5"
                 style={{ border: "1px solid rgba(255,70,85,.14)" }}
               >
                 <BIcon name={q.icon} size={20} />
@@ -199,7 +199,7 @@ export default async function BusinessCenterPage() {
           </div>
         </div>
 
-        <div className="flex flex-col rounded-2xl p-5" style={{ border: "1px solid rgba(255,70,85,.24)", background: "radial-gradient(360px 160px at 90% 10%,rgba(225,29,42,.2),transparent 70%),rgba(14,6,8,.55)" }}>
+        <div className="flex flex-col rounded-xl p-3" style={{ border: "1px solid rgba(255,70,85,.24)", background: "radial-gradient(360px 160px at 90% 10%,rgba(225,29,42,.2),transparent 70%),rgba(14,6,8,.55)" }}>
           <div className="mb-1 flex items-center justify-between">
             <span className="font-display font-bold">What&apos;s New in Reelo</span>
             <Link href="/roadmap" className="text-xs hover:underline" style={{ color: "#ff5663" }}>Roadmap</Link>
@@ -207,18 +207,18 @@ export default async function BusinessCenterPage() {
           {/* This said NEW for a feature that did not exist, then PLANNED once
               that was corrected. It is NEW again because Assets is now real. */}
           <span className="mt-2 w-fit rounded-md px-2 py-0.5 text-[10px] font-bold" style={{ color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>NEW</span>
-          <div className="font-display mt-2 text-2xl font-extrabold leading-none">ASSETS<br />MANAGER</div>
+          <div className="font-display mt-1.5 text-xl font-extrabold leading-none">ASSETS<br />MANAGER</div>
           <p className="mt-2 text-[13px]" style={{ color: "#a99a9c" }}>Organize, find, and reuse your media faster than ever.</p>
           <Link href="/business-center/assets" className="mt-3 w-fit rounded-lg px-4 py-2 text-sm font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>Try It Now</Link>
         </div>
       </div>
 
       {/* footer band */}
-      <div className="grid grid-cols-1 gap-5 rounded-2xl px-6 py-5 sm:grid-cols-2 lg:grid-cols-4" style={{ border: "1px solid rgba(255,70,85,.2)", background: "rgba(14,6,8,.5)" }}>
+      <div className="grid grid-cols-2 gap-2.5 rounded-xl px-3.5 py-2.5 sm:grid-cols-2 lg:grid-cols-4" style={{ border: "1px solid rgba(255,70,85,.2)", background: "rgba(14,6,8,.5)" }}>
         {FOOTER.map((f) => (
-          <div key={f.t} className="flex items-center gap-3">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full" style={{ border: "1.5px solid rgba(255,70,85,.4)" }}><BIcon name={f.icon} size={20} /></span>
-            <div><div className="text-sm font-bold">{f.t}</div><div className="text-xs" style={{ color: "#8e7f81" }}>{f.d}</div></div>
+          <div key={f.t} className="flex items-center gap-2">
+            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full" style={{ border: "1.5px solid rgba(255,70,85,.4)" }}><BIcon name={f.icon} size={16} /></span>
+            <div><div className="text-[12.5px] font-bold leading-tight">{f.t}</div><div className="line-clamp-1 text-[10.5px]" style={{ color: "#8e7f81" }}>{f.d}</div></div>
           </div>
         ))}
       </div>

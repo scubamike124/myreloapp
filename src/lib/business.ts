@@ -104,7 +104,7 @@ export async function getOverview(): Promise<Overview> {
       WHERE user_id = ${user.id}
         AND (expires_at IS NULL OR expires_at > ${new Date().toISOString()})
       ORDER BY created_at DESC
-      LIMIT 4
+      LIMIT 3
     `) as Activity[];
 
     return {

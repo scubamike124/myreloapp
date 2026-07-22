@@ -115,7 +115,7 @@ export default function BusinessShell({
       {/* main */}
       <main className="relative min-w-0 flex-1">
         {/* top profile chip */}
-        <div className="flex items-center justify-end gap-2 px-5 pt-5 sm:px-8">
+        <div className="flex items-center justify-end gap-2 px-5 pt-3 sm:px-8">
           <BackButton className="mr-auto" />
           {/* Invisible on desktop, so this row looks exactly as it did. */}
           <BusinessMobileNav
@@ -126,7 +126,7 @@ export default function BusinessShell({
             }))}
           />
           <Link href="/account" className="flex items-center gap-2.5 rounded-xl px-3 py-2 transition-colors hover:border-[rgba(255,70,85,.45)]" style={{ border: "1px solid rgba(255,70,85,.2)", background: "rgba(14,6,8,.6)" }}>
-            <span className="relative h-9 w-9 overflow-hidden rounded-full" style={{ border: "1px solid rgba(255,70,85,.4)" }}>
+            <span className="relative h-8 w-8 overflow-hidden rounded-full" style={{ border: "1px solid rgba(255,70,85,.4)" }}>
               <Image src="/assets/spokesperson.jpg" alt="Profile" fill sizes="36px" className="object-cover" />
             </span>
             {/* Hidden on the narrowest phones: with Back and the menu button
@@ -140,50 +140,12 @@ export default function BusinessShell({
           </Link>
         </div>
 
-        <div className="amber-safe px-5 pt-2 sm:px-8">
-          <PreviewNotice />
-          {children}
-        </div>
+        {/* The preview banner used to live here. Every unbuilt section already
+            wears a SOON badge — in the sidebar and on its own card — so the
+            banner repeated what the page says anyway, and cost a strip across
+            the top of a design meant to fit one screen. */}
+        <div className="amber-safe px-5 pt-1.5 pb-4 sm:px-8">{children}</div>
       </main>
-    </div>
-  );
-}
-
-/**
- * Which half of the Business Center is real.
- *
- * This used to say the figures were examples, and it was right — they were
- * invented. They are now the signed-in customer's own, so claiming otherwise
- * would be its own kind of lie. What remains unbuilt is the publishing side,
- * and only that is named here.
- */
-function PreviewNotice() {
-  return (
-    <div
-      className="mb-5 flex items-start gap-2.5 rounded-xl px-4 py-3 text-xs leading-relaxed"
-      style={{ border: "1px solid rgba(255,159,67,.3)", background: "rgba(255,159,67,.07)", color: "#ffcf9a" }}
-    >
-      <svg
-        width="15"
-        height="15"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="mt-px shrink-0"
-        aria-hidden
-      >
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 8h.01M11 12h1v4h1" />
-      </svg>
-      {/* Kept to one line. The design has no banner here at all, and three
-          lines of caveat above the title pushed the page it describes down. */}
-      <span>
-        <strong className="font-bold">SOON = not built yet.</strong> Everything else is live and your figures are your
-        own.
-      </span>
     </div>
   );
 }
