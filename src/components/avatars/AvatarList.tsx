@@ -37,6 +37,7 @@ export default function AvatarList({
 }) {
   const [rows, setRows] = useState<Row[]>([]);
   const [total, setTotal] = useState(0);
+  const [split, setSplit] = useState<{ premium: number; standard: number; female: number; male: number } | null>(null);
   const [offset, setOffset] = useState(0);
   const [q, setQ] = useState(initialQuery);
   const [gender, setGender] = useState("");
@@ -69,6 +70,7 @@ export default function AvatarList({
         }
         setRows((prev) => (replace ? data.avatars : [...prev, ...data.avatars]));
         setTotal(data.total ?? 0);
+        setSplit(data.split ?? null);
         setOffset(nextOffset + (data.avatars?.length ?? 0));
       } catch {
         if (ticket === reqRef.current) setErr("Network error. Try again.");
@@ -104,8 +106,8 @@ export default function AvatarList({
         <div className="flex flex-wrap gap-1.5">
           {[
             { v: "", l: "All" },
-            { v: "female", l: "Female" },
-            { v: "male", l: "Male" },
+            { v: "female", l: split ? `Female (${split.female.toLocaleString()})` : "Female" },
+            { v: "male", l: split ? `Male (${split.male.toLocaleString()})` : "Male" },
           ].map((o) => (
             <button key={o.l} onClick={() => setGender(o.v)} className="rounded-lg px-2.5 py-1.5 text-[12px] font-semibold transition-colors" style={chip(gender === o.v)}>
               {o.l}
@@ -114,8 +116,8 @@ export default function AvatarList({
           <span className="mx-1 w-px self-stretch bg-white/10" />
           {[
             { v: "any", l: "Any tier" },
-            { v: "only", l: "Premium" },
-            { v: "exclude", l: "Standard" },
+            { v: "only", l: split ? `⭐ Premium (${split.premium.toLocaleString()})` : "Premium" },
+            { v: "exclude", l: split ? `Standard (${split.standard.toLocaleString()})` : "Standard" },
           ].map((o) => (
             <button key={o.v} onClick={() => setPremium(o.v as typeof premium)} className="rounded-lg px-2.5 py-1.5 text-[12px] font-semibold transition-colors" style={chip(premium === o.v)}>
               {o.l}

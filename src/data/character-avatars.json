@@ -3,7 +3,7 @@
     "avatarId": "char_apple",
     "name": "Apple",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/apple.webp",
     "video": "",
     "source": "reelo",
@@ -21,7 +21,7 @@
     "avatarId": "char_banana",
     "name": "Banana",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/banana.webp",
     "video": "",
     "source": "reelo",
@@ -38,7 +38,7 @@
     "avatarId": "char_orange",
     "name": "Orange",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/orange.webp",
     "video": "",
     "source": "reelo",
@@ -55,7 +55,7 @@
     "avatarId": "char_strawberry",
     "name": "Strawberry",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/strawberry.webp",
     "video": "",
     "source": "reelo",
@@ -73,7 +73,7 @@
     "avatarId": "char_watermelon",
     "name": "Watermelon",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/watermelon.webp",
     "video": "",
     "source": "reelo",
@@ -90,7 +90,7 @@
     "avatarId": "char_pineapple",
     "name": "Pineapple",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/pineapple.webp",
     "video": "",
     "source": "reelo",
@@ -107,7 +107,7 @@
     "avatarId": "char_lemon",
     "name": "Lemon",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/lemon.webp",
     "video": "",
     "source": "reelo",
@@ -125,7 +125,7 @@
     "avatarId": "char_peach",
     "name": "Peach",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/peach.webp",
     "video": "",
     "source": "reelo",
@@ -141,7 +141,7 @@
     "avatarId": "char_mango",
     "name": "Mango",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/mango.webp",
     "video": "",
     "source": "reelo",
@@ -158,7 +158,7 @@
     "avatarId": "char_carrot",
     "name": "Carrot",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/carrot.webp",
     "video": "",
     "source": "reelo",
@@ -176,7 +176,7 @@
     "avatarId": "char_broccoli",
     "name": "Broccoli",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/broccoli.webp",
     "video": "",
     "source": "reelo",
@@ -195,7 +195,7 @@
     "avatarId": "char_tomato",
     "name": "Tomato",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/tomato.webp",
     "video": "",
     "source": "reelo",
@@ -212,7 +212,7 @@
     "avatarId": "char_corn",
     "name": "Corn",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/corn.webp",
     "video": "",
     "source": "reelo",
@@ -229,7 +229,7 @@
     "avatarId": "char_potato",
     "name": "Potato",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/potato.webp",
     "video": "",
     "source": "reelo",
@@ -245,7 +245,7 @@
     "avatarId": "char_bell-pepper",
     "name": "Bell Pepper",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/bell-pepper.webp",
     "video": "",
     "source": "reelo",
@@ -262,7 +262,7 @@
     "avatarId": "char_eggplant",
     "name": "Eggplant",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/eggplant.webp",
     "video": "",
     "source": "reelo",
@@ -279,7 +279,7 @@
     "avatarId": "char_mushroom",
     "name": "Mushroom",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/mushroom.webp",
     "video": "",
     "source": "reelo",
@@ -295,7 +295,7 @@
     "avatarId": "char_pumpkin",
     "name": "Pumpkin",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/pumpkin.webp",
     "video": "",
     "source": "reelo",
@@ -314,7 +314,7 @@
     "avatarId": "char_pizza-slice",
     "name": "Pizza Slice",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/pizza-slice.webp",
     "video": "",
     "source": "reelo",
@@ -331,7 +331,7 @@
     "avatarId": "char_hamburger",
     "name": "Hamburger",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/hamburger.webp",
     "video": "",
     "source": "reelo",
@@ -348,7 +348,7 @@
     "avatarId": "char_french-fries",
     "name": "French Fries",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/french-fries.webp",
     "video": "",
     "source": "reelo",
@@ -365,7 +365,7 @@
     "avatarId": "char_hot-dog",
     "name": "Hot Dog",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/hot-dog.webp",
     "video": "",
     "source": "reelo",
@@ -381,7 +381,7 @@
     "avatarId": "char_ice-cream-cone",
     "name": "Ice Cream Cone",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/ice-cream-cone.webp",
     "video": "",
     "source": "reelo",
@@ -398,7 +398,7 @@
     "avatarId": "char_birthday-cake",
     "name": "Birthday Cake",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/birthday-cake.webp",
     "video": "",
     "source": "reelo",
@@ -417,7 +417,7 @@
     "avatarId": "char_red-dragon",
     "name": "Red Dragon",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/red-dragon.webp",
     "video": "",
     "source": "reelo",
@@ -436,7 +436,7 @@
     "avatarId": "char_ice-dragon",
     "name": "Ice Dragon",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/ice-dragon.webp",
     "video": "",
     "source": "reelo",
@@ -455,7 +455,7 @@
     "avatarId": "char_golden-dragon",
     "name": "Golden Dragon",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/golden-dragon.webp",
     "video": "",
     "source": "reelo",
@@ -473,7 +473,7 @@
     "avatarId": "char_baby-dragon",
     "name": "Baby Dragon",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/baby-dragon.webp",
     "video": "",
     "source": "reelo",
@@ -491,7 +491,7 @@
     "avatarId": "char_barbarian-warlord",
     "name": "Barbarian Warlord",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/barbarian-warlord.webp",
     "video": "",
     "source": "reelo",
@@ -509,7 +509,7 @@
     "avatarId": "char_samurai",
     "name": "Samurai",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/samurai.webp",
     "video": "",
     "source": "reelo",
@@ -527,7 +527,7 @@
     "avatarId": "char_wizard",
     "name": "Wizard",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/wizard.webp",
     "video": "",
     "source": "reelo",
@@ -544,7 +544,7 @@
     "avatarId": "char_sorceress",
     "name": "Sorceress",
     "gender": "female",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/sorceress.webp",
     "video": "",
     "source": "reelo",
@@ -562,7 +562,7 @@
     "avatarId": "char_elf-archer",
     "name": "Elf Archer",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/elf-archer.webp",
     "video": "",
     "source": "reelo",
@@ -579,7 +579,7 @@
     "avatarId": "char_phoenix",
     "name": "Phoenix",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/phoenix.webp",
     "video": "",
     "source": "reelo",
@@ -597,7 +597,7 @@
     "avatarId": "char_mermaid",
     "name": "Mermaid",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/mermaid.webp",
     "video": "",
     "source": "reelo",
@@ -614,7 +614,7 @@
     "avatarId": "char_pirate-captain",
     "name": "Pirate Captain",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/pirate-captain.webp",
     "video": "",
     "source": "reelo",
@@ -631,7 +631,7 @@
     "avatarId": "char_cowboy",
     "name": "Cowboy",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/cowboy.webp",
     "video": "",
     "source": "reelo",
@@ -648,7 +648,7 @@
     "avatarId": "char_friendly-robot",
     "name": "Friendly Robot",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/friendly-robot.webp",
     "video": "",
     "source": "reelo",
@@ -666,7 +666,7 @@
     "avatarId": "char_zombie",
     "name": "Zombie",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/zombie.webp",
     "video": "",
     "source": "reelo",
@@ -684,7 +684,7 @@
     "avatarId": "char_king",
     "name": "King",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/king.webp",
     "video": "",
     "source": "reelo",
@@ -702,7 +702,7 @@
     "avatarId": "char_princess",
     "name": "Princess",
     "gender": "female",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/princess.webp",
     "video": "",
     "source": "reelo",
@@ -720,7 +720,7 @@
     "avatarId": "char_golden-retriever",
     "name": "Golden Retriever",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/golden-retriever.webp",
     "video": "",
     "source": "reelo",
@@ -738,7 +738,7 @@
     "avatarId": "char_tabby-cat",
     "name": "Tabby Cat",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/tabby-cat.webp",
     "video": "",
     "source": "reelo",
@@ -755,7 +755,7 @@
     "avatarId": "char_lion",
     "name": "Lion",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/lion.webp",
     "video": "",
     "source": "reelo",
@@ -772,7 +772,7 @@
     "avatarId": "char_brown-bear",
     "name": "Brown Bear",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/brown-bear.webp",
     "video": "",
     "source": "reelo",
@@ -789,7 +789,7 @@
     "avatarId": "char_red-fox",
     "name": "Red Fox",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/red-fox.webp",
     "video": "",
     "source": "reelo",
@@ -806,7 +806,7 @@
     "avatarId": "char_wise-owl",
     "name": "Wise Owl",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/wise-owl.webp",
     "video": "",
     "source": "reelo",
@@ -823,7 +823,7 @@
     "avatarId": "char_dolphin",
     "name": "Dolphin",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/dolphin.webp",
     "video": "",
     "source": "reelo",
@@ -840,7 +840,7 @@
     "avatarId": "char_shark",
     "name": "Shark",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/shark.webp",
     "video": "",
     "source": "reelo",
@@ -857,7 +857,7 @@
     "avatarId": "char_t-rex",
     "name": "T-Rex",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/t-rex.webp",
     "video": "",
     "source": "reelo",
@@ -875,7 +875,7 @@
     "avatarId": "char_triceratops",
     "name": "Triceratops",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/triceratops.webp",
     "video": "",
     "source": "reelo",
@@ -892,7 +892,7 @@
     "avatarId": "char_rooster",
     "name": "Rooster",
     "gender": "",
-    "premium": false,
+    "premium": true,
     "image": "/assets/characters/rooster.webp",
     "video": "",
     "source": "reelo",
@@ -904,6 +904,3222 @@
       "rooster",
       "farm",
       "bird"
+    ]
+  },
+  {
+    "avatarId": "char_grapes",
+    "name": "Grapes",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/grapes.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "purple"
+    ]
+  },
+  {
+    "avatarId": "char_peach-fruit",
+    "name": "Peach Fruit",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/peach-fruit.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit"
+    ]
+  },
+  {
+    "avatarId": "char_cherry",
+    "name": "Cherry",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/cherry.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "berry",
+      "red"
+    ]
+  },
+  {
+    "avatarId": "char_avocado",
+    "name": "Avocado",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/avocado.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "green",
+      "healthy"
+    ]
+  },
+  {
+    "avatarId": "char_blueberry",
+    "name": "Blueberry",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/blueberry.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "berry",
+      "blue"
+    ]
+  },
+  {
+    "avatarId": "char_pear",
+    "name": "Pear",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/pear.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "green"
+    ]
+  },
+  {
+    "avatarId": "char_kiwi-fruit",
+    "name": "Kiwi Fruit",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/kiwi-fruit.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "green"
+    ]
+  },
+  {
+    "avatarId": "char_coconut",
+    "name": "Coconut",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/coconut.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "tropical"
+    ]
+  },
+  {
+    "avatarId": "char_raspberry",
+    "name": "Raspberry",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/raspberry.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "berry"
+    ]
+  },
+  {
+    "avatarId": "char_pomegranate",
+    "name": "Pomegranate",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/pomegranate.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fruit",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fruit",
+      "red"
+    ]
+  },
+  {
+    "avatarId": "char_corn-cob",
+    "name": "Corn Cob",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/corn-cob.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable",
+      "yellow"
+    ]
+  },
+  {
+    "avatarId": "char_onion",
+    "name": "Onion",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/onion.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable"
+    ]
+  },
+  {
+    "avatarId": "char_cucumber",
+    "name": "Cucumber",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/cucumber.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable",
+      "green"
+    ]
+  },
+  {
+    "avatarId": "char_lettuce",
+    "name": "Lettuce",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/lettuce.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable",
+      "green",
+      "healthy"
+    ]
+  },
+  {
+    "avatarId": "char_sweet-potato",
+    "name": "Sweet Potato",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/sweet-potato.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable"
+    ]
+  },
+  {
+    "avatarId": "char_peas",
+    "name": "Peas",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/peas.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable",
+      "green"
+    ]
+  },
+  {
+    "avatarId": "char_chilli-pepper",
+    "name": "Chilli Pepper",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/chilli-pepper.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable",
+      "spicy",
+      "red"
+    ]
+  },
+  {
+    "avatarId": "char_garlic",
+    "name": "Garlic",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/garlic.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "vegetables",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "vegetable"
+    ]
+  },
+  {
+    "avatarId": "char_hot-dog-snack",
+    "name": "Hot Dog Snack",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/hot-dog-snack.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "food",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fast-food"
+    ]
+  },
+  {
+    "avatarId": "char_coffee-cup",
+    "name": "Coffee Cup",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/coffee-cup.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "drinks",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "coffee",
+      "drink"
+    ]
+  },
+  {
+    "avatarId": "char_donut",
+    "name": "Donut",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/donut.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "desserts",
+    "secondary": [
+      "food",
+      "bakery"
+    ],
+    "tags": [
+      "dessert",
+      "bakery"
+    ]
+  },
+  {
+    "avatarId": "char_taco",
+    "name": "Taco",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/taco.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "food",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "fast-food"
+    ]
+  },
+  {
+    "avatarId": "char_sushi-roll",
+    "name": "Sushi Roll",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/sushi-roll.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "food",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "japanese"
+    ]
+  },
+  {
+    "avatarId": "char_croissant",
+    "name": "Croissant",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/croissant.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "bakery",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "bakery"
+    ]
+  },
+  {
+    "avatarId": "char_bread-loaf",
+    "name": "Bread Loaf",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/bread-loaf.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "bakery",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "bakery"
+    ]
+  },
+  {
+    "avatarId": "char_cupcake",
+    "name": "Cupcake",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/cupcake.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "desserts",
+    "secondary": [
+      "food",
+      "bakery"
+    ],
+    "tags": [
+      "dessert",
+      "sweet"
+    ]
+  },
+  {
+    "avatarId": "char_milkshake",
+    "name": "Milkshake",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/milkshake.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "drinks",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "drink",
+      "sweet"
+    ]
+  },
+  {
+    "avatarId": "char_smoothie",
+    "name": "Smoothie",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/smoothie.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "drinks",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "drink",
+      "healthy"
+    ]
+  },
+  {
+    "avatarId": "char_tea-cup",
+    "name": "Tea Cup",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/tea-cup.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "drinks",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "drink"
+    ]
+  },
+  {
+    "avatarId": "char_pretzel",
+    "name": "Pretzel",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/pretzel.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "bakery",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "bakery",
+      "snack"
+    ]
+  },
+  {
+    "avatarId": "char_popcorn",
+    "name": "Popcorn",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/popcorn.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "food",
+    "secondary": [
+      "food"
+    ],
+    "tags": [
+      "snack",
+      "cinema"
+    ]
+  },
+  {
+    "avatarId": "char_shadow-dragon",
+    "name": "Shadow Dragon",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/shadow-dragon.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dragons",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "dragon",
+      "dark"
+    ]
+  },
+  {
+    "avatarId": "char_forest-dragon",
+    "name": "Forest Dragon",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/forest-dragon.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dragons",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "dragon",
+      "green"
+    ]
+  },
+  {
+    "avatarId": "char_storm-dragon",
+    "name": "Storm Dragon",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/storm-dragon.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dragons",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "dragon",
+      "storm"
+    ]
+  },
+  {
+    "avatarId": "char_wyvern",
+    "name": "Wyvern",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/wyvern.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dragons",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "dragon",
+      "wyvern"
+    ]
+  },
+  {
+    "avatarId": "char_warlord",
+    "name": "Warlord",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/warlord.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "warlord",
+      "armour"
+    ]
+  },
+  {
+    "avatarId": "char_armoured-knight",
+    "name": "Armoured Knight",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/armoured-knight.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "historical"
+    ],
+    "tags": [
+      "knight",
+      "armour"
+    ]
+  },
+  {
+    "avatarId": "char_viking-warrior",
+    "name": "Viking Warrior",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/viking-warrior.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "historical"
+    ],
+    "tags": [
+      "viking"
+    ]
+  },
+  {
+    "avatarId": "char_gladiator",
+    "name": "Gladiator",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/gladiator.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "historical"
+    ],
+    "tags": [
+      "gladiator"
+    ]
+  },
+  {
+    "avatarId": "char_spartan-warrior",
+    "name": "Spartan Warrior",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/spartan-warrior.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "historical"
+    ],
+    "tags": [
+      "spartan"
+    ]
+  },
+  {
+    "avatarId": "char_archer-ranger",
+    "name": "Archer Ranger",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/archer-ranger.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "archer",
+      "ranger"
+    ]
+  },
+  {
+    "avatarId": "char_shieldmaiden",
+    "name": "Shieldmaiden",
+    "gender": "female",
+    "premium": true,
+    "image": "/assets/characters/shieldmaiden.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "warrior",
+      "female"
+    ]
+  },
+  {
+    "avatarId": "char_desert-nomad-warrior",
+    "name": "Desert Nomad Warrior",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/desert-nomad-warrior.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "warrior",
+      "desert"
+    ]
+  },
+  {
+    "avatarId": "char_witch",
+    "name": "Witch",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/witch.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "wizards",
+    "secondary": [
+      "halloween"
+    ],
+    "tags": [
+      "witch",
+      "halloween"
+    ]
+  },
+  {
+    "avatarId": "char_warlock",
+    "name": "Warlock",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/warlock.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "wizards",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "warlock",
+      "magic"
+    ]
+  },
+  {
+    "avatarId": "char_orc-chieftain",
+    "name": "Orc Chieftain",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/orc-chieftain.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "orc"
+    ]
+  },
+  {
+    "avatarId": "char_dwarf-blacksmith",
+    "name": "Dwarf Blacksmith",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/dwarf-blacksmith.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fantasy",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "dwarf"
+    ]
+  },
+  {
+    "avatarId": "char_forest-fairy",
+    "name": "Forest Fairy",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/forest-fairy.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fantasy",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "fairy"
+    ]
+  },
+  {
+    "avatarId": "char_unicorn",
+    "name": "Unicorn",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/unicorn.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fantasy-animals",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "unicorn"
+    ]
+  },
+  {
+    "avatarId": "char_griffin",
+    "name": "Griffin",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/griffin.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fantasy-animals",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "griffin"
+    ]
+  },
+  {
+    "avatarId": "char_merman",
+    "name": "Merman",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/merman.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "mermaids",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "merman",
+      "ocean"
+    ]
+  },
+  {
+    "avatarId": "char_centaur",
+    "name": "Centaur",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/centaur.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fantasy",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "centaur"
+    ]
+  },
+  {
+    "avatarId": "char_minotaur",
+    "name": "Minotaur",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/minotaur.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "minotaur"
+    ]
+  },
+  {
+    "avatarId": "char_troll",
+    "name": "Troll",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/troll.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "troll"
+    ]
+  },
+  {
+    "avatarId": "char_goblin",
+    "name": "Goblin",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/goblin.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "goblin"
+    ]
+  },
+  {
+    "avatarId": "char_vampire",
+    "name": "Vampire",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/vampire.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "halloween"
+    ],
+    "tags": [
+      "vampire",
+      "halloween"
+    ]
+  },
+  {
+    "avatarId": "char_friendly-ghost",
+    "name": "Friendly Ghost",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/friendly-ghost.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "halloween"
+    ],
+    "tags": [
+      "ghost",
+      "halloween"
+    ]
+  },
+  {
+    "avatarId": "char_werewolf",
+    "name": "Werewolf",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/werewolf.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "halloween"
+    ],
+    "tags": [
+      "werewolf"
+    ]
+  },
+  {
+    "avatarId": "char_mummy",
+    "name": "Mummy",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/mummy.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "halloween"
+    ],
+    "tags": [
+      "mummy",
+      "halloween"
+    ]
+  },
+  {
+    "avatarId": "char_skeleton",
+    "name": "Skeleton",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/skeleton.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "halloween"
+    ],
+    "tags": [
+      "skeleton",
+      "halloween"
+    ]
+  },
+  {
+    "avatarId": "char_swamp-creature",
+    "name": "Swamp Creature",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/swamp-creature.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "avatarId": "char_kraken",
+    "name": "Kraken",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/kraken.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "monsters",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "kraken",
+      "ocean"
+    ]
+  },
+  {
+    "avatarId": "char_superhero",
+    "name": "Superhero",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/superhero.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "superheroes",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "superhero"
+    ]
+  },
+  {
+    "avatarId": "char_super-heroine",
+    "name": "Super Heroine",
+    "gender": "female",
+    "premium": true,
+    "image": "/assets/characters/super-heroine.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "superheroes",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "superhero",
+      "female"
+    ]
+  },
+  {
+    "avatarId": "char_supervillain",
+    "name": "Supervillain",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/supervillain.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "villains",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "villain"
+    ]
+  },
+  {
+    "avatarId": "char_battle-mech",
+    "name": "Battle Mech",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/battle-mech.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "robots",
+    "secondary": [
+      "sci-fi"
+    ],
+    "tags": [
+      "robot",
+      "mech"
+    ]
+  },
+  {
+    "avatarId": "char_android-assistant",
+    "name": "Android Assistant",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/android-assistant.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "robots",
+    "secondary": [
+      "sci-fi"
+    ],
+    "tags": [
+      "android"
+    ]
+  },
+  {
+    "avatarId": "char_alien-visitor",
+    "name": "Alien Visitor",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/alien-visitor.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "aliens",
+    "secondary": [
+      "sci-fi"
+    ],
+    "tags": [
+      "alien"
+    ]
+  },
+  {
+    "avatarId": "char_insect-alien",
+    "name": "Insect Alien",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/insect-alien.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "aliens",
+    "secondary": [
+      "sci-fi"
+    ],
+    "tags": [
+      "alien"
+    ]
+  },
+  {
+    "avatarId": "char_space-explorer",
+    "name": "Space Explorer",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/space-explorer.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "aliens",
+    "secondary": [
+      "sci-fi"
+    ],
+    "tags": [
+      "astronaut",
+      "space"
+    ]
+  },
+  {
+    "avatarId": "char_cyberpunk-hacker",
+    "name": "Cyberpunk Hacker",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/cyberpunk-hacker.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "robots",
+    "secondary": [
+      "sci-fi"
+    ],
+    "tags": [
+      "cyberpunk"
+    ]
+  },
+  {
+    "avatarId": "char_queen",
+    "name": "Queen",
+    "gender": "female",
+    "premium": true,
+    "image": "/assets/characters/queen.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "royalty",
+    "secondary": [
+      "historical"
+    ],
+    "tags": [
+      "queen",
+      "crown",
+      "female"
+    ]
+  },
+  {
+    "avatarId": "char_prince",
+    "name": "Prince",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/prince.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "royalty",
+    "secondary": [
+      "fantasy"
+    ],
+    "tags": [
+      "prince"
+    ]
+  },
+  {
+    "avatarId": "char_pirate-first-mate",
+    "name": "Pirate First Mate",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/pirate-first-mate.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "pirates",
+    "secondary": [
+      "historical"
+    ],
+    "tags": [
+      "pirate"
+    ]
+  },
+  {
+    "avatarId": "char_cowgirl",
+    "name": "Cowgirl",
+    "gender": "female",
+    "premium": true,
+    "image": "/assets/characters/cowgirl.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "cowboys",
+    "secondary": [
+      "historical"
+    ],
+    "tags": [
+      "cowgirl",
+      "western",
+      "female"
+    ]
+  },
+  {
+    "avatarId": "char_sheriff",
+    "name": "Sheriff",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/sheriff.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "cowboys",
+    "secondary": [
+      "police"
+    ],
+    "tags": [
+      "sheriff",
+      "western"
+    ]
+  },
+  {
+    "avatarId": "char_egyptian-pharaoh",
+    "name": "Egyptian Pharaoh",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/egyptian-pharaoh.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "historical",
+    "secondary": [
+      "royalty"
+    ],
+    "tags": [
+      "egyptian"
+    ]
+  },
+  {
+    "avatarId": "char_roman-senator",
+    "name": "Roman Senator",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/roman-senator.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "historical",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "roman"
+    ]
+  },
+  {
+    "avatarId": "char_victorian-gentleman",
+    "name": "Victorian Gentleman",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/victorian-gentleman.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "historical",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "victorian"
+    ]
+  },
+  {
+    "avatarId": "char_renaissance-painter",
+    "name": "Renaissance Painter",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/renaissance-painter.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "historical",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "renaissance"
+    ]
+  },
+  {
+    "avatarId": "char_caveman",
+    "name": "Caveman",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/caveman.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "historical",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "caveman"
+    ]
+  },
+  {
+    "avatarId": "char_ninja",
+    "name": "Ninja",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/ninja.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "warriors",
+    "secondary": [
+      "historical"
+    ],
+    "tags": [
+      "ninja"
+    ]
+  },
+  {
+    "avatarId": "char_french-bulldog",
+    "name": "French Bulldog",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/french-bulldog.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dogs",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "dog",
+      "pet"
+    ]
+  },
+  {
+    "avatarId": "char_husky",
+    "name": "Husky",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/husky.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dogs",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "dog",
+      "pet"
+    ]
+  },
+  {
+    "avatarId": "char_dachshund",
+    "name": "Dachshund",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/dachshund.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dogs",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "dog",
+      "pet"
+    ]
+  },
+  {
+    "avatarId": "char_black-cat",
+    "name": "Black Cat",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/black-cat.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "cats",
+    "secondary": [
+      "animals",
+      "halloween"
+    ],
+    "tags": [
+      "cat",
+      "halloween"
+    ]
+  },
+  {
+    "avatarId": "char_persian-cat",
+    "name": "Persian Cat",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/persian-cat.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "cats",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "cat",
+      "pet"
+    ]
+  },
+  {
+    "avatarId": "char_tiger",
+    "name": "Tiger",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/tiger.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "jungle-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "tiger"
+    ]
+  },
+  {
+    "avatarId": "char_elephant",
+    "name": "Elephant",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/elephant.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "jungle-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "elephant"
+    ]
+  },
+  {
+    "avatarId": "char_giraffe",
+    "name": "Giraffe",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/giraffe.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "jungle-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "giraffe"
+    ]
+  },
+  {
+    "avatarId": "char_monkey",
+    "name": "Monkey",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/monkey.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "jungle-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "monkey"
+    ]
+  },
+  {
+    "avatarId": "char_panda",
+    "name": "Panda",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/panda.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "jungle-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "panda"
+    ]
+  },
+  {
+    "avatarId": "char_grey-wolf",
+    "name": "Grey Wolf",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/grey-wolf.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "jungle-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "wolf"
+    ]
+  },
+  {
+    "avatarId": "char_bald-eagle",
+    "name": "Bald Eagle",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/bald-eagle.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "birds",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "eagle",
+      "bird"
+    ]
+  },
+  {
+    "avatarId": "char_parrot",
+    "name": "Parrot",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/parrot.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "birds",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "parrot",
+      "bird"
+    ]
+  },
+  {
+    "avatarId": "char_penguin",
+    "name": "Penguin",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/penguin.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "birds",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "penguin",
+      "bird"
+    ]
+  },
+  {
+    "avatarId": "char_great-white-shark",
+    "name": "Great White Shark",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/great-white-shark.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "ocean-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "shark",
+      "ocean"
+    ]
+  },
+  {
+    "avatarId": "char_sea-turtle",
+    "name": "Sea Turtle",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/sea-turtle.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "ocean-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "turtle",
+      "ocean"
+    ]
+  },
+  {
+    "avatarId": "char_octopus",
+    "name": "Octopus",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/octopus.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "ocean-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "octopus",
+      "ocean"
+    ]
+  },
+  {
+    "avatarId": "char_whale",
+    "name": "Whale",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/whale.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "ocean-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "whale",
+      "ocean"
+    ]
+  },
+  {
+    "avatarId": "char_crab",
+    "name": "Crab",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/crab.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "ocean-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "crab",
+      "ocean"
+    ]
+  },
+  {
+    "avatarId": "char_farm-cow",
+    "name": "Farm Cow",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/farm-cow.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "farm-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "cow",
+      "farm"
+    ]
+  },
+  {
+    "avatarId": "char_pig",
+    "name": "Pig",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/pig.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "farm-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "pig",
+      "farm"
+    ]
+  },
+  {
+    "avatarId": "char_sheep",
+    "name": "Sheep",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/sheep.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "farm-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "sheep",
+      "farm"
+    ]
+  },
+  {
+    "avatarId": "char_horse",
+    "name": "Horse",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/horse.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "farm-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "horse",
+      "farm"
+    ]
+  },
+  {
+    "avatarId": "char_goat",
+    "name": "Goat",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/goat.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "farm-animals",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "goat",
+      "farm"
+    ]
+  },
+  {
+    "avatarId": "char_rabbit",
+    "name": "Rabbit",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/rabbit.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "farm-animals",
+    "secondary": [
+      "animals",
+      "easter"
+    ],
+    "tags": [
+      "rabbit",
+      "easter"
+    ]
+  },
+  {
+    "avatarId": "char_velociraptor",
+    "name": "Velociraptor",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/velociraptor.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dinosaurs",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "dinosaur"
+    ]
+  },
+  {
+    "avatarId": "char_stegosaurus",
+    "name": "Stegosaurus",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/stegosaurus.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dinosaurs",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "dinosaur"
+    ]
+  },
+  {
+    "avatarId": "char_brachiosaurus",
+    "name": "Brachiosaurus",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/brachiosaurus.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dinosaurs",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "dinosaur"
+    ]
+  },
+  {
+    "avatarId": "char_pterodactyl",
+    "name": "Pterodactyl",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/pterodactyl.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "dinosaurs",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "dinosaur"
+    ]
+  },
+  {
+    "avatarId": "char_delivery-van",
+    "name": "Delivery Van",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/delivery-van.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "trucks",
+    "secondary": [
+      "vehicles"
+    ],
+    "tags": [
+      "van",
+      "delivery"
+    ]
+  },
+  {
+    "avatarId": "char_motorcycle",
+    "name": "Motorcycle",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/motorcycle.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "motorcycles",
+    "secondary": [
+      "vehicles"
+    ],
+    "tags": [
+      "motorcycle"
+    ]
+  },
+  {
+    "avatarId": "char_sailboat",
+    "name": "Sailboat",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/sailboat.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "boats",
+    "secondary": [
+      "vehicles"
+    ],
+    "tags": [
+      "boat"
+    ]
+  },
+  {
+    "avatarId": "char_speedboat",
+    "name": "Speedboat",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/speedboat.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "boats",
+    "secondary": [
+      "vehicles"
+    ],
+    "tags": [
+      "boat"
+    ]
+  },
+  {
+    "avatarId": "char_passenger-jet",
+    "name": "Passenger Jet",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/passenger-jet.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "airplanes",
+    "secondary": [
+      "vehicles"
+    ],
+    "tags": [
+      "airplane"
+    ]
+  },
+  {
+    "avatarId": "char_helicopter",
+    "name": "Helicopter",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/helicopter.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "airplanes",
+    "secondary": [
+      "vehicles"
+    ],
+    "tags": [
+      "helicopter"
+    ]
+  },
+  {
+    "avatarId": "char_excavator",
+    "name": "Excavator",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/excavator.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "construction-equipment",
+    "secondary": [
+      "vehicles",
+      "construction"
+    ],
+    "tags": [
+      "excavator"
+    ]
+  },
+  {
+    "avatarId": "char_bulldozer",
+    "name": "Bulldozer",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/bulldozer.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "construction-equipment",
+    "secondary": [
+      "vehicles",
+      "construction"
+    ],
+    "tags": [
+      "bulldozer"
+    ]
+  },
+  {
+    "avatarId": "char_cement-mixer",
+    "name": "Cement Mixer",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/cement-mixer.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "construction-equipment",
+    "secondary": [
+      "vehicles",
+      "construction"
+    ],
+    "tags": [
+      "mixer"
+    ]
+  },
+  {
+    "avatarId": "char_farm-tractor",
+    "name": "Farm Tractor",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/farm-tractor.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "farm-equipment",
+    "secondary": [
+      "vehicles",
+      "agriculture"
+    ],
+    "tags": [
+      "tractor",
+      "farm"
+    ]
+  },
+  {
+    "avatarId": "char_combine-harvester",
+    "name": "Combine Harvester",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/combine-harvester.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "farm-equipment",
+    "secondary": [
+      "vehicles",
+      "agriculture"
+    ],
+    "tags": [
+      "harvester",
+      "farm"
+    ]
+  },
+  {
+    "avatarId": "char_santa-claus",
+    "name": "Santa Claus",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/santa-claus.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "christmas",
+    "secondary": [
+      "holiday"
+    ],
+    "tags": [
+      "santa",
+      "christmas"
+    ]
+  },
+  {
+    "avatarId": "char_christmas-elf",
+    "name": "Christmas Elf",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/christmas-elf.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "christmas",
+    "secondary": [
+      "holiday"
+    ],
+    "tags": [
+      "elf",
+      "christmas"
+    ]
+  },
+  {
+    "avatarId": "char_snowman",
+    "name": "Snowman",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/snowman.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "christmas",
+    "secondary": [
+      "holiday"
+    ],
+    "tags": [
+      "snowman",
+      "christmas"
+    ]
+  },
+  {
+    "avatarId": "char_gingerbread-man",
+    "name": "Gingerbread Man",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/gingerbread-man.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "christmas",
+    "secondary": [
+      "holiday",
+      "desserts"
+    ],
+    "tags": [
+      "gingerbread",
+      "christmas"
+    ]
+  },
+  {
+    "avatarId": "char_jack-o-lantern",
+    "name": "Jack O Lantern",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/jack-o-lantern.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "halloween",
+    "secondary": [
+      "holiday"
+    ],
+    "tags": [
+      "pumpkin",
+      "halloween"
+    ]
+  },
+  {
+    "avatarId": "char_cupid",
+    "name": "Cupid",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/cupid.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "valentines",
+    "secondary": [
+      "holiday"
+    ],
+    "tags": [
+      "cupid",
+      "valentine"
+    ]
+  },
+  {
+    "avatarId": "char_heart-character",
+    "name": "Heart Character",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/heart-character.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "valentines",
+    "secondary": [
+      "holiday"
+    ],
+    "tags": [
+      "heart",
+      "valentine"
+    ]
+  },
+  {
+    "avatarId": "char_thanksgiving-turkey",
+    "name": "Thanksgiving Turkey",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/thanksgiving-turkey.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "thanksgiving",
+    "secondary": [
+      "holiday",
+      "birds"
+    ],
+    "tags": [
+      "turkey",
+      "thanksgiving"
+    ]
+  },
+  {
+    "avatarId": "char_easter-bunny",
+    "name": "Easter Bunny",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/easter-bunny.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "easter",
+    "secondary": [
+      "holiday"
+    ],
+    "tags": [
+      "bunny",
+      "easter"
+    ]
+  },
+  {
+    "avatarId": "char_easter-egg",
+    "name": "Easter Egg",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/easter-egg.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "easter",
+    "secondary": [
+      "holiday"
+    ],
+    "tags": [
+      "egg",
+      "easter"
+    ]
+  },
+  {
+    "avatarId": "char_new-year-party-popper",
+    "name": "New Year Party Popper",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/new-year-party-popper.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "new-year",
+    "secondary": [
+      "holiday"
+    ],
+    "tags": [
+      "party",
+      "new year"
+    ]
+  },
+  {
+    "avatarId": "char_bride",
+    "name": "Bride",
+    "gender": "female",
+    "premium": true,
+    "image": "/assets/characters/bride.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "wedding",
+    "secondary": [
+      "holiday"
+    ],
+    "tags": [
+      "bride",
+      "wedding",
+      "female"
+    ]
+  },
+  {
+    "avatarId": "char_groom",
+    "name": "Groom",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/groom.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "wedding",
+    "secondary": [
+      "holiday"
+    ],
+    "tags": [
+      "groom",
+      "wedding"
+    ]
+  },
+  {
+    "avatarId": "char_birthday-balloon",
+    "name": "Birthday Balloon",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/birthday-balloon.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "birthday",
+    "secondary": [
+      "holiday"
+    ],
+    "tags": [
+      "balloon",
+      "birthday"
+    ]
+  },
+  {
+    "avatarId": "char_graduate",
+    "name": "Graduate",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/graduate.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "graduation",
+    "secondary": [
+      "holiday",
+      "education"
+    ],
+    "tags": [
+      "graduate",
+      "graduation"
+    ]
+  },
+  {
+    "avatarId": "char_sports-team-bear",
+    "name": "Sports Team Bear",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/sports-team-bear.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "sports-mascots",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "mascot",
+      "sports"
+    ]
+  },
+  {
+    "avatarId": "char_sports-team-eagle",
+    "name": "Sports Team Eagle",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/sports-team-eagle.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "sports-mascots",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "mascot",
+      "sports"
+    ]
+  },
+  {
+    "avatarId": "char_sports-team-bull",
+    "name": "Sports Team Bull",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/sports-team-bull.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "sports-mascots",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "mascot",
+      "sports"
+    ]
+  },
+  {
+    "avatarId": "char_school-owl-mascot",
+    "name": "School Owl Mascot",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/school-owl-mascot.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "school-mascots",
+    "secondary": [
+      "mascots",
+      "education"
+    ],
+    "tags": [
+      "mascot",
+      "school"
+    ]
+  },
+  {
+    "avatarId": "char_school-lion-mascot",
+    "name": "School Lion Mascot",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/school-lion-mascot.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "school-mascots",
+    "secondary": [
+      "mascots",
+      "education"
+    ],
+    "tags": [
+      "mascot",
+      "school"
+    ]
+  },
+  {
+    "avatarId": "char_delivery-mascot",
+    "name": "Delivery Mascot",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/delivery-mascot.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "business-mascots",
+    "secondary": [
+      "mascots"
+    ],
+    "tags": [
+      "mascot",
+      "business"
+    ]
+  },
+  {
+    "avatarId": "char_coffee-shop-mascot",
+    "name": "Coffee Shop Mascot",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/coffee-shop-mascot.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "business-mascots",
+    "secondary": [
+      "mascots",
+      "drinks"
+    ],
+    "tags": [
+      "mascot",
+      "coffee"
+    ]
+  },
+  {
+    "avatarId": "char_bank-mascot",
+    "name": "Bank Mascot",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/bank-mascot.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "business-mascots",
+    "secondary": [
+      "mascots",
+      "finance"
+    ],
+    "tags": [
+      "mascot",
+      "finance"
+    ]
+  },
+  {
+    "avatarId": "char_gym-mascot",
+    "name": "Gym Mascot",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/gym-mascot.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "business-mascots",
+    "secondary": [
+      "mascots",
+      "fitness"
+    ],
+    "tags": [
+      "mascot",
+      "fitness"
+    ]
+  },
+  {
+    "avatarId": "char_hvac-technician",
+    "name": "HVAC Technician",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/hvac-technician.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "hvac",
+    "secondary": [
+      "construction"
+    ],
+    "tags": [
+      "hvac",
+      "trade"
+    ]
+  },
+  {
+    "avatarId": "char_electrician",
+    "name": "Electrician",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/electrician.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "electrical",
+    "secondary": [
+      "construction"
+    ],
+    "tags": [
+      "electrician",
+      "trade"
+    ]
+  },
+  {
+    "avatarId": "char_roofer",
+    "name": "Roofer",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/roofer.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "roofing",
+    "secondary": [
+      "construction"
+    ],
+    "tags": [
+      "roofer",
+      "trade"
+    ]
+  },
+  {
+    "avatarId": "char_carpenter",
+    "name": "Carpenter",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/carpenter.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "carpentry",
+    "secondary": [
+      "construction"
+    ],
+    "tags": [
+      "carpenter",
+      "trade"
+    ]
+  },
+  {
+    "avatarId": "char_welder",
+    "name": "Welder",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/welder.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "manufacturing",
+    "secondary": [
+      "construction"
+    ],
+    "tags": [
+      "welder",
+      "trade"
+    ]
+  },
+  {
+    "avatarId": "char_mechanic",
+    "name": "Mechanic",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/mechanic.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "automotive",
+    "secondary": [
+      "manufacturing"
+    ],
+    "tags": [
+      "mechanic",
+      "trade"
+    ]
+  },
+  {
+    "avatarId": "char_farmer",
+    "name": "Farmer",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/farmer.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "agriculture",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "farmer"
+    ]
+  },
+  {
+    "avatarId": "char_chef",
+    "name": "Chef",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/chef.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "restaurants",
+    "secondary": [
+      "hospitality"
+    ],
+    "tags": [
+      "chef"
+    ]
+  },
+  {
+    "avatarId": "char_barista",
+    "name": "Barista",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/barista.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "restaurants",
+    "secondary": [
+      "hospitality",
+      "drinks"
+    ],
+    "tags": [
+      "barista"
+    ]
+  },
+  {
+    "avatarId": "char_police-officer",
+    "name": "Police Officer",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/police-officer.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "police",
+    "secondary": [
+      "government"
+    ],
+    "tags": [
+      "police"
+    ]
+  },
+  {
+    "avatarId": "char_firefighter",
+    "name": "Firefighter",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/firefighter.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "firefighters",
+    "secondary": [
+      "government"
+    ],
+    "tags": [
+      "firefighter"
+    ]
+  },
+  {
+    "avatarId": "char_paramedic",
+    "name": "Paramedic",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/paramedic.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "firefighters",
+    "secondary": [
+      "healthcare"
+    ],
+    "tags": [
+      "paramedic"
+    ]
+  },
+  {
+    "avatarId": "char_soldier",
+    "name": "Soldier",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/soldier.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "military",
+    "secondary": [
+      "government"
+    ],
+    "tags": [
+      "soldier"
+    ]
+  },
+  {
+    "avatarId": "char_pilot",
+    "name": "Pilot",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/pilot.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "travel",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "pilot"
+    ]
+  },
+  {
+    "avatarId": "char_flight-attendant",
+    "name": "Flight Attendant",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/flight-attendant.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "travel",
+    "secondary": [
+      "hospitality"
+    ],
+    "tags": [
+      "cabin crew"
+    ]
+  },
+  {
+    "avatarId": "char_engineer",
+    "name": "Engineer",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/engineer.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "engineers",
+    "secondary": [
+      "construction"
+    ],
+    "tags": [
+      "engineer"
+    ]
+  },
+  {
+    "avatarId": "char_teacher",
+    "name": "Teacher",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/teacher.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "education",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "teacher"
+    ]
+  },
+  {
+    "avatarId": "char_nurse",
+    "name": "Nurse",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/nurse.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "healthcare",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "nurse"
+    ]
+  },
+  {
+    "avatarId": "char_doctor",
+    "name": "Doctor",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/doctor.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "healthcare",
+    "secondary": [
+      "business"
+    ],
+    "tags": [
+      "doctor"
+    ]
+  },
+  {
+    "avatarId": "char_dentist",
+    "name": "Dentist",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/dentist.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "healthcare",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "dentist"
+    ]
+  },
+  {
+    "avatarId": "char_veterinarian",
+    "name": "Veterinarian",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/veterinarian.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "healthcare",
+    "secondary": [
+      "animals"
+    ],
+    "tags": [
+      "vet"
+    ]
+  },
+  {
+    "avatarId": "char_lawyer",
+    "name": "Lawyer",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/lawyer.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "legal",
+    "secondary": [
+      "business"
+    ],
+    "tags": [
+      "lawyer"
+    ]
+  },
+  {
+    "avatarId": "char_judge",
+    "name": "Judge",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/judge.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "legal",
+    "secondary": [
+      "government"
+    ],
+    "tags": [
+      "judge"
+    ]
+  },
+  {
+    "avatarId": "char_real-estate-agent",
+    "name": "Real Estate Agent",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/real-estate-agent.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "real-estate",
+    "secondary": [
+      "business",
+      "sales"
+    ],
+    "tags": [
+      "realtor"
+    ]
+  },
+  {
+    "avatarId": "char_insurance-agent",
+    "name": "Insurance Agent",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/insurance-agent.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "insurance",
+    "secondary": [
+      "business"
+    ],
+    "tags": [
+      "insurance"
+    ]
+  },
+  {
+    "avatarId": "char_hair-stylist",
+    "name": "Hair Stylist",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/hair-stylist.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "beauty",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "stylist"
+    ]
+  },
+  {
+    "avatarId": "char_makeup-artist",
+    "name": "Makeup Artist",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/makeup-artist.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "beauty",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "makeup"
+    ]
+  },
+  {
+    "avatarId": "char_personal-trainer",
+    "name": "Personal Trainer",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/personal-trainer.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fitness",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "trainer"
+    ]
+  },
+  {
+    "avatarId": "char_yoga-instructor",
+    "name": "Yoga Instructor",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/yoga-instructor.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "fitness",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "yoga"
+    ]
+  },
+  {
+    "avatarId": "char_news-anchor",
+    "name": "News Anchor",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/news-anchor.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "news-media",
+    "secondary": [
+      "business"
+    ],
+    "tags": [
+      "news"
+    ]
+  },
+  {
+    "avatarId": "char_field-reporter",
+    "name": "Field Reporter",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/field-reporter.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "news-media",
+    "secondary": [
+      "characters"
+    ],
+    "tags": [
+      "reporter"
+    ]
+  },
+  {
+    "avatarId": "char_customer-service-agent",
+    "name": "Customer Service Agent",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/customer-service-agent.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "customer-service",
+    "secondary": [
+      "business"
+    ],
+    "tags": [
+      "support"
+    ]
+  },
+  {
+    "avatarId": "char_sales-executive",
+    "name": "Sales Executive",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/sales-executive.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "sales",
+    "secondary": [
+      "business"
+    ],
+    "tags": [
+      "sales"
+    ]
+  },
+  {
+    "avatarId": "char_software-developer",
+    "name": "Software Developer",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/software-developer.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "technology",
+    "secondary": [
+      "business"
+    ],
+    "tags": [
+      "developer"
+    ]
+  },
+  {
+    "avatarId": "char_it-support-technician",
+    "name": "IT Support Technician",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/it-support-technician.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "technology",
+    "secondary": [
+      "customer-service"
+    ],
+    "tags": [
+      "it"
+    ]
+  },
+  {
+    "avatarId": "char_government-official",
+    "name": "Government Official",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/government-official.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "government",
+    "secondary": [
+      "business"
+    ],
+    "tags": [
+      "government"
+    ]
+  },
+  {
+    "avatarId": "char_warehouse-worker",
+    "name": "Warehouse Worker",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/warehouse-worker.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "manufacturing",
+    "secondary": [
+      "retail"
+    ],
+    "tags": [
+      "warehouse"
+    ]
+  },
+  {
+    "avatarId": "char_construction-foreman",
+    "name": "Construction Foreman",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/construction-foreman.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "construction",
+    "secondary": [
+      "engineers"
+    ],
+    "tags": [
+      "foreman"
+    ]
+  },
+  {
+    "avatarId": "char_young-boy",
+    "name": "Young Boy",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/young-boy.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "children",
+    "secondary": [
+      "families"
+    ],
+    "tags": [
+      "child",
+      "boy"
+    ]
+  },
+  {
+    "avatarId": "char_young-girl",
+    "name": "Young Girl",
+    "gender": "female",
+    "premium": true,
+    "image": "/assets/characters/young-girl.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "children",
+    "secondary": [
+      "families"
+    ],
+    "tags": [
+      "child",
+      "girl",
+      "female"
+    ]
+  },
+  {
+    "avatarId": "char_toddler",
+    "name": "Toddler",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/toddler.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "children",
+    "secondary": [
+      "families"
+    ],
+    "tags": [
+      "toddler"
+    ]
+  },
+  {
+    "avatarId": "char_teen-boy",
+    "name": "Teen Boy",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/teen-boy.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "teens",
+    "secondary": [
+      "families"
+    ],
+    "tags": [
+      "teen"
+    ]
+  },
+  {
+    "avatarId": "char_teen-girl",
+    "name": "Teen Girl",
+    "gender": "female",
+    "premium": true,
+    "image": "/assets/characters/teen-girl.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "teens",
+    "secondary": [
+      "families"
+    ],
+    "tags": [
+      "teen",
+      "female"
+    ]
+  },
+  {
+    "avatarId": "char_young-father",
+    "name": "Young Father",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/young-father.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "families",
+    "secondary": [
+      "people"
+    ],
+    "tags": [
+      "father"
+    ]
+  },
+  {
+    "avatarId": "char_grandmother",
+    "name": "Grandmother",
+    "gender": "female",
+    "premium": true,
+    "image": "/assets/characters/grandmother.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "seniors",
+    "secondary": [
+      "families"
+    ],
+    "tags": [
+      "senior",
+      "female"
+    ]
+  },
+  {
+    "avatarId": "char_grandfather",
+    "name": "Grandfather",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/grandfather.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "seniors",
+    "secondary": [
+      "families"
+    ],
+    "tags": [
+      "senior"
+    ]
+  },
+  {
+    "avatarId": "char_senior-athlete",
+    "name": "Senior Athlete",
+    "gender": "",
+    "premium": true,
+    "image": "/assets/characters/senior-athlete.webp",
+    "video": "",
+    "source": "reelo",
+    "primary": "seniors",
+    "secondary": [
+      "fitness"
+    ],
+    "tags": [
+      "senior"
     ]
   }
 ]

@@ -48,8 +48,18 @@ export async function GET(req: Request) {
       };
     });
 
+    // The split matters commercially — premium avatars are priced differently —
+    // so it is returned alongside every query rather than left to the client to
+    // work out from a page of results it has not loaded yet.
+    const split = {
+      premium: list.filter((a) => a.premium).length,
+      standard: list.filter((a) => !a.premium).length,
+      female: list.filter((a) => a.gender.toLowerCase() === "female").length,
+      male: list.filter((a) => a.gender.toLowerCase() === "male").length,
+    };
+
     return NextResponse.json(
-      { ok: true, total: list.length, catalog: COUNTS, offset, limit, avatars: page },
+      { ok: true, total: list.length, split, catalog: COUNTS, offset, limit, avatars: page },
       { headers: { "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800" } },
     );
   } catch (e) {

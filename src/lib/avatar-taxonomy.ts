@@ -135,7 +135,7 @@ export const GROUPS: Group[] = [
     children: [
       { slug: "fruit", name: "Fruit", icon: "🍎", keywords: ["apple", "banana", "orange", "strawberry", "watermelon", "pineapple", "grape", "lemon", "peach", "cherry", "mango", "avocado", "fruit"] },
       { slug: "vegetables", name: "Vegetables", icon: "🥕", keywords: ["carrot", "broccoli", "tomato", "corn", "potato", "pepper", "eggplant", "mushroom", "pumpkin", "onion", "vegetable"] },
-      { slug: "food", name: "Prepared Food", icon: "🍕", keywords: ["pizza", "burger", "hamburger", "fries", "hot dog", "sandwich", "taco"] },
+      { slug: "prepared-food", name: "Prepared Food", icon: "🍕", keywords: ["pizza", "burger", "hamburger", "fries", "hot dog", "sandwich", "taco"] },
       { slug: "desserts", name: "Desserts & Sweets", icon: "🍦", keywords: ["ice cream", "cake", "donut", "candy", "dessert", "cookie", "chocolate"] },
       { slug: "drinks", name: "Drinks", icon: "☕", keywords: ["coffee", "tea", "juice", "smoothie", "drink", "soda"] },
       { slug: "bakery", name: "Bakery", icon: "🥐", keywords: ["bread", "bakery", "croissant", "baker", "pastry"] },

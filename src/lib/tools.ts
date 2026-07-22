@@ -26,6 +26,18 @@ const LANGS = ["English", "Spanish", "French", "German", "Hindi", "Arabic", "Jap
 
 export const TOOLS: Tool[] = [
   {
+    slug: "bedtime-storybook", title: "Bedtime Storybook", tagline: "Your child as the hero of their own picture book.", icon: "doc", poster: "/assets/storybook.webp", credits: "Uses 3 credits", cta: "Make the book",
+    // StoryBook renders its own interface; these fields describe the tool for
+    // the Create page and for Amber, so both stay in step with what it needs.
+    fields: [
+      { kind: "upload", name: "photo", label: "Photo of your child", hint: "A clear, front-facing photo works best." },
+      { kind: "text", name: "childName", label: "Child's name", placeholder: "Ava" },
+      { kind: "textarea", name: "idea", label: "What should it be about?", placeholder: "A story about a red ball that rolls away" },
+      { kind: "select", name: "theme", label: "They become a…", options: ["Superhero", "Explorer", "Astronaut", "Pirate", "Knight", "Wizard", "Detective", "Animal friend"] },
+      { kind: "select", name: "language", label: "Language", options: LANGS },
+    ],
+  },
+  {
     slug: "talking-photo", title: "Talking Photo", tagline: "Make any photo speak naturally.", icon: "mic", poster: "/assets/talking-selfie.jpg", credits: "Uses 1 credit", cta: "Generate talking video",
     fields: [
       { kind: "upload", name: "photo", label: "Upload a photo", hint: "Clear, front-facing works best." },
@@ -161,7 +173,7 @@ export const VIDEO_TOOLS = new Set(["talking-photo", "dancing-photo", "ai-avatar
 export const IMAGE_TOOLS = new Set(["custom-avatar-creator"]);
 
 /** Every tool that can currently produce a result. */
-export const LIVE_TOOLS = new Set<string>([...VIDEO_TOOLS, ...IMAGE_TOOLS, "website-commercial"]);
+export const LIVE_TOOLS = new Set<string>([...VIDEO_TOOLS, ...IMAGE_TOOLS, "website-commercial", "bedtime-storybook"]);
 
 export function isToolLive(slug: string): boolean {
   return LIVE_TOOLS.has(slug);
@@ -169,6 +181,7 @@ export function isToolLive(slug: string): boolean {
 
 /** Which external service a live tool depends on — used for Amber's guidance. */
 export const TOOL_SERVICE: Record<string, "gemini" | "heygen"> = {
+  "bedtime-storybook": "gemini",
   "talking-photo": "gemini",
   "dancing-photo": "gemini",
   "custom-avatar-creator": "gemini",

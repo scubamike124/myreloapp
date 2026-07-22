@@ -115,6 +115,26 @@ mkdirSync(OUT_DIR, { recursive: true });
 const existing = existsSync(CATALOG) ? JSON.parse(readFileSync(CATALOG, "utf8")) : [];
 const byId = new Map(existing.map((a) => [a.avatarId, a]));
 
+// Prune orphans: records whose entry has been renamed or dropped from the list.
+// Renaming "Peach" to "Peach Fruit" left the original Princess Peach image in
+// the catalog and out of reach of --verify, which only walks the current list.
+{
+  const wanted = new Set(CHARACTERS.map(([name]) => `char_${slugify(name)}`));
+  let pruned = 0;
+  for (const id of [...byId.keys()]) {
+    if (wanted.has(id)) continue;
+    const rec = byId.get(id);
+    for (const ext of ["png", "webp"]) {
+      const f = path.join(OUT_DIR, `${id.replace(/^char_/, "")}.${ext}`);
+      if (existsSync(f)) unlinkSync(f);
+    }
+    byId.delete(id);
+    pruned++;
+    console.log(`pruned   ${rec?.name ?? id} (no longer in the character list)`);
+  }
+  if (pruned) console.log(`pruned ${pruned} orphaned record(s)\n`);
+}
+
 let made = 0, skipped = 0, failed = 0, rejected = 0, removed = 0;
 let processed = 0;
 
@@ -179,7 +199,10 @@ for (const [name, subject, primary, secondary, tags] of CHARACTERS) {
     avatarId: id,
     name,
     gender: tags.includes("female") ? "female" : "",
-    premium: false,
+    // Reelo-exclusive artwork: HeyGen marks nothing premium (verified: the
+    // premium flag is false on all 1,264), so the tier is ours to define, and
+    // these are the avatars competitors licensing HeyGen do not have.
+    premium: true,
     image: `/assets/characters/${slug}.png`,
     video: "",
     source: "reelo",
