@@ -45,9 +45,9 @@ export default function SupportPage() {
           runaway costs. The limit resets at midnight UTC.
         </p>
         <p>
-          <strong className="text-white">Your video is not in the Library.</strong> The Library is stored in your
-          browser, so it does not follow you between devices or survive clearing site data. Download anything you want
-          to keep.
+          <strong className="text-white">Your video is not in the Library.</strong> Signed out, the Library lives only
+          in the browser that made it. Signed in, it follows you — but finished videos are kept for 30 days and then
+          deleted, so download anything you want to keep permanently.
         </p>
       </Section>
 

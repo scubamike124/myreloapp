@@ -92,10 +92,16 @@ export default function LibraryGrid() {
             </div>
           )}
 
+          {/* The retention window is a promise to the customer, so it is stated
+              where the work is rather than only in the privacy policy. */}
+          <p className="mt-6 text-[12.5px] text-white/40">
+            Finished videos are kept for 30 days. Download anything you want to keep for good.
+          </p>
+
           {visible.length === 0 ? (
             <p className="mt-10 text-white/45">No creations match that search.</p>
           ) : (
-            <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {visible.map((c) => (
                 <Card key={c.id} creation={c} onDelete={() => deleteCreation(c.id)} />
               ))}

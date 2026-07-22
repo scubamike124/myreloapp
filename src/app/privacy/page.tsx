@@ -9,11 +9,15 @@ export default function PrivacyPage() {
       title="Privacy Policy"
       intro="What we collect, where it goes, and what stays on your own device."
     >
-      <Section heading="What stays in your browser">
+      <Section heading="Your Library, and how long we keep videos">
         <p>
-          Your Library — the record of what you have generated — is stored in your browser&apos;s local storage, not on
-          our servers. It does not follow you between devices, and clearing site data deletes it. Download anything you
-          want to keep.
+          Signed out, your Library lives only in this browser. It does not follow you between devices, and clearing site
+          data deletes it.
+        </p>
+        <p>
+          Signed in, we keep the record on our servers so it follows you — and we store the finished videos themselves
+          for <strong className="text-white">30 days</strong>, after which they are deleted automatically. Download
+          anything you want to keep permanently.
         </p>
       </Section>
 

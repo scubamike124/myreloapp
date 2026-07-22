@@ -179,9 +179,22 @@ export async function ensureSchema(): Promise<boolean> {
       media_url   TEXT,
       bytes       INTEGER,
       error       TEXT,
-      created_at  ${NOW}
+      created_at  ${NOW},
+      expires_at  TEXT
     )`);
   await exec(`CREATE INDEX IF NOT EXISTS creations_user_idx ON creations (user_id, created_at DESC)`);
+
+  // Databases created before retention existed have no expires_at. Add it
+  // BEFORE indexing it — the other way round, the index fails on "no such
+  // column", ensureSchema throws, and every request 500s on an existing
+  // database while working perfectly on a fresh one.
+  try {
+    await exec(`ALTER TABLE creations ADD COLUMN expires_at TEXT`);
+  } catch {
+    /* already present */
+  }
+
+  await exec(`CREATE INDEX IF NOT EXISTS creations_expiry_idx ON creations (expires_at)`);
 
   await exec(`
     CREATE TABLE IF NOT EXISTS sessions (
