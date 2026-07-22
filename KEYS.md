@@ -47,6 +47,21 @@ catalog. HeyGen trial accounts include a limited number of credits; the vault's
 
 ---
 
+### 3.  — Neon Postgres
+
+- [ ] Get one at **https://neon.tech** — free tier, no card
+- Create a project, copy the connection string (starts )
+
+**Unlocks:**
+- User accounts (sign up, sign in)
+- Token balances and purchase history
+- Charging tokens per generation
+
+Without it the app runs exactly as it does now; sign-in pages say accounts
+aren't switched on rather than showing a form that cannot work.
+
+---
+
 ## Self-generated — nothing to sign up for
 
 | Key | How |

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import AppShell from "@/components/design/AppShell";
+import TokenPanel from "@/components/account/TokenPanel";
 
 const TABS = ["Profile", "Billing", "Usage", "Security", "Family", "Preferences"];
 
@@ -19,6 +20,8 @@ export default function AccountPage() {
 
   return (
     <AppShell active="settings">
+      <TokenPanel />
+
       <h1 className="font-display text-3xl font-bold tracking-[-0.02em]">Account Settings</h1>
       <p className="mb-[22px] mt-1 text-[15px]" style={{ color: "#a99a9c" }}>Manage your account, preferences, and billing.</p>
 

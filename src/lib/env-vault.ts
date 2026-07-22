@@ -55,6 +55,15 @@ export const KNOWN_KEYS: KnownKey[] = [
     group: "AI providers",
   },
   {
+    name: "DATABASE_URL",
+    label: "Database connection string",
+    kind: "secret",
+    purpose: "User accounts, token balances and purchase history",
+    source: "https://neon.tech",
+    pattern: /^postgres(ql)?:\/\//,
+    group: "Accounts",
+  },
+  {
     name: "ADMIN_PASSWORD",
     label: "Admin password",
     kind: "secret",
