@@ -65,7 +65,7 @@ export async function createUser(email: string, password: string, name: string):
   await q`
     INSERT INTO token_ledger (user_id, delta, reason, ref)
     VALUES (${id}, ${WELCOME_TOKENS}, 'welcome', ${`welcome:${id}`})
-    ON CONFLICT (ref) DO NOTHING`;
+    ON CONFLICT (ref) WHERE ref IS NOT NULL DO NOTHING`;
 
   return { id, email: clean, name: name.trim() || null };
 }
@@ -117,7 +117,7 @@ export async function currentUser(): Promise<User | null> {
     SELECT u.id, u.email, u.name
     FROM sessions s
     JOIN users u ON u.id = s.user_id
-    WHERE s.id = ${sid} AND s.expires_at > now()
+    WHERE s.id = ${sid} AND s.expires_at > ${new Date().toISOString()}
   `) as User[];
   return rows[0] ?? null;
 }

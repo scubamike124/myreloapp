@@ -1,27 +1,33 @@
 import { neon } from "@neondatabase/serverless";
+import { DatabaseSync } from "node:sqlite";
+import path from "node:path";
 
 // ---------------------------------------------------------------------------
-// Database access.
+// Database access, over two drivers.
 //
-// Postgres (Neon) holds anything that must not be forgeable: who a user is,
-// how many tokens they hold, and every movement of those tokens. None of it
-// can live in the browser — a balance in localStorage is a balance the user
-// can edit.
+//   SQLite   — a file on disk, via node:sqlite (built into Node, no package).
+//              Needs no account, no signup, no network. Used automatically
+//              whenever there is no Postgres URL and the filesystem is
+//              writable, which covers local development and any host with a
+//              real disk (a VPS, Railway, Render, Fly).
 //
-// The app runs without a database. Every call here reports "not configured"
-// rather than throwing, so the product degrades the way the rest of it does:
-// features that need accounts say so, everything else keeps working.
+//   Postgres — Neon or any Postgres, used whenever a connection string is
+//              present. Required on Vercel, whose filesystem is read-only and
+//              wiped between requests, so a SQLite file there would silently
+//              lose every account written to it.
+//
+// Both are reached through the same tagged-template `sql()`, so nothing above
+// this file knows or cares which is in use.
+//
+// The point of the SQLite path: everything — accounts, balances, the ledger,
+// stored creations — can be built and tested today without signing up for
+// anything. Moving to Postgres later is one environment variable.
 // ---------------------------------------------------------------------------
 
-/**
- * The connection string, under whichever name it arrived.
- *
- * Provisioning Postgres from the Vercel dashboard injects POSTGRES_URL (and
- * sometimes DATABASE_URL); Neon's own dashboard gives you DATABASE_URL. Reading
- * all of them means it works however it was set up, instead of failing over a
- * variable name.
- */
-function connectionString(): string | undefined {
+type Row = Record<string, unknown>;
+type Sql = (strings: TemplateStringsArray, ...values: unknown[]) => Promise<Row[]>;
+
+function postgresUrl(): string | undefined {
   return (
     process.env.DATABASE_URL ||
     process.env.POSTGRES_URL ||
@@ -31,65 +37,139 @@ function connectionString(): string | undefined {
   );
 }
 
-export function dbConfigured(): boolean {
-  return Boolean(connectionString());
+/**
+ * SQLite is only safe where the filesystem persists. Vercel sets VERCEL=1 and
+ * gives each invocation a fresh read-only filesystem, so falling back to a file
+ * there would look like it worked and lose the data.
+ */
+function sqliteAllowed(): boolean {
+  if (postgresUrl()) return false;
+  if (process.env.DISABLE_SQLITE === "1") return false;
+  const ephemeral = process.env.VERCEL === "1" || process.env.AWS_LAMBDA_FUNCTION_NAME;
+  return !ephemeral;
 }
 
-type Row = Record<string, unknown>;
+function sqliteFile(): string {
+  return process.env.SQLITE_PATH || path.join(process.cwd(), ".data", "reelo.db");
+}
 
-/** Tagged-template query. Parameters are bound, never interpolated. */
-export function sql() {
-  const url = connectionString();
-  if (!url) return null;
-  return neon(url);
+export type Driver = "postgres" | "sqlite" | "none";
+
+export function driver(): Driver {
+  if (postgresUrl()) return "postgres";
+  if (sqliteAllowed()) return "sqlite";
+  return "none";
+}
+
+export function dbConfigured(): boolean {
+  return driver() !== "none";
+}
+
+// --- SQLite -----------------------------------------------------------------
+
+let sqliteDb: DatabaseSync | null = null;
+
+function openSqlite(): DatabaseSync | null {
+  if (sqliteDb) return sqliteDb;
+  try {
+    const file = sqliteFile();
+    // node:fs rather than an import at module scope — this file is also loaded
+    // in environments where it will never be used.
+    const { mkdirSync } = require("node:fs") as typeof import("node:fs");
+    mkdirSync(path.dirname(file), { recursive: true });
+    sqliteDb = new DatabaseSync(file);
+    sqliteDb.exec("PRAGMA journal_mode = WAL");
+    sqliteDb.exec("PRAGMA foreign_keys = ON");
+    return sqliteDb;
+  } catch {
+    return null;
+  }
 }
 
 /**
- * Schema. Created on demand and safe to run repeatedly, so there is no separate
- * migration step to forget on a fresh deploy.
- *
- * Money-adjacent decisions worth stating:
- * - Balances are NOT stored as a mutable number. The ledger is the truth and
- *   the balance is its sum, so a bug can never silently desync a balance from
- *   the transactions that produced it.
- * - Every ledger row carries a `ref` unique per source event, so a Stripe
- *   webhook delivered twice credits tokens once.
+ * Bridge the tagged-template shape onto SQLite. Values become positional
+ * parameters — they are never interpolated into the SQL, so the injection
+ * safety of the Postgres path is preserved exactly.
  */
+function sqliteSql(db: DatabaseSync): Sql {
+  return async (strings, ...values) => {
+    const text = strings.reduce((acc, part, i) => acc + part + (i < values.length ? "?" : ""), "");
+    const params = values.map((v) => {
+      if (v === undefined || v === null) return null;
+      if (typeof v === "boolean") return v ? 1 : 0;
+      if (v instanceof Date) return v.toISOString();
+      if (typeof v === "number" || typeof v === "bigint" || typeof v === "string") return v;
+      return String(v);
+    });
+    const stmt = db.prepare(text);
+    // .all() throws on statements that return nothing, so writes use .run().
+    if (/^\s*(select|with)/i.test(text) || /returning/i.test(text)) {
+      return stmt.all(...(params as never[])) as Row[];
+    }
+    stmt.run(...(params as never[]));
+    return [];
+  };
+}
+
+export function sql(): Sql | null {
+  const url = postgresUrl();
+  if (url) return neon(url) as unknown as Sql;
+  const db = openSqlite();
+  return db ? sqliteSql(db) : null;
+}
+
+// --- schema -----------------------------------------------------------------
+
 let ensured = false;
 
+/**
+ * Created on demand and safe to run repeatedly, so a fresh machine or a fresh
+ * deploy needs no migration step.
+ *
+ * The two dialects differ in exactly three places — auto-increment, timestamp
+ * defaults, and integer casts — so the DDL is written per driver rather than
+ * pretending one string works for both.
+ */
 export async function ensureSchema(): Promise<boolean> {
   const q = sql();
   if (!q) return false;
   if (ensured) return true;
 
-  await q`
+  const pg = driver() === "postgres";
+  const ID = pg ? "BIGSERIAL PRIMARY KEY" : "INTEGER PRIMARY KEY AUTOINCREMENT";
+  const NOW = pg ? "TIMESTAMPTZ NOT NULL DEFAULT now()" : "TEXT NOT NULL DEFAULT (datetime('now'))";
+  const TS = pg ? "TIMESTAMPTZ NOT NULL" : "TEXT NOT NULL";
+
+  const exec = async (text: string) => {
+    // Schema statements carry no user input, so a plain template is safe here.
+    await q([text] as unknown as TemplateStringsArray);
+  };
+
+  await exec(`
     CREATE TABLE IF NOT EXISTS users (
       id            TEXT PRIMARY KEY,
       email         TEXT UNIQUE NOT NULL,
       password_hash TEXT NOT NULL,
       name          TEXT,
-      created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
-    )`;
+      created_at    ${NOW}
+    )`);
 
-  await q`
+  await exec(`
     CREATE TABLE IF NOT EXISTS token_ledger (
-      id         BIGSERIAL PRIMARY KEY,
+      id         ${ID},
       user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
       delta      INTEGER NOT NULL,
       reason     TEXT NOT NULL,
       ref        TEXT,
-      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
-    )`;
+      created_at ${NOW}
+    )`);
 
   // One credit per external event, enforced by the database rather than by
   // remembering to check first.
-  await q`CREATE UNIQUE INDEX IF NOT EXISTS token_ledger_ref_key ON token_ledger (ref) WHERE ref IS NOT NULL`;
-  await q`CREATE INDEX IF NOT EXISTS token_ledger_user_idx ON token_ledger (user_id, created_at DESC)`;
+  await exec(`CREATE UNIQUE INDEX IF NOT EXISTS token_ledger_ref_key ON token_ledger (ref) WHERE ref IS NOT NULL`);
+  await exec(`CREATE INDEX IF NOT EXISTS token_ledger_user_idx ON token_ledger (user_id, created_at DESC)`);
 
-  // Finished work. Previously this existed only in the browser that made it,
-  // so clearing site data or switching device lost everything a customer had
-  // paid for. media_url points at durable storage when it is configured.
-  await q`
+  await exec(`
     CREATE TABLE IF NOT EXISTS creations (
       id          TEXT PRIMARY KEY,
       user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -101,18 +181,18 @@ export async function ensureSchema(): Promise<boolean> {
       media_url   TEXT,
       bytes       INTEGER,
       error       TEXT,
-      created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
-    )`;
-  await q`CREATE INDEX IF NOT EXISTS creations_user_idx ON creations (user_id, created_at DESC)`;
+      created_at  ${NOW}
+    )`);
+  await exec(`CREATE INDEX IF NOT EXISTS creations_user_idx ON creations (user_id, created_at DESC)`);
 
-  await q`
+  await exec(`
     CREATE TABLE IF NOT EXISTS sessions (
       id         TEXT PRIMARY KEY,
       user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-      expires_at TIMESTAMPTZ NOT NULL
-    )`;
-  await q`CREATE INDEX IF NOT EXISTS sessions_user_idx ON sessions (user_id)`;
+      created_at ${NOW},
+      expires_at ${TS}
+    )`);
+  await exec(`CREATE INDEX IF NOT EXISTS sessions_user_idx ON sessions (user_id)`);
 
   ensured = true;
   return true;

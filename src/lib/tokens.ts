@@ -21,9 +21,11 @@ export async function balanceOf(userId: string): Promise<number> {
   const q = sql();
   if (!q || !(await ensureSchema())) return 0;
   const rows = (await q`
-    SELECT COALESCE(SUM(delta), 0)::int AS balance FROM token_ledger WHERE user_id = ${userId}
+    SELECT COALESCE(SUM(delta), 0) AS balance FROM token_ledger WHERE user_id = ${userId}
   `) as { balance: number }[];
-  return rows[0]?.balance ?? 0;
+  // SQLite returns this as a number already; Postgres as a string without the
+  // cast. Normalising here keeps both drivers honest.
+  return Number(rows[0]?.balance ?? 0);
 }
 
 export type LedgerEntry = { delta: number; reason: string; created_at: string };
@@ -78,7 +80,7 @@ export async function refund(userId: string, action: string, ref?: string): Prom
   await q`
     INSERT INTO token_ledger (user_id, delta, reason, ref)
     VALUES (${userId}, ${cost}, ${`refund:${action}`}, ${ref ? `refund:${ref}` : null})
-    ON CONFLICT (ref) DO NOTHING`;
+    ON CONFLICT (ref) WHERE ref IS NOT NULL DO NOTHING`;
 }
 
 /**
@@ -93,5 +95,5 @@ export async function credit(userId: string, amount: number, reason: string, ref
   await q`
     INSERT INTO token_ledger (user_id, delta, reason, ref)
     VALUES (${userId}, ${amount}, ${reason}, ${ref})
-    ON CONFLICT (ref) DO NOTHING`;
+    ON CONFLICT (ref) WHERE ref IS NOT NULL DO NOTHING`;
 }

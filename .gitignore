@@ -56,3 +56,6 @@ next-env.d.ts
 .econ.mjs
 .prop.mjs
 .avg.mjs
+
+# local SQLite database
+.data/
