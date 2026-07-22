@@ -29,8 +29,13 @@ type Part =
   | { kind: "ic"; x: number; z: number; w: number; d: number; h: number; rot: boolean; pins: number }
   | { kind: "smd"; x: number; z: number; w: number; d: number; h: number; lit: number }
   | { kind: "cap"; x: number; z: number; r: number; h: number }
+  | { kind: "ring"; x: number; z: number; r: number; h: number; phase: number }
+  | { kind: "sink"; x: number; z: number; w: number; d: number; h: number; fins: number; rot: boolean }
   | { kind: "hero"; x: number; z: number; w: number; h: number };
 type Led = { x: number; z: number; phase: number; rate: number; hue: number };
+/** A mote climbing a vertical data-stream column. */
+type Mote = { col: number; y: number; speed: number; jitter: number; hue: number };
+type Column = { x: number; z: number; h: number };
 
 /** Reelo red, through orange, to a hot white core — the pulse travels this. */
 const HOT = [
@@ -89,8 +94,42 @@ export default function MotherboardBackground() {
     let pads: Pad[] = [];
     let parts: Part[] = [];
     let leds: Led[] = [];
+    let columns: Column[] = [];
+    let motes: Mote[] = [];
 
     const camera = { x: 0, y: 52, z: 112, yaw: 0, pitch: 0.52, focal: 0 };
+
+    // --- glow sprites ------------------------------------------------------
+    // Every LED, pulse-tail segment and data mote used to build its own
+    // createRadialGradient each frame — ~700 gradient objects per frame, which
+    // cost more than everything else combined. They are pre-rendered once here
+    // and blitted, which is a single cheap draw call each.
+    const SPRITE_STEPS = 12;
+    const SPRITE_PX = 64;
+    const sprites: HTMLCanvasElement[] = [];
+    for (let i = 0; i < SPRITE_STEPS; i++) {
+      const c = document.createElement("canvas");
+      c.width = c.height = SPRITE_PX;
+      const g = c.getContext("2d")!;
+      const [r, gg, b] = ramp(i / (SPRITE_STEPS - 1));
+      const half = SPRITE_PX / 2;
+      const grad = g.createRadialGradient(half, half, 0, half, half, half);
+      grad.addColorStop(0, `rgba(${r},${gg},${b},1)`);
+      grad.addColorStop(0.4, `rgba(${r},${gg},${b},0.3)`);
+      grad.addColorStop(1, `rgba(${r},${gg},${b},0)`);
+      g.fillStyle = grad;
+      g.fillRect(0, 0, SPRITE_PX, SPRITE_PX);
+      sprites.push(c);
+    }
+
+    /** Blit a pre-rendered glow. `hue` picks the ramp step, `a` the strength. */
+    function glow(x: number, y: number, radius: number, hue: number, a: number) {
+      if (a <= 0.008 || radius <= 0.2) return;
+      const sp = sprites[Math.max(0, Math.min(SPRITE_STEPS - 1, Math.round(hue * (SPRITE_STEPS - 1))))];
+      ctx!.globalAlpha = Math.min(1, a);
+      ctx!.drawImage(sp, x - radius, y - radius, radius * 2, radius * 2);
+      ctx!.globalAlpha = 1;
+    }
 
     function project(p: Vec3) {
       const dx = p.x - camera.x;
@@ -178,6 +217,46 @@ export default function MotherboardBackground() {
         }
       }
 
+      // --- ring-lit components --------------------------------------------
+      // The concentric glowing discs in the reference. They read as "powered"
+      // more strongly than anything else on the board, so they stay sparse.
+      const ringCount = Math.round(Math.max(3, Math.min(8, area / 240000)));
+      for (let i = 0; i < ringCount; i++) {
+        for (let tries = 0; tries < 14; tries++) {
+          const r = rnd(9, 17);
+          const x = rnd(-EXTENT * 0.9, EXTENT * 0.9);
+          const z = rnd(-EXTENT * 0.9, EXTENT * 0.4);
+          if (!free(taken, x, z, r * 1.5)) continue;
+          taken.push({ x, z, r: r * 1.5 });
+          parts.push({ kind: "ring", x, z, r, h: rnd(2, 4), phase: rnd(0, Math.PI * 2) });
+          break;
+        }
+      }
+
+      // --- heatsinks --------------------------------------------------------
+      const sinkCount = Math.round(Math.max(2, Math.min(6, area / 320000)));
+      for (let i = 0; i < sinkCount; i++) {
+        for (let tries = 0; tries < 14; tries++) {
+          const w = rnd(26, 44);
+          const d = rnd(20, 34);
+          const x = rnd(-EXTENT * 0.85, EXTENT * 0.85);
+          const z = rnd(-EXTENT * 0.9, EXTENT * 0.3);
+          if (!free(taken, x, z, Math.max(w, d) * 0.8)) continue;
+          taken.push({ x, z, r: Math.max(w, d) * 0.8 });
+          parts.push({
+            kind: "sink",
+            x,
+            z,
+            w,
+            d,
+            h: rnd(10, 18),
+            fins: Math.round(rnd(6, 11)),
+            rot: Math.random() < 0.5,
+          });
+          break;
+        }
+      }
+
       // --- small SMD parts, the scatter that sells the density -------------
       const smdCount = Math.round(Math.max(50, Math.min(190, area / 11000)));
       for (let i = 0; i < smdCount; i++) {
@@ -193,14 +272,14 @@ export default function MotherboardBackground() {
           w: horiz ? long : long * 0.42,
           d: horiz ? long * 0.42 : long,
           h: rnd(1.2, 2.6),
-          lit: Math.random() < 0.22 ? rnd(0.4, 1) : 0,
+          lit: Math.random() < 0.34 ? rnd(0.5, 1) : 0,
         });
       }
 
       // --- routing --------------------------------------------------------
       // Many short traces on a fine pitch reads as a real board; a few long
       // ones read as a wireframe grid, which is what this used to look like.
-      const traceCount = Math.round(Math.max(150, Math.min(460, area / 3400)));
+      const traceCount = Math.round(Math.max(150, Math.min(620, area / 2500)));
       for (let i = 0; i < traceCount; i++) {
         const pts: Vec3[] = [];
         let cx = Math.round(rnd(-EXTENT, EXTENT) / GRID) * GRID;
@@ -243,7 +322,29 @@ export default function MotherboardBackground() {
         });
       }
 
-      const ledCount = Math.round(Math.max(22, Math.min(70, area / 34000)));
+      // --- vertical data streams -------------------------------------------
+      // The signature of the reference image: light climbing out of the board.
+      // Anchored on the hero die and the ring components, so the beams read as
+      // something the hardware is doing rather than free-floating particles.
+      columns = [{ x: -74, z: -34, h: 120 }];
+      for (const p of parts) {
+        if (p.kind === "ring") columns.push({ x: p.x, z: p.z, h: rnd(48, 92) });
+      }
+      motes = [];
+      const perColumn = Math.round(Math.max(14, Math.min(30, area / 70000)));
+      for (let c = 0; c < columns.length; c++) {
+        for (let i = 0; i < perColumn; i++) {
+          motes.push({
+            col: c,
+            y: rnd(0, columns[c].h),
+            speed: rnd(9, 26),
+            jitter: rnd(-5.5, 5.5),
+            hue: rnd(0.25, 1),
+          });
+        }
+      }
+
+      const ledCount = Math.round(Math.max(22, Math.min(70, area / 25000)));
       for (let i = 0; i < ledCount; i++) {
         leds.push({
           x: rnd(-EXTENT, EXTENT),
@@ -394,10 +495,10 @@ export default function MotherboardBackground() {
         const head = project(tr.pts[0]);
         const fade = head ? Math.max(0, Math.min(1, 1 - head.depth / 400)) : 0;
         if (fade <= 0.01) continue;
-        ctx!.strokeStyle = `rgba(168,32,40,${0.07 + fade * 0.20})`;
+        ctx!.strokeStyle = `rgba(186,40,46,${0.10 + fade * 0.30})`;
         ctx!.lineWidth = (0.9 + fade * 2.1) * tr.w;
         ctx!.stroke();
-        ctx!.strokeStyle = `rgba(255,104,88,${0.06 + fade * 0.22 * (0.7 + hb * 0.5)})`;
+        ctx!.strokeStyle = `rgba(255,124,96,${0.10 + fade * 0.40 * (0.7 + hb * 0.5)})`;
         ctx!.lineWidth = (0.35 + fade * 0.85) * tr.w;
         ctx!.stroke();
       }
@@ -411,7 +512,7 @@ export default function MotherboardBackground() {
         const r = Math.min(4, Math.max(0.4, q.scale * p.r));
         ctx!.beginPath();
         ctx!.arc(q.x, q.y, r, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(214,80,64,${0.22 * fade})`;
+        ctx!.fillStyle = `rgba(236,96,72,${0.34 * fade})`;
         ctx!.fill();
       }
 
@@ -428,14 +529,7 @@ export default function MotherboardBackground() {
         // depth rather than a flat CAD look.
         if (probe.depth < 58) {
           const blurR = Math.min(130, (58 - probe.depth) * 2.2 + 16);
-          const [r, g, b] = ramp(0.15);
-          const bk = ctx!.createRadialGradient(probe.x, probe.y, 0, probe.x, probe.y, blurR);
-          bk.addColorStop(0, `rgba(${r},${g},${b},0.055)`);
-          bk.addColorStop(1, "rgba(0,0,0,0)");
-          ctx!.fillStyle = bk;
-          ctx!.beginPath();
-          ctx!.arc(probe.x, probe.y, blurR, 0, Math.PI * 2);
-          ctx!.fill();
+          glow(probe.x, probe.y, blurR, 0.15, 0.055);
           continue;
         }
 
@@ -454,15 +548,70 @@ export default function MotherboardBackground() {
           if (top && part.lit > 0) {
             const cx = (top[0].x + top[2].x) / 2;
             const cy = (top[0].y + top[2].y) / 2;
-            const [r, g, b] = ramp(0.25 + part.lit * 0.5);
-            const rad = Math.min(11, Math.max(1, probe.scale * 2.4));
-            const gl = ctx!.createRadialGradient(cx, cy, 0, cx, cy, rad);
-            gl.addColorStop(0, `rgba(${r},${g},${b},${0.5 * part.lit * fade * (0.5 + hb * 0.6)})`);
-            gl.addColorStop(1, "rgba(0,0,0,0)");
-            ctx!.fillStyle = gl;
+            glow(cx, cy, Math.min(11, Math.max(1, probe.scale * 2.4)), 0.25 + part.lit * 0.5, 0.5 * part.lit * fade * (0.5 + hb * 0.6));
+          }
+          continue;
+        }
+
+        if (part.kind === "ring") {
+          const c = project({ x: part.x, y: part.h, z: part.z });
+          if (!c) continue;
+          const beat = 0.45 + 0.55 * Math.abs(Math.sin(t * 0.9 + part.phase));
+          const rx = Math.min(120, Math.max(2, c.scale * part.r));
+          const ry = rx * 0.46; // the plane seen at a tilt
+
+          // Bloom pool beneath the rings.
+          glow(c.x, c.y, rx * 2.1, 0.35 + beat * 0.35, 0.3 * beat * fade);
+
+          for (let i = 3; i >= 1; i--) {
+            const k = i / 3;
+            const [r, g, b] = ramp(0.25 + (1 - k) * 0.7);
             ctx!.beginPath();
-            ctx!.arc(cx, cy, rad, 0, Math.PI * 2);
-            ctx!.fill();
+            ctx!.ellipse(c.x, c.y, rx * k, ry * k, 0, 0, Math.PI * 2);
+            ctx!.strokeStyle = `rgba(${r},${g},${b},${(0.22 + beat * 0.4) * fade * (1.1 - k * 0.4)})`;
+            ctx!.lineWidth = Math.max(0.6, rx * 0.055);
+            ctx!.stroke();
+          }
+
+          const [hr, hg, hb] = ramp(0.95);
+          ctx!.beginPath();
+          ctx!.ellipse(c.x, c.y, rx * 0.18, ry * 0.18, 0, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(${hr},${hg},${hb},${(0.4 + beat * 0.5) * fade})`;
+          ctx!.fill();
+          continue;
+        }
+
+        if (part.kind === "sink") {
+          // Finned block: parallel ridges catching the board light.
+          drawBox(
+            part.x,
+            part.z,
+            part.w,
+            part.d,
+            part.h * 0.35,
+            fade,
+            `rgba(24,18,20,${0.94 * fade})`,
+            `rgba(11,7,8,${0.94 * fade})`,
+            `rgba(226,96,78,${0.34 * fade})`,
+          );
+          const span = part.rot ? part.d : part.w;
+          for (let i = 0; i < part.fins; i++) {
+            const f = (i + 0.5) / part.fins - 0.5;
+            const fx = part.rot ? part.x : part.x + f * span;
+            const fz = part.rot ? part.z + f * span : part.z;
+            const a = project({ x: fx, y: part.h * 0.35, z: fz });
+            const b = project({ x: fx, y: part.h, z: fz });
+            if (!a || !b) continue;
+            const halfLen = (part.rot ? part.w : part.d) / 2;
+            const a2 = project({ x: part.rot ? fx + halfLen : fx, y: part.h, z: part.rot ? fz : fz + halfLen });
+            const b2 = project({ x: part.rot ? fx - halfLen : fx, y: part.h, z: part.rot ? fz : fz - halfLen });
+            if (!a2 || !b2) continue;
+            ctx!.beginPath();
+            ctx!.moveTo(b2.x, b2.y);
+            ctx!.lineTo(a2.x, a2.y);
+            ctx!.strokeStyle = `rgba(196,84,70,${0.3 * fade})`;
+            ctx!.lineWidth = Math.max(0.5, a.scale * 0.7);
+            ctx!.stroke();
           }
           continue;
         }
@@ -583,13 +732,19 @@ export default function MotherboardBackground() {
           const size = Math.hypot(top[0].x - top[2].x, top[0].y - top[2].y);
 
           // Heartbeat halo under the die.
-          const halo = ctx!.createRadialGradient(cx, cy, 0, cx, cy, size * 0.9);
-          halo.addColorStop(0, `rgba(255,58,60,${(0.06 + hb * 0.14) * fade})`);
-          halo.addColorStop(1, "rgba(0,0,0,0)");
-          ctx!.fillStyle = halo;
-          ctx!.beginPath();
-          ctx!.arc(cx, cy, size * 0.9, 0, Math.PI * 2);
-          ctx!.fill();
+          glow(cx, cy, size * 0.9, 0.05, (0.06 + hb * 0.14) * fade);
+
+          // Illuminated die: concentric rings around a hot core, as in the
+          // reference. Drawn on the package top, tilted with the board.
+          for (let i = 3; i >= 1; i--) {
+            const k = (i / 3) * 0.34;
+            const [r, g, b] = ramp(0.3 + (1 - i / 3) * 0.65);
+            ctx!.beginPath();
+            ctx!.ellipse(cx, cy, size * k, size * k * 0.46, 0, 0, Math.PI * 2);
+            ctx!.strokeStyle = `rgba(${r},${g},${b},${(0.16 + hb * 0.34) * fade})`;
+            ctx!.lineWidth = Math.max(0.6, size * 0.012);
+            ctx!.stroke();
+          }
 
           // The R, breathing with the beat.
           const fs = Math.max(6, size * 0.42);
@@ -605,6 +760,28 @@ export default function MotherboardBackground() {
         }
       }
 
+      // --- vertical data streams ---------------------------------------------
+      // Drawn after the parts so the light reads as rising OUT of the board.
+      for (const m of motes) {
+        const col = columns[m.col];
+        if (!col) continue;
+        if (!reduce) {
+          m.y += m.speed / 60;
+          if (m.y > col.h) m.y -= col.h;
+        }
+        const q = project({ x: col.x + m.jitter, y: m.y, z: col.z + m.jitter * 0.5 });
+        if (!q || q.depth < 34) continue;
+
+        const distFade = Math.max(0, Math.min(1, 1 - q.depth / 400));
+        // Fade out toward the top of the column so beams dissolve, not stop.
+        const rise = 1 - m.y / col.h;
+        const a = 0.85 * distFade * rise * (0.4 + hb * 0.7);
+        if (a <= 0.01) continue;
+
+        const rad = Math.min(5.5, Math.max(0.5, q.scale * 1.0));
+        glow(q.x, q.y, rad * 3.6, m.hue * 0.5 + rise * 0.5, a);
+      }
+
       // --- LEDs -------------------------------------------------------------
       for (const l of leds) {
         const q = project({ x: l.x, y: 1.5, z: l.z });
@@ -612,17 +789,8 @@ export default function MotherboardBackground() {
         const fade = Math.max(0, Math.min(1, 1 - q.depth / 380));
         if (fade <= 0.02) continue;
         const flick = reduce ? 0.6 : 0.35 + 0.65 * Math.abs(Math.sin(t * l.rate + l.phase));
-        const [r, g, b] = ramp(l.hue * 0.6 + hb * 0.3);
         const rad = Math.min(5.5, Math.max(0.6, q.scale * 1.1)) * (0.6 + flick * 0.4);
-        const halo = Math.min(26, rad * 4);
-        const glow = ctx!.createRadialGradient(q.x, q.y, 0, q.x, q.y, halo);
-        glow.addColorStop(0, `rgba(${r},${g},${b},${0.42 * flick * fade})`);
-        glow.addColorStop(0.35, `rgba(${r},${g},${b},${0.12 * flick * fade})`);
-        glow.addColorStop(1, "rgba(0,0,0,0)");
-        ctx!.fillStyle = glow;
-        ctx!.beginPath();
-        ctx!.arc(q.x, q.y, halo, 0, Math.PI * 2);
-        ctx!.fill();
+        glow(q.x, q.y, Math.min(26, rad * 4), l.hue * 0.6 + hb * 0.3, 0.42 * flick * fade);
       }
 
       // --- travelling pulses -------------------------------------------------
@@ -638,18 +806,9 @@ export default function MotherboardBackground() {
           const fade = Math.max(0, Math.min(1, 1 - q.depth / 400));
           if (fade <= 0.02) continue;
           const k = 1 - i / TAIL;
-          const [r, g, b] = ramp(p.hue * 0.4 + k * 0.6);
           const a = 0.5 * k * k * fade * (0.45 + hb * 0.75);
           const rad = Math.min(6.5, Math.max(0.5, q.scale * p.size * 0.6)) * (0.45 + k * 0.75);
-          const halo = Math.min(30, rad * 4);
-          const glow = ctx!.createRadialGradient(q.x, q.y, 0, q.x, q.y, halo);
-          glow.addColorStop(0, `rgba(${r},${g},${b},${a})`);
-          glow.addColorStop(0.4, `rgba(${r},${g},${b},${a * 0.3})`);
-          glow.addColorStop(1, "rgba(0,0,0,0)");
-          ctx!.fillStyle = glow;
-          ctx!.beginPath();
-          ctx!.arc(q.x, q.y, halo, 0, Math.PI * 2);
-          ctx!.fill();
+          glow(q.x, q.y, Math.min(30, rad * 4), p.hue * 0.4 + k * 0.6, a);
         }
       }
 
@@ -700,7 +859,7 @@ export default function MotherboardBackground() {
     <canvas
       ref={ref}
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 h-full w-full opacity-[0.62]"
+      className="pointer-events-none fixed inset-0 -z-10 h-full w-full opacity-[0.78]"
     />
   );
 }
