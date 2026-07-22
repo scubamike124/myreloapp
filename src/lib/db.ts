@@ -68,6 +68,25 @@ export async function ensureSchema(): Promise<boolean> {
   await q`CREATE UNIQUE INDEX IF NOT EXISTS token_ledger_ref_key ON token_ledger (ref) WHERE ref IS NOT NULL`;
   await q`CREATE INDEX IF NOT EXISTS token_ledger_user_idx ON token_ledger (user_id, created_at DESC)`;
 
+  // Finished work. Previously this existed only in the browser that made it,
+  // so clearing site data or switching device lost everything a customer had
+  // paid for. media_url points at durable storage when it is configured.
+  await q`
+    CREATE TABLE IF NOT EXISTS creations (
+      id          TEXT PRIMARY KEY,
+      user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      tool_slug   TEXT NOT NULL,
+      tool_title  TEXT NOT NULL,
+      title       TEXT NOT NULL,
+      status      TEXT NOT NULL,
+      kind        TEXT NOT NULL,
+      media_url   TEXT,
+      bytes       INTEGER,
+      error       TEXT,
+      created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+    )`;
+  await q`CREATE INDEX IF NOT EXISTS creations_user_idx ON creations (user_id, created_at DESC)`;
+
   await q`
     CREATE TABLE IF NOT EXISTS sessions (
       id         TEXT PRIMARY KEY,

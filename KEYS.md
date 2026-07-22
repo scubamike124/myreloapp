@@ -60,6 +60,21 @@ catalog. HeyGen trial accounts include a limited number of credits; the vault's
 Without it the app runs exactly as it does now; sign-in pages say accounts
 aren't switched on rather than showing a form that cannot work.
 
+### 4. `BLOB_READ_WRITE_TOKEN` — Vercel Blob
+
+- [ ] In your Vercel dashboard → **Storage** → **Create** → **Blob**
+- Copy the token it gives you (starts `vercel_blob_rw_`)
+
+**Unlocks:**
+- Finished videos stored permanently instead of only in the browser that
+  made them
+
+**Why this matters more than it sounds:** without it, a customer who clears
+their browser, or opens Reelo on their phone, loses every video they paid
+for. Veo returns the video inline and HeyGen's links expire, so there is no
+copy anywhere else. This is the difference between a product people trust
+with paid work and one that quietly loses it.
+
 ---
 
 ## Self-generated — nothing to sign up for

@@ -64,6 +64,15 @@ export const KNOWN_KEYS: KnownKey[] = [
     group: "Accounts",
   },
   {
+    name: "BLOB_READ_WRITE_TOKEN",
+    label: "Vercel Blob token",
+    kind: "secret",
+    purpose: "Stores finished videos permanently, so they survive clearing a browser",
+    source: "https://vercel.com/dashboard/stores",
+    pattern: /^vercel_blob_rw_/,
+    group: "Accounts",
+  },
+  {
     name: "ADMIN_PASSWORD",
     label: "Admin password",
     kind: "secret",

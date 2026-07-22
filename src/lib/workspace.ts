@@ -110,7 +110,39 @@ export function recordCreation(input: Omit<Creation, "id" | "createdAt">): Creat
   };
   // Newest first.
   write([creation, ...readCreations()]);
+
+  // Also push it to the server, where it survives clearing this browser or
+  // moving to another device. Fire-and-forget: the local copy is already
+  // written, so a signed-out user or an unreachable server changes nothing.
+  void persist(creation);
+
   return creation;
+}
+
+/**
+ * Mirror a creation to the account, if there is one. Deliberately silent —
+ * this is a durability upgrade, not a step the user is waiting on, and a
+ * failure here must never look like a failed generation.
+ */
+async function persist(creation: Creation): Promise<void> {
+  if (typeof window === "undefined") return;
+  try {
+    await fetch("/api/creations", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        toolSlug: creation.toolSlug,
+        toolTitle: creation.toolTitle,
+        title: creation.title,
+        status: creation.status,
+        kind: creation.kind,
+        mediaUrl: creation.mediaUrl ?? "",
+        error: creation.error ?? "",
+      }),
+    });
+  } catch {
+    /* local copy already saved */
+  }
 }
 
 export function deleteCreation(id: string) {
