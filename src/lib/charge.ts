@@ -58,7 +58,21 @@ export async function chargeFor(action: string): Promise<ChargeResult> {
  * must call this on its error path — being charged for a video that never
  * arrived is the one billing mistake customers do not forgive.
  */
-export async function refundCharge(charge: Charge): Promise<void> {
+export async function refundCharge(charge: Charge, ref?: string): Promise<void> {
   if (!charge.userId || charge.charged <= 0) return;
-  await refund(charge.userId, charge.action);
+  // `ref` makes the refund idempotent. It matters for the asynchronous
+  // providers: a client polls a failed HeyGen render every few seconds, and
+  // without a ref each poll would hand back another refund.
+  await refund(charge.userId, charge.action, ref);
+}
+
+/**
+ * Refund a job that failed after the request that started it had returned.
+ * Used by status endpoints, where the original Charge object is long gone.
+ */
+export async function refundLater(action: string, ref: string): Promise<void> {
+  if (!dbConfigured()) return;
+  const user = await currentUser();
+  if (!user) return;
+  await refund(user.id, action, ref);
 }

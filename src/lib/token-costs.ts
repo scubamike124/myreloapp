@@ -17,9 +17,18 @@ export const TOKEN_COST: Record<string, number> = {
   "website-commercial": 3,
   "bedtime-storybook": 2,
   "custom-avatar-creator": 1,
+  // Free by design. All three are cheap text or transcription calls guarded by
+  // their own daily caps, and charging for them would be worse than pointless:
+  //   analyze    — Website Commercial calls it AND the video route, so billing
+  //                it separately would charge twice for one commercial. The
+  //                scan is already inside that tool's 3 tokens. Standalone, it
+  //                costs $0.006 and is what convinces someone to buy.
+  //   transcribe — voice input; charging to speak instead of type is hostile.
+  //   captions   — a few cents, and it makes the video people already paid for
+  //                actually usable.
   transcribe: 0,
   captions: 0,
-  analyze: 1,
+  analyze: 0,
 };
 
 export function costOf(action: string): number {

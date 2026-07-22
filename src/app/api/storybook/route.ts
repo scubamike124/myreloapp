@@ -1,5 +1,6 @@
 import { clientId, createDailyLimiter, readJsonLimited, PayloadTooLarge } from "@/lib/api-guard";
 import { getLanguage, isRTL } from "@/lib/languages";
+import { chargeFor, refundCharge } from "@/lib/charge";
 
 // ---------------------------------------------------------------------------
 // Personalised children's storybook.
@@ -74,6 +75,16 @@ export async function POST(req: Request) {
 
   const hero = childName || "the child";
 
+  // Charged once the input is known to be usable, before any paid model call.
+  const charged = await chargeFor("bedtime-storybook");
+  if (!charged.ok) {
+    limiter.refund(id);
+    return Response.json(
+      { error: charged.error, needed: charged.needed, balance: charged.balance },
+      { status: 402 },
+    );
+  }
+
   // --- 1. the story ---------------------------------------------------------
   const storyPrompt =
     `Write a gentle bedtime picture-book story for a child aged about 3 to 7.\n\n` +
@@ -123,6 +134,7 @@ export async function POST(req: Request) {
     if (story.pages.length === 0) throw new Error("story had no pages");
   } catch (e) {
     limiter.refund(id);
+    await refundCharge(charged.charge); // no book was written — do not charge for one
     return Response.json(
       { error: e instanceof Error ? `Couldn't write the story: ${e.message}`.slice(0, 200) : "Couldn't write the story." },
       { status: 502 },
@@ -194,6 +206,8 @@ export async function POST(req: Request) {
       pages: story.pages.map((p, i) => ({ text: p.text, image: images[i] })),
       // Told plainly rather than hidden: a page without art is still readable.
       illustrated: images.filter(Boolean).length,
+      tokensCharged: charged.charge.charged,
+      balance: charged.charge.balance,
     },
     { headers: { "Cache-Control": "no-store" } },
   );

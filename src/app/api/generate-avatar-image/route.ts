@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { PayloadTooLarge, clientId, createDailyLimiter, readJsonLimited } from "@/lib/api-guard";
+import { chargeFor, refundCharge } from "@/lib/charge";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -41,7 +42,19 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Please upload a photo first." }, { status: 400 });
   }
 
+  // Charged outside the try so the outer catch can still refund it — inside,
+  // an unexpected error would leave the customer paying for nothing.
+  const charged = await chargeFor("custom-avatar-creator");
+  if (!charged.ok) {
+    limiter.refund(id);
+    return NextResponse.json(
+      { error: charged.error, needed: charged.needed, balance: charged.balance },
+      { status: 402 },
+    );
+  }
+
   try {
+
     const reqBody = JSON.stringify({ contents: [{ parts: [{ text: prompt }, { inlineData: { mimeType, data: imageBase64 } }] }] });
     let data: Record<string, unknown> | null = null;
     let lastErr = "";
@@ -57,25 +70,26 @@ export async function POST(req: Request) {
         if (res.ok) { data = json; break; }
         lastErr = json?.error?.message || `Image error ${res.status}`;
         if (res.status >= 500 || res.status === 429) { await sleep(4000); continue; }
-        { limiter.refund(id); return NextResponse.json({ error: lastErr }, { status: 502 }); }
+        { limiter.refund(id); await refundCharge(charged.charge); return NextResponse.json({ error: lastErr }, { status: 502 }); }
       } catch (e) {
         lastErr = e instanceof Error ? e.message : String(e);
         if (attempt < 3) { await sleep(4000); continue; }
       }
     }
-    if (!data) { limiter.refund(id); return NextResponse.json({ error: `Image model timed out. ${lastErr}`.trim() }, { status: 504 }); }
+    if (!data) { limiter.refund(id); await refundCharge(charged.charge); return NextResponse.json({ error: `Image model timed out. ${lastErr}`.trim() }, { status: 504 }); }
 
     type ImgPart = { inlineData?: { data: string; mimeType?: string }; inline_data?: { data: string; mimeType?: string } };
     const parts = ((data as { candidates?: { content?: { parts?: ImgPart[] } }[] })?.candidates?.[0]?.content?.parts) ?? [];
     const imgPart = parts.find((p) => p.inlineData || p.inline_data);
     const out = imgPart?.inlineData || imgPart?.inline_data;
-    if (!out?.data) { limiter.refund(id); return NextResponse.json({ error: "The model did not return an image. Try another photo." }, { status: 502 }); }
+    if (!out?.data) { limiter.refund(id); await refundCharge(charged.charge); return NextResponse.json({ error: "The model did not return an image. Try another photo." }, { status: 502 }); }
 
     const outMimeType = out.mimeType || "image/png";
 
-    return NextResponse.json({ ok: true, remainingToday, imageUrl: `data:${outMimeType};base64,${out.data}` });
+    return NextResponse.json({ ok: true, remainingToday, tokensCharged: charged.charge.charged, balance: charged.charge.balance, imageUrl: `data:${outMimeType};base64,${out.data}` });
   } catch (e) {
     limiter.refund(id);
+    await refundCharge(charged.charge);
     return NextResponse.json({ error: e instanceof Error ? e.message : "Image generation failed." }, { status: 502 });
   }
 }

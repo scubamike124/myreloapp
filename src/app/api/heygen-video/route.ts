@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { chargeFor, refundCharge, refundLater } from "@/lib/charge";
 
 export const runtime = "nodejs";
 export const maxDuration = 60; // submit + status are fast; no long blocking poll.
@@ -91,6 +92,15 @@ export async function GET(req: Request) {
     const { res, data } = await heygen(`/v1/video_status.get?video_id=${encodeURIComponent(videoId)}`, { method: "GET" }, key);
     if (!res.ok) return NextResponse.json({ ok: false, error: data?.message || "Status lookup failed." }, { status: 502 });
     const d = data?.data ?? {};
+
+    // HeyGen fails asynchronously, long after the POST that started the job
+    // returned, so the refund has to happen here. Keyed on the video id, which
+    // makes it idempotent — the client polls this endpoint every few seconds
+    // and would otherwise be refunded once per poll.
+    if (d.status === "failed") {
+      await refundLater("ai-avatar-studio", `heygen:${videoId}`);
+    }
+
     return NextResponse.json({
       ok: true,
       videoId,
@@ -129,7 +139,7 @@ export async function POST(req: Request) {
   }
 
   // 2. Parse + cap the script to the max duration.
-  let body: { script?: string; avatarId?: string; voiceId?: string; width?: number; height?: number } = {};
+  let body: { script?: string; avatarId?: string; voiceId?: string; width?: number; height?: number; action?: string } = {};
   try {
     body = await req.json();
   } catch {
@@ -139,7 +149,23 @@ export async function POST(req: Request) {
   const avatarId = body.avatarId?.trim() || DEFAULT_AVATAR_ID;
   const voiceId = body.voiceId?.trim() || DEFAULT_VOICE_ID;
 
-  // 3. Kick off generation and return the id right away.
+  // Both tools that use this route cost the same, so an unexpected value
+  // cannot mis-bill; the distinction only makes the ledger readable.
+  const action = body.action === "website-commercial" ? "website-commercial" : "ai-avatar-studio";
+
+  // 3. Charge before submitting: HeyGen deducts its own credits the moment the
+  //    job is accepted, so waiting for completion would mean spending their
+  //    credits without spending the customer's tokens.
+  const charged = await chargeFor(action);
+  if (!charged.ok) {
+    refund(id);
+    return NextResponse.json(
+      { error: charged.error, needed: charged.needed, balance: charged.balance },
+      { status: 402 },
+    );
+  }
+
+  // 4. Kick off generation and return the id right away.
   try {
     const { res, data } = await heygen(
       "/v2/video/generate",
@@ -161,6 +187,7 @@ export async function POST(req: Request) {
     const videoId = data?.data?.video_id;
     if (!res.ok || !videoId) {
       refund(id); // no video was actually created — give the quota unit back
+      await refundCharge(charged.charge); // and the customer's tokens with it
       const msg = data?.error?.message || data?.message || `HeyGen generate failed (${res.status}).`;
       return NextResponse.json({ error: msg }, { status: 502 });
     }
@@ -170,6 +197,8 @@ export async function POST(req: Request) {
       videoId,
       status: "processing",
       remainingToday,
+      tokensCharged: charged.charge.charged,
+      balance: charged.charge.balance,
       script,
       truncated,
       maxSeconds: MAX_SECONDS,
@@ -177,6 +206,7 @@ export async function POST(req: Request) {
     });
   } catch (e) {
     refund(id);
+    await refundCharge(charged.charge);
     return NextResponse.json({ error: e instanceof Error ? e.message : "HeyGen video generation failed." }, { status: 502 });
   }
 }
