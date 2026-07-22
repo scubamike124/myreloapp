@@ -49,3 +49,6 @@ next-env.d.ts
 .responsive-audit/
 .responsive-audit.json
 .interaction-audit.json
+
+# one-off analysis scratch files
+.check.mjs
