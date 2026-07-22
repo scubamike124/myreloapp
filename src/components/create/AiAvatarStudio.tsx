@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
+import { creditLabel } from "@/lib/token-costs";
 
 type Avatar = { avatarId: string; name: string; gender: string; image: string; video: string };
 type Status = "idle" | "generating" | "done";
@@ -185,7 +186,7 @@ export default function AiAvatarStudio() {
             <span className="font-display grid h-7 w-7 place-items-center rounded-lg text-xs font-bold" style={{ background: "linear-gradient(135deg,#ff3645,#b3121d)" }}>R</span>
             Create
           </Link>
-          <span className="rounded-full px-3 py-1 text-xs font-medium" style={{ border: "1px solid rgba(255,70,85,.2)", color: "#cabcbe" }}>Uses 1 credit</span>
+          <span className="rounded-full px-3 py-1 text-xs font-medium" style={{ border: "1px solid rgba(255,70,85,.2)", color: "#cabcbe" }}>{creditLabel("ai-avatar-studio")}</span>
         </div>
       </header>
 

@@ -27,14 +27,31 @@ export function costOf(action: string): number {
 }
 
 /**
- * The label shown on a tool card. Generated rather than written by hand: the
- * hand-written strings had drifted badly — Talking Photo advertised 1 credit
- * while charging 4, and Website Commercial advertised 5 while charging 3.
+ * What one charge buys. "Uses 4 tokens" is ambiguous when a tool can produce
+ * more than one thing — it reads as though it might cover the whole batch — so
+ * every price states its unit.
+ */
+export const TOKEN_UNIT: Record<string, string> = {
+  "talking-photo": "video",
+  "dancing-photo": "video",
+  "ai-avatar-studio": "video",
+  "website-commercial": "commercial",
+  "bedtime-storybook": "book",
+  "custom-avatar-creator": "avatar",
+  analyze: "scan",
+};
+
+/**
+ * The price label shown wherever a tool is offered. Generated rather than
+ * written by hand: the hand-written strings had drifted badly — Talking Photo
+ * advertised 1 credit while charging 4, and Website Commercial advertised 5
+ * while charging 3.
  */
 export function creditLabel(slug: string, suffix?: string): string {
   const n = TOKEN_COST[slug];
-  if (n === undefined) return suffix ? `Free · ${suffix}` : "Pricing to be confirmed";
-  if (n === 0) return suffix ? `Free · ${suffix}` : "Free";
-  const base = `Uses ${n} ${n === 1 ? "token" : "tokens"}`;
+  if (n === undefined) return suffix ? `Pricing to be confirmed · ${suffix}` : "Pricing to be confirmed";
+
+  const unit = TOKEN_UNIT[slug] ?? "generation";
+  const base = n === 0 ? `Free per ${unit}` : `${n} ${n === 1 ? "token" : "tokens"} per ${unit}`;
   return suffix ? `${base} · ${suffix}` : base;
 }

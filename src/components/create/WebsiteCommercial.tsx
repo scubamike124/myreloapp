@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
+import { creditLabel } from "@/lib/token-costs";
 
 type Step = "input" | "scanning" | "detected" | "generating" | "result";
 const MAX_SECONDS = 30; // HeyGen spokesperson commercial cap
@@ -202,7 +203,7 @@ export default function WebsiteCommercial() {
             <span className="font-display grid h-7 w-7 place-items-center rounded-lg text-xs font-bold" style={{ background: "linear-gradient(135deg,#ff3645,#b3121d)" }}>R</span>
             Create
           </Link>
-          <span className="rounded-full px-3 py-1 text-xs font-medium" style={{ border: "1px solid rgba(255,70,85,.2)", color: "#cabcbe" }}>Uses 5 credits</span>
+          <span className="rounded-full px-3 py-1 text-xs font-medium" style={{ border: "1px solid rgba(255,70,85,.2)", color: "#cabcbe" }}>{creditLabel("website-commercial")}</span>
         </div>
       </header>
 

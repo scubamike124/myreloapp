@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { LANGUAGES, DEFAULT_LANGUAGE } from "@/lib/languages";
 import { recordCreation } from "@/lib/workspace";
+import { creditLabel } from "@/lib/token-costs";
 
 // ---------------------------------------------------------------------------
 // Bedtime Storybook.
@@ -256,6 +257,8 @@ export default function StoryBook() {
           >
             {busy ? "Writing and illustrating…" : "Make the book"}
           </button>
+
+          <p className="text-center text-[11.5px] text-white/40">{creditLabel("bedtime-storybook")}</p>
 
           {busy && (
             <p className="text-[12px] leading-relaxed text-white/45">
