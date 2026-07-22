@@ -99,7 +99,7 @@ const TILES = [
   ["detailed-analytics", "a rich red analytics dashboard with donut charts, tall data columns and floating metric panels, filling the frame"],
   ["competitor-tracker", "a large glossy red magnifying glass examining a bar chart and several plain profile cards, filling the frame"],
   ["lead-capture-crm", "a stack of glossy red contact cards with a glowing funnel capturing streams of light leads, filling the frame"],
-  ["white-label", "a plain glossy white rounded card floating among red colour swatches and brushes, completely unmarked, filling the frame"],
+  ["white-label", "a blank glossy dark-red rounded card with a glowing red border, floating among red colour swatches and paint chips, completely unmarked, no white, filling the frame"],
   ["api-access", "glossy red interlocking gear and plug shapes joined by glowing cables and connection nodes, an integration scene, no screens, filling the frame"],
   ["webhooks", "several glossy red connector plugs joining glowing nodes with light flowing between them, filling the frame"],
   ["unlimited-storage", "a large glossy red cloud with a glowing infinity loop beneath it and stacked storage drums, filling the frame"],
