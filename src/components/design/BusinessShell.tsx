@@ -178,13 +178,11 @@ function PreviewNotice() {
         <circle cx="12" cy="12" r="9" />
         <path d="M12 8h.01M11 12h1v4h1" />
       </svg>
+      {/* Kept to one line. The design has no banner here at all, and three
+          lines of caveat above the title pushed the page it describes down. */}
       <span>
-        <strong className="font-bold">Sections marked SOON aren&apos;t built yet.</strong> Publishing, scheduling,
-        analytics, revenue and social connections have no backend, so they show what they will do rather than doing it.
-        Everything else is live: your figures below are your own,{" "}
-        <Link href="/create" className="underline underline-offset-2">Create</Link>,{" "}
-        <Link href="/business-center/brand-kit" className="underline underline-offset-2">Brand Kit</Link> and{" "}
-        <Link href="/business-center/assets" className="underline underline-offset-2">Assets</Link> all work.
+        <strong className="font-bold">SOON = not built yet.</strong> Everything else is live and your figures are your
+        own.
       </span>
     </div>
   );

@@ -121,13 +121,19 @@ export default async function BusinessCenterPage() {
         </div>
       )}
 
-      {/* feature cards — all eleven lead somewhere */}
-      <div className="mb-7 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {/* Feature cards — all eleven lead somewhere.
+          The design lays these out five across, then six, not as an even grid,
+          which is why a plain grid-cols-4 looked nothing like it. Flex with an
+          explicit basis reproduces the two rows exactly on wide screens and
+          still stacks sensibly on a phone. */}
+      <div className="mb-7 flex flex-wrap gap-4">
         {CARDS.map((c) => (
           <Link
             key={c.n}
             href={c.href}
-            className="relative block rounded-2xl p-4 transition-all hover:-translate-y-1 hover:border-[rgba(255,70,85,.45)]"
+            className={`relative block flex-1 rounded-2xl p-4 transition-all hover:-translate-y-1 hover:border-[rgba(255,70,85,.45)] basis-full sm:basis-[calc((100%-1rem)/2)] lg:basis-[calc((100%-2rem)/3)] ${
+              c.n <= 5 ? "xl:basis-[calc((100%-4rem)/5)]" : "xl:basis-[calc((100%-5rem)/6)]"
+            }`}
             style={{ border: "1px solid rgba(255,70,85,.18)", background: "linear-gradient(180deg,rgba(24,9,12,.5),rgba(10,5,7,.5))" }}
           >
             <span className="absolute left-3 top-3 z-10 grid h-6 w-6 place-items-center rounded-full text-xs font-bold" style={{ border: "1px solid rgba(255,70,85,.5)", color: "#ff5663" }}>{c.n}</span>
