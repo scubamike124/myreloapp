@@ -1,10 +1,13 @@
+// Artwork made for this grid: square, centred subject, near-black background
+// with the site's red/orange glow. The repo's other imagery is bright 9:16
+// video stills, which neither match the theme nor survive a square crop.
 const FEATURES: { icon: string; title: string; desc: string }[] = [
-  { icon: "/assets/lady icon.png", title: "AI Avatars", desc: "Realistic AI avatars that talk and engage." },
-  { icon: "/assets/record.png", title: "Talking Photos", desc: "Make any photo speak naturally." },
-  { icon: "/assets/man winigng.png", title: "Dancing Photos", desc: "Bring any photo to life with dance." },
-  { icon: "/assets/video.png", title: "AI Videos", desc: "Generate stunning videos with AI." },
-  { icon: "/assets/mike.png", title: "Commercials", desc: "High-converting ads in minutes." },
-  { icon: "/assets/sound icon.png", title: "AI Voices", desc: "Natural voices in multiple languages." },
+  { icon: "/assets/features/ai-avatars.webp", title: "AI Avatars", desc: "Realistic AI avatars that talk and engage." },
+  { icon: "/assets/features/talking-photos.webp", title: "Talking Photos", desc: "Make any photo speak naturally." },
+  { icon: "/assets/features/dancing-photos.webp", title: "Dancing Photos", desc: "Bring any photo to life with dance." },
+  { icon: "/assets/features/ai-videos.webp", title: "AI Videos", desc: "Generate stunning videos with AI." },
+  { icon: "/assets/features/commercials.webp", title: "Commercials", desc: "High-converting ads in minutes." },
+  { icon: "/assets/features/ai-voices.webp", title: "AI Voices", desc: "Natural voices in multiple languages." },
 ];
 
 const SOCIAL = [
@@ -41,10 +44,12 @@ export default function FeatureGrid() {
             style={{ border: "1px solid rgba(255,70,85,.14)", background: "rgba(255,60,75,.03)" }}
           >
             <div
-              className="mb-5 h-16 w-16 overflow-hidden rounded-2xl"
+              className="mb-5 h-20 w-20 overflow-hidden rounded-2xl"
               style={{ border: "1px solid rgba(255,70,85,.28)", boxShadow: "0 0 26px -8px rgba(255,54,69,.55)" }}
             >
-              <img src={f.icon} alt="" className="h-full w-full object-cover" loading="lazy" />
+              {/* object-contain, not cover: the whole picture stays visible
+                  instead of being cropped to a slice of itself. */}
+              <img src={f.icon} alt="" className="h-full w-full object-contain" loading="lazy" />
             </div>
             <h3 className="font-display text-lg font-bold text-white">{f.title}</h3>
             <p className="mt-1.5 max-w-[210px] text-sm leading-[1.5] text-white/55">{f.desc}</p>
