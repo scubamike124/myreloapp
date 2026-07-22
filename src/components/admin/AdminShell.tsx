@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import BackButton from "@/components/design/BackButton";
 import { usePathname, useRouter } from "next/navigation";
 
 const NAV = [
@@ -67,7 +68,10 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             })}
             <button onClick={logout} className="ml-auto whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-semibold text-white/50">Log out</button>
           </div>
-          <main className="amber-safe mx-auto max-w-[1150px] px-5 py-7 sm:px-8">{children}</main>
+          <main className="amber-safe mx-auto max-w-[1150px] px-5 py-7 sm:px-8">
+            <div className="mb-4"><BackButton /></div>
+            {children}
+          </main>
         </div>
       </div>
     </div>

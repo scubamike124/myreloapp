@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import BIcon, { type IconKey } from "@/components/design/BIcon";
 import BusinessMobileNav from "@/components/design/BusinessMobileNav";
+import BackButton from "@/components/design/BackButton";
 
 type NavItem = { key: string; label: string; href: string; icon: IconKey };
 
@@ -98,7 +99,8 @@ export default function BusinessShell({
       {/* main */}
       <main className="relative min-w-0 flex-1">
         {/* top profile chip */}
-        <div className="flex items-center justify-end px-5 pt-5 sm:px-8">
+        <div className="flex items-center justify-end gap-2 px-5 pt-5 sm:px-8">
+          <BackButton className="mr-auto" />
           {/* Invisible on desktop, so this row looks exactly as it did. */}
           <BusinessMobileNav
             active={active}

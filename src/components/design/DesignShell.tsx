@@ -25,7 +25,9 @@ export default function DesignShell({
       />
       <div className="relative z-[1] flex min-h-screen flex-col">
         <Header />
-        <main className="amber-safe flex-1">{children}</main>
+        <main className="amber-safe flex-1">
+          {children}
+        </main>
         <SiteFooter />
       </div>
     </div>

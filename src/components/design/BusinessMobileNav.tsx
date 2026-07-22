@@ -53,7 +53,7 @@ export default function BusinessMobileNav({
         aria-controls="business-mobile-nav"
         // mr-auto keeps it left while the profile chip stays right; lg:hidden
         // removes it entirely on desktop, leaving that row exactly as it was.
-        className="mr-auto grid h-10 w-10 shrink-0 place-items-center rounded-xl transition-colors hover:bg-white/5 lg:hidden"
+        className="grid h-10 w-10 shrink-0 place-items-center rounded-xl transition-colors hover:bg-white/5 lg:hidden"
         style={{ border: "1px solid rgba(255,70,85,.2)", background: "rgba(14,6,8,.6)" }}
       >
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e8d9db" strokeWidth="2" strokeLinecap="round" aria-hidden>

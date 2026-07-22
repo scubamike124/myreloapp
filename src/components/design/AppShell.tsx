@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import AmberNavButton from "@/components/amber/AmberNavButton";
 import AppMobileNav from "@/components/design/AppMobileNav";
+import BackButton from "@/components/design/BackButton";
 
 type NavKey = "home" | "create" | "avatars" | "videos" | "trends" | "business" | "settings";
 
@@ -53,7 +54,13 @@ export default function AppShell({ active, children }: { active: NavKey; childre
       {/* min-w-0 is required: a flex item defaults to min-width:auto, which
           refuses to shrink below its content's intrinsic width and made
           /account and /trends scroll sideways on phones. */}
-      <main className="amber-safe relative z-[1] min-w-0 max-w-[1200px] flex-1 px-5 py-7 sm:px-9 sm:py-[30px]">{children}</main>
+      <main className="amber-safe relative z-[1] min-w-0 max-w-[1200px] flex-1 px-5 py-7 sm:px-9 sm:py-[30px]">
+        {/* Left padding on mobile clears the fixed menu button. */}
+        <div className="mb-4 pl-12 md:pl-0">
+          <BackButton />
+        </div>
+        {children}
+      </main>
     </div>
   );
 }
