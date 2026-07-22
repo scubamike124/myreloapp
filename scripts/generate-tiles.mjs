@@ -44,11 +44,15 @@ const MAX_ATTEMPTS = 3;
 // Held constant across all 35 so the grid reads as one set rather than 35
 // unrelated pictures. Matches the site: crimson, near-black, glowing edges.
 const STYLE =
-  "Premium 3D product-illustration render for a dark UI dashboard card. " +
+  "Premium 3D illustrated dashboard scene, in the style of a glossy dark app card. " +
   "Deep near-black background. Crimson and scarlet red colour scheme " +
   "with bright neon red rim lighting and a soft red glow. Subtle white and silver highlights. " +
-  "Object centred, floating, generous empty margin on all sides, nothing touching the edges. " +
-  "Clean, glossy, high detail, sharp focus, professional icon illustration. " +
+  // The old prompt said "floating, generous empty margin", and that is exactly
+  // why the tiles came back as a small object adrift on black. The mockup art
+  // is a rich, detailed scene that fills its frame; this asks for that instead.
+  "A rich, detailed composition of several related objects that FILLS the frame, " +
+  "large and close-up, with only a small even margin — not a single tiny object floating in empty space. " +
+  "Cinematic, glossy, high detail, sharp focus, dramatic lighting. " +
   "Square 1:1 composition. " +
   // Saying "no text" once was not enough: a vision pass over the first batch
   // found thirteen tiles carrying invented lettering — "Szgaufb", "MIX RIVES
@@ -58,48 +62,49 @@ const STYLE =
   "Any surface that would normally carry writing must be left blank or show plain abstract blocks. " +
   "No human faces.";
 
+// Every subject is written as a SCENE of a few related objects, not one item,
+// so the render fills the frame the way the mockup art does. No text on any
+// surface, no real brand logos, no human faces — all three had to be fixed by
+// a vision pass on earlier batches.
 const TILES = [
   // --- Business Center overview (11) ---
-  ["create", "a glowing red pen or stylus writing a spark of light, creative authoring"],
-  ["video-library", "a stack of red-glowing video thumbnails fanned out like cards, a media library"],
-  // These three used to ask for "a font letterform", "fonts inside" and
-  // "labelling" — then the tiles came back covered in invented lettering.
-  ["brand-kit", "a red artist paint palette with round colour swatches and a plain circular disc"],
-  ["assets", "open file folders holding photos, video clips and music notes, a media asset library"],
-  ["social", "a cluster of glowing red social media app tiles connected by light trails"],
-  ["publishing", "a red rocket launching upward trailing light, publishing content"],
-  ["scheduling", "a red desk calendar with a clock overlapping it, scheduling"],
-  ["analytics", "a floating red bar chart and rising line graph with a pie chart, analytics dashboard"],
-  ["revenue", "a red wallet with coins and a rising arrow, earnings and growth"],
-  ["trend-ai", "a glowing red human brain made of circuitry with a rising trend arrow"],
-  ["hub-pro", "an ornate glowing red crown on a pedestal, premium tier"],
+  ["create", "a glossy red film clapperboard with a curling film strip and several glowing video thumbnail frames arranged around it, a movie-making scene"],
+  ["video-library", "a rich fanned stack of many glossy red video thumbnail cards with glowing play triangles, overlapping like a media library, filling the frame"],
+  ["brand-kit", "a red artist paint palette with round colour swatches, a set of brushes and a plain circular brand disc, an art scene"],
+  ["assets", "several open red file folders overflowing with glossy photos, film clips and music notes, a media asset scene filling the frame"],
+  ["social", "a dense cluster of many glossy red rounded app icons showing generic heart, chat, play and camera symbols, connected by glowing light trails (no real brand logos)"],
+  ["publishing", "a glossy red rocket launching from a small pad with billowing light trails and sparks, filling the frame"],
+  ["scheduling", "a red desk calendar shown as a plain grid of blank empty squares with an alarm clock and a pin, no numbers on it, a scheduling scene"],
+  ["analytics", "a rich red analytics dashboard scene with a bar chart, a rising line graph, a donut chart and floating data panels, filling the frame"],
+  ["revenue", "a red wallet with a fan of glossy coins, stacked chips and a rising arrow, an earnings scene filling the frame"],
+  ["trend-ai", "a glowing red human brain made of circuitry surrounded by floating nodes and a rising trend arrow, filling the frame"],
+  ["hub-pro", "an ornate glossy red crown on a pedestal with glowing gems and radiating light beams, a premium scene"],
 
   // --- Business Center Pro (24) ---
-  ["advanced-ai-suite", "a glowing red cube of layered AI circuitry radiating light"],
-  ["team-collaboration", "three abstract red humanoid figures standing together around a glowing ring"],
-  ["brand-vault", "a heavy red circular bank vault door with a spoked handle, ajar, glowing red from within, floating in darkness"],
-  ["content-templates", "a fanned stack of red video template cards with play buttons"],
-  ["bulk-creation", "a conveyor belt producing many identical red video panels at once"],
-  ["auto-subtitles", "two red speech bubbles containing subtitle caption bars and a sound waveform"],
-  ["voice-cloning", "a red studio microphone beside a glowing duplicated audio waveform"],
-  ["translate-dub", "a red globe with speech bubbles containing different writing systems around it"],
-  ["smart-cut-edit", "red scissors cutting a strip of film beside a video timeline with edit markers"],
-  ["thumbnail-maker", "a red video thumbnail frame with a cursor clicking it, high click-through"],
-  ["stock-media-pro", "a grid of red-tinted stock photo, video and music note tiles"],
-  ["background-remover", "a portrait silhouette lifting away from a checkerboard transparency background"],
-  ["ai-script-writer", "a red fountain pen writing glowing script lines on a floating page"],
-  // "social app tiles" produced recognisable third-party logos. Kept generic.
-  ["automated-reposting", "a ring of red circular arrows cycling around plain glossy rounded squares"],
-  ["detailed-analytics", "a detailed red analytics dashboard with donut charts and data columns"],
-  ["competitor-tracker", "a red magnifying glass examining a bar chart and profile cards"],
-  ["lead-capture-crm", "a red contact card stack with a funnel capturing glowing leads"],
-  ["white-label", "a plain white rounded card floating beside red colour swatches, completely unmarked"],
-  ["api-access", "a floating red code window with angle brackets and connection nodes"],
-  ["webhooks", "red connector plugs joining nodes with light flowing between them"],
-  ["unlimited-storage", "a red cloud with an infinity symbol glowing inside it"],
-  ["priority-rendering", "a red speedometer needle pinned at maximum with motion streaks"],
-  ["revenue-reports", "a red financial report page with a dollar sign, charts and an upward arrow"],
-  ["account-manager", "a red headset resting beside a support chat bubble, dedicated support"],
+  ["advanced-ai-suite", "a glowing red cube of layered AI circuitry surrounded by floating chips and light particles, filling the frame"],
+  ["team-collaboration", "several abstract red humanoid figures standing together around a glowing ring with connecting light lines, a teamwork scene"],
+  ["brand-vault", "a heavy red circular bank vault door with a spoked handle, ajar, glowing red from within, with glossy swatch chips spilling out"],
+  ["content-templates", "a rich fanned stack of many red video template cards with glowing play buttons, overlapping and filling the frame"],
+  ["bulk-creation", "a red conveyor belt producing a long row of many identical glossy video panels at once, filling the frame"],
+  ["auto-subtitles", "two large glossy red speech bubbles holding plain caption bars, beside a glowing sound waveform, filling the frame"],
+  ["voice-cloning", "a glossy red studio microphone beside a glowing duplicated audio waveform and pop filter, a recording scene"],
+  ["translate-dub", "a glossy red wireframe globe ringed by plain empty speech bubbles and curved exchange arrows, filling the frame"],
+  ["smart-cut-edit", "glossy red scissors cutting a film strip above a video editing timeline with clip blocks and markers, filling the frame"],
+  ["thumbnail-maker", "a large glossy red video thumbnail frame with a glowing play button and a cursor arrow clicking it, filling the frame"],
+  ["stock-media-pro", "a rich grid of glossy red blank photo frames, film strips and music notes, a stock media scene filling the frame"],
+  ["background-remover", "a glossy red portrait silhouette lifting cleanly away from a checkerboard transparency panel behind it, filling the frame"],
+  ["ai-script-writer", "a glossy red fountain pen above a floating sheet with blank ruled lines and sparks of light, a writing scene"],
+  ["automated-reposting", "a ring of glossy red circular arrows cycling around several plain rounded app squares, filling the frame"],
+  ["detailed-analytics", "a rich red analytics dashboard with donut charts, tall data columns and floating metric panels, filling the frame"],
+  ["competitor-tracker", "a large glossy red magnifying glass examining a bar chart and several plain profile cards, filling the frame"],
+  ["lead-capture-crm", "a stack of glossy red contact cards with a glowing funnel capturing streams of light leads, filling the frame"],
+  ["white-label", "a plain glossy white rounded card floating among red colour swatches and brushes, completely unmarked, filling the frame"],
+  ["api-access", "glossy red interlocking gear and plug shapes joined by glowing cables and connection nodes, an integration scene, no screens, filling the frame"],
+  ["webhooks", "several glossy red connector plugs joining glowing nodes with light flowing between them, filling the frame"],
+  ["unlimited-storage", "a large glossy red cloud with a glowing infinity loop beneath it and stacked storage drums, filling the frame"],
+  ["priority-rendering", "glowing red server racks with a lightning bolt and motion streaks rushing past, a fast-rendering scene, no dials, filling the frame"],
+  ["revenue-reports", "a red financial report scene with a large dollar coin, bar charts and an upward arrow on floating panels, filling the frame"],
+  ["account-manager", "a glossy red headset resting beside a glowing support chat bubble and a small desk, a support scene filling the frame"],
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
