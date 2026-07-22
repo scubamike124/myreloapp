@@ -70,13 +70,13 @@ const STATUS: Record<string, string> = { completed: "#5fd08a", failed: "#ff8892"
  */
 function Tile({ art }: { art: string }) {
   return (
-    <div className="relative mb-2 grid h-[86px] place-items-center overflow-hidden rounded-xl" style={{ background: "radial-gradient(circle at 50% 40%,rgba(225,29,42,.16),transparent 70%)", border: "1px solid rgba(255,70,85,.12)" }}>
+    <div className="relative mb-2 grid aspect-[16/9] w-full place-items-center overflow-hidden rounded-xl" style={{ background: "radial-gradient(circle at 50% 40%,rgba(225,29,42,.16),transparent 70%)", border: "1px solid rgba(255,70,85,.12)" }}>
       <Image
-        src={"/assets/tiles/" + art + ".webp"}
+        src={"/assets/tiles/wide/" + art + ".webp"}
         alt=""
-        width={256}
-        height={256}
-        className="h-full w-full object-contain"
+        width={512}
+        height={288}
+        className="h-full w-full object-cover"
       />
     </div>
   );

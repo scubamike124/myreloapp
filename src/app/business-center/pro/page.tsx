@@ -90,13 +90,13 @@ export default function BusinessCenterProPage() {
                 <BIcon name={c.icon} size={16} />
               </div>
               {/* Square art in a square frame, object-contain — nothing cropped. */}
-              <div className="mb-1.5 grid h-[58px] place-items-center overflow-hidden rounded-xl" style={{ background: "radial-gradient(circle at 50% 40%,rgba(225,29,42,.14),transparent 70%)", border: "1px solid rgba(255,70,85,.1)" }}>
+              <div className="mb-1.5 grid aspect-[16/9] w-full place-items-center overflow-hidden rounded-xl" style={{ background: "radial-gradient(circle at 50% 40%,rgba(225,29,42,.14),transparent 70%)", border: "1px solid rgba(255,70,85,.1)" }}>
                 <Image
-                  src={"/assets/tiles/" + c.art + ".webp"}
+                  src={"/assets/tiles/wide/" + c.art + ".webp"}
                   alt=""
-                  width={256}
-                  height={256}
-                  className="h-full w-full object-contain"
+                  width={512}
+                  height={288}
+                  className="h-full w-full object-cover"
                 />
               </div>
               <h3 className="font-display text-[11.5px] font-bold uppercase leading-tight tracking-wide">{c.t}</h3>
