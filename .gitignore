@@ -52,3 +52,7 @@ next-env.d.ts
 
 # one-off analysis scratch files
 .check.mjs
+.measure.mjs
+.econ.mjs
+.prop.mjs
+.avg.mjs
