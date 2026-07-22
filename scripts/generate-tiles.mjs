@@ -77,7 +77,7 @@ const TILES = [
   // --- Business Center Pro (24) ---
   ["advanced-ai-suite", "a glowing red cube of layered AI circuitry radiating light"],
   ["team-collaboration", "three abstract red humanoid figures standing together around a glowing ring"],
-  ["brand-vault-pro", "a heavy red circular bank vault door with a spoked handle, ajar, glowing red from within, floating in darkness"],
+  ["brand-vault", "a heavy red circular bank vault door with a spoked handle, ajar, glowing red from within, floating in darkness"],
   ["content-templates", "a fanned stack of red video template cards with play buttons"],
   ["bulk-creation", "a conveyor belt producing many identical red video panels at once"],
   ["auto-subtitles", "two red speech bubbles containing subtitle caption bars and a sound waveform"],

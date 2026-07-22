@@ -19,7 +19,7 @@ const HIGHLIGHTS: { icon: IconKey; t: string; d: string }[] = [
 const CARDS: { n: number; icon: IconKey; art: string; t: string; d: string; href?: string; planned?: boolean }[] = [
   { n: 1, icon: "chip", art: "advanced-ai-suite", t: "Advanced AI Suite", d: "Access the most powerful AI models for videos, voices, scripts and more.", href: "/create" },
   { n: 2, icon: "users", art: "team-collaboration", t: "Team Collaboration", d: "Invite unlimited team members and work together in real time.", planned: true },
-  { n: 3, icon: "lock", art: "brand-vault-pro", t: "Brand Vault Pro", d: "Store unlimited brands, templates, logos, fonts and color palettes.", planned: true },
+  { n: 3, icon: "lock", art: "brand-vault", t: "Brand Vault Pro", d: "Store unlimited brands, templates, logos, fonts and color palettes.", planned: true },
   { n: 4, icon: "layers", art: "content-templates", t: "Content Templates", d: "Access 1000+ premium templates for every industry and niche.", planned: true },
   { n: 5, icon: "grid", art: "bulk-creation", t: "Bulk Creation", d: "Create hundreds of videos at once with bulk upload, scripts and automation.", planned: true },
   { n: 6, icon: "cc", art: "auto-subtitles", t: "Auto Subtitles", d: "Auto-generate accurate subtitles in 100+ languages.", planned: true },
@@ -81,16 +81,16 @@ export default function BusinessCenterProPage() {
           the other 22 are labelled PLANNED and open the roadmap. A card that
           looks clickable and lies is worse than one that tells you where it
           stands. */}
-      <div className="mb-7 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+      <div className="mb-7 grid grid-cols-2 gap-2.5 sm:grid-cols-4 lg:grid-cols-6">
         {CARDS.map((c) => {
           const inner = (
             <>
-              <div className="mb-2 flex items-center justify-between">
-                <span className="grid h-6 w-6 place-items-center rounded-full text-xs font-bold" style={{ border: "1px solid rgba(255,70,85,.5)", color: "#ff5663" }}>{c.n}</span>
-                <BIcon name={c.icon} size={20} />
+              <div className="mb-1.5 flex items-center justify-between">
+                <span className="grid h-5 w-5 place-items-center rounded-full text-[10px] font-bold" style={{ border: "1px solid rgba(255,70,85,.5)", color: "#ff5663" }}>{c.n}</span>
+                <BIcon name={c.icon} size={16} />
               </div>
               {/* Square art in a square frame, object-contain — nothing cropped. */}
-              <div className="mb-3 grid h-[112px] place-items-center overflow-hidden rounded-xl" style={{ background: "radial-gradient(circle at 50% 40%,rgba(225,29,42,.14),transparent 70%)", border: "1px solid rgba(255,70,85,.1)" }}>
+              <div className="mb-1.5 grid h-[58px] place-items-center overflow-hidden rounded-xl" style={{ background: "radial-gradient(circle at 50% 40%,rgba(225,29,42,.14),transparent 70%)", border: "1px solid rgba(255,70,85,.1)" }}>
                 <Image
                   src={"/assets/tiles/" + c.art + ".webp"}
                   alt=""
@@ -99,12 +99,12 @@ export default function BusinessCenterProPage() {
                   className="h-full w-full object-contain"
                 />
               </div>
-              <h3 className="font-display text-[13px] font-bold uppercase tracking-wide">{c.t}</h3>
-              <p className="mt-1 text-[12px] leading-[1.45]" style={{ color: "#9a8b8d" }}>{c.d}</p>
+              <h3 className="font-display text-[11.5px] font-bold uppercase leading-tight tracking-wide">{c.t}</h3>
+              <p className="mt-0.5 line-clamp-2 text-[10px] leading-[1.3]" style={{ color: "#9a8b8d" }}>{c.d}</p>
               {c.planned ? (
-                <span className="mt-2 inline-block rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase" style={{ color: "#c98", background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.1)" }}>Planned</span>
+                <span className="mt-1 inline-block rounded-md px-1 py-px text-[8.5px] font-bold uppercase" style={{ color: "#c98", background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.1)" }}>Planned</span>
               ) : (
-                <span className="mt-2 inline-block text-[11px] font-bold" style={{ color: "#ff5663" }}>Open now →</span>
+                <span className="mt-1 inline-block text-[10px] font-bold" style={{ color: "#ff5663" }}>Open now →</span>
               )}
             </>
           );
@@ -115,7 +115,7 @@ export default function BusinessCenterProPage() {
             <Link
               key={c.n}
               href={c.href ?? "/roadmap"}
-              className="relative block rounded-2xl p-4 transition-all hover:-translate-y-1 hover:border-[rgba(255,70,85,.45)]"
+              className="relative block rounded-xl p-2 transition-all hover:-translate-y-1 hover:border-[rgba(255,70,85,.45)]"
               style={style}
             >
               {inner}

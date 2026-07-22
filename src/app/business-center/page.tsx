@@ -70,7 +70,7 @@ const STATUS: Record<string, string> = { completed: "#5fd08a", failed: "#ff8892"
  */
 function Tile({ art }: { art: string }) {
   return (
-    <div className="relative mb-3 grid h-[132px] place-items-center overflow-hidden rounded-xl" style={{ background: "radial-gradient(circle at 50% 40%,rgba(225,29,42,.16),transparent 70%)", border: "1px solid rgba(255,70,85,.12)" }}>
+    <div className="relative mb-2 grid h-[86px] place-items-center overflow-hidden rounded-xl" style={{ background: "radial-gradient(circle at 50% 40%,rgba(225,29,42,.16),transparent 70%)", border: "1px solid rgba(255,70,85,.12)" }}>
       <Image
         src={"/assets/tiles/" + art + ".webp"}
         alt=""
@@ -126,13 +126,13 @@ export default async function BusinessCenterPage() {
           which is why a plain grid-cols-4 looked nothing like it. Flex with an
           explicit basis reproduces the two rows exactly on wide screens and
           still stacks sensibly on a phone. */}
-      <div className="mb-7 flex flex-wrap gap-4">
+      <div className="mb-7 flex flex-wrap gap-3">
         {CARDS.map((c) => (
           <Link
             key={c.n}
             href={c.href}
-            className={`relative block flex-1 rounded-2xl p-4 transition-all hover:-translate-y-1 hover:border-[rgba(255,70,85,.45)] basis-full sm:basis-[calc((100%-1rem)/2)] lg:basis-[calc((100%-2rem)/3)] ${
-              c.n <= 5 ? "xl:basis-[calc((100%-4rem)/5)]" : "xl:basis-[calc((100%-5rem)/6)]"
+            className={`relative block flex-1 rounded-2xl p-3 transition-all hover:-translate-y-1 hover:border-[rgba(255,70,85,.45)] basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-2.25rem)/4)] ${
+              c.n <= 5 ? "lg:basis-[calc((100%-3rem)/5)]" : "lg:basis-[calc((100%-3.75rem)/6)]"
             }`}
             style={{ border: "1px solid rgba(255,70,85,.18)", background: "linear-gradient(180deg,rgba(24,9,12,.5),rgba(10,5,7,.5))" }}
           >
@@ -141,8 +141,8 @@ export default async function BusinessCenterPage() {
               <span className="absolute right-3 top-3 z-10 rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase" style={c.badge === "NEW" ? { color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" } : { color: "#c98", background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.1)" }}>{c.badge}</span>
             )}
             <Tile art={c.art} />
-            <h3 className="font-display text-base font-bold">{c.title}</h3>
-            <p className="mt-1 text-[13px] leading-[1.5]" style={{ color: "#9a8b8d" }}>{c.desc}</p>
+            <h3 className="font-display text-[14px] font-bold leading-tight">{c.title}</h3>
+            <p className="mt-0.5 line-clamp-2 text-[11.5px] leading-[1.4]" style={{ color: "#9a8b8d" }}>{c.desc}</p>
           </Link>
         ))}
       </div>
