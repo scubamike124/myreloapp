@@ -1,3 +1,4 @@
+import Link from "next/link";
 import BusinessShell from "@/components/design/BusinessShell";
 import BIcon, { type IconKey } from "@/components/design/BIcon";
 
@@ -12,31 +13,33 @@ const HIGHLIGHTS: { icon: IconKey; t: string; d: string }[] = [
   { icon: "headset", t: "24/7", d: "Pro Support" },
 ];
 
-const CARDS: { n: number; icon: IconKey; t: string; d: string }[] = [
-  { n: 1, icon: "chip", t: "Advanced AI Suite", d: "Access the most powerful AI models for videos, voices, scripts and more." },
-  { n: 2, icon: "users", t: "Team Collaboration", d: "Invite unlimited team members and work together in real time." },
-  { n: 3, icon: "lock", t: "Brand Vault Pro", d: "Store unlimited brands, templates, logos, fonts and color palettes." },
-  { n: 4, icon: "layers", t: "Content Templates", d: "Access 1000+ premium templates for every industry and niche." },
-  { n: 5, icon: "grid", t: "Bulk Creation", d: "Create hundreds of videos at once with bulk upload, scripts and automation." },
-  { n: 6, icon: "cc", t: "Auto Subtitles", d: "Auto-generate accurate subtitles in 100+ languages." },
-  { n: 7, icon: "mic", t: "Voice Cloning Pro", d: "Clone voices or create custom AI voices for your brand." },
-  { n: 8, icon: "globe", t: "Translate & Dub", d: "Translate and dub your videos into 100+ languages instantly." },
-  { n: 9, icon: "scissors", t: "Smart Cut & Edit", d: "AI-powered editing tools to cut, trim and enhance videos automatically." },
-  { n: 10, icon: "image", t: "Thumbnail Maker", d: "AI creates high-converting thumbnails that get more clicks." },
-  { n: 11, icon: "stack", t: "Stock Media Pro", d: "Unlimited access to premium stock videos, images and music." },
-  { n: 12, icon: "magic", t: "Background Remover", d: "Remove or replace backgrounds with one click." },
-  { n: 13, icon: "pen", t: "AI Script Writer", d: "Generate viral scripts, hooks and captions in seconds." },
-  { n: 14, icon: "refresh", t: "Automated Reposting", d: "Automatically repost your best content across all platforms." },
-  { n: 15, icon: "chart", t: "Detailed Analytics", d: "Deep insights on every video, audience and revenue stream." },
-  { n: 16, icon: "target", t: "Competitor Tracker", d: "Track competitors, keywords and top performing content." },
-  { n: 17, icon: "contact", t: "Lead Capture & CRM", d: "Capture leads, manage contacts and nurture your audience." },
-  { n: 18, icon: "tag", t: "White Label Options", d: "Rebrand Reelo with your own logo, domain and custom colors." },
-  { n: 19, icon: "code", t: "API Access", d: "Integrate Reelo with your apps and workflows using our API." },
-  { n: 20, icon: "plug", t: "Webhooks", d: "Connect and automate with 3rd party apps seamlessly." },
-  { n: 21, icon: "cloud", t: "Unlimited Storage", d: "Store all your videos, assets and projects with no limits." },
-  { n: 22, icon: "gauge", t: "Priority Rendering", d: "Your videos render faster with top priority servers." },
-  { n: 23, icon: "doc", t: "Detailed Revenue Reports", d: "Track earnings, refunds and growth with detailed financial reports." },
-  { n: 24, icon: "headset", t: "Dedicated Account Manager", d: "Get a dedicated expert to help you grow and succeed." },
+// href = this exists today and the card opens it. planned = it does not, and
+// the card says so rather than looking clickable and doing nothing.
+const CARDS: { n: number; icon: IconKey; t: string; d: string; href?: string; planned?: boolean }[] = [
+  { n: 1, icon: "chip", t: "Advanced AI Suite", d: "Access the most powerful AI models for videos, voices, scripts and more.", href: "/create" },
+  { n: 2, icon: "users", t: "Team Collaboration", d: "Invite unlimited team members and work together in real time.", planned: true },
+  { n: 3, icon: "lock", t: "Brand Vault Pro", d: "Store unlimited brands, templates, logos, fonts and color palettes.", planned: true },
+  { n: 4, icon: "layers", t: "Content Templates", d: "Access 1000+ premium templates for every industry and niche.", planned: true },
+  { n: 5, icon: "grid", t: "Bulk Creation", d: "Create hundreds of videos at once with bulk upload, scripts and automation.", planned: true },
+  { n: 6, icon: "cc", t: "Auto Subtitles", d: "Auto-generate accurate subtitles in 100+ languages.", planned: true },
+  { n: 7, icon: "mic", t: "Voice Cloning Pro", d: "Clone voices or create custom AI voices for your brand.", planned: true },
+  { n: 8, icon: "globe", t: "Translate & Dub", d: "Translate and dub your videos into 100+ languages instantly.", planned: true },
+  { n: 9, icon: "scissors", t: "Smart Cut & Edit", d: "AI-powered editing tools to cut, trim and enhance videos automatically.", planned: true },
+  { n: 10, icon: "image", t: "Thumbnail Maker", d: "AI creates high-converting thumbnails that get more clicks.", planned: true },
+  { n: 11, icon: "stack", t: "Stock Media Pro", d: "Unlimited access to premium stock videos, images and music.", planned: true },
+  { n: 12, icon: "magic", t: "Background Remover", d: "Remove or replace backgrounds with one click.", planned: true },
+  { n: 13, icon: "pen", t: "AI Script Writer", d: "Generate viral scripts, hooks and captions in seconds.", href: "/create/shorts-20" },
+  { n: 14, icon: "refresh", t: "Automated Reposting", d: "Automatically repost your best content across all platforms.", planned: true },
+  { n: 15, icon: "chart", t: "Detailed Analytics", d: "Deep insights on every video, audience and revenue stream.", planned: true },
+  { n: 16, icon: "target", t: "Competitor Tracker", d: "Track competitors, keywords and top performing content.", planned: true },
+  { n: 17, icon: "contact", t: "Lead Capture & CRM", d: "Capture leads, manage contacts and nurture your audience.", planned: true },
+  { n: 18, icon: "tag", t: "White Label Options", d: "Rebrand Reelo with your own logo, domain and custom colors.", planned: true },
+  { n: 19, icon: "code", t: "API Access", d: "Integrate Reelo with your apps and workflows using our API.", planned: true },
+  { n: 20, icon: "plug", t: "Webhooks", d: "Connect and automate with 3rd party apps seamlessly.", planned: true },
+  { n: 21, icon: "cloud", t: "Unlimited Storage", d: "Store all your videos, assets and projects with no limits.", planned: true },
+  { n: 22, icon: "gauge", t: "Priority Rendering", d: "Your videos render faster with top priority servers.", planned: true },
+  { n: 23, icon: "doc", t: "Detailed Revenue Reports", d: "Track earnings, refunds and growth with detailed financial reports.", planned: true },
+  { n: 24, icon: "headset", t: "Dedicated Account Manager", d: "Get a dedicated expert to help you grow and succeed.", planned: true },
 ];
 
 const FOOTER: { icon: IconKey; t: string; d: string }[] = [
@@ -73,18 +76,40 @@ export default function BusinessCenterProPage() {
         Everything Included in Business Center Pro
       </div>
 
-      {/* 24 cards */}
+      {/* 24 cards. Nine open something that works today; the rest are labelled
+          PLANNED, because a card that looks clickable and is not is worse than
+          one that tells you where it stands. */}
       <div className="mb-7 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-        {CARDS.map((c) => (
-          <div key={c.n} className="relative rounded-2xl p-4 transition-all hover:-translate-y-1 hover:border-[rgba(255,70,85,.45)]" style={{ border: "1px solid rgba(255,70,85,.18)", background: "linear-gradient(180deg,rgba(24,9,12,.5),rgba(10,5,7,.5))" }}>
-            <div className="mb-3 flex items-center justify-between">
-              <span className="grid h-6 w-6 place-items-center rounded-full text-xs font-bold" style={{ border: "1px solid rgba(255,70,85,.5)", color: "#ff5663" }}>{c.n}</span>
-              <BIcon name={c.icon} size={24} />
-            </div>
-            <h3 className="font-display text-[13px] font-bold uppercase tracking-wide">{c.t}</h3>
-            <p className="mt-1 text-[12px] leading-[1.45]" style={{ color: "#9a8b8d" }}>{c.d}</p>
-          </div>
-        ))}
+        {CARDS.map((c) => {
+          const inner = (
+            <>
+              <div className="mb-3 flex items-center justify-between">
+                <span className="grid h-6 w-6 place-items-center rounded-full text-xs font-bold" style={{ border: "1px solid rgba(255,70,85,.5)", color: "#ff5663" }}>{c.n}</span>
+                <BIcon name={c.icon} size={24} />
+              </div>
+              <h3 className="font-display text-[13px] font-bold uppercase tracking-wide">{c.t}</h3>
+              <p className="mt-1 text-[12px] leading-[1.45]" style={{ color: "#9a8b8d" }}>{c.d}</p>
+              {c.planned ? (
+                <span className="mt-2 inline-block rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase" style={{ color: "#c98", background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.1)" }}>Planned</span>
+              ) : (
+                <span className="mt-2 inline-block text-[11px] font-bold" style={{ color: "#ff5663" }}>Open now →</span>
+              )}
+            </>
+          );
+          const style = { border: "1px solid rgba(255,70,85,.18)", background: "linear-gradient(180deg,rgba(24,9,12,.5),rgba(10,5,7,.5))" };
+          // Every card is clickable, and none of them lies about where it goes:
+          // a built feature opens itself, a planned one opens the roadmap.
+          return (
+            <Link
+              key={c.n}
+              href={c.href ?? "/roadmap"}
+              className="relative block rounded-2xl p-4 transition-all hover:-translate-y-1 hover:border-[rgba(255,70,85,.45)]"
+              style={style}
+            >
+              {inner}
+            </Link>
+          );
+        })}
       </div>
 
       {/* footer band */}

@@ -205,6 +205,20 @@ export async function ensureSchema(): Promise<boolean> {
     )`);
   await exec(`CREATE INDEX IF NOT EXISTS sessions_user_idx ON sessions (user_id)`);
 
+  // One brand kit per account: the colours, fonts and logo a customer wants
+  // their videos to use. Stored as JSON rather than a column per colour because
+  // a palette is a list of unknown length, not five fixed slots.
+  await exec(`
+    CREATE TABLE IF NOT EXISTS brand_kits (
+      user_id      TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+      brand_name   TEXT,
+      colors       TEXT,
+      heading_font TEXT,
+      body_font    TEXT,
+      logo_url     TEXT,
+      updated_at   ${NOW}
+    )`);
+
   ensured = true;
   return true;
 }

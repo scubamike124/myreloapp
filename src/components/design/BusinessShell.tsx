@@ -10,8 +10,11 @@ const NAV: NavItem[] = [
   { key: "overview", label: "Overview", href: "/business-center", icon: "home" },
   { key: "create", label: "Create", href: "/create", icon: "pen" },
   { key: "library", label: "Video Library", href: "/library", icon: "film" },
-  // Brand Kit and Assets were listed here pointing at "#". Both features are
-  // unbuilt, so they are omitted rather than shown as dead nav items.
+  // Both of these once pointed at "#" and were removed for it. They are back
+  // because they now have real pages behind them, not because the design asked
+  // for the row.
+  { key: "brand", label: "Brand Kit", href: "/business-center/brand-kit", icon: "palette" },
+  { key: "assets", label: "Assets", href: "/business-center/assets", icon: "folder" },
   { key: "social", label: "Social", href: "/business-center/social", icon: "share" },
   { key: "publishing", label: "Publishing", href: "/business-center/publishing", icon: "rocket" },
   { key: "scheduling", label: "Scheduling", href: "/business-center/scheduling", icon: "calendar" },
@@ -21,8 +24,21 @@ const NAV: NavItem[] = [
   { key: "hubpro", label: "Hub Pro", href: "/business-center/pro", icon: "crown" },
 ];
 
+/**
+ * SOON marks a section with no backend. It is the honest half of the design:
+ * every one of these pages exists and explains itself, but none of them can
+ * publish, schedule or report on anything yet, and the badge says so before
+ * you click rather than after.
+ */
 const OVERVIEW_BADGES: Record<string, string> = {
-  assets: "NEW", hubpro: "SOON",
+  assets: "NEW",
+  social: "SOON",
+  publishing: "SOON",
+  scheduling: "SOON",
+  analytics: "SOON",
+  revenue: "SOON",
+  trend: "SOON",
+  hubpro: "SOON",
 };
 
 function Badge({ text }: { text: string }) {
@@ -134,9 +150,12 @@ export default function BusinessShell({
 }
 
 /**
- * The Business Center is a designed preview: publishing, scheduling, analytics,
- * revenue and social connections have no backend yet. Saying so once here is
- * more honest than scattering buttons that quietly do nothing.
+ * Which half of the Business Center is real.
+ *
+ * This used to say the figures were examples, and it was right — they were
+ * invented. They are now the signed-in customer's own, so claiming otherwise
+ * would be its own kind of lie. What remains unbuilt is the publishing side,
+ * and only that is named here.
  */
 function PreviewNotice() {
   return (
@@ -160,9 +179,12 @@ function PreviewNotice() {
         <path d="M12 8h.01M11 12h1v4h1" />
       </svg>
       <span>
-        <strong className="font-bold">Preview.</strong> The Business Center isn&apos;t connected to live data yet —
-        figures shown are examples, and publishing, scheduling and social connections aren&apos;t active. Video
-        generation in <Link href="/create" className="underline underline-offset-2">Create</Link> is fully working.
+        <strong className="font-bold">Sections marked SOON aren&apos;t built yet.</strong> Publishing, scheduling,
+        analytics, revenue and social connections have no backend, so they show what they will do rather than doing it.
+        Everything else is live: your figures below are your own,{" "}
+        <Link href="/create" className="underline underline-offset-2">Create</Link>,{" "}
+        <Link href="/business-center/brand-kit" className="underline underline-offset-2">Brand Kit</Link> and{" "}
+        <Link href="/business-center/assets" className="underline underline-offset-2">Assets</Link> all work.
       </span>
     </div>
   );
