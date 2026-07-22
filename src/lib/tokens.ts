@@ -1,4 +1,5 @@
 import { sql, ensureSchema } from "@/lib/db";
+import { costOf } from "@/lib/token-costs";
 
 // ---------------------------------------------------------------------------
 // Token balances.
@@ -12,25 +13,9 @@ import { sql, ensureSchema } from "@/lib/db";
 // succeed on the same last token — the check and the write are one statement.
 // ---------------------------------------------------------------------------
 
-/** What each generation costs. Kept here so pricing lives in one place. */
-export const TOKEN_COST: Record<string, number> = {
-  // Set so every generation clears ~50-70% margin at EVERY tier, including the
-  // cheapest. See src/lib/costs.ts for the workings; changing one without the
-  // other is how a product ends up selling videos below cost.
-  "talking-photo": 4,
-  "dancing-photo": 4,
-  "ai-avatar-studio": 3,
-  "website-commercial": 3,
-  "bedtime-storybook": 2,
-  "custom-avatar-creator": 1,
-  transcribe: 0,
-  captions: 0,
-  analyze: 1,
-};
-
-export function costOf(action: string): number {
-  return TOKEN_COST[action] ?? 1;
-}
+// Costs live in token-costs.ts so the browser can show the real price without
+// importing this module (and with it the database driver).
+export { TOKEN_COST, costOf } from "@/lib/token-costs";
 
 export async function balanceOf(userId: string): Promise<number> {
   const q = sql();

@@ -17,6 +17,9 @@ function ToolCard({ tool }: { tool: Tool }) {
         <span className="mb-2 block h-1 w-8 sm:mb-4 sm:w-10 rounded-full bg-gradient-to-r from-amber-400 to-red-500" />
         <h3 className="font-display text-base font-bold tracking-tight sm:text-2xl">{tool.title}</h3>
         <p className="mt-1 hidden text-sm text-white/70 sm:block">{tool.tagline}</p>
+        {/* Price on the card, generated from the real token cost — a customer
+            should not have to open a tool to find out what it charges. */}
+        <p className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-white/45 sm:text-xs">{tool.credits}</p>
         <span className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-amber-400 sm:mt-4 sm:text-sm">
           Open studio
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>

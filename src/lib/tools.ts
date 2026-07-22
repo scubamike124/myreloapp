@@ -1,4 +1,8 @@
 import type { IconKey } from "@/components/design/BIcon";
+import { creditLabel } from "@/lib/token-costs";
+
+/** Clip length requested by the Veo route; shown so the card cannot claim 10s. */
+const VIDEO_SECONDS = Number(process.env.VIDEO_SECONDS ?? 6);
 
 export type Field =
   | { kind: "url" | "text"; name: string; label: string; placeholder: string; hint?: string }
@@ -26,7 +30,7 @@ const LANGS = ["English", "Spanish", "French", "German", "Hindi", "Arabic", "Jap
 
 export const TOOLS: Tool[] = [
   {
-    slug: "bedtime-storybook", title: "Bedtime Storybook", tagline: "Your child as the hero of their own picture book.", icon: "doc", poster: "/assets/storybook.webp", credits: "Uses 3 credits", cta: "Make the book",
+    slug: "bedtime-storybook", title: "Bedtime Storybook", tagline: "Your child as the hero of their own picture book.", icon: "doc", poster: "/assets/storybook.webp", credits: creditLabel("bedtime-storybook"), cta: "Make the book",
     // StoryBook renders its own interface; these fields describe the tool for
     // the Create page and for Amber, so both stay in step with what it needs.
     fields: [
@@ -38,7 +42,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "talking-photo", title: "Talking Photo", tagline: "Make any photo speak naturally.", icon: "mic", poster: "/assets/talking-selfie.jpg", credits: "Uses 1 credit", cta: "Generate talking video",
+    slug: "talking-photo", title: "Talking Photo", tagline: "Make any photo speak naturally.", icon: "mic", poster: "/assets/talking-selfie.jpg", credits: creditLabel("talking-photo"), cta: "Generate talking video",
     fields: [
       { kind: "upload", name: "photo", label: "Upload a photo", hint: "Clear, front-facing works best." },
       { kind: "textarea", name: "script", label: "What should they say?", placeholder: "Hey everyone! Today I want to show you something incredible…" },
@@ -47,7 +51,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "dancing-photo", title: "Dancing Photo", tagline: "Bring any photo to life with dance.", icon: "sparkle", poster: "/assets/dancing.jpg", credits: "Uses 1 credit · max 10s", cta: "Make it dance",
+    slug: "dancing-photo", title: "Dancing Photo", tagline: "Bring any photo to life with dance.", icon: "sparkle", poster: "/assets/dancing.jpg", credits: creditLabel("dancing-photo", `max ${VIDEO_SECONDS}s`), cta: "Make it dance",
     fields: [
       { kind: "upload", name: "photo", label: "Upload a photo", hint: "Full or upper body both work." },
       { kind: "choices", name: "move", label: "Pick a move", options: [
@@ -58,7 +62,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "ai-avatar-studio", title: "AI Avatar Studio", tagline: "Realistic AI avatars that talk and engage.", icon: "users", poster: "/assets/spokesperson.jpg", credits: "Uses 1 credit", cta: "Generate avatar video",
+    slug: "ai-avatar-studio", title: "AI Avatar Studio", tagline: "Realistic AI avatars that talk and engage.", icon: "users", poster: "/assets/spokesperson.jpg", credits: creditLabel("ai-avatar-studio"), cta: "Generate avatar video",
     fields: [
       { kind: "choices", name: "avatar", label: "Choose an avatar", options: [
         { label: "Ava", value: "ava", img: "/assets/talking-selfie.jpg" }, { label: "Leo", value: "leo", img: "/assets/spokesperson.jpg" },
@@ -70,7 +74,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "custom-avatar-creator", title: "Custom Avatar Creator", tagline: "Turn your photo into a reusable avatar.", icon: "magic", poster: "/assets/Custom Avatar Creator.png", credits: "Uses 1 credit", cta: "Create avatar",
+    slug: "custom-avatar-creator", title: "Custom Avatar Creator", tagline: "Turn your photo into a reusable avatar.", icon: "magic", poster: "/assets/Custom Avatar Creator.png", credits: creditLabel("custom-avatar-creator"), cta: "Create avatar",
     fields: [
       { kind: "upload", name: "photo", label: "Upload your photo", hint: "We build a reusable avatar from this." },
       { kind: "text", name: "name", label: "Avatar name", placeholder: "e.g. Brand Spokesperson" },
@@ -78,7 +82,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "revoice", title: "Revoice", tagline: "Swap the voice on any video.", icon: "mic", poster: "/assets/Revoice.png", credits: "Uses 1 credit", cta: "Revoice video",
+    slug: "revoice", title: "Revoice", tagline: "Swap the voice on any video.", icon: "mic", poster: "/assets/Revoice.png", credits: "Pricing to be confirmed", cta: "Revoice video",
     fields: [
       { kind: "upload", name: "video", label: "Upload a video", hint: "MP4 or MOV." },
       { kind: "select", name: "voice", label: "New voice", options: VOICES },
@@ -86,7 +90,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "website-commercial", title: "Website Commercial", tagline: "Paste a URL. Get a cinematic 30-second ad.", icon: "film", poster: "/assets/website commershial.png", credits: "Uses 5 credits", cta: "Generate commercial",
+    slug: "website-commercial", title: "Website Commercial", tagline: "Paste a URL. Get a cinematic 30-second ad.", icon: "film", poster: "/assets/website commershial.png", credits: creditLabel("website-commercial"), cta: "Generate commercial",
     fields: [
       { kind: "url", name: "url", label: "Website URL", placeholder: "https://yourbrand.com", hint: "We scrape copy, colors, and product shots." },
       { kind: "select", name: "tone", label: "Style", options: ["Cinematic", "Energetic", "Luxury", "Playful", "Minimal"] },
@@ -95,7 +99,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "shorts-20", title: "20 Shorts Generator", tagline: "A month of shorts from a website or prompt.", icon: "grid", poster: "/assets/shorts.jpg", credits: "Uses 1 credit each", cta: "Generate shorts",
+    slug: "shorts-20", title: "20 Shorts Generator", tagline: "A month of shorts from a website or prompt.", icon: "grid", poster: "/assets/shorts.jpg", credits: "Pricing to be confirmed", cta: "Generate shorts",
     fields: [
       { kind: "segment", name: "source", label: "Source", options: ["Website", "Prompt", "Photos"] },
       { kind: "url", name: "url", label: "Website URL", placeholder: "https://yourbrand.com" },
@@ -106,7 +110,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "product-commercial", title: "Product Commercial", tagline: "Cinematic product videos that sell.", icon: "rocket", poster: "/assets/product.jpg", credits: "Uses 1 credit", cta: "Generate product video",
+    slug: "product-commercial", title: "Product Commercial", tagline: "Cinematic product videos that sell.", icon: "rocket", poster: "/assets/product.jpg", credits: "Pricing to be confirmed", cta: "Generate product video",
     fields: [
       { kind: "upload", name: "image", label: "Upload product image", hint: "Or paste a product URL below." },
       { kind: "url", name: "url", label: "Product URL (optional)", placeholder: "https://store.com/product" },
@@ -115,7 +119,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "ai-story-maker", title: "AI Story Maker", tagline: "Multi-episode AI stories with memory.", icon: "sparkle", poster: "/assets/commercials.jpg", credits: "Uses 2 credits", cta: "Generate story",
+    slug: "ai-story-maker", title: "AI Story Maker", tagline: "Multi-episode AI stories with memory.", icon: "sparkle", poster: "/assets/commercials.jpg", credits: "Pricing to be confirmed", cta: "Generate story",
     fields: [
       { kind: "textarea", name: "prompt", label: "Story prompt", placeholder: "A young inventor discovers a hidden city beneath the ocean…" },
       { kind: "select", name: "genre", label: "Genre", options: ["Family", "Fantasy", "Anime", "Children's", "Tribute", "Adventure"] },
@@ -124,7 +128,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "translate-videos", title: "Translate Videos", tagline: "Translate & dub into 100+ languages.", icon: "globe", poster: "/assets/talking-selfie.jpg", credits: "Uses 1 credit / language", cta: "Translate video",
+    slug: "translate-videos", title: "Translate Videos", tagline: "Translate & dub into 100+ languages.", icon: "globe", poster: "/assets/talking-selfie.jpg", credits: "Pricing to be confirmed", cta: "Translate video",
     fields: [
       { kind: "upload", name: "video", label: "Upload a video", hint: "MP4 or MOV." },
       { kind: "multi", name: "languages", label: "Target languages", options: LANGS },
@@ -132,7 +136,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "ai-quality-enhancement", title: "AI Quality Enhancement", tagline: "Upscale and enhance any video.", icon: "magic", poster: "/assets/spokesperson.jpg", credits: "Uses 2 credits", cta: "Enhance video",
+    slug: "ai-quality-enhancement", title: "AI Quality Enhancement", tagline: "Upscale and enhance any video.", icon: "magic", poster: "/assets/spokesperson.jpg", credits: "Pricing to be confirmed", cta: "Enhance video",
     fields: [
       { kind: "upload", name: "video", label: "Upload a video", hint: "We enhance face, motion, and detail." },
       { kind: "multi", name: "enhancements", label: "Enhancements", options: ["Face Enhancement", "Motion Enhancement", "Upscale to 4K", "Texture Boost"] },
@@ -140,7 +144,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "story-memory-generator", title: "Story & Memory Generator", tagline: "Turn memories into cinematic stories.", icon: "sparkle", poster: "/assets/dancing-grandpa.jpg", credits: "Uses 2 credits", cta: "Generate story",
+    slug: "story-memory-generator", title: "Story & Memory Generator", tagline: "Turn memories into cinematic stories.", icon: "sparkle", poster: "/assets/dancing-grandpa.jpg", credits: "Pricing to be confirmed", cta: "Generate story",
     fields: [
       { kind: "choices", name: "type", label: "Story type", options: [
         { label: "Family", value: "family", icon: "👨‍👩‍👧" }, { label: "Pet", value: "pet", icon: "🐶" }, { label: "Fantasy", value: "fantasy", icon: "🐉" },

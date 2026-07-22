@@ -1,4 +1,4 @@
-import { TOKEN_COST } from "@/lib/tokens";
+import { TOKEN_COST } from "@/lib/token-costs";
 
 // ---------------------------------------------------------------------------
 // Unit economics.
