@@ -6,6 +6,7 @@ import Image from "next/image";
 import type { Tool, Field } from "@/lib/tools";
 import { TOOLS, IMAGE_TOOLS, LIVE_TOOLS, VIDEO_TOOLS } from "@/lib/tools";
 import { recordCreation } from "@/lib/workspace";
+import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 type Status = "idle" | "generating" | "done";
 
@@ -78,6 +79,8 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
   const [videoUrl, setVideoUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [err, setErr] = useState<string | null>(null);
+  const [short, setShort] = useState<Shortfall | null>(null);
+  const tokens = useTokens();
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const filesRef = useRef<Record<string, File>>({});
@@ -148,6 +151,7 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
 
   const generate = async () => {
     setErr(null);
+    setShort(null);
 
     // Real image-to-video path (Dancing / Talking Photo, AI Avatar Studio).
     if (isVideoTool) {
@@ -187,7 +191,14 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
         });
         const data = await res.json();
         if (timer.current) clearInterval(timer.current);
+
+        // Out of tokens: nothing generated, nothing charged, no failed
+        // creation to record — just the purchase panel.
+        const gap = await shortfallFrom(res, data);
+        if (gap) { setShort(gap); setProgress(0); setStatus("idle"); return; }
+
         if (!res.ok || !data.ok) throw new Error(data.error || "Generation failed.");
+        tokens.setBalance(data.balance);
         setVideoUrl(data.videoUrl);
         setProgress(100);
         setStatus("done");
@@ -237,7 +248,12 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
         });
         const data = await res.json();
         if (timer.current) clearInterval(timer.current);
+
+        const gap = await shortfallFrom(res, data);
+        if (gap) { setShort(gap); setProgress(0); setStatus("idle"); return; }
+
         if (!res.ok || !data.ok) throw new Error(data.error || "Generation failed.");
+        tokens.setBalance(data.balance);
         setImageUrl(data.imageUrl);
         setProgress(100);
         setStatus("done");
@@ -278,6 +294,7 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
     setVideoUrl("");
     setImageUrl("");
     setErr(null);
+    setShort(null);
   };
 
   const toggleMute = () => {
@@ -300,7 +317,7 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
             <span className="font-display grid h-7 w-7 place-items-center rounded-lg text-xs font-bold" style={{ background: "linear-gradient(135deg,#ff3645,#b3121d)" }}>R</span>
             Create
           </Link>
-          <span className="rounded-full px-3 py-1 text-xs font-medium" style={{ border: "1px solid rgba(255,70,85,.2)", color: "#cabcbe" }}>{tool.credits}</span>
+          <TokenMeter slug={tool.slug} tokens={tokens} variant="chip" />
         </div>
       </header>
 
@@ -324,11 +341,12 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
               <button onClick={generate} disabled={status === "generating" || !isLive} className="flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-bold text-white transition-transform hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 10px 28px -8px rgba(225,29,42,.6)" }}>
                 {status === "generating" ? <><Spinner /> Generating…</> : <><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>{!isLive ? "Not available yet" : status === "done" ? "Regenerate" : tool.cta}</>}
               </button>
+              {short && <NotEnoughTokens {...short} />}
               {err && <p role="alert" className="text-sm font-medium text-[#ff8a92]">{err}</p>}
-              {isVideoTool && status !== "generating" && !err && (
+              {isVideoTool && status !== "generating" && !err && !short && (
                 <p className="text-center text-xs text-white/40">Generates a real AI video from your photo (~1–2 min).</p>
               )}
-              {isImageTool && status !== "generating" && !err && (
+              {isImageTool && status !== "generating" && !err && !short && (
                 <p className="text-center text-xs text-white/40">Generates a real AI avatar image from your photo (~15–30s).</p>
               )}
             </div>

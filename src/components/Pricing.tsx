@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { planPrice, planTokens, packSaving, PACK_SPECS, type PlanName } from "@/lib/plans";
 
 type IconKey = "person" | "wand" | "bolt" | "crown" | "diamond" | "briefcase" | "building";
 
@@ -25,7 +26,7 @@ function TierIcon({ name, color, fill }: { name: IconKey; color: string; fill?: 
 }
 
 type Tier = {
-  name: string;
+  name: PlanName;
   blurb: string;
   price: string;
   tokens: string;
@@ -55,7 +56,7 @@ type Tier = {
 
 const TIERS: Tier[] = [
   {
-    name: "FREE", blurb: "Try Reelo for free", price: "$0", tokens: "5", icon: "person",
+    name: "FREE" as const, blurb: "Try Reelo for free", price: planPrice("FREE"), tokens: planTokens("FREE"), icon: "person",
     accent: "#c9c9cc", checkStroke: "#9a9a9c",
     cardBg: "linear-gradient(180deg,rgba(26,26,28,.7),rgba(12,12,14,.55))", cardBorder: "1px solid rgba(255,255,255,.13)",
     ringBorder: "1.5px solid rgba(255,255,255,.28)", tokenBorder: "1px solid rgba(255,255,255,.18)", tokenColor: "#f3e9e9", tokenLabelColor: "#9a9a9c",
@@ -63,7 +64,7 @@ const TIERS: Tier[] = [
     btnBg: "rgba(255,255,255,.07)", btnColor: "#e8e8ea", note: "No credit card required",
   },
   {
-    name: "CORE", blurb: "For creators getting started", price: "$14.99", tokens: "25", icon: "wand",
+    name: "CORE" as const, blurb: "For creators getting started", price: planPrice("CORE"), tokens: planTokens("CORE"), icon: "wand",
     accent: "#ff5663", checkStroke: "#ff5663",
     cardBg: "linear-gradient(180deg,rgba(40,12,15,.7),rgba(12,7,9,.55))", cardBorder: "1px solid rgba(255,54,69,.5)", cardShadow: "0 0 26px rgba(225,29,42,.18),inset 0 0 30px rgba(225,29,42,.05)",
     ringBorder: "1.5px solid rgba(255,54,69,.55)", ringShadow: "0 0 18px rgba(225,29,42,.3)", tokenBorder: "1px solid rgba(255,54,69,.4)", tokenColor: "#ff5663", tokenLabelColor: "#cabcbe",
@@ -72,7 +73,7 @@ const TIERS: Tier[] = [
     btnBg: "linear-gradient(135deg,#ff3645,#c4101c)", btnColor: "#fff", btnShadow: "0 8px 20px rgba(225,29,42,.35)",
   },
   {
-    name: "PLUS", blurb: "For growing creators", price: "$29.99", tokens: "55", icon: "bolt", iconFill: true,
+    name: "PLUS" as const, blurb: "For growing creators", price: planPrice("PLUS"), tokens: planTokens("PLUS"), icon: "bolt", iconFill: true,
     accent: "#5fb0ff", checkStroke: "#5fb0ff",
     cardBg: "linear-gradient(180deg,rgba(12,22,42,.7),rgba(8,10,16,.55))", cardBorder: "1px solid rgba(59,158,255,.5)", cardShadow: "0 0 26px rgba(59,158,255,.16),inset 0 0 30px rgba(59,158,255,.05)",
     ringBorder: "1.5px solid rgba(59,158,255,.55)", ringShadow: "0 0 18px rgba(59,158,255,.3)", tokenBorder: "1px solid rgba(59,158,255,.4)", tokenColor: "#5fb0ff", tokenLabelColor: "#bcc7d6",
@@ -81,7 +82,7 @@ const TIERS: Tier[] = [
     btnBg: "linear-gradient(135deg,#3b9eff,#1c63d6)", btnColor: "#fff", btnShadow: "0 8px 20px rgba(59,158,255,.3)",
   },
   {
-    name: "PRO", blurb: "For professionals & businesses", price: "$49.99", tokens: "100", icon: "crown",
+    name: "PRO" as const, blurb: "For professionals & businesses", price: planPrice("PRO"), tokens: planTokens("PRO"), icon: "crown",
     accent: "#e26bea", checkStroke: "#e26bea", badge: "Most Popular", badgeBg: "linear-gradient(135deg,#d633e0,#9d1fb0)", badgeColor: "#fff",
     cardBg: "linear-gradient(180deg,rgba(34,12,40,.78),rgba(12,7,14,.6))", cardBorder: "1px solid rgba(214,51,224,.62)", cardShadow: "0 0 40px rgba(214,51,224,.28),inset 0 0 34px rgba(214,51,224,.07)",
     ringBorder: "1.5px solid rgba(214,51,224,.6)", ringShadow: "0 0 20px rgba(214,51,224,.35)", tokenBorder: "1px solid rgba(214,51,224,.45)", tokenColor: "#e26bea", tokenLabelColor: "#d6c2da",
@@ -90,7 +91,7 @@ const TIERS: Tier[] = [
     btnBg: "linear-gradient(135deg,#d633e0,#9d1fb0)", btnColor: "#fff", btnShadow: "0 8px 22px rgba(214,51,224,.4)",
   },
   {
-    name: "ELITE", blurb: "For teams & agencies", price: "$79.99", tokens: "175", icon: "diamond",
+    name: "ELITE" as const, blurb: "For teams & agencies", price: planPrice("ELITE"), tokens: planTokens("ELITE"), icon: "diamond",
     accent: "#f0b94f", checkStroke: "#f0b94f",
     cardBg: "linear-gradient(180deg,rgba(38,28,8,.7),rgba(14,11,6,.55))", cardBorder: "1px solid rgba(240,185,79,.5)", cardShadow: "0 0 26px rgba(240,185,79,.16),inset 0 0 30px rgba(240,185,79,.05)",
     ringBorder: "1.5px solid rgba(240,185,79,.55)", ringShadow: "0 0 18px rgba(240,185,79,.3)", tokenBorder: "1px solid rgba(240,185,79,.4)", tokenColor: "#f0b94f", tokenLabelColor: "#d6cbb0",
@@ -99,7 +100,7 @@ const TIERS: Tier[] = [
     btnBg: "linear-gradient(135deg,#f0b94f,#d39322)", btnColor: "#1c1407", btnShadow: "0 8px 20px rgba(240,185,79,.3)",
   },
   {
-    name: "BUSINESS CENTER", blurb: "For small businesses & teams", price: "$149.99", tokens: "340", icon: "briefcase", small: true,
+    name: "BUSINESS CENTER" as const, blurb: "For small businesses & teams", price: planPrice("BUSINESS CENTER"), tokens: planTokens("BUSINESS CENTER"), icon: "briefcase", small: true,
     accent: "#4fdc8c", checkStroke: "#4fdc8c", badge: "Business", badgeBg: "linear-gradient(135deg,#3ad17a,#1f9b54)", badgeColor: "#06210f",
     cardBg: "linear-gradient(180deg,rgba(10,32,20,.7),rgba(7,14,10,.55))", cardBorder: "1px solid rgba(58,209,122,.5)", cardShadow: "0 0 26px rgba(58,209,122,.16),inset 0 0 30px rgba(58,209,122,.05)",
     ringBorder: "1.5px solid rgba(58,209,122,.55)", ringShadow: "0 0 18px rgba(58,209,122,.3)", tokenBorder: "1px solid rgba(58,209,122,.4)", tokenColor: "#4fdc8c", tokenLabelColor: "#bcd6c6",
@@ -108,7 +109,7 @@ const TIERS: Tier[] = [
     btnBg: "linear-gradient(135deg,#3ad17a,#1f9b54)", btnColor: "#06210f", btnShadow: "0 8px 20px rgba(58,209,122,.3)",
   },
   {
-    name: "BUSINESS CENTER PRO", blurb: "For agencies & large organizations", price: "$299.99", tokens: "750", icon: "building", small: true,
+    name: "BUSINESS CENTER PRO" as const, blurb: "For agencies & large organizations", price: planPrice("BUSINESS CENTER PRO"), tokens: planTokens("BUSINESS CENTER PRO"), icon: "building", small: true,
     accent: "#c89bff", checkStroke: "#c89bff", badge: "Enterprise", badgeBg: "linear-gradient(135deg,#b76bff,#7d34d6)", badgeColor: "#fff",
     cardBg: "linear-gradient(180deg,rgba(26,14,40,.74),rgba(11,7,16,.58))", cardBorder: "1px solid rgba(183,107,255,.55)", cardShadow: "0 0 28px rgba(183,107,255,.2),inset 0 0 32px rgba(183,107,255,.06)",
     ringBorder: "1.5px solid rgba(183,107,255,.6)", ringShadow: "0 0 18px rgba(183,107,255,.35)", tokenBorder: "1px solid rgba(183,107,255,.45)", tokenColor: "#c89bff", tokenLabelColor: "#cdc0db",
@@ -118,14 +119,17 @@ const TIERS: Tier[] = [
   },
 ];
 
-const PACKS = [
-  { t: "10 TOKENS", p: "$6.99" },
-  { t: "25 TOKENS", p: "$14.99", save: "SAVE 14%" },
-  { t: "60 TOKENS", p: "$32.99", save: "SAVE 21%" },
-  { t: "150 TOKENS", p: "$74.99", save: "SAVE 28%" },
-  { t: "400 TOKENS", p: "$179.99", save: "SAVE 36%" },
-  { t: "1,000 TKN", p: "$399.99", save: "SAVE 43%" },
-];
+// Prices and the "SAVE x%" labels both come from PACK_SPECS, so a discount can
+// never claim more than the price actually gives. The narrow card wants a short
+// label, hence "TKN" once the number reaches four digits.
+const PACKS = PACK_SPECS.map(({ tokens, price }) => {
+  const saved = Math.round(packSaving(tokens) * 100);
+  return {
+    t: `${tokens.toLocaleString()} ${tokens >= 1000 ? "TKN" : "TOKENS"}`,
+    p: `${price.toFixed(2)}`,
+    save: saved > 0 ? `SAVE ${saved}%` : undefined,
+  };
+});
 
 function Check({ stroke }: { stroke: string }) {
   return (

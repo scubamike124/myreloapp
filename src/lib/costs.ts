@@ -1,4 +1,5 @@
 import { TOKEN_COST } from "@/lib/token-costs";
+import { PLAN_SPECS, PACK_SPECS } from "@/lib/plans";
 
 // ---------------------------------------------------------------------------
 // Unit economics.
@@ -92,19 +93,21 @@ export const COST_LINES: CostLine[] = [
 /** What a customer pays per token, by how they bought it. */
 export type Tier = { name: string; kind: "plan" | "pack"; price: number; tokens: number };
 
+/** Title case for a plan name, so "BUSINESS CENTER PRO" reads as a heading. */
+function titled(name: string): string {
+  return name.toLowerCase().replace(/w/g, (c) => c.toUpperCase());
+}
+
+// Both lists are derived from src/lib/plans.ts, so a margin worked out here is
+// always a margin on the price a customer is actually offered. FREE is excluded
+// — it earns nothing per token by definition and would report -Infinity.
 export const TIERS: Tier[] = [
-  { name: "Core", kind: "plan", price: 14.99, tokens: 25 },
-  { name: "Plus", kind: "plan", price: 29.99, tokens: 55 },
-  { name: "Pro", kind: "plan", price: 49.99, tokens: 100 },
-  { name: "Elite", kind: "plan", price: 79.99, tokens: 175 },
-  { name: "Business Center", kind: "plan", price: 149.99, tokens: 340 },
-  { name: "Business Center Pro", kind: "plan", price: 299.99, tokens: 750 },
-  { name: "10 tokens", kind: "pack", price: 6.99, tokens: 10 },
-  { name: "25 tokens", kind: "pack", price: 14.99, tokens: 25 },
-  { name: "60 tokens", kind: "pack", price: 32.99, tokens: 60 },
-  { name: "150 tokens", kind: "pack", price: 74.99, tokens: 150 },
-  { name: "400 tokens", kind: "pack", price: 179.99, tokens: 400 },
-  { name: "1,000 tokens", kind: "pack", price: 399.99, tokens: 1000 },
+  ...PLAN_SPECS.filter((p) => p.price > 0).map(
+    (p): Tier => ({ name: titled(p.name), kind: "plan", price: p.price, tokens: p.tokens }),
+  ),
+  ...PACK_SPECS.map(
+    (p): Tier => ({ name: `${p.tokens.toLocaleString()} tokens`, kind: "pack", price: p.price, tokens: p.tokens }),
+  ),
 ];
 
 export function revenuePerToken(tier: Tier): number {

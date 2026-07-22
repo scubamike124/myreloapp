@@ -28,13 +28,22 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
   const studio =
     slug === "bedtime-storybook" ? <StoryBook /> : slug === "website-commercial" ? <WebsiteCommercial /> : slug === "ai-avatar-studio" ? <AiAvatarStudio /> : <ToolStudio tool={tool} />;
 
+  // Most studios open with their own sticky header carrying a "← Create" link.
+  // Floating a second Back button over that both duplicated the control and,
+  // below 1440px, sat directly on top of the header's logo — the narrower the
+  // screen, the worse it got, so every phone had them overlapping. Storybook is
+  // the one studio with no header of its own, so it still needs the floater.
+  const hasOwnHeader = slug !== "bedtime-storybook";
+
   return (
     <>
-      <div className="pointer-events-none fixed left-4 top-4 z-50 sm:left-6 sm:top-6">
-        <div className="pointer-events-auto">
-          <BackButton />
+      {!hasOwnHeader && (
+        <div className="pointer-events-none fixed left-4 top-4 z-50 sm:left-6 sm:top-6">
+          <div className="pointer-events-auto">
+            <BackButton />
+          </div>
         </div>
-      </div>
+      )}
       {studio}
     </>
   );

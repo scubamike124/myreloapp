@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
-import { creditLabel } from "@/lib/token-costs";
+import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 type Avatar = { avatarId: string; name: string; gender: string; image: string; video: string };
 type Status = "idle" | "generating" | "done";
@@ -60,6 +60,8 @@ export default function AiAvatarStudio() {
   const [progress, setProgress] = useState(0);
   const [videoUrl, setVideoUrl] = useState("");
   const [err, setErr] = useState<string | null>(null);
+  const [short, setShort] = useState<Shortfall | null>(null);
+  const tokens = useTokens();
   const genTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -106,6 +108,7 @@ export default function AiAvatarStudio() {
     if (!selected) { setErr("Pick an avatar first."); return; }
     if (!script.trim()) { setErr("Write a script first."); return; }
     setErr(null);
+    setShort(null);
     setStatus("generating");
     setProgress(0);
     if (genTimer.current) clearInterval(genTimer.current);
@@ -119,7 +122,20 @@ export default function AiAvatarStudio() {
         body: JSON.stringify({ script, avatarId: selected.avatarId, voiceId }),
       });
       const data = await res.json();
+
+      // Out of tokens is not a failure to record — nothing was generated and
+      // nothing was charged — so it gets the purchase panel and a clean stop.
+      const gap = await shortfallFrom(res, data);
+      if (gap) {
+        if (genTimer.current) clearInterval(genTimer.current);
+        setShort(gap);
+        setProgress(0);
+        setStatus("idle");
+        return;
+      }
+
       if (!res.ok || !data.ok) throw new Error(data.error || "Generation failed.");
+      tokens.setBalance(data.balance);
       const videoId = data.videoId as string;
 
       const finalUrl = await new Promise<string>((resolve, reject) => {
@@ -186,7 +202,7 @@ export default function AiAvatarStudio() {
             <span className="font-display grid h-7 w-7 place-items-center rounded-lg text-xs font-bold" style={{ background: "linear-gradient(135deg,#ff3645,#b3121d)" }}>R</span>
             Create
           </Link>
-          <span className="rounded-full px-3 py-1 text-xs font-medium" style={{ border: "1px solid rgba(255,70,85,.2)", color: "#cabcbe" }}>{creditLabel("ai-avatar-studio")}</span>
+          <TokenMeter slug="ai-avatar-studio" tokens={tokens} variant="chip" />
         </div>
       </header>
 
@@ -261,8 +277,9 @@ export default function AiAvatarStudio() {
               <button onClick={generate} disabled={status === "generating"} className="flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-bold text-white transition-transform hover:scale-[1.01] disabled:opacity-60" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 10px 28px -8px rgba(225,29,42,.6)" }}>
                 {status === "generating" ? <><Spinner /> Generating…</> : <><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>{status === "done" ? "Regenerate" : "Generate avatar video"}</>}
               </button>
+              {short && <NotEnoughTokens {...short} />}
               {err && <p className="text-sm font-medium text-[#ff8a92]">{err}</p>}
-              {status !== "generating" && !err && <p className="text-center text-xs text-white/40">Generates a real talking-avatar video with HeyGen (~1–3 min).</p>}
+              {status !== "generating" && !err && !short && <p className="text-center text-xs text-white/40">Generates a real talking-avatar video with HeyGen (~1–3 min).</p>}
             </div>
           </div>
 

@@ -1,28 +1,19 @@
+import { PLAN_SPECS, type PlanName } from "@/lib/plans";
+
 // ---------------------------------------------------------------------------
 // Mock admin data. Deterministic (no Date.now / Math.random) so server and
 // client render identically. This is demo data — not wired to a real backend.
 // ---------------------------------------------------------------------------
 
-export type PlanName =
-  | "FREE"
-  | "CORE"
-  | "PLUS"
-  | "PRO"
-  | "ELITE"
-  | "BUSINESS CENTER"
-  | "BUSINESS CENTER PRO";
+export type { PlanName };
 
 export type Plan = { name: PlanName; price: number; tokens: number; active: boolean };
 
-export const PLANS: Plan[] = [
-  { name: "FREE", price: 0, tokens: 5, active: true },
-  { name: "CORE", price: 14.99, tokens: 25, active: true },
-  { name: "PLUS", price: 29.99, tokens: 75, active: true },
-  { name: "PRO", price: 49.99, tokens: 175, active: true },
-  { name: "ELITE", price: 79.99, tokens: 350, active: true },
-  { name: "BUSINESS CENTER", price: 149.99, tokens: 1000, active: true },
-  { name: "BUSINESS CENTER PRO", price: 299.99, tokens: 3000, active: true },
-];
+// Derived, never retyped. This list used to be written out by hand and had gone
+// badly stale — it still advertised Business Center Pro at 3,000 tokens after
+// the real plan moved to 750, so the admin dashboard reported a plan that would
+// have lost money on every video generated against it.
+export const PLANS: Plan[] = PLAN_SPECS.map((p) => ({ ...p, active: true }));
 
 export const PLAN_PRICE: Record<PlanName, number> = Object.fromEntries(
   PLANS.map((p) => [p.name, p.price]),

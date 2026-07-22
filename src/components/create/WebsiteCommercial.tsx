@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
-import { creditLabel } from "@/lib/token-costs";
+import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 type Step = "input" | "scanning" | "detected" | "generating" | "result";
 const MAX_SECONDS = 30; // HeyGen spokesperson commercial cap
@@ -53,6 +53,8 @@ export default function WebsiteCommercial() {
   const [ideas, setIdeas] = useState<string[]>([]);
   const [category, setCategory] = useState("");
   const [err, setErr] = useState<string | null>(null);
+  const [short, setShort] = useState<Shortfall | null>(null);
+  const tokens = useTokens();
   const [videoUrl, setVideoUrl] = useState("");
 
   const [progress, setProgress] = useState(0);
@@ -102,6 +104,7 @@ export default function WebsiteCommercial() {
 
   const generate = async () => {
     setErr(null);
+    setShort(null);
     setStep("generating");
     setProgress(0);
     if (genTimer.current) clearInterval(genTimer.current);
@@ -120,7 +123,20 @@ export default function WebsiteCommercial() {
         body: JSON.stringify({ script: finalScript }),
       });
       const data = await res.json();
+
+      // Out of tokens: nothing rendered, nothing charged. Step back to where
+      // they were rather than recording a failed creation.
+      const gap = await shortfallFrom(res, data);
+      if (gap) {
+        if (genTimer.current) clearInterval(genTimer.current);
+        setShort(gap);
+        setProgress(0);
+        setStep("detected");
+        return;
+      }
+
       if (!res.ok || !data.ok) throw new Error(data.error || "Video generation failed.");
+      tokens.setBalance(data.balance);
       const videoId = data.videoId as string;
 
       // 2. Poll our status endpoint until HeyGen finishes.
@@ -203,7 +219,7 @@ export default function WebsiteCommercial() {
             <span className="font-display grid h-7 w-7 place-items-center rounded-lg text-xs font-bold" style={{ background: "linear-gradient(135deg,#ff3645,#b3121d)" }}>R</span>
             Create
           </Link>
-          <span className="rounded-full px-3 py-1 text-xs font-medium" style={{ border: "1px solid rgba(255,70,85,.2)", color: "#cabcbe" }}>{creditLabel("website-commercial")}</span>
+          <TokenMeter slug="website-commercial" tokens={tokens} variant="chip" />
         </div>
       </header>
 
@@ -270,6 +286,11 @@ export default function WebsiteCommercial() {
         {/* ---------- DETECTED (auto-filled, editable = manual option) ---------- */}
         {step === "detected" && (
           <div className="mx-auto max-w-[620px]">
+            {short && (
+              <div className="mb-5">
+                <NotEnoughTokens {...short} />
+              </div>
+            )}
             {err ? (
               <div className="mb-5 flex items-center gap-2 rounded-xl px-3.5 py-2.5 text-sm" style={{ border: "1px solid rgba(255,159,67,.35)", background: "rgba(255,159,67,.08)", color: "#ffcf9a" }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 9v4M12 17h.01" /><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" /></svg>

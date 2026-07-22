@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { LANGUAGES, DEFAULT_LANGUAGE } from "@/lib/languages";
 import { recordCreation } from "@/lib/workspace";
-import { creditLabel } from "@/lib/token-costs";
+import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 // ---------------------------------------------------------------------------
 // Bedtime Storybook.
@@ -58,6 +58,8 @@ export default function StoryBook() {
 
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const [short, setShort] = useState<Shortfall | null>(null);
+  const tokens = useTokens();
   const [book, setBook] = useState<Book | null>(null);
   const [spread, setSpread] = useState(0);
   const bookRef = useRef<HTMLDivElement>(null);
@@ -76,6 +78,7 @@ export default function StoryBook() {
     }
     setBusy(true);
     setErr(null);
+    setShort(null);
     setBook(null);
     try {
       const base64 = await fileToBase64(photo);
@@ -94,9 +97,13 @@ export default function StoryBook() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setErr(data.error || "Couldn't make the book. Try again.");
+        // Out of tokens is a purchase, not a fault — it gets its own panel.
+        const gap = await shortfallFrom(res, data);
+        if (gap) setShort(gap);
+        else setErr(data.error || "Couldn't make the book. Try again.");
         return;
       }
+      tokens.setBalance(data.balance);
       setBook(data);
       setSpread(0);
       recordCreation({
@@ -258,7 +265,9 @@ export default function StoryBook() {
             {busy ? "Writing and illustrating…" : "Make the book"}
           </button>
 
-          <p className="text-center text-[11.5px] text-white/40">{creditLabel("bedtime-storybook")}</p>
+          <TokenMeter slug="bedtime-storybook" tokens={tokens} />
+
+          {short && <NotEnoughTokens {...short} />}
 
           {busy && (
             <p className="text-[12px] leading-relaxed text-white/45">
