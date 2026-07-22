@@ -63,8 +63,13 @@ export default function VaultManager({
 
       if (Array.isArray(data.keys)) setKeys(data.keys);
 
+      // Warnings describe keys that DID save but looked unusual, so they are
+      // shown alongside the field without blocking anything.
+      const warnings: { name: string; message: string }[] = Array.isArray(data.warnings) ? data.warnings : [];
+      const map: Record<string, string> = {};
+      for (const w of warnings) map[w.name] = w.message;
+
       if (Array.isArray(data.errors) && data.errors.length > 0) {
-        const map: Record<string, string> = {};
         for (const e of data.errors) map[e.name] = e.message;
         setFieldErrors(map);
         setNotice({
@@ -72,7 +77,13 @@ export default function VaultManager({
           text: `Saved ${data.written?.length ?? 0}. ${data.errors.length} could not be saved.`,
         });
       } else {
-        setNotice({ kind: "ok", text: `Saved ${data.written?.length ?? 0} key${data.written?.length === 1 ? "" : "s"} to .env.local.` });
+        setFieldErrors(map);
+        const saved = `Saved ${data.written?.length ?? 0} key${data.written?.length === 1 ? "" : "s"} to .env.local.`;
+        setNotice(
+          warnings.length > 0
+            ? { kind: "ok", text: `${saved} ${warnings.length} looked unusual — run Test to confirm.` }
+            : { kind: "ok", text: saved },
+        );
       }
 
       // Clear only the drafts that actually landed.

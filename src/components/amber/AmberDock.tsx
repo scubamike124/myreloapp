@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { areaFromPath } from "@/lib/amber/context";
 import { starterPrompts } from "@/lib/amber/persona";
@@ -14,6 +14,28 @@ import { readCreations, summarize } from "@/lib/workspace";
 // ---------------------------------------------------------------------------
 
 type Msg = { role: "user" | "assistant"; content: string };
+
+/** Support never changes at runtime, so there is nothing to subscribe to. */
+const noopSubscribe = () => () => {};
+
+/** Recording needs a mic, MediaRecorder, and a secure context (https or localhost). */
+function canRecord(): boolean {
+  return (
+    typeof window !== "undefined" &&
+    typeof MediaRecorder !== "undefined" &&
+    Boolean(navigator?.mediaDevices?.getUserMedia)
+  );
+}
+
+/** First container the browser will actually give us. Chrome and Firefox do
+ *  webm/opus; Safari only does mp4. */
+function pickMimeType(): string {
+  const candidates = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4", "audio/ogg;codecs=opus"];
+  for (const c of candidates) {
+    if (MediaRecorder.isTypeSupported?.(c)) return c;
+  }
+  return "";
+}
 
 const HIDDEN_ON = ["/admin/login"];
 
@@ -36,9 +58,21 @@ export default function AmberDock() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const [listening, setListening] = useState(false);
+  const [transcribing, setTranscribing] = useState(false);
+
+  // Recording works anywhere there's a mic and a secure context. The server
+  // snapshot is `false` so the markup matches until hydration decides.
+  const micSupported = useSyncExternalStore(noopSubscribe, canRecord, () => false);
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<BlobPart[]>([]);
+  // Text already in the box when recording started, so the transcript appends
+  // rather than replacing what the user typed by hand.
+  const baseTextRef = useRef("");
 
   const area = areaFromPath(pathname);
   const toolSlug = pathname.startsWith("/create/") ? pathname.split("/")[2] : undefined;
@@ -69,6 +103,117 @@ export default function AmberDock() {
 
   // Cancel any in-flight stream on unmount.
   useEffect(() => () => abortRef.current?.abort(), []);
+
+  // Never leave the mic running after the component goes away.
+  /** Release the mic. Without this the browser's recording indicator stays lit. */
+  const releaseMic = useCallback(() => {
+    const rec = recorderRef.current;
+    if (!rec) return;
+    rec.stream.getTracks().forEach((t) => t.stop());
+    recorderRef.current = null;
+  }, []);
+
+  useEffect(
+    () => () => {
+      recorderRef.current?.stream.getTracks().forEach((t) => t.stop());
+    },
+    [],
+  );
+
+  // Stop recording when the panel closes, so the mic is never left hot on a
+  // screen the user has navigated away from.
+  useEffect(() => {
+    if (!open && recorderRef.current?.state === "recording") recorderRef.current.stop();
+  }, [open]);
+
+  const transcribe = useCallback(async (blob: Blob) => {
+    if (blob.size === 0) {
+      setError("Nothing was recorded. Check your microphone and try again.");
+      return;
+    }
+
+    setTranscribing(true);
+    try {
+      const res = await fetch("/api/transcribe", {
+        method: "POST",
+        headers: { "Content-Type": blob.type || "audio/webm" },
+        body: blob,
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setError(data.error || "Couldn't transcribe that. Try again, or type instead.");
+        return;
+      }
+      if (!data.text) {
+        setError(data.detail || "I didn't catch any speech in that recording.");
+        return;
+      }
+
+      const base = baseTextRef.current;
+      setInput(base ? `${base.replace(/\s*$/, "")} ${data.text}` : data.text);
+      inputRef.current?.focus();
+    } catch {
+      setError("Couldn't reach the transcription service. Check your connection.");
+    } finally {
+      setTranscribing(false);
+    }
+  }, []);
+
+  const toggleDictation = useCallback(async () => {
+    if (listening) {
+      recorderRef.current?.stop();
+      return;
+    }
+
+    let stream: MediaStream;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (e) {
+      const name = (e as Error)?.name;
+      setError(
+        name === "NotAllowedError" || name === "SecurityError"
+          ? "Microphone access is blocked. Click the icon at the left of your browser's address bar, allow the microphone, then try again."
+          : name === "NotFoundError"
+            ? "No microphone was found. Check one is plugged in and enabled in your system settings."
+            : "Couldn't open your microphone. Another app may be using it.",
+      );
+      return;
+    }
+
+    const mimeType = pickMimeType();
+    let rec: MediaRecorder;
+    try {
+      rec = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+    } catch {
+      stream.getTracks().forEach((t) => t.stop());
+      setError("This browser can't record audio. Try Chrome, Edge, or Safari.");
+      return;
+    }
+
+    chunksRef.current = [];
+    rec.ondataavailable = (e) => {
+      if (e.data.size > 0) chunksRef.current.push(e.data);
+    };
+    rec.onstop = () => {
+      setListening(false);
+      const blob = new Blob(chunksRef.current, { type: rec.mimeType || mimeType || "audio/webm" });
+      chunksRef.current = [];
+      releaseMic();
+      void transcribe(blob);
+    };
+    rec.onerror = () => {
+      setListening(false);
+      releaseMic();
+      setError("Recording stopped unexpectedly. Try again, or type instead.");
+    };
+
+    baseTextRef.current = input;
+    recorderRef.current = rec;
+    setError(null);
+    setListening(true);
+    rec.start();
+  }, [listening, input, releaseMic, transcribe]);
 
   // Let any feature open Amber (see openAmber above).
   useEffect(() => {
@@ -101,6 +246,11 @@ export default function AmberDock() {
             context: {
               path: pathname,
               toolSlug,
+              // Lets Amber answer "what's trending" for the user's own country
+              // instead of defaulting to the US. Neither needs a permission
+              // prompt, unlike geolocation.
+              locale: typeof navigator !== "undefined" ? navigator.language : undefined,
+              timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
               workspace: summarize(readCreations()),
             },
           }),
@@ -151,7 +301,12 @@ export default function AmberDock() {
         aria-expanded={open}
         aria-controls="amber-panel"
         aria-label={open ? "Close Amber" : "Ask Amber"}
-        className="fixed bottom-5 right-5 z-[70] flex items-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-white shadow-lg transition-transform hover:scale-[1.04] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff8892] sm:bottom-6 sm:right-6"
+        // On mobile the panel is a full-width sheet and this launcher floats
+        // directly over its send button, so it hides while open. On desktop the
+        // panel sits above the launcher and there is no overlap.
+        className={`fixed bottom-5 right-5 z-[70] flex items-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-white shadow-lg transition-transform hover:scale-[1.04] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff8892] sm:bottom-6 sm:right-6 ${
+          open ? "max-sm:hidden" : ""
+        }`}
         style={{
           background: "linear-gradient(135deg,#ff3645,#c4101c)",
           boxShadow: "0 10px 30px -8px rgba(225,29,42,.65)",
@@ -289,9 +444,39 @@ export default function AmberDock() {
                       send(input);
                     }
                   }}
-                  placeholder="Ask Amber anything…"
+                  placeholder={
+                    listening
+                      ? "Recording… click the mic again when you're done"
+                      : transcribing
+                        ? "Transcribing…"
+                        : "Ask Amber anything…"
+                  }
                   className="max-h-28 min-h-[24px] flex-1 resize-none bg-transparent text-[13px] text-white placeholder-white/30 outline-none"
                 />
+                {/* Always rendered. Hiding it in unsupported browsers made a
+                    missing feature look like a broken one. */}
+                <button
+                  type="button"
+                  onClick={
+                    micSupported
+                      ? toggleDictation
+                      : () =>
+                          setError(
+                            "Voice input needs a microphone and a secure page (https or localhost). This browser or address can't record.",
+                          )
+                  }
+                  disabled={transcribing}
+                  aria-label={
+                    listening ? "Stop recording" : transcribing ? "Transcribing" : "Record a message"
+                  }
+                  aria-pressed={listening}
+                  className={`shrink-0 rounded-xl p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+                    listening ? "text-white" : "text-white/45 hover:text-white"
+                  }`}
+                  style={listening ? { background: "rgba(255,60,75,.22)" } : undefined}
+                >
+                  <MicMark active={listening || transcribing} />
+                </button>
                 <button
                   type="submit"
                   disabled={busy || input.trim().length === 0}
@@ -317,6 +502,26 @@ function AmberMark() {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M12 3v3M12 18v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M3 12h3M18 12h3M4.9 19.1 7 17M17 7l2.1-2.1" />
       <circle cx="12" cy="12" r="3.2" />
+    </svg>
+  );
+}
+
+function MicMark({ active }: { active: boolean }) {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className={active ? "animate-pulse" : undefined}
+    >
+      <rect x="9" y="2" width="6" height="12" rx="3" />
+      <path d="M5 11a7 7 0 0 0 14 0M12 18v4" />
     </svg>
   );
 }

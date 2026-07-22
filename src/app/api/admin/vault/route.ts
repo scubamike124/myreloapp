@@ -60,6 +60,7 @@ export async function POST(req: Request) {
       ok: result.errors.length === 0,
       written: result.written,
       errors: result.errors,
+      warnings: result.warnings,
       keys: await readStatuses(),
     });
   } catch (e) {

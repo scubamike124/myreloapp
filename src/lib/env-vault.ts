@@ -41,7 +41,9 @@ export const KNOWN_KEYS: KnownKey[] = [
     kind: "secret",
     purpose: "Amber, website scanning, and avatar video/image generation",
     source: "https://aistudio.google.com",
-    pattern: /^AIza[\w-]{30,}$/,
+    // Two formats in the wild: the legacy `AIza…` key, and the newer `AQ.…`
+    // key that AI Studio issues now (dotted, ~53 chars). Both verified working.
+    pattern: /^(?:AIza[\w-]{30,}|AQ\.[\w.-]{20,})$/,
     group: "AI providers",
   },
   {
@@ -283,14 +285,18 @@ export async function readRawValue(name: string): Promise<string> {
   return fileValue || process.env[name] || "";
 }
 
-export type WriteResult = { written: string[]; errors: { name: string; message: string }[] };
+export type WriteResult = {
+  written: string[];
+  errors: { name: string; message: string }[];
+  warnings: { name: string; message: string }[];
+};
 
 /**
  * Merge updates into .env.local, preserving unrelated lines and comments.
  * An empty value removes the key. Rejects anything not in KNOWN_KEYS.
  */
 export async function writeKeys(updates: Record<string, string>): Promise<WriteResult> {
-  const result: WriteResult = { written: [], errors: [] };
+  const result: WriteResult = { written: [], errors: [], warnings: [] };
   const accepted = new Map<string, string>();
 
   for (const [name, rawValue] of Object.entries(updates)) {
@@ -307,9 +313,15 @@ export async function writeKeys(updates: Record<string, string>): Promise<WriteR
         result.errors.push({ name, message: "Value cannot contain line breaks." });
         continue;
       }
+      // A shape mismatch is a hint, not a verdict. Providers change their key
+      // formats without telling us, and refusing to save a key the provider
+      // would happily accept leaves no way forward. Save it and flag it — the
+      // Test button asks the provider itself, which is the real answer.
       if (known.pattern && !known.pattern.test(value)) {
-        result.errors.push({ name, message: `That doesn't look like a valid ${known.label}.` });
-        continue;
+        result.warnings.push({
+          name,
+          message: `This doesn't match the usual ${known.label} format — saved anyway. Use Test to check it against the provider.`,
+        });
       }
     }
     accepted.set(name, value);

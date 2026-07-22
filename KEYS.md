@@ -15,8 +15,9 @@ section is either self-generated or not needed yet.
 
 ### 1. `GEMINI_API_KEY` — Google Gemini
 
-- [ ] Get one at **https://aistudio.google.com** → "Get API key"
-- Format looks like `AIza...`
+- [x] Get one at **https://aistudio.google.com** → "Get API key"
+- Two formats are valid: the older `AIza...` and the newer dotted `AQ....`
+  that AI Studio issues now. Both work — the vault accepts either.
 
 **Unlocks:**
 - Amber (the assistant) — she is unavailable without this
@@ -32,7 +33,7 @@ a quota error, this is why. Check current pricing before enabling billing.
 
 ### 2. `HEYGEN_API_KEY` — HeyGen
 
-- [ ] Get one at **https://app.heygen.com** → Settings → API
+- [x] Get one at **https://app.heygen.com** → Settings → API
 
 **Unlocks:**
 - AI Avatar Studio (talking-avatar videos)

@@ -68,7 +68,15 @@ export async function POST(req: Request) {
     messages = parseMessages(body.messages);
     // Client-supplied context is sanitised; service status is added here on the
     // server so it cannot be spoofed by the browser.
-    contextBlock = `${renderContext(parseContext(body.context))}\n${renderServiceState()}`;
+    // Vercel and Cloudflare both resolve the country at the edge and overwrite
+    // these headers, so they beat anything the browser says about itself.
+    const edgeCountry =
+      req.headers.get("x-vercel-ip-country") ?? req.headers.get("cf-ipcountry") ?? undefined;
+    const ctx = parseContext(body.context);
+    contextBlock = `${renderContext({
+      ...ctx,
+      country: /^[A-Za-z]{2}$/.test(edgeCountry ?? "") ? edgeCountry : undefined,
+    })}\n${renderServiceState()}`;
   } catch {
     return Response.json({ error: "Invalid request." }, { status: 400 });
   }
@@ -93,6 +101,12 @@ export async function POST(req: Request) {
         systemInstruction: {
           parts: [{ text: `${AMBER_SYSTEM_PROMPT}\n\n# CONTEXT\n${contextBlock}` }],
         },
+        // Google Search grounding. Without it Amber has no way to answer the
+        // single most common question people ask a video assistant — "what's
+        // trending right now" — and has to deflect. Gemini decides per-turn
+        // whether a search is warranted, so ordinary product questions still
+        // answer straight from the prompt.
+        tools: [{ google_search: {} }],
         generationConfig: { temperature: 0.7, maxOutputTokens: 800 },
       }),
       signal: AbortSignal.timeout(45_000),
@@ -136,9 +150,14 @@ export async function POST(req: Request) {
             if (!payload || payload === "[DONE]") continue;
             try {
               const json = JSON.parse(payload);
-              const text = json?.candidates?.[0]?.content?.parts?.[0]?.text;
-              if (typeof text === "string" && text.length > 0) {
-                controller.enqueue(encoder.encode(text));
+              // A grounded turn can split a chunk across several parts, so take
+              // all of them rather than just the first.
+              const parts: unknown = json?.candidates?.[0]?.content?.parts;
+              if (Array.isArray(parts)) {
+                const text = parts
+                  .map((p) => (typeof p?.text === "string" ? p.text : ""))
+                  .join("");
+                if (text.length > 0) controller.enqueue(encoder.encode(text));
               }
             } catch {
               // Partial or non-JSON frame — skip it.

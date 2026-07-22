@@ -13,6 +13,13 @@ export type AmberContext = {
   area: string;
   /** Slug of the tool being viewed, when on a tool page. */
   toolSlug?: string;
+  /** BCP-47 tag from the browser, e.g. "en-AU". Used to localise trend advice. */
+  locale?: string;
+  /** IANA zone from the browser, e.g. "Australia/Sydney". */
+  timeZone?: string;
+  /** ISO-3166 country from the edge, when the host provides it. Server-set and
+   *  therefore trusted over anything the browser claims. */
+  country?: string;
   /** Compact workspace summary from lib/workspace `summarize()`. */
   workspace?: {
     total: number;
@@ -45,6 +52,41 @@ const AREA_LABEL: Record<string, string> = {
   marketing: "a public marketing page",
 };
 
+/** Turn a region code into a name, falling back to the raw code. */
+function regionName(code: string): string {
+  try {
+    return new Intl.DisplayNames(["en"], { type: "region" }).of(code.toUpperCase()) ?? code;
+  } catch {
+    return code;
+  }
+}
+
+/**
+ * Describe where the user is, so trend answers can be local rather than
+ * generic. "Trending on TikTok" differs enormously by country — sounds, formats
+ * and hashtags are largely region-specific — so this is the difference between
+ * a useful answer and a US-default one.
+ */
+function describeLocation(ctx: AmberContext): string | null {
+  const parts: string[] = [];
+
+  // Edge-provided country beats the browser's claim about itself.
+  const iso = ctx.country ?? (ctx.locale?.includes("-") ? ctx.locale.split("-")[1] : undefined);
+  if (iso && /^[A-Za-z]{2}$/.test(iso)) parts.push(`country: ${regionName(iso)} (${iso.toUpperCase()})`);
+  if (ctx.timeZone) parts.push(`timezone: ${ctx.timeZone}`);
+  if (ctx.locale) parts.push(`language: ${ctx.locale}`);
+
+  if (parts.length === 0) return null;
+
+  return (
+    `User's location signals — ${parts.join(", ")}. When they ask what is trending, ` +
+    `answer for THIS country first and say which country you are answering for. Trends, sounds ` +
+    `and hashtags vary by region. If they ask about somewhere else, or say these signals are ` +
+    `wrong, use what they tell you instead. Never state their location as a fact about them ` +
+    `beyond this — it is inferred from their browser, not something they told you.`
+  );
+}
+
 /**
  * Render the context into the plain-text block handed to the model.
  * Kept human-readable on purpose: it is far easier to debug a bad Amber answer
@@ -54,6 +96,9 @@ export function renderContext(ctx: AmberContext): string {
   const lines: string[] = [];
 
   lines.push(`The user is currently on ${ctx.path} — ${AREA_LABEL[ctx.area] ?? "the platform"}.`);
+
+  const where = describeLocation(ctx);
+  if (where) lines.push(where);
 
   if (ctx.toolSlug) {
     const tool = TOOLS.find((t) => t.slug === ctx.toolSlug);
@@ -150,6 +195,17 @@ export function parseContext(raw: unknown): AmberContext {
   const toolSlug =
     typeof o.toolSlug === "string" && TOOLS.some((t) => t.slug === o.toolSlug) ? o.toolSlug : undefined;
 
+  // Both go straight into the prompt, so they are shape-checked rather than
+  // merely truncated — no free text from the browser reaches the model here.
+  const locale =
+    typeof o.locale === "string" && /^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$/.test(o.locale)
+      ? o.locale.slice(0, 35)
+      : undefined;
+  const timeZone =
+    typeof o.timeZone === "string" && /^[A-Za-z]+(?:[_/+-][A-Za-z0-9_+-]+)*$/.test(o.timeZone)
+      ? o.timeZone.slice(0, 60)
+      : undefined;
+
   let workspace: AmberContext["workspace"];
   const w = o.workspace as Record<string, unknown> | undefined;
   if (w && typeof w === "object") {
@@ -186,5 +242,5 @@ export function parseContext(raw: unknown): AmberContext {
     };
   }
 
-  return { path, area: areaFromPath(path), toolSlug, workspace };
+  return { path, area: areaFromPath(path), toolSlug, locale, timeZone, workspace };
 }
