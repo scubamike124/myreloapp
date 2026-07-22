@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { UnsafeUrlError, assertSafeUrl, clientId, createDailyLimiter } from "@/lib/api-guard";
+import { scrapePage } from "@/lib/scrape";
 
 export const runtime = "nodejs";
 
@@ -7,9 +8,6 @@ const MODEL = "gemini-2.5-flash";
 
 // Scanning a site costs a Gemini call, so cap it per user per day.
 const limiter = createDailyLimiter(Number(process.env.ANALYZE_DAILY_LIMIT ?? 25));
-
-// Refuse to buffer an unbounded response from a hostile or huge page.
-const MAX_HTML_BYTES = 2 * 1024 * 1024;
 
 const SCHEMA = {
   type: "object",
@@ -23,37 +21,6 @@ const SCHEMA = {
   },
   required: ["businessName", "about", "tone", "script", "ideas"],
 };
-
-async function scrape(url: string): Promise<string> {
-  const res = await fetch(url, {
-    headers: { "user-agent": "Mozilla/5.0 (compatible; ReeloBot/1.0)" },
-    signal: AbortSignal.timeout(12000),
-    redirect: "follow",
-  });
-
-  // Only parse HTML, and only up to a bounded size.
-  const type = res.headers.get("content-type") ?? "";
-  if (type && !/text\/html|application\/xhtml|text\/plain/i.test(type)) {
-    throw new Error("That URL isn't a web page.");
-  }
-  const declared = Number(res.headers.get("content-length") ?? 0);
-  if (Number.isFinite(declared) && declared > MAX_HTML_BYTES) {
-    throw new Error("That page is too large to scan.");
-  }
-
-  const buf = await res.arrayBuffer();
-  const html = new TextDecoder().decode(buf.slice(0, MAX_HTML_BYTES));
-  const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? "";
-  const desc = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i)?.[1] ?? "";
-  const body = html
-    .replace(/<script[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&[a-z#0-9]+;/gi, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  return `TITLE: ${title}\nDESCRIPTION: ${desc}\nCONTENT: ${body}`.slice(0, 7000);
-}
 
 export async function POST(req: Request) {
   const key = process.env.GEMINI_API_KEY;
@@ -82,7 +49,7 @@ export async function POST(req: Request) {
 
   let siteText = "";
   try {
-    siteText = await scrape(url);
+    siteText = await scrapePage(url);
   } catch {
     siteText = `(Could not fetch the page. Infer the business from the domain name only.)`;
   }

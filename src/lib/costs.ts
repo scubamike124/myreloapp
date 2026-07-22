@@ -71,6 +71,20 @@ export const COST_LINES: CostLine[] = [
     detail: "HeyGen 30s + site analysis",
   },
   {
+    action: "product-commercial",
+    label: "Product Commercial",
+    cost: PROVIDER.veoFastPerSecond720 * VIDEO_SECONDS + textCall(3000, 800),
+    detail: `Veo 3.1 Fast ${VIDEO_SECONDS}s + concept`,
+  },
+  {
+    action: "story-memory-generator",
+    label: "Story & Memory Generator",
+    // Vision input for up to 12 photos plus the narration. No video render:
+    // the film is assembled client-side from the customer's own pictures.
+    cost: textCall(12 * 300 + 1500, 1500),
+    detail: "reads 12 photos, writes narration",
+  },
+  {
     action: "custom-avatar-creator",
     label: "Custom Avatar Creator",
     cost: PROVIDER.geminiImage,

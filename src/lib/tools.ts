@@ -110,7 +110,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "product-commercial", title: "Product Commercial", tagline: "Cinematic product videos that sell.", icon: "rocket", poster: "/assets/product.jpg", credits: "Pricing to be confirmed", cta: "Generate product video",
+    slug: "product-commercial", title: "Product Commercial", tagline: "Your product photo, animated into a cinematic ad.", icon: "rocket", poster: "/assets/product.jpg", credits: creditLabel("product-commercial"), cta: "Generate product video",
     fields: [
       { kind: "upload", name: "image", label: "Upload product image", hint: "Or paste a product URL below." },
       { kind: "url", name: "url", label: "Product URL (optional)", placeholder: "https://store.com/product" },
@@ -148,7 +148,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "story-memory-generator", title: "Story & Memory Generator", tagline: "Your own photos, cut into one narrated memory film.", icon: "sparkle", poster: "/assets/dancing-grandpa.jpg", credits: "Pricing to be confirmed", cta: "Generate memory film",
+    slug: "story-memory-generator", title: "Story & Memory Generator", tagline: "Your own photos, cut into one memory film you can keep.", icon: "sparkle", poster: "/assets/dancing-grandpa.jpg", credits: creditLabel("story-memory-generator"), cta: "Make the film",
     fields: [
       { kind: "choices", name: "type", label: "Story type", options: [
         { label: "Family", value: "family", icon: "👨‍👩‍👧" }, { label: "Pet", value: "pet", icon: "🐶" }, { label: "Fantasy", value: "fantasy", icon: "🐉" },
@@ -181,7 +181,7 @@ export const VIDEO_TOOLS = new Set(["talking-photo", "dancing-photo", "ai-avatar
 export const IMAGE_TOOLS = new Set(["custom-avatar-creator"]);
 
 /** Every tool that can currently produce a result. */
-export const LIVE_TOOLS = new Set<string>([...VIDEO_TOOLS, ...IMAGE_TOOLS, "website-commercial", "bedtime-storybook", "ai-story-maker"]);
+export const LIVE_TOOLS = new Set<string>([...VIDEO_TOOLS, ...IMAGE_TOOLS, "website-commercial", "bedtime-storybook", "ai-story-maker", "product-commercial", "story-memory-generator"]);
 
 export function isToolLive(slug: string): boolean {
   return LIVE_TOOLS.has(slug);
@@ -191,6 +191,8 @@ export function isToolLive(slug: string): boolean {
 export const TOOL_SERVICE: Record<string, "gemini" | "heygen"> = {
   "bedtime-storybook": "gemini",
   "ai-story-maker": "gemini",
+  "product-commercial": "gemini",
+  "story-memory-generator": "gemini",
   "talking-photo": "gemini",
   "dancing-photo": "gemini",
   "custom-avatar-creator": "gemini",

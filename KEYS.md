@@ -47,33 +47,35 @@ catalog. HeyGen trial accounts include a limited number of credits; the vault's
 
 ---
 
-### 3. `DATABASE_URL` — Neon Postgres
+### 3. `DATABASE_URL` — Postgres (only if you deploy to Vercel)
 
-- [ ] Get one at **https://neon.tech** — free tier, no card required
+- [ ] Only needed on Vercel. Free tier at **https://neon.tech**, no card required
 - Create a project, then copy the connection string (starts `postgresql://`)
 
-**Unlocks:**
-- User accounts (sign up, sign in)
-- Token balances and purchase history
-- Charging tokens per generation
+**You do not need this to run Reelo.** Accounts, token balances and the ledger
+all work right now on a local database file (`.data/reelo.db`) using SQLite,
+which is built into Node and needs no signup.
 
-Without it the app runs exactly as it does now; sign-in pages say accounts
-aren't switched on rather than showing a form that cannot work.
+It becomes **required on Vercel**, whose filesystem is wiped between requests —
+a database file there would look like it worked and silently lose every account.
+Reelo detects this and refuses to use SQLite on Vercel rather than losing data.
 
-### 4. `BLOB_READ_WRITE_TOKEN` — Vercel Blob
+Any host with a real disk (a VPS, Railway, Render, Fly) needs nothing.
+
+### 4. `BLOB_READ_WRITE_TOKEN` — Vercel Blob (only if you deploy to Vercel)
 
 - [ ] In your Vercel dashboard → **Storage** → **Create** → **Blob**
 - Copy the token it gives you (starts `vercel_blob_rw_`)
 
-**Unlocks:**
-- Finished videos stored permanently instead of only in the browser that
-  made them
+**Also not needed to run Reelo.** Finished videos are already saved to disk
+under `.data/media` and served back by the app. Same story as the database:
+Vercel's filesystem cannot hold them, so Blob takes over there.
 
-**Why this matters more than it sounds:** without it, a customer who clears
-their browser, or opens Reelo on their phone, loses every video they paid
-for. Veo returns the video inline and HeyGen's links expire, so there is no
-copy anywhere else. This is the difference between a product people trust
-with paid work and one that quietly loses it.
+Videos are kept for **30 days** and then deleted automatically — stated in the
+Library, the privacy policy and support. Change it with `MEDIA_RETENTION_DAYS`.
+
+Without any storage at all, the Library keeps the provider's own link, which
+expires on their schedule rather than ours.
 
 ---
 
@@ -86,16 +88,54 @@ with paid work and one that quietly loses it.
 
 ---
 
-## Not needed yet — don't bother
+## Blocking revenue — Stripe
 
-I checked: **no code reads these.** There is no checkout flow, so getting Stripe
-or PayPal credentials right now buys you nothing. The vault lists them only so
-the slots exist for when billing gets built.
+Everything else about billing is now built and tested: accounts, balances, the
+ledger, charging every paid generation, refunding failures, and the "not enough
+tokens" screen. The one missing piece is taking the money.
 
-- `STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`
-- `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`
+- [ ] `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET`
+- Sign up at **https://stripe.com**, then Developers → API keys
 
-Come back to these when billing is actually implemented.
+Until this exists, "Buy tokens" leads to the pricing page but no purchase can
+complete. No code reads these yet — the checkout gets built once the account
+exists, because the webhook has to be tested against a real one.
+
+PayPal (`PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`) is a later alternative,
+not needed for launch.
+
+---
+
+## Not keys — but they're on the site right now
+
+The legal pages show these as literal placeholder text to every visitor. They
+live in `src/lib/legal.ts` and need your real details:
+
+- [ ] Registered business name
+- [ ] Business address
+- [ ] Country / state whose law applies
+- [ ] Support email address
+- [ ] Billing email address
+- [ ] Refund window you want to offer (e.g. 14 days)
+
+Send them over and I'll put them in — it's a five-minute change, and until then
+your privacy policy reads "`[YOUR SUPPORT EMAIL]`".
+
+---
+
+## Would unlock more tools — not needed for launch
+
+Three tools in Create have no backend because they need a provider we have not
+connected. They say so plainly rather than pretending.
+
+| Tool | Needs |
+| --- | --- |
+| Revoice | A voice-cloning provider (ElevenLabs or similar) |
+| Translate Videos | A dubbing / translation provider |
+| AI Quality Enhancement | A video upscaling provider (Topaz or similar) |
+
+A text-to-speech provider would also add spoken voiceover to Story & Memory
+Generator, which currently carries written narration on screen only.
 
 ---
 
@@ -111,6 +151,10 @@ you want different limits.
 | `ANALYZE_DAILY_LIMIT` | 25 | Website scans |
 | `HEYGEN_DAILY_LIMIT` | 5 | HeyGen videos |
 | `HEYGEN_MAX_SECONDS` | 30 | Spoken length per HeyGen clip |
+| `STORYBOOK_DAILY_LIMIT` | 5 | Bedtime storybooks |
+| `STORY_MAKER_DAILY_LIMIT` | 5 | Story Maker episodes |
+| `MEMORY_FILM_DAILY_LIMIT` | 10 | Memory films (cheap — text only) |
+| `MEDIA_RETENTION_DAYS` | 30 | How long finished videos are kept |
 
 These are your main protection against a runaway bill, since every one of those
 actions costs money. Worth lowering while you're testing.
