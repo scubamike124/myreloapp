@@ -122,14 +122,24 @@ export default function MotherboardBackground() {
       sprites.push(c);
     }
 
-    /** Blit a pre-rendered glow. `hue` picks the ramp step, `a` the strength. */
+    /**
+     * Blit a pre-rendered glow ADDITIVELY. Light adds where it overlaps, which
+     * is what makes emissive things read as emissive — with source-over the
+     * whole board stayed muddy no matter how the alphas were tuned.
+     */
     function glow(x: number, y: number, radius: number, hue: number, a: number) {
       if (a <= 0.008 || radius <= 0.2) return;
       const sp = sprites[Math.max(0, Math.min(SPRITE_STEPS - 1, Math.round(hue * (SPRITE_STEPS - 1))))];
+      ctx!.globalCompositeOperation = "lighter";
       ctx!.globalAlpha = Math.min(1, a);
       ctx!.drawImage(sp, x - radius, y - radius, radius * 2, radius * 2);
       ctx!.globalAlpha = 1;
+      ctx!.globalCompositeOperation = "source-over";
     }
+
+    // Quarter-resolution buffer for the bloom pass.
+    const bloomCanvas = document.createElement("canvas");
+    const bctx = bloomCanvas.getContext("2d")!;
 
     function project(p: Vec3) {
       const dx = p.x - camera.x;
@@ -175,11 +185,11 @@ export default function MotherboardBackground() {
       const taken: { x: number; z: number; r: number }[] = [];
 
       // --- hero processor, dead centre -----------------------------------
-      parts.push({ kind: "hero", x: -74, z: -34, w: 34, h: 7 });
-      taken.push({ x: -74, z: -34, r: 30 });
+      parts.push({ kind: "hero", x: 0, z: -18, w: 52, h: 9 });
+      taken.push({ x: 0, z: -18, r: 44 });
 
       // --- IC packages ----------------------------------------------------
-      const icCount = Math.round(Math.max(9, Math.min(22, area / 90000)));
+      const icCount = Math.round(Math.max(26, Math.min(44, area / 38000)));
       for (let i = 0; i < icCount; i++) {
         for (let tries = 0; tries < 14; tries++) {
           const w = rnd(16, 34);
@@ -204,7 +214,7 @@ export default function MotherboardBackground() {
       }
 
       // --- electrolytic capacitors ---------------------------------------
-      const capCount = Math.round(Math.max(8, Math.min(24, area / 78000)));
+      const capCount = Math.round(Math.max(24, Math.min(40, area / 42000)));
       for (let i = 0; i < capCount; i++) {
         for (let tries = 0; tries < 12; tries++) {
           const r = rnd(3, 5.5);
@@ -220,7 +230,7 @@ export default function MotherboardBackground() {
       // --- ring-lit components --------------------------------------------
       // The concentric glowing discs in the reference. They read as "powered"
       // more strongly than anything else on the board, so they stay sparse.
-      const ringCount = Math.round(Math.max(3, Math.min(8, area / 240000)));
+      const ringCount = Math.round(Math.max(5, Math.min(12, area / 150000)));
       for (let i = 0; i < ringCount; i++) {
         for (let tries = 0; tries < 14; tries++) {
           const r = rnd(9, 17);
@@ -234,7 +244,7 @@ export default function MotherboardBackground() {
       }
 
       // --- heatsinks --------------------------------------------------------
-      const sinkCount = Math.round(Math.max(2, Math.min(6, area / 320000)));
+      const sinkCount = Math.round(Math.max(5, Math.min(14, area / 120000)));
       for (let i = 0; i < sinkCount; i++) {
         for (let tries = 0; tries < 14; tries++) {
           const w = rnd(26, 44);
@@ -258,7 +268,7 @@ export default function MotherboardBackground() {
       }
 
       // --- small SMD parts, the scatter that sells the density -------------
-      const smdCount = Math.round(Math.max(50, Math.min(190, area / 11000)));
+      const smdCount = Math.round(Math.max(160, Math.min(300, area / 6500)));
       for (let i = 0; i < smdCount; i++) {
         const x = rnd(-EXTENT, EXTENT);
         const z = rnd(-EXTENT, EXTENT * 0.55);
@@ -279,7 +289,7 @@ export default function MotherboardBackground() {
       // --- routing --------------------------------------------------------
       // Many short traces on a fine pitch reads as a real board; a few long
       // ones read as a wireframe grid, which is what this used to look like.
-      const traceCount = Math.round(Math.max(150, Math.min(620, area / 2500)));
+      const traceCount = Math.round(Math.max(150, Math.min(430, area / 2500)));
       for (let i = 0; i < traceCount; i++) {
         const pts: Vec3[] = [];
         let cx = Math.round(rnd(-EXTENT, EXTENT) / GRID) * GRID;
@@ -326,12 +336,12 @@ export default function MotherboardBackground() {
       // The signature of the reference image: light climbing out of the board.
       // Anchored on the hero die and the ring components, so the beams read as
       // something the hardware is doing rather than free-floating particles.
-      columns = [{ x: -74, z: -34, h: 120 }];
+      columns = [{ x: 0, z: -18, h: 165 }];
       for (const p of parts) {
         if (p.kind === "ring") columns.push({ x: p.x, z: p.z, h: rnd(48, 92) });
       }
       motes = [];
-      const perColumn = Math.round(Math.max(14, Math.min(30, area / 70000)));
+      const perColumn = Math.round(Math.max(26, Math.min(44, area / 38000)));
       for (let c = 0; c < columns.length; c++) {
         for (let i = 0; i < perColumn; i++) {
           motes.push({
@@ -344,7 +354,7 @@ export default function MotherboardBackground() {
         }
       }
 
-      const ledCount = Math.round(Math.max(22, Math.min(70, area / 25000)));
+      const ledCount = Math.round(Math.max(60, Math.min(170, area / 13000)));
       for (let i = 0; i < ledCount; i++) {
         leds.push({
           x: rnd(-EXTENT, EXTENT),
@@ -365,6 +375,8 @@ export default function MotherboardBackground() {
       canvas!.style.width = W + "px";
       canvas!.style.height = H + "px";
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+      bloomCanvas.width = Math.max(1, Math.floor(W / 4));
+      bloomCanvas.height = Math.max(1, Math.floor(H / 4));
       camera.focal = Math.max(W, H) * 0.9;
       build();
     }
@@ -495,10 +507,10 @@ export default function MotherboardBackground() {
         const head = project(tr.pts[0]);
         const fade = head ? Math.max(0, Math.min(1, 1 - head.depth / 400)) : 0;
         if (fade <= 0.01) continue;
-        ctx!.strokeStyle = `rgba(186,40,46,${0.10 + fade * 0.30})`;
+        ctx!.strokeStyle = `rgba(150,32,38,${0.07 + fade * 0.20})`;
         ctx!.lineWidth = (0.9 + fade * 2.1) * tr.w;
         ctx!.stroke();
-        ctx!.strokeStyle = `rgba(255,124,96,${0.10 + fade * 0.40 * (0.7 + hb * 0.5)})`;
+        ctx!.strokeStyle = `rgba(255,110,88,${0.07 + fade * 0.30 * (0.7 + hb * 0.5)})`;
         ctx!.lineWidth = (0.35 + fade * 0.85) * tr.w;
         ctx!.stroke();
       }
@@ -812,6 +824,26 @@ export default function MotherboardBackground() {
         }
       }
 
+      // --- bloom -------------------------------------------------------------
+      // The single biggest difference from the reference. Downscale the frame,
+      // blur it, and add it back: bright areas bleed into their surroundings,
+      // which is what makes traces read as glowing rather than merely coloured.
+      // Done at quarter resolution so the blur is cheap.
+      const bw = bloomCanvas.width;
+      const bh = bloomCanvas.height;
+      if (bw > 1 && bh > 1) {
+        bctx.clearRect(0, 0, bw, bh);
+        bctx.filter = "blur(3px)";
+        bctx.drawImage(canvas!, 0, 0, bw, bh);
+        bctx.filter = "none";
+
+        ctx!.save();
+        ctx!.globalCompositeOperation = "lighter";
+        ctx!.globalAlpha = 0.85;
+        ctx!.drawImage(bloomCanvas, 0, 0, W, H);
+        ctx!.restore();
+      }
+
       // Vignette — pulls the eye to the centre and guarantees the corners never
       // fight with foreground copy.
       const vig = ctx!.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.5, W / 2, H / 2, Math.max(W, H) * 0.85);
@@ -859,7 +891,7 @@ export default function MotherboardBackground() {
     <canvas
       ref={ref}
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 h-full w-full opacity-[0.78]"
+      className="pointer-events-none fixed inset-0 -z-10 h-full w-full opacity-[0.72]"
     />
   );
 }
