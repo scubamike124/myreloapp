@@ -47,10 +47,10 @@ catalog. HeyGen trial accounts include a limited number of credits; the vault's
 
 ---
 
-### 3.  — Neon Postgres
+### 3. `DATABASE_URL` — Neon Postgres
 
-- [ ] Get one at **https://neon.tech** — free tier, no card
-- Create a project, copy the connection string (starts )
+- [ ] Get one at **https://neon.tech** — free tier, no card required
+- Create a project, then copy the connection string (starts `postgresql://`)
 
 **Unlocks:**
 - User accounts (sign up, sign in)
