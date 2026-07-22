@@ -1,6 +1,7 @@
 import { neon } from "@neondatabase/serverless";
 import { DatabaseSync } from "node:sqlite";
 import path from "node:path";
+import { mkdirSync } from "node:fs";
 
 // ---------------------------------------------------------------------------
 // Database access, over two drivers.
@@ -73,9 +74,6 @@ function openSqlite(): DatabaseSync | null {
   if (sqliteDb) return sqliteDb;
   try {
     const file = sqliteFile();
-    // node:fs rather than an import at module scope — this file is also loaded
-    // in environments where it will never be used.
-    const { mkdirSync } = require("node:fs") as typeof import("node:fs");
     mkdirSync(path.dirname(file), { recursive: true });
     sqliteDb = new DatabaseSync(file);
     sqliteDb.exec("PRAGMA journal_mode = WAL");
