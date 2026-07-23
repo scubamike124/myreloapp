@@ -1,0 +1,14 @@
+# Keep the build context small and the image clean.
+node_modules
+.next
+.git
+.data
+.env*
+!.env.example
+npm-debug.log*
+*.md
+design-refs
+scripts/lib
+**/*.test.*
+.vscode
+.idea
