@@ -62,6 +62,23 @@ function fileToBase64(file: Blob): Promise<string> {
   });
 }
 
+/**
+ * Poll a Veo render started by /api/generate-avatar until the clip is ready.
+ * The render is asynchronous now, so the browser checks its status every few
+ * seconds rather than the server holding one request open for minutes.
+ */
+async function pollVeo(pollUrl: string, maxTries = 90): Promise<string> {
+  for (let i = 0; i < maxTries; i++) {
+    await new Promise((r) => setTimeout(r, 5000));
+    const res = await fetch(pollUrl);
+    const d = await res.json();
+    if (d.status === "completed" && d.videoUrl) return d.videoUrl as string;
+    if (d.status === "failed") throw new Error(d.error || "Generation failed.");
+    // "processing" — keep polling.
+  }
+  throw new Error("Video is taking too long — please try again.");
+}
+
 export default function ToolStudio({ tool }: { tool: Tool }) {
   const [values, setValues] = useState<Record<string, string>>(() => {
     const v: Record<string, string> = {};
@@ -187,19 +204,24 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
         const res = await fetch("/api/generate-avatar", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ imageBase64: base64, mimeType: mime, prompt: avatarPrompt(tool.slug, values) }),
+          body: JSON.stringify({ imageBase64: base64, mimeType: mime, prompt: avatarPrompt(tool.slug, values), action: tool.slug }),
         });
         const data = await res.json();
-        if (timer.current) clearInterval(timer.current);
 
         // Out of tokens: nothing generated, nothing charged, no failed
         // creation to record — just the purchase panel.
         const gap = await shortfallFrom(res, data);
-        if (gap) { setShort(gap); setProgress(0); setStatus("idle"); return; }
+        if (gap) { if (timer.current) clearInterval(timer.current); setShort(gap); setProgress(0); setStatus("idle"); return; }
 
         if (!res.ok || !data.ok) throw new Error(data.error || "Generation failed.");
         tokens.setBalance(data.balance);
-        setVideoUrl(data.videoUrl);
+
+        // The render now runs asynchronously — the POST returns a handle and we
+        // poll until the clip is ready, instead of the server holding the whole
+        // request open for minutes.
+        const videoUrl = await pollVeo(data.poll as string);
+        if (timer.current) clearInterval(timer.current);
+        setVideoUrl(videoUrl);
         setProgress(100);
         setStatus("done");
         recordCreation({
@@ -208,7 +230,7 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
           title: creationTitle(),
           status: "completed",
           kind: "video",
-          mediaUrl: data.videoUrl,
+          mediaUrl: videoUrl,
         });
       } catch (e) {
         if (timer.current) clearInterval(timer.current);
