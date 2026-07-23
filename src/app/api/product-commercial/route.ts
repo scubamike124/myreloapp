@@ -7,8 +7,9 @@ import {
   createDailyLimiter,
   readJsonLimited,
 } from "@/lib/api-guard";
-import { chargeFor, refundCharge } from "@/lib/charge";
+import { chargeFor, refundCharge, refundLater } from "@/lib/charge";
 import { scrapePage } from "@/lib/scrape";
+import { startVeo, checkVeo, isVeoOperation, VIDEO_SECONDS } from "@/lib/veo";
 
 // ---------------------------------------------------------------------------
 // Product Commercial.
@@ -28,14 +29,10 @@ export const runtime = "nodejs";
 export const maxDuration = 300;
 
 const TEXT_MODEL = "gemini-2.5-flash";
-const VEO_MODEL = "veo-3.1-fast-generate-preview";
 const BASE = "https://generativelanguage.googleapis.com/v1beta";
-const VIDEO_SECONDS = Number(process.env.VIDEO_SECONDS ?? 6);
 
 const MAX_BODY = 12 * 1024 * 1024;
 const limiter = createDailyLimiter(Number(process.env.VIDEO_DAILY_LIMIT ?? 5));
-
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 /** Camera and lighting language per look, so "Neon" means something specific. */
 const LOOKS: Record<string, string> = {
@@ -54,45 +51,9 @@ function str(v: unknown, max: number): string {
   return typeof v === "string" ? v.slice(0, max).trim() : "";
 }
 
-async function startVeo(key: string, prompt: string, imageBase64: string, mimeType: string, tries = 3): Promise<string> {
-  for (let attempt = 1; attempt <= tries; attempt++) {
-    const res = await fetch(`${BASE}/models/${VEO_MODEL}:predictLongRunning?key=${encodeURIComponent(key)}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        instances: [{ prompt, image: { bytesBase64Encoded: imageBase64, mimeType } }],
-        // Same 6s as the other Veo tools: it is a direct cost lever ($0.60 at
-        // the Fast 720p rate) and a natural length for a social ad.
-        parameters: { aspectRatio: "9:16", durationSeconds: VIDEO_SECONDS },
-      }),
-      signal: AbortSignal.timeout(30_000),
-    });
-    const data = await res.json();
-    if (res.ok && data.name) return data.name as string;
-    const msg = data?.error?.message || `Veo start failed (${res.status}).`;
-    if ((res.status === 429 || /quota|rate limit|resource has been exhausted/i.test(msg)) && attempt < tries) {
-      await sleep(20_000);
-      continue;
-    }
-    throw new Error(msg);
-  }
-  throw new Error("Veo start failed.");
-}
-
-async function awaitVeo(key: string, op: string): Promise<string> {
-  for (let i = 0; i < 40; i++) {
-    await sleep(8000);
-    const res = await fetch(`${BASE}/${op}?key=${encodeURIComponent(key)}`, { signal: AbortSignal.timeout(30_000) });
-    const data = await res.json();
-    if (data.done) {
-      if (data.error) throw new Error(data.error.message || "Generation failed.");
-      const uri = data?.response?.generateVideoResponse?.generatedSamples?.[0]?.video?.uri;
-      if (!uri) throw new Error("Veo returned no video.");
-      return uri;
-    }
-  }
-  throw new Error("Generation timed out.");
-}
+// Veo start/poll now live in @/lib/veo, shared with the photo tools. The render
+// runs asynchronously — the POST returns the ad concept and an operation handle
+// straight away, and the client polls the GET below for the finished clip.
 
 type Concept = { headline: string; voiceover: string; caption: string; shot: string };
 
@@ -224,14 +185,16 @@ export async function POST(req: Request) {
       `sharp focus on the product, high quality, 4k. The product must stay exactly as it appears in the ` +
       `reference image. No added text, no captions, no watermarks, no people.`;
 
-    const op = await startVeo(key, veoPrompt, imageBase64, mimeType);
-    const uri = await awaitVeo(key, op);
-
-    const r = await fetch(`${uri}&key=${encodeURIComponent(key)}`, { signal: AbortSignal.timeout(90_000) });
-    const buf = Buffer.from(await r.arrayBuffer());
+    // Start the render and return the concept immediately. The customer sees the
+    // headline, voiceover and caption at once, and the client polls the GET below
+    // for the clip — no five-minute server wait.
+    const operation = await startVeo(key, veoPrompt, imageBase64, mimeType);
 
     return NextResponse.json({
       ok: true,
+      status: "processing",
+      operation,
+      poll: `/api/product-commercial?op=${encodeURIComponent(operation)}`,
       remainingToday,
       tokensCharged: charged.charge.charged,
       balance: charged.charge.balance,
@@ -242,9 +205,10 @@ export async function POST(req: Request) {
       // direction the model was actually given.
       shot: concept.shot,
       scannedPage: Boolean(pageText),
-      videoUrl: `data:video/mp4;base64,${buf.toString("base64")}`,
     });
   } catch (e) {
+    // The concept or the render kick-off failed, so nothing is polling — refund
+    // here.
     limiter.refund(id);
     await refundCharge(charged.charge); // no advert was made — do not charge for one
     return NextResponse.json(
@@ -252,4 +216,34 @@ export async function POST(req: Request) {
       { status: 502 },
     );
   }
+}
+
+// ---------------------------------------------------------------------------
+// GET — poll the render. /api/product-commercial?op=<operation>
+//   Response: { status: "processing" | "completed" (with videoUrl) | "failed" }
+// ---------------------------------------------------------------------------
+export async function GET(req: Request) {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) return NextResponse.json({ status: "failed", error: "GEMINI_API_KEY is not set." }, { status: 500 });
+
+  const op = (new URL(req.url).searchParams.get("op") ?? "").trim();
+  if (!isVeoOperation(op)) {
+    return NextResponse.json({ status: "failed", error: "Invalid operation handle." }, { status: 400 });
+  }
+
+  let result;
+  try {
+    result = await checkVeo(key, op);
+  } catch (e) {
+    // A transient status-check error is not a failed render — keep polling.
+    return NextResponse.json({ status: "processing", note: e instanceof Error ? e.message : "retrying" });
+  }
+
+  // Refund on genuine failure, keyed on the operation so repeated polls refund
+  // exactly once.
+  if (result.status === "failed") {
+    await refundLater("product-commercial", `veo:${op}`);
+  }
+
+  return NextResponse.json(result);
 }

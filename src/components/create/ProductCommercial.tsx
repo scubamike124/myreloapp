@@ -35,6 +35,18 @@ function fileToBase64(file: Blob): Promise<string> {
   });
 }
 
+/** Poll an async Veo render until the clip is ready. */
+async function pollVeo(pollUrl: string, maxTries = 90): Promise<string> {
+  for (let i = 0; i < maxTries; i++) {
+    await new Promise((r) => setTimeout(r, 5000));
+    const res = await fetch(pollUrl);
+    const d = await res.json();
+    if (d.status === "completed" && d.videoUrl) return d.videoUrl as string;
+    if (d.status === "failed") throw new Error(d.error || "Generation failed.");
+  }
+  throw new Error("The video is taking too long — please try again.");
+}
+
 export default function ProductCommercial() {
   const [photo, setPhoto] = useState<File | null>(null);
   const [preview, setPreview] = useState("");
@@ -94,15 +106,18 @@ export default function ProductCommercial() {
         return;
       }
       tokens.setBalance(data.balance);
+      // The concept is ready now; the render runs asynchronously, so poll for
+      // the finished clip and attach it to the result.
+      const videoUrl = await pollVeo(data.poll as string);
       setProgress(100);
-      setResult(data as Result);
+      setResult({ ...(data as Result), videoUrl });
       recordCreation({
         toolSlug: "product-commercial",
         toolTitle: "Product Commercial",
         title: productName.trim() || data.headline || "Product advert",
         status: "completed",
         kind: "video",
-        mediaUrl: data.videoUrl,
+        mediaUrl: videoUrl,
       });
     } catch {
       setErr("Network error. Try again.");
