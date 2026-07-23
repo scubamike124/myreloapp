@@ -1,7 +1,16 @@
 import { neon } from "@neondatabase/serverless";
-import { DatabaseSync } from "node:sqlite";
+import type { DatabaseSync } from "node:sqlite";
+import { createRequire } from "node:module";
 import path from "node:path";
 import { mkdirSync } from "node:fs";
+
+// node:sqlite is loaded lazily, never at module top. It is a value import only
+// where SQLite is actually used (a host with a real disk). On Vercel — where
+// SQLite is never used, and where the runtime may not expose node:sqlite at all
+// — a static top-level import would throw at cold start and take down every
+// route that touches the database. The type import above is erased at build and
+// costs nothing at runtime.
+const nodeRequire = createRequire(import.meta.url);
 
 // ---------------------------------------------------------------------------
 // Database access, over two drivers.
@@ -73,6 +82,8 @@ let sqliteDb: DatabaseSync | null = null;
 function openSqlite(): DatabaseSync | null {
   if (sqliteDb) return sqliteDb;
   try {
+    // Loaded here, not at the top of the file — see the note by the imports.
+    const { DatabaseSync } = nodeRequire("node:sqlite") as typeof import("node:sqlite");
     const file = sqliteFile();
     mkdirSync(path.dirname(file), { recursive: true });
     sqliteDb = new DatabaseSync(file);
