@@ -13,15 +13,23 @@ export default function PolicyPage({
   title,
   intro,
   children,
+  draft = BUSINESS.placeholder,
 }: {
   title: string;
   intro: string;
   children: React.ReactNode;
+  /**
+   * Whether to show the "not yet in force" banner. Defaults to the global
+   * placeholder flag, but a page that no longer depends on any placeholder —
+   * the Terms, which name no legal entity or address — passes `draft={false}`
+   * so it reads as a finished policy while the others stay in draft.
+   */
+  draft?: boolean;
 }) {
   return (
     <DesignShell>
       <main className="amber-safe mx-auto max-w-[820px] px-6 pb-20 pt-14 sm:px-9">
-        {BUSINESS.placeholder && (
+        {draft && (
           <div
             role="note"
             className="mb-8 rounded-xl px-4 py-3 text-[13px] leading-relaxed"

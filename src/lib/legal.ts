@@ -37,5 +37,11 @@ export const BUSINESS = {
   refundProcessing: "[E.G. 5-10 BUSINESS DAYS]",
 
   /** Last review date for the policy pages. */
-  lastUpdated: "[DATE YOU PUBLISH THIS]",
+  lastUpdated: "22 July 2026",
 } as const;
+
+// Note: the Terms of Service is deliberately written to need none of the
+// placeholder fields above — no legal name, no address, no jurisdiction. It
+// refers to the operator only as "Reelo" and routes contact through the Support
+// page, so it stands as a finished document while the other pages wait on those
+// details.
