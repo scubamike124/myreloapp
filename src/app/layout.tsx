@@ -3,6 +3,7 @@ import { Space_Grotesk, Manrope } from "next/font/google";
 import "./globals.css";
 import AmberDock from "@/components/amber/AmberDock";
 import MotherboardBackground from "@/components/design/MotherboardBackground";
+import { SITE_URL } from "@/lib/site";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -14,10 +15,29 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
+const title = "Reelo — AI Video Creator for TikToks, Reels & Shorts";
+const description =
+  "Transform ideas, photos, and scripts into professional videos in minutes. No editing skills required.";
+
 export const metadata: Metadata = {
-  title: "Reelo — AI Video Creator for TikToks, Reels & Shorts",
-  description:
-    "Transform ideas, photos, and scripts into professional videos in minutes. No editing skills required.",
+  // Resolves relative URLs (canonical links, Open Graph images) against the
+  // real domain once NEXT_PUBLIC_SITE_URL is set; localhost until then.
+  metadataBase: new URL(SITE_URL),
+  title,
+  description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: "Reelo",
+    title,
+    description,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({
