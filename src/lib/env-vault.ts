@@ -72,6 +72,48 @@ export const KNOWN_KEYS: KnownKey[] = [
     pattern: /^vercel_blob_rw_/,
     group: "Accounts",
   },
+  // Cloudflare R2 — the Cloudflare-first storage target. Slots defined here so
+  // the owner can store the credentials securely in the vault; the R2 storage
+  // driver (Phase 2) reads them. Account id and bucket are configuration; the
+  // two keys are secrets and are never shown once saved.
+  {
+    name: "R2_ACCOUNT_ID",
+    label: "Cloudflare account ID",
+    kind: "public",
+    purpose: "Which Cloudflare account holds the R2 bucket",
+    source: "https://dash.cloudflare.com → R2 → account details",
+    group: "Accounts",
+  },
+  {
+    name: "R2_BUCKET",
+    label: "R2 bucket name",
+    kind: "public",
+    purpose: "The R2 bucket finished videos are stored in",
+    group: "Accounts",
+  },
+  {
+    name: "R2_ACCESS_KEY_ID",
+    label: "R2 access key ID",
+    kind: "secret",
+    purpose: "Read/write access to the R2 bucket (S3-compatible API)",
+    source: "https://dash.cloudflare.com → R2 → Manage API tokens",
+    group: "Accounts",
+  },
+  {
+    name: "R2_SECRET_ACCESS_KEY",
+    label: "R2 secret access key",
+    kind: "secret",
+    purpose: "Read/write access to the R2 bucket (S3-compatible API)",
+    source: "https://dash.cloudflare.com → R2 → Manage API tokens",
+    group: "Accounts",
+  },
+  {
+    name: "R2_PUBLIC_URL",
+    label: "R2 public URL (optional)",
+    kind: "public",
+    purpose: "Public base URL for serving stored videos, if the bucket is public",
+    group: "Accounts",
+  },
   {
     name: "ADMIN_PASSWORD",
     label: "Admin password",
