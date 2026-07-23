@@ -1,7 +1,7 @@
 import Link from "next/link";
 import DesignShell from "@/components/design/DesignShell";
 
-export const metadata = { title: "Add-ons — Reelo" };
+export const metadata = { title: "Add-ons — Reelo", description: "Optional add-ons and extras for your Reelo account." };
 
 const BENEFITS = ["Their own login & profile", "Their own AI tools & videos", "Their own storage & history", "Their own settings & preferences"];
 

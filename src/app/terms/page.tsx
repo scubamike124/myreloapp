@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PolicyPage, { Section } from "@/components/design/PolicyPage";
 
-export const metadata = { title: "Terms of Service — Reelo" };
+export const metadata = { title: "Terms of Service — Reelo", description: "The terms that govern your use of Reelo." };
 
 // A complete, self-contained Terms of Service. It names no legal entity, no
 // address and no jurisdiction — the operator is referred to throughout only as

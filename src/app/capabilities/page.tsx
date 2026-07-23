@@ -3,7 +3,7 @@ import DesignShell from "@/components/design/DesignShell";
 import BIcon, { type IconKey } from "@/components/design/BIcon";
 import { TOOLS, LIVE_TOOLS } from "@/lib/tools";
 
-export const metadata = { title: "Master Feature List — Reelo" };
+export const metadata = { title: "Master Feature List — Reelo", description: "Every tool, format and language Reelo supports today." };
 
 type Section = {
   id: string;

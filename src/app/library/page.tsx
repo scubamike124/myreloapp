@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import LibraryGrid from "@/components/library/LibraryGrid";
 
-export const metadata = { title: "Video Library — Reelo" };
+export const metadata = { title: "Video Library — Reelo", description: "Every video and image you have created with Reelo, in one place." };
 
 export default function LibraryPage() {
   return (

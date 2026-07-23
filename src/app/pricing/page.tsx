@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Pricing from "@/components/Pricing";
 import SiteFooter from "@/components/design/SiteFooter";
 
-export const metadata = { title: "Pricing — Reelo" };
+export const metadata = { title: "Pricing — Reelo", description: "Simple token-based pricing. Start free, then pay only for what you create — plans and packs for creators, businesses and agencies." };
 
 export default function PricingPage() {
   return (

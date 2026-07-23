@@ -1,7 +1,7 @@
 import DesignShell from "@/components/design/DesignShell";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 
-export const metadata = { title: "How It Works — Reelo" };
+export const metadata = { title: "How It Works — Reelo", description: "Upload or describe what you want, customise it, and generate a finished video in minutes. No editing skills required." };
 
 export default function HowItWorksPage() {
   return (

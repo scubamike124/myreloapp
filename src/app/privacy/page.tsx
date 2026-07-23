@@ -1,7 +1,7 @@
 import PolicyPage, { Section } from "@/components/design/PolicyPage";
 import { BUSINESS } from "@/lib/legal";
 
-export const metadata = { title: "Privacy Policy — Reelo" };
+export const metadata = { title: "Privacy Policy — Reelo", description: "What Reelo collects, how your uploads and generated videos are handled, and your choices." };
 
 export default function PrivacyPage() {
   return (

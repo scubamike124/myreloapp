@@ -1,7 +1,7 @@
 import PolicyPage, { Section } from "@/components/design/PolicyPage";
 import { BUSINESS } from "@/lib/legal";
 
-export const metadata = { title: "Refund Policy — Reelo" };
+export const metadata = { title: "Refund Policy — Reelo", description: "Reelo refund policy for tokens and subscription plans." };
 
 export default function RefundsPage() {
   return (

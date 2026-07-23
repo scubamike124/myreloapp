@@ -1,7 +1,7 @@
 import DesignShell from "@/components/design/DesignShell";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 
-export const metadata = { title: "Features — Reelo" };
+export const metadata = { title: "Features — Reelo", description: "AI avatars, talking and dancing photos, product and website commercials, illustrated stories and more — everything Reelo can create." };
 
 export default function FeaturesPage() {
   return (

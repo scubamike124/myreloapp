@@ -4,7 +4,7 @@ import BusinessShell from "@/components/design/BusinessShell";
 import BIcon, { type IconKey } from "@/components/design/BIcon";
 import { getOverview, timeAgo } from "@/lib/business";
 
-export const metadata = { title: "Business Center — Reelo" };
+export const metadata = { title: "Business Center — Reelo", description: "Create, manage and grow your content in one place with the Reelo Business Center." };
 
 // Read per request: these are the signed-in customer's own figures, so they
 // must never be cached and served to somebody else.

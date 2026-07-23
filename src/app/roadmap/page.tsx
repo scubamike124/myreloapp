@@ -1,6 +1,6 @@
 import DesignShell from "@/components/design/DesignShell";
 
-export const metadata = { title: "Roadmap — Reelo" };
+export const metadata = { title: "Roadmap — Reelo", description: "What is live in Reelo today and what is coming next." };
 
 type Group = { name: string; items: string[] };
 type Phase = { n: number; title: string; tag: string; groups: Group[] };

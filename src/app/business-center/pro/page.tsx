@@ -3,7 +3,7 @@ import Image from "next/image";
 import BusinessShell from "@/components/design/BusinessShell";
 import BIcon, { type IconKey } from "@/components/design/BIcon";
 
-export const metadata = { title: "Business Center Pro — Reelo" };
+export const metadata = { title: "Business Center Pro — Reelo", description: "Business Center Pro — the full power of Reelo for agencies and teams." };
 
 const HIGHLIGHTS: { icon: IconKey; t: string; d: string }[] = [
   { icon: "infinity", t: "Unlimited", d: "AI Generations" },

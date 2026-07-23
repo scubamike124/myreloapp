@@ -4,7 +4,7 @@ import DesignShell from "@/components/design/DesignShell";
 import { TOOLS, type Tool } from "@/lib/tools";
 import { COUNTS } from "@/lib/avatar-catalog";
 
-export const metadata = { title: "Create — Reelo" };
+export const metadata = { title: "Create — Reelo", description: "Pick a tool and turn ideas, photos and scripts into finished videos and images in minutes." };
 
 const AVATAR_GROUP = ["custom-avatar-creator", "ai-avatar-studio", "talking-photo"];
 

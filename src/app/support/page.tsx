@@ -2,7 +2,7 @@ import Link from "next/link";
 import PolicyPage, { Section } from "@/components/design/PolicyPage";
 import { BUSINESS } from "@/lib/legal";
 
-export const metadata = { title: "Help & Support — Reelo" };
+export const metadata = { title: "Help & Support — Reelo", description: "Get help with Reelo — the fastest fixes for common problems and how to reach us." };
 
 export default function SupportPage() {
   return (

@@ -18,7 +18,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const tool = getTool(slug);
-  return { title: tool ? `${tool.title} — Reelo` : "Create — Reelo" };
+  if (!tool) return { title: "Create — Reelo" };
+  // The tool's own tagline is its meta description, so every tool page has a
+  // distinct, accurate summary for search results and link previews.
+  return {
+    title: `${tool.title} — Reelo`,
+    description: tool.tagline,
+    alternates: { canonical: `/create/${tool.slug}` },
+    openGraph: { title: `${tool.title} — Reelo`, description: tool.tagline, url: `/create/${tool.slug}` },
+  };
 }
 
 export default async function ToolPage({ params }: { params: Promise<{ slug: string }> }) {
