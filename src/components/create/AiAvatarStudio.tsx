@@ -28,6 +28,10 @@ export default function AiAvatarStudio() {
   const [gender, setGender] = useState("");
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<Avatar | null>(null);
+  // Avatar preview videos are served from HeyGen's CDN, and an individual URL
+  // there occasionally 404s. The poster still shows, but tracking the failure
+  // lets us drop straight to the still image rather than leave a dead <video>.
+  const [videoFailed, setVideoFailed] = useState<Set<string>>(new Set());
 
   // Arriving from the Avatar Library with ?avatar=<id>: fetch that one avatar
   // directly so it is selected without paging through the catalog to find it.
@@ -291,9 +295,19 @@ export default function AiAvatarStudio() {
                 {status === "done" ? (
                   <video src={videoUrl} className="absolute inset-0 h-full w-full object-cover" autoPlay controls loop playsInline />
                 ) : selected ? (
-                  selected.video ? (
+                  selected.video && !videoFailed.has(selected.avatarId) ? (
                     // Muted looping preview of the chosen avatar; poster is the still image.
-                    <video key={selected.avatarId} src={selected.video} poster={selected.image} muted autoPlay loop playsInline className={`absolute inset-0 h-full w-full object-cover transition ${status === "generating" ? "opacity-25" : "opacity-100"}`} />
+                    <video
+                      key={selected.avatarId}
+                      src={selected.video}
+                      poster={selected.image}
+                      muted
+                      autoPlay
+                      loop
+                      playsInline
+                      onError={() => setVideoFailed((prev) => new Set(prev).add(selected.avatarId))}
+                      className={`absolute inset-0 h-full w-full object-cover transition ${status === "generating" ? "opacity-25" : "opacity-100"}`}
+                    />
                   ) : (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={selected.image} alt={selected.name} className={`absolute inset-0 h-full w-full object-cover transition ${status === "generating" ? "opacity-25" : "opacity-100"}`} />
