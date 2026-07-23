@@ -1,0 +1,53 @@
+# Render blueprint — one-click provisioning for a host you own.
+#
+# In Render: New → Blueprint → point at this repo. Render reads this file and
+# creates the whole service exactly as described: builds the Dockerfile, attaches
+# a persistent disk at /app/.data (so accounts and videos survive restarts on
+# SQLite + local files, with no separate database or storage service), and polls
+# /api/health. It then asks you only for the secret values marked `sync: false`.
+#
+# A persistent disk needs a paid instance (Starter, a few dollars a month) — that
+# is the one billing step, and it is what lets this run self-contained.
+#
+# Deploy staging first: keep NEXT_PUBLIC_SITE_URL as the render.com URL Render
+# gives you, test, then change it to the domain only at cutover.
+
+services:
+  - type: web
+    name: reelo-staging
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    region: oregon
+    healthCheckPath: /api/health
+    autoDeploy: true
+
+    # Persistent disk — this is what makes the app self-contained: SQLite and
+    # finished videos live here and survive deploys and restarts.
+    disk:
+      name: reelo-data
+      mountPath: /app/.data
+      sizeGB: 5
+
+    envVars:
+      # Non-secret, safe to commit.
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+
+      # Secrets — Render prompts for these; they are never stored in the repo.
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_SESSION_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: HEYGEN_API_KEY
+        sync: false
+
+      # The public URL. Set to the render.com address for staging, then to
+      # https://www.myreelo.com at cutover. Left unset, production defaults to
+      # the domain — but on staging you want the staging URL, so set it.
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false
