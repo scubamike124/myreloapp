@@ -12,6 +12,12 @@ export const maxDuration = 30;
 
 type Check = (key: string) => Promise<{ ok: boolean; detail: string }>;
 
+function asRecord(value: unknown): Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value)
+    ? (value as Record<string, unknown>)
+    : {};
+}
+
 const CHECKS: Record<string, { keyName: string; label: string; run: Check }> = {
   gemini: {
     keyName: "GEMINI_API_KEY",
@@ -21,12 +27,15 @@ const CHECKS: Record<string, { keyName: string; label: string; run: Check }> = {
         `https://generativelanguage.googleapis.com/v1beta/models?key=${encodeURIComponent(key)}`,
         { signal: AbortSignal.timeout(15000) },
       );
-      const data = await res.json().catch(() => ({}));
+      const data = asRecord(await res.json().catch(() => ({})));
       if (res.ok) {
-        const n = Array.isArray(data?.models) ? data.models.length : 0;
+        const models = data.models;
+        const n = Array.isArray(models) ? models.length : 0;
         return { ok: true, detail: n > 0 ? `Working — ${n} models available.` : "Working." };
       }
-      return { ok: false, detail: data?.error?.message || `Rejected by Google (${res.status}).` };
+      const error = asRecord(data.error);
+      const message = typeof error.message === "string" ? error.message : null;
+      return { ok: false, detail: message || `Rejected by Google (${res.status}).` };
     },
   },
   heygen: {
@@ -37,15 +46,17 @@ const CHECKS: Record<string, { keyName: string; label: string; run: Check }> = {
         headers: { "X-Api-Key": key },
         signal: AbortSignal.timeout(15000),
       });
-      const data = await res.json().catch(() => ({}));
+      const data = asRecord(await res.json().catch(() => ({})));
       if (res.ok) {
-        const quota = data?.data?.remaining_quota;
+        const inner = asRecord(data.data);
+        const quota = inner.remaining_quota;
         return {
           ok: true,
           detail: typeof quota === "number" ? `Working — ${quota} credits remaining.` : "Working.",
         };
       }
-      return { ok: false, detail: data?.message || `Rejected by HeyGen (${res.status}).` };
+      const message = typeof data.message === "string" ? data.message : null;
+      return { ok: false, detail: message || `Rejected by HeyGen (${res.status}).` };
     },
   },
 };
@@ -58,7 +69,12 @@ export async function POST(req: Request) {
 
   let provider: string;
   try {
-    provider = String((await req.json()).provider ?? "");
+    const body: unknown = await req.json();
+    const raw =
+      typeof body === "object" && body !== null && "provider" in body
+        ? (body as { provider: unknown }).provider
+        : undefined;
+    provider = typeof raw === "string" ? raw : String(raw ?? "");
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }

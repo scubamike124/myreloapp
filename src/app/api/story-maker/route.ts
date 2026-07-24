@@ -1,3 +1,4 @@
+import { asRecord, asString, errorMessage, geminiParts, geminiText } from "@/lib/json";
 import path from "node:path";
 import { clientId, createDailyLimiter, readJsonLimited, PayloadTooLarge } from "@/lib/api-guard";
 import { getLanguage, isRTL } from "@/lib/languages";
@@ -192,9 +193,9 @@ export async function POST(req: Request) {
       }),
       signal: AbortSignal.timeout(120_000),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data?.error?.message ?? `HTTP ${res.status}`);
-    return (data?.candidates?.[0]?.content?.parts ?? []).map((p: { text?: string }) => p.text ?? "").join("");
+    const data = asRecord(await res.json());
+    if (!res.ok) throw new Error(errorMessage(data, "") ?? `HTTP ${res.status}`);
+    return geminiText(data) ?? "";
   };
 
   let episode: Episode;
@@ -273,12 +274,15 @@ export async function POST(req: Request) {
       signal: AbortSignal.timeout(120_000),
     });
     if (!res.ok) return "";
-    const data = await res.json();
-    const part = (data?.candidates?.[0]?.content?.parts ?? []).find(
-      (p: Record<string, unknown>) => p.inlineData || p.inline_data,
-    );
-    const payload = (part?.inlineData || part?.inline_data) as { data?: string; mimeType?: string } | undefined;
-    return payload?.data ? `data:${payload.mimeType ?? "image/png"};base64,${payload.data}` : "";
+    const data = asRecord(await res.json());
+    const part = geminiParts(data).find((p) => {
+      const rec = asRecord(p);
+      return Boolean(rec.inlineData || rec.inline_data);
+    });
+    const payload = asRecord(asRecord(part).inlineData || asRecord(part).inline_data);
+    return typeof payload.data === "string"
+      ? `data:${asString(payload.mimeType, "image/png")};base64,${payload.data}`
+      : "";
   };
 
   const images = await Promise.all(

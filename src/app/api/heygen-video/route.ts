@@ -1,3 +1,4 @@
+import { asRecord, asString, childRecord, errorMessage } from "@/lib/json";
 import { NextResponse } from "next/server";
 import { chargeFor, refundCharge, refundLater } from "@/lib/charge";
 
@@ -75,7 +76,7 @@ async function heygen(path: string, init: RequestInit, key: string) {
     headers: { "X-Api-Key": key, "Content-Type": "application/json", ...(init.headers || {}) },
     signal: AbortSignal.timeout(30000),
   });
-  const data = await res.json().catch(() => ({}));
+  const data = asRecord(await res.json().catch(() => ({})));
   return { res, data } as const;
 }
 
@@ -90,8 +91,8 @@ export async function GET(req: Request) {
 
   if (videoId) {
     const { res, data } = await heygen(`/v1/video_status.get?video_id=${encodeURIComponent(videoId)}`, { method: "GET" }, key);
-    if (!res.ok) return NextResponse.json({ ok: false, error: data?.message || "Status lookup failed." }, { status: 502 });
-    const d = data?.data ?? {};
+    if (!res.ok) return NextResponse.json({ ok: false, error: (asString(data.message) || "Status lookup failed.") }, { status: 502 });
+    const d = childRecord(data, "data");
 
     // HeyGen fails asynchronously, long after the POST that started the job
     // returned, so the refund has to happen here. Keyed on the video id, which
@@ -116,7 +117,7 @@ export async function GET(req: Request) {
   return NextResponse.json({
     ok: res.ok,
     config: { dailyLimit: DAILY_LIMIT, maxSeconds: MAX_SECONDS, maxWords: MAX_WORDS },
-    remainingQuota: data?.data?.remaining_quota ?? null,
+    remainingQuota: childRecord(data, "data").remaining_quota ?? null,
   });
 }
 
@@ -141,7 +142,16 @@ export async function POST(req: Request) {
   // 2. Parse + cap the script to the max duration.
   let body: { script?: string; avatarId?: string; voiceId?: string; width?: number; height?: number; action?: string } = {};
   try {
-    body = await req.json();
+    const raw: unknown = await req.json();
+    const rec = asRecord(raw);
+    body = {
+      script: asString(rec.script) || undefined,
+      avatarId: asString(rec.avatarId) || undefined,
+      voiceId: asString(rec.voiceId) || undefined,
+      width: typeof rec.width === "number" ? rec.width : undefined,
+      height: typeof rec.height === "number" ? rec.height : undefined,
+      action: asString(rec.action) || undefined,
+    };
   } catch {
     /* empty body → use defaults */
   }
@@ -184,11 +194,11 @@ export async function POST(req: Request) {
       key,
     );
 
-    const videoId = data?.data?.video_id;
+    const videoId = childRecord(data, "data").video_id;
     if (!res.ok || !videoId) {
       refund(id); // no video was actually created — give the quota unit back
       await refundCharge(charged.charge); // and the customer's tokens with it
-      const msg = data?.error?.message || data?.message || `HeyGen generate failed (${res.status}).`;
+      const msg = errorMessage(data, "") || (asString(data.message) || `HeyGen generate failed (${res.status}).`);
       return NextResponse.json({ error: msg }, { status: 502 });
     }
 

@@ -42,7 +42,12 @@ export async function POST(req: Request) {
 
   let submitted = "";
   try {
-    submitted = String((await req.json()).password ?? "");
+    const body: unknown = await req.json();
+    const password =
+      typeof body === "object" && body !== null && "password" in body
+        ? (body as { password: unknown }).password
+        : undefined;
+    submitted = typeof password === "string" ? password : "";
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }

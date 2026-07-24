@@ -1,3 +1,4 @@
+import { asRecord, asString, errorMessage, geminiParts } from "@/lib/json";
 import { clientId, createDailyLimiter } from "@/lib/api-guard";
 
 // ---------------------------------------------------------------------------
@@ -113,8 +114,9 @@ export async function POST(req: Request) {
     limiter.refund(id);
     let msg = `Transcription failed (${upstream.status}).`;
     try {
-      const data = await upstream.json();
-      if (data?.error?.message) msg = data.error.message;
+      const data = asRecord(await upstream.json());
+      const m = errorMessage(data, "");
+      if (m) msg = m;
     } catch {
       /* keep the generic message */
     }
@@ -123,11 +125,9 @@ export async function POST(req: Request) {
 
   let text = "";
   try {
-    const data = await upstream.json();
-    const parts = data?.candidates?.[0]?.content?.parts;
-    if (Array.isArray(parts)) {
-      text = parts.map((p: { text?: unknown }) => (typeof p.text === "string" ? p.text : "")).join("");
-    }
+    const data = asRecord(await upstream.json());
+    const parts = geminiParts(data);
+    text = parts.map((p) => asString(asRecord(p).text)).join("");
   } catch {
     limiter.refund(id);
     return Response.json({ error: "Transcription came back unreadable. Try again." }, { status: 502 });

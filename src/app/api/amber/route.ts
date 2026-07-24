@@ -1,3 +1,4 @@
+import { asRecord, errorMessage } from "@/lib/json";
 import { AMBER_SYSTEM_PROMPT } from "@/lib/amber/persona";
 import { parseContext, renderContext, renderServiceState } from "@/lib/amber/context";
 
@@ -64,7 +65,7 @@ export async function POST(req: Request) {
   let messages: Message[];
   let contextBlock: string;
   try {
-    const body = await req.json();
+    const body = asRecord(await req.json());
     messages = parseMessages(body.messages);
     // Client-supplied context is sanitised; service status is added here on the
     // server so it cannot be spoofed by the browser.
@@ -122,8 +123,9 @@ export async function POST(req: Request) {
   if (!upstream.ok || !upstream.body) {
     let msg = `Amber is temporarily unavailable (${upstream.status}).`;
     try {
-      const data = await upstream.json();
-      if (data?.error?.message) msg = data.error.message;
+      const data = asRecord(await upstream.json());
+      const m = errorMessage(data, "");
+      if (m) msg = m;
     } catch {
       /* keep the generic message */
     }

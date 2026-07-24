@@ -1,3 +1,4 @@
+import { asRecord, errorMessage, geminiText } from "@/lib/json";
 import { NextResponse } from "next/server";
 import { UnsafeUrlError, assertSafeUrl, clientId, createDailyLimiter } from "@/lib/api-guard";
 import { scrapePage } from "@/lib/scrape";
@@ -39,7 +40,7 @@ export async function POST(req: Request) {
   // runs from inside our network.
   let url: string;
   try {
-    const body = await req.json();
+    const body = asRecord(await req.json());
     url = await assertSafeUrl(String(body.url ?? ""));
   } catch (e) {
     limiter.refund(id);
@@ -80,13 +81,13 @@ ${siteText}`;
       },
     );
 
-    const data = await gemini.json();
+    const data = asRecord(await gemini.json());
     if (!gemini.ok) {
-      const msg = data?.error?.message || `Gemini error ${gemini.status}`;
+      const msg = errorMessage(data, `Gemini error ${gemini.status}`);
       return NextResponse.json({ error: msg }, { status: 502 });
     }
 
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    const text = geminiText(data);
     if (!text) return NextResponse.json({ error: "Gemini returned no content." }, { status: 502 });
 
     const parsed = JSON.parse(text);

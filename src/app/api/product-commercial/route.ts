@@ -1,3 +1,4 @@
+import { asRecord, asString, errorMessage, geminiParts, geminiText } from "@/lib/json";
 import { NextResponse } from "next/server";
 import {
   PayloadTooLarge,
@@ -99,9 +100,9 @@ async function writeConcept(
     }),
     signal: AbortSignal.timeout(90_000),
   });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data?.error?.message ?? `HTTP ${res.status}`);
-  const text = (data?.candidates?.[0]?.content?.parts ?? []).map((p: { text?: string }) => p.text ?? "").join("");
+  const data = asRecord(await res.json());
+  if (!res.ok) throw new Error(errorMessage(data, "") ?? `HTTP ${res.status}`);
+  const text = geminiText(data) ?? "";
   const match = text.match(/\{[\s\S]*\}/);
   if (!match) throw new Error("no concept returned");
   const parsed = JSON.parse(match[0]);

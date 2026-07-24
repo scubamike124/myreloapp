@@ -1,3 +1,4 @@
+import { asRecord, errorMessage } from "@/lib/json";
 import { NextResponse } from "next/server";
 import { PayloadTooLarge, clientId, createDailyLimiter, readJsonLimited } from "@/lib/api-guard";
 import { chargeFor, refundCharge } from "@/lib/charge";
@@ -66,9 +67,9 @@ export async function POST(req: Request) {
           body: reqBody,
           signal: AbortSignal.timeout(170000), // ~3 min per attempt
         });
-        const json = await res.json();
+        const json = asRecord(await res.json());
         if (res.ok) { data = json; break; }
-        lastErr = json?.error?.message || `Image error ${res.status}`;
+        lastErr = errorMessage(json, `Image error ${res.status}`);
         if (res.status >= 500 || res.status === 429) { await sleep(4000); continue; }
         { limiter.refund(id); await refundCharge(charged.charge); return NextResponse.json({ error: lastErr }, { status: 502 }); }
       } catch (e) {

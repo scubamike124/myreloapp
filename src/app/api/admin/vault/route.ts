@@ -43,9 +43,20 @@ export async function POST(req: Request) {
 
   let updates: Record<string, string>;
   try {
-    const body = await req.json();
-    updates = body?.updates;
-    if (!updates || typeof updates !== "object" || Array.isArray(updates)) throw new Error("bad shape");
+    const body: unknown = await req.json();
+    const rawUpdates =
+      typeof body === "object" && body !== null && "updates" in body
+        ? (body as { updates: unknown }).updates
+        : undefined;
+    if (!rawUpdates || typeof rawUpdates !== "object" || Array.isArray(rawUpdates)) {
+      throw new Error("bad shape");
+    }
+    updates = {};
+    for (const [key, value] of Object.entries(rawUpdates as Record<string, unknown>)) {
+      if (typeof value === "string") updates[key] = value;
+      else if (value == null) updates[key] = "";
+      else updates[key] = String(value);
+    }
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }

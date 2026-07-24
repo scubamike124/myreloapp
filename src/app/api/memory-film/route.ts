@@ -1,3 +1,4 @@
+import { asRecord, asString, errorMessage, geminiParts, geminiText } from "@/lib/json";
 import { clientId, createDailyLimiter, readJsonLimited, PayloadTooLarge } from "@/lib/api-guard";
 import { getLanguage, isRTL } from "@/lib/languages";
 import { chargeFor, refundCharge } from "@/lib/charge";
@@ -142,9 +143,9 @@ export async function POST(req: Request) {
       }),
       signal: AbortSignal.timeout(100_000),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data?.error?.message ?? `HTTP ${res.status}`);
-    const text = (data?.candidates?.[0]?.content?.parts ?? []).map((p: { text?: string }) => p.text ?? "").join("");
+    const data = asRecord(await res.json());
+    if (!res.ok) throw new Error(errorMessage(data, "") ?? `HTTP ${res.status}`);
+    const text = geminiText(data) ?? "";
     const match = text.match(/\{[\s\S]*\}/);
     if (!match) throw new Error("no narration returned");
     const parsed = JSON.parse(match[0]);

@@ -1,3 +1,4 @@
+import { asArray, asRecord, asString, childRecord } from "@/lib/json";
 import { NextResponse } from "next/server";
 import snapshot from "@/data/heygen-avatars.json";
 import { CATEGORIES, getCategory, matches } from "@/lib/avatar-categories";
@@ -24,9 +25,9 @@ async function fetchLive(key: string): Promise<Avatar[]> {
     signal: AbortSignal.timeout(90000),
     next: { revalidate: 60 * 60 * 24 }, // persists across cold starts
   });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data?.message || "Failed to load avatars.");
-  const raw = (data?.data?.avatars ?? []) as Array<Record<string, unknown>>;
+  const data = asRecord(await res.json());
+  if (!res.ok) throw new Error((asString(data.message) || "Failed to load avatars."));
+  const raw = (asArray(childRecord(data, "data").avatars) ?? []) as Array<Record<string, unknown>>;
   const avatars: Avatar[] = raw
     .map((a) => ({
       avatarId: String(a.avatar_id ?? ""),
