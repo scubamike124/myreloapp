@@ -1,9 +1,9 @@
-import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { clientId, createDailyLimiter, readJsonLimited, PayloadTooLarge } from "@/lib/api-guard";
 import { getLanguage, isRTL } from "@/lib/languages";
 import { chargeFor, refundCharge } from "@/lib/charge";
 import { CATALOG } from "@/lib/avatar-catalog";
+import { readPublicAsset } from "@/lib/public-asset";
 
 // ---------------------------------------------------------------------------
 // AI Story Maker — an ongoing illustrated series.
@@ -71,10 +71,10 @@ async function characterImage(
       return { data: buf.toString("base64"), mimeType: res.headers.get("content-type") ?? "image/webp" };
     }
     // A Reelo character shipped in public/. found.image comes from the catalog,
-    // not the request, so this join cannot be steered elsewhere.
-    const file = path.join(process.cwd(), "public", found.image.replace(/^\//, ""));
-    const buf = await readFile(file);
-    const ext = path.extname(file).toLowerCase();
+    // not the request, so this cannot be steered elsewhere.
+    const buf = await readPublicAsset(found.image.replace(/^\//, ""));
+    if (!buf) return null;
+    const ext = path.extname(found.image).toLowerCase();
     const mime = ext === ".png" ? "image/png" : ext === ".webp" ? "image/webp" : "image/jpeg";
     return { data: buf.toString("base64"), mimeType: mime };
   } catch {

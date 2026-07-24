@@ -55,7 +55,7 @@ export async function POST(req: Request) {
 
   attempts.delete(id);
 
-  const token = createSessionToken();
+  const token = await createSessionToken();
   if (!token) {
     return NextResponse.json({ error: "Admin access is not configured." }, { status: 503 });
   }

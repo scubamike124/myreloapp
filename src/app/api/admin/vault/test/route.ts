@@ -52,7 +52,7 @@ const CHECKS: Record<string, { keyName: string; label: string; run: Check }> = {
 
 export async function POST(req: Request) {
   const store = await cookies();
-  if (!verifySessionToken(store.get(ADMIN_COOKIE)?.value)) {
+  if (!(await verifySessionToken(store.get(ADMIN_COOKIE)?.value))) {
     return NextResponse.json({ error: "Not authorized." }, { status: 401 });
   }
 

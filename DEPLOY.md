@@ -1,29 +1,35 @@
 # Deploying Reelo
 
-Reelo is a normal Node server. It needs **Node 22.5 or newer** (the database is
-built into Node itself, `node:sqlite`) and **one writable folder** that survives
-restarts. Nothing else — no managed database or object store is required to go
-live, though you can add them later.
+**Strategy:** Cloudflare Workers (OpenNext) is the primary production runtime.
+**Docker / VPS Node** remains the migration fallback with a persistent `.data` volume.
+**Vercel is optional** and not required. Do **not** use `@cloudflare/next-on-pages`.
 
-## The one thing that matters: `.data`
+See `docs/CLOUDFLARE_WORKERS.md` and `.env.production.example` for the Workers path.
 
-Accounts, token balances and finished videos are written under `.data/` in the
-app directory. **That folder must persist between restarts.** On a normal server
-or a mounted disk it does; on a "serverless" host with an ephemeral filesystem
-(Vercel, Netlify, plain Lambda) it does not — and Reelo detects that case and
-refuses to use SQLite there rather than lose accounts silently.
+Reelo on a normal Node server needs **Node 22.5 or newer** (local SQLite uses
+`node:sqlite`) and **one writable folder** that survives restarts. On Cloudflare
+Workers, SQLite/disk are disabled — you must set **Neon `DATABASE_URL`** (and
+ideally remote blob storage).
+
+## The one thing that matters: persistence
+
+Accounts, token balances and finished videos must survive restarts.
 
 So pick one:
 
-- **A host with a real disk** — a VPS, Railway, Render, Fly, a container with a
-  volume. `.data` just works. This is the simplest path and needs no signups.
-- **A serverless host** — then you must give it a Postgres database and blob
-  storage instead (see "Managed services" below).
+- **Cloudflare Workers + Neon (preferred production)** — OpenNext Worker with
+  `DATABASE_URL` and `BLOB_READ_WRITE_TOKEN` (or future R2). No local `.data`.
+- **Cloudflare DNS + Docker/VPS (fallback)** — container or VPS with a volume at
+  `/app/.data`. Cloudflare for DNS/TLS/WAF in front.
+- **A host with a real disk** — Railway, Render, Fly, or any VPS. `.data` just
+  works. Use Cloudflare for DNS/TLS even when the origin is Docker.
+- **A fully ephemeral serverless host** — then you must give it a Postgres
+  database and blob storage (see managed services below).
 
 Check which mode you are in at any time: `GET /api/health` reports the live
 database and storage drivers.
 
-## Option A — Docker (works anywhere)
+## Option A — Docker (migration fallback / origin)
 
 ```bash
 docker build -t reelo .
@@ -31,9 +37,8 @@ docker run -p 3000:3000 --env-file .env.local -v reelo-data:/app/.data reelo
 ```
 
 The `-v reelo-data:/app/.data` is the persistent folder. Drop it and you lose
-accounts and videos on every restart. Railway, Render and Fly all build this
-Dockerfile directly — point them at the repo and add a volume mounted at
-`/app/.data`.
+accounts and videos on every restart. Point Cloudflare DNS at this host and
+enable the proxy for TLS/WAF.
 
 ## Option B — a plain server / VPS
 
@@ -42,11 +47,12 @@ npm ci
 npm run build
 npm run setup          # once — sets your admin password in .env.local
 npm start              # serves on PORT (default 3000)
+# or: node .next/standalone/server.js
 ```
 
-Put it behind nginx/Caddy for TLS, and keep it running with `pm2`, `systemd` or
-similar. `.data` sits in the project directory; make sure that directory is on
-persistent storage and backed up.
+Put it behind Cloudflare (or nginx/Caddy) for TLS, and keep it running with
+`pm2`, `systemd` or similar. `.data` sits in the project directory; make sure
+that directory is on persistent storage and backed up.
 
 ## Environment
 
@@ -60,8 +66,8 @@ in the running app, or set as environment variables on your host:
 | `HEYGEN_API_KEY` | AI Avatar Studio, Website Commercial | For those two tools |
 | `ADMIN_PASSWORD` | the admin login | Yes — `npm run setup` sets it |
 | `ADMIN_SESSION_SECRET` | admin session signing | `npm run setup` generates it |
-| `DATABASE_URL` | Postgres instead of SQLite | Only on serverless hosts |
-| `BLOB_READ_WRITE_TOKEN` | Vercel Blob instead of local disk | Only on serverless hosts |
+| `DATABASE_URL` | Postgres instead of SQLite | Only on ephemeral/serverless hosts |
+| `BLOB_READ_WRITE_TOKEN` | Remote blob instead of local disk | Only on ephemeral hosts (optional) |
 | `MEDIA_RETENTION_DAYS` | how long videos are kept (default 30) | No |
 
 The daily usage caps (`VIDEO_DAILY_LIMIT`, `HEYGEN_DAILY_LIMIT`, and the rest)
@@ -72,15 +78,19 @@ Note: the vault turns **read-only** on a deployed server, because a deployed
 filesystem should not be edited from the browser. Set keys as host environment
 variables in production; use the vault only in local development.
 
+Amber HQ stores deploy tokens separately: prefer `CLOUDFLARE_API_TOKEN` in the
+Amber Credential Vault. `VERCEL_TOKEN` is optional and not a deploy blocker.
+
 ## Managed services (only if your host is serverless)
 
 - **Postgres** — set `DATABASE_URL` (Neon, Supabase, any Postgres). Reelo uses
   it automatically whenever the variable is present. The schema is created on
   first run; no migration step.
-- **Blob storage** — set `BLOB_READ_WRITE_TOKEN` (Vercel Blob). Finished videos
-  go there instead of local disk.
+- **Blob storage** — set `BLOB_READ_WRITE_TOKEN` only if you need remote blobs
+  on an ephemeral filesystem. Prefer Docker + local disk behind Cloudflare when
+  possible.
 
-With both set, Reelo runs statelessly and can scale horizontally.
+With both Postgres and blob set, Reelo can run more statelessly on ephemeral hosts.
 
 ## Verifying a deploy
 

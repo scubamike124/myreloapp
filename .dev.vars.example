@@ -1,0 +1,12 @@
+# Local Wrangler / OpenNext preview secrets (gitignored as .dev.vars).
+# Copy to `.dev.vars` and fill in. Never commit `.dev.vars`.
+NEXTJS_ENV=production
+CLOUDFLARE_WORKERS=1
+DISABLE_SQLITE=1
+DATABASE_URL=
+GEMINI_API_KEY=
+HEYGEN_API_KEY=
+ADMIN_PASSWORD=
+ADMIN_SESSION_SECRET=
+BLOB_READ_WRITE_TOKEN=
+NEXT_PUBLIC_SITE_URL=http://127.0.0.1:8787

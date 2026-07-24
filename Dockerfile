@@ -23,6 +23,7 @@ COPY package.json package-lock.json* ./
 RUN npm ci --ignore-scripts || npm install --ignore-scripts
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV DOCKER_BUILD=1
 RUN npm run build
 
 # --- run: the smallest thing that serves --------------------------------------

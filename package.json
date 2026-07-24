@@ -8,14 +8,22 @@
     "start": "next start",
     "lint": "eslint",
     "setup": "node scripts/setup.mjs",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "cf:build": "opennextjs-cloudflare build",
     "test:responsive": "node scripts/audit-responsive.mjs",
     "test:interactions": "node scripts/audit-interactions.mjs",
+    "verify:production": "node scripts/production-verify.mjs",
+    "check:pricing": "node scripts/check-pricing.mjs",
+    "check:tiles": "node scripts/check-tiles.mjs",
     "refresh:avatars": "node scripts/refresh-avatars.mjs",
     "start:standalone": "node .next/standalone/server.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
-    "next": "16.2.9",
+    "@opennextjs/cloudflare": "^1.20.2",
+    "next": "^16.2.11",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -25,10 +33,11 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.9",
+    "eslint-config-next": "^16.2.11",
     "puppeteer-core": "^25.3.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.114.0"
   },
   "engines": {
     "node": ">=22.5.0"

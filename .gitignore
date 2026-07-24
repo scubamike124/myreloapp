@@ -33,9 +33,15 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 !.env.example
-# A template manifest with example values only — no real secrets — so it is
-# safe and useful to track alongside .env.example.
+# Template manifests with example values only — no real secrets.
 !.env.production.example
+!.dev.vars.example
+
+# Cloudflare / OpenNext
+.open-next
+.wrangler
+.dev.vars
+.mf
 
 # vercel
 .vercel

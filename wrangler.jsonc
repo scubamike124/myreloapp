@@ -1,0 +1,40 @@
+/**
+ * Cloudflare Workers configuration for MyReelo (OpenNext).
+ * Do not use @cloudflare/next-on-pages or Vercel for this deploy path.
+ *
+ * Secrets are set in the Cloudflare dashboard / `wrangler secret put` —
+ * never commit real values here.
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "myreloapp",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-07-23",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "myreloapp"
+    }
+  ],
+  "images": {
+    "binding": "IMAGES"
+  },
+  "observability": {
+    "enabled": true
+  },
+  // Non-secret defaults for the Workers runtime. Put secrets in CF Secrets.
+  "vars": {
+    "CLOUDFLARE_WORKERS": "1",
+    "DISABLE_SQLITE": "1"
+  }
+  // Optional later:
+  // "r2_buckets": [{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "myreloapp-cache" }]
+}

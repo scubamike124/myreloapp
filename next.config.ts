@@ -1,10 +1,11 @@
 import type { NextConfig } from "next";
 
+// Standalone output is for Docker / VPS Node only. OpenNext Cloudflare builds
+// its own Worker bundle — do not enable standalone for `opennextjs-cloudflare build`.
+const useStandalone = process.env.DOCKER_BUILD === "1";
+
 const nextConfig: NextConfig = {
-  // Bundle the server and only its used dependencies into .next/standalone, so a
-  // deploy is `node server.js` against a few megabytes rather than the whole
-  // node_modules tree. The Dockerfile copies exactly that folder.
-  output: "standalone",
+  ...(useStandalone ? { output: "standalone" as const } : {}),
 
   // The dev indicator defaults to bottom-left, where it sits on top of Amber's
   // composer on narrow screens and hides the first characters you type. Moved
@@ -38,3 +39,11 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+// Enables Cloudflare bindings during `next dev` only (avoids NFT tracing the
+// whole project during production / OpenNext builds).
+if (process.env.NODE_ENV === "development") {
+  void import("@opennextjs/cloudflare").then(({ initOpenNextCloudflareForDev }) => {
+    initOpenNextCloudflareForDev();
+  });
+}

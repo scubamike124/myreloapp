@@ -3,6 +3,7 @@ import type { DatabaseSync } from "node:sqlite";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { mkdirSync } from "node:fs";
+import { isEphemeralFilesystem } from "@/lib/runtime-platform";
 
 // node:sqlite is loaded lazily, never at module top. It is a value import only
 // where SQLite is actually used (a host with a real disk). On Vercel — where
@@ -55,8 +56,8 @@ function postgresUrl(): string | undefined {
 function sqliteAllowed(): boolean {
   if (postgresUrl()) return false;
   if (process.env.DISABLE_SQLITE === "1") return false;
-  const ephemeral = process.env.VERCEL === "1" || process.env.AWS_LAMBDA_FUNCTION_NAME;
-  return !ephemeral;
+  if (isEphemeralFilesystem()) return false;
+  return true;
 }
 
 function sqliteFile(): string {

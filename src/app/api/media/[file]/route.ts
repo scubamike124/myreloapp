@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { mediaDir } from "@/lib/storage";
+import { mediaDir, storageDriver } from "@/lib/storage";
 import { sql, ensureSchema, dbConfigured } from "@/lib/db";
 
 // ---------------------------------------------------------------------------
@@ -41,6 +41,15 @@ export async function GET(_req: Request, { params }: { params: Promise<{ file: s
         return new Response("This video has expired.", { status: 410 });
       }
     }
+  }
+
+  // Local disk media is Node/Docker only. On Cloudflare Workers, creations
+  // must be stored via remote blob (BLOB_READ_WRITE_TOKEN) and served by URL.
+  if (storageDriver() !== "disk") {
+    return new Response(
+      "Local media serving is unavailable on this host. Use a remote blob URL.",
+      { status: 404 },
+    );
   }
 
   try {

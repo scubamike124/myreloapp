@@ -1,5 +1,6 @@
 import { mkdir, writeFile, unlink, stat } from "node:fs/promises";
 import path from "node:path";
+import { isEphemeralFilesystem } from "@/lib/runtime-platform";
 
 // ---------------------------------------------------------------------------
 // Durable storage for finished videos and images, over two drivers.
@@ -22,11 +23,11 @@ function blobToken(): string | undefined {
   return process.env.BLOB_READ_WRITE_TOKEN || undefined;
 }
 
-/** Disk is only safe where the filesystem survives — never on Vercel. */
+/** Disk is only safe where the filesystem survives — never on Vercel / Workers. */
 function diskAllowed(): boolean {
   if (blobToken()) return false;
-  const ephemeral = process.env.VERCEL === "1" || process.env.AWS_LAMBDA_FUNCTION_NAME;
-  return !ephemeral;
+  if (isEphemeralFilesystem()) return false;
+  return true;
 }
 
 export function mediaDir(): string {

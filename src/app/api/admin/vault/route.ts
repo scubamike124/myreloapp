@@ -5,11 +5,11 @@ import { canWrite, readStatuses, writeKeys } from "@/lib/env-vault";
 
 export const runtime = "nodejs";
 
-// IMPORTANT: proxy.ts matches "/admin/:path*", which does NOT cover this route
+// IMPORTANT: middleware matches "/admin/:path*", which does NOT cover this route
 // (it lives under /api). The session must be verified here, explicitly.
 async function requireAdmin(): Promise<NextResponse | null> {
   const store = await cookies();
-  if (!verifySessionToken(store.get(ADMIN_COOKIE)?.value)) {
+  if (!(await verifySessionToken(store.get(ADMIN_COOKIE)?.value))) {
     return NextResponse.json({ error: "Not authorized." }, { status: 401 });
   }
   return null;

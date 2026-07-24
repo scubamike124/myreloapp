@@ -1,5 +1,6 @@
 import { driver } from "@/lib/db";
 import { storageDriver, RETENTION_DAYS } from "@/lib/storage";
+import { isCloudflareWorkers, isEphemeralFilesystem } from "@/lib/runtime-platform";
 
 // ---------------------------------------------------------------------------
 // Liveness and readiness in one place.
@@ -43,6 +44,8 @@ export async function GET() {
       storage, // "blob" | "disk" | "none"
       retentionDays: RETENTION_DAYS,
       providers,
+      platform: isCloudflareWorkers() ? "cloudflare-workers" : "node",
+      ephemeralFilesystem: isEphemeralFilesystem(),
       env: process.env.NODE_ENV ?? "unknown",
     },
     { headers: { "Cache-Control": "no-store" } },
