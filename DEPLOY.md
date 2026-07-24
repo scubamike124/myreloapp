@@ -36,6 +36,9 @@ docker build -t reelo .
 docker run -p 3000:3000 --env-file .env.local -v reelo-data:/app/.data reelo
 ```
 
+Docker runs `npm run build:next` (plain Next standalone). Cloudflare Workers use
+`npm run build` → OpenNext (see `docs/CLOUDFLARE_WORKERS.md`).
+
 The `-v reelo-data:/app/.data` is the persistent folder. Drop it and you lose
 accounts and videos on every restart. Point Cloudflare DNS at this host and
 enable the proxy for TLS/WAF.

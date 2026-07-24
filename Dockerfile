@@ -24,7 +24,8 @@ RUN npm ci --ignore-scripts || npm install --ignore-scripts
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV DOCKER_BUILD=1
-RUN npm run build
+# Docker needs Next standalone output, not the OpenNext Worker bundle.
+RUN npm run build:next
 
 # --- run: the smallest thing that serves --------------------------------------
 FROM node:24-slim AS run

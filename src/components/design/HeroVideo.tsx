@@ -5,10 +5,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const SRC = "/assets/hero-launch.mp4";
 
 /**
- * The hero clip is large (see README — it wants re-encoding). Until then, skip
- * autoplay for people who have asked not to pay for it: Save-Data, a metered or
- * slow connection, or reduced-motion. They get the first frame and a play
- * button instead of an unrequested multi-megabyte download.
+ * Skip autoplay for Save-Data, metered/slow connections, or reduced-motion.
+ * Those users get the first frame and a play button instead of an unrequested
+ * download. The clip is kept under Cloudflare Workers' 25 MiB asset limit.
  */
 function shouldAutoplay(): boolean {
   if (typeof window === "undefined") return false;
