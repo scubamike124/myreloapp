@@ -6,8 +6,8 @@
  *
  *   1 Token = TOKEN_USD_VALUE USD
  *
- * Standard AI video and Website Commercial use tiered "up to N seconds" buckets
- * (not a linear per-second formula).
+ * Standard AI video: 1 token per 30 seconds (simple tier buckets).
+ * Website Commercial + Product Commercial use separate premium ladders.
  */
 
 /** Face value of one Reelo token in US dollars. */
@@ -16,17 +16,18 @@ export const TOKEN_USD_VALUE = 10;
 export type PriceTier = { maxSeconds: number; tokens: number; label: string };
 
 /**
- * Standard AI video (Talking Photo, Dancing Photo, Product Commercial,
- * AI Avatar Studio, AI Story Maker video, cinematic episodes, future video).
+ * Standard AI video — Talking Photo, Dancing Photo, AI Avatar Studio,
+ * and any future standard video feature.
+ * Rule: 1 token for every 30 seconds of generated video.
  */
 export const STANDARD_VIDEO_TIERS: readonly PriceTier[] = [
-  { maxSeconds: 30, tokens: 4, label: "Up to 30 seconds" },
-  { maxSeconds: 60, tokens: 8, label: "Up to 60 seconds" },
-  { maxSeconds: 120, tokens: 16, label: "Up to 2 minutes" },
-  { maxSeconds: 180, tokens: 24, label: "Up to 3 minutes" },
-  { maxSeconds: 300, tokens: 40, label: "Up to 5 minutes" },
-  { maxSeconds: 600, tokens: 80, label: "Up to 10 minutes" },
-  { maxSeconds: 900, tokens: 120, label: "Up to 15 minutes" },
+  { maxSeconds: 30, tokens: 1, label: "Up to 30 seconds" },
+  { maxSeconds: 60, tokens: 2, label: "Up to 60 seconds" },
+  { maxSeconds: 120, tokens: 4, label: "Up to 2 minutes" },
+  { maxSeconds: 180, tokens: 6, label: "Up to 3 minutes" },
+  { maxSeconds: 300, tokens: 10, label: "Up to 5 minutes" },
+  { maxSeconds: 600, tokens: 20, label: "Up to 10 minutes" },
+  { maxSeconds: 900, tokens: 30, label: "Up to 15 minutes" },
 ] as const;
 
 /**
@@ -38,6 +39,17 @@ export const WEBSITE_COMMERCIAL_TIERS: readonly PriceTier[] = [
   { maxSeconds: 120, tokens: 24, label: "Up to 2 minutes" },
   { maxSeconds: 180, tokens: 36, label: "Up to 3 minutes" },
   { maxSeconds: 300, tokens: 60, label: "Up to 5 minutes" },
+] as const;
+
+/**
+ * Product Commercial — premium (product photo → cinematic ad).
+ */
+export const PRODUCT_COMMERCIAL_TIERS: readonly PriceTier[] = [
+  { maxSeconds: 30, tokens: 2, label: "Up to 30 seconds" },
+  { maxSeconds: 60, tokens: 4, label: "Up to 60 seconds" },
+  { maxSeconds: 120, tokens: 8, label: "Up to 2 minutes" },
+  { maxSeconds: 180, tokens: 12, label: "Up to 3 minutes" },
+  { maxSeconds: 300, tokens: 20, label: "Up to 5 minutes" },
 ] as const;
 
 /** Round token amounts (supports whole tokens; keeps 2 d.p. for legacy ledger). */
@@ -84,14 +96,19 @@ function nearestTierSeconds(tiers: readonly PriceTier[], seconds: number): numbe
   return best;
 }
 
-/** Tokens for a standard AI video of the given length (tiered). */
+/** Tokens for a standard AI video of the given length (1 token / 30s). */
 export function standardVideoTokens(seconds: number): number {
   return tokensForTier(STANDARD_VIDEO_TIERS, seconds);
 }
 
-/** Tokens for a Website Commercial of the given length (premium tiers). */
+/** Tokens for a Website Commercial of the given length (premium). */
 export function websiteCommercialTokens(seconds: number): number {
   return tokensForTier(WEBSITE_COMMERCIAL_TIERS, seconds);
+}
+
+/** Tokens for a Product Commercial of the given length (premium). */
+export function productCommercialTokens(seconds: number): number {
+  return tokensForTier(PRODUCT_COMMERCIAL_TIERS, seconds);
 }
 
 export function clampToStandardTier(seconds: number): number {
@@ -102,11 +119,18 @@ export function clampToWebsiteTiers(seconds: number): number {
   return nearestTierSeconds(WEBSITE_COMMERCIAL_TIERS, seconds);
 }
 
-/** Lengths offered in duration pickers for standard video (product). */
+export function clampToProductTiers(seconds: number): number {
+  return nearestTierSeconds(PRODUCT_COMMERCIAL_TIERS, seconds);
+}
+
+/** Lengths offered in duration pickers for standard video. */
 export const STANDARD_VIDEO_PICKER_SECONDS = STANDARD_VIDEO_TIERS.map((t) => t.maxSeconds);
 
 /** Lengths offered for Website Commercial. */
 export const WEBSITE_COMMERCIAL_LENGTHS_SEC = WEBSITE_COMMERCIAL_TIERS.map((t) => t.maxSeconds);
+
+/** Lengths offered for Product Commercial. */
+export const PRODUCT_COMMERCIAL_LENGTHS_SEC = PRODUCT_COMMERCIAL_TIERS.map((t) => t.maxSeconds);
 
 /**
  * Veo provider only renders 4 / 6 / 8 seconds — all bill as the "up to 30s" tier.
@@ -114,10 +138,9 @@ export const WEBSITE_COMMERCIAL_LENGTHS_SEC = WEBSITE_COMMERCIAL_TIERS.map((t) =
  */
 export const VEO_RENDER_SECONDS = [4, 6, 8] as const;
 
-/** Flat non-duration features (only defined here — never hard-coded in tools). */
+/** Flat non-duration features (only defined here — never hard-coded in UI). */
 export const FLAT_TOKEN_COST = {
   "bedtime-storybook": 1, // 10-page personalized bedtime story
-  "ai-story-maker": 1, // ebook / episode writing; video render billed as standard video
   "shorts-20": 2,
   "story-memory-generator": 2,
   "custom-avatar-creator": 2,

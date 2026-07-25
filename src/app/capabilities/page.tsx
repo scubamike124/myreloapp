@@ -17,7 +17,7 @@ type Section = {
 const SECTIONS: Section[] = [
   {
     id: "creation", title: "AI Creation Studio", icon: "chip",
-    items: ["Talking Photos", "Dancing Photos", "AI Avatar Videos", "AI Talking Avatars", "Website Commercial Generator", "Product Commercial Generator", "Social Media Commercials", "AI Story Maker", "20 Shorts Generator", "AI Video Generator", "Image to Video", "Text to Video", "AI Voiceovers", "AI Revoice", "AI Lip Sync", "AI Background Replacement", "AI Object Removal", "AI Upscaling", "AI Captions", "AI Translation", "AI Subtitle Generator", "AI Script Writer", "AI Hook Generator", "AI CTA Generator", "AI Hashtag Generator", "AI Thumbnail Generator"],
+    items: ["Talking Photos", "Dancing Photos", "AI Avatar Videos", "AI Talking Avatars", "Website Commercial Generator", "Product Commercial Generator", "Social Media Commercials", "20 Shorts Generator", "AI Video Generator", "Image to Video", "Text to Video", "AI Voiceovers", "AI Lip Sync", "AI Captions", "AI Subtitle Generator", "AI Script Writer", "AI Hook Generator", "AI CTA Generator", "AI Hashtag Generator", "AI Thumbnail Generator", "Bedtime Storybook", "Story & Memory Generator"],
   },
   {
     id: "avatars", title: "Avatar Library", icon: "users", note: "Target: 1,000+ Avatars",

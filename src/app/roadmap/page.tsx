@@ -9,7 +9,7 @@ const PHASES: Phase[] = [
   {
     n: 1, title: "Core Platform", tag: "Launch",
     groups: [
-      { name: "AI Creation Tools", items: ["Talking Photo", "Dancing Photo", "AI Avatar Studio", "Custom Avatar Creator", "Revoice", "Website → 30-Second Commercial Generator", "Create 20 Shorts from Website or Prompt", "Product Commercial Generator", "AI Story Maker", "Translate Videos into Multiple Languages"] },
+      { name: "AI Creation Tools", items: ["Talking Photo", "Dancing Photo", "AI Avatar Studio", "Custom Avatar Creator", "Website → Commercial Generator", "Create 20 Shorts from Website or Prompt", "Product Commercial Generator", "Bedtime Storybook", "Story & Memory Generator"] },
       { name: "Avatar System", items: ["700+ curated avatar roadmap", "Creator & Host categories", "Saved Custom Avatars", "Favorites", "Voice previews", "Multiple languages", "Accent presets", "Gender filters", "Style filters"] },
       { name: "Website Commercials", items: ["AI scans website", "Generates script", "Uses uploaded business photos first", "Creates cinematic commercial", "AI voiceover", "Music", "Download", "Share", "Copy Link", "Generate 20 Shorts", "One-click regeneration"] },
       { name: "Shorts Generator", items: ["Generate from website", "Generate from prompt", "Generate from uploaded photos", "AI narration", "Multiple voice styles", "Multiple languages"] },
@@ -25,12 +25,10 @@ const PHASES: Phase[] = [
     groups: [
       { name: "Business Hub Pro", items: ["Connect TikTok", "Connect Instagram", "Connect Facebook", "Connect YouTube", "Scheduled posting", "Cross-posting", "Analytics", "Revenue dashboard", "Conversion tracking", "Trend AI", "Clone My Winner", "AI Content Calendar", "AI Growth Recommendations"] },
       { name: "Trend AI", items: ["What's Trending", "Viral Hooks", "Trending Formats", "Trending Audio", "AI Recommendations", "One-click trend creation"] },
-      { name: "AI Quality Enhancement", items: ["Face enhancement", "Motion enhancement", "Upscaling", "HD exports", "Texture improvements", "Premium render mode"] },
       { name: "AI Prompt Builder", items: ["Simple controls", "AI writes advanced prompts", "Camera movement", "Style", "Pacing", "Lighting", "Effects"] },
       { name: "Social Features", items: ["Groups", "Friends", "Family Groups", "Work Groups", "Birthday Videos", "Greeting Cards", "Holiday Videos", "Revenge Videos", "Notifications", "Response reminders"] },
       { name: "Avatar Battles", items: ["Dance Battles", "Roast Battles", "Comedy Battles", "AI Judges", "Scorecards", "Leaderboards", "Weekly competitions", "Seasons", "Championships"] },
       { name: "Music", items: ["Upload your own music", "Dance to custom songs", "AI synchronization"] },
-      { name: "AI Story Expansion", items: ["Multi-episode stories", "Continuing series", "Character consistency", "Story memory"] },
     ],
   },
   {

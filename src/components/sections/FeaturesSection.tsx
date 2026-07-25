@@ -59,7 +59,7 @@ function Phase3Art() {
 const PHASES = [
   { n: "Phase 1", title: "Core Creation Studio", Art: Phase1Art, items: ["AI Avatars", "Talking Photos", "Dancing Photos", "AI Voices", "AI Videos", "Commercials & Product Videos", "20 Shorts from One Description"] },
   { n: "Phase 2", title: "Growth & Engagement", Art: Phase2Art, items: ["Avatar Battles", "Groups & Social", "Trend AI – What's Working Now", "Greeting Videos (Birthdays, Holidays)", "Revenge Videos", "Leaderboards & Challenges"] },
-  { n: "Phase 3", title: "Scale & Automation", Art: Phase3Art, items: ["TikTok/Instagram/YouTube Scheduling", "Advanced Analytics", "Batch Creation & Queue", "AI Story Maker (Episodic Videos)", "Product Commercial Engine", "Enterprise & Team Tools"] },
+  { n: "Phase 3", title: "Scale & Automation", Art: Phase3Art, items: ["TikTok/Instagram/YouTube Scheduling", "Advanced Analytics", "Batch Creation & Queue", "Product Commercial Engine", "Enterprise & Team Tools"] },
 ];
 
 function CircleCheck() {

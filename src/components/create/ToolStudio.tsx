@@ -259,7 +259,9 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
             data.error ||
               (tool.slug === "dancing-photo"
                 ? "Dancing video failed to start. Try a clearer JPG/PNG photo (not HEIC) under ~8MB."
-                : "Generation failed."),
+                : tool.slug === "talking-photo"
+                  ? "Talking video failed to start. Use a JPG or PNG from your phone (not HEIC/Live Photo), front-facing, under ~8MB."
+                  : "Generation failed."),
           );
         }
         tokens.setBalance(data.balance);
@@ -656,7 +658,7 @@ function FieldView({ field, value, preview, selected, onChange, onFile, onToggle
             {!preview && field.hint && (
               <span className="max-w-xs text-[11px] leading-relaxed text-white/30">{PHOTO_SIZE_HINT}</span>
             )}
-            <input type="file" accept="image/jpeg,image/png,image/webp,image/*" className="hidden" onChange={(e) => onFile(e.target.files?.[0])} />
+            <input type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" className="hidden" onChange={(e) => onFile(e.target.files?.[0])} />
           </label>
         </div>
       );

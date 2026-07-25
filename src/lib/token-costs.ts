@@ -7,12 +7,14 @@
 
 import {
   FLAT_TOKEN_COST,
+  PRODUCT_COMMERCIAL_TIERS,
   STANDARD_VIDEO_TIERS,
   TOKEN_USD_VALUE,
   VEO_RENDER_SECONDS,
   WEBSITE_COMMERCIAL_TIERS,
   formatTokens,
   formatUsdFromTokens,
+  productCommercialTokens,
   roundTokens,
   standardVideoTokens,
   usdFromTokens,
@@ -26,6 +28,7 @@ export {
   usdFromTokens,
   standardVideoTokens,
   websiteCommercialTokens,
+  productCommercialTokens,
   roundTokens,
 } from "@/lib/token-pricing";
 
@@ -33,11 +36,10 @@ export {
 export const TOKEN_COST: Record<string, number> = {
   "talking-photo": standardVideoTokens(30),
   "dancing-photo": standardVideoTokens(30),
-  "product-commercial": standardVideoTokens(30),
+  "product-commercial": productCommercialTokens(30),
   "ai-avatar-studio": standardVideoTokens(30),
   "website-commercial": websiteCommercialTokens(30),
   "bedtime-storybook": FLAT_TOKEN_COST["bedtime-storybook"],
-  "ai-story-maker": FLAT_TOKEN_COST["ai-story-maker"],
   "shorts-20": FLAT_TOKEN_COST["shorts-20"],
   "story-memory-generator": FLAT_TOKEN_COST["story-memory-generator"],
   "custom-avatar-creator": FLAT_TOKEN_COST["custom-avatar-creator"],
@@ -62,9 +64,20 @@ function standardOption(maxSeconds: number, tokens: number, label: string, floor
   };
 }
 
-/** Veo: pick render length 4/6/8; all bill as the up-to-30s standard tier (4 tokens). */
+/** Veo: pick render length 4/6/8; all bill as the up-to-30s standard (or product) tier. */
 export const VEO_DURATION_OPTIONS: DurationOption[] = VEO_RENDER_SECONDS.map((seconds) => {
   const tokens = standardVideoTokens(seconds);
+  return {
+    seconds,
+    tokens,
+    label: `${seconds}-second clip`,
+    priceNote: "Billed as up to 30 seconds",
+  };
+});
+
+/** Product Commercial Veo clips — same 4/6/8 render lengths, product premium floor. */
+export const PRODUCT_VEO_DURATION_OPTIONS: DurationOption[] = VEO_RENDER_SECONDS.map((seconds) => {
+  const tokens = productCommercialTokens(seconds);
   return {
     seconds,
     tokens,
@@ -83,27 +96,28 @@ export const WEBSITE_COMMERCIAL_DURATION_OPTIONS: DurationOption[] = WEBSITE_COM
   standardOption(t.maxSeconds, t.tokens, t.label, WEBSITE_COMMERCIAL_TIERS[0]!.tokens),
 );
 
-const VEO_ACTIONS = new Set(["talking-photo", "dancing-photo", "product-commercial"]);
+/** Product Commercial premium tiers (for any non-Veo length UI). */
+export const PRODUCT_COMMERCIAL_DURATION_OPTIONS: DurationOption[] = PRODUCT_COMMERCIAL_TIERS.map((t) =>
+  standardOption(t.maxSeconds, t.tokens, t.label, PRODUCT_COMMERCIAL_TIERS[0]!.tokens),
+);
+
+const VEO_STANDARD_ACTIONS = new Set(["talking-photo", "dancing-photo"]);
+const VEO_PRODUCT_ACTIONS = new Set(["product-commercial"]);
 const HEYGEN_ACTIONS = new Set(["ai-avatar-studio"]);
 const WEBSITE_ACTIONS = new Set(["website-commercial"]);
-/** Story Maker video episodes use the same standard video ladder when seconds are passed. */
-const STANDARD_VIDEO_ACTIONS = new Set([
-  ...VEO_ACTIONS,
-  ...HEYGEN_ACTIONS,
-  "ai-story-maker",
-]);
+const STANDARD_VIDEO_ACTIONS = new Set([...VEO_STANDARD_ACTIONS, ...HEYGEN_ACTIONS]);
 
 export function durationOptionsFor(action: string): DurationOption[] | null {
-  if (VEO_ACTIONS.has(action)) return VEO_DURATION_OPTIONS;
+  if (VEO_STANDARD_ACTIONS.has(action)) return VEO_DURATION_OPTIONS;
+  if (VEO_PRODUCT_ACTIONS.has(action)) return PRODUCT_VEO_DURATION_OPTIONS;
   if (HEYGEN_ACTIONS.has(action)) return HEYGEN_DURATION_OPTIONS;
   if (WEBSITE_ACTIONS.has(action)) return WEBSITE_COMMERCIAL_DURATION_OPTIONS;
-  if (action === "ai-story-maker") return HEYGEN_DURATION_OPTIONS;
   return null;
 }
 
 export function defaultDurationSeconds(action: string): number {
-  if (VEO_ACTIONS.has(action)) return 8;
-  if (HEYGEN_ACTIONS.has(action) || action === "ai-story-maker") return 30;
+  if (VEO_STANDARD_ACTIONS.has(action) || VEO_PRODUCT_ACTIONS.has(action)) return 8;
+  if (HEYGEN_ACTIONS.has(action)) return 30;
   if (WEBSITE_ACTIONS.has(action)) return 30;
   return 0;
 }
@@ -122,11 +136,13 @@ export function costOf(action: string, opts?: { seconds?: number }): number {
     return websiteCommercialTokens(seconds);
   }
 
+  if (VEO_PRODUCT_ACTIONS.has(action)) {
+    const seconds =
+      opts?.seconds != null ? clampDurationSeconds(action, opts.seconds) : defaultDurationSeconds(action);
+    return productCommercialTokens(seconds);
+  }
+
   if (STANDARD_VIDEO_ACTIONS.has(action)) {
-    // Ebook / script-only Story Maker (no seconds) stays on the flat episode price.
-    if (action === "ai-story-maker" && opts?.seconds == null) {
-      return FLAT_TOKEN_COST["ai-story-maker"];
-    }
     const seconds =
       opts?.seconds != null ? clampDurationSeconds(action, opts.seconds) : defaultDurationSeconds(action);
     return standardVideoTokens(seconds);
@@ -144,7 +160,6 @@ export const TOKEN_UNIT: Record<string, string> = {
   "website-commercial": "commercial",
   "product-commercial": "commercial",
   "bedtime-storybook": "book",
-  "ai-story-maker": "episode",
   "custom-avatar-creator": "avatar",
   "story-memory-generator": "film",
   "shorts-20": "batch",

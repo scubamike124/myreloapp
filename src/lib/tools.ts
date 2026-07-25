@@ -47,7 +47,7 @@ export const TOOLS: Tool[] = [
   {
     slug: "talking-photo", title: "Talking Photo", tagline: "Make any photo speak naturally.", icon: "mic", poster: "/assets/talking-selfie.jpg", credits: creditLabel("talking-photo"), cta: "Generate talking video",
     fields: [
-      { kind: "upload", name: "photo", label: "Upload a photo", hint: "JPG or PNG under ~8MB — clear, front-facing. Large photos are auto-shrunk." },
+      { kind: "upload", name: "photo", label: "Upload a photo", hint: "JPG or PNG from your phone works best. HEIC/Live Photos often fail — convert to JPG in Photos first. Large images are auto-shrunk." },
       { kind: "textarea", name: "script", label: "What should they say?", placeholder: "Hey everyone! Today I want to show you something incredible…" },
       { kind: "select", name: "voice", label: "Voice", options: VOICES },
       { kind: "select", name: "language", label: "Spoken language", options: LANGS },
@@ -86,14 +86,6 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "revoice", title: "Revoice", tagline: "Swap the voice on any video — pick the target language (coming soon).", icon: "mic", poster: "/assets/Revoice.png", credits: "Coming soon", cta: "Revoice video",
-    fields: [
-      { kind: "upload", name: "video", label: "Upload a video", hint: "MP4 or MOV." },
-      { kind: "select", name: "voice", label: "New voice", options: VOICES },
-      { kind: "select", name: "language", label: "Target language", options: LANGS },
-    ],
-  },
-  {
     slug: "website-commercial", title: "Website Commercial", tagline: "Paste a URL. Get up to 20 video ideas and a cinematic ad — pick your avatar.", icon: "film", poster: "/assets/website commershial.png", credits: creditLabel("website-commercial"), cta: "Generate commercial",
     fields: [
       { kind: "url", name: "url", label: "Website URL", placeholder: "https://yourbrand.com", hint: "We scrape copy, colors, and product shots." },
@@ -122,36 +114,6 @@ export const TOOLS: Tool[] = [
       { kind: "url", name: "url", label: "Product URL (optional)", placeholder: "https://store.com/product" },
       { kind: "select", name: "look", label: "Look", options: ["Studio", "Lifestyle", "Outdoor", "Neon", "Marble & Gold"] },
       { kind: "select", name: "music", label: "Music", options: ["Upbeat", "Ambient", "Luxury", "Energetic"] },
-    ],
-  },
-  {
-    slug: "ai-story-maker", title: "AI Story Maker", tagline: "Any character starring in a series — as an illustrated ebook or a talking video.", icon: "sparkle", poster: "/assets/commercials.jpg", credits: creditLabel("ai-story-maker"), cta: "Start the series",
-    // StoryMaker renders its own interface; these fields describe the tool for
-    // the Create page and for Amber.
-    fields: [
-      { kind: "upload", name: "character", label: "Your star", hint: "Upload a photo, or pick any Reelo character — a banana, a dragon, a warlord." },
-      { kind: "segment", name: "format", label: "Format", options: ["Video", "Ebook"] },
-      { kind: "text", name: "characterName", label: "Their name", placeholder: "Barry the Banana" },
-      { kind: "textarea", name: "premise", label: "What is the series about?", placeholder: "Barry escapes the fruit bowl and sets out to find the legendary Golden Orchard…" },
-      { kind: "select", name: "genre", label: "Genre", options: ["Adventure", "Fantasy", "Comedy", "Anime", "Mystery", "Sci-Fi", "Family", "Children's"] },
-      { kind: "slider", name: "scenes", label: "Scenes per episode", min: 6, max: 10, step: 1, default: 8 },
-      { kind: "select", name: "language", label: "Language", options: LANGS },
-    ],
-  },
-  {
-    slug: "translate-videos", title: "Translate Videos", tagline: "Translate & dub into many languages (coming soon).", icon: "globe", poster: "/assets/talking-selfie.jpg", credits: "Coming soon", cta: "Translate video",
-    fields: [
-      { kind: "upload", name: "video", label: "Upload a video", hint: "MP4 or MOV." },
-      { kind: "multi", name: "languages", label: "Target languages", options: LANGS },
-      { kind: "select", name: "mode", label: "Voice", options: ["Clone original voice", "Use AI voice"] },
-    ],
-  },
-  {
-    slug: "ai-quality-enhancement", title: "AI Quality Enhancement", tagline: "Upscale and enhance any video.", icon: "magic", poster: "/assets/spokesperson.jpg", credits: "Pricing to be confirmed", cta: "Enhance video",
-    fields: [
-      { kind: "upload", name: "video", label: "Upload a video", hint: "We enhance face, motion, and detail." },
-      { kind: "multi", name: "enhancements", label: "Enhancements", options: ["Face Enhancement", "Motion Enhancement", "Upscale to 4K", "Texture Boost"] },
-      { kind: "select", name: "mode", label: "Render mode", options: ["Standard", "Premium"] },
     ],
   },
   {
@@ -194,7 +156,6 @@ export const LIVE_TOOLS = new Set<string>([
   "ai-avatar-studio",
   "website-commercial",
   "bedtime-storybook",
-  "ai-story-maker",
   "product-commercial",
   "story-memory-generator",
   "shorts-20",
@@ -207,7 +168,6 @@ export function isToolLive(slug: string): boolean {
 /** Which external service a live tool depends on — used for Amber's guidance. */
 export const TOOL_SERVICE: Record<string, "gemini" | "heygen"> = {
   "bedtime-storybook": "gemini",
-  "ai-story-maker": "gemini",
   "product-commercial": "gemini",
   "story-memory-generator": "gemini",
   "shorts-20": "gemini",

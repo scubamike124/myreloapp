@@ -371,9 +371,9 @@ export default function AiAvatarStudio() {
         <h1 className="font-display mt-1 text-3xl font-bold tracking-[-0.02em] sm:text-4xl">AI Avatar Studio</h1>
         <p className="mt-2 text-[15px] leading-relaxed" style={{ color: "#a99a9c" }}>
           Three steps: add a website or message → pick an avatar or your photo → choose length &amp; generate.
-          Avatar videos use standard tier pricing (from {formatTokens(standardVideoTokens(30))} tokens /{" "}
-          {formatUsdFromTokens(standardVideoTokens(30))}). Your-photo clips are up to ~{VEO_MAX_SECONDS}s and bill as
-          the up-to-30s tier.
+          Avatar videos use standard tier pricing (from {formatTokens(standardVideoTokens(30))}{" "}
+          {standardVideoTokens(30) === 1 ? "token" : "tokens"} / {formatUsdFromTokens(standardVideoTokens(30))}).
+          Your-photo clips are up to ~{VEO_MAX_SECONDS}s and bill as the up-to-30s tier.
         </p>
         <p
           className="mt-3 rounded-xl px-3.5 py-2.5 text-[12.5px] leading-relaxed"

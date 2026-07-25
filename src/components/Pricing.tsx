@@ -13,6 +13,7 @@ import {
 import {
   formatTokens,
   websiteCommercialTokens,
+  productCommercialTokens,
   standardVideoTokens,
   formatUsdFromTokens,
 } from "@/lib/token-pricing";
@@ -63,6 +64,7 @@ type Tier = {
 };
 
 const WC_FLOOR = websiteCommercialTokens(30);
+const PRODUCT_FLOOR = productCommercialTokens(30);
 const STD_FLOOR = standardVideoTokens(30);
 
 const TIERS: Tier[] = [
@@ -327,8 +329,10 @@ export default function Pricing() {
           ))}
         </div>
         <p className="mt-4 text-center text-[11px]" style={{ color: "#7a6e70" }}>
-          Website Commercials from {formatTokens(WC_FLOOR)} tokens ({formatUsdFromTokens(WC_FLOOR)}) · Standard
-          videos from {formatTokens(STD_FLOOR)} tokens ({formatUsdFromTokens(STD_FLOOR)})
+          Standard videos from {formatTokens(STD_FLOOR)} token
+          {STD_FLOOR === 1 ? "" : "s"} ({formatUsdFromTokens(STD_FLOOR)}) · Product Commercials from{" "}
+          {formatTokens(PRODUCT_FLOOR)} ({formatUsdFromTokens(PRODUCT_FLOOR)}) · Website Commercials from{" "}
+          {formatTokens(WC_FLOOR)} ({formatUsdFromTokens(WC_FLOOR)})
         </p>
       </div>
     </section>
