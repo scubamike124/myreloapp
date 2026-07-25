@@ -24,7 +24,7 @@ const CHALLENGES = [
 ];
 
 const FEED = [
-  { who: "Ava Reyes", action: "won the Dance Battle vs Leo", when: "5m ago", img: "/assets/talking-selfie.jpg" },
+  { who: "Ava Reyes", action: "shared a new Dancing Photo", when: "5m ago", img: "/assets/talking-selfie.jpg" },
   { who: "Nina Cole", action: "shared a new Talking Photo", when: "22m ago", img: "/assets/avatar-business.jpg" },
   { who: "Maya Stone", action: "joined #FamilyStory challenge", when: "1h ago", img: "/assets/talking-photo.jpg" },
 ];
