@@ -43,6 +43,7 @@ const STUDIO: Record<string, { href: string; label: string }> = {
 
 export default function ShortsPlanner() {
   const [mode, setMode] = useState<"url" | "prompt">("url");
+  const [output, setOutput] = useState<"text" | "video">("text");
   const [url, setUrl] = useState("");
   const [prompt, setPrompt] = useState("");
   const [count, setCount] = useState(10);
@@ -164,12 +165,8 @@ export default function ShortsPlanner() {
         </p>
         <h1 className="font-display mt-1 text-3xl font-bold tracking-[-0.02em] sm:text-4xl">Shorts Generator</h1>
         <p className="mt-2" style={{ color: "#a99a9c" }}>
-          A month of shorts from one website or one sentence — each with its hook, spoken script, shot list, caption
-          and hashtags.
-        </p>
-        <p className="mt-1 text-[13px]" style={{ color: "#7d6f71" }}>
-          These are scripts, not finished videos. Any one of them can be sent to the studio that films it, so you only
-          spend on the videos you actually want.
+          Up to 20 shorts from one website or one sentence — choose <strong className="text-white/85">Text scripts</strong>{" "}
+          or <strong className="text-white/85">Video handoff</strong> (send each script to a studio that films it).
         </p>
 
         <div className="mt-7 grid gap-6 lg:grid-cols-5">
@@ -178,6 +175,36 @@ export default function ShortsPlanner() {
             className="flex flex-col gap-5 rounded-2xl p-5 lg:col-span-2"
             style={{ border: "1px solid rgba(255,70,85,.18)", background: "rgba(20,10,12,.55)" }}
           >
+            <div>
+              <p className="mb-2 text-[13px] font-semibold text-white/80">Output</p>
+              <div className="mb-1 flex gap-1.5">
+                {(
+                  [
+                    ["text", "Text scripts"],
+                    ["video", "Video handoff"],
+                  ] as const
+                ).map(([id, label]) => (
+                  <button
+                    key={id}
+                    onClick={() => setOutput(id)}
+                    className="flex-1 rounded-lg px-3 py-2 text-[12.5px] font-semibold transition-colors"
+                    style={
+                      output === id
+                        ? { color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" }
+                        : { color: "#b9a9ab", border: "1px solid rgba(255,70,85,.2)" }
+                    }
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <p className="mb-4 text-[11.5px] leading-relaxed text-white/40">
+                {output === "text"
+                  ? "Get hooks, scripts, shots, captions & hashtags you can copy."
+                  : "Same scripts, plus big buttons to film each one in Talking Photo or AI Avatar Studio (avatar = longer video)."}
+              </p>
+            </div>
+
             <div>
               <p className="mb-2 text-[13px] font-semibold text-white/80">Where should the ideas come from?</p>
               <div className="mb-3 flex gap-1.5">
@@ -433,13 +460,32 @@ export default function ShortsPlanner() {
                           )}
 
                           <div className="mt-4 flex flex-wrap gap-2">
-                            <Link
-                              href={studio.href}
-                              className="rounded-lg px-3 py-2 text-[12.5px] font-bold text-white"
-                              style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
-                            >
-                              Film this in {studio.label}
-                            </Link>
+                            {output === "video" ? (
+                              <>
+                                <Link
+                                  href={`/create/ai-avatar-studio?script=${encodeURIComponent(s.script.slice(0, 900))}`}
+                                  className="rounded-lg px-3 py-2 text-[12.5px] font-bold text-white"
+                                  style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+                                >
+                                  Make video (avatar · longer)
+                                </Link>
+                                <Link
+                                  href={`/create/talking-photo?script=${encodeURIComponent(s.script.slice(0, 500))}`}
+                                  className="rounded-lg px-3 py-2 text-[12.5px] font-bold text-white"
+                                  style={{ border: "1px solid rgba(255,70,85,.4)", background: "rgba(255,60,75,.12)" }}
+                                >
+                                  Make video (your photo · ~8s)
+                                </Link>
+                              </>
+                            ) : (
+                              <Link
+                                href={studio.href}
+                                className="rounded-lg px-3 py-2 text-[12.5px] font-bold text-white"
+                                style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+                              >
+                                Open {studio.label}
+                              </Link>
+                            )}
                             <button
                               onClick={() => copy(s.script, `script-${i}`)}
                               className="rounded-lg px-3 py-2 text-[12.5px] font-semibold text-white/60 transition-colors hover:text-white"

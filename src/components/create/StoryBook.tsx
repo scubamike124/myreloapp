@@ -154,7 +154,7 @@ export default function StoryBook() {
               className="flex cursor-pointer items-center gap-3 rounded-xl px-3 py-3 transition-colors hover:bg-white/[.04]"
               style={{ border: "1px dashed rgba(255,70,85,.35)" }}
             >
-              <input type="file" accept="image/*" className="hidden" onChange={(e) => onPhoto(e.target.files?.[0])} />
+              <input type="file" accept="image/jpeg,image/png,image/webp,image/*" className="hidden" onChange={(e) => onPhoto(e.target.files?.[0])} />
               {preview ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={preview} alt="" className="h-14 w-14 rounded-lg object-cover" />
@@ -163,8 +163,13 @@ export default function StoryBook() {
                   📷
                 </span>
               )}
-              <span className="text-[13px] text-white/60">{photo ? photo.name : "Upload a clear, front-facing photo"}</span>
+              <span className="text-[13px] text-white/60">
+                {photo ? photo.name : "Upload a clear JPG/PNG under ~8MB"}
+              </span>
             </label>
+            <p className="mt-1.5 text-[11px] leading-relaxed text-white/35">
+              Large phone photos are auto-shrunk. If upload fails, choose a smaller picture.
+            </p>
           </div>
 
           <div>

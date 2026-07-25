@@ -12,6 +12,7 @@ import { playSyncedWithSound } from "@/lib/play-synced";
 import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 import { compressImageForUpload } from "@/lib/compress-image";
+import { PHOTO_SIZE_HINT, VEO_MAX_SECONDS } from "@/lib/upload-limits";
 
 type Status = "idle" | "generating" | "done";
 
@@ -27,16 +28,21 @@ function stagesFor(slug: string): string[] {
 // disagree about which tools actually work.
 
 function avatarPrompt(slug: string, values: Record<string, string>): string {
+  const lang = (values.language || "English").trim();
   if (slug === "dancing-photo") {
     const move = values.move ? `${values.move} ` : "";
     const music = values.music ? ` Soundtrack style: ${values.music}.` : "";
     return `The person in the photo performs an energetic, joyful ${move}dance — dynamic full-body motion, rhythmic and lively, dancing to clear upbeat music with an audible soundtrack, big smile. Include synchronized music and ambient sound.${music}`;
   }
-  // talking-photo
+  // talking-photo — language must be spoken, not English by default when another is chosen
   const script = (values.script || "").trim();
+  const langLine =
+    lang && !/^english$/i.test(lang)
+      ? ` Speak the entire dialogue clearly in ${lang} (not English). Pronunciation and wording must be natural ${lang}.`
+      : ` Speak clearly in English.`;
   return script
-    ? `A close-up of the person in the photo looking at the camera and speaking naturally with clear audible speech, lip-syncing exactly: "${script}". Subtle natural head movement, engaging eye contact. The spoken words must be clearly audible throughout.`
-    : `A close-up of the person in the photo looking at the camera and speaking naturally with clear audible speech and lip-sync. Subtle natural head movement. Spoken audio must be clearly present.`;
+    ? `A close-up of the person in the photo looking at the camera and speaking naturally with clear audible speech, lip-syncing exactly: "${script}".${langLine} Subtle natural head movement, engaging eye contact. The spoken words must be clearly audible throughout.`
+    : `A close-up of the person in the photo looking at the camera and speaking naturally with clear audible speech and lip-sync.${langLine} Subtle natural head movement. Spoken audio must be clearly present.`;
 }
 
 function avatarImagePrompt(values: Record<string, string>): string {
@@ -134,16 +140,13 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
     setErr(null);
   };
 
-  // Arriving from the Avatar Library with ?avatar=<id>: load that character's
-  // image straight into the tool's photo field, so picking a dragon in the
-  // library actually starts a video with the dragon. Without this the link
-  // promised something the page did not deliver.
-  //
-  // window.location rather than useSearchParams(): these routes are statically
-  // prerendered, and useSearchParams() without a Suspense boundary breaks the
-  // production build.
+  // Arriving from the Avatar Library with ?avatar=<id>, or Shorts with ?script=
   useEffect(() => {
-    const wanted = new URLSearchParams(window.location.search).get("avatar");
+    const params = new URLSearchParams(window.location.search);
+    const wantedScript = params.get("script");
+    if (wantedScript) set("script", wantedScript.slice(0, 2000));
+
+    const wanted = params.get("avatar");
     if (!wanted) return;
     const field = tool.fields.find((f) => f.kind === "upload");
     if (!field) return;
@@ -208,7 +211,11 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
         let mime = "image/jpeg";
         const file = uploadField ? filesRef.current[uploadField.name] : undefined;
         if (file) {
-          const compressed = await compressImageForUpload(file);
+          const compressed = await compressImageForUpload(file, {
+            maxEdge: tool.slug === "dancing-photo" ? 1024 : 1280,
+            quality: 0.8,
+            maxBytes: 3 * 1024 * 1024,
+          });
           base64 = compressed.base64;
           mime = compressed.mimeType;
         } else if (avatarChoiceField && avatarChoiceField.kind === "choices") {
@@ -216,7 +223,11 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
           const opt = avatarChoiceField.options.find((o) => o.value === sel) || avatarChoiceField.options[0];
           if (!opt?.img) throw new Error("Please choose an avatar.");
           const blob = await (await fetch(opt.img)).blob();
-          const compressed = await compressImageForUpload(blob);
+          const compressed = await compressImageForUpload(blob, {
+            maxEdge: 1024,
+            quality: 0.8,
+            maxBytes: 3 * 1024 * 1024,
+          });
           base64 = compressed.base64;
           mime = compressed.mimeType;
         } else {
@@ -407,6 +418,18 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
                   <FieldView key={f.name} field={f} value={values[f.name] ?? ""} preview={previews[f.name]} selected={multi[f.name] ?? []} onChange={(v) => set(f.name, v)} onFile={(file) => onFile(f.name, file)} onToggle={(opt) => toggleMulti(f.name, opt)} />
                 ))}
               </fieldset>
+              {isVideoTool && (
+                <p
+                  className="rounded-xl px-3.5 py-2.5 text-[12.5px] leading-relaxed"
+                  style={{ border: "1px solid rgba(255,70,85,.25)", background: "rgba(255,60,75,.06)", color: "#ffb3b9" }}
+                >
+                  Photo videos max out at about {VEO_MAX_SECONDS} seconds. For a longer talking video (up to ~30s),{" "}
+                  <Link href="/create/ai-avatar-studio" className="font-semibold underline underline-offset-2">
+                    open AI Avatar Studio and pick an avatar
+                  </Link>
+                  .
+                </p>
+              )}
               <button onClick={generate} disabled={status === "generating" || !isLive} className="flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-bold text-white transition-transform hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 10px 28px -8px rgba(225,29,42,.6)" }}>
                 {status === "generating" ? <><Spinner /> Generating…</> : <><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>{!isLive ? "Not available yet" : status === "done" ? "Regenerate" : tool.cta}</>}
               </button>
@@ -415,12 +438,12 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
               {isVideoTool && status !== "generating" && !err && !short && (
                 <p className="text-center text-xs text-white/40">
                   {tool.slug === "dancing-photo"
-                    ? `Upload a JPG/PNG photo first, pick a move, then generate (~${Number(process.env.NEXT_PUBLIC_VIDEO_SECONDS ?? 8)}s real AI video, ~1–3 min).`
-                    : "Generates a real AI video from your photo (~1–3 min)."}
+                    ? `Upload a JPG/PNG under ~8MB, pick a move, then generate (~${VEO_MAX_SECONDS}s AI video, ~1–3 min).`
+                    : `Generates a real ~${VEO_MAX_SECONDS}s AI video from your photo (~1–3 min).`}
                 </p>
               )}
-              {isImageTool && status !== "generating" && !err && !short && (
-                <p className="text-center text-xs text-white/40">Generates a real AI avatar image from your photo (~15–30s).</p>
+              {(isVideoTool || isImageTool) && (
+                <p className="text-center text-[11px] leading-relaxed text-white/35">{PHOTO_SIZE_HINT}</p>
               )}
             </div>
           </div>
@@ -617,8 +640,11 @@ function FieldView({ field, value, preview, selected, onChange, onFile, onToggle
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff5663" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 16V4m0 0L8 8m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
             )}
             <span className="text-sm font-medium text-white/70">{preview ? value : "Click to upload"}</span>
-            <span className="text-xs text-white/40">{preview ? "Change file" : field.hint ?? "PNG, JPG or MP4"}</span>
-            <input type="file" accept="image/*" className="hidden" onChange={(e) => onFile(e.target.files?.[0])} />
+            <span className="text-xs text-white/40">{preview ? "Change file" : field.hint ?? PHOTO_SIZE_HINT}</span>
+            {!preview && field.hint && (
+              <span className="max-w-xs text-[11px] leading-relaxed text-white/30">{PHOTO_SIZE_HINT}</span>
+            )}
+            <input type="file" accept="image/jpeg,image/png,image/webp,image/*" className="hidden" onChange={(e) => onFile(e.target.files?.[0])} />
           </label>
         </div>
       );

@@ -8,6 +8,8 @@ import { materializeVideoUrl } from "@/lib/materialize-video";
 import { playSyncedWithSound } from "@/lib/play-synced";
 import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
+import { compressImageForUpload } from "@/lib/compress-image";
+import { PHOTO_SIZE_HINT, VEO_MAX_SECONDS } from "@/lib/upload-limits";
 
 // ---------------------------------------------------------------------------
 // Product Commercial.
@@ -18,9 +20,6 @@ import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall }
 // presenter talks about a business instead.
 // ---------------------------------------------------------------------------
 
-const LOOKS = ["Studio", "Lifestyle", "Outdoor", "Neon", "Marble & Gold"];
-const MUSIC = ["Upbeat", "Ambient", "Luxury", "Energetic"];
-
 type Result = {
   headline: string;
   voiceover: string;
@@ -30,14 +29,10 @@ type Result = {
   scannedPage: boolean;
 };
 
-function fileToBase64(file: Blob): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const r = new FileReader();
-    r.onload = () => resolve(String(r.result).split(",")[1] || "");
-    r.onerror = () => reject(new Error("Could not read that image."));
-    r.readAsDataURL(file);
-  });
-}
+const LOOKS = ["Studio", "Lifestyle", "Outdoor", "Neon", "Marble & Gold"];
+const MUSIC = ["Upbeat", "Ambient", "Luxury", "Energetic"];
+
+// fileToBase64 removed — compressImageForUpload handles encoding.
 
 /** Poll an async Veo render until the clip is ready. */
 async function pollVeo(pollUrl: string, maxTries = 90): Promise<string> {
@@ -91,13 +86,17 @@ export default function ProductCommercial() {
     // still — it never claims to be finished before the video arrives.
     const timer = setInterval(() => setProgress((p) => Math.min(95, p + 1)), 1200);
     try {
-      const imageBase64 = await fileToBase64(photo);
+      const { base64: imageBase64, mimeType } = await compressImageForUpload(photo, {
+        maxEdge: 1280,
+        quality: 0.82,
+        maxBytes: 3.5 * 1024 * 1024,
+      });
       const res = await fetch("/api/product-commercial", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           imageBase64,
-          mimeType: photo.type || "image/jpeg",
+          mimeType,
           productName: productName.trim(),
           details: details.trim(),
           url: url.trim(),
@@ -197,7 +196,7 @@ export default function ProductCommercial() {
                 className="flex cursor-pointer items-center gap-3 rounded-xl px-3.5 py-3 transition-colors hover:bg-white/[.03]"
                 style={inputStyle}
               >
-                <input type="file" accept="image/*" className="hidden" onChange={(e) => onPhoto(e.target.files?.[0])} />
+                <input type="file" accept="image/jpeg,image/png,image/webp,image/*" className="hidden" onChange={(e) => onPhoto(e.target.files?.[0])} />
                 {preview ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={preview} alt="" className="h-14 w-14 rounded-lg object-cover" />
@@ -210,6 +209,11 @@ export default function ProductCommercial() {
                   {photo ? photo.name : "A clear shot on a plain background works best"}
                 </span>
               </label>
+              <p className="mt-1.5 text-[11px] leading-relaxed text-white/35">{PHOTO_SIZE_HINT}</p>
+              <p className="mt-1 text-[11px] leading-relaxed text-[#ffb3b9]/90">
+                Product clips are about {VEO_MAX_SECONDS}s (provider max). For longer talking ads, use AI Avatar Studio
+                with an avatar.
+              </p>
             </div>
 
             <div>

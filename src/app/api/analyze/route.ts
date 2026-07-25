@@ -2,6 +2,7 @@ import { asRecord, errorMessage, geminiText } from "@/lib/json";
 import { NextResponse } from "next/server";
 import { UnsafeUrlError, assertSafeUrl, clientId, createDailyLimiter } from "@/lib/api-guard";
 import { scrapePageDetailed } from "@/lib/scrape";
+import { getLanguage } from "@/lib/languages";
 
 export const runtime = "nodejs";
 
@@ -40,11 +41,16 @@ export async function POST(req: Request) {
   // runs from inside our network.
   let url: string;
   let ideaCount = 20;
+  let languageName = "English";
+  let languageEndonym = "English";
   try {
     const body = asRecord(await req.json());
     url = await assertSafeUrl(String(body.url ?? ""));
     const n = Number(body.ideaCount ?? body.count ?? 20);
     ideaCount = Math.max(1, Math.min(20, Number.isFinite(n) ? Math.round(n) : 20));
+    const lang = getLanguage(String(body.languageCode ?? body.language ?? "en"));
+    languageName = lang.name;
+    languageEndonym = lang.endonym;
   } catch (e) {
     limiter.refund(id);
     const msg = e instanceof UnsafeUrlError ? e.message : "Invalid URL.";
@@ -64,10 +70,10 @@ export async function POST(req: Request) {
   const prompt = `You are a senior brand & video-marketing strategist. Analyze the following website and return ONLY JSON matching the schema.
 - businessName: the brand/company name.
 - category: the industry/niche (2-4 words).
-- about: 1-2 sentence summary of what the business does.
+- about: 1-2 sentence summary of what the business does, written in ${languageName} (${languageEndonym}).
 - tone: brand tone in 1-3 words (e.g. "Bold & premium").
-- script: a punchy, CINEMATIC 30-second commercial voiceover script for this brand. Keep it under 90 words. No scene directions — just the spoken lines.
-- ideas: EXACTLY ${ideaCount} short, catchy short-form (TikTok/Reels) video idea titles for this brand.
+- script: a punchy, CINEMATIC ~25-second commercial voiceover script for this brand, written ENTIRELY in ${languageName} (${languageEndonym}). Do not use English unless the language IS English. Keep it under 90 words. No scene directions — just the spoken lines.
+- ideas: EXACTLY ${ideaCount} short, catchy short-form (TikTok/Reels) video idea titles for this brand, written in ${languageName}.
 
 Website: ${url}
 --- WEBSITE CONTENT ---

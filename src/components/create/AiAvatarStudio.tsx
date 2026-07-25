@@ -7,6 +7,8 @@ import { downloadMedia } from "@/lib/download-media";
 import { materializeVideoUrl } from "@/lib/materialize-video";
 import { playSyncedWithSound } from "@/lib/play-synced";
 import { compressImageForUpload } from "@/lib/compress-image";
+import { LANGUAGES, DEFAULT_LANGUAGE, getLanguage } from "@/lib/languages";
+import { PHOTO_SIZE_HINT, VEO_MAX_SECONDS } from "@/lib/upload-limits";
 import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
@@ -53,6 +55,7 @@ export default function AiAvatarStudio() {
   const [url, setUrl] = useState("");
   const [script, setScript] = useState(DEFAULT_SCRIPT);
   const [voiceId, setVoiceId] = useState(VOICES[0].id);
+  const [languageCode, setLanguageCode] = useState(DEFAULT_LANGUAGE);
 
   const [avatars, setAvatars] = useState<Avatar[]>([]);
   const [selected, setSelected] = useState<Avatar | null>(null);
@@ -96,13 +99,17 @@ export default function AiAvatarStudio() {
     };
   }, []);
 
+  // Arriving from Shorts / Avatar Library with ?script= or ?avatar=
   useEffect(() => {
-    const wanted = new URLSearchParams(window.location.search).get("avatar");
-    if (!wanted) return;
+    const params = new URLSearchParams(window.location.search);
+    const wantedScript = params.get("script");
+    if (wantedScript) setScript(wantedScript.slice(0, 2000));
+    const wantedId = params.get("avatar");
+    if (!wantedId) return;
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch(`/api/heygen-avatars?id=${encodeURIComponent(wanted)}`);
+        const res = await fetch(`/api/heygen-avatars?id=${encodeURIComponent(wantedId)}`);
         const data = await res.json();
         if (!cancelled && res.ok && data.avatar) {
           setFaceMode("avatar");
@@ -136,7 +143,7 @@ export default function AiAvatarStudio() {
       const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url, ideaCount: 5 }),
+        body: JSON.stringify({ url, ideaCount: 5, languageCode }),
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw new Error(data.error || "Could not scan that website.");
@@ -149,7 +156,7 @@ export default function AiAvatarStudio() {
       setErr(e instanceof Error ? e.message : "Scan failed.");
       setStatus("idle");
     }
-  }, [url]);
+  }, [url, languageCode]);
 
   const onPhoto = (f?: File) => {
     if (!f) return;
@@ -188,10 +195,19 @@ export default function AiAvatarStudio() {
 
       if (faceMode === "photo" && photo) {
         // Your photo → Veo talking clip (~8s).
-        const { base64, mimeType } = await compressImageForUpload(photo);
+        const { base64, mimeType } = await compressImageForUpload(photo, {
+          maxEdge: 1024,
+          quality: 0.8,
+          maxBytes: 3 * 1024 * 1024,
+        });
+        const lang = getLanguage(languageCode);
+        const langLine =
+          lang.code !== "en"
+            ? ` Speak the entire dialogue clearly in ${lang.name} (${lang.endonym}), not English.`
+            : ` Speak clearly in English.`;
         const prompt =
           `A close-up of the person in the photo looking at the camera and speaking naturally with clear audible speech, ` +
-          `lip-syncing exactly: "${spoken.slice(0, 500)}". Subtle natural head movement, engaging eye contact. ` +
+          `lip-syncing exactly: "${spoken.slice(0, 500)}".${langLine} Subtle natural head movement, engaging eye contact. ` +
           `The spoken words must be clearly audible throughout.`;
         const res = await fetch("/api/generate-avatar", {
           method: "POST",
@@ -214,7 +230,9 @@ export default function AiAvatarStudio() {
         }
         if (!res.ok || !data.ok) throw new Error(data.error || "Video generation failed.");
         tokens.setBalance(data.balance);
-        setClipHint("Photo videos run about 8 seconds (provider max).");
+        setClipHint(
+          `Photo videos max out at about ${VEO_MAX_SECONDS} seconds. For longer clips, pick an avatar above instead.`,
+        );
         remoteUrl = await pollVeo(data.poll as string);
       } else {
         // Avatar → HeyGen (~20–30s from script length).
@@ -343,7 +361,15 @@ export default function AiAvatarStudio() {
         </p>
         <h1 className="font-display mt-1 text-3xl font-bold tracking-[-0.02em] sm:text-4xl">AI Avatar Studio</h1>
         <p className="mt-2 text-[15px] leading-relaxed" style={{ color: "#a99a9c" }}>
-          Three steps: add a website or message → pick an avatar or your photo → generate a longer talking video.
+          Three steps: add a website or message → pick an avatar or your photo → generate. Avatar videos can run up to
+          ~30s; your-photo videos max out at about {VEO_MAX_SECONDS}s.
+        </p>
+        <p
+          className="mt-3 rounded-xl px-3.5 py-2.5 text-[12.5px] leading-relaxed"
+          style={{ border: "1px solid rgba(255,70,85,.25)", background: "rgba(255,60,75,.06)", color: "#ffb3b9" }}
+        >
+          Need longer than {VEO_MAX_SECONDS} seconds? Choose <strong className="text-white">Pick an avatar</strong> (not
+          your photo). Write or scan the script in your language below.
         </p>
 
         <div className="mt-7 space-y-5">
@@ -352,6 +378,25 @@ export default function AiAvatarStudio() {
             <p className="mb-3 text-xs font-bold uppercase tracking-wider" style={{ color: "#ff8892" }}>
               1 · What should they say?
             </p>
+            <div className="mb-3">
+              <label className="mb-1.5 block text-[13px] font-semibold text-white/80">Language</label>
+              <select
+                value={languageCode}
+                onChange={(e) => setLanguageCode(e.target.value)}
+                className="w-full appearance-none rounded-xl px-4 py-3 text-sm text-white outline-none"
+                style={inputStyle}
+              >
+                {LANGUAGES.map((l) => (
+                  <option key={l.code} value={l.code} className="bg-[#140a0c]">
+                    {l.name}
+                    {l.endonym !== l.name ? ` — ${l.endonym}` : ""}
+                  </option>
+                ))}
+              </select>
+              <p className="mt-1 text-[11px] text-white/40">
+                Website scans and spoken lines use this language. Write your message in the same language.
+              </p>
+            </div>
             <div className="mb-3 flex gap-1.5">
               {(
                 [
@@ -500,7 +545,11 @@ export default function AiAvatarStudio() {
                   </span>
                 )}
                 <span className="text-sm text-white/70">{photo ? photo.name : "Clear front-facing photo works best"}</span>
-                <input type="file" accept="image/*" className="hidden" onChange={(e) => onPhoto(e.target.files?.[0])} />
+                <span className="max-w-sm text-[11px] leading-relaxed text-white/35">{PHOTO_SIZE_HINT}</span>
+                <span className="max-w-sm text-[11px] leading-relaxed text-[#ffb3b9]">
+                  Your-photo videos are limited to about {VEO_MAX_SECONDS}s — pick an avatar for longer.
+                </span>
+                <input type="file" accept="image/jpeg,image/png,image/webp,image/*" className="hidden" onChange={(e) => onPhoto(e.target.files?.[0])} />
               </label>
             )}
           </section>
@@ -533,8 +582,9 @@ export default function AiAvatarStudio() {
             </button>
             <TokenMeter slug="ai-avatar-studio" tokens={tokens} />
             <p className="mt-2 text-center text-xs text-white/40">
-              Avatar path ≈ 20–30s · Your-photo path ≈ 8s (provider limit). Keep this tab open.
+              Avatar path ≈ 20–30s · Your-photo path ≈ {VEO_MAX_SECONDS}s (provider limit). Keep this tab open.
             </p>
+            <p className="mt-1 text-center text-[11px] text-white/35">{PHOTO_SIZE_HINT}</p>
           </section>
 
           {/* Result */}

@@ -1,5 +1,6 @@
 import type { IconKey } from "@/components/design/BIcon";
 import { creditLabel } from "@/lib/token-costs";
+import { LANGUAGES } from "@/lib/languages";
 
 /** Clip length requested by the Veo route; shown so the card cannot claim 10s. */
 const VIDEO_SECONDS = Number(process.env.VIDEO_SECONDS ?? 8);
@@ -26,7 +27,8 @@ export type Tool = {
 };
 
 const VOICES = ["Natural (Female)", "Natural (Male)", "Warm (Female)", "Deep (Male)", "Confident (Female)", "Clone my voice"];
-const LANGS = ["English", "Spanish", "French", "German", "Hindi", "Arabic", "Japanese", "Portuguese", "Chinese", "Korean"];
+/** Same catalog as storybooks / shorts — generated speech & copy honor this list. */
+const LANGS = LANGUAGES.map((l) => l.name);
 
 export const TOOLS: Tool[] = [
   {
@@ -34,7 +36,7 @@ export const TOOLS: Tool[] = [
     // StoryBook renders its own interface; these fields describe the tool for
     // the Create page and for Amber, so both stay in step with what it needs.
     fields: [
-      { kind: "upload", name: "photo", label: "Photo of the main character", hint: "A clear, front-facing photo works best." },
+      { kind: "upload", name: "photo", label: "Photo of the main character", hint: "JPG or PNG under ~8MB. Large photos are auto-shrunk." },
       { kind: "text", name: "characterName", label: "Character's name", placeholder: "Alex" },
       { kind: "textarea", name: "idea", label: "What should the story be about?", placeholder: "An older gentleman looking for a kind companion…" },
       { kind: "select", name: "theme", label: "They become a… (costume / role)", options: ["Superhero", "Explorer", "Astronaut", "Pirate", "Knight", "Wizard", "Detective", "Animal friend"] },
@@ -44,16 +46,16 @@ export const TOOLS: Tool[] = [
   {
     slug: "talking-photo", title: "Talking Photo", tagline: "Make any photo speak naturally.", icon: "mic", poster: "/assets/talking-selfie.jpg", credits: creditLabel("talking-photo"), cta: "Generate talking video",
     fields: [
-      { kind: "upload", name: "photo", label: "Upload a photo", hint: "Clear, front-facing works best." },
+      { kind: "upload", name: "photo", label: "Upload a photo", hint: "JPG or PNG under ~8MB — clear, front-facing. Large photos are auto-shrunk." },
       { kind: "textarea", name: "script", label: "What should they say?", placeholder: "Hey everyone! Today I want to show you something incredible…" },
       { kind: "select", name: "voice", label: "Voice", options: VOICES },
-      { kind: "select", name: "language", label: "Language", options: LANGS },
+      { kind: "select", name: "language", label: "Spoken language", options: LANGS },
     ],
   },
   {
     slug: "dancing-photo", title: "Dancing Photo", tagline: "Bring any photo to life with dance.", icon: "sparkle", poster: "/assets/dancing.jpg", credits: creditLabel("dancing-photo", `max ${VIDEO_SECONDS}s`), cta: "Make it dance",
     fields: [
-      { kind: "upload", name: "photo", label: "Upload a photo", hint: "JPG or PNG works best — full or upper body." },
+      { kind: "upload", name: "photo", label: "Upload a photo", hint: "JPG or PNG under ~8MB — full or upper body. Large photos are auto-shrunk." },
       { kind: "choices", name: "move", label: "Pick a move", options: [
         { label: "Hip Shake", value: "hip", icon: "💃" }, { label: "Moonwalk", value: "moon", icon: "🕺" }, { label: "Robot", value: "robot", icon: "🤖" },
         { label: "Spin", value: "spin", icon: "🌀" }, { label: "Twerk", value: "twerk", icon: "🍑" }, { label: "Jump", value: "jump", icon: "⚡" },
@@ -71,23 +73,23 @@ export const TOOLS: Tool[] = [
       ] },
       { kind: "textarea", name: "script", label: "Script", placeholder: "Introducing the easiest way to create videos that convert…" },
       { kind: "select", name: "voice", label: "Voice", options: VOICES },
-      { kind: "select", name: "language", label: "Language", options: LANGS },
+      { kind: "select", name: "language", label: "Spoken language", options: LANGS },
     ],
   },
   {
     slug: "custom-avatar-creator", title: "Custom Avatar Creator", tagline: "Turn your photo into a reusable avatar.", icon: "magic", poster: "/assets/Custom Avatar Creator.png", credits: creditLabel("custom-avatar-creator"), cta: "Create avatar",
     fields: [
-      { kind: "upload", name: "photo", label: "Upload your photo", hint: "We build a reusable avatar from this." },
+      { kind: "upload", name: "photo", label: "Upload your photo", hint: "JPG or PNG under ~8MB. Large photos are auto-shrunk before upload." },
       { kind: "text", name: "name", label: "Avatar name", placeholder: "e.g. Brand Spokesperson" },
       { kind: "select", name: "style", label: "Style", options: ["3D Character", "Cartoon", "Anime", "Realistic Studio", "Cinematic"] },
     ],
   },
   {
-    slug: "revoice", title: "Revoice", tagline: "Swap the voice on any video.", icon: "mic", poster: "/assets/Revoice.png", credits: "Pricing to be confirmed", cta: "Revoice video",
+    slug: "revoice", title: "Revoice", tagline: "Swap the voice on any video — pick the target language (coming soon).", icon: "mic", poster: "/assets/Revoice.png", credits: "Coming soon", cta: "Revoice video",
     fields: [
       { kind: "upload", name: "video", label: "Upload a video", hint: "MP4 or MOV." },
       { kind: "select", name: "voice", label: "New voice", options: VOICES },
-      { kind: "select", name: "language", label: "Language", options: LANGS },
+      { kind: "select", name: "language", label: "Target language", options: LANGS },
     ],
   },
   {
@@ -101,9 +103,10 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "shorts-20", title: "Shorts Generator", tagline: "Up to 20 shorts, scripted and ready to film — you choose how many.", icon: "grid", poster: "/assets/shorts.jpg", credits: creditLabel("shorts-20"), cta: "Generate shorts",
+    slug: "shorts-20", title: "Shorts Generator", tagline: "Up to 20 shorts — choose text scripts or video handoff.", icon: "grid", poster: "/assets/shorts.jpg", credits: creditLabel("shorts-20"), cta: "Generate shorts",
     fields: [
       { kind: "segment", name: "source", label: "Source", options: ["Website", "Prompt"] },
+      { kind: "segment", name: "output", label: "Output", options: ["Text scripts", "Video handoff"] },
       { kind: "url", name: "url", label: "Website URL", placeholder: "https://yourbrand.com" },
       { kind: "textarea", name: "prompt", label: "Topic or prompt", placeholder: "e.g. healthy meal-prep tips for busy parents" },
       { kind: "slider", name: "count", label: "How many shorts (up to 20)", min: 5, max: 20, step: 5, default: 10 },
@@ -135,7 +138,7 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "translate-videos", title: "Translate Videos", tagline: "Translate & dub into 100+ languages.", icon: "globe", poster: "/assets/talking-selfie.jpg", credits: "Pricing to be confirmed", cta: "Translate video",
+    slug: "translate-videos", title: "Translate Videos", tagline: "Translate & dub into many languages (coming soon).", icon: "globe", poster: "/assets/talking-selfie.jpg", credits: "Coming soon", cta: "Translate video",
     fields: [
       { kind: "upload", name: "video", label: "Upload a video", hint: "MP4 or MOV." },
       { kind: "multi", name: "languages", label: "Target languages", options: LANGS },
