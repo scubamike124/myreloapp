@@ -20,7 +20,7 @@ const scrypt = promisify(scryptCb) as (pw: string, salt: Buffer, len: number) =>
 
 export const SESSION_COOKIE = "reelo_session";
 export const SESSION_DAYS = 30;
-const PBKDF2_ITERS = 120_000;
+const PBKDF2_ITERS = 100_000; // Workers Web Crypto rejects > 100_000 iterations.
 
 export type User = { id: string; email: string; name: string | null };
 
