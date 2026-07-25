@@ -156,33 +156,87 @@ try {
     const btn = [...document.querySelectorAll("button")].find((b) => /play with sound|unmute/i.test(b.textContent || ""));
     btn?.click();
   });
-  await new Promise((r) => setTimeout(r, 2000));
+  await new Promise((r) => setTimeout(r, 2500));
+
+  const afterTap = await page.evaluate(async () => {
+    const v = document.querySelector("video[src]");
+    if (!v) return { error: "no video" };
+    v.muted = false;
+    v.volume = 1;
+    try { await v.play(); } catch (e) { /* */ }
+    await new Promise((r) => setTimeout(r, 2000));
+    // Seek near end to prove full-file playback, then back
+    const dur = Number.isFinite(v.duration) ? v.duration : 0;
+    if (dur > 2) {
+      v.currentTime = Math.max(0, dur - 0.5);
+      await new Promise((r) => setTimeout(r, 800));
+      v.currentTime = 0.2;
+      await v.play().catch(() => {});
+      await new Promise((r) => setTimeout(r, 1000));
+    }
+    return {
+      src: (v.currentSrc || v.src || "").slice(0, 120),
+      isBlob: (v.currentSrc || v.src || "").startsWith("blob:"),
+      isSameOrigin: (() => {
+        try {
+          const u = new URL(v.currentSrc || v.src, location.href);
+          return u.origin === location.origin;
+        } catch { return false; }
+      })(),
+      isIngest: /\/api\/media\//.test(v.currentSrc || v.src || ""),
+      muted: v.muted,
+      paused: v.paused,
+      duration: v.duration,
+      currentTime: v.currentTime,
+      readyState: v.readyState,
+      webkitAudioDecodedByteCount: v.webkitAudioDecodedByteCount ?? null,
+    };
+  });
+  report.afterTap = afterTap;
   await page.screenshot({ path: join(OUT, "04-playing.png"), fullPage: true });
 
-  // Export blob bytes from page and ffprobe
-  report.steps.push("export blob");
-  if (videoInfo.isBlob) {
-    const b64 = await page.evaluate(async () => {
-      const v = document.querySelector("video[src]");
-      const res = await fetch(v.src);
-      const buf = await res.arrayBuffer();
-      const bytes = new Uint8Array(buf);
-      let binary = "";
-      for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-      return btoa(binary);
-    });
-    const file = join(OUT, "avatar-e2e.mp4");
-    writeFileSync(file, Buffer.from(b64, "base64"));
-    const probe = ffprobe(file);
-    report.fileBytes = Buffer.from(b64, "base64").length;
-    report.probe = probe;
-    const streams = probe.streams || [];
-    report.hasVideo = streams.some((s) => s.codec_type === "video");
-    report.hasAudio = streams.some((s) => s.codec_type === "audio");
-    report.ok = Boolean(report.hasVideo && report.hasAudio && report.fileBytes > 50000 && videoInfo.isBlob);
-  } else {
-    report.ok = false;
-    report.reason = "video src was not a blob: URL — materialize path did not run";
+  // Export bytes from page and ffprobe
+  report.steps.push("export media");
+  const exportInfo = await page.evaluate(async () => {
+    const v = document.querySelector("video[src]");
+    if (!v) return { error: "no video" };
+    const res = await fetch(v.currentSrc || v.src);
+    if (!res.ok) return { error: `fetch ${res.status}` };
+    const buf = new Uint8Array(await res.arrayBuffer());
+    let binary = "";
+    for (let i = 0; i < buf.length; i++) binary += String.fromCharCode(buf[i]);
+    return { b64: btoa(binary), bytes: buf.length, contentType: res.headers.get("content-type") };
+  });
+  if (exportInfo.error) throw new Error(exportInfo.error);
+  const file = join(OUT, "avatar-e2e.mp4");
+  writeFileSync(file, Buffer.from(exportInfo.b64, "base64"));
+  const probe = ffprobe(file);
+  report.fileBytes = exportInfo.bytes;
+  report.probe = probe;
+  const streams = probe.streams || [];
+  report.hasVideo = streams.some((s) => s.codec_type === "video");
+  report.hasAudio = streams.some((s) => s.codec_type === "audio");
+  report.playableUrl =
+    Boolean(afterTap.isBlob || afterTap.isSameOrigin || afterTap.isIngest);
+  report.audioDecoded = Number(afterTap.webkitAudioDecodedByteCount || 0) > 0;
+  report.ok = Boolean(
+    report.hasVideo &&
+      report.hasAudio &&
+      report.fileBytes > 50000 &&
+      report.playableUrl &&
+      !afterTap.muted &&
+      report.audioDecoded,
+  );
+  if (!report.ok) {
+    report.reason = {
+      hasVideo: report.hasVideo,
+      hasAudio: report.hasAudio,
+      fileBytes: report.fileBytes,
+      playableUrl: report.playableUrl,
+      muted: afterTap.muted,
+      audioDecoded: report.audioDecoded,
+      afterTap,
+    };
   }
 } catch (e) {
   report.ok = false;

@@ -90,8 +90,36 @@ async function pollHeygen(videoId, label, maxTries = 60) {
 }
 
 async function verifyDownloaded(label, videoUrl, providerUrl) {
+  // Prefer browser-path simulation: fetch provider bytes (Node has no CORS),
+  // POST /api/media/ingest, then play from same-origin /api/media/c/...
+  const ingestSource = providerUrl || videoUrl;
+  let ingested = null;
+  if (ingestSource && /^https?:\/\//i.test(ingestSource)) {
+    try {
+      const dl0 = await download(ingestSource, join(OUT, `${label}-source.mp4`));
+      const shape0 = looksLikeMp4(dl0.buf);
+      if (shape0.ok && dl0.bytes > 20_000) {
+        const ing = await fetch(`${PROD}/api/media/ingest`, {
+          method: "POST",
+          headers: { "Content-Type": "video/mp4" },
+          body: dl0.buf,
+        });
+        const ingData = await ing.json().catch(() => ({}));
+        if (ing.ok && ingData.url) {
+          ingested = { url: ingData.url, backend: ingData.backend, bytes: ingData.bytes };
+          log(`[${label}] ingested → ${ingData.url} backend=${ingData.backend}`);
+        } else {
+          log(`[${label}] ingest failed: ${ing.status} ${JSON.stringify(ingData)}`);
+        }
+      }
+    } catch (e) {
+      log(`[${label}] ingest path error: ${e.message}`);
+    }
+  }
+
+  const playUrl = ingested?.url || videoUrl;
   const file = join(OUT, `${label}.mp4`);
-  const dl = await download(videoUrl, file);
+  const dl = await download(playUrl, file);
   const shape = looksLikeMp4(dl.buf);
   const probe = shape.ok ? ffprobe(file) : { ok: false, hasVideo: false, hasAudio: false, streams: [], stderr: shape.reason };
 
@@ -106,7 +134,7 @@ async function verifyDownloaded(label, videoUrl, providerUrl) {
   }
 
   const used = fallback && fallback.probe.hasVideo ? fallback : { dl, shape, probe };
-  const isProxyError = typeof videoUrl === "string" && videoUrl.includes("/api/media/remote") && !shape.ok;
+  const isProxyError = typeof playUrl === "string" && playUrl.includes("/api/media/remote") && !shape.ok;
   const pass =
     used.shape.ok &&
     used.probe.hasVideo &&
@@ -117,8 +145,9 @@ async function verifyDownloaded(label, videoUrl, providerUrl) {
   return {
     label,
     pass,
-    playbackUrl: videoUrl,
+    playbackUrl: playUrl,
     providerUrl: providerUrl || null,
+    ingested,
     http: used.dl.status,
     bytes: used.dl.bytes,
     contentType: used.dl.contentType,
@@ -131,6 +160,7 @@ async function verifyDownloaded(label, videoUrl, providerUrl) {
       isProxyError ? "playback URL was broken media/remote error JSON" : null,
       !used.probe.hasAudio ? "NO AUDIO TRACK" : null,
       used.dl.bytes < 50_000 ? "file too small" : null,
+      ingested ? `ingest_backend=${ingested.backend}` : "ingest_not_used",
     ].filter(Boolean),
   };
 }
@@ -322,12 +352,8 @@ async function testProductCommercial() {
   }
   const poll = start.poll || `/api/product-commercial?op=${encodeURIComponent(start.operation)}`;
   const done = await pollVeo(poll, label);
-  // intentional silence — pass if real video plays even without audio
-  const row = await verifyDataOrUrl(label, done.videoUrl, false);
-  row.expectAudio = false;
-  row.notes.push("intentional_silent_by_design");
-  row.pass = row.isRealMp4 && row.hasVideo && row.bytes > 20_000;
-  return row;
+  // Soundtrack is requested in the Veo prompt — require an audio track.
+  return verifyDataOrUrl(label, done.videoUrl, true);
 }
 
 async function main() {

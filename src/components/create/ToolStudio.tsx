@@ -37,8 +37,8 @@ function avatarPrompt(slug: string, values: Record<string, string>): string {
   // talking-photo
   const script = (values.script || "").trim();
   return script
-    ? `The person in the photo sings and speaks expressively with clear audible dialogue and lip-sync, saying: "${script}". Natural head movement, engaging eye contact, lively facial expression. Audio must include the spoken words clearly.`
-    : `The person in the photo talks and sings expressively with natural lip movement, lively facial expression, and clearly audible speech.`;
+    ? `A close-up of the person in the photo looking at the camera and speaking naturally with clear audible speech, lip-syncing exactly: "${script}". Subtle natural head movement, engaging eye contact. The spoken words must be clearly audible throughout.`
+    : `A close-up of the person in the photo looking at the camera and speaking naturally with clear audible speech and lip-sync. Subtle natural head movement. Spoken audio must be clearly present.`;
 }
 
 function avatarImagePrompt(values: Record<string, string>): string {

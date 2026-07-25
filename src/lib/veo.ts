@@ -97,8 +97,20 @@ export async function checkVeo(key: string, op: string): Promise<VeoStatus> {
   if (!data.done) return { status: "processing" };
   if (data.error) return { status: "failed", error: data.error.message || "Generation failed." };
 
-  const uri = data?.response?.generateVideoResponse?.generatedSamples?.[0]?.video?.uri;
-  if (!uri) return { status: "failed", error: "Veo returned no video." };
+  const samples = data?.response?.generateVideoResponse?.generatedSamples;
+  const uri = samples?.[0]?.video?.uri;
+  if (!uri) {
+    const gvr = data?.response?.generateVideoResponse || {};
+    const filtered =
+      gvr.raiMediaFilteredCount ||
+      gvr.raiMediaFilteredReasons ||
+      gvr.filterReason ||
+      data?.response?.raiMediaFilteredCount;
+    const detail = filtered
+      ? `Veo filtered the video (${typeof filtered === "object" ? JSON.stringify(filtered) : filtered}). Try a different photo or wording.`
+      : "Veo returned no video. Try again with a clearer face photo and a short spoken line.";
+    return { status: "failed", error: detail };
+  }
 
   const r = await fetch(`${uri}&key=${encodeURIComponent(key)}`, { signal: AbortSignal.timeout(90_000) });
   if (!r.ok) return { status: "failed", error: "Could not download the finished video." };
