@@ -5,6 +5,7 @@ import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
 import { materializeVideoUrl } from "@/lib/materialize-video";
+import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 type Avatar = { avatarId: string; name: string; gender: string; image: string; video: string };
@@ -323,14 +324,12 @@ export default function AiAvatarStudio() {
               <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-black">
                 {status === "done" ? (
                   <>
-                    <video
+                    <SmoothVideo
                       ref={resultRef}
                       key={videoUrl}
                       src={videoUrl}
                       className="absolute inset-0 h-full w-full object-cover"
                       controls
-                      playsInline
-                      preload="auto"
                       muted={muted}
                     />
                     {needsGesture && (

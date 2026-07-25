@@ -5,6 +5,7 @@ import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
 import { materializeVideoUrl } from "@/lib/materialize-video";
+import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 // ---------------------------------------------------------------------------
@@ -362,14 +363,12 @@ export default function ProductCommercial() {
               >
                 <div className="grid gap-5 p-5 sm:grid-cols-2">
                   <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl bg-black" style={{ border: "1px solid rgba(255,255,255,.08)" }}>
-                    <video
+                    <SmoothVideo
                       ref={videoRef}
                       key={result.videoUrl}
                       src={result.videoUrl}
                       controls
                       muted={muted}
-                      playsInline
-                      preload="auto"
                       className="h-full w-full object-cover"
                     />
                     {needsGesture && (

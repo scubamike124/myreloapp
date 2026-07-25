@@ -1,13 +1,19 @@
 /**
- * Fetch / verify a finished video, then ingest bytes to same-origin storage
- * so <video> and download never depend on HeyGen CDN or Worker proxies.
+ * Fetch / verify a finished video for smooth local playback + optional durable store.
  *
- * Returns a playable URL preference order:
- *   1. Same-origin /api/media/c/... (or blob/disk URL from ingest)
- *   2. Temporary blob: URL (tab-local fallback)
+ * CRITICAL (production stutter / A/V desync):
+ * OpenNext on Cloudflare serves /api/media/* with Transfer-Encoding: chunked and
+ * strips Content-Length. Browsers then Range-buffer over the Worker, which causes
+ * stalls that look like narration drift and frame skips.
+ *
+ * So preview/export playback always uses a local blob: URL (full file in memory).
+ * Ingest (when available) is only for a durable same-origin copy / library.
  */
 export async function materializeVideoUrl(source: string): Promise<{
+  /** Always a local blob: URL — use this for <video src> and download. */
   url: string;
+  /** Optional same-origin /api/media/... for library persistence. */
+  durableUrl?: string;
   bytes: number;
   revoke?: () => void;
   durable: boolean;
@@ -17,41 +23,39 @@ export async function materializeVideoUrl(source: string): Promise<{
 
   const { buf, contentType } = await readVideoBytes(source);
   assertMp4OrWebm(buf, contentType);
+  const type = contentType.includes("webm") ? "video/webm" : "video/mp4";
 
-  // Prefer same-origin ingest so Library/download/playback share one URL.
+  let durableUrl: string | undefined;
+  let backend: string | undefined;
+
+  // Best-effort durable copy (library). Never use this URL for the player.
   try {
-    const body = new Blob([new Uint8Array(buf)], {
-      type: contentType.includes("webm") ? "video/webm" : "video/mp4",
-    });
+    const body = new Blob([new Uint8Array(buf)], { type });
     const res = await fetch("/api/media/ingest", {
       method: "POST",
-      headers: { "Content-Type": body.type },
+      headers: { "Content-Type": type },
       body,
     });
     const data = await res.json().catch(() => ({}));
     if (res.ok && data?.ok && typeof data.url === "string") {
-      return {
-        url: data.url as string,
-        bytes: Number(data.bytes) || buf.byteLength,
-        durable: true,
-        backend: typeof data.backend === "string" ? data.backend : "ingest",
-      };
+      durableUrl = data.url as string;
+      backend = typeof data.backend === "string" ? data.backend : "ingest";
     }
   } catch {
-    /* fall through to blob: */
+    /* preview still works from blob: */
   }
 
+  // Local blob playback — no chunked Worker streaming, no Range thrash.
   const copy = new Uint8Array(buf);
-  const blob = new Blob([copy], {
-    type: contentType.includes("webm") ? "video/webm" : "video/mp4",
-  });
+  const blob = new Blob([copy], { type });
   const url = URL.createObjectURL(blob);
   return {
     url,
+    durableUrl,
     bytes: buf.byteLength,
     revoke: () => URL.revokeObjectURL(url),
-    durable: false,
-    backend: "blob-url",
+    durable: Boolean(durableUrl),
+    backend: backend || "blob-url",
   };
 }
 
@@ -65,7 +69,6 @@ async function readVideoBytes(source: string): Promise<{ buf: Uint8Array; conten
     return { buf, contentType: match[1] || "video/mp4" };
   }
 
-  // Same-origin media we already ingested — no need to re-fetch as CORS remote.
   if (source.startsWith("/api/media/") || source.startsWith("blob:")) {
     const res = await fetch(source);
     if (!res.ok) throw new Error(`Could not read video (${res.status}).`);

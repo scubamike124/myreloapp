@@ -8,6 +8,7 @@ import { TOOLS, IMAGE_TOOLS, LIVE_TOOLS, VIDEO_TOOLS } from "@/lib/tools";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
 import { materializeVideoUrl } from "@/lib/materialize-video";
+import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 type Status = "idle" | "generating" | "done";
@@ -393,15 +394,13 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
                   <img src={imageUrl} alt="Generated avatar" className="absolute inset-0 h-full w-full object-cover" />
                 ) : status === "done" ? (
                   <>
-                    <video
+                    <SmoothVideo
                       ref={videoRef}
                       key={videoUrl}
                       src={videoUrl}
                       className="absolute inset-0 h-full w-full object-cover"
                       muted={muted}
                       controls
-                      playsInline
-                      preload="auto"
                     />
                     {needsGesture && (
                       <button
