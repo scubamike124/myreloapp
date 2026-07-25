@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
+import { materializeVideoUrl } from "@/lib/materialize-video";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 type Step = "input" | "scanning" | "detected" | "generating" | "result";
@@ -65,6 +66,7 @@ export default function WebsiteCommercial() {
   const genTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const revokeRef = useRef<(() => void) | null>(null);
 
   const renderStage = RENDER_STAGES[Math.min(RENDER_STAGES.length - 1, Math.floor((progress / 100) * RENDER_STAGES.length))];
 
@@ -141,7 +143,7 @@ export default function WebsiteCommercial() {
       const videoId = data.videoId as string;
 
       // 2. Poll our status endpoint until HeyGen finishes.
-      const finalUrl = await new Promise<string>((resolve, reject) => {
+      const remoteUrl = await new Promise<string>((resolve, reject) => {
         let tries = 0;
         pollTimer.current = setInterval(async () => {
           if (++tries > 168) { // ~14 min safety guard (HeyGen's trial queue can be slow)
@@ -154,7 +156,7 @@ export default function WebsiteCommercial() {
             const d = await r.json();
             if (d.status === "completed" && d.videoUrl) {
               if (pollTimer.current) clearInterval(pollTimer.current);
-              resolve(d.videoUrl as string);
+              resolve((d.videoUrl as string) || (d.providerUrl as string));
             } else if (d.status === "failed") {
               if (pollTimer.current) clearInterval(pollTimer.current);
               reject(new Error(d.error?.detail || d.error?.message || "Generation failed on HeyGen."));
@@ -165,8 +167,12 @@ export default function WebsiteCommercial() {
         }, 5000);
       });
 
+      revokeRef.current?.();
+      const local = await materializeVideoUrl(remoteUrl);
+      revokeRef.current = local.revoke ?? null;
+
       if (genTimer.current) clearInterval(genTimer.current);
-      setVideoUrl(finalUrl);
+      setVideoUrl(local.url);
       setMuted(false);
       setProgress(100);
       setStep("result");
@@ -183,7 +189,7 @@ export default function WebsiteCommercial() {
         title: brand || url,
         status: "completed",
         kind: "video",
-        mediaUrl: finalUrl,
+        mediaUrl: local.url,
       });
     } catch (e) {
       if (genTimer.current) clearInterval(genTimer.current);

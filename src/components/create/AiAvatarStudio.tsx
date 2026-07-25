@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
+import { materializeVideoUrl } from "@/lib/materialize-video";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 type Avatar = { avatarId: string; name: string; gender: string; image: string; video: string };
@@ -67,10 +68,13 @@ export default function AiAvatarStudio() {
   const [err, setErr] = useState<string | null>(null);
   const [short, setShort] = useState<Shortfall | null>(null);
   const [muted, setMuted] = useState(false);
+  const [needsGesture, setNeedsGesture] = useState(false);
+  const [audioReady, setAudioReady] = useState(false);
   const tokens = useTokens();
   const genTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const resultRef = useRef<HTMLVideoElement | null>(null);
+  const revokeRef = useRef<(() => void) | null>(null);
 
   // Fetch a page of avatars (append when loading more, replace on a fresh query).
   const fetchAvatars = useCallback(async (nextOffset: number, replace: boolean, query: string, g: string) => {
@@ -108,8 +112,14 @@ export default function AiAvatarStudio() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [q, gender]);
 
-  // Clean up timers on unmount.
-  useEffect(() => () => { [genTimer, pollTimer].forEach((t) => t.current && clearInterval(t.current)); }, []);
+  // Clean up timers + blob URLs on unmount.
+  useEffect(
+    () => () => {
+      [genTimer, pollTimer].forEach((t) => t.current && clearInterval(t.current));
+      revokeRef.current?.();
+    },
+    [],
+  );
 
   const generate = async () => {
     if (!selected) { setErr("Pick an avatar first."); return; }
@@ -150,7 +160,7 @@ export default function AiAvatarStudio() {
       tokens.setBalance(data.balance);
       const videoId = data.videoId as string;
 
-      const finalUrl = await new Promise<string>((resolve, reject) => {
+      const remoteUrl = await new Promise<string>((resolve, reject) => {
         let tries = 0;
         pollTimer.current = setInterval(async () => {
           if (++tries > 168) { // ~14 min guard
@@ -163,7 +173,8 @@ export default function AiAvatarStudio() {
             const d = await r.json();
             if (d.status === "completed" && d.videoUrl) {
               if (pollTimer.current) clearInterval(pollTimer.current);
-              resolve(d.videoUrl as string);
+              // Prefer durable/local URL; keep provider URL as fallback for materialize.
+              resolve((d.videoUrl as string) || (d.providerUrl as string));
             } else if (d.status === "failed") {
               if (pollTimer.current) clearInterval(pollTimer.current);
               reject(new Error(d.error?.detail || d.error?.message || "Generation failed on HeyGen."));
@@ -172,20 +183,25 @@ export default function AiAvatarStudio() {
         }, 5000);
       });
 
+      // Pull the real MP4 into a blob: URL so playback/download are same-origin
+      // and we never hand the <video> element a JSON error body.
+      revokeRef.current?.();
+      const local = await materializeVideoUrl(remoteUrl);
+      revokeRef.current = local.revoke ?? null;
+
       if (genTimer.current) clearInterval(genTimer.current);
-      setVideoUrl(finalUrl);
+      setVideoUrl(local.url);
       setMuted(false);
+      setAudioReady(true);
+      setNeedsGesture(false);
       setProgress(100);
       setStatus("done");
-      // User just clicked Generate — try audible playback immediately.
       requestAnimationFrame(() => {
         const v = resultRef.current;
         if (!v) return;
         v.muted = false;
         v.volume = 1;
-        void v.play().catch(() => {
-          /* autoplay with sound blocked — controls still work */
-        });
+        void v.play().then(() => setNeedsGesture(false)).catch(() => setNeedsGesture(true));
       });
       recordCreation({
         toolSlug: "ai-avatar-studio",
@@ -193,7 +209,7 @@ export default function AiAvatarStudio() {
         title: script.trim().slice(0, 60) || "Avatar video",
         status: "completed",
         kind: "video",
-        mediaUrl: finalUrl,
+        mediaUrl: local.url,
       });
     } catch (e) {
       if (genTimer.current) clearInterval(genTimer.current);
@@ -368,8 +384,26 @@ export default function AiAvatarStudio() {
                 <div className="mt-4 space-y-3">
                   <div className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm" style={{ border: "1px solid rgba(255,70,85,.3)", background: "rgba(255,70,85,.1)", color: "#ffb3b9" }}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6 9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                    Your avatar video is ready — tap play if you don&apos;t hear audio.
+                    {audioReady
+                      ? "Video verified with audio — tap play if your browser blocked sound."
+                      : "Your avatar video is ready — tap play if you don\u2019t hear audio."}
                   </div>
+                  {needsGesture && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const v = resultRef.current;
+                        if (!v) return;
+                        v.muted = false;
+                        setMuted(false);
+                        void v.play().then(() => setNeedsGesture(false)).catch(() => {});
+                      }}
+                      className="w-full rounded-xl px-3 py-3 text-sm font-bold text-white"
+                      style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+                    >
+                      Click to play with sound
+                    </button>
+                  )}
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       type="button"
@@ -379,7 +413,7 @@ export default function AiAvatarStudio() {
                         const next = !v.muted;
                         v.muted = next;
                         setMuted(next);
-                        if (!next) void v.play().catch(() => {});
+                        if (!next) void v.play().then(() => setNeedsGesture(false)).catch(() => {});
                       }}
                       className="flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-semibold text-white/90"
                     >
