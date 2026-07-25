@@ -147,6 +147,16 @@ export async function ensureSchema(): Promise<boolean> {
 
   const pg = driver() === "postgres";
 
+  // Production DBs already have tables. Probe first so signup/login never
+  // re-run a long DDL chain (which has failed over Neon HTTP from Workers).
+  try {
+    await q`SELECT 1 FROM users LIMIT 1`;
+    ensured = true;
+    return true;
+  } catch {
+    /* tables missing — fall through to CREATE */
+  }
+
   // Neon only accepts real tagged templates (not sql(["…"])). Keep DDL as
   // literal templates per driver — there is no user input in these strings.
   if (pg) {
