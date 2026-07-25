@@ -65,9 +65,11 @@ export default function AiAvatarStudio() {
   const [videoUrl, setVideoUrl] = useState("");
   const [err, setErr] = useState<string | null>(null);
   const [short, setShort] = useState<Shortfall | null>(null);
+  const [muted, setMuted] = useState(false);
   const tokens = useTokens();
   const genTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const resultRef = useRef<HTMLVideoElement | null>(null);
 
   // Fetch a page of avatars (append when loading more, replace on a fresh query).
   const fetchAvatars = useCallback(async (nextOffset: number, replace: boolean, query: string, g: string) => {
@@ -123,7 +125,12 @@ export default function AiAvatarStudio() {
       const res = await fetch("/api/heygen-video", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ script, avatarId: selected.avatarId, voiceId }),
+        body: JSON.stringify({
+          script,
+          avatarId: selected.avatarId,
+          voiceId,
+          action: "ai-avatar-studio",
+        }),
       });
       const data = await res.json();
 
@@ -166,8 +173,19 @@ export default function AiAvatarStudio() {
 
       if (genTimer.current) clearInterval(genTimer.current);
       setVideoUrl(finalUrl);
+      setMuted(false);
       setProgress(100);
       setStatus("done");
+      // User just clicked Generate — try audible playback immediately.
+      requestAnimationFrame(() => {
+        const v = resultRef.current;
+        if (!v) return;
+        v.muted = false;
+        v.volume = 1;
+        void v.play().catch(() => {
+          /* autoplay with sound blocked — controls still work */
+        });
+      });
       recordCreation({
         toolSlug: "ai-avatar-studio",
         toolTitle: "AI Avatar Studio",
@@ -293,7 +311,24 @@ export default function AiAvatarStudio() {
               <p className="mb-3 px-2 text-sm font-semibold text-white/70">{status === "done" ? "Your video" : "Preview"}</p>
               <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-black">
                 {status === "done" ? (
-                  <video src={videoUrl} className="absolute inset-0 h-full w-full object-cover" autoPlay controls loop playsInline />
+                  <video
+                    ref={resultRef}
+                    key={videoUrl}
+                    src={videoUrl}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    controls
+                    playsInline
+                    preload="auto"
+                    autoPlay
+                    muted={muted}
+                    onPlay={() => {
+                      const v = resultRef.current;
+                      if (v && muted) {
+                        v.muted = false;
+                        setMuted(false);
+                      }
+                    }}
+                  />
                 ) : selected ? (
                   selected.video && !videoFailed.has(selected.avatarId) ? (
                     // Muted looping preview of the chosen avatar; poster is the still image.
@@ -332,12 +367,46 @@ export default function AiAvatarStudio() {
                 <div className="mt-4 space-y-3">
                   <div className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm" style={{ border: "1px solid rgba(255,70,85,.3)", background: "rgba(255,70,85,.1)", color: "#ffb3b9" }}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6 9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                    Your avatar video is ready!
+                    Your avatar video is ready — tap play if you don&apos;t hear audio.
                   </div>
-                  <a href={videoUrl} download className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
-                    Download
-                  </a>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const v = resultRef.current;
+                        if (!v) return;
+                        const next = !v.muted;
+                        v.muted = next;
+                        setMuted(next);
+                        if (!next) void v.play().catch(() => {});
+                      }}
+                      className="flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-semibold text-white/90"
+                    >
+                      {muted ? "Unmute" : "Mute"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        try {
+                          const res = await fetch(videoUrl);
+                          const blob = await res.blob();
+                          const href = URL.createObjectURL(blob);
+                          const a = document.createElement("a");
+                          a.href = href;
+                          a.download = `reelo-avatar-${Date.now()}.mp4`;
+                          a.click();
+                          URL.revokeObjectURL(href);
+                        } catch {
+                          window.open(videoUrl, "_blank");
+                        }
+                      }}
+                      className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold text-white"
+                      style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
+                      Download
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

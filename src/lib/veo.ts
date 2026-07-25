@@ -15,7 +15,10 @@
 // ---------------------------------------------------------------------------
 
 const BASE = "https://generativelanguage.googleapis.com/v1beta";
-const VEO_MODEL = "veo-3.1-fast-generate-preview";
+// Fast preview often ships clips with weak/missing audio. Talking & dancing
+// tools need audible speech + ambience, so default to the full 3.1 model.
+// Override with VEO_MODEL=veo-3.1-fast-generate-preview if cost/latency wins.
+const VEO_MODEL = process.env.VEO_MODEL || "veo-3.1-generate-preview";
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 /** Clip length, in seconds. Veo bills per second, so this is a direct cost lever. */
@@ -55,7 +58,9 @@ export async function startVeo(
       body: JSON.stringify({
         instances: [{ prompt, image: { bytesBase64Encoded: imageBase64, mimeType } }],
         // 6s instead of the 8s default is a 25% saving and a natural short-form
-        // length. durationSeconds accepts 5-8.
+        // length. durationSeconds accepts 5-8. Native audio comes from the
+        // Veo 3.1 model itself (no separate generateAudio flag — unsupported
+        // on the Gemini API and rejected when sent).
         parameters: { aspectRatio: "9:16", durationSeconds: VIDEO_SECONDS },
       }),
       signal: AbortSignal.timeout(30_000),

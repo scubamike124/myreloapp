@@ -24,19 +24,19 @@ function stagesFor(slug: string): string[] {
 function avatarPrompt(slug: string, values: Record<string, string>): string {
   if (slug === "dancing-photo") {
     const move = values.move ? `${values.move} ` : "";
-    return `The person in the photo performs an energetic, joyful ${move}dance — dynamic full-body motion, rhythmic and lively, as if singing and dancing to upbeat music, big smile.`;
+    return `The person in the photo performs an energetic, joyful ${move}dance — dynamic full-body motion, rhythmic and lively, dancing to clear upbeat music with an audible soundtrack, big smile. Include synchronized music and ambient sound.`;
   }
   if (slug === "ai-avatar-studio") {
     const script = (values.script || "").trim();
     return script
-      ? `The avatar looks into the camera and speaks naturally and professionally, lip-syncing the words: "${script}". Confident, engaging on-camera presenter, subtle natural head movement.`
-      : `The avatar looks into the camera and speaks naturally as a confident, engaging on-camera presenter with natural lip movement.`;
+      ? `The avatar looks into the camera and speaks naturally and professionally with clear audible speech, lip-syncing the words: "${script}". Confident, engaging on-camera presenter, subtle natural head movement. The spoken dialogue must be clearly audible.`
+      : `The avatar looks into the camera and speaks naturally as a confident, engaging on-camera presenter with natural lip movement and clearly audible speech.`;
   }
   // talking-photo
   const script = (values.script || "").trim();
   return script
-    ? `The person in the photo sings and speaks expressively, lip-syncing the words: "${script}". Natural head movement, engaging eye contact, lively facial expression.`
-    : `The person in the photo talks and sings expressively with natural lip movement and lively facial expression.`;
+    ? `The person in the photo sings and speaks expressively with clear audible dialogue and lip-sync, saying: "${script}". Natural head movement, engaging eye contact, lively facial expression. Audio must include the spoken words clearly.`
+    : `The person in the photo talks and sings expressively with natural lip movement, lively facial expression, and clearly audible speech.`;
 }
 
 function avatarImagePrompt(values: Record<string, string>): string {
@@ -222,8 +222,16 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
         const videoUrl = await pollVeo(data.poll as string);
         if (timer.current) clearInterval(timer.current);
         setVideoUrl(videoUrl);
+        setMuted(false);
         setProgress(100);
         setStatus("done");
+        requestAnimationFrame(() => {
+          const v = videoRef.current;
+          if (!v) return;
+          v.muted = false;
+          v.volume = 1;
+          void v.play().catch(() => {});
+        });
         recordCreation({
           toolSlug: tool.slug,
           toolTitle: tool.title,
@@ -383,7 +391,17 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={imageUrl} alt="Generated avatar" className="absolute inset-0 h-full w-full object-cover" />
                 ) : status === "done" ? (
-                  <video ref={videoRef} src={videoUrl} className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline />
+                  <video
+                    ref={videoRef}
+                    key={videoUrl}
+                    src={videoUrl}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    autoPlay
+                    muted={muted}
+                    controls
+                    playsInline
+                    preload="auto"
+                  />
                 ) : (
                   <Image src={tool.poster} alt="" fill className={`object-cover transition ${status === "generating" ? "opacity-25" : "opacity-100"}`} />
                 )}
@@ -400,16 +418,11 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
                   </div>
                 )}
 
-                {/* done: minimal player controls (video only) */}
-                {status === "done" && !isImageTool && (
-                  <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-3">
-                    <span className="rounded-md px-2 py-1 text-[11px] font-semibold text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>Preview</span>
-                    <button onClick={toggleMute} aria-label={muted ? "Unmute" : "Mute"} className="grid h-9 w-9 place-items-center rounded-full text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>
-                      {muted ? (
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" /><path d="M22 9l-6 6M16 9l6 6" /></svg>
-                      ) : (
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" /><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" /></svg>
-                      )}
+                {/* done: unmute hint sits above native controls */}
+                {status === "done" && !isImageTool && muted && (
+                  <div className="absolute inset-x-0 top-0 flex items-center justify-end p-3">
+                    <button onClick={toggleMute} aria-label="Unmute" className="grid h-9 w-9 place-items-center rounded-full text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" /><path d="M22 9l-6 6M16 9l6 6" /></svg>
                     </button>
                   </div>
                 )}

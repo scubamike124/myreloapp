@@ -120,7 +120,7 @@ export default function WebsiteCommercial() {
       const res = await fetch("/api/heygen-video", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ script: finalScript }),
+        body: JSON.stringify({ script: finalScript, action: "website-commercial" }),
       });
       const data = await res.json();
 
@@ -166,8 +166,16 @@ export default function WebsiteCommercial() {
 
       if (genTimer.current) clearInterval(genTimer.current);
       setVideoUrl(finalUrl);
+      setMuted(false);
       setProgress(100);
       setStep("result");
+      requestAnimationFrame(() => {
+        const v = videoRef.current;
+        if (!v) return;
+        v.muted = false;
+        v.volume = 1;
+        void v.play().catch(() => {});
+      });
       recordCreation({
         toolSlug: "website-commercial",
         toolTitle: "Website Commercial",
@@ -198,13 +206,6 @@ export default function WebsiteCommercial() {
     setStep("input");
     setUrl("");
     setProgress(0);
-  };
-
-  const toggleMute = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.muted = !v.muted;
-    setMuted(v.muted);
   };
 
   return (
@@ -399,20 +400,20 @@ export default function WebsiteCommercial() {
             </div>
 
             <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-black">
-              <video ref={videoRef} src={videoUrl} className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline />
-              {(
-                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-3">
-                  <span className="rounded-md px-2 py-1 text-[11px] font-semibold text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>0:{String(MAX_SECONDS).padStart(2, "0")} · {style}</span>
-                  <button onClick={toggleMute} aria-label={muted ? "Unmute" : "Mute"} className="grid h-9 w-9 place-items-center rounded-full text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>
-                    {muted ? (
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" /><path d="M22 9l-6 6M16 9l6 6" /></svg>
-                    ) : (
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" /><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" /></svg>
-                    )}
-                  </button>
-                </div>
-              )}
-
+              <video
+                ref={videoRef}
+                key={videoUrl}
+                src={videoUrl}
+                className="absolute inset-0 h-full w-full object-cover"
+                autoPlay
+                muted={muted}
+                controls
+                playsInline
+                preload="auto"
+              />
+              <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-3">
+                <span className="rounded-md px-2 py-1 text-[11px] font-semibold text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>0:{String(MAX_SECONDS).padStart(2, "0")} · {style}</span>
+              </div>
             </div>
 
             {(
