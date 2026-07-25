@@ -170,16 +170,25 @@ export async function POST(req: Request) {
       theme,
       pageText: page.text,
       adultOriented,
+      characterName,
     });
     imagePrompts.push(prompt);
-    if (debug) console.info("[storybook] imagePrompt", prompt.slice(0, 400));
+    if (debug) console.info("[storybook] imagePrompt", prompt.slice(0, 500));
 
+    // Photo first so the model anchors identity before reading the scene text.
     const res = await fetch(`${BASE}/models/${IMAGE_MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }, { inline_data: { mime_type: mimeType, data: photo } }] }],
-        generationConfig: { temperature: 0.7 },
+        contents: [
+          {
+            parts: [
+              { inline_data: { mime_type: mimeType, data: photo } },
+              { text: prompt },
+            ],
+          },
+        ],
+        generationConfig: { temperature: 0.35 },
       }),
       signal: AbortSignal.timeout(120_000),
     });
@@ -235,6 +244,7 @@ export async function POST(req: Request) {
                   theme,
                   pageText: "(page text)",
                   adultOriented,
+                  characterName,
                 }),
             },
           }

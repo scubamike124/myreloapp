@@ -18,7 +18,7 @@ export type StorybookInput = {
 /** Heuristic: adult-oriented requests must not be rewritten as kids' bedtime tales. */
 export function looksAdultOriented(idea: string, characterName: string): boolean {
   const t = `${idea} ${characterName}`.toLowerCase();
-  return /\b(adult|gentleman|lady|man|woman|men|women|romance|romantic|dating|marriage|wife|husband|retire|retirement|older|elderly|senior|grown[- ]?up|gentleman|looking for a (nice )?woman|looking for a (nice )?man)\b/.test(
+  return /\b(adult|gentleman|lady|man|woman|men|women|romance|romantic|dating|marriage|wife|husband|retire|retirement|older|elderly|senior|grown[- ]?up|looking for a (nice )?woman|looking for a (nice )?man)\b/.test(
     t,
   );
 }
@@ -55,14 +55,18 @@ export function buildStoryPrompt(input: StorybookInput): string {
     (adult
       ? `- Dedication must address an adult reader/character — never "little wizards" or similar child copy.\n`
       : "") +
+    `- ${hero} is ALWAYS the protagonist. Other people may appear as supporting characters, but never replace ${hero} as the hero.\n` +
     `\nReturn ONLY JSON, no markdown fence:\n` +
     `{"title": "...", "dedication": "...", "pages": [{"text": "...", "illustration": "..."}]}\n\n` +
     `- Exactly ${input.pageCount} pages.\n` +
     `- "text": 2 to 3 short sentences for that page, in ${input.languageName}. Clear read-aloud rhythm.\n` +
     `- "dedication": one short line in ${input.languageName}.\n` +
-    `- "illustration": a description IN ENGLISH of what to draw. Refer to the hero as "the main character" ` +
-    `(never force the word "child" unless the story is actually about a child). Describe scene, action, mood, ` +
-    `approximate age, and ${theme.toLowerCase()} costume cues. No text or letters in the image.\n` +
+    `- "illustration": a description IN ENGLISH of what to draw. EVERY illustration MUST name "${hero}" as the ` +
+    `visible main subject (e.g. "${hero} stands…"). Do NOT invent a different hero's age, gender, or face — ` +
+    `a real photograph of ${hero} will be attached when drawing, so keep illustration notes focused on pose, ` +
+    `setting, action, mood, and ${theme.toLowerCase()} costume cues only. Supporting characters may appear ` +
+    `but ${hero} must remain the clear focal subject. Never force the word "child" unless the story is actually ` +
+    `about a child. No text or letters in the image.\n` +
     `- Complete arc across the pages that serves the primary request.\n`
   );
 }
@@ -72,8 +76,10 @@ export function buildIllustrationPrompt(opts: {
   theme: string;
   pageText: string;
   adultOriented: boolean;
+  characterName?: string;
 }): string {
   const theme = opts.theme.trim() || "Adventurer";
+  const hero = (opts.characterName || "").trim() || "the main character";
   const style = opts.adultOriented
     ? "Illustrated storybook art, expressive and cinematic, rich colour, painterly, consistent character design, " +
       "no text, no words, no letters, no watermark, full-bleed square composition."
@@ -82,17 +88,22 @@ export function buildIllustrationPrompt(opts: {
 
   return (
     `${style}\n\n` +
-    `Page text (for scene accuracy): ${opts.pageText}\n\n` +
-    `Draw this scene: ${opts.illustration}\n\n` +
-    `The person in the attached photograph is the main character. Render them as an illustrated character ` +
-    `who remains clearly recognizable as that same person on every page: preserve approximate age, face shape, ` +
-    `hairstyle, skin tone, glasses, facial hair, and clothing cues where appropriate. ` +
-    `Draw in storybook style, NOT as a photograph. ` +
+    `=== CHARACTER IDENTITY (GROUND TRUTH — overrides everything else) ===\n` +
+    `The attached photograph shows ${hero}, the ONLY main character for this book.\n` +
+    `Draw ${hero} as an illustrated version of THAT exact person on this page.\n` +
+    `Preserve: approximate age, face shape, hairstyle, skin tone, glasses, facial hair, and distinctive features.\n` +
+    `If the scene description conflicts with the photo (wrong age, gender, face, hair), IGNORE the conflict and follow the photograph.\n` +
+    `Do NOT invent a different protagonist. Supporting people may appear in the background or beside ${hero}, ` +
+    `but ${hero} from the photo must be the clear focal subject.\n` +
+    `Draw in storybook style, NOT as a photograph.\n` +
     (opts.adultOriented
       ? `Do NOT turn this adult into a child. Keep adult proportions and age.\n`
       : `Match the age implied by the photograph and story — do not arbitrarily age them up or down.\n`) +
     `They may wear ${theme.toLowerCase()} costume/role elements while staying the same individual.\n` +
-    `The illustration must match the page text and the scene description.`
+    `===============================================================\n\n` +
+    `Page text (for scene accuracy): ${opts.pageText}\n\n` +
+    `Scene / action to depict (pose and setting only — appearance comes from the photo): ${opts.illustration}\n\n` +
+    `The illustration must match the page text and keep ${hero}'s identity consistent with the attached photo.`
   );
 }
 

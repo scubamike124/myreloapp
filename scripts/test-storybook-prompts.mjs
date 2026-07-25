@@ -118,10 +118,13 @@ test("6. illustration prompt preserves photo identity / adult age", () => {
     theme: "Wizard",
     pageText: "Walter met someone wonderful.",
     adultOriented: true,
+    characterName: "Walter",
   });
-  assert.match(img, /attached photograph is the main character/i);
+  assert.match(img, /CHARACTER IDENTITY \(GROUND TRUTH/i);
+  assert.match(img, /attached photograph shows Walter/i);
   assert.match(img, /Do NOT turn this adult into a child/i);
   assert.match(img, /approximate age/);
+  assert.match(img, /IGNORE the conflict and follow the photograph/i);
   assert.match(img, /Wizard/i);
   assert.match(img, /Page text/);
   assert.doesNotMatch(img, /The child in the attached photograph/i);
@@ -134,9 +137,23 @@ test("7. child illustration path does not force adult language", () => {
     theme: "Explorer",
     pageText: "Ava took a deep breath.",
     adultOriented: false,
+    characterName: "Ava",
   });
-  assert.match(img, /attached photograph is the main character/i);
+  assert.match(img, /attached photograph shows Ava/i);
   assert.doesNotMatch(img, /Do NOT turn this adult into a child/);
+});
+
+test("8. story illustration notes must keep named hero as focal subject", () => {
+  const prompt = buildStoryPrompt({
+    characterName: "Walter",
+    idea: adultIdea,
+    theme: "Wizard",
+    languageName: "English",
+    languageEndonym: "English",
+    pageCount: 4,
+  });
+  assert.match(prompt, /Walter is ALWAYS the protagonist/i);
+  assert.match(prompt, /EVERY illustration MUST name "Walter"/i);
 });
 
 if (!process.exitCode) console.log("\nAll storybook prompt tests passed.");
