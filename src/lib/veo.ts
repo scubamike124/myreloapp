@@ -24,8 +24,11 @@ const BASE = "https://generativelanguage.googleapis.com/v1beta";
 const VEO_MODEL = process.env.VEO_MODEL || "veo-3.1-generate-preview";
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-/** Clip length, in seconds. Veo bills per second, so this is a direct cost lever. */
-export const VIDEO_SECONDS = Number(process.env.VIDEO_SECONDS ?? 6);
+/** Clip length, in seconds. Veo supports 4, 6, or 8 — default to the longest. */
+const RAW_SECONDS = Number(process.env.VIDEO_SECONDS ?? 8);
+export const VIDEO_SECONDS = ([4, 6, 8] as const).includes(RAW_SECONDS as 4 | 6 | 8)
+  ? (RAW_SECONDS as 4 | 6 | 8)
+  : 8;
 
 /**
  * The operation handle comes back to us from the client on every poll, so it
@@ -60,10 +63,7 @@ export async function startVeo(
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         instances: [{ prompt, image: { bytesBase64Encoded: imageBase64, mimeType } }],
-        // 6s instead of the 8s default is a 25% saving and a natural short-form
-        // length. durationSeconds accepts 5-8. Native audio comes from the
-        // Veo 3.1 model itself (no separate generateAudio flag — unsupported
-        // on the Gemini API and rejected when sent).
+        // Veo 3.1 accepts 4, 6, or 8 seconds. We default to 8 for usable clips.
         parameters: { aspectRatio: "9:16", durationSeconds: VIDEO_SECONDS },
       }),
       signal: AbortSignal.timeout(30_000),

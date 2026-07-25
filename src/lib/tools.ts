@@ -2,7 +2,7 @@ import type { IconKey } from "@/components/design/BIcon";
 import { creditLabel } from "@/lib/token-costs";
 
 /** Clip length requested by the Veo route; shown so the card cannot claim 10s. */
-const VIDEO_SECONDS = Number(process.env.VIDEO_SECONDS ?? 6);
+const VIDEO_SECONDS = Number(process.env.VIDEO_SECONDS ?? 8);
 
 export type Field =
   | { kind: "url" | "text"; name: string; label: string; placeholder: string; hint?: string }
@@ -53,7 +53,7 @@ export const TOOLS: Tool[] = [
   {
     slug: "dancing-photo", title: "Dancing Photo", tagline: "Bring any photo to life with dance.", icon: "sparkle", poster: "/assets/dancing.jpg", credits: creditLabel("dancing-photo", `max ${VIDEO_SECONDS}s`), cta: "Make it dance",
     fields: [
-      { kind: "upload", name: "photo", label: "Upload a photo", hint: "Full or upper body both work." },
+      { kind: "upload", name: "photo", label: "Upload a photo", hint: "JPG or PNG works best — full or upper body." },
       { kind: "choices", name: "move", label: "Pick a move", options: [
         { label: "Hip Shake", value: "hip", icon: "💃" }, { label: "Moonwalk", value: "moon", icon: "🕺" }, { label: "Robot", value: "robot", icon: "🤖" },
         { label: "Spin", value: "spin", icon: "🌀" }, { label: "Twerk", value: "twerk", icon: "🍑" }, { label: "Jump", value: "jump", icon: "⚡" },
@@ -62,8 +62,9 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "ai-avatar-studio", title: "AI Avatar Studio", tagline: "Realistic AI avatars that talk and engage.", icon: "users", poster: "/assets/spokesperson.jpg", credits: creditLabel("ai-avatar-studio"), cta: "Generate avatar video",
+    slug: "ai-avatar-studio", title: "AI Avatar Studio", tagline: "Website or message + avatar or your photo → talking video.", icon: "users", poster: "/assets/spokesperson.jpg", credits: creditLabel("ai-avatar-studio"), cta: "Generate avatar video",
     fields: [
+      { kind: "url", name: "url", label: "Website URL (optional)", placeholder: "https://yourbrand.com" },
       { kind: "choices", name: "avatar", label: "Choose an avatar", options: [
         { label: "Ava", value: "ava", img: "/assets/talking-selfie.jpg" }, { label: "Leo", value: "leo", img: "/assets/spokesperson.jpg" },
         { label: "Nina", value: "nina", img: "/assets/avatar-business.jpg" }, { label: "Maya", value: "maya", img: "/assets/talking-photo.jpg" },

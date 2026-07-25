@@ -6,13 +6,22 @@ import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
 import { materializeVideoUrl } from "@/lib/materialize-video";
 import { playSyncedWithSound } from "@/lib/play-synced";
+import { compressImageForUpload } from "@/lib/compress-image";
 import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
-type Avatar = { avatarId: string; name: string; gender: string; image: string; video: string };
-type Status = "idle" | "generating" | "done";
+/**
+ * AI Avatar Studio — deliberately simple:
+ *  1. Message: paste a website (we scan it) OR write what they should say
+ *  2. Face: pick an avatar OR upload your photo
+ *  3. Generate
+ */
 
-// Known-good STANDARD HeyGen voices (voice-design voices have no avatar mapping).
+type Avatar = { avatarId: string; name: string; gender: string; image: string; video: string };
+type Status = "idle" | "scanning" | "generating" | "done";
+type SourceMode = "website" | "script";
+type FaceMode = "avatar" | "photo";
+
 const VOICES = [
   { id: "f8c69e517f424cafaecde32dde57096b", label: "Allison (F)" },
   { id: "cef3bc4e0a84424cafcde6f2cf466c97", label: "Ivy (F)" },
@@ -21,35 +30,65 @@ const VOICES = [
   { id: "d92994ae0de34b2e8659b456a2f388b8", label: "John Doe (M)" },
   { id: "453c20e1525a429080e2ad9e4b26f2cd", label: "Archer (M)" },
 ];
-const PAGE = 48;
+
+const DEFAULT_SCRIPT =
+  "Hi! I'm glad you're here. Today I want to share something simple that can help you move faster. " +
+  "With Reelo, you turn a website or a short message into a clear on-camera video — no camera crew, no complicated edit. " +
+  "Watch how easy it is, then try it with your own brand. Stick around for the key details, and take the next step today.";
+
+async function pollVeo(pollUrl: string, maxTries = 90): Promise<string> {
+  for (let i = 0; i < maxTries; i++) {
+    await new Promise((r) => setTimeout(r, 5000));
+    const res = await fetch(pollUrl);
+    const d = await res.json();
+    if (d.status === "completed" && d.videoUrl) return d.videoUrl as string;
+    if (d.status === "failed") throw new Error(d.error || "Video generation failed.");
+  }
+  throw new Error("Video is taking too long — please try again.");
+}
 
 export default function AiAvatarStudio() {
-  // --- gallery state ---
+  const [sourceMode, setSourceMode] = useState<SourceMode>("website");
+  const [faceMode, setFaceMode] = useState<FaceMode>("avatar");
+  const [url, setUrl] = useState("");
+  const [script, setScript] = useState(DEFAULT_SCRIPT);
+  const [voiceId, setVoiceId] = useState(VOICES[0].id);
+
   const [avatars, setAvatars] = useState<Avatar[]>([]);
-  const [total, setTotal] = useState(0);
-  const [offset, setOffset] = useState(0);
-  const [q, setQ] = useState("");
-  const [gender, setGender] = useState("");
-  const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<Avatar | null>(null);
-  // Avatar preview videos are served from HeyGen's CDN, and an individual URL
-  // Arriving from the Avatar Library with ?avatar=<id>: fetch that one avatar
-  // directly so it is selected without paging through the catalog to find it.
-  //
-  // Read from window rather than useSearchParams(): this component is rendered
-  // by a statically prerendered route, and useSearchParams() without a Suspense
-  // boundary fails the production build ("Error occurred prerendering page").
+  const [loadingAvatars, setLoadingAvatars] = useState(true);
+  const [photo, setPhoto] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState("");
+
+  const [status, setStatus] = useState<Status>("idle");
+  const [progress, setProgress] = useState(0);
+  const [videoUrl, setVideoUrl] = useState("");
+  const [err, setErr] = useState<string | null>(null);
+  const [short, setShort] = useState<Shortfall | null>(null);
+  const [muted, setMuted] = useState(true);
+  const [needsGesture, setNeedsGesture] = useState(false);
+  const [clipHint, setClipHint] = useState("");
+  const tokens = useTokens();
+
+  const genTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pollTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const resultRef = useRef<HTMLVideoElement | null>(null);
+  const revokeRef = useRef<(() => void) | null>(null);
+
   useEffect(() => {
-    const wantedId = new URLSearchParams(window.location.search).get("avatar");
-    if (!wantedId) return;
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch(`/api/heygen-avatars?id=${encodeURIComponent(wantedId)}`);
+        const res = await fetch("/api/heygen-avatars?limit=24&offset=0");
         const data = await res.json();
-        if (!cancelled && res.ok && data.avatar) setSelected(data.avatar as Avatar);
+        if (cancelled || !res.ok) return;
+        const list = (Array.isArray(data.avatars) ? data.avatars : []) as Avatar[];
+        setAvatars(list);
+        setSelected((cur) => cur ?? list[0] ?? null);
       } catch {
-        /* the gallery below still works; no need to surface this */
+        setErr("Could not load avatars — try the Avatar Library link.");
+      } finally {
+        if (!cancelled) setLoadingAvatars(false);
       }
     })();
     return () => {
@@ -57,60 +96,27 @@ export default function AiAvatarStudio() {
     };
   }, []);
 
-  // --- generation state ---
-  const [script, setScript] = useState("Hi! I'm your AI presenter. Let me show you how easy it is to create studio-quality videos with Reelo.");
-  const [voiceId, setVoiceId] = useState(VOICES[0].id);
-  const [status, setStatus] = useState<Status>("idle");
-  const [progress, setProgress] = useState(0);
-  const [videoUrl, setVideoUrl] = useState("");
-  const [err, setErr] = useState<string | null>(null);
-  const [short, setShort] = useState<Shortfall | null>(null);
-  const [muted, setMuted] = useState(false);
-  const [needsGesture, setNeedsGesture] = useState(false);
-  const [audioReady, setAudioReady] = useState(false);
-  const tokens = useTokens();
-  const genTimer = useRef<ReturnType<typeof setInterval> | null>(null);
-  const pollTimer = useRef<ReturnType<typeof setInterval> | null>(null);
-  const resultRef = useRef<HTMLVideoElement | null>(null);
-  const revokeRef = useRef<(() => void) | null>(null);
-
-  // Fetch a page of avatars (append when loading more, replace on a fresh query).
-  const fetchAvatars = useCallback(async (nextOffset: number, replace: boolean, query: string, g: string) => {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams({ offset: String(nextOffset), limit: String(PAGE) });
-      if (query) params.set("q", query);
-      if (g) params.set("gender", g);
-      const res = await fetch(`/api/heygen-avatars?${params}`);
-      const data = await res.json();
-      if (!res.ok || !data.ok) throw new Error(data.error || "Could not load avatars.");
-      setTotal(data.total);
-      setOffset(nextOffset + data.avatars.length);
-      setAvatars((prev) => (replace ? data.avatars : [...prev, ...data.avatars]));
-      setSelected((cur) => cur ?? (replace ? data.avatars[0] ?? null : cur));
-    } catch (e) {
-      setErr(e instanceof Error ? e.message : "Could not load avatars.");
-    } finally {
-      setLoading(false);
-    }
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get("avatar");
+    if (!wanted) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`/api/heygen-avatars?id=${encodeURIComponent(wanted)}`);
+        const data = await res.json();
+        if (!cancelled && res.ok && data.avatar) {
+          setFaceMode("avatar");
+          setSelected(data.avatar as Avatar);
+        }
+      } catch {
+        /* ignore */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  // Initial load + debounced re-query on search/gender. One effect handles both
-  // so mount fires a single request (two effects meant two identical fetches of
-  // a slow endpoint). First run is immediate; later ones debounce.
-  const firstLoad = useRef(true);
-  useEffect(() => {
-    if (firstLoad.current) {
-      firstLoad.current = false;
-      fetchAvatars(0, true, "", "");
-      return;
-    }
-    const t = setTimeout(() => fetchAvatars(0, true, q, gender), 300);
-    return () => clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [q, gender]);
-
-  // Clean up timers + blob URLs on unmount.
   useEffect(
     () => () => {
       [genTimer, pollTimer].forEach((t) => t.current && clearInterval(t.current));
@@ -119,11 +125,58 @@ export default function AiAvatarStudio() {
     [],
   );
 
+  const scanWebsite = useCallback(async () => {
+    if (!url.trim()) {
+      setErr("Paste a website URL first.");
+      return;
+    }
+    setErr(null);
+    setStatus("scanning");
+    try {
+      const res = await fetch("/api/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url, ideaCount: 5 }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || "Could not scan that website.");
+      const written = String(data.script || "").trim();
+      if (!written) throw new Error("Scan worked, but no script came back. Try writing one yourself.");
+      setScript(written);
+      setSourceMode("script");
+      setStatus("idle");
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : "Scan failed.");
+      setStatus("idle");
+    }
+  }, [url]);
+
+  const onPhoto = (f?: File) => {
+    if (!f) return;
+    setPhoto(f);
+    setPhotoPreview(URL.createObjectURL(f));
+    setFaceMode("photo");
+    setErr(null);
+  };
+
   const generate = async () => {
-    if (!selected) { setErr("Pick an avatar first."); return; }
-    if (!script.trim()) { setErr("Write a script first."); return; }
+    const spoken = script.trim();
+    if (!spoken) {
+      setErr("Add a message — scan a website or write what they should say.");
+      return;
+    }
+    if (faceMode === "avatar" && !selected) {
+      setErr("Pick an avatar, or switch to Upload your photo.");
+      return;
+    }
+    if (faceMode === "photo" && !photo) {
+      setErr("Upload a photo of the person who should speak.");
+      return;
+    }
+
     setErr(null);
     setShort(null);
+    setClipHint("");
     setStatus("generating");
     setProgress(0);
     if (genTimer.current) clearInterval(genTimer.current);
@@ -131,58 +184,92 @@ export default function AiAvatarStudio() {
     genTimer.current = setInterval(() => setProgress((p) => Math.min(95, p + 1)), 1500);
 
     try {
-      const res = await fetch("/api/heygen-video", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          script,
-          avatarId: selected.avatarId,
-          voiceId,
-          action: "ai-avatar-studio",
-        }),
-      });
-      const data = await res.json();
+      let remoteUrl = "";
 
-      // Out of tokens is not a failure to record — nothing was generated and
-      // nothing was charged — so it gets the purchase panel and a clean stop.
-      const gap = await shortfallFrom(res, data);
-      if (gap) {
-        if (genTimer.current) clearInterval(genTimer.current);
-        setShort(gap);
-        setProgress(0);
-        setStatus("idle");
-        return;
+      if (faceMode === "photo" && photo) {
+        // Your photo → Veo talking clip (~8s).
+        const { base64, mimeType } = await compressImageForUpload(photo);
+        const prompt =
+          `A close-up of the person in the photo looking at the camera and speaking naturally with clear audible speech, ` +
+          `lip-syncing exactly: "${spoken.slice(0, 500)}". Subtle natural head movement, engaging eye contact. ` +
+          `The spoken words must be clearly audible throughout.`;
+        const res = await fetch("/api/generate-avatar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            imageBase64: base64,
+            mimeType,
+            prompt,
+            action: "talking-photo",
+          }),
+        });
+        const data = await res.json();
+        const gap = await shortfallFrom(res, data);
+        if (gap) {
+          if (genTimer.current) clearInterval(genTimer.current);
+          setShort(gap);
+          setProgress(0);
+          setStatus("idle");
+          return;
+        }
+        if (!res.ok || !data.ok) throw new Error(data.error || "Video generation failed.");
+        tokens.setBalance(data.balance);
+        setClipHint("Photo videos run about 8 seconds (provider max).");
+        remoteUrl = await pollVeo(data.poll as string);
+      } else {
+        // Avatar → HeyGen (~20–30s from script length).
+        const res = await fetch("/api/heygen-video", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            script: spoken,
+            avatarId: selected!.avatarId,
+            voiceId,
+            action: "ai-avatar-studio",
+          }),
+        });
+        const data = await res.json();
+        const gap = await shortfallFrom(res, data);
+        if (gap) {
+          if (genTimer.current) clearInterval(genTimer.current);
+          setShort(gap);
+          setProgress(0);
+          setStatus("idle");
+          return;
+        }
+        if (!res.ok || !data.ok) throw new Error(data.error || "Video generation failed.");
+        tokens.setBalance(data.balance);
+        setClipHint(
+          data.expanded
+            ? `We expanded a short script so the video lasts about ${data.targetSeconds || 25}s (max ${data.maxSeconds || 30}s).`
+            : `Avatar videos last up to about ${data.maxSeconds || 30} seconds based on the script.`,
+        );
+        const videoId = data.videoId as string;
+        remoteUrl = await new Promise<string>((resolve, reject) => {
+          let tries = 0;
+          pollTimer.current = setInterval(async () => {
+            if (++tries > 168) {
+              if (pollTimer.current) clearInterval(pollTimer.current);
+              reject(new Error("Video is taking too long — please try again."));
+              return;
+            }
+            try {
+              const r = await fetch(`/api/heygen-video?video_id=${videoId}`);
+              const d = await r.json();
+              if (d.status === "completed" && d.videoUrl) {
+                if (pollTimer.current) clearInterval(pollTimer.current);
+                resolve((d.videoUrl as string) || (d.providerUrl as string));
+              } else if (d.status === "failed") {
+                if (pollTimer.current) clearInterval(pollTimer.current);
+                reject(new Error(d.error?.detail || d.error?.message || "Generation failed on HeyGen."));
+              }
+            } catch {
+              /* keep polling */
+            }
+          }, 5000);
+        });
       }
 
-      if (!res.ok || !data.ok) throw new Error(data.error || "Generation failed.");
-      tokens.setBalance(data.balance);
-      const videoId = data.videoId as string;
-
-      const remoteUrl = await new Promise<string>((resolve, reject) => {
-        let tries = 0;
-        pollTimer.current = setInterval(async () => {
-          if (++tries > 168) { // ~14 min guard
-            if (pollTimer.current) clearInterval(pollTimer.current);
-            reject(new Error("Video is taking too long — please try again."));
-            return;
-          }
-          try {
-            const r = await fetch(`/api/heygen-video?video_id=${videoId}`);
-            const d = await r.json();
-            if (d.status === "completed" && d.videoUrl) {
-              if (pollTimer.current) clearInterval(pollTimer.current);
-              // Prefer durable/local URL; keep provider URL as fallback for materialize.
-              resolve((d.videoUrl as string) || (d.providerUrl as string));
-            } else if (d.status === "failed") {
-              if (pollTimer.current) clearInterval(pollTimer.current);
-              reject(new Error(d.error?.detail || d.error?.message || "Generation failed on HeyGen."));
-            }
-          } catch { /* keep polling */ }
-        }, 5000);
-      });
-
-      // Pull the real MP4 into a blob: URL so playback/download are same-origin
-      // and we never hand the <video> element a JSON error body.
       revokeRef.current?.();
       setProgress(96);
       const local = await materializeVideoUrl(remoteUrl);
@@ -190,15 +277,14 @@ export default function AiAvatarStudio() {
 
       if (genTimer.current) clearInterval(genTimer.current);
       setVideoUrl(local.url);
-      setMuted(true); // start muted so the explicit tap unlocks audible play reliably
-      setAudioReady(true);
-      setNeedsGesture(true); // always require one tap — browsers block unmuted autoplay
+      setMuted(true);
+      setNeedsGesture(true);
       setProgress(100);
       setStatus("done");
       recordCreation({
         toolSlug: "ai-avatar-studio",
         toolTitle: "AI Avatar Studio",
-        title: script.trim().slice(0, 60) || "Avatar video",
+        title: spoken.slice(0, 60) || "Avatar video",
         status: "completed",
         kind: "video",
         mediaUrl: local.url,
@@ -221,103 +307,239 @@ export default function AiAvatarStudio() {
   };
 
   const inputStyle = { border: "1px solid rgba(255,70,85,.22)", background: "rgba(255,60,75,.04)" } as const;
+  const canGenerate =
+    script.trim().length > 0 &&
+    ((faceMode === "avatar" && Boolean(selected)) || (faceMode === "photo" && Boolean(photo)));
 
   return (
     <div className="relative min-h-screen text-white" style={{ background: "#0a0607" }}>
-      <div aria-hidden className="pointer-events-none fixed inset-0" style={{ backgroundImage: "radial-gradient(900px 500px at 70% -5%,rgba(225,29,42,.16),transparent 60%)" }} />
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0"
+        style={{ backgroundImage: "radial-gradient(900px 500px at 70% -5%,rgba(225,29,42,.16),transparent 60%)" }}
+      />
 
       <header className="sticky top-0 z-20 border-b border-white/10 bg-black/50 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+        <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-4 sm:px-6">
           <Link href="/create" className="flex items-center gap-2 text-sm font-medium text-white/70 hover:text-white">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M11 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            <span className="font-display grid h-7 w-7 place-items-center rounded-lg text-xs font-bold" style={{ background: "linear-gradient(135deg,#ff3645,#b3121d)" }}>R</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M11 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span
+              className="font-display grid h-7 w-7 place-items-center rounded-lg text-xs font-bold"
+              style={{ background: "linear-gradient(135deg,#ff3645,#b3121d)" }}
+            >
+              R
+            </span>
             Create
           </Link>
           <TokenMeter slug="ai-avatar-studio" tokens={tokens} variant="chip" />
         </div>
       </header>
 
-      <div className="relative z-[1] mx-auto max-w-6xl px-4 py-9 sm:px-6">
-        <p className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#ff5663" }}>Studio</p>
+      <div className="relative z-[1] mx-auto max-w-3xl px-4 py-9 sm:px-6">
+        <p className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#ff5663" }}>
+          Studio
+        </p>
         <h1 className="font-display mt-1 text-3xl font-bold tracking-[-0.02em] sm:text-4xl">AI Avatar Studio</h1>
-        <p className="mt-2" style={{ color: "#a99a9c" }}>Realistic AI avatars that talk and engage — {total > 0 ? total.toLocaleString() : "1,000+"} to choose from.</p>
+        <p className="mt-2 text-[15px] leading-relaxed" style={{ color: "#a99a9c" }}>
+          Three steps: add a website or message → pick an avatar or your photo → generate a longer talking video.
+        </p>
 
-        <div className="mt-7 grid gap-6 lg:grid-cols-5">
-          {/* left: gallery + script */}
-          <div className="lg:col-span-3 space-y-5">
-            {/* search + filters */}
-            <div className="rounded-3xl border border-white/10 bg-black/40 p-5 backdrop-blur-md">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <div className="flex flex-1 items-center gap-2 rounded-xl px-3.5" style={inputStyle}>
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ff8a92" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4-4" strokeLinecap="round" /></svg>
-                  <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search avatars by name…" className="w-full bg-transparent py-2.5 text-sm text-white placeholder-white/35 outline-none" />
-                </div>
-                <div className="inline-flex gap-1 rounded-xl p-1" style={inputStyle}>
-                  {[["", "All"], ["female", "Female"], ["male", "Male"]].map(([val, lbl]) => (
-                    <button key={val} onClick={() => setGender(val)} className="rounded-lg px-3 py-2 text-xs font-semibold transition-colors" style={gender === val ? { background: "linear-gradient(135deg,#ff3645,#c4101c)", color: "#fff" } : { color: "#b9a9ab" }}>{lbl}</button>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2">
-                <p className="text-xs text-white/40">{total.toLocaleString()} avatars{q ? ` matching “${q}”` : ""}{gender ? ` · ${gender}` : ""}{selected ? ` · selected: ${selected.name}` : ""}</p>
-                {/* The full catalog, browsable at a comfortable size. */}
-                <Link href="/avatars" className="text-xs font-semibold underline underline-offset-2" style={{ color: "#ff8892" }}>
-                  Browse the full Avatar Library →
-                </Link>
-              </div>
-
-              {/* avatar grid */}
-              <div className="mt-4 grid max-h-[440px] grid-cols-3 gap-2.5 overflow-y-auto pr-1 sm:grid-cols-4 md:grid-cols-5">
-                {/* First load: show placeholders so the grid never looks empty/broken. */}
-                {loading && avatars.length === 0 &&
-                  Array.from({ length: 15 }).map((_, i) => (
-                    <div key={`sk${i}`} className="aspect-[3/4] w-full animate-pulse rounded-xl" style={{ background: "rgba(255,70,85,.07)", border: "1px solid rgba(255,70,85,.12)" }} />
-                  ))}
-                {avatars.map((a) => {
-                  const on = selected?.avatarId === a.avatarId;
-                  return (
-                    <button key={a.avatarId} onClick={() => setSelected(a)} title={a.name} className="group relative overflow-hidden rounded-xl transition" style={{ border: on ? "2px solid #ff3645" : "1px solid rgba(255,70,85,.15)" }}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={a.image} alt={a.name} loading="lazy" decoding="async" className="aspect-[3/4] w-full object-cover transition group-hover:scale-105" style={{ background: "#1a1012" }} />
-                      <span className="absolute inset-x-0 bottom-0 truncate bg-gradient-to-t from-black/80 to-transparent px-1.5 pb-1 pt-3 text-left text-[10px] font-medium text-white/90">{a.name}</span>
-                      {on && <span className="absolute right-1 top-1 grid h-5 w-5 place-items-center rounded-full" style={{ background: "#ff3645" }}><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3"><path d="M20 6 9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" /></svg></span>}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {offset < total && (
-                <button onClick={() => fetchAvatars(offset, false, q, gender)} disabled={loading} className="mt-3 w-full rounded-xl border border-white/10 bg-white/5 py-2.5 text-sm font-semibold text-white/80 hover:bg-white/10 disabled:opacity-50">
-                  {loading ? "Loading…" : `Load more (${(total - offset).toLocaleString()} left)`}
+        <div className="mt-7 space-y-5">
+          {/* STEP 1 — message */}
+          <section className="rounded-3xl border border-white/10 bg-black/40 p-5 backdrop-blur-md sm:p-6">
+            <p className="mb-3 text-xs font-bold uppercase tracking-wider" style={{ color: "#ff8892" }}>
+              1 · What should they say?
+            </p>
+            <div className="mb-3 flex gap-1.5">
+              {(
+                [
+                  ["website", "Scan a website"],
+                  ["script", "Write a message"],
+                ] as const
+              ).map(([id, label]) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setSourceMode(id)}
+                  className="flex-1 rounded-lg px-3 py-2.5 text-[13px] font-semibold"
+                  style={
+                    sourceMode === id
+                      ? { color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" }
+                      : { color: "#b9a9ab", border: "1px solid rgba(255,70,85,.22)" }
+                  }
+                >
+                  {label}
                 </button>
+              ))}
+            </div>
+
+            {sourceMode === "website" ? (
+              <div>
+                <div className="flex items-center gap-2 rounded-xl px-3.5" style={inputStyle}>
+                  <input
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && void scanWebsite()}
+                    placeholder="yourbusiness.com"
+                    className="w-full bg-transparent py-3 text-[15px] text-white placeholder-white/35 outline-none"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => void scanWebsite()}
+                  disabled={status === "scanning" || !url.trim()}
+                  className="mt-3 w-full rounded-xl py-3 text-sm font-bold text-white disabled:opacity-50"
+                  style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+                >
+                  {status === "scanning" ? "Scanning…" : "Scan website & write script"}
+                </button>
+                <p className="mt-2 text-xs text-white/40">We read the page and write a ~25-second commercial script for you.</p>
+              </div>
+            ) : (
+              <div>
+                <textarea
+                  rows={5}
+                  value={script}
+                  onChange={(e) => setScript(e.target.value)}
+                  className="w-full resize-none rounded-xl px-4 py-3 text-sm leading-relaxed text-white outline-none"
+                  style={inputStyle}
+                  placeholder="What should the presenter say?"
+                />
+                <p className="mt-2 text-xs text-white/40">
+                  Aim for a few sentences. Short one-liners are expanded automatically so the video isn&apos;t only ~5
+                  seconds.
+                </p>
+              </div>
+            )}
+          </section>
+
+          {/* STEP 2 — face */}
+          <section className="rounded-3xl border border-white/10 bg-black/40 p-5 backdrop-blur-md sm:p-6">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <p className="text-xs font-bold uppercase tracking-wider" style={{ color: "#ff8892" }}>
+                2 · Who appears on camera?
+              </p>
+              <Link href="/avatars?tool=ai-avatar-studio" className="text-xs font-semibold underline underline-offset-2" style={{ color: "#ff8892" }}>
+                Avatar Library →
+              </Link>
+            </div>
+            <div className="mb-3 flex gap-1.5">
+              {(
+                [
+                  ["avatar", "Pick an avatar"],
+                  ["photo", "Upload your photo"],
+                ] as const
+              ).map(([id, label]) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setFaceMode(id)}
+                  className="flex-1 rounded-lg px-3 py-2.5 text-[13px] font-semibold"
+                  style={
+                    faceMode === id
+                      ? { color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" }
+                      : { color: "#b9a9ab", border: "1px solid rgba(255,70,85,.22)" }
+                  }
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {faceMode === "avatar" ? (
+              <>
+                <div className="grid max-h-[280px] grid-cols-3 gap-2 overflow-y-auto sm:grid-cols-4">
+                  {loadingAvatars &&
+                    Array.from({ length: 8 }).map((_, i) => (
+                      <div key={i} className="aspect-[3/4] animate-pulse rounded-xl" style={{ background: "rgba(255,70,85,.08)" }} />
+                    ))}
+                  {avatars.map((a) => {
+                    const on = selected?.avatarId === a.avatarId;
+                    return (
+                      <button
+                        key={a.avatarId}
+                        type="button"
+                        title={a.name}
+                        onClick={() => setSelected(a)}
+                        className="relative overflow-hidden rounded-xl"
+                        style={{ border: on ? "2px solid #ff3645" : "1px solid rgba(255,255,255,.1)" }}
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={a.image} alt={a.name} className="aspect-[3/4] w-full object-cover" />
+                        <span className="absolute inset-x-0 bottom-0 truncate bg-black/70 px-1.5 py-1 text-[10px]">{a.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="mt-3">
+                  <label className="mb-1.5 block text-[13px] font-semibold text-white/80">Voice</label>
+                  <select
+                    value={voiceId}
+                    onChange={(e) => setVoiceId(e.target.value)}
+                    className="w-full appearance-none rounded-xl px-4 py-3 text-sm text-white outline-none"
+                    style={inputStyle}
+                  >
+                    {VOICES.map((v) => (
+                      <option key={v.id} value={v.id} className="bg-[#140a0c]">
+                        {v.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </>
+            ) : (
+              <label className="flex cursor-pointer flex-col items-center gap-2 rounded-2xl px-4 py-8 text-center" style={{ border: "2px dashed rgba(255,70,85,.3)" }}>
+                {photoPreview ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={photoPreview} alt="" className="h-28 w-28 rounded-xl object-cover" />
+                ) : (
+                  <span className="text-3xl" aria-hidden>
+                    📷
+                  </span>
+                )}
+                <span className="text-sm text-white/70">{photo ? photo.name : "Clear front-facing photo works best"}</span>
+                <input type="file" accept="image/*" className="hidden" onChange={(e) => onPhoto(e.target.files?.[0])} />
+              </label>
+            )}
+          </section>
+
+          {/* STEP 3 — generate */}
+          <section className="rounded-3xl border border-white/10 bg-black/40 p-5 backdrop-blur-md sm:p-6">
+            <p className="mb-3 text-xs font-bold uppercase tracking-wider" style={{ color: "#ff8892" }}>
+              3 · Generate
+            </p>
+            {short && (
+              <div className="mb-3">
+                <NotEnoughTokens {...short} />
+              </div>
+            )}
+            {err && <p className="mb-3 text-sm font-medium text-[#ff8a92]">{err}</p>}
+            <button
+              type="button"
+              onClick={() => void generate()}
+              disabled={status === "generating" || status === "scanning" || !canGenerate}
+              className="flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-bold text-white disabled:opacity-50"
+              style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 10px 28px -8px rgba(225,29,42,.6)" }}
+            >
+              {status === "generating" ? (
+                <>
+                  <Spinner /> Generating…
+                </>
+              ) : (
+                "Generate talking video"
               )}
-            </div>
+            </button>
+            <TokenMeter slug="ai-avatar-studio" tokens={tokens} />
+            <p className="mt-2 text-center text-xs text-white/40">
+              Avatar path ≈ 20–30s · Your-photo path ≈ 8s (provider limit). Keep this tab open.
+            </p>
+          </section>
 
-            {/* script + voice */}
-            <div className="space-y-4 rounded-3xl border border-white/10 bg-black/40 p-5 backdrop-blur-md">
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-white/85">Script <span className="text-white/40">· spoken by the avatar (max ~30s)</span></label>
-                <textarea rows={4} value={script} onChange={(e) => setScript(e.target.value)} className="w-full resize-none rounded-xl px-4 py-3 text-sm leading-relaxed text-white outline-none" style={inputStyle} />
-              </div>
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-white/85">Voice</label>
-                <select value={voiceId} onChange={(e) => setVoiceId(e.target.value)} className="w-full appearance-none rounded-xl px-4 py-3 text-sm text-white outline-none" style={inputStyle}>
-                  {VOICES.map((v) => <option key={v.id} value={v.id} className="bg-[#140a0c]">{v.label}</option>)}
-                </select>
-              </div>
-              <button onClick={generate} disabled={status === "generating"} className="flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-bold text-white transition-transform hover:scale-[1.01] disabled:opacity-60" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 10px 28px -8px rgba(225,29,42,.6)" }}>
-                {status === "generating" ? <><Spinner /> Generating…</> : <><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>{status === "done" ? "Regenerate" : "Generate avatar video"}</>}
-              </button>
-              {short && <NotEnoughTokens {...short} />}
-              {err && <p className="text-sm font-medium text-[#ff8a92]">{err}</p>}
-              {status !== "generating" && !err && !short && <p className="text-center text-xs text-white/40">Generates a real talking-avatar video with HeyGen (~1–3 min).</p>}
-            </div>
-          </div>
-
-          {/* right: preview / result */}
-          <div className="lg:col-span-2">
-            <div className="sticky top-24 rounded-3xl border border-white/10 bg-black/40 p-4 backdrop-blur-md">
-              <p className="mb-3 px-2 text-sm font-semibold text-white/70">{status === "done" ? "Your video" : "Preview"}</p>
+          {/* Result */}
+          {(status === "generating" || status === "done") && (
+            <section className="rounded-3xl border border-white/10 bg-black/40 p-4 backdrop-blur-md">
               <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-black">
                 {status === "done" ? (
                   <>
@@ -340,76 +562,63 @@ export default function AiAvatarStudio() {
                             .then(() => setNeedsGesture(false))
                             .catch(() => {});
                         }}
-                        className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/70 px-6 text-center"
+                        className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/70"
                       >
-                        <span className="grid h-16 w-16 place-items-center rounded-full text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
-                          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><polygon points="8 5 20 12 8 19" /></svg>
+                        <span
+                          className="grid h-16 w-16 place-items-center rounded-full"
+                          style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+                        >
+                          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
+                            <polygon points="8 5 20 12 8 19" />
+                          </svg>
                         </span>
-                        <span className="text-lg font-bold text-white">Tap to play with sound</span>
-                        <span className="text-sm text-white/70">Audio is included — browsers require a tap before sound plays.</span>
+                        <span className="text-lg font-bold">Tap to play with sound</span>
                       </button>
                     )}
                   </>
-                ) : selected ? (
-                  // Still image only while idle — avoid a second decoder competing
-                  // with the result player (causes stutter / apparent A/V drift).
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={selected.image} alt={selected.name} className={`absolute inset-0 h-full w-full object-cover transition ${status === "generating" ? "opacity-25" : "opacity-100"}`} />
                 ) : (
-                  <div className="absolute inset-0 grid place-items-center text-sm text-white/40">Pick an avatar</div>
-                )}
-
-                {status === "generating" && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-black/55">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
                     <Spinner large />
                     <div className="w-3/4">
-                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/15"><div className="h-full rounded-full transition-all" style={{ width: `${progress}%`, background: "linear-gradient(90deg,#ff3645,#c4101c)" }} /></div>
-                      <p className="mt-2.5 text-center text-[13px] font-medium text-white/85">Rendering your avatar…</p>
-                      <p className="mt-0.5 text-center text-xs text-white/45">{progress}%</p>
+                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/15">
+                        <div
+                          className="h-full rounded-full transition-all"
+                          style={{ width: `${progress}%`, background: "linear-gradient(90deg,#ff3645,#c4101c)" }}
+                        />
+                      </div>
+                      <p className="mt-2 text-center text-sm text-white/80">Rendering your video… {progress}%</p>
                     </div>
                   </div>
                 )}
               </div>
-
               {status === "done" && (
-                <div className="mt-4 space-y-3">
-                  <div className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm" style={{ border: "1px solid rgba(255,70,85,.3)", background: "rgba(255,70,85,.1)", color: "#ffb3b9" }}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6 9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                    {audioReady
-                      ? "MP4 verified with AAC audio. Use Tap to play with sound above."
-                      : "Your avatar video is ready."}
-                  </div>
+                <div className="mt-3 space-y-2">
+                  {clipHint && <p className="text-xs text-white/45">{clipHint}</p>}
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       type="button"
                       onClick={() => {
-                        const v = resultRef.current;
-                        if (!v) return;
-                        const next = !v.muted;
-                        v.muted = next;
-                        setMuted(next);
-                        if (!next) {
-                          void v.play().then(() => setNeedsGesture(false)).catch(() => {});
-                        }
+                        setStatus("idle");
+                        setVideoUrl("");
+                        setProgress(0);
                       }}
-                      className="flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-semibold text-white/90"
+                      className="rounded-full border border-white/15 py-2.5 text-sm font-semibold"
                     >
-                      {muted ? "Unmute" : "Mute"}
+                      Make another
                     </button>
                     <button
                       type="button"
                       onClick={() => void downloadMedia(videoUrl, `reelo-avatar-${Date.now()}.mp4`)}
-                      className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold text-white"
+                      className="rounded-full py-2.5 text-sm font-semibold text-white"
                       style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
                     >
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
                       Download
                     </button>
                   </div>
                 </div>
               )}
-            </div>
-          </div>
+            </section>
+          )}
         </div>
       </div>
     </div>

@@ -36,11 +36,14 @@ const HEYGEN_BASE = "https://api.heygen.com";
 // --- Tunables (overridable via .env.local) ---------------------------------
 const DAILY_LIMIT = Number(process.env.HEYGEN_DAILY_LIMIT ?? 5); // videos per user/day
 const MAX_SECONDS = Number(process.env.HEYGEN_MAX_SECONDS ?? 30); // hard cap on clip length
+// Target spoken length when the user pastes a tiny script (AI Studio was returning ~5s).
+const TARGET_SECONDS = Number(process.env.HEYGEN_TARGET_SECONDS ?? 25);
 // HeyGen avatar videos have no "duration" param — length is driven by how much
 // text the voice speaks. At a natural ~2.7 words/sec, MAX_SECONDS maps to a word
 // budget we truncate the script to, keeping every clip at/under the cap.
 const WORDS_PER_SECOND = 2.7;
 const MAX_WORDS = Math.floor(MAX_SECONDS * WORDS_PER_SECOND);
+const TARGET_WORDS = Math.floor(TARGET_SECONDS * WORDS_PER_SECOND);
 
 // Sensible defaults (real IDs from this account, verified to render together).
 // NOTE: use a STANDARD TTS voice — "voice-design" preview voices have no
@@ -89,11 +92,31 @@ function refund(id: string) {
   if (b) b.count = Math.max(0, b.count - 1);
 }
 
-// Truncate the script to the word budget so the spoken clip stays <= MAX_SECONDS.
-function capScript(raw: string): { script: string; truncated: boolean } {
+// Truncate long scripts and expand short ones so clips land near TARGET_SECONDS.
+function capScript(raw: string): { script: string; truncated: boolean; expanded: boolean } {
   const words = raw.trim().split(/\s+/).filter(Boolean);
-  if (words.length <= MAX_WORDS) return { script: words.join(" "), truncated: false };
-  return { script: words.slice(0, MAX_WORDS).join(" "), truncated: true };
+  if (words.length === 0) {
+    return { script: DEFAULT_SCRIPT, truncated: false, expanded: true };
+  }
+  if (words.length > MAX_WORDS) {
+    return { script: words.slice(0, MAX_WORDS).join(" "), truncated: true, expanded: false };
+  }
+  if (words.length >= TARGET_WORDS) {
+    return { script: words.join(" "), truncated: false, expanded: false };
+  }
+  // Pad short copy so HeyGen doesn't return a ~5s clip from a one-liner.
+  const base = words.join(" ");
+  const filler =
+    " Here's why it matters: it saves you time, looks professional on camera, " +
+    "and helps your audience understand the offer clearly. Stick with us for the " +
+    "key details, then take the next step today. We'll keep it simple, useful, " +
+    "and easy to act on — so you can share this message with confidence.";
+  let expanded = `${base}${filler}`;
+  const expandedWords = expanded.split(/\s+/).filter(Boolean);
+  if (expandedWords.length > MAX_WORDS) {
+    expanded = expandedWords.slice(0, MAX_WORDS).join(" ");
+  }
+  return { script: expanded, truncated: false, expanded: true };
 }
 
 async function heygen(path: string, init: RequestInit, key: string) {
@@ -196,7 +219,7 @@ export async function POST(req: Request) {
   } catch {
     /* empty body → use defaults */
   }
-  const { script, truncated } = capScript(body.script?.trim() || DEFAULT_SCRIPT);
+  const { script, truncated, expanded } = capScript(body.script?.trim() || DEFAULT_SCRIPT);
   const avatarId = body.avatarId?.trim() || DEFAULT_AVATAR_ID;
   const voiceId = body.voiceId?.trim() || DEFAULT_VOICE_ID;
 
@@ -254,7 +277,9 @@ export async function POST(req: Request) {
       balance: charged.charge.balance,
       script,
       truncated,
+      expanded,
       maxSeconds: MAX_SECONDS,
+      targetSeconds: TARGET_SECONDS,
       poll: `/api/heygen-video?video_id=${videoId}`,
     });
   } catch (e) {

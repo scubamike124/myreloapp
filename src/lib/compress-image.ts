@@ -10,35 +10,37 @@ export async function compressImageForUpload(
   const quality = opts.quality ?? 0.85;
   const maxBytes = opts.maxBytes ?? 6 * 1024 * 1024;
 
-  const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, maxEdge / Math.max(bitmap.width, bitmap.height));
-  const w = Math.max(1, Math.round(bitmap.width * scale));
-  const h = Math.max(1, Math.round(bitmap.height * scale));
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, maxEdge / Math.max(bitmap.width, bitmap.height));
+    const w = Math.max(1, Math.round(bitmap.width * scale));
+    const h = Math.max(1, Math.round(bitmap.height * scale));
 
-  const canvas = document.createElement("canvas");
-  canvas.width = w;
-  canvas.height = h;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) {
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      bitmap.close();
+      return { base64: await blobToBase64(file), mimeType: file.type || "image/jpeg" };
+    }
+    ctx.drawImage(bitmap, 0, 0, w, h);
     bitmap.close();
-    const fallback = await blobToBase64(file);
-    return { base64: fallback, mimeType: file.type || "image/jpeg" };
-  }
-  ctx.drawImage(bitmap, 0, 0, w, h);
-  bitmap.close();
 
-  let q = quality;
-  let blob: Blob | null = await canvasToBlob(canvas, "image/jpeg", q);
-  while (blob && blob.size > maxBytes && q > 0.45) {
-    q -= 0.1;
-    blob = await canvasToBlob(canvas, "image/jpeg", q);
+    let q = quality;
+    let blob: Blob | null = await canvasToBlob(canvas, "image/jpeg", q);
+    while (blob && blob.size > maxBytes && q > 0.45) {
+      q -= 0.1;
+      blob = await canvasToBlob(canvas, "image/jpeg", q);
+    }
+    if (!blob) {
+      return { base64: await blobToBase64(file), mimeType: file.type || "image/jpeg" };
+    }
+    return { base64: await blobToBase64(blob), mimeType: "image/jpeg" };
+  } catch {
+    // HEIC / exotic formats: send original bytes (API may still accept JPEG/PNG).
+    return { base64: await blobToBase64(file), mimeType: file.type || "image/jpeg" };
   }
-  if (!blob) {
-    const fallback = await blobToBase64(file);
-    return { base64: fallback, mimeType: file.type || "image/jpeg" };
-  }
-  const base64 = await blobToBase64(blob);
-  return { base64, mimeType: "image/jpeg" };
 }
 
 function canvasToBlob(canvas: HTMLCanvasElement, type: string, quality: number): Promise<Blob | null> {

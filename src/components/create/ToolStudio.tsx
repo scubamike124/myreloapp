@@ -85,6 +85,7 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
     for (const f of tool.fields) {
       if (f.kind === "select" || f.kind === "segment") v[f.name] = f.options[0];
       if (f.kind === "slider") v[f.name] = String(f.default);
+      if (f.kind === "choices" && f.options[0]) v[f.name] = f.options[0].value;
     }
     return v;
   });
@@ -233,16 +234,37 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
         const gap = await shortfallFrom(res, data);
         if (gap) { if (timer.current) clearInterval(timer.current); setShort(gap); setProgress(0); setStatus("idle"); return; }
 
-        if (!res.ok || !data.ok) throw new Error(data.error || "Generation failed.");
+        if (!res.ok || !data.ok) {
+          throw new Error(
+            data.error ||
+              (tool.slug === "dancing-photo"
+                ? "Dancing video failed to start. Try a clearer JPG/PNG photo (not HEIC) under ~8MB."
+                : "Generation failed."),
+          );
+        }
         tokens.setBalance(data.balance);
 
         // The render now runs asynchronously — the POST returns a handle and we
         // poll until the clip is ready, instead of the server holding the whole
         // request open for minutes.
-        const remoteUrl = await pollVeo(data.poll as string);
+        let remoteUrl: string;
+        try {
+          remoteUrl = await pollVeo(data.poll as string);
+        } catch (pollErr) {
+          throw new Error(
+            pollErr instanceof Error
+              ? pollErr.message
+              : "Video render failed. Try again with a different photo.",
+          );
+        }
         if (timer.current) clearInterval(timer.current);
         revokeRef.current?.();
-        const local = await materializeVideoUrl(remoteUrl);
+        let local: { url: string; revoke?: (() => void) | null };
+        try {
+          local = await materializeVideoUrl(remoteUrl);
+        } catch {
+          throw new Error("Video was created but could not be loaded for playback. Try Download again in a moment.");
+        }
         revokeRef.current = local.revoke ?? null;
         setVideoUrl(local.url);
         setMuted(true);
@@ -391,7 +413,11 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
               {short && <NotEnoughTokens {...short} />}
               {err && <p role="alert" className="text-sm font-medium text-[#ff8a92]">{err}</p>}
               {isVideoTool && status !== "generating" && !err && !short && (
-                <p className="text-center text-xs text-white/40">Generates a real AI video from your photo (~1–2 min).</p>
+                <p className="text-center text-xs text-white/40">
+                  {tool.slug === "dancing-photo"
+                    ? `Upload a JPG/PNG photo first, pick a move, then generate (~${Number(process.env.NEXT_PUBLIC_VIDEO_SECONDS ?? 8)}s real AI video, ~1–3 min).`
+                    : "Generates a real AI video from your photo (~1–3 min)."}
+                </p>
               )}
               {isImageTool && status !== "generating" && !err && !short && (
                 <p className="text-center text-xs text-white/40">Generates a real AI avatar image from your photo (~15–30s).</p>
@@ -592,7 +618,7 @@ function FieldView({ field, value, preview, selected, onChange, onFile, onToggle
             )}
             <span className="text-sm font-medium text-white/70">{preview ? value : "Click to upload"}</span>
             <span className="text-xs text-white/40">{preview ? "Change file" : field.hint ?? "PNG, JPG or MP4"}</span>
-            <input type="file" className="hidden" onChange={(e) => onFile(e.target.files?.[0])} />
+            <input type="file" accept="image/*" className="hidden" onChange={(e) => onFile(e.target.files?.[0])} />
           </label>
         </div>
       );
