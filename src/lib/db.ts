@@ -146,110 +146,158 @@ export async function ensureSchema(): Promise<boolean> {
   if (ensured) return true;
 
   const pg = driver() === "postgres";
-  const ID = pg ? "BIGSERIAL PRIMARY KEY" : "INTEGER PRIMARY KEY AUTOINCREMENT";
-  const NOW = pg ? "TIMESTAMPTZ NOT NULL DEFAULT now()" : "TEXT NOT NULL DEFAULT (datetime('now'))";
-  const TS = pg ? "TIMESTAMPTZ NOT NULL" : "TEXT NOT NULL";
 
-  const exec = async (text: string) => {
-    // Schema DDL has no user parameters. Neon now rejects calling the tagged
-    // template as a plain function (sql(["…"])), so Postgres uses sql.query;
-    // SQLite still accepts a one-element template via the bridge above.
-    if (pg) {
-      const url = postgresUrl();
-      if (!url) throw new Error("DATABASE_URL is not set.");
-      await neon(url).query(text);
-      return;
-    }
-    const strings = Object.assign([text], { raw: [text] }) as TemplateStringsArray;
-    await q(strings);
-  };
-
-  await exec(`
-    CREATE TABLE IF NOT EXISTS users (
-      id            TEXT PRIMARY KEY,
-      email         TEXT UNIQUE NOT NULL,
-      password_hash TEXT NOT NULL,
-      name          TEXT,
-      created_at    ${NOW}
-    )`);
-
-  await exec(`
-    CREATE TABLE IF NOT EXISTS token_ledger (
-      id         ${ID},
-      user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      delta      ${pg ? "DOUBLE PRECISION" : "REAL"} NOT NULL,
-      reason     TEXT NOT NULL,
-      ref        TEXT,
-      created_at ${NOW}
-    )`);
-
-  // Existing installs used INTEGER deltas — widen so fractional tokens ($10 face) work.
+  // Neon only accepts real tagged templates (not sql(["…"])). Keep DDL as
+  // literal templates per driver — there is no user input in these strings.
   if (pg) {
+    await q`
+      CREATE TABLE IF NOT EXISTS users (
+        id            TEXT PRIMARY KEY,
+        email         TEXT UNIQUE NOT NULL,
+        password_hash TEXT NOT NULL,
+        name          TEXT,
+        created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS token_ledger (
+        id         BIGSERIAL PRIMARY KEY,
+        user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        delta      DOUBLE PRECISION NOT NULL,
+        reason     TEXT NOT NULL,
+        ref        TEXT,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+
     try {
-      await exec(
-        `ALTER TABLE token_ledger ALTER COLUMN delta TYPE DOUBLE PRECISION USING delta::double precision`,
-      );
+      await q`
+        ALTER TABLE token_ledger
+        ALTER COLUMN delta TYPE DOUBLE PRECISION
+        USING delta::double precision`;
     } catch {
       /* already DOUBLE PRECISION or table just created */
     }
+
+    await q`CREATE UNIQUE INDEX IF NOT EXISTS token_ledger_ref_key ON token_ledger (ref) WHERE ref IS NOT NULL`;
+    await q`CREATE INDEX IF NOT EXISTS token_ledger_user_idx ON token_ledger (user_id, created_at DESC)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS creations (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        tool_slug   TEXT NOT NULL,
+        tool_title  TEXT NOT NULL,
+        title       TEXT NOT NULL,
+        status      TEXT NOT NULL,
+        kind        TEXT NOT NULL,
+        media_url   TEXT,
+        bytes       INTEGER,
+        error       TEXT,
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+        expires_at  TEXT
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS creations_user_idx ON creations (user_id, created_at DESC)`;
+
+    try {
+      await q`ALTER TABLE creations ADD COLUMN expires_at TEXT`;
+    } catch {
+      /* already present */
+    }
+
+    await q`CREATE INDEX IF NOT EXISTS creations_expiry_idx ON creations (expires_at)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS sessions (
+        id         TEXT PRIMARY KEY,
+        user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+        expires_at TIMESTAMPTZ NOT NULL
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS sessions_user_idx ON sessions (user_id)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS brand_kits (
+        user_id      TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+        brand_name   TEXT,
+        colors       TEXT,
+        heading_font TEXT,
+        body_font    TEXT,
+        logo_url     TEXT,
+        updated_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+  } else {
+    const exec = async (text: string) => {
+      const strings = Object.assign([text], { raw: [text] }) as TemplateStringsArray;
+      await q(strings);
+    };
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS users (
+        id            TEXT PRIMARY KEY,
+        email         TEXT UNIQUE NOT NULL,
+        password_hash TEXT NOT NULL,
+        name          TEXT,
+        created_at    TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS token_ledger (
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        delta      REAL NOT NULL,
+        reason     TEXT NOT NULL,
+        ref        TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+
+    await exec(`CREATE UNIQUE INDEX IF NOT EXISTS token_ledger_ref_key ON token_ledger (ref) WHERE ref IS NOT NULL`);
+    await exec(`CREATE INDEX IF NOT EXISTS token_ledger_user_idx ON token_ledger (user_id, created_at DESC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS creations (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        tool_slug   TEXT NOT NULL,
+        tool_title  TEXT NOT NULL,
+        title       TEXT NOT NULL,
+        status      TEXT NOT NULL,
+        kind        TEXT NOT NULL,
+        media_url   TEXT,
+        bytes       INTEGER,
+        error       TEXT,
+        created_at  TEXT NOT NULL DEFAULT (datetime('now')),
+        expires_at  TEXT
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS creations_user_idx ON creations (user_id, created_at DESC)`);
+
+    try {
+      await exec(`ALTER TABLE creations ADD COLUMN expires_at TEXT`);
+    } catch {
+      /* already present */
+    }
+
+    await exec(`CREATE INDEX IF NOT EXISTS creations_expiry_idx ON creations (expires_at)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS sessions (
+        id         TEXT PRIMARY KEY,
+        user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        expires_at TEXT NOT NULL
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS sessions_user_idx ON sessions (user_id)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS brand_kits (
+        user_id      TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+        brand_name   TEXT,
+        colors       TEXT,
+        heading_font TEXT,
+        body_font    TEXT,
+        logo_url     TEXT,
+        updated_at   TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
   }
-
-  // One credit per external event, enforced by the database rather than by
-  // remembering to check first.
-  await exec(`CREATE UNIQUE INDEX IF NOT EXISTS token_ledger_ref_key ON token_ledger (ref) WHERE ref IS NOT NULL`);
-  await exec(`CREATE INDEX IF NOT EXISTS token_ledger_user_idx ON token_ledger (user_id, created_at DESC)`);
-
-  await exec(`
-    CREATE TABLE IF NOT EXISTS creations (
-      id          TEXT PRIMARY KEY,
-      user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      tool_slug   TEXT NOT NULL,
-      tool_title  TEXT NOT NULL,
-      title       TEXT NOT NULL,
-      status      TEXT NOT NULL,
-      kind        TEXT NOT NULL,
-      media_url   TEXT,
-      bytes       INTEGER,
-      error       TEXT,
-      created_at  ${NOW},
-      expires_at  TEXT
-    )`);
-  await exec(`CREATE INDEX IF NOT EXISTS creations_user_idx ON creations (user_id, created_at DESC)`);
-
-  // Databases created before retention existed have no expires_at. Add it
-  // BEFORE indexing it — the other way round, the index fails on "no such
-  // column", ensureSchema throws, and every request 500s on an existing
-  // database while working perfectly on a fresh one.
-  try {
-    await exec(`ALTER TABLE creations ADD COLUMN expires_at TEXT`);
-  } catch {
-    /* already present */
-  }
-
-  await exec(`CREATE INDEX IF NOT EXISTS creations_expiry_idx ON creations (expires_at)`);
-
-  await exec(`
-    CREATE TABLE IF NOT EXISTS sessions (
-      id         TEXT PRIMARY KEY,
-      user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      created_at ${NOW},
-      expires_at ${TS}
-    )`);
-  await exec(`CREATE INDEX IF NOT EXISTS sessions_user_idx ON sessions (user_id)`);
-
-  // One brand kit per account: the colours, fonts and logo a customer wants
-  // their videos to use. Stored as JSON rather than a column per colour because
-  // a palette is a list of unknown length, not five fixed slots.
-  await exec(`
-    CREATE TABLE IF NOT EXISTS brand_kits (
-      user_id      TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
-      brand_name   TEXT,
-      colors       TEXT,
-      heading_font TEXT,
-      body_font    TEXT,
-      logo_url     TEXT,
-      updated_at   ${NOW}
-    )`);
 
   ensured = true;
   return true;
