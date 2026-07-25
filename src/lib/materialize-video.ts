@@ -38,8 +38,8 @@ export async function materializeVideoUrl(source: string): Promise<{
 
   assertMp4(buf);
 
-  // Copy into a plain ArrayBuffer slice so TS/DOM BlobPart typing is happy.
-  const copy = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+  // A fresh Uint8Array avoids SharedArrayBuffer / BlobPart typing issues.
+  const copy = new Uint8Array(buf);
   const blob = new Blob([copy], {
     type: contentType.includes("video") || contentType.includes("octet") ? "video/mp4" : contentType,
   });
