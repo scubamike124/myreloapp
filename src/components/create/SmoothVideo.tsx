@@ -7,40 +7,55 @@ type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "src"> & {
   src: string;
 };
 
+async function forceBlobUrl(source: string): Promise<{ url: string; revoke?: () => void }> {
+  if (source.startsWith("blob:") || source.startsWith("data:")) {
+    return { url: source };
+  }
+  // Prefer shared materialize (also verifies MP4), then raw fetch fallback.
+  try {
+    const local = await materializeVideoUrl(source);
+    if (local.url.startsWith("blob:") || local.url.startsWith("data:")) {
+      return { url: local.url, revoke: local.revoke };
+    }
+  } catch {
+    /* fall through */
+  }
+  const res = await fetch(source);
+  if (!res.ok) throw new Error(`Could not load video (${res.status}).`);
+  const buf = new Uint8Array(await res.arrayBuffer());
+  const type = res.headers.get("content-type") || "video/mp4";
+  const blob = new Blob([buf], { type: type.includes("webm") ? "video/webm" : "video/mp4" });
+  const url = URL.createObjectURL(blob);
+  return { url, revoke: () => URL.revokeObjectURL(url) };
+}
+
 /**
- * Plays video from a local blob: URL whenever the source would otherwise be
- * streamed (HeyGen CDN or chunked /api/media/c). Chunked Worker responses
- * cause stutter that looks like A/V desync.
+ * Guarantees <video> only ever receives a local blob:/data: URL.
+ * Network / chunked Worker URLs cause stutter and apparent A/V desync.
  */
 const SmoothVideo = forwardRef<HTMLVideoElement, Props>(function SmoothVideo({ src, ...rest }, ref) {
-  const [playSrc, setPlaySrc] = useState(() =>
-    src.startsWith("blob:") || src.startsWith("data:") ? src : "",
-  );
+  const [playSrc, setPlaySrc] = useState("");
   const [err, setErr] = useState<string | null>(null);
   const revokeRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     setErr(null);
+    setPlaySrc("");
 
     const run = async () => {
       revokeRef.current?.();
       revokeRef.current = null;
-
-      if (!src) {
-        setPlaySrc("");
-        return;
-      }
-      if (src.startsWith("blob:") || src.startsWith("data:")) {
-        setPlaySrc(src);
-        return;
-      }
+      if (!src) return;
 
       try {
-        const local = await materializeVideoUrl(src);
+        const local = await forceBlobUrl(src);
         if (cancelled) {
           local.revoke?.();
           return;
+        }
+        if (!local.url.startsWith("blob:") && !local.url.startsWith("data:")) {
+          throw new Error("Smooth playback requires a local media URL.");
         }
         revokeRef.current = local.revoke ?? null;
         setPlaySrc(local.url);

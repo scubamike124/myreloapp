@@ -76,10 +76,14 @@ try {
   report.steps.push("generating");
 
   await page.waitForFunction(
-    () => /tap to play with sound/i.test(document.body.innerText) && document.querySelector("video[src]"),
+    () => {
+      const v = document.querySelector("video[src]");
+      const src = v?.currentSrc || v?.src || "";
+      return /tap to play with sound/i.test(document.body.innerText) && src.startsWith("blob:");
+    },
     { timeout: 14 * 60 * 1000, polling: 3000 },
   );
-  report.steps.push("ready");
+  report.steps.push("ready-blob");
 
   // Install playback monitors before tap
   await page.evaluate(() => {

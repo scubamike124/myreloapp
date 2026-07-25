@@ -25,10 +25,14 @@ export async function materializeVideoUrl(source: string): Promise<{
   assertMp4OrWebm(buf, contentType);
   const type = contentType.includes("webm") ? "video/webm" : "video/mp4";
 
+  // Local blob FIRST — preview must never wait on ingest or play chunked Worker URLs.
+  const copy = new Uint8Array(buf);
+  const blob = new Blob([copy], { type });
+  const url = URL.createObjectURL(blob);
+
   let durableUrl: string | undefined;
   let backend: string | undefined;
 
-  // Best-effort durable copy (library). Never use this URL for the player.
   try {
     const body = new Blob([new Uint8Array(buf)], { type });
     const res = await fetch("/api/media/ingest", {
@@ -45,10 +49,6 @@ export async function materializeVideoUrl(source: string): Promise<{
     /* preview still works from blob: */
   }
 
-  // Local blob playback — no chunked Worker streaming, no Range thrash.
-  const copy = new Uint8Array(buf);
-  const blob = new Blob([copy], { type });
-  const url = URL.createObjectURL(blob);
   return {
     url,
     durableUrl,
