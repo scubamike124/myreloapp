@@ -2,17 +2,20 @@ import { asRecord, asString, errorMessage, geminiParts, geminiText } from "@/lib
 import { clientId, createDailyLimiter, readJsonLimited, PayloadTooLarge } from "@/lib/api-guard";
 import { getLanguage, isRTL } from "@/lib/languages";
 import { chargeFor, refundCharge } from "@/lib/charge";
+import {
+  buildIllustrationPrompt,
+  buildStoryPrompt,
+  looksAdultOriented,
+  summarizeStorybookRequest,
+} from "@/lib/storybook-prompts";
 
 // ---------------------------------------------------------------------------
-// Personalised children's storybook.
+// Personalised storybook.
 //
-// A parent uploads a photo of their child and a one-line idea ("a story about
-// a red ball"). We write an age-appropriate story in their chosen language,
-// then illustrate every page with the child as the hero — using their photo as
-// the character reference so the same child appears on each page.
-//
-// Two model calls per book plus one image per page, so this is the most
-// expensive thing in the product. It is capped per day accordingly.
+// Upload a photo of the main character + a custom story request. The user's
+// "What should the story be about?" text is the PRIMARY plot instruction.
+// Theme only affects costume/role. The photo is the visual identity reference
+// on every illustrated page (age and features preserved).
 // ---------------------------------------------------------------------------
 
 export const runtime = "nodejs";
@@ -22,7 +25,7 @@ const TEXT_MODEL = "gemini-2.5-flash";
 const IMAGE_MODEL = "gemini-2.5-flash-image";
 const BASE = "https://generativelanguage.googleapis.com/v1beta";
 
-const MAX_BODY = 12 * 1024 * 1024; // a phone photo, base64-encoded
+const MAX_BODY = 12 * 1024 * 1024;
 const MIN_PAGES = 4;
 const MAX_PAGES = 10;
 
@@ -65,18 +68,42 @@ export async function POST(req: Request) {
   const mimeType = str(body.mimeType, 60) || "image/jpeg";
   if (!photo) {
     limiter.refund(id);
-    return Response.json({ error: "Upload a photo of your child to start." }, { status: 400 });
+    return Response.json({ error: "Upload a photo of the main character to start." }, { status: 400 });
   }
 
-  const childName = str(body.childName, 40);
-  const idea = str(body.idea, 400);
-  const theme = str(body.theme, 60) || "Superhero";
+  // Accept legacy childName for older clients; prefer characterName.
+  const characterName = str(body.characterName, 40) || str(body.childName, 40);
+  const idea = str(body.idea, 800);
+  const theme = str(body.theme, 60) || "Adventurer";
   const language = getLanguage(str(body.languageCode, 8));
   const pageCount = Math.max(MIN_PAGES, Math.min(MAX_PAGES, Number(body.pages) || 6));
+  const debug = body.debug === true || process.env.NODE_ENV !== "production";
 
-  const hero = childName || "the child";
+  if (!idea) {
+    limiter.refund(id);
+    return Response.json(
+      { error: "Tell us what the story should be about — your request becomes the plot." },
+      { status: 400 },
+    );
+  }
 
-  // Charged once the input is known to be usable, before any paid model call.
+  const promptInput = {
+    characterName,
+    idea,
+    theme,
+    languageName: language.name,
+    languageEndonym: language.endonym,
+    pageCount,
+  };
+  const summary = summarizeStorybookRequest(promptInput);
+  const adultOriented = looksAdultOriented(idea, characterName);
+  const storyPrompt = buildStoryPrompt(promptInput);
+
+  if (debug) {
+    console.info("[storybook] request", summary);
+    console.info("[storybook] storyPrompt\n", storyPrompt);
+  }
+
   const charged = await chargeFor("bedtime-storybook");
   if (!charged.ok) {
     limiter.refund(id);
@@ -87,22 +114,6 @@ export async function POST(req: Request) {
   }
 
   // --- 1. the story ---------------------------------------------------------
-  const storyPrompt =
-    `Write a gentle bedtime picture-book story for a child aged about 3 to 7.\n\n` +
-    `Hero: ${hero}, who becomes a ${theme.toLowerCase()}.\n` +
-    (idea ? `The parent asked for: ${idea}\n` : "") +
-    `Language: write EVERY word of the story in ${language.name} (${language.endonym}). ` +
-    `Do not use English unless the language IS English.\n\n` +
-    `Return ONLY JSON, no markdown fence:\n` +
-    `{"title": "...", "dedication": "...", "pages": [{"text": "...", "illustration": "..."}]}\n\n` +
-    `- Exactly ${pageCount} pages.\n` +
-    `- "text": 2 to 3 short sentences for that page, in ${language.name}. Warm, simple, read-aloud rhythm.\n` +
-    `- "dedication": one short line, in ${language.name}, e.g. "For ${hero}, who is braver than they know."\n` +
-    `- "illustration": a description IN ENGLISH of what to draw for that page. Describe the scene, ` +
-    `the action and the mood. Always refer to the hero simply as "the child". Do not mention text or words.\n` +
-    `- A complete arc: ordinary world, a problem, courage, resolution, a calm ending suitable for bedtime.\n` +
-    `- Nothing frightening. No peril that is not resolved on the same page.`;
-
   let story: { title: string; dedication: string; pages: Page[] };
   try {
     const res = await fetch(`${BASE}/models/${TEXT_MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
@@ -110,9 +121,7 @@ export async function POST(req: Request) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: [{ parts: [{ text: storyPrompt }] }],
-        // Thinking tokens are billed against maxOutputTokens on this model and
-        // will happily consume the whole budget before writing any JSON.
-        generationConfig: { temperature: 0.9, thinkingConfig: { thinkingBudget: 0 }, maxOutputTokens: 4096 },
+        generationConfig: { temperature: 0.7, thinkingConfig: { thinkingBudget: 0 }, maxOutputTokens: 4096 },
       }),
       signal: AbortSignal.timeout(90_000),
     });
@@ -123,7 +132,7 @@ export async function POST(req: Request) {
     if (!match) throw new Error("no story returned");
     const parsed = JSON.parse(match[0]);
     story = {
-      title: str(parsed.title, 120) || "A Bedtime Story",
+      title: str(parsed.title, 120) || "A Story",
       dedication: str(parsed.dedication, 200),
       pages: (Array.isArray(parsed.pages) ? parsed.pages : [])
         .slice(0, pageCount)
@@ -133,25 +142,17 @@ export async function POST(req: Request) {
     if (story.pages.length === 0) throw new Error("story had no pages");
   } catch (e) {
     limiter.refund(id);
-    await refundCharge(charged.charge); // no book was written — do not charge for one
+    await refundCharge(charged.charge);
     return Response.json(
-      { error: e instanceof Error ? `Couldn't write the story: ${e.message}`.slice(0, 200) : "Couldn't write the story." },
+      {
+        error:
+          e instanceof Error ? `Couldn't write the story: ${e.message}`.slice(0, 200) : "Couldn't write the story.",
+      },
       { status: 502 },
     );
   }
 
   // --- 2. the illustrations -------------------------------------------------
-  // The child's photo is passed with every page so the same character appears
-  // throughout. Generated in parallel — sequentially this would exceed the
-  // function's time limit at 10 pages.
-  const style =
-    "Children's picture-book illustration, warm and friendly, soft rounded shapes, rich colour, " +
-    "painterly storybook art, gentle lighting, cosy bedtime mood, no text, no words, no letters, " +
-    "no watermark, full-bleed square composition.";
-
-  // The image model returns 503 "high demand" under load, and firing every page
-  // at once makes that more likely. Retried with backoff, and staggered, so a
-  // book does not come back half-illustrated because of a momentary spike.
   const withRetry = async (fn: () => Promise<string>, attempts = 3): Promise<string> => {
     for (let i = 0; i < attempts; i++) {
       const out = await fn().catch(() => "");
@@ -161,20 +162,24 @@ export async function POST(req: Request) {
     return "";
   };
 
+  const imagePrompts: string[] = [];
+
   const illustrate = async (page: Page): Promise<string> => {
-    const prompt =
-      `${style}\n\n` +
-      `Draw this scene: ${page.illustration}\n\n` +
-      `The child in the attached photograph is the hero of the story. Render them as a friendly ` +
-      `illustrated character — keep their recognisable features (face shape, hair, skin tone, glasses ` +
-      `if present) but draw them in the picture-book style, NOT as a photograph. ` +
-      `They are dressed as a ${theme.toLowerCase()}.`;
+    const prompt = buildIllustrationPrompt({
+      illustration: page.illustration,
+      theme,
+      pageText: page.text,
+      adultOriented,
+    });
+    imagePrompts.push(prompt);
+    if (debug) console.info("[storybook] imagePrompt", prompt.slice(0, 400));
+
     const res = await fetch(`${BASE}/models/${IMAGE_MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }, { inline_data: { mime_type: mimeType, data: photo } }] }],
-        generationConfig: { temperature: 0.8 },
+        generationConfig: { temperature: 0.7 },
       }),
       signal: AbortSignal.timeout(120_000),
     });
@@ -191,11 +196,9 @@ export async function POST(req: Request) {
   };
 
   const images = await Promise.all(
-    story.pages.map((p, i) =>
-      // Stagger the starts so ten pages do not hit the model in the same instant.
-      new Promise<string>((resolve) =>
-        setTimeout(() => resolve(withRetry(() => illustrate(p))), i * 700),
-      ),
+    story.pages.map(
+      (p, i) =>
+        new Promise<string>((resolve) => setTimeout(() => resolve(withRetry(() => illustrate(p))), i * 700)),
     ),
   );
 
@@ -205,11 +208,35 @@ export async function POST(req: Request) {
       title: story.title,
       dedication: story.dedication,
       language: { code: language.code, name: language.name, endonym: language.endonym, rtl: isRTL(language.code) },
-      pages: story.pages.map((p, i) => ({ text: p.text, image: images[i] })),
-      // Told plainly rather than hidden: a page without art is still readable.
+      pages: story.pages.map((p, i) => ({ text: p.text, image: images[i], illustration: p.illustration })),
       illustrated: images.filter(Boolean).length,
       tokensCharged: charged.charge.charged,
       balance: charged.charge.balance,
+      // Echo so the client (and tests) can verify personalization reached the model.
+      submitted: {
+        idea,
+        theme,
+        characterName: characterName || null,
+        pages: pageCount,
+        languageCode: language.code,
+        adultOriented,
+        photoBytesApprox: Math.floor(photo.length * 0.75),
+        photoAttached: true,
+      },
+      ...(debug
+        ? {
+            debug: {
+              summary,
+              storyPrompt,
+              imagePromptStructure: imagePrompts[0] || buildIllustrationPrompt({
+                illustration: "(scene)",
+                theme,
+                pageText: "(page text)",
+                adultOriented,
+              }),
+            },
+          }
+        : {}),
     },
     { headers: { "Cache-Control": "no-store" } },
   );

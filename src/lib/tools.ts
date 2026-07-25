@@ -30,14 +30,14 @@ const LANGS = ["English", "Spanish", "French", "German", "Hindi", "Arabic", "Jap
 
 export const TOOLS: Tool[] = [
   {
-    slug: "bedtime-storybook", title: "Bedtime Storybook", tagline: "One picture book, finished tonight, starring your child.", icon: "doc", poster: "/assets/storybook.webp", credits: creditLabel("bedtime-storybook"), cta: "Make the book",
+    slug: "bedtime-storybook", title: "Storybook", tagline: "An illustrated picture book starring your photo subject.", icon: "doc", poster: "/assets/storybook.webp", credits: creditLabel("bedtime-storybook"), cta: "Make the book",
     // StoryBook renders its own interface; these fields describe the tool for
     // the Create page and for Amber, so both stay in step with what it needs.
     fields: [
-      { kind: "upload", name: "photo", label: "Photo of your child", hint: "A clear, front-facing photo works best." },
-      { kind: "text", name: "childName", label: "Child's name", placeholder: "Ava" },
-      { kind: "textarea", name: "idea", label: "What should it be about?", placeholder: "A story about a red ball that rolls away" },
-      { kind: "select", name: "theme", label: "They become a…", options: ["Superhero", "Explorer", "Astronaut", "Pirate", "Knight", "Wizard", "Detective", "Animal friend"] },
+      { kind: "upload", name: "photo", label: "Photo of the main character", hint: "A clear, front-facing photo works best." },
+      { kind: "text", name: "characterName", label: "Character's name", placeholder: "Alex" },
+      { kind: "textarea", name: "idea", label: "What should the story be about?", placeholder: "An older gentleman looking for a kind companion…" },
+      { kind: "select", name: "theme", label: "They become a… (costume / role)", options: ["Superhero", "Explorer", "Astronaut", "Pirate", "Knight", "Wizard", "Detective", "Animal friend"] },
       { kind: "select", name: "language", label: "Language", options: LANGS },
     ],
   },
