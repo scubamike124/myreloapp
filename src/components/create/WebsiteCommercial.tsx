@@ -61,6 +61,7 @@ export default function WebsiteCommercial() {
 
   const [progress, setProgress] = useState(0);
   const [muted, setMuted] = useState(true);
+  const [needsGesture, setNeedsGesture] = useState(false);
 
   const scanTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const genTimer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -173,16 +174,10 @@ export default function WebsiteCommercial() {
 
       if (genTimer.current) clearInterval(genTimer.current);
       setVideoUrl(local.url);
-      setMuted(false);
+      setMuted(true);
+      setNeedsGesture(true);
       setProgress(100);
       setStep("result");
-      requestAnimationFrame(() => {
-        const v = videoRef.current;
-        if (!v) return;
-        v.muted = false;
-        v.volume = 1;
-        void v.play().catch(() => {});
-      });
       recordCreation({
         toolSlug: "website-commercial",
         toolTitle: "Website Commercial",
@@ -412,15 +407,30 @@ export default function WebsiteCommercial() {
                 key={videoUrl}
                 src={videoUrl}
                 className="absolute inset-0 h-full w-full object-cover"
-                autoPlay
                 muted={muted}
                 controls
                 playsInline
                 preload="auto"
               />
-              <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-3">
-                <span className="rounded-md px-2 py-1 text-[11px] font-semibold text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>0:{String(MAX_SECONDS).padStart(2, "0")} · {style}</span>
-              </div>
+              {needsGesture && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const v = videoRef.current;
+                    if (!v) return;
+                    v.muted = false;
+                    v.volume = 1;
+                    setMuted(false);
+                    void v.play().then(() => setNeedsGesture(false)).catch(() => {});
+                  }}
+                  className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/70 px-6 text-center"
+                >
+                  <span className="grid h-16 w-16 place-items-center rounded-full text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><polygon points="8 5 20 12 8 19" /></svg>
+                  </span>
+                  <span className="text-lg font-bold text-white">Tap to play with sound</span>
+                </button>
+              )}
             </div>
 
             {(

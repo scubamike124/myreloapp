@@ -186,23 +186,17 @@ export default function AiAvatarStudio() {
       // Pull the real MP4 into a blob: URL so playback/download are same-origin
       // and we never hand the <video> element a JSON error body.
       revokeRef.current?.();
+      setProgress(96);
       const local = await materializeVideoUrl(remoteUrl);
       revokeRef.current = local.revoke ?? null;
 
       if (genTimer.current) clearInterval(genTimer.current);
       setVideoUrl(local.url);
-      setMuted(false);
+      setMuted(true); // start muted so the explicit tap unlocks audible play reliably
       setAudioReady(true);
-      setNeedsGesture(false);
+      setNeedsGesture(true); // always require one tap — browsers block unmuted autoplay
       setProgress(100);
       setStatus("done");
-      requestAnimationFrame(() => {
-        const v = resultRef.current;
-        if (!v) return;
-        v.muted = false;
-        v.volume = 1;
-        void v.play().then(() => setNeedsGesture(false)).catch(() => setNeedsGesture(true));
-      });
       recordCreation({
         toolSlug: "ai-avatar-studio",
         toolTitle: "AI Avatar Studio",
@@ -328,24 +322,38 @@ export default function AiAvatarStudio() {
               <p className="mb-3 px-2 text-sm font-semibold text-white/70">{status === "done" ? "Your video" : "Preview"}</p>
               <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-black">
                 {status === "done" ? (
-                  <video
-                    ref={resultRef}
-                    key={videoUrl}
-                    src={videoUrl}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    controls
-                    playsInline
-                    preload="auto"
-                    autoPlay
-                    muted={muted}
-                    onPlay={() => {
-                      const v = resultRef.current;
-                      if (v && muted) {
-                        v.muted = false;
-                        setMuted(false);
-                      }
-                    }}
-                  />
+                  <>
+                    <video
+                      ref={resultRef}
+                      key={videoUrl}
+                      src={videoUrl}
+                      className="absolute inset-0 h-full w-full object-cover"
+                      controls
+                      playsInline
+                      preload="auto"
+                      muted={muted}
+                    />
+                    {needsGesture && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const v = resultRef.current;
+                          if (!v) return;
+                          v.muted = false;
+                          v.volume = 1;
+                          setMuted(false);
+                          void v.play().then(() => setNeedsGesture(false)).catch(() => {});
+                        }}
+                        className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/70 px-6 text-center"
+                      >
+                        <span className="grid h-16 w-16 place-items-center rounded-full text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
+                          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><polygon points="8 5 20 12 8 19" /></svg>
+                        </span>
+                        <span className="text-lg font-bold text-white">Tap to play with sound</span>
+                        <span className="text-sm text-white/70">Audio is included — browsers require a tap before sound plays.</span>
+                      </button>
+                    )}
+                  </>
                 ) : selected ? (
                   selected.video && !videoFailed.has(selected.avatarId) ? (
                     // Muted looping preview of the chosen avatar; poster is the still image.
@@ -385,25 +393,9 @@ export default function AiAvatarStudio() {
                   <div className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm" style={{ border: "1px solid rgba(255,70,85,.3)", background: "rgba(255,70,85,.1)", color: "#ffb3b9" }}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6 9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                     {audioReady
-                      ? "Video verified with audio — tap play if your browser blocked sound."
-                      : "Your avatar video is ready — tap play if you don\u2019t hear audio."}
+                      ? "MP4 verified with AAC audio. Use Tap to play with sound above."
+                      : "Your avatar video is ready."}
                   </div>
-                  {needsGesture && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const v = resultRef.current;
-                        if (!v) return;
-                        v.muted = false;
-                        setMuted(false);
-                        void v.play().then(() => setNeedsGesture(false)).catch(() => {});
-                      }}
-                      className="w-full rounded-xl px-3 py-3 text-sm font-bold text-white"
-                      style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
-                    >
-                      Click to play with sound
-                    </button>
-                  )}
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       type="button"
@@ -413,7 +405,9 @@ export default function AiAvatarStudio() {
                         const next = !v.muted;
                         v.muted = next;
                         setMuted(next);
-                        if (!next) void v.play().then(() => setNeedsGesture(false)).catch(() => {});
+                        if (!next) {
+                          void v.play().then(() => setNeedsGesture(false)).catch(() => {});
+                        }
                       }}
                       className="flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-semibold text-white/90"
                     >
