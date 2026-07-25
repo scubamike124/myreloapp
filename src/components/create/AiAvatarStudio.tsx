@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
+import { downloadMedia } from "@/lib/download-media";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 type Avatar = { avatarId: string; name: string; gender: string; image: string; video: string };
@@ -386,20 +387,7 @@ export default function AiAvatarStudio() {
                     </button>
                     <button
                       type="button"
-                      onClick={async () => {
-                        try {
-                          const res = await fetch(videoUrl);
-                          const blob = await res.blob();
-                          const href = URL.createObjectURL(blob);
-                          const a = document.createElement("a");
-                          a.href = href;
-                          a.download = `reelo-avatar-${Date.now()}.mp4`;
-                          a.click();
-                          URL.revokeObjectURL(href);
-                        } catch {
-                          window.open(videoUrl, "_blank");
-                        }
-                      }}
+                      onClick={() => void downloadMedia(videoUrl, `reelo-avatar-${Date.now()}.mp4`)}
                       className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold text-white"
                       style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
                     >

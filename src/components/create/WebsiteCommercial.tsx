@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
+import { downloadMedia } from "@/lib/download-media";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 type Step = "input" | "scanning" | "detected" | "generating" | "result";
@@ -425,10 +426,20 @@ export default function WebsiteCommercial() {
                   connected yet.
                 </p>
                 <div className="grid grid-cols-2 gap-2">
-                  <a href={videoUrl} download={`reelo-${brand.toLowerCase().replace(/\s+/g, "-") || "commercial"}.mp4`} className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      void downloadMedia(
+                        videoUrl,
+                        `reelo-${brand.toLowerCase().replace(/\s+/g, "-") || "commercial"}.mp4`,
+                      )
+                    }
+                    className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold text-white"
+                    style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+                  >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
                     Download
-                  </a>
+                  </button>
                   <button onClick={startOver} className="flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-semibold hover:bg-white/10">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 4v4h-4" strokeLinecap="round" strokeLinejoin="round" /></svg>
                     New

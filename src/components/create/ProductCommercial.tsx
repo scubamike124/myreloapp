@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
+import { downloadMedia } from "@/lib/download-media";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 // ---------------------------------------------------------------------------
@@ -390,14 +391,14 @@ export default function ProductCommercial() {
                         Copy caption
                       </button>
                     </div>
-                    <a
-                      href={result.videoUrl}
-                      download="product-commercial.mp4"
+                    <button
+                      type="button"
+                      onClick={() => void downloadMedia(result.videoUrl, "product-commercial.mp4")}
                       className="rounded-xl py-2.5 text-center text-[13px] font-bold text-white"
                       style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
                     >
                       Download video
-                    </a>
+                    </button>
                   </div>
                 </div>
                 <div className="border-t border-white/10 px-5 py-3">
