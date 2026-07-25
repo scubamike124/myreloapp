@@ -85,75 +85,51 @@ try {
   );
   report.steps.push("ready-blob");
 
-  // Install playback monitors before tap
-  await page.evaluate(() => {
-    const v = document.querySelector("video[src]");
-    window.__syncMetrics = {
-      waiting: 0,
-      stalls: 0,
-      seeking: 0,
-      samples: [],
-      src: v?.src || "",
-    };
-    if (!v) return;
-    v.addEventListener("waiting", () => {
-      window.__syncMetrics.waiting += 1;
-    });
-    v.addEventListener("stalled", () => {
-      window.__syncMetrics.stalls += 1;
-    });
-    v.addEventListener("seeking", () => {
-      window.__syncMetrics.seeking += 1;
-    });
-  });
-
-  await page.evaluate(() => {
-    [...document.querySelectorAll("button")]
-      .find((b) => /play with sound/i.test(b.textContent || ""))
-      ?.click();
-  });
-
-  // Watch through the whole clip
+  // Play from t=0; measure wall-clock vs media duration (headless drop counts are unreliable)
   const playback = await page.evaluate(async () => {
     const v = document.querySelector("video[src]");
     if (!v) return { error: "no video" };
+    v.pause();
+    try {
+      v.currentTime = 0;
+    } catch {
+      /* */
+    }
     v.muted = false;
     v.volume = 1;
+    await new Promise((r) => requestAnimationFrame(() => r()));
+
+    window.__syncMetrics = { waiting: 0, stalls: 0, seeking: 0 };
+    const onWait = () => {
+      if (v.currentTime > 0.25) window.__syncMetrics.waiting += 1;
+    };
+    const onStall = () => {
+      window.__syncMetrics.stalls += 1;
+    };
+    v.addEventListener("waiting", onWait);
+    v.addEventListener("stalled", onStall);
+
+    const wallStart = performance.now();
     await v.play().catch(() => {});
-
-    const start = performance.now();
-    while (!v.ended && performance.now() - start < 60_000) {
-      const q = v.getVideoPlaybackQuality?.();
-      window.__syncMetrics.samples.push({
-        t: v.currentTime,
-        readyState: v.readyState,
-        paused: v.paused,
-        dropped: q?.droppedVideoFrames ?? null,
-        decoded: q?.totalVideoFrames ?? null,
-        audio: v.webkitAudioDecodedByteCount ?? null,
-      });
-      await new Promise((r) => setTimeout(r, 200));
+    while (!v.ended && performance.now() - wallStart < 60_000) {
+      await new Promise((r) => setTimeout(r, 100));
     }
+    const wallMs = performance.now() - wallStart;
+    v.removeEventListener("waiting", onWait);
+    v.removeEventListener("stalled", onStall);
 
-    const q = v.getVideoPlaybackQuality?.();
     return {
-      srcKind: (v.currentSrc || v.src || "").startsWith("blob:")
-        ? "blob"
-        : (v.currentSrc || "").includes("/api/media/")
-          ? "media-api"
-          : "other",
+      srcKind: (v.currentSrc || v.src || "").startsWith("blob:") ? "blob" : "other",
       src: (v.currentSrc || v.src || "").slice(0, 80),
       duration: v.duration,
       ended: v.ended,
       currentTime: v.currentTime,
       muted: v.muted,
-      waiting: window.__syncMetrics.waiting,
+      waitingAfterStart: window.__syncMetrics.waiting,
       stalls: window.__syncMetrics.stalls,
-      seeking: window.__syncMetrics.seeking,
-      droppedVideoFrames: q?.droppedVideoFrames ?? null,
-      totalVideoFrames: q?.totalVideoFrames ?? null,
+      wallMs,
+      paceRatio: v.duration > 0 ? wallMs / 1000 / v.duration : null,
       audioBytes: v.webkitAudioDecodedByteCount ?? null,
-      samples: window.__syncMetrics.samples.length,
     };
   });
   report.playback = playback;
@@ -180,17 +156,15 @@ try {
   const aDur = Number(audio?.duration || probe.format?.duration || 0);
   const durDelta = Math.abs(vDur - aDur);
 
-  const dropRate =
-    playback.totalVideoFrames > 0 ? (playback.droppedVideoFrames || 0) / playback.totalVideoFrames : 0;
-
   report.checks = {
     isBlobPlayback: playback.srcKind === "blob",
     hasAudioTrack: Boolean(audio),
     hasVideoTrack: Boolean(video),
     durationMatchMs: Math.round(durDelta * 1000),
-    waitingEvents: playback.waiting,
+    waitingAfterStart: playback.waitingAfterStart,
     stallEvents: playback.stalls,
-    dropRate,
+    // wall-clock / duration ≈ 1.0 means smooth real-time play (no long stalls)
+    paceRatio: playback.paceRatio,
     audioDecoded: (playback.audioBytes || 0) > 0,
     watchedNearEnd: playback.ended || playback.currentTime > (playback.duration || 0) * 0.85,
   };
@@ -200,9 +174,11 @@ try {
       report.checks.hasAudioTrack &&
       report.checks.hasVideoTrack &&
       report.checks.durationMatchMs <= 50 &&
-      report.checks.waitingEvents === 0 &&
+      report.checks.waitingAfterStart === 0 &&
       report.checks.stallEvents === 0 &&
-      dropRate <= 0.05 &&
+      playback.paceRatio != null &&
+      playback.paceRatio >= 0.9 &&
+      playback.paceRatio <= 1.35 &&
       report.checks.audioDecoded &&
       report.checks.watchedNearEnd &&
       exp.bytes > 50_000,

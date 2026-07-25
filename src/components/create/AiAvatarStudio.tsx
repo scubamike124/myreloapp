@@ -5,6 +5,7 @@ import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
 import { materializeVideoUrl } from "@/lib/materialize-video";
+import { playSyncedWithSound } from "@/lib/play-synced";
 import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
@@ -32,10 +33,6 @@ export default function AiAvatarStudio() {
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<Avatar | null>(null);
   // Avatar preview videos are served from HeyGen's CDN, and an individual URL
-  // there occasionally 404s. The poster still shows, but tracking the failure
-  // lets us drop straight to the still image rather than leave a dead <video>.
-  const [videoFailed, setVideoFailed] = useState<Set<string>>(new Set());
-
   // Arriving from the Avatar Library with ?avatar=<id>: fetch that one avatar
   // directly so it is selected without paging through the catalog to find it.
   //
@@ -338,10 +335,10 @@ export default function AiAvatarStudio() {
                         onClick={() => {
                           const v = resultRef.current;
                           if (!v) return;
-                          v.muted = false;
-                          v.volume = 1;
                           setMuted(false);
-                          void v.play().then(() => setNeedsGesture(false)).catch(() => {});
+                          void playSyncedWithSound(v)
+                            .then(() => setNeedsGesture(false))
+                            .catch(() => {});
                         }}
                         className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/70 px-6 text-center"
                       >
@@ -354,23 +351,10 @@ export default function AiAvatarStudio() {
                     )}
                   </>
                 ) : selected ? (
-                  selected.video && !videoFailed.has(selected.avatarId) ? (
-                    // Muted looping preview of the chosen avatar; poster is the still image.
-                    <video
-                      key={selected.avatarId}
-                      src={selected.video}
-                      poster={selected.image}
-                      muted
-                      autoPlay
-                      loop
-                      playsInline
-                      onError={() => setVideoFailed((prev) => new Set(prev).add(selected.avatarId))}
-                      className={`absolute inset-0 h-full w-full object-cover transition ${status === "generating" ? "opacity-25" : "opacity-100"}`}
-                    />
-                  ) : (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={selected.image} alt={selected.name} className={`absolute inset-0 h-full w-full object-cover transition ${status === "generating" ? "opacity-25" : "opacity-100"}`} />
-                  )
+                  // Still image only while idle — avoid a second decoder competing
+                  // with the result player (causes stutter / apparent A/V drift).
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={selected.image} alt={selected.name} className={`absolute inset-0 h-full w-full object-cover transition ${status === "generating" ? "opacity-25" : "opacity-100"}`} />
                 ) : (
                   <div className="absolute inset-0 grid place-items-center text-sm text-white/40">Pick an avatar</div>
                 )}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
 import { materializeVideoUrl } from "@/lib/materialize-video";
+import { playSyncedWithSound } from "@/lib/play-synced";
 import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
@@ -377,10 +378,10 @@ export default function ProductCommercial() {
                         onClick={() => {
                           const v = videoRef.current;
                           if (!v) return;
-                          v.muted = false;
-                          v.volume = 1;
                           setMuted(false);
-                          void v.play().then(() => setNeedsGesture(false)).catch(() => {});
+                          void playSyncedWithSound(v)
+                            .then(() => setNeedsGesture(false))
+                            .catch(() => {});
                         }}
                         className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/70 px-4 text-center"
                       >
