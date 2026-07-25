@@ -1,11 +1,38 @@
 import type { NextConfig } from "next";
+import { execSync } from "node:child_process";
 
 // Standalone output is for Docker / VPS Node only. OpenNext Cloudflare builds
 // its own Worker bundle — do not enable standalone for `opennextjs-cloudflare build`.
 const useStandalone = process.env.DOCKER_BUILD === "1";
 
+function resolveBuildSha(): string {
+  const fromEnv =
+    process.env.NEXT_PUBLIC_BUILD_SHA ||
+    process.env.BUILD_SHA ||
+    process.env.CF_PAGES_COMMIT_SHA ||
+    process.env.CF_COMMIT_SHA ||
+    process.env.WORKERS_CI_COMMIT_SHA ||
+    process.env.GITHUB_SHA ||
+    process.env.COMMIT_SHA;
+  if (fromEnv && fromEnv.trim()) return fromEnv.trim().slice(0, 40);
+  try {
+    return execSync("git rev-parse HEAD", { stdio: ["ignore", "pipe", "ignore"] }).toString().trim().slice(0, 40);
+  } catch {
+    return "unknown";
+  }
+}
+
+const buildSha = resolveBuildSha();
+
 const nextConfig: NextConfig = {
   ...(useStandalone ? { output: "standalone" as const } : {}),
+
+  // Bake the commit into the Worker bundle so /api/health can prove which build
+  // is live (Cloudflare runtime often omits CI SHA env vars).
+  env: {
+    NEXT_PUBLIC_BUILD_SHA: buildSha,
+    BUILD_SHA: buildSha,
+  },
 
   // The dev indicator defaults to bottom-left, where it sits on top of Amber's
   // composer on narrow screens and hides the first characters you type. Moved

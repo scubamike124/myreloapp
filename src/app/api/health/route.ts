@@ -1,4 +1,4 @@
-import { driver } from "@/lib/db";
+import { driver, pingDatabase, postgresPublicMeta } from "@/lib/db";
 import { storageDriver, RETENTION_DAYS } from "@/lib/storage";
 import { isCloudflareWorkers, isEphemeralFilesystem } from "@/lib/runtime-platform";
 
@@ -23,6 +23,8 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const db = driver();
   const storage = storageDriver();
+  const postgres = postgresPublicMeta();
+  const dbPing = db === "none" ? { ok: false as const, error: "No database configured." } : await pingDatabase();
 
   // Which providers have a key present. Not whether the key is valid — that is
   // what the vault's Test button is for — only whether the slot is filled, so a
@@ -37,6 +39,16 @@ export async function GET() {
   const ingestBackend =
     blobConfigured ? "blob" : isCloudflareWorkers() || isEphemeralFilesystem() ? "cache-or-memory" : "disk";
 
+  // Prefer the SHA baked in at OpenNext build time; fall back to CI env vars.
+  const build =
+    process.env.NEXT_PUBLIC_BUILD_SHA ||
+    process.env.BUILD_SHA ||
+    process.env.CF_PAGES_COMMIT_SHA ||
+    process.env.CF_COMMIT_SHA ||
+    process.env.WORKERS_CI_COMMIT_SHA ||
+    process.env.GITHUB_SHA ||
+    null;
+
   return Response.json(
     {
       ok: true,
@@ -45,6 +57,15 @@ export async function GET() {
       accounts: db !== "none",
       persistsVideos: storage !== "none" || blobConfigured,
       database: db, // "postgres" | "sqlite" | "none"
+      databaseLive: dbPing,
+      postgres: {
+        configured: postgres.configured,
+        host: postgres.host,
+        database: postgres.database,
+        pooled: postgres.pooled,
+        // True if the raw secret still had channel_binding=require (we strip it).
+        hadChannelBinding: postgres.hadChannelBinding,
+      },
       storage, // "blob" | "disk" | "none"
       // Browser → POST /api/media/ingest path (avoids Worker→HeyGen 403).
       mediaIngest: ingestBackend,
@@ -54,12 +75,7 @@ export async function GET() {
       ephemeralFilesystem: isEphemeralFilesystem(),
       env: process.env.NODE_ENV ?? "unknown",
       // Helps confirm which Git SHA Cloudflare actually shipped.
-      build:
-        process.env.CF_PAGES_COMMIT_SHA ||
-        process.env.CF_COMMIT_SHA ||
-        process.env.WORKERS_CI_COMMIT_SHA ||
-        process.env.GITHUB_SHA ||
-        null,
+      build,
     },
     { headers: { "Cache-Control": "no-store" } },
   );

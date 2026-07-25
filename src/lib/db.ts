@@ -1,9 +1,9 @@
-import { neon } from "@neondatabase/serverless";
+import { neon, neonConfig, Pool } from "@neondatabase/serverless";
 import type { DatabaseSync } from "node:sqlite";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { mkdirSync } from "node:fs";
-import { isEphemeralFilesystem } from "@/lib/runtime-platform";
+import { isCloudflareWorkers, isEphemeralFilesystem } from "@/lib/runtime-platform";
 
 // node:sqlite is loaded lazily, never at module top. It is a value import only
 // where SQLite is actually used (a host with a real disk). On Vercel — where
@@ -17,28 +17,42 @@ const nodeRequire = createRequire(import.meta.url);
 // Database access, over two drivers.
 //
 //   SQLite   — a file on disk, via node:sqlite (built into Node, no package).
-//              Needs no account, no signup, no network. Used automatically
-//              whenever there is no Postgres URL and the filesystem is
-//              writable, which covers local development and any host with a
-//              real disk (a VPS, Railway, Render, Fly).
-//
-//   Postgres — Neon or any Postgres, used whenever a connection string is
-//              present. Required on Vercel, whose filesystem is read-only and
-//              wiped between requests, so a SQLite file there would silently
-//              lose every account written to it.
-//
-// Both are reached through the same tagged-template `sql()`, so nothing above
-// this file knows or cares which is in use.
-//
-// The point of the SQLite path: everything — accounts, balances, the ledger,
-// stored creations — can be built and tested today without signing up for
-// anything. Moving to Postgres later is one environment variable.
+//   Postgres — Neon via @neondatabase/serverless (HTTP, with WebSocket fallback
+//              when Neon HTTP returns Cloudflare 530 / Origin DNS 1016).
 // ---------------------------------------------------------------------------
 
 type Row = Record<string, unknown>;
 type Sql = (strings: TemplateStringsArray, ...values: unknown[]) => Promise<Row[]>;
 
-function postgresUrl(): string | undefined {
+let neonConfigured = false;
+
+function configureNeonRuntime() {
+  if (neonConfigured) return;
+  neonConfigured = true;
+  // Reuse HTTP connections across queries in one isolate.
+  neonConfig.fetchConnectionCache = true;
+  // Workers expose the global WebSocket constructor for Neon Pool fallback.
+  if (typeof WebSocket !== "undefined") {
+    neonConfig.webSocketConstructor = WebSocket;
+  }
+}
+
+/**
+ * Neon + some CF setups choke on channel_binding=require over the HTTP driver.
+ * Strip it and ensure sslmode=require.
+ */
+export function sanitizePostgresUrl(raw: string): string {
+  try {
+    const u = new URL(raw);
+    u.searchParams.delete("channel_binding");
+    if (!u.searchParams.get("sslmode")) u.searchParams.set("sslmode", "require");
+    return u.toString();
+  } catch {
+    return raw.replace(/([?&])channel_binding=require&?/gi, "$1").replace(/[?&]$/, "");
+  }
+}
+
+function rawPostgresUrl(): string | undefined {
   return (
     process.env.DATABASE_URL ||
     process.env.POSTGRES_URL ||
@@ -48,11 +62,38 @@ function postgresUrl(): string | undefined {
   );
 }
 
-/**
- * SQLite is only safe where the filesystem persists. Vercel sets VERCEL=1 and
- * gives each invocation a fresh read-only filesystem, so falling back to a file
- * there would look like it worked and lose the data.
- */
+function postgresUrl(): string | undefined {
+  const raw = rawPostgresUrl();
+  return raw ? sanitizePostgresUrl(raw) : undefined;
+}
+
+/** Safe metadata for /api/health — never includes password. */
+export function postgresPublicMeta(): {
+  configured: boolean;
+  host: string | null;
+  database: string | null;
+  pooled: boolean;
+  hadChannelBinding: boolean;
+} {
+  const raw = rawPostgresUrl();
+  if (!raw) {
+    return { configured: false, host: null, database: null, pooled: false, hadChannelBinding: false };
+  }
+  const hadChannelBinding = /channel_binding=require/i.test(raw);
+  try {
+    const u = new URL(sanitizePostgresUrl(raw));
+    return {
+      configured: true,
+      host: u.hostname,
+      database: u.pathname.replace(/^\//, "") || null,
+      pooled: u.hostname.includes("-pooler"),
+      hadChannelBinding,
+    };
+  } catch {
+    return { configured: true, host: "unparseable", database: null, pooled: false, hadChannelBinding };
+  }
+}
+
 function sqliteAllowed(): boolean {
   if (postgresUrl()) return false;
   if (process.env.DISABLE_SQLITE === "1") return false;
@@ -83,7 +124,6 @@ let sqliteDb: DatabaseSync | null = null;
 function openSqlite(): DatabaseSync | null {
   if (sqliteDb) return sqliteDb;
   try {
-    // Loaded here, not at the top of the file — see the note by the imports.
     const { DatabaseSync } = nodeRequire("node:sqlite") as typeof import("node:sqlite");
     const file = sqliteFile();
     mkdirSync(path.dirname(file), { recursive: true });
@@ -96,11 +136,6 @@ function openSqlite(): DatabaseSync | null {
   }
 }
 
-/**
- * Bridge the tagged-template shape onto SQLite. Values become positional
- * parameters — they are never interpolated into the SQL, so the injection
- * safety of the Postgres path is preserved exactly.
- */
 function sqliteSql(db: DatabaseSync): Sql {
   return async (strings, ...values) => {
     const text = strings.reduce((acc, part, i) => acc + part + (i < values.length ? "?" : ""), "");
@@ -112,7 +147,6 @@ function sqliteSql(db: DatabaseSync): Sql {
       return String(v);
     });
     const stmt = db.prepare(text);
-    // .all() throws on statements that return nothing, so writes use .run().
     if (/^\s*(select|with)/i.test(text) || /returning/i.test(text)) {
       return stmt.all(...(params as never[])) as Row[];
     }
@@ -121,11 +155,201 @@ function sqliteSql(db: DatabaseSync): Sql {
   };
 }
 
-export function sql(): Sql | null {
+// --- Neon HTTP + WebSocket -------------------------------------------------
+//
+// Production symptom: neon() HTTP from this Worker returns Cloudflare
+// "HTTP status 530 / error code 1016" (Origin DNS). The WebSocket Pool path
+// reaches Neon directly and does not use that broken HTTP hop.
+// On Cloudflare Workers we therefore prefer WebSocket; HTTP remains available
+// as a fallback (and as the default off-Workers).
+
+let cachedHttp: Sql | null = null;
+let cachedPool: Pool | null = null;
+
+function preferNeonWebSocket(): boolean {
+  if (process.env.NEON_USE_WEBSOCKET === "1") return true;
+  if (process.env.NEON_USE_WEBSOCKET === "0") return false;
+  return isCloudflareWorkers();
+}
+
+function neonHttp(): Sql {
+  configureNeonRuntime();
   const url = postgresUrl();
-  if (url) return neon(url) as unknown as Sql;
+  if (!url) throw new Error("DATABASE_URL is not set.");
+  if (!cachedHttp) cachedHttp = neon(url) as unknown as Sql;
+  return cachedHttp;
+}
+
+function neonPool(): Pool {
+  configureNeonRuntime();
+  const url = postgresUrl();
+  if (!url) throw new Error("DATABASE_URL is not set.");
+  if (!cachedPool) cachedPool = new Pool({ connectionString: url, max: 5 });
+  return cachedPool;
+}
+
+function isNeonEdgeDnsFailure(e: unknown): boolean {
+  const msg = e instanceof Error ? e.message : String(e);
+  return /HTTP status 530|error code:\s*1016|Origin DNS/i.test(msg);
+}
+
+/** Parameterized query over Neon WebSockets. */
+async function neonWsQuery(text: string, params: unknown[]): Promise<Row[]> {
+  const result = await neonPool().query(text, params);
+  return (result.rows ?? []) as Row[];
+}
+
+function templateToPg(strings: TemplateStringsArray, values: unknown[]): { text: string; params: unknown[] } {
+  let text = "";
+  const params: unknown[] = [];
+  for (let i = 0; i < strings.length; i++) {
+    text += strings[i];
+    if (i < values.length) {
+      params.push(values[i]);
+      text += `$${params.length}`;
+    }
+  }
+  return { text, params };
+}
+
+function neonWsSql(): Sql {
+  return async (strings, ...values) => {
+    const { text, params } = templateToPg(strings, values);
+    return await neonWsQuery(text, params);
+  };
+}
+
+function neonResilientSql(): Sql {
+  if (preferNeonWebSocket()) {
+    const ws = neonWsSql();
+    return async (strings, ...values) => {
+      try {
+        return await ws(strings, ...values);
+      } catch (wsErr) {
+        // Last resort: HTTP (rarely helps when WS is preferred for 530, but
+        // covers misconfigured WebSocket environments).
+        try {
+          return await neonHttp()(strings, ...values);
+        } catch (httpErr) {
+          const wsMsg = wsErr instanceof Error ? wsErr.message : String(wsErr);
+          const httpMsg = httpErr instanceof Error ? httpErr.message : String(httpErr);
+          throw new Error(`Neon WebSocket failed (${wsMsg}); HTTP also failed (${httpMsg})`);
+        }
+      }
+    };
+  }
+
+  const http = neonHttp();
+  return async (strings, ...values) => {
+    try {
+      return await http(strings, ...values);
+    } catch (e) {
+      if (!isNeonEdgeDnsFailure(e)) throw e;
+      const { text, params } = templateToPg(strings, values);
+      return await neonWsQuery(text, params);
+    }
+  };
+}
+
+export function sql(): Sql | null {
+  if (postgresUrl()) return neonResilientSql();
   const db = openSqlite();
   return db ? sqliteSql(db) : null;
+}
+
+/** Live connectivity check for /api/health. */
+export async function pingDatabase(): Promise<{
+  ok: boolean;
+  transport?: "http" | "websocket" | "sqlite";
+  preferWebSocket?: boolean;
+  error?: string;
+  userTable?: boolean;
+  userCount?: number;
+}> {
+  const d = driver();
+  if (d === "none") return { ok: false, error: "No DATABASE_URL / SQLite." };
+
+  if (d === "sqlite") {
+    try {
+      const q = sql();
+      if (!q) return { ok: false, error: "SQLite open failed." };
+      await q`SELECT 1 AS ok`;
+      return { ok: true, transport: "sqlite" };
+    } catch (e) {
+      return { ok: false, error: e instanceof Error ? e.message : "SQLite ping failed." };
+    }
+  }
+
+  const preferWs = preferNeonWebSocket();
+
+  async function countUsers(run: (text: string, params: unknown[]) => Promise<Row[]>): Promise<{
+    userTable: boolean;
+    userCount?: number;
+  }> {
+    try {
+      const rows = (await run("SELECT COUNT(*)::int AS n FROM users", [])) as { n: number }[];
+      return { userTable: true, userCount: Number(rows[0]?.n ?? 0) };
+    } catch {
+      return { userTable: false };
+    }
+  }
+
+  if (preferWs) {
+    try {
+      await neonWsQuery("SELECT 1 AS ok", []);
+      const users = await countUsers(neonWsQuery);
+      return { ok: true, transport: "websocket", preferWebSocket: true, ...users };
+    } catch (wsErr) {
+      try {
+        const http = neonHttp();
+        await http`SELECT 1 AS ok`;
+        const users = await countUsers(async (text, params) => {
+          // neon HTTP only accepts tagged templates; rebuild via Pool-style unused.
+          void text;
+          void params;
+          const rows = await http`SELECT COUNT(*)::int AS n FROM users`;
+          return rows;
+        });
+        return { ok: true, transport: "http", preferWebSocket: true, ...users };
+      } catch (httpErr) {
+        return {
+          ok: false,
+          preferWebSocket: true,
+          error: `WS: ${wsErr instanceof Error ? wsErr.message : "fail"}; HTTP: ${httpErr instanceof Error ? httpErr.message : "fail"}`,
+        };
+      }
+    }
+  }
+
+  try {
+    const http = neonHttp();
+    await http`SELECT 1 AS ok`;
+    let userTable = false;
+    let userCount: number | undefined;
+    try {
+      const rows = (await http`SELECT COUNT(*)::int AS n FROM users`) as { n: number }[];
+      userTable = true;
+      userCount = Number(rows[0]?.n ?? 0);
+    } catch {
+      userTable = false;
+    }
+    return { ok: true, transport: "http", preferWebSocket: false, userTable, userCount };
+  } catch (httpErr) {
+    if (!isNeonEdgeDnsFailure(httpErr)) {
+      return { ok: false, preferWebSocket: false, error: httpErr instanceof Error ? httpErr.message : "HTTP ping failed." };
+    }
+    try {
+      await neonWsQuery("SELECT 1 AS ok", []);
+      const users = await countUsers(neonWsQuery);
+      return { ok: true, transport: "websocket", preferWebSocket: false, ...users };
+    } catch (wsErr) {
+      return {
+        ok: false,
+        preferWebSocket: false,
+        error: `HTTP: ${httpErr instanceof Error ? httpErr.message : "fail"}; WS: ${wsErr instanceof Error ? wsErr.message : "fail"}`,
+      };
+    }
+  }
 }
 
 // --- schema -----------------------------------------------------------------
@@ -135,10 +359,6 @@ let ensured = false;
 /**
  * Created on demand and safe to run repeatedly, so a fresh machine or a fresh
  * deploy needs no migration step.
- *
- * The two dialects differ in exactly three places — auto-increment, timestamp
- * defaults, and integer casts — so the DDL is written per driver rather than
- * pretending one string works for both.
  */
 export async function ensureSchema(): Promise<boolean> {
   const q = sql();
@@ -148,7 +368,7 @@ export async function ensureSchema(): Promise<boolean> {
   const pg = driver() === "postgres";
 
   // Production DBs already have tables. Probe first so signup/login never
-  // re-run a long DDL chain (which has failed over Neon HTTP from Workers).
+  // re-run a long DDL chain.
   try {
     await q`SELECT 1 FROM users LIMIT 1`;
     ensured = true;
@@ -157,8 +377,6 @@ export async function ensureSchema(): Promise<boolean> {
     /* tables missing — fall through to CREATE */
   }
 
-  // Neon only accepts real tagged templates (not sql(["…"])). Keep DDL as
-  // literal templates per driver — there is no user input in these strings.
   if (pg) {
     await q`
       CREATE TABLE IF NOT EXISTS users (

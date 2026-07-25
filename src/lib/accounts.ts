@@ -9,10 +9,9 @@ export { WELCOME_TOKENS };
 // ---------------------------------------------------------------------------
 // User accounts.
 //
-// Deliberately dependency-free: scrypt from node:crypto for hashing, and an
-// opaque session id in an httpOnly cookie checked against the sessions table.
-// The admin gate already works this way, and adding an auth framework for
-// email-and-password would be a large dependency for very little.
+// Deliberately dependency-free: Web Crypto PBKDF2 for new hashes (reliable on
+// Cloudflare Workers), with scrypt verify kept for any legacy rows. Opaque
+// session id in an httpOnly cookie checked against the sessions table.
 //
 // Passwords are never logged, never returned, and compared in constant time.
 // ---------------------------------------------------------------------------
@@ -21,22 +20,60 @@ const scrypt = promisify(scryptCb) as (pw: string, salt: Buffer, len: number) =>
 
 export const SESSION_COOKIE = "reelo_session";
 export const SESSION_DAYS = 30;
+const PBKDF2_ITERS = 120_000;
 
 export type User = { id: string; email: string; name: string | null };
 
+async function pbkdf2Hex(password: string, salt: Uint8Array): Promise<string> {
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits(
+    { name: "PBKDF2", salt: salt as BufferSource, iterations: PBKDF2_ITERS, hash: "SHA-256" },
+    keyMaterial,
+    256,
+  );
+  return Buffer.from(bits).toString("hex");
+}
+
 async function hash(password: string): Promise<string> {
   const salt = randomBytes(16);
-  const derived = await scrypt(password, salt, 64);
-  return `scrypt:${salt.toString("hex")}:${derived.toString("hex")}`;
+  const derived = await pbkdf2Hex(password, salt);
+  return `pbkdf2:${PBKDF2_ITERS}:${salt.toString("hex")}:${derived}`;
 }
 
 async function verify(password: string, stored: string): Promise<boolean> {
-  const [scheme, saltHex, hashHex] = stored.split(":");
-  if (scheme !== "scrypt" || !saltHex || !hashHex) return false;
-  const derived = await scrypt(password, Buffer.from(saltHex, "hex"), 64);
-  const expected = Buffer.from(hashHex, "hex");
-  if (derived.length !== expected.length) return false;
-  return timingSafeEqual(derived, expected);
+  const parts = stored.split(":");
+  const scheme = parts[0];
+
+  if (scheme === "pbkdf2") {
+    const [, iterStr, saltHex, hashHex] = parts;
+    if (!iterStr || !saltHex || !hashHex) return false;
+    const iterations = Number(iterStr);
+    if (!Number.isFinite(iterations) || iterations < 1) return false;
+    const salt = Buffer.from(saltHex, "hex");
+    const enc = new TextEncoder();
+    const keyMaterial = await crypto.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, ["deriveBits"]);
+    const bits = await crypto.subtle.deriveBits(
+      { name: "PBKDF2", salt, iterations, hash: "SHA-256" },
+      keyMaterial,
+      256,
+    );
+    const derived = Buffer.from(bits);
+    const expected = Buffer.from(hashHex, "hex");
+    if (derived.length !== expected.length) return false;
+    return timingSafeEqual(derived, expected);
+  }
+
+  if (scheme === "scrypt") {
+    const [, saltHex, hashHex] = parts;
+    if (!saltHex || !hashHex) return false;
+    const derived = await scrypt(password, Buffer.from(saltHex, "hex"), 64);
+    const expected = Buffer.from(hashHex, "hex");
+    if (derived.length !== expected.length) return false;
+    return timingSafeEqual(derived, expected);
+  }
+
+  return false;
 }
 
 export function validEmail(email: string): boolean {
