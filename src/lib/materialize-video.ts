@@ -38,7 +38,9 @@ export async function materializeVideoUrl(source: string): Promise<{
 
   assertMp4(buf);
 
-  const blob = new Blob([buf], {
+  // Copy into a plain ArrayBuffer slice so TS/DOM BlobPart typing is happy.
+  const copy = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+  const blob = new Blob([copy], {
     type: contentType.includes("video") || contentType.includes("octet") ? "video/mp4" : contentType,
   });
   const url = URL.createObjectURL(blob);
