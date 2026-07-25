@@ -195,24 +195,24 @@ export async function POST(req: Request) {
       : "";
   };
 
-  const images = await Promise.all(
-    story.pages.map(
-      (p, i) =>
-        new Promise<string>((resolve) => setTimeout(() => resolve(withRetry(() => illustrate(p))), i * 700)),
-    ),
-  );
+  // Illustrate sequentially with retries — parallel bursts often 503 under load
+  // and left books half-empty.
+  const images: string[] = [];
+  for (let i = 0; i < story.pages.length; i++) {
+    if (i > 0) await new Promise((r) => setTimeout(r, 400));
+    images.push(await withRetry(() => illustrate(story.pages[i]), 4));
+  }
 
+  // Put metadata before huge page payloads so clients always receive personalization proof.
   return Response.json(
     {
       ok: true,
       title: story.title,
       dedication: story.dedication,
       language: { code: language.code, name: language.name, endonym: language.endonym, rtl: isRTL(language.code) },
-      pages: story.pages.map((p, i) => ({ text: p.text, image: images[i], illustration: p.illustration })),
       illustrated: images.filter(Boolean).length,
       tokensCharged: charged.charge.charged,
       balance: charged.charge.balance,
-      // Echo so the client (and tests) can verify personalization reached the model.
       submitted: {
         idea,
         theme,
@@ -228,15 +228,18 @@ export async function POST(req: Request) {
             debug: {
               summary,
               storyPrompt,
-              imagePromptStructure: imagePrompts[0] || buildIllustrationPrompt({
-                illustration: "(scene)",
-                theme,
-                pageText: "(page text)",
-                adultOriented,
-              }),
+              imagePromptStructure:
+                imagePrompts[0] ||
+                buildIllustrationPrompt({
+                  illustration: "(scene)",
+                  theme,
+                  pageText: "(page text)",
+                  adultOriented,
+                }),
             },
           }
         : {}),
+      pages: story.pages.map((p, i) => ({ text: p.text, image: images[i], illustration: p.illustration })),
     },
     { headers: { "Cache-Control": "no-store" } },
   );

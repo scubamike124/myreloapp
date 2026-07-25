@@ -40,7 +40,7 @@ test("1. adult + romance + Wizard: topic is primary, not bedtime child template"
   assert.doesNotMatch(prompt, /child aged about 3 to 7/i);
   assert.doesNotMatch(prompt, /gentle bedtime picture-book story for a child/i);
   assert.match(prompt, /ADULT main character/i);
-  // Role present but topic authoritative
+  assert.match(prompt, /little wizard/i); // forbidden phrase mentioned as ban
   assert.match(prompt, /AUTHORITATIVE/);
 });
 

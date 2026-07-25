@@ -30,7 +30,7 @@ export function buildStoryPrompt(input: StorybookInput): string {
   const adult = looksAdultOriented(idea, hero);
 
   const audience = adult
-    ? `Write an age-appropriate illustrated picture-book style story for an ADULT main character. Do NOT write a children's bedtime story. Do NOT invent a child wizard / school / toy plot.`
+    ? `Write an age-appropriate illustrated picture-book style story for an ADULT main character. Do NOT write a children's bedtime story. Do NOT invent a child wizard / school / toy plot. Do NOT use phrases like "little wizard", "brave little", or a preschool "once upon a time" tone unless the user asked for that. Treat the hero as a grown adult.`
     : idea
       ? `Write an illustrated picture-book story. Match the tone to the user's request (gentle if they ask for bedtime/kids; otherwise follow their topic).`
       : `Write an illustrated picture-book story. Prefer a warm, readable tone unless the user specifies otherwise.`;
@@ -51,8 +51,11 @@ export function buildStoryPrompt(input: StorybookInput): string {
     `- The primary story request is the plot. Never replace it with a preset example, default bedtime template, or generic "child bravely learns a lesson" story.\n` +
     `- Preserve the user's intended meaning even if grammar is imperfect.\n` +
     `- Infer approximate age/life stage from the request and name. If the request is about an older gentleman, romance, work, etc., keep that adult framing.\n` +
-    `- Only use a cosy children's bedtime arc if the user clearly asked for a child/bedtime story.\n\n` +
-    `Return ONLY JSON, no markdown fence:\n` +
+    `- Only use a cosy children's bedtime arc if the user clearly asked for a child/bedtime story.\n` +
+    (adult
+      ? `- Dedication must address an adult reader/character — never "little wizards" or similar child copy.\n`
+      : "") +
+    `\nReturn ONLY JSON, no markdown fence:\n` +
     `{"title": "...", "dedication": "...", "pages": [{"text": "...", "illustration": "..."}]}\n\n` +
     `- Exactly ${input.pageCount} pages.\n` +
     `- "text": 2 to 3 short sentences for that page, in ${input.languageName}. Clear read-aloud rhythm.\n` +
