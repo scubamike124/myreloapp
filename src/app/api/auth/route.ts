@@ -70,6 +70,10 @@ export async function POST(req: Request) {
     );
   }
 
+  // Capture Hyperdrive before cookies() — cookies can drop OpenNext ALS.
+  const { sqlAsync } = await import("@/lib/db");
+  await sqlAsync();
+
   let body: Record<string, unknown>;
   try {
     body = (await req.json()) as Record<string, unknown>;

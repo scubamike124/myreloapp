@@ -36,7 +36,13 @@
     "DISABLE_SQLITE": "1",
     // Neon HTTP from this Worker returns CF 530/1016; use WebSocket Pool instead.
     "NEON_USE_WEBSOCKET": "1"
-  }
-  // Optional later:
-  // "r2_buckets": [{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "myreloapp-cache" }]
+  },
+  // Supabase direct TCP from Workers fails (IPv6-only / CONNECT_TIMEOUT).
+  // Hyperdrive proxies Postgres over CF's network — required for auth.
+  "hyperdrive": [
+    {
+      "binding": "HYPERDRIVE",
+      "id": "fb7349127d7e4bb699b877d1ec859679"
+    }
+  ]
 }

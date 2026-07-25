@@ -1,7 +1,7 @@
 import { randomBytes, scrypt as scryptCb, timingSafeEqual, randomUUID } from "node:crypto";
 import { promisify } from "node:util";
 import { cookies } from "next/headers";
-import { sql, ensureSchema, dbConfigured } from "@/lib/db";
+import { sqlAsync, ensureSchema, dbConfigured } from "@/lib/db";
 import { WELCOME_TOKENS } from "@/lib/token-pricing";
 
 export { WELCOME_TOKENS };
@@ -23,6 +23,10 @@ export const SESSION_DAYS = 30;
 const PBKDF2_ITERS = 120_000;
 
 export type User = { id: string; email: string; name: string | null };
+
+async function dbSql() {
+  return sqlAsync();
+}
 
 async function pbkdf2Hex(password: string, salt: Uint8Array): Promise<string> {
   const enc = new TextEncoder();
@@ -88,7 +92,7 @@ export function passwordProblem(password: string): string | null {
 }
 
 export async function createUser(email: string, password: string, name: string): Promise<User | { error: string }> {
-  const q = sql();
+  const q = await dbSql();
   if (!q || !(await ensureSchema())) return { error: "Accounts are not available yet." };
 
   const clean = email.trim().toLowerCase();
@@ -116,7 +120,7 @@ export async function createUser(email: string, password: string, name: string):
 }
 
 export async function authenticate(email: string, password: string): Promise<User | null> {
-  const q = sql();
+  const q = await dbSql();
   if (!q || !(await ensureSchema())) return null;
   const rows = (await q`
     SELECT id, email, name, password_hash FROM users WHERE email = ${email.trim().toLowerCase()}
@@ -132,7 +136,7 @@ export async function authenticate(email: string, password: string): Promise<Use
 }
 
 export async function startSession(userId: string): Promise<string | null> {
-  const q = sql();
+  const q = await dbSql();
   if (!q || !(await ensureSchema())) return null;
   const id = randomBytes(32).toString("hex");
   const expires = new Date(Date.now() + SESSION_DAYS * 86400_000);
@@ -141,7 +145,7 @@ export async function startSession(userId: string): Promise<string | null> {
 }
 
 export async function endSession(sessionId: string): Promise<void> {
-  const q = sql();
+  const q = await dbSql();
   if (!q) return;
   await q`DELETE FROM sessions WHERE id = ${sessionId}`;
 }
@@ -149,11 +153,12 @@ export async function endSession(sessionId: string): Promise<void> {
 /** The signed-in user for this request, or null. */
 export async function currentUser(): Promise<User | null> {
   if (!dbConfigured()) return null;
+  // Resolve Hyperdrive before cookies() — cookies can drop OpenNext ALS.
+  const q = await dbSql();
   const store = await cookies();
   const sid = store.get(SESSION_COOKIE)?.value;
   if (!sid) return null;
 
-  const q = sql();
   if (!q || !(await ensureSchema())) return null;
 
   const rows = (await q`

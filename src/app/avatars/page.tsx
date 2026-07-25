@@ -4,6 +4,8 @@ import CategorySearch from "@/components/avatars/CategorySearch";
 import { CATALOG, COUNTS } from "@/lib/avatar-catalog";
 import { GROUPS, FILTERS, primaryCounts } from "@/lib/avatar-taxonomy";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Avatar Library — Reelo",
   description: "Browse AI avatars and characters by industry, character type, animal, food and more.",

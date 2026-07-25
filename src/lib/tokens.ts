@@ -1,4 +1,4 @@
-import { sql, ensureSchema } from "@/lib/db";
+import { sqlAsync, ensureSchema } from "@/lib/db";
 import { costOf } from "@/lib/token-costs";
 import { roundTokens } from "@/lib/token-pricing";
 
@@ -11,8 +11,12 @@ import { roundTokens } from "@/lib/token-pricing";
 
 export { TOKEN_COST, costOf } from "@/lib/token-costs";
 
+async function dbSql() {
+  return sqlAsync();
+}
+
 export async function balanceOf(userId: string): Promise<number> {
-  const q = sql();
+  const q = await dbSql();
   if (!q || !(await ensureSchema())) return 0;
   const rows = (await q`
     SELECT COALESCE(SUM(delta), 0) AS balance FROM token_ledger WHERE user_id = ${userId}
@@ -23,7 +27,7 @@ export async function balanceOf(userId: string): Promise<number> {
 export type LedgerEntry = { delta: number; reason: string; created_at: string };
 
 export async function historyOf(userId: string, limit = 50): Promise<LedgerEntry[]> {
-  const q = sql();
+  const q = await dbSql();
   if (!q || !(await ensureSchema())) return [];
   const rows = (await q`
     SELECT delta, reason, created_at
@@ -41,7 +45,7 @@ export async function spend(
   ref?: string,
   tokensOverride?: number,
 ): Promise<number | null> {
-  const q = sql();
+  const q = await dbSql();
   if (!q || !(await ensureSchema())) return null;
 
   const cost = roundTokens(tokensOverride ?? costOf(action));
@@ -59,7 +63,7 @@ export async function spend(
 }
 
 export async function refund(userId: string, action: string, ref?: string, amount?: number): Promise<void> {
-  const q = sql();
+  const q = await dbSql();
   if (!q || !(await ensureSchema())) return;
   const cost = roundTokens(amount ?? costOf(action));
   if (cost <= 0) return;
@@ -70,7 +74,7 @@ export async function refund(userId: string, action: string, ref?: string, amoun
 }
 
 export async function credit(userId: string, amount: number, reason: string, ref: string): Promise<void> {
-  const q = sql();
+  const q = await dbSql();
   if (!q || !(await ensureSchema())) return;
   const tokens = roundTokens(amount);
   if (!(tokens > 0)) return;

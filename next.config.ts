@@ -34,6 +34,17 @@ const nextConfig: NextConfig = {
     BUILD_SHA: buildSha,
   },
 
+  // postgres.js (and legacy pg) need workerd export conditions + full traces.
+  serverExternalPackages: ["postgres", "pg", "pg-cloudflare"],
+  outputFileTracingIncludes: {
+    "/**/*": [
+      "./node_modules/postgres/**",
+      "./node_modules/pg-cloudflare/dist/**",
+      "./node_modules/pg-cloudflare/esm/**",
+      "./node_modules/pg/lib/**",
+    ],
+  },
+
   // The dev indicator defaults to bottom-left, where it sits on top of Amber's
   // composer on narrow screens and hides the first characters you type. Moved
   // out of the way rather than disabled, so compile errors still surface.

@@ -1,4 +1,4 @@
-import { driver, pingDatabase, postgresPublicMeta } from "@/lib/db";
+import { driver, pingDatabase, postgresPublicMeta, hyperdriveBound } from "@/lib/db";
 import { storageDriver, RETENTION_DAYS } from "@/lib/storage";
 import { isCloudflareWorkers, isEphemeralFilesystem } from "@/lib/runtime-platform";
 
@@ -24,6 +24,7 @@ export async function GET() {
   const db = driver();
   const storage = storageDriver();
   const postgres = postgresPublicMeta();
+  const hdBound = await hyperdriveBound();
   const dbPing = db === "none" ? { ok: false as const, error: "No database configured." } : await pingDatabase();
 
   // Which providers have a key present. Not whether the key is valid — that is
@@ -65,6 +66,10 @@ export async function GET() {
         pooled: postgres.pooled,
         // True if the raw secret still had channel_binding=require (we strip it).
         hadChannelBinding: postgres.hadChannelBinding,
+        provider: postgres.provider,
+        driver: postgres.driver,
+        hint: postgres.hint,
+        hyperdriveBound: hdBound,
       },
       storage, // "blob" | "disk" | "none"
       // Browser → POST /api/media/ingest path (avoids Worker→HeyGen 403).

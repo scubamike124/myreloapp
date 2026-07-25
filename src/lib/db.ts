@@ -1,9 +1,11 @@
 import { neon, neonConfig, Pool } from "@neondatabase/serverless";
-import pg from "pg";
+import postgres from "postgres";
 import type { DatabaseSync } from "node:sqlite";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { mkdirSync } from "node:fs";
+import { cache } from "react";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { isCloudflareWorkers, isEphemeralFilesystem } from "@/lib/runtime-platform";
 
 // node:sqlite is loaded lazily, never at module top. It is a value import only
@@ -19,9 +21,10 @@ const nodeRequire = createRequire(import.meta.url);
 //
 //   SQLite   — a file on disk, via node:sqlite (built into Node, no package).
 //   Neon     — @neondatabase/serverless (HTTP / WebSocket). Neon hosts only.
-//   Postgres — node-postgres (`pg`) over TCP/TLS for Supabase and other
-//              providers. Required on Workers when DATABASE_URL is not Neon:
-//              Neon's HTTP driver returns CF 530/1016 against supabase.co.
+//   Postgres — postgres.js over TCP/TLS for Supabase and other providers
+//              (Workers-compatible; prepare:false for transaction poolers).
+//              Required when DATABASE_URL is not Neon: Neon's HTTP driver
+//              returns CF 530/1016 against supabase.co.
 // ---------------------------------------------------------------------------
 
 type Row = Record<string, unknown>;
@@ -71,6 +74,44 @@ function postgresUrl(): string | undefined {
   return raw ? sanitizePostgresUrl(raw) : undefined;
 }
 
+function hyperdriveFromEnv(env: unknown): string | undefined {
+  const hd = (env as { HYPERDRIVE?: { connectionString?: string } } | undefined)?.HYPERDRIVE;
+  return hd?.connectionString || undefined;
+}
+
+/**
+ * Resolve Hyperdrive once per request. Must be captured before next/headers
+ * cookies() in auth routes — that can drop OpenNext ALS mid-request.
+ */
+export const hyperdriveUrl = cache(async (): Promise<string | undefined> => {
+  try {
+    const fromSync = hyperdriveFromEnv(getCloudflareContext()?.env);
+    if (fromSync) return fromSync;
+  } catch {
+    /* sync context unavailable */
+  }
+  try {
+    const ctx = await getCloudflareContext({ async: true });
+    return hyperdriveFromEnv(ctx?.env);
+  } catch {
+    return undefined;
+  }
+});
+
+export async function hyperdriveBound(): Promise<boolean> {
+  return Boolean(await hyperdriveUrl());
+}
+
+async function resolveEffectivePostgres(): Promise<{ url: string; viaHyperdrive: boolean } | null> {
+  const hd = await hyperdriveUrl();
+  if (hd) return { url: hd, viaHyperdrive: true };
+  const raw = postgresUrl();
+  if (!raw) return null;
+  // Direct Supabase TCP from Workers fails (IPv6-only / connection reset).
+  if (isCloudflareWorkers() && usesPgTcp()) return null;
+  return { url: raw, viaHyperdrive: false };
+}
+
 export function isNeonHostname(host: string | null | undefined): boolean {
   return Boolean(host && /\.neon\.tech$/i.test(host));
 }
@@ -94,7 +135,7 @@ export function postgresPublicMeta(): {
   pooled: boolean;
   hadChannelBinding: boolean;
   provider: "neon" | "supabase" | "postgres" | "none";
-  driver: "neon-serverless" | "pg-tcp" | "none";
+  driver: "neon-serverless" | "postgres-js" | "none";
   hint: string | null;
 } {
   const raw = rawPostgresUrl();
@@ -132,7 +173,7 @@ export function postgresPublicMeta(): {
       pooled,
       hadChannelBinding,
       provider: neon ? "neon" : supabase ? "supabase" : "postgres",
-      driver: neon ? "neon-serverless" : "pg-tcp",
+      driver: neon ? "neon-serverless" : "postgres-js",
       hint,
     };
   } catch {
@@ -143,7 +184,7 @@ export function postgresPublicMeta(): {
       pooled: false,
       hadChannelBinding,
       provider: "postgres",
-      driver: "pg-tcp",
+      driver: "postgres-js",
       hint: "DATABASE_URL could not be parsed.",
     };
   }
@@ -306,42 +347,69 @@ function neonResilientSql(): Sql {
   };
 }
 
-// --- Generic Postgres (Supabase, etc.) via node-postgres TCP/TLS ------------
+// --- Generic Postgres (Supabase / Hyperdrive) via postgres.js --------------
 
-async function pgTcpQuery(text: string, params: unknown[]): Promise<Row[]> {
-  const url = postgresUrl();
+async function pgTcpQuery(text: string, params: unknown[], viaHyperdrive = false): Promise<Row[]> {
+  const resolved = viaHyperdrive
+    ? { url: (await hyperdriveUrl()) || "", viaHyperdrive: true }
+    : await resolveEffectivePostgres();
+  const url = resolved?.url || postgresUrl();
   if (!url) throw new Error("DATABASE_URL is not set.");
-  // Supabase and many managed hosts need TLS; Workers may not have a full CA
-  // bundle, so allow self-signed / incomplete chain for managed Postgres.
-  const client = new pg.Client({
-    connectionString: url,
-    ssl: { rejectUnauthorized: false },
-    connectionTimeoutMillis: 12_000,
-    query_timeout: 20_000,
+  const useHd = Boolean(resolved?.viaHyperdrive || viaHyperdrive);
+  // One client per query — Workers cannot reuse TCP across requests.
+  // prepare:false is required for transaction poolers (port 6543).
+  // Hyperdrive: Worker→proxy usually without client TLS.
+  const sql = postgres(url, {
+    max: 1,
+    idle_timeout: 5,
+    connect_timeout: 15,
+    prepare: false,
+    ssl: useHd ? false : "require",
   });
   try {
-    await client.connect();
-    const result = await client.query(text, params);
-    return (result.rows ?? []) as Row[];
+    const rows = await sql.unsafe(text, params as never[]);
+    return rows as unknown as Row[];
   } finally {
     try {
-      await client.end();
+      await sql.end({ timeout: 5 });
     } catch {
       /* ignore */
     }
   }
 }
 
-function pgTcpSql(): Sql {
+function pgTcpSql(viaHyperdrive = false): Sql {
   return async (strings, ...values) => {
     const { text, params } = templateToPg(strings, values);
-    return await pgTcpQuery(text, params);
+    return await pgTcpQuery(text, params, viaHyperdrive);
   };
 }
 
+/**
+ * Per-request SQL resolver. Prefer Hyperdrive on Workers (required for Supabase).
+ */
+export const sqlAsync = cache(async (): Promise<Sql | null> => {
+  const resolved = await resolveEffectivePostgres();
+  if (resolved) {
+    if (!resolved.viaHyperdrive) {
+      try {
+        if (isNeonHostname(new URL(resolved.url).hostname)) return neonResilientSql();
+      } catch {
+        /* fall through */
+      }
+    }
+    return pgTcpSql(resolved.viaHyperdrive);
+  }
+  const db = openSqlite();
+  return db ? sqliteSql(db) : null;
+});
+
 export function sql(): Sql | null {
-  if (postgresUrl()) {
-    return usesPgTcp() ? pgTcpSql() : neonResilientSql();
+  const url = postgresUrl();
+  if (url) {
+    // Sync path cannot read Hyperdrive. On Workers + non-Neon, callers must use sqlAsync().
+    if (isCloudflareWorkers() && usesPgTcp()) return null;
+    return usesPgTcp() ? pgTcpSql(false) : neonResilientSql();
   }
   const db = openSqlite();
   return db ? sqliteSql(db) : null;
@@ -382,19 +450,29 @@ export async function pingDatabase(): Promise<{
     }
   }
 
-  // Non-Neon (e.g. Supabase): TCP via node-postgres.
-  if (usesPgTcp()) {
+  // Non-Neon (e.g. Supabase): prefer Hyperdrive on Workers.
+  if (usesPgTcp() || isCloudflareWorkers()) {
     try {
+      const hd = await hyperdriveUrl();
+      if (hd) {
+        await pgTcpQuery("SELECT 1 AS ok", [], true);
+        const users = await countUsers((text, params) => pgTcpQuery(text, params, true));
+        return { ok: true, transport: "pg-tcp", preferWebSocket: false, ...users };
+      }
       await pgTcpQuery("SELECT 1 AS ok", []);
       const users = await countUsers(pgTcpQuery);
       return { ok: true, transport: "pg-tcp", ...users };
     } catch (e) {
       const meta = postgresPublicMeta();
-      const base = e instanceof Error ? e.message : "pg-tcp ping failed.";
+      const hdBound = Boolean(await hyperdriveUrl().catch(() => undefined));
+      const base = e instanceof Error ? e.message : "postgres-js ping failed.";
+      const hint = hdBound
+        ? "Hyperdrive bound but query failed."
+        : meta.hint || "Workers need a Hyperdrive binding for Supabase.";
       return {
         ok: false,
         transport: "pg-tcp",
-        error: meta.hint ? `${base} — ${meta.hint}` : base,
+        error: `${base} — ${hint}`,
       };
     }
   }
@@ -470,7 +548,7 @@ let ensured = false;
  * deploy needs no migration step.
  */
 export async function ensureSchema(): Promise<boolean> {
-  const q = sql();
+  const q = await sqlAsync();
   if (!q) return false;
   if (ensured) return true;
 
