@@ -17,6 +17,7 @@ const ALLOWED_HOSTS = [
   "heygen.com",
   "resource.heygen.com",
   "files.heygen.ai",
+  "files2.heygen.ai",
   "cdn.heygen.com",
   "heygen.ai",
   "googleapis.com",
@@ -52,7 +53,16 @@ export async function GET(req: Request) {
   const range = req.headers.get("range") ?? undefined;
   try {
     const upstream = await fetch(target.toString(), {
-      headers: range ? { Range: range } : undefined,
+      headers: {
+        // HeyGen's CDN 403s bare Worker fetches; a browser-like UA + referer
+        // is enough in some regions. Callers should still prefer Blob re-host.
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+        Accept: "video/mp4,video/*,*/*;q=0.8",
+        Referer: "https://app.heygen.com/",
+        Origin: "https://app.heygen.com",
+        ...(range ? { Range: range } : {}),
+      },
       signal: AbortSignal.timeout(180_000),
       redirect: "follow",
     });

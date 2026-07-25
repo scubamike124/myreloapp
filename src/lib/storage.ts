@@ -57,7 +57,16 @@ async function readSource(source: string): Promise<{ body: Buffer; contentType: 
       if (!match) return null;
       return { body: Buffer.from(match[2], "base64"), contentType: match[1] };
     }
-    const res = await fetch(source, { signal: AbortSignal.timeout(120_000) });
+    const res = await fetch(source, {
+      signal: AbortSignal.timeout(120_000),
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+        Accept: "*/*",
+        Referer: "https://app.heygen.com/",
+      },
+      redirect: "follow",
+    });
     if (!res.ok) return null;
     return {
       body: Buffer.from(await res.arrayBuffer()),

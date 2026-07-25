@@ -11,10 +11,17 @@ export const maxDuration = 120;
 // the full file on every 5s client poll after completion.
 const finalizedUrls = new Map<string, string>();
 
-/** Prefer durable storage; fall back to a same-origin proxy that preserves audio. */
+/** Prefer durable storage; fall back to the provider URL for playback.
+ *
+ * We used to wrap HeyGen CDN links in `/api/media/remote`, but Cloudflare
+ * Workers receive HTTP 403 from HeyGen's signed CDN (IP / bot filtering). That
+ * made the player load a 40-byte JSON error and look like a silent/broken video
+ * even though the real MP4 has an audio track. The browser can fetch the
+ * signed URL directly; Workers often cannot.
+ */
 async function durablePlaybackUrl(videoId: string, providerUrl: string): Promise<{ url: string; durable: boolean }> {
   const cached = finalizedUrls.get(videoId);
-  if (cached) return { url: cached, durable: !cached.includes("/api/media/remote") };
+  if (cached) return { url: cached, durable: !/^https?:\/\/[^/]*heygen\./i.test(cached) };
 
   const stored = await store(providerUrl, `heygen_${videoId}`, "video");
   if (stored?.url) {
@@ -22,9 +29,8 @@ async function durablePlaybackUrl(videoId: string, providerUrl: string): Promise
     return { url: stored.url, durable: true };
   }
 
-  const proxied = `/api/media/remote?src=${encodeURIComponent(providerUrl)}`;
-  finalizedUrls.set(videoId, proxied);
-  return { url: proxied, durable: false };
+  finalizedUrls.set(videoId, providerUrl);
+  return { url: providerUrl, durable: false };
 }
 
 const HEYGEN_BASE = "https://api.heygen.com";
