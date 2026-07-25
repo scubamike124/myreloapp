@@ -33,15 +33,21 @@ export async function GET() {
     stripe: Boolean(process.env.STRIPE_SECRET_KEY),
   };
 
+  const blobConfigured = Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+  const ingestBackend =
+    blobConfigured ? "blob" : isCloudflareWorkers() || isEphemeralFilesystem() ? "cache-or-memory" : "disk";
+
   return Response.json(
     {
       ok: true,
       status: "up",
       // The two things that make a deploy real rather than a demo.
       accounts: db !== "none",
-      persistsVideos: storage !== "none",
+      persistsVideos: storage !== "none" || blobConfigured,
       database: db, // "postgres" | "sqlite" | "none"
       storage, // "blob" | "disk" | "none"
+      // Browser → POST /api/media/ingest path (avoids Worker→HeyGen 403).
+      mediaIngest: ingestBackend,
       retentionDays: RETENTION_DAYS,
       providers,
       platform: isCloudflareWorkers() ? "cloudflare-workers" : "node",

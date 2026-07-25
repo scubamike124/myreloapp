@@ -98,7 +98,7 @@ try {
   const outcome = await page.waitForFunction(
     () => {
       const body = document.body.innerText;
-      if (/video verified with audio|click to play with sound|your avatar video is ready/i.test(body)) {
+      if (/tap to play with sound|mp4 verified with aac|video verified with audio|click to play with sound|your avatar video is ready/i.test(body)) {
         return { state: "done", text: body.slice(0, 500) };
       }
       if (/could not download|not a playable mp4|server returned an error|generation failed|HEYGEN/i.test(body) &&

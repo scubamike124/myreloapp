@@ -7,6 +7,7 @@ import type { Tool, Field } from "@/lib/tools";
 import { TOOLS, IMAGE_TOOLS, LIVE_TOOLS, VIDEO_TOOLS } from "@/lib/tools";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
+import { materializeVideoUrl } from "@/lib/materialize-video";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 type Status = "idle" | "generating" | "done";
@@ -94,11 +95,13 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
   const [status, setStatus] = useState<Status>("idle");
   const [progress, setProgress] = useState(0);
   const [muted, setMuted] = useState(true);
+  const [needsGesture, setNeedsGesture] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [err, setErr] = useState<string | null>(null);
   const [short, setShort] = useState<Shortfall | null>(null);
   const tokens = useTokens();
+  const revokeRef = useRef<(() => void) | null>(null);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const filesRef = useRef<Record<string, File>>({});
@@ -220,26 +223,23 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
         // The render now runs asynchronously — the POST returns a handle and we
         // poll until the clip is ready, instead of the server holding the whole
         // request open for minutes.
-        const videoUrl = await pollVeo(data.poll as string);
+        const remoteUrl = await pollVeo(data.poll as string);
         if (timer.current) clearInterval(timer.current);
-        setVideoUrl(videoUrl);
-        setMuted(false);
+        revokeRef.current?.();
+        const local = await materializeVideoUrl(remoteUrl);
+        revokeRef.current = local.revoke ?? null;
+        setVideoUrl(local.url);
+        setMuted(true);
+        setNeedsGesture(true);
         setProgress(100);
         setStatus("done");
-        requestAnimationFrame(() => {
-          const v = videoRef.current;
-          if (!v) return;
-          v.muted = false;
-          v.volume = 1;
-          void v.play().catch(() => {});
-        });
         recordCreation({
           toolSlug: tool.slug,
           toolTitle: tool.title,
           title: creationTitle(),
           status: "completed",
           kind: "video",
-          mediaUrl: videoUrl,
+          mediaUrl: local.url,
         });
       } catch (e) {
         if (timer.current) clearInterval(timer.current);
@@ -392,17 +392,37 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={imageUrl} alt="Generated avatar" className="absolute inset-0 h-full w-full object-cover" />
                 ) : status === "done" ? (
-                  <video
-                    ref={videoRef}
-                    key={videoUrl}
-                    src={videoUrl}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    autoPlay
-                    muted={muted}
-                    controls
-                    playsInline
-                    preload="auto"
-                  />
+                  <>
+                    <video
+                      ref={videoRef}
+                      key={videoUrl}
+                      src={videoUrl}
+                      className="absolute inset-0 h-full w-full object-cover"
+                      muted={muted}
+                      controls
+                      playsInline
+                      preload="auto"
+                    />
+                    {needsGesture && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const v = videoRef.current;
+                          if (!v) return;
+                          v.muted = false;
+                          v.volume = 1;
+                          setMuted(false);
+                          void v.play().then(() => setNeedsGesture(false)).catch(() => {});
+                        }}
+                        className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/70 px-4 text-center"
+                      >
+                        <span className="grid h-14 w-14 place-items-center rounded-full text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><polygon points="8 5 20 12 8 19" /></svg>
+                        </span>
+                        <span className="text-base font-bold text-white">Tap to play with sound</span>
+                      </button>
+                    )}
+                  </>
                 ) : (
                   <Image src={tool.poster} alt="" fill className={`object-cover transition ${status === "generating" ? "opacity-25" : "opacity-100"}`} />
                 )}
@@ -419,8 +439,8 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
                   </div>
                 )}
 
-                {/* done: unmute hint sits above native controls */}
-                {status === "done" && !isImageTool && muted && (
+                {/* done: unmute chip only if overlay dismissed but still muted */}
+                {status === "done" && !isImageTool && muted && !needsGesture && (
                   <div className="absolute inset-x-0 top-0 flex items-center justify-end p-3">
                     <button onClick={toggleMute} aria-label="Unmute" className="grid h-9 w-9 place-items-center rounded-full text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" /><path d="M22 9l-6 6M16 9l6 6" /></svg>

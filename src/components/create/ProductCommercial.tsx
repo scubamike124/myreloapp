@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
+import { materializeVideoUrl } from "@/lib/materialize-video";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 // ---------------------------------------------------------------------------
@@ -62,8 +63,11 @@ export default function ProductCommercial() {
   const [err, setErr] = useState<string | null>(null);
   const [short, setShort] = useState<Shortfall | null>(null);
   const [result, setResult] = useState<Result | null>(null);
+  const [needsGesture, setNeedsGesture] = useState(false);
+  const [muted, setMuted] = useState(true);
   const tokens = useTokens();
-
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const revokeRef = useRef<(() => void) | null>(null);
   const onPhoto = (f?: File) => {
     if (!f) return;
     setPhoto(f);
@@ -109,16 +113,21 @@ export default function ProductCommercial() {
       tokens.setBalance(data.balance);
       // The concept is ready now; the render runs asynchronously, so poll for
       // the finished clip and attach it to the result.
-      const videoUrl = await pollVeo(data.poll as string);
+      const remoteUrl = await pollVeo(data.poll as string);
+      revokeRef.current?.();
+      const local = await materializeVideoUrl(remoteUrl);
+      revokeRef.current = local.revoke ?? null;
       setProgress(100);
-      setResult({ ...(data as Result), videoUrl });
+      setMuted(true);
+      setNeedsGesture(true);
+      setResult({ ...(data as Result), videoUrl: local.url });
       recordCreation({
         toolSlug: "product-commercial",
         toolTitle: "Product Commercial",
         title: productName.trim() || data.headline || "Product advert",
         status: "completed",
         kind: "video",
-        mediaUrl: videoUrl,
+        mediaUrl: local.url,
       });
     } catch {
       setErr("Network error. Try again.");
@@ -352,15 +361,37 @@ export default function ProductCommercial() {
                 style={{ border: "1px solid rgba(255,70,85,.18)", background: "rgba(20,10,12,.55)" }}
               >
                 <div className="grid gap-5 p-5 sm:grid-cols-2">
-                  <video
-                    src={result.videoUrl}
-                    controls
-                    autoPlay
-                    loop
-                    playsInline
-                    className="aspect-[9/16] w-full rounded-xl bg-black object-cover"
-                    style={{ border: "1px solid rgba(255,255,255,.08)" }}
-                  />
+                  <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl bg-black" style={{ border: "1px solid rgba(255,255,255,.08)" }}>
+                    <video
+                      ref={videoRef}
+                      key={result.videoUrl}
+                      src={result.videoUrl}
+                      controls
+                      muted={muted}
+                      playsInline
+                      preload="auto"
+                      className="h-full w-full object-cover"
+                    />
+                    {needsGesture && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const v = videoRef.current;
+                          if (!v) return;
+                          v.muted = false;
+                          v.volume = 1;
+                          setMuted(false);
+                          void v.play().then(() => setNeedsGesture(false)).catch(() => {});
+                        }}
+                        className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/70 px-4 text-center"
+                      >
+                        <span className="grid h-14 w-14 place-items-center rounded-full text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><polygon points="8 5 20 12 8 19" /></svg>
+                        </span>
+                        <span className="text-base font-bold text-white">Tap to play with sound</span>
+                      </button>
+                    )}
+                  </div>
                   <div className="flex flex-col gap-4">
                     <div>
                       <p className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "#ff5663" }}>
@@ -370,10 +401,13 @@ export default function ProductCommercial() {
                     </div>
                     <div>
                       <p className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "#ff5663" }}>
-                        Voiceover
+                        Suggested voiceover
                       </p>
                       <p className="mt-0.5 text-[14px] leading-relaxed" style={{ color: "#d8cbcd" }}>
                         {result.voiceover}
+                      </p>
+                      <p className="mt-1.5 text-[11px] leading-relaxed text-white/40">
+                        The clip includes soundtrack audio. This line is copy you can record or post with the video — it is not baked as spoken narration.
                       </p>
                     </div>
                     <div>
@@ -400,8 +434,7 @@ export default function ProductCommercial() {
                       Download video
                     </button>
                   </div>
-                </div>
-                <div className="border-t border-white/10 px-5 py-3">
+                </div>                <div className="border-t border-white/10 px-5 py-3">
                   <p className="text-[11.5px] leading-relaxed text-white/35">
                     Shot direction used: {result.shot}
                     {result.scannedPage && " · Wording informed by your product page."}

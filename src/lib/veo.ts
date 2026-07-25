@@ -14,6 +14,9 @@
 // the HeyGen tools already use.
 // ---------------------------------------------------------------------------
 
+import { ingestBytes } from "@/lib/media-ingest";
+import { randomUUID } from "node:crypto";
+
 const BASE = "https://generativelanguage.googleapis.com/v1beta";
 // Fast preview often ships clips with weak/missing audio. Talking & dancing
 // tools need audible speech + ambience, so default to the full 3.1 model.
@@ -99,6 +102,16 @@ export async function checkVeo(key: string, op: string): Promise<VeoStatus> {
 
   const r = await fetch(`${uri}&key=${encodeURIComponent(key)}`, { signal: AbortSignal.timeout(90_000) });
   if (!r.ok) return { status: "failed", error: "Could not download the finished video." };
-  const buf = Buffer.from(await r.arrayBuffer());
-  return { status: "completed", videoUrl: `data:video/mp4;base64,${buf.toString("base64")}` };
+  const buf = new Uint8Array(await r.arrayBuffer());
+  if (buf.byteLength < 32) return { status: "failed", error: "Veo returned an empty video." };
+
+  // Prefer same-origin ingest over multi-MB data URLs (Workers response limits).
+  const id = randomUUID().replace(/-/g, "");
+  const stored = await ingestBytes(id, buf, "video/mp4");
+  if (stored?.url) {
+    return { status: "completed", videoUrl: stored.url };
+  }
+
+  // Fallback for local/dev when ingest backends are unavailable.
+  return { status: "completed", videoUrl: `data:video/mp4;base64,${Buffer.from(buf).toString("base64")}` };
 }

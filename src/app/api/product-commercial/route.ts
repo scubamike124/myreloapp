@@ -180,11 +180,14 @@ export async function POST(req: Request) {
   try {
     const concept = await writeConcept(key, imageBase64, mimeType, productName, details, pageText, look, music);
 
+    const musicMood = music || "Upbeat";
     const veoPrompt =
       `${concept.shot}\n\n` +
       `${LOOKS[look]}. Photoreal product commercial, ${VIDEO_SECONDS} seconds, smooth cinematic camera, ` +
       `sharp focus on the product, high quality, 4k. The product must stay exactly as it appears in the ` +
-      `reference image. No added text, no captions, no watermarks, no people.`;
+      `reference image. No added text, no captions, no watermarks, no people. ` +
+      `Include a clear audible ${musicMood.toLowerCase()} music soundtrack and light ambient sound throughout — ` +
+      `the clip must not be silent. Do not add spoken narration over the product shot.`;
 
     // Start the render and return the concept immediately. The customer sees the
     // headline, voiceover and caption at once, and the client polls the GET below

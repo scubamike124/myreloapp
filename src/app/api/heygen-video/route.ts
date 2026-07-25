@@ -1,7 +1,6 @@
 import { asRecord, asString, childRecord, errorMessage } from "@/lib/json";
 import { NextResponse } from "next/server";
 import { chargeFor, refundCharge, refundLater } from "@/lib/charge";
-import { store } from "@/lib/storage";
 
 export const runtime = "nodejs";
 // Status poll may download + re-host the finished MP4 so playback keeps audio.
@@ -10,6 +9,8 @@ export const maxDuration = 120;
 // One durable URL per HeyGen video id for this isolate — avoids re-downloading
 // the full file on every 5s client poll after completion.
 const finalizedUrls = new Map<string, string>();
+// Remember which product charged the job so async failures refund correctly.
+const chargedActionByVideo = new Map<string, string>();
 
 /** Prefer durable storage; fall back to the provider URL for playback.
  *
@@ -17,18 +18,15 @@ const finalizedUrls = new Map<string, string>();
  * Workers receive HTTP 403 from HeyGen's signed CDN (IP / bot filtering). That
  * made the player load a 40-byte JSON error and look like a silent/broken video
  * even though the real MP4 has an audio track. The browser can fetch the
- * signed URL directly; Workers often cannot.
+ * signed URL directly; Workers often cannot. The browser then POSTs bytes to
+ * /api/media/ingest for same-origin playback.
  */
 async function durablePlaybackUrl(videoId: string, providerUrl: string): Promise<{ url: string; durable: boolean }> {
   const cached = finalizedUrls.get(videoId);
   if (cached) return { url: cached, durable: !/^https?:\/\/[^/]*heygen\./i.test(cached) };
 
-  const stored = await store(providerUrl, `heygen_${videoId}`, "video");
-  if (stored?.url) {
-    finalizedUrls.set(videoId, stored.url);
-    return { url: stored.url, durable: true };
-  }
-
+  // Never call store(providerUrl) on Workers — that fetches HeyGen and 403s.
+  // Client materialize + ingest is the durable path.
   finalizedUrls.set(videoId, providerUrl);
   return { url: providerUrl, durable: false };
 }
@@ -127,12 +125,13 @@ export async function GET(req: Request) {
     // makes it idempotent — the client polls this endpoint every few seconds
     // and would otherwise be refunded once per poll.
     if (d.status === "failed") {
-      await refundLater("ai-avatar-studio", `heygen:${videoId}`);
+      const action = chargedActionByVideo.get(videoId) || "ai-avatar-studio";
+      await refundLater(action, `heygen:${videoId}`);
     }
 
-    // Never hand the browser a raw HeyGen CDN URL for playback/download.
-    // Cross-origin Range/CORS failures strip or break the audio track and make
-    // the player look broken even when HeyGen rendered speech correctly.
+    // Hand the provider URL to the client. The browser fetches HeyGen CDN
+    // successfully; Workers often get 403. Client materialize + /api/media/ingest
+    // creates the same-origin playback URL.
     let videoUrl: string | null = asString(d.video_url) || null;
     let durable = false;
     let providerUrl: string | null = videoUrl;
@@ -243,6 +242,8 @@ export async function POST(req: Request) {
       const msg = errorMessage(data, "") || (asString(data.message) || `HeyGen generate failed (${res.status}).`);
       return NextResponse.json({ error: msg }, { status: 502 });
     }
+
+    chargedActionByVideo.set(String(videoId), action);
 
     return NextResponse.json({
       ok: true,
