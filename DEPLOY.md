@@ -86,8 +86,11 @@ Amber Credential Vault. `VERCEL_TOKEN` is optional and not a deploy blocker.
 
 ## Managed services (only if your host is serverless)
 
-- **Postgres** — set `DATABASE_URL` (Neon, Supabase, any Postgres). Reelo uses
-  it automatically whenever the variable is present. The schema is created on
+- **Postgres** — set `DATABASE_URL`. On **Cloudflare Workers**, prefer a
+  **Neon** (`*.neon.tech`) pooled URL — the app uses `@neondatabase/serverless`.
+  **Supabase** is also supported via TCP (`pg`), but use the **pooler** URL
+  (`*.pooler.supabase.com:6543`), not the direct `db.*.supabase.co` host
+  (often IPv6-only and unreachable from Workers). The schema is created on
   first run; no migration step.
 - **Blob storage** — set `BLOB_READ_WRITE_TOKEN` only if you need remote blobs
   on an ephemeral filesystem. Prefer Docker + local disk behind Cloudflare when

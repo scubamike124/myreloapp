@@ -60,7 +60,8 @@ export const KNOWN_KEYS: KnownKey[] = [
     kind: "secret",
     purpose: "User accounts, token balances and purchase history",
     source: "https://neon.tech",
-    pattern: /^postgres(ql)?:\/\//,
+    pattern: /^postgres(ql)?:\/\/.+/i,
+    // Neon is preferred on Workers; Supabase works only via the pooler + TCP path.
     group: "Accounts",
   },
   {
