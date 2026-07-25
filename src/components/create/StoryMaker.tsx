@@ -4,23 +4,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { LANGUAGES, DEFAULT_LANGUAGE } from "@/lib/languages";
 import { recordCreation } from "@/lib/workspace";
+import { compressImageForUpload } from "@/lib/compress-image";
+import { materializeVideoUrl } from "@/lib/materialize-video";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
+import SmoothVideo from "./SmoothVideo";
 
 // ---------------------------------------------------------------------------
 // AI Story Maker.
 //
-// Pick a star — an uploaded photo or any Reelo character, the banana included —
-// and it heads an ongoing series. Each episode is long (six to ten scenes of
-// real narration, every one illustrated) and each remembers the ones before it.
-//
-// This is the opposite of Bedtime Storybook, which the two tools' old copy did
-// not distinguish at all: that one makes a single short book for a child in one
-// go, this one keeps a series running for as long as you want episodes.
-//
-// The series lives in this component: episode recaps are collected here and
-// handed back to the API for the next episode. That keeps the server free of
-// session state, and means closing the tab ends the series rather than leaving
-// a half-written one on disk.
+// Pick a star — an uploaded photo or any Reelo character — and choose Video
+// (talking clip from the episode narration) or Ebook (illustrated scenes).
 // ---------------------------------------------------------------------------
 
 type Scene = { text: string; image: string };
@@ -30,6 +23,8 @@ type Episode = {
   synopsis: string;
   cliffhanger: string;
   recap: string;
+  format?: "ebook" | "video";
+  videoUrl?: string;
   language: { code: string; name: string; endonym: string; rtl: boolean };
   scenes: Scene[];
   illustrated: number;
@@ -48,18 +43,21 @@ const PREMISE_EXAMPLES = [
   "Two socks separated in the wash search the house for each other",
 ];
 
-function fileToBase64(file: Blob): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const r = new FileReader();
-    r.onload = () => resolve(String(r.result).split(",")[1] || "");
-    r.onerror = () => reject(new Error("Could not read that photo."));
-    r.readAsDataURL(file);
-  });
+async function pollVeo(pollUrl: string, maxTries = 90): Promise<string> {
+  for (let i = 0; i < maxTries; i++) {
+    await new Promise((r) => setTimeout(r, 5000));
+    const res = await fetch(pollUrl);
+    const d = await res.json();
+    if (d.status === "completed" && d.videoUrl) return d.videoUrl as string;
+    if (d.status === "failed") throw new Error(d.error || "Video generation failed.");
+  }
+  throw new Error("Video is taking too long — please try again.");
 }
 
 export default function StoryMaker() {
   // --- the cast ------------------------------------------------------------
   const [mode, setMode] = useState<"character" | "photo">("character");
+  const [format, setFormat] = useState<"video" | "ebook">("video");
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loadingCast, setLoadingCast] = useState(true);
   const [q, setQ] = useState("");
@@ -80,6 +78,7 @@ export default function StoryMaker() {
   const [short, setShort] = useState<Shortfall | null>(null);
   const tokens = useTokens();
   const latestRef = useRef<HTMLDivElement>(null);
+  const revokeRef = useRef<(() => void) | null>(null);
 
   // The Reelo characters — the banana, the dragons, the warlords. Loaded from
   // the same catalog the Avatar Library uses, so the cast here is never a
@@ -102,6 +101,37 @@ export default function StoryMaker() {
     return () => {
       cancelled = true;
     };
+  }, []);
+
+  useEffect(
+    () => () => {
+      revokeRef.current?.();
+    },
+    [],
+  );
+
+  // Deep-link from Avatar Library: /create/ai-story-maker?avatar=<id>
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get("avatar");
+    if (!wanted) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`/api/avatars?id=${encodeURIComponent(wanted)}`);
+        const data = await res.json();
+        if (cancelled || !res.ok || !data.avatar) return;
+        const a = data.avatar as Character;
+        setMode("character");
+        setPicked(a);
+        if (!characterName.trim()) setCharacterName(a.name);
+      } catch {
+        /* ignore */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onPhoto = (f?: File) => {
@@ -128,6 +158,15 @@ export default function StoryMaker() {
 
   const hasStar = Boolean(picked || photo);
 
+  const resolveStarImage = async (): Promise<{ base64: string; mimeType: string }> => {
+    if (photo) return compressImageForUpload(photo);
+    if (picked?.image) {
+      const blob = await (await fetch(picked.image)).blob();
+      return compressImageForUpload(blob);
+    }
+    throw new Error("Pick a character or upload a photo first.");
+  };
+
   const writeEpisode = useCallback(async () => {
     if (!hasStar) {
       setErr("Pick a character or upload a photo first.");
@@ -144,14 +183,17 @@ export default function StoryMaker() {
         scenes,
         languageCode,
         episodeNumber: episodes.length + 1,
+        format,
+        skipIllustrations: format === "video",
         // The series memory: only recaps travel, which is all the next episode
         // needs to follow on.
         previously: episodes.map((e) => ({ number: e.episodeNumber, title: e.title, recap: e.recap })),
       };
       if (picked) payload.avatarId = picked.avatarId;
       if (photo) {
-        payload.photo = await fileToBase64(photo);
-        payload.mimeType = photo.type || "image/jpeg";
+        const compressed = await compressImageForUpload(photo);
+        payload.photo = compressed.base64;
+        payload.mimeType = compressed.mimeType;
       }
 
       const res = await fetch("/api/story-maker", {
@@ -167,21 +209,58 @@ export default function StoryMaker() {
         return;
       }
       tokens.setBalance(data.balance);
-      setEpisodes((prev) => [...prev, data as Episode]);
+
+      let videoUrl = "";
+      if (format === "video") {
+        const narration = (Array.isArray(data.scenes) ? data.scenes : [])
+          .map((s: Scene) => s.text)
+          .join(" ")
+          .slice(0, 900);
+        const star = await resolveStarImage();
+        const prompt =
+          `A close-up of the character in the photo looking at the camera and narrating this story episode with clear audible speech, lip-syncing: "${narration || data.synopsis || premise}". ` +
+          `Expressive storytelling energy, subtle head movement. Spoken words must be clearly audible.`;
+        const vRes = await fetch("/api/generate-avatar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            imageBase64: star.base64,
+            mimeType: star.mimeType,
+            prompt,
+            action: "talking-photo",
+          }),
+        });
+        const vData = await vRes.json();
+        const gap = await shortfallFrom(vRes, vData);
+        if (gap) {
+          setShort(gap);
+          return;
+        }
+        if (!vRes.ok || !vData.ok) throw new Error(vData.error || "Couldn't render the episode video.");
+        tokens.setBalance(vData.balance);
+        const remote = await pollVeo(vData.poll as string);
+        revokeRef.current?.();
+        const local = await materializeVideoUrl(remote);
+        revokeRef.current = local.revoke ?? null;
+        videoUrl = local.url;
+      }
+
+      const ep = { ...(data as Episode), format, videoUrl: videoUrl || undefined };
+      setEpisodes((prev) => [...prev, ep]);
       recordCreation({
         toolSlug: "ai-story-maker",
         toolTitle: "AI Story Maker",
         title: `${characterName.trim() || "Series"} — Ep. ${data.episodeNumber}: ${data.title}`,
         status: "completed",
-        kind: "image",
-        mediaUrl: data.scenes?.[0]?.image ?? "",
+        kind: format === "video" ? "video" : "image",
+        mediaUrl: videoUrl || data.scenes?.[0]?.image || "",
       });
-    } catch {
-      setErr("Network error. Try again.");
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : "Network error. Try again.");
     } finally {
       setBusy(false);
     }
-  }, [hasStar, characterName, premise, genre, scenes, languageCode, episodes, picked, photo, tokens]);
+  }, [hasStar, characterName, premise, genre, scenes, languageCode, episodes, picked, photo, tokens, format]);
 
   // Bring a finished episode into view rather than leaving it below the fold.
   useEffect(() => {
@@ -223,13 +302,14 @@ export default function StoryMaker() {
         </p>
         <h1 className="font-display mt-1 text-3xl font-bold tracking-[-0.02em] sm:text-4xl">AI Story Maker</h1>
         <p className="mt-2" style={{ color: "#a99a9c" }}>
-          Pick a star — your own photo or any Reelo character — and give them a series. Every episode is long, fully
-          illustrated, and remembers the ones before it.
+          Pick a star — your own photo or any Reelo character — then choose <strong className="text-white/80">Video</strong>{" "}
+          (talking episode) or <strong className="text-white/80">Ebook</strong> (illustrated scenes). Every episode
+          remembers the ones before it.
         </p>
         <p className="mt-1 text-[13px]" style={{ color: "#7d6f71" }}>
           Looking for a single picture book for tonight instead?{" "}
           <Link href="/create/bedtime-storybook" className="underline underline-offset-2 hover:text-white">
-            Bedtime Storybook
+            Storybook
           </Link>{" "}
           does that.
         </p>
@@ -241,6 +321,25 @@ export default function StoryMaker() {
             style={{ border: "1px solid rgba(255,70,85,.18)", background: "rgba(20,10,12,.55)" }}
           >
             <div>
+              <p className="mb-2 text-[13px] font-semibold text-white/80">Format</p>
+              <div className="mb-4 flex gap-1.5">
+                {(["video", "ebook"] as const).map((f) => (
+                  <button
+                    key={f}
+                    onClick={() => setFormat(f)}
+                    disabled={started}
+                    className="flex-1 rounded-lg px-3 py-2 text-[12.5px] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                    style={
+                      format === f
+                        ? { color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" }
+                        : { color: "#b9a9ab", border: "1px solid rgba(255,70,85,.2)" }
+                    }
+                  >
+                    {f === "video" ? "Video episode" : "Illustrated ebook"}
+                  </button>
+                ))}
+              </div>
+
               <p className="mb-2 text-[13px] font-semibold text-white/80">Who stars in it?</p>
               <div className="mb-3 flex gap-1.5">
                 {(["character", "photo"] as const).map((m) => (
@@ -262,16 +361,25 @@ export default function StoryMaker() {
 
               {mode === "character" ? (
                 <>
-                  <input
-                    value={q}
-                    onChange={(e) => setQ(e.target.value)}
-                    placeholder={loadingCast ? "Loading characters…" : `Search ${characters.length} characters — try "banana"`}
-                    disabled={started}
-                    className="mb-2 w-full rounded-xl px-3.5 py-2.5 text-sm text-white outline-none placeholder:text-white/25 disabled:opacity-50"
-                    style={inputStyle}
-                  />
+                  <div className="mb-2 flex items-center justify-between gap-2">
+                    <input
+                      value={q}
+                      onChange={(e) => setQ(e.target.value)}
+                      placeholder={loadingCast ? "Loading characters…" : `Search ${characters.length} characters — try "banana"`}
+                      disabled={started}
+                      className="w-full rounded-xl px-3.5 py-2.5 text-sm text-white outline-none placeholder:text-white/25 disabled:opacity-50"
+                      style={inputStyle}
+                    />
+                  </div>
+                  <Link
+                    href="/avatars?tool=ai-story-maker"
+                    className="mb-2 inline-block text-xs font-semibold underline underline-offset-2"
+                    style={{ color: "#ff8892" }}
+                  >
+                    Browse the full Avatar Library →
+                  </Link>
                   <div
-                    className="grid max-h-[280px] grid-cols-4 gap-1.5 overflow-y-auto rounded-xl p-1.5"
+                    className="grid max-h-[440px] grid-cols-3 gap-2 overflow-y-auto rounded-xl p-2 sm:grid-cols-3"
                     style={{ border: "1px solid rgba(255,255,255,.07)" }}
                   >
                     {shown.map((c) => (
@@ -280,7 +388,7 @@ export default function StoryMaker() {
                         onClick={() => pick(c)}
                         disabled={started}
                         title={c.name}
-                        className="relative aspect-square overflow-hidden rounded-lg transition-transform hover:scale-[1.04] disabled:cursor-not-allowed"
+                        className="relative aspect-square overflow-hidden rounded-xl transition-transform hover:scale-[1.03] disabled:cursor-not-allowed"
                         style={{
                           border:
                             picked?.avatarId === c.avatarId
@@ -290,14 +398,18 @@ export default function StoryMaker() {
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={c.image} alt={c.name} loading="lazy" className="h-full w-full object-cover" />
-                        <span className="absolute inset-x-0 bottom-0 truncate bg-black/70 px-1 py-0.5 text-[9px] text-white/80">
+                        <span className="absolute inset-x-0 bottom-0 truncate bg-black/75 px-1.5 py-1 text-[11px] font-medium text-white/90">
                           {c.name}
                         </span>
                       </button>
                     ))}
                     {!loadingCast && shown.length === 0 && (
-                      <p className="col-span-4 px-2 py-6 text-center text-[12.5px] text-white/40">
-                        No character matches “{q}”.
+                      <p className="col-span-3 px-2 py-6 text-center text-[12.5px] text-white/40">
+                        No character matches “{q}”. Try the{" "}
+                        <Link href="/avatars?tool=ai-story-maker" className="underline">
+                          Avatar Library
+                        </Link>
+                        .
                       </p>
                     )}
                   </div>
@@ -448,10 +560,14 @@ export default function StoryMaker() {
               style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
             >
               {busy
-                ? `Writing episode ${episodes.length + 1}…`
+                ? format === "video"
+                  ? `Writing & rendering episode ${episodes.length + 1}…`
+                  : `Writing episode ${episodes.length + 1}…`
                 : started
                   ? `Write episode ${episodes.length + 1}`
-                  : "Start the series"}
+                  : format === "video"
+                    ? "Start the series (video)"
+                    : "Start the series (ebook)"}
             </button>
 
             <TokenMeter slug="ai-story-maker" tokens={tokens} />
@@ -460,7 +576,9 @@ export default function StoryMaker() {
 
             {busy && (
               <p className="text-[12px] leading-relaxed text-white/45">
-                Writing the episode, then illustrating every scene. This takes a minute or two.
+                {format === "video"
+                  ? "Writing the episode, then rendering a talking video from your star. Keep this tab open (~2–4 min)."
+                  : "Writing the episode, then illustrating every scene. This takes a minute or two."}
               </p>
             )}
 
@@ -525,7 +643,7 @@ export default function StoryMaker() {
                           {ep.synopsis}
                         </p>
                       )}
-                      {ep.illustrated < ep.scenes.length && (
+                      {ep.format !== "video" && ep.illustrated < ep.scenes.length && (
                         <p className="mt-2 text-[11.5px]" style={{ color: "#ffcf9a" }}>
                           {ep.scenes.length - ep.illustrated} of {ep.scenes.length} scenes could not be illustrated —
                           the writing is all there.
@@ -534,25 +652,31 @@ export default function StoryMaker() {
                     </header>
 
                     <div className="flex flex-col gap-5 p-5">
+                      {ep.videoUrl && (
+                        <div className="relative aspect-video overflow-hidden rounded-xl border border-white/10 bg-black">
+                          <SmoothVideo src={ep.videoUrl} className="absolute inset-0 h-full w-full object-cover" controls muted />
+                        </div>
+                      )}
                       {ep.scenes.map((s, si) => (
-                        <div key={si} className="grid gap-3 sm:grid-cols-2">
-                          {s.image ? (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img
-                              src={s.image}
-                              alt=""
-                              className="aspect-video w-full rounded-xl object-cover"
-                              style={{ border: "1px solid rgba(255,255,255,.08)" }}
-                            />
-                          ) : (
-                            <div
-                              className="grid aspect-video w-full place-items-center rounded-xl text-2xl"
-                              style={{ border: "1px dashed rgba(255,255,255,.12)" }}
-                              aria-hidden
-                            >
-                              🎨
-                            </div>
-                          )}
+                        <div key={si} className={ep.videoUrl ? "" : "grid gap-3 sm:grid-cols-2"}>
+                          {!ep.videoUrl &&
+                            (s.image ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={s.image}
+                                alt=""
+                                className="aspect-video w-full rounded-xl object-cover"
+                                style={{ border: "1px solid rgba(255,255,255,.08)" }}
+                              />
+                            ) : (
+                              <div
+                                className="grid aspect-video w-full place-items-center rounded-xl text-2xl"
+                                style={{ border: "1px dashed rgba(255,255,255,.12)" }}
+                                aria-hidden
+                              >
+                                🎨
+                              </div>
+                            ))}
                           <p className="self-center text-[14px] leading-relaxed" style={{ color: "#d8cbcd" }}>
                             {s.text}
                           </p>

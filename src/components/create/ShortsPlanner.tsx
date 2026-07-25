@@ -45,7 +45,7 @@ export default function ShortsPlanner() {
   const [mode, setMode] = useState<"url" | "prompt">("url");
   const [url, setUrl] = useState("");
   const [prompt, setPrompt] = useState("");
-  const [count, setCount] = useState(20);
+  const [count, setCount] = useState(10);
   const [platform, setPlatform] = useState(PLATFORMS[3]);
   const [tone, setTone] = useState(TONES[0]);
   const [languageCode, setLanguageCode] = useState(DEFAULT_LANGUAGE);
@@ -108,7 +108,7 @@ export default function ShortsPlanner() {
       setOpen(0);
       recordCreation({
         toolSlug: "shorts-20",
-        toolTitle: "20 Shorts Generator",
+        toolTitle: "Shorts Generator",
         title: `${data.shorts.length} shorts${data.brand ? ` — ${data.brand}` : ""}`,
         status: "completed",
         kind: "image",
@@ -162,7 +162,7 @@ export default function ShortsPlanner() {
         <p className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#ff5663" }}>
           Studio
         </p>
-        <h1 className="font-display mt-1 text-3xl font-bold tracking-[-0.02em] sm:text-4xl">20 Shorts Generator</h1>
+        <h1 className="font-display mt-1 text-3xl font-bold tracking-[-0.02em] sm:text-4xl">Shorts Generator</h1>
         <p className="mt-2" style={{ color: "#a99a9c" }}>
           A month of shorts from one website or one sentence — each with its hook, spoken script, shot list, caption
           and hashtags.
@@ -224,7 +224,7 @@ export default function ShortsPlanner() {
 
             <div>
               <label htmlFor="sh-count" className="mb-1.5 block text-[13px] font-semibold text-white/80">
-                How many shorts
+                How many shorts <span className="font-normal text-white/40">(up to 20)</span>
               </label>
               <select
                 id="sh-count"
@@ -233,7 +233,7 @@ export default function ShortsPlanner() {
                 className="w-full rounded-xl px-3 py-2.5 text-sm text-white outline-none"
                 style={{ border: "1px solid rgba(255,70,85,.22)", background: "rgba(20,10,12,.9)" }}
               >
-                {[5, 10, 15, 20, 25, 30].map((n) => (
+                {[5, 10, 15, 20].map((n) => (
                   <option key={n} value={n}>
                     {n} shorts
                   </option>

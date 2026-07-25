@@ -29,7 +29,7 @@ const BASE = "https://generativelanguage.googleapis.com/v1beta";
 
 const MAX_BODY = 256 * 1024;
 const MIN_COUNT = 5;
-const MAX_COUNT = 30;
+const MAX_COUNT = 20;
 
 const DAILY = Number(process.env.SHORTS_DAILY_LIMIT ?? 10);
 const limiter = createDailyLimiter(Number.isFinite(DAILY) ? DAILY : 10);

@@ -11,6 +11,7 @@ import { materializeVideoUrl } from "@/lib/materialize-video";
 import { playSyncedWithSound } from "@/lib/play-synced";
 import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
+import { compressImageForUpload } from "@/lib/compress-image";
 
 type Status = "idle" | "generating" | "done";
 
@@ -28,13 +29,8 @@ function stagesFor(slug: string): string[] {
 function avatarPrompt(slug: string, values: Record<string, string>): string {
   if (slug === "dancing-photo") {
     const move = values.move ? `${values.move} ` : "";
-    return `The person in the photo performs an energetic, joyful ${move}dance — dynamic full-body motion, rhythmic and lively, dancing to clear upbeat music with an audible soundtrack, big smile. Include synchronized music and ambient sound.`;
-  }
-  if (slug === "ai-avatar-studio") {
-    const script = (values.script || "").trim();
-    return script
-      ? `The avatar looks into the camera and speaks naturally and professionally with clear audible speech, lip-syncing the words: "${script}". Confident, engaging on-camera presenter, subtle natural head movement. The spoken dialogue must be clearly audible.`
-      : `The avatar looks into the camera and speaks naturally as a confident, engaging on-camera presenter with natural lip movement and clearly audible speech.`;
+    const music = values.music ? ` Soundtrack style: ${values.music}.` : "";
+    return `The person in the photo performs an energetic, joyful ${move}dance — dynamic full-body motion, rhythmic and lively, dancing to clear upbeat music with an audible soundtrack, big smile. Include synchronized music and ambient sound.${music}`;
   }
   // talking-photo
   const script = (values.script || "").trim();
@@ -176,12 +172,28 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
     setErr(null);
     setShort(null);
 
-    // Real image-to-video path (Dancing / Talking Photo, AI Avatar Studio).
+    // Real image-to-video path (Dancing / Talking Photo).
     if (isVideoTool) {
       const uploadField = tool.fields.find((f) => f.kind === "upload");
-      const choiceField = tool.fields.find((f) => f.kind === "choices");
-      // Upload-based tools require a photo; preset-avatar tools always have one selected.
-      if (uploadField && !choiceField && !filesRef.current[uploadField.name]) {
+      // Avatar-style choices have img previews; dance "move" choices do not —
+      // never treat move options as a substitute for the uploaded photo.
+      const avatarChoiceField = tool.fields.find(
+        (f) => f.kind === "choices" && f.options.some((o) => Boolean(o.img)),
+      );
+      if (uploadField && !filesRef.current[uploadField.name] && !avatarChoiceField) {
+        setErr("Please upload a photo first.");
+        return;
+      }
+      if (uploadField && !filesRef.current[uploadField.name] && avatarChoiceField && !values[avatarChoiceField.name]) {
+        setErr("Please upload a photo or choose an avatar.");
+        return;
+      }
+      // Dancing / talking always need the photo when an upload field exists.
+      if (uploadField && !filesRef.current[uploadField.name] && tool.slug === "dancing-photo") {
+        setErr("Please upload a photo first.");
+        return;
+      }
+      if (uploadField && !filesRef.current[uploadField.name] && tool.slug === "talking-photo") {
         setErr("Please upload a photo first.");
         return;
       }
@@ -195,15 +207,17 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
         let mime = "image/jpeg";
         const file = uploadField ? filesRef.current[uploadField.name] : undefined;
         if (file) {
-          base64 = await fileToBase64(file);
-          mime = file.type || "image/jpeg";
-        } else if (choiceField && choiceField.kind === "choices") {
-          const sel = values[choiceField.name] || choiceField.options[0]?.value;
-          const opt = choiceField.options.find((o) => o.value === sel) || choiceField.options[0];
+          const compressed = await compressImageForUpload(file);
+          base64 = compressed.base64;
+          mime = compressed.mimeType;
+        } else if (avatarChoiceField && avatarChoiceField.kind === "choices") {
+          const sel = values[avatarChoiceField.name] || avatarChoiceField.options[0]?.value;
+          const opt = avatarChoiceField.options.find((o) => o.value === sel) || avatarChoiceField.options[0];
           if (!opt?.img) throw new Error("Please choose an avatar.");
           const blob = await (await fetch(opt.img)).blob();
-          base64 = await fileToBase64(blob);
-          mime = blob.type || "image/jpeg";
+          const compressed = await compressImageForUpload(blob);
+          base64 = compressed.base64;
+          mime = compressed.mimeType;
         } else {
           throw new Error("Please upload a photo first.");
         }
@@ -273,11 +287,11 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
       if (timer.current) clearInterval(timer.current);
       timer.current = setInterval(() => setProgress((p) => Math.min(95, p + 3)), 400);
       try {
-        const imageBase64 = await fileToBase64(file);
+        const { base64: imageBase64, mimeType } = await compressImageForUpload(file);
         const res = await fetch("/api/generate-avatar-image", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ imageBase64, mimeType: file.type || "image/jpeg", prompt: avatarImagePrompt(values) }),
+          body: JSON.stringify({ imageBase64, mimeType, prompt: avatarImagePrompt(values) }),
         });
         const data = await res.json();
         if (timer.current) clearInterval(timer.current);

@@ -9,7 +9,7 @@ export const maxDuration = 300;
 // Every call here starts a paid Veo render, so it must be metered.
 const limiter = createDailyLimiter(Number(process.env.VIDEO_DAILY_LIMIT ?? 5));
 // Uploaded photos arrive base64-encoded in the JSON body.
-const MAX_BODY = 12 * 1024 * 1024;
+const MAX_BODY = 24 * 1024 * 1024;
 
 const STYLE =
   "Photoreal, natural expressive motion, cinematic lighting, smooth camera, high quality, 4k. Include clear audible speech or music matching the action; audio must be present and lip-synced when the subject speaks.";
@@ -54,7 +54,10 @@ export async function POST(req: Request) {
   } catch (e) {
     limiter.refund(id); // nothing was rendered — don't charge the quota unit
     if (e instanceof PayloadTooLarge) {
-      return NextResponse.json({ error: "That photo is too large. Try one under 10MB." }, { status: 413 });
+      return NextResponse.json(
+        { error: "That photo is too large. Try a smaller image (under ~8MB), or crop to a clearer headshot." },
+        { status: 413 },
+      );
     }
     return NextResponse.json({ error: "Please upload a photo first." }, { status: 400 });
   }

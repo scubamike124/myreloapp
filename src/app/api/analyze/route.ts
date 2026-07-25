@@ -1,7 +1,7 @@
 import { asRecord, errorMessage, geminiText } from "@/lib/json";
 import { NextResponse } from "next/server";
 import { UnsafeUrlError, assertSafeUrl, clientId, createDailyLimiter } from "@/lib/api-guard";
-import { scrapePage } from "@/lib/scrape";
+import { scrapePageDetailed } from "@/lib/scrape";
 
 export const runtime = "nodejs";
 
@@ -39,9 +39,12 @@ export async function POST(req: Request) {
   // Validate BEFORE fetching: this URL is attacker-controlled and the fetch
   // runs from inside our network.
   let url: string;
+  let ideaCount = 20;
   try {
     const body = asRecord(await req.json());
     url = await assertSafeUrl(String(body.url ?? ""));
+    const n = Number(body.ideaCount ?? body.count ?? 20);
+    ideaCount = Math.max(1, Math.min(20, Number.isFinite(n) ? Math.round(n) : 20));
   } catch (e) {
     limiter.refund(id);
     const msg = e instanceof UnsafeUrlError ? e.message : "Invalid URL.";
@@ -49,8 +52,11 @@ export async function POST(req: Request) {
   }
 
   let siteText = "";
+  let colors: string[] = [];
   try {
-    siteText = await scrapePage(url);
+    const scraped = await scrapePageDetailed(url);
+    siteText = scraped.text;
+    colors = scraped.colors;
   } catch {
     siteText = `(Could not fetch the page. Infer the business from the domain name only.)`;
   }
@@ -61,7 +67,7 @@ export async function POST(req: Request) {
 - about: 1-2 sentence summary of what the business does.
 - tone: brand tone in 1-3 words (e.g. "Bold & premium").
 - script: a punchy, CINEMATIC 30-second commercial voiceover script for this brand. Keep it under 90 words. No scene directions — just the spoken lines.
-- ideas: EXACTLY 20 short, catchy short-form (TikTok/Reels) video idea titles for this brand.
+- ideas: EXACTLY ${ideaCount} short, catchy short-form (TikTok/Reels) video idea titles for this brand.
 
 Website: ${url}
 --- WEBSITE CONTENT ---
@@ -91,7 +97,8 @@ ${siteText}`;
     if (!text) return NextResponse.json({ error: "Gemini returned no content." }, { status: 502 });
 
     const parsed = JSON.parse(text);
-    return NextResponse.json({ ok: true, url, ...parsed });
+    const ideas = Array.isArray(parsed.ideas) ? parsed.ideas.slice(0, ideaCount) : [];
+    return NextResponse.json({ ok: true, url, ideaCount, colors, ...parsed, ideas });
   } catch (e) {
     return NextResponse.json({ error: e instanceof Error ? e.message : "Analysis failed." }, { status: 502 });
   }

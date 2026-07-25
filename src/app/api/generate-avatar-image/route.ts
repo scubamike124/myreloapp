@@ -8,7 +8,7 @@ export const maxDuration = 300;
 
 // Image generation is cheaper than video, but still a paid call per request.
 const limiter = createDailyLimiter(Number(process.env.IMAGE_DAILY_LIMIT ?? 20));
-const MAX_BODY = 12 * 1024 * 1024;
+const MAX_BODY = 24 * 1024 * 1024;
 
 const MODEL = "gemini-2.5-flash-image";
 const BASE = "https://generativelanguage.googleapis.com/v1beta";
@@ -38,7 +38,10 @@ export async function POST(req: Request) {
   } catch (e) {
     limiter.refund(id);
     if (e instanceof PayloadTooLarge) {
-      return NextResponse.json({ error: "That photo is too large. Try one under 10MB." }, { status: 413 });
+      return NextResponse.json(
+        { error: "That photo is too large. Try a smaller image (under ~8MB), or use a clearer headshot." },
+        { status: 413 },
+      );
     }
     return NextResponse.json({ error: "Please upload a photo first." }, { status: 400 });
   }

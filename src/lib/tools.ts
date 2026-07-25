@@ -90,21 +90,22 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "website-commercial", title: "Website Commercial", tagline: "Paste a URL. Get a cinematic 30-second ad.", icon: "film", poster: "/assets/website commershial.png", credits: creditLabel("website-commercial"), cta: "Generate commercial",
+    slug: "website-commercial", title: "Website Commercial", tagline: "Paste a URL. Get up to 20 video ideas and a cinematic ad — pick your avatar.", icon: "film", poster: "/assets/website commershial.png", credits: creditLabel("website-commercial"), cta: "Generate commercial",
     fields: [
       { kind: "url", name: "url", label: "Website URL", placeholder: "https://yourbrand.com", hint: "We scrape copy, colors, and product shots." },
+      { kind: "slider", name: "ideaCount", label: "How many video ideas (up to 20)", min: 5, max: 20, step: 5, default: 10 },
       { kind: "select", name: "tone", label: "Style", options: ["Cinematic", "Energetic", "Luxury", "Playful", "Minimal"] },
       { kind: "select", name: "ratio", label: "Aspect ratio", options: ["9:16 (Vertical)", "1:1 (Square)", "16:9 (Wide)"] },
       { kind: "slider", name: "duration", label: "Duration (max 30s)", min: 15, max: 30, step: 15, default: 30, unit: "s" },
     ],
   },
   {
-    slug: "shorts-20", title: "20 Shorts Generator", tagline: "A month of shorts, scripted and ready to film.", icon: "grid", poster: "/assets/shorts.jpg", credits: creditLabel("shorts-20"), cta: "Generate shorts",
+    slug: "shorts-20", title: "Shorts Generator", tagline: "Up to 20 shorts, scripted and ready to film — you choose how many.", icon: "grid", poster: "/assets/shorts.jpg", credits: creditLabel("shorts-20"), cta: "Generate shorts",
     fields: [
       { kind: "segment", name: "source", label: "Source", options: ["Website", "Prompt"] },
       { kind: "url", name: "url", label: "Website URL", placeholder: "https://yourbrand.com" },
       { kind: "textarea", name: "prompt", label: "Topic or prompt", placeholder: "e.g. healthy meal-prep tips for busy parents" },
-      { kind: "slider", name: "count", label: "How many shorts", min: 5, max: 30, step: 5, default: 20 },
+      { kind: "slider", name: "count", label: "How many shorts (up to 20)", min: 5, max: 20, step: 5, default: 10 },
       { kind: "select", name: "platform", label: "Platform", options: ["TikTok", "Reels", "Shorts", "All of them"] },
       { kind: "select", name: "tone", label: "Tone", options: ["Punchy", "Educational", "Funny", "Inspirational"] },
     ],
@@ -119,11 +120,12 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "ai-story-maker", title: "AI Story Maker", tagline: "Any character — even a banana — starring in a long-running series.", icon: "sparkle", poster: "/assets/commercials.jpg", credits: creditLabel("ai-story-maker"), cta: "Start the series",
+    slug: "ai-story-maker", title: "AI Story Maker", tagline: "Any character starring in a series — as an illustrated ebook or a talking video.", icon: "sparkle", poster: "/assets/commercials.jpg", credits: creditLabel("ai-story-maker"), cta: "Start the series",
     // StoryMaker renders its own interface; these fields describe the tool for
     // the Create page and for Amber.
     fields: [
       { kind: "upload", name: "character", label: "Your star", hint: "Upload a photo, or pick any Reelo character — a banana, a dragon, a warlord." },
+      { kind: "segment", name: "format", label: "Format", options: ["Video", "Ebook"] },
       { kind: "text", name: "characterName", label: "Their name", placeholder: "Barry the Banana" },
       { kind: "textarea", name: "premise", label: "What is the series about?", placeholder: "Barry escapes the fruit bowl and sets out to find the legendary Golden Orchard…" },
       { kind: "select", name: "genre", label: "Genre", options: ["Adventure", "Fantasy", "Comedy", "Anime", "Mystery", "Sci-Fi", "Family", "Children's"] },
@@ -174,14 +176,24 @@ export function getTool(slug: string): Tool | undefined {
 // run. Add a slug here only once its route genuinely generates something.
 // ---------------------------------------------------------------------------
 
-/** Tools backed by Veo image-to-video. */
-export const VIDEO_TOOLS = new Set(["talking-photo", "dancing-photo", "ai-avatar-studio"]);
+/** Tools backed by Veo image-to-video (AI Avatar Studio uses HeyGen via its own page). */
+export const VIDEO_TOOLS = new Set(["talking-photo", "dancing-photo"]);
 
 /** Tools backed by Gemini image generation. */
 export const IMAGE_TOOLS = new Set(["custom-avatar-creator"]);
 
 /** Every tool that can currently produce a result. */
-export const LIVE_TOOLS = new Set<string>([...VIDEO_TOOLS, ...IMAGE_TOOLS, "website-commercial", "bedtime-storybook", "ai-story-maker", "product-commercial", "story-memory-generator", "shorts-20"]);
+export const LIVE_TOOLS = new Set<string>([
+  ...VIDEO_TOOLS,
+  ...IMAGE_TOOLS,
+  "ai-avatar-studio",
+  "website-commercial",
+  "bedtime-storybook",
+  "ai-story-maker",
+  "product-commercial",
+  "story-memory-generator",
+  "shorts-20",
+]);
 
 export function isToolLive(slug: string): boolean {
   return LIVE_TOOLS.has(slug);

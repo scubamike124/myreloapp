@@ -126,6 +126,7 @@ export async function POST(req: Request) {
   const language = getLanguage(str(body.languageCode, 8));
   const sceneCount = Math.max(MIN_SCENES, Math.min(MAX_SCENES, Number(body.scenes) || 8));
   const episodeNumber = Math.max(1, Math.min(50, Number(body.episodeNumber) || 1));
+  const skipIllustrations = body.skipIllustrations === true || body.format === "video";
 
   // What happened so far, newest last. Only recaps travel, not whole episodes —
   // enough for continuity without spending the context on prose the model has
@@ -236,7 +237,28 @@ export async function POST(req: Request) {
     );
   }
 
-  // --- 2. the artwork -------------------------------------------------------
+  // --- 2. the artwork (ebook) -----------------------------------------------
+  // Video format skips illustrations — the client turns narration into a talking clip.
+  if (skipIllustrations) {
+    return Response.json(
+      {
+        ok: true,
+        episodeNumber,
+        title: episode.title,
+        synopsis: episode.synopsis,
+        cliffhanger: episode.cliffhanger,
+        recap: episode.recap,
+        format: "video",
+        language: { code: language.code, name: language.name, endonym: language.endonym, rtl: isRTL(language.code) },
+        scenes: episode.scenes.map((s) => ({ text: s.text, image: "" })),
+        illustrated: 0,
+        tokensCharged: charged.charge.charged,
+        balance: charged.charge.balance,
+      },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  }
+
   // The character's picture goes with every scene so the same face — or the
   // same banana — appears throughout the series, not just within one episode.
 
@@ -300,6 +322,7 @@ export async function POST(req: Request) {
       cliffhanger: episode.cliffhanger,
       // Sent back so the client can hand it to the next episode as memory.
       recap: episode.recap,
+      format: "ebook",
       language: { code: language.code, name: language.name, endonym: language.endonym, rtl: isRTL(language.code) },
       scenes: episode.scenes.map((s, i) => ({ text: s.text, image: images[i] })),
       illustrated: images.filter(Boolean).length,

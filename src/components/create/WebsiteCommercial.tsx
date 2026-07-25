@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
@@ -11,6 +11,8 @@ import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall }
 
 type Step = "input" | "scanning" | "detected" | "generating" | "result";
 const MAX_SECONDS = 30; // HeyGen spokesperson commercial cap
+const DEFAULT_COLORS = ["#ff3645", "#c4101c", "#0a0607", "#ffb3b9"];
+const IDEA_COUNTS = [5, 10, 15, 20];
 
 const SCAN_TASKS = [
   "Fetching your website…",
@@ -56,6 +58,12 @@ export default function WebsiteCommercial() {
   const [script, setScript] = useState("");
   const [ideas, setIdeas] = useState<string[]>([]);
   const [category, setCategory] = useState("");
+  const [colors, setColors] = useState<string[]>([]);
+  const [ideaCount, setIdeaCount] = useState(10);
+  const [avatarId, setAvatarId] = useState("");
+  const [avatarName, setAvatarName] = useState("");
+  const [avatarImage, setAvatarImage] = useState("");
+  const [avatarPick, setAvatarPick] = useState<{ avatarId: string; name: string; image: string }[]>([]);
   const [err, setErr] = useState<string | null>(null);
   const [short, setShort] = useState<Shortfall | null>(null);
   const tokens = useTokens();
@@ -72,6 +80,52 @@ export default function WebsiteCommercial() {
   const revokeRef = useRef<(() => void) | null>(null);
 
   const renderStage = RENDER_STAGES[Math.min(RENDER_STAGES.length - 1, Math.floor((progress / 100) * RENDER_STAGES.length))];
+  const shownColors = colors.length > 0 ? colors : DEFAULT_COLORS;
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/heygen-avatars?limit=24&offset=0");
+        const data = await res.json();
+        if (cancelled || !res.ok || !Array.isArray(data.avatars)) return;
+        const list = data.avatars as { avatarId: string; name: string; image: string }[];
+        setAvatarPick(list);
+        if (list[0]) {
+          setAvatarId((cur) => cur || list[0].avatarId);
+          setAvatarName((cur) => cur || list[0].name);
+          setAvatarImage((cur) => cur || list[0].image);
+        }
+      } catch {
+        /* generate still works with server default */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get("avatar");
+    if (!wanted) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`/api/heygen-avatars?id=${encodeURIComponent(wanted)}`);
+        const data = await res.json();
+        if (!cancelled && res.ok && data.avatar) {
+          setAvatarId(data.avatar.avatarId);
+          setAvatarName(data.avatar.name);
+          setAvatarImage(data.avatar.image);
+        }
+      } catch {
+        /* ignore */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const analyze = async () => {
     if (!url.trim()) return;
@@ -84,7 +138,11 @@ export default function WebsiteCommercial() {
 
     try {
       const [res] = await Promise.all([
-        fetch("/api/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url }) }),
+        fetch("/api/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url, ideaCount }),
+        }),
         new Promise((r) => setTimeout(r, 1600)),
       ]);
       const data = await res.json();
@@ -95,6 +153,7 @@ export default function WebsiteCommercial() {
       setScript(data.script || "");
       setIdeas(Array.isArray(data.ideas) ? data.ideas : []);
       setCategory(data.category || "");
+      setColors(Array.isArray(data.colors) ? data.colors.filter((c: unknown) => typeof c === "string") : []);
       setStep("detected");
     } catch (e) {
       if (scanTimer.current) clearInterval(scanTimer.current);
@@ -104,6 +163,7 @@ export default function WebsiteCommercial() {
       setScript("");
       setIdeas([]);
       setCategory("");
+      setColors([]);
       setStep("detected");
     }
   };
@@ -126,7 +186,11 @@ export default function WebsiteCommercial() {
       const res = await fetch("/api/heygen-video", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ script: finalScript, action: "website-commercial" }),
+        body: JSON.stringify({
+          script: finalScript,
+          action: "website-commercial",
+          ...(avatarId ? { avatarId } : {}),
+        }),
       });
       const data = await res.json();
 
@@ -241,7 +305,7 @@ export default function WebsiteCommercial() {
               <span style={{ background: "linear-gradient(120deg,#ff4a57,#c4101c)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>30 days of content</span>
             </h1>
             <p className="mx-auto mt-4 max-w-[520px] text-[16px] leading-[1.6]" style={{ color: "#a99a9c" }}>
-              Reelo analyzes your website, writes 20 video ideas, builds your content calendar, and turns the ideas into videos.
+              Reelo analyzes your website, writes up to 20 video ideas (you choose how many), detects brand colors, and turns your script into a spokesperson video.
             </p>
 
             <div className="mx-auto mt-8 max-w-[560px] rounded-3xl border border-white/10 bg-black/40 p-5 text-left backdrop-blur-md sm:p-6">
@@ -250,7 +314,25 @@ export default function WebsiteCommercial() {
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff8a92" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" /></svg>
                 <input value={url} onChange={(e) => setUrl(e.target.value)} onKeyDown={(e) => e.key === "Enter" && analyze()} placeholder="yourbusiness.com" className="w-full bg-transparent py-3 text-[15px] text-white placeholder-white/35 outline-none" />
               </div>
-              <button onClick={analyze} disabled={!url.trim()} className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white transition-transform hover:scale-[1.01] disabled:opacity-50" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 10px 28px -8px rgba(225,29,42,.6)" }}>
+              <label className="mb-2 mt-4 block text-sm font-semibold text-white/85">How many video ideas? <span className="font-normal text-white/40">up to 20</span></label>
+              <div className="flex flex-wrap gap-2">
+                {IDEA_COUNTS.map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    onClick={() => setIdeaCount(n)}
+                    className="rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors"
+                    style={
+                      ideaCount === n
+                        ? { color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" }
+                        : { color: "#b9a9ab", border: "1px solid rgba(255,70,85,.22)" }
+                    }
+                  >
+                    {n}
+                  </button>
+                ))}
+              </div>
+              <button onClick={analyze} disabled={!url.trim()} className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white transition-transform hover:scale-[1.01] disabled:opacity-50" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 10px 28px -8px rgba(225,29,42,.6)" }}>
                 Analyze My Website
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
               </button>
@@ -326,10 +408,58 @@ export default function WebsiteCommercial() {
                   </select>
                 </div>
                 <div>
-                  <label className="mb-2 block text-sm font-semibold text-white/85">Detected brand colors</label>
+                  <label className="mb-2 block text-sm font-semibold text-white/85">
+                    {colors.length > 0 ? "Detected brand colors" : "Brand colors"}
+                    {colors.length === 0 ? <span className="font-normal text-white/40"> · fallback</span> : null}
+                  </label>
                   <div className="flex items-center gap-2 rounded-xl px-4 py-2.5" style={inputStyle}>
-                    {["#ff3645", "#c4101c", "#0a0607", "#ffb3b9"].map((c) => <span key={c} className="h-6 w-6 rounded-full" style={{ background: c, border: "1px solid rgba(255,255,255,.2)" }} />)}
+                    {shownColors.map((c) => (
+                      <span key={c} title={c} className="h-6 w-6 rounded-full" style={{ background: c, border: "1px solid rgba(255,255,255,.2)" }} />
+                    ))}
                   </div>
+                </div>
+              </div>
+
+              <div>
+                <div className="mb-2 flex items-center justify-between gap-2">
+                  <label className="block text-sm font-semibold text-white/85">Spokesperson avatar</label>
+                  <Link
+                    href={`/avatars?tool=website-commercial${avatarId ? `&avatar=${encodeURIComponent(avatarId)}` : ""}`}
+                    className="text-xs font-semibold underline underline-offset-2"
+                    style={{ color: "#ff8892" }}
+                  >
+                    Browse Avatar Library →
+                  </Link>
+                </div>
+                {avatarName && (
+                  <p className="mb-2 text-xs text-white/45">Selected: {avatarName}</p>
+                )}
+                <div className="grid max-h-[200px] grid-cols-4 gap-2 overflow-y-auto rounded-xl p-2 sm:grid-cols-6" style={inputStyle}>
+                  {avatarPick.map((a) => {
+                    const on = avatarId === a.avatarId;
+                    return (
+                      <button
+                        key={a.avatarId}
+                        type="button"
+                        title={a.name}
+                        onClick={() => {
+                          setAvatarId(a.avatarId);
+                          setAvatarName(a.name);
+                          setAvatarImage(a.image);
+                        }}
+                        className="relative aspect-square overflow-hidden rounded-lg"
+                        style={{ border: on ? "2px solid #ff3645" : "1px solid rgba(255,255,255,.1)" }}
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={a.image} alt={a.name} className="h-full w-full object-cover" />
+                      </button>
+                    );
+                  })}
+                  {avatarPick.length === 0 && (
+                    <p className="col-span-4 px-2 py-4 text-center text-xs text-white/40 sm:col-span-6">
+                      Loading avatars… or open the library link above.
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -341,7 +471,7 @@ export default function WebsiteCommercial() {
                 </div>
               )}
 
-              {/* 20 AI video ideas */}
+              {/* AI video ideas */}
               {ideas.length > 0 && (
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-white/85">{ideas.length} video ideas <span className="text-white/40">· generated for {brand}</span></label>
