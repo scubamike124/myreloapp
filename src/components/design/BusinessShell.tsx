@@ -38,7 +38,7 @@ const OVERVIEW_BADGES: Record<string, string> = {
   analytics: "SOON",
   revenue: "SOON",
   trend: "SOON",
-  hubpro: "SOON",
+  hubpro: "NEW",
 };
 
 function Badge({ text }: { text: string }) {

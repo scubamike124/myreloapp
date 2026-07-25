@@ -86,6 +86,30 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
+    slug: "thumbnail-maker", title: "Thumbnail Maker", tagline: "AI creates high-converting thumbnails that get more clicks.", icon: "image", poster: "/assets/shorts.jpg", credits: creditLabel("thumbnail-maker"), cta: "Make thumbnail",
+    fields: [
+      { kind: "upload", name: "photo", label: "Reference image (optional)", hint: "Face, product, or scene — JPG/PNG under ~8MB." },
+      { kind: "textarea", name: "topic", label: "Video topic / title", placeholder: "e.g. 5 meal-prep mistakes busy parents make" },
+      { kind: "select", name: "style", label: "Look", options: ["Bold Clickbait", "Clean Minimal", "YouTube Face", "Product Spotlight", "Neon Energy"] },
+      { kind: "select", name: "ratio", label: "Aspect", options: ["16:9 YouTube", "9:16 Shorts", "1:1 Square"] },
+    ],
+  },
+  {
+    slug: "background-remover", title: "Background Remover", tagline: "Remove or replace backgrounds with one click.", icon: "magic", poster: "/assets/product.jpg", credits: creditLabel("background-remover"), cta: "Remove background",
+    fields: [
+      { kind: "upload", name: "photo", label: "Upload photo", hint: "JPG or PNG under ~8MB." },
+      { kind: "select", name: "bg", label: "Replacement", options: ["Transparent / cutout", "Pure white studio", "Soft gradient", "Brand red glow", "Outdoor bokeh"] },
+    ],
+  },
+  {
+    slug: "auto-subtitles", title: "Auto Subtitles", tagline: "Generate accurate SRT/VTT subtitles from audio or a script.", icon: "cc", poster: "/assets/shorts.jpg", credits: creditLabel("auto-subtitles"), cta: "Generate subtitles",
+    fields: [
+      { kind: "upload", name: "audio", label: "Upload audio or video (optional)", hint: "WebM, MP3, MP4, WAV — or paste a script below." },
+      { kind: "textarea", name: "script", label: "Script / transcript", placeholder: "Paste spoken words if you don't have an audio file…" },
+      { kind: "select", name: "format", label: "Format", options: ["SRT", "VTT"] },
+    ],
+  },
+  {
     slug: "website-commercial", title: "Website Commercial", tagline: "Paste a URL. Get up to 20 video ideas and a cinematic ad — pick your avatar.", icon: "film", poster: "/assets/website commershial.png", credits: creditLabel("website-commercial"), cta: "Generate commercial",
     fields: [
       { kind: "url", name: "url", label: "Website URL", placeholder: "https://yourbrand.com", hint: "We scrape copy, colors, and product shots." },
@@ -147,7 +171,7 @@ export function getTool(slug: string): Tool | undefined {
 export const VIDEO_TOOLS = new Set(["talking-photo", "dancing-photo"]);
 
 /** Tools backed by Gemini image generation. */
-export const IMAGE_TOOLS = new Set(["custom-avatar-creator"]);
+export const IMAGE_TOOLS = new Set(["custom-avatar-creator", "thumbnail-maker", "background-remover"]);
 
 /** Every tool that can currently produce a result. */
 export const LIVE_TOOLS = new Set<string>([
@@ -159,6 +183,7 @@ export const LIVE_TOOLS = new Set<string>([
   "product-commercial",
   "story-memory-generator",
   "shorts-20",
+  "auto-subtitles",
 ]);
 
 export function isToolLive(slug: string): boolean {
@@ -174,6 +199,9 @@ export const TOOL_SERVICE: Record<string, "gemini" | "heygen"> = {
   "talking-photo": "gemini",
   "dancing-photo": "gemini",
   "custom-avatar-creator": "gemini",
+  "thumbnail-maker": "gemini",
+  "background-remover": "gemini",
+  "auto-subtitles": "gemini",
   "ai-avatar-studio": "heygen",
   "website-commercial": "heygen",
 };

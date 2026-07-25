@@ -1,6 +1,7 @@
 import Image from "next/image";
 import BusinessShell from "@/components/design/BusinessShell";
 import BIcon, { type IconKey } from "@/components/design/BIcon";
+import SoonBanner from "@/components/design/SoonBanner";
 
 export const metadata = { title: "Analytics — Reelo" };
 
@@ -32,6 +33,8 @@ export default function AnalyticsPage() {
         <h1 className="font-display text-3xl font-bold tracking-[-0.02em]">Analytics</h1>
         <p className="mt-1 text-[15px]" style={{ color: "#a99a9c" }}>Track performance and grow faster.</p>
       </div>
+
+      <SoonBanner feature="Analytics" />
 
       <div className="mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
         {STATS.map((s) => (

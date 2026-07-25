@@ -1,6 +1,7 @@
 import Image from "next/image";
 import BusinessShell from "@/components/design/BusinessShell";
 import BIcon, { type IconKey } from "@/components/design/BIcon";
+import SoonBanner from "@/components/design/SoonBanner";
 
 export const metadata = { title: "Scheduling — Reelo" };
 
@@ -32,6 +33,8 @@ export default function SchedulingPage() {
         <h1 className="font-display text-3xl font-bold tracking-[-0.02em]">Scheduling</h1>
         <p className="mt-1 text-[15px]" style={{ color: "#a99a9c" }}>Schedule posts and never miss a beat.</p>
       </div>
+
+      <SoonBanner feature="Scheduling" />
 
       <div className="mb-6 grid grid-cols-3 gap-3">
         {STATS.map((s) => (

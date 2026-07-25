@@ -26,7 +26,7 @@ export type Creation = {
   createdAt: string;
   /** Only set while the originating tab is still alive — never persisted. */
   mediaUrl?: string;
-  kind: "video" | "image";
+  kind: "video" | "image" | "file";
   /** Populated on failure so Amber can explain what went wrong. */
   error?: string;
 };

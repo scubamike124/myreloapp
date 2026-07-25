@@ -47,7 +47,20 @@ function avatarPrompt(slug: string, values: Record<string, string>): string {
     : `A close-up of the person in the photo looking at the camera and speaking naturally with clear audible speech and lip-sync.${langLine} Subtle natural head movement. Spoken audio must be clearly present.`;
 }
 
-function avatarImagePrompt(values: Record<string, string>): string {
+function avatarImagePrompt(slug: string, values: Record<string, string>): string {
+  if (slug === "thumbnail-maker") {
+    const topic = (values.topic || values.prompt || "viral short video").trim();
+    const style = values.style || "Bold Clickbait";
+    const ratio = values.ratio || "16:9 YouTube";
+    return `Create a high-converting social video thumbnail (${ratio}). Topic: "${topic}". Style: ${style}. Bold readable title text in the image if it fits, strong contrast, professional YouTube/TikTok thumbnail composition, no watermarks.`;
+  }
+  if (slug === "background-remover") {
+    const bg = values.bg || "Transparent / cutout";
+    if (/transparent/i.test(bg)) {
+      return "Remove the background completely. Keep the subject sharp with clean edges on a transparent / cutout style (checkerboard-ready). Do not crop the subject.";
+    }
+    return `Remove the original background and place the subject on: ${bg}. Keep natural edges, realistic lighting, no text overlays.`;
+  }
   const style = values.style || "3D Character";
   const looks: Record<string, string> = {
     "3D Character": "a polished 3D animated character avatar in the style of a modern Pixar / DreamWorks movie — smooth stylized 3D render, slightly exaggerated friendly features, big expressive eyes, soft studio lighting",
@@ -318,12 +331,17 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
       return;
     }
 
-    // Real avatar IMAGE path (Custom Avatar Creator).
+    // Real Gemini IMAGE path (avatar / thumbnail / background remover).
     if (isImageTool) {
       const uploadField = tool.fields.find((f) => f.kind === "upload");
       const file = uploadField ? filesRef.current[uploadField.name] : undefined;
-      if (!file) {
+      const needsPhoto = tool.slug !== "thumbnail-maker";
+      if (needsPhoto && !file) {
         setErr("Please upload a photo first.");
+        return;
+      }
+      if (tool.slug === "thumbnail-maker" && !(values.topic || "").trim() && !file) {
+        setErr("Add a topic/title or upload a reference image.");
         return;
       }
       setStatus("generating");
@@ -331,11 +349,22 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
       if (timer.current) clearInterval(timer.current);
       timer.current = setInterval(() => setProgress((p) => Math.min(95, p + 3)), 400);
       try {
-        const { base64: imageBase64, mimeType } = await compressImageForUpload(file);
+        let imageBase64 = "";
+        let mimeType = "image/jpeg";
+        if (file) {
+          const compressed = await compressImageForUpload(file);
+          imageBase64 = compressed.base64;
+          mimeType = compressed.mimeType;
+        }
         const res = await fetch("/api/generate-avatar-image", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ imageBase64, mimeType, prompt: avatarImagePrompt(values) }),
+          body: JSON.stringify({
+            imageBase64: imageBase64 || undefined,
+            mimeType,
+            prompt: avatarImagePrompt(tool.slug, values),
+            action: tool.slug,
+          }),
         });
         const data = await res.json();
         if (timer.current) clearInterval(timer.current);

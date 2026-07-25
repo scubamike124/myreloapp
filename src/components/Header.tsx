@@ -26,11 +26,9 @@ export const EXPLORE: { group: string; items: { label: string; href: string }[] 
   {
     group: "Phase 2 · Growth & Engagement",
     items: [
-      { label: "Avatar Battles", href: "/battles" },
       { label: "Groups & Social", href: "/community" },
       { label: "Trend AI – What's Working Now", href: "/trends" },
       { label: "Greeting Videos (Birthdays, Holidays)", href: "/create/story-memory-generator" },
-      { label: "Revenge Videos", href: "/battles" },
       { label: "Leaderboards & Challenges", href: "/competitions" },
     ],
   },

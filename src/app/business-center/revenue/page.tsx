@@ -1,5 +1,6 @@
 import BusinessShell from "@/components/design/BusinessShell";
 import BIcon, { type IconKey } from "@/components/design/BIcon";
+import SoonBanner from "@/components/design/SoonBanner";
 
 export const metadata = { title: "Revenue — Reelo" };
 
@@ -25,6 +26,8 @@ export default function RevenuePage() {
         <h1 className="font-display text-3xl font-bold tracking-[-0.02em]">Revenue</h1>
         <p className="mt-1 text-[15px]" style={{ color: "#a99a9c" }}>Monitor your earnings and growth.</p>
       </div>
+
+      <SoonBanner feature="Revenue" />
 
       <div className="mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
         {STATS.map((s) => (

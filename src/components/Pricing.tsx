@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BuyPackButton from "@/components/billing/BuyPackButton";
 import {
   planPrice,
   planTokens,
@@ -17,6 +18,7 @@ import {
   standardVideoTokens,
   formatUsdFromTokens,
 } from "@/lib/token-pricing";
+import { packIdFromTokens } from "@/lib/token-packs";
 
 type IconKey = "person" | "wand" | "crown" | "briefcase" | "diamond" | "building";
 
@@ -231,6 +233,7 @@ const TIERS: Tier[] = [
 const PACKS = PACK_SPECS.map(({ tokens, price }) => {
   const saved = Math.round(packSaving(tokens) * 100);
   return {
+    id: packIdFromTokens(tokens),
     t: `${formatTokens(tokens)} ${tokens === 1 ? "TOKEN" : "TOKENS"}`,
     p: price % 1 === 0 ? `${price.toFixed(0)}` : `${price.toFixed(2)}`,
     save: saved > 0 ? `SAVE ${saved}%` : undefined,
@@ -316,15 +319,17 @@ export default function Pricing() {
         </div>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {PACKS.map((p) => (
-            <div key={p.t} className="relative flex flex-col items-center rounded-2xl px-3 py-5" style={{ background: "linear-gradient(180deg,rgba(40,12,15,.55),rgba(12,7,9,.45))", border: "1px solid rgba(255,54,69,.35)" }}>
+            <div key={p.id} className="relative flex flex-col items-center rounded-2xl px-3 py-5" style={{ background: "linear-gradient(180deg,rgba(40,12,15,.55),rgba(12,7,9,.45))", border: "1px solid rgba(255,54,69,.35)" }}>
               {p.save && (
                 <span className="absolute -top-2 rounded-md px-2 py-0.5 text-[9px] font-bold" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", color: "#fff" }}>{p.save}</span>
               )}
               <div className="font-display text-sm font-bold" style={{ color: "#ff8892" }}>{p.t}</div>
               <div className="mt-2 font-display text-2xl font-bold">${p.p}</div>
-              <Link href="/dashboard" className="mt-3 w-full rounded-lg py-2 text-center text-[12px] font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
-                Buy
-              </Link>
+              <BuyPackButton
+                packId={p.id}
+                className="mt-3 w-full rounded-lg py-2 text-center text-[12px] font-bold text-white disabled:opacity-60"
+                style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+              />
             </div>
           ))}
         </div>

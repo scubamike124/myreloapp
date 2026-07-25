@@ -22,13 +22,13 @@ const CARDS: { n: number; icon: IconKey; art: string; t: string; d: string; href
   { n: 3, icon: "lock", art: "brand-vault", t: "Brand Vault Pro", d: "Store unlimited brands, templates, logos, fonts and color palettes.", planned: true },
   { n: 4, icon: "layers", art: "content-templates", t: "Content Templates", d: "Access 1000+ premium templates for every industry and niche.", planned: true },
   { n: 5, icon: "grid", art: "bulk-creation", t: "Bulk Creation", d: "Create hundreds of videos at once with bulk upload, scripts and automation.", planned: true },
-  { n: 6, icon: "cc", art: "auto-subtitles", t: "Auto Subtitles", d: "Auto-generate accurate subtitles in 100+ languages.", planned: true },
+  { n: 6, icon: "cc", art: "auto-subtitles", t: "Auto Subtitles", d: "Auto-generate accurate SRT/VTT subtitles from a script or clip.", href: "/create/auto-subtitles" },
   { n: 7, icon: "mic", art: "voice-cloning", t: "Voice Cloning Pro", d: "Clone voices or create custom AI voices for your brand.", planned: true },
   { n: 8, icon: "globe", art: "translate-dub", t: "Translate & Dub", d: "Translate and dub your videos into 100+ languages instantly.", planned: true },
   { n: 9, icon: "scissors", art: "smart-cut-edit", t: "Smart Cut & Edit", d: "AI-powered editing tools to cut, trim and enhance videos automatically.", planned: true },
-  { n: 10, icon: "image", art: "thumbnail-maker", t: "Thumbnail Maker", d: "AI creates high-converting thumbnails that get more clicks.", planned: true },
+  { n: 10, icon: "image", art: "thumbnail-maker", t: "Thumbnail Maker", d: "AI creates high-converting thumbnails that get more clicks.", href: "/create/thumbnail-maker" },
   { n: 11, icon: "stack", art: "stock-media-pro", t: "Stock Media Pro", d: "Unlimited access to premium stock videos, images and music.", planned: true },
-  { n: 12, icon: "magic", art: "background-remover", t: "Background Remover", d: "Remove or replace backgrounds with one click.", planned: true },
+  { n: 12, icon: "magic", art: "background-remover", t: "Background Remover", d: "Remove or replace backgrounds with one click.", href: "/create/background-remover" },
   { n: 13, icon: "pen", art: "ai-script-writer", t: "AI Script Writer", d: "Generate viral scripts, hooks and captions in seconds.", href: "/create/shorts-20" },
   { n: 14, icon: "refresh", art: "automated-reposting", t: "Automated Reposting", d: "Automatically repost your best content across all platforms.", planned: true },
   { n: 15, icon: "chart", art: "detailed-analytics", t: "Detailed Analytics", d: "Deep insights on every video, audience and revenue stream.", planned: true },
@@ -77,10 +77,9 @@ export default function BusinessCenterProPage() {
         Everything Included in Business Center Pro
       </div>
 
-      {/* 24 cards. Two open a feature that genuinely does what the card claims;
-          the other 22 are labelled PLANNED and open the roadmap. A card that
-          looks clickable and lies is worse than one that tells you where it
-          stands. */}
+      {/* 24 cards. Wave 1 tools + Advanced AI Suite + Script Writer open for real;
+          the rest stay Planned → roadmap. A card that looks clickable and lies is
+          worse than one that tells you where it stands. */}
       <div className="mb-2.5 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-6">
         {CARDS.map((c) => {
           const inner = (

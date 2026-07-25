@@ -85,7 +85,7 @@ export default function TokenPanel() {
           <p className="font-display text-2xl font-bold" style={{ color: "#ff5663" }}>{formatTokens(state.balance)}</p>
           <p className="text-[11px] text-white/35">{formatUsdFromTokens(state.balance)} face value</p>
         </div>
-        <Link href="/pricing" className="rounded-lg px-3 py-2 text-[12.5px] font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>Buy tokens</Link>
+        <Link href="/pricing#pricing" className="rounded-lg px-3 py-2 text-[12.5px] font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>Buy tokens</Link>
         <button onClick={signOut} disabled={busy} className="rounded-lg px-3 py-2 text-[12.5px] font-semibold text-white/55 transition-colors hover:text-white disabled:opacity-50" style={{ border: "1px solid rgba(255,255,255,.12)" }}>
           Sign out
         </button>

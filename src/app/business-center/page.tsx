@@ -37,7 +37,7 @@ const CARDS: { n: number; icon: IconKey; art: string; title: string; desc: strin
   { n: 8, icon: "chart", art: "analytics", title: "Analytics", desc: "Track performance and grow faster.", badge: "SOON", href: "/business-center/analytics" },
   { n: 9, icon: "dollar", art: "revenue", title: "Revenue", desc: "Monitor earnings and growth.", badge: "SOON", href: "/business-center/revenue" },
   { n: 10, icon: "brain", art: "trend-ai", title: "Trend AI", desc: "Discover trending topics and ideas.", badge: "SOON", href: "/trends" },
-  { n: 11, icon: "crown", art: "hub-pro", title: "Hub Pro", desc: "Unlock all pro tools and advanced features.", badge: "SOON", href: "/business-center/pro" },
+  { n: 11, icon: "crown", art: "hub-pro", title: "Hub Pro", desc: "Unlock all pro tools and advanced features.", badge: "NEW", href: "/business-center/pro" },
 ];
 
 // Every one of these goes to something that works. The old set listed "Video to

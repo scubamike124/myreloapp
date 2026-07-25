@@ -8,6 +8,7 @@ import StoryBook from "@/components/create/StoryBook";
 import ProductCommercial from "@/components/create/ProductCommercial";
 import MemoryFilm from "@/components/create/MemoryFilm";
 import ShortsPlanner from "@/components/create/ShortsPlanner";
+import AutoSubtitles from "@/components/create/AutoSubtitles";
 import BackButton from "@/components/design/BackButton";
 
 export function generateStaticParams() {
@@ -49,6 +50,8 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
       <WebsiteCommercial />
     ) : slug === "ai-avatar-studio" ? (
       <AiAvatarStudio />
+    ) : slug === "auto-subtitles" ? (
+      <AutoSubtitles />
     ) : (
       <ToolStudio tool={tool} />
     );

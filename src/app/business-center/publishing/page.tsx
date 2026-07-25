@@ -1,6 +1,7 @@
 import Image from "next/image";
 import BusinessShell from "@/components/design/BusinessShell";
 import BIcon from "@/components/design/BIcon";
+import SoonBanner from "@/components/design/SoonBanner";
 
 export const metadata = { title: "Publishing — Reelo" };
 
@@ -21,6 +22,8 @@ export default function PublishingPage() {
         <h1 className="font-display text-3xl font-bold tracking-[-0.02em]">Publishing</h1>
         <p className="mt-1 text-[15px]" style={{ color: "#a99a9c" }}>Publish your content everywhere from one place.</p>
       </div>
+
+      <SoonBanner feature="Publishing" />
 
       {/* composer */}
       <div className="mb-6 rounded-2xl p-5 sm:p-6" style={{ border: "1px solid rgba(255,70,85,.22)", background: "linear-gradient(180deg,rgba(24,9,12,.55),rgba(10,5,7,.5))" }}>
