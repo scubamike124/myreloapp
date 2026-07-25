@@ -11,7 +11,8 @@ const limiter = createDailyLimiter(Number(process.env.VIDEO_DAILY_LIMIT ?? 5));
 // Uploaded photos arrive base64-encoded in the JSON body.
 const MAX_BODY = 12 * 1024 * 1024;
 
-const STYLE = "Photoreal, natural expressive motion, cinematic lighting, smooth camera, high quality, 4k.";
+const STYLE =
+  "Photoreal, natural expressive motion, cinematic lighting, smooth camera, high quality, 4k. Include clear audible speech or music matching the action; audio must be present and lip-synced when the subject speaks.";
 
 /** Only the two Veo photo tools use this route; both cost the same. */
 function toolAction(v: unknown): string {

@@ -1,9 +1,37 @@
 import { asRecord, asString, childRecord, errorMessage } from "@/lib/json";
 import { NextResponse } from "next/server";
 import { chargeFor, refundCharge, refundLater } from "@/lib/charge";
+import { store } from "@/lib/storage";
 
 export const runtime = "nodejs";
-export const maxDuration = 60; // submit + status are fast; no long blocking poll.
+// Status poll may download + re-host the finished MP4 so playback keeps audio.
+export const maxDuration = 120;
+
+// One durable URL per HeyGen video id for this isolate — avoids re-downloading
+// the full file on every 5s client poll after completion.
+const finalizedUrls = new Map<string, string>();
+
+/** Prefer durable storage; fall back to the provider URL for playback.
+ *
+ * We used to wrap HeyGen CDN links in `/api/media/remote`, but Cloudflare
+ * Workers receive HTTP 403 from HeyGen's signed CDN (IP / bot filtering). That
+ * made the player load a 40-byte JSON error and look like a silent/broken video
+ * even though the real MP4 has an audio track. The browser can fetch the
+ * signed URL directly; Workers often cannot.
+ */
+async function durablePlaybackUrl(videoId: string, providerUrl: string): Promise<{ url: string; durable: boolean }> {
+  const cached = finalizedUrls.get(videoId);
+  if (cached) return { url: cached, durable: !/^https?:\/\/[^/]*heygen\./i.test(cached) };
+
+  const stored = await store(providerUrl, `heygen_${videoId}`, "video");
+  if (stored?.url) {
+    finalizedUrls.set(videoId, stored.url);
+    return { url: stored.url, durable: true };
+  }
+
+  finalizedUrls.set(videoId, providerUrl);
+  return { url: providerUrl, durable: false };
+}
 
 const HEYGEN_BASE = "https://api.heygen.com";
 
@@ -102,11 +130,25 @@ export async function GET(req: Request) {
       await refundLater("ai-avatar-studio", `heygen:${videoId}`);
     }
 
+    // Never hand the browser a raw HeyGen CDN URL for playback/download.
+    // Cross-origin Range/CORS failures strip or break the audio track and make
+    // the player look broken even when HeyGen rendered speech correctly.
+    let videoUrl: string | null = asString(d.video_url) || null;
+    let durable = false;
+    let providerUrl: string | null = videoUrl;
+    if (d.status === "completed" && videoUrl) {
+      const ready = await durablePlaybackUrl(videoId, videoUrl);
+      videoUrl = ready.url;
+      durable = ready.durable;
+    }
+
     return NextResponse.json({
       ok: true,
       videoId,
       status: d.status, // "processing" | "completed" | "failed" | "pending" | "waiting"
-      videoUrl: d.video_url ?? null,
+      videoUrl,
+      providerUrl,
+      durable,
       thumbnailUrl: d.thumbnail_url ?? null,
       duration: d.duration ?? null,
       error: d.error ?? null,

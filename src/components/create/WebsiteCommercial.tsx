@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
+import { downloadMedia } from "@/lib/download-media";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
 type Step = "input" | "scanning" | "detected" | "generating" | "result";
@@ -120,7 +121,7 @@ export default function WebsiteCommercial() {
       const res = await fetch("/api/heygen-video", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ script: finalScript }),
+        body: JSON.stringify({ script: finalScript, action: "website-commercial" }),
       });
       const data = await res.json();
 
@@ -166,8 +167,16 @@ export default function WebsiteCommercial() {
 
       if (genTimer.current) clearInterval(genTimer.current);
       setVideoUrl(finalUrl);
+      setMuted(false);
       setProgress(100);
       setStep("result");
+      requestAnimationFrame(() => {
+        const v = videoRef.current;
+        if (!v) return;
+        v.muted = false;
+        v.volume = 1;
+        void v.play().catch(() => {});
+      });
       recordCreation({
         toolSlug: "website-commercial",
         toolTitle: "Website Commercial",
@@ -198,13 +207,6 @@ export default function WebsiteCommercial() {
     setStep("input");
     setUrl("");
     setProgress(0);
-  };
-
-  const toggleMute = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.muted = !v.muted;
-    setMuted(v.muted);
   };
 
   return (
@@ -399,20 +401,20 @@ export default function WebsiteCommercial() {
             </div>
 
             <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-black">
-              <video ref={videoRef} src={videoUrl} className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline />
-              {(
-                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-3">
-                  <span className="rounded-md px-2 py-1 text-[11px] font-semibold text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>0:{String(MAX_SECONDS).padStart(2, "0")} · {style}</span>
-                  <button onClick={toggleMute} aria-label={muted ? "Unmute" : "Mute"} className="grid h-9 w-9 place-items-center rounded-full text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>
-                    {muted ? (
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" /><path d="M22 9l-6 6M16 9l6 6" /></svg>
-                    ) : (
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" /><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" /></svg>
-                    )}
-                  </button>
-                </div>
-              )}
-
+              <video
+                ref={videoRef}
+                key={videoUrl}
+                src={videoUrl}
+                className="absolute inset-0 h-full w-full object-cover"
+                autoPlay
+                muted={muted}
+                controls
+                playsInline
+                preload="auto"
+              />
+              <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-3">
+                <span className="rounded-md px-2 py-1 text-[11px] font-semibold text-white" style={{ background: "rgba(10,6,8,.6)", backdropFilter: "blur(4px)" }}>0:{String(MAX_SECONDS).padStart(2, "0")} · {style}</span>
+              </div>
             </div>
 
             {(
@@ -424,10 +426,20 @@ export default function WebsiteCommercial() {
                   connected yet.
                 </p>
                 <div className="grid grid-cols-2 gap-2">
-                  <a href={videoUrl} download={`reelo-${brand.toLowerCase().replace(/\s+/g, "-") || "commercial"}.mp4`} className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      void downloadMedia(
+                        videoUrl,
+                        `reelo-${brand.toLowerCase().replace(/\s+/g, "-") || "commercial"}.mp4`,
+                      )
+                    }
+                    className="flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-sm font-semibold text-white"
+                    style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+                  >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
                     Download
-                  </a>
+                  </button>
                   <button onClick={startOver} className="flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-semibold hover:bg-white/10">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 4v4h-4" strokeLinecap="round" strokeLinejoin="round" /></svg>
                     New
