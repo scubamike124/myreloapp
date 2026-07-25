@@ -11,6 +11,9 @@ import { LANGUAGES, DEFAULT_LANGUAGE, getLanguage } from "@/lib/languages";
 import { PHOTO_SIZE_HINT, VEO_MAX_SECONDS } from "@/lib/upload-limits";
 import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
+import DurationPicker from "./DurationPicker";
+import { defaultDurationSeconds } from "@/lib/token-costs";
+import { formatTokens, formatUsdFromTokens, standardVideoTokens } from "@/lib/token-pricing";
 
 /**
  * AI Avatar Studio — deliberately simple:
@@ -71,7 +74,11 @@ export default function AiAvatarStudio() {
   const [muted, setMuted] = useState(true);
   const [needsGesture, setNeedsGesture] = useState(false);
   const [clipHint, setClipHint] = useState("");
+  const [avatarSeconds, setAvatarSeconds] = useState(() => defaultDurationSeconds("ai-avatar-studio"));
+  const [photoSeconds, setPhotoSeconds] = useState(() => defaultDurationSeconds("talking-photo"));
   const tokens = useTokens();
+  const meterSeconds = faceMode === "photo" ? photoSeconds : avatarSeconds;
+  const meterSlug = faceMode === "photo" ? "talking-photo" : "ai-avatar-studio";
 
   const genTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollTimer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -217,6 +224,7 @@ export default function AiAvatarStudio() {
             mimeType,
             prompt,
             action: "talking-photo",
+            seconds: photoSeconds,
           }),
         });
         const data = await res.json();
@@ -231,11 +239,11 @@ export default function AiAvatarStudio() {
         if (!res.ok || !data.ok) throw new Error(data.error || "Video generation failed.");
         tokens.setBalance(data.balance);
         setClipHint(
-          `Photo videos max out at about ${VEO_MAX_SECONDS} seconds. For longer clips, pick an avatar above instead.`,
+          `Photo videos are ~${photoSeconds}s (max ${VEO_MAX_SECONDS}s). For longer clips, pick an avatar above instead.`,
         );
         remoteUrl = await pollVeo(data.poll as string);
       } else {
-        // Avatar → HeyGen (~20–30s from script length).
+        // Avatar → HeyGen (length from chosen target + script).
         const res = await fetch("/api/heygen-video", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -244,6 +252,7 @@ export default function AiAvatarStudio() {
             avatarId: selected!.avatarId,
             voiceId,
             action: "ai-avatar-studio",
+            seconds: avatarSeconds,
           }),
         });
         const data = await res.json();
@@ -259,8 +268,8 @@ export default function AiAvatarStudio() {
         tokens.setBalance(data.balance);
         setClipHint(
           data.expanded
-            ? `We expanded a short script so the video lasts about ${data.targetSeconds || 25}s (max ${data.maxSeconds || 30}s).`
-            : `Avatar videos last up to about ${data.maxSeconds || 30} seconds based on the script.`,
+            ? `We expanded a short script so the video lasts about ${data.targetSeconds || avatarSeconds}s.`
+            : `Avatar video aims for about ${data.targetSeconds || avatarSeconds} seconds.`,
         );
         const videoId = data.videoId as string;
         remoteUrl = await new Promise<string>((resolve, reject) => {
@@ -351,7 +360,7 @@ export default function AiAvatarStudio() {
             </span>
             Create
           </Link>
-          <TokenMeter slug="ai-avatar-studio" tokens={tokens} variant="chip" />
+          <TokenMeter slug={meterSlug} tokens={tokens} variant="chip" seconds={meterSeconds} />
         </div>
       </header>
 
@@ -361,8 +370,10 @@ export default function AiAvatarStudio() {
         </p>
         <h1 className="font-display mt-1 text-3xl font-bold tracking-[-0.02em] sm:text-4xl">AI Avatar Studio</h1>
         <p className="mt-2 text-[15px] leading-relaxed" style={{ color: "#a99a9c" }}>
-          Three steps: add a website or message → pick an avatar or your photo → generate. Avatar videos can run up to
-          ~30s; your-photo videos max out at about {VEO_MAX_SECONDS}s.
+          Three steps: add a website or message → pick an avatar or your photo → choose length &amp; generate.
+          Avatar videos use standard tier pricing (from {formatTokens(standardVideoTokens(30))} tokens /{" "}
+          {formatUsdFromTokens(standardVideoTokens(30))}). Your-photo clips are up to ~{VEO_MAX_SECONDS}s and bill as
+          the up-to-30s tier.
         </p>
         <p
           className="mt-3 rounded-xl px-3.5 py-2.5 text-[12.5px] leading-relaxed"
@@ -557,8 +568,15 @@ export default function AiAvatarStudio() {
           {/* STEP 3 — generate */}
           <section className="rounded-3xl border border-white/10 bg-black/40 p-5 backdrop-blur-md sm:p-6">
             <p className="mb-3 text-xs font-bold uppercase tracking-wider" style={{ color: "#ff8892" }}>
-              3 · Generate
+              3 · Length &amp; generate
             </p>
+            <div className="mb-4">
+              {faceMode === "photo" ? (
+                <DurationPicker action="talking-photo" value={photoSeconds} onChange={setPhotoSeconds} />
+              ) : (
+                <DurationPicker action="ai-avatar-studio" value={avatarSeconds} onChange={setAvatarSeconds} />
+              )}
+            </div>
             {short && (
               <div className="mb-3">
                 <NotEnoughTokens {...short} />
@@ -580,9 +598,11 @@ export default function AiAvatarStudio() {
                 "Generate talking video"
               )}
             </button>
-            <TokenMeter slug="ai-avatar-studio" tokens={tokens} />
+            <TokenMeter slug={meterSlug} tokens={tokens} seconds={meterSeconds} />
             <p className="mt-2 text-center text-xs text-white/40">
-              Avatar path ≈ 20–30s · Your-photo path ≈ {VEO_MAX_SECONDS}s (provider limit). Keep this tab open.
+              {faceMode === "photo"
+                ? `Your-photo path ≈ ${photoSeconds}s (provider max ${VEO_MAX_SECONDS}s). Keep this tab open.`
+                : `Avatar path ≈ ${avatarSeconds}s from script length. Keep this tab open.`}
             </p>
             <p className="mt-1 text-center text-[11px] text-white/35">{PHOTO_SIZE_HINT}</p>
           </section>

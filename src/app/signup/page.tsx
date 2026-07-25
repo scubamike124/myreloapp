@@ -4,6 +4,7 @@ import DesignShell from "@/components/design/DesignShell";
 import AuthForm from "@/components/account/AuthForm";
 import { dbConfigured } from "@/lib/db";
 import { currentUser } from "@/lib/accounts";
+import { WELCOME_TOKENS, formatTokens } from "@/lib/token-pricing";
 
 export const metadata = { title: "Create your account — Reelo" };
 
@@ -17,7 +18,9 @@ export default async function SignupPage() {
     <DesignShell>
       <main className="amber-safe mx-auto max-w-[430px] px-6 pb-20 pt-14">
         <h1 className="font-display text-3xl font-extrabold tracking-[-0.02em] text-white">Create your account</h1>
-        <p className="mt-2 mb-7 text-[14.5px] text-white/55">Start free with 5 tokens. No card needed.</p>
+        <p className="mt-2 mb-7 text-[14.5px] text-white/55">
+          Start free with {formatTokens(WELCOME_TOKENS)} tokens. No card needed.
+        </p>
 
         {dbConfigured() ? (
           <AuthForm mode="signup" />

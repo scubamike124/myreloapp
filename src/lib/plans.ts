@@ -1,58 +1,53 @@
+import {
+  PACK_TOKEN_AMOUNTS,
+  PLAN_DEFINITIONS,
+  TOKEN_USD_VALUE,
+  formatTokens,
+  planFaceValueUsd,
+  planSavingsVsStore,
+  usdFromTokens,
+  type PlanId,
+} from "@/lib/token-pricing";
+
 // ---------------------------------------------------------------------------
-// What every plan and pack costs, and how many tokens it includes.
+// Plans and packs.
 //
-// THE source of truth. Nothing else may hold its own copy of a price or a token
-// allowance — this file exists because three places did, and they drifted:
-// the pricing page sold Business Center Pro at 750 tokens while the admin
-// dashboard reported 3,000. At 3,000 the plan works out to $0.10 per token
-// against a $0.50–0.60 provider cost per video, so every video sold on it lost
-// money. Nobody had bought one, and the only reason nobody noticed is that the
-// two numbers lived in files that were never read side by side.
-//
-// Before changing any allowance here, run the margin check in src/lib/costs.ts.
-// The ladder is deliberately monotonic — each larger plan is cheaper per token
-// than the one below it, and none dips under roughly 55% margin on the worst
-// generation.
+// Token store = face value (tokens × TOKEN_USD_VALUE).
+// Subscriptions = discounted monthlyPrice for a token allotment + benefits.
+// Feature deductions are identical either way.
 // ---------------------------------------------------------------------------
 
-export type PlanName =
-  | "FREE"
-  | "CORE"
-  | "PLUS"
-  | "PRO"
-  | "ELITE"
-  | "BUSINESS CENTER"
-  | "BUSINESS CENTER PRO";
+export type PlanName = PlanId;
 
 export type PlanSpec = {
   name: PlanName;
-  /** USD per month. */
+  label: string;
+  /** USD per month (subscription discount — not face value). */
   price: number;
   /** Tokens included per month. */
   tokens: number;
+  /** Face value of those tokens at TOKEN_USD_VALUE. */
+  faceValue: number;
+  /** 0–1 savings vs buying the same tokens in the store. */
+  savingsVsStore: number;
 };
 
-export const PLAN_SPECS: PlanSpec[] = [
-  { name: "FREE", price: 0, tokens: 5 },
-  { name: "CORE", price: 14.99, tokens: 25 },
-  { name: "PLUS", price: 29.99, tokens: 55 },
-  { name: "PRO", price: 49.99, tokens: 100 },
-  { name: "ELITE", price: 79.99, tokens: 175 },
-  { name: "BUSINESS CENTER", price: 149.99, tokens: 340 },
-  { name: "BUSINESS CENTER PRO", price: 299.99, tokens: 750 },
-];
+export const PLAN_SPECS: PlanSpec[] = PLAN_DEFINITIONS.map((p) => ({
+  name: p.id,
+  label: p.label,
+  price: p.monthlyPrice,
+  tokens: p.tokens,
+  faceValue: planFaceValueUsd(p.tokens),
+  savingsVsStore: planSavingsVsStore(p.monthlyPrice, p.tokens),
+}));
 
-/** One-off token purchases, for people who do not want a subscription. */
+/** One-off token purchases — always face value. */
 export type PackSpec = { tokens: number; price: number };
 
-export const PACK_SPECS: PackSpec[] = [
-  { tokens: 10, price: 6.99 },
-  { tokens: 25, price: 14.99 },
-  { tokens: 60, price: 32.99 },
-  { tokens: 150, price: 74.99 },
-  { tokens: 400, price: 179.99 },
-  { tokens: 1000, price: 399.99 },
-];
+export const PACK_SPECS: PackSpec[] = PACK_TOKEN_AMOUNTS.map((tokens) => ({
+  tokens,
+  price: usdFromTokens(tokens),
+}));
 
 const BY_NAME = new Map(PLAN_SPECS.map((p) => [p.name, p]));
 
@@ -62,24 +57,33 @@ export function planSpec(name: PlanName): PlanSpec {
   return found;
 }
 
-/** "$299.99" — formatted once so no two pages disagree about the decimals. */
 export function planPrice(name: PlanName): string {
   const { price } = planSpec(name);
-  return price === 0 ? "$0" : `$${price.toFixed(2)}`;
+  if (price === 0) return "$0";
+  return price % 1 === 0 ? `$${price.toFixed(0)}` : `$${price.toFixed(2)}`;
 }
 
-/** "750" — the allowance as the pricing card prints it. */
 export function planTokens(name: PlanName): string {
-  return String(planSpec(name).tokens);
+  return formatTokens(planSpec(name).tokens);
 }
 
-/**
- * What one token costs on a pack, used to work out the "SAVE x%" labels rather
- * than trusting hand-written percentages.
- */
-export function packSaving(tokens: number): number {
-  const pack = PACK_SPECS.find((p) => p.tokens === tokens);
-  const base = PACK_SPECS[0];
-  if (!pack || pack === base) return 0;
-  return 1 - pack.price / pack.tokens / (base.price / base.tokens);
+export function planLabel(name: PlanName): string {
+  return planSpec(name).label;
+}
+
+/** Packs are face value — no volume discount. */
+export function packSaving(_tokens: number): number {
+  return 0;
+}
+
+export function tokenFaceValueLabel(): string {
+  return `1 token = $${TOKEN_USD_VALUE.toFixed(0)}`;
+}
+
+/** e.g. "$80 value" for marketing on plan cards. */
+export function planFaceValueLabel(name: PlanName): string {
+  const { faceValue } = planSpec(name);
+  return faceValue >= 1000
+    ? `$${faceValue.toLocaleString("en-US")} value`
+    : `$${faceValue} value`;
 }

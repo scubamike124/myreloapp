@@ -1,95 +1,78 @@
-import { TOKEN_COST } from "@/lib/token-costs";
+import { TOKEN_COST, costOf } from "@/lib/token-costs";
 import { PLAN_SPECS, PACK_SPECS } from "@/lib/plans";
+import { TOKEN_USD_VALUE, standardVideoTokens, websiteCommercialTokens } from "@/lib/token-pricing";
 
 // ---------------------------------------------------------------------------
-// Unit economics.
+// Unit economics vs the global face value (1 token = TOKEN_USD_VALUE).
 //
-// What each generation costs Reelo in provider fees, what it earns in token
-// revenue, and therefore the margin. Kept in code rather than a spreadsheet so
-// it cannot drift from the token costs the product actually charges.
-//
-// PROVIDER PRICES — verified July 2026:
-//   Google (ai.google.dev/gemini-api/docs/pricing)
-//     Veo 3.1 Fast      $0.10/sec at 720p, $0.12/sec at 1080p
-//     Veo 3.1 standard  $0.40/sec at 720p and 1080p
-//     Gemini 2.5 Flash Image  $0.039 per image
-//     Gemini 2.5 Flash text   $0.30 per 1M input, $2.50 per 1M output
-//   HeyGen (pay-as-you-go since Feb 2026)
-//     ~$0.50–$0.99 per credit; roughly $1.00 per minute for Avatar III 1080p.
-//     The conservative figure is used here.
-//
-// Re-check these when a provider changes pricing; they are the only inputs.
+// Provider rates — verified Jul 2026:
+//   Google Veo 3.1 Standard  $0.40/sec (app default model)
+//   Google Veo 3.1 Fast 720p $0.10/sec
+//   HeyGen Avatar III Studio $0.0167/sec
+//   Gemini 2.5 Flash text    $0.30/M in, $2.50/M out
 // ---------------------------------------------------------------------------
 
-/** Clip length actually requested by /api/generate-avatar. */
-export const VIDEO_SECONDS = Number(process.env.VIDEO_SECONDS ?? 6);
+export const VIDEO_SECONDS = Number(process.env.VIDEO_SECONDS ?? 8);
 
 export const PROVIDER = {
+  veoStandardPerSecond: 0.4,
   veoFastPerSecond720: 0.1,
   veoFastPerSecond1080: 0.12,
-  veoStandardPerSecond: 0.4,
   geminiImage: 0.039,
   geminiTextPerMInput: 0.3,
   geminiTextPerMOutput: 2.5,
-  heygenPerMinute: 1.0,
+  heygenPerSecond: 0.0167,
 } as const;
 
-/** A rough text call: a prompt in, a page or two out. */
 function textCall(inputTokens: number, outputTokens: number): number {
   return (inputTokens / 1_000_000) * PROVIDER.geminiTextPerMInput + (outputTokens / 1_000_000) * PROVIDER.geminiTextPerMOutput;
 }
 
 export type CostLine = { action: string; label: string; cost: number; detail: string };
 
-/**
- * Cost per generation, using what the code actually requests: Veo 3.1 Fast at
- * 8 seconds, HeyGen capped at 30 seconds, storybooks at 6 pages.
- */
+/** Provider COGS for a typical generation (not retail). */
 export const COST_LINES: CostLine[] = [
   {
     action: "talking-photo",
     label: "Talking Photo",
-    cost: PROVIDER.veoFastPerSecond720 * VIDEO_SECONDS,
-    detail: `Veo 3.1 Fast, ${VIDEO_SECONDS}s at 720p`,
+    cost: PROVIDER.veoStandardPerSecond * VIDEO_SECONDS,
+    detail: `Veo 3.1 Standard, ${VIDEO_SECONDS}s`,
   },
   {
     action: "dancing-photo",
     label: "Dancing Photo",
-    cost: PROVIDER.veoFastPerSecond720 * VIDEO_SECONDS,
-    detail: `Veo 3.1 Fast, ${VIDEO_SECONDS}s at 720p`,
+    cost: PROVIDER.veoStandardPerSecond * VIDEO_SECONDS,
+    detail: `Veo 3.1 Standard, ${VIDEO_SECONDS}s`,
   },
   {
     action: "ai-avatar-studio",
     label: "AI Avatar Studio",
-    cost: PROVIDER.heygenPerMinute * 0.5,
-    detail: "HeyGen, 30s cap",
+    cost: PROVIDER.heygenPerSecond * 20,
+    detail: "HeyGen Avatar III, ~20s",
   },
   {
     action: "website-commercial",
     label: "Website Commercial",
-    cost: PROVIDER.heygenPerMinute * 0.5 + textCall(8000, 1500),
+    cost: PROVIDER.heygenPerSecond * 30 + textCall(8000, 1500),
     detail: "HeyGen 30s + site analysis",
   },
   {
     action: "product-commercial",
     label: "Product Commercial",
-    cost: PROVIDER.veoFastPerSecond720 * VIDEO_SECONDS + textCall(3000, 800),
-    detail: `Veo 3.1 Fast ${VIDEO_SECONDS}s + concept`,
+    cost: PROVIDER.veoStandardPerSecond * VIDEO_SECONDS + textCall(3000, 800),
+    detail: `Veo Standard ${VIDEO_SECONDS}s + concept`,
   },
   {
     action: "shorts-20",
-    label: "20 Shorts Generator",
-    // One large text call: a site's worth of input, thirty full scripts out.
+    label: "Shorts Generator",
     cost: textCall(8000, 12000),
-    detail: "reads a site, writes 20 scripts",
+    detail: "reads a site, writes scripts",
   },
   {
     action: "story-memory-generator",
     label: "Story & Memory Generator",
-    // Vision input for up to 12 photos plus the narration. No video render:
-    // the film is assembled client-side from the customer's own pictures.
     cost: textCall(12 * 300 + 1500, 1500),
-    detail: "reads 12 photos, writes narration",
+    detail: "reads photos, writes narration",
   },
   {
     action: "custom-avatar-creator",
@@ -101,15 +84,13 @@ export const COST_LINES: CostLine[] = [
     action: "bedtime-storybook",
     label: "Bedtime Storybook",
     cost: PROVIDER.geminiImage * 6 + textCall(1200, 2500),
-    detail: "6 illustrations + story",
+    detail: "6–10 illustrations + story",
   },
   {
     action: "ai-story-maker",
     label: "AI Story Maker",
-    // One episode at the default eight scenes. Ten scenes — the maximum — costs
-    // $0.41 and still clears 66% on the cheapest tier.
     cost: PROVIDER.geminiImage * 8 + textCall(2500, 6000),
-    detail: "8 illustrations + long episode",
+    detail: "episode + illustrations",
   },
   {
     action: "analyze",
@@ -119,10 +100,8 @@ export const COST_LINES: CostLine[] = [
   },
 ];
 
-/** What a customer pays per token, by how they bought it. */
 export type Tier = { name: string; kind: "plan" | "pack"; price: number; tokens: number };
 
-/** Title case for a plan name, so "BUSINESS CENTER PRO" reads as a heading. */
 function titled(name: string): string {
   return name
     .toLowerCase()
@@ -131,9 +110,6 @@ function titled(name: string): string {
     .join(" ");
 }
 
-// Both lists are derived from src/lib/plans.ts, so a margin worked out here is
-// always a margin on the price a customer is actually offered. FREE is excluded
-// — it earns nothing per token by definition and would report -Infinity.
 export const TIERS: Tier[] = [
   ...PLAN_SPECS.filter((p) => p.price > 0).map(
     (p): Tier => ({ name: titled(p.name), kind: "plan", price: p.price, tokens: p.tokens }),
@@ -143,29 +119,25 @@ export const TIERS: Tier[] = [
   ),
 ];
 
-export function revenuePerToken(tier: Tier): number {
-  return tier.price / tier.tokens;
+/** Face value is the global standard; plans/packs sell at that rate. */
+export function revenuePerToken(_tier?: Tier): number {
+  return TOKEN_USD_VALUE;
 }
 
-/** Margin on one generation at one tier. Negative means it is sold at a loss. */
 export function marginFor(line: CostLine, tier: Tier): { revenue: number; profit: number; margin: number } {
-  const revenue = revenuePerToken(tier) * (TOKEN_COST[line.action] ?? 1);
+  const tokens = TOKEN_COST[line.action] ?? costOf(line.action);
+  const revenue = revenuePerToken(tier) * tokens;
   const profit = revenue - line.cost;
   return { revenue, profit, margin: revenue > 0 ? profit / revenue : -Infinity };
 }
 
-/**
- * Tokens that a generation must cost to hit a target margin at a given tier.
- * This is the number to change when something is underpriced.
- */
-export function tokensNeeded(line: CostLine, tier: Tier, targetMargin = 0.7): number {
-  const perToken = revenuePerToken(tier);
+export function tokensNeeded(line: CostLine, _tier: Tier, targetMargin = 0.7): number {
+  const perToken = TOKEN_USD_VALUE;
   if (perToken <= 0) return Infinity;
   const requiredRevenue = line.cost / (1 - targetMargin);
-  return Math.ceil(requiredRevenue / perToken);
+  return Math.ceil((requiredRevenue / perToken) * 100) / 100;
 }
 
-/** The worst case across all tiers — where the business actually gets hurt. */
 export function worstTier(line: CostLine): { tier: Tier; margin: number; profit: number } {
   let worst = { tier: TIERS[0], margin: Infinity, profit: Infinity };
   for (const tier of TIERS) {
@@ -173,4 +145,15 @@ export function worstTier(line: CostLine): { tier: Tier; margin: number; profit:
     if (m.margin < worst.margin) worst = { tier, margin: m.margin, profit: m.profit };
   }
   return worst;
+}
+
+/** Quick retail check helpers used by admin/docs. */
+export function retailForStandardVideo(seconds: number): { tokens: number; usd: number } {
+  const tokens = standardVideoTokens(seconds);
+  return { tokens, usd: tokens * TOKEN_USD_VALUE };
+}
+
+export function retailForWebsiteCommercial(seconds: number): { tokens: number; usd: number } {
+  const tokens = websiteCommercialTokens(seconds);
+  return { tokens, usd: tokens * TOKEN_USD_VALUE };
 }

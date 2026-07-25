@@ -8,9 +8,10 @@ import { materializeVideoUrl } from "@/lib/materialize-video";
 import { playSyncedWithSound } from "@/lib/play-synced";
 import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
+import DurationPicker from "./DurationPicker";
+import { defaultDurationSeconds } from "@/lib/token-costs";
 
 type Step = "input" | "scanning" | "detected" | "generating" | "result";
-const MAX_SECONDS = 30; // HeyGen spokesperson commercial cap
 const DEFAULT_COLORS = ["#ff3645", "#c4101c", "#0a0607", "#ffb3b9"];
 const IDEA_COUNTS = [5, 10, 15, 20];
 
@@ -28,7 +29,7 @@ const RENDER_STAGES = [
   "Rendering cinematic shots…",
   "Adding voiceover & music…",
   "Color grading…",
-  "Finalizing your 30-second commercial…",
+  "Finalizing your commercial…",
 ];
 
 const STYLES = ["Cinematic", "Energetic", "Luxury", "Minimal"];
@@ -66,6 +67,7 @@ export default function WebsiteCommercial() {
   const [avatarPick, setAvatarPick] = useState<{ avatarId: string; name: string; image: string }[]>([]);
   const [err, setErr] = useState<string | null>(null);
   const [short, setShort] = useState<Shortfall | null>(null);
+  const [seconds, setSeconds] = useState(() => defaultDurationSeconds("website-commercial"));
   const tokens = useTokens();
   const [videoUrl, setVideoUrl] = useState("");
 
@@ -189,6 +191,7 @@ export default function WebsiteCommercial() {
         body: JSON.stringify({
           script: finalScript,
           action: "website-commercial",
+          seconds,
           ...(avatarId ? { avatarId } : {}),
         }),
       });
@@ -288,7 +291,7 @@ export default function WebsiteCommercial() {
             <span className="font-display grid h-7 w-7 place-items-center rounded-lg text-xs font-bold" style={{ background: "linear-gradient(135deg,#ff3645,#b3121d)" }}>R</span>
             Create
           </Link>
-          <TokenMeter slug="website-commercial" tokens={tokens} variant="chip" />
+          <TokenMeter slug="website-commercial" tokens={tokens} variant="chip" seconds={seconds} />
         </div>
       </header>
 
@@ -336,7 +339,7 @@ export default function WebsiteCommercial() {
                 Analyze My Website
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
               </button>
-              <p className="mt-3 text-xs leading-relaxed text-white/40">Works with any URL — myreelo.com, https://myreelo.com, or https://www.myreelo.com. Your commercial is capped at 30 seconds for the best quality and price.</p>
+              <p className="mt-3 text-xs leading-relaxed text-white/40">Works with any URL — myreelo.com, https://myreelo.com, or https://www.myreelo.com. Premium commercial pricing by length — tokens and price shown before you generate.</p>
             </div>
           </div>
         )}
@@ -486,22 +489,14 @@ export default function WebsiteCommercial() {
                 </div>
               )}
 
-              {/* 30s hard cap */}
-              <div className="flex items-center justify-between rounded-xl px-4 py-3" style={{ border: "1px solid rgba(255,70,85,.25)", background: "rgba(255,60,75,.05)" }}>
-                <div className="flex items-center gap-2.5">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff8a92" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>
-                  <div>
-                    <div className="text-sm font-semibold text-white">Duration · {MAX_SECONDS} seconds</div>
-                    <div className="text-xs text-white/45">Commercials are capped at {MAX_SECONDS}s for the best quality &amp; price.</div>
-                  </div>
-                </div>
-                <span className="rounded-md px-2.5 py-1 text-xs font-bold" style={{ background: "rgba(255,70,85,.14)", color: "#ff8a92" }}>Max {MAX_SECONDS}s</span>
-              </div>
+              {/* Length picker — longer = higher token price */}
+              <DurationPicker action="website-commercial" value={seconds} onChange={setSeconds} />
 
               <button onClick={generate} className="flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-bold text-white transition-transform hover:scale-[1.01]" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 10px 28px -8px rgba(225,29,42,.6)" }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
-                Generate {MAX_SECONDS}s Cinematic Commercial
+                Generate ~{seconds}s Cinematic Commercial
               </button>
+              <TokenMeter slug="website-commercial" tokens={tokens} seconds={seconds} />
               <button onClick={startOver} className="w-full text-center text-xs font-semibold text-white/45 hover:text-white">← Use a different website</button>
             </div>
           </div>
@@ -520,7 +515,7 @@ export default function WebsiteCommercial() {
                 </div>
               </div>
             </div>
-            <p className="mt-4 text-sm" style={{ color: "#a99a9c" }}>Directing a cinematic {MAX_SECONDS}-second spot for <span className="text-white">{brand}</span>…</p>
+            <p className="mt-4 text-sm" style={{ color: "#a99a9c" }}>Directing a cinematic ~{seconds}-second spot for <span className="text-white">{brand}</span>…</p>
             <p className="mt-1 text-xs text-white/40">Generating real AI video — this takes ~1–2 minutes. Keep this tab open.</p>
           </div>
         )}

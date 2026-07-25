@@ -2,6 +2,9 @@ import { randomBytes, scrypt as scryptCb, timingSafeEqual, randomUUID } from "no
 import { promisify } from "node:util";
 import { cookies } from "next/headers";
 import { sql, ensureSchema, dbConfigured } from "@/lib/db";
+import { WELCOME_TOKENS } from "@/lib/token-pricing";
+
+export { WELCOME_TOKENS };
 
 // ---------------------------------------------------------------------------
 // User accounts.
@@ -69,8 +72,6 @@ export async function createUser(email: string, password: string, name: string):
 
   return { id, email: clean, name: name.trim() || null };
 }
-
-export const WELCOME_TOKENS = 5;
 
 export async function authenticate(email: string, password: string): Promise<User | null> {
   const q = sql();

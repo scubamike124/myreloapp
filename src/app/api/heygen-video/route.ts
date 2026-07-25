@@ -1,6 +1,7 @@
 import { asRecord, asString, childRecord, errorMessage } from "@/lib/json";
 import { NextResponse } from "next/server";
 import { chargeFor, refundCharge, refundLater } from "@/lib/charge";
+import { clampDurationSeconds } from "@/lib/token-costs";
 
 export const runtime = "nodejs";
 // Status poll may download + re-host the finished MP4 so playback keeps audio.
@@ -11,6 +12,7 @@ export const maxDuration = 120;
 const finalizedUrls = new Map<string, string>();
 // Remember which product charged the job so async failures refund correctly.
 const chargedActionByVideo = new Map<string, string>();
+const chargedAmountByVideo = new Map<string, number>();
 
 /** Prefer durable storage; fall back to the provider URL for playback.
  *
@@ -36,18 +38,10 @@ const HEYGEN_BASE = "https://api.heygen.com";
 // --- Tunables (overridable via .env.local) ---------------------------------
 const DAILY_LIMIT = Number(process.env.HEYGEN_DAILY_LIMIT ?? 5); // videos per user/day
 const MAX_SECONDS = Number(process.env.HEYGEN_MAX_SECONDS ?? 30); // hard cap on clip length
-// Target spoken length when the user pastes a tiny script (AI Studio was returning ~5s).
-const TARGET_SECONDS = Number(process.env.HEYGEN_TARGET_SECONDS ?? 25);
 // HeyGen avatar videos have no "duration" param — length is driven by how much
-// text the voice speaks. At a natural ~2.7 words/sec, MAX_SECONDS maps to a word
-// budget we truncate the script to, keeping every clip at/under the cap.
+// text the voice speaks. At a natural ~2.7 words/sec, seconds map to a word budget.
 const WORDS_PER_SECOND = 2.7;
-const MAX_WORDS = Math.floor(MAX_SECONDS * WORDS_PER_SECOND);
-const TARGET_WORDS = Math.floor(TARGET_SECONDS * WORDS_PER_SECOND);
 
-// Sensible defaults (real IDs from this account, verified to render together).
-// NOTE: use a STANDARD TTS voice — "voice-design" preview voices have no
-// VideoTTS mapping to avatars and cause "No VideoTTS mapping" render failures.
 const DEFAULT_AVATAR_ID = "Abigail_expressive_2024112501";
 const DEFAULT_VOICE_ID = "f8c69e517f424cafaecde32dde57096b"; // Allison (English) — verified with Abigail
 const DEFAULT_SCRIPT =
@@ -57,14 +51,11 @@ const DEFAULT_SCRIPT =
   "Try it today and see what you can create.";
 
 // --- Best-effort per-IP daily rate limit -----------------------------------
-// In-memory: resets on server restart / serverless cold start. Good enough for
-// dev and single-instance hosting; swap for Vercel KV / Redis / a DB for a
-// durable production limit shared across instances.
 type Bucket = { day: string; count: number };
 const buckets = new Map<string, Bucket>();
 
 function todayUTC(): string {
-  return new Date().toISOString().slice(0, 10); // YYYY-MM-DD (UTC daily window)
+  return new Date().toISOString().slice(0, 10);
 }
 
 function clientId(req: Request): string {
@@ -73,8 +64,6 @@ function clientId(req: Request): string {
   return req.headers.get("x-real-ip") || "local";
 }
 
-// Increments and returns remaining, or null if the daily cap is already reached.
-// Checks the cap BEFORE consuming so it is correct for any limit (including 0).
 function consume(id: string): number | null {
   const day = todayUTC();
   let b = buckets.get(id);
@@ -82,7 +71,7 @@ function consume(id: string): number | null {
     b = { day, count: 0 };
     buckets.set(id, b);
   }
-  if (b.count >= DAILY_LIMIT) return null; // already at/over the cap → deny
+  if (b.count >= DAILY_LIMIT) return null;
   b.count += 1;
   return DAILY_LIMIT - b.count;
 }
@@ -92,19 +81,42 @@ function refund(id: string) {
   if (b) b.count = Math.max(0, b.count - 1);
 }
 
-// Truncate long scripts and expand short ones so clips land near TARGET_SECONDS.
-function capScript(raw: string): { script: string; truncated: boolean; expanded: boolean } {
+/** Fit the script to the customer's chosen length (longer = more tokens). */
+function capScript(
+  raw: string,
+  targetSeconds: number,
+  hardMaxSeconds: number,
+): { script: string; truncated: boolean; expanded: boolean; targetSeconds: number; maxSeconds: number } {
+  const seconds = Math.min(hardMaxSeconds, Math.max(10, targetSeconds));
+  const maxWords = Math.floor(seconds * WORDS_PER_SECOND);
   const words = raw.trim().split(/\s+/).filter(Boolean);
   if (words.length === 0) {
-    return { script: DEFAULT_SCRIPT, truncated: false, expanded: true };
+    return {
+      script: DEFAULT_SCRIPT.split(/\s+/).slice(0, maxWords).join(" "),
+      truncated: false,
+      expanded: true,
+      targetSeconds: seconds,
+      maxSeconds: hardMaxSeconds,
+    };
   }
-  if (words.length > MAX_WORDS) {
-    return { script: words.slice(0, MAX_WORDS).join(" "), truncated: true, expanded: false };
+  if (words.length > maxWords) {
+    return {
+      script: words.slice(0, maxWords).join(" "),
+      truncated: true,
+      expanded: false,
+      targetSeconds: seconds,
+      maxSeconds: hardMaxSeconds,
+    };
   }
-  if (words.length >= TARGET_WORDS) {
-    return { script: words.join(" "), truncated: false, expanded: false };
+  if (words.length >= Math.floor(maxWords * 0.8)) {
+    return {
+      script: words.join(" "),
+      truncated: false,
+      expanded: false,
+      targetSeconds: seconds,
+      maxSeconds: hardMaxSeconds,
+    };
   }
-  // Pad short copy so HeyGen doesn't return a ~5s clip from a one-liner.
   const base = words.join(" ");
   const filler =
     " Here's why it matters: it saves you time, looks professional on camera, " +
@@ -113,10 +125,16 @@ function capScript(raw: string): { script: string; truncated: boolean; expanded:
     "and easy to act on — so you can share this message with confidence.";
   let expanded = `${base}${filler}`;
   const expandedWords = expanded.split(/\s+/).filter(Boolean);
-  if (expandedWords.length > MAX_WORDS) {
-    expanded = expandedWords.slice(0, MAX_WORDS).join(" ");
+  if (expandedWords.length > maxWords) {
+    expanded = expandedWords.slice(0, maxWords).join(" ");
   }
-  return { script: expanded, truncated: false, expanded: true };
+  return {
+    script: expanded,
+    truncated: false,
+    expanded: true,
+    targetSeconds: seconds,
+    maxSeconds: hardMaxSeconds,
+  };
 }
 
 async function heygen(path: string, init: RequestInit, key: string) {
@@ -129,9 +147,6 @@ async function heygen(path: string, init: RequestInit, key: string) {
   return { res, data } as const;
 }
 
-// GET — two modes:
-//   /api/heygen-video                    → diagnostic: config + remaining account quota
-//   /api/heygen-video?video_id=<id>      → poll: status + final video_url when ready
 export async function GET(req: Request) {
   const key = process.env.HEYGEN_API_KEY;
   if (!key) return NextResponse.json({ ok: false, error: "HEYGEN_API_KEY is not set in .env.local" }, { status: 500 });
@@ -143,18 +158,11 @@ export async function GET(req: Request) {
     if (!res.ok) return NextResponse.json({ ok: false, error: (asString(data.message) || "Status lookup failed.") }, { status: 502 });
     const d = childRecord(data, "data");
 
-    // HeyGen fails asynchronously, long after the POST that started the job
-    // returned, so the refund has to happen here. Keyed on the video id, which
-    // makes it idempotent — the client polls this endpoint every few seconds
-    // and would otherwise be refunded once per poll.
     if (d.status === "failed") {
       const action = chargedActionByVideo.get(videoId) || "ai-avatar-studio";
-      await refundLater(action, `heygen:${videoId}`);
+      await refundLater(action, `heygen:${videoId}`, chargedAmountByVideo.get(videoId));
     }
 
-    // Hand the provider URL to the client. The browser fetches HeyGen CDN
-    // successfully; Workers often get 403. Client materialize + /api/media/ingest
-    // creates the same-origin playback URL.
     let videoUrl: string | null = asString(d.video_url) || null;
     let durable = false;
     let providerUrl: string | null = videoUrl;
@@ -167,7 +175,7 @@ export async function GET(req: Request) {
     return NextResponse.json({
       ok: true,
       videoId,
-      status: d.status, // "processing" | "completed" | "failed" | "pending" | "waiting"
+      status: d.status,
       videoUrl,
       providerUrl,
       durable,
@@ -180,20 +188,15 @@ export async function GET(req: Request) {
   const { res, data } = await heygen("/v2/user/remaining_quota", { method: "GET" }, key);
   return NextResponse.json({
     ok: res.ok,
-    config: { dailyLimit: DAILY_LIMIT, maxSeconds: MAX_SECONDS, maxWords: MAX_WORDS },
+    config: { dailyLimit: DAILY_LIMIT, maxSeconds: MAX_SECONDS },
     remainingQuota: childRecord(data, "data").remaining_quota ?? null,
   });
 }
 
-// POST — submit an avatar video and return immediately (async).
-// Body: { script?, avatarId?, voiceId?, width?, height? }
-// Response: { videoId, status: "processing", remainingToday, script, truncated }
-// Poll GET /api/heygen-video?video_id=<videoId> until status === "completed".
 export async function POST(req: Request) {
   const key = process.env.HEYGEN_API_KEY;
   if (!key) return NextResponse.json({ error: "HEYGEN_API_KEY is not set in .env.local" }, { status: 500 });
 
-  // 1. Daily per-user limit.
   const id = clientId(req);
   const remainingToday = consume(id);
   if (remainingToday === null) {
@@ -203,8 +206,15 @@ export async function POST(req: Request) {
     );
   }
 
-  // 2. Parse + cap the script to the max duration.
-  let body: { script?: string; avatarId?: string; voiceId?: string; width?: number; height?: number; action?: string } = {};
+  let body: {
+    script?: string;
+    avatarId?: string;
+    voiceId?: string;
+    width?: number;
+    height?: number;
+    action?: string;
+    seconds?: number;
+  } = {};
   try {
     const raw: unknown = await req.json();
     const rec = asRecord(raw);
@@ -215,22 +225,25 @@ export async function POST(req: Request) {
       width: typeof rec.width === "number" ? rec.width : undefined,
       height: typeof rec.height === "number" ? rec.height : undefined,
       action: asString(rec.action) || undefined,
+      seconds: typeof rec.seconds === "number" ? rec.seconds : Number(rec.seconds) || undefined,
     };
   } catch {
     /* empty body → use defaults */
   }
-  const { script, truncated, expanded } = capScript(body.script?.trim() || DEFAULT_SCRIPT);
+
+  const action = body.action === "website-commercial" ? "website-commercial" : "ai-avatar-studio";
+  const seconds = clampDurationSeconds(action, body.seconds ?? (action === "website-commercial" ? 30 : 20));
+  // Website commercials may run longer than the default avatar cap.
+  const hardMax = action === "website-commercial" ? Math.max(MAX_SECONDS, 300) : Math.max(MAX_SECONDS, 900);
+  const { script, truncated, expanded, targetSeconds, maxSeconds } = capScript(
+    body.script?.trim() || DEFAULT_SCRIPT,
+    seconds,
+    hardMax,
+  );
   const avatarId = body.avatarId?.trim() || DEFAULT_AVATAR_ID;
   const voiceId = body.voiceId?.trim() || DEFAULT_VOICE_ID;
 
-  // Both tools that use this route cost the same, so an unexpected value
-  // cannot mis-bill; the distinction only makes the ledger readable.
-  const action = body.action === "website-commercial" ? "website-commercial" : "ai-avatar-studio";
-
-  // 3. Charge before submitting: HeyGen deducts its own credits the moment the
-  //    job is accepted, so waiting for completion would mean spending their
-  //    credits without spending the customer's tokens.
-  const charged = await chargeFor(action);
+  const charged = await chargeFor(action, { seconds });
   if (!charged.ok) {
     refund(id);
     return NextResponse.json(
@@ -239,7 +252,6 @@ export async function POST(req: Request) {
     );
   }
 
-  // 4. Kick off generation and return the id right away.
   try {
     const { res, data } = await heygen(
       "/v2/video/generate",
@@ -260,26 +272,28 @@ export async function POST(req: Request) {
 
     const videoId = childRecord(data, "data").video_id;
     if (!res.ok || !videoId) {
-      refund(id); // no video was actually created — give the quota unit back
-      await refundCharge(charged.charge); // and the customer's tokens with it
+      refund(id);
+      await refundCharge(charged.charge);
       const msg = errorMessage(data, "") || (asString(data.message) || `HeyGen generate failed (${res.status}).`);
       return NextResponse.json({ error: msg }, { status: 502 });
     }
 
     chargedActionByVideo.set(String(videoId), action);
+    if (charged.charge.charged > 0) chargedAmountByVideo.set(String(videoId), charged.charge.charged);
 
     return NextResponse.json({
       ok: true,
       videoId,
       status: "processing",
       remainingToday,
+      seconds,
       tokensCharged: charged.charge.charged,
       balance: charged.charge.balance,
       script,
       truncated,
       expanded,
-      maxSeconds: MAX_SECONDS,
-      targetSeconds: TARGET_SECONDS,
+      maxSeconds,
+      targetSeconds,
       poll: `/api/heygen-video?video_id=${videoId}`,
     });
   } catch (e) {

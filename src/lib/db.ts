@@ -168,11 +168,22 @@ export async function ensureSchema(): Promise<boolean> {
     CREATE TABLE IF NOT EXISTS token_ledger (
       id         ${ID},
       user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      delta      INTEGER NOT NULL,
+      delta      ${pg ? "DOUBLE PRECISION" : "REAL"} NOT NULL,
       reason     TEXT NOT NULL,
       ref        TEXT,
       created_at ${NOW}
     )`);
+
+  // Existing installs used INTEGER deltas — widen so fractional tokens ($10 face) work.
+  if (pg) {
+    try {
+      await exec(
+        `ALTER TABLE token_ledger ALTER COLUMN delta TYPE DOUBLE PRECISION USING delta::double precision`,
+      );
+    } catch {
+      /* already DOUBLE PRECISION or table just created */
+    }
+  }
 
   // One credit per external event, enforced by the database rather than by
   // remembering to check first.

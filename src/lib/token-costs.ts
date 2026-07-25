@@ -1,58 +1,142 @@
-// ---------------------------------------------------------------------------
-// What each generation costs in tokens.
-//
-// Its own module, with no server imports, so the UI can display the real price
-// without pulling the database driver into the browser bundle. Everything that
-// mentions a price — the ledger, the cost model, the tool cards — reads from
-// here, so the number a customer is shown is the number they are charged.
-//
-// Set to hold ~50-70% margin at EVERY tier. See src/lib/costs.ts for the
-// workings before changing any of them.
-// ---------------------------------------------------------------------------
+/**
+ * What each generation costs in tokens.
+ *
+ * Browser-safe. All amounts come from token-pricing.ts — never hard-code
+ * feature prices here beyond wiring actions to that config.
+ */
 
+import {
+  FLAT_TOKEN_COST,
+  STANDARD_VIDEO_TIERS,
+  TOKEN_USD_VALUE,
+  VEO_RENDER_SECONDS,
+  WEBSITE_COMMERCIAL_TIERS,
+  formatTokens,
+  formatUsdFromTokens,
+  roundTokens,
+  standardVideoTokens,
+  usdFromTokens,
+  websiteCommercialTokens,
+} from "@/lib/token-pricing";
+
+export {
+  TOKEN_USD_VALUE,
+  formatTokens,
+  formatUsdFromTokens,
+  usdFromTokens,
+  standardVideoTokens,
+  websiteCommercialTokens,
+  roundTokens,
+} from "@/lib/token-pricing";
+
+/** Floor / "From …" cost when no duration is chosen yet. */
 export const TOKEN_COST: Record<string, number> = {
-  "talking-photo": 4,
-  "dancing-photo": 4,
-  "ai-avatar-studio": 3,
-  "website-commercial": 3,
-  // Same Veo clip as Talking Photo, so the same price: the cost is the six
-  // seconds of render, not what is in frame.
-  "product-commercial": 4,
-  "bedtime-storybook": 2,
-  // Per EPISODE, not per series. Eight scenes of long narration plus eight
-  // illustrations; at the ten-scene maximum this still holds 66% on the
-  // cheapest tier, where 2 tokens would fall to 49% and break the floor.
-  "ai-story-maker": 3,
-  // One text call that reads every photo. The film itself is drawn in the
-  // browser from photos the customer already has, so there is no render cost.
-  // A month of scripts from one text call. No render — each short is filmed
-  // later, in the studio that suits it, and charged there.
-  "shorts-20": 2,
-  "story-memory-generator": 1,
-  "custom-avatar-creator": 1,
-  // Free by design. All three are cheap text or transcription calls guarded by
-  // their own daily caps, and charging for them would be worse than pointless:
-  //   analyze    — Website Commercial calls it AND the video route, so billing
-  //                it separately would charge twice for one commercial. The
-  //                scan is already inside that tool's 3 tokens. Standalone, it
-  //                costs $0.006 and is what convinces someone to buy.
-  //   transcribe — voice input; charging to speak instead of type is hostile.
-  //   captions   — a few cents, and it makes the video people already paid for
-  //                actually usable.
-  transcribe: 0,
-  captions: 0,
-  analyze: 0,
+  "talking-photo": standardVideoTokens(30),
+  "dancing-photo": standardVideoTokens(30),
+  "product-commercial": standardVideoTokens(30),
+  "ai-avatar-studio": standardVideoTokens(30),
+  "website-commercial": websiteCommercialTokens(30),
+  "bedtime-storybook": FLAT_TOKEN_COST["bedtime-storybook"],
+  "ai-story-maker": FLAT_TOKEN_COST["ai-story-maker"],
+  "shorts-20": FLAT_TOKEN_COST["shorts-20"],
+  "story-memory-generator": FLAT_TOKEN_COST["story-memory-generator"],
+  "custom-avatar-creator": FLAT_TOKEN_COST["custom-avatar-creator"],
+  transcribe: FLAT_TOKEN_COST.transcribe,
+  captions: FLAT_TOKEN_COST.captions,
+  analyze: FLAT_TOKEN_COST.analyze,
 };
 
-export function costOf(action: string): number {
-  return TOKEN_COST[action] ?? 1;
+export type DurationOption = {
+  seconds: number;
+  tokens: number;
+  label: string;
+  priceNote?: string;
+};
+
+function standardOption(maxSeconds: number, tokens: number, label: string, floor: number): DurationOption {
+  return {
+    seconds: maxSeconds,
+    tokens,
+    label,
+    priceNote: tokens > floor ? "Longer video — higher token price" : undefined,
+  };
 }
 
-/**
- * What one charge buys. "Uses 4 tokens" is ambiguous when a tool can produce
- * more than one thing — it reads as though it might cover the whole batch — so
- * every price states its unit.
- */
+/** Veo: pick render length 4/6/8; all bill as the up-to-30s standard tier (4 tokens). */
+export const VEO_DURATION_OPTIONS: DurationOption[] = VEO_RENDER_SECONDS.map((seconds) => {
+  const tokens = standardVideoTokens(seconds);
+  return {
+    seconds,
+    tokens,
+    label: `${seconds}-second clip`,
+    priceNote: "Billed as up to 30 seconds",
+  };
+});
+
+/** Avatar / standard long-form tiers (HeyGen path). */
+export const HEYGEN_DURATION_OPTIONS: DurationOption[] = STANDARD_VIDEO_TIERS.map((t) =>
+  standardOption(t.maxSeconds, t.tokens, t.label, STANDARD_VIDEO_TIERS[0]!.tokens),
+);
+
+/** Website Commercial premium tiers. */
+export const WEBSITE_COMMERCIAL_DURATION_OPTIONS: DurationOption[] = WEBSITE_COMMERCIAL_TIERS.map((t) =>
+  standardOption(t.maxSeconds, t.tokens, t.label, WEBSITE_COMMERCIAL_TIERS[0]!.tokens),
+);
+
+const VEO_ACTIONS = new Set(["talking-photo", "dancing-photo", "product-commercial"]);
+const HEYGEN_ACTIONS = new Set(["ai-avatar-studio"]);
+const WEBSITE_ACTIONS = new Set(["website-commercial"]);
+/** Story Maker video episodes use the same standard video ladder when seconds are passed. */
+const STANDARD_VIDEO_ACTIONS = new Set([
+  ...VEO_ACTIONS,
+  ...HEYGEN_ACTIONS,
+  "ai-story-maker",
+]);
+
+export function durationOptionsFor(action: string): DurationOption[] | null {
+  if (VEO_ACTIONS.has(action)) return VEO_DURATION_OPTIONS;
+  if (HEYGEN_ACTIONS.has(action)) return HEYGEN_DURATION_OPTIONS;
+  if (WEBSITE_ACTIONS.has(action)) return WEBSITE_COMMERCIAL_DURATION_OPTIONS;
+  if (action === "ai-story-maker") return HEYGEN_DURATION_OPTIONS;
+  return null;
+}
+
+export function defaultDurationSeconds(action: string): number {
+  if (VEO_ACTIONS.has(action)) return 8;
+  if (HEYGEN_ACTIONS.has(action) || action === "ai-story-maker") return 30;
+  if (WEBSITE_ACTIONS.has(action)) return 30;
+  return 0;
+}
+
+export function clampDurationSeconds(action: string, seconds: number): number {
+  const opts = durationOptionsFor(action);
+  if (!opts?.length) return seconds;
+  const match = opts.find((o) => o.seconds === seconds);
+  return match ? match.seconds : defaultDurationSeconds(action);
+}
+
+export function costOf(action: string, opts?: { seconds?: number }): number {
+  if (WEBSITE_ACTIONS.has(action)) {
+    const seconds =
+      opts?.seconds != null ? clampDurationSeconds(action, opts.seconds) : defaultDurationSeconds(action);
+    return websiteCommercialTokens(seconds);
+  }
+
+  if (STANDARD_VIDEO_ACTIONS.has(action)) {
+    // Ebook / script-only Story Maker (no seconds) stays on the flat episode price.
+    if (action === "ai-story-maker" && opts?.seconds == null) {
+      return FLAT_TOKEN_COST["ai-story-maker"];
+    }
+    const seconds =
+      opts?.seconds != null ? clampDurationSeconds(action, opts.seconds) : defaultDurationSeconds(action);
+    return standardVideoTokens(seconds);
+  }
+
+  const base = TOKEN_COST[action];
+  if (base === undefined) return 1;
+  return roundTokens(base);
+}
+
 export const TOKEN_UNIT: Record<string, string> = {
   "talking-photo": "video",
   "dancing-photo": "video",
@@ -67,17 +151,25 @@ export const TOKEN_UNIT: Record<string, string> = {
   analyze: "scan",
 };
 
-/**
- * The price label shown wherever a tool is offered. Generated rather than
- * written by hand: the hand-written strings had drifted badly — Talking Photo
- * advertised 1 credit while charging 4, and Website Commercial advertised 5
- * while charging 3.
- */
+function tokenWord(n: number): string {
+  return Math.abs(n) === 1 ? "token" : "tokens";
+}
+
 export function creditLabel(slug: string, suffix?: string): string {
   const n = TOKEN_COST[slug];
   if (n === undefined) return suffix ? `Pricing to be confirmed · ${suffix}` : "Pricing to be confirmed";
 
   const unit = TOKEN_UNIT[slug] ?? "generation";
-  const base = n === 0 ? `Free per ${unit}` : `${n} ${n === 1 ? "token" : "tokens"} per ${unit}`;
+  if (n === 0) {
+    const base = `Free per ${unit}`;
+    return suffix ? `${base} · ${suffix}` : base;
+  }
+  const base = `From ${formatTokens(n)} ${tokenWord(n)} (${formatUsdFromTokens(n)}) per ${unit}`;
   return suffix ? `${base} · ${suffix}` : base;
+}
+
+export function creditLabelForSeconds(slug: string, seconds: number): string {
+  const n = costOf(slug, { seconds });
+  if (n <= 0) return `Free`;
+  return `${formatTokens(n)} ${tokenWord(n)} · ${formatUsdFromTokens(n)}`;
 }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { formatTokens, formatUsdFromTokens, TOKEN_USD_VALUE } from "@/lib/token-pricing";
 
 type Entry = { delta: number; reason: string; created_at: string };
 type State = {
@@ -80,8 +81,9 @@ export default function TokenPanel() {
           <p className="truncate font-semibold text-white">{state.user.name || state.user.email}</p>
         </div>
         <div className="text-right">
-          <p className="text-[13px] text-white/45">Token balance</p>
-          <p className="font-display text-2xl font-bold" style={{ color: "#ff5663" }}>{state.balance.toLocaleString()}</p>
+          <p className="text-[13px] text-white/45">Token balance · 1 = ${TOKEN_USD_VALUE}</p>
+          <p className="font-display text-2xl font-bold" style={{ color: "#ff5663" }}>{formatTokens(state.balance)}</p>
+          <p className="text-[11px] text-white/35">{formatUsdFromTokens(state.balance)} face value</p>
         </div>
         <Link href="/pricing" className="rounded-lg px-3 py-2 text-[12.5px] font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>Buy tokens</Link>
         <button onClick={signOut} disabled={busy} className="rounded-lg px-3 py-2 text-[12.5px] font-semibold text-white/55 transition-colors hover:text-white disabled:opacity-50" style={{ border: "1px solid rgba(255,255,255,.12)" }}>
@@ -97,7 +99,8 @@ export default function TokenPanel() {
               <li key={i} className="flex items-center justify-between gap-3 text-[12.5px]">
                 <span className="truncate capitalize text-white/60">{label(h.reason)}</span>
                 <span className="shrink-0 font-semibold" style={{ color: h.delta > 0 ? "#5fd08a" : "#ff8892" }}>
-                  {h.delta > 0 ? "+" : ""}{h.delta}
+                  {h.delta > 0 ? "+" : ""}
+                  {formatTokens(h.delta)}
                 </span>
               </li>
             ))}

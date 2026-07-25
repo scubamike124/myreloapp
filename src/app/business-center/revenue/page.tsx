@@ -14,7 +14,7 @@ const TX = [
   { src: "Creator Plan — Annual", date: "Jun 26, 2026", amount: "+$190.00", status: "Paid" },
   { src: "Token Pack — 100", date: "Jun 24, 2026", amount: "+$69.99", status: "Paid" },
   { src: "Pro Plan — Monthly", date: "Jun 22, 2026", amount: "+$49.99", status: "Paid" },
-  { src: "Refund — Core Plan", date: "Jun 20, 2026", amount: "−$14.99", status: "Refunded" },
+  { src: "Refund — Core Plan", date: "Jun 20, 2026", amount: "−$49.00", status: "Refunded" },
   { src: "Token Pack — 500", date: "Jun 18, 2026", amount: "+$249.99", status: "Paid" },
 ];
 

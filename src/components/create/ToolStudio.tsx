@@ -11,8 +11,10 @@ import { materializeVideoUrl } from "@/lib/materialize-video";
 import { playSyncedWithSound } from "@/lib/play-synced";
 import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
+import DurationPicker from "./DurationPicker";
 import { compressImageForUpload } from "@/lib/compress-image";
 import { PHOTO_SIZE_HINT, VEO_MAX_SECONDS } from "@/lib/upload-limits";
+import { defaultDurationSeconds } from "@/lib/token-costs";
 
 type Status = "idle" | "generating" | "done";
 
@@ -105,6 +107,7 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
   const [imageUrl, setImageUrl] = useState("");
   const [err, setErr] = useState<string | null>(null);
   const [short, setShort] = useState<Shortfall | null>(null);
+  const [seconds, setSeconds] = useState(() => defaultDurationSeconds(tool.slug) || 6);
   const tokens = useTokens();
   const revokeRef = useRef<(() => void) | null>(null);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -236,7 +239,13 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
         const res = await fetch("/api/generate-avatar", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ imageBase64: base64, mimeType: mime, prompt: avatarPrompt(tool.slug, values), action: tool.slug }),
+          body: JSON.stringify({
+            imageBase64: base64,
+            mimeType: mime,
+            prompt: avatarPrompt(tool.slug, values),
+            action: tool.slug,
+            seconds,
+          }),
         });
         const data = await res.json();
 
@@ -397,7 +406,7 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
             <span className="font-display grid h-7 w-7 place-items-center rounded-lg text-xs font-bold" style={{ background: "linear-gradient(135deg,#ff3645,#b3121d)" }}>R</span>
             Create
           </Link>
-          <TokenMeter slug={tool.slug} tokens={tokens} variant="chip" />
+          <TokenMeter slug={tool.slug} tokens={tokens} variant="chip" seconds={isVideoTool ? seconds : undefined} />
         </div>
       </header>
 
@@ -419,11 +428,14 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
                 ))}
               </fieldset>
               {isVideoTool && (
+                <DurationPicker action={tool.slug} value={seconds} onChange={setSeconds} />
+              )}
+              {isVideoTool && (
                 <p
                   className="rounded-xl px-3.5 py-2.5 text-[12.5px] leading-relaxed"
                   style={{ border: "1px solid rgba(255,70,85,.25)", background: "rgba(255,60,75,.06)", color: "#ffb3b9" }}
                 >
-                  Photo videos max out at about {VEO_MAX_SECONDS} seconds. For a longer talking video (up to ~30s),{" "}
+                  Photo videos max out at {VEO_MAX_SECONDS} seconds. For a longer talking video (up to ~30s),{" "}
                   <Link href="/create/ai-avatar-studio" className="font-semibold underline underline-offset-2">
                     open AI Avatar Studio and pick an avatar
                   </Link>
@@ -438,8 +450,8 @@ export default function ToolStudio({ tool }: { tool: Tool }) {
               {isVideoTool && status !== "generating" && !err && !short && (
                 <p className="text-center text-xs text-white/40">
                   {tool.slug === "dancing-photo"
-                    ? `Upload a JPG/PNG under ~8MB, pick a move, then generate (~${VEO_MAX_SECONDS}s AI video, ~1–3 min).`
-                    : `Generates a real ~${VEO_MAX_SECONDS}s AI video from your photo (~1–3 min).`}
+                    ? `Upload a JPG/PNG under ~8MB, pick a move, then generate (~${seconds}s AI video, ~1–3 min).`
+                    : `Generates a real ~${seconds}s AI video from your photo (~1–3 min).`}
                 </p>
               )}
               {(isVideoTool || isImageTool) && (

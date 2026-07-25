@@ -136,15 +136,18 @@ export default function StoryBook() {
 
   return (
     <div className="mx-auto max-w-[1100px] px-5 pb-20 pt-16 sm:px-8">
-      <div className="mb-7">
-        <h1 className="font-display text-3xl font-extrabold tracking-[-0.02em] text-white sm:text-4xl">
-          Storybook
-        </h1>
-        <p className="mt-2 max-w-[620px] text-[15px] leading-[1.6] text-white/55">
-          Upload a photo of the main character, write what the story should be about, and get an illustrated picture
-          book starring them — in any supported language.
-        </p>
-      </div>
+      <header className="mb-7 flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="font-display text-3xl font-extrabold tracking-[-0.02em] text-white sm:text-4xl">
+            Storybook
+          </h1>
+          <p className="mt-2 max-w-[620px] text-[15px] leading-[1.6] text-white/55">
+            Upload a photo of the main character, write what the story should be about, and get an illustrated picture
+            book starring them — in any supported language.
+          </p>
+        </div>
+        <TokenMeter slug="bedtime-storybook" tokens={tokens} variant="chip" />
+      </header>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)]">
         <div className="flex flex-col gap-4 rounded-2xl p-5" style={{ border: "1px solid rgba(255,70,85,.18)", background: "rgba(255,60,75,.03)" }}>

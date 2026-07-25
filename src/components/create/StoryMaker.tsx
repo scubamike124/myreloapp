@@ -228,6 +228,7 @@ export default function StoryMaker() {
             mimeType: star.mimeType,
             prompt,
             action: "talking-photo",
+            seconds: 8, // Veo max; billed as standard "up to 30s" tier
           }),
         });
         const vData = await vRes.json();

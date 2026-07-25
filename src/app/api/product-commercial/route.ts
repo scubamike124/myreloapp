@@ -10,7 +10,7 @@ import {
 } from "@/lib/api-guard";
 import { chargeFor, refundCharge, refundLater } from "@/lib/charge";
 import { scrapePage } from "@/lib/scrape";
-import { startVeo, checkVeo, isVeoOperation, VIDEO_SECONDS } from "@/lib/veo";
+import { startVeo, checkVeo, isVeoOperation, clampVeoSeconds } from "@/lib/veo";
 
 // ---------------------------------------------------------------------------
 // Product Commercial.
@@ -71,9 +71,10 @@ async function writeConcept(
   pageText: string,
   look: string,
   music: string,
+  seconds: number,
 ): Promise<Concept> {
   const prompt =
-    `You are a commercial director writing a ${VIDEO_SECONDS}-second social advert for the product in the attached photograph.\n\n` +
+    `You are a commercial director writing a ${seconds}-second social advert for the product in the attached photograph.\n\n` +
     (productName ? `Product: ${productName}\n` : "") +
     (details ? `What the seller says about it: ${details}\n` : "") +
     (pageText ? `From the product page:\n${pageText}\n` : "") +
@@ -82,9 +83,9 @@ async function writeConcept(
     `Return ONLY JSON, no markdown fence:\n` +
     `{"headline": "...", "voiceover": "...", "caption": "...", "shot": "..."}\n\n` +
     `- "headline": 2 to 5 words. The hook on screen.\n` +
-    `- "voiceover": one sentence a narrator can read in about ${VIDEO_SECONDS} seconds.\n` +
+    `- "voiceover": one sentence a narrator can read in about ${seconds} seconds.\n` +
     `- "caption": a short social caption with 3 to 5 relevant hashtags.\n` +
-    `- "shot": camera direction for a ${VIDEO_SECONDS}-second clip of THIS product, in the look above. ` +
+    `- "shot": camera direction for a ${seconds}-second clip of THIS product, in the look above. ` +
     `Describe the movement, the lighting and the framing. Keep the product exactly as it appears in the ` +
     `photograph — do not restyle, relabel or redesign it. No people, no text, no logos added.\n` +
     `- Claim nothing about the product that the seller has not said. No invented statistics, prices or awards.`;
@@ -150,6 +151,7 @@ export async function POST(req: Request) {
   const details = str(body.details, 600);
   const look = LOOKS[str(body.look, 40)] ? str(body.look, 40) : "Studio";
   const music = str(body.music, 40) || "Upbeat";
+  const seconds = clampVeoSeconds(body.seconds);
 
   // Optional, and never fatal: the video comes from the photo, so a page that
   // will not load costs the customer nothing but a little extra copy quality.
@@ -168,7 +170,7 @@ export async function POST(req: Request) {
     }
   }
 
-  const charged = await chargeFor("product-commercial");
+  const charged = await chargeFor("product-commercial", { seconds });
   if (!charged.ok) {
     limiter.refund(id);
     return NextResponse.json(
@@ -178,12 +180,12 @@ export async function POST(req: Request) {
   }
 
   try {
-    const concept = await writeConcept(key, imageBase64, mimeType, productName, details, pageText, look, music);
+    const concept = await writeConcept(key, imageBase64, mimeType, productName, details, pageText, look, music, seconds);
 
     const musicMood = music || "Upbeat";
     const veoPrompt =
       `${concept.shot}\n\n` +
-      `${LOOKS[look]}. Photoreal product commercial, ${VIDEO_SECONDS} seconds, smooth cinematic camera, ` +
+      `${LOOKS[look]}. Photoreal product commercial, ${seconds} seconds, smooth cinematic camera, ` +
       `sharp focus on the product, high quality, 4k. The product must stay exactly as it appears in the ` +
       `reference image. No added text, no captions, no watermarks, no people. ` +
       `Include a clear audible ${musicMood.toLowerCase()} music soundtrack and light ambient sound throughout — ` +
@@ -192,7 +194,7 @@ export async function POST(req: Request) {
     // Start the render and return the concept immediately. The customer sees the
     // headline, voiceover and caption at once, and the client polls the GET below
     // for the clip — no five-minute server wait.
-    const operation = await startVeo(key, veoPrompt, imageBase64, mimeType);
+    const operation = await startVeo(key, veoPrompt, imageBase64, mimeType, 3, seconds);
 
     return NextResponse.json({
       ok: true,
@@ -200,6 +202,7 @@ export async function POST(req: Request) {
       operation,
       poll: `/api/product-commercial?op=${encodeURIComponent(operation)}`,
       remainingToday,
+      seconds,
       tokensCharged: charged.charge.charged,
       balance: charged.charge.balance,
       headline: concept.headline,

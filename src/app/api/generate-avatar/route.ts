@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { PayloadTooLarge, clientId, createDailyLimiter, readJsonLimited } from "@/lib/api-guard";
 import { chargeFor, refundCharge, refundLater } from "@/lib/charge";
-import { startVeo, checkVeo, isVeoOperation } from "@/lib/veo";
+import { startVeo, checkVeo, isVeoOperation, clampVeoSeconds } from "@/lib/veo";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -42,13 +42,14 @@ export async function POST(req: Request) {
     );
   }
 
-  let imageBase64: string, mimeType: string, prompt: string, action: string;
+  let imageBase64: string, mimeType: string, prompt: string, action: string, seconds: 4 | 6 | 8;
   try {
     const body = (await readJsonLimited(req, MAX_BODY)) as Record<string, unknown>;
     imageBase64 = String(body.imageBase64 ?? "");
     mimeType = String(body.mimeType || "image/jpeg");
     prompt = String(body.prompt ?? "").trim();
     action = toolAction(body.action);
+    seconds = clampVeoSeconds(body.seconds);
     if (!imageBase64) throw new Error("no image");
     if (!prompt) prompt = "The person in the photo comes to life with natural, expressive motion.";
   } catch (e) {
@@ -64,8 +65,8 @@ export async function POST(req: Request) {
 
   // Charged after validation and before the paid render begins. Without a
   // database, or with nobody signed in, this takes nothing and the per-IP cap
-  // above is still the limit.
-  const charged = await chargeFor(action);
+  // above is still the limit. Longer clips cost more tokens.
+  const charged = await chargeFor(action, { seconds });
   if (!charged.ok) {
     limiter.refund(id);
     return NextResponse.json(
@@ -75,12 +76,13 @@ export async function POST(req: Request) {
   }
 
   try {
-    const operation = await startVeo(key, `${prompt}\n\n${STYLE}`, imageBase64, mimeType);
+    const operation = await startVeo(key, `${prompt}\n\n${STYLE}`, imageBase64, mimeType, 3, seconds);
     return NextResponse.json({
       ok: true,
       status: "processing",
       operation,
       action,
+      seconds,
       remainingToday,
       tokensCharged: charged.charge.charged,
       balance: charged.charge.balance,

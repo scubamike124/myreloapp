@@ -24,11 +24,17 @@ const BASE = "https://generativelanguage.googleapis.com/v1beta";
 const VEO_MODEL = process.env.VEO_MODEL || "veo-3.1-generate-preview";
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-/** Clip length, in seconds. Veo supports 4, 6, or 8 — default to the longest. */
-const RAW_SECONDS = Number(process.env.VIDEO_SECONDS ?? 8);
+/** Clip length, in seconds. Veo supports 4, 6, or 8 — default to 6 (mid price). */
+const RAW_SECONDS = Number(process.env.VIDEO_SECONDS ?? 6);
 export const VIDEO_SECONDS = ([4, 6, 8] as const).includes(RAW_SECONDS as 4 | 6 | 8)
   ? (RAW_SECONDS as 4 | 6 | 8)
-  : 8;
+  : 6;
+
+export function clampVeoSeconds(n: unknown): 4 | 6 | 8 {
+  const v = Number(n);
+  if (v === 4 || v === 6 || v === 8) return v;
+  return VIDEO_SECONDS;
+}
 
 /**
  * The operation handle comes back to us from the client on every poll, so it
@@ -56,15 +62,17 @@ export async function startVeo(
   imageBase64: string,
   mimeType: string,
   tries = 3,
+  durationSeconds: 4 | 6 | 8 = VIDEO_SECONDS,
 ): Promise<string> {
+  const seconds = clampVeoSeconds(durationSeconds);
   for (let attempt = 1; attempt <= tries; attempt++) {
     const res = await fetch(`${BASE}/models/${VEO_MODEL}:predictLongRunning?key=${encodeURIComponent(key)}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         instances: [{ prompt, image: { bytesBase64Encoded: imageBase64, mimeType } }],
-        // Veo 3.1 accepts 4, 6, or 8 seconds. We default to 8 for usable clips.
-        parameters: { aspectRatio: "9:16", durationSeconds: VIDEO_SECONDS },
+        // Veo 3.1 accepts 4, 6, or 8 seconds only.
+        parameters: { aspectRatio: "9:16", durationSeconds: seconds },
       }),
       signal: AbortSignal.timeout(30_000),
     });

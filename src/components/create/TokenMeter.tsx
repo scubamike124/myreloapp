@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { TOKEN_COST, creditLabel } from "@/lib/token-costs";
+import { formatTokens } from "@/lib/token-pricing";
+import { TOKEN_COST, costOf, creditLabel, creditLabelForSeconds } from "@/lib/token-costs";
 
 // ---------------------------------------------------------------------------
 // The customer's side of token charging.
@@ -98,13 +99,18 @@ export function TokenMeter({
   slug,
   tokens,
   variant = "line",
+  seconds,
 }: {
   slug: string;
   tokens: Tokens;
   /** "chip" for studios that show the price as a pill in their header. */
   variant?: "line" | "chip";
+  /** When set, shows the price for that video length (duration-based tools). */
+  seconds?: number;
 }) {
-  const cost = TOKEN_COST[slug];
+  const cost = seconds != null ? costOf(slug, { seconds }) : TOKEN_COST[slug];
+  const priceText =
+    seconds != null ? creditLabelForSeconds(slug, seconds) : creditLabel(slug);
   const balanceApplies = tokens.ready && tokens.configured && tokens.signedIn && cost !== undefined && cost > 0;
 
   if (!balanceApplies) {
@@ -113,14 +119,14 @@ export function TokenMeter({
         className="rounded-full px-3 py-1 text-xs font-medium"
         style={{ border: "1px solid rgba(255,70,85,.2)", color: "#cabcbe" }}
       >
-        {creditLabel(slug)}
+        {priceText}
       </span>
     ) : (
-      <p className="text-center text-[11.5px] text-white/40">{creditLabel(slug)}</p>
+      <p className="text-center text-[11.5px] text-white/40">{priceText}</p>
     );
   }
 
-  const short = tokens.balance < cost;
+  const short = tokens.balance + 1e-9 < cost;
 
   if (variant === "chip") {
     return (
@@ -131,7 +137,7 @@ export function TokenMeter({
           color: short ? "#ffcf9a" : "#cabcbe",
         }}
       >
-        {creditLabel(slug)} · you have {tokens.balance.toLocaleString()}
+        {priceText} · you have {formatTokens(tokens.balance)}
       </span>
     );
   }
@@ -144,12 +150,12 @@ export function TokenMeter({
         background: short ? "rgba(255,159,67,.07)" : "rgba(255,255,255,.02)",
       }}
     >
-      <span className="text-white/55">{creditLabel(slug)}</span>
+      <span className="text-white/55">{priceText}</span>
       <span className="text-white/25">·</span>
       <span className="text-white/55">
         you have{" "}
         <strong className="font-bold" style={{ color: short ? "#ffcf9a" : "#ff5663" }}>
-          {tokens.balance.toLocaleString()}
+          {formatTokens(tokens.balance)}
         </strong>
       </span>
       {short && (
@@ -177,9 +183,9 @@ export function NotEnoughTokens({ needed, balance }: Shortfall) {
       className="mt-3 rounded-2xl px-4 py-3.5 text-[13px] leading-relaxed"
       style={{ border: "1px solid rgba(255,159,67,.3)", background: "rgba(255,159,67,.07)", color: "#ffcf9a" }}
     >
-      <strong className="font-bold">Not enough tokens.</strong> This needs {needed}{" "}
-      {needed === 1 ? "token" : "tokens"} and you have {balance.toLocaleString()}
-      {gap > 0 && <> — {gap} short</>}. You have not been charged.
+      <strong className="font-bold">Not enough tokens.</strong> This needs {formatTokens(needed)}{" "}
+      {needed === 1 ? "token" : "tokens"} and you have {formatTokens(balance)}
+      {gap > 0 && <> — {formatTokens(gap)} short</>}. You have not been charged.
       <div className="mt-2.5 flex flex-wrap gap-2">
         <Link
           href="/pricing"

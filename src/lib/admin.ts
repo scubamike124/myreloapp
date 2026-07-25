@@ -67,16 +67,14 @@ const dateFrom = (seed: number) => {
 };
 
 // Plan mix, weighted like a real SaaS funnel. Picking plans with `i * 4 + 3`
-// put exactly 6 users on each of the 7 tiers — a perfectly flat "Users by plan"
-// chart that read as broken rather than as data.
+// Weighted so lower tiers appear more often than BC Pro — not a flat 6-per-tier chart.
 const PLAN_WEIGHTS: [PlanName, number][] = [
   ["FREE", 14],
-  ["CORE", 9],
-  ["PLUS", 7],
-  ["PRO", 5],
-  ["ELITE", 3],
-  ["BUSINESS CENTER", 3],
-  ["BUSINESS CENTER PRO", 1],
+  ["CORE", 10],
+  ["PRO", 8],
+  ["BUSINESS", 5],
+  ["BUSINESS PLUS", 3],
+  ["BC PRO", 2],
 ];
 const PLAN_POOL: PlanName[] = PLAN_WEIGHTS.flatMap(([name, n]) => Array<PlanName>(n).fill(name));
 

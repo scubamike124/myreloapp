@@ -8,8 +8,10 @@ import { materializeVideoUrl } from "@/lib/materialize-video";
 import { playSyncedWithSound } from "@/lib/play-synced";
 import SmoothVideo from "./SmoothVideo";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
+import DurationPicker from "./DurationPicker";
 import { compressImageForUpload } from "@/lib/compress-image";
 import { PHOTO_SIZE_HINT, VEO_MAX_SECONDS } from "@/lib/upload-limits";
+import { defaultDurationSeconds } from "@/lib/token-costs";
 
 // ---------------------------------------------------------------------------
 // Product Commercial.
@@ -62,6 +64,7 @@ export default function ProductCommercial() {
   const [result, setResult] = useState<Result | null>(null);
   const [needsGesture, setNeedsGesture] = useState(false);
   const [muted, setMuted] = useState(true);
+  const [seconds, setSeconds] = useState(() => defaultDurationSeconds("product-commercial"));
   const tokens = useTokens();
   const videoRef = useRef<HTMLVideoElement>(null);
   const revokeRef = useRef<(() => void) | null>(null);
@@ -102,6 +105,7 @@ export default function ProductCommercial() {
           url: url.trim(),
           look,
           music,
+          seconds,
         }),
       });
       const data = await res.json();
@@ -162,7 +166,7 @@ export default function ProductCommercial() {
             </span>
             Create
           </Link>
-          <TokenMeter slug="product-commercial" tokens={tokens} variant="chip" />
+          <TokenMeter slug="product-commercial" tokens={tokens} variant="chip" seconds={seconds} />
         </div>
       </header>
 
@@ -307,6 +311,8 @@ export default function ProductCommercial() {
               </p>
             </div>
 
+            <DurationPicker action="product-commercial" value={seconds} onChange={setSeconds} />
+
             <button
               onClick={generate}
               disabled={busy || !photo}
@@ -316,7 +322,7 @@ export default function ProductCommercial() {
               {busy ? "Filming your product…" : result ? "Make another" : "Generate product video"}
             </button>
 
-            <TokenMeter slug="product-commercial" tokens={tokens} />
+            <TokenMeter slug="product-commercial" tokens={tokens} seconds={seconds} />
 
             {short && <NotEnoughTokens {...short} />}
 
