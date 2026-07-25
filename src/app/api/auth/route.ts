@@ -102,23 +102,65 @@ export async function POST(req: Request) {
       const problem = passwordProblem(password);
       if (problem) return NextResponse.json({ error: problem }, { status: 400 });
 
-      const result = await createUser(email, password, String(body.name ?? ""));
+      let result: Awaited<ReturnType<typeof createUser>>;
+      try {
+        result = await createUser(email, password, String(body.name ?? ""));
+      } catch (e) {
+        return NextResponse.json(
+          { error: `signup/createUser: ${e instanceof Error ? e.message : "failed"}` },
+          { status: 500 },
+        );
+      }
       if ("error" in result) return NextResponse.json({ error: result.error }, { status: 400 });
 
-      const sid = await startSession(result.id);
+      let sid: string | null;
+      try {
+        sid = await startSession(result.id);
+      } catch (e) {
+        return NextResponse.json(
+          { error: `signup/startSession: ${e instanceof Error ? e.message : "failed"}` },
+          { status: 500 },
+        );
+      }
       if (!sid) return NextResponse.json({ error: "Could not start a session." }, { status: 500 });
-      const res = NextResponse.json({ ok: true, user: result, balance: await balanceOf(result.id) });
+
+      let balance = 0;
+      try {
+        balance = await balanceOf(result.id);
+      } catch (e) {
+        return NextResponse.json(
+          { error: `signup/balanceOf: ${e instanceof Error ? e.message : "failed"}` },
+          { status: 500 },
+        );
+      }
+      const res = NextResponse.json({ ok: true, user: result, balance });
       applySessionCookie(res, sid);
       return res;
     }
 
     if (action === "login") {
-      const user = await authenticate(email, password);
+      let user: Awaited<ReturnType<typeof authenticate>>;
+      try {
+        user = await authenticate(email, password);
+      } catch (e) {
+        return NextResponse.json(
+          { error: `login/authenticate: ${e instanceof Error ? e.message : "failed"}` },
+          { status: 500 },
+        );
+      }
       // One message for both cases: which half was wrong is not the user's
       // business, and telling them reveals whether an account exists.
       if (!user) return NextResponse.json({ error: "That email and password don't match." }, { status: 401 });
 
-      const sid = await startSession(user.id);
+      let sid: string | null;
+      try {
+        sid = await startSession(user.id);
+      } catch (e) {
+        return NextResponse.json(
+          { error: `login/startSession: ${e instanceof Error ? e.message : "failed"}` },
+          { status: 500 },
+        );
+      }
       if (!sid) return NextResponse.json({ error: "Could not start a session." }, { status: 500 });
       const res = NextResponse.json({ ok: true, user, balance: await balanceOf(user.id) });
       applySessionCookie(res, sid);

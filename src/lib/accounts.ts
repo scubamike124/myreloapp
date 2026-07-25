@@ -65,10 +65,15 @@ export async function createUser(email: string, password: string, name: string):
 
   // Welcome credit, recorded like every other movement so the balance always
   // equals the sum of the ledger.
-  await q`
-    INSERT INTO token_ledger (user_id, delta, reason, ref)
-    VALUES (${id}, ${WELCOME_TOKENS}, 'welcome', ${`welcome:${id}`})
-    ON CONFLICT (ref) WHERE ref IS NOT NULL DO NOTHING`;
+  try {
+    await q`
+      INSERT INTO token_ledger (user_id, delta, reason, ref)
+      VALUES (${id}, ${WELCOME_TOKENS}, 'welcome', ${`welcome:${id}`})`;
+  } catch (e) {
+    // Unique-ref races are fine; other ledger failures should surface.
+    const msg = e instanceof Error ? e.message : "";
+    if (!/duplicate|unique/i.test(msg)) throw e;
+  }
 
   return { id, email: clean, name: name.trim() || null };
 }

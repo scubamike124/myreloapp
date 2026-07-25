@@ -53,6 +53,13 @@ export async function GET() {
       platform: isCloudflareWorkers() ? "cloudflare-workers" : "node",
       ephemeralFilesystem: isEphemeralFilesystem(),
       env: process.env.NODE_ENV ?? "unknown",
+      // Helps confirm which Git SHA Cloudflare actually shipped.
+      build:
+        process.env.CF_PAGES_COMMIT_SHA ||
+        process.env.CF_COMMIT_SHA ||
+        process.env.WORKERS_CI_COMMIT_SHA ||
+        process.env.GITHUB_SHA ||
+        null,
     },
     { headers: { "Cache-Control": "no-store" } },
   );
