@@ -151,8 +151,17 @@ export async function ensureSchema(): Promise<boolean> {
   const TS = pg ? "TIMESTAMPTZ NOT NULL" : "TEXT NOT NULL";
 
   const exec = async (text: string) => {
-    // Schema statements carry no user input, so a plain template is safe here.
-    await q([text] as unknown as TemplateStringsArray);
+    // Schema DDL has no user parameters. Neon now rejects calling the tagged
+    // template as a plain function (sql(["…"])), so Postgres uses sql.query;
+    // SQLite still accepts a one-element template via the bridge above.
+    if (pg) {
+      const url = postgresUrl();
+      if (!url) throw new Error("DATABASE_URL is not set.");
+      await neon(url).query(text);
+      return;
+    }
+    const strings = Object.assign([text], { raw: [text] }) as TemplateStringsArray;
+    await q(strings);
   };
 
   await exec(`
