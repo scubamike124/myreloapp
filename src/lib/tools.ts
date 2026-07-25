@@ -26,7 +26,8 @@ export type Tool = {
   fields: Field[];
 };
 
-const VOICES = ["Natural (Female)", "Natural (Male)", "Warm (Female)", "Deep (Male)", "Confident (Female)", "Clone my voice"];
+// "Clone my voice" removed until a real clone upload/flow exists — it was a dead option.
+const VOICES = ["Natural (Female)", "Natural (Male)", "Warm (Female)", "Deep (Male)", "Confident (Female)"];
 /** Same catalog as storybooks / shorts — generated speech & copy honor this list. */
 const LANGS = LANGUAGES.map((l) => l.name);
 

@@ -7,6 +7,9 @@ import { currentUser } from "@/lib/accounts";
 
 export const metadata = { title: "Create your account — Reelo" };
 
+/** Cookies (via currentUser) require a dynamic page on OpenNext/Cloudflare. */
+export const dynamic = "force-dynamic";
+
 export default async function SignupPage() {
   if (dbConfigured() && (await currentUser())) redirect("/account");
 
