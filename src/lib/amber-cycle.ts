@@ -15,6 +15,7 @@ import {
   recordOpsMetric,
   startCycleRun,
 } from "@/lib/amber-launch";
+import { writeCheckpoint, raiseAlert } from "@/lib/amber-ops";
 import { recall, writeCycleMemories, memoryPromptBlock } from "@/lib/amber-memory";
 import { computeBusinessHealth, saveHealthSnapshot } from "@/lib/amber-health";
 import { buildExecutiveBrief } from "@/lib/amber-executive";
@@ -57,6 +58,7 @@ export async function runAmberAutonomousCycle(input: {
     // 1. Memory + BI
     const memory = await recall(q, userId, { limit: 20 });
     steps.push({ step: "recall_company_memory", ok: true, detail: { count: memory.length } });
+    await writeCheckpoint(q, { cycleId: cycleRunId, userId, step: "recall_company_memory", detail: { count: memory.length } });
 
     let biRefresh: Record<string, unknown> = {};
     try {
@@ -78,6 +80,12 @@ export async function runAmberAutonomousCycle(input: {
     const healthScores = await computeBusinessHealth(q, userId);
     await saveHealthSnapshot(q, userId, healthScores, cycleRunId, actorEmail);
     steps.push({ step: "compute_business_health", ok: true, detail: { overall: healthScores.overall } });
+    await writeCheckpoint(q, {
+      cycleId: cycleRunId,
+      userId,
+      step: "compute_business_health",
+      detail: { overall: healthScores.overall },
+    });
 
     const bi = await loadBusinessIntelligence(q, userId);
     const activeObj = await activeObjectiveGoal(q, userId);
@@ -114,6 +122,12 @@ Return JSON: { "goal": "...", "priorities": ["..."] }`);
       step: "build_executive_brief",
       ok: true,
       detail: { briefId: brief.briefId, confidence: brief.confidence },
+    });
+    await writeCheckpoint(q, {
+      cycleId: cycleRunId,
+      userId,
+      step: "build_executive_brief",
+      detail: { briefId: brief.briefId },
     });
 
     // 5. Decisions
@@ -181,11 +195,24 @@ Return JSON: { "goal": "...", "priorities": ["..."] }`);
           schedules: missionResult.scheduleIds,
         },
       });
+      await writeCheckpoint(q, {
+        cycleId: cycleRunId,
+        userId,
+        step: "qa_content_calendar_queue",
+        detail: { status: missionResult.status },
+      });
     } catch (e) {
       steps.push({
         step: "qa_content_calendar_queue",
         ok: false,
         detail: e instanceof Error ? e.message : "mission failed",
+      });
+      await writeCheckpoint(q, {
+        cycleId: cycleRunId,
+        userId,
+        step: "qa_content_calendar_queue",
+        status: "failed",
+        detail: { error: e instanceof Error ? e.message : "mission failed" },
       });
       throw e;
     }
@@ -280,6 +307,12 @@ Return JSON: { "focus": "...", "campaignIdeas": ["..."], "ownerAsks": [] }`);
         })
       : {};
     steps.push({ step: "update_learning_engine", ok: true, detail: { applied: learningMode } });
+    await writeCheckpoint(q, {
+      cycleId: cycleRunId,
+      userId,
+      step: "cycle_complete",
+      detail: { reportId: report.reportId, learningMode },
+    });
 
     const ownerAsks = Array.isArray(nextWeek.ownerAsks) ? nextWeek.ownerAsks : [];
     const durationMs = Date.now() - started;
@@ -407,6 +440,19 @@ Return JSON: { "focus": "...", "campaignIdeas": ["..."], "ownerAsks": [] }`);
       metrics: { durationMs, error: msg, bos: true },
       note: "Failed BOS cycle",
     });
+    try {
+      await raiseAlert(q, {
+        severity: "critical",
+        kind: "failed_cycle",
+        title: "BOS cycle failed",
+        detail: msg,
+        workspaceUserId: userId,
+        recommended: "Use Command → Retry cycle after reviewing Logs/checkpoints.",
+        meta: { cycleId: cycleRunId },
+      });
+    } catch {
+      /* alert table may not exist yet on first boot */
+    }
     await logAmberAction({
       actorUserId: actorUserId,
       actorEmail,

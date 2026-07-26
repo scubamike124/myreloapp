@@ -36,6 +36,7 @@ import { ensureDepartments, listDepartments, pauseDepartment } from "@/lib/amber
 import { recall, remember } from "@/lib/amber-memory";
 import { createObjective, listObjectives } from "@/lib/amber-objectives";
 import { listImprovements, setImprovementStatus, generateImprovements } from "@/lib/amber-improvements";
+import { buildOpsConsole, runOwnerCommand, resolveAlert, scanAndRaiseAlerts, computeReadinessScore } from "@/lib/amber-ops";
 import { str } from "@/lib/workspace-api";
 import { asRecord } from "@/lib/json";
 import { randomUUID } from "node:crypto";
@@ -84,10 +85,16 @@ export async function GET(req: Request) {
   const notifyPrefs = await getAmberNotifyPrefs();
   const access = await resolveAmberAccess();
   let launchOps = null;
+  let opsConsole = null;
   try {
     launchOps = await getAmberOpsDashboard(q);
   } catch {
     launchOps = null;
+  }
+  try {
+    opsConsole = await buildOpsConsole(q);
+  } catch {
+    opsConsole = null;
   }
 
   const accounts = (await q`
@@ -272,6 +279,7 @@ export async function GET(req: Request) {
     learningMode,
     learningWorkspaces,
     launchOps,
+    opsConsole,
     notifyPrefs,
     access,
     summary: {
@@ -928,6 +936,56 @@ Include admin, marketing, social, content. Status planned only.`);
       detail: { body: String(body.body || "").slice(0, 2000) },
     });
     return Response.json({ ok: true });
+  }
+
+  if (body.action === "ops_console_refresh" || body.action === "scan_alerts" || body.action === "compute_readiness") {
+    const q = await sqlAsync();
+    if (!q || !(await ensureSchema())) {
+      return Response.json({ ok: false, error: "Storage unavailable." }, { status: 503 });
+    }
+    if (body.action === "scan_alerts") {
+      const scanned = await scanAndRaiseAlerts(q);
+      return Response.json({ ok: true, ...scanned, opsConsole: await buildOpsConsole(q) });
+    }
+    if (body.action === "compute_readiness") {
+      const readiness = await computeReadinessScore(q);
+      return Response.json({ ok: true, ...readiness, opsConsole: await buildOpsConsole(q) });
+    }
+    return Response.json({ ok: true, opsConsole: await buildOpsConsole(q) });
+  }
+
+  if (body.action === "resolve_ops_alert") {
+    const alertId = str(body.alertId, 80);
+    if (!alertId) return Response.json({ ok: false, error: "alertId required." }, { status: 400 });
+    const q = await sqlAsync();
+    if (!q || !(await ensureSchema())) {
+      return Response.json({ ok: false, error: "Storage unavailable." }, { status: 503 });
+    }
+    await resolveAlert(q, alertId, "super_admin");
+    return Response.json({ ok: true, alertId, opsConsole: await buildOpsConsole(q) });
+  }
+
+  if (body.action === "owner_command") {
+    const command = str(body.command, 80);
+    if (!command) return Response.json({ ok: false, error: "command required." }, { status: 400 });
+    const q = await sqlAsync();
+    if (!q || !(await ensureSchema())) {
+      return Response.json({ ok: false, error: "Storage unavailable." }, { status: 503 });
+    }
+    try {
+      const result = await runOwnerCommand(q, {
+        command,
+        userId: str(body.userId, 80) || null,
+        actorEmail: "super_admin",
+        meta: (body.meta as Record<string, unknown>) || {},
+      });
+      return Response.json({ ok: true, ...result, opsConsole: await buildOpsConsole(q) });
+    } catch (e) {
+      return Response.json(
+        { ok: false, error: e instanceof Error ? e.message : "Command failed." },
+        { status: 500 },
+      );
+    }
   }
 
   return Response.json({ ok: false, error: "Unknown action." }, { status: 400 });

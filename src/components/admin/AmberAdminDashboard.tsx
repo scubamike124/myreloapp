@@ -4,6 +4,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
 type Tab =
+  | "ops"
+  | "command"
   | "launch"
   | "control"
   | "health"
@@ -55,6 +57,36 @@ type Dash = {
       metrics: Record<string, unknown>;
       createdAt: string;
     }[];
+  } | null;
+  opsConsole: {
+    honestyNote?: string;
+    readiness?: {
+      score: number;
+      breakdown: Record<string, number>;
+      explanations: Record<string, string>;
+    };
+    queues?: { publishBacklog: number; schedulePending: number; agentJobsRecent: number };
+    alerts?: {
+      id: string;
+      severity: string;
+      kind: string;
+      title: string;
+      detail: string;
+      status: string;
+      recommended: string;
+      workspaceUserId?: string | null;
+      createdAt: string;
+    }[];
+    recoveries?: {
+      id: string;
+      action: string;
+      status: string;
+      createdAt: string;
+      workspaceUserId?: string | null;
+    }[];
+    recentCheckpoints?: { cycleId: string; step: string; status: string; createdAt: string }[];
+    activeAgents?: { id: string; agent: string; department?: string; title: string; status: string }[];
+    flags?: Record<string, unknown>;
   } | null;
   notifyPrefs: {
     weeklyReport: boolean;
@@ -168,6 +200,8 @@ type Dash = {
 };
 
 const TABS: { id: Tab; label: string }[] = [
+  { id: "ops", label: "Ops" },
+  { id: "command", label: "Command" },
   { id: "launch", label: "Launch" },
   { id: "control", label: "Control" },
   { id: "health", label: "Health" },
@@ -195,7 +229,7 @@ export default function AmberAdminDashboard() {
   const [err, setErr] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [flash, setFlash] = useState("");
-  const [tab, setTab] = useState<Tab>("launch");
+  const [tab, setTab] = useState<Tab>("ops");
   const [selectedWorkspaces, setSelectedWorkspaces] = useState<string[]>([]);
   const [objectiveGoal, setObjectiveGoal] = useState("");
   const [memoryTitle, setMemoryTitle] = useState("");
@@ -343,6 +377,186 @@ export default function AmberAdminDashboard() {
           Week/setup APIs for a chosen user run via Super Admin actions below. Customer-facing Amber stays 403.
         </p>
       </div>
+
+      {tab === "ops" ? (
+        <div className="space-y-4">
+          <div className="rounded-2xl p-5" style={card}>
+            <h2 className="font-display text-xl font-bold">Production Operations Console</h2>
+            <p className="mt-1 text-xs text-white/50">
+              {data.opsConsole?.honestyNote ||
+                "Amber operational signals only — not host CPU/RAM on Workers."}
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <button
+                type="button"
+                disabled={busy}
+                onClick={async () => {
+                  await post({ action: "compute_readiness" });
+                  setFlash("Readiness score refreshed.");
+                }}
+                className="rounded-lg px-4 py-2 text-sm font-bold text-white disabled:opacity-40"
+                style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+              >
+                Refresh readiness
+              </button>
+              <button
+                type="button"
+                disabled={busy}
+                onClick={async () => {
+                  await post({ action: "scan_alerts" });
+                  setFlash("Alert scan complete.");
+                }}
+                className="rounded-lg border border-white/20 px-4 py-2 text-sm font-bold text-white/90 disabled:opacity-40"
+              >
+                Scan alerts
+              </button>
+              <button
+                type="button"
+                disabled={busy}
+                onClick={async () => {
+                  await post({ action: "ops_console_refresh" });
+                  setFlash("Ops console refreshed.");
+                }}
+                className="rounded-lg border border-white/20 px-4 py-2 text-sm font-bold text-white/90 disabled:opacity-40"
+              >
+                Refresh console
+              </button>
+            </div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+              <div>
+                Readiness:{" "}
+                <strong className="text-[#5fd08a]">{data.opsConsole?.readiness?.score ?? "—"}/100</strong>
+              </div>
+              <div>
+                Publish backlog: <strong>{data.opsConsole?.queues?.publishBacklog ?? 0}</strong>
+              </div>
+              <div>
+                Schedule pending: <strong>{data.opsConsole?.queues?.schedulePending ?? 0}</strong>
+              </div>
+              <div>
+                Recent agent jobs: <strong>{data.opsConsole?.queues?.agentJobsRecent ?? 0}</strong>
+              </div>
+            </div>
+            {data.opsConsole?.readiness?.breakdown ? (
+              <pre className="mt-3 max-h-40 overflow-auto text-xs text-white/60">
+                {JSON.stringify(data.opsConsole.readiness.breakdown, null, 2)}
+              </pre>
+            ) : null}
+          </div>
+
+          <div className="rounded-2xl p-5" style={card}>
+            <h3 className="font-semibold">Open alerts</h3>
+            <ul className="mt-3 max-h-56 space-y-2 overflow-auto text-sm">
+              {(data.opsConsole?.alerts || []).filter((a) => a.status === "open").length === 0 ? (
+                <li className="text-white/50">No open alerts.</li>
+              ) : null}
+              {(data.opsConsole?.alerts || [])
+                .filter((a) => a.status === "open")
+                .slice(0, 15)
+                .map((a) => (
+                  <li key={a.id} className="border-b border-white/5 pb-2">
+                    <span className="text-[#ff8892]">{a.severity}</span> {a.title}
+                    <p className="text-xs text-white/50">{a.recommended}</p>
+                    <button
+                      type="button"
+                      className="text-xs underline text-white/60"
+                      disabled={busy}
+                      onClick={async () => {
+                        await post({ action: "resolve_ops_alert", alertId: a.id });
+                        setFlash("Alert resolved.");
+                      }}
+                    >
+                      Resolve
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          </div>
+
+          <div className="rounded-2xl p-5" style={card}>
+            <h3 className="font-semibold">Checkpoints & recoveries</h3>
+            <ul className="mt-2 max-h-40 space-y-1 overflow-auto text-xs text-white/65">
+              {(data.opsConsole?.recentCheckpoints || []).slice(0, 12).map((c, i) => (
+                <li key={`${c.cycleId}-${c.step}-${i}`}>
+                  {c.status} · {c.step} · {String(c.cycleId).slice(0, 8)}…
+                </li>
+              ))}
+            </ul>
+            <ul className="mt-3 max-h-32 space-y-1 overflow-auto text-xs text-white/65">
+              {(data.opsConsole?.recoveries || []).slice(0, 8).map((r) => (
+                <li key={r.id}>
+                  {r.status} · {r.action}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : null}
+
+      {tab === "command" ? (
+        <div className="space-y-4">
+          <div className="rounded-2xl p-5" style={card}>
+            <h2 className="font-display text-xl font-bold">Owner Command Center</h2>
+            <p className="mt-1 text-xs text-white/50">
+              Every command is audited via recovery events + amber_action_logs. Destructive ops use emergency
+              stop / maintenance.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {(
+                [
+                  ["emergency_stop_on", "Emergency stop ON"],
+                  ["emergency_stop_off", "Clear emergency stop"],
+                  ["pause_automation", "Pause automation"],
+                  ["resume_automation", "Resume Learning Mode"],
+                  ["maintenance_mode", "Maintenance mode"],
+                  ["scan_alerts", "Scan alerts"],
+                  ["compute_readiness", "Compute readiness"],
+                ] as const
+              ).map(([cmd, label]) => (
+                <button
+                  key={cmd}
+                  type="button"
+                  disabled={busy}
+                  onClick={async () => {
+                    await post({ action: "owner_command", command: cmd, userId: testerId || undefined });
+                    setFlash(`Command: ${label}`);
+                  }}
+                  className="rounded-lg border border-white/20 px-3 py-2 text-xs font-bold text-white/90 disabled:opacity-40"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <button
+                type="button"
+                disabled={busy || !testerId}
+                onClick={async () => {
+                  await post({ action: "owner_command", command: "retry_productions", userId: testerId });
+                  setFlash("Retry productions started.");
+                }}
+                className="rounded-lg px-4 py-2 text-sm font-bold text-white disabled:opacity-40"
+                style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+              >
+                Retry failed productions
+              </button>
+              <button
+                type="button"
+                disabled={busy || !testerId}
+                onClick={async () => {
+                  await post({ action: "owner_command", command: "retry_cycle", userId: testerId });
+                  setFlash("Recovery cycle started.");
+                }}
+                className="rounded-lg px-4 py-2 text-sm font-bold text-white disabled:opacity-40"
+                style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+              >
+                Retry / trigger BOS cycle
+              </button>
+            </div>
+            <p className="mt-2 text-xs text-white/40">Select a tester user above for workspace-scoped recovery.</p>
+          </div>
+        </div>
+      ) : null}
 
       {tab === "launch" ? (
         <div className="space-y-4">
