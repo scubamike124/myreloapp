@@ -23,6 +23,7 @@ import { applyBriefPriorities, ensureDepartments } from "@/lib/amber-departments
 import { activeObjectiveGoal, linkObjectiveArtifacts } from "@/lib/amber-objectives";
 import { generateImprovements } from "@/lib/amber-improvements";
 import { AMBER_HONESTY_NOTE } from "@/lib/amber-explain";
+import { runExecutiveOpsPass } from "@/lib/amber-exec-ops";
 import type { Sql } from "@/lib/workspace-api";
 
 /**
@@ -307,6 +308,32 @@ Return JSON: { "focus": "...", "campaignIdeas": ["..."], "ownerAsks": [] }`);
         })
       : {};
     steps.push({ step: "update_learning_engine", ok: true, detail: { applied: learningMode } });
+
+    let executiveOps: Record<string, unknown> = {};
+    try {
+      executiveOps = await runExecutiveOpsPass(q, userId, goal, actorEmail);
+      steps.push({
+        step: "executive_ops_pass",
+        ok: true,
+        detail: {
+          planId: (executiveOps.planning as { planId?: string } | undefined)?.planId,
+          briefingId: (executiveOps.briefing as { briefingId?: string } | undefined)?.briefingId,
+        },
+      });
+      await writeCheckpoint(q, {
+        cycleId: cycleRunId,
+        userId,
+        step: "executive_ops_pass",
+        detail: { ok: true },
+      });
+    } catch (e) {
+      steps.push({
+        step: "executive_ops_pass",
+        ok: false,
+        detail: e instanceof Error ? e.message : "exec ops failed",
+      });
+    }
+
     await writeCheckpoint(q, {
       cycleId: cycleRunId,
       userId,
@@ -408,6 +435,7 @@ Return JSON: { "focus": "...", "campaignIdeas": ["..."], "ownerAsks": [] }`);
       decisions: decisions.decisions,
       agentJobs: agents.jobs,
       infraRecommendations: infra.recommendations,
+      executiveOps,
       nextWeek,
       steps,
       learningDelta,

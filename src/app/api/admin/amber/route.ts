@@ -37,6 +37,13 @@ import { recall, remember } from "@/lib/amber-memory";
 import { createObjective, listObjectives } from "@/lib/amber-objectives";
 import { listImprovements, setImprovementStatus, generateImprovements } from "@/lib/amber-improvements";
 import { buildOpsConsole, runOwnerCommand, resolveAlert, scanAndRaiseAlerts, computeReadinessScore } from "@/lib/amber-ops";
+import {
+  getExecutiveDashboard,
+  runExecutiveOpsPass,
+  runExecutivePlanning,
+  resolveApproval,
+  generateExecBriefing,
+} from "@/lib/amber-exec-ops";
 import { str } from "@/lib/workspace-api";
 import { asRecord } from "@/lib/json";
 import { randomUUID } from "node:crypto";
@@ -226,6 +233,7 @@ export async function GET(req: Request) {
         objectives: await listObjectives(q, testerUserId),
         memory: await recall(q, testerUserId, { limit: 30 }),
         improvements: await listImprovements(q, testerUserId),
+        execOps: await getExecutiveDashboard(q, testerUserId),
       };
     } catch {
       bos = {};
@@ -986,6 +994,52 @@ Include admin, marketing, social, content. Status planned only.`);
         { status: 500 },
       );
     }
+  }
+
+  if (body.action === "exec_plan" || body.action === "exec_ops_pass" || body.action === "exec_briefing") {
+    const userId = str(body.userId, 80);
+    if (!userId) return Response.json({ ok: false, error: "userId required." }, { status: 400 });
+    if (await getAmberEmergencyStop()) {
+      return Response.json({ ok: false, error: "amber_emergency_stop" }, { status: 403 });
+    }
+    const q = await sqlAsync();
+    if (!q || !(await ensureSchema())) {
+      return Response.json({ ok: false, error: "Storage unavailable." }, { status: 503 });
+    }
+    try {
+      if (body.action === "exec_plan") {
+        const goal = str(body.goal, 2000);
+        if (!goal) return Response.json({ ok: false, error: "goal required." }, { status: 400 });
+        const result = await runExecutivePlanning(q, userId, goal, "super_admin");
+        return Response.json({ ok: true, ...result });
+      }
+      if (body.action === "exec_briefing") {
+        const kind = (str(body.kind, 20) || "weekly") as "daily" | "weekly" | "monthly";
+        return Response.json({ ok: true, ...(await generateExecBriefing(q, userId, kind, "super_admin")) });
+      }
+      const result = await runExecutiveOpsPass(q, userId, str(body.goal, 2000) || null, "super_admin");
+      return Response.json(result);
+    } catch (e) {
+      return Response.json(
+        { ok: false, error: e instanceof Error ? e.message : "Executive ops failed." },
+        { status: 500 },
+      );
+    }
+  }
+
+  if (body.action === "resolve_approval") {
+    const userId = str(body.userId, 80);
+    const approvalId = str(body.approvalId, 80);
+    const decision = str(body.decision, 20) as "approved" | "rejected";
+    if (!userId || !approvalId || !["approved", "rejected"].includes(decision)) {
+      return Response.json({ ok: false, error: "userId, approvalId, decision required." }, { status: 400 });
+    }
+    const q = await sqlAsync();
+    if (!q || !(await ensureSchema())) {
+      return Response.json({ ok: false, error: "Storage unavailable." }, { status: 503 });
+    }
+    await resolveApproval(q, userId, approvalId, decision, "super_admin");
+    return Response.json({ ok: true, approvalId, decision });
   }
 
   return Response.json({ ok: false, error: "Unknown action." }, { status: 400 });

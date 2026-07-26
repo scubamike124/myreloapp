@@ -6,6 +6,7 @@ import Link from "next/link";
 type Tab =
   | "ops"
   | "command"
+  | "exec"
   | "launch"
   | "control"
   | "health"
@@ -192,6 +193,18 @@ type Dash = {
       objectives: Record<string, unknown>[];
       memory: Record<string, unknown>[];
       improvements: Record<string, unknown>[];
+      execOps?: {
+        plans?: Record<string, unknown>[];
+        initiatives?: Record<string, unknown>[];
+        projects?: Record<string, unknown>[];
+        tasks?: Record<string, unknown>[];
+        kpis?: Record<string, unknown>[];
+        risks?: Record<string, unknown>[];
+        approvals?: Record<string, unknown>[];
+        briefings?: Record<string, unknown>[];
+        optimizations?: Record<string, unknown>[];
+        honestyNote?: string;
+      };
     };
     accounts: { id: string; provider: string; handle: string; status: string }[];
     schedules: { id: string; title: string; approvalStatus: string; amberPlaced: boolean }[];
@@ -202,6 +215,7 @@ type Dash = {
 const TABS: { id: Tab; label: string }[] = [
   { id: "ops", label: "Ops" },
   { id: "command", label: "Command" },
+  { id: "exec", label: "Exec Ops" },
   { id: "launch", label: "Launch" },
   { id: "control", label: "Control" },
   { id: "health", label: "Health" },
@@ -554,6 +568,158 @@ export default function AmberAdminDashboard() {
               </button>
             </div>
             <p className="mt-2 text-xs text-white/40">Select a tester user above for workspace-scoped recovery.</p>
+          </div>
+        </div>
+      ) : null}
+
+      {tab === "exec" ? (
+        <div className="space-y-4">
+          <div className="rounded-2xl p-5" style={card}>
+            <h2 className="font-display text-xl font-bold">Executive Operations (Amber 34)</h2>
+            <p className="mt-1 text-xs text-white/50">
+              {data.tester?.bos?.execOps?.honestyNote ||
+                "Plan → initiatives → projects → tasks → KPIs → risks → briefing. Reelo-honest metrics only."}
+            </p>
+            <textarea
+              className="mt-3 min-h-[70px] w-full rounded-lg border border-white/10 bg-black/40 p-3 text-sm"
+              placeholder="Strategic goal for executive planning…"
+              value={objectiveGoal}
+              onChange={(e) => setObjectiveGoal(e.target.value)}
+              disabled={!testerId}
+            />
+            <div className="mt-2 flex flex-wrap gap-2">
+              <button
+                type="button"
+                disabled={busy || !testerId || !objectiveGoal.trim()}
+                onClick={async () => {
+                  await post({ action: "exec_plan", userId: testerId, goal: objectiveGoal.trim() });
+                  setFlash("Executive plan created.");
+                }}
+                className="rounded-lg px-4 py-2 text-sm font-bold text-white disabled:opacity-40"
+                style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+              >
+                Build plan
+              </button>
+              <button
+                type="button"
+                disabled={busy || !testerId}
+                onClick={async () => {
+                  await post({
+                    action: "exec_ops_pass",
+                    userId: testerId,
+                    goal: objectiveGoal.trim() || undefined,
+                  });
+                  setFlash("Executive ops pass complete.");
+                }}
+                className="rounded-lg px-4 py-2 text-sm font-bold text-white disabled:opacity-40"
+                style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+              >
+                Run full exec ops pass
+              </button>
+              <button
+                type="button"
+                disabled={busy || !testerId}
+                onClick={async () => {
+                  await post({ action: "exec_briefing", userId: testerId, kind: "weekly" });
+                  setFlash("Weekly briefing generated.");
+                }}
+                className="rounded-lg border border-white/20 px-4 py-2 text-sm font-bold text-white/90 disabled:opacity-40"
+              >
+                Weekly briefing
+              </button>
+            </div>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-2">
+            <div className="rounded-2xl p-5" style={card}>
+              <h3 className="font-semibold">Initiatives</h3>
+              <ul className="mt-2 max-h-48 space-y-1 overflow-auto text-sm">
+                {(data.tester?.bos?.execOps?.initiatives || []).map((i) => (
+                  <li key={String(i.id)}>
+                    <span className="text-[#ff8892]">{String(i.department)}</span> {String(i.title)}{" "}
+                    <span className="text-white/40">({Math.round(Number(i.progress || 0) * 100)}%)</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl p-5" style={card}>
+              <h3 className="font-semibold">KPIs</h3>
+              <ul className="mt-2 max-h-48 space-y-1 overflow-auto text-sm">
+                {(data.tester?.bos?.execOps?.kpis || []).slice(0, 12).map((k) => (
+                  <li key={String(k.id)}>
+                    {String(k.label)}: <strong>{String(k.value)}</strong> / {String(k.target)}{" "}
+                    <span className="text-white/40">{String(k.trend)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl p-5" style={card}>
+              <h3 className="font-semibold">Risks</h3>
+              <ul className="mt-2 max-h-40 space-y-1 overflow-auto text-sm">
+                {(data.tester?.bos?.execOps?.risks || [])
+                  .filter((r) => r.status === "open")
+                  .map((r) => (
+                    <li key={String(r.id)}>
+                      <span className="text-[#ff8892]">{String(r.severity)}</span> {String(r.title)}
+                    </li>
+                  ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl p-5" style={card}>
+              <h3 className="font-semibold">Approvals</h3>
+              <ul className="mt-2 max-h-40 space-y-2 overflow-auto text-sm">
+                {(data.tester?.bos?.execOps?.approvals || []).map((a) => (
+                  <li key={String(a.id)} className="border-b border-white/5 pb-1">
+                    <span className="text-white/40">{String(a.status)}</span> {String(a.title)}
+                    {a.status === "pending" ? (
+                      <span className="ml-2 space-x-2">
+                        <button
+                          type="button"
+                          className="text-xs underline text-[#5fd08a]"
+                          disabled={busy}
+                          onClick={async () => {
+                            await post({
+                              action: "resolve_approval",
+                              userId: testerId,
+                              approvalId: a.id,
+                              decision: "approved",
+                            });
+                          }}
+                        >
+                          approve
+                        </button>
+                        <button
+                          type="button"
+                          className="text-xs underline text-[#ff8892]"
+                          disabled={busy}
+                          onClick={async () => {
+                            await post({
+                              action: "resolve_approval",
+                              userId: testerId,
+                              approvalId: a.id,
+                              decision: "rejected",
+                            });
+                          }}
+                        >
+                          reject
+                        </button>
+                      </span>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="rounded-2xl p-5" style={card}>
+            <h3 className="font-semibold">Latest briefing</h3>
+            {(data.tester?.bos?.execOps?.briefings || [])[0] ? (
+              <pre className="mt-2 max-h-56 overflow-auto text-xs text-white/70">
+                {JSON.stringify((data.tester?.bos?.execOps?.briefings || [])[0], null, 2)}
+              </pre>
+            ) : (
+              <p className="mt-2 text-sm text-white/50">No briefing yet — run exec ops pass.</p>
+            )}
           </div>
         </div>
       ) : null}

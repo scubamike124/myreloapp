@@ -1151,6 +1151,139 @@ async function ensureWorkspaceTables(q: Sql): Promise<void> {
       )`;
     await q`CREATE INDEX IF NOT EXISTS amber_ops_checkpoints_cycle_idx ON amber_ops_checkpoints (cycle_id, created_at ASC)`;
 
+    await q`
+      CREATE TABLE IF NOT EXISTS amber_strategic_plans (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        title       TEXT NOT NULL,
+        horizon     TEXT NOT NULL DEFAULT 'quarterly',
+        status      TEXT NOT NULL DEFAULT 'active',
+        body        TEXT NOT NULL DEFAULT '{}',
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS amber_strategic_plans_user_idx ON amber_strategic_plans (user_id, created_at DESC)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS amber_initiatives (
+        id            TEXT PRIMARY KEY,
+        user_id       TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        plan_id       TEXT,
+        objective_id  TEXT,
+        title         TEXT NOT NULL,
+        department    TEXT NOT NULL DEFAULT 'marketing',
+        status        TEXT NOT NULL DEFAULT 'active',
+        priority      INTEGER NOT NULL DEFAULT 50,
+        progress      DOUBLE PRECISION NOT NULL DEFAULT 0,
+        body          TEXT NOT NULL DEFAULT '{}',
+        created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS amber_initiatives_user_idx ON amber_initiatives (user_id, status, priority ASC)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS amber_projects (
+        id             TEXT PRIMARY KEY,
+        user_id        TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        initiative_id  TEXT,
+        title          TEXT NOT NULL,
+        status         TEXT NOT NULL DEFAULT 'active',
+        progress       DOUBLE PRECISION NOT NULL DEFAULT 0,
+        deadline       TEXT,
+        body           TEXT NOT NULL DEFAULT '{}',
+        created_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at     TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS amber_projects_user_idx ON amber_projects (user_id, created_at DESC)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS amber_exec_tasks (
+        id            TEXT PRIMARY KEY,
+        user_id       TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        project_id    TEXT,
+        title         TEXT NOT NULL,
+        agent         TEXT NOT NULL DEFAULT '',
+        department    TEXT NOT NULL DEFAULT 'marketing',
+        status        TEXT NOT NULL DEFAULT 'queued',
+        depends_on    TEXT NOT NULL DEFAULT '[]',
+        quality       DOUBLE PRECISION NOT NULL DEFAULT 0,
+        body          TEXT NOT NULL DEFAULT '{}',
+        created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS amber_exec_tasks_user_idx ON amber_exec_tasks (user_id, status, created_at DESC)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS amber_kpis (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        slug        TEXT NOT NULL,
+        label       TEXT NOT NULL,
+        value       DOUBLE PRECISION NOT NULL DEFAULT 0,
+        target      DOUBLE PRECISION NOT NULL DEFAULT 0,
+        unit        TEXT NOT NULL DEFAULT '',
+        trend       TEXT NOT NULL DEFAULT 'flat',
+        meta        TEXT NOT NULL DEFAULT '{}',
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS amber_kpis_user_idx ON amber_kpis (user_id, created_at DESC)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS amber_risks (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        severity    TEXT NOT NULL DEFAULT 'medium',
+        title       TEXT NOT NULL,
+        detail      TEXT NOT NULL DEFAULT '',
+        status      TEXT NOT NULL DEFAULT 'open',
+        recommended TEXT NOT NULL DEFAULT '',
+        meta        TEXT NOT NULL DEFAULT '{}',
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+        resolved_at TIMESTAMPTZ
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS amber_risks_user_idx ON amber_risks (user_id, status, created_at DESC)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS amber_approvals (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        kind        TEXT NOT NULL,
+        title       TEXT NOT NULL,
+        detail      TEXT NOT NULL DEFAULT '',
+        status      TEXT NOT NULL DEFAULT 'pending',
+        impact      TEXT NOT NULL DEFAULT 'high',
+        meta        TEXT NOT NULL DEFAULT '{}',
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+        resolved_at TIMESTAMPTZ,
+        resolved_by TEXT
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS amber_approvals_user_idx ON amber_approvals (user_id, status, created_at DESC)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS amber_exec_briefings (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        period      TEXT NOT NULL,
+        kind        TEXT NOT NULL DEFAULT 'weekly',
+        summary     TEXT NOT NULL DEFAULT '',
+        body        TEXT NOT NULL DEFAULT '{}',
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS amber_exec_briefings_user_idx ON amber_exec_briefings (user_id, created_at DESC)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS amber_optimizations (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        area        TEXT NOT NULL,
+        recommendation TEXT NOT NULL,
+        expected_impact TEXT NOT NULL DEFAULT '',
+        status      TEXT NOT NULL DEFAULT 'open',
+        evidence    TEXT NOT NULL DEFAULT '[]',
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS amber_optimizations_user_idx ON amber_optimizations (user_id, created_at DESC)`;
+
     for (const ddl of [
       `ALTER TABLE amber_productions ADD COLUMN IF NOT EXISTS campaign_id TEXT`,
       `ALTER TABLE amber_productions ADD COLUMN IF NOT EXISTS quality_score DOUBLE PRECISION DEFAULT 0`,
@@ -1743,6 +1876,139 @@ async function ensureWorkspaceTables(q: Sql): Promise<void> {
         created_at   TEXT NOT NULL DEFAULT (datetime('now'))
       )`);
     await exec(`CREATE INDEX IF NOT EXISTS amber_ops_checkpoints_cycle_idx ON amber_ops_checkpoints (cycle_id, created_at ASC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS amber_strategic_plans (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL,
+        title       TEXT NOT NULL,
+        horizon     TEXT NOT NULL DEFAULT 'quarterly',
+        status      TEXT NOT NULL DEFAULT 'active',
+        body        TEXT NOT NULL DEFAULT '{}',
+        created_at  TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at  TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS amber_strategic_plans_user_idx ON amber_strategic_plans (user_id, created_at DESC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS amber_initiatives (
+        id            TEXT PRIMARY KEY,
+        user_id       TEXT NOT NULL,
+        plan_id       TEXT,
+        objective_id  TEXT,
+        title         TEXT NOT NULL,
+        department    TEXT NOT NULL DEFAULT 'marketing',
+        status        TEXT NOT NULL DEFAULT 'active',
+        priority      INTEGER NOT NULL DEFAULT 50,
+        progress      REAL NOT NULL DEFAULT 0,
+        body          TEXT NOT NULL DEFAULT '{}',
+        created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at    TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS amber_initiatives_user_idx ON amber_initiatives (user_id, status, priority ASC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS amber_projects (
+        id             TEXT PRIMARY KEY,
+        user_id        TEXT NOT NULL,
+        initiative_id  TEXT,
+        title          TEXT NOT NULL,
+        status         TEXT NOT NULL DEFAULT 'active',
+        progress       REAL NOT NULL DEFAULT 0,
+        deadline       TEXT,
+        body           TEXT NOT NULL DEFAULT '{}',
+        created_at     TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at     TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS amber_projects_user_idx ON amber_projects (user_id, created_at DESC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS amber_exec_tasks (
+        id            TEXT PRIMARY KEY,
+        user_id       TEXT NOT NULL,
+        project_id    TEXT,
+        title         TEXT NOT NULL,
+        agent         TEXT NOT NULL DEFAULT '',
+        department    TEXT NOT NULL DEFAULT 'marketing',
+        status        TEXT NOT NULL DEFAULT 'queued',
+        depends_on    TEXT NOT NULL DEFAULT '[]',
+        quality       REAL NOT NULL DEFAULT 0,
+        body          TEXT NOT NULL DEFAULT '{}',
+        created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at    TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS amber_exec_tasks_user_idx ON amber_exec_tasks (user_id, status, created_at DESC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS amber_kpis (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL,
+        slug        TEXT NOT NULL,
+        label       TEXT NOT NULL,
+        value       REAL NOT NULL DEFAULT 0,
+        target      REAL NOT NULL DEFAULT 0,
+        unit        TEXT NOT NULL DEFAULT '',
+        trend       TEXT NOT NULL DEFAULT 'flat',
+        meta        TEXT NOT NULL DEFAULT '{}',
+        created_at  TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS amber_kpis_user_idx ON amber_kpis (user_id, created_at DESC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS amber_risks (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL,
+        severity    TEXT NOT NULL DEFAULT 'medium',
+        title       TEXT NOT NULL,
+        detail      TEXT NOT NULL DEFAULT '',
+        status      TEXT NOT NULL DEFAULT 'open',
+        recommended TEXT NOT NULL DEFAULT '',
+        meta        TEXT NOT NULL DEFAULT '{}',
+        created_at  TEXT NOT NULL DEFAULT (datetime('now')),
+        resolved_at TEXT
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS amber_risks_user_idx ON amber_risks (user_id, status, created_at DESC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS amber_approvals (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL,
+        kind        TEXT NOT NULL,
+        title       TEXT NOT NULL,
+        detail      TEXT NOT NULL DEFAULT '',
+        status      TEXT NOT NULL DEFAULT 'pending',
+        impact      TEXT NOT NULL DEFAULT 'high',
+        meta        TEXT NOT NULL DEFAULT '{}',
+        created_at  TEXT NOT NULL DEFAULT (datetime('now')),
+        resolved_at TEXT,
+        resolved_by TEXT
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS amber_approvals_user_idx ON amber_approvals (user_id, status, created_at DESC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS amber_exec_briefings (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL,
+        period      TEXT NOT NULL,
+        kind        TEXT NOT NULL DEFAULT 'weekly',
+        summary     TEXT NOT NULL DEFAULT '',
+        body        TEXT NOT NULL DEFAULT '{}',
+        created_at  TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS amber_exec_briefings_user_idx ON amber_exec_briefings (user_id, created_at DESC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS amber_optimizations (
+        id          TEXT PRIMARY KEY,
+        user_id     TEXT NOT NULL,
+        area        TEXT NOT NULL,
+        recommendation TEXT NOT NULL,
+        expected_impact TEXT NOT NULL DEFAULT '',
+        status      TEXT NOT NULL DEFAULT 'open',
+        evidence    TEXT NOT NULL DEFAULT '[]',
+        created_at  TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS amber_optimizations_user_idx ON amber_optimizations (user_id, created_at DESC)`);
 
     for (const col of [
       `ALTER TABLE amber_productions ADD COLUMN campaign_id TEXT`,
