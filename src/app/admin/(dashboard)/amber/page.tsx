@@ -1,20 +1,20 @@
 import AmberAdminDashboard from "@/components/admin/AmberAdminDashboard";
 
-export const metadata = { title: "Amber 34 — Executive Operations" };
+export const metadata = { title: "Amber 35 — Enterprise OS" };
 
 export default function AdminAmberPage() {
   return (
     <div className="space-y-4">
       <div>
         <h1 className="font-display text-3xl font-bold tracking-tight">
-          Amber 34 — Autonomous Executive Operations
+          Amber 35 — Enterprise Intelligence & Multi-Business OS
         </h1>
         <p className="mt-1 max-w-2xl text-sm text-white/55">
-          Strategic planning, cross-department coordination, KPI optimization, risks, approvals, and executive
-          briefings — on top of Amber 32 BOS + Amber 33 Ops. Admin Learning Mode only.
+          Multi-workspace enterprise layer on Amber 32–34: knowledge graph, predictive ops, self-optimization,
+          benchmarking, governance, and business reviews. Admin Learning Mode only — not public.
         </p>
         <p className="mt-2 text-xs text-white/40">
-          Reelo workspace + Amber ops KPIs only — not fabricated revenue, pipeline, or social reach.
+          Aggregate Reelo + Amber ops metrics only. Predictions are trend heuristics with confidence scores.
         </p>
       </div>
       <AmberAdminDashboard />

@@ -44,6 +44,16 @@ import {
   resolveApproval,
   generateExecBriefing,
 } from "@/lib/amber-exec-ops";
+import {
+  getEnterpriseDashboard,
+  syncEnterpriseWorkspaces,
+  runEnterpriseIntelligencePass,
+  searchKnowledgeGraph,
+  generatePredictiveInsights,
+  rebuildKnowledgeGraph,
+  runSelfOptimization,
+  generateEnterpriseBusinessReview,
+} from "@/lib/amber-enterprise";
 import { str } from "@/lib/workspace-api";
 import { asRecord } from "@/lib/json";
 import { randomUUID } from "node:crypto";
@@ -93,6 +103,7 @@ export async function GET(req: Request) {
   const access = await resolveAmberAccess();
   let launchOps = null;
   let opsConsole = null;
+  let enterprise = null;
   try {
     launchOps = await getAmberOpsDashboard(q);
   } catch {
@@ -102,6 +113,11 @@ export async function GET(req: Request) {
     opsConsole = await buildOpsConsole(q);
   } catch {
     opsConsole = null;
+  }
+  try {
+    enterprise = await getEnterpriseDashboard(q);
+  } catch {
+    enterprise = null;
   }
 
   const accounts = (await q`
@@ -288,6 +304,7 @@ export async function GET(req: Request) {
     learningWorkspaces,
     launchOps,
     opsConsole,
+    enterprise,
     notifyPrefs,
     access,
     summary: {
@@ -1040,6 +1057,71 @@ Include admin, marketing, social, content. Status planned only.`);
     }
     await resolveApproval(q, userId, approvalId, decision, "super_admin");
     return Response.json({ ok: true, approvalId, decision });
+  }
+
+  if (
+    body.action === "enterprise_sync" ||
+    body.action === "enterprise_pass" ||
+    body.action === "enterprise_predict" ||
+    body.action === "enterprise_review" ||
+    body.action === "enterprise_graph" ||
+    body.action === "enterprise_optimize" ||
+    body.action === "enterprise_search"
+  ) {
+    const q = await sqlAsync();
+    if (!q || !(await ensureSchema())) {
+      return Response.json({ ok: false, error: "Storage unavailable." }, { status: 503 });
+    }
+    try {
+      if (body.action === "enterprise_sync") {
+        return Response.json({ ok: true, ...(await syncEnterpriseWorkspaces(q, "super_admin")), enterprise: await getEnterpriseDashboard(q) });
+      }
+      if (body.action === "enterprise_pass") {
+        const result = await runEnterpriseIntelligencePass(q, "super_admin");
+        return Response.json({ ok: true, ...result, enterprise: await getEnterpriseDashboard(q) });
+      }
+      if (body.action === "enterprise_predict") {
+        return Response.json({
+          ok: true,
+          forecasts: await generatePredictiveInsights(q, str(body.userId, 80) || null),
+          enterprise: await getEnterpriseDashboard(q),
+        });
+      }
+      if (body.action === "enterprise_review") {
+        const kind = (str(body.kind, 20) || "weekly") as
+          | "daily"
+          | "weekly"
+          | "monthly"
+          | "quarterly"
+          | "annual";
+        return Response.json({
+          ok: true,
+          ...(await generateEnterpriseBusinessReview(q, kind, "super_admin")),
+          enterprise: await getEnterpriseDashboard(q),
+        });
+      }
+      if (body.action === "enterprise_graph") {
+        const userId = str(body.userId, 80);
+        if (!userId) return Response.json({ ok: false, error: "userId required." }, { status: 400 });
+        return Response.json({ ok: true, ...(await rebuildKnowledgeGraph(q, userId)) });
+      }
+      if (body.action === "enterprise_optimize") {
+        const userId = str(body.userId, 80);
+        if (!userId) return Response.json({ ok: false, error: "userId required." }, { status: 400 });
+        return Response.json({ ok: true, ...(await runSelfOptimization(q, userId, "super_admin")) });
+      }
+      if (body.action === "enterprise_search") {
+        return Response.json({
+          ok: true,
+          ...(await searchKnowledgeGraph(q, str(body.q, 120) || "", str(body.userId, 80) || null)),
+        });
+      }
+    } catch (e) {
+      return Response.json(
+        { ok: false, error: e instanceof Error ? e.message : "Enterprise action failed." },
+        { status: 500 },
+      );
+    }
   }
 
   return Response.json({ ok: false, error: "Unknown action." }, { status: 400 });

@@ -24,6 +24,7 @@ import { activeObjectiveGoal, linkObjectiveArtifacts } from "@/lib/amber-objecti
 import { generateImprovements } from "@/lib/amber-improvements";
 import { AMBER_HONESTY_NOTE } from "@/lib/amber-explain";
 import { runExecutiveOpsPass } from "@/lib/amber-exec-ops";
+import { syncEnterpriseWorkspaces, rebuildKnowledgeGraph, generatePredictiveInsights } from "@/lib/amber-enterprise";
 import type { Sql } from "@/lib/workspace-api";
 
 /**
@@ -331,6 +332,19 @@ Return JSON: { "focus": "...", "campaignIdeas": ["..."], "ownerAsks": [] }`);
         step: "executive_ops_pass",
         ok: false,
         detail: e instanceof Error ? e.message : "exec ops failed",
+      });
+    }
+
+    try {
+      await syncEnterpriseWorkspaces(q, actorEmail);
+      await rebuildKnowledgeGraph(q, userId);
+      await generatePredictiveInsights(q, userId);
+      steps.push({ step: "enterprise_intelligence", ok: true });
+    } catch (e) {
+      steps.push({
+        step: "enterprise_intelligence",
+        ok: false,
+        detail: e instanceof Error ? e.message : "enterprise sync failed",
       });
     }
 

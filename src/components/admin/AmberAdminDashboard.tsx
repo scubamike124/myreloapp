@@ -6,6 +6,7 @@ import Link from "next/link";
 type Tab =
   | "ops"
   | "command"
+  | "enterprise"
   | "exec"
   | "launch"
   | "control"
@@ -88,6 +89,34 @@ type Dash = {
     recentCheckpoints?: { cycleId: string; step: string; status: string; createdAt: string }[];
     activeAgents?: { id: string; agent: string; department?: string; title: string; status: string }[];
     flags?: Record<string, unknown>;
+  } | null;
+  enterprise: {
+    honestyNote?: string;
+    orgId?: string;
+    workspaces?: {
+      userId: string;
+      label: string;
+      readinessScore: number;
+      healthScore: number;
+      status: string;
+    }[];
+    readiness?: { score?: number };
+    forecasts?: {
+      id: string;
+      title: string;
+      confidence: number;
+      prediction: string;
+      mitigation: string;
+      kind: string;
+    }[];
+    benchmarks?: Record<string, unknown>[];
+    policies?: { slug: string; title: string; rule: string; enforced: boolean }[];
+    reviews?: { id: string; kind: string; summary: string; createdAt: string }[];
+    enterpriseKpis?: { slug: string; avg: number; samples: number }[];
+    knowledgeGraph?: { nodeCount: number };
+    allocations?: Record<string, unknown>[];
+    decisions?: Record<string, unknown>[];
+    strategies?: { id: string; title: string; status: string; horizon?: string; userId?: string }[];
   } | null;
   notifyPrefs: {
     weeklyReport: boolean;
@@ -215,6 +244,7 @@ type Dash = {
 const TABS: { id: Tab; label: string }[] = [
   { id: "ops", label: "Ops" },
   { id: "command", label: "Command" },
+  { id: "enterprise", label: "Enterprise" },
   { id: "exec", label: "Exec Ops" },
   { id: "launch", label: "Launch" },
   { id: "control", label: "Control" },
@@ -248,6 +278,8 @@ export default function AmberAdminDashboard() {
   const [objectiveGoal, setObjectiveGoal] = useState("");
   const [memoryTitle, setMemoryTitle] = useState("");
   const [memoryBody, setMemoryBody] = useState("");
+  const [kgQuery, setKgQuery] = useState("");
+  const [kgResults, setKgResults] = useState<Record<string, unknown>[] | null>(null);
   const [testerId, setTesterId] = useState("");
   const [kindFilter, setKindFilter] = useState("");
   const [brandRules, setBrandRules] = useState("");
@@ -568,6 +600,212 @@ export default function AmberAdminDashboard() {
               </button>
             </div>
             <p className="mt-2 text-xs text-white/40">Select a tester user above for workspace-scoped recovery.</p>
+          </div>
+        </div>
+      ) : null}
+
+      {tab === "enterprise" ? (
+        <div className="space-y-4">
+          <div className="rounded-2xl p-5" style={card}>
+            <h2 className="font-display text-xl font-bold">Enterprise Console (Amber 35)</h2>
+            <p className="mt-1 text-xs text-white/50">
+              {data.enterprise?.honestyNote ||
+                "Multi-workspace intelligence on Learning Mode workspaces — isolated by user_id."}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button
+                type="button"
+                disabled={busy}
+                onClick={async () => {
+                  await post({ action: "enterprise_sync" });
+                  setFlash("Enterprise workspaces synced.");
+                }}
+                className="rounded-lg px-4 py-2 text-sm font-bold text-white disabled:opacity-40"
+                style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+              >
+                Sync workspaces
+              </button>
+              <button
+                type="button"
+                disabled={busy}
+                onClick={async () => {
+                  await post({ action: "enterprise_pass" });
+                  setFlash("Enterprise intelligence pass complete.");
+                }}
+                className="rounded-lg px-4 py-2 text-sm font-bold text-white disabled:opacity-40"
+                style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+              >
+                Run intelligence pass
+              </button>
+              <button
+                type="button"
+                disabled={busy}
+                onClick={async () => {
+                  await post({ action: "enterprise_predict" });
+                  setFlash("Predictive insights refreshed.");
+                }}
+                className="rounded-lg border border-white/20 px-4 py-2 text-sm font-bold text-white/90 disabled:opacity-40"
+              >
+                Predict risks
+              </button>
+              <button
+                type="button"
+                disabled={busy}
+                onClick={async () => {
+                  await post({ action: "enterprise_review", kind: "weekly" });
+                  setFlash("Enterprise weekly review generated.");
+                }}
+                className="rounded-lg border border-white/20 px-4 py-2 text-sm font-bold text-white/90 disabled:opacity-40"
+              >
+                Weekly enterprise review
+              </button>
+              <button
+                type="button"
+                disabled={busy || !testerId}
+                onClick={async () => {
+                  await post({ action: "enterprise_graph", userId: testerId });
+                  setFlash("Knowledge graph rebuilt for tester.");
+                }}
+                className="rounded-lg border border-white/20 px-4 py-2 text-sm font-bold text-white/90 disabled:opacity-40"
+              >
+                Rebuild KG (tester)
+              </button>
+              <button
+                type="button"
+                disabled={busy || !testerId}
+                onClick={async () => {
+                  await post({ action: "enterprise_optimize", userId: testerId });
+                  setFlash("Self-optimization pass complete.");
+                }}
+                className="rounded-lg border border-white/20 px-4 py-2 text-sm font-bold text-white/90 disabled:opacity-40"
+              >
+                Self-optimize (tester)
+              </button>
+            </div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+              <div>
+                Org readiness: <strong>{data.enterprise?.readiness?.score ?? "—"}</strong>
+              </div>
+              <div>
+                Workspaces: <strong>{data.enterprise?.workspaces?.length ?? 0}</strong>
+              </div>
+              <div>
+                KG nodes: <strong>{data.enterprise?.knowledgeGraph?.nodeCount ?? 0}</strong>
+              </div>
+              <div>
+                Forecasts: <strong>{data.enterprise?.forecasts?.length ?? 0}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-2">
+            <div className="rounded-2xl p-5" style={card}>
+              <h3 className="font-semibold">Workspaces</h3>
+              <ul className="mt-2 max-h-48 space-y-1 overflow-auto text-sm">
+                {(data.enterprise?.workspaces || []).map((w) => (
+                  <li key={String(w.userId)}>
+                    {String(w.label)} — health {w.healthScore} / ready {w.readinessScore}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl p-5" style={card}>
+              <h3 className="font-semibold">Predictive insights</h3>
+              <ul className="mt-2 max-h-48 space-y-2 overflow-auto text-sm">
+                {(data.enterprise?.forecasts || []).slice(0, 10).map((f) => (
+                  <li key={String(f.id)} className="border-b border-white/5 pb-1">
+                    <span className="text-[#ff8892]">{Math.round(Number(f.confidence) * 100)}%</span> {f.title}
+                    <p className="text-xs text-white/50">{f.mitigation}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl p-5" style={card}>
+              <h3 className="font-semibold">Enterprise KPIs (avg)</h3>
+              <ul className="mt-2 max-h-40 space-y-1 overflow-auto text-sm">
+                {(data.enterprise?.enterpriseKpis || []).map((k) => (
+                  <li key={k.slug}>
+                    {k.slug}: <strong>{k.avg}</strong> <span className="text-white/40">n={k.samples}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl p-5" style={card}>
+              <h3 className="font-semibold">Governance</h3>
+              <ul className="mt-2 max-h-40 space-y-1 overflow-auto text-xs text-white/70">
+                {(data.enterprise?.policies || []).map((p) => (
+                  <li key={p.slug}>
+                    <strong>{p.title}</strong> — {p.rule}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="rounded-2xl p-5" style={card}>
+            <h3 className="font-semibold">Knowledge graph search</h3>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <input
+                className="min-w-[200px] flex-1 rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm"
+                placeholder="Search nodes…"
+                value={kgQuery}
+                onChange={(e) => setKgQuery(e.target.value)}
+              />
+              <button
+                type="button"
+                disabled={busy || !kgQuery.trim()}
+                onClick={async () => {
+                  const json = await post({
+                    action: "enterprise_search",
+                    q: kgQuery.trim(),
+                    userId: testerId || undefined,
+                  });
+                  setKgResults((json?.nodes as Record<string, unknown>[]) || []);
+                  setFlash("Graph search complete.");
+                }}
+                className="rounded-lg border border-white/20 px-4 py-2 text-sm font-bold text-white/90 disabled:opacity-40"
+              >
+                Search
+              </button>
+            </div>
+            {kgResults ? (
+              <ul className="mt-3 max-h-40 space-y-1 overflow-auto text-xs text-white/70">
+                {kgResults.map((n) => (
+                  <li key={String(n.id)}>
+                    [{String(n.kind)}] {String(n.title)}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+
+          <div className="rounded-2xl p-5" style={card}>
+            <h3 className="font-semibold">Executive Strategy Center</h3>
+            <p className="mt-1 text-xs text-white/50">
+              Cross-workspace strategic plans from Amber 34 — manage detail in Exec Ops.
+            </p>
+            <ul className="mt-2 max-h-40 space-y-1 overflow-auto text-sm">
+              {(data.enterprise?.strategies || []).map((s) => (
+                <li key={String(s.id)}>
+                  <span className="text-[#ff8892]">{String(s.status)}</span> {String(s.title)}
+                  {s.horizon ? <span className="text-white/40"> · {String(s.horizon)}</span> : null}
+                </li>
+              ))}
+              {!data.enterprise?.strategies?.length ? (
+                <li className="text-white/40">No plans yet — run Exec Ops plan on a Learning Mode workspace.</li>
+              ) : null}
+            </ul>
+          </div>
+
+          <div className="rounded-2xl p-5" style={card}>
+            <h3 className="font-semibold">Recent enterprise reviews</h3>
+            <ul className="mt-2 max-h-40 space-y-1 overflow-auto text-sm">
+              {(data.enterprise?.reviews || []).map((r) => (
+                <li key={String(r.id)}>
+                  <span className="text-[#ff8892]">{String(r.kind)}</span> {String(r.summary).slice(0, 120)}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       ) : null}
