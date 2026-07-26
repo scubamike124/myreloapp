@@ -11,6 +11,7 @@ const NAV = [
   { href: "/admin/plans", label: "Plans", icon: <><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 20l-4.9 2.6.9-5.5-4-3.9L9.5 7z" /></> },
   { href: "/admin/gateways", label: "Payment gateways", icon: <><rect x="2.5" y="5" width="19" height="14" rx="2.5" /><path d="M6.5 15h4M15 15h2.5" /><circle cx="12" cy="12" r="0.5" /></> },
   { href: "/admin/vault", label: "Key vault", icon: <><rect x="3.5" y="10.5" width="17" height="10" rx="2.5" /><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5" /><circle cx="12" cy="15.5" r="1.4" /></> },
+  { href: "/admin/amber", label: "Amber Autonomous", icon: <><circle cx="12" cy="12" r="3" /><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4l1.4-1.4M17 7l1.4-1.4" /></> },
 ];
 
 export default function AdminShell({ children }: { children: React.ReactNode }) {
