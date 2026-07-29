@@ -63,6 +63,33 @@ function LibraryCard({ count }: { count: number }) {
   );
 }
 
+function TemplatesCard() {
+  return (
+    <Link
+      href="/create/templates"
+      className="group relative block overflow-hidden rounded-3xl border border-amber-400/25 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-amber-400/50 hover:shadow-2xl hover:shadow-amber-900/20"
+      style={{ background: "linear-gradient(135deg,rgba(245,215,142,.14),rgba(20,8,10,.92))" }}
+    >
+      <div className="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400/90">Production library</p>
+          <h2 className="font-display mt-1 text-2xl font-extrabold tracking-tight sm:text-3xl">
+            Video templates
+          </h2>
+          <p className="mt-2 max-w-xl text-sm text-white/60">
+            20 polished formats — product demo, social ads, industry packs. Add your business details;
+            Reelo builds the script and opens the studio. VQOS-gated before publish.
+          </p>
+        </div>
+        <span className="inline-flex shrink-0 items-center gap-2 rounded-full px-5 py-3 text-sm font-bold text-[#0a0607]" style={{ background: "linear-gradient(135deg,#f5d78e,#c9a227)" }}>
+          Browse templates
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        </span>
+      </div>
+    </Link>
+  );
+}
+
 export default function CreatePage() {
   const group = AVATAR_GROUP.map((s) => TOOLS.find((t) => t.slug === s)).filter(Boolean) as Tool[];
   const rest = TOOLS.filter((t) => !AVATAR_GROUP.includes(t.slug));
@@ -77,6 +104,10 @@ export default function CreatePage() {
         <p className="mx-auto mt-3 max-w-[480px] text-[16px]" style={{ color: "#a99a9c" }}>
           Pick a tool, add your idea, and Reelo builds the video — ready in 3–4 clicks.
         </p>
+      </section>
+
+      <section className="mx-auto max-w-[1100px] px-6 pt-8">
+        <TemplatesCard />
       </section>
 
       <section className="mx-auto max-w-[1100px] px-6 pt-8">
