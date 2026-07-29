@@ -2,6 +2,11 @@ import { asArray, asRecord, asString, childRecord } from "@/lib/json";
 import { NextResponse } from "next/server";
 import snapshot from "@/data/heygen-avatars.json";
 import { CATEGORIES, getCategory, matches } from "@/lib/avatar-categories";
+import {
+  isDeskOrSofaAvatar,
+  isPatternBanned,
+  listApprovedReeloAvatars,
+} from "@/lib/reelo-avatar-eligibility";
 
 export const runtime = "nodejs";
 
@@ -13,6 +18,20 @@ export const runtime = "nodejs";
 type Avatar = { avatarId: string; name: string; gender: string; premium: boolean; image: string; video: string };
 
 const SNAPSHOT = snapshot as Avatar[];
+
+function registryAllowedIds(): Set<string> {
+  return new Set(listApprovedReeloAvatars().map((a) => a.avatarId));
+}
+
+/** Canonical VQOS filter — never hard-code a second allowlist here */
+function filterToVqosRegistry(list: Avatar[]): Avatar[] {
+  const allowed = registryAllowedIds();
+  return list.filter((a) => {
+    if (!allowed.has(a.avatarId)) return false;
+    if (isPatternBanned(a.avatarId, a.name) || isDeskOrSofaAvatar(a.avatarId, a.name)) return false;
+    return true;
+  });
+}
 
 // Live-refresh cache: only populated when ?refresh=1 is used, then reused.
 let live: { at: number; avatars: Avatar[] } | null = null;
@@ -44,6 +63,7 @@ async function fetchLive(key: string): Promise<Avatar[]> {
 
 // GET /api/heygen-avatars?q=&offset=0&limit=48&gender=&includePremium=1&refresh=1
 // Serves the bundled snapshot instantly; ?refresh=1 pulls a fresh catalog.
+// Always intersected with reelo-brand-avatars.json (VQOS registry).
 export async function GET(req: Request) {
   try {
     const sp = new URL(req.url).searchParams;
@@ -52,15 +72,55 @@ export async function GET(req: Request) {
     const includePremium = sp.get("includePremium") === "1";
     const offset = Math.max(0, Number(sp.get("offset") ?? 0) || 0);
     const limit = Math.min(96, Math.max(1, Number(sp.get("limit") ?? 48) || 48));
+    const allowed = registryAllowedIds();
 
     // Single-avatar lookup, so /avatars can deep-link a choice into the studio
     // (?avatar=<id>) and the studio can restore it without paging the catalog.
     const id = (sp.get("id") ?? "").trim();
     if (id) {
+      if (!allowed.has(id) || isPatternBanned(id) || isDeskOrSofaAvatar(id)) {
+        return NextResponse.json(
+          {
+            ok: false,
+            available: false,
+            error: "AVATAR_UNAVAILABLE",
+            message:
+              "This avatar is not available for Reelo production (not in the VQOS registry, or desk/sofa/quarantined). No substitute was applied.",
+            avatarId: id,
+          },
+          { status: 404 },
+        );
+      }
       const found = SNAPSHOT.find((a) => a.avatarId === id);
-      if (!found) return NextResponse.json({ error: "Avatar not found." }, { status: 404 });
+      if (!found) {
+        const reg = listApprovedReeloAvatars().find((a) => a.avatarId === id);
+        if (!reg) {
+          return NextResponse.json(
+            {
+              ok: false,
+              available: false,
+              error: "AVATAR_UNAVAILABLE",
+              message: "Avatar not found and not eligible.",
+              avatarId: id,
+            },
+            { status: 404 },
+          );
+        }
+        return NextResponse.json({
+          ok: true,
+          available: true,
+          avatar: {
+            avatarId: reg.avatarId,
+            name: reg.name || reg.avatarId,
+            gender: "",
+            premium: false,
+            image: "",
+            video: "",
+          },
+        });
+      }
       return NextResponse.json(
-        { ok: true, avatar: found },
+        { ok: true, available: true, avatar: found },
         { headers: { "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800" } },
       );
     }
@@ -78,6 +138,8 @@ export async function GET(req: Request) {
       }
     }
 
+    const totalCatalog = list.length;
+    list = filterToVqosRegistry(list);
     const totalAll = list.length;
 
     // Category filter. "all" is everything; "other" is whatever matches no
@@ -99,9 +161,22 @@ export async function GET(req: Request) {
 
     const total = list.length;
     const page = list.slice(offset, offset + limit);
-    // Public catalog data — let the CDN serve repeat queries.
     return NextResponse.json(
-      { ok: true, source, total, totalAll, offset, limit, avatars: page },
+      {
+        ok: true,
+        source,
+        registryFiltered: true,
+        total,
+        totalAll,
+        totalCatalogBeforeVqos: totalCatalog,
+        offset,
+        limit,
+        avatars: page,
+        emptyMessage:
+          total === 0
+            ? "No VQOS-approved standing avatars match this filter. Desk, sofa, and quarantined avatars are unavailable — no substitute is applied."
+            : undefined,
+      },
       { headers: { "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800" } },
     );
   } catch (e) {

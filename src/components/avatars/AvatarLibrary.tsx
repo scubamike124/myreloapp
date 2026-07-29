@@ -122,10 +122,10 @@ export default function AvatarLibrary({ category = "all", initialQuery = "" }: {
 
       <p className="mb-4 text-[13px] text-white/45">
         {loading && avatars.length === 0
-          ? "Loading avatars…"
-          : `${total.toLocaleString()} avatar${total === 1 ? "" : "s"}${q ? ` matching “${q}”` : ""}${
-              totalAll && total !== totalAll ? ` of ${totalAll.toLocaleString()}` : ""
-            }`}
+          ? "Loading VQOS-approved avatars…"
+          : `${total.toLocaleString()} approved avatar${total === 1 ? "" : "s"}${q ? ` matching “${q}”` : ""}${
+              totalAll && total !== totalAll ? ` of ${totalAll.toLocaleString()} registry-eligible` : ""
+            } · desk, sofa, and quarantined hosts are unavailable`}
       </p>
 
       {err && (
@@ -177,7 +177,9 @@ export default function AvatarLibrary({ category = "all", initialQuery = "" }: {
       )}
 
       {!loading && avatars.length === 0 && !err && (
-        <p className="py-12 text-center text-sm text-white/45">No avatars match that search.</p>
+        <p className="py-12 text-center text-sm text-white/45">
+          No VQOS-approved standing avatars match that search. Desk, sofa, and quarantined avatars are unavailable — no substitute was applied.
+        </p>
       )}
     </div>
   );

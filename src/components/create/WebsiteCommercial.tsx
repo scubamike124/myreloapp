@@ -65,6 +65,8 @@ export default function WebsiteCommercial() {
   const [avatarName, setAvatarName] = useState("");
   const [avatarImage, setAvatarImage] = useState("");
   const [avatarPick, setAvatarPick] = useState<{ avatarId: string; name: string; image: string }[]>([]);
+  const [avatarUnavailable, setAvatarUnavailable] = useState<string | null>(null);
+  const [avatarsEmptyMsg, setAvatarsEmptyMsg] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const [short, setShort] = useState<Shortfall | null>(null);
   const [seconds, setSeconds] = useState(() => defaultDurationSeconds("website-commercial"));
@@ -93,10 +95,20 @@ export default function WebsiteCommercial() {
         if (cancelled || !res.ok || !Array.isArray(data.avatars)) return;
         const list = data.avatars as { avatarId: string; name: string; image: string }[];
         setAvatarPick(list);
+        setAvatarsEmptyMsg(
+          list.length === 0
+            ? (typeof data.emptyMessage === "string" && data.emptyMessage) ||
+                "No VQOS-approved standing avatars available. Desk, sofa, and quarantined avatars are hidden — no substitute was applied."
+            : null,
+        );
         if (list[0]) {
           setAvatarId((cur) => cur || list[0].avatarId);
           setAvatarName((cur) => cur || list[0].name);
           setAvatarImage((cur) => cur || list[0].image);
+        } else {
+          setAvatarId("");
+          setAvatarName("");
+          setAvatarImage("");
         }
       } catch {
         /* generate still works with server default */
@@ -115,10 +127,17 @@ export default function WebsiteCommercial() {
       try {
         const res = await fetch(`/api/heygen-avatars?id=${encodeURIComponent(wanted)}`);
         const data = await res.json();
-        if (!cancelled && res.ok && data.avatar) {
+        if (cancelled) return;
+        if (res.ok && data.avatar) {
+          setAvatarUnavailable(null);
           setAvatarId(data.avatar.avatarId);
           setAvatarName(data.avatar.name);
           setAvatarImage(data.avatar.image);
+        } else {
+          setAvatarUnavailable(
+            (typeof data.message === "string" && data.message) ||
+              "That avatar is unavailable for Reelo production. No substitute was applied.",
+          );
         }
       } catch {
         /* ignore */
@@ -446,6 +465,7 @@ export default function WebsiteCommercial() {
                         type="button"
                         title={a.name}
                         onClick={() => {
+                          setAvatarUnavailable(null);
                           setAvatarId(a.avatarId);
                           setAvatarName(a.name);
                           setAvatarImage(a.image);
@@ -460,10 +480,15 @@ export default function WebsiteCommercial() {
                   })}
                   {avatarPick.length === 0 && (
                     <p className="col-span-4 px-2 py-4 text-center text-xs text-white/40 sm:col-span-6">
-                      Loading avatars… or open the library link above.
+                      {avatarsEmptyMsg || "Loading VQOS-approved avatars… or open the library link above."}
                     </p>
                   )}
                 </div>
+                {avatarUnavailable && (
+                  <p className="mt-2 rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs text-amber-100">
+                    Unavailable: {avatarUnavailable}
+                  </p>
+                )}
               </div>
 
               {/* AI-written commercial script */}

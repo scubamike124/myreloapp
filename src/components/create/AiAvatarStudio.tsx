@@ -62,6 +62,8 @@ export default function AiAvatarStudio() {
 
   const [avatars, setAvatars] = useState<Avatar[]>([]);
   const [selected, setSelected] = useState<Avatar | null>(null);
+  const [avatarUnavailable, setAvatarUnavailable] = useState<string | null>(null);
+  const [avatarsEmptyMsg, setAvatarsEmptyMsg] = useState<string | null>(null);
   const [loadingAvatars, setLoadingAvatars] = useState(true);
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState("");
@@ -94,6 +96,12 @@ export default function AiAvatarStudio() {
         if (cancelled || !res.ok) return;
         const list = (Array.isArray(data.avatars) ? data.avatars : []) as Avatar[];
         setAvatars(list);
+        setAvatarsEmptyMsg(
+          list.length === 0
+            ? (typeof data.emptyMessage === "string" && data.emptyMessage) ||
+                "No VQOS-approved standing avatars available. Desk, sofa, and quarantined avatars are hidden — no substitute was applied."
+            : null,
+        );
         setSelected((cur) => cur ?? list[0] ?? null);
       } catch {
         setErr("Could not load avatars — try the Avatar Library link.");
@@ -118,9 +126,17 @@ export default function AiAvatarStudio() {
       try {
         const res = await fetch(`/api/heygen-avatars?id=${encodeURIComponent(wantedId)}`);
         const data = await res.json();
-        if (!cancelled && res.ok && data.avatar) {
+        if (cancelled) return;
+        if (res.ok && data.avatar) {
+          setAvatarUnavailable(null);
           setFaceMode("avatar");
           setSelected(data.avatar as Avatar);
+        } else {
+          setSelected(null);
+          setAvatarUnavailable(
+            (typeof data.message === "string" && data.message) ||
+              "That avatar is unavailable for Reelo production. No substitute was applied — pick an approved standing avatar.",
+          );
         }
       } catch {
         /* ignore */
@@ -506,11 +522,22 @@ export default function AiAvatarStudio() {
 
             {faceMode === "avatar" ? (
               <>
+                {avatarUnavailable && (
+                  <p className="mb-3 rounded-xl border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs text-amber-100">
+                    Unavailable: {avatarUnavailable}
+                  </p>
+                )}
                 <div className="grid max-h-[280px] grid-cols-3 gap-2 overflow-y-auto sm:grid-cols-4">
                   {loadingAvatars &&
                     Array.from({ length: 8 }).map((_, i) => (
                       <div key={i} className="aspect-[3/4] animate-pulse rounded-xl" style={{ background: "rgba(255,70,85,.08)" }} />
                     ))}
+                  {!loadingAvatars && avatars.length === 0 && (
+                    <p className="col-span-3 px-2 py-6 text-center text-xs text-white/50 sm:col-span-4">
+                      {avatarsEmptyMsg ||
+                        "No VQOS-approved standing avatars available. Desk, sofa, and quarantined avatars are hidden."}
+                    </p>
+                  )}
                   {avatars.map((a) => {
                     const on = selected?.avatarId === a.avatarId;
                     return (
@@ -518,7 +545,10 @@ export default function AiAvatarStudio() {
                         key={a.avatarId}
                         type="button"
                         title={a.name}
-                        onClick={() => setSelected(a)}
+                        onClick={() => {
+                          setAvatarUnavailable(null);
+                          setSelected(a);
+                        }}
                         className="relative overflow-hidden rounded-xl"
                         style={{ border: on ? "2px solid #ff3645" : "1px solid rgba(255,255,255,.1)" }}
                       >
