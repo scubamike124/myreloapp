@@ -2,6 +2,8 @@ import { asRecord, asString, childRecord, errorMessage } from "@/lib/json";
 import { NextResponse } from "next/server";
 import { chargeFor, refundCharge, refundLater } from "@/lib/charge";
 import { clampDurationSeconds } from "@/lib/token-costs";
+import { DEFAULT_REELO_VOICE_ID } from "@/lib/reelo-avatar-eligibility";
+import { validateHeygenProductionSubmission } from "@/lib/validate-heygen-production";
 
 export const runtime = "nodejs";
 // Status poll may download + re-host the finished MP4 so playback keeps audio.
@@ -42,8 +44,8 @@ const MAX_SECONDS = Number(process.env.HEYGEN_MAX_SECONDS ?? 30); // hard cap on
 // text the voice speaks. At a natural ~2.7 words/sec, seconds map to a word budget.
 const WORDS_PER_SECOND = 2.7;
 
-const DEFAULT_AVATAR_ID = "Abigail_expressive_2024112501";
-const DEFAULT_VOICE_ID = "f8c69e517f424cafaecde32dde57096b"; // Allison (English) — verified with Abigail
+/** No default Abigail / desk / sofa — client must pass a registry avatar, or we stop. */
+const DEFAULT_VOICE_ID = DEFAULT_REELO_VOICE_ID;
 const DEFAULT_SCRIPT =
   "Welcome to Reelo, where your ideas become studio-quality videos in minutes. " +
   "No cameras, no crews, no editing — just type your message and press generate. " +
@@ -165,7 +167,7 @@ export async function GET(req: Request) {
 
     let videoUrl: string | null = asString(d.video_url) || null;
     let durable = false;
-    let providerUrl: string | null = videoUrl;
+    const providerUrl: string | null = videoUrl;
     if (d.status === "completed" && videoUrl) {
       const ready = await durablePlaybackUrl(videoId, videoUrl);
       videoUrl = ready.url;
@@ -182,6 +184,9 @@ export async function GET(req: Request) {
       thumbnailUrl: d.thumbnail_url ?? null,
       duration: d.duration ?? null,
       error: d.error ?? null,
+      // VQOS: provider completion ≠ publish authorization
+      publishAuthorized: false,
+      publishGate: "assertPublishable required before delivery, scheduling, or publication",
     });
   }
 
@@ -214,6 +219,12 @@ export async function POST(req: Request) {
     height?: number;
     action?: string;
     seconds?: number;
+    videoType?: string;
+    engine?: string;
+    estimatedCostUsd?: number;
+    maximumAuthorizedCostUsd?: number;
+    premiumUpgradeAllowed?: boolean;
+    platform?: string;
   } = {};
   try {
     const raw: unknown = await req.json();
@@ -226,6 +237,13 @@ export async function POST(req: Request) {
       height: typeof rec.height === "number" ? rec.height : undefined,
       action: asString(rec.action) || undefined,
       seconds: typeof rec.seconds === "number" ? rec.seconds : Number(rec.seconds) || undefined,
+      videoType: asString(rec.videoType) || undefined,
+      engine: asString(rec.engine) || undefined,
+      estimatedCostUsd: typeof rec.estimatedCostUsd === "number" ? rec.estimatedCostUsd : undefined,
+      maximumAuthorizedCostUsd:
+        typeof rec.maximumAuthorizedCostUsd === "number" ? rec.maximumAuthorizedCostUsd : undefined,
+      premiumUpgradeAllowed: rec.premiumUpgradeAllowed === true,
+      platform: asString(rec.platform) || undefined,
     };
   } catch {
     /* empty body → use defaults */
@@ -240,8 +258,37 @@ export async function POST(req: Request) {
     seconds,
     hardMax,
   );
-  const avatarId = body.avatarId?.trim() || DEFAULT_AVATAR_ID;
-  const voiceId = body.voiceId?.trim() || DEFAULT_VOICE_ID;
+
+  const w = body.width ?? 1280;
+  const h = body.height ?? 720;
+  const aspectRatio = Math.abs(w / h - 9 / 16) < 0.08 ? "9:16" : Math.abs(w / h - 16 / 9) < 0.08 ? "16:9" : `${w}x${h}`;
+
+  const planGate = validateHeygenProductionSubmission({
+    videoType:
+      body.videoType ||
+      (action === "website-commercial" ? "tv_commercial" : "social_short"),
+    avatarId: body.avatarId,
+    engine: body.engine || "avatar_iii",
+    estimatedCostUsd: body.estimatedCostUsd,
+    maximumAuthorizedCostUsd: body.maximumAuthorizedCostUsd,
+    premiumUpgradeAllowed: body.premiumUpgradeAllowed,
+    aspectRatio,
+    platform: body.platform || (action === "website-commercial" ? "web" : "tiktok"),
+    script,
+  });
+  if (!planGate.ok) {
+    refund(id);
+    return NextResponse.json(
+      {
+        error: `PAID_RENDER_BLOCKED: ${planGate.failures.join(" | ")}`,
+        failures: planGate.failures,
+        videoType: planGate.videoType,
+      },
+      { status: 400 },
+    );
+  }
+  const avatarId = planGate.avatarId!;
+  const voiceId = body.voiceId?.trim() || planGate.voiceId || DEFAULT_VOICE_ID;
 
   const charged = await chargeFor(action, { seconds });
   if (!charged.ok) {
@@ -264,7 +311,7 @@ export async function POST(req: Request) {
               voice: { type: "text", input_text: script, voice_id: voiceId },
             },
           ],
-          dimension: { width: body.width ?? 1280, height: body.height ?? 720 },
+          dimension: { width: w, height: h },
         }),
       },
       key,
@@ -294,6 +341,9 @@ export async function POST(req: Request) {
       expanded,
       maxSeconds,
       targetSeconds,
+      videoType: planGate.videoType,
+      avatarId,
+      publishAuthorized: false,
       poll: `/api/heygen-video?video_id=${videoId}`,
     });
   } catch (e) {
