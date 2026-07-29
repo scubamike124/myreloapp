@@ -186,6 +186,12 @@ export default function TemplateGallery() {
               <Chip key={p} label={p} on={platform === p} onClick={() => setPlatform(platform === p ? "" : p)} />
             ))}
           </div>
+          <div className="flex flex-wrap gap-2">
+            <Chip label="All styles" on={!style} onClick={() => setStyle("")} />
+            {filters.styles.slice(0, 14).map((s) => (
+              <Chip key={s} label={s} on={style === s} onClick={() => setStyle(style === s ? "" : s)} />
+            ))}
+          </div>
         </div>
       )}
 
@@ -233,17 +239,26 @@ export default function TemplateGallery() {
                 <p className="mt-3 text-[10px] uppercase tracking-wide text-white/35">
                   {t.industries.slice(0, 3).join(" · ")}
                 </p>
-                {t.previewKind === "storyboard" && (
-                  <div className="mt-3 flex gap-1">
-                    {t.sceneBlueprint.slice(0, 5).map((s) => (
-                      <div
-                        key={s.id}
-                        className="h-8 flex-1 rounded-md bg-gradient-to-b from-white/10 to-white/5"
-                        title={s.role}
+                  {t.previewKind === "annie-rank1" ? (
+                    <div className="mt-3 overflow-hidden rounded-lg border border-white/10">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src="/templates/product-demo-preview.jpg"
+                        alt=""
+                        className="aspect-[16/10] w-full object-cover object-top"
                       />
-                    ))}
-                  </div>
-                )}
+                    </div>
+                  ) : (
+                    <div className="mt-3 flex gap-1">
+                      {t.sceneBlueprint.slice(0, 5).map((s) => (
+                        <div
+                          key={s.id}
+                          className="h-8 flex-1 rounded-md bg-gradient-to-b from-white/10 to-white/5"
+                          title={s.role}
+                        />
+                      ))}
+                    </div>
+                  )}
               </button>
             );
           })}
@@ -265,10 +280,18 @@ export default function TemplateGallery() {
           <p className="mt-1 text-sm text-white/55">{selected.tagline}</p>
 
           {selected.previewKind === "annie-rank1" && (
-            <p className="mt-3 rounded-xl border border-emerald-500/25 bg-emerald-500/10 px-3 py-2 text-xs text-emerald-100">
-              Preview sample: Annie Rank-1 Product Demo (saved VQOS-authorized MP4). No new paid render
-              required to preview this template.
-            </p>
+            <div className="mt-4 overflow-hidden rounded-2xl border border-emerald-500/25 bg-black/40">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/templates/product-demo-preview.jpg"
+                alt="Annie Rank-1 Product Demo sample frame"
+                className="aspect-[9/16] max-h-[360px] w-full object-cover object-top sm:max-h-[420px]"
+              />
+              <p className="px-3 py-2 text-xs text-emerald-100/90">
+                Sample ready: Annie Rank-1 Product Demo (VQOS-authorized). Full MP4 lives in Amber review —
+                no new paid render required to preview this template.
+              </p>
+            </div>
           )}
 
           {selected.previewKind === "storyboard" && (

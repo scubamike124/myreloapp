@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
@@ -74,6 +74,19 @@ export default function ProductCommercial() {
     setPreview(URL.createObjectURL(f));
     setErr(null);
   };
+
+  // Template gallery handoff: prefill product name / details / url
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const product = params.get("product");
+    const business = params.get("business");
+    const script = params.get("script");
+    const wantedUrl = params.get("url");
+    if (product) setProductName(product);
+    else if (business) setProductName(business);
+    if (script) setDetails(script.slice(0, 2000));
+    if (wantedUrl) setUrl(wantedUrl);
+  }, []);
 
   const generate = async () => {
     if (!photo) {

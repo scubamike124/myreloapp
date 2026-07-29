@@ -148,6 +148,27 @@ export default function WebsiteCommercial() {
     };
   }, []);
 
+  // Template gallery handoff: ?script=&url=&business=&product=&template=
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const wantedScript = params.get("script");
+    const wantedUrl = params.get("url");
+    const business = params.get("business");
+    const product = params.get("product");
+    if (wantedScript) {
+      setScript(wantedScript.slice(0, 4000));
+      setStep("detected");
+    }
+    if (wantedUrl) setUrl(wantedUrl);
+    if (business) setBrand((cur) => cur || business);
+    if (product && !wantedScript) {
+      setAbout((cur) => cur || product);
+    }
+    if (params.get("template")) {
+      setStyle("Cinematic");
+    }
+  }, []);
+
   const analyze = async () => {
     if (!url.trim()) return;
     setErr(null);

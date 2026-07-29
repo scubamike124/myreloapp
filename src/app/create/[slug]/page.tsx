@@ -37,6 +37,11 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
   // The tool studios render their own full-page layouts rather than going
   // through a shell, so Back is added here — these are the pages people most
   // need to get out of.
+  if (slug === "templates") {
+    const { redirect } = await import("next/navigation");
+    redirect("/create/templates");
+  }
+
   const studio =
     slug === "bedtime-storybook" ? (
       <StoryBook />

@@ -150,14 +150,23 @@ export function buildTemplatePlan(templateId: string, brief: BusinessBrief) {
     throw new Error("BRIEF_INCOMPLETE: businessName, productOrService, cta, and audience are required");
   }
 
-  const length =
+  const lengthRaw =
     brief.lengthSec && template.lengthsSec.includes(brief.lengthSec)
       ? brief.lengthSec
       : template.lengthsSec[0]!;
+  // Clamp to VQOS rubric-friendly ranges (product_demo ~28–34s, social ~12–30s)
+  const length =
+    template.videoType === "product_demo"
+      ? Math.max(28, Math.min(34, lengthRaw < 28 ? 30 : lengthRaw))
+      : template.videoType === "tv_commercial"
+        ? Math.max(25, Math.min(45, lengthRaw < 25 ? 30 : lengthRaw))
+        : Math.max(12, Math.min(30, lengthRaw));
   const aspect =
     brief.aspectRatio && template.allowedAspects.includes(brief.aspectRatio)
       ? brief.aspectRatio
-      : template.defaultAspect;
+      : template.defaultAspect === "16:9" && template.videoType === "social_short"
+        ? "9:16"
+        : template.defaultAspect;
 
   const script = generateTemplateScript(template, brief);
   const lastEnd = template.sceneBlueprint[template.sceneBlueprint.length - 1]?.endSec || length;

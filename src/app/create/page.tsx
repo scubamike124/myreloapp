@@ -92,7 +92,7 @@ function TemplatesCard() {
 
 export default function CreatePage() {
   const group = AVATAR_GROUP.map((s) => TOOLS.find((t) => t.slug === s)).filter(Boolean) as Tool[];
-  const rest = TOOLS.filter((t) => !AVATAR_GROUP.includes(t.slug));
+  const rest = TOOLS.filter((t) => !AVATAR_GROUP.includes(t.slug) && t.slug !== "templates");
 
   return (
     <DesignShell glow="radial-gradient(900px 450px at 50% -10%,rgba(225,29,42,.22),transparent 65%),radial-gradient(700px 500px at 95% 30%,rgba(140,12,20,.12),transparent 60%)">

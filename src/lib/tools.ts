@@ -153,6 +153,21 @@ export const TOOLS: Tool[] = [
       { kind: "select", name: "voice", label: "Narration voice", options: ["Warm (Female)", "Warm (Male)", "Cinematic", "Storyteller"] },
     ],
   },
+  {
+    slug: "templates",
+    title: "Video Templates",
+    tagline: "20 production-ready formats — pick a template, add your business, generate.",
+    icon: "film",
+    poster: "/templates/product-demo-preview.jpg",
+    credits: "Uses studio credits",
+    cta: "Browse templates",
+    fields: [
+      { kind: "text", name: "businessName", label: "Business name", placeholder: "Acme Co" },
+      { kind: "text", name: "productOrService", label: "Product or service", placeholder: "AI video ads" },
+      { kind: "url", name: "website", label: "Website (optional)", placeholder: "https://…" },
+      { kind: "textarea", name: "cta", label: "Call to action", placeholder: "Start free today" },
+    ],
+  },
 ];
 
 export function getTool(slug: string): Tool | undefined {
@@ -184,6 +199,7 @@ export const LIVE_TOOLS = new Set<string>([
   "story-memory-generator",
   "shorts-20",
   "auto-subtitles",
+  "templates",
 ]);
 
 export function isToolLive(slug: string): boolean {
