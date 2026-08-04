@@ -15,7 +15,11 @@ import { type CatalogAvatar, primariesFor, filtersFor, inPrimary, inFilter } fro
 // ---------------------------------------------------------------------------
 
 const HEYGEN: CatalogAvatar[] = (heygen as CatalogAvatar[]).map((a) => ({ ...a, source: "heygen" }));
-const CHARACTERS: CatalogAvatar[] = (characters as CatalogAvatar[]).map((a) => ({ ...a, source: "reelo" }));
+const CHARACTERS: CatalogAvatar[] = (characters as CatalogAvatar[]).map((a) => ({
+  ...a,
+  source: "reelo",
+  gender: a.gender || "neutral",
+}));
 
 export const CATALOG: CatalogAvatar[] = [...CHARACTERS, ...HEYGEN];
 

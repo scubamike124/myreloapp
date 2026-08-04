@@ -1,6 +1,7 @@
 import { mkdir, writeFile, unlink, stat } from "node:fs/promises";
 import path from "node:path";
 import { isEphemeralFilesystem } from "@/lib/runtime-platform";
+import { r2Available, r2PutBytes } from "@/lib/r2-storage";
 
 // ---------------------------------------------------------------------------
 // Durable storage for finished videos and images, over two drivers.
@@ -34,16 +35,38 @@ export function mediaDir(): string {
   return process.env.MEDIA_PATH || path.join(process.cwd(), ".data", "media");
 }
 
-export type StorageDriver = "blob" | "disk" | "none";
+export type StorageDriver = "blob" | "disk" | "r2" | "none";
 
-export function storageDriver(): StorageDriver {
+export async function storageDriverAsync(): Promise<StorageDriver> {
   if (blobToken()) return "blob";
+  if (await r2Available()) return "r2";
   if (diskAllowed()) return "disk";
   return "none";
 }
 
+export function storageDriver(): StorageDriver {
+  if (blobToken()) return "blob";
+  if (r2EnvConfigured()) return "r2";
+  if (diskAllowed()) return "disk";
+  return "none";
+}
+
+function r2EnvConfigured(): boolean {
+  return Boolean(
+    process.env.R2_ACCOUNT_ID?.trim() &&
+      process.env.R2_BUCKET?.trim() &&
+      process.env.R2_ACCESS_KEY_ID?.trim() &&
+      process.env.R2_SECRET_ACCESS_KEY?.trim(),
+  );
+}
+
 export function storageConfigured(): boolean {
-  return storageDriver() !== "none";
+  const d = storageDriver();
+  return d !== "none";
+}
+
+export async function storageConfiguredAsync(): Promise<boolean> {
+  return (await storageDriverAsync()) !== "none";
 }
 
 export type Stored = { url: string; bytes: number; contentType: string };
@@ -109,6 +132,11 @@ export async function store(source: string, id: string, kind: "video" | "image")
     } catch {
       return null;
     }
+  }
+
+  const r2 = await r2PutBytes(id, new Uint8Array(file.body), file.contentType);
+  if (r2) {
+    return { url: r2.url, bytes: r2.bytes, contentType: r2.contentType };
   }
 
   if (!diskAllowed()) return null;

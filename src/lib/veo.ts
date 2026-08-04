@@ -22,6 +22,21 @@ const BASE = "https://generativelanguage.googleapis.com/v1beta";
 // tools need audible speech + ambience, so default to the full 3.1 model.
 // Override with VEO_MODEL=veo-3.1-fast-generate-preview if cost/latency wins.
 const VEO_MODEL = process.env.VEO_MODEL || "veo-3.1-generate-preview";
+
+/**
+ * The Fast tier, for callers that supply their own audio.
+ *
+ * The default above is the full model because, as the note says, Fast ships
+ * clips with weak or missing audio and the talking and dancing tools depend on
+ * Veo's own speech and ambience.
+ *
+ * The storybook movie does not. It lays a separate narration track and score
+ * over the footage, so Veo is being asked for pictures rather than sound - and
+ * on twelve scenes the tier is the difference between $7.20 and $28.80 of
+ * provider spend per film. Passed per call so pinning it here cannot quietly
+ * downgrade the tools that still need the full model.
+ */
+export const VEO_FAST_720 = "veo-3.1-fast-generate-preview";
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 /** Clip length, in seconds. Veo supports 4, 6, or 8 — default to 6 (mid price). */
@@ -63,10 +78,12 @@ export async function startVeo(
   mimeType: string,
   tries = 3,
   durationSeconds: 4 | 6 | 8 = VIDEO_SECONDS,
+  /** Defaults to the app-wide model; pass `VEO_FAST_720` to pin the Fast tier. */
+  model: string = VEO_MODEL,
 ): Promise<string> {
   const seconds = clampVeoSeconds(durationSeconds);
   for (let attempt = 1; attempt <= tries; attempt++) {
-    const res = await fetch(`${BASE}/models/${VEO_MODEL}:predictLongRunning?key=${encodeURIComponent(key)}`, {
+    const res = await fetch(`${BASE}/models/${model}:predictLongRunning?key=${encodeURIComponent(key)}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

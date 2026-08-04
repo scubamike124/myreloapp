@@ -1,4 +1,5 @@
 import { isCloudflareWorkers, isEphemeralFilesystem } from "@/lib/runtime-platform";
+import { r2PutBytes } from "@/lib/r2-storage";
 
 /**
  * Same-origin media persistence that does NOT fetch provider CDNs from the Worker.
@@ -25,7 +26,7 @@ function cacheRequest(id: string): Request {
   return new Request(`https://media.reelo.local/c/${encodeURIComponent(id)}`);
 }
 
-export type Ingested = { url: string; bytes: number; contentType: string; backend: "blob" | "disk" | "cache" | "memory" };
+export type Ingested = { url: string; bytes: number; contentType: string; backend: "blob" | "disk" | "cache" | "memory" | "r2" };
 
 export async function ingestBytes(
   id: string,
@@ -58,6 +59,11 @@ export async function ingestBytes(
     } catch {
       /* fall through */
     }
+  }
+
+  const r2 = await r2PutBytes(id, body, type);
+  if (r2) {
+    return { url: r2.url, bytes: r2.bytes, contentType: r2.contentType, backend: "r2" };
   }
 
   if (!isEphemeralFilesystem() && !isCloudflareWorkers()) {

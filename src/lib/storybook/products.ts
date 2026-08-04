@@ -22,6 +22,11 @@
  */
 
 /** Things the pipeline can produce from a story. Products are built of these. */
+// Relative rather than the "@/" alias: the test runner strips types but does
+// not resolve tsconfig paths, and a module that cannot be imported by a test is
+// a module whose prices nothing can check.
+import { FLAT_TOKEN_COST } from "../token-pricing.ts";
+
 export type StoryArtifact =
   | "manuscript"
   | "illustrations"
@@ -51,6 +56,15 @@ export type StoryProduct = {
   includes: string[];
   /** Everything this product needs the pipeline to produce. */
   artifacts: StoryArtifact[];
+  /**
+   * What it costs, in tokens.
+   *
+   * Read from FLAT_TOKEN_COST rather than written here. That table says of
+   * itself "only defined here - never hard-coded in UI", and a price that
+   * exists in two places is a price that will eventually disagree with itself
+   * on a checkout screen.
+   */
+  tokens: number;
   /**
    * Featured on the selection screen. Exactly one product may be recommended —
    * two recommendations is no recommendation.
@@ -82,6 +96,7 @@ export const STORY_PRODUCTS: StoryProduct[] = [
       "Download as a PDF and keep it forever",
     ],
     artifacts: [...ALWAYS_PRODUCED, "ebook_layout"],
+    tokens: FLAT_TOKEN_COST["storybook-ebook"],
   },
   {
     id: "movie",
@@ -95,6 +110,7 @@ export const STORY_PRODUCTS: StoryProduct[] = [
       "Reviewed by Amber before it is delivered",
     ],
     artifacts: [...ALWAYS_PRODUCED, "screenplay", "narration_audio", "scene_video", "final_cut"],
+    tokens: FLAT_TOKEN_COST["storybook-movie"],
   },
   {
     id: "bundle",
@@ -117,6 +133,7 @@ export const STORY_PRODUCTS: StoryProduct[] = [
       "scene_video",
       "final_cut",
     ],
+    tokens: FLAT_TOKEN_COST["storybook-bundle"],
     recommended: true,
   },
 ];

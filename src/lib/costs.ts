@@ -14,6 +14,17 @@ import { TOKEN_USD_VALUE, standardVideoTokens, websiteCommercialTokens } from "@
 
 export const VIDEO_SECONDS = Number(process.env.VIDEO_SECONDS ?? 8);
 
+/**
+ * The storybook movie renders one scene per page.
+ *
+ * Fixed here rather than read from `VIDEO_SECONDS`: that variable steers the
+ * talking and dancing tools, and a film whose length changed with an unrelated
+ * setting would also silently change what it costs to make — on a product
+ * priced per unit, that is the number that must not move on its own.
+ */
+export const STORYBOOK_SCENES = 12;
+export const STORYBOOK_SCENE_SECONDS = 6;
+
 export const PROVIDER = {
   veoStandardPerSecond: 0.4,
   veoFastPerSecond720: 0.1,
@@ -85,6 +96,37 @@ export const COST_LINES: CostLine[] = [
     label: "Bedtime Storybook",
     cost: PROVIDER.geminiImage * 6 + textCall(1200, 2500),
     detail: "6–10 illustrations + story",
+  },
+  {
+    /*
+     * The storybook movie renders on Veo Fast 720p, not the app default.
+     *
+     * It supplies its own narration and score, so it is buying pictures rather
+     * than Veo's audio — which is the reason the app default is the full model.
+     * Across twelve scenes the tier decides between $7.20 and $28.80 a film,
+     * and at 4 tokens of face value the Standard tier would not clear its own
+     * cost once the Director AI regenerates a rejected cut.
+     */
+    action: "storybook-movie",
+    label: "Storybook Movie",
+    cost:
+      PROVIDER.veoFastPerSecond720 * STORYBOOK_SCENE_SECONDS * STORYBOOK_SCENES + textCall(4000, 3000),
+    detail: `Veo 3.1 Fast 720p, ${STORYBOOK_SCENES}x${STORYBOOK_SCENE_SECONDS}s + screenplay`,
+  },
+  {
+    /*
+     * The bundle adds the book's layout to a movie that already exists. The
+     * story, character bible and illustrations are reused rather than
+     * regenerated, which is the whole reason it is priced at movie-plus-one.
+     */
+    action: "storybook-bundle",
+    label: "Storybook Book + Movie",
+    cost:
+      PROVIDER.veoFastPerSecond720 * STORYBOOK_SCENE_SECONDS * STORYBOOK_SCENES +
+      textCall(4000, 3000) +
+      PROVIDER.geminiImage * STORYBOOK_SCENES +
+      textCall(1200, 2500),
+    detail: "One story, both deliveries",
   },
   {
     action: "analyze",

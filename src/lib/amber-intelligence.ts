@@ -213,7 +213,137 @@ Return JSON:
   return { intelligence: updated, insights };
 }
 
+export type AmberWebsiteTarget = {
+  url: string;
+  videosPerDay: number;
+  label?: string;
+};
+
+function normalizeUrl(raw: string): string {
+  let u = raw.trim();
+  if (!u) return "";
+  if (!/^https?:\/\//i.test(u)) u = `https://${u}`;
+  try {
+    const parsed = new URL(u);
+    return `${parsed.protocol}//${parsed.host}${parsed.pathname === "/" ? "" : parsed.pathname}`.replace(/\/$/, "");
+  } catch {
+    return u.slice(0, 300);
+  }
+}
+
+function clampVideosPerDay(n: unknown): number {
+  const v = Math.round(Number(n));
+  if (!Number.isFinite(v)) return 1;
+  return Math.min(20, Math.max(0, v));
+}
+
+/** Read Amber website video cadence targets from BI intelligence JSON. */
+export function getWebsiteTargets(bi: BusinessIntelligence | Record<string, unknown> | null | undefined): AmberWebsiteTarget[] {
+  const intel =
+    bi && typeof bi === "object" && "intelligence" in bi
+      ? ((bi as BusinessIntelligence).intelligence || {})
+      : ((bi as Record<string, unknown>) || {});
+  const raw = intel.websites;
+  if (!Array.isArray(raw)) {
+    // Migrate single goals/website string if present
+    const goals = bi && typeof bi === "object" && "goals" in bi ? String((bi as BusinessIntelligence).goals || "") : "";
+    if (/^https?:\/\//i.test(goals.trim()) || /\.[a-z]{2,}/i.test(goals.trim())) {
+      return [{ url: normalizeUrl(goals), videosPerDay: 1, label: "Primary" }];
+    }
+    return [];
+  }
+  return raw
+    .map((row): AmberWebsiteTarget | null => {
+      const r = row && typeof row === "object" ? (row as Record<string, unknown>) : {};
+      const url = normalizeUrl(String(r.url || ""));
+      if (!url) return null;
+      const label = String(r.label || "").slice(0, 80);
+      return {
+        url,
+        videosPerDay: clampVideosPerDay(r.videosPerDay ?? r.videos_per_day ?? 1),
+        ...(label ? { label } : {}),
+      };
+    })
+    .filter((x): x is AmberWebsiteTarget => x != null);
+}
+
+/** Max videos Amber should produce per day for this workspace (sum of site targets, min 1 if any site, else default 1). */
+export function getDailyVideoCap(bi: BusinessIntelligence): number {
+  const sites = getWebsiteTargets(bi);
+  if (!sites.length) return 1;
+  const sum = sites.reduce((a, s) => a + s.videosPerDay, 0);
+  return Math.min(20, Math.max(0, sum));
+}
+
+export async function saveWebsiteTargets(
+  q: Sql,
+  userId: string,
+  websites: AmberWebsiteTarget[],
+  actorEmail?: string | null,
+): Promise<BusinessIntelligence> {
+  const cleaned = websites
+    .map((w) => ({
+      url: normalizeUrl(w.url),
+      videosPerDay: clampVideosPerDay(w.videosPerDay),
+      label: (w.label || "").slice(0, 80) || undefined,
+    }))
+    .filter((w) => w.url);
+  // Dedupe by normalized URL
+  const seen = new Set<string>();
+  const unique: AmberWebsiteTarget[] = [];
+  for (const w of cleaned) {
+    const key = w.url.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push(w);
+  }
+  const current = await loadBusinessIntelligence(q, userId);
+  const primary = unique[0]?.url || current.goals;
+  const updated = await saveBusinessIntelligence(q, userId, {
+    goals: primary.slice(0, 500),
+    intelligence: {
+      ...current.intelligence,
+      websites: unique,
+      videosPerDayUpdatedAt: new Date().toISOString(),
+    },
+  });
+  await logAmberAction({
+    actorUserId: userId,
+    actorEmail: actorEmail ?? null,
+    kind: "save_website_targets",
+    title: `Saved ${unique.length} website video cadence target(s)`,
+    detail: { count: unique.length, totalPerDay: getDailyVideoCap(updated) },
+  });
+  return updated;
+}
+
+/** Set the same videos-per-day on every website for a workspace (keeps URLs). */
+export async function setAllWebsiteVideosPerDay(
+  q: Sql,
+  userId: string,
+  videosPerDay: number,
+  actorEmail?: string | null,
+): Promise<BusinessIntelligence> {
+  const current = await loadBusinessIntelligence(q, userId);
+  const sites = getWebsiteTargets(current);
+  const n = clampVideosPerDay(videosPerDay);
+  if (!sites.length) {
+    // Nothing to update — caller should add URLs first (Intel tab)
+    return current;
+  }
+  return saveWebsiteTargets(
+    q,
+    userId,
+    sites.map((s) => ({ ...s, videosPerDay: n })),
+    actorEmail,
+  );
+}
+
 export function biPromptBlock(bi: BusinessIntelligence): string {
+  const sites = getWebsiteTargets(bi);
+  const siteLines = sites.length
+    ? sites.map((s) => `- ${s.url}: ${s.videosPerDay} video(s)/day`).join("\n")
+    : "(none configured — default 1/day)";
   return [
     `Brand: ${bi.brandName || bi.company}`,
     `Industry: ${bi.industry}`,
@@ -226,6 +356,8 @@ export function biPromptBlock(bi: BusinessIntelligence): string {
     `Seasonal: ${bi.seasonalTrends}`,
     `Objectives: ${bi.marketingObjectives || bi.goals}`,
     `Brand rules: ${bi.brandRules}`,
+    `Website video cadence (owner-set):\n${siteLines}`,
+    `Daily video production cap: ${getDailyVideoCap(bi)}`,
     `Intel: ${JSON.stringify(bi.intelligence).slice(0, 800)}`,
   ].join("\n");
 }

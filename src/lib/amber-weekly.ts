@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { asRecord, errorMessage, geminiParts } from "@/lib/json";
 import { logAmberAction } from "@/lib/amber-autonomous";
+import { loadBusinessIntelligence, getDailyVideoCap, getWebsiteTargets, biPromptBlock } from "@/lib/amber-intelligence";
 import type { Sql } from "@/lib/workspace-api";
 
 const MODEL = "gemini-2.5-flash";
@@ -237,6 +238,9 @@ export async function runAmberWeeklyCycle(input: {
            approval_mode AS "approvalMode"
     FROM business_profiles WHERE user_id = ${userId} LIMIT 1
   `) as Record<string, unknown>[];
+  const bi = await loadBusinessIntelligence(q, userId);
+  const dailyCap = Math.max(1, Math.min(7, getDailyVideoCap(bi) || 1));
+  const siteTargets = getWebsiteTargets(bi);
   const accounts = (await q`
     SELECT id, provider, handle FROM social_accounts
     WHERE user_id = ${userId} AND status = 'connected'
@@ -268,6 +272,11 @@ export async function runAmberWeeklyCycle(input: {
 Plan ONE week of marketing for an existing business. Never create new social platform accounts.
 Brand: ${brandLine || "not set"}
 Connected accounts: ${accounts.map((a) => `${a.provider}:@${a.handle}`).join("; ") || "none"}
+${biPromptBlock(bi)}
+Owner cadence: ~${dailyCap} video(s) per day across sites: ${
+      siteTargets.map((s) => `${s.url} (${s.videosPerDay}/day)`).join("; ") || "default 1/day"
+    }.
+For this weekly plan, create about ${Math.min(dailyCap * 5, 15)} contentRequests total for the week (≈ ${dailyCap}/day × 5 weekdays), max 15.
 Workspace analytics (Reelo only): ${JSON.stringify(analytics)}
 Prior week report: ${prior[0]?.report?.slice(0, 1500) || "none"}
 Learning patterns: ${JSON.stringify(learning)}
@@ -278,11 +287,11 @@ Return JSON:
   "strategySummary": "...",
   "themes": ["..."],
   "tasks": [{"kind":"review|content|caption|schedule|report","title":"...","detail":"..."}],
-  "contentRequests": [{"title":"...","script":"...","platforms":["tiktok","instagram","youtube"],"toolSlug":"shorts-20"}],
+  "contentRequests": [{"title":"...","script":"...","platforms":["tiktok","instagram","youtube"],"toolSlug":"shorts-20","websiteUrl":"https://..."}],
   "postingWindows": ["weekday mornings", "..."],
   "useLibraryIds": ["creation-id-if-useful"]
 }
-tasks: 4-8. contentRequests: 1-3. toolSlug must be a Reelo live tool slug when possible.`);
+tasks: 4-8. contentRequests: ${Math.min(Math.max(dailyCap, 1), 7)}-${Math.min(dailyCap * 5, 15)}. toolSlug must be a Reelo live tool slug when possible.`);
   } catch (e) {
     const failReport = { error: e instanceof Error ? e.message : "strategy failed", analytics };
     await q`
@@ -314,7 +323,8 @@ tasks: 4-8. contentRequests: 1-3. toolSlug must be a Reelo live tool slug when p
 
   const contentRequests: { id: string; title: string; status: string }[] = [];
   const rawReqs = Array.isArray(strategy.contentRequests) ? strategy.contentRequests : [];
-  for (const r of rawReqs.slice(0, 5)) {
+  const weekCap = Math.min(Math.max(dailyCap * 5, dailyCap), 15);
+  for (const r of rawReqs.slice(0, weekCap)) {
     const row = asRecord(r);
     const parentId = randomUUID();
     const title = String(row.title || "Content request").slice(0, 160);

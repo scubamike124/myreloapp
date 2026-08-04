@@ -169,3 +169,64 @@ export async function currentUser(): Promise<User | null> {
   `) as User[];
   return rows[0] ?? null;
 }
+
+const RESET_TTL_MS = 60 * 60 * 1000; // 1 hour
+
+/**
+ * Create a one-time password reset token for an existing account.
+ * Always returns ok-shaped result to callers so they can avoid email enumeration;
+ * `token` is only present when an account exists (for the mailer).
+ */
+export async function createPasswordResetToken(
+  email: string,
+): Promise<{ ok: true; token?: string; email?: string }> {
+  const q = await dbSql();
+  if (!q || !(await ensureSchema())) return { ok: true };
+
+  const clean = email.trim().toLowerCase();
+  const rows = (await q`SELECT id, email FROM users WHERE email = ${clean}`) as {
+    id: string;
+    email: string;
+  }[];
+  const user = rows[0];
+  if (!user) {
+    await hash("timing-pad");
+    return { ok: true };
+  }
+
+  await q`DELETE FROM password_reset_tokens WHERE user_id = ${user.id}`;
+  const token = randomBytes(32).toString("hex");
+  const expires = new Date(Date.now() + RESET_TTL_MS).toISOString();
+  await q`
+    INSERT INTO password_reset_tokens (token, user_id, expires_at)
+    VALUES (${token}, ${user.id}, ${expires})`;
+  return { ok: true, token, email: user.email };
+}
+
+/** Apply a reset token and set a new password. Invalid/expired → null. */
+export async function resetPasswordWithToken(
+  token: string,
+  newPassword: string,
+): Promise<{ ok: true } | { error: string }> {
+  const problem = passwordProblem(newPassword);
+  if (problem) return { error: problem };
+
+  const q = await dbSql();
+  if (!q || !(await ensureSchema())) return { error: "Accounts are not available yet." };
+
+  const clean = token.trim();
+  if (!clean || clean.length < 32) return { error: "That reset link is invalid or expired." };
+
+  const rows = (await q`
+    SELECT user_id FROM password_reset_tokens
+    WHERE token = ${clean} AND expires_at > ${new Date().toISOString()}
+  `) as { user_id: string }[];
+  const row = rows[0];
+  if (!row) return { error: "That reset link is invalid or expired." };
+
+  await q`UPDATE users SET password_hash = ${await hash(newPassword)} WHERE id = ${row.user_id}`;
+  await q`DELETE FROM password_reset_tokens WHERE user_id = ${row.user_id}`;
+  // Force re-login after a password change.
+  await q`DELETE FROM sessions WHERE user_id = ${row.user_id}`;
+  return { ok: true };
+}

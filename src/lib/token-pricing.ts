@@ -141,6 +141,39 @@ export const VEO_RENDER_SECONDS = [4, 6, 8] as const;
 /** Flat non-duration features (only defined here — never hard-coded in UI). */
 export const FLAT_TOKEN_COST = {
   "bedtime-storybook": 1, // 10-page personalized bedtime story
+
+  /*
+   * Storybook delivery products.
+   *
+   * The e-book is the existing "bedtime-storybook" line and stays at 1 token:
+   * it costs about $0.40 to produce (story text plus ten illustrations) against
+   * $10 of face value.
+   *
+   * The movie is 4 tokens because the video is the whole cost. Twelve scenes on
+   * Veo 3.1 Fast 720p at 6 seconds is $7.20 of provider spend, and the Director
+   * AI is required to regenerate anything below threshold - one rejected cut
+   * doubles that line. 4 tokens leaves room for narration, music and a re-render
+   * and still holds a healthy margin. On Veo Standard the same film is $28.80,
+   * which is why the storybook pipeline pins the Fast tier rather than
+   * inheriting the app default.
+   *
+   * The bundle is the same 4 as the movie - the book comes free with the film.
+   *
+   * It was briefly 5, and a test caught that 5 is not cheaper than 1 + 4: the
+   * card promises "cheaper than buying the two separately" and at 5 that
+   * sentence was false. Matching the movie makes it true and makes the
+   * recommendation obviously right.
+   *
+   * It is affordable because the bundle genuinely costs almost nothing more
+   * than the movie: the story, the character bible and the illustrations are
+   * already made and are reused rather than regenerated. Adding the book to a
+   * film that exists costs about $0.47 of illustration against $40 of face
+   * value.
+   */
+  "storybook-ebook": 1,
+  "storybook-movie": 4,
+  "storybook-bundle": 4,
+
   "shorts-20": 2,
   "story-memory-generator": 2,
   "custom-avatar-creator": 2,

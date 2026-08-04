@@ -554,6 +554,15 @@ async function ensureWorkspaceTables(q: Sql): Promise<void> {
   const pg = driver() === "postgres" || Boolean(process.env.CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE) || Boolean(process.env.CF_HYPERDRIVE);
   if (pg) {
     await q`
+      CREATE TABLE IF NOT EXISTS password_reset_tokens (
+        token      TEXT PRIMARY KEY,
+        user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        expires_at TIMESTAMPTZ NOT NULL,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS password_reset_user_idx ON password_reset_tokens (user_id)`;
+
+    await q`
       CREATE TABLE IF NOT EXISTS publish_items (
         id          TEXT PRIMARY KEY,
         user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,

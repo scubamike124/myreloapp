@@ -10,7 +10,11 @@ export function stripeConfigured(): boolean {
 export function getStripe(): Stripe | null {
   const key = process.env.STRIPE_SECRET_KEY?.trim();
   if (!key) return null;
-  return new Stripe(key);
+  // Cloudflare Workers have no Node http/https sockets. Without the Fetch
+  // client, checkout.sessions.create hangs until the Worker request times out.
+  return new Stripe(key, {
+    httpClient: Stripe.createFetchHttpClient(),
+  });
 }
 
 export function billingReturnUrls() {

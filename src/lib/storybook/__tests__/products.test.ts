@@ -16,6 +16,7 @@ import {
   orderableProducts,
   ALWAYS_PRODUCED,
 } from "../products.ts";
+import { FLAT_TOKEN_COST, usdFromTokens } from "../../token-pricing.ts";
 
 test("the three deliveries the directive names all exist", () => {
   const ids = STORY_PRODUCTS.map((p) => p.id).sort();
@@ -93,4 +94,62 @@ test("only orderable products are offered", () => {
   const orderable = orderableProducts();
   assert.ok(orderable.every((p) => !p.comingSoon));
   assert.equal(orderable.length, STORY_PRODUCTS.length, "nothing is marked coming-soon yet");
+});
+
+test("prices come from the pricing table, not from this file", () => {
+  // "Change it everywhere so there isn't a confusion on price." A price that
+  // exists in two places is a price that will eventually disagree with itself
+  // on a checkout screen, so the products read FLAT_TOKEN_COST and never carry
+  // a literal.
+  assert.equal(getStoryProduct("ebook")!.tokens, FLAT_TOKEN_COST["storybook-ebook"]);
+  assert.equal(getStoryProduct("movie")!.tokens, FLAT_TOKEN_COST["storybook-movie"]);
+  assert.equal(getStoryProduct("bundle")!.tokens, FLAT_TOKEN_COST["storybook-bundle"]);
+});
+
+test("the agreed prices are the ones in force", () => {
+  // The owner's decision, pinned: e-book 1, movie 4. The bundle matches the
+  // movie so the book comes free with the film - at 5 it was not cheaper than
+  // buying both, which its own card claims.
+  assert.equal(getStoryProduct("ebook")!.tokens, 1);
+  assert.equal(getStoryProduct("movie")!.tokens, 4);
+  assert.equal(getStoryProduct("bundle")!.tokens, 4);
+});
+
+test("the bundle costs less than buying both separately", () => {
+  // Its card says "cheaper than buying the two separately". If that ever stops
+  // being true the card is a false claim, not a marketing choice.
+  const ebook = getStoryProduct("ebook")!.tokens;
+  const movie = getStoryProduct("movie")!.tokens;
+  const bundle = getStoryProduct("bundle")!.tokens;
+  assert.ok(bundle < ebook + movie, `bundle ${bundle} is not cheaper than ${ebook} + ${movie}`);
+});
+
+test("every product's price clears what it costs to produce", () => {
+  // The check that would have caught pricing the movie on the Standard tier: at
+  // 4 tokens ($40) a $28.80 film leaves nothing for narration, music, or the
+  // re-render the Director AI is required to perform.
+  // Provider rates from costs.ts, stated here because that module imports
+  // through the "@/" alias the test runner cannot resolve.
+  const VEO_FAST_720_PER_SEC = 0.1;
+  const GEMINI_IMAGE = 0.039;
+  const SCENES = 12;
+  const SCENE_SECONDS = 6;
+
+  const video = VEO_FAST_720_PER_SEC * SCENE_SECONDS * SCENES;
+  const illustrations = GEMINI_IMAGE * SCENES;
+  const cogs: Record<string, number> = {
+    ebook: illustrations,
+    movie: video,
+    bundle: video + illustrations,
+  };
+
+  for (const [productId, cost] of Object.entries(cogs)) {
+    const revenue = usdFromTokens(getStoryProduct(productId)!.tokens);
+    // Doubled, because a single rejected cut re-renders the whole film and the
+    // Director AI is required to reject below-threshold work.
+    assert.ok(
+      revenue > cost * 2,
+      `${productId}: ${revenue} does not cover ${cost.toFixed(2)} with one re-render`,
+    );
+  }
 });

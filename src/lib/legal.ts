@@ -1,43 +1,26 @@
 // ---------------------------------------------------------------------------
-// Business details used across the support and policy pages.
-//
-// EVERY value here is a PLACEHOLDER. Nothing in this file is a real commitment
-// Reelo has made — it exists so the pages can be built and reviewed without
-// inventing a refund window, a support address, or a legal entity.
-//
-// Replace each value, then delete `placeholder: true`. While that flag is on,
-// the pages render a visible banner saying the details are not final, so a
-// draft can never be mistaken for policy.
+// Business details used across the support and policy pages (production).
 // ---------------------------------------------------------------------------
 
 export const BUSINESS = {
-  placeholder: true,
+  placeholder: false,
 
-  /** Legal entity name, e.g. "Reelo Media Pty Ltd". */
-  legalName: "[YOUR REGISTERED BUSINESS NAME]",
-  /** Trading name shown to customers. */
+  /** Legal entity name — update if you register a separate company. */
+  legalName: "Reelo",
   tradingName: "Reelo",
-  /** Where the business is registered — sets which consumer law applies. */
-  jurisdiction: "[YOUR COUNTRY / STATE]",
-  /** Postal address, if you need one for consumer-law compliance. */
-  address: "[YOUR BUSINESS ADDRESS]",
+  jurisdiction: "United States",
+  /** Mailing address for formal requests — email is the primary contact channel. */
+  address: "support@myreelo.com",
 
-  /** Where support email actually lands. */
-  supportEmail: "[YOUR SUPPORT EMAIL]",
-  /** Billing and refund requests, if different from support. */
-  billingEmail: "[YOUR BILLING EMAIL]",
-  /** Realistic first-response time — do not promise faster than you can meet. */
-  responseTime: "[E.G. 1-2 BUSINESS DAYS]",
-  /** Support hours, if you offer them. */
-  hours: "[E.G. MON-FRI, 9AM-5PM]",
+  supportEmail: process.env.SUPPORT_EMAIL?.trim() || "support@myreelo.com",
+  billingEmail: process.env.BILLING_EMAIL?.trim() || "billing@myreelo.com",
+  responseTime: "1–2 business days",
+  hours: "Mon–Fri, 9am–5pm PT",
 
-  /** Cooling-off window for refunds. */
-  refundWindow: "[E.G. 14 DAYS]",
-  /** How long a refund takes to land back on the card. */
-  refundProcessing: "[E.G. 5-10 BUSINESS DAYS]",
+  refundWindow: "14 days",
+  refundProcessing: "5–10 business days",
 
-  /** Last review date for the policy pages. */
-  lastUpdated: "22 July 2026",
+  lastUpdated: "26 July 2026",
 } as const;
 
 // Note: the Terms of Service is deliberately written to need none of the

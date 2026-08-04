@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { asRecord } from "@/lib/json";
 import { logAmberAction, getAmberAutoGenerate } from "@/lib/amber-autonomous";
 import { geminiJson, mergeAmberLearning } from "@/lib/amber-weekly";
+import { loadBusinessIntelligence, getDailyVideoCap, getWebsiteTargets, biPromptBlock } from "@/lib/amber-intelligence";
 import { LIVE_TOOLS } from "@/lib/tools";
 import { RETENTION_DAYS } from "@/lib/storage";
 import type { Sql } from "@/lib/workspace-api";
@@ -383,6 +384,9 @@ export async function executeAmberMission(input: {
     UPDATE amber_missions SET status = ${"running"}, updated_at = ${now} WHERE id = ${missionId}`;
 
   const ws = await loadWorkspace(q, userId);
+  const bi = await loadBusinessIntelligence(q, userId);
+  const dailyCap = Math.max(1, getDailyVideoCap(bi) || 1);
+  const siteTargets = getWebsiteTargets(bi);
   const autoGenerate = await getAmberAutoGenerate();
   const weekId = randomUUID();
   const weekStart = new Date().toISOString().slice(0, 10);
@@ -397,6 +401,11 @@ export async function executeAmberMission(input: {
 Owner mission goal: ${mission.goal}
 Brand: ${ws.brandLine || "not set"}
 Connected accounts: ${ws.accounts.map((a) => `${a.provider}:@${a.handle}`).join("; ") || "none"}
+${biPromptBlock(bi)}
+Owner video cadence: produce about ${dailyCap} video(s) per day across these sites: ${
+      siteTargets.map((s) => `${s.url} (${s.videosPerDay}/day)`).join("; ") || "default"
+    }.
+For THIS mission run, create up to ${Math.min(dailyCap, 5)} campaign parent production(s) (not more).
 Learning: ${JSON.stringify(ws.learning)}
 Recent library: ${ws.creations
       .slice(0, 8)
@@ -417,12 +426,13 @@ Return JSON:
       "script": "full short-form script",
       "toolSlug": "shorts-20",
       "platforms": ["tiktok","instagram","youtube"],
+      "websiteUrl": "https://...",
       "why": "..."
     }
   ],
   "tasks": [{"kind":"video|review|schedule|publish|report","title":"..."}]
 }
-productions: 1-3 campaign parents. toolSlug must be a live Reelo tool when possible (shorts-20, product-commercial, talking-photo, ai-avatar-studio).`);
+productions: 1-${Math.min(dailyCap, 5)} campaign parents. toolSlug must be a live Reelo tool when possible (shorts-20, product-commercial, talking-photo, ai-avatar-studio).`);
   } catch (e) {
     const err = e instanceof Error ? e.message : "strategy failed";
     await q`
@@ -451,7 +461,7 @@ productions: 1-3 campaign parents. toolSlug must be a live Reelo tool when possi
   const productionIds: string[] = [];
   const rawProds = Array.isArray(strategy.productions) ? strategy.productions : [];
   const campaigns = rawProds.length
-    ? rawProds.slice(0, 3)
+    ? rawProds.slice(0, Math.min(Math.max(dailyCap, 1), 5))
     : [
         {
           title: `Mission: ${mission.goal.slice(0, 80)}`,

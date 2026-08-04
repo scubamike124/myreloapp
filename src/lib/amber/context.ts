@@ -45,7 +45,7 @@ export function areaFromPath(path: string): string {
 const AREA_LABEL: Record<string, string> = {
   create: "the Create area, browsing or using a video tool",
   library: "their Library of past creations",
-  business: "the Business Center (publishing, scheduling, analytics, revenue)",
+  business: "the Business Center (Social Account Manager, calendar, publish queue, brand kit, analytics)",
   pricing: "pricing and plans",
   admin: "the internal admin dashboard",
   dashboard: "their dashboard / account settings",
@@ -127,7 +127,7 @@ export function renderContext(ctx: AmberContext): string {
 
   lines.push("");
   lines.push(
-    "Also not built: user accounts/login, billing and checkout, social publishing, and the Business Center (publishing, scheduling, analytics, revenue, social) which shows example figures only. Do not claim any of these work.",
+    "Business Center that works today: Brand Kit, Assets, Library, Publish queue (prepare/export), Content calendar (intent + approval), Workspace analytics (creations/tokens — not social reach), Team invites, Settings, Storage, and Social Account Manager (connect existing TikTok/Instagram/YouTube when OAuth secrets are set). Amber may place Library items on the calendar for owner approval. Live platform publish only succeeds when OAuth adapters return success — never invent Posted/Connected/follower metrics. Amber never creates new social accounts.",
   );
 
   const ws = ctx.workspace;

@@ -4,6 +4,10 @@
  */
 import catalog from "@/data/reelo-templates.json";
 import { DEFAULT_REELO_AVATAR_ID, DEFAULT_REELO_VOICE_ID } from "@/lib/reelo-avatar-eligibility";
+import { directReeloAvatar } from "@/lib/avatar-director";
+import { directVideo } from "@/lib/video-director";
+import { analyzeBusiness } from "@/lib/business-detect";
+import { recommendedTemplatesForBusiness as biRecommended } from "@/lib/business-detect";
 
 export type TemplateSceneBlueprint = {
   id: string;
@@ -60,6 +64,9 @@ export type BusinessBrief = {
   language?: string;
   aspectRatio?: "9:16" | "16:9" | "1:1";
   lengthSec?: number;
+  industry?: string;
+  tone?: string;
+  avatarIdOverride?: string | null;
 };
 
 function fill(pattern: string, vars: Record<string, string>): string {
@@ -110,32 +117,137 @@ export function generateTemplateScript(template: ReeloVideoTemplate, brief: Busi
   const cta = brief.cta.trim() || "Learn more today";
   const audience = brief.audience.trim() || "customers";
   const vars = { business, product, cta, audience };
-  const hook = fill(template.hookPattern, vars);
-  const endCta = fill(template.ctaPattern, vars);
+  const hook = fill(template.hookPattern, vars).replace(/\.*$/, "");
+  const endCta = fill(template.ctaPattern, vars).replace(/\.*$/, "");
 
-  const map: Record<string, string> = {
-    "product-demo": `${hook} See ${product} open, run, and finish a real result for ${audience}. No fluff — just the product working. ${endCta}.`,
-    "app-demo": `${hook} See ${product} open, run, and finish a real result for ${audience}. No fluff — just the product working. ${endCta}.`,
-    "cinematic-commercial": `${hook} ${business} built ${product} for people who want a better outcome — not another tutorial. Feel the shift. Then take the next step. ${endCta}.`,
-    storytelling: `${hook} ${business} built ${product} for people who want a better outcome — not another tutorial. Feel the shift. Then take the next step. ${endCta}.`,
-    "social-media-ad": `${hook} ${product} from ${business} is built for ${audience}. Clear offer. Clear next step. ${endCta}.`,
-    "promotional-sale": `${hook} ${product} from ${business} is built for ${audience}. Clear offer. Clear next step. ${endCta}.`,
-    "talking-avatar": `${hook} ${business} helps ${audience} with ${product}. Here’s what matters, in plain language. ${endCta}.`,
-    "brand-introduction": `${hook} ${business} helps ${audience} with ${product}. Here’s what matters, in plain language. ${endCta}.`,
-    "product-showcase": `${hook} Look closer at ${product} from ${business}. Designed for ${audience} who want quality they can see. ${endCta}.`,
-    ecommerce: `${hook} Look closer at ${product} from ${business}. Designed for ${audience} who want quality they can see. ${endCta}.`,
-    "before-after": `Before ${product}, the problem slowed ${audience} down. After ${product} from ${business}, the result is clear. ${endCta}.`,
-    testimonial: `${hook} ${audience} needed a real fix. ${product} from ${business} delivered the outcome they wanted. ${endCta}.`,
-    explainer: `${hook} Step one: start. Step two: let ${product} do the work. Step three: get the finished result. ${endCta}.`,
-    "website-promo": `${hook} ${business} turns visitors into customers with ${product}. See the site story, then act. ${endCta}.`,
-    "real-estate": `${hook} ${product} from ${business} — light, space, and location that fit ${audience}. Book a showing. ${endCta}.`,
-    restaurant: `${hook} ${product} at ${business} is made for ${audience} who care about taste and atmosphere. Come hungry. ${endCta}.`,
-    medical: `${hook} ${business} offers ${product} with clear guidance for ${audience}. Care without confusion. ${endCta}.`,
-    automotive: `${hook} ${product} from ${business} — confidence on the road for ${audience}. Inquire today. ${endCta}.`,
-    "local-business": `${hook} ${business} serves ${audience} with ${product}. Nearby, reliable, ready when you are. ${endCta}.`,
-    "corporate-presentation": `${hook} ${business}: how ${product} moves the needle for ${audience}. Three clear points. One next step. ${endCta}.`,
-  };
-  return map[template.id] || `${hook} ${business} — ${product} for ${audience}. ${endCta}.`;
+  const beat = (lines: string[]) =>
+    lines
+      .map((l) => l.trim())
+      .filter(Boolean)
+      .join(" ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+  switch (template.id) {
+    case "product-demo":
+    case "app-demo":
+      return beat([
+        `${hook}.`,
+        `Watch ${product} open on screen — real interface, real clicks, real finish.`,
+        `No stock montage. No fake UI.`,
+        `In under thirty seconds, ${audience} see the result they came for.`,
+        `${endCta}.`,
+      ]);
+    case "cinematic-commercial":
+    case "storytelling":
+      return beat([
+        `${hook}.`,
+        `The old way wasted time. ${business} built ${product} for a cleaner finish.`,
+        `Desire first. Proof second. Brand last.`,
+        `Then the move: ${endCta}.`,
+      ]);
+    case "social-media-ad":
+      return beat([
+        `${hook}.`,
+        `${product} from ${business} is built for ${audience} who want speed without looking cheap.`,
+        `One clear payoff. One clear next step.`,
+        `${endCta} — now.`,
+      ]);
+    case "promotional-sale":
+      return beat([
+        `${hook}.`,
+        `Limited window. Clear offer. No fine-print fog.`,
+        `${product} from ${business} — for ${audience} ready to act.`,
+        `${endCta}.`,
+      ]);
+    case "talking-avatar":
+    case "brand-introduction":
+      return beat([
+        `${hook}.`,
+        `${business} helps ${audience} get ${product} without the usual chaos.`,
+        `Here’s what matters, in plain language — then what to do next.`,
+        `${endCta}.`,
+      ]);
+    case "product-showcase":
+    case "ecommerce":
+      return beat([
+        `${hook}.`,
+        `Hold on the hero: ${product} from ${business}.`,
+        `Texture, finish, and the moment it becomes undeniable for ${audience}.`,
+        `${endCta}.`,
+      ]);
+    case "before-after":
+      return beat([
+        `Before ${product}, ${audience} were stuck in the slow version.`,
+        `After ${product} from ${business}, the result is obvious on screen.`,
+        `Same problem. New ending.`,
+        `${endCta}.`,
+      ]);
+    case "testimonial":
+      return beat([
+        `${hook}.`,
+        `${audience} didn’t need another pitch — they needed a real outcome.`,
+        `${product} from ${business} delivered it.`,
+        `${endCta}.`,
+      ]);
+    case "explainer":
+      return beat([
+        `${hook}.`,
+        `Step one: start. Step two: let ${product} work. Step three: ship the finished result.`,
+        `Simple enough for ${audience}. Strong enough for ${business}.`,
+        `${endCta}.`,
+      ]);
+    case "website-promo":
+      return beat([
+        `${hook}.`,
+        `${business} turns visitors into customers with ${product} — story, proof, then action.`,
+        `Scroll stops here.`,
+        `${endCta}.`,
+      ]);
+    case "real-estate":
+      return beat([
+        `${hook}.`,
+        `${product} from ${business}: light, space, and a location that fits ${audience}.`,
+        `Feel the walkthrough energy — then book.`,
+        `${endCta}.`,
+      ]);
+    case "restaurant":
+      return beat([
+        `${hook}.`,
+        `${product} at ${business} is plated for ${audience} who care about taste and atmosphere.`,
+        `Come hungry. Leave decided.`,
+        `${endCta}.`,
+      ]);
+    case "medical":
+      return beat([
+        `${hook}.`,
+        `${business} offers ${product} with clear guidance for ${audience}.`,
+        `Calm. Credible. Human.`,
+        `${endCta}.`,
+      ]);
+    case "automotive":
+      return beat([
+        `${hook}.`,
+        `${product} from ${business} — confidence on the road for ${audience}.`,
+        `Motion. Presence. Next step.`,
+        `${endCta}.`,
+      ]);
+    case "local-business":
+      return beat([
+        `${hook}.`,
+        `${business} serves ${audience} with ${product} — nearby, reliable, ready when you are.`,
+        `${endCta}.`,
+      ]);
+    case "corporate-presentation":
+      return beat([
+        `${hook}.`,
+        `${business}: how ${product} moves the needle for ${audience}.`,
+        `Three clear points. One decisive next step.`,
+        `${endCta}.`,
+      ]);
+    default:
+      return beat([`${hook}.`, `${business} — ${product} for ${audience}.`, `${endCta}.`]);
+  }
 }
 
 export function buildTemplatePlan(templateId: string, brief: BusinessBrief) {
@@ -171,16 +283,60 @@ export function buildTemplatePlan(templateId: string, brief: BusinessBrief) {
   const script = generateTemplateScript(template, brief);
   const lastEnd = template.sceneBlueprint[template.sceneBlueprint.length - 1]?.endSec || length;
   const scale = length / lastEnd;
-  const scenes = template.sceneBlueprint.map((s) => ({
+
+  const businessProfile = analyzeBusiness({
+    businessName: business,
+    productOrService: product,
+    website: brief.website,
+    industryHint: brief.industry || template.industries[0],
+    audienceHint: audience,
+    ctaHint: cta,
+    toneHint: brief.tone,
+  });
+
+  const direction = directVideo({
+    template,
+    durationSec: length,
+    product,
+    audience,
+    tone: brief.tone || businessProfile.tone || template.styles[0],
+    industry: businessProfile.industry || brief.industry,
+    brandColors: brief.brandColors,
+  });
+
+  const scenes = direction.scenes.map((s) => ({
     id: s.id,
-    startSec: Math.round(s.startSec * scale * 10) / 10,
-    endSec: Math.round(s.endSec * scale * 10) / 10,
+    startSec: s.startSec,
+    endSec: s.endSec,
     role: s.role,
-    description: `${s.role}: ${product}`,
+    description: s.description,
+    camera: s.camera,
   }));
 
-  const avatarId = template.avatarPreference || data.defaultAvatarId || DEFAULT_REELO_AVATAR_ID;
-  const voiceId = data.defaultVoiceId || DEFAULT_REELO_VOICE_ID;
+  // Keep scale fallback roles if director somehow empty
+  if (!scenes.length) {
+    template.sceneBlueprint.forEach((s) => {
+      scenes.push({
+        id: s.id,
+        startSec: Math.round(s.startSec * scale * 10) / 10,
+        endSec: Math.round(s.endSec * scale * 10) / 10,
+        role: s.role,
+        description: `${s.role}: ${product}`,
+        camera: "",
+      });
+    });
+  }
+
+  const directed = directReeloAvatar({
+    videoType: template.videoType,
+    industry: businessProfile.industry || brief.industry || template.industries[0],
+    tone: brief.tone || businessProfile.tone || template.styles[0],
+    audience,
+    overrideAvatarId: brief.avatarIdOverride,
+  });
+  const avatarId = directed.avatarId || template.avatarPreference || data.defaultAvatarId || DEFAULT_REELO_AVATAR_ID;
+  const voiceId = directed.voiceId || data.defaultVoiceId || DEFAULT_REELO_VOICE_ID;
+  const estimatedCostUsd = Math.min(data.costTargetUsd ?? 0.35, 0.4);
 
   const handoffPath =
     template.studioHandoff === "website-commercial"
@@ -195,6 +351,8 @@ export function buildTemplatePlan(templateId: string, brief: BusinessBrief) {
     avatar: avatarId,
     business,
     product,
+    pacing: direction.pacing,
+    music: direction.music.mood,
   });
   if (brief.website) params.set("url", brief.website);
 
@@ -206,33 +364,29 @@ export function buildTemplatePlan(templateId: string, brief: BusinessBrief) {
     engine: template.defaultEngine,
     avatarId,
     voiceId,
+    avatarTier: directed.tier,
+    avatarName: directed.name,
+    avatarReason: directed.reason,
     aspectRatio: aspect,
     durationSec: length,
-    estimatedCostUsd: data.costTargetUsd,
-    hardCostCeilingUsd: data.hardCostCeilingUsd,
+    estimatedCostUsd,
+    hardCostCeilingUsd: Math.min(data.hardCostCeilingUsd ?? 0.5, 0.5),
     studioHandoff: template.studioHandoff,
     handoffUrl: `${handoffPath}?${params.toString()}`,
-    musicMood: template.musicMood,
-    captionStyle: template.captionStyle,
+    musicMood: direction.music.mood,
+    captionStyle: direction.captions.style,
+    direction,
+    businessProfile,
     brandColors: brief.brandColors || [],
     logoUrl: brief.logoUrl || null,
     website: brief.website || null,
     publishAuthorized: false as const,
-    note: "VQOS required before delivery. Provider completed ≠ publishAuthorized.",
+    note: `Directed · ${direction.pacing} · est. $${estimatedCostUsd.toFixed(2)} · ${directed.reason}. VQOS required before delivery.`,
   };
 }
 
 export function recommendedTemplatesForBusiness(businessType: string): string[] {
-  const t = businessType.toLowerCase();
-  if (/real.?estate|realtor/.test(t)) return ["real-estate", "social-media-ad", "testimonial"];
-  if (/restaurant|food|cafe/.test(t)) return ["restaurant", "promotional-sale", "social-media-ad"];
-  if (/medical|dental|clinic|health/.test(t)) return ["medical", "testimonial", "explainer"];
-  if (/auto|car|dealership/.test(t)) return ["automotive", "promotional-sale", "social-media-ad"];
-  if (/e-?commerce|shop|store|retail/.test(t)) return ["ecommerce", "product-showcase", "promotional-sale"];
-  if (/saas|software|app/.test(t)) return ["product-demo", "app-demo", "explainer", "website-promo"];
-  if (/local|plumber|salon|gym/.test(t)) return ["local-business", "promotional-sale", "testimonial"];
-  if (/corporate|b2b|enterprise/.test(t)) return ["corporate-presentation", "brand-introduction", "explainer"];
-  return ["social-media-ad", "talking-avatar", "website-promo", "product-demo"];
+  return biRecommended(businessType);
 }
 
 export function templateFilterOptions() {
