@@ -14,17 +14,20 @@ const NAV: NavItem[] = [
   { key: "brand", label: "Brand Kit", href: "/business-center/brand-kit", icon: "palette" },
   { key: "assets", label: "Assets", href: "/business-center/assets", icon: "folder" },
   { key: "social", label: "Social", href: "/business-center/social", icon: "share" },
-  { key: "publishing", label: "Publishing", href: "/business-center/publishing", icon: "rocket" },
-  { key: "scheduling", label: "Scheduling", href: "/business-center/scheduling", icon: "calendar" },
-  { key: "analytics", label: "Analytics", href: "/business-center/analytics", icon: "chart" },
+  { key: "publishing", label: "Publish queue", href: "/business-center/publishing", icon: "rocket" },
+  { key: "scheduling", label: "Content calendar", href: "/business-center/scheduling", icon: "calendar" },
+  { key: "analytics", label: "Workspace analytics", href: "/business-center/analytics", icon: "chart" },
+  { key: "team", label: "Team", href: "/business-center/team", icon: "users" },
+  { key: "notifications", label: "Notifications", href: "/business-center/notifications", icon: "bolt" },
+  { key: "storage", label: "Storage", href: "/business-center/storage", icon: "cloud" },
+  { key: "settings", label: "Settings", href: "/business-center/settings", icon: "gauge" },
   { key: "revenue", label: "Revenue", href: "/business-center/revenue", icon: "dollar" },
   { key: "trend", label: "Trend AI", href: "/trends", icon: "brain" },
   { key: "hubpro", label: "Hub Pro", href: "/business-center/pro", icon: "crown" },
 ];
 
 /**
- * Pro sidebar only lists live destinations. Unfinished Social / Publishing /
- * Scheduling / Analytics / Revenue shells are not marked “PRO unlocked”.
+ * Pro sidebar — Amber Autonomous Social Manager is admin-only; not listed for customers.
  */
 const PRO_NAV: NavItem[] = [
   { key: "hubpro", label: "Pro Dashboard", href: "/business-center/pro", icon: "crown" },
@@ -37,15 +40,15 @@ const PRO_NAV: NavItem[] = [
   { key: "library", label: "Video Library", href: "/library", icon: "film" },
   { key: "brand", label: "Brand Kit", href: "/business-center/brand-kit", icon: "palette" },
   { key: "assets", label: "Assets", href: "/business-center/assets", icon: "folder" },
+  { key: "publishing", label: "Publish queue", href: "/business-center/publishing", icon: "rocket" },
+  { key: "scheduling", label: "Content calendar", href: "/business-center/scheduling", icon: "calendar" },
+  { key: "analytics", label: "Workspace analytics", href: "/business-center/analytics", icon: "chart" },
   { key: "overview", label: "Standard BC", href: "/business-center", icon: "home" },
 ];
 
 const OVERVIEW_BADGES: Record<string, string> = {
   assets: "NEW",
   social: "SOON",
-  publishing: "SOON",
-  scheduling: "SOON",
-  analytics: "SOON",
   revenue: "SOON",
   trend: "SOON",
   hubpro: "NEW",

@@ -35,11 +35,11 @@ export const EXPLORE: { group: string; items: { label: string; href: string }[] 
   {
     group: "Phase 3 · Scale & Automation",
     items: [
-      { label: "TikTok/Instagram/YouTube Scheduling", href: "/business-center/scheduling" },
-      { label: "Advanced Analytics", href: "/business-center/analytics" },
+      { label: "Content calendar", href: "/business-center/scheduling" },
+      { label: "Workspace analytics", href: "/business-center/analytics" },
       { label: "Batch Creation & Queue", href: "/create/shorts-20" },
       { label: "Product Commercial Engine", href: "/create/product-commercial" },
-      { label: "Enterprise & Team Tools", href: "/business-center/pro" },
+      { label: "Team invites & Pro desk", href: "/business-center/team" },
     ],
   },
 ];

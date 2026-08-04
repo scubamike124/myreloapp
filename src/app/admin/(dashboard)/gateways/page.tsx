@@ -62,8 +62,8 @@ export default function AdminGateways() {
           <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
         </svg>
         <span>
-          Billing is not wired up yet. Setting these variables makes the credentials available to the server, but no
-          checkout flow consumes them so far — this page reports configuration status only.
+          Stripe checkout and webhooks are live when secrets are set on the Worker. This page reports configuration
+          status only — PayPal remains unwired. Prefer Cloudflare Worker secrets over Vercel for production.
         </span>
       </div>
 

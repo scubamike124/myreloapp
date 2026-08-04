@@ -92,6 +92,13 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
           style={field}
           placeholder={isSignup ? "At least 8 characters" : ""}
         />
+        {!isSignup && (
+          <p className="mt-1.5 text-right text-[12px]">
+            <Link href="/forgot-password" className="text-white/45 underline underline-offset-2 hover:text-white">
+              Forgot password?
+            </Link>
+          </p>
+        )}
       </div>
 
       {err && (

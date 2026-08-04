@@ -10,6 +10,7 @@ import {
   summarizeStorybookRequest,
 } from "@/lib/storybook-prompts";
 import { appearancePrompt, isUsable } from "@/lib/storybook/character-bible";
+import { categoryGuidance } from "@/lib/storybook/categories";
 import { continuityPrompt } from "@/lib/storybook/story-memory";
 import {
   episodeFor,
@@ -143,6 +144,13 @@ export async function POST(req: Request) {
   const episode = episodeFor(series);
   const continuity = series ? continuityPrompt(series.memory, series.title) : "";
 
+  // The adventure type and the occasion. Both optional: a parent who just types
+  // what they want still gets exactly that, which is how this tool already
+  // worked and is not something to take away.
+  const categoryId = str(body.categoryId, 40);
+  const seasonalId = str(body.seasonalId, 40);
+  const guidance = categoryGuidance(categoryId, seasonalId || undefined);
+
   const promptInput = {
     characterName,
     idea,
@@ -150,6 +158,7 @@ export async function POST(req: Request) {
     languageName: language.name,
     languageEndonym: language.endonym,
     pageCount,
+    guidance,
     continuity,
   };
   const summary = summarizeStorybookRequest(promptInput);
@@ -300,6 +309,7 @@ export async function POST(req: Request) {
         episode,
         title: story.title,
         dedication: story.dedication,
+        category: categoryId,
         theme,
         languageCode: language.code,
         request: idea,
@@ -342,6 +352,8 @@ export async function POST(req: Request) {
       submitted: {
         idea,
         theme,
+        categoryId: categoryId || null,
+        seasonalId: seasonalId || null,
         characterName: characterName || null,
         pages: pageCount,
         languageCode: language.code,

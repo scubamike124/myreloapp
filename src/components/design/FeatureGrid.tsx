@@ -49,7 +49,7 @@ export default function FeatureGrid() {
             >
               {/* object-contain, not cover: the whole picture stays visible
                   instead of being cropped to a slice of itself. */}
-              <img src={f.icon} alt="" className="h-full w-full object-contain" loading="lazy" />
+              <img src={f.icon} alt={f.title} className="h-full w-full object-contain" loading="lazy" />
             </div>
             <h3 className="font-display text-lg font-bold text-white">{f.title}</h3>
             <p className="mt-1.5 max-w-[210px] text-sm leading-[1.5] text-white/55">{f.desc}</p>

@@ -32,7 +32,7 @@ function Step1Card() {
         <div className="text-xs" style={{ color: "#8e7f81" }}>or drag and drop</div>
       </div>
       <div className="grid grid-cols-4 gap-2.5">
-        {AVATARS.map((src) => <div key={src} className="relative aspect-[5/6] overflow-hidden rounded-xl" style={field}><Image src={src} alt="" fill sizes="120px" className="object-cover" /></div>)}
+        {AVATARS.map((src, i) => <div key={src} className="relative aspect-[5/6] overflow-hidden rounded-xl" style={field}><Image src={src} alt={`Avatar example ${i + 1}`} fill sizes="120px" className="object-cover" /></div>)}
       </div>
     </div>
   );
@@ -50,7 +50,7 @@ function Step3Card() {
   return (
     <div className="rounded-[20px] p-5 sm:p-6" style={card}>
       <div className="relative mb-4 aspect-video overflow-hidden rounded-xl" style={field}>
-        <Image src="/assets/the lady in white.png" alt="" fill sizes="600px" className="object-cover" />
+        <Image src="/assets/the lady in white.png" alt="Finished video ready to share" fill sizes="600px" className="object-cover" />
         <div className="absolute inset-x-2 bottom-2 flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-white" style={{ background: "rgba(10,6,8,.72)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,70,85,.18)" }}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="7 4 20 12 7 20 7 4" /></svg>
           <span className="text-[11px] font-medium tabular-nums">00:03 / 00:30</span>

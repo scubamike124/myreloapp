@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { LANGUAGES, DEFAULT_LANGUAGE } from "@/lib/languages";
+import { STORY_CATEGORIES, getCategory, seasonalNow, type SeasonalStory } from "@/lib/storybook/categories";
 import { recordCreation } from "@/lib/workspace";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
@@ -48,6 +49,8 @@ export default function StoryBook() {
   const [characterName, setCharacterName] = useState("");
   const [idea, setIdea] = useState("");
   const [theme, setTheme] = useState(THEMES[0]);
+  const [categoryId, setCategoryId] = useState("");
+  const [seasonalId, setSeasonalId] = useState("");
   const [languageCode, setLanguageCode] = useState(DEFAULT_LANGUAGE);
   const [pages, setPages] = useState(6);
 
@@ -60,6 +63,21 @@ export default function StoryBook() {
   const [pdfError, setPdfError] = useState<string | null>(null);
   const [spread, setSpread] = useState(0);
   const bookRef = useRef<HTMLDivElement>(null);
+
+  /*
+   * Which occasions to offer.
+   *
+   * Resolved after mount rather than during render: `new Date()` runs once on
+   * the server and again in the browser, and a request that straddles the turn
+   * of a month would render two different lists and fail to hydrate. The row is
+   * optional, so appearing a frame late costs nothing and guessing costs a
+   * hydration error.
+   */
+  const [seasonalOptions, setSeasonalOptions] = useState<SeasonalStory[]>([]);
+  useEffect(() => {
+    setSeasonalOptions(seasonalNow(new Date()));
+  }, []);
+  const activeCategory = categoryId ? getCategory(categoryId) : null;
 
   const onPhoto = (f?: File) => {
     if (!f) return;
@@ -116,6 +134,8 @@ export default function StoryBook() {
         childName: characterName.trim(), // legacy field name
         idea: idea.trim(),
         theme,
+        categoryId,
+        seasonalId,
         languageCode,
         pages,
         debug: process.env.NODE_ENV !== "production",
@@ -248,6 +268,82 @@ export default function StoryBook() {
               ))}
             </div>
           </div>
+
+          {/*
+            The adventure. Distinct from the costume picker below it, and
+            labelled so: the category decides what kind of story gets written,
+            the theme decides what the hero is wearing while it happens.
+
+            "Any adventure" is first and is the default, because this tool's
+            existing promise is that what the parent types becomes the plot.
+            Pre-selecting a genre would quietly start steering every story.
+          */}
+          <div>
+            <label className="mb-1.5 block text-[13px] font-semibold text-white/80">
+              Adventure <span className="font-normal text-white/40">(optional — shapes the kind of story)</span>
+            </label>
+            <div className="flex flex-wrap gap-1.5">
+              <button
+                type="button"
+                onClick={() => setCategoryId("")}
+                className="rounded-lg px-2.5 py-1.5 text-[12px] font-semibold transition-colors"
+                style={
+                  categoryId === ""
+                    ? { color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" }
+                    : { color: "#b9a9ab", border: "1px solid rgba(255,70,85,.2)" }
+                }
+              >
+                Any adventure
+              </button>
+              {STORY_CATEGORIES.map((c) => (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => setCategoryId(c.id)}
+                  title={c.blurb}
+                  className="rounded-lg px-2.5 py-1.5 text-[12px] font-semibold transition-colors"
+                  style={
+                    categoryId === c.id
+                      ? { color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" }
+                      : { color: "#b9a9ab", border: "1px solid rgba(255,70,85,.2)" }
+                  }
+                >
+                  {c.emoji} {c.name}
+                </button>
+              ))}
+            </div>
+            {activeCategory ? <p className="mt-1.5 text-[11px] text-white/45">{activeCategory.blurb}</p> : null}
+          </div>
+
+          {/*
+            Occasions are only shown when they are actually near. A Christmas
+            button in June is clutter; in December it is the reason a parent
+            opened the page. Birthday has no season and is always here.
+          */}
+          {seasonalOptions.length > 0 ? (
+            <div>
+              <label className="mb-1.5 block text-[13px] font-semibold text-white/80">
+                Occasion <span className="font-normal text-white/40">(optional)</span>
+              </label>
+              <div className="flex flex-wrap gap-1.5">
+                {seasonalOptions.map((s) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => setSeasonalId(seasonalId === s.id ? "" : s.id)}
+                    className="rounded-lg px-2.5 py-1.5 text-[12px] font-semibold transition-colors"
+                    style={
+                      seasonalId === s.id
+                        ? { color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" }
+                        : { color: "#b9a9ab", border: "1px solid rgba(255,70,85,.2)" }
+                    }
+                  >
+                    {s.emoji} {s.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : null}
 
           <div>
             <label className="mb-1.5 block text-[13px] font-semibold text-white/80">

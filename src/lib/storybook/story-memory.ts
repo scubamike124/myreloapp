@@ -30,11 +30,35 @@ export type EpisodeNote = {
   summary: string;
 };
 
+/**
+ * The directive's list, kept as separate lists rather than one bag of facts.
+ *
+ * "Amber should remember: Characters, Past adventures, Friends, Villains,
+ * Kingdoms, Pets, Special powers, Favorite themes." They are separated because
+ * the writer needs them differently — a villain is someone to bring back, a
+ * power is a rule that constrains what can happen next, and mixing them into
+ * one list would leave the model to guess which is which.
+ *
+ * Favourite themes are deliberately absent: they are a fact about the child
+ * across every series, not canon within one, and the library can count them
+ * from the stories themselves rather than storing an answer that goes stale.
+ */
 export type SeriesMemory = {
   episodes: EpisodeNote[];
-  /** Side characters who now exist in this world. */
+  /** Friends and side characters who now exist in this world. */
   characters: string[];
-  /** Places the stories have established. */
+  /** Villains — named separately because they are brought back, not just kept consistent. */
+  villains: string[];
+  /** Animals belonging to the hero. Children notice a missing pet immediately. */
+  pets: string[];
+  /**
+   * Established powers and abilities.
+   *
+   * The most constraining list: a power introduced in book two is a rule about
+   * what book five can no longer treat as impossible.
+   */
+  powers: string[];
+  /** Kingdoms, towns and places the stories have established. */
   places: string[];
   /**
    * Morals already used. Tracked so they are not repeated — a series that
@@ -50,13 +74,24 @@ export const RECENT_EPISODES = 6;
 /** Per list. Roughly a paragraph each once rendered into the prompt. */
 export const MAX_FACTS = 12;
 
-export const EMPTY_MEMORY: SeriesMemory = {
-  episodes: [],
-  characters: [],
-  places: [],
-  lessons: [],
-  keepsakes: [],
-};
+/**
+ * Every list of facts, in the order the briefing presents them.
+ *
+ * Iterated rather than written out at each call site: the directive says to
+ * keep adding to what Amber remembers, and a new kind of fact should be one
+ * entry here rather than four functions that must all be found and changed.
+ */
+export const FACT_LISTS = ["characters", "villains", "pets", "powers", "places", "lessons", "keepsakes"] as const;
+
+export type FactList = (typeof FACT_LISTS)[number];
+
+function emptyFacts(): Record<FactList, string[]> {
+  const out = {} as Record<FactList, string[]>;
+  for (const key of FACT_LISTS) out[key] = [];
+  return out;
+}
+
+export const EMPTY_MEMORY: SeriesMemory = { episodes: [], ...emptyFacts() };
 
 function clean(values: unknown, max: number): string[] {
   if (!Array.isArray(values)) return [];
@@ -103,13 +138,9 @@ export function readMemory(raw: unknown): SeriesMemory {
         })
         .filter((e): e is EpisodeNote => e !== null)
     : [];
-  return {
-    episodes: episodes.sort((a, b) => a.episode - b.episode).slice(-RECENT_EPISODES),
-    characters: clean(rec.characters, MAX_FACTS),
-    places: clean(rec.places, MAX_FACTS),
-    lessons: clean(rec.lessons, MAX_FACTS),
-    keepsakes: clean(rec.keepsakes, MAX_FACTS),
-  };
+  const facts = emptyFacts();
+  for (const key of FACT_LISTS) facts[key] = clean(rec[key], MAX_FACTS);
+  return { episodes: episodes.sort((a, b) => a.episode - b.episode).slice(-RECENT_EPISODES), ...facts };
 }
 
 /**
@@ -125,16 +156,12 @@ export function rememberEpisode(current: SeriesMemory, note: EpisodeNote, facts:
     .sort((a, b) => a.episode - b.episode)
     .slice(-RECENT_EPISODES);
 
-  const extend = (existing: string[], added: unknown): string[] =>
-    clean([...existing, ...clean(added, MAX_FACTS)], MAX_FACTS);
+  const merged = emptyFacts();
+  for (const key of FACT_LISTS) {
+    merged[key] = clean([...(current[key] ?? []), ...clean(facts[key], MAX_FACTS)], MAX_FACTS);
+  }
 
-  return {
-    episodes,
-    characters: extend(current.characters, facts.characters),
-    places: extend(current.places, facts.places),
-    lessons: extend(current.lessons, facts.lessons),
-    keepsakes: extend(current.keepsakes, facts.keepsakes),
-  };
+  return { episodes, ...merged };
 }
 
 /** The episode number a new story in this series should take. */
@@ -165,23 +192,42 @@ export function continuityPrompt(memory: SeriesMemory, seriesTitle: string): str
     }
   }
 
-  const list = (label: string, values: string[], rule: string) => {
-    if (values.length === 0) return;
-    lines.push("", `${label}: ${values.join("; ")}.`, rule);
+  /*
+   * Each list gets its own instruction, because they constrain the writer
+   * differently. A place must stay consistent; a lesson must not recur; a
+   * power is a rule about what is now possible. One combined "remember these"
+   * would leave the model to work out which is which, and it does not.
+   */
+  const BRIEFING: Record<FactList, { label: string; rule: string }> = {
+    characters: {
+      label: "Characters who already exist",
+      rule: "Use them as established. Do not introduce them again as if they were new.",
+    },
+    villains: {
+      label: "Villains and rivals from earlier books",
+      rule: "They may return. If one was defeated or befriended, do not undo that without explaining it.",
+    },
+    pets: {
+      label: "Animals belonging to the hero",
+      rule: "They still exist. A child notices when a pet quietly disappears between books.",
+    },
+    powers: {
+      label: "Abilities already established",
+      rule: "These still work and still have the same limits. Do not grant a new power that makes an old problem trivial.",
+    },
+    places: { label: "Places already established", rule: "Keep them consistent with how they were described before." },
+    lessons: {
+      label: "Lessons already taught",
+      rule: "Do NOT repeat any of these. This episode must land on a different lesson.",
+    },
+    keepsakes: { label: "Things carried over", rule: "These still exist and may appear." },
   };
 
-  list(
-    "Characters who already exist",
-    memory.characters,
-    "Use them as established. Do not introduce them again as if they were new.",
-  );
-  list("Places already established", memory.places, "Keep them consistent with how they were described before.");
-  list(
-    "Lessons already taught",
-    memory.lessons,
-    "Do NOT repeat any of these. This episode must land on a different lesson.",
-  );
-  list("Things carried over", memory.keepsakes, "These still exist and may appear.");
+  for (const key of FACT_LISTS) {
+    const values = memory[key];
+    if (values.length === 0) continue;
+    lines.push("", `${BRIEFING[key].label}: ${values.join("; ")}.`, BRIEFING[key].rule);
+  }
 
   return lines.join("\n");
 }

@@ -6,14 +6,18 @@ import {
   SESSION_COOKIE,
   SESSION_DAYS,
   authenticate,
+  createPasswordResetToken,
   createUser,
   currentUser,
   endSession,
   passwordProblem,
+  resetPasswordWithToken,
   startSession,
   validEmail,
 } from "@/lib/accounts";
 import { balanceOf, historyOf } from "@/lib/tokens";
+import { mailConfigured, sendPasswordResetEmail } from "@/lib/mail";
+import { BUSINESS } from "@/lib/legal";
 
 export const runtime = "nodejs";
 
@@ -97,9 +101,17 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Too many attempts. Try again later." }, { status: 429 });
     }
 
-    const email = String(body.email ?? "").trim();
     const password = String(body.password ?? "");
 
+    // Token + password only — do not require a fake email from the client.
+    if (action === "reset-password") {
+      const token = String(body.token ?? "");
+      const outcome = await resetPasswordWithToken(token, password);
+      if ("error" in outcome) return NextResponse.json({ error: outcome.error }, { status: 400 });
+      return NextResponse.json({ ok: true });
+    }
+
+    const email = String(body.email ?? "").trim();
     if (!validEmail(email)) return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 });
 
     if (action === "signup") {
@@ -169,6 +181,27 @@ export async function POST(req: Request) {
       const res = NextResponse.json({ ok: true, user, balance: await balanceOf(user.id) });
       applySessionCookie(res, sid);
       return res;
+    }
+
+    if (action === "request-reset") {
+      const canMail = mailConfigured();
+      let emailed = false;
+      // Only mint a token when we can actually deliver it.
+      if (canMail) {
+        const result = await createPasswordResetToken(email);
+        if (result.token && result.email) {
+          const origin = new URL(req.url).origin;
+          const resetUrl = `${origin}/reset-password?token=${encodeURIComponent(result.token)}`;
+          emailed = await sendPasswordResetEmail(result.email, resetUrl);
+        }
+      }
+      // Never reveal whether the account exists.
+      return NextResponse.json({
+        ok: true,
+        emailed,
+        mailConfigured: canMail,
+        supportEmail: BUSINESS.supportEmail,
+      });
     }
 
     return NextResponse.json({ error: "Unknown action." }, { status: 400 });

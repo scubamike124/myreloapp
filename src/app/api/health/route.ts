@@ -1,6 +1,7 @@
 import { driver, pingDatabase, postgresPublicMeta, hyperdriveBound } from "@/lib/db";
-import { storageDriver, RETENTION_DAYS } from "@/lib/storage";
+import { storageDriver, storageDriverAsync, RETENTION_DAYS } from "@/lib/storage";
 import { isCloudflareWorkers, isEphemeralFilesystem } from "@/lib/runtime-platform";
+import { r2Available } from "@/lib/r2-storage";
 
 // ---------------------------------------------------------------------------
 // Liveness and readiness in one place.
@@ -23,6 +24,8 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const db = driver();
   const storage = storageDriver();
+  const storageLive = await storageDriverAsync();
+  const r2Ready = await r2Available();
   const postgres = postgresPublicMeta();
   const hdBound = await hyperdriveBound();
   const dbPing = db === "none" ? { ok: false as const, error: "No database configured." } : await pingDatabase();
@@ -34,11 +37,17 @@ export async function GET() {
     gemini: Boolean(process.env.GEMINI_API_KEY),
     heygen: Boolean(process.env.HEYGEN_API_KEY),
     stripe: Boolean(process.env.STRIPE_SECRET_KEY),
+    resend: Boolean(process.env.RESEND_API_KEY?.trim()),
   };
 
   const blobConfigured = Boolean(process.env.BLOB_READ_WRITE_TOKEN);
-  const ingestBackend =
-    blobConfigured ? "blob" : isCloudflareWorkers() || isEphemeralFilesystem() ? "cache-or-memory" : "disk";
+  const ingestBackend = blobConfigured
+    ? "blob"
+    : r2Ready
+      ? "r2"
+      : isCloudflareWorkers() || isEphemeralFilesystem()
+        ? "cache-or-memory"
+        : "disk";
 
   // Prefer the SHA baked in at OpenNext build time; fall back to CI env vars.
   const build =
@@ -56,7 +65,7 @@ export async function GET() {
       status: "up",
       // The two things that make a deploy real rather than a demo.
       accounts: db !== "none",
-      persistsVideos: storage !== "none" || blobConfigured,
+      persistsVideos: storageLive !== "none" || blobConfigured || r2Ready,
       database: db, // "postgres" | "sqlite" | "none"
       databaseLive: dbPing,
       postgres: {
@@ -71,7 +80,8 @@ export async function GET() {
         hint: postgres.hint,
         hyperdriveBound: hdBound,
       },
-      storage, // "blob" | "disk" | "none"
+      storage: storageLive, // "blob" | "disk" | "r2" | "none"
+      r2Ready,
       // Browser → POST /api/media/ingest path (avoids Worker→HeyGen 403).
       mediaIngest: ingestBackend,
       retentionDays: RETENTION_DAYS,

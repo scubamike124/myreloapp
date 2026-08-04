@@ -11,12 +11,31 @@ import Link from "next/link";
 // reloads what you saved, and it says plainly when it cannot.
 // ---------------------------------------------------------------------------
 
+type BrandExtra = {
+  voice: string;
+  businessInfo: string;
+  products: string;
+  services: string;
+  contactInfo: string;
+  disclaimers: string;
+};
+
 type Kit = {
   brandName: string;
   colors: string[];
   headingFont: string;
   bodyFont: string;
   logoUrl: string | null;
+  extra: BrandExtra;
+};
+
+const BLANK_EXTRA: BrandExtra = {
+  voice: "",
+  businessInfo: "",
+  products: "",
+  services: "",
+  contactInfo: "",
+  disclaimers: "",
 };
 
 const FONTS = ["", "Inter", "Poppins", "Montserrat", "Playfair Display", "Georgia", "Roboto", "Oswald", "Lato"];
@@ -44,7 +63,11 @@ export default function BrandKitEditor() {
         const res = await fetch("/api/brand-kit");
         const data = await res.json();
         if (cancelled) return;
-        setKit(data.kit);
+        const kit = data.kit as Kit;
+        setKit({
+          ...kit,
+          extra: { ...BLANK_EXTRA, ...(kit.extra ?? {}) },
+        });
         setState({ configured: Boolean(data.configured), signedIn: Boolean(data.signedIn) });
       } catch {
         if (!cancelled) setErr("Couldn't load your brand kit.");
@@ -57,6 +80,11 @@ export default function BrandKitEditor() {
 
   const set = <K extends keyof Kit>(key: K, value: Kit[K]) => {
     setKit((k) => (k ? { ...k, [key]: value } : k));
+    setSaved("");
+  };
+
+  const setExtra = <K extends keyof BrandExtra>(key: K, value: BrandExtra[K]) => {
+    setKit((k) => (k ? { ...k, extra: { ...BLANK_EXTRA, ...k.extra, [key]: value } } : k));
     setSaved("");
   };
 
@@ -253,6 +281,32 @@ export default function BrandKitEditor() {
             </button>
           )}
         </div>
+
+        {(
+          [
+            ["voice", "Brand voice", "Tone, personality, words to use or avoid"],
+            ["businessInfo", "Business info", "What you do, who you serve"],
+            ["products", "Products", "Flagship products or lines"],
+            ["services", "Services", "What you offer"],
+            ["contactInfo", "Contact info", "Website, email, phone, location"],
+            ["disclaimers", "Disclaimers", "Legal or compliance lines for captions"],
+          ] as const
+        ).map(([key, label, placeholder]) => (
+          <div key={key}>
+            <label htmlFor={`bk-${key}`} className="mb-1.5 block text-[13px] font-semibold text-white/80">
+              {label}
+            </label>
+            <textarea
+              id={`bk-${key}`}
+              rows={key === "contactInfo" ? 2 : 3}
+              value={kit.extra?.[key] ?? ""}
+              onChange={(e) => setExtra(key, e.target.value)}
+              placeholder={placeholder}
+              className="w-full resize-none rounded-xl px-3.5 py-2.5 text-sm text-white outline-none placeholder:text-white/25"
+              style={input}
+            />
+          </div>
+        ))}
 
         <div className="flex flex-wrap items-center gap-3">
           <button

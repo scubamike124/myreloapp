@@ -14,6 +14,14 @@ export type StorybookInput = {
   languageEndonym: string;
   pageCount: number;
   /**
+   * The chosen adventure type and occasion, from `categoryGuidance`.
+   *
+   * Like the theme, it shapes the story rather than choosing it — the parent's
+   * request stays the plot. Unlike the theme, which is costume only, this sets
+   * the setting, the cast and the kind of problem to be solved.
+   */
+  guidance?: string;
+  /**
    * The series briefing, when this story is a sequel — built by
    * `continuityPrompt` from what Amber remembers of the earlier episodes.
    *
@@ -51,6 +59,9 @@ export function buildStoryPrompt(input: StorybookInput): string {
       ? `"${idea}"\n`
       : `(No custom topic was provided — invent a simple, wholesome adventure for ${hero}.)\n`) +
     `===============================================================\n\n` +
+    (input.guidance?.trim()
+      ? `=== ADVENTURE TYPE ===\n${input.guidance.trim()}\n` + `===============================================================\n\n`
+      : "") +
     (input.continuity?.trim()
       ? `=== SERIES CONTINUITY (this is not the first book) ===\n${input.continuity.trim()}\n` +
         `===============================================================\n\n`

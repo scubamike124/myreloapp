@@ -296,6 +296,10 @@ export default function AmberAdminDashboard() {
     services: "",
     marketingObjectives: "",
   });
+  const [websitesDraft, setWebsitesDraft] = useState<{ url: string; videosPerDay: number; label?: string }[]>([]);
+  const [newSiteUrl, setNewSiteUrl] = useState("");
+  const [newSiteVideos, setNewSiteVideos] = useState(1);
+  const [bulkVideosPerDay, setBulkVideosPerDay] = useState(1);
 
   const load = useCallback(async () => {
     try {
@@ -327,6 +331,30 @@ export default function AmberAdminDashboard() {
           services: String(i.services || ""),
           marketingObjectives: String(i.marketingObjectives || ""),
         });
+        const intelBlob =
+          i.intelligence && typeof i.intelligence === "object"
+            ? (i.intelligence as Record<string, unknown>)
+            : {};
+        const sites = Array.isArray(intelBlob.websites) ? intelBlob.websites : [];
+        if (sites.length) {
+          setWebsitesDraft(
+            sites.map((row) => {
+              const r = row && typeof row === "object" ? (row as Record<string, unknown>) : {};
+              return {
+                url: String(r.url || ""),
+                videosPerDay: Math.min(20, Math.max(0, Math.round(Number(r.videosPerDay ?? 1)) || 1)),
+                label: r.label ? String(r.label) : undefined,
+              };
+            }),
+          );
+        } else if (i.goals && String(i.goals).trim()) {
+          const g = String(i.goals).trim();
+          if (/^https?:\/\//i.test(g) || /\.[a-z]{2,}/i.test(g)) {
+            setWebsitesDraft([{ url: g, videosPerDay: 1, label: "Primary" }]);
+          }
+        } else {
+          setWebsitesDraft([]);
+        }
       }
     } catch {
       setErr("Network error.");
@@ -1076,6 +1104,45 @@ export default function AmberAdminDashboard() {
           </div>
 
           <div className="rounded-2xl p-5" style={card}>
+            <h3 className="font-semibold">Videos per day — all websites</h3>
+            <p className="mt-1 text-xs text-white/50">
+              Sets the same daily video count on every website for every selected Learning workspace.
+              Per-site URLs are managed in the Intel tab.
+            </p>
+            <div className="mt-3 flex flex-wrap items-end gap-3">
+              <label className="block text-xs text-white/50">
+                Videos / day (all sites)
+                <input
+                  type="number"
+                  min={0}
+                  max={20}
+                  value={bulkVideosPerDay}
+                  onChange={(e) => setBulkVideosPerDay(Math.min(20, Math.max(0, Number(e.target.value) || 0)))}
+                  className="mt-1 w-28 rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white"
+                />
+              </label>
+              <button
+                type="button"
+                disabled={busy || selectedWorkspaces.length === 0}
+                onClick={async () => {
+                  await post({
+                    action: "set_all_videos_per_day",
+                    userIds: selectedWorkspaces,
+                    videosPerDay: bulkVideosPerDay,
+                  });
+                  setFlash(
+                    `Set ${bulkVideosPerDay} video(s)/day on all websites for ${selectedWorkspaces.length} workspace(s).`,
+                  );
+                }}
+                className="rounded-lg px-4 py-2 text-sm font-bold text-white disabled:opacity-40"
+                style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+              >
+                Apply to all selected workspaces
+              </button>
+            </div>
+          </div>
+
+          <div className="rounded-2xl p-5" style={card}>
             <h3 className="font-semibold">Amber operational metrics</h3>
             <p className="mt-1 text-xs text-white/50">Evaluating Amber — not customer social reach.</p>
             {data.launchOps ? (
@@ -1672,6 +1739,161 @@ export default function AmberAdminDashboard() {
               Refresh from workspace
             </button>
           </div>
+
+          {data.tester ? (
+            <div className="rounded-2xl p-5 space-y-4" style={card}>
+              <div>
+                <h3 className="font-semibold">Websites & videos per day</h3>
+                <p className="mt-1 text-xs text-white/50">
+                  Enter a website URL, then set how many videos Amber should make per day for that site.
+                  Adjust anytime. Total daily cap drives mission / weekly production volume.
+                </p>
+                <div className="mt-3 space-y-2">
+                  <label className="block text-xs text-white/50">
+                    Website URL
+                    <input
+                      className="mt-1 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white"
+                      placeholder="https://yourbusiness.com"
+                      value={newSiteUrl}
+                      onChange={(e) => setNewSiteUrl(e.target.value)}
+                    />
+                  </label>
+                  <label className="block text-xs text-white/50">
+                    How many videos per day should Amber make on that website?
+                    <input
+                      type="number"
+                      min={0}
+                      max={20}
+                      className="mt-1 w-32 rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white"
+                      value={newSiteVideos}
+                      onChange={(e) =>
+                        setNewSiteVideos(Math.min(20, Math.max(0, Number(e.target.value) || 0)))
+                      }
+                    />
+                  </label>
+                  <button
+                    type="button"
+                    disabled={busy || !newSiteUrl.trim()}
+                    onClick={() => {
+                      const url = newSiteUrl.trim();
+                      setWebsitesDraft((prev) => {
+                        const key = url.toLowerCase().replace(/^https?:\/\//, "");
+                        const without = prev.filter(
+                          (w) => w.url.toLowerCase().replace(/^https?:\/\//, "") !== key,
+                        );
+                        return [...without, { url, videosPerDay: newSiteVideos }];
+                      });
+                      setNewSiteUrl("");
+                      setNewSiteVideos(1);
+                    }}
+                    className="rounded-lg border border-white/20 px-4 py-2 text-sm font-bold text-white/90 disabled:opacity-40"
+                  >
+                    Add website
+                  </button>
+                </div>
+
+                {websitesDraft.length ? (
+                  <ul className="mt-4 space-y-3">
+                    {websitesDraft.map((site, idx) => (
+                      <li
+                        key={`${site.url}-${idx}`}
+                        className="rounded-xl border border-white/10 bg-black/30 p-3"
+                      >
+                        <div className="flex flex-wrap items-start justify-between gap-2">
+                          <div className="min-w-0 flex-1">
+                            <p className="truncate text-sm font-semibold text-white">{site.url}</p>
+                            <label className="mt-2 block text-xs text-white/50">
+                              Videos per day
+                              <input
+                                type="number"
+                                min={0}
+                                max={20}
+                                className="mt-1 w-28 rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white"
+                                value={site.videosPerDay}
+                                onChange={(e) => {
+                                  const n = Math.min(20, Math.max(0, Number(e.target.value) || 0));
+                                  setWebsitesDraft((prev) =>
+                                    prev.map((w, i) => (i === idx ? { ...w, videosPerDay: n } : w)),
+                                  );
+                                }}
+                              />
+                            </label>
+                          </div>
+                          <button
+                            type="button"
+                            className="text-xs text-[#ff8892] hover:underline"
+                            onClick={() =>
+                              setWebsitesDraft((prev) => prev.filter((_, i) => i !== idx))
+                            }
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="mt-3 text-sm text-white/40">No websites yet — add a URL above.</p>
+                )}
+
+                <div className="mt-4 flex flex-wrap items-end gap-3 border-t border-white/10 pt-4">
+                  <label className="block text-xs text-white/50">
+                    Set all websites on this workspace to
+                    <input
+                      type="number"
+                      min={0}
+                      max={20}
+                      className="mt-1 w-28 rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white"
+                      value={bulkVideosPerDay}
+                      onChange={(e) =>
+                        setBulkVideosPerDay(Math.min(20, Math.max(0, Number(e.target.value) || 0)))
+                      }
+                    />
+                  </label>
+                  <button
+                    type="button"
+                    disabled={busy || !websitesDraft.length}
+                    onClick={() => {
+                      setWebsitesDraft((prev) =>
+                        prev.map((w) => ({ ...w, videosPerDay: bulkVideosPerDay })),
+                      );
+                    }}
+                    className="rounded-lg border border-white/20 px-3 py-2 text-sm font-bold text-white/90 disabled:opacity-40"
+                  >
+                    Apply to all sites here
+                  </button>
+                  <button
+                    type="button"
+                    disabled={busy || !testerId}
+                    onClick={async () => {
+                      await post({
+                        action: "save_websites",
+                        userId: testerId,
+                        websites: websitesDraft,
+                      });
+                      setFlash(
+                        `Saved ${websitesDraft.length} website(s). Daily total: ${websitesDraft.reduce((a, w) => a + w.videosPerDay, 0)} video(s)/day.`,
+                      );
+                    }}
+                    className="rounded-lg px-4 py-2 text-sm font-bold text-white disabled:opacity-40"
+                    style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+                  >
+                    Save website cadence
+                  </button>
+                </div>
+                <p className="mt-2 text-xs text-white/40">
+                  Workspace daily total:{" "}
+                  <strong className="text-white/70">
+                    {websitesDraft.reduce((a, w) => a + w.videosPerDay, 0)}
+                  </strong>{" "}
+                  · For all Learning workspaces at once, use Launch → Videos per day.
+                </p>
+              </div>
+            </div>
+          ) : (
+            <p className="text-sm text-white/50">Select a tester user to manage websites.</p>
+          )}
+
           {data.tester ? (
             <div className="rounded-2xl p-5 space-y-2" style={card}>
               {(
@@ -1712,9 +1934,7 @@ export default function AmberAdminDashboard() {
                 </pre>
               ) : null}
             </div>
-          ) : (
-            <p className="text-sm text-white/50">Select a tester user.</p>
-          )}
+          ) : null}
         </div>
       ) : null}
 

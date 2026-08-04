@@ -33,6 +33,7 @@ type BusinessProfile = {
   company: string;
   industry: string;
   website: string;
+  videosPerDay: number;
   contact: string;
   voice: string;
   notes: string;
@@ -42,6 +43,7 @@ const DEFAULT_PROFILE: BusinessProfile = {
   company: "",
   industry: "Creator / Brand",
   website: "",
+  videosPerDay: 1,
   contact: "",
   voice: "Bold & clear",
   notes: "",
@@ -134,7 +136,8 @@ export default function BusinessProDashboard({
 }) {
   const search = useSearchParams();
   const router = useRouter();
-  const tabParam = (search.get("tab") || "overview") as Tab;
+  const tabParamRaw = search.get("tab") || "overview";
+  const tabParam = (TABS.some((t) => t.id === tabParamRaw) ? tabParamRaw : "overview") as Tab;
   const tab: Tab = TABS.some((t) => t.id === tabParam) ? tabParam : "overview";
 
   const [profile, setProfile] = useState<BusinessProfile>(DEFAULT_PROFILE);
@@ -158,8 +161,59 @@ export default function BusinessProDashboard({
     router.push(q);
   };
 
-  const saveProfile = () => {
+  const saveProfile = async () => {
     localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+    const videosPerDay = Math.min(20, Math.max(0, Math.round(Number(profile.videosPerDay)) || 1));
+    const website = profile.website.trim();
+    let existingIntel: Record<string, unknown> = {};
+    try {
+      const existing = await fetch("/api/business-profile");
+      const data = await existing.json();
+      if (data?.profile?.intelligence && typeof data.profile.intelligence === "object") {
+        existingIntel = data.profile.intelligence as Record<string, unknown>;
+      }
+    } catch {
+      /* ignore */
+    }
+    const priorSites = Array.isArray(existingIntel.websites) ? existingIntel.websites : [];
+    const websites = website
+      ? [
+          {
+            url: website.startsWith("http") ? website : `https://${website}`,
+            videosPerDay,
+            label: "Primary",
+          },
+          ...priorSites
+            .filter((row) => {
+              const r = row && typeof row === "object" ? (row as Record<string, unknown>) : {};
+              const u = String(r.url || "").toLowerCase().replace(/^https?:\/\//, "").replace(/\/$/, "");
+              const cur = website.toLowerCase().replace(/^https?:\/\//, "").replace(/\/$/, "");
+              return u && u !== cur;
+            })
+            .map((row) => {
+              const r = row as Record<string, unknown>;
+              return {
+                url: String(r.url || ""),
+                videosPerDay: Number(r.videosPerDay ?? 1),
+                label: r.label ? String(r.label) : undefined,
+              };
+            }),
+        ]
+      : priorSites;
+    void fetch("/api/business-profile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        company: profile.company,
+        industry: profile.industry,
+        audience: profile.notes,
+        style: profile.voice,
+        goals: website,
+        intelligence: { ...existingIntel, websites },
+        approvalMode: "require",
+        onboardingComplete: true,
+      }),
+    });
     setSaved(true);
     setTimeout(() => setSaved(false), 1800);
   };
@@ -326,7 +380,6 @@ export default function BusinessProDashboard({
               [
                 ["company", "Company / brand name", "e.g. Aurixa Studio"],
                 ["industry", "Industry", "e.g. Beauty / SaaS"],
-                ["website", "Website", "https://"],
                 ["contact", "Contact email", "hello@brand.com"],
                 ["voice", "Brand voice", "Bold & clear"],
               ] as const
@@ -342,6 +395,40 @@ export default function BusinessProDashboard({
                 />
               </label>
             ))}
+            <div className="sm:col-span-2 space-y-2">
+              <label className="block text-sm">
+                <span className="mb-1 block font-semibold text-white/80">Website</span>
+                <input
+                  value={profile.website}
+                  onChange={(e) => setProfile((p) => ({ ...p, website: e.target.value }))}
+                  placeholder="https://"
+                  className="w-full rounded-xl bg-transparent px-3 py-2.5 text-sm outline-none"
+                  style={{ border: "1px solid rgba(255,70,85,.22)" }}
+                />
+              </label>
+              <label className="block text-sm">
+                <span className="mb-1 block font-semibold text-white/80">
+                  How many videos per day should Amber make on that website?
+                </span>
+                <input
+                  type="number"
+                  min={0}
+                  max={20}
+                  value={profile.videosPerDay}
+                  onChange={(e) =>
+                    setProfile((p) => ({
+                      ...p,
+                      videosPerDay: Math.min(20, Math.max(0, Number(e.target.value) || 0)),
+                    }))
+                  }
+                  className="w-32 rounded-xl bg-transparent px-3 py-2.5 text-sm outline-none"
+                  style={{ border: "1px solid rgba(255,70,85,.22)" }}
+                />
+              </label>
+              <p className="text-xs" style={{ color: "#9a8b8d" }}>
+                Manage multiple websites and bulk cadence in Admin → Amber → Intel / Launch.
+              </p>
+            </div>
             <label className="block text-sm sm:col-span-2">
               <span className="mb-1 block font-semibold text-white/80">Notes for AI assist</span>
               <textarea
@@ -450,9 +537,12 @@ export default function BusinessProDashboard({
           {[
             { t: "Video Library", d: "Every finished generation you kept.", href: "/library", icon: "film" as IconKey },
             { t: "Assets", d: "Upload and reuse media for ads and avatars.", href: "/business-center/assets", icon: "folder" as IconKey },
-            { t: "Brand Kit", d: "Logos, colors, and brand identity.", href: "/business-center/brand-kit", icon: "palette" as IconKey },
+            { t: "Brand Kit", d: "Logos, colors, voice, and brand extras.", href: "/business-center/brand-kit", icon: "palette" as IconKey },
+            { t: "Publish queue", d: "Prepare captions and mark exports — no auto-post.", href: "/business-center/publishing", icon: "rocket" as IconKey },
+            { t: "Content calendar", d: "Plan posting intent by date.", href: "/business-center/scheduling", icon: "calendar" as IconKey },
+            { t: "Workspace analytics", d: "Creations and token spend — not social reach.", href: "/business-center/analytics", icon: "chart" as IconKey },
             { t: "Create Studio", d: "Full tool catalog for new work.", href: "/create", icon: "pen" as IconKey },
-            { t: "Product commercials", d: "Photo → cinematic product ad.", href: "/create/product-commercial", icon: "rocket" as IconKey },
+            { t: "Product commercials", d: "Photo → cinematic product ad.", href: "/create/product-commercial", icon: "image" as IconKey },
             { t: "Website commercials", d: "URL → brand video ideas.", href: "/create/website-commercial", icon: "globe" as IconKey },
           ].map((c) => (
             <Link
@@ -468,14 +558,18 @@ export default function BusinessProDashboard({
             </Link>
           ))}
           <Panel className="sm:col-span-2 lg:col-span-3">
-            <h3 className="font-display font-bold">Social publishing</h3>
+            <h3 className="font-display font-bold">Social posting</h3>
             <p className="mt-1 text-sm" style={{ color: "#9a8b8d" }}>
-              Direct posting to TikTok / Instagram / YouTube is not connected. Download from Library or Create, then publish on the platform.
-              Social connectors stay in the internal backlog until a real integration ships.
+              Amber Autonomous Mode is admin-only while we verify it. Use Publish queue and Content calendar to prepare posts; connect-your-accounts automation is not customer-facing yet.
             </p>
-            <Link href="/library" className="mt-3 inline-block text-sm font-bold" style={{ color: "#ff8a92" }}>
-              Go to Library to download →
-            </Link>
+            <div className="mt-3 flex flex-wrap gap-4">
+              <Link href="/business-center/publishing" className="text-sm font-bold" style={{ color: "#ff8a92" }}>
+                Open publish queue →
+              </Link>
+              <Link href="/business-center/scheduling" className="text-sm font-bold" style={{ color: "#ff8a92" }}>
+                Content calendar →
+              </Link>
+            </div>
           </Panel>
         </div>
       )}

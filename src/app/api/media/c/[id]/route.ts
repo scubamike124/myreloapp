@@ -37,7 +37,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ id: string }> }
   if (range) {
     const m = /^bytes=(\d*)-(\d*)$/i.exec(range.trim());
     if (m) {
-      let start = m[1] !== "" && m[1] != null ? Number(m[1]) : 0;
+      const start = m[1] !== "" && m[1] != null ? Number(m[1]) : 0;
       let end = m[2] !== "" && m[2] != null ? Number(m[2]) : total - 1;
       // Clamp oversized ends (some players send huge end values).
       if (Number.isFinite(end) && end >= total) end = total - 1;

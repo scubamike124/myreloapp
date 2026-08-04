@@ -24,7 +24,7 @@ import { runAmberWeeklyCycle, geminiJson } from "@/lib/amber-weekly";
 import { createAmberMission, executeAmberMission, reviewAmberProduction } from "@/lib/amber-execute";
 import { runAmberAutonomousCycle, detectInfraVerificationNeeds, resolveVerificationHold } from "@/lib/amber-cycle";
 import { generateExecutiveReport } from "@/lib/amber-reports";
-import { refreshBusinessIntelligence, saveBusinessIntelligence, loadBusinessIntelligence } from "@/lib/amber-intelligence";
+import { refreshBusinessIntelligence, saveBusinessIntelligence, loadBusinessIntelligence, saveWebsiteTargets, setAllWebsiteVideosPerDay, getWebsiteTargets, getDailyVideoCap } from "@/lib/amber-intelligence";
 import { buildAmberCampaign, retryFailedProductions } from "@/lib/amber-campaigns";
 import { runDecisionEngine } from "@/lib/amber-decision";
 import { rebalanceAmberCalendar } from "@/lib/amber-schedule";
@@ -768,6 +768,60 @@ export async function POST(req: Request) {
       goals: body.goals != null ? str(body.goals, 500) : undefined,
     });
     return Response.json({ ok: true, intelligence });
+  }
+
+  if (body.action === "save_websites") {
+    const userId = str(body.userId, 80);
+    if (!userId) return Response.json({ ok: false, error: "userId required." }, { status: 400 });
+    const q = await sqlAsync();
+    if (!q || !(await ensureSchema())) {
+      return Response.json({ ok: false, error: "Storage unavailable." }, { status: 503 });
+    }
+    const raw = Array.isArray(body.websites) ? body.websites : [];
+    const websites = raw.map((row) => {
+      const r = row && typeof row === "object" ? (row as Record<string, unknown>) : {};
+      return {
+        url: str(r.url, 300),
+        videosPerDay: Number(r.videosPerDay ?? 1),
+        label: str(r.label, 80) || undefined,
+      };
+    });
+    const intelligence = await saveWebsiteTargets(q, userId, websites, "super_admin");
+    return Response.json({
+      ok: true,
+      websites: getWebsiteTargets(intelligence),
+      dailyCap: getDailyVideoCap(intelligence),
+      intelligence,
+    });
+  }
+
+  if (body.action === "set_all_videos_per_day") {
+    const videosPerDay = Number(body.videosPerDay);
+    if (!Number.isFinite(videosPerDay)) {
+      return Response.json({ ok: false, error: "videosPerDay required." }, { status: 400 });
+    }
+    const q = await sqlAsync();
+    if (!q || !(await ensureSchema())) {
+      return Response.json({ ok: false, error: "Storage unavailable." }, { status: 503 });
+    }
+    const userIds = Array.isArray(body.userIds)
+      ? body.userIds.map((id) => str(id, 80)).filter(Boolean)
+      : str(body.userId, 80)
+        ? [str(body.userId, 80)]
+        : [];
+    if (!userIds.length) {
+      return Response.json({ ok: false, error: "userId or userIds required." }, { status: 400 });
+    }
+    const results: { userId: string; dailyCap: number; websites: ReturnType<typeof getWebsiteTargets> }[] = [];
+    for (const userId of userIds.slice(0, 40)) {
+      const intelligence = await setAllWebsiteVideosPerDay(q, userId, videosPerDay, "super_admin");
+      results.push({
+        userId,
+        dailyCap: getDailyVideoCap(intelligence),
+        websites: getWebsiteTargets(intelligence),
+      });
+    }
+    return Response.json({ ok: true, videosPerDay, results });
   }
 
   if (body.action === "detect_holds") {

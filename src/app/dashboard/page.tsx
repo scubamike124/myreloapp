@@ -1,22 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import AppShell from "@/components/design/AppShell";
+import { currentUser } from "@/lib/accounts";
+import { dbConfigured } from "@/lib/db";
 
 export const metadata = { title: "Dashboard — Reelo" };
+export const dynamic = "force-dynamic";
 
 const STATS = [
-  { label: "Videos Created", value: "128", delta: "↑ 24% this month", highlight: false },
-  { label: "Total Views", value: "45.2K", delta: "↑ 31% this month", highlight: false },
-  { label: "Engagement", value: "8.7%", delta: "↑ 19% this month", highlight: false },
-  { label: "Tokens Left", value: "320", delta: "Renews in 12 days", highlight: true },
+  { label: "Videos Created", value: "—", delta: "Starts after your first render", highlight: false },
+  { label: "Total Views", value: "—", delta: "Connect publishing to track", highlight: false },
+  { label: "Engagement", value: "—", delta: "Available with Business Center", highlight: false },
+  { label: "Tokens Left", value: "—", delta: "See Account for live balance", highlight: true },
 ];
 
-const RECENT = [
-  { t: "Chiropractic Commercial", m: "00:30 · 2 hours ago", img: "/assets/commercials.jpg" },
-  { t: "AI Avatar Intro", m: "00:45 · 1 day ago", img: "/assets/spokesperson.jpg" },
-  { t: "Dancing Photo", m: "00:15 · 2 days ago", img: "/assets/dancing.jpg" },
-  { t: "20 Shorts Pack", m: "Created 3 days ago", img: "/assets/shorts.jpg" },
-];
+const RECENT: { t: string; m: string; img: string }[] = [];
 
 const QUICK: { t: string; href: string; icon: React.ReactNode; star?: boolean }[] = [
   { t: "AI Avatar Video", href: "/create/ai-avatar-studio", icon: <><circle cx="12" cy="8" r="3.4" /><path d="M5 20a7 7 0 0 1 14 0" /></> },
@@ -27,12 +26,18 @@ const QUICK: { t: string; href: string; icon: React.ReactNode; star?: boolean }[
   { t: "20 Shorts from One Prompt", href: "/create/shorts-20", star: true, icon: <path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5z" /> },
 ];
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const user = dbConfigured() ? await currentUser() : null;
+  if (dbConfigured() && !user) redirect("/login?next=/dashboard");
+
+  const firstName = (user?.name || user?.email || "creator").split(/[\s@]/)[0];
+  const greetName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+
   return (
     <AppShell active="home">
       <div className="mb-[26px] flex items-start justify-between">
         <div>
-          <h1 className="font-display text-3xl font-bold tracking-[-0.02em]">Welcome back, Michael!</h1>
+          <h1 className="font-display text-3xl font-bold tracking-[-0.02em]">Welcome back, {greetName}!</h1>
           <p className="mt-1 text-[15px]" style={{ color: "#a99a9c" }}>Let&apos;s create something amazing today.</p>
         </div>
         <div className="relative h-[42px] w-[42px] overflow-hidden rounded-full" style={{ border: "1px solid rgba(255,70,85,.4)" }}>
@@ -56,22 +61,32 @@ export default function DashboardPage() {
         {/* recent */}
         <div className="rounded-[18px] p-[22px]" style={{ border: "1px solid rgba(255,70,85,.14)", background: "rgba(255,60,75,.03)" }}>
           <div className="font-display mb-4 text-[17px] font-bold">Recent Projects</div>
-          <div className="flex flex-col gap-3">
-            {RECENT.map((r) => (
-              <div key={r.t} className="flex items-center gap-3 rounded-xl p-2.5 transition-colors hover:bg-[rgba(255,70,85,.06)]">
-                <div className="relative h-[42px] w-16 flex-shrink-0 overflow-hidden rounded-[9px]">
-                  <Image src={r.img} alt="" fill sizes="64px" className="object-cover" />
-                  <span className="absolute inset-0 grid place-items-center bg-black/25">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><polygon points="6 4 20 12 6 20 6 4" /></svg>
-                  </span>
+          {RECENT.length === 0 ? (
+            <p className="text-[13.5px]" style={{ color: "#8e7f81" }}>
+              No renders here yet.{" "}
+              <Link href="/create" className="underline underline-offset-2" style={{ color: "#ff8a92" }}>
+                Create your first video
+              </Link>
+              .
+            </p>
+          ) : (
+            <div className="flex flex-col gap-3">
+              {RECENT.map((r) => (
+                <div key={r.t} className="flex items-center gap-3 rounded-xl p-2.5 transition-colors hover:bg-[rgba(255,70,85,.06)]">
+                  <div className="relative h-[42px] w-16 flex-shrink-0 overflow-hidden rounded-[9px]">
+                    <Image src={r.img} alt="" fill sizes="64px" className="object-cover" />
+                    <span className="absolute inset-0 grid place-items-center bg-black/25">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><polygon points="6 4 20 12 6 20 6 4" /></svg>
+                    </span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-semibold">{r.t}</div>
+                    <div className="font-mono text-xs" style={{ color: "#8e7f81" }}>{r.m}</div>
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <div className="text-sm font-semibold">{r.t}</div>
-                  <div className="font-mono text-xs" style={{ color: "#8e7f81" }}>{r.m}</div>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
         {/* quick create */}
         <div className="rounded-[18px] p-[22px]" style={{ border: "1px solid rgba(255,70,85,.14)", background: "rgba(255,60,75,.03)" }}>
