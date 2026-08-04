@@ -16,11 +16,18 @@ type PlanResult = {
   script: string;
   handoffUrl: string;
   avatarId: string;
+  avatarTier?: string;
+  avatarName?: string;
+  avatarReason?: string;
+  estimatedCostUsd?: number;
   videoType: string;
   durationSec: number;
   publishAuthorized: false;
   note: string;
   template: ReeloVideoTemplate;
+  musicMood?: string;
+  direction?: { pacing?: string; hookSec?: number; ctaStartSec?: number; directorNotes?: string[] };
+  businessProfile?: { industry?: string; tone?: string; confidence?: number };
 };
 
 const inputStyle = {
@@ -122,6 +129,8 @@ export default function TemplateGallery() {
           website: website || undefined,
           cta,
           audience,
+          industry: industry || selected.industries[0],
+          tone: selected.styles[0],
         }),
       });
       const data = await res.json();
@@ -386,8 +395,35 @@ export default function TemplateGallery() {
           {plan && (
             <div className="mt-5 space-y-3">
               <p className="text-[11px] font-semibold uppercase tracking-wide text-white/40">
-                Script · {plan.videoType} · {plan.durationSec}s · publishAuthorized: false
+                Script · {plan.videoType} · {plan.durationSec}s · est. $
+                {(plan.estimatedCostUsd ?? 0.4).toFixed(2)} · publishAuthorized: false
               </p>
+              {(plan.avatarName || plan.avatarId) && (
+                <p className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/70">
+                  Avatar Director: <span className="font-semibold text-amber-200">{plan.avatarName || plan.avatarId}</span>
+                  {plan.avatarTier ? ` · ${plan.avatarTier}` : ""}
+                  {plan.avatarReason ? ` — ${plan.avatarReason}` : ""}
+                </p>
+              )}
+              {(plan.direction || plan.businessProfile) && (
+                <p className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/70">
+                  {plan.direction?.pacing ? (
+                    <>
+                      Video Director: <span className="font-semibold text-amber-200">{plan.direction.pacing}</span>
+                      {typeof plan.direction.hookSec === "number" ? ` · hook ${plan.direction.hookSec}s` : ""}
+                      {typeof plan.direction.ctaStartSec === "number" ? ` · CTA @ ${plan.direction.ctaStartSec}s` : ""}
+                      {plan.musicMood ? ` · music ${plan.musicMood}` : ""}
+                    </>
+                  ) : null}
+                  {plan.businessProfile?.industry ? (
+                    <>
+                      {plan.direction?.pacing ? " · " : ""}
+                      BI: {plan.businessProfile.industry}
+                      {plan.businessProfile.tone ? ` / ${plan.businessProfile.tone}` : ""}
+                    </>
+                  ) : null}
+                </p>
+              )}
               <textarea
                 readOnly
                 value={plan.script}

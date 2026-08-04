@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useId} from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
@@ -49,6 +49,11 @@ function brandFromUrl(url: string) {
 const inputStyle = { border: "1px solid rgba(255,70,85,.22)", background: "rgba(255,60,75,.04)" } as const;
 
 export default function WebsiteCommercial() {
+  // Label association. These labels already read correctly to a sighted
+  // user; they were simply not associated, so a screen reader announced
+  // the control with no name. Indexed off one useId so the ids stay
+  // unique when the component renders more than once on a page.
+  const fieldIds = useId();
   const [step, setStep] = useState<Step>("input");
   const [url, setUrl] = useState("");
   const [scanIdx, setScanIdx] = useState(0);
@@ -435,18 +440,18 @@ export default function WebsiteCommercial() {
 
             <div className="space-y-5 rounded-3xl border border-white/10 bg-black/40 p-6 backdrop-blur-md">
               <div>
-                <label className="mb-2 block text-sm font-semibold text-white/85">Business name</label>
-                <input value={brand} onChange={(e) => setBrand(e.target.value)} className="w-full rounded-xl px-4 py-3 text-sm text-white outline-none" style={inputStyle} />
+                <label htmlFor={`${fieldIds}-0`} className="mb-2 block text-sm font-semibold text-white/85">Business name</label>
+                <input id={`${fieldIds}-0`} value={brand} onChange={(e) => setBrand(e.target.value)} className="w-full rounded-xl px-4 py-3 text-sm text-white outline-none" style={inputStyle} />
               </div>
               <div>
-                <label className="mb-2 block text-sm font-semibold text-white/85">What your business does</label>
-                <textarea rows={3} value={about} onChange={(e) => setAbout(e.target.value)} className="w-full resize-none rounded-xl px-4 py-3 text-sm leading-relaxed text-white outline-none" style={inputStyle} />
+                <label htmlFor={`${fieldIds}-1`} className="mb-2 block text-sm font-semibold text-white/85">What your business does</label>
+                <textarea id={`${fieldIds}-1`} rows={3} value={about} onChange={(e) => setAbout(e.target.value)} className="w-full resize-none rounded-xl px-4 py-3 text-sm leading-relaxed text-white outline-none" style={inputStyle} />
               </div>
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-sm font-semibold text-white/85">Style</label>
-                  <select value={style} onChange={(e) => setStyle(e.target.value)} className="w-full appearance-none rounded-xl px-4 py-3 text-sm text-white outline-none" style={inputStyle}>
+                  <label htmlFor={`${fieldIds}-2`} className="mb-2 block text-sm font-semibold text-white/85">Style</label>
+                  <select id={`${fieldIds}-2`} value={style} onChange={(e) => setStyle(e.target.value)} className="w-full appearance-none rounded-xl px-4 py-3 text-sm text-white outline-none" style={inputStyle}>
                     {STYLES.map((s) => <option key={s} value={s} className="bg-[#140a0c]">{s}</option>)}
                   </select>
                 </div>

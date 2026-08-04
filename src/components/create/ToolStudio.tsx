@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useId} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Tool, Field } from "@/lib/tools";
@@ -637,18 +637,29 @@ function FieldView({ field, value, preview, selected, onChange, onFile, onToggle
   field: Field; value: string; preview?: string; selected: string[];
   onChange: (v: string) => void; onFile: (f?: File) => void; onToggle: (opt: string) => void;
 }) {
-  const label = <label className="mb-2 block text-sm font-semibold text-white/85">{"label" in field ? field.label : ""}</label>;
+  // One id for this field, used by whichever control the switch below renders.
+  //
+  // The label was already correct to look at and simply not associated: it is
+  // rendered as a sibling of the control (`{label}<input/>`), never wrapping
+  // it, so a screen reader announced every field in this renderer with no name.
+  // Fixing it here fixes every tool that uses FieldView at once.
+  const fieldId = useId();
+  const label = (
+    <label htmlFor={fieldId} className="mb-2 block text-sm font-semibold text-white/85">
+      {"label" in field ? field.label : ""}
+    </label>
+  );
   const inputCls = "w-full rounded-xl px-4 py-3 text-sm text-white placeholder-white/35 outline-none transition focus:border-[rgba(255,70,85,.6)]";
   const inputStyle = { border: "1px solid rgba(255,70,85,.22)", background: "rgba(255,60,75,.04)" } as const;
 
   switch (field.kind) {
     case "url":
     case "text":
-      return <div>{label}<input type={field.kind === "url" ? "url" : "text"} value={value} placeholder={field.placeholder} onChange={(e) => onChange(e.target.value)} className={inputCls} style={inputStyle} />{field.hint && <p className="mt-1.5 text-xs text-white/40">{field.hint}</p>}</div>;
+      return <div>{label}<input id={fieldId} type={field.kind === "url" ? "url" : "text"} value={value} placeholder={field.placeholder} onChange={(e) => onChange(e.target.value)} className={inputCls} style={inputStyle} />{field.hint && <p className="mt-1.5 text-xs text-white/40">{field.hint}</p>}</div>;
     case "textarea":
-      return <div>{label}<textarea rows={4} value={value} placeholder={field.placeholder} onChange={(e) => onChange(e.target.value)} className={`${inputCls} resize-none`} style={inputStyle} />{field.hint && <p className="mt-1.5 text-xs text-white/40">{field.hint}</p>}</div>;
+      return <div>{label}<textarea id={fieldId} rows={4} value={value} placeholder={field.placeholder} onChange={(e) => onChange(e.target.value)} className={`${inputCls} resize-none`} style={inputStyle} />{field.hint && <p className="mt-1.5 text-xs text-white/40">{field.hint}</p>}</div>;
     case "select":
-      return <div>{label}<select value={value} onChange={(e) => onChange(e.target.value)} className={`${inputCls} appearance-none`} style={inputStyle}>{field.options.map((o) => <option key={o} value={o} className="bg-[#140a0c]">{o}</option>)}</select></div>;
+      return <div>{label}<select id={fieldId} value={value} onChange={(e) => onChange(e.target.value)} className={`${inputCls} appearance-none`} style={inputStyle}>{field.options.map((o) => <option key={o} value={o} className="bg-[#140a0c]">{o}</option>)}</select></div>;
     case "segment":
       return (
         <div>{label}
@@ -660,8 +671,8 @@ function FieldView({ field, value, preview, selected, onChange, onFile, onToggle
     case "slider":
       return (
         <div>
-          <div className="mb-2 flex items-center justify-between"><label className="text-sm font-semibold text-white/85">{field.label}</label><span className="rounded-md px-2 py-0.5 text-sm font-medium" style={{ background: "rgba(255,70,85,.12)", color: "#ff8a92" }}>{value || field.default}{field.unit ?? ""}</span></div>
-          <input type="range" min={field.min} max={field.max} step={field.step} value={value || field.default} onChange={(e) => onChange(e.target.value)} className="w-full accent-[#ff3645]" />
+          <div className="mb-2 flex items-center justify-between"><label htmlFor={fieldId} className="text-sm font-semibold text-white/85">{field.label}</label><span className="rounded-md px-2 py-0.5 text-sm font-medium" style={{ background: "rgba(255,70,85,.12)", color: "#ff8a92" }}>{value || field.default}{field.unit ?? ""}</span></div>
+          <input id={fieldId} type="range" min={field.min} max={field.max} step={field.step} value={value || field.default} onChange={(e) => onChange(e.target.value)} className="w-full accent-[#ff3645]" />
         </div>
       );
     case "multi":

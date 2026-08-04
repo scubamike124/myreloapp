@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { recordCreation } from "@/lib/workspace";
 import { downloadMedia } from "@/lib/download-media";
@@ -58,6 +58,18 @@ export default function AiAvatarStudio() {
   const [url, setUrl] = useState("");
   const [script, setScript] = useState(DEFAULT_SCRIPT);
   const [voiceId, setVoiceId] = useState(VOICES[0].id);
+  // Ids for label association.
+  //
+  // The labels were already here and already read correctly to a sighted user —
+  // they were simply not *associated*: a `<label>` with no `htmlFor`, sitting
+  // beside its control rather than wrapping it. A screen reader announces that
+  // control with no name at all, and voice-control users cannot address it.
+  //
+  // `useId` rather than a hand-written string: these components are rendered
+  // more than once on some pages, and duplicate ids would silently associate
+  // the second label with the first control.
+  const languageFieldId = useId();
+  const voiceFieldId = useId();
   const [languageCode, setLanguageCode] = useState(DEFAULT_LANGUAGE);
 
   const [avatars, setAvatars] = useState<Avatar[]>([]);
@@ -406,8 +418,11 @@ export default function AiAvatarStudio() {
               1 · What should they say?
             </p>
             <div className="mb-3">
-              <label className="mb-1.5 block text-[13px] font-semibold text-white/80">Language</label>
+              <label htmlFor={languageFieldId} className="mb-1.5 block text-[13px] font-semibold text-white/80">
+                Language
+              </label>
               <select
+                id={languageFieldId}
                 value={languageCode}
                 onChange={(e) => setLanguageCode(e.target.value)}
                 className="w-full appearance-none rounded-xl px-4 py-3 text-sm text-white outline-none"
@@ -560,8 +575,11 @@ export default function AiAvatarStudio() {
                   })}
                 </div>
                 <div className="mt-3">
-                  <label className="mb-1.5 block text-[13px] font-semibold text-white/80">Voice</label>
+                  <label htmlFor={voiceFieldId} className="mb-1.5 block text-[13px] font-semibold text-white/80">
+                    Voice
+                  </label>
                   <select
+                    id={voiceFieldId}
                     value={voiceId}
                     onChange={(e) => setVoiceId(e.target.value)}
                     className="w-full appearance-none rounded-xl px-4 py-3 text-sm text-white outline-none"
