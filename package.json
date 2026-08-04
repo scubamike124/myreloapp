@@ -23,7 +23,7 @@
     "check:tiles": "node scripts/check-tiles.mjs",
     "refresh:avatars": "node scripts/refresh-avatars.mjs",
     "start:standalone": "node .next/standalone/server.js",
-    "test": "node --experimental-strip-types --test src/lib/__tests__/*.test.ts"
+    "test": "node --experimental-strip-types --test src/lib/__tests__/*.test.ts src/lib/storybook/__tests__/*.test.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
