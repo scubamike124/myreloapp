@@ -2,12 +2,23 @@ import { asRecord, asString, errorMessage, geminiParts, geminiText } from "@/lib
 import { clientId, createDailyLimiter, readJsonLimited, PayloadTooLarge } from "@/lib/api-guard";
 import { getLanguage, isRTL } from "@/lib/languages";
 import { chargeFor, refundCharge } from "@/lib/charge";
+import { currentUser } from "@/lib/accounts";
 import {
   buildIllustrationPrompt,
   buildStoryPrompt,
   looksAdultOriented,
   summarizeStorybookRequest,
 } from "@/lib/storybook-prompts";
+import { appearancePrompt, isUsable } from "@/lib/storybook/character-bible";
+import { continuityPrompt } from "@/lib/storybook/story-memory";
+import {
+  episodeFor,
+  getCharacter,
+  getSeries,
+  recordEpisode,
+  saveStory,
+  storeIllustrations,
+} from "@/lib/storybook/store";
 
 // ---------------------------------------------------------------------------
 // Personalised storybook.
@@ -66,13 +77,45 @@ export async function POST(req: Request) {
 
   const photo = str(body.photo, 16_000_000);
   const mimeType = str(body.mimeType, 60) || "image/jpeg";
-  if (!photo) {
+
+  /*
+   * Who this is for.
+   *
+   * Anonymous generation still works — it always has, and requiring an account
+   * to try the product once is a decision nobody made. What an anonymous
+   * request cannot have is a library, a saved character or a sequel, because
+   * there is no one to file them under. The response says so rather than
+   * quietly dropping the book.
+   */
+  const user = await currentUser().catch(() => null);
+
+  /*
+   * A returning character.
+   *
+   * The directive: "Future stories should reuse this Character Bible
+   * automatically. Parents should not need to upload another picture unless
+   * they want to update it." So a stored bible substitutes for the photo — and
+   * only a usable one does, since a half-filled bible would produce a
+   * different-looking child, which is the failure it exists to prevent.
+   */
+  const characterId = str(body.characterId, 60);
+  const bible = user && characterId ? await getCharacter(user.id, characterId) : null;
+  const usableBible = bible && isUsable(bible) ? bible : null;
+
+  if (!photo && !usableBible) {
     limiter.refund(id);
-    return Response.json({ error: "Upload a photo of the main character to start." }, { status: 400 });
+    return Response.json(
+      {
+        error: characterId
+          ? "That saved character is missing its description — upload a photo to rebuild it."
+          : "Upload a photo of the main character to start.",
+      },
+      { status: 400 },
+    );
   }
 
   // Accept legacy childName for older clients; prefer characterName.
-  const characterName = str(body.characterName, 40) || str(body.childName, 40);
+  const characterName = str(body.characterName, 40) || str(body.childName, 40) || usableBible?.name || "";
   const idea = str(body.idea, 800);
   const theme = str(body.theme, 60) || "Adventurer";
   const language = getLanguage(str(body.languageCode, 8));
@@ -87,6 +130,19 @@ export async function POST(req: Request) {
     );
   }
 
+  /*
+   * A sequel.
+   *
+   * The series is loaded before the story is written, because continuity is an
+   * input to the writing rather than a label applied afterwards. A series the
+   * signed-in user does not own simply does not load, and the story is written
+   * as a standalone.
+   */
+  const seriesId = str(body.seriesId, 60);
+  const series = user && seriesId ? await getSeries(user.id, seriesId) : null;
+  const episode = episodeFor(series);
+  const continuity = series ? continuityPrompt(series.memory, series.title) : "";
+
   const promptInput = {
     characterName,
     idea,
@@ -94,6 +150,7 @@ export async function POST(req: Request) {
     languageName: language.name,
     languageEndonym: language.endonym,
     pageCount,
+    continuity,
   };
   const summary = summarizeStorybookRequest(promptInput);
   const adultOriented = looksAdultOriented(idea, characterName);
@@ -164,6 +221,10 @@ export async function POST(req: Request) {
 
   const imagePrompts: string[] = [];
 
+  // The bible's appearance sentence, identical on every page and in every book
+  // — that sameness is the whole point of storing it as words.
+  const appearance = usableBible ? appearancePrompt(usableBible) : "";
+
   const illustrate = async (page: Page): Promise<string> => {
     const prompt = buildIllustrationPrompt({
       illustration: page.illustration,
@@ -171,23 +232,21 @@ export async function POST(req: Request) {
       pageText: page.text,
       adultOriented,
       characterName,
+      appearance,
+      hasPhoto: Boolean(photo),
     });
     imagePrompts.push(prompt);
     if (debug) console.info("[storybook] imagePrompt", prompt.slice(0, 500));
 
     // Photo first so the model anchors identity before reading the scene text.
+    const parts = photo
+      ? [{ inline_data: { mime_type: mimeType, data: photo } }, { text: prompt }]
+      : [{ text: prompt }];
     const res = await fetch(`${BASE}/models/${IMAGE_MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        contents: [
-          {
-            parts: [
-              { inline_data: { mime_type: mimeType, data: photo } },
-              { text: prompt },
-            ],
-          },
-        ],
+        contents: [{ parts }],
         generationConfig: { temperature: 0.35 },
       }),
       signal: AbortSignal.timeout(120_000),
@@ -212,10 +271,68 @@ export async function POST(req: Request) {
     images.push(await withRetry(() => illustrate(story.pages[i]), 4));
   }
 
+  // --- 3. keep it ------------------------------------------------------------
+  /*
+   * Persistence never fails the request.
+   *
+   * By this point the parent has spent tokens and waited a couple of minutes,
+   * and the finished book is in the response below either way. A failure here
+   * costs them the library entry, not the story — so the result is reported as
+   * `saved` rather than thrown, and the UI can tell them to download it.
+   */
+  const responsePages = story.pages.map((p, i) => ({
+    text: p.text,
+    image: images[i],
+    illustration: p.illustration,
+  }));
+
+  let storyId: string | null = null;
+  let saved = false;
+  if (user) {
+    try {
+      // Illustrations move to storage first: a story row carrying ten base64
+      // images would be megabytes, and the library only ever wants the cover.
+      const { pages: storedPages } = await storeIllustrations(responsePages);
+      const record = await saveStory({
+        userId: user.id,
+        characterId: usableBible?.id ?? null,
+        seriesId: series?.id ?? null,
+        episode,
+        title: story.title,
+        dedication: story.dedication,
+        theme,
+        languageCode: language.code,
+        request: idea,
+        pages: storedPages,
+        characterVersion: usableBible?.version ?? 1,
+      });
+      storyId = record?.id ?? null;
+      saved = Boolean(record);
+
+      // Only once the story is genuinely on disk does the series learn about
+      // it. Recording an episode that failed to save would leave the memory
+      // describing a book nobody can open.
+      if (record && series) {
+        await recordEpisode(
+          series,
+          { episode, title: story.title, summary: story.pages[0]?.text ?? "" },
+          { characters: characterName ? [characterName] : [] },
+        );
+      }
+    } catch {
+      /* the book is still in the response */
+    }
+  }
+
   // Put metadata before huge page payloads so clients always receive personalization proof.
   return Response.json(
     {
       ok: true,
+      storyId,
+      saved,
+      signedIn: Boolean(user),
+      series: series ? { id: series.id, title: series.title, episode } : null,
+      character: usableBible ? { id: usableBible.id, name: usableBible.name, version: usableBible.version } : null,
       title: story.title,
       dedication: story.dedication,
       language: { code: language.code, name: language.name, endonym: language.endonym, rtl: isRTL(language.code) },
@@ -249,7 +366,7 @@ export async function POST(req: Request) {
             },
           }
         : {}),
-      pages: story.pages.map((p, i) => ({ text: p.text, image: images[i], illustration: p.illustration })),
+      pages: responsePages,
     },
     { headers: { "Cache-Control": "no-store" } },
   );

@@ -28,6 +28,23 @@ function cacheRequest(id: string): Request {
 
 export type Ingested = { url: string; bytes: number; contentType: string; backend: "blob" | "disk" | "cache" | "memory" | "r2" };
 
+/**
+ * File extension for a stored type.
+ *
+ * It has to be right rather than decorative: /api/media/[file] types its
+ * response from the extension alone, so a PNG written as `.mp4` is served as
+ * `video/mp4` and renders as a broken image. This started as video-only
+ * storage, where "mp4 unless webm" was true; the storybook stores
+ * illustrations through the same door.
+ */
+function extensionFor(type: string): string {
+  if (type.includes("webm")) return "webm";
+  if (type.includes("png")) return "png";
+  if (type.includes("webp")) return "webp";
+  if (type.includes("jpeg") || type.includes("jpg")) return "jpg";
+  return "mp4";
+}
+
 export async function ingestBytes(
   id: string,
   body: Uint8Array,
@@ -41,7 +58,7 @@ export async function ingestBytes(
 
   if (token) {
     try {
-      const ext = type.includes("webm") ? "webm" : "mp4";
+      const ext = extensionFor(type);
       const res = await fetch(`https://blob.vercel-storage.com/creations/${id}.${ext}`, {
         method: "PUT",
         headers: {
@@ -72,7 +89,7 @@ export async function ingestBytes(
       const path = await import("node:path");
       const dir = process.env.MEDIA_PATH || path.join(process.cwd(), ".data", "media");
       await mkdir(dir, { recursive: true });
-      const ext = type.includes("webm") ? "webm" : "mp4";
+      const ext = extensionFor(type);
       await writeFile(path.join(dir, `${id}.${ext}`), Buffer.from(body));
       return { url: `/api/media/${id}.${ext}`, bytes: body.byteLength, contentType: type, backend: "disk" };
     } catch {

@@ -13,6 +13,15 @@ export type StorybookInput = {
   languageName: string;
   languageEndonym: string;
   pageCount: number;
+  /**
+   * The series briefing, when this story is a sequel — built by
+   * `continuityPrompt` from what Amber remembers of the earlier episodes.
+   *
+   * Placed after the story request rather than before it, because the request
+   * is still what this episode is about. Continuity constrains the world; it
+   * does not choose the plot.
+   */
+  continuity?: string;
 };
 
 /** Heuristic: adult-oriented requests must not be rewritten as kids' bedtime tales. */
@@ -42,6 +51,10 @@ export function buildStoryPrompt(input: StorybookInput): string {
       ? `"${idea}"\n`
       : `(No custom topic was provided — invent a simple, wholesome adventure for ${hero}.)\n`) +
     `===============================================================\n\n` +
+    (input.continuity?.trim()
+      ? `=== SERIES CONTINUITY (this is not the first book) ===\n${input.continuity.trim()}\n` +
+        `===============================================================\n\n`
+      : "") +
     `Main character name: ${hero}\n` +
     `Role / costume only (does NOT replace the story topic): ${theme}. ` +
     `The character may dress or act in a ${theme.toLowerCase()} role, but the plot MUST stay about the primary story request above.\n` +
@@ -77,33 +90,66 @@ export function buildIllustrationPrompt(opts: {
   pageText: string;
   adultOriented: boolean;
   characterName?: string;
+  /**
+   * The character bible's fixed appearance sentence, when this character has
+   * one. It is what makes book four look like book one: the same words go to
+   * the image model every time, rather than a fresh reading of a fresh photo.
+   */
+  appearance?: string;
+  /**
+   * Whether a photograph is attached to this call.
+   *
+   * The directive is that parents "should not need to upload another picture
+   * unless they want to update it", so a sequel usually arrives without one.
+   * The identity section has to name a single ground truth — with both, the
+   * photo wins because it is the more specific reference; with only the bible,
+   * the bible is not a supporting hint but the whole description, and saying
+   * "the attached photograph" when nothing is attached invites the model to
+   * invent one.
+   */
+  hasPhoto?: boolean;
 }): string {
   const theme = opts.theme.trim() || "Adventurer";
   const hero = (opts.characterName || "").trim() || "the main character";
+  const appearance = (opts.appearance || "").trim();
+  const photo = opts.hasPhoto !== false;
   const style = opts.adultOriented
     ? "Illustrated storybook art, expressive and cinematic, rich colour, painterly, consistent character design, " +
       "no text, no words, no letters, no watermark, full-bleed square composition."
     : "Illustrated storybook art, warm and friendly, soft shapes, rich colour, painterly, consistent character design, " +
       "gentle lighting, no text, no words, no letters, no watermark, full-bleed square composition.";
 
+  const identity = photo
+    ? `The attached photograph shows ${hero}, the ONLY main character for this book.\n` +
+      `Draw ${hero} as an illustrated version of THAT exact person on this page.\n` +
+      `Preserve: approximate age, face shape, hairstyle, skin tone, glasses, facial hair, and distinctive features.\n` +
+      `If the scene description conflicts with the photo (wrong age, gender, face, hair), IGNORE the conflict and follow the photograph.\n` +
+      (appearance ? `This is the same character described as: ${appearance}\n` : "") +
+      `Do NOT invent a different protagonist. Supporting people may appear in the background or beside ${hero}, ` +
+      `but ${hero} from the photo must be the clear focal subject.\n`
+    : `${hero} is the ONLY main character for this book, and looks exactly like this: ${appearance}\n` +
+      `That description is fixed. It is the same in every book in this series, and it must be drawn the same way ` +
+      `every time — a reader will notice if ${hero} changes between pages or between books.\n` +
+      `If the scene description conflicts with it (wrong age, hair, clothing), IGNORE the conflict and follow the description.\n` +
+      `Do NOT invent a different protagonist. Supporting people may appear in the background or beside ${hero}, ` +
+      `but ${hero} must be the clear focal subject.\n`;
+
   return (
     `${style}\n\n` +
     `=== CHARACTER IDENTITY (GROUND TRUTH — overrides everything else) ===\n` +
-    `The attached photograph shows ${hero}, the ONLY main character for this book.\n` +
-    `Draw ${hero} as an illustrated version of THAT exact person on this page.\n` +
-    `Preserve: approximate age, face shape, hairstyle, skin tone, glasses, facial hair, and distinctive features.\n` +
-    `If the scene description conflicts with the photo (wrong age, gender, face, hair), IGNORE the conflict and follow the photograph.\n` +
-    `Do NOT invent a different protagonist. Supporting people may appear in the background or beside ${hero}, ` +
-    `but ${hero} from the photo must be the clear focal subject.\n` +
+    identity +
     `Draw in storybook style, NOT as a photograph.\n` +
     (opts.adultOriented
       ? `Do NOT turn this adult into a child. Keep adult proportions and age.\n`
-      : `Match the age implied by the photograph and story — do not arbitrarily age them up or down.\n`) +
+      : photo
+        ? `Match the age implied by the photograph and story — do not arbitrarily age them up or down.\n`
+        : `Match the age in the description above — do not arbitrarily age them up or down.\n`) +
     `They may wear ${theme.toLowerCase()} costume/role elements while staying the same individual.\n` +
     `===============================================================\n\n` +
     `Page text (for scene accuracy): ${opts.pageText}\n\n` +
-    `Scene / action to depict (pose and setting only — appearance comes from the photo): ${opts.illustration}\n\n` +
-    `The illustration must match the page text and keep ${hero}'s identity consistent with the attached photo.`
+    `Scene / action to depict (pose and setting only — appearance comes from ${photo ? "the photo" : "the description above"}): ${opts.illustration}\n\n` +
+    `The illustration must match the page text and keep ${hero}'s identity consistent with ` +
+    `${photo ? "the attached photo" : "that description"}.`
   );
 }
 

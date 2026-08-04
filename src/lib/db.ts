@@ -1450,6 +1450,88 @@ async function ensureWorkspaceTables(q: Sql): Promise<void> {
         }
       }
     }
+
+    /*
+     * Storybook.
+     *
+     * Until now a finished storybook existed only in the browser tab that
+     * generated it — StoryMaker's own UI said so: "Episodes live in this page
+     * only." That is why there is no library, no sequel and no reused
+     * character: nothing was ever written down.
+     *
+     * Four tables rather than one JSON blob, because each is read on its own.
+     * A library lists stories without loading illustrations; a sequel reads the
+     * series memory without loading the previous manuscripts; the movie
+     * pipeline updates one artifact's status while the others are still
+     * rendering.
+     */
+    await q`
+      CREATE TABLE IF NOT EXISTS story_characters (
+        id               TEXT PRIMARY KEY,
+        user_id          TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        name             TEXT NOT NULL,
+        age_band         TEXT,
+        face             TEXT NOT NULL DEFAULT '',
+        hair             TEXT NOT NULL DEFAULT '',
+        clothing         TEXT NOT NULL DEFAULT '',
+        body_proportions TEXT,
+        animation_style  TEXT,
+        expressions      TEXT NOT NULL DEFAULT '[]',
+        personality      TEXT NOT NULL DEFAULT '[]',
+        voice            TEXT NOT NULL DEFAULT '{}',
+        version          INTEGER NOT NULL DEFAULT 1,
+        created_at       TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at       TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS story_characters_user_idx ON story_characters (user_id, updated_at DESC)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS story_series (
+        id           TEXT PRIMARY KEY,
+        user_id      TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        character_id TEXT,
+        title        TEXT NOT NULL,
+        memory       TEXT NOT NULL DEFAULT '{}',
+        episodes     INTEGER NOT NULL DEFAULT 0,
+        created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS story_series_user_idx ON story_series (user_id, updated_at DESC)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS stories (
+        id                TEXT PRIMARY KEY,
+        user_id           TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        character_id      TEXT,
+        series_id         TEXT,
+        episode           INTEGER NOT NULL DEFAULT 1,
+        title             TEXT NOT NULL,
+        dedication        TEXT NOT NULL DEFAULT '',
+        category          TEXT NOT NULL DEFAULT '',
+        theme             TEXT NOT NULL DEFAULT '',
+        language_code     TEXT NOT NULL DEFAULT 'en',
+        request           TEXT NOT NULL DEFAULT '',
+        pages             TEXT NOT NULL DEFAULT '[]',
+        character_version INTEGER NOT NULL DEFAULT 1,
+        product           TEXT NOT NULL DEFAULT 'ebook',
+        created_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at        TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS stories_user_idx ON stories (user_id, created_at DESC)`;
+    await q`CREATE INDEX IF NOT EXISTS stories_series_idx ON stories (series_id, episode)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS story_artifacts (
+        id         TEXT PRIMARY KEY,
+        story_id   TEXT NOT NULL REFERENCES stories(id) ON DELETE CASCADE,
+        kind       TEXT NOT NULL,
+        status     TEXT NOT NULL DEFAULT 'pending',
+        url        TEXT,
+        detail     TEXT NOT NULL DEFAULT '{}',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE UNIQUE INDEX IF NOT EXISTS story_artifacts_story_kind ON story_artifacts (story_id, kind)`;
   } else {
     const exec = async (text: string) => {
       const strings = Object.assign([text], { raw: [text] }) as TemplateStringsArray;
@@ -2310,6 +2392,76 @@ async function ensureWorkspaceTables(q: Sql): Promise<void> {
         /* present */
       }
     }
+
+    // Storybook — see the note on the postgres side for why these are four
+    // tables. Same columns, sqlite spellings.
+    await exec(`
+      CREATE TABLE IF NOT EXISTS story_characters (
+        id               TEXT PRIMARY KEY,
+        user_id          TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        name             TEXT NOT NULL,
+        age_band         TEXT,
+        face             TEXT NOT NULL DEFAULT '',
+        hair             TEXT NOT NULL DEFAULT '',
+        clothing         TEXT NOT NULL DEFAULT '',
+        body_proportions TEXT,
+        animation_style  TEXT,
+        expressions      TEXT NOT NULL DEFAULT '[]',
+        personality      TEXT NOT NULL DEFAULT '[]',
+        voice            TEXT NOT NULL DEFAULT '{}',
+        version          INTEGER NOT NULL DEFAULT 1,
+        created_at       TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at       TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS story_characters_user_idx ON story_characters (user_id, updated_at DESC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS story_series (
+        id           TEXT PRIMARY KEY,
+        user_id      TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        character_id TEXT,
+        title        TEXT NOT NULL,
+        memory       TEXT NOT NULL DEFAULT '{}',
+        episodes     INTEGER NOT NULL DEFAULT 0,
+        created_at   TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at   TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS story_series_user_idx ON story_series (user_id, updated_at DESC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS stories (
+        id                TEXT PRIMARY KEY,
+        user_id           TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        character_id      TEXT,
+        series_id         TEXT,
+        episode           INTEGER NOT NULL DEFAULT 1,
+        title             TEXT NOT NULL,
+        dedication        TEXT NOT NULL DEFAULT '',
+        category          TEXT NOT NULL DEFAULT '',
+        theme             TEXT NOT NULL DEFAULT '',
+        language_code     TEXT NOT NULL DEFAULT 'en',
+        request           TEXT NOT NULL DEFAULT '',
+        pages             TEXT NOT NULL DEFAULT '[]',
+        character_version INTEGER NOT NULL DEFAULT 1,
+        product           TEXT NOT NULL DEFAULT 'ebook',
+        created_at        TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at        TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS stories_user_idx ON stories (user_id, created_at DESC)`);
+    await exec(`CREATE INDEX IF NOT EXISTS stories_series_idx ON stories (series_id, episode)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS story_artifacts (
+        id         TEXT PRIMARY KEY,
+        story_id   TEXT NOT NULL REFERENCES stories(id) ON DELETE CASCADE,
+        kind       TEXT NOT NULL,
+        status     TEXT NOT NULL DEFAULT 'pending',
+        url        TEXT,
+        detail     TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE UNIQUE INDEX IF NOT EXISTS story_artifacts_story_kind ON story_artifacts (story_id, kind)`);
   }
 }
 
