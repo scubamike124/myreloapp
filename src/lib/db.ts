@@ -1514,11 +1514,18 @@ async function ensureWorkspaceTables(q: Sql): Promise<void> {
         pages             TEXT NOT NULL DEFAULT '[]',
         character_version INTEGER NOT NULL DEFAULT 1,
         product           TEXT NOT NULL DEFAULT 'ebook',
+        favorite          BOOLEAN NOT NULL DEFAULT false,
         created_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
         updated_at        TIMESTAMPTZ NOT NULL DEFAULT now()
       )`;
     await q`CREATE INDEX IF NOT EXISTS stories_user_idx ON stories (user_id, created_at DESC)`;
     await q`CREATE INDEX IF NOT EXISTS stories_series_idx ON stories (series_id, episode)`;
+    // For databases that already created `stories` before favourites existed.
+    try {
+      await alterExtra(`ALTER TABLE stories ADD COLUMN IF NOT EXISTS favorite BOOLEAN NOT NULL DEFAULT false`);
+    } catch {
+      /* already present */
+    }
 
     await q`
       CREATE TABLE IF NOT EXISTS story_artifacts (
@@ -2444,11 +2451,17 @@ async function ensureWorkspaceTables(q: Sql): Promise<void> {
         pages             TEXT NOT NULL DEFAULT '[]',
         character_version INTEGER NOT NULL DEFAULT 1,
         product           TEXT NOT NULL DEFAULT 'ebook',
+        favorite          INTEGER NOT NULL DEFAULT 0,
         created_at        TEXT NOT NULL DEFAULT (datetime('now')),
         updated_at        TEXT NOT NULL DEFAULT (datetime('now'))
       )`);
     await exec(`CREATE INDEX IF NOT EXISTS stories_user_idx ON stories (user_id, created_at DESC)`);
     await exec(`CREATE INDEX IF NOT EXISTS stories_series_idx ON stories (series_id, episode)`);
+    try {
+      await exec(`ALTER TABLE stories ADD COLUMN favorite INTEGER NOT NULL DEFAULT 0`);
+    } catch {
+      /* already present */
+    }
 
     await exec(`
       CREATE TABLE IF NOT EXISTS story_artifacts (

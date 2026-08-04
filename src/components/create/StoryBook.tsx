@@ -16,6 +16,10 @@ type Page = { text: string; image: string; illustration?: string };
 type Book = {
   title: string;
   dedication: string;
+  /** Whether it reached the library. False for signed-out visitors. */
+  saved?: boolean;
+  signedIn?: boolean;
+  storyId?: string | null;
   language: { code: string; name: string; endonym: string; rtl: boolean };
   pages: Page[];
   illustrated: number;
@@ -79,6 +83,47 @@ export default function StoryBook() {
   }, []);
   const activeCategory = categoryId ? getCategory(categoryId) : null;
 
+  /*
+   * Continuing a series.
+   *
+   * The library's "Continue the story" link arrives here with ?series=<id>, and
+   * the character it stars comes with it — so the parent is not asked for the
+   * photo again, which is the promise the character bible exists to keep.
+   *
+   * Read from the URL after mount rather than via useSearchParams, which would
+   * force this whole screen into a Suspense boundary for one optional value.
+   */
+  const [seriesId, setSeriesId] = useState("");
+  const [seriesTitle, setSeriesTitle] = useState("");
+  const [characterId, setCharacterId] = useState("");
+  const [nextEpisode, setNextEpisode] = useState(0);
+
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get("series");
+    if (!id) return;
+    setSeriesId(id);
+    (async () => {
+      try {
+        const res = await fetch("/api/storybook/series", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ seriesId: id }),
+        });
+        const body = await res.json();
+        if (!res.ok) return;
+        setSeriesTitle(body.series?.title ?? "");
+        setCharacterId(body.series?.characterId ?? "");
+        setNextEpisode(body.nextEpisode ?? 0);
+        // The category the series was started in, so the next book is the same
+        // kind of story without the parent having to remember which.
+        if (body.books?.[0]?.category) setCategoryId(body.books[0].category);
+        if (body.nextTitle) setIdea((current) => current || `Continue the series: ${body.nextTitle}`);
+      } catch {
+        /* a series that will not load is just a normal new story */
+      }
+    })();
+  }, []);
+
   const onPhoto = (f?: File) => {
     if (!f) return;
     setPhoto(f);
@@ -113,7 +158,9 @@ export default function StoryBook() {
   };
 
   const make = async () => {
-    if (!photo) {
+    // A saved character stands in for the photo — that is the whole point of
+    // keeping one. Only a new character still needs a picture.
+    if (!photo && !characterId) {
       setErr("Upload a photo of the main character first.");
       return;
     }
@@ -126,16 +173,18 @@ export default function StoryBook() {
     setShort(null);
     setBook(null);
     try {
-      const base64 = await fileToBase64(photo);
+      const base64 = photo ? await fileToBase64(photo) : "";
       const payload = {
         photo: base64,
-        mimeType: photo.type || "image/jpeg",
+        mimeType: photo?.type || "image/jpeg",
         characterName: characterName.trim(),
         childName: characterName.trim(), // legacy field name
         idea: idea.trim(),
         theme,
         categoryId,
         seasonalId,
+        seriesId,
+        characterId,
         languageCode,
         pages,
         debug: process.env.NODE_ENV !== "production",
@@ -268,6 +317,17 @@ export default function StoryBook() {
               ))}
             </div>
           </div>
+
+          {seriesId && seriesTitle ? (
+            <div
+              className="rounded-xl px-3 py-2.5 text-[13px] text-white/75"
+              style={{ border: "1px solid rgba(255,70,85,.25)", background: "rgba(255,70,85,.06)" }}
+            >
+              Writing <strong className="font-semibold text-white">book {nextEpisode || "next"}</strong> of{" "}
+              <strong className="font-semibold text-white">{seriesTitle}</strong>.
+              {characterId ? " The same character carries over — no new photo needed." : ""}
+            </div>
+          ) : null}
 
           {/*
             The adventure. Distinct from the costume picker below it, and
@@ -496,6 +556,43 @@ export default function StoryBook() {
                   {pdfError} You can still use Print and choose “Save as PDF” as the destination.
                 </p>
               )}
+
+              {/*
+                Whether it was kept, said plainly.
+
+                A signed-out parent has a book in the page and nowhere for it to
+                go, which is exactly what the old "episodes live in this page
+                only" warning was about. Now the page can offer the fix instead
+                of the warning — and when saving genuinely failed, it says that
+                rather than implying the book is safe.
+              */}
+              <p
+                className="mb-3 rounded-xl px-3.5 py-2 text-[12px] leading-relaxed"
+                style={{
+                  border: "1px solid rgba(255,255,255,.08)",
+                  color: book.saved ? "rgba(160,230,180,.9)" : "rgba(255,255,255,.55)",
+                }}
+              >
+                {book.saved ? (
+                  <>
+                    Saved to your{" "}
+                    <Link href="/stories" className="underline">
+                      Story Library
+                    </Link>
+                    . You can reopen it, download the PDF again, or continue the story any time.
+                  </>
+                ) : book.signedIn ? (
+                  <>This book could not be saved to your library — download the PDF before you close this page.</>
+                ) : (
+                  <>
+                    <Link href="/login" className="underline">
+                      Sign in
+                    </Link>{" "}
+                    to keep your stories, reuse this character, and write sequels. Otherwise download the PDF before you
+                    close this page.
+                  </>
+                )}
+              </p>
 
               {book.submitted && (
                 <p className="mb-3 rounded-xl px-3.5 py-2 text-[11.5px] leading-relaxed text-white/50" style={{ border: "1px solid rgba(255,255,255,.08)" }}>

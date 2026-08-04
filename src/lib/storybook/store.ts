@@ -60,6 +60,8 @@ export type StoryRecord = {
   pages: StoredPage[];
   characterVersion: number;
   product: StoryProductId;
+  /** The directive's "Favorite stories" shelf. */
+  favorite: boolean;
   createdAt: string;
   updatedAt: string;
 };
@@ -416,6 +418,7 @@ export async function saveStory(input: NewStory): Promise<StoryRecord | null> {
     pages: input.pages,
     characterVersion: input.characterVersion ?? 1,
     product: input.product ?? "ebook",
+    favorite: false,
     createdAt: stamp,
     updatedAt: stamp,
   };
@@ -451,6 +454,9 @@ function toStory(row: Row): StoryRecord {
     pages: parseJson<StoredPage[]>(row.pages, []),
     characterVersion: num(row.characterVersion, 1),
     product: (text(row.product, "ebook") || "ebook") as StoryProductId,
+    // sqlite stores booleans as 0/1 and postgres as true/false, so neither
+    // Boolean() alone nor === true is right on both.
+    favorite: row.favorite === true || row.favorite === 1 || row.favorite === "1",
     createdAt: text(row.createdAt),
     updatedAt: text(row.updatedAt),
   };
@@ -463,7 +469,7 @@ export async function getStory(userId: string, id: string): Promise<StoryRecord 
     const rows = await q`
       SELECT id, user_id AS "userId", character_id AS "characterId", series_id AS "seriesId",
              episode, title, dedication, category, theme, language_code AS "languageCode",
-             request, pages, character_version AS "characterVersion", product,
+             request, pages, character_version AS "characterVersion", product, favorite,
              created_at AS "createdAt", updated_at AS "updatedAt"
       FROM stories WHERE id = ${id} AND user_id = ${userId}`;
     return rows[0] ? toStory(rows[0]) : null;
@@ -486,7 +492,7 @@ export async function listStories(userId: string): Promise<StorySummary[]> {
     const rows = await q`
       SELECT id, user_id AS "userId", character_id AS "characterId", series_id AS "seriesId",
              episode, title, dedication, category, theme, language_code AS "languageCode",
-             request, pages, character_version AS "characterVersion", product,
+             request, pages, character_version AS "characterVersion", product, favorite,
              created_at AS "createdAt", updated_at AS "updatedAt"
       FROM stories WHERE user_id = ${userId} ORDER BY created_at DESC LIMIT 100`;
     return rows.map((row) => {
@@ -501,6 +507,53 @@ export async function listStories(userId: string): Promise<StorySummary[]> {
   } catch {
     return [];
   }
+}
+
+/**
+ * Adopt an existing story into a series.
+ *
+ * "Continue Story" is pressed on a book that was written as a standalone —
+ * nobody decides a story is book one until they want a book two. So a series is
+ * created around it afterwards, and this is the step that makes the first book
+ * part of it rather than leaving episode one missing from its own series.
+ */
+export async function attachStoryToSeries(
+  userId: string,
+  storyId: string,
+  seriesId: string,
+  episode: number,
+): Promise<boolean> {
+  const q = await db();
+  if (!q || !userId || !storyId || !seriesId) return false;
+  try {
+    await q`
+      UPDATE stories SET series_id = ${seriesId}, episode = ${episode}, updated_at = ${now()}
+      WHERE id = ${storyId} AND user_id = ${userId}`;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export async function setFavorite(userId: string, storyId: string, favorite: boolean): Promise<boolean> {
+  const q = await db();
+  if (!q || !userId || !storyId) return false;
+  try {
+    // Written as 1/0 rather than a boolean: sqlite has no boolean type, and the
+    // driver's coercion is one more thing that would have to agree.
+    await q`
+      UPDATE stories SET favorite = ${favorite ? 1 : 0}, updated_at = ${now()}
+      WHERE id = ${storyId} AND user_id = ${userId}`;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** The books in a series, in reading order. */
+export async function storiesInSeries(userId: string, seriesId: string): Promise<StorySummary[]> {
+  const all = await listStories(userId);
+  return all.filter((s) => s.seriesId === seriesId).sort((a, b) => a.episode - b.episode);
 }
 
 export async function deleteStory(userId: string, id: string): Promise<boolean> {

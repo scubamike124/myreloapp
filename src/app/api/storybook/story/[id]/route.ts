@@ -1,5 +1,6 @@
 import { currentUser } from "@/lib/accounts";
-import { deleteStory, getStory, listArtifacts } from "@/lib/storybook/store";
+import { readJsonLimited } from "@/lib/api-guard";
+import { deleteStory, getStory, listArtifacts, setFavorite } from "@/lib/storybook/store";
 
 // ---------------------------------------------------------------------------
 // One story, in full — the pages, and whatever has been produced from them.
@@ -25,6 +26,23 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
 
   const artifacts = await listArtifacts(story.id);
   return Response.json({ ok: true, story, artifacts }, { headers: { "Cache-Control": "no-store" } });
+}
+
+/** Favouriting. The only field of a finished story a parent can change. */
+export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }> }) {
+  const user = await currentUser().catch(() => null);
+  if (!user) return Response.json({ error: "Sign in to manage your library." }, { status: 401 });
+
+  const { id } = await ctx.params;
+  const body = ((await readJsonLimited(req, 2048).catch(() => null)) ?? {}) as Record<string, unknown>;
+  if (typeof body.favorite !== "boolean") {
+    return Response.json({ error: "Send { favorite: true } or { favorite: false }." }, { status: 400 });
+  }
+
+  const ok = await setFavorite(user.id, id, body.favorite);
+  return Response.json(ok ? { ok: true, favorite: body.favorite } : { error: "Could not update that story." }, {
+    status: ok ? 200 : 500,
+  });
 }
 
 export async function DELETE(_req: Request, ctx: { params: Promise<{ id: string }> }) {
