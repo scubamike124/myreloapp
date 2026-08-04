@@ -73,6 +73,36 @@ export default function StoryMaker() {
   const [languageCode, setLanguageCode] = useState(DEFAULT_LANGUAGE);
 
   const [episodes, setEpisodes] = useState<Episode[]>([]);
+  const [savingPdf, setSavingPdf] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
+
+  /**
+   * Save the whole series as a real PDF file.
+   *
+   * This was `window.print()`. Video episodes are included as their
+   * storyboard - the video lives at its own URL and does not belong inside a
+   * PDF, but the scenes are what "save the series" means for something you
+   * watch.
+   */
+  const saveSeriesPdf = async () => {
+    if (!episodes.length) return;
+    setSavingPdf(true);
+    setPdfError(null);
+    try {
+      const { downloadBookPdf, seriesToBook } = await import("@/lib/book-pdf");
+      await downloadBookPdf(
+        seriesToBook({
+          characterName,
+          language: episodes[0]!.language,
+          episodes,
+        }),
+      );
+    } catch (e) {
+      setPdfError(e instanceof Error ? e.message : "The PDF could not be built.");
+    } finally {
+      setSavingPdf(false);
+    }
+  };
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [short, setShort] = useState<Shortfall | null>(null);
@@ -706,12 +736,28 @@ export default function StoryMaker() {
                 </button>
 
                 <button
-                  onClick={() => window.print()}
-                  className="rounded-xl py-2.5 text-[12.5px] font-semibold text-white/55 transition-colors hover:text-white"
+                  onClick={saveSeriesPdf}
+                  disabled={savingPdf}
+                  className="rounded-xl py-2.5 text-[12.5px] font-semibold text-white/55 transition-colors hover:text-white disabled:opacity-60"
                   style={{ border: "1px solid rgba(255,255,255,.12)" }}
                 >
-                  Save the series (print or PDF)
+                  {savingPdf ? "Building your PDF…" : "Save the series as a PDF"}
                 </button>
+
+                {/* Print kept, but as its own thing rather than hidden behind a
+                    label that says PDF. */}
+                <button
+                  onClick={() => window.print()}
+                  className="rounded-xl py-2 text-[11.5px] font-semibold text-white/40 transition-colors hover:text-white/70"
+                >
+                  or print it
+                </button>
+
+                {pdfError && (
+                  <p className="text-[11.5px] leading-relaxed" style={{ color: "#ffb3b3" }}>
+                    {pdfError} You can still print and choose “Save as PDF” as the destination.
+                  </p>
+                )}
               </div>
             )}
           </div>

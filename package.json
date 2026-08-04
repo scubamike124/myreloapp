@@ -17,14 +17,18 @@
     "test:responsive": "node scripts/audit-responsive.mjs",
     "test:interactions": "node scripts/audit-interactions.mjs",
     "verify:production": "node scripts/production-verify.mjs",
+    "verify:launch-cert": "node scripts/launch-certification-probe.mjs",
+    "verify:avatars": "node scripts/avatar-library-audit.mjs",
     "check:pricing": "node scripts/check-pricing.mjs",
     "check:tiles": "node scripts/check-tiles.mjs",
     "refresh:avatars": "node scripts/refresh-avatars.mjs",
-    "start:standalone": "node .next/standalone/server.js"
+    "start:standalone": "node .next/standalone/server.js",
+    "test": "node --experimental-strip-types --test src/lib/__tests__/*.test.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
     "@opennextjs/cloudflare": "^1.20.2",
+    "jspdf": "^4.2.1",
     "next": "^16.2.11",
     "pg": "^8.22.0",
     "postgres": "^3.4.9",

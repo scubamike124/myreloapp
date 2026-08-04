@@ -56,6 +56,8 @@ export default function StoryBook() {
   const [short, setShort] = useState<Shortfall | null>(null);
   const tokens = useTokens();
   const [book, setBook] = useState<Book | null>(null);
+  const [savingPdf, setSavingPdf] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
   const [spread, setSpread] = useState(0);
   const bookRef = useRef<HTMLDivElement>(null);
 
@@ -64,6 +66,32 @@ export default function StoryBook() {
     setPhoto(f);
     setPreview(URL.createObjectURL(f));
     setErr(null);
+  };
+
+  /**
+   * Save the book as an actual PDF file.
+   *
+   * This button used to call `window.print()`. On a desktop that opens a print
+   * dialog where PDF is one destination among several; on a phone it usually
+   * only offers printers. It promised a file and produced a print job.
+   *
+   * The work happens off the main render path and can take a second or two on a
+   * long book, so the button reports that it is working rather than appearing
+   * to do nothing. A failure is shown with the print fallback beside it — the
+   * reader should never be left with a dead button and no way to keep the book.
+   */
+  const savePdf = async () => {
+    if (!book) return;
+    setSavingPdf(true);
+    setPdfError(null);
+    try {
+      const { downloadBookPdf } = await import("@/lib/book-pdf");
+      await downloadBookPdf(book);
+    } catch (e) {
+      setPdfError(e instanceof Error ? e.message : "The PDF could not be built.");
+    } finally {
+      setSavingPdf(false);
+    }
   };
 
   const make = async () => {
@@ -344,13 +372,34 @@ export default function StoryBook() {
                 <h2 className="font-display flex-1 text-xl font-bold text-white">{book.title}</h2>
                 <button
                   type="button"
-                  onClick={() => window.print()}
-                  className="rounded-lg px-3 py-1.5 text-[12.5px] font-bold text-white"
+                  onClick={savePdf}
+                  disabled={savingPdf}
+                  className="rounded-lg px-3 py-1.5 text-[12.5px] font-bold text-white disabled:opacity-60"
                   style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
                 >
-                  Save as PDF
+                  {savingPdf ? "Building your PDF…" : "Save as PDF"}
+                </button>
+                {/* Print kept as its own button. It used to be what "Save as
+                    PDF" secretly did; some people do want a printed book, and
+                    it is also the fallback if the export fails. */}
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="rounded-lg px-3 py-1.5 text-[12.5px] font-semibold text-white/60 transition-colors hover:text-white"
+                  style={{ border: "1px solid rgba(255,255,255,.14)" }}
+                >
+                  Print
                 </button>
               </div>
+
+              {pdfError && (
+                <p
+                  className="mb-3 rounded-xl px-3.5 py-2 text-[12px]"
+                  style={{ border: "1px solid rgba(255,88,88,.3)", background: "rgba(255,88,88,.07)", color: "#ffb3b3" }}
+                >
+                  {pdfError} You can still use Print and choose “Save as PDF” as the destination.
+                </p>
+              )}
 
               {book.submitted && (
                 <p className="mb-3 rounded-xl px-3.5 py-2 text-[11.5px] leading-relaxed text-white/50" style={{ border: "1px solid rgba(255,255,255,.08)" }}>
