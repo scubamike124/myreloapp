@@ -40,6 +40,18 @@ export const TOKEN_COST: Record<string, number> = {
   "ai-avatar-studio": standardVideoTokens(30),
   "website-commercial": websiteCommercialTokens(30),
   "bedtime-storybook": FLAT_TOKEN_COST["bedtime-storybook"],
+  /*
+   * Every action that is charged or displayed must be listed here, not only in
+   * FLAT_TOKEN_COST. This map is what `costOf` and `creditLabel` read, and both
+   * fail quietly when a slug is absent: costOf returns 1 token and creditLabel
+   * renders "Pricing to be confirmed". `ai-story-maker` had been live in that
+   * state. `storybook-*` are here before the delivery picker can charge them,
+   * so the same hole cannot open a second time — see the pricing-coverage test.
+   */
+  "ai-story-maker": FLAT_TOKEN_COST["ai-story-maker"],
+  "storybook-ebook": FLAT_TOKEN_COST["storybook-ebook"],
+  "storybook-movie": FLAT_TOKEN_COST["storybook-movie"],
+  "storybook-bundle": FLAT_TOKEN_COST["storybook-bundle"],
   "shorts-20": FLAT_TOKEN_COST["shorts-20"],
   "story-memory-generator": FLAT_TOKEN_COST["story-memory-generator"],
   "custom-avatar-creator": FLAT_TOKEN_COST["custom-avatar-creator"],
@@ -163,6 +175,10 @@ export const TOKEN_UNIT: Record<string, string> = {
   "website-commercial": "commercial",
   "product-commercial": "commercial",
   "bedtime-storybook": "book",
+  "ai-story-maker": "episode",
+  "storybook-ebook": "book",
+  "storybook-movie": "film",
+  "storybook-bundle": "book and film",
   "custom-avatar-creator": "avatar",
   "story-memory-generator": "film",
   "shorts-20": "batch",

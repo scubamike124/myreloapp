@@ -17,6 +17,7 @@ import {
   getCharacter,
   getSeries,
   recordEpisode,
+  saveCharacter,
   saveStory,
   storeIllustrations,
 } from "@/lib/storybook/store";
@@ -101,7 +102,7 @@ export async function POST(req: Request) {
    */
   const characterId = str(body.characterId, 60);
   const bible = user && characterId ? await getCharacter(user.id, characterId) : null;
-  const usableBible = bible && isUsable(bible) ? bible : null;
+  let usableBible = bible && isUsable(bible) ? bible : null;
 
   if (!photo && !usableBible) {
     limiter.refund(id);
@@ -121,7 +122,15 @@ export async function POST(req: Request) {
   const theme = str(body.theme, 60) || "Adventurer";
   const language = getLanguage(str(body.languageCode, 8));
   const pageCount = Math.max(MIN_PAGES, Math.min(MAX_PAGES, Number(body.pages) || 6));
-  const debug = body.debug === true || process.env.NODE_ENV !== "production";
+  /*
+   * Debug is a development affordance, not a request option.
+   *
+   * It returns the full story and illustration prompts. Honouring `body.debug`
+   * in production would let anyone with curl read the prompt engineering by
+   * asking for it, so the request flag only applies where the prompts are not
+   * a secret in the first place.
+   */
+  const debug = process.env.NODE_ENV !== "production" && body.debug !== false;
 
   if (!idea) {
     limiter.refund(id);
@@ -170,6 +179,94 @@ export async function POST(req: Request) {
     console.info("[storybook] storyPrompt\n", storyPrompt);
   }
 
+  /*
+   * The character bible, written the first time we see the child.
+   *
+   * The directive says "every child receives a permanent Character Bible" and
+   * that parents "should not need to upload another picture unless they want to
+   * update it". Both sentences describe something automatic, and until now
+   * nothing created one: the only writer was an endpoint no screen called, so
+   * the reuse branch above could never fire, the library's Characters shelf was
+   * permanently empty, and every book re-derived the child's appearance from a
+   * fresh photograph — which is exactly the drift the bible exists to stop.
+   *
+   * It is derived here, before the illustrations, rather than after the story is
+   * saved. Deriving it afterwards would leave the very first book drawn without
+   * it, so book one would be the one that looks different.
+   *
+   * What is stored is the description, never the photograph. The storybook page
+   * promises parents their photo "is not kept by Reelo", and that promise is
+   * older than this feature.
+   */
+  const deriveBible = async (): Promise<void> => {
+    if (!user || !photo || usableBible) return;
+    try {
+      const res = await fetch(`${BASE}/models/${TEXT_MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                { inline_data: { mime_type: mimeType, data: photo } },
+                {
+                  text:
+                    `Describe the person in this photograph so an illustrator could draw them consistently ` +
+                    `in a children's picture book, without seeing the photo.\n\n` +
+                    `Return ONLY JSON, no markdown fence:\n` +
+                    `{"face":"...","hair":"...","clothing":"...","bodyProportions":"...","ageBand":"3-5|6-8|9-12"}\n\n` +
+                    `- "face": skin tone, face shape, eyes, and any distinctive features such as glasses, ` +
+                    `freckles or facial hair. One sentence.\n` +
+                    `- "hair": colour, length and style. One short phrase.\n` +
+                    `- "clothing": what they are wearing, as a short phrase.\n` +
+                    `- "bodyProportions": build and approximate height for their age. Short phrase.\n` +
+                    `- "ageBand": the closest of 3-5, 6-8 or 9-12. Omit the field entirely if the subject ` +
+                    `is clearly an adult.\n` +
+                    `Be factual and neutral. Do not guess a name, a mood, or anything not visible.`,
+                },
+              ],
+            },
+          ],
+          generationConfig: { temperature: 0.2, thinkingConfig: { thinkingBudget: 0 }, maxOutputTokens: 512 },
+        }),
+        signal: AbortSignal.timeout(45_000),
+      });
+      if (!res.ok) return;
+      const data = asRecord(await res.json());
+      const match = (geminiText(data) ?? "").match(/\{[\s\S]*\}/);
+      if (!match) return;
+      const parsed = asRecord(JSON.parse(match[0]));
+
+      const band = str(parsed.ageBand, 8);
+      const draft = {
+        name: characterName || "the main character",
+        ageBand: (["3-5", "6-8", "9-12"] as const).includes(band as "3-5") ? (band as "3-5") : undefined,
+        face: str(parsed.face, 400),
+        hair: str(parsed.hair, 200),
+        clothing: str(parsed.clothing, 200),
+        bodyProportions: str(parsed.bodyProportions, 200) || undefined,
+        // Held so a whole series shares one look, not just one book.
+        animationStyle: adultOriented ? "expressive cinematic storybook art" : "warm painterly storybook art",
+        expressions: [] as string[],
+        personality: [] as string[],
+        voice: {},
+      };
+
+      // A half-filled bible would draw a different child every time, which is
+      // worse than having none — so an incomplete description is discarded and
+      // the photo carries this book on its own.
+      if (!isUsable(draft)) return;
+      usableBible = await saveCharacter(user.id, draft);
+    } catch {
+      /*
+       * A failed derivation must never fail the book. The parent is about to be
+       * charged for a story, not for a character record, and the photo still
+       * carries this book exactly as it did before.
+       */
+    }
+  };
+  await deriveBible();
+
   const charged = await chargeFor("bedtime-storybook");
   if (!charged.ok) {
     limiter.refund(id);
@@ -192,7 +289,10 @@ export async function POST(req: Request) {
       signal: AbortSignal.timeout(90_000),
     });
     const data = asRecord(await res.json());
-    if (!res.ok) throw new Error(errorMessage(data, "") ?? `HTTP ${res.status}`);
+    // The fallback goes to errorMessage, which returns "" rather than null when
+    // there is no message — and `"" ?? x` is "", so a `??` here left the parent
+    // reading "Couldn't write the story:" with nothing after the colon.
+    if (!res.ok) throw new Error(errorMessage(data, `HTTP ${res.status}`));
     const text = geminiText(data) ?? "";
     const match = text.match(/\{[\s\S]*\}/);
     if (!match) throw new Error("no story returned");
@@ -280,6 +380,38 @@ export async function POST(req: Request) {
     images.push(await withRetry(() => illustrate(story.pages[i]), 4));
   }
 
+  /*
+   * A book with no pictures is not the book that was paid for.
+   *
+   * Every failure in the illustration loop is swallowed by design — `withRetry`
+   * catches, and `illustrate` returns "" on a bad response — so that one dead
+   * page does not lose the other nine. But the same silence turned a total
+   * failure into a cheerful 200: when the image model is refusing every request,
+   * which is the exact condition the sequential loop above exists to survive,
+   * the parent was billed the full price and a daily-limit slot for a book of
+   * text, and then told to regenerate at full price again.
+   *
+   * A partly-illustrated book is still a book and is still charged; the UI
+   * already reports how many pages came out. None at all is a refund.
+   */
+  if (!images.some(Boolean)) {
+    limiter.refund(id);
+    await refundCharge(charged.charge);
+    return Response.json(
+      {
+        error:
+          "The story was written, but none of the pages could be illustrated — you have not been charged. Please try again in a few minutes.",
+        refunded: true,
+        title: story.title,
+        dedication: story.dedication,
+        // The words are still returned: the parent waited for them, and losing
+        // the story as well as the pictures helps nobody.
+        pages: story.pages.map((p) => ({ text: p.text, image: "", illustration: p.illustration })),
+      },
+      { status: 502, headers: { "Cache-Control": "no-store" } },
+    );
+  }
+
   // --- 3. keep it ------------------------------------------------------------
   /*
    * Persistence never fails the request.
@@ -359,7 +491,11 @@ export async function POST(req: Request) {
         languageCode: language.code,
         adultOriented,
         photoBytesApprox: Math.floor(photo.length * 0.75),
-        photoAttached: true,
+        // This block exists to be proof of what was actually used, so it has to
+        // be true: a sequel drawn from a stored bible attaches no photo, and
+        // claiming otherwise would make the proof worthless.
+        photoAttached: Boolean(photo),
+        characterFromBible: usableBible ? usableBible.id : null,
       },
       ...(debug
         ? {

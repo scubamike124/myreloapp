@@ -5,6 +5,7 @@ import {
   attachStoryToSeries,
   createSeries,
   episodeFor,
+  getCharacter,
   getSeries,
   getStory,
   listSeries,
@@ -75,10 +76,15 @@ export async function POST(req: Request) {
     const series = await getSeries(user.id, existingId);
     if (!series) return Response.json({ error: "That series is not in your library." }, { status: 404 });
     const books = await storiesInSeries(user.id, series.id);
+    // The hero's name comes from the bible when there is one and from the first
+    // book otherwise. Without it the maker screen starts with an empty name
+    // field and episode two is about an unnamed child.
+    const character = series.characterId ? await getCharacter(user.id, series.characterId) : null;
     return Response.json({
       ok: true,
       series,
       books,
+      characterName: character?.name ?? "",
       nextEpisode: episodeFor(series),
       nextTitle: suggestedTitle(books[0]?.category ?? "", episodeFor(series)),
     });
@@ -108,8 +114,20 @@ export async function POST(req: Request) {
   const series = await createSeries(user.id, title, story.characterId);
   if (!series) return Response.json({ error: "Could not start that series." }, { status: 500 });
 
-  // The book that started it becomes episode one of it.
-  await attachStoryToSeries(user.id, story.id, series.id, 1);
+  /*
+   * The book that started it becomes episode one of it.
+   *
+   * If that fails, the series exists with nothing in it and the next book would
+   * be episode two of an empty shelf — so the failure is reported rather than
+   * papered over with a success the caller cannot act on.
+   */
+  const attached = await attachStoryToSeries(user.id, story.id, series.id, 1);
+  if (!attached) {
+    return Response.json(
+      { error: "The series was created but the first book could not be added to it." },
+      { status: 500 },
+    );
+  }
   const seeded = await recordEpisode(
     series,
     { episode: 1, title: story.title, summary: story.pages[0]?.text ?? "" },

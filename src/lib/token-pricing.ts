@@ -174,6 +174,22 @@ export const FLAT_TOKEN_COST = {
   "storybook-movie": 4,
   "storybook-bundle": 4,
 
+  /*
+   * AI Story Maker.
+   *
+   * This is not a new price. The tool has been live and charging, but its slug
+   * was in neither price table, so `costOf` fell through to its unknown-action
+   * default of 1 token and `creditLabel` rendered the literal words "Pricing to
+   * be confirmed" on the product page. It billed correctly by accident and
+   * advertised nothing.
+   *
+   * 1 token is what it has always charged and is also what it should charge: it
+   * produces an illustrated episode - Gemini text plus Gemini images - which is
+   * the same work, and the same few cents of provider spend, as the e-book.
+   * Writing it down changes no one's bill and makes the page tell the truth.
+   */
+  "ai-story-maker": 1,
+
   "shorts-20": 2,
   "story-memory-generator": 2,
   "custom-avatar-creator": 2,

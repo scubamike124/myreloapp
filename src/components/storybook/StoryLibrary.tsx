@@ -69,10 +69,32 @@ export default function StoryLibrary() {
   const [busy, setBusy] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
+  /*
+   * The payload is checked before it is trusted.
+   *
+   * `setData(await res.json())` was wrong in two ways at once. A non-2xx
+   * response — a 502 while the Worker redeploys, say — parsed into an object
+   * with no `signedIn`, so a parent with a full shelf was shown the signed-out
+   * panel; and a body with no `stories` array made the filter below throw. A
+   * thrown fetch set the error but left `data` null, and the null guard renders
+   * "Loading…" before the error is ever reached, so a failed load looked like a
+   * load that had not finished yet — forever.
+   */
   const load = useCallback(async () => {
     try {
       const res = await fetch("/api/storybook/library", { cache: "no-store" });
-      setData(await res.json());
+      const body = await res.json();
+      if (!res.ok || typeof body?.signedIn !== "boolean" || !Array.isArray(body?.stories)) {
+        setErr(body?.error || "Could not load your library.");
+        return;
+      }
+      setData({
+        signedIn: body.signedIn,
+        stories: body.stories,
+        series: Array.isArray(body.series) ? body.series : [],
+        characters: Array.isArray(body.characters) ? body.characters : [],
+      });
+      setErr(null);
     } catch {
       setErr("Could not load your library.");
     }
@@ -95,12 +117,25 @@ export default function StoryLibrary() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ favorite: !story.favorite }),
       });
+    } catch {
+      // Caught rather than left to reject: this runs from an onClick, where an
+      // unhandled rejection is an uncaught error in the console and nothing on
+      // screen. The reload below puts the heart back where it belongs.
+      setErr("That change did not save.");
     } finally {
       setBusy(null);
       void load();
     }
   };
 
+  /*
+   * "Continue Story" has to actually continue the story.
+   *
+   * Creating the series and reloading the shelf is only half of it: the parent
+   * pressed a button that promises the next book, and was left looking at the
+   * same list with no indication of what to do next. So it creates the series
+   * and then goes where the next book is written, carrying the series id.
+   */
   const startSeries = async (story: Summary) => {
     setBusy(story.id);
     setErr(null);
@@ -111,14 +146,40 @@ export default function StoryLibrary() {
         body: JSON.stringify({ fromStoryId: story.id }),
       });
       const body = await res.json();
-      if (!res.ok) setErr(body.error || "Could not start that series.");
-      else await load();
+      if (!res.ok || !body?.series?.id) {
+        setErr(body?.error || "Could not start that series.");
+        return;
+      }
+      window.location.href = `/create/bedtime-storybook?series=${encodeURIComponent(body.series.id)}`;
     } catch {
       setErr("Network error. Try again.");
     } finally {
       setBusy(null);
     }
   };
+
+  /*
+   * A failed load is its own state, and it comes first.
+   *
+   * It needs its own retry because `load` is otherwise only reachable from the
+   * favourite and series buttons, and neither of those is on screen while
+   * `data` is null — so without this the only way out was a page refresh.
+   */
+  if (!data && err) {
+    return (
+      <div className="rounded-2xl p-6 text-center" style={CARD}>
+        <p className="text-sm text-[#ff8b95]">{err}</p>
+        <button
+          type="button"
+          onClick={() => void load()}
+          className="mt-3 rounded-xl px-4 py-2 text-sm font-semibold text-white"
+          style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
 
   if (!data) {
     return <p className="text-sm text-white/50">Loading your stories…</p>;

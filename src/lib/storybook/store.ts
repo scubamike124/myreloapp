@@ -109,6 +109,23 @@ async function db(): Promise<Sql | null> {
 
 const now = () => new Date().toISOString();
 const text = (v: unknown, fallback = ""): string => (typeof v === "string" ? v : fallback);
+
+/**
+ * A timestamp column, from either database.
+ *
+ * The two dialects disagree about what a timestamp is. sqlite stores these
+ * columns as TEXT and hands back a string; postgres declares them TIMESTAMPTZ
+ * and every transport this app uses — neon HTTP, the neon WebSocket pool and
+ * postgres.js — deserialises them into a JS `Date`. Running a Date through
+ * `text()` returns the fallback, so on a deployed instance every createdAt and
+ * updatedAt in this module was silently the empty string, and the library
+ * rendered "10 pages · " with nothing after the separator.
+ *
+ * It worked locally, which is what made it worth a named helper: sqlite is the
+ * development database, so the bug could only ever appear in production.
+ */
+const isoText = (v: unknown): string =>
+  v instanceof Date ? v.toISOString() : typeof v === "string" ? v : "";
 const num = (v: unknown, fallback = 0): number => (Number.isFinite(Number(v)) ? Number(v) : fallback);
 
 function parseJson<T>(raw: unknown, fallback: T): T {
@@ -181,8 +198,8 @@ function toBible(row: Row): CharacterBible {
     expressions: parseJson<string[]>(row.expressions, []),
     personality: parseJson<string[]>(row.personality, []),
     voice: parseJson<CharacterBible["voice"]>(row.voice, {}),
-    createdAt: text(row.createdAt),
-    updatedAt: text(row.updatedAt),
+    createdAt: isoText(row.createdAt),
+    updatedAt: isoText(row.updatedAt),
     version: num(row.version, 1),
   };
 }
@@ -284,8 +301,8 @@ function toSeries(row: Row): SeriesRecord {
     title: text(row.title),
     memory: readMemory(row.memory),
     episodes: num(row.episodes, 0),
-    createdAt: text(row.createdAt),
-    updatedAt: text(row.updatedAt),
+    createdAt: isoText(row.createdAt),
+    updatedAt: isoText(row.updatedAt),
   };
 }
 
@@ -457,8 +474,8 @@ function toStory(row: Row): StoryRecord {
     // sqlite stores booleans as 0/1 and postgres as true/false, so neither
     // Boolean() alone nor === true is right on both.
     favorite: row.favorite === true || row.favorite === 1 || row.favorite === "1",
-    createdAt: text(row.createdAt),
-    updatedAt: text(row.updatedAt),
+    createdAt: isoText(row.createdAt),
+    updatedAt: isoText(row.updatedAt),
   };
 }
 
@@ -495,18 +512,40 @@ export async function listStories(userId: string): Promise<StorySummary[]> {
              request, pages, character_version AS "characterVersion", product, favorite,
              created_at AS "createdAt", updated_at AS "updatedAt"
       FROM stories WHERE user_id = ${userId} ORDER BY created_at DESC LIMIT 100`;
-    return rows.map((row) => {
-      const story = toStory(row);
-      const { pages, request: _request, ...rest } = story;
-      return {
-        ...rest,
-        pageCount: pages.length,
-        cover: pages.find((p) => p.image)?.image ?? "",
-      };
-    });
+    return rows.map(summarise);
   } catch {
     return [];
   }
+}
+
+/**
+ * A shelf row: the story without its pages.
+ *
+ * Built by naming the fields rather than by destructuring the ones to drop —
+ * with a spread, a field added to StoryRecord later would silently start
+ * appearing in the library payload, pages included.
+ */
+function summarise(row: Row): StorySummary {
+  const story = toStory(row);
+  return {
+    id: story.id,
+    userId: story.userId,
+    characterId: story.characterId,
+    seriesId: story.seriesId,
+    episode: story.episode,
+    title: story.title,
+    dedication: story.dedication,
+    category: story.category,
+    theme: story.theme,
+    languageCode: story.languageCode,
+    characterVersion: story.characterVersion,
+    product: story.product,
+    favorite: story.favorite,
+    createdAt: story.createdAt,
+    updatedAt: story.updatedAt,
+    pageCount: story.pages.length,
+    cover: story.pages.find((p) => p.image)?.image ?? "",
+  };
 }
 
 /**
@@ -539,8 +578,19 @@ export async function setFavorite(userId: string, storyId: string, favorite: boo
   const q = await db();
   if (!q || !userId || !storyId) return false;
   try {
-    // Written as 1/0 rather than a boolean: sqlite has no boolean type, and the
-    // driver's coercion is one more thing that would have to agree.
+    /*
+     * The UPDATE is scoped to the owner, so someone else's story cannot be
+     * changed — but an UPDATE that matches nothing still succeeds, and
+     * returning true for it meant the API answered 200 "done" to a request
+     * that did nothing. The row is read first so the answer is about a story
+     * that exists and belongs to the caller.
+     *
+     * The value is written as 1/0 rather than a boolean: sqlite has no boolean
+     * type, and the driver's coercion is one more thing that would have to
+     * agree between the two dialects.
+     */
+    const owned = await q`SELECT id FROM stories WHERE id = ${storyId} AND user_id = ${userId}`;
+    if (!owned[0]) return false;
     await q`
       UPDATE stories SET favorite = ${favorite ? 1 : 0}, updated_at = ${now()}
       WHERE id = ${storyId} AND user_id = ${userId}`;
@@ -550,10 +600,28 @@ export async function setFavorite(userId: string, storyId: string, favorite: boo
   }
 }
 
-/** The books in a series, in reading order. */
+/**
+ * The books in a series, in reading order.
+ *
+ * Queried directly rather than filtered out of `listStories`, whose LIMIT 100
+ * is right for a shelf and wrong here: a parent with a hundred and one stories
+ * would have watched the early episodes of their oldest series disappear, and
+ * the series they were reading is exactly the one furthest down that list.
+ */
 export async function storiesInSeries(userId: string, seriesId: string): Promise<StorySummary[]> {
-  const all = await listStories(userId);
-  return all.filter((s) => s.seriesId === seriesId).sort((a, b) => a.episode - b.episode);
+  const q = await db();
+  if (!q || !userId || !seriesId) return [];
+  try {
+    const rows = await q`
+      SELECT id, user_id AS "userId", character_id AS "characterId", series_id AS "seriesId",
+             episode, title, dedication, category, theme, language_code AS "languageCode",
+             request, pages, character_version AS "characterVersion", product, favorite,
+             created_at AS "createdAt", updated_at AS "updatedAt"
+      FROM stories WHERE user_id = ${userId} AND series_id = ${seriesId} ORDER BY episode`;
+    return rows.map(summarise);
+  } catch {
+    return [];
+  }
 }
 
 export async function deleteStory(userId: string, id: string): Promise<boolean> {
@@ -577,8 +645,8 @@ function toArtifact(row: Row): ArtifactRecord {
     status: (text(row.status, "pending") || "pending") as ArtifactStatus,
     url: text(row.url) || null,
     detail: parseJson<Record<string, unknown>>(row.detail, {}),
-    createdAt: text(row.createdAt),
-    updatedAt: text(row.updatedAt),
+    createdAt: isoText(row.createdAt),
+    updatedAt: isoText(row.updatedAt),
   };
 }
 

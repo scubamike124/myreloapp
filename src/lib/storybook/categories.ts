@@ -297,7 +297,15 @@ export function inSeason(
   hemisphere: "north" | "south" = "north",
 ): boolean {
   if (!seasonal.months) return true;
-  const month = date.getUTCMonth() + 1;
+  /*
+   * The parent's month, not UTC's.
+   *
+   * A season is a fact about where the parent is standing. Reading it in UTC
+   * makes Halloween disappear from a Californian's screen at 5pm on the 31st,
+   * which is roughly when they would go looking for it. The caller passes a
+   * Date built in the browser, so the local month is the right one to read.
+   */
+  const month = date.getMonth() + 1;
   const months =
     hemisphere === "south" && seasonal.hemisphereSensitive ? seasonal.months.map(shiftMonth) : seasonal.months;
   return months.includes(month);

@@ -119,11 +119,19 @@ export function applyBibleUpdate(
     (next as Record<string, unknown>)[key] = value;
   }
   next.updatedAt = now.toISOString();
-  // Only a change to how the character *looks* invalidates existing artwork, so
-  // only that bumps the version a story pins itself to.
+  /*
+   * Only a change to how the character *looks* invalidates existing artwork, so
+   * only that bumps the version a story pins itself to.
+   *
+   * Compared against the merged result rather than against the update, because
+   * the loop above deliberately ignores blank strings. Reading the update
+   * directly counted a cleared field as a change and bumped the version for an
+   * edit that was never applied — which told a parent their older books were
+   * drawn from a different description when nothing had moved.
+   */
   const appearanceChanged = (
     ["face", "hair", "clothing", "bodyProportions", "animationStyle"] as const
-  ).some((k) => update[k] !== undefined && update[k] !== current[k]);
+  ).some((k) => next[k] !== current[k]);
   next.version = appearanceChanged ? current.version + 1 : current.version;
   return next;
 }

@@ -32,12 +32,64 @@ export type StorybookInput = {
   continuity?: string;
 };
 
-/** Heuristic: adult-oriented requests must not be rewritten as kids' bedtime tales. */
+/**
+ * Requests that contain an ambiguous word but are plainly children's material.
+ *
+ * Checked first, and decisive. A hyphen is a word boundary, so "Spider-Man"
+ * matched the bare `man` alternative this list exists to defuse.
+ */
+const CHILDLIKE =
+  /\b(spider[- ]?man|iron[- ]?man|ant[- ]?man|bat[- ]?man|he[- ]?man|super[- ]?man|gingerbread man|snow[- ]?man|muffin man|man on the moon|lady ?bug|lady ?bird|old(er)? (brother|sister|cousin|kid|boy|girl))\b/;
+
+/** Words that only ever signal an adult request. */
+const ADULT_TERMS =
+  /\b(adult|gentleman|romance|romantic|dating|marriage|married|wife|husband|retire|retirement|elderly|widow|widower|grown[- ]?up)\b/;
+
+/**
+ * Ambiguous words that signal an adult request only in these shapes.
+ *
+ * `man`, `woman`, `lady` and `older` cannot decide this on their own; only the
+ * words around them separate "an older gentleman looking for a companion" from
+ * "Ollie's older brother meets Spider-Man". `senior` is deliberately absent
+ * unless followed by `citizen` — on its own it reads as senior year.
+ */
+const ADULT_PHRASES =
+  /\b(a (man|woman) (who|looking|named)|looking for a (nice )?(man|woman)|(his|her|my) (wife|husband)|senior citizen)\b/;
+
+/**
+ * An older person as the *protagonist*, which is a different thing from an
+ * older person appearing in the story.
+ *
+ * "An older gentleman looking for a companion" and "Ava helps an old lady cross
+ * the road" contain the same words and are not the same request: the first is
+ * about him, the second is about Ava. What separates them is position — a
+ * request opens with its hero. Anchoring is a cruder signal than understanding
+ * the sentence, and it is the right kind of crude here, because the two
+ * mistakes do not cost the same. Reading a child's story as adult puts
+ * "keep adult proportions" against a photograph of a six-year-old; reading an
+ * adult's story as a child's gives it a warmer tone than asked for, and the
+ * photograph still governs how they are drawn.
+ */
+const ADULT_SUBJECT = /^\s*(a|an|the)\s+(old(er)?|elderly)\s+(man|woman|lady|gentleman|guy)\b/;
+
+/**
+ * Heuristic: adult-oriented requests must not be rewritten as kids' bedtime tales.
+ *
+ * The cost of a false positive is high and invisible. The flag does not only
+ * change the prose — the route passes it into every illustration prompt, where
+ * it emits "Do NOT turn this adult into a child. Keep adult proportions and
+ * age." on a page being drawn from a photograph of a six-year-old. So a request
+ * as ordinary as "Ollie meets Spider-Man" produced an adult-framed story whose
+ * illustration prompts argued with the child's own photo.
+ */
 export function looksAdultOriented(idea: string, characterName: string): boolean {
   const t = `${idea} ${characterName}`.toLowerCase();
-  return /\b(adult|gentleman|lady|man|woman|men|women|romance|romantic|dating|marriage|wife|husband|retire|retirement|older|elderly|senior|grown[- ]?up|looking for a (nice )?woman|looking for a (nice )?man)\b/.test(
-    t,
-  );
+  // Early return, not a later condition: "Ollie's older brother meets
+  // Spider-Man" must not be re-flagged by a phrase match further down.
+  if (CHILDLIKE.test(t)) return false;
+  // The idea alone for the subject test — the name is appended to `t` and would
+  // never be at the front.
+  return ADULT_TERMS.test(t) || ADULT_PHRASES.test(t) || ADULT_SUBJECT.test(idea.trim().toLowerCase());
 }
 
 export function buildStoryPrompt(input: StorybookInput): string {
@@ -150,7 +202,17 @@ export function buildIllustrationPrompt(opts: {
     `=== CHARACTER IDENTITY (GROUND TRUTH — overrides everything else) ===\n` +
     identity +
     `Draw in storybook style, NOT as a photograph.\n` +
-    (opts.adultOriented
+    /*
+     * The age line, and why the photo overrides the adult flag.
+     *
+     * "Do NOT turn this adult into a child" is only safe when there is no
+     * photograph. With one, the photo is already declared ground truth above,
+     * so the line is redundant when the flag is right and actively harmful when
+     * it is wrong — an over-eager heuristic would have the model drawing an
+     * adult from a picture of a six-year-old. The neutral line says the same
+     * thing without betting on the guess.
+     */
+    (opts.adultOriented && !photo
       ? `Do NOT turn this adult into a child. Keep adult proportions and age.\n`
       : photo
         ? `Match the age implied by the photograph and story — do not arbitrarily age them up or down.\n`

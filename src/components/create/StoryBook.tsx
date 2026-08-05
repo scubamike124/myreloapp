@@ -114,6 +114,10 @@ export default function StoryBook() {
         setSeriesTitle(body.series?.title ?? "");
         setCharacterId(body.series?.characterId ?? "");
         setNextEpisode(body.nextEpisode ?? 0);
+        // Without this the hero of episode two is unnamed: the field starts
+        // empty on a fresh page load, and a parent continuing a series has no
+        // reason to expect they must retype the child's name.
+        if (body.characterName) setCharacterName((current) => current || body.characterName);
         // The category the series was started in, so the next book is the same
         // kind of story without the parent having to remember which.
         if (body.books?.[0]?.category) setCategoryId(body.books[0].category);

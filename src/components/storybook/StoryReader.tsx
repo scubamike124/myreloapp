@@ -36,6 +36,13 @@ export default function StoryReader({ storyId }: { storyId: string }) {
   const [story, setStory] = useState<Story | null>(null);
   const [artifacts, setArtifacts] = useState<Artifact[]>([]);
   const [error, setError] = useState<string | null>(null);
+  /*
+   * Kept apart from `error`, which means "this story could not be opened" and
+   * replaces the whole view. A PDF that fails to build must not take the story
+   * off the screen — least of all the button that failed, which is the one the
+   * reader wants to press again.
+   */
+  const [pdfError, setPdfError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -62,7 +69,7 @@ export default function StoryReader({ storyId }: { storyId: string }) {
   const savePdf = async () => {
     if (!story) return;
     setSaving(true);
-    setError(null);
+    setPdfError(null);
     try {
       // Rebuilt from the stored code rather than stored as an object: the PDF
       // needs the reading direction, and a book written in Arabic must still
@@ -75,7 +82,7 @@ export default function StoryReader({ storyId }: { storyId: string }) {
         language: { ...language, rtl: isRTL(language.code) },
       });
     } catch {
-      setError("Could not build the PDF. Try again.");
+      setPdfError("Could not build the PDF. Try again.");
     } finally {
       setSaving(false);
     }
@@ -122,6 +129,8 @@ export default function StoryReader({ storyId }: { storyId: string }) {
           </span>
         ) : null}
       </div>
+
+      {pdfError ? <p className="mt-3 text-[13px] text-[#ff8b95]">{pdfError}</p> : null}
 
       <div className="mt-8 space-y-6">
         {story.pages.map((page, i) => (

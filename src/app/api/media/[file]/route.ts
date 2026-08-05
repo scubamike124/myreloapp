@@ -18,14 +18,33 @@ import { sql, ensureSchema, dbConfigured } from "@/lib/db";
 
 export const runtime = "nodejs";
 
-const TYPES: Record<string, string> = { mp4: "video/mp4", png: "image/png", webp: "image/webp", jpg: "image/jpeg" };
+const TYPES: Record<string, string> = {
+  mp4: "video/mp4",
+  webm: "video/webm",
+  png: "image/png",
+  webp: "image/webp",
+  jpg: "image/jpeg",
+};
 
 export async function GET(_req: Request, { params }: { params: Promise<{ file: string }> }) {
   const { file } = await params;
 
-  // Only a bare "<uuid>.<ext>" is acceptable; anything with a separator could
-  // walk out of the media directory.
-  const match = /^([0-9a-f-]{36})\.(mp4|png|webp|jpg)$/i.exec(file);
+  /*
+   * Only a bare "<id>.<ext>" is acceptable; anything with a separator could
+   * walk out of the media directory.
+   *
+   * Both id shapes are allowed because both are written. `ingestBytes` stores
+   * under whatever id its caller supplies, and veo.ts and /api/media/ingest
+   * both strip the dashes out of a UUID — thirty-two characters, not
+   * thirty-six. This pattern only matched the dashed form, so on a disk-backed
+   * host every ingested video 404'd on the URL the app had just handed out.
+   * It went unnoticed because production stores in blob or R2 and never reaches
+   * this route.
+   *
+   * The extensions are the ones `extensionFor` can produce; webm was missing
+   * and is a video the same code path can write.
+   */
+  const match = /^([0-9a-f]{32}|[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12})\.(mp4|webm|png|webp|jpg)$/i.exec(file);
   if (!match) return new Response("Not found", { status: 404 });
 
   const [, id, ext] = match;
