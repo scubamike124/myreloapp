@@ -39,8 +39,35 @@ export async function chargeFor(
 
   const user = await currentUser();
   if (!user) {
-    // Anonymous use still works, still capped per IP. Requiring sign-in is a
-    // product decision, not a technical one — flip it here when you want it.
+    /*
+     * An anonymous caller cannot spend the provider budget.
+     *
+     * This used to return ok with charged: 0, on the stated reasoning that
+     * anonymous use was "still capped per IP". It was not capped in any
+     * meaningful sense. The cap is a Map held in module memory, and on
+     * Cloudflare Workers every isolate has its own — isolates are created and
+     * discarded constantly and spread across the world, so a caller gets a
+     * fresh allowance every few requests. The key is also taken from
+     * x-forwarded-for, which the caller sends.
+     *
+     * So twelve endpoints that spend $3.20–$7.20 of Veo or HeyGen credit per
+     * call were free and effectively unlimited to anyone who found the URL.
+     *
+     * A free trial still exists and is a better one: signing up credits real
+     * tokens to a named account with a balance that decrements, and the balance
+     * lives in the database rather than in one isolate's memory.
+     *
+     * Genuinely free actions (cost 0) are untouched — they fall through, so
+     * anything that costs nothing stays open to visitors.
+     */
+    if (cost > 0) {
+      return {
+        ok: false,
+        error: "Create a free account to use this — you get free tokens when you join.",
+        needed: cost,
+        balance: 0,
+      };
+    }
     return { ok: true, charge: { action, charged: 0, balance: null, seconds: opts?.seconds } };
   }
 

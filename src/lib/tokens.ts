@@ -62,14 +62,46 @@ export async function spend(
   return balanceOf(userId);
 }
 
+/**
+ * Give tokens back for work that failed.
+ *
+ * ## A refund can never exceed what was actually paid
+ *
+ * This used to be an unconditional INSERT of a positive row. Nothing checked
+ * that the caller had ever been charged, and the de-duplication key was `ref` —
+ * which, on the render pollers, is derived from an operation id the caller
+ * passes in. So a signed-in user could call a poll endpoint with a made-up but
+ * well-formed operation id, get "failed" back (any non-OK provider response is
+ * reported as failed), and be credited. A different fake id each time meant a
+ * different ref each time, so ON CONFLICT never fired and the loop minted
+ * tokens indefinitely. Minted tokens are indistinguishable from bought ones and
+ * spend on real provider calls, so it drained the provider budget and destroyed
+ * the revenue unit at the same time.
+ *
+ * The guard is an invariant rather than a patch on the callers: for any one
+ * action, a user's total refunds may never exceed their total charges. It holds
+ * however the refund is reached — a new poller, a retry, an endpoint written
+ * next year — so it cannot be reopened by someone adding a caller who forgets.
+ *
+ * One statement, so the read and the write cannot interleave: two concurrent
+ * refunds cannot both observe the old total and both succeed.
+ */
 export async function refund(userId: string, action: string, ref?: string, amount?: number): Promise<void> {
   const q = await dbSql();
   if (!q || !(await ensureSchema())) return;
   const cost = roundTokens(amount ?? costOf(action));
   if (cost <= 0) return;
+  const refundReason = `refund:${action}`;
   await q`
     INSERT INTO token_ledger (user_id, delta, reason, ref)
-    VALUES (${userId}, ${cost}, ${`refund:${action}`}, ${ref ? `refund:${ref}` : null})
+    SELECT ${userId}, ${cost}, ${refundReason}, ${ref ? `refund:${ref}` : null}
+    WHERE (
+      SELECT COALESCE(-SUM(delta), 0) FROM token_ledger
+       WHERE user_id = ${userId} AND reason = ${action} AND delta < 0
+    ) >= (
+      SELECT COALESCE(SUM(delta), 0) FROM token_ledger
+       WHERE user_id = ${userId} AND reason = ${refundReason} AND delta > 0
+    ) + ${cost}
     ON CONFLICT (ref) WHERE ref IS NOT NULL DO NOTHING`;
 }
 
