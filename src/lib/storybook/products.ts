@@ -133,6 +133,20 @@ export const STORY_PRODUCTS: StoryProduct[] = [
       "A shot, a camera move and lighting written for every scene",
       "Scene transitions planned across the whole film",
       "Reviewed by Amber before a single frame is rendered",
+      /*
+       * Said out loud rather than left to be discovered.
+       *
+       * "Cinematic movie" sets an expectation of sound even with the narration
+       * claim removed, and the honest position is that this film does not have
+       * spoken narration yet. A buyer told up front is a buyer who is not
+       * disappointed; a buyer who finds out after paying $40 asks for a refund
+       * and is right to.
+       *
+       * Narration is practical to add — ElevenLabs is already the house TTS —
+       * but it needs a key in this app's environment and it changes the cost
+       * per film, which is a pricing decision rather than a repair.
+       */
+      "No spoken narration yet — the film plays without a voiceover",
     ],
     // narration_audio is deliberately absent: an artifact with no producer in
     // the list would have the pipeline waiting for something nothing makes.
