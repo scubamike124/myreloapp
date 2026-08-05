@@ -28,7 +28,8 @@ type Story = {
   seriesId: string | null;
   pages: Page[];
 };
-type Artifact = { kind: string; status: string; url: string | null };
+type Artifact = { kind: string; status: string; url: string | null; detail?: Record<string, unknown> };
+type SceneClip = { scene: number; url?: string; status?: string };
 
 const CARD = { border: "1px solid rgba(255,70,85,.18)", background: "rgba(20,10,12,.72)" };
 
@@ -66,6 +67,57 @@ export default function StoryReader({ storyId }: { storyId: string }) {
     };
   }, [storyId]);
 
+  /*
+   * Collecting the film.
+   *
+   * Ordering a film starts twelve Veo renders and stores their operation
+   * handles; turning those handles into video is what `GET /api/storybook/movie`
+   * does, and nothing was calling it. So the renders were paid for, started,
+   * and never collected — and Veo's handles expire, which would have made the
+   * footage unrecoverable rather than merely late.
+   *
+   * Polling from here means opening the story is what advances it, which is the
+   * page a parent opens to watch the film anyway. It stops as soon as the film
+   * settles, either way.
+   */
+  const [scenes, setScenes] = useState<SceneClip[]>([]);
+  const [filmStatus, setFilmStatus] = useState<string | null>(null);
+  const [playing, setPlaying] = useState(0);
+
+  useEffect(() => {
+    const cut = artifacts.find((a) => a.kind === "final_cut");
+    if (!cut) return;
+    setFilmStatus(cut.status);
+    if (cut.status === "ready" && Array.isArray(cut.detail?.scenes)) {
+      setScenes(cut.detail.scenes as SceneClip[]);
+      return;
+    }
+    if (cut.status !== "producing") return;
+
+    let stopped = false;
+    const poll = async () => {
+      try {
+        const res = await fetch(`/api/storybook/movie?storyId=${encodeURIComponent(storyId)}`, { cache: "no-store" });
+        const body = await res.json();
+        if (stopped || !res.ok) return;
+        if (Array.isArray(body.scenes)) setScenes(body.scenes as SceneClip[]);
+        if (body.settled) {
+          setFilmStatus(body.done ? "ready" : "failed");
+          stopped = true;
+          clearInterval(timer);
+        }
+      } catch {
+        /* keep polling — a blip is not a verdict */
+      }
+    };
+    void poll();
+    const timer = setInterval(() => void poll(), 15_000);
+    return () => {
+      stopped = true;
+      clearInterval(timer);
+    };
+  }, [artifacts, storyId]);
+
   const savePdf = async () => {
     if (!story) return;
     setSaving(true);
@@ -92,6 +144,8 @@ export default function StoryReader({ storyId }: { storyId: string }) {
   if (!story) return <p className="text-sm text-white/50">Opening…</p>;
 
   const film = artifacts.find((a) => a.kind === "final_cut");
+  const ready = scenes.filter((s) => s.url);
+  const status = filmStatus ?? film?.status;
 
   return (
     <div>
@@ -113,22 +167,49 @@ export default function StoryReader({ storyId }: { storyId: string }) {
         >
           {saving ? "Building the PDF…" : "Download as PDF"}
         </button>
-        {film?.status === "ready" && film.url ? (
-          <a
-            href={film.url}
-            className="rounded-xl px-4 py-2 text-sm font-semibold text-white"
-            style={{ border: "1px solid rgba(255,70,85,.3)" }}
-          >
-            Watch the film
-          </a>
-        ) : film ? (
+        {film && status !== "ready" ? (
           // Said plainly rather than hidden: a parent who bought the bundle and
           // sees only the book assumes the film failed.
           <span className="rounded-xl px-4 py-2 text-sm text-white/55" style={{ border: "1px solid rgba(255,255,255,.12)" }}>
-            {film.status === "failed" ? "The film could not be made — we will look into it" : "The film is still rendering"}
+            {status === "failed"
+              ? "The film could not be made — your tokens for it have been refunded"
+              : scenes.length > 0
+                ? `The film is rendering — ${ready.length} of ${scenes.length} scenes done`
+                : "The film is still rendering"}
           </span>
         ) : null}
       </div>
+
+      {/*
+        The film, played as the scenes it is.
+
+        Nothing stitches the clips into a single file, so there is no one URL to
+        link to. Playing them in order and advancing on `ended` is what actually
+        exists; a "Watch the film" link pointed at the first clip would play six
+        seconds of scene one and stop, which is worse than being told the truth.
+      */}
+      {status === "ready" && ready.length > 0 ? (
+        <div className="mt-6 rounded-2xl p-4" style={CARD}>
+          <p className="mb-2 text-sm font-semibold text-white">🎬 The film</p>
+          <video
+            key={ready[playing]?.url}
+            src={ready[playing]?.url}
+            controls
+            autoPlay={playing > 0}
+            playsInline
+            className="w-full rounded-xl"
+            onEnded={() => setPlaying((i) => (i + 1 < ready.length ? i + 1 : i))}
+          />
+          <p className="mt-2 text-[12px] text-white/50">
+            Scene {playing + 1} of {ready.length} — it plays straight through.
+            {playing > 0 ? (
+              <button type="button" onClick={() => setPlaying(0)} className="ml-2 underline hover:text-white">
+                Start again
+              </button>
+            ) : null}
+          </p>
+        </div>
+      ) : null}
 
       {pdfError ? <p className="mt-3 text-[13px] text-[#ff8b95]">{pdfError}</p> : null}
 

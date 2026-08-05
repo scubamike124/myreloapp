@@ -11,6 +11,7 @@ import {
 } from "@/lib/storybook-prompts";
 import { appearancePrompt, isUsable } from "@/lib/storybook/character-bible";
 import { categoryGuidance } from "@/lib/storybook/categories";
+import { getStoryProduct } from "@/lib/storybook/products";
 import { continuityPrompt } from "@/lib/storybook/story-memory";
 import {
   episodeFor,
@@ -267,7 +268,21 @@ export async function POST(req: Request) {
   };
   await deriveBible();
 
-  const charged = await chargeFor("bedtime-storybook");
+  /*
+   * What is being bought.
+   *
+   * The charge follows the product rather than a fixed action, so a film is
+   * billed as a film. The slug comes off the product record instead of being
+   * built from the id, because an action the pricing table does not recognise
+   * does not fail — `costOf` quietly bills one token, which on the film would
+   * sell $40 of work for $10.
+   *
+   * Unknown or absent means the e-book, which is what this tool has always
+   * produced; an older client that sends no product keeps working and keeps
+   * paying the same price.
+   */
+  const product = getStoryProduct(str(body.productId, 20)) ?? getStoryProduct("ebook");
+  const charged = await chargeFor(product?.chargeAction ?? "storybook-ebook");
   if (!charged.ok) {
     limiter.refund(id);
     return Response.json(
@@ -447,6 +462,7 @@ export async function POST(req: Request) {
         request: idea,
         pages: storedPages,
         characterVersion: usableBible?.version ?? 1,
+        product: product?.id ?? "ebook",
       });
       storyId = record?.id ?? null;
       saved = Boolean(record);
@@ -473,6 +489,9 @@ export async function POST(req: Request) {
       storyId,
       saved,
       signedIn: Boolean(user),
+      // What was bought, so the screen that follows knows whether to offer the
+      // film — and so a receipt can be checked against what was charged.
+      product: product ? { id: product.id, name: product.name, tokens: product.tokens } : null,
       series: series ? { id: series.id, title: series.title, episode } : null,
       character: usableBible ? { id: usableBible.id, name: usableBible.name, version: usableBible.version } : null,
       title: story.title,

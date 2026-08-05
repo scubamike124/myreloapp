@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { LANGUAGES, DEFAULT_LANGUAGE } from "@/lib/languages";
 import { STORY_CATEGORIES, getCategory, seasonalNow, type SeasonalStory } from "@/lib/storybook/categories";
+import { getStoryProduct, orderableProducts } from "@/lib/storybook/products";
 import { recordCreation } from "@/lib/workspace";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
@@ -98,6 +99,36 @@ export default function StoryBook() {
   const [characterId, setCharacterId] = useState("");
   const [nextEpisode, setNextEpisode] = useState(0);
 
+  /** What is being bought. The bundle is recommended, so it is the default. */
+  const [productId, setProductId] = useState(
+    () => orderableProducts().find((p) => p.recommended)?.id ?? "ebook",
+  );
+  const product = getStoryProduct(productId);
+
+  /*
+   * Saved characters.
+   *
+   * Offered on every story, not only inside a series. The character bible's
+   * whole promise is that a parent does not upload the photo again, and until
+   * this list existed the only way to reach it was through Continue Story —
+   * so a parent making a second, unrelated story still got a child who looked
+   * different.
+   */
+  const [saved, setSaved] = useState<{ id: string; name: string }[]>([]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch("/api/storybook/library", { cache: "no-store" });
+        const body = await res.json();
+        if (res.ok && Array.isArray(body?.characters)) {
+          setSaved(body.characters.map((c: { id: string; name: string }) => ({ id: c.id, name: c.name })));
+        }
+      } catch {
+        /* a missing list just means the photo field is used, as before */
+      }
+    })();
+  }, []);
+
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get("series");
     if (!id) return;
@@ -133,6 +164,66 @@ export default function StoryBook() {
     setPhoto(f);
     setPreview(URL.createObjectURL(f));
     setErr(null);
+  };
+
+  /*
+   * The film's progress, reported honestly.
+   *
+   * Three outcomes worth telling apart. It can be planned and approved and
+   * rendering; it can be planned and *rejected* by the Director, in which case
+   * nothing was rendered and the parent should be told why rather than left
+   * waiting for a film that is not coming; or the plan itself can fail.
+   */
+  const [film, setFilm] = useState<{
+    state: "planning" | "rendering" | "rejected" | "failed";
+    message: string;
+    /** So the message can link to where the film is actually collected. */
+    storyId?: string | null;
+  } | null>(null);
+
+  const orderFilm = async (id: string) => {
+    try {
+      const res = await fetch("/api/storybook/movie", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ storyId: id }),
+      });
+      const body = await res.json();
+      // Every non-ok path names the refund if there was one. A parent who is
+      // told "we could not make it" and is not told about their tokens assumes
+      // the worst, and would be right to.
+      const refund =
+        typeof body.refunded === "number" && body.refunded > 0
+          ? ` ${body.refunded} ${body.refunded === 1 ? "token has" : "tokens have"} been refunded.`
+          : "";
+      if (res.status === 422) {
+        setFilm({
+          state: "rejected",
+          message: `${body.summary ?? "Amber did not approve the film."} Nothing was rendered.${refund}`,
+          storyId: id,
+        });
+        return;
+      }
+      if (!res.ok || !body.ok) {
+        setFilm({
+          state: "failed",
+          message: `${body.error || "The film could not be started."}${refund}`,
+          storyId: id,
+        });
+        return;
+      }
+      setFilm({
+        state: "rendering",
+        message: `${body.summary} All ${body.started} scenes are rendering.`,
+        storyId: id,
+      });
+    } catch {
+      setFilm({
+        state: "failed",
+        message: "The film could not be started. Your book is safe in the library.",
+        storyId: id,
+      });
+    }
   };
 
   /**
@@ -189,6 +280,7 @@ export default function StoryBook() {
         seasonalId,
         seriesId,
         characterId,
+        productId,
         languageCode,
         pages,
         debug: process.env.NODE_ENV !== "production",
@@ -226,6 +318,23 @@ export default function StoryBook() {
         kind: "image",
         mediaUrl: data.pages?.[0]?.image ?? "",
       });
+
+      /*
+       * Order the film, if a film was bought.
+       *
+       * Started from here rather than inside the storybook request, which has
+       * already spent most of its five minutes illustrating: planning the film,
+       * reviewing it and starting twelve renders on top of that would not fit,
+       * and a timeout would lose the book as well.
+       *
+       * It needs a saved story, because the film is made from the stored pages
+       * rather than from what is on screen — which is also what lets the order
+       * survive the parent closing the tab.
+       */
+      if ((productId === "movie" || productId === "bundle") && data.storyId) {
+        setFilm({ state: "planning", message: "Amber is planning the film and reviewing it before anything is rendered…", storyId: data.storyId });
+        void orderFilm(data.storyId);
+      }
     } catch {
       setErr("Network error. Try again.");
     } finally {
@@ -247,7 +356,7 @@ export default function StoryBook() {
             book starring them — in any supported language.
           </p>
         </div>
-        <TokenMeter slug="bedtime-storybook" tokens={tokens} variant="chip" />
+        <TokenMeter slug={product?.chargeAction ?? "storybook-ebook"} tokens={tokens} variant="chip" />
       </header>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)]">
@@ -321,6 +430,109 @@ export default function StoryBook() {
               ))}
             </div>
           </div>
+
+          {/*
+            How it gets delivered.
+
+            One story, three ways to receive it — the bundle is recommended and
+            selected by default because it is the same price as the film and
+            includes the book, which makes it the obviously right choice rather
+            than a nudge. The prices come from the product registry, which reads
+            them from the pricing table, so this card cannot disagree with what
+            is charged.
+          */}
+          <div>
+            <label className="mb-1.5 block text-[13px] font-semibold text-white/80">How would you like it?</label>
+            <div className="grid gap-2 sm:grid-cols-3">
+              {orderableProducts().map((p) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => setProductId(p.id)}
+                  aria-pressed={productId === p.id}
+                  className="rounded-xl p-3 text-left transition-colors"
+                  style={
+                    productId === p.id
+                      ? { border: "1px solid rgba(255,70,85,.55)", background: "rgba(255,70,85,.10)" }
+                      : { border: "1px solid rgba(255,255,255,.10)" }
+                  }
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[13px] font-semibold text-white">
+                      {p.emoji} {p.name}
+                    </span>
+                    {p.recommended ? (
+                      <span
+                        className="rounded px-1.5 py-0.5 text-[10px] font-semibold text-white"
+                        style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+                      >
+                        BEST VALUE
+                      </span>
+                    ) : null}
+                  </div>
+                  <p className="mt-1 text-[11.5px] leading-snug text-white/55">{p.summary}</p>
+                  <p className="mt-1.5 text-[12px] font-semibold text-white/80">
+                    {p.tokens} {p.tokens === 1 ? "token" : "tokens"}
+                  </p>
+                </button>
+              ))}
+            </div>
+            {product && product.id !== "ebook" ? (
+              <p className="mt-1.5 text-[11px] text-white/45">
+                The film is planned, reviewed by Amber and only then rendered — it arrives in your Story Library a
+                few minutes after the book.
+              </p>
+            ) : null}
+          </div>
+
+          {/*
+            A child we have already drawn.
+
+            Choosing one makes the photo optional, which is the promise: "parents
+            should not need to upload another picture unless they want to update
+            it."
+          */}
+          {saved.length > 0 && !seriesId ? (
+            <div>
+              <label className="mb-1.5 block text-[13px] font-semibold text-white/80">
+                Someone you have made before <span className="font-normal text-white/40">(optional)</span>
+              </label>
+              <div className="flex flex-wrap gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => setCharacterId("")}
+                  className="rounded-lg px-2.5 py-1.5 text-[12px] font-semibold transition-colors"
+                  style={
+                    characterId === ""
+                      ? { color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" }
+                      : { color: "#b9a9ab", border: "1px solid rgba(255,70,85,.2)" }
+                  }
+                >
+                  Someone new
+                </button>
+                {saved.map((c) => (
+                  <button
+                    key={c.id}
+                    type="button"
+                    onClick={() => setCharacterId(c.id)}
+                    className="rounded-lg px-2.5 py-1.5 text-[12px] font-semibold transition-colors"
+                    style={
+                      characterId === c.id
+                        ? { color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" }
+                        : { color: "#b9a9ab", border: "1px solid rgba(255,70,85,.2)" }
+                    }
+                  >
+                    {c.name}
+                  </button>
+                ))}
+              </div>
+              {characterId ? (
+                <p className="mt-1.5 text-[11px] text-white/45">
+                  They will be drawn exactly as before — no photo needed.
+                </p>
+              ) : null}
+            </div>
+          ) : null}
 
           {seriesId && seriesTitle ? (
             <div
@@ -482,7 +694,7 @@ export default function StoryBook() {
             {busy ? "Writing and illustrating…" : "Make the book"}
           </button>
 
-          <TokenMeter slug="bedtime-storybook" tokens={tokens} />
+          <TokenMeter slug={product?.chargeAction ?? "storybook-ebook"} tokens={tokens} />
           {short && <NotEnoughTokens {...short} />}
 
           {busy && (
@@ -597,6 +809,30 @@ export default function StoryBook() {
                   </>
                 )}
               </p>
+
+              {film ? (
+                <p
+                  className="mb-3 rounded-xl px-3.5 py-2 text-[12px] leading-relaxed"
+                  style={{
+                    border: "1px solid rgba(255,255,255,.08)",
+                    color:
+                      film.state === "rejected" || film.state === "failed"
+                        ? "rgba(255,180,180,.9)"
+                        : "rgba(255,255,255,.65)",
+                  }}
+                >
+                  🎬 {film.message}
+                  {film.storyId && film.state === "rendering" ? (
+                    <>
+                      {" "}
+                      <Link href={`/stories/${film.storyId}`} className="underline">
+                        Open the story
+                      </Link>{" "}
+                      to watch it come together.
+                    </>
+                  ) : null}
+                </p>
+              ) : null}
 
               {book.submitted && (
                 <p className="mb-3 rounded-xl px-3.5 py-2 text-[11.5px] leading-relaxed text-white/50" style={{ border: "1px solid rgba(255,255,255,.08)" }}>

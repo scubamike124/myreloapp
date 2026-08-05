@@ -66,6 +66,16 @@ export type StoryProduct = {
    */
   tokens: number;
   /**
+   * The action name the charge is booked against.
+   *
+   * Carried on the product rather than derived from the id, because a charge
+   * slug is a thing the pricing table has to know about and a product id is
+   * not. Deriving it as `storybook-${id}` would put the two one typo apart,
+   * and an unrecognised action does not fail — `costOf` quietly bills a single
+   * token, which on the film is a $40 product sold for $10.
+   */
+  chargeAction: string;
+  /**
    * Featured on the selection screen. Exactly one product may be recommended —
    * two recommendations is no recommendation.
    */
@@ -97,6 +107,7 @@ export const STORY_PRODUCTS: StoryProduct[] = [
     ],
     artifacts: [...ALWAYS_PRODUCED, "ebook_layout"],
     tokens: FLAT_TOKEN_COST["storybook-ebook"],
+    chargeAction: "storybook-ebook",
   },
   {
     id: "movie",
@@ -111,6 +122,7 @@ export const STORY_PRODUCTS: StoryProduct[] = [
     ],
     artifacts: [...ALWAYS_PRODUCED, "screenplay", "narration_audio", "scene_video", "final_cut"],
     tokens: FLAT_TOKEN_COST["storybook-movie"],
+    chargeAction: "storybook-movie",
   },
   {
     id: "bundle",
@@ -134,6 +146,7 @@ export const STORY_PRODUCTS: StoryProduct[] = [
       "final_cut",
     ],
     tokens: FLAT_TOKEN_COST["storybook-bundle"],
+    chargeAction: "storybook-bundle",
     recommended: true,
   },
 ];
