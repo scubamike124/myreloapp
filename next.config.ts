@@ -115,6 +115,34 @@ const nextConfig: NextConfig = {
           { key: "Content-Security-Policy", value: csp },
         ],
       },
+      /*
+       * Stop pages being cached at the edge for a year.
+       *
+       * HTML was going out with `s-maxage=31536000` and nothing purged it on
+       * deploy, so the live site served a stale homepage indefinitely: a
+       * corrected marketing claim shipped, the Worker had the new code, and
+       * https://www.myreelo.com/ still returned the old text — while
+       * https://www.myreelo.com/?cb=1 returned the new one. Anything that
+       * changed a page and did not change its URL simply never reached
+       * customers, and it looked deployed from every angle except opening it.
+       *
+       * A minute of shared cache keeps the edge doing its job; the browser is
+       * told to revalidate every time, and stale-while-revalidate means nobody
+       * waits for the origin during that window.
+       *
+       * Hashed build output is excluded and keeps its immutable caching — those
+       * URLs change whenever their content does, which is what makes a long
+       * cache correct for them and wrong for HTML.
+       */
+      {
+        source: "/:path((?!_next/static|_next/image|assets/).*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, must-revalidate, s-maxage=60, stale-while-revalidate=86400",
+          },
+        ],
+      },
     ];
   },
 };
