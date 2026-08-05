@@ -62,8 +62,35 @@ test("artifacts come back in an order the pipeline can just run", () => {
   const movie = artifactsFor("movie");
   const at = (a: string) => movie.indexOf(a as never);
   assert.ok(at("manuscript") < at("screenplay"), "the screenplay is written from the manuscript");
-  assert.ok(at("screenplay") < at("narration_audio"), "narration is recorded from the screenplay");
+  assert.ok(at("screenplay") < at("scene_video"), "the footage is shot from the screenplay");
   assert.ok(at("scene_video") < at("final_cut"), "the cut needs the footage");
+});
+
+test("no product promises an artifact that nothing produces", () => {
+  /*
+   * The movie card once advertised "narration and an original score" while
+   * `narration_audio` had no producer anywhere in the codebase — a paid product
+   * promising something that could never arrive.
+   *
+   * This guards the general case rather than that one string: a product may
+   * only list an artifact the pipeline can actually make. Adding narration back
+   * then takes two steps — build the producer, then list it here — instead of a
+   * promise quietly outrunning the code again.
+   */
+  const PRODUCIBLE = new Set([
+    "manuscript",
+    "character_bible",
+    "illustrations",
+    "ebook_layout",
+    "screenplay",
+    "scene_video",
+    "final_cut",
+  ]);
+  for (const product of STORY_PRODUCTS) {
+    for (const artifact of artifactsFor(product.id)) {
+      assert.ok(PRODUCIBLE.has(artifact), `${product.id} promises "${artifact}", which nothing produces`);
+    }
+  }
 });
 
 test("artifacts are not repeated", () => {

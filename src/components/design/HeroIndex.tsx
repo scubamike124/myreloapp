@@ -70,8 +70,15 @@ export default function HeroIndex() {
           </Link>
         </div>
 
+        {/*
+          Was "Trusted by creators and businesses worldwide" sitting above the
+          TikTok, YouTube, Instagram, Facebook and Shopify marks, which reads as
+          those companies endorsing or using Reelo. None of them do. They are
+          where customers post the output, so the label says that instead — true,
+          and more useful to a visitor than a borrowed endorsement.
+        */}
         <div className="mb-3 text-[12px] tracking-[0.04em]" style={{ color: "#7e7173" }}>
-          Trusted by creators and businesses worldwide
+          Sized and ready for
         </div>
         <div className="flex flex-wrap items-center gap-5 text-[13px] font-semibold text-white">
           {LOGOS.map((l) => (

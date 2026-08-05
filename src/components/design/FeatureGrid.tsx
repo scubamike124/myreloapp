@@ -66,8 +66,10 @@ export default function FeatureGrid() {
         <span className="h-px w-full max-w-[300px]" style={{ background: "linear-gradient(90deg,rgba(255,70,85,.45),transparent)" }} />
       </div>
 
+      {/* Same correction as the hero: these are export destinations, not
+          endorsements. See HeroIndex.tsx for the reasoning. */}
       <div className="mt-6 text-center text-[12px] font-semibold uppercase tracking-[0.22em] text-white/45">
-        Trusted by creators and businesses worldwide
+        Sized and ready for
       </div>
 
       <div className="mt-5 flex flex-wrap items-center justify-center text-[15px] font-semibold text-white">

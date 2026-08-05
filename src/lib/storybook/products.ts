@@ -113,14 +113,30 @@ export const STORY_PRODUCTS: StoryProduct[] = [
     id: "movie",
     name: "Cinematic movie",
     emoji: "🎬",
-    summary: "The same story, animated, narrated and scored.",
+    /*
+     * This card used to promise "narration and an original score".
+     *
+     * Nothing produces either. The screenplay writes narration lines and music
+     * cues — they are real, and the Director scores the film on them — but there
+     * is no text-to-speech provider connected and nothing composes or mixes
+     * audio. `narration_audio` is declared as an artifact and has no producer.
+     *
+     * So the claim came off rather than staying up while the work was pending.
+     * Every bullet below is something the pipeline demonstrably does: the
+     * character bible holds the appearance across scenes, the plan specifies a
+     * shot, a camera move and lighting per scene, and director.ts refuses to
+     * render anything it has not approved.
+     */
+    summary: "The same story, animated scene by scene.",
     includes: [
       "The same child and the same characters, animated",
-      "Narration and an original score",
-      "Camera moves, lighting and scene transitions",
-      "Reviewed by Amber before it is delivered",
+      "A shot, a camera move and lighting written for every scene",
+      "Scene transitions planned across the whole film",
+      "Reviewed by Amber before a single frame is rendered",
     ],
-    artifacts: [...ALWAYS_PRODUCED, "screenplay", "narration_audio", "scene_video", "final_cut"],
+    // narration_audio is deliberately absent: an artifact with no producer in
+    // the list would have the pipeline waiting for something nothing makes.
+    artifacts: [...ALWAYS_PRODUCED, "screenplay", "scene_video", "final_cut"],
     tokens: FLAT_TOKEN_COST["storybook-movie"],
     chargeAction: "storybook-movie",
   },
@@ -141,7 +157,7 @@ export const STORY_PRODUCTS: StoryProduct[] = [
       ...ALWAYS_PRODUCED,
       "ebook_layout",
       "screenplay",
-      "narration_audio",
+      // narration_audio removed alongside the movie's — nothing produces it.
       "scene_video",
       "final_cut",
     ],

@@ -299,9 +299,41 @@ export default function Pricing() {
                     </div>
                   ))}
                 </div>
-                <Link href="/dashboard" className="mt-auto rounded-[11px] p-[11px] text-center text-[13.5px] font-bold transition-transform hover:-translate-y-px" style={{ background: t.btnBg, color: t.btnColor, border: t.name === "FREE" ? "1px solid rgba(255,255,255,.16)" : undefined, boxShadow: t.btnShadow }}>
-                  Get Started
-                </Link>
+                {/*
+                  Monthly plans cannot be bought yet.
+
+                  /api/billing/checkout only creates Stripe sessions in
+                  mode: "payment" — one-off token packs. There is no
+                  subscription code anywhere in the app: no price ids, no
+                  mode: "subscription", no renewal, no cancellation. This button
+                  said "Get Started" and navigated to /dashboard, so a visitor
+                  who chose a $399/month plan was shown a dashboard and no
+                  charge, no plan and no explanation.
+
+                  Building subscriptions is real work and carries decisions that
+                  are the owner's — trial length, proration, what happens to
+                  unused tokens on cancellation. So the button now tells the
+                  truth and sends people to the packs, which do work end to end.
+                  The prices stay visible because they are the intended offer;
+                  only the promise that you can buy one today has been removed.
+
+                  To restore: implement subscription checkout, then change this
+                  back to a real purchase link.
+                */}
+                {t.name === "FREE" ? (
+                  <Link href="/signup" className="mt-auto rounded-[11px] p-[11px] text-center text-[13.5px] font-bold transition-transform hover:-translate-y-px" style={{ background: t.btnBg, color: t.btnColor, border: "1px solid rgba(255,255,255,.16)", boxShadow: t.btnShadow }}>
+                    Create free account
+                  </Link>
+                ) : (
+                  <Link href="#packs" className="mt-auto rounded-[11px] p-[11px] text-center text-[13.5px] font-bold transition-transform hover:-translate-y-px" style={{ background: t.btnBg, color: t.btnColor, boxShadow: t.btnShadow }}>
+                    Buy tokens instead
+                  </Link>
+                )}
+                {t.name !== "FREE" && (
+                  <div className="mt-2.5 text-center text-[11px]" style={{ color: "#9a9a9c" }}>
+                    Monthly plans are not available yet — token packs are.
+                  </div>
+                )}
                 {t.note && <div className="mt-2.5 text-center text-[11px]" style={{ color: "#9a9a9c" }}>{t.note}</div>}
               </div>
             );
@@ -309,7 +341,9 @@ export default function Pricing() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[1100px] px-6 pb-16 pt-10">
+      {/* Anchor target for the plan cards, which point here because packs are
+          the thing a visitor can actually buy today. */}
+      <div id="packs" className="mx-auto max-w-[1100px] px-6 pb-16 pt-10 scroll-mt-24">
         <div className="mb-5 text-center">
           <div className="mb-1.5 text-[12px] font-bold uppercase tracking-[0.28em]" style={{ color: "#cfc3c4" }}>Token Store</div>
           <h2 className="font-display text-2xl font-bold sm:text-3xl">Need more tokens?</h2>
