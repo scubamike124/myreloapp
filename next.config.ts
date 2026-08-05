@@ -72,6 +72,49 @@ const nextConfig: NextConfig = {
       // /business-hub was an unreachable, mock-only duplicate of the Business
       // Center. Removed, with the URL preserved.
       { source: "/business-hub", destination: "/business-center", permanent: true },
+      { source: "/contact", destination: "/support", permanent: true },
+      // Common bookmarks / external guesses → real routes
+      { source: "/settings", destination: "/account", permanent: false },
+      { source: "/ai-avatar-studio", destination: "/create/ai-avatar-studio", permanent: true },
+      { source: "/create/ai-avatar", destination: "/create/ai-avatar-studio", permanent: false },
+    ];
+  },
+
+  async headers() {
+    // Baseline browser isolation for HTML/app routes. Stripe Checkout + R2 media
+    // + Google Fonts are allowlisted; tighten further once third-party embeds settle.
+    const csp = [
+      "default-src 'self'",
+      "base-uri 'self'",
+      "object-src 'none'",
+      "frame-ancestors 'self'",
+      "form-action 'self' https://checkout.stripe.com",
+      "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com",
+      "img-src 'self' data: blob: https:",
+      "media-src 'self' blob: https:",
+      "font-src 'self' data: https://fonts.gstatic.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://js.stripe.com",
+      "connect-src 'self' https: wss:",
+      "worker-src 'self' blob:",
+    ].join("; ");
+
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          // CF terminates TLS; still declare HSTS so browsers enforce HTTPS on apex/www.
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains; preload",
+          },
+          { key: "Content-Security-Policy", value: csp },
+        ],
+      },
     ];
   },
 };

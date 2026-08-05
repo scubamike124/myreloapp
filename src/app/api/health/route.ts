@@ -1,7 +1,9 @@
+import { cookies } from "next/headers";
 import { driver, pingDatabase, postgresPublicMeta, hyperdriveBound } from "@/lib/db";
 import { storageDriver, storageDriverAsync, RETENTION_DAYS } from "@/lib/storage";
 import { isCloudflareWorkers, isEphemeralFilesystem } from "@/lib/runtime-platform";
 import { r2Available } from "@/lib/r2-storage";
+import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin-auth";
 
 // ---------------------------------------------------------------------------
 // Liveness and readiness in one place.
@@ -16,12 +18,34 @@ import { r2Available } from "@/lib/r2-storage";
 //
 // GET /api/health  -> 200 with the picture, always. It never reports "down"
 // for a missing key, because the site still serves — it reports what is on.
+//
+// ## Two audiences, two answers
+//
+// An uptime monitor needs to know the site is up. That is all it needs, and it
+// is all an anonymous caller gets.
+//
+// The full picture — database host, provider, driver, user count, which
+// provider keys are present, the exact build SHA — is operational detail, and
+// published to the open internet it is a targeting aid: it names the vendor to
+// attack, confirms the account exists, and sizes the prize. None of it helps a
+// customer. So the detail requires the same admin session the vault does, and
+// the anonymous answer is deliberately boring.
 // ---------------------------------------------------------------------------
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+async function isAdmin(): Promise<boolean> {
+  try {
+    const store = await cookies();
+    return await verifySessionToken(store.get(ADMIN_COOKIE)?.value);
+  } catch {
+    return false;
+  }
+}
+
 export async function GET() {
+  const admin = await isAdmin();
   const db = driver();
   const storage = storageDriver();
   const storageLive = await storageDriverAsync();
@@ -59,13 +83,27 @@ export async function GET() {
     process.env.GITHUB_SHA ||
     null;
 
+  /*
+   * What everyone gets: is it up, and is it real.
+   *
+   * `accounts` and `persistsVideos` are booleans about the deployment's own
+   * shape rather than about its vendors, which is what makes them safe to
+   * publish — they say "this deploy can hold an account", not where.
+   */
+  const publicView = {
+    ok: true,
+    status: "up",
+    accounts: db !== "none",
+    persistsVideos: storageLive !== "none" || blobConfigured || r2Ready,
+  };
+
+  if (!admin) {
+    return Response.json(publicView, { headers: { "Cache-Control": "no-store" } });
+  }
+
   return Response.json(
     {
-      ok: true,
-      status: "up",
-      // The two things that make a deploy real rather than a demo.
-      accounts: db !== "none",
-      persistsVideos: storageLive !== "none" || blobConfigured || r2Ready,
+      ...publicView,
       database: db, // "postgres" | "sqlite" | "none"
       databaseLive: dbPing,
       postgres: {
