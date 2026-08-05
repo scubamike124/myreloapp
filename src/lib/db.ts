@@ -1539,6 +1539,30 @@ async function ensureWorkspaceTables(q: Sql): Promise<void> {
         updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
       )`;
     await q`CREATE UNIQUE INDEX IF NOT EXISTS story_artifacts_story_kind ON story_artifacts (story_id, kind)`;
+
+    /*
+     * Consent, recorded rather than assumed.
+     *
+     * The storybook is built around photographs of children, and the defensible
+     * model for that is a service sold to *parents*: the adult account holder
+     * supplies a picture of their own child and says so. What makes that a
+     * model rather than a hope is a record — who agreed, to what wording, and
+     * when — kept independently of the story, so it survives the story being
+     * deleted and can still answer "did this person consent?" afterwards.
+     *
+     * `version` is the wording they actually agreed to. Consent given to one
+     * form of words is not consent to a later, broader one, so changing the
+     * text means asking again rather than silently inheriting.
+     */
+    await q`
+      CREATE TABLE IF NOT EXISTS user_consents (
+        id         TEXT PRIMARY KEY,
+        user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        kind       TEXT NOT NULL,
+        version    TEXT NOT NULL,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS user_consents_user_idx ON user_consents (user_id, kind)`;
   } else {
     const exec = async (text: string) => {
       const strings = Object.assign([text], { raw: [text] }) as TemplateStringsArray;
@@ -2475,6 +2499,17 @@ async function ensureWorkspaceTables(q: Sql): Promise<void> {
         updated_at TEXT NOT NULL DEFAULT (datetime('now'))
       )`);
     await exec(`CREATE UNIQUE INDEX IF NOT EXISTS story_artifacts_story_kind ON story_artifacts (story_id, kind)`);
+
+    // Consent records — see the note on the postgres side.
+    await exec(`
+      CREATE TABLE IF NOT EXISTS user_consents (
+        id         TEXT PRIMARY KEY,
+        user_id    TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        kind       TEXT NOT NULL,
+        version    TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS user_consents_user_idx ON user_consents (user_id, kind)`);
   }
 }
 

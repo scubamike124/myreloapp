@@ -5,6 +5,7 @@ import Link from "next/link";
 import { LANGUAGES, DEFAULT_LANGUAGE } from "@/lib/languages";
 import { STORY_CATEGORIES, getCategory, seasonalNow, type SeasonalStory } from "@/lib/storybook/categories";
 import { getStoryProduct, orderableProducts } from "@/lib/storybook/products";
+import { CHILD_IMAGE_CONSENT_TEXT } from "@/lib/storybook/consent";
 import { recordCreation } from "@/lib/workspace";
 import { useTokens, TokenMeter, NotEnoughTokens, shortfallFrom, type Shortfall } from "./TokenMeter";
 
@@ -114,6 +115,15 @@ export default function StoryBook() {
    * so a parent making a second, unrelated story still got a child who looked
    * different.
    */
+  /*
+   * Guardian consent for the photograph.
+   *
+   * Only asked when a photo is actually being uploaded — a sequel drawn from a
+   * saved description involves no new image of anybody, and asking every time
+   * would train people to click past it without reading.
+   */
+  const [consented, setConsented] = useState(false);
+
   const [saved, setSaved] = useState<{ id: string; name: string }[]>([]);
   useEffect(() => {
     (async () => {
@@ -259,6 +269,12 @@ export default function StoryBook() {
       setErr("Upload a photo of the main character first.");
       return;
     }
+    // Checked here for a civil error message; the server enforces it and
+    // records it, because a checkbox nobody verifies proves nothing.
+    if (photo && !consented) {
+      setErr("Please confirm you are the parent or guardian of the person in the photo.");
+      return;
+    }
     if (!idea.trim()) {
       setErr("Say what the story should be about — your words become the plot.");
       return;
@@ -281,6 +297,7 @@ export default function StoryBook() {
         seriesId,
         characterId,
         productId,
+        childImageConsent: consented,
         languageCode,
         pages,
         debug: process.env.NODE_ENV !== "production",
@@ -430,6 +447,32 @@ export default function StoryBook() {
               ))}
             </div>
           </div>
+
+          {/*
+            Guardian consent, asked once and only when a photo is attached.
+
+            Deliberately not pre-ticked and not buried in the terms: this is a
+            photograph of a child going to a third-party AI provider, and the
+            person clicking should read the sentence. The server records the
+            exact wording they agreed to, so the record means something later.
+          */}
+          {photo ? (
+            <label
+              className="flex cursor-pointer items-start gap-2.5 rounded-xl px-3 py-2.5"
+              style={{ border: "1px solid rgba(255,70,85,.25)", background: "rgba(255,70,85,.05)" }}
+            >
+              <input
+                type="checkbox"
+                checked={consented}
+                onChange={(e) => {
+                  setConsented(e.target.checked);
+                  setErr(null);
+                }}
+                className="mt-0.5 h-4 w-4 shrink-0 accent-[#ff3645]"
+              />
+              <span className="text-[12px] leading-relaxed text-white/70">{CHILD_IMAGE_CONSENT_TEXT}</span>
+            </label>
+          ) : null}
 
           {/*
             How it gets delivered.

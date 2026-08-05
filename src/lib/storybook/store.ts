@@ -182,6 +182,94 @@ export async function storeIllustrations(
   return { pages: out, stored };
 }
 
+// --- consent ----------------------------------------------------------------
+
+/**
+ * Record that someone agreed to a specific form of words.
+ *
+ * Returns whether it was written. A caller that cannot record consent must not
+ * proceed as though it had — so this reports failure rather than swallowing it,
+ * unlike the persistence helpers below, where losing a library entry is a
+ * nuisance and losing a consent record is a compliance failure.
+ */
+export async function recordConsent(userId: string, kind: string, version: string): Promise<boolean> {
+  const q = await db();
+  if (!q || !userId) return false;
+  try {
+    await q`
+      INSERT INTO user_consents (id, user_id, kind, version, created_at)
+      VALUES (${randomUUID()}, ${userId}, ${kind}, ${version}, ${now()})`;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export async function consentsFor(userId: string, kind: string): Promise<{ kind: string; version: string; createdAt: string }[]> {
+  const q = await db();
+  if (!q || !userId) return [];
+  try {
+    const rows = await q`
+      SELECT kind, version, created_at AS "createdAt"
+      FROM user_consents WHERE user_id = ${userId} AND kind = ${kind}
+      ORDER BY created_at DESC`;
+    return rows.map((r) => ({ kind: text(r.kind), version: text(r.version), createdAt: isoText(r.createdAt) }));
+  } catch {
+    return [];
+  }
+}
+
+// --- deletion ---------------------------------------------------------------
+
+/**
+ * Delete a character and everything derived from it.
+ *
+ * The deletion right is only real if it reaches the derived data. A parent who
+ * asks for their child's record to be removed means the *description* — the
+ * thing that persists and that describes a real person — not only the row that
+ * happens to be labelled "character".
+ *
+ * Stories that starred them are unlinked rather than destroyed by default: the
+ * book a family paid for is theirs, and it holds no description once the bible
+ * is gone. `withStories` deletes those too, for the parent who wants everything
+ * about that child removed.
+ */
+export async function deleteCharacter(userId: string, characterId: string, withStories: boolean): Promise<boolean> {
+  const q = await db();
+  if (!q || !userId || !characterId) return false;
+  try {
+    const owned = await q`SELECT id FROM story_characters WHERE id = ${characterId} AND user_id = ${userId}`;
+    if (!owned[0]) return false;
+
+    if (withStories) {
+      // story_artifacts cascade from stories via the foreign key.
+      await q`DELETE FROM stories WHERE user_id = ${userId} AND character_id = ${characterId}`;
+    } else {
+      await q`
+        UPDATE stories SET character_id = NULL, updated_at = ${now()}
+        WHERE user_id = ${userId} AND character_id = ${characterId}`;
+    }
+    await q`DELETE FROM story_characters WHERE id = ${characterId} AND user_id = ${userId}`;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** Everything the storybook holds for one account. */
+export async function deleteAllStorybookData(userId: string): Promise<boolean> {
+  const q = await db();
+  if (!q || !userId) return false;
+  try {
+    await q`DELETE FROM stories WHERE user_id = ${userId}`;
+    await q`DELETE FROM story_series WHERE user_id = ${userId}`;
+    await q`DELETE FROM story_characters WHERE user_id = ${userId}`;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // --- character bibles -------------------------------------------------------
 
 function toBible(row: Row): CharacterBible {

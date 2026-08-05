@@ -11,12 +11,20 @@ import {
 } from "@/lib/storybook-prompts";
 import { appearancePrompt, isUsable } from "@/lib/storybook/character-bible";
 import { categoryGuidance } from "@/lib/storybook/categories";
+import {
+  CHILD_IMAGE_CONSENT_TEXT,
+  CHILD_IMAGE_CONSENT_VERSION,
+  CONSENT_KIND,
+  coversCurrentWording,
+} from "@/lib/storybook/consent";
 import { getStoryProduct } from "@/lib/storybook/products";
 import { continuityPrompt } from "@/lib/storybook/story-memory";
 import {
+  consentsFor,
   episodeFor,
   getCharacter,
   getSeries,
+  recordConsent,
   recordEpisode,
   saveCharacter,
   saveStory,
@@ -115,6 +123,59 @@ export async function POST(req: Request) {
       },
       { status: 400 },
     );
+  }
+
+  /*
+   * A photograph of a person is not accepted without consent on record.
+   *
+   * This product makes books from pictures of children. The model that makes
+   * that legitimate is a service sold to parents — an adult account holder,
+   * their own child, and them saying so — and what turns that from a hope into a
+   * model is a record: who agreed, to which wording, and when.
+   *
+   * Enforced here rather than in the browser, because a checkbox the server
+   * does not verify is decoration. Enforced only when a photograph is actually
+   * being sent: a sequel drawn from an existing description involves no new
+   * image of anybody, and asking again would train people to click past it.
+   *
+   * Anonymous callers cannot reach this point — a paid action requires an
+   * account — so there is always someone to attach the record to.
+   */
+  if (photo) {
+    if (!user) {
+      limiter.refund(id);
+      return Response.json(
+        { error: "Create a free account before uploading a photo, so we can record who consented." },
+        { status: 401 },
+      );
+    }
+    const already = coversCurrentWording(await consentsFor(user.id, CONSENT_KIND));
+    if (!already) {
+      if (body.childImageConsent !== true) {
+        limiter.refund(id);
+        return Response.json(
+          {
+            error: "Please confirm you are the parent or guardian before uploading a photo.",
+            consentRequired: {
+              kind: CONSENT_KIND,
+              version: CHILD_IMAGE_CONSENT_VERSION,
+              text: CHILD_IMAGE_CONSENT_TEXT,
+            },
+          },
+          { status: 428 },
+        );
+      }
+      // Recorded before the photo is used, and the request stops if it cannot
+      // be written — proceeding would mean using the image with no record.
+      const stored = await recordConsent(user.id, CONSENT_KIND, CHILD_IMAGE_CONSENT_VERSION);
+      if (!stored) {
+        limiter.refund(id);
+        return Response.json(
+          { error: "We could not record your consent, so we have not used the photo. Please try again." },
+          { status: 503 },
+        );
+      }
+    }
   }
 
   // Accept legacy childName for older clients; prefer characterName.

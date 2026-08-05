@@ -136,6 +136,26 @@ export default function StoryLibrary() {
    * same list with no indication of what to do next. So it creates the series
    * and then goes where the next book is written, carrying the series id.
    */
+  const deleteCharacter = async (c: Character) => {
+    if (!window.confirm(`Delete the stored description of ${c.name}? Their books stay in your library.`)) return;
+    setBusy(c.id);
+    setErr(null);
+    try {
+      const res = await fetch("/api/storybook/data", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ characterId: c.id }),
+      });
+      const body = await res.json();
+      if (!res.ok) setErr(body?.error || "Could not delete that character.");
+      else await load();
+    } catch {
+      setErr("Network error. Try again.");
+    } finally {
+      setBusy(null);
+    }
+  };
+
   const startSeries = async (story: Summary) => {
     setBusy(story.id);
     setErr(null);
@@ -259,6 +279,25 @@ export default function StoryLibrary() {
                       looks different, rather than leaving it a mystery. */}
                   description v{c.version}
                 </p>
+                {/*
+                  The deletion right, where the data is.
+
+                  A policy that promises deletion and offers no way to do it is
+                  a promise nobody can keep. This removes the stored description
+                  — the only thing held that describes a real child; the
+                  photograph was never kept. Books are left alone by default,
+                  because once the description is gone they contain no personal
+                  data and a family paid for them.
+                */}
+                <button
+                  type="button"
+                  onClick={() => void deleteCharacter(c)}
+                  disabled={busy === c.id}
+                  className="mt-3 rounded-lg px-2.5 py-1.5 text-[12px] font-semibold text-white/70 transition-colors hover:text-white disabled:opacity-50"
+                  style={{ border: "1px solid rgba(255,255,255,.14)" }}
+                >
+                  {busy === c.id ? "Deleting…" : "Delete this character's description"}
+                </button>
               </div>
             ))}
           </div>
