@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { dbConfigured, ensureSchema, sql } from "@/lib/db";
+import { dbConfigured, ensureSchema, sqlAsync } from "@/lib/db";
 import { currentUser } from "@/lib/accounts";
 import { store, remove, storageDriver, RETENTION_DAYS } from "@/lib/storage";
 import { readJsonLimited, PayloadTooLarge } from "@/lib/api-guard";
@@ -31,7 +31,7 @@ async function sweep(): Promise<void> {
   if (Date.now() - lastSweep < 10 * 60_000) return;
   lastSweep = Date.now();
 
-  const q = sql();
+  const q = await sqlAsync();
   if (!q) return;
   try {
     const now = new Date().toISOString();
@@ -52,7 +52,7 @@ export async function GET() {
   const user = await currentUser();
   if (!user) return Response.json({ ok: true, configured: true, signedIn: false, creations: [] });
 
-  const q = sql();
+  const q = await sqlAsync();
   if (!q || !(await ensureSchema())) return Response.json({ ok: true, configured: false, creations: [] });
 
   await sweep();
@@ -120,7 +120,7 @@ export async function POST(req: Request) {
 
   const expiresAt = new Date(Date.now() + RETENTION_DAYS * 86400_000).toISOString();
 
-  const q = sql();
+  const q = await sqlAsync();
   if (!q || !(await ensureSchema())) {
     return Response.json({ ok: false, error: "Storage unavailable." }, { status: 503 });
   }

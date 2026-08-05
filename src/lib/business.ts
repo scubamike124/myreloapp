@@ -1,4 +1,4 @@
-import { dbConfigured, ensureSchema, sql } from "@/lib/db";
+import { dbConfigured, ensureSchema, sqlAsync } from "@/lib/db";
 import { currentUser } from "@/lib/accounts";
 import { balanceOf } from "@/lib/tokens";
 import { RETENTION_DAYS } from "@/lib/storage";
@@ -72,7 +72,7 @@ export async function getOverview(): Promise<Overview> {
   const user = await currentUser();
   if (!user) return empty(false);
 
-  const q = sql();
+  const q = await sqlAsync();
   if (!q || !(await ensureSchema())) return empty(true);
 
   try {

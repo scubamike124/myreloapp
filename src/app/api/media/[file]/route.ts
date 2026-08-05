@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { mediaDir, storageDriver } from "@/lib/storage";
-import { sql, ensureSchema, dbConfigured } from "@/lib/db";
+import { sqlAsync, ensureSchema, dbConfigured } from "@/lib/db";
 
 // ---------------------------------------------------------------------------
 // Serves a stored video or image.
@@ -50,7 +50,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ file: s
   const [, id, ext] = match;
 
   if (dbConfigured() && (await ensureSchema())) {
-    const q = sql();
+    const q = await sqlAsync();
     if (q) {
       const rows = (await q`SELECT expires_at AS "expiresAt" FROM creations WHERE id = ${id}`) as {
         expiresAt: string | null;
