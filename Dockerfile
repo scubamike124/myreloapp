@@ -25,6 +25,13 @@ WORKDIR /app
 # default, so that fallback failed silently and /api/health reported
 # "unknown" regardless of which commit was actually deployed.
 RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
+# git also refused to rev-parse a repo it didn't clone itself ("detected
+# dubious ownership") once .git arrived here via a Docker COPY instead of a
+# native clone inside the container — confirmed via next.config.ts's own
+# error log: "Command failed: git rev-parse HEAD". This is git's ownership
+# safety check, not a real security boundary inside an ephemeral build
+# stage, so trust the whole tree.
+RUN git config --global --add safe.directory /app
 COPY package.json package-lock.json* ./
 RUN npm ci --ignore-scripts || npm install --ignore-scripts
 COPY . .
