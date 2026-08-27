@@ -1,6 +1,8 @@
-# Amber OS
+# Amber Project
 
-Welcome to Amber OS! This project aims to provide a robust and flexible operating system framework.
+Amber is a powerful coding agent designed to assist developers in creating efficient and effective code. It leverages advanced algorithms to enhance productivity and streamline the coding process.
 
-## New Addition
-- This README has been updated to enhance clarity and provide better guidance for users.
+*New Line Added: Amber aims to revolutionize the way developers approach coding by providing intelligent suggestions and automating repetitive tasks.*
+
+## Getting Started
+...
