@@ -1,0 +1,1 @@
+<!-- Amber OS full pipeline proof: 2026-08-27T14:39:58Z -->
