@@ -23,9 +23,7 @@ COPY package.json package-lock.json* ./
 RUN npm ci --ignore-scripts || npm install --ignore-scripts
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV DOCKER_BUILD=1
-# Docker needs Next standalone output, not the OpenNext Worker bundle.
-RUN npm run build:next
+RUN npm run build
 
 # --- run: the smallest thing that serves --------------------------------------
 FROM node:24-slim AS run
@@ -46,13 +44,22 @@ RUN groupadd --system --gid 1001 nodejs \
 COPY --from=build --chown=reelo:nodejs /app/.next/standalone ./
 COPY --from=build --chown=reelo:nodejs /app/.next/static ./.next/static
 COPY --from=build --chown=reelo:nodejs /app/public ./public
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-USER reelo
+# Stays root here on purpose — the entrypoint fixes /app/.data ownership
+# (needed because a mounted volume replaces it at runtime) and then drops to
+# the unprivileged `reelo` user itself before exec'ing the server.
 EXPOSE 3000
-VOLUME ["/app/.data"]
+# No VOLUME instruction here — Railway's builder rejects it ("use Railway
+# Volumes instead"). Railway's own volume attachment mounts over /app/.data
+# at runtime regardless; a plain `docker run -v reelo-data:/app/.data` (see
+# the header comment) also works fine without the Docker VOLUME directive.
 
 # The platform can poll this; it answers 200 as soon as the server is serving.
+# Reads $PORT rather than hardcoding 3000 — hosts like Railway assign their
+# own port and the server (honoring $PORT itself) listens there instead.
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s \
-  CMD node -e "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+  CMD node -e "fetch('http://127.0.0.1:'+(process.env.PORT||3000)+'/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
 
-CMD ["node", "server.js"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
