@@ -1,9 +1,19 @@
 import type { NextConfig } from "next";
 import { execSync } from "node:child_process";
+import { readFileSync, existsSync } from "node:fs";
+import path from "node:path";
 
 // Standalone output is for Docker / VPS Node only. OpenNext Cloudflare builds
 // its own Worker bundle — do not enable standalone for `opennextjs-cloudflare build`.
 const useStandalone = process.env.DOCKER_BUILD === "1";
+
+// Railway's `railway up` strips .git from whatever it uploads regardless of
+// .dockerignore (confirmed live: git rev-parse HEAD failed with "not a git
+// repository" even with .git kept in .dockerignore and git installed in the
+// build stage) — so a deploy tool that clones a specific commit and wants
+// that commit provable can write its SHA here instead, a plain file that
+// survives the upload like any other source file.
+const BUILD_SHA_FILE = path.join(process.cwd(), ".build-sha");
 
 function resolveBuildSha(): string {
   const fromEnv =
@@ -15,6 +25,15 @@ function resolveBuildSha(): string {
     process.env.GITHUB_SHA ||
     process.env.COMMIT_SHA;
   if (fromEnv && fromEnv.trim()) return fromEnv.trim().slice(0, 40);
+
+  if (existsSync(BUILD_SHA_FILE)) {
+    const fromFile = readFileSync(BUILD_SHA_FILE, "utf8").trim();
+    if (fromFile) {
+      console.log(`[next.config] resolved build SHA from .build-sha: ${fromFile}`);
+      return fromFile.slice(0, 40);
+    }
+  }
+
   try {
     const sha = execSync("git rev-parse HEAD", { stdio: ["ignore", "pipe", "pipe"] }).toString().trim().slice(0, 40);
     console.log(`[next.config] resolved build SHA from git: ${sha}`);
@@ -27,7 +46,7 @@ function resolveBuildSha(): string {
     // stderr (not just e.message) is what actually names the reason —
     // e.message alone is just "Command failed: git rev-parse HEAD".
     const stderr = e instanceof Error && "stderr" in e ? String((e as { stderr?: unknown }).stderr) : "";
-    console.warn(`[next.config] could not resolve a build SHA (no env var set, git rev-parse failed): ${stderr || (e instanceof Error ? e.message : String(e))}`);
+    console.warn(`[next.config] could not resolve a build SHA (no env var, no .build-sha, git rev-parse failed): ${stderr || (e instanceof Error ? e.message : String(e))}`);
     return "unknown";
   }
 }

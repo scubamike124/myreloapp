@@ -30,6 +30,10 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# Written by deploy tooling into an ephemeral checkout, never meant to be a
+# real tracked file — see next.config.ts's resolveBuildSha().
+.build-sha
+
 # env files (can opt-in for committing if needed)
 .env*
 !.env.example
