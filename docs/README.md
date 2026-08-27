@@ -4,5 +4,6 @@ This README has been updated to include specific details on the recent changes m
 
 - Added step-by-step instructions for common tasks to assist users in navigating the system effectively.
 - Clarified the purpose of each section to ensure users understand the context and relevance of the information provided.
+- **New:** Enhanced explanations on how these changes improve user experience.
 
 Please refer to the updated sections for detailed guidance on using the Amber Coding Agent effectively.
