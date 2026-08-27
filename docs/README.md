@@ -1,6 +1,18 @@
 # Amber OS
 
-Welcome to Amber OS! This project aims to provide a robust and flexible operating system framework.
+## Overview
+Amber OS is designed to provide a seamless experience for developers and users alike.
 
-## New Addition
-- This README has been updated to enhance clarity and provide better guidance for users.
+## Features
+- Feature 1
+- Feature 2
+
+## Getting Started
+To get started with Amber OS, follow these steps:
+
+1. Install the necessary dependencies.
+2. Clone the repository.
+3. Run the setup script.
+
+## Important Note
+Please ensure to review the documentation thoroughly to maximize your experience with Amber OS.
