@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { kpis, revenueByMonth, planDistribution, TRANSACTIONS, USERS, fmtMoney } from "@/lib/admin";
 
 const statusColor: Record<string, string> = { paid: "#2ecc71", refunded: "#ff9f43", failed: "#ff5663" };
@@ -22,6 +23,20 @@ export default function AdminOverview() {
     <div>
       <h1 className="font-display text-2xl font-bold sm:text-[28px]">Overview</h1>
       <p className="mt-1 text-sm text-white/50">Snapshot of users, subscriptions, and revenue.</p>
+
+      <Link
+        href="/admin/command-center"
+        className="mt-6 flex items-center justify-between gap-4 rounded-2xl p-5 transition-colors hover:border-[rgba(255,70,85,.5)]"
+        style={{ border: "1px solid rgba(255,70,85,.3)", background: "linear-gradient(135deg,rgba(255,54,69,.14),rgba(196,16,28,.08))" }}
+      >
+        <div>
+          <div className="font-display text-lg font-bold" style={{ color: "#ff2d3f" }}>Command Center</div>
+          <div className="mt-0.5 text-xs text-white/50">Talk to Amber directly — ask her to build, fix, or ship something.</div>
+        </div>
+        <span className="shrink-0 rounded-lg px-3 py-1.5 text-sm font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
+          Open →
+        </span>
+      </Link>
 
       <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
         {cards.map((c) => (
