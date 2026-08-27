@@ -95,6 +95,12 @@ export async function GET() {
     status: "up",
     accounts: db !== "none",
     persistsVideos: storageLive !== "none" || blobConfigured || r2Ready,
+    // Unlike the admin-gated fields below, a bare commit SHA doesn't name a
+    // vendor, confirm an account, or size anything worth attacking — so it's
+    // exposed here too. This is what lets a deploy step verify the specific
+    // commit it just shipped is actually the one answering requests, not
+    // just that some deploy was accepted.
+    build,
   };
 
   if (!admin) {
@@ -127,8 +133,7 @@ export async function GET() {
       platform: isCloudflareWorkers() ? "cloudflare-workers" : "node",
       ephemeralFilesystem: isEphemeralFilesystem(),
       env: process.env.NODE_ENV ?? "unknown",
-      // Helps confirm which Git SHA Cloudflare actually shipped.
-      build,
+      // build is already included via ...publicView above.
     },
     { headers: { "Cache-Control": "no-store" } },
   );
