@@ -1,6 +1,6 @@
-# Amber OS
+# Amber Coding Agent
 
-Welcome to Amber OS! This project aims to provide a robust and flexible operating system framework.
+Welcome to the Amber Coding Agent project. This project aims to provide an intelligent coding assistant to enhance your development experience.
 
-## New Addition
-- This README has been updated to enhance clarity and provide better guidance for users.
+## New Feature
+- This README has been updated to include additional information for better clarity and user guidance.
