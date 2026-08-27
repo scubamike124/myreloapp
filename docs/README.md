@@ -1,6 +1,6 @@
 # Amber OS
 
-Welcome to Amber OS! This project aims to provide a robust and flexible operating system framework.
+Welcome to Amber OS! This project is designed to provide a seamless experience for users and developers alike.
 
-## New Addition
-- This README has been updated to enhance clarity and provide better guidance for users.
+## New Feature
+- **Enhanced Documentation**: We have added comprehensive guides and examples to help you get started quickly.
