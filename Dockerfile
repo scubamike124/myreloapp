@@ -23,7 +23,14 @@ COPY package.json package-lock.json* ./
 RUN npm ci --ignore-scripts || npm install --ignore-scripts
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
+# `npm run build` now targets Cloudflare Workers (opennextjs-cloudflare) —
+# it does not produce .next/standalone at all, which is what the run stage
+# below actually copies out. Found live: every Railway deploy was silently
+# building the wrong target, so the "app" running here was whatever stale
+# artifact happened to exist, not the commit that was actually deployed.
+# build:next is the plain `next build` that produces the standalone server
+# this Dockerfile is built around.
+RUN npm run build:next
 
 # --- run: the smallest thing that serves --------------------------------------
 FROM node:24-slim AS run
