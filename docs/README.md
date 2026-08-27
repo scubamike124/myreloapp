@@ -1,28 +1,6 @@
-# Amber Coding Agent
+# Amber OS
 
-This project aims to provide a coding assistant that enhances productivity and coding efficiency. 
+Welcome to Amber OS! This project aims to provide a robust and flexible operating system framework.
 
-## Features
-- Intelligent code suggestions
-- Error detection and debugging assistance
-- Integration with popular IDEs
-
-## Installation
-To install the Amber Coding Agent, follow these steps:
-1. Clone the repository.
-2. Run `npm install` to install dependencies.
-3. Start the application with `npm start`.
-
-## Usage
-After installation, you can use the agent by invoking it within your coding environment.
-
-## Contribution
-We welcome contributions! Please read our [contributing guidelines](CONTRIBUTING.md) for more information.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Additional Information
-For more details, visit our [documentation](docs/). 
-
-**Note:** This README is subject to revisions to maintain a polished and professional appearance.
+## New Addition
+- This README has been updated to enhance clarity and provide better guidance for users.
