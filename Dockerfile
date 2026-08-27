@@ -30,6 +30,13 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # artifact happened to exist, not the commit that was actually deployed.
 # build:next is the plain `next build` that produces the standalone server
 # this Dockerfile is built around.
+#
+# DOCKER_BUILD=1 is what next.config.ts checks to turn on `output:
+# "standalone"` in the first place — without it, build:next still runs but
+# never emits .next/standalone (that flag exists specifically because
+# standalone is wrong for the Cloudflare/OpenNext target and must stay off
+# there).
+ENV DOCKER_BUILD=1
 RUN npm run build:next
 
 # --- run: the smallest thing that serves --------------------------------------

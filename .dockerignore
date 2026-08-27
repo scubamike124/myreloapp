@@ -1,8 +1,14 @@
 # Keep the build context small and the image clean.
 node_modules
 .next
-.git
 .data
+# .git is intentionally NOT excluded: next.config.ts's resolveBuildSha()
+# falls back to `git rev-parse HEAD` when no BUILD_SHA-style env var is
+# set, and none are during a Docker build (only runtime service variables
+# are set on the container, not the build step) — without .git present
+# that fallback always failed and /api/health reported "unknown" no
+# matter what commit was actually deployed. It never reaches the final
+# image; only the build stage copies the full context.
 .env*
 !.env.example
 npm-debug.log*
