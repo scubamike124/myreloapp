@@ -1,6 +1,7 @@
 # Amber OS
 
-Welcome to Amber OS! This project aims to provide a robust and flexible operating system framework.
+Welcome to the Amber OS project. This repository contains the source code and documentation for the Amber OS platform.
 
-## New Addition
-- This README has been updated to enhance clarity and provide better guidance for users.
+## New Line Added
+
+This project aims to provide a seamless and efficient operating system experience for users and developers alike.
