@@ -16,8 +16,15 @@ function resolveBuildSha(): string {
     process.env.COMMIT_SHA;
   if (fromEnv && fromEnv.trim()) return fromEnv.trim().slice(0, 40);
   try {
-    return execSync("git rev-parse HEAD", { stdio: ["ignore", "pipe", "ignore"] }).toString().trim().slice(0, 40);
-  } catch {
+    const sha = execSync("git rev-parse HEAD", { stdio: ["ignore", "pipe", "ignore"] }).toString().trim().slice(0, 40);
+    console.log(`[next.config] resolved build SHA from git: ${sha}`);
+    return sha;
+  } catch (e) {
+    // Silently returning "unknown" here once meant a stale or missing
+    // BUILD_SHA was indistinguishable from "the build succeeded and this
+    // just isn't a git checkout" — logged instead so a real deploy failure
+    // shows up in build logs rather than looking identical to normal.
+    console.warn(`[next.config] could not resolve a build SHA (no env var set, git rev-parse failed): ${e instanceof Error ? e.message : String(e)}`);
     return "unknown";
   }
 }
