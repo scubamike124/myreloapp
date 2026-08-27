@@ -19,6 +19,12 @@ RUN npm ci --omit=dev --ignore-scripts || npm install --omit=dev --ignore-script
 # --- build: compile the app ---------------------------------------------------
 FROM node:24-slim AS build
 WORKDIR /app
+# next.config.ts's resolveBuildSha() falls back to `git rev-parse HEAD` when
+# no BUILD_SHA-style env var is present at build time (see .dockerignore for
+# why .git is even here to rev-parse) — node:24-slim has no git binary by
+# default, so that fallback failed silently and /api/health reported
+# "unknown" regardless of which commit was actually deployed.
+RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json* ./
 RUN npm ci --ignore-scripts || npm install --ignore-scripts
 COPY . .
