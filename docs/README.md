@@ -1,3 +1,6 @@
-# Amber Coding Agent
+# Amber OS
 
-The Amber Coding Agent is designed to assist developers in automating coding tasks and improving productivity.
+Welcome to Amber OS! This project aims to provide a robust and flexible operating system framework.
+
+## New Addition
+- This README has been updated to enhance clarity and provide better guidance for users.
