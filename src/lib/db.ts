@@ -227,7 +227,8 @@ function openSqlite(): DatabaseSync | null {
     sqliteDb.exec("PRAGMA journal_mode = WAL");
     sqliteDb.exec("PRAGMA foreign_keys = ON");
     return sqliteDb;
-  } catch {
+  } catch (e) {
+    console.error("[db] SQLite open failed:", e instanceof Error ? e.stack || e.message : String(e));
     return null;
   }
 }
