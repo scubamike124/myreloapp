@@ -1,8 +1,10 @@
 import { getConversation, messagesFor, renameConversation, setPinned, deleteConversation } from "@/lib/ai/conversations";
+import { isAdminSession, unauthorized } from "@/lib/admin-session";
 
 export const runtime = "nodejs";
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+  if (!(await isAdminSession())) return unauthorized();
   const { id } = await params;
   const conversation = await getConversation(id);
   if (!conversation) return Response.json({ error: "Not found." }, { status: 404 });
@@ -11,6 +13,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
 }
 
 export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  if (!(await isAdminSession())) return unauthorized();
   const { id } = await params;
   const body = (await req.json().catch(() => ({}))) as { title?: string; pinned?: boolean };
   if (typeof body.title === "string") await renameConversation(id, body.title);
@@ -21,6 +24,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
 }
 
 export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+  if (!(await isAdminSession())) return unauthorized();
   const { id } = await params;
   await deleteConversation(id);
   return Response.json({ ok: true });

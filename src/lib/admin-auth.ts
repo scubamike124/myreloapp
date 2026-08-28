@@ -6,7 +6,16 @@
  */
 
 export const ADMIN_COOKIE = "reelo_admin_session";
-export const SESSION_MAX_AGE = 60 * 60 * 8; // 8 hours
+// This gates a single owner's private admin tool behind a real password —
+// not a multi-tenant surface where a short session limits blast radius. An
+// 8-hour hard cutoff with no renewal meant a tab left open overnight (or
+// across this exact kind of multi-day work session) silently stopped
+// authenticating: the page still looked logged in, but every API call
+// failed with a real, correct "Unauthorized" the owner had no reason to
+// expect. middleware.ts renews this on every valid /admin/* page load, so
+// an actively-used session effectively never expires; this ceiling only
+// matters for a session that's genuinely gone untouched for 30 days.
+export const SESSION_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
 
 function password(): string | null {
   const pw = process.env.ADMIN_PASSWORD;

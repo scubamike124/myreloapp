@@ -3,12 +3,19 @@ import { runAgentTurn, agentProviderConfigured, currentAgentModel, currentAgentP
 import { commandCenterToolDefs, executeCommandCenterTool } from "@/lib/ai/command-center-tools";
 import { createConversation, getConversation, appendMessage, messagesFor, toAgentMessages, renameConversation } from "@/lib/ai/conversations";
 import { recordUsage, estimateReasoningCostUsd } from "@/lib/ai/cost";
+import { isAdminSession, unauthorized } from "@/lib/admin-session";
 
 // ---------------------------------------------------------------------------
 // Admin Command Center — streaming chat + tool calling.
 //
-// Protected implicitly: everything under /admin is gated by src/proxy.ts
-// before this route is ever reached, so there is no separate auth check here.
+// The comment this replaced claimed "everything under /admin is gated by
+// src/proxy.ts before this route is ever reached" — false for this path.
+// middleware.ts's matcher is /admin/:path* only; /api/command-center/chat
+// doesn't start with /admin/ and was never touched by it. Confirmed live:
+// an anonymous curl with no cookie got a real answer from Amber, including
+// the ability to call every Command Center tool (start_dev_task,
+// approve_dev_task — which merges PRs and deploys — publish_post, etc).
+// The check below is the real, enforced gate that comment described.
 //
 // Streams newline-delimited JSON (AgentEvent) rather than plain text, unlike
 // /api/amber — the client needs to render tool calls and their results as
@@ -36,6 +43,7 @@ function titleFrom(message: string): string {
 }
 
 export async function POST(req: Request) {
+  if (!(await isAdminSession())) return unauthorized();
   if (!agentProviderConfigured()) {
     return Response.json({ error: "The Command Center needs ANTHROPIC_API_KEY (or OPENAI_API_KEY) set on the server." }, { status: 503 });
   }
