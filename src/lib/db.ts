@@ -1827,6 +1827,32 @@ async function ensureWorkspaceTables(q: Sql): Promise<void> {
         updated_at         TEXT NOT NULL DEFAULT (datetime('now')),
         UNIQUE (user_id, provider, external_id)
       )`);
+    // A pre-existing social_accounts table can predate any of these columns —
+    // confirmed live: SQLite silently failed to open in production for long
+    // enough that this table fossilized on an older shape while the code
+    // moved on. CREATE TABLE IF NOT EXISTS above is a no-op against it, so
+    // each column needs its own guarded backfill before the index below
+    // (which assumes `provider` exists) can run.
+    for (const stmt of [
+      `ALTER TABLE social_accounts ADD COLUMN provider TEXT NOT NULL DEFAULT ''`,
+      `ALTER TABLE social_accounts ADD COLUMN external_id TEXT NOT NULL DEFAULT ''`,
+      `ALTER TABLE social_accounts ADD COLUMN handle TEXT NOT NULL DEFAULT ''`,
+      `ALTER TABLE social_accounts ADD COLUMN display_name TEXT NOT NULL DEFAULT ''`,
+      `ALTER TABLE social_accounts ADD COLUMN scopes TEXT NOT NULL DEFAULT ''`,
+      `ALTER TABLE social_accounts ADD COLUMN access_token_enc TEXT`,
+      `ALTER TABLE social_accounts ADD COLUMN refresh_token_enc TEXT`,
+      `ALTER TABLE social_accounts ADD COLUMN expires_at TEXT`,
+      `ALTER TABLE social_accounts ADD COLUMN status TEXT NOT NULL DEFAULT 'connected'`,
+      `ALTER TABLE social_accounts ADD COLUMN meta TEXT NOT NULL DEFAULT '{}'`,
+      `ALTER TABLE social_accounts ADD COLUMN created_at TEXT NOT NULL DEFAULT (datetime('now'))`,
+      `ALTER TABLE social_accounts ADD COLUMN updated_at TEXT NOT NULL DEFAULT (datetime('now'))`,
+    ]) {
+      try {
+        await exec(stmt);
+      } catch {
+        /* already present */
+      }
+    }
     await exec(`CREATE INDEX IF NOT EXISTS social_accounts_user_idx ON social_accounts (user_id, provider)`);
 
     await exec(`
