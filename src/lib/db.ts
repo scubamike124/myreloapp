@@ -1,7 +1,6 @@
 import { neon, neonConfig, Pool } from "@neondatabase/serverless";
 import postgres from "postgres";
 import type { DatabaseSync } from "node:sqlite";
-import { createRequire } from "node:module";
 import path from "node:path";
 import { mkdirSync } from "node:fs";
 import { cache } from "react";
@@ -14,7 +13,16 @@ import { isCloudflareWorkers, isEphemeralFilesystem } from "@/lib/runtime-platfo
 // — a static top-level import would throw at cold start and take down every
 // route that touches the database. The type import above is erased at build and
 // costs nothing at runtime.
-const nodeRequire = createRequire(import.meta.url);
+//
+// Plain `require()` behind `eval` on purpose: Turbopack's server bundler
+// rewrites a normal `createRequire(import.meta.url)("node:sqlite")` call and
+// fails at runtime with "Unsupported external type Url for commonjs
+// reference" (confirmed live — every SQLite open failed in production,
+// silently, until this). `eval("require")` hides the call from static
+// analysis entirely, so Turbopack leaves it alone and Node's own runtime
+// `require` resolves the builtin directly, the same escape hatch used for
+// other native/builtin modules under webpack/Turbopack bundling.
+const nodeRequire = eval("require") as NodeJS.Require;
 
 // ---------------------------------------------------------------------------
 // Database access, over three drivers.
