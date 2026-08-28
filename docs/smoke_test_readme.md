@@ -13,11 +13,13 @@ This document outlines the steps to verify the existence of the `README.md` file
    ls -lh README.md
    ```
    - This command will list the file along with its size.
+   - **Evidence Required**: Capture the output of this command showing the file size.
 4. To view the content of the `README.md`, use:
    ```bash
    cat README.md
    ```
    - This will display the content of the file in the terminal.
+   - **Evidence Required**: Capture the output of this command displaying the content.
 
 ## Evidence Required
 - **File Size and Content**: Ensure to capture the output of the `ls -lh README.md` command showing the file size and the `cat README.md` command displaying the content.
