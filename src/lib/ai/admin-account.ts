@@ -16,7 +16,7 @@
 // ---------------------------------------------------------------------------
 
 import { randomBytes } from "node:crypto";
-import { dbConfigured, ensureSchema, sql } from "@/lib/db";
+import { dbConfigured, ensureSchema, sqlAsync } from "@/lib/db";
 
 export const ADMIN_USER_ID = "command-center-system";
 const ADMIN_USER_EMAIL = "command-center@reelo.internal";
@@ -29,7 +29,7 @@ const ADMIN_USER_EMAIL = "command-center@reelo.internal";
  */
 export async function ensureAdminSystemUser(): Promise<string | null> {
   if (!dbConfigured()) return null;
-  const q = sql();
+  const q = await sqlAsync();
   if (!q || !(await ensureSchema())) return null;
 
   const existing = (await q`SELECT id FROM users WHERE id = ${ADMIN_USER_ID}`) as unknown as { id: string }[];

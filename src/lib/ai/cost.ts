@@ -9,11 +9,11 @@
 // Gemini and HeyGen to run the Command Center, with hard daily/monthly caps.
 // ---------------------------------------------------------------------------
 
-import { dbConfigured, ensureSchema, sql } from "@/lib/db";
+import { dbConfigured, ensureSchema, sqlAsync } from "@/lib/db";
 
 async function q() {
   if (!dbConfigured()) return null;
-  const query = sql();
+  const query = await sqlAsync();
   if (!query || !(await ensureSchema())) return null;
   return query;
 }

@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { dbConfigured, ensureSchema, sqlAsync, sql } from "@/lib/db";
+import { dbConfigured, ensureSchema, sqlAsync } from "@/lib/db";
 import { currentUser } from "@/lib/accounts";
 import { requireUser, str, parsePlatforms, parseJsonArray } from "@/lib/workspace-api";
 import { readJsonLimited, PayloadTooLarge } from "@/lib/api-guard";
@@ -48,7 +48,7 @@ export type ScheduledPost = ReturnType<typeof shapeScheduledPost>;
 export async function listScheduledPostsFor(userId: string): Promise<ScheduledPost[]> {
   if (!dbConfigured()) return [];
   await ensureSchema();
-  const q = sql();
+  const q = await sqlAsync();
   if (!q) return [];
   const rows = (await q`
     SELECT id, media_id, caption, platforms, scheduled_at, status, external_id, error, created_at
@@ -79,7 +79,7 @@ export async function queuePostFor(input: QueuePostInput): Promise<QueuePostResu
   if (!input.scheduledAt || Number.isNaN(at.getTime())) return { ok: false, error: "That date and time could not be read." };
   if (at.getTime() < Date.now() - 60_000) return { ok: false, error: "That time is in the past." };
 
-  const q = sql();
+  const q = await sqlAsync();
   if (!q) return { ok: false, error: "No database is configured." };
 
   if (input.mediaId) {
@@ -99,7 +99,7 @@ export async function queuePostFor(input: QueuePostInput): Promise<QueuePostResu
 export async function cancelScheduledPostFor(userId: string, id: string): Promise<{ ok: true } | { ok: false; error: string }> {
   if (!dbConfigured()) return { ok: false, error: "No database is configured." };
   await ensureSchema();
-  const q = sql();
+  const q = await sqlAsync();
   if (!q) return { ok: false, error: "No database is configured." };
   await q`DELETE FROM scheduled_posts WHERE id = ${id} AND user_id = ${userId}`;
   return { ok: true };

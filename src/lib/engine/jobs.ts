@@ -14,7 +14,7 @@
 // ---------------------------------------------------------------------------
 
 import { randomUUID } from "node:crypto";
-import { dbConfigured, ensureSchema, sql } from "@/lib/db";
+import { dbConfigured, ensureSchema, sqlAsync } from "@/lib/db";
 import type { Storyboard } from "@/lib/director/types";
 
 export type JobStatus = "queued" | "shooting" | "filming" | "assembling" | "completed" | "failed";
@@ -49,7 +49,7 @@ const MAX_ATTEMPTS = 3;
 
 async function q() {
   if (!dbConfigured()) return null;
-  const query = sql();
+  const query = await sqlAsync();
   if (!query || !(await ensureSchema())) return null;
   return query;
 }
