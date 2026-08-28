@@ -20,15 +20,20 @@ async function q() {
 
 export type UsageKind = "reasoning" | "tool";
 
-/** $ per 1M tokens. Update alongside COMMAND_CENTER_MODEL in agent-chain.ts. */
-const OPENAI_RATES: Record<string, { in: number; out: number }> = {
+/** $ per 1M tokens. Update alongside CLAUDE_MODEL/OPENAI_MODEL in agent-chain.ts. */
+const MODEL_RATES: Record<string, { in: number; out: number }> = {
+  "claude-sonnet-5": { in: 3.0, out: 15.0 },
+  "claude-haiku-4-5": { in: 1.0, out: 5.0 },
   "gpt-4.1": { in: 2.0, out: 8.0 },
   "gpt-4.1-mini": { in: 0.4, out: 1.6 },
   "gpt-4.1-nano": { in: 0.1, out: 0.4 },
 };
 
 export function estimateReasoningCostUsd(model: string, tokensIn: number, tokensOut: number): number {
-  const rate = OPENAI_RATES[model] ?? OPENAI_RATES["gpt-4.1"];
+  // Unknown model names fall back to whichever family they look like they're
+  // from, rather than always defaulting to gpt-4.1's rate — a "claude-*" name
+  // costed at OpenAI's rate would be silently wrong, not just imprecise.
+  const rate = MODEL_RATES[model] ?? (model.startsWith("claude-") ? MODEL_RATES["claude-sonnet-5"] : MODEL_RATES["gpt-4.1"]);
   return (tokensIn / 1_000_000) * rate.in + (tokensOut / 1_000_000) * rate.out;
 }
 

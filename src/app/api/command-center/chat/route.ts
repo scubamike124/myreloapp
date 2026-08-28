@@ -1,5 +1,5 @@
 import { AMBER_SYSTEM_PROMPT, AMBER_ADMIN_OPERATOR_ADDENDUM } from "@/lib/amber/persona";
-import { runAgentTurn, openAIConfigured, type AgentMessage, type AgentEvent, type UserContentPart } from "@/lib/ai/agent-chain";
+import { runAgentTurn, agentProviderConfigured, currentAgentModel, currentAgentProvider, type AgentMessage, type AgentEvent, type UserContentPart } from "@/lib/ai/agent-chain";
 import { commandCenterToolDefs, executeCommandCenterTool } from "@/lib/ai/command-center-tools";
 import { createConversation, getConversation, appendMessage, messagesFor, toAgentMessages, renameConversation } from "@/lib/ai/conversations";
 import { recordUsage, estimateReasoningCostUsd } from "@/lib/ai/cost";
@@ -17,8 +17,6 @@ import { recordUsage, estimateReasoningCostUsd } from "@/lib/ai/cost";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
-
-const MODEL = process.env.COMMAND_CENTER_MODEL || "gpt-4.1";
 
 type Attachment = { data: string; mimeType: string; name?: string };
 
@@ -38,8 +36,8 @@ function titleFrom(message: string): string {
 }
 
 export async function POST(req: Request) {
-  if (!openAIConfigured()) {
-    return Response.json({ error: "The Command Center needs OPENAI_API_KEY set on the server." }, { status: 503 });
+  if (!agentProviderConfigured()) {
+    return Response.json({ error: "The Command Center needs ANTHROPIC_API_KEY (or OPENAI_API_KEY) set on the server." }, { status: 503 });
   }
 
   let body: { conversationId?: string; message?: string; attachments?: Attachment[] };
@@ -143,8 +141,8 @@ export async function POST(req: Request) {
             void recordUsage({
               conversationId: cid,
               kind: "reasoning",
-              provider: "openai",
-              estimatedCostUsd: estimateReasoningCostUsd(MODEL, event.tokensIn, event.tokensOut),
+              provider: currentAgentProvider(),
+              estimatedCostUsd: estimateReasoningCostUsd(currentAgentModel(), event.tokensIn, event.tokensOut),
               tokensIn: event.tokensIn,
               tokensOut: event.tokensOut,
               ok: true,
