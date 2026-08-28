@@ -3,7 +3,7 @@
 This document outlines the procedure to verify the existence of the `README.md` file at the root of the repository. This is a crucial step in ensuring that the repository is properly set up and provides necessary documentation for users.
 
 ## Procedure
-1. Navigate to the root directory of the repository.
+1. Navigate to the root directory of the repository located at `/<full_path_to_repository>`.
 2. Check for the presence of the `README.md` file.
 
 ### Expected Output
