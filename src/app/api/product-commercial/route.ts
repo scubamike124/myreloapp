@@ -10,7 +10,7 @@ import {
 } from "@/lib/api-guard";
 import { chargeFor, refundCharge, refundLater } from "@/lib/charge";
 import { scrapePage } from "@/lib/scrape";
-import { startVeo, checkVeo, isVeoOperation, clampVeoSeconds } from "@/lib/veo";
+import { startVeo, checkVeo, isVeoOperation, clampVeoSeconds, VIDEO_SECONDS } from "@/lib/veo";
 
 // ---------------------------------------------------------------------------
 // Product Commercial.
@@ -113,6 +113,96 @@ async function writeConcept(
     caption: str(parsed.caption, 400),
     shot: str(parsed.shot, 900),
   };
+}
+
+export type ProductCommercialSyncInput = {
+  imageBase64: string;
+  mimeType: string;
+  productName: string;
+  details: string;
+  url: string;
+  look: string;
+  music: string;
+};
+
+export type ProductCommercialSyncResult = {
+  headline: string;
+  voiceover: string;
+  caption: string;
+  shot: string;
+  scannedPage: boolean;
+  videoUrl: string;
+};
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * Command Center variant: writes the concept, starts the render, and polls it
+ * to completion in one call instead of returning an operation handle for the
+ * client to poll — the agent loop needs one final result per tool call, not a
+ * "check back later." Shares writeConcept/startVeo/checkVeo with the
+ * customer-facing POST/GET pair above rather than re-implementing them; this
+ * function is additive and does not change that pair's behavior. Always uses
+ * the app-wide default clip length (VIDEO_SECONDS) — Command Center doesn't
+ * expose a duration control the way the customer route's request body does.
+ *
+ * No chargeFor here — the Command Center isn't a signed-in customer call, and
+ * its spend is tracked separately in src/lib/ai/cost.ts. Callers should treat
+ * a thrown error as "nothing was produced."
+ */
+export async function generateProductCommercialSync(
+  input: ProductCommercialSyncInput,
+): Promise<ProductCommercialSyncResult> {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) throw new Error("GEMINI_API_KEY is not set on the server.");
+
+  if (!input.imageBase64) throw new Error("A product photo is required.");
+  const look = LOOKS[input.look] ? input.look : "Studio";
+  const music = input.music || "Upbeat";
+
+  let pageText = "";
+  if (input.url) {
+    try {
+      const safe = await assertSafeUrl(input.url);
+      pageText = await scrapePage(safe, 4000);
+    } catch {
+      pageText = ""; // never fatal — see the note on the customer-facing route below
+    }
+  }
+
+  const concept = await writeConcept(
+    key,
+    input.imageBase64,
+    input.mimeType || "image/jpeg",
+    input.productName,
+    input.details,
+    pageText,
+    look,
+    music,
+    VIDEO_SECONDS,
+  );
+
+  const veoPrompt =
+    `${concept.shot}\n\n` +
+    `${LOOKS[look]}. Photoreal product commercial, ${VIDEO_SECONDS} seconds, smooth cinematic camera, ` +
+    `sharp focus on the product, high quality, 4k. The product must stay exactly as it appears in the ` +
+    `reference image. No added text, no captions, no watermarks, no people.`;
+
+  const operation = await startVeo(key, veoPrompt, input.imageBase64, input.mimeType || "image/jpeg", 3, VIDEO_SECONDS);
+
+  // Poll to completion within this function's own budget rather than the
+  // route's maxDuration — the agent loop has its own timeout, so this stays
+  // comfortably under it and fails clearly rather than hanging.
+  const deadline = Date.now() + 200_000;
+  for (;;) {
+    const status = await checkVeo(key, operation);
+    if (status.status === "completed") {
+      return { ...concept, scannedPage: Boolean(pageText), videoUrl: status.videoUrl };
+    }
+    if (status.status === "failed") throw new Error(status.error);
+    if (Date.now() > deadline) throw new Error("The render is taking longer than expected — try again in a moment.");
+    await sleep(6_000);
+  }
 }
 
 export async function POST(req: Request) {

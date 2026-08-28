@@ -51,6 +51,112 @@ function str(v: unknown, max: number): string {
   return typeof v === "string" ? v.slice(0, max).trim() : "";
 }
 
+export type MemoryFilmInput = {
+  photos: { data: string; mimeType: string }[];
+  type: string;
+  details: string;
+  languageCode: string;
+};
+
+export type MemoryFilmResult = {
+  ok: true;
+  title: string;
+  opening: string;
+  closing: string;
+  captions: string[];
+  language: { code: string; name: string; endonym: string; rtl: boolean };
+  tokensCharged: number;
+  balance: number | null;
+};
+
+/**
+ * The core of Memory Film generation, independent of HTTP. Used by the POST
+ * handler below and by the Command Center's tool executor
+ * (src/lib/ai/command-center-tools.ts) — both call this directly rather than
+ * one of them going through the other's HTTP endpoint, which is a real source
+ * of self-inflicted timeouts under load.
+ *
+ * Charging and the per-IP daily limiter stay in the route (they need the
+ * request/IP, and the Command Center isn't a per-IP customer call), so this
+ * function trusts its input has already been validated and paid for.
+ */
+export async function generateMemoryFilm(input: MemoryFilmInput): Promise<MemoryFilmResult> {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) throw new Error("GEMINI_API_KEY is not set on the server.");
+
+  const photos = input.photos.slice(0, MAX_PHOTOS).filter((p) => p.data);
+  if (photos.length < MIN_PHOTOS) {
+    throw new Error(`Add at least ${MIN_PHOTOS} photos — a film needs something to move between.`);
+  }
+
+  const type = (input.type || "family").toLowerCase();
+  const details = str(input.details, 800);
+  const language = getLanguage(str(input.languageCode, 8));
+
+  const prompt =
+    `You are writing the narration for a short memory film made from the ${photos.length} attached ` +
+    `photographs. They are in the order the film will show them.\n\n` +
+    `Tone: ${TONES[type] ?? TONES.family}.\n` +
+    (details ? `What the person who made this film told us about it: ${details}\n` : "") +
+    `\nLanguage: write EVERY word in ${language.name} (${language.endonym}). ` +
+    `Do not use English unless the language IS English.\n\n` +
+    `Return ONLY JSON, no markdown fence:\n` +
+    `{"title": "...", "opening": "...", "captions": ["...", "..."], "closing": "..."}\n\n` +
+    `- "title": 2 to 6 words. The film's title card.\n` +
+    `- "opening": one short line for under the title.\n` +
+    `- "captions": EXACTLY ${photos.length} entries, one per photograph IN ORDER. One or two sentences ` +
+    `each, about what is actually happening in THAT photograph. Look at it — mention what is really ` +
+    `there. Never number them or write "photo 1".\n` +
+    `- "closing": one line to end on.\n` +
+    `- These are real people's real memories. Describe only what you can see and what you were told. ` +
+    `Invent no names, no places, no relationships and no events.`;
+
+  const res = await fetch(`${BASE}/models/${TEXT_MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      contents: [
+        {
+          parts: [
+            { text: prompt },
+            ...photos.map((p) => ({ inline_data: { mime_type: p.mimeType, data: p.data } })),
+          ],
+        },
+      ],
+      // Thinking is billed against maxOutputTokens here and will consume the
+      // whole budget before any JSON appears.
+      generationConfig: { temperature: 0.85, thinkingConfig: { thinkingBudget: 0 }, maxOutputTokens: 4096 },
+    }),
+    signal: AbortSignal.timeout(100_000),
+  });
+  const data = asRecord(await res.json());
+  if (!res.ok) throw new Error(errorMessage(data, "") ?? `HTTP ${res.status}`);
+  const text = geminiText(data) ?? "";
+  const match = text.match(/\{[\s\S]*\}/);
+  if (!match) throw new Error("no narration returned");
+  const parsed = JSON.parse(match[0]);
+
+  const captions: string[] = (Array.isArray(parsed.captions) ? parsed.captions : [])
+    .slice(0, photos.length)
+    .map((c: unknown) => str(c, 400));
+  if (captions.length === 0) throw new Error("narration had no captions");
+  // A short answer must not silently drop the tail of someone's film.
+  while (captions.length < photos.length) captions.push("");
+
+  return {
+    ok: true,
+    title: str(parsed.title, 120) || "A Memory",
+    opening: str(parsed.opening, 300),
+    closing: str(parsed.closing, 300),
+    captions,
+    language: { code: language.code, name: language.name, endonym: language.endonym, rtl: isRTL(language.code) },
+    // Filled in by the HTTP route, which knows the charge — the Command Center
+    // caller passes its own accounting through cost.ts instead.
+    tokensCharged: 0,
+    balance: null,
+  };
+}
+
 export async function POST(req: Request) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) {
@@ -93,10 +199,6 @@ export async function POST(req: Request) {
     );
   }
 
-  const type = str(body.type, 30).toLowerCase() || "family";
-  const details = str(body.details, 800);
-  const language = getLanguage(str(body.languageCode, 8));
-
   const charged = await chargeFor("story-memory-generator");
   if (!charged.ok) {
     limiter.refund(id);
@@ -106,68 +208,16 @@ export async function POST(req: Request) {
     );
   }
 
-  const prompt =
-    `You are writing the narration for a short memory film made from the ${photos.length} attached ` +
-    `photographs. They are in the order the film will show them.\n\n` +
-    `Tone: ${TONES[type] ?? TONES.family}.\n` +
-    (details ? `What the person who made this film told us about it: ${details}\n` : "") +
-    `\nLanguage: write EVERY word in ${language.name} (${language.endonym}). ` +
-    `Do not use English unless the language IS English.\n\n` +
-    `Return ONLY JSON, no markdown fence:\n` +
-    `{"title": "...", "opening": "...", "captions": ["...", "..."], "closing": "..."}\n\n` +
-    `- "title": 2 to 6 words. The film's title card.\n` +
-    `- "opening": one short line for under the title.\n` +
-    `- "captions": EXACTLY ${photos.length} entries, one per photograph IN ORDER. One or two sentences ` +
-    `each, about what is actually happening in THAT photograph. Look at it — mention what is really ` +
-    `there. Never number them or write "photo 1".\n` +
-    `- "closing": one line to end on.\n` +
-    `- These are real people's real memories. Describe only what you can see and what you were told. ` +
-    `Invent no names, no places, no relationships and no events.`;
-
   try {
-    const res = await fetch(`${BASE}/models/${TEXT_MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [
-              { text: prompt },
-              ...photos.map((p) => ({ inline_data: { mime_type: p.mimeType, data: p.data } })),
-            ],
-          },
-        ],
-        // Thinking is billed against maxOutputTokens here and will consume the
-        // whole budget before any JSON appears.
-        generationConfig: { temperature: 0.85, thinkingConfig: { thinkingBudget: 0 }, maxOutputTokens: 4096 },
-      }),
-      signal: AbortSignal.timeout(100_000),
+    const result = await generateMemoryFilm({
+      photos,
+      type: str(body.type, 30),
+      details: str(body.details, 800),
+      languageCode: str(body.languageCode, 8),
     });
-    const data = asRecord(await res.json());
-    if (!res.ok) throw new Error(errorMessage(data, "") ?? `HTTP ${res.status}`);
-    const text = geminiText(data) ?? "";
-    const match = text.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error("no narration returned");
-    const parsed = JSON.parse(match[0]);
-
-    const captions: string[] = (Array.isArray(parsed.captions) ? parsed.captions : [])
-      .slice(0, photos.length)
-      .map((c: unknown) => str(c, 400));
-    if (captions.length === 0) throw new Error("narration had no captions");
-    // A short answer must not silently drop the tail of someone's film.
-    while (captions.length < photos.length) captions.push("");
 
     return Response.json(
-      {
-        ok: true,
-        title: str(parsed.title, 120) || "A Memory",
-        opening: str(parsed.opening, 300),
-        closing: str(parsed.closing, 300),
-        captions,
-        language: { code: language.code, name: language.name, endonym: language.endonym, rtl: isRTL(language.code) },
-        tokensCharged: charged.charge.charged,
-        balance: charged.charge.balance,
-      },
+      { ...result, tokensCharged: charged.charge.charged, balance: charged.charge.balance },
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (e) {

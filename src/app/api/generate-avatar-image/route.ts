@@ -16,6 +16,61 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 const IMAGE_ACTIONS = new Set([...IMAGE_TOOLS]);
 
+export type AvatarImageSyncInput = { imageBase64: string; mimeType: string; prompt: string };
+
+/**
+ * Command Center variant of Custom Avatar Creator — the retry loop below,
+ * without the HTTP/charge/limiter concerns (see cost.ts for how Command
+ * Center spend is tracked instead).
+ */
+export async function generateAvatarImageSync(input: AvatarImageSyncInput): Promise<{ imageUrl: string }> {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) throw new Error("GEMINI_API_KEY is not set on the server.");
+  if (!input.imageBase64) throw new Error("A photo is required.");
+  const prompt = input.prompt.trim() || "Create a high-quality stylized avatar portrait of this person, preserving their likeness.";
+  const mimeType = input.mimeType || "image/jpeg";
+
+  const reqBody = JSON.stringify({ contents: [{ parts: [{ text: prompt }, { inlineData: { mimeType, data: input.imageBase64 } }] }] });
+  let data: Record<string, unknown> | null = null;
+  let lastErr = "";
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch(`${BASE}/models/${MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: reqBody,
+        signal: AbortSignal.timeout(170000),
+      });
+      const json = await res.json();
+      if (res.ok) {
+        data = json;
+        break;
+      }
+      lastErr = json?.error?.message || `Image error ${res.status}`;
+      if (res.status >= 500 || res.status === 429) {
+        await sleep(4000);
+        continue;
+      }
+      throw new Error(lastErr);
+    } catch (e) {
+      lastErr = e instanceof Error ? e.message : String(e);
+      if (attempt < 3) {
+        await sleep(4000);
+        continue;
+      }
+    }
+  }
+  if (!data) throw new Error(`Image model timed out. ${lastErr}`.trim());
+
+  type ImgPart = { inlineData?: { data: string; mimeType?: string }; inline_data?: { data: string; mimeType?: string } };
+  const parts = ((data as { candidates?: { content?: { parts?: ImgPart[] } }[] })?.candidates?.[0]?.content?.parts) ?? [];
+  const imgPart = parts.find((p) => p.inlineData || p.inline_data);
+  const out = imgPart?.inlineData || imgPart?.inline_data;
+  if (!out?.data) throw new Error("The model did not return an image. Try another photo.");
+
+  return { imageUrl: `data:${out.mimeType || "image/png"};base64,${out.data}` };
+}
+
 export async function POST(req: Request) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) return NextResponse.json({ error: "GEMINI_API_KEY is not set in .env.local" }, { status: 500 });

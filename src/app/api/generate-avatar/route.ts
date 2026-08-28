@@ -19,6 +19,35 @@ function toolAction(v: unknown): string {
   return v === "dancing-photo" ? "dancing-photo" : "talking-photo";
 }
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+export type AvatarPhotoSyncInput = { action: "talking-photo" | "dancing-photo"; imageBase64: string; mimeType: string; prompt: string };
+
+/**
+ * Command Center variant of Talking/Dancing Photo: starts the Veo render and
+ * polls it to completion in one call, same reasoning and pattern as
+ * generateProductCommercialSync in the product-commercial route. No
+ * chargeFor here — see cost.ts, this is tracked as real $ spend, not customer
+ * tokens, since the admin session is not a customer account.
+ */
+export async function generateAvatarPhotoSync(input: AvatarPhotoSyncInput): Promise<{ videoUrl: string }> {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) throw new Error("GEMINI_API_KEY is not set on the server.");
+  if (!input.imageBase64) throw new Error("A photo is required.");
+
+  const prompt = input.prompt.trim() || "The person in the photo comes to life with natural, expressive motion.";
+  const operation = await startVeo(key, `${prompt}\n\n${STYLE}`, input.imageBase64, input.mimeType || "image/jpeg");
+
+  const deadline = Date.now() + 200_000;
+  for (;;) {
+    const status = await checkVeo(key, operation);
+    if (status.status === "completed") return { videoUrl: status.videoUrl };
+    if (status.status === "failed") throw new Error(status.error);
+    if (Date.now() > deadline) throw new Error("The render is taking longer than expected — try again in a moment.");
+    await sleep(6_000);
+  }
+}
+
 // ---------------------------------------------------------------------------
 // POST — start a render and return its handle immediately (async).
 //   Body:     { imageBase64, mimeType, prompt, action }

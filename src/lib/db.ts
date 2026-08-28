@@ -1563,6 +1563,163 @@ async function ensureWorkspaceTables(q: Sql): Promise<void> {
         created_at TIMESTAMPTZ NOT NULL DEFAULT now()
       )`;
     await q`CREATE INDEX IF NOT EXISTS user_consents_user_idx ON user_consents (user_id, kind)`;
+
+    // -------------------------------------------------------------------
+    // Command Center tables. Additive only: none of these rename, alter or
+    // replace anything above (in particular, social_accounts already exists
+    // above with its own richer OAuth-token schema — Command Center reads
+    // that same table via src/lib/social/store.ts rather than creating a
+    // second one here).
+    // -------------------------------------------------------------------
+
+    // A post Command Center has queued. Deliberately separate from
+    // schedule_items above: Michael's Command Center session is a system
+    // account (src/lib/ai/admin-account.ts), not a customer workspace, so
+    // this is its own simple queue rather than schedule_items's richer,
+    // workspace-scoped shape.
+    await q`
+      CREATE TABLE IF NOT EXISTS scheduled_posts (
+        id           TEXT PRIMARY KEY,
+        user_id      TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        media_id     TEXT REFERENCES creations(id) ON DELETE SET NULL,
+        caption      TEXT NOT NULL DEFAULT '',
+        platforms    TEXT NOT NULL,
+        scheduled_at TIMESTAMPTZ NOT NULL,
+        status       TEXT NOT NULL DEFAULT 'queued',
+        external_id  TEXT,
+        error        TEXT,
+        created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS scheduled_posts_user_idx ON scheduled_posts (user_id, scheduled_at)`;
+
+    // The autonomous commercial engine: one row per production run, and every
+    // direction the director has tried for a feature (so run N+1 diverges
+    // from run N instead of reinventing it).
+    await q`
+      CREATE TABLE IF NOT EXISTS engine_runs (
+        id           TEXT PRIMARY KEY,
+        feature_slug TEXT NOT NULL,
+        status       TEXT NOT NULL DEFAULT 'running',
+        concepts     INTEGER NOT NULL DEFAULT 0,
+        budget_cents INTEGER NOT NULL DEFAULT 0,
+        spent_cents  INTEGER NOT NULL DEFAULT 0,
+        error        TEXT,
+        created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+        finished_at  TIMESTAMPTZ
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS engine_runs_feature_idx ON engine_runs (feature_slug, created_at)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS engine_attempts (
+        id              TEXT PRIMARY KEY,
+        run_id          TEXT NOT NULL REFERENCES engine_runs(id) ON DELETE CASCADE,
+        feature_slug    TEXT NOT NULL,
+        angle           TEXT NOT NULL,
+        visual_system   TEXT NOT NULL,
+        opening_shot    TEXT NOT NULL,
+        opening_subject TEXT NOT NULL DEFAULT '',
+        structure       TEXT NOT NULL,
+        verdict         TEXT NOT NULL,
+        overall         INTEGER NOT NULL DEFAULT 0,
+        would_watch     INTEGER NOT NULL DEFAULT 0,
+        would_trust     INTEGER NOT NULL DEFAULT 0,
+        directive       TEXT,
+        brief           TEXT NOT NULL,
+        storyboard      TEXT NOT NULL,
+        review          TEXT NOT NULL,
+        violations      TEXT,
+        created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS engine_attempts_feature_idx ON engine_attempts (feature_slug, created_at)`;
+    await q`CREATE INDEX IF NOT EXISTS engine_attempts_run_idx ON engine_attempts (run_id)`;
+
+    // Captured product footage/stills, keyed by content hash so the same
+    // capture is never paid for twice.
+    await q`
+      CREATE TABLE IF NOT EXISTS engine_assets (
+        id           TEXT PRIMARY KEY,
+        feature_slug TEXT NOT NULL,
+        kind         TEXT NOT NULL,
+        path         TEXT NOT NULL,
+        sha256       TEXT NOT NULL,
+        width        INTEGER,
+        height       INTEGER,
+        duration_ms  INTEGER,
+        bytes        INTEGER,
+        rejected     BOOLEAN NOT NULL DEFAULT false,
+        reason       TEXT,
+        created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE UNIQUE INDEX IF NOT EXISTS engine_assets_hash ON engine_assets (sha256)`;
+    await q`CREATE INDEX IF NOT EXISTS engine_assets_feature_idx ON engine_assets (feature_slug, kind)`;
+
+    // A commercial being produced end to end — survives the tab/session that
+    // started it, since assembly runs on a background worker, not in the
+    // request that queued it.
+    await q`
+      CREATE TABLE IF NOT EXISTS engine_jobs (
+        id            TEXT PRIMARY KEY,
+        user_id       TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        feature_slug  TEXT NOT NULL DEFAULT '',
+        title         TEXT NOT NULL DEFAULT '',
+        status        TEXT NOT NULL DEFAULT 'queued',
+        phase         TEXT NOT NULL DEFAULT 'Queued',
+        board         TEXT NOT NULL,
+        shoot         TEXT,
+        narration_url TEXT,
+        media_id      TEXT,
+        media_url     TEXT,
+        error         TEXT,
+        attempts      INTEGER NOT NULL DEFAULT 0,
+        claimed_at    TIMESTAMPTZ,
+        created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at    TIMESTAMPTZ,
+        finished_at   TIMESTAMPTZ
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS engine_jobs_status_idx ON engine_jobs (status, created_at)`;
+    await q`CREATE INDEX IF NOT EXISTS engine_jobs_user_idx ON engine_jobs (user_id, created_at)`;
+
+    // Michael's own operator chat. No user_id, same reasoning as engine_runs:
+    // these rows belong to Reelo itself, and there is exactly one admin
+    // session (ADMIN_PASSWORD), not an account system.
+    await q`
+      CREATE TABLE IF NOT EXISTS command_center_conversations (
+        id         TEXT PRIMARY KEY,
+        title      TEXT NOT NULL DEFAULT 'New chat',
+        pinned     BOOLEAN NOT NULL DEFAULT false,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS cc_conversations_updated_idx ON command_center_conversations (pinned DESC, updated_at DESC)`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS command_center_messages (
+        id              TEXT PRIMARY KEY,
+        conversation_id TEXT NOT NULL REFERENCES command_center_conversations(id) ON DELETE CASCADE,
+        role            TEXT NOT NULL,
+        content         TEXT NOT NULL DEFAULT '',
+        tool_calls_json TEXT,
+        created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS cc_messages_conversation_idx ON command_center_messages (conversation_id, created_at)`;
+
+    // Real provider spend in USD, kept separate from token_ledger (customer
+    // billing in Reelo's own token currency) — this is cost.ts's ledger for
+    // Command Center's own daily/monthly spend caps and usage dashboard.
+    await q`
+      CREATE TABLE IF NOT EXISTS command_center_usage (
+        id                 BIGSERIAL PRIMARY KEY,
+        conversation_id    TEXT REFERENCES command_center_conversations(id) ON DELETE SET NULL,
+        kind               TEXT NOT NULL,
+        provider           TEXT NOT NULL,
+        tool_name          TEXT,
+        estimated_cost_usd DOUBLE PRECISION NOT NULL DEFAULT 0,
+        tokens_in          INTEGER NOT NULL DEFAULT 0,
+        tokens_out         INTEGER NOT NULL DEFAULT 0,
+        ok                 BOOLEAN NOT NULL DEFAULT true,
+        created_at         TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+    await q`CREATE INDEX IF NOT EXISTS cc_usage_created_idx ON command_center_usage (created_at)`;
   } else {
     const exec = async (text: string) => {
       const strings = Object.assign([text], { raw: [text] }) as TemplateStringsArray;
@@ -2510,6 +2667,138 @@ async function ensureWorkspaceTables(q: Sql): Promise<void> {
         created_at TEXT NOT NULL DEFAULT (datetime('now'))
       )`);
     await exec(`CREATE INDEX IF NOT EXISTS user_consents_user_idx ON user_consents (user_id, kind)`);
+
+    // Command Center tables — SQLite side, same additive-only note as the
+    // postgres branch above.
+    await exec(`
+      CREATE TABLE IF NOT EXISTS scheduled_posts (
+        id           TEXT PRIMARY KEY,
+        user_id      TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        media_id     TEXT REFERENCES creations(id) ON DELETE SET NULL,
+        caption      TEXT NOT NULL DEFAULT '',
+        platforms    TEXT NOT NULL,
+        scheduled_at TEXT NOT NULL,
+        status       TEXT NOT NULL DEFAULT 'queued',
+        external_id  TEXT,
+        error        TEXT,
+        created_at   TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS scheduled_posts_user_idx ON scheduled_posts (user_id, scheduled_at)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS engine_runs (
+        id           TEXT PRIMARY KEY,
+        feature_slug TEXT NOT NULL,
+        status       TEXT NOT NULL DEFAULT 'running',
+        concepts     INTEGER NOT NULL DEFAULT 0,
+        budget_cents INTEGER NOT NULL DEFAULT 0,
+        spent_cents  INTEGER NOT NULL DEFAULT 0,
+        error        TEXT,
+        created_at   TEXT NOT NULL DEFAULT (datetime('now')),
+        finished_at  TEXT
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS engine_runs_feature_idx ON engine_runs (feature_slug, created_at)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS engine_attempts (
+        id              TEXT PRIMARY KEY,
+        run_id          TEXT NOT NULL REFERENCES engine_runs(id) ON DELETE CASCADE,
+        feature_slug    TEXT NOT NULL,
+        angle           TEXT NOT NULL,
+        visual_system   TEXT NOT NULL,
+        opening_shot    TEXT NOT NULL,
+        opening_subject TEXT NOT NULL DEFAULT '',
+        structure       TEXT NOT NULL,
+        verdict         TEXT NOT NULL,
+        overall         INTEGER NOT NULL DEFAULT 0,
+        would_watch     INTEGER NOT NULL DEFAULT 0,
+        would_trust     INTEGER NOT NULL DEFAULT 0,
+        directive       TEXT,
+        brief           TEXT NOT NULL,
+        storyboard      TEXT NOT NULL,
+        review          TEXT NOT NULL,
+        violations      TEXT,
+        created_at      TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS engine_attempts_feature_idx ON engine_attempts (feature_slug, created_at)`);
+    await exec(`CREATE INDEX IF NOT EXISTS engine_attempts_run_idx ON engine_attempts (run_id)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS engine_assets (
+        id           TEXT PRIMARY KEY,
+        feature_slug TEXT NOT NULL,
+        kind         TEXT NOT NULL,
+        path         TEXT NOT NULL,
+        sha256       TEXT NOT NULL,
+        width        INTEGER,
+        height       INTEGER,
+        duration_ms  INTEGER,
+        bytes        INTEGER,
+        rejected     INTEGER NOT NULL DEFAULT 0,
+        reason       TEXT,
+        created_at   TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE UNIQUE INDEX IF NOT EXISTS engine_assets_hash ON engine_assets (sha256)`);
+    await exec(`CREATE INDEX IF NOT EXISTS engine_assets_feature_idx ON engine_assets (feature_slug, kind)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS engine_jobs (
+        id            TEXT PRIMARY KEY,
+        user_id       TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        feature_slug  TEXT NOT NULL DEFAULT '',
+        title         TEXT NOT NULL DEFAULT '',
+        status        TEXT NOT NULL DEFAULT 'queued',
+        phase         TEXT NOT NULL DEFAULT 'Queued',
+        board         TEXT NOT NULL,
+        shoot         TEXT,
+        narration_url TEXT,
+        media_id      TEXT,
+        media_url     TEXT,
+        error         TEXT,
+        attempts      INTEGER NOT NULL DEFAULT 0,
+        claimed_at    TEXT,
+        created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at    TEXT,
+        finished_at   TEXT
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS engine_jobs_status_idx ON engine_jobs (status, created_at)`);
+    await exec(`CREATE INDEX IF NOT EXISTS engine_jobs_user_idx ON engine_jobs (user_id, created_at)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS command_center_conversations (
+        id         TEXT PRIMARY KEY,
+        title      TEXT NOT NULL DEFAULT 'New chat',
+        pinned     INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS cc_conversations_updated_idx ON command_center_conversations (pinned DESC, updated_at DESC)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS command_center_messages (
+        id              TEXT PRIMARY KEY,
+        conversation_id TEXT NOT NULL REFERENCES command_center_conversations(id) ON DELETE CASCADE,
+        role            TEXT NOT NULL,
+        content         TEXT NOT NULL DEFAULT '',
+        tool_calls_json TEXT,
+        created_at      TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS cc_messages_conversation_idx ON command_center_messages (conversation_id, created_at)`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS command_center_usage (
+        id                 INTEGER PRIMARY KEY AUTOINCREMENT,
+        conversation_id    TEXT REFERENCES command_center_conversations(id) ON DELETE SET NULL,
+        kind               TEXT NOT NULL,
+        provider           TEXT NOT NULL,
+        tool_name          TEXT,
+        estimated_cost_usd REAL NOT NULL DEFAULT 0,
+        tokens_in          INTEGER NOT NULL DEFAULT 0,
+        tokens_out         INTEGER NOT NULL DEFAULT 0,
+        ok                 INTEGER NOT NULL DEFAULT 1,
+        created_at         TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+    await exec(`CREATE INDEX IF NOT EXISTS cc_usage_created_idx ON command_center_usage (created_at)`);
   }
 }
 

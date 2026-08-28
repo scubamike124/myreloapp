@@ -83,6 +83,246 @@ async function characterImage(
   }
 }
 
+export type StoryEpisodeSyncInput = {
+  avatarId: string;
+  photo: string;
+  photoMimeType: string;
+  characterName: string;
+  premise: string;
+  genre: string;
+  languageCode: string;
+  scenes: number;
+  episodeNumber: number;
+  previously: { number: number; title: string; recap: string }[];
+};
+
+export type StoryEpisodeResult = {
+  ok: true;
+  episodeNumber: number;
+  title: string;
+  synopsis: string;
+  cliffhanger: string;
+  recap: string;
+  format: "ebook" | "video";
+  language: { code: string; name: string; endonym: string; rtl: boolean };
+  scenes: { text: string; image: string }[];
+  illustrated: number;
+};
+
+/**
+ * Command Center variant of AI Story Maker — one episode, fully illustrated,
+ * same generation logic as the POST handler below (runEpisode, shared by
+ * both). Always illustrates (skipIllustrations: false) — Command Center has
+ * no "video" format concept the way the customer route does.
+ */
+export async function generateStoryEpisodeSync(input: StoryEpisodeSyncInput): Promise<StoryEpisodeResult> {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) throw new Error("GEMINI_API_KEY is not set on the server.");
+
+  const character = await characterImage(input.avatarId, input.photo, input.photoMimeType);
+  if (!character) throw new Error("Pick a character or provide a photo to star in the series.");
+
+  const characterName = input.characterName || "the hero";
+  const premise = str(input.premise, 600);
+  const genre = input.genre || "Adventure";
+  const language = getLanguage(input.languageCode || "en");
+  const sceneCount = Math.max(MIN_SCENES, Math.min(MAX_SCENES, input.scenes || 8));
+  const episodeNumber = Math.max(1, Math.min(50, input.episodeNumber || 1));
+  const previously = input.previously.slice(-8).filter((p) => p.recap);
+
+  return runEpisode(key, {
+    character,
+    characterName,
+    premise,
+    genre,
+    language,
+    sceneCount,
+    episodeNumber,
+    previously,
+    skipIllustrations: false,
+  });
+}
+
+/** Shared by both the sync (Command Center) and async (customer route) callers. */
+async function runEpisode(
+  key: string,
+  ctx: {
+    character: { data: string; mimeType: string };
+    characterName: string;
+    premise: string;
+    genre: string;
+    language: ReturnType<typeof getLanguage>;
+    sceneCount: number;
+    episodeNumber: number;
+    previously: { number: number; title: string; recap: string }[];
+    skipIllustrations: boolean;
+  },
+): Promise<StoryEpisodeResult> {
+  const { character, characterName, premise, genre, language, sceneCount, episodeNumber, previously, skipIllustrations } = ctx;
+
+  const history = previously.length
+    ? `THE STORY SO FAR — these episodes already happened, do not repeat them:\n` +
+      previously.map((p) => `Episode ${p.number}${p.title ? ` "${p.title}"` : ""}: ${p.recap}`).join("\n") +
+      `\n\nEpisode ${episodeNumber} must follow on directly from the end of episode ${previously[previously.length - 1].number}.\n\n`
+    : "";
+
+  const episodePrompt =
+    `You are writing episode ${episodeNumber} of an ongoing ${genre.toLowerCase()} series.\n\n` +
+    `The star of the series is ${characterName}.\n` +
+    (premise ? `The series is about: ${premise}\n` : "") +
+    `\n${history}` +
+    `Language: write EVERY word of the narration in ${language.name} (${language.endonym}). ` +
+    `Do not use English unless the language IS English.\n\n` +
+    `Return ONLY JSON, no markdown fence:\n` +
+    `{"title": "...", "synopsis": "...", "scenes": [{"text": "...", "illustration": "..."}], ` +
+    `"recap": "...", "cliffhanger": "..."}\n\n` +
+    `- Exactly ${sceneCount} scenes.\n` +
+    `- "text": this is a LONG-form episode, so write 5 to 8 full sentences per scene in ${language.name}. ` +
+    `Real storytelling — dialogue, what the character notices, what they feel. Not a caption.\n` +
+    `- "title": the episode's own title, in ${language.name}.\n` +
+    `- "synopsis": one or two sentences, in ${language.name}, describing this episode.\n` +
+    `- "recap": 2 to 3 sentences IN ENGLISH summarising what happened and what changed, ` +
+    `including anything a later episode must remember. This is the series memory.\n` +
+    `- "cliffhanger": one sentence, in ${language.name}, setting up the next episode.\n` +
+    `- "illustration": a description IN ENGLISH of what to draw for that scene — the setting, the ` +
+    `action, the mood. Always call the star simply "the character". Never mention text or words.\n` +
+    `- The episode must stand on its own AND move the larger story forward.`;
+
+  // The text model answers "currently experiencing high demand" often enough
+  // that a single attempt loses whole episodes to a spike that clears in
+  // seconds. The illustrations already retried; the writing did not, which made
+  // the one call the episode cannot survive losing also the most fragile.
+  const writeOnce = async (): Promise<string> => {
+    const res = await fetch(`${BASE}/models/${TEXT_MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: episodePrompt }] }],
+        // Thinking is billed against maxOutputTokens on this model and will eat
+        // the whole budget before a single line of JSON appears.
+        generationConfig: { temperature: 0.95, thinkingConfig: { thinkingBudget: 0 }, maxOutputTokens: 8192 },
+      }),
+      signal: AbortSignal.timeout(120_000),
+    });
+    const data = asRecord(await res.json());
+    if (!res.ok) throw new Error(errorMessage(data, "") ?? `HTTP ${res.status}`);
+    return geminiText(data) ?? "";
+  };
+
+  let text = "";
+  let lastErr: unknown = null;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      text = await writeOnce();
+      if (text) break;
+    } catch (e) {
+      lastErr = e;
+    }
+    if (attempt < 2) await new Promise((r) => setTimeout(r, 3000 * (attempt + 1)));
+  }
+  if (!text) throw lastErr ?? new Error("no episode returned");
+
+  const match = text.match(/\{[\s\S]*\}/);
+  if (!match) throw new Error("no episode returned");
+  const parsed = JSON.parse(match[0]);
+  const episode: Episode = {
+    title: str(parsed.title, 140) || `Episode ${episodeNumber}`,
+    synopsis: str(parsed.synopsis, 400),
+    recap: str(parsed.recap, 600),
+    cliffhanger: str(parsed.cliffhanger, 300),
+    scenes: (Array.isArray(parsed.scenes) ? parsed.scenes : [])
+      .slice(0, sceneCount)
+      .map((s: Record<string, unknown>) => ({ text: str(s.text, 2500), illustration: str(s.illustration, 700) }))
+      .filter((s: Scene) => s.text),
+  };
+  if (episode.scenes.length === 0) throw new Error("episode had no scenes");
+
+  // --- 2. the artwork (ebook) -----------------------------------------------
+  // Video format skips illustrations — the client turns narration into a talking clip.
+  if (skipIllustrations) {
+    return {
+      ok: true,
+      episodeNumber,
+      title: episode.title,
+      synopsis: episode.synopsis,
+      cliffhanger: episode.cliffhanger,
+      recap: episode.recap,
+      format: "video",
+      language: { code: language.code, name: language.name, endonym: language.endonym, rtl: isRTL(language.code) },
+      scenes: episode.scenes.map((s) => ({ text: s.text, image: "" })),
+      illustrated: 0,
+    };
+  }
+
+  // The character's picture goes with every scene so the same face — or the
+  // same banana — appears throughout the series, not just within one episode.
+
+  const style =
+    `Cinematic illustrated story art, ${genre.toLowerCase()} series, rich colour, dramatic lighting, ` +
+    `detailed painterly rendering, widescreen composition, no text, no words, no letters, no watermark.`;
+
+  const withRetry = async (fn: () => Promise<string>, attempts = 3): Promise<string> => {
+    for (let i = 0; i < attempts; i++) {
+      const out = await fn().catch(() => "");
+      if (out) return out;
+      if (i < attempts - 1) await new Promise((r) => setTimeout(r, 2500 * (i + 1)));
+    }
+    return "";
+  };
+
+  const illustrate = async (scene: Scene): Promise<string> => {
+    const prompt =
+      `${style}\n\n` +
+      `Draw this scene: ${scene.illustration}\n\n` +
+      `The subject in the attached picture is ${characterName}, the recurring star of this series. ` +
+      `Render them as an illustrated character in the style above, keeping them instantly ` +
+      `recognisable — same shape, colours and distinguishing features — so they look like the same ` +
+      `character in every episode. If the subject is an object, an animal or a piece of fruit, give ` +
+      `it life as a character with expression and personality rather than drawing a still life.`;
+    const res = await fetch(`${BASE}/models/${IMAGE_MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [
+          { parts: [{ text: prompt }, { inline_data: { mime_type: character.mimeType, data: character.data } }] },
+        ],
+        generationConfig: { temperature: 0.8 },
+      }),
+      signal: AbortSignal.timeout(120_000),
+    });
+    if (!res.ok) return "";
+    const data = asRecord(await res.json());
+    const part = geminiParts(data).find((p) => {
+      const rec = asRecord(p);
+      return Boolean(rec.inlineData || rec.inline_data);
+    });
+    const payload = asRecord(asRecord(part).inlineData || asRecord(part).inline_data);
+    return typeof payload.data === "string"
+      ? `data:${asString(payload.mimeType, "image/png")};base64,${payload.data}`
+      : "";
+  };
+
+  const images = await Promise.all(
+    episode.scenes.map((s, i) =>
+      new Promise<string>((resolve) => setTimeout(() => resolve(withRetry(() => illustrate(s))), i * 700)),
+    ),
+  );
+
+  return {
+    ok: true,
+    episodeNumber,
+    title: episode.title,
+    synopsis: episode.synopsis,
+    cliffhanger: episode.cliffhanger,
+    // Sent back so the client can hand it to the next episode as memory.
+    recap: episode.recap,
+    format: "ebook",
+    language: { code: language.code, name: language.name, endonym: language.endonym, rtl: isRTL(language.code) },
+    scenes: episode.scenes.map((s, i) => ({ text: s.text, image: images[i] })),
+    illustrated: images.filter(Boolean).length,
+  };
+}
+
 export async function POST(req: Request) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) {
@@ -148,86 +388,22 @@ export async function POST(req: Request) {
     );
   }
 
-  // --- 1. the episode -------------------------------------------------------
-
-  const history = previously.length
-    ? `THE STORY SO FAR — these episodes already happened, do not repeat them:\n` +
-      previously.map((p) => `Episode ${p.number}${p.title ? ` "${p.title}"` : ""}: ${p.recap}`).join("\n") +
-      `\n\nEpisode ${episodeNumber} must follow on directly from the end of episode ${previously[previously.length - 1].number}.\n\n`
-    : "";
-
-  const episodePrompt =
-    `You are writing episode ${episodeNumber} of an ongoing ${genre.toLowerCase()} series.\n\n` +
-    `The star of the series is ${characterName}.\n` +
-    (premise ? `The series is about: ${premise}\n` : "") +
-    `\n${history}` +
-    `Language: write EVERY word of the narration in ${language.name} (${language.endonym}). ` +
-    `Do not use English unless the language IS English.\n\n` +
-    `Return ONLY JSON, no markdown fence:\n` +
-    `{"title": "...", "synopsis": "...", "scenes": [{"text": "...", "illustration": "..."}], ` +
-    `"recap": "...", "cliffhanger": "..."}\n\n` +
-    `- Exactly ${sceneCount} scenes.\n` +
-    `- "text": this is a LONG-form episode, so write 5 to 8 full sentences per scene in ${language.name}. ` +
-    `Real storytelling — dialogue, what the character notices, what they feel. Not a caption.\n` +
-    `- "title": the episode's own title, in ${language.name}.\n` +
-    `- "synopsis": one or two sentences, in ${language.name}, describing this episode.\n` +
-    `- "recap": 2 to 3 sentences IN ENGLISH summarising what happened and what changed, ` +
-    `including anything a later episode must remember. This is the series memory.\n` +
-    `- "cliffhanger": one sentence, in ${language.name}, setting up the next episode.\n` +
-    `- "illustration": a description IN ENGLISH of what to draw for that scene — the setting, the ` +
-    `action, the mood. Always call the star simply "the character". Never mention text or words.\n` +
-    `- The episode must stand on its own AND move the larger story forward.`;
-
-  // The text model answers "currently experiencing high demand" often enough
-  // that a single attempt loses whole episodes to a spike that clears in
-  // seconds. The illustrations already retried; the writing did not, which made
-  // the one call the episode cannot survive losing also the most fragile.
-  const writeOnce = async (): Promise<string> => {
-    const res = await fetch(`${BASE}/models/${TEXT_MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: episodePrompt }] }],
-        // Thinking is billed against maxOutputTokens on this model and will eat
-        // the whole budget before a single line of JSON appears.
-        generationConfig: { temperature: 0.95, thinkingConfig: { thinkingBudget: 0 }, maxOutputTokens: 8192 },
-      }),
-      signal: AbortSignal.timeout(120_000),
-    });
-    const data = asRecord(await res.json());
-    if (!res.ok) throw new Error(errorMessage(data, "") ?? `HTTP ${res.status}`);
-    return geminiText(data) ?? "";
-  };
-
-  let episode: Episode;
   try {
-    let text = "";
-    let lastErr: unknown = null;
-    for (let attempt = 0; attempt < 3; attempt++) {
-      try {
-        text = await writeOnce();
-        if (text) break;
-      } catch (e) {
-        lastErr = e;
-      }
-      if (attempt < 2) await new Promise((r) => setTimeout(r, 3000 * (attempt + 1)));
-    }
-    if (!text) throw lastErr ?? new Error("no episode returned");
-
-    const match = text.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error("no episode returned");
-    const parsed = JSON.parse(match[0]);
-    episode = {
-      title: str(parsed.title, 140) || `Episode ${episodeNumber}`,
-      synopsis: str(parsed.synopsis, 400),
-      recap: str(parsed.recap, 600),
-      cliffhanger: str(parsed.cliffhanger, 300),
-      scenes: (Array.isArray(parsed.scenes) ? parsed.scenes : [])
-        .slice(0, sceneCount)
-        .map((s: Record<string, unknown>) => ({ text: str(s.text, 2500), illustration: str(s.illustration, 700) }))
-        .filter((s: Scene) => s.text),
-    };
-    if (episode.scenes.length === 0) throw new Error("episode had no scenes");
+    const result = await runEpisode(key, {
+      character,
+      characterName,
+      premise,
+      genre,
+      language,
+      sceneCount,
+      episodeNumber,
+      previously,
+      skipIllustrations,
+    });
+    return Response.json(
+      { ...result, tokensCharged: charged.charge.charged, balance: charged.charge.balance },
+      { headers: { "Cache-Control": "no-store" } },
+    );
   } catch (e) {
     limiter.refund(id);
     await refundCharge(charged.charge); // nothing was written — do not charge for it
@@ -236,99 +412,4 @@ export async function POST(req: Request) {
       { status: 502 },
     );
   }
-
-  // --- 2. the artwork (ebook) -----------------------------------------------
-  // Video format skips illustrations — the client turns narration into a talking clip.
-  if (skipIllustrations) {
-    return Response.json(
-      {
-        ok: true,
-        episodeNumber,
-        title: episode.title,
-        synopsis: episode.synopsis,
-        cliffhanger: episode.cliffhanger,
-        recap: episode.recap,
-        format: "video",
-        language: { code: language.code, name: language.name, endonym: language.endonym, rtl: isRTL(language.code) },
-        scenes: episode.scenes.map((s) => ({ text: s.text, image: "" })),
-        illustrated: 0,
-        tokensCharged: charged.charge.charged,
-        balance: charged.charge.balance,
-      },
-      { headers: { "Cache-Control": "no-store" } },
-    );
-  }
-
-  // The character's picture goes with every scene so the same face — or the
-  // same banana — appears throughout the series, not just within one episode.
-
-  const style =
-    `Cinematic illustrated story art, ${genre.toLowerCase()} series, rich colour, dramatic lighting, ` +
-    `detailed painterly rendering, widescreen composition, no text, no words, no letters, no watermark.`;
-
-  const withRetry = async (fn: () => Promise<string>, attempts = 3): Promise<string> => {
-    for (let i = 0; i < attempts; i++) {
-      const out = await fn().catch(() => "");
-      if (out) return out;
-      if (i < attempts - 1) await new Promise((r) => setTimeout(r, 2500 * (i + 1)));
-    }
-    return "";
-  };
-
-  const illustrate = async (scene: Scene): Promise<string> => {
-    const prompt =
-      `${style}\n\n` +
-      `Draw this scene: ${scene.illustration}\n\n` +
-      `The subject in the attached picture is ${characterName}, the recurring star of this series. ` +
-      `Render them as an illustrated character in the style above, keeping them instantly ` +
-      `recognisable — same shape, colours and distinguishing features — so they look like the same ` +
-      `character in every episode. If the subject is an object, an animal or a piece of fruit, give ` +
-      `it life as a character with expression and personality rather than drawing a still life.`;
-    const res = await fetch(`${BASE}/models/${IMAGE_MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [
-          { parts: [{ text: prompt }, { inline_data: { mime_type: character.mimeType, data: character.data } }] },
-        ],
-        generationConfig: { temperature: 0.8 },
-      }),
-      signal: AbortSignal.timeout(120_000),
-    });
-    if (!res.ok) return "";
-    const data = asRecord(await res.json());
-    const part = geminiParts(data).find((p) => {
-      const rec = asRecord(p);
-      return Boolean(rec.inlineData || rec.inline_data);
-    });
-    const payload = asRecord(asRecord(part).inlineData || asRecord(part).inline_data);
-    return typeof payload.data === "string"
-      ? `data:${asString(payload.mimeType, "image/png")};base64,${payload.data}`
-      : "";
-  };
-
-  const images = await Promise.all(
-    episode.scenes.map((s, i) =>
-      new Promise<string>((resolve) => setTimeout(() => resolve(withRetry(() => illustrate(s))), i * 700)),
-    ),
-  );
-
-  return Response.json(
-    {
-      ok: true,
-      episodeNumber,
-      title: episode.title,
-      synopsis: episode.synopsis,
-      cliffhanger: episode.cliffhanger,
-      // Sent back so the client can hand it to the next episode as memory.
-      recap: episode.recap,
-      format: "ebook",
-      language: { code: language.code, name: language.name, endonym: language.endonym, rtl: isRTL(language.code) },
-      scenes: episode.scenes.map((s, i) => ({ text: s.text, image: images[i] })),
-      illustrated: images.filter(Boolean).length,
-      tokensCharged: charged.charge.charged,
-      balance: charged.charge.balance,
-    },
-    { headers: { "Cache-Control": "no-store" } },
-  );
 }

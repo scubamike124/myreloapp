@@ -52,6 +52,76 @@ const DEFAULT_SCRIPT =
   "It's the fastest way to turn words into content your audience will love. " +
   "Try it today and see what you can create.";
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+// Command Center-only default: the "no silent default avatar" rule above is a
+// customer-safety guard against silently rendering the wrong avatar — it does
+// not apply here, since this is Michael asking Amber for a video directly and
+// a sensible default is exactly what he'd want when he hasn't named one.
+const DEFAULT_AVATAR_ID = "Abigail_expressive_2024112501";
+
+export type HeygenSyncInput = {
+  action: "ai-avatar-studio" | "website-commercial";
+  script: string;
+  avatarId?: string;
+  voiceId?: string;
+  width?: number;
+  height?: number;
+};
+
+/**
+ * Command Center variant of AI Avatar Studio / Website Commercial — submits
+ * the HeyGen job and polls it to completion in one call, same pattern as the
+ * other Veo-backed Command Center variants in this codebase. Reuses this
+ * route's own heygen()/capScript() helpers further below (hoisted function
+ * declarations) rather than duplicating them.
+ */
+export async function generateHeygenVideoSync(input: HeygenSyncInput): Promise<{ videoUrl: string; thumbnailUrl: string | null }> {
+  const key = process.env.HEYGEN_API_KEY;
+  if (!key) throw new Error("HEYGEN_API_KEY is not set on the server.");
+
+  const { script } = capScript(input.script.trim() || DEFAULT_SCRIPT, MAX_SECONDS, MAX_SECONDS);
+  const avatarId = input.avatarId?.trim() || DEFAULT_AVATAR_ID;
+  const voiceId = input.voiceId?.trim() || DEFAULT_VOICE_ID;
+  const width = input.width ?? 1280;
+  const height = input.height ?? 720;
+  const aspectRatio = height > width ? "9:16" : height === width ? "1:1" : "16:9";
+
+  const { res, data } = await heygen(
+    "/v3/videos",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        type: "avatar",
+        avatar_id: avatarId,
+        script,
+        voice_id: voiceId,
+        engine: { type: "avatar_iii" },
+        resolution: "720p",
+        aspect_ratio: aspectRatio,
+      }),
+    },
+    key,
+  );
+  const videoId = asString(childRecord(data, "data").video_id);
+  if (!res.ok || !videoId) {
+    throw new Error(errorMessage(data, `HeyGen generate failed (${res.status}).`));
+  }
+
+  const deadline = Date.now() + 200_000;
+  for (;;) {
+    const { data: statusData } = await heygen(`/v3/videos/${encodeURIComponent(videoId)}`, { method: "GET" }, key);
+    const d = childRecord(statusData, "data");
+    const status = asString(d.status);
+    if (status === "completed" && d.video_url) {
+      return { videoUrl: asString(d.video_url), thumbnailUrl: typeof d.thumbnail_url === "string" ? d.thumbnail_url : null };
+    }
+    if (status === "failed") throw new Error(errorMessage(d, "HeyGen render failed."));
+    if (Date.now() > deadline) throw new Error("The render is taking longer than expected — check back in a moment.");
+    await sleep(6_000);
+  }
+}
+
 // --- Best-effort per-IP daily rate limit -----------------------------------
 type Bucket = { day: string; count: number };
 const buckets = new Map<string, Bucket>();

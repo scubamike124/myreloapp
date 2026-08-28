@@ -1,5 +1,8 @@
 import { asRecord, asString, errorMessage, geminiParts, geminiText } from "@/lib/json";
 import { clientId, createDailyLimiter, readJsonLimited, PayloadTooLarge } from "@/lib/api-guard";
+import { generateJson, textProviderConfigured, type TextProviderId } from "@/lib/ai/text-chain";
+import { illustratePage } from "@/lib/ai/image-chain";
+import { resolveTheme, DEFAULT_THEME } from "@/lib/storybook-themes";
 import { getLanguage, isRTL } from "@/lib/languages";
 import { chargeFor, refundCharge } from "@/lib/charge";
 import { currentUser } from "@/lib/accounts";
@@ -58,6 +61,207 @@ type Page = { text: string; illustration: string };
 
 function str(v: unknown, max: number): string {
   return typeof v === "string" ? v.slice(0, max).trim() : "";
+}
+
+// ---------------------------------------------------------------------------
+// Command Center variant — deliberately separate from everything above.
+//
+// The customer-facing route above is consent-gated (child image storage
+// requires a recorded parental consent) and ties into character-bible/series
+// persistence for a specific customer account. Command Center has neither: it
+// is Michael asking Amber directly, not a customer's child's photo attached
+// to a stored account, so the consent/continuity machinery above does not
+// apply and is not reused or bypassed here — this is a self-contained,
+// stateless generator that produces one book with no persistence.
+// ---------------------------------------------------------------------------
+
+/**
+ * Shape the story must come back in. Providers that support constrained output
+ * (Claude, OpenAI) are held to this, which removes the "model wrote prose
+ * around the JSON" failure mode entirely.
+ */
+const STORY_SCHEMA = {
+  type: "object",
+  properties: {
+    title: { type: "string" },
+    dedication: { type: "string" },
+    pages: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          text: { type: "string" },
+          illustration: { type: "string" },
+        },
+        required: ["text", "illustration"],
+        additionalProperties: false,
+      },
+    },
+  },
+  required: ["title", "dedication", "pages"],
+  additionalProperties: false,
+} as const satisfies Record<string, unknown>;
+
+export type StorybookSyncInput = {
+  photo: string;
+  mimeType: string;
+  childName: string;
+  idea: string;
+  theme: string;
+  languageCode: string;
+  pages: number;
+};
+
+export type StorybookSyncResult = {
+  ok: true;
+  title: string;
+  dedication: string;
+  language: { code: string; name: string; endonym: string; rtl: boolean };
+  pages: { text: string; image: string; personalised: boolean }[];
+  illustrated: number;
+  personalisedPages: number;
+  storyProvider: TextProviderId;
+};
+
+export async function generateStorybookSync(input: StorybookSyncInput): Promise<StorybookSyncResult> {
+  const textProviders: TextProviderId[] = ["gemini", "claude", "openai"];
+  if (!textProviders.some(textProviderConfigured)) {
+    throw new Error("Storybooks are unavailable — no AI provider is configured.");
+  }
+  if (!input.photo) throw new Error("A photo of the child is required.");
+
+  const mimeType = input.mimeType || "image/jpeg";
+  const childName = str(input.childName, 40);
+  const idea = str(input.idea, 400);
+  const theme = resolveTheme(str(input.theme, 60) || DEFAULT_THEME);
+  const language = getLanguage(input.languageCode || "en");
+  const pageCount = Math.max(MIN_PAGES, Math.min(MAX_PAGES, input.pages || 6));
+  const hero = childName || "the child";
+
+  return runStorybookSync(input.photo, mimeType, { hero, idea, theme, language, pageCount });
+}
+
+async function runStorybookSync(
+  photo: string,
+  mimeType: string,
+  ctx: { hero: string; idea: string; theme: ReturnType<typeof resolveTheme>; language: ReturnType<typeof getLanguage>; pageCount: number },
+): Promise<StorybookSyncResult> {
+  const { hero, idea, theme, language, pageCount } = ctx;
+
+  const storyPrompt =
+    `Write a gentle bedtime picture-book story for a child aged about 3 to 7.\n\n` +
+    `Hero: ${hero}, who becomes ${theme.becomes}.\n` +
+    (idea ? `The parent asked for: ${idea}\n` : "") +
+    `Language: write EVERY word of the story in ${language.name} (${language.endonym}). ` +
+    `Do not use English unless the language IS English.\n\n` +
+    `Return ONLY JSON, no markdown fence:\n` +
+    `{"title": "...", "dedication": "...", "pages": [{"text": "...", "illustration": "..."}]}\n\n` +
+    `- Exactly ${pageCount} pages.\n` +
+    `- "text": 2 to 3 short sentences for that page, in ${language.name}. Warm, simple, read-aloud rhythm.\n` +
+    `- "dedication": one short line, in ${language.name}, e.g. "For ${hero}, who is braver than they know."\n` +
+    `- "illustration": a description IN ENGLISH of what to draw for that page. Describe the scene, ` +
+    `the action and the mood. Always refer to the hero simply as "the child". Do not mention text or words.\n` +
+    `- A complete arc: ordinary world, a problem, courage, resolution, a calm ending suitable for bedtime.\n` +
+    `- Nothing frightening. No peril that is not resolved on the same page.`;
+
+  let story: { title: string; dedication: string; pages: Page[] };
+  let storyProvider: TextProviderId;
+  try {
+    const result = await generateJson<{ title: string; dedication: string; pages: Page[] }>({
+      prompt: storyPrompt,
+      schema: STORY_SCHEMA,
+      maxTokens: 4096,
+      timeoutMs: 90_000,
+      onAttempt: (a) =>
+        console.log(
+          `[storybook] text ${a.provider}#${a.attempt} ${a.ok ? "ok" : "failed"} in ${a.ms}ms` +
+            (a.error ? ` — ${a.error}` : ""),
+        ),
+      // Runs on every provider's output: a structurally valid but unusable
+      // story (no pages) is treated as a failure and falls through, rather
+      // than being handed to the parent as an empty book.
+      validate: (raw) => {
+        const parsed = (raw ?? {}) as Record<string, unknown>;
+        const pages = (Array.isArray(parsed.pages) ? parsed.pages : [])
+          .slice(0, pageCount)
+          .map((p: Record<string, unknown>) => ({
+            text: str(p.text, 600),
+            illustration: str(p.illustration, 600),
+          }))
+          .filter((p: Page) => p.text);
+        if (pages.length === 0) throw new Error("story had no pages");
+        return {
+          title: str(parsed.title, 120) || "A Bedtime Story",
+          dedication: str(parsed.dedication, 200),
+          pages,
+        };
+      },
+    });
+    story = result.data;
+    storyProvider = result.provider;
+  } catch (e) {
+    throw new Error(e instanceof Error ? `Couldn't write the story: ${e.message}`.slice(0, 200) : "Couldn't write the story.");
+  }
+
+  const style =
+    "Children's picture-book illustration, warm and friendly, soft rounded shapes, rich colour, " +
+    "painterly storybook art, gentle lighting, cosy bedtime mood, no text, no words, no letters, " +
+    "no watermark, full-bleed square composition.";
+
+  const illustrate = (page: Page) =>
+    illustratePage({
+      // Gemini gets the photo and draws the child as the hero — the whole point.
+      personalisedPrompt:
+        `${style}\n\n` +
+        `Draw this scene: ${page.illustration}\n\n` +
+        `The child in the attached photograph is the hero of the story. Render them as a friendly ` +
+        `illustrated character — keep their recognisable features (face shape, hair, skin tone, glasses ` +
+        `if present) but draw them in the picture-book style, NOT as a photograph. ` +
+        `They are dressed as ${theme.costume}.`,
+      // The fallback never receives the photograph, so it is told to draw a
+      // generic young hero. The page is marked personalised: false.
+      scenePrompt:
+        `${style}\n\n` +
+        `Draw this scene: ${page.illustration}\n\n` +
+        `The hero is a young child dressed as ${theme.costume}, drawn as a friendly ` +
+        `picture-book character. Do not depict any real, identifiable person.`,
+      photo,
+      mimeType,
+    });
+
+  const results = await Promise.all(
+    story.pages.map((p, i) =>
+      // Stagger the starts so ten pages do not hit the model in the same instant.
+      new Promise<Awaited<ReturnType<typeof illustratePage>>>((resolve) =>
+        setTimeout(() => resolve(illustrate(p)), i * 700),
+      ),
+    ),
+  );
+
+  for (const [i, r] of results.entries()) {
+    if (r.errors.length) console.log(`[storybook] page ${i + 1} illustration: ${r.errors.join("; ")}`);
+  }
+
+  const images = results.map((r) => r.image);
+
+  return {
+    ok: true,
+    title: story.title,
+    dedication: story.dedication,
+    language: { code: language.code, name: language.name, endonym: language.endonym, rtl: isRTL(language.code) },
+    pages: story.pages.map((p, i) => ({
+      text: p.text,
+      image: images[i],
+      // False when the fallback drew a generic scene instead of this child.
+      personalised: results[i].personalised,
+    })),
+    // Told plainly rather than hidden: a page without art is still readable.
+    illustrated: images.filter(Boolean).length,
+    personalisedPages: results.filter((r) => r.personalised).length,
+    // Which provider wrote the story. "gemini" on a normal run; anything else
+    // means the chain absorbed a failure.
+    storyProvider,
+  };
 }
 
 export async function POST(req: Request) {

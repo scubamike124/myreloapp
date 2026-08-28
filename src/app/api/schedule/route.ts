@@ -1,10 +1,109 @@
 import { randomUUID } from "node:crypto";
-import { dbConfigured, ensureSchema, sqlAsync } from "@/lib/db";
+import { dbConfigured, ensureSchema, sqlAsync, sql } from "@/lib/db";
 import { currentUser } from "@/lib/accounts";
 import { requireUser, str, parsePlatforms, parseJsonArray } from "@/lib/workspace-api";
 import { readJsonLimited, PayloadTooLarge } from "@/lib/api-guard";
 
 export const runtime = "nodejs";
+
+// ---------------------------------------------------------------------------
+// Command Center variant — a separate scheduled_posts table, not the
+// schedule_items table the customer-facing handlers below use. Michael's
+// Command Center session is not a customer workspace (see
+// src/lib/ai/admin-account.ts's system-user pattern), so this is its own
+// simple queue rather than reusing schedule_items's richer, workspace-scoped
+// shape. No collision: scheduled_posts is a new table, created alongside
+// schedule_items in db.ts's ensureWorkspaceTables().
+// ---------------------------------------------------------------------------
+
+const CC_PLATFORMS = ["tiktok", "instagram", "youtube", "facebook", "x"] as const;
+type CcPlatform = (typeof CC_PLATFORMS)[number];
+
+type ScheduledPostRow = {
+  id: string;
+  media_id: string | null;
+  caption: string;
+  platforms: string;
+  scheduled_at: string;
+  status: string;
+  external_id: string | null;
+  error: string | null;
+  created_at: string;
+};
+
+const shapeScheduledPost = (r: ScheduledPostRow) => ({
+  id: r.id,
+  mediaId: r.media_id,
+  caption: r.caption,
+  platforms: r.platforms ? r.platforms.split(",").filter(Boolean) : [],
+  scheduledAt: r.scheduled_at,
+  status: r.status,
+  externalId: r.external_id,
+  error: r.error,
+  createdAt: r.created_at,
+});
+
+export type ScheduledPost = ReturnType<typeof shapeScheduledPost>;
+
+export async function listScheduledPostsFor(userId: string): Promise<ScheduledPost[]> {
+  if (!dbConfigured()) return [];
+  await ensureSchema();
+  const q = sql();
+  if (!q) return [];
+  const rows = (await q`
+    SELECT id, media_id, caption, platforms, scheduled_at, status, external_id, error, created_at
+    FROM scheduled_posts
+    WHERE user_id = ${userId}
+    ORDER BY scheduled_at ASC
+    LIMIT 500
+  `) as ScheduledPostRow[];
+  return rows.map(shapeScheduledPost);
+}
+
+export type QueuePostInput = { userId: string; caption: string; mediaId: string | null; platforms: string[]; scheduledAt: string };
+export type QueuePostResult =
+  | { ok: true; id: string; scheduledAt: string; platforms: string[]; status: "queued"; note: string }
+  | { ok: false; error: string };
+
+export async function queuePostFor(input: QueuePostInput): Promise<QueuePostResult> {
+  if (!dbConfigured()) return { ok: false, error: "No database is configured." };
+  await ensureSchema();
+
+  const platforms = [...new Set(input.platforms.map((p) => p.toLowerCase()))].filter((p): p is CcPlatform =>
+    (CC_PLATFORMS as readonly string[]).includes(p),
+  );
+  if (platforms.length === 0) return { ok: false, error: `Choose at least one platform: ${CC_PLATFORMS.join(", ")}.` };
+  if (!input.caption && !input.mediaId) return { ok: false, error: "Add a caption or a media id." };
+
+  const at = new Date(input.scheduledAt);
+  if (!input.scheduledAt || Number.isNaN(at.getTime())) return { ok: false, error: "That date and time could not be read." };
+  if (at.getTime() < Date.now() - 60_000) return { ok: false, error: "That time is in the past." };
+
+  const q = sql();
+  if (!q) return { ok: false, error: "No database is configured." };
+
+  if (input.mediaId) {
+    const owned = (await q`SELECT id FROM creations WHERE id = ${input.mediaId} AND user_id = ${input.userId}`) as { id: string }[];
+    if (owned.length === 0) return { ok: false, error: "That media id is not in the Command Center's library." };
+  }
+
+  const id = randomUUID();
+  const iso = at.toISOString();
+  await q`
+    INSERT INTO scheduled_posts (id, user_id, media_id, caption, platforms, scheduled_at, status)
+    VALUES (${id}, ${input.userId}, ${input.mediaId}, ${input.caption}, ${platforms.join(",")}, ${iso}, 'queued')
+  `;
+  return { ok: true, id, scheduledAt: iso, platforms, status: "queued", note: "Queued. Connect the channel to publish automatically." };
+}
+
+export async function cancelScheduledPostFor(userId: string, id: string): Promise<{ ok: true } | { ok: false; error: string }> {
+  if (!dbConfigured()) return { ok: false, error: "No database is configured." };
+  await ensureSchema();
+  const q = sql();
+  if (!q) return { ok: false, error: "No database is configured." };
+  await q`DELETE FROM scheduled_posts WHERE id = ${id} AND user_id = ${userId}`;
+  return { ok: true };
+}
 
 const STATUSES = new Set(["planned", "due", "done", "cancelled"]);
 
