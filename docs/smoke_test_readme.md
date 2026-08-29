@@ -1,18 +1,19 @@
 # Smoke Test: Confirm README.md Exists at Repo Root
 
-This document outlines the steps to confirm the existence of the `README.md` file at the root of the repository. It includes requirements for screenshots and testing procedures.
+This document outlines the steps to perform a smoke test to confirm the existence of the `README.md` file at the root of the repository. It includes requirements for screenshots and guidelines for a polished user experience.
 
 ## Steps to Confirm README.md Existence
 1. Navigate to the root directory of the repository.
 2. Check for the presence of the `README.md` file.
+3. Open the `README.md` file to ensure it is accessible and displays correctly.
 
 ## Required Evidence
-- **Screenshots**:
-  - Capture a screenshot of the `README.md` file confirmation on a desktop view.
-  - Capture a screenshot of the `README.md` file confirmation on a mobile view.
+- **Screenshots**: Capture screenshots of the `README.md` confirmation on both desktop and mobile views.
+  - **Desktop View**: Show the `README.md` file in a code editor or viewer.
+  - **Mobile View**: Display the `README.md` file in a mobile browser or viewer.
 
-## Tests to Run After Revision
-- Re-run the project test suite to ensure all functionalities are intact.
+## Post-Revision Testing
+After completing the above steps and addressing mandatory failures, re-run the project test suite to ensure all tests pass successfully.
 
 ## Conclusion
-Ensure that both desktop and mobile screenshots are provided to clear mandatory failures and confirm the successful completion of this smoke test.
+Ensure that all mandatory failures are cleared and evidence is attached before claiming completion of this task.
