@@ -18,7 +18,7 @@ The purpose of this smoke test is to confirm that the `README.md` file is presen
 4. Check for the presence of `README.md` in the output.
 
 ## Expected Output
-The output of the `ls -la` command should include `README.md` in the list of files.
+The output of the `ls -la` command should include `README.md` in the list of files. 
 
 ## Screenshots
 - **Desktop Output:**
