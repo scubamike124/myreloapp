@@ -8,7 +8,7 @@ This document outlines the steps to perform a smoke test to confirm the existenc
    ```bash
    cd path/to/your/repo
    ```
-3. **List Files**: Execute the following command to list the files in the root directory:
+3. **List Files**: Execute the following command to list files in the root directory:
    ```bash
    ls -la
    ```
@@ -21,10 +21,10 @@ total 32
 drwxr-xr-x  5 user  group  160 Oct  1 12:00 .
 drwxr-xr-x  8 user  group  256 Oct  1 12:00 ..
 -rw-r--r--  1 user  group  512 Oct  1 12:00 README.md
-```
+```  
 
 ## Conclusion
-The presence of the `README.md` file at the root of the repository is essential for providing users with initial guidance and documentation about the project. Ensure that this file is not only present but also up-to-date and informative. If the file is missing, it is crucial to create one to enhance user experience and project clarity.
+The presence of the `README.md` file is crucial for providing users with essential information about the repository. If the file is missing, it should be created to ensure users have access to necessary documentation and guidance.
 
 ## Screenshots
 - **Desktop View**: ![Desktop Terminal Output](path/to/desktop_screenshot.png)
