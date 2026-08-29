@@ -16,4 +16,4 @@ This document outlines the process for confirming the presence of the `README.md
 ![Mobile Output](path/to/mobile_screenshot.png)
 
 ## Conclusion
-The presence of the `README.md` file has been confirmed through the terminal output. The test was successful, and the file exists at the root of the repository. This confirms that the initial setup of the repository is correct and ready for further development.
+The presence of the `README.md` file has been confirmed through the terminal output. The test was successful, with 1 test passed and 0 failed. This confirms that the initial setup of the repository is correct and ready for further development.
