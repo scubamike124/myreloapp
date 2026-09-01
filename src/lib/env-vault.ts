@@ -130,6 +130,14 @@ export const KNOWN_KEYS: KnownKey[] = [
     group: "Admin access",
   },
   {
+    name: "SAM_API_KEY",
+    label: "SAM.gov API key",
+    kind: "secret",
+    purpose:
+      "Official sam.gov / SA.gov opportunities API key for Amber nationwide government job scanning (EMP). Get it from sam.gov → Account Details → API Key.",
+    group: "Amber Earnings",
+  },
+  {
     name: "STRIPE_PUBLISHABLE_KEY",
     label: "Stripe publishable key",
     kind: "public",

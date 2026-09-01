@@ -9,6 +9,8 @@ type NavItem = { key: string; label: string; href: string; icon: IconKey };
 const NAV: NavItem[] = [
   { key: "overview", label: "Overview", href: "/business-center", icon: "home" },
   { key: "builder", label: "Amber Fix", href: "/amber-builder", icon: "code" },
+  { key: "earnings", label: "Amber Earnings", href: "/business-center/amber-earnings", icon: "dollar" },
+  { key: "property", label: "Property Intelligence", href: "/business-center/property-intelligence", icon: "home" },
   { key: "create", label: "Create", href: "/create", icon: "pen" },
   { key: "library", label: "Video Library", href: "/library", icon: "film" },
   // Both of these once pointed at "#" and were removed for it. They are back
@@ -28,6 +30,8 @@ const NAV: NavItem[] = [
 /** Badges for overview nav. Only mark NEW — never SOON for live surfaces. */
 const OVERVIEW_BADGES: Record<string, string> = {
   builder: "NEW",
+  earnings: "NEW",
+  property: "NEW",
   assets: "NEW",
   trend: "SOON",
 };
