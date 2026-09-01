@@ -4,6 +4,7 @@ import { ensureSchema, sqlAsync } from "@/lib/db";
 import { SOCIAL_PROVIDERS, type SocialProvider, appBaseUrl } from "@/lib/social/providers";
 import { exchangeOAuthCode, verifyOAuthState } from "@/lib/social/oauth";
 import { encryptToken } from "@/lib/social/tokens";
+import { completeGoogleLogin } from "@/lib/complete-google-login";
 
 export const runtime = "nodejs";
 
@@ -29,6 +30,17 @@ export async function GET(req: Request, ctx: Ctx) {
   const state = url.searchParams.get("state") || "";
   if (!code || !state) {
     return NextResponse.redirect(`${socialUrl}?oauth=error&reason=missing_code`);
+  }
+
+  // Google Sign-In reuses this exact callback path (its authorize URL is
+  // registered against the same Google OAuth client as YouTube publish) but
+  // is a completely different flow -- signing someone into a Reelo account,
+  // not connecting a social channel to an existing one. It's the only flow
+  // whose state carries this literal prefix, so branch on that alone, before
+  // this route's own verifyOAuthState (which expects a signed-in-user state
+  // shape and would reject this one).
+  if (state.startsWith("google_login.")) {
+    return completeGoogleLogin(code, state);
   }
 
   const verified = verifyOAuthState(state, provider);

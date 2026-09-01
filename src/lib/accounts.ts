@@ -3,29 +3,44 @@ import { promisify } from "node:util";
 import { cookies } from "next/headers";
 import { sqlAsync, ensureSchema, dbConfigured } from "@/lib/db";
 import { WELCOME_TOKENS } from "@/lib/token-pricing";
+import type { GoogleProfile } from "@/lib/google-login";
+import { tryClaimFirstOwner } from "@/lib/owner-claim";
 
 export { WELCOME_TOKENS };
 
 // ---------------------------------------------------------------------------
 // User accounts.
 //
-// Deliberately dependency-free: Web Crypto PBKDF2 for new hashes (reliable on
-// Cloudflare Workers), with scrypt verify kept for any legacy rows. Opaque
-// session id in an httpOnly cookie checked against the sessions table.
-//
-// Passwords are never logged, never returned, and compared in constant time.
+// Web Crypto PBKDF2 for new hashes (Cloudflare Workers-safe), scrypt verify for
+// legacy rows. Roles: USER | ADMIN | OWNER. Google Sign-In can claim OWNER once
+// (or always for the configured owner email).
 // ---------------------------------------------------------------------------
 
 const scrypt = promisify(scryptCb) as (pw: string, salt: Buffer, len: number) => Promise<Buffer>;
 
 export const SESSION_COOKIE = "reelo_session";
 export const SESSION_DAYS = 30;
-const PBKDF2_ITERS = 100_000; // Workers Web Crypto rejects > 100_000 iterations.
+const PBKDF2_ITERS = 100_000;
 
-export type User = { id: string; email: string; name: string | null };
+/** USER = ordinary; ADMIN = promoted by Owner; OWNER = configured / first claim. */
+export type UserRole = "USER" | "ADMIN" | "OWNER";
+
+export type User = {
+  id: string;
+  email: string;
+  name: string | null;
+  role: UserRole;
+};
+
+const OAUTH_PASSWORD_PLACEHOLDER = "oauth:google";
 
 async function dbSql() {
   return sqlAsync();
+}
+
+function normalizeRole(raw: string | null | undefined): UserRole {
+  if (raw === "OWNER" || raw === "ADMIN") return raw;
+  return "USER";
 }
 
 async function pbkdf2Hex(password: string, salt: Uint8Array): Promise<string> {
@@ -45,7 +60,8 @@ async function hash(password: string): Promise<string> {
   return `pbkdf2:${PBKDF2_ITERS}:${salt.toString("hex")}:${derived}`;
 }
 
-async function verify(password: string, stored: string): Promise<boolean> {
+async function verify(password: string, stored: string | null): Promise<boolean> {
+  if (!stored) return false;
   const parts = stored.split(":");
   const scheme = parts[0];
 
@@ -101,38 +117,124 @@ export async function createUser(email: string, password: string, name: string):
 
   const id = randomUUID();
   await q`
-    INSERT INTO users (id, email, password_hash, name)
-    VALUES (${id}, ${clean}, ${await hash(password)}, ${name.trim().slice(0, 80) || null})`;
+    INSERT INTO users (id, email, password_hash, name, role, auth_provider)
+    VALUES (${id}, ${clean}, ${await hash(password)}, ${name.trim().slice(0, 80) || null}, ${"USER"}, ${"password"})`;
 
-  // Welcome credit, recorded like every other movement so the balance always
-  // equals the sum of the ledger.
   try {
     await q`
       INSERT INTO token_ledger (user_id, delta, reason, ref)
       VALUES (${id}, ${WELCOME_TOKENS}, 'welcome', ${`welcome:${id}`})`;
   } catch (e) {
-    // Unique-ref races are fine; other ledger failures should surface.
     const msg = e instanceof Error ? e.message : "";
     if (!/duplicate|unique/i.test(msg)) throw e;
   }
 
-  return { id, email: clean, name: name.trim() || null };
+  return { id, email: clean, name: name.trim() || null, role: "USER" };
 }
 
 export async function authenticate(email: string, password: string): Promise<User | null> {
   const q = await dbSql();
   if (!q || !(await ensureSchema())) return null;
   const rows = (await q`
-    SELECT id, email, name, password_hash FROM users WHERE email = ${email.trim().toLowerCase()}
-  `) as { id: string; email: string; name: string | null; password_hash: string }[];
+    SELECT id, email, name, password_hash, COALESCE(role, 'USER') AS role
+    FROM users WHERE email = ${email.trim().toLowerCase()}
+  `) as { id: string; email: string; name: string | null; password_hash: string | null; role: string }[];
   const row = rows[0];
   if (!row) {
-    // Burn comparable time so a missing account is not detectable by timing.
     await hash(password);
     return null;
   }
   if (!(await verify(password, row.password_hash))) return null;
-  return { id: row.id, email: row.email, name: row.name };
+  return { id: row.id, email: row.email, name: row.name, role: normalizeRole(row.role) };
+}
+
+/**
+ * Find-or-create a user from a verified Google profile, then attempt the
+ * Owner claim (first claim or configured owner email).
+ */
+export async function upsertGoogleUser(
+  profile: GoogleProfile,
+): Promise<{ user: User; created: boolean; claimedOwner: boolean } | { error: string }> {
+  const q = await dbSql();
+  if (!q || !(await ensureSchema())) return { error: "Accounts are not available yet." };
+
+  if (!profile.emailVerified) {
+    return { error: "Verify your Google email before signing in to Reelo." };
+  }
+  if (!validEmail(profile.email)) return { error: "Google returned an invalid email." };
+
+  const email = profile.email.trim().toLowerCase();
+
+  let rows = (await q`
+    SELECT id, email, name, role, google_sub FROM users WHERE google_sub = ${profile.sub} LIMIT 1
+  `) as { id: string; email: string; name: string | null; role: string; google_sub: string | null }[];
+
+  if (!rows[0]) {
+    rows = (await q`
+      SELECT id, email, name, role, google_sub FROM users WHERE email = ${email} LIMIT 1
+    `) as typeof rows;
+  }
+
+  let created = false;
+  let userId: string;
+
+  if (rows[0]) {
+    userId = rows[0].id;
+    await q`
+      UPDATE users
+      SET google_sub = COALESCE(google_sub, ${profile.sub}),
+          auth_provider = CASE
+            WHEN auth_provider IS NULL OR auth_provider = 'password' THEN 'google'
+            ELSE auth_provider
+          END,
+          name = COALESCE(${profile.name}, name)
+      WHERE id = ${userId}
+    `;
+  } else {
+    userId = randomUUID();
+    created = true;
+    await q`
+      INSERT INTO users (id, email, password_hash, name, role, google_sub, auth_provider)
+      VALUES (
+        ${userId},
+        ${email},
+        ${OAUTH_PASSWORD_PLACEHOLDER},
+        ${profile.name},
+        ${"USER"},
+        ${profile.sub},
+        ${"google"}
+      )
+    `;
+    try {
+      await q`
+        INSERT INTO token_ledger (user_id, delta, reason, ref)
+        VALUES (${userId}, ${WELCOME_TOKENS}, 'welcome', ${`welcome:${userId}`})
+      `;
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "";
+      if (!/duplicate|unique/i.test(msg)) throw e;
+    }
+  }
+
+  const claimedOwner = Boolean(await tryClaimFirstOwner(userId));
+
+  const fresh = (await q`
+    SELECT id, email, name, COALESCE(role, 'USER') AS role FROM users WHERE id = ${userId} LIMIT 1
+  `) as { id: string; email: string; name: string | null; role: string }[];
+
+  const row = fresh[0];
+  if (!row) return { error: "Could not load account after Google sign-in." };
+
+  return {
+    user: {
+      id: row.id,
+      email: row.email,
+      name: row.name,
+      role: normalizeRole(row.role),
+    },
+    created,
+    claimedOwner,
+  };
 }
 
 export async function startSession(userId: string): Promise<string | null> {
@@ -162,21 +264,18 @@ export async function currentUser(): Promise<User | null> {
   if (!q || !(await ensureSchema())) return null;
 
   const rows = (await q`
-    SELECT u.id, u.email, u.name
+    SELECT u.id, u.email, u.name, COALESCE(u.role, 'USER') AS role
     FROM sessions s
     JOIN users u ON u.id = s.user_id
     WHERE s.id = ${sid} AND s.expires_at > ${new Date().toISOString()}
-  `) as User[];
-  return rows[0] ?? null;
+  `) as { id: string; email: string; name: string | null; role: string }[];
+  const row = rows[0];
+  if (!row) return null;
+  return { id: row.id, email: row.email, name: row.name, role: normalizeRole(row.role) };
 }
 
-const RESET_TTL_MS = 60 * 60 * 1000; // 1 hour
+const RESET_TTL_MS = 60 * 60 * 1000;
 
-/**
- * Create a one-time password reset token for an existing account.
- * Always returns ok-shaped result to callers so they can avoid email enumeration;
- * `token` is only present when an account exists (for the mailer).
- */
 export async function createPasswordResetToken(
   email: string,
 ): Promise<{ ok: true; token?: string; email?: string }> {
@@ -203,7 +302,6 @@ export async function createPasswordResetToken(
   return { ok: true, token, email: user.email };
 }
 
-/** Apply a reset token and set a new password. Invalid/expired → null. */
 export async function resetPasswordWithToken(
   token: string,
   newPassword: string,
@@ -226,7 +324,6 @@ export async function resetPasswordWithToken(
 
   await q`UPDATE users SET password_hash = ${await hash(newPassword)} WHERE id = ${row.user_id}`;
   await q`DELETE FROM password_reset_tokens WHERE user_id = ${row.user_id}`;
-  // Force re-login after a password change.
   await q`DELETE FROM sessions WHERE user_id = ${row.user_id}`;
   return { ok: true };
 }

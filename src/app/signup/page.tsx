@@ -5,6 +5,7 @@ import AuthForm from "@/components/account/AuthForm";
 import { dbConfigured } from "@/lib/db";
 import { currentUser } from "@/lib/accounts";
 import { WELCOME_TOKENS, formatTokens } from "@/lib/token-pricing";
+import { googleLoginConfigured } from "@/lib/google-login";
 
 export const metadata = { title: "Create your account — Reelo" };
 
@@ -23,7 +24,7 @@ export default async function SignupPage() {
         </p>
 
         {dbConfigured() ? (
-          <AuthForm mode="signup" />
+          <AuthForm mode="signup" googleEnabled={googleLoginConfigured()} />
         ) : (
           <NotConfigured />
         )}

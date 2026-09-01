@@ -33,6 +33,7 @@ export type AmberContext = {
 
 /** Map a pathname to a coarse product area. */
 export function areaFromPath(path: string): string {
+  if (path.startsWith("/amber-builder")) return "amber-fix";
   if (path.startsWith("/create")) return "create";
   if (path.startsWith("/library")) return "library";
   if (path.startsWith("/business-center") || path.startsWith("/business-hub")) return "business";
@@ -43,6 +44,7 @@ export function areaFromPath(path: string): string {
 }
 
 const AREA_LABEL: Record<string, string> = {
+  "amber-fix": "Amber Fixes — owner engineering surface for inspecting repos, coding, testing, and shipping",
   create: "the Create area, browsing or using a video tool",
   library: "their Library of past creations",
   business: "the Business Center (Social Account Manager, calendar, publish queue, brand kit, analytics)",

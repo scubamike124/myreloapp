@@ -34,9 +34,27 @@ export const PROVIDER_META: Record<SocialProvider, ProviderConfig> = {
   },
 };
 
+/** Resolve YouTube/Google OAuth client from Amber vault names or Reelo aliases. */
+export function youtubeClientId(): string {
+  return (
+    process.env.GOOGLE_OAUTH_CLIENT_ID?.trim() ||
+    process.env.YOUTUBE_CLIENT_ID?.trim() ||
+    ""
+  );
+}
+
+export function youtubeClientSecret(): string {
+  return (
+    process.env.GOOGLE_OAUTH_CLIENT_SECRET?.trim() ||
+    process.env.YOUTUBE_CLIENT_SECRET?.trim() ||
+    ""
+  );
+}
+
 export function providerSecretsReady(provider: SocialProvider): boolean {
   const meta = PROVIDER_META[provider];
   if (meta.future) return false;
+  if (provider === "youtube") return Boolean(youtubeClientId() && youtubeClientSecret());
   return meta.requiredEnv.every((k) => Boolean(process.env[k]?.trim()));
 }
 

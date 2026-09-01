@@ -8,7 +8,7 @@ import Link from "next/link";
  * Sign in and sign up. One component, because the two forms differ by a single
  * field and keeping them together stops them drifting apart.
  */
-export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
+export default function AuthForm({ mode, googleEnabled = false }: { mode: "login" | "signup"; googleEnabled?: boolean }) {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -49,6 +49,28 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
 
   return (
     <form onSubmit={submit} className="flex flex-col gap-3.5">
+      {googleEnabled && (
+        <>
+          <a
+            href={`/api/auth/google/start?next=${encodeURIComponent(isSignup ? "/account" : "/account")}`}
+            className="flex items-center justify-center gap-2.5 rounded-xl border border-white/15 bg-white py-3 text-sm font-bold text-[#1f1f1f] transition-transform hover:scale-[1.01]"
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden>
+              <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62z" />
+              <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.92-2.26c-.81.54-1.84.87-3.04.87-2.34 0-4.32-1.58-5.03-3.7H.96v2.33A9 9 0 0 0 9 18z" />
+              <path fill="#FBBC05" d="M3.97 10.73A5.4 5.4 0 0 1 3.69 9c0-.6.1-1.19.28-1.73V4.94H.96A9 9 0 0 0 0 9c0 1.45.35 2.83.96 4.06l3.01-2.33z" />
+              <path fill="#EA4335" d="M9 3.58c1.32 0 2.5.46 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .96 4.94l3.01 2.33C4.68 5.16 6.66 3.58 9 3.58z" />
+            </svg>
+            Continue with Google
+          </a>
+          <div className="flex items-center gap-3 text-[12px] text-white/35">
+            <span className="h-px flex-1 bg-white/10" />
+            or
+            <span className="h-px flex-1 bg-white/10" />
+          </div>
+        </>
+      )}
+
       {isSignup && (
         <div>
           <label htmlFor="af-name" className="mb-1.5 block text-[13px] font-semibold text-white/80">Your name</label>

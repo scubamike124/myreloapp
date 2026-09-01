@@ -2849,6 +2849,12 @@ export async function ensureSchema(): Promise<boolean> {
   try {
     await q`SELECT 1 FROM users LIMIT 1`;
     await ensureWorkspaceTables(q);
+    try {
+      const { ensureOwnerToolsSchema } = await import("@/lib/owner-tools-schema");
+      await ensureOwnerToolsSchema(q, pg);
+    } catch (err) {
+      console.error("[db] owner-tools-schema skipped:", err instanceof Error ? err.message : err);
+    }
     ensured = true;
     return true;
   } catch {
@@ -2863,6 +2869,40 @@ export async function ensureSchema(): Promise<boolean> {
         password_hash TEXT NOT NULL,
         name          TEXT,
         created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+      )`;
+
+    // Confirmed live: role/google_sub/auth_provider were already columns on
+    // the real production users table (added directly against Supabase,
+    // never through this bootstrap) -- roles.ts, owner-claim.ts, and Google
+    // sign-in all depend on them. Without these, a fresh database (or any
+    // environment that only ever ran this file) would be missing the exact
+    // columns the owner/Google-login system requires.
+    try {
+      await q`ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'USER'`;
+    } catch {
+      /* already present */
+    }
+    try {
+      await q`ALTER TABLE users ADD COLUMN google_sub TEXT`;
+    } catch {
+      /* already present */
+    }
+    try {
+      await q`ALTER TABLE users ADD COLUMN auth_provider TEXT NOT NULL DEFAULT 'password'`;
+    } catch {
+      /* already present */
+    }
+    await q`CREATE UNIQUE INDEX IF NOT EXISTS users_google_sub_key ON users (google_sub) WHERE google_sub IS NOT NULL`;
+    // Belt-and-suspenders alongside owner-claim.ts's own race-safe UPDATE:
+    // this makes "more than one OWNER" structurally impossible rather than
+    // just unlikely.
+    await q`CREATE UNIQUE INDEX IF NOT EXISTS users_one_owner ON users ((role = 'OWNER')) WHERE role = 'OWNER'`;
+
+    await q`
+      CREATE TABLE IF NOT EXISTS platform_meta (
+        key        TEXT PRIMARY KEY,
+        value      TEXT NOT NULL,
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
       )`;
 
     await q`
@@ -2947,6 +2987,30 @@ export async function ensureSchema(): Promise<boolean> {
         created_at    TEXT NOT NULL DEFAULT (datetime('now'))
       )`);
 
+    try {
+      await exec(`ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'USER'`);
+    } catch {
+      /* already present */
+    }
+    try {
+      await exec(`ALTER TABLE users ADD COLUMN google_sub TEXT`);
+    } catch {
+      /* already present */
+    }
+    try {
+      await exec(`ALTER TABLE users ADD COLUMN auth_provider TEXT NOT NULL DEFAULT 'password'`);
+    } catch {
+      /* already present */
+    }
+    await exec(`CREATE UNIQUE INDEX IF NOT EXISTS users_google_sub_key ON users (google_sub) WHERE google_sub IS NOT NULL`);
+
+    await exec(`
+      CREATE TABLE IF NOT EXISTS platform_meta (
+        key        TEXT PRIMARY KEY,
+        value      TEXT NOT NULL,
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      )`);
+
     await exec(`
       CREATE TABLE IF NOT EXISTS token_ledger (
         id         INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -3008,6 +3072,12 @@ export async function ensureSchema(): Promise<boolean> {
   }
 
   await ensureWorkspaceTables(q);
+  try {
+    const { ensureOwnerToolsSchema } = await import("@/lib/owner-tools-schema");
+    await ensureOwnerToolsSchema(q, pg);
+  } catch (err) {
+    console.error("[db] owner-tools-schema skipped:", err instanceof Error ? err.message : err);
+  }
   ensured = true;
   return true;
 }
