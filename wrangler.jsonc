@@ -42,7 +42,13 @@
   "hyperdrive": [
     {
       "binding": "HYPERDRIVE",
-      "id": "fb7349127d7e4bb699b877d1ec859679"
+      "id": "fb7349127d7e4bb699b877d1ec859679",
+      // Local/CI only (Miniflare + OpenNext binding check). Runtime still uses
+      // the Hyperdrive id above. Env CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE
+      // overrides this when set. Workers Builds was not injecting the Build secret
+      // (build details showed "Build variables: None"), so a non-secret localhost
+      // placeholder is required for CI to pass the wrangler local Hyperdrive gate.
+      "localConnectionString": "postgresql://build:build@127.0.0.1:5432/postgres"
     }
   ]
 }
