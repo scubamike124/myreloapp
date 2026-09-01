@@ -28,17 +28,19 @@ const STAT_ICONS: IconKey[] = ["film", "eye", "heart", "growth", "dollar"];
 
 const CARDS: { n: number; icon: IconKey; art: string; title: string; desc: string; badge?: string; href: string }[] = [
   { n: 0, icon: "code", art: "hub-pro", title: "Amber Fix", desc: "Describe a fix or build. Amber codes, tests, and ships on Relo.", badge: "NEW", href: "/amber-builder" },
-  { n: 1, icon: "crown", art: "hub-pro", title: "Business Center Pro", desc: "Full Pro studio and owner tools hub.", badge: "NEW", href: "/business-center/pro" },
-  { n: 2, icon: "pen", art: "create", title: "Create", desc: "Make amazing videos in minutes.", href: "/create" },
-  { n: 3, icon: "film", art: "video-library", title: "Video Library", desc: "Manage and organize all your creations.", href: "/library" },
-  { n: 4, icon: "palette", art: "brand-kit", title: "Brand Kit", desc: "Store your logos, colors, fonts, and brand assets.", href: "/business-center/brand-kit" },
-  { n: 5, icon: "folder", art: "assets", title: "Assets", desc: "Access and manage all your media and resources.", badge: "NEW", href: "/business-center/assets" },
-  { n: 6, icon: "share", art: "social", title: "Social", desc: "Connect and grow your social channels.", href: "/business-center/social" },
-  { n: 7, icon: "rocket", art: "publishing", title: "Publishing", desc: "Publish your content everywhere.", href: "/business-center/publishing" },
-  { n: 8, icon: "calendar", art: "scheduling", title: "Scheduling", desc: "Schedule posts and never miss a beat.", href: "/business-center/scheduling" },
-  { n: 9, icon: "chart", art: "analytics", title: "Analytics", desc: "Track performance and grow faster.", href: "/business-center/analytics" },
-  { n: 10, icon: "dollar", art: "revenue", title: "Revenue", desc: "Monitor earnings and growth.", href: "/business-center/revenue" },
-  { n: 11, icon: "brain", art: "trend-ai", title: "Trend AI", desc: "Discover trending topics and ideas.", badge: "SOON", href: "/trends" },
+  { n: 1, icon: "dollar", art: "revenue", title: "Amber Earnings", desc: "Owner income command center — platforms, jobs, Needs Mike.", badge: "NEW", href: "/business-center/amber-earnings" },
+  { n: 2, icon: "home", art: "hub-pro", title: "Property Intelligence", desc: "California property research and private deal opportunities.", badge: "NEW", href: "/business-center/property-intelligence" },
+  { n: 3, icon: "crown", art: "hub-pro", title: "Business Center Pro", desc: "Full Pro studio and owner tools hub.", badge: "NEW", href: "/business-center/pro" },
+  { n: 4, icon: "pen", art: "create", title: "Create", desc: "Make amazing videos in minutes.", href: "/create" },
+  { n: 5, icon: "film", art: "video-library", title: "Video Library", desc: "Manage and organize all your creations.", href: "/library" },
+  { n: 6, icon: "palette", art: "brand-kit", title: "Brand Kit", desc: "Store your logos, colors, fonts, and brand assets.", href: "/business-center/brand-kit" },
+  { n: 7, icon: "folder", art: "assets", title: "Assets", desc: "Access and manage all your media and resources.", badge: "NEW", href: "/business-center/assets" },
+  { n: 8, icon: "share", art: "social", title: "Social", desc: "Connect and grow your social channels.", href: "/business-center/social" },
+  { n: 9, icon: "rocket", art: "publishing", title: "Publishing", desc: "Publish your content everywhere.", href: "/business-center/publishing" },
+  { n: 10, icon: "calendar", art: "scheduling", title: "Scheduling", desc: "Schedule posts and never miss a beat.", href: "/business-center/scheduling" },
+  { n: 11, icon: "chart", art: "analytics", title: "Analytics", desc: "Track performance and grow faster.", href: "/business-center/analytics" },
+  { n: 12, icon: "dollar", art: "revenue", title: "Revenue", desc: "Monitor earnings and growth.", href: "/business-center/revenue" },
+  { n: 13, icon: "brain", art: "trend-ai", title: "Trend AI", desc: "Discover trending topics and ideas.", badge: "SOON", href: "/trends" },
 ];
 
 // Every one of these goes to something that works. The old set listed "Video to
@@ -46,6 +48,8 @@ const CARDS: { n: number; icon: IconKey; art: string; title: string; desc: strin
 // were links at all.
 const QUICK: { icon: IconKey; label: string; href: string }[] = [
   { icon: "code", label: "Amber Fix", href: "/amber-builder" },
+  { icon: "dollar", label: "Amber Earnings", href: "/business-center/amber-earnings" },
+  { icon: "home", label: "Property Intel", href: "/business-center/property-intelligence" },
   { icon: "crown", label: "BC Pro", href: "/business-center/pro" },
   { icon: "film", label: "New Video", href: "/create" },
   { icon: "upload", label: "Upload Media", href: "/business-center/assets" },
