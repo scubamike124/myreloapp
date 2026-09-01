@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import DesignShell from "@/components/design/DesignShell";
 import AuthForm from "@/components/account/AuthForm";
 import { dbConfigured } from "@/lib/db";
@@ -24,7 +25,9 @@ export default async function SignupPage() {
         </p>
 
         {dbConfigured() ? (
-          <AuthForm mode="signup" googleEnabled={googleLoginConfigured()} />
+          <Suspense fallback={null}>
+            <AuthForm mode="signup" googleEnabled={googleLoginConfigured()} />
+          </Suspense>
         ) : (
           <NotConfigured />
         )}
