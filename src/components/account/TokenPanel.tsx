@@ -8,7 +8,7 @@ import { formatTokens, formatUsdFromTokens, TOKEN_USD_VALUE } from "@/lib/token-
 type Entry = { delta: number; reason: string; created_at: string };
 type State = {
   configured: boolean;
-  user: { id: string; email: string; name: string | null } | null;
+  user: { id: string; email: string; name: string | null; role?: "USER" | "ADMIN" | "OWNER" } | null;
   balance: number;
   history: Entry[];
 };
@@ -78,7 +78,17 @@ export default function TokenPanel() {
       <div className="flex flex-wrap items-center gap-3">
         <div className="min-w-0 flex-1">
           <p className="text-[13px] text-white/45">Signed in as</p>
-          <p className="truncate font-semibold text-white">{state.user.name || state.user.email}</p>
+          <p className="flex items-center gap-1.5 truncate font-semibold text-white">
+            {state.user.name || state.user.email}
+            {(state.user.role === "OWNER" || state.user.role === "ADMIN") && (
+              <span
+                className="shrink-0 rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white"
+                style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+              >
+                {state.user.role}
+              </span>
+            )}
+          </p>
         </div>
         <div className="text-right">
           <p className="text-[13px] text-white/45">Token balance · 1 = ${TOKEN_USD_VALUE}</p>

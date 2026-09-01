@@ -100,6 +100,18 @@ test("only the configured owner email can ever receive the OWNER role via Google
   );
 });
 
+test("OWNER/ADMIN status is visibly shown, not just the signed-in name", () => {
+  // Confirmed live: after signing in, Michael saw his name but nothing told
+  // him whether the account was actually recognized as owner. "Signed in"
+  // must not be the only thing shown.
+  const panel = read("components/account/TokenPanel.tsx");
+  assert.match(panel, /state\.user\.role/, "the account page must read the signed-in user's role");
+  assert.match(panel, /OWNER.*ADMIN|ADMIN.*OWNER/s, "the account page must render OWNER/ADMIN as a visible badge, not silently ignore role");
+
+  const dashboard = read("components/business/BusinessProDashboard.tsx");
+  assert.match(dashboard, /role === ["']OWNER["']/, "Business Center Pro must also check the role, not just signedIn/userName");
+});
+
 test("the owner-mode Amber persona still overrides the base \"cannot act\" restriction", () => {
   // Regression test for the exact bug found live this session: the base
   // AMBER_SYSTEM_PROMPT's "you cannot act" line bled into owner-mode replies
