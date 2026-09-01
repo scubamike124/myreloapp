@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import DesignShell from "@/components/design/DesignShell";
 import AuthForm from "@/components/account/AuthForm";
 import { dbConfigured } from "@/lib/db";
@@ -21,7 +22,9 @@ export default async function LoginPage() {
         <p className="mt-2 mb-7 text-[14.5px] text-white/55">Welcome back. Your tokens and videos are waiting.</p>
 
         {dbConfigured() ? (
-          <AuthForm mode="login" googleEnabled={googleLoginConfigured()} />
+          <Suspense fallback={null}>
+            <AuthForm mode="login" googleEnabled={googleLoginConfigured()} />
+          </Suspense>
         ) : (
           <NotConfigured />
         )}

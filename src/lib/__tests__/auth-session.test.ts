@@ -55,6 +55,51 @@ test("currentUser only returns a user for a non-expired session", () => {
   );
 });
 
+test("password sign-up/sign-in/reset are rejected, not silently processed", () => {
+  // Removed entirely with no customers ever on a password account. This
+  // guards against someone re-wiring these actions back in without
+  // noticing Google is supposed to be the only way in now.
+  const route = read("app/api/auth/route.ts");
+  for (const action of ["signup", "login", "reset-password", "request-reset"]) {
+    assert.match(
+      route,
+      new RegExp(`action === ["']${action}["']`),
+      `POST /api/auth must still recognize "${action}" so it can explicitly reject it`,
+    );
+  }
+  assert.doesNotMatch(
+    route,
+    /createUser\(|authenticate\(|resetPasswordWithToken\(|createPasswordResetToken\(/,
+    "the route must not call any password-auth function -- these actions should be rejected outright, not processed",
+  );
+});
+
+test("AuthForm no longer renders a password field", () => {
+  const form = read("components/account/AuthForm.tsx");
+  assert.doesNotMatch(form, /type=["']password["']/, "no password input should remain in the sign-in/sign-up form");
+  assert.match(form, /Continue with Google/, "Google must still be the offered sign-in method");
+});
+
+test("a failed Google sign-in shows a real error, never a silent session", () => {
+  const complete = read("lib/complete-google-login.ts");
+  assert.match(
+    complete,
+    /searchParams\.set\(["']error["']/,
+    "a failed Google callback must redirect with a visible error, not silently continue",
+  );
+  const form = read("components/account/AuthForm.tsx");
+  assert.match(form, /params\.get\(["']error["']\)/, "the sign-in page must actually read and display that error param");
+});
+
+test("only the configured owner email can ever receive the OWNER role via Google sign-in", () => {
+  const claim = read("lib/owner-claim.ts");
+  assert.match(
+    claim,
+    /CONFIGURED_OWNER_EMAILS\.includes\(email\)/,
+    "promoting an existing account to OWNER must check the configured owner email allowlist -- without this, any Google account could end up OWNER",
+  );
+});
+
 test("the owner-mode Amber persona still overrides the base \"cannot act\" restriction", () => {
   // Regression test for the exact bug found live this session: the base
   // AMBER_SYSTEM_PROMPT's "you cannot act" line bled into owner-mode replies
