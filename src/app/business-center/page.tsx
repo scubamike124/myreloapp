@@ -27,29 +27,29 @@ function Skyline() {
 const STAT_ICONS: IconKey[] = ["film", "eye", "heart", "growth", "dollar"];
 
 const CARDS: { n: number; icon: IconKey; art: string; title: string; desc: string; badge?: string; href: string }[] = [
-  { n: 1, icon: "pen", art: "create", title: "Create", desc: "Make amazing videos in minutes.", href: "/create" },
-  { n: 2, icon: "film", art: "video-library", title: "Video Library", desc: "Manage and organize all your creations.", href: "/library" },
-  { n: 3, icon: "palette", art: "brand-kit", title: "Brand Kit", desc: "Store your logos, colors, fonts, and brand assets.", href: "/business-center/brand-kit" },
-  { n: 4, icon: "folder", art: "assets", title: "Assets", desc: "Access and manage all your media and resources.", badge: "NEW", href: "/business-center/assets" },
-  { n: 5, icon: "share", art: "social", title: "Social", desc: "Connect and grow your social channels.", badge: "SOON", href: "/business-center/social" },
-  { n: 6, icon: "rocket", art: "publishing", title: "Publishing", desc: "Publish your content everywhere.", badge: "SOON", href: "/business-center/publishing" },
-  { n: 7, icon: "calendar", art: "scheduling", title: "Scheduling", desc: "Schedule posts and never miss a beat.", badge: "SOON", href: "/business-center/scheduling" },
-  { n: 8, icon: "chart", art: "analytics", title: "Analytics", desc: "Track performance and grow faster.", badge: "SOON", href: "/business-center/analytics" },
-  { n: 9, icon: "dollar", art: "revenue", title: "Revenue", desc: "Monitor earnings and growth.", badge: "SOON", href: "/business-center/revenue" },
-  { n: 10, icon: "brain", art: "trend-ai", title: "Trend AI", desc: "Discover trending topics and ideas.", badge: "SOON", href: "/trends" },
-  { n: 11, icon: "crown", art: "hub-pro", title: "Hub Pro", desc: "Unlock all pro tools and advanced features.", badge: "NEW", href: "/business-center/pro" },
+  { n: 0, icon: "code", art: "hub-pro", title: "Amber Fix", desc: "Describe a fix or build. Amber codes, tests, and ships on Relo.", badge: "NEW", href: "/amber-builder" },
+  { n: 1, icon: "crown", art: "hub-pro", title: "Business Center Pro", desc: "Full Pro studio and owner tools hub.", badge: "NEW", href: "/business-center/pro" },
+  { n: 2, icon: "pen", art: "create", title: "Create", desc: "Make amazing videos in minutes.", href: "/create" },
+  { n: 3, icon: "film", art: "video-library", title: "Video Library", desc: "Manage and organize all your creations.", href: "/library" },
+  { n: 4, icon: "palette", art: "brand-kit", title: "Brand Kit", desc: "Store your logos, colors, fonts, and brand assets.", href: "/business-center/brand-kit" },
+  { n: 5, icon: "folder", art: "assets", title: "Assets", desc: "Access and manage all your media and resources.", badge: "NEW", href: "/business-center/assets" },
+  { n: 6, icon: "share", art: "social", title: "Social", desc: "Connect and grow your social channels.", href: "/business-center/social" },
+  { n: 7, icon: "rocket", art: "publishing", title: "Publishing", desc: "Publish your content everywhere.", href: "/business-center/publishing" },
+  { n: 8, icon: "calendar", art: "scheduling", title: "Scheduling", desc: "Schedule posts and never miss a beat.", href: "/business-center/scheduling" },
+  { n: 9, icon: "chart", art: "analytics", title: "Analytics", desc: "Track performance and grow faster.", href: "/business-center/analytics" },
+  { n: 10, icon: "dollar", art: "revenue", title: "Revenue", desc: "Monitor earnings and growth.", href: "/business-center/revenue" },
+  { n: 11, icon: "brain", art: "trend-ai", title: "Trend AI", desc: "Discover trending topics and ideas.", badge: "SOON", href: "/trends" },
 ];
 
 // Every one of these goes to something that works. The old set listed "Video to
 // Script" and "Clone Video", which are not tools Reelo has, and none of the six
 // were links at all.
 const QUICK: { icon: IconKey; label: string; href: string }[] = [
+  { icon: "code", label: "Amber Fix", href: "/amber-builder" },
+  { icon: "crown", label: "BC Pro", href: "/business-center/pro" },
   { icon: "film", label: "New Video", href: "/create" },
   { icon: "upload", label: "Upload Media", href: "/business-center/assets" },
   { icon: "bolt", label: "Create Short", href: "/create/shorts-20" },
-  { icon: "users", label: "AI Avatar", href: "/create/ai-avatar-studio" },
-  { icon: "doc", label: "Storybook", href: "/create/bedtime-storybook" },
-  { icon: "refresh", label: "Product Ad", href: "/create/product-commercial" },
 ];
 
 const FOOTER: { icon: IconKey; t: string; d: string }[] = [

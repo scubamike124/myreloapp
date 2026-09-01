@@ -205,17 +205,23 @@ const META_TOOL_DEFS: AgentToolDef[] = [
     name: "start_dev_task",
     description:
       "Send a real engineering request (build a feature, fix a bug, add an API, change something in the codebase) to " +
-      "Amber OS's coding-agent loop against the Reelo repo. This does NOT write code itself — it queues a task that a " +
-      "separate, already-running cloud worker claims on its own schedule, writes real code for in an isolated clone " +
-      "(never this live app's own files), tests, and gets reviewed by an automated quality gate. That can take " +
-      "minutes. Returns a taskId immediately — use check_dev_task to follow up, never assume it's done. If Amber OS " +
-      "reports the request needs a human decision (billing, credentials, production deploy, something only Michael " +
-      "can authorize), say that plainly instead of retrying.",
+      "Amber OS's coding-agent loop against the Reelo repo (or the product Michael named). This does NOT write code " +
+      "itself — it queues a task that a separate cloud worker claims, inspects the repo, writes real code in an " +
+      "isolated clone, tests, and opens a PR for the quality gate. Call this as soon as Michael gives a clear " +
+      "outcome. YOU write a self-contained title + description (what to find, what to change, how to verify) — never " +
+      "ask him for file paths, line numbers, or exact sentences. Returns a taskId immediately — use check_dev_task " +
+      "to follow up. If Amber OS needs a human decision only he can authorize (billing, credentials, merge/deploy), " +
+      "say that plainly instead of retrying.",
     parameters: {
       type: "object",
       properties: {
         title: { type: "string", description: "Short task title." },
-        description: { type: "string", description: "What to build/fix/change, in enough detail to act on." },
+        description: {
+          type: "string",
+          description:
+            "Self-contained brief for the coding agent: product outcome, where to look in the Reelo (or named) repo, " +
+            "what to change, and how to verify. Do not leave discovery questions for Michael.",
+        },
         acceptanceCriteria: { type: "string", description: "How to know it's done correctly. Optional but improves the result." },
       },
       required: ["title", "description"],

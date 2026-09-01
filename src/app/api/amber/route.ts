@@ -1,9 +1,15 @@
 import { asRecord, errorMessage } from "@/lib/json";
-import { AMBER_SYSTEM_PROMPT, AMBER_ADMIN_OPERATOR_ADDENDUM } from "@/lib/amber/persona";
+import {
+  AMBER_SYSTEM_PROMPT,
+  AMBER_ADMIN_OPERATOR_ADDENDUM,
+  AMBER_FIX_SURFACE_ADDENDUM,
+} from "@/lib/amber/persona";
 import { parseContext, renderContext, renderServiceState } from "@/lib/amber/context";
 import { isAdminSession } from "@/lib/admin-session";
 import { runAgentTurn, agentProviderConfigured, type AgentMessage, type AgentEvent } from "@/lib/ai/agent-chain";
 import { commandCenterToolDefs, executeCommandCenterTool } from "@/lib/ai/command-center-tools";
+import { isAmberFixWorkIntent, modeInstruction, type AmberMode } from "@/lib/amber/intent";
+import { amberDevBridgeConfigured, startDevTask } from "@/lib/amber/dev-bridge";
 
 // ---------------------------------------------------------------------------
 // Public "Ask Amber" widget — POST /api/amber. Mounted once, unauthenticated,
@@ -94,16 +100,18 @@ function textStream(fn: (controller: ReadableStreamDefaultController<Uint8Array>
 }
 
 /**
- * Michael's own verified-owner turn: the exact same tool-calling agent loop
- * (runAgentTurn), toolset (commandCenterToolDefs — including the dev-bridge
- * build/fix tools), and executor (executeCommandCenterTool) already used by
- * the admin Command Center chat. No conversation is persisted here — this
- * widget keeps its own history client-side, same as it already does for the
- * public path — so the tool executor is called with a null conversation id,
- * a shape it already supports (Command Center's own route falls back to the
- * same null when conversation creation fails).
+ * Michael's own verified-owner turn.
+ *
+ * On Amber Fixes (/amber-builder), work-intent messages do NOT go to the LLM
+ * first. Production proved the model still asks "which line / which page"
+ * even with strong prompts. For those turns we auto-queue start_dev_task with
+ * an investigative brief, then narrate — no clarifying interview.
  */
-function runOwnerTurn(messages: Message[], contextBlock: string): Response {
+function runOwnerTurn(
+  messages: Message[],
+  contextBlock: string,
+  opts: { onAmberFix: boolean; mode: AmberMode | null },
+): Response {
   if (!agentProviderConfigured()) {
     return new Response(
       "Amber's build/fix tools need ANTHROPIC_API_KEY or OPENAI_API_KEY set on this Reelo service before they'll work — nothing is wired up yet on this deploy.",
@@ -111,12 +119,72 @@ function runOwnerTurn(messages: Message[], contextBlock: string): Response {
     );
   }
 
+  const lastUser = [...messages].reverse().find((m) => m.role === "user")?.content?.trim() || "";
+  const autoFix = opts.onAmberFix && isAmberFixWorkIntent(lastUser);
+
+  if (autoFix) {
+    return textStream(async (controller) => {
+      const encoder = new TextEncoder();
+      if (!amberDevBridgeConfigured()) {
+        controller.enqueue(
+          encoder.encode(
+            "I would start that Relo change now, but the coding-agent bridge isn't configured on this deploy (REELO_DEV_BRIDGE_SECRET). Once that's set I can inspect the repo and queue the work without asking you for file paths.",
+          ),
+        );
+        return;
+      }
+
+      const title =
+        lastUser.length <= 72
+          ? lastUser.replace(/\?+$/, "").trim() || "Relo change"
+          : `Relo: ${lastUser.slice(0, 60).trim()}…`;
+
+      const description = [
+        "Owner request via Amber Fixes (/amber-builder):",
+        lastUser,
+        "",
+        "IMPORTANT — the owner did NOT specify file paths, routes, or exact copy.",
+        "You must inspect the Relo (myreloapp) repository and live product yourself,",
+        "locate the relevant code, choose the best interpretation of their outcome,",
+        "implement the change, test it, and open a PR through the normal coding-agent workflow.",
+        "Do not block on asking the owner which line/page/file — discovering that is your job.",
+        "If multiple interpretations exist, pick the highest-value single change on a primary",
+        "Relo surface that matches their wording and document the assumption in the PR.",
+      ].join("\n");
+
+      try {
+        const result = await startDevTask({
+          title,
+          description,
+          acceptanceCriteria:
+            "Change is implemented in the Relo repo, tests/quality gate pass, PR opened with a clear summary of what was inspected and changed.",
+        });
+        controller.enqueue(
+          encoder.encode(
+            `Starting now — I queued a real engineering task against the Relo repo to inspect the code, pick the right change, implement it, and test it (taskId \`${result.taskId}\`, status \`${result.status}\`). I am not going to ask you which file or line; that's the coding agent's job. I'll check progress with check_dev_task.`,
+          ),
+        );
+      } catch (e) {
+        controller.enqueue(
+          encoder.encode(
+            `I tried to queue that Relo change just now and the bridge failed: ${e instanceof Error ? e.message : "unknown error"}. I'm not asking you for implementation details — once the bridge is healthy I'll retry the same investigative task.`,
+          ),
+        );
+      }
+    });
+  }
+
   // Gemini has no live clock and the dev-bridge tools reason about "right
   // now" (a queued task, a deploy "a few minutes" out) — same fix Command
   // Center's own chat route already applies for this agent loop.
   const now = new Date();
   const nowLine = `\n\n# Current time\nRight now it is ${now.toISOString()} (UTC), a ${now.toLocaleDateString("en-US", { weekday: "long", timeZone: "UTC" })}.`;
-  const systemPrompt = `${AMBER_SYSTEM_PROMPT}\n\n${AMBER_ADMIN_OPERATOR_ADDENDUM}\n\n# CONTEXT\n${contextBlock}${nowLine}`;
+  const fixBlock = opts.onAmberFix ? `\n\n${AMBER_FIX_SURFACE_ADDENDUM}` : "";
+  const modeBlock =
+    opts.mode != null
+      ? `\n\n${modeInstruction(opts.mode, { surface: opts.onAmberFix ? "amber-fix" : "general" })}`
+      : "";
+  const systemPrompt = `${AMBER_SYSTEM_PROMPT}\n\n${AMBER_ADMIN_OPERATOR_ADDENDUM}${fixBlock}${modeBlock}\n\n# CONTEXT\n${contextBlock}${nowLine}`;
   const agentMessages: AgentMessage[] = messages.map((m) => ({ role: m.role, content: m.content }));
   const tools = commandCenterToolDefs();
 
@@ -242,6 +310,8 @@ export async function POST(req: Request) {
 
   let messages: Message[];
   let contextBlock: string;
+  let onAmberFix = false;
+  let mode: AmberMode | null = null;
   try {
     const body = asRecord(await req.json());
     messages = parseMessages(body.messages);
@@ -252,6 +322,10 @@ export async function POST(req: Request) {
     const edgeCountry =
       req.headers.get("x-vercel-ip-country") ?? req.headers.get("cf-ipcountry") ?? undefined;
     const ctx = parseContext(body.context);
+    onAmberFix = typeof ctx.path === "string" && ctx.path.startsWith("/amber-builder");
+    if (body.mode === "execution" || body.mode === "conversation") {
+      mode = body.mode;
+    }
     contextBlock = `${renderContext({
       ...ctx,
       country: /^[A-Za-z]{2}$/.test(edgeCountry ?? "") ? edgeCountry : undefined,
@@ -264,6 +338,6 @@ export async function POST(req: Request) {
     return Response.json({ error: "Say something to Amber first." }, { status: 400 });
   }
 
-  if (await isAdminSession()) return runOwnerTurn(messages, contextBlock);
+  if (await isAdminSession()) return runOwnerTurn(messages, contextBlock, { onAmberFix, mode });
   return runPublicTurn(messages, contextBlock);
 }

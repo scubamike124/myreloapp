@@ -4,6 +4,7 @@ import DesignShell from "@/components/design/DesignShell";
 import AuthForm from "@/components/account/AuthForm";
 import { dbConfigured } from "@/lib/db";
 import { currentUser } from "@/lib/accounts";
+import { googleLoginConfigured } from "@/lib/google-login";
 
 export const metadata = { title: "Sign in — Reelo" };
 
@@ -20,7 +21,7 @@ export default async function LoginPage() {
         <p className="mt-2 mb-7 text-[14.5px] text-white/55">Welcome back. Your tokens and videos are waiting.</p>
 
         {dbConfigured() ? (
-          <AuthForm mode="login" />
+          <AuthForm mode="login" googleEnabled={googleLoginConfigured()} />
         ) : (
           <NotConfigured />
         )}
