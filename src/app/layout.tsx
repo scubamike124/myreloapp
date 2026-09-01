@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Manrope } from "next/font/google";
 import "./globals.css";
 import AmberDock from "@/components/amber/AmberDock";
+import AuthBar from "@/components/design/AuthBar";
 import MotherboardBackground from "@/components/design/MotherboardBackground";
 import { SITE_URL } from "@/lib/site";
 
@@ -59,6 +60,9 @@ export default function RootLayout({
             body is transparent so the canvas shows through. */}
         <MotherboardBackground />
         {children}
+        {/* Persistent sign-in/out at the top of every page -- previously only
+            reachable by navigating all the way to /account. */}
+        <AuthBar />
         {/* There is only one Amber, mounted once for the whole platform. */}
         <AmberDock />
       </body>
