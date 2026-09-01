@@ -126,6 +126,7 @@ export default function BusinessProDashboard({
   personal,
   userName,
   userEmail,
+  role,
 }: {
   stats: ProStat[];
   recent: ProActivity[];
@@ -133,6 +134,8 @@ export default function BusinessProDashboard({
   personal: boolean;
   userName: string;
   userEmail: string;
+  /** Owner/admin recognition must be visible, not just the signed-in name. */
+  role?: "USER" | "ADMIN" | "OWNER" | null;
 }) {
   const search = useSearchParams();
   const router = useRouter();
@@ -270,7 +273,17 @@ export default function BusinessProDashboard({
           </div>
           <div className="rounded-xl px-4 py-3 text-right" style={{ border: "1px solid rgba(255,70,85,.25)", background: "rgba(0,0,0,.35)" }}>
             <div className="text-[11px] uppercase tracking-wide" style={{ color: "#8e7f81" }}>Signed in</div>
-            <div className="font-display text-lg font-bold">{signedIn ? userName || "Member" : "Guest"}</div>
+            <div className="flex items-center justify-end gap-1.5">
+              <div className="font-display text-lg font-bold">{signedIn ? userName || "Member" : "Guest"}</div>
+              {signedIn && (role === "OWNER" || role === "ADMIN") && (
+                <span
+                  className="rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide"
+                  style={{ color: "#fff", background: "linear-gradient(135deg,#ff3645,#c4101c)" }}
+                >
+                  {role}
+                </span>
+              )}
+            </div>
             <div className="text-xs" style={{ color: "#ff8a92" }}>{signedIn ? userEmail || "Session active" : "Sign in for personal stats"}</div>
           </div>
         </div>

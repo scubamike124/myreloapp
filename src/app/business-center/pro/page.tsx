@@ -49,6 +49,7 @@ export default async function BusinessCenterProPage({
           signedIn={signedIn}
           userName={user?.name || user?.email?.split("@")[0] || ""}
           userEmail={user?.email || ""}
+          role={user?.role ?? null}
         />
       </Suspense>
     </BusinessShell>
