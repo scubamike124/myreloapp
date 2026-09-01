@@ -28,7 +28,7 @@ const FOLLOW_UP_REFINEMENT =
   /^(make it|use a|use an|change (it|the)|instead|shorter|longer|30 seconds|15 seconds|60 seconds|a woman|a man|add |drop |remove |keep the)\b/i;
 
 const QUESTION =
-  /^(what|why|how|who|when|where|which|should|is|are|do you|can we|could we)\b/i;
+  /^(what|why|how|who|when|where|which|should|is|are|do you|can you|could you|can we|could we)\b/i;
 
 const EXPLORATORY =
   /^(what should|which (one|product|area|repo)|where should|any ideas|what('s| is) (broken|next)|priorit)/i;
@@ -135,7 +135,15 @@ export function classifyAmberMode(
     return "execution";
   }
 
-  if (EXEC_VERBS.test(trimmed) && trimmed.length > 24) {
+  // Confirmed live: "how many e-books were made, and how many are ready for
+  // publish" was classified execution and (on Amber Fixes) auto-queued a
+  // real coding task, purely because "publish" is an EXEC_VERB and the
+  // message was long enough -- nothing here ever checked that a product or
+  // codebase was actually being referenced. A bare verb plus length is not
+  // work intent; requiring WORK_TARGET too means an ordinary status/count
+  // question about e-books, earnings, jobs, etc. can contain words like
+  // "publish," "update," or "test" without becoming an engineering task.
+  if (EXEC_VERBS.test(trimmed) && WORK_TARGET.test(trimmed) && trimmed.length > 24) {
     return "execution";
   }
 
