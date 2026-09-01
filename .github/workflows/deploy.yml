@@ -1,0 +1,42 @@
+name: Deploy to Cloudflare
+
+# The single, enforced deploy path for production. Before this workflow
+# existed, production was updated by direct `wrangler`/`npm run deploy` runs
+# from a local machine -- 7 of them in one ~5 hour window, none through
+# GitHub, invisible to any PR, review, or test run. This workflow is what
+# makes that unnecessary: a merge to main is the only thing that should ever
+# reach production from now on.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npm test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
