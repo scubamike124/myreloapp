@@ -33,6 +33,7 @@ import { estimateToolCostUsd, checkSpendAllowed, recordUsage } from "@/lib/ai/co
 import { produceCommercial, checkJobStatus, retryJob } from "@/lib/ai/admin-jobs";
 import { scheduleAdminPost, listAdminScheduledPosts, cancelAdminScheduledPost, checkAdminSocialAccounts } from "@/lib/ai/admin-scheduling";
 import { publishToPlatform } from "@/lib/ai/admin-publish";
+import { ebookStats } from "@/lib/storybook/store";
 import { assertSafeUrl } from "@/lib/api-guard";
 import { scrapePage } from "@/lib/scrape";
 import { generateJson } from "@/lib/ai/text-chain";
@@ -133,6 +134,32 @@ const META_TOOL_DEFS: AgentToolDef[] = [
       type: "object",
       properties: { jobId: { type: "string", description: "The failed job's id." } },
       required: ["jobId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "ebook_stats",
+    description:
+      "Count the personalised e-books saved to the Story Library recently, and how many of those are finished " +
+      "enough to publish. Read-only — it changes nothing. 'Made' counts stories whose delivery includes a book " +
+      "(the e-book and the book+movie bundle); 'readyToPublish' counts only the ones where every page has both " +
+      "its words and its illustration, which is what the PDF is built from. A book with a missing illustration " +
+      "is real and was charged for, it just is not sendable — those come back named in notReadyBooks. Defaults " +
+      "to the last 3 days, rolling from now, so the oldest day in byDay is a partial one. Two limits worth " +
+      "saying out loud rather than glossing: books made by signed-out visitors are never saved at all, so they " +
+      "cannot appear here; and `truncated: true` means the row cap was hit and every number is a floor. Report " +
+      "the figures exactly as returned — never estimate this one.",
+    parameters: {
+      type: "object",
+      properties: {
+        days: {
+          type: "number",
+          minimum: 1,
+          maximum: 90,
+          description: "How many days back to count. Defaults to 3.",
+        },
+      },
+      required: [],
       additionalProperties: false,
     },
   },
@@ -492,6 +519,13 @@ export async function executeCommandCenterTool(
         if (!platform || !mediaUrl) return { ok: false, result: { error: "platform and mediaUrl are required." } };
         const result = await publishToPlatform({ platform, mediaUrl, caption });
         return { ok: result.ok, result };
+      }
+      if (name === "ebook_stats") {
+        const stats = await ebookStats(num(argObj.days) ?? 3);
+        // null is "storage unavailable", which must not be reported as a quiet
+        // week — see ebookStats. Zero books is a real answer; no database is not.
+        if (!stats) return { ok: false, result: { error: "The Story Library database is not reachable, so there is no count to give." } };
+        return { ok: true, result: stats };
       }
       if (name === "check_social_accounts") {
         const result = await checkAdminSocialAccounts();
