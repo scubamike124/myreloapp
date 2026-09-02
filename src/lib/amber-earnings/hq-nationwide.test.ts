@@ -50,4 +50,40 @@ describe("Relo admin nationwide HQ snapshot", () => {
     assert.equal(v.empApplied, 1);
     assert.equal(v.emp?.departments.contracts, 3);
   });
+
+  it("surfaces a real HQ marketplace payout as hqMoney, not just a raw job row", () => {
+    // A won MoltJobs job pays out via snapshot.metrics — before this test, that
+    // number reached `snapshot` intact but nothing read it back out, so it never
+    // appeared anywhere on the Relo page even though the fetch itself worked.
+    const v = summarizeHqEarningsJson(
+      {
+        ok: true,
+        snapshot: {
+          jobs: [{ title: "Benchmark agent delivery-verification approaches", status: "won", payoutUsd: 250 }],
+          metrics: {
+            pendingPaymentUsd: 250,
+            verifiedPaidRevenueUsd: 0,
+            netProfitUsd: 0,
+            jobsWon: 1,
+            activeJobs: 0,
+          },
+        },
+      },
+      "https://hq.amberoneai.com",
+    );
+    assert.equal(v.hqMoney.pendingPaymentUsd, 250);
+    assert.equal(v.hqMoney.jobsWon, 1);
+    assert.equal(v.hqMoney.verifiedPaidRevenueUsd, 0);
+  });
+
+  it("defaults hqMoney to zero when snapshot metrics are missing", () => {
+    const v = summarizeHqEarningsJson({ ok: true, snapshot: { jobs: [] } }, "https://hq.amberoneai.com");
+    assert.deepEqual(v.hqMoney, {
+      pendingPaymentUsd: 0,
+      verifiedPaidRevenueUsd: 0,
+      netProfitUsd: 0,
+      jobsWon: 0,
+      activeJobs: 0,
+    });
+  });
 });
