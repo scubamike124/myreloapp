@@ -321,6 +321,23 @@ export default function AmberEarningsPanel() {
                     ? ` Last HQ action: ${nationwide.lastAction.action} (${nationwide.lastAction.ok ? "ok" : "failed"}).`
                     : ""}
                 </p>
+                <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                  {[
+                    ["HQ pending payment", money(nationwide.hqMoney.pendingPaymentUsd)],
+                    ["HQ verified paid", money(nationwide.hqMoney.verifiedPaidRevenueUsd)],
+                    ["HQ net profit", money(nationwide.hqMoney.netProfitUsd)],
+                    ["HQ jobs won", nationwide.hqMoney.jobsWon],
+                  ].map(([l, v]) => (
+                    <div key={String(l)} className="p-3" style={card}>
+                      <div className="text-[11px] font-bold uppercase" style={{ color: label }}>{l}</div>
+                      <div className="mt-1 text-[20px] font-bold">{v}</div>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-1 text-[12px]" style={{ color: muted }}>
+                  Real TaskBounty / SporeAgent / MoltJobs money from the shared HQ store — a won job shows here as
+                  pending until HQ verifies the platform paid out. See it by title below under &ldquo;HQ marketplace jobs.&rdquo;
+                </p>
                 {nationwide.emp ? (
                   <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
                     {[

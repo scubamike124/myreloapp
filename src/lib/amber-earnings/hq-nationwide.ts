@@ -153,6 +153,37 @@ export type HqMarketplaceJob = {
   externalId?: string;
 };
 
+/**
+ * HQ's own real marketplace money (TaskBounty/SporeAgent/MoltJobs), read out of
+ * `snapshot.metrics` — separate from `emp` (the nationwide government/grants
+ * lane) and from Relo's own local per-user accounting. Before this, a real
+ * won job's payout sat inside `snapshot` but nothing on the page ever read it,
+ * so it was invisible even though the fetch that pulled it in was working.
+ */
+export type HqMoney = {
+  pendingPaymentUsd: number;
+  verifiedPaidRevenueUsd: number;
+  netProfitUsd: number;
+  jobsWon: number;
+  activeJobs: number;
+};
+
+function emptyHqMoney(): HqMoney {
+  return { pendingPaymentUsd: 0, verifiedPaidRevenueUsd: 0, netProfitUsd: 0, jobsWon: 0, activeJobs: 0 };
+}
+
+function extractHqMoney(snapshot: Record<string, unknown>): HqMoney {
+  const metrics = asRecord(snapshot.metrics);
+  const num = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : 0);
+  return {
+    pendingPaymentUsd: num(metrics.pendingPaymentUsd),
+    verifiedPaidRevenueUsd: num(metrics.verifiedPaidRevenueUsd),
+    netProfitUsd: num(metrics.netProfitUsd),
+    jobsWon: num(metrics.jobsWon),
+    activeJobs: num(metrics.activeJobs),
+  };
+}
+
 export type NationwideView = {
   ok: boolean;
   reason?: string;
@@ -163,6 +194,8 @@ export type NationwideView = {
   hqJobs: HqMarketplaceJob[];
   empApplied: number;
   emp: NationwideEmp | null;
+  /** Real marketplace money (pending payment, verified paid, net profit, jobs won). */
+  hqMoney: HqMoney;
   /** Full HQ snapshot metrics (marketplace lanes) when available. */
   snapshot?: Record<string, unknown> | null;
   readiness?: Record<string, unknown> | null;
@@ -222,6 +255,7 @@ export function summarizeHqEarningsJson(json: unknown, hqUrl: string): Nationwid
     hqJobs: jobs.slice(0, 80),
     empApplied: empOpps.filter((o) => HQ_EMP_APPLIED_STATUSES.has(String(o.status || ""))).length,
     emp,
+    hqMoney: extractHqMoney(snapshot),
     snapshot: Object.keys(snapshot).length ? snapshot : null,
     readiness: root.readiness && typeof root.readiness === "object" ? asRecord(root.readiness) : null,
     lastAction: null,
@@ -241,6 +275,7 @@ function emptyView(hqUrl: string, reason: string): NationwideView {
     hqJobs: [],
     empApplied: 0,
     emp: null,
+    hqMoney: emptyHqMoney(),
     snapshot: null,
     readiness: null,
     lastAction: null,
