@@ -35,6 +35,17 @@ function money(n: number) {
   return `$${(Number(n) || 0).toFixed(2)}`;
 }
 
+function pct(numerator: number, denominator: number): string {
+  if (!denominator) return "—";
+  return `${((numerator / denominator) * 100).toFixed(1)}%`;
+}
+
+const OUTREACH_CAMPAIGN_LABELS: Record<string, string> = {
+  ca_drop: "CA Data Broker Removal (DROP)",
+  ca_accessibility: "CA ADA Accessibility",
+  ca_vendor_risk: "CA Vendor Risk / Breach Notice",
+};
+
 function modeColor(s: string): string {
   if (["CONNECTED", "READY_TO_WORK", "PAID", "RUNNING", "paid", "connected"].includes(s)) return "#15803d";
   if (["WORKING", "SUBMITTED", "PAYMENT_PENDING", "accepted", "working", "submitted"].includes(s)) return "#1d4ed8";
@@ -560,6 +571,55 @@ export default function AmberEarningsPanel() {
                 ) : null}
               </>
             )}
+          </section>
+        ) : null}
+
+        {nationwide?.ok && nationwide.outreachFunnels?.length ? (
+          <section className="mt-4 p-4" style={card}>
+            <div>
+              <h2 className="text-lg font-bold text-gray-900">Customer acquisition outreach</h2>
+              <p className="mt-1 text-[13px]" style={{ color: muted }}>
+                Real send funnels for Amber&rsquo;s three active outreach campaigns, tracked from Resend delivery
+                and engagement webhooks. Purchases/conversions are not shown here — nothing in this system yet
+                links a clicked prospect to an actual signup or payment, so that number would be a guess, not data.
+              </p>
+            </div>
+            <div className="mt-3 space-y-3">
+              {nationwide.outreachFunnels.map((f) => (
+                <article key={f.productSlug} className="p-3" style={card}>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <strong className="text-[14px] text-gray-900">
+                      {OUTREACH_CAMPAIGN_LABELS[f.productSlug] || f.productSlug}
+                    </strong>
+                    <span className="text-[12px]" style={{ color: muted }}>{f.productSlug}</span>
+                  </div>
+                  <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+                    {[
+                      ["Sent", f.sent, null],
+                      ["Delivered", f.delivered, pct(f.delivered, f.sent)],
+                      ["Opened", f.opened, pct(f.opened, f.delivered || f.sent)],
+                      ["Clicked", f.clicked, pct(f.clicked, f.opened || f.delivered || f.sent)],
+                      ["Replied", f.replied, pct(f.replied, f.sent)],
+                      ["Bounced", f.bounced, pct(f.bounced, f.sent)],
+                      ["Complained", f.complained, pct(f.complained, f.sent)],
+                    ].map(([l, v, rate]) => (
+                      <div key={String(l)} className="p-2">
+                        <div className="text-[10px] font-bold uppercase" style={{ color: label }}>{l}</div>
+                        <div className="mt-0.5 text-[18px] font-bold text-gray-900">{v}</div>
+                        {rate ? (
+                          <div className="text-[11px]" style={{ color: muted }}>{rate} of {l === "Delivered" ? "sent" : "prior stage"}</div>
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+            <p className="mt-2 text-[12px]" style={{ color: muted }}>
+              Bounced/complained/unsubscribed addresses are automatically suppressed from future sends. Prospects who
+              open or click are prioritized for a single, gated follow-up — nobody who bounces, complains, or
+              unsubscribes is re-contacted.
+            </p>
           </section>
         ) : null}
 
