@@ -172,6 +172,45 @@ function emptyHqMoney(): HqMoney {
   return { pendingPaymentUsd: 0, verifiedPaidRevenueUsd: 0, netProfitUsd: 0, jobsWon: 0, activeJobs: 0 };
 }
 
+/**
+ * Real Sent/Delivered/Opened/Clicked/Bounced/Complained/Replied counts for
+ * one outreach campaign (ca_drop / ca_accessibility / ca_vendor_risk),
+ * sourced from HQ's own EmailEvent table via Resend webhooks. Purchase/
+ * conversion isn't wired to this yet -- no code anywhere correlates a
+ * clicked prospect to an actual signup, so that number would be fabricated
+ * if shown here. Only real, tracked stages appear.
+ */
+export type OutreachCampaignFunnel = {
+  productSlug: string;
+  sent: number;
+  delivered: number;
+  opened: number;
+  clicked: number;
+  replied: number;
+  bounced: number;
+  complained: number;
+};
+
+function asOutreachFunnels(v: unknown): OutreachCampaignFunnel[] {
+  if (!Array.isArray(v)) return [];
+  const num = (x: unknown) => (typeof x === "number" && Number.isFinite(x) ? x : 0);
+  return v
+    .filter((f) => f && typeof f === "object")
+    .map((f) => {
+      const r = asRecord(f);
+      return {
+        productSlug: String(r.productSlug || ""),
+        sent: num(r.sent),
+        delivered: num(r.delivered),
+        opened: num(r.opened),
+        clicked: num(r.clicked),
+        replied: num(r.replied),
+        bounced: num(r.bounced),
+        complained: num(r.complained),
+      };
+    });
+}
+
 function extractHqMoney(snapshot: Record<string, unknown>): HqMoney {
   const metrics = asRecord(snapshot.metrics);
   const num = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : 0);
@@ -196,6 +235,8 @@ export type NationwideView = {
   emp: NationwideEmp | null;
   /** Real marketplace money (pending payment, verified paid, net profit, jobs won). */
   hqMoney: HqMoney;
+  /** Real Sent/Delivered/Opened/Clicked funnel per outreach campaign (ca_drop/ca_accessibility/ca_vendor_risk). */
+  outreachFunnels: OutreachCampaignFunnel[];
   /** Full HQ snapshot metrics (marketplace lanes) when available. */
   snapshot?: Record<string, unknown> | null;
   readiness?: Record<string, unknown> | null;
@@ -256,6 +297,7 @@ export function summarizeHqEarningsJson(json: unknown, hqUrl: string): Nationwid
     empApplied: empOpps.filter((o) => HQ_EMP_APPLIED_STATUSES.has(String(o.status || ""))).length,
     emp,
     hqMoney: extractHqMoney(snapshot),
+    outreachFunnels: asOutreachFunnels(root.outreachFunnels),
     snapshot: Object.keys(snapshot).length ? snapshot : null,
     readiness: root.readiness && typeof root.readiness === "object" ? asRecord(root.readiness) : null,
     lastAction: null,
@@ -276,6 +318,7 @@ function emptyView(hqUrl: string, reason: string): NationwideView {
     empApplied: 0,
     emp: null,
     hqMoney: emptyHqMoney(),
+    outreachFunnels: [],
     snapshot: null,
     readiness: null,
     lastAction: null,
