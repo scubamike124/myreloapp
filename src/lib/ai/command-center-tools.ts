@@ -36,7 +36,7 @@ import { publishToPlatform } from "@/lib/ai/admin-publish";
 import { assertSafeUrl } from "@/lib/api-guard";
 import { scrapePage } from "@/lib/scrape";
 import { generateJson } from "@/lib/ai/text-chain";
-import { startDevTask, checkDevTask, listPendingDevApprovals, approveDevTask } from "@/lib/amber/dev-bridge";
+import { startDevTask, checkDevTask, listPendingDevApprovals, approveDevTask, cancelDevTask } from "@/lib/amber/dev-bridge";
 
 // --- schema derivation -------------------------------------------------------
 
@@ -264,6 +264,19 @@ const META_TOOL_DEFS: AgentToolDef[] = [
     parameters: {
       type: "object",
       properties: { taskId: { type: "string", description: "The taskId to approve, from check_dev_task or list_pending_dev_approvals." } },
+      required: ["taskId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "cancel_dev_task",
+    description:
+      "Cancel a dev task queued or running on Amber OS's coding-agent loop — e.g. Michael changed his mind, the " +
+      "brief was wrong, or a duplicate got queued. Does not touch anything already merged; only stops in-flight " +
+      "work and closes out the task. Call only when Michael has actually asked to stop or cancel that task.",
+    parameters: {
+      type: "object",
+      properties: { taskId: { type: "string", description: "The taskId to cancel, from start_dev_task or check_dev_task." } },
       required: ["taskId"],
       additionalProperties: false,
     },
@@ -544,6 +557,12 @@ export async function executeCommandCenterTool(
         const taskId = str(argObj.taskId);
         if (!taskId) return { ok: false, result: { error: "taskId is required." } };
         const result = await approveDevTask(taskId);
+        return { ok: true, result };
+      }
+      if (name === "cancel_dev_task") {
+        const taskId = str(argObj.taskId);
+        if (!taskId) return { ok: false, result: { error: "taskId is required." } };
+        const result = await cancelDevTask(taskId);
         return { ok: true, result };
       }
     } catch (e) {
