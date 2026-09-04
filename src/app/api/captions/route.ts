@@ -1,5 +1,6 @@
 import { asRecord, asString, errorMessage, geminiParts } from "@/lib/json";
 import { clientId, createDailyLimiter, readJsonLimited, PayloadTooLarge } from "@/lib/api-guard";
+import { normalizeRegion, regionDisplayName } from "@/lib/locale-region";
 
 // ---------------------------------------------------------------------------
 // Captions and hashtags for a finished video.
@@ -63,11 +64,12 @@ export async function POST(req: Request) {
   const platform = PLATFORMS.has(String(body.platform)) ? String(body.platform) : "tiktok";
   const toolTitle = str(body.toolTitle, 80);
   // Shape-checked, not just truncated — these land in the prompt.
-  const rawCountry = str(body.country, 8);
-  const country = /^[A-Za-z]{2}$/.test(rawCountry) ? rawCountry.toUpperCase() : "";
-
-  const edgeCountry = req.headers.get("x-vercel-ip-country") ?? req.headers.get("cf-ipcountry") ?? "";
-  const region = /^[A-Za-z]{2}$/.test(edgeCountry) ? edgeCountry.toUpperCase() : country;
+  const edgeCountry = req.headers.get("x-vercel-ip-country") ?? req.headers.get("cf-ipcountry");
+  const code = normalizeRegion(edgeCountry) ?? normalizeRegion(str(body.country, 8)) ?? "";
+  // The model grounds a live search on this, so name the place rather than
+  // asking it to search "in AU" — and a UN M.49 code like 419 means nothing at
+  // all until it reads as "Latin America".
+  const region = code ? regionDisplayName(code) : "";
 
   const prompt = `You are a short-form social strategist. A creator has made a video and needs a caption and hashtags for ${PLATFORM_LABEL[platform]}.
 

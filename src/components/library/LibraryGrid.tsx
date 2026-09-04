@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { TOOLS } from "@/lib/tools";
 import { type Creation, deleteCreation, getServerSnapshot, readCreations, subscribe } from "@/lib/workspace";
+import { regionFromLocale } from "@/lib/locale-region";
 
 // Reads the real workspace instead of the hardcoded demo list this page used to
 // show. An empty library is now genuinely empty — which is the honest state for
@@ -145,7 +146,7 @@ function Card({ creation, onDelete }: { creation: Creation; onDelete: () => void
           toolTitle: creation.toolTitle,
           platform: target,
           // Best guess at the audience; the server prefers its edge header.
-          country: navigator.language?.includes("-") ? navigator.language.split("-")[1] : undefined,
+          country: regionFromLocale(navigator.language),
         }),
       });
       const data = await res.json().catch(() => ({}));

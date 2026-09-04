@@ -1,4 +1,5 @@
 import { TOOLS, LIVE_TOOLS, TOOL_SERVICE } from "@/lib/tools";
+import { describeRegion, normalizeRegion, regionFromLocale } from "@/lib/locale-region";
 
 // ---------------------------------------------------------------------------
 // The context Amber is grounded in. Assembled on the client (it needs the
@@ -54,15 +55,6 @@ const AREA_LABEL: Record<string, string> = {
   marketing: "a public marketing page",
 };
 
-/** Turn a region code into a name, falling back to the raw code. */
-function regionName(code: string): string {
-  try {
-    return new Intl.DisplayNames(["en"], { type: "region" }).of(code.toUpperCase()) ?? code;
-  } catch {
-    return code;
-  }
-}
-
 /**
  * Describe where the user is, so trend answers can be local rather than
  * generic. "Trending on TikTok" differs enormously by country — sounds, formats
@@ -72,9 +64,12 @@ function regionName(code: string): string {
 function describeLocation(ctx: AmberContext): string | null {
   const parts: string[] = [];
 
-  // Edge-provided country beats the browser's claim about itself.
-  const iso = ctx.country ?? (ctx.locale?.includes("-") ? ctx.locale.split("-")[1] : undefined);
-  if (iso && /^[A-Za-z]{2}$/.test(iso)) parts.push(`country: ${regionName(iso)} (${iso.toUpperCase()})`);
+  // Edge-provided country beats the browser's claim about itself. Most hosts
+  // do not resolve a country at all (only Vercel and Cloudflare set the header
+  // this reads), so on every other deployment the locale IS the only signal —
+  // which is why parsing it correctly matters rather than being a nicety.
+  const iso = normalizeRegion(ctx.country) ?? regionFromLocale(ctx.locale);
+  if (iso) parts.push(`country: ${describeRegion(iso)}`);
   if (ctx.timeZone) parts.push(`timezone: ${ctx.timeZone}`);
   if (ctx.locale) parts.push(`language: ${ctx.locale}`);
 

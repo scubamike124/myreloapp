@@ -5,6 +5,7 @@ import {
   AMBER_FIX_SURFACE_ADDENDUM,
 } from "@/lib/amber/persona";
 import { parseContext, renderContext, renderServiceState } from "@/lib/amber/context";
+import { normalizeRegion } from "@/lib/locale-region";
 import { isAdminSession } from "@/lib/admin-session";
 import { ADMIN_COOKIE, SESSION_MAX_AGE, createSessionToken } from "@/lib/admin-auth";
 import { runAgentTurn, agentProviderConfigured, type AgentMessage, type AgentEvent } from "@/lib/ai/agent-chain";
@@ -329,7 +330,7 @@ export async function POST(req: Request) {
     }
     contextBlock = `${renderContext({
       ...ctx,
-      country: /^[A-Za-z]{2}$/.test(edgeCountry ?? "") ? edgeCountry : undefined,
+      country: normalizeRegion(edgeCountry),
     })}\n${renderServiceState()}`;
   } catch {
     return Response.json({ error: "Invalid request." }, { status: 400 });
