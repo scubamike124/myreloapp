@@ -44,6 +44,8 @@ const OUTREACH_CAMPAIGN_LABELS: Record<string, string> = {
   ca_drop: "CA Data Broker Removal (DROP)",
   ca_accessibility: "CA ADA Accessibility",
   ca_vendor_risk: "CA Vendor Risk / Breach Notice",
+  delaware_privacy: "Delaware Privacy + AI Compliance",
+  business_risk: "Business Risk Intelligence API",
 };
 
 function modeColor(s: string): string {
