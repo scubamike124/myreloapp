@@ -6,6 +6,7 @@ import {
 } from "@/lib/amber/persona";
 import { parseContext, renderContext, renderServiceState } from "@/lib/amber/context";
 import { isAdminSession } from "@/lib/admin-session";
+import { ADMIN_COOKIE, SESSION_MAX_AGE, createSessionToken } from "@/lib/admin-auth";
 import { runAgentTurn, agentProviderConfigured, type AgentMessage, type AgentEvent } from "@/lib/ai/agent-chain";
 import { commandCenterToolDefs, executeCommandCenterTool } from "@/lib/ai/command-center-tools";
 import { isAmberFixWorkIntent, modeInstruction, type AmberMode } from "@/lib/amber/intent";
@@ -338,6 +339,56 @@ export async function POST(req: Request) {
     return Response.json({ error: "Say something to Amber first." }, { status: 400 });
   }
 
-  if (await isAdminSession()) return runOwnerTurn(messages, contextBlock, { onAmberFix, mode });
+  if (await isAdminSession()) {
+    const res = runOwnerTurn(messages, contextBlock, { onAmberFix, mode });
+    // Sliding renewal, same intent as middleware.ts's for /admin/*, extended
+    // to cover the one major owner surface it never actually reached.
+    //
+    // Confirmed live: middleware.ts's matcher is /admin/:path* only — using
+    // Amber Fix (/amber-builder, and this route generally) never renews the
+    // admin cookie, no matter how actively it's used, so its fixed 30-day
+    // ceiling from the owner's last real /admin/* visit is the only thing
+    // that determines whether he's still recognized here. When it lapses,
+    // isAdminSession() silently starts returning false and every message —
+    // including a plain status question about a real, existing task — falls
+    // through to runPublicTurn: a tool-free assistant with zero database
+    // access, that answers confidently anyway ("that task ID doesn't exist")
+    // because it was never told it might be wrong to. The page still looks
+    // signed in; nothing here ever said otherwise. Renewing on every owner
+    // turn closes the actual gap instead of only ever answering "yes, only
+    // /admin/* renews" when someone reads the code closely enough to ask.
+    try {
+      const renewed = await createSessionToken();
+      if (renewed) {
+        res.headers.append(
+          "Set-Cookie",
+          `${ADMIN_COOKIE}=${renewed}; Path=/; Max-Age=${SESSION_MAX_AGE}; HttpOnly; SameSite=Lax${
+            process.env.NODE_ENV === "production" ? "; Secure" : ""
+          }`,
+        );
+      }
+    } catch {
+      /* renewal is best-effort — never block the actual reply on it */
+    }
+    return res;
+  }
+
+  // /amber-builder's own page load already redirects to /admin/login when
+  // there's no valid session (see src/app/amber-builder/page.tsx) — so
+  // reaching here with onAmberFix true and isAdminSession() false means a
+  // session that WAS valid when the page loaded has since expired mid-use
+  // (see the renewal comment above for why that can happen even during
+  // active use). Falling through to runPublicTurn here is exactly the bug
+  // this whole change exists to close: a tool-free assistant with no
+  // database access, answering a real internal-system question as if it
+  // had one, on the one surface that is never meant to serve anyone but
+  // the owner. Say plainly what happened instead of guessing an answer.
+  if (onAmberFix) {
+    return new Response(
+      "Your session looks like it's expired — I can't reach the real tools (repo, tasks, deploys) from here right now, and I'm not going to guess at an answer about system state I can't actually check. Please sign in again at /admin/login and ask me again.",
+      { status: 401, headers: { "Content-Type": "text/plain; charset=utf-8" } },
+    );
+  }
+
   return runPublicTurn(messages, contextBlock);
 }
