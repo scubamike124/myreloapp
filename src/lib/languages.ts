@@ -54,13 +54,39 @@ export const DEFAULT_LANGUAGE = "en";
 
 const BY_CODE = new Map(LANGUAGES.map((l) => [l.code, l]));
 
+/**
+ * Resolve a real-world locale string to one of the codes above, or null.
+ *
+ * The codes in LANGUAGES are bare ISO 639-1, but almost nothing hands us one.
+ * Browsers report `navigator.language` as BCP-47 — "es-MX", "pt-BR",
+ * "zh-Hans-CN" — some platforms use an underscore, and casing is not
+ * guaranteed. Matching those against the map verbatim fails, and because
+ * getLanguage falls back to English on a miss it fails silently: a Mexican
+ * reader asking for "es-MX" got a storybook written in English, and an Arabic
+ * book reopened as "ar-SA" laid its PDF out left-to-right.
+ *
+ * So normalize before looking up: casefold, accept `_` for `-`, then fall back
+ * to the primary subtag. Region and script are dropped rather than matched
+ * because the list is per-language, not per-locale — "pt" is the entry that
+ * serves "pt-BR" and "pt-PT" alike.
+ */
+export function normalizeLanguageCode(code: string | undefined | null): string | null {
+  if (typeof code !== "string") return null;
+  const cleaned = code.trim().toLowerCase().replace(/_/g, "-");
+  if (BY_CODE.has(cleaned)) return cleaned;
+  const primary = cleaned.split("-")[0];
+  return primary && BY_CODE.has(primary) ? primary : null;
+}
+
 export function getLanguage(code: string | undefined | null): Language {
-  return (code && BY_CODE.get(code)) || BY_CODE.get(DEFAULT_LANGUAGE)!;
+  const resolved = normalizeLanguageCode(code);
+  return BY_CODE.get(resolved ?? DEFAULT_LANGUAGE) ?? BY_CODE.get(DEFAULT_LANGUAGE)!;
 }
 
 /** Right-to-left scripts, so generated pages can be laid out correctly. */
 const RTL = new Set(["ar", "he", "ur"]);
 
-export function isRTL(code: string): boolean {
-  return RTL.has(code);
+export function isRTL(code: string | undefined | null): boolean {
+  const resolved = normalizeLanguageCode(code);
+  return resolved !== null && RTL.has(resolved);
 }
