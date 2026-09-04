@@ -91,6 +91,57 @@ test("a failed Google sign-in shows a real error, never a silent session", () =>
   assert.match(form, /params\.get\(["']error["']\)/, "the sign-in page must actually read and display that error param");
 });
 
+test("Amber Fix's admin session renews on every owner turn, not just /admin/* page loads", () => {
+  // Confirmed live: middleware.ts's matcher is /admin/:path* only -- it was
+  // never going to cover /api/amber (a route amber-builder's own page calls
+  // repeatedly without ever loading a fresh /admin/* page in between). Using
+  // Amber Fix, however actively, never renewed the cookie, so its fixed
+  // 30-day ceiling from the owner's last real /admin/* visit was the only
+  // thing determining whether he stayed recognized -- and when it lapsed,
+  // isAdminSession() started silently returning false with the page still
+  // looking signed in. Same failure shape as SESSION_MAX_AGE's own comment
+  // in admin-auth.ts already describes for the old 8-hour cutoff, just on a
+  // surface that comment's fix never actually reached.
+  const route = read("app/api/amber/route.ts");
+  const ownerBranch = route.slice(
+    route.indexOf("await isAdminSession()) {"),
+    route.indexOf("return runPublicTurn"),
+  );
+  assert.match(
+    ownerBranch,
+    /createSessionToken\(\)/,
+    "the owner-turn branch must call createSessionToken() to renew the cookie, the same way middleware.ts already does for /admin/*",
+  );
+  assert.match(
+    ownerBranch,
+    /Set-Cookie["'],\s*`\$\{ADMIN_COOKIE\}=/,
+    "the renewed token must actually be attached to the response as a Set-Cookie header, not just minted and discarded",
+  );
+});
+
+test("Amber Fix never falls back to the tool-free public assistant on an expired owner session", () => {
+  // Confirmed live: task cmtn80m20001qf0117q994li was created successfully
+  // (a real isAdminSession()=true owner turn), then a later status question
+  // about the exact same task got "that task ID doesn't exist" and "amber/
+  // devtask- isn't a format I recognize" -- both textbook answers from
+  // runPublicTurn, a tool-free assistant with zero database access, which
+  // silently took over once the session lapsed. /amber-builder's own page
+  // load already redirects to /admin/login when unauthenticated, so reaching
+  // this route with onAmberFix=true and no valid session only ever means a
+  // session that WAS valid when the page loaded has since expired mid-use --
+  // never a random public visitor. Falling through to runPublicTurn there
+  // means Amber confidently answers real internal-system questions with an
+  // assistant that has no way to know the real answer.
+  const route = read("app/api/amber/route.ts");
+  const afterOwnerCheck = route.slice(route.indexOf("if (await isAdminSession())"));
+  const beforePublicFallback = afterOwnerCheck.slice(0, afterOwnerCheck.indexOf("return runPublicTurn"));
+  assert.match(
+    beforePublicFallback,
+    /if\s*\(onAmberFix\)\s*\{[\s\S]*?status:\s*401/,
+    "an expired session on the Amber Fix surface must return an honest 401 explaining the session lapsed, before ever reaching the runPublicTurn fallback",
+  );
+});
+
 test("only the configured owner email can ever receive the OWNER role via Google sign-in", () => {
   const claim = read("lib/owner-claim.ts");
   assert.match(
