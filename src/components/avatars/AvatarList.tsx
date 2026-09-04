@@ -30,9 +30,12 @@ const PAGE = 200;
 
 export default function AvatarList({
   primary = "all",
+  filter = "",
   initialQuery = "",
 }: {
   primary?: string;
+  /** Secondary filter slug (setting, attire, pose) — see FILTERS in avatar-taxonomy. */
+  filter?: string;
   initialQuery?: string;
 }) {
   const [rows, setRows] = useState<Row[]>([]);
@@ -57,6 +60,7 @@ export default function AvatarList({
       try {
         const p = new URLSearchParams({ offset: String(nextOffset), limit: String(PAGE) });
         if (primary && primary !== "all") p.set("primary", primary);
+        if (filter) p.set("filter", filter);
         if (q) p.set("q", q);
         if (gender) p.set("gender", gender);
         if (premium !== "any") p.set("premium", premium);
@@ -78,7 +82,7 @@ export default function AvatarList({
         if (ticket === reqRef.current) setLoading(false);
       }
     },
-    [primary, q, gender, premium, source],
+    [primary, filter, q, gender, premium, source],
   );
 
   useEffect(() => {
