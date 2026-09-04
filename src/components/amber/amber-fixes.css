@@ -53,6 +53,26 @@
   line-height: 1.4;
 }
 
+/* Higher specificity than `.amber-fixes-titles p` so the status line keeps its own colour. */
+.amber-fixes-titles .amber-fixes-status {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #15803d;
+}
+
+.amber-fixes-status-dot {
+  flex-shrink: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: #16a34a;
+}
+
 .amber-fixes-projects {
   display: flex;
   flex-wrap: wrap;

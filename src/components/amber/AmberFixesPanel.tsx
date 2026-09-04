@@ -25,6 +25,9 @@ const PROJECTS = [
   { key: "dayli", label: "Dayli" },
 ] as const;
 
+/** Admin-only banner on the Amber Fix console. Not rendered on any customer surface. */
+const AMBER_FIX_STATUS_LINE = "Amber Fix — Autonomous Developer Online.";
+
 const THREAD_KEY = "amber-fixes-thread-v1";
 const DRAFT_KEY = "amber-fixes-draft-v1";
 const PROJECT_KEY = "amber-fixes-project-v1";
@@ -326,6 +329,10 @@ export default function AmberFixesPanel() {
         <div className="amber-fixes-titles">
           <h1>Amber Fixes</h1>
           <p>Give Amber a clear outcome. She inspects the repo, implements, tests, and ships the normal workflow.</p>
+          <p className="amber-fixes-status" data-amber-fix-status="1">
+            <span className="amber-fixes-status-dot" aria-hidden />
+            {AMBER_FIX_STATUS_LINE}
+          </p>
         </div>
         <div className="amber-fixes-projects" role="group" aria-label="Repository">
           {PROJECTS.map((p) => (
