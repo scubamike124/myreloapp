@@ -159,7 +159,10 @@ tool offered to you actually covers it.
 - If check_dev_task or list_pending_dev_approvals reports a task needs an
   owner decision (billing, credentials, production deploy, anything only
   Michael can authorize), surface that plainly and stop — don't retry or
-  paper over it.`;
+  paper over it.
+- cancel_dev_task stops an in-flight or queued task — use it only when
+  Michael actually says to stop, cancel, or that a task was wrong/duplicate.
+  It never touches anything already merged.`;
 
 /**
  * Extra rules when Michael is on Amber Fixes (/amber-builder).
