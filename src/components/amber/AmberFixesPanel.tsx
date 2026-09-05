@@ -342,16 +342,50 @@ export default function AmberFixesPanel() {
       setCurrentRun(target);
 
       // Keep polling through "succeeded, PR open, not yet merged" too -- the
-      // owner approves via chat/Reelo Command Center separately from this
-      // panel, and without this the workspace would freeze on "needs
-      // approval" forever even after a merge actually happened elsewhere.
+      // owner approves right from this console's own Approve & Merge button
+      // (see approveRun below), and without this the console would freeze on
+      // "needs approval" forever even right after a real merge happened.
+      // Also keep polling while a real post-merge deploy check is in flight
+      // (deployStatus "verifying"), or its real outcome would never surface.
       const pendingApproval = target.status === "succeeded" && Boolean(target.prUrl) && !target.mergedAt;
-      const live = target.status === "queued" || target.status === "running" || target.status === "testing" || pendingApproval;
+      const pendingDeploy = Boolean(target.mergedAt) && target.deployStatus === "verifying";
+      const live =
+        target.status === "queued" || target.status === "running" || target.status === "testing" || pendingApproval || pendingDeploy;
       if (!live && target.id) setActiveRunId((id) => (id === target.id || id === target.taskId ? null : id));
     } catch {
       /* keep the thread usable if status is briefly unreachable */
     }
   }, [activeRunId, appendActivity]);
+
+  const [approving, setApproving] = useState(false);
+
+  const approveRun = useCallback(async () => {
+    const idOrTaskId = currentRun?.taskId || currentRun?.id;
+    if (!idOrTaskId) return;
+    setApproving(true);
+    try {
+      const res = await fetch("/api/amber-builder", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "approve", taskId: idOrTaskId }),
+      });
+      const data = (await res.json().catch(() => ({}))) as Record<string, unknown>;
+      if (!res.ok || data.ok === false) {
+        setError(String(data.error || "Could not approve that pull request."));
+        return;
+      }
+      // A real merge just happened (or was already done) -- make sure
+      // polling is active so the merged state, and any deploy verification
+      // that follows, actually reaches this console.
+      setActiveRunId(idOrTaskId);
+      void pollRuns();
+    } catch {
+      setError("Could not reach Amber to approve that pull request.");
+    } finally {
+      setApproving(false);
+    }
+  }, [currentRun, pollRuns]);
 
   // Fast poll while a run is active (existing behavior).
   useEffect(() => {
@@ -490,7 +524,12 @@ export default function AmberFixesPanel() {
         />
 
         <div className="amber-main-body">
-          <AmberActivityConsole run={currentRun} idleProjectLabel={projectLabel(projectKey)} />
+          <AmberActivityConsole
+            run={currentRun}
+            idleProjectLabel={projectLabel(projectKey)}
+            onApprove={() => void approveRun()}
+            approving={approving}
+          />
 
           <details
             className="amber-log"

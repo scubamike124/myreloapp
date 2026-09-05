@@ -56,13 +56,15 @@ test("the elapsed timer only ticks while a run is actually in progress", () => {
   );
 });
 
-test("the progress stepper has exactly the steps the backend can actually report -- no Planning/Inspecting/Editing/Deploying/Verifying", () => {
+test("the progress stepper has exactly the steps the backend can actually report -- no Planning/Inspecting/Editing/Deploying/Verifying step", () => {
   // Confirmed against the real CodingAgentRun backend (amberai): status is
   // one of queued/running/testing/succeeded/failed/needs_owner/needs_runtime
   // /interrupted, with no field distinguishing "planning" from "editing"
-  // within a run, and no field at all recording a deploy or its
-  // verification for this run type. Inventing extra steps here would be
-  // exactly the fabricated-progress UI this product must never show.
+  // within a run. Inventing extra steps in this fixed stepper would be
+  // fabricated-progress UI. Deploy verification is real (see the separate
+  // "deployStatus" test below) but deliberately lives in its own gated
+  // section below the stepper, not as a stepper step -- most repos have no
+  // deploy signal at all, which a fixed-position step can't express honestly.
   const stepOrderLine = CONSOLE_SRC.slice(
     CONSOLE_SRC.indexOf("const STEP_ORDER"),
     CONSOLE_SRC.indexOf(";", CONSOLE_SRC.indexOf("const STEP_ORDER")) + 1,
@@ -74,13 +76,39 @@ test("the progress stepper has exactly the steps the backend can actually report
   assert.match(stepOrderLine, /"merged"/);
   const steps = stepOrderLine.match(/"[^"]+"/g) || [];
   assert.equal(steps.length, 5, "exactly 5 real steps -- no Planning, Inspecting, Editing, Deploying, or Verifying step exists to add");
-  for (const fake of ["planning", "inspecting", "editing", "deploying", "verifying", "complete"]) {
+  for (const fake of ["planning", "inspecting", "editing", "complete"]) {
     assert.doesNotMatch(
-      CONSOLE_SRC.toLowerCase(),
+      stepOrderLine.toLowerCase(),
       new RegExp(`"${fake}"`),
       `must not fabricate a "${fake}" step -- no backend field distinguishes it from a real step`,
     );
   }
+});
+
+test("deploy verification only ever shows a real, backend-reported outcome, gated on run.deployStatus", () => {
+  // Unlike the fixed stepper above, this section is real: amberai's
+  // approve.ts now actually merges the PR and, for the one repo with a real
+  // health-check endpoint, polls it and records the true outcome as
+  // deployStatus. This must stay strictly gated on that field -- never shown
+  // for a repo with no deployStatus at all, and never claim "verified"
+  // without deployStatus literally being "verified".
+  assert.match(CONSOLE_SRC, /\{run\.deployStatus\s*&&/, "the whole deployment section must be conditional on a real deployStatus");
+  assert.match(CONSOLE_SRC, /run\.deployStatus === "verifying"/);
+  assert.match(CONSOLE_SRC, /run\.deployStatus === "verified"/);
+  assert.match(CONSOLE_SRC, /run\.deployStatus === "unverified"/);
+  const deploySection = CONSOLE_SRC.slice(CONSOLE_SRC.indexOf("{run.deployStatus && ("), CONSOLE_SRC.indexOf("{badge &&"));
+  const verifiedBranch = deploySection.slice(deploySection.indexOf('run.deployStatus === "verified"'));
+  assert.match(verifiedBranch, /Deployed and verified live/, "the 'verified' claim text must live inside the deployStatus === \"verified\" branch");
+  assert.equal(
+    (deploySection.match(/Deployed and verified live/g) || []).length,
+    1,
+    "the 'verified' claim text must appear exactly once, not also in the verifying/unverified branches",
+  );
+});
+
+test("Approve & merge only appears on a real, unmerged, succeeded run with an open PR -- never fabricates an approval affordance", () => {
+  const section = CONSOLE_SRC.slice(CONSOLE_SRC.indexOf("{run.prUrl && ("), CONSOLE_SRC.indexOf("{run.deployStatus &&"));
+  assert.match(section, /!run\.mergedAt && run\.status === "succeeded" && onApprove/, "must gate on real unmerged+succeeded state, not just prUrl being present");
 });
 
 test("changed files link to the real PR diff on GitHub instead of a fabricated inline diff", () => {
@@ -96,7 +124,7 @@ test("changed files link to the real PR diff on GitHub instead of a fabricated i
 });
 
 test("the console is wired into the real panel with the real live run state, not static/demo data", () => {
-  assert.match(PANEL, /<AmberActivityConsole run=\{currentRun\}/, "must be rendered with the same state the polling loop updates");
+  assert.match(PANEL, /<AmberActivityConsole\s+run=\{currentRun\}/, "must be rendered with the same state the polling loop updates");
   assert.match(PANEL, /setCurrentRun\(run\)/, "must update on a freshly-started run");
   assert.match(PANEL, /setCurrentRun\(target\)/, "must update on every poll tick, or the console goes stale mid-run");
 });
@@ -112,6 +140,21 @@ test("polling continues through a real pending-approval state, not just while ac
   assert.match(
     PANEL,
     /pendingApproval\s*=\s*target\.status\s*===\s*"succeeded"\s*&&\s*Boolean\(target\.prUrl\)\s*&&\s*!target\.mergedAt/,
-    "a successful run awaiting merge must keep polling so a later merge (approved via chat) actually reaches merged",
+    "a successful run awaiting merge must keep polling so a later merge actually reaches merged",
   );
+});
+
+test("polling continues while a real deploy-verification check is in flight, or its outcome would never surface", () => {
+  assert.match(
+    PANEL,
+    /pendingDeploy\s*=\s*Boolean\(target\.mergedAt\)\s*&&\s*target\.deployStatus\s*===\s*"verifying"/,
+    "must keep polling after merge while deployStatus is still 'verifying', or the real verified/unverified outcome never reaches the console",
+  );
+});
+
+test("Approve & merge calls the real backend action, not a local status flip", () => {
+  assert.match(PANEL, /const approveRun = useCallback\(/, "must be a real network call, not a client-side state toggle");
+  assert.match(PANEL, /action:\s*"approve"/);
+  assert.match(PANEL, /fetch\("\/api\/amber-builder"/);
+  assert.match(PANEL, /taskId:\s*idOrTaskId/, "must send the real run/task id -- there is nothing else identifying which PR to merge");
 });

@@ -86,7 +86,17 @@ function formatElapsed(ms: number): string {
   return m > 0 ? `${m}m ${s}s` : `${s}s`;
 }
 
-export default function AmberActivityConsole({ run, idleProjectLabel }: { run: BuilderRun | null; idleProjectLabel?: string }) {
+export default function AmberActivityConsole({
+  run,
+  idleProjectLabel,
+  onApprove,
+  approving,
+}: {
+  run: BuilderRun | null;
+  idleProjectLabel?: string;
+  onApprove?: () => void;
+  approving?: boolean;
+}) {
   const isRunning = run?.status === "queued" || run?.status === "running" || run?.status === "testing";
   const [now, setNow] = useState(() => Date.now());
 
@@ -218,9 +228,35 @@ export default function AmberActivityConsole({ run, idleProjectLabel }: { run: B
       {run.prUrl && (
         <div className="amber-console-section">
           <div className="amber-console-section-label">Pull request</div>
-          <a href={run.prUrl} target="_blank" rel="noreferrer" className="amber-console-pr-link">
-            {run.mergedAt ? "View merged pull request" : "Review pull request"}
-          </a>
+          <div className="amber-console-pr-row">
+            <a href={run.prUrl} target="_blank" rel="noreferrer" className="amber-console-pr-link">
+              {run.mergedAt ? "View merged pull request" : "Review pull request"}
+            </a>
+            {!run.mergedAt && run.status === "succeeded" && onApprove && (
+              <button type="button" className="amber-console-approve" onClick={onApprove} disabled={approving}>
+                {approving ? "Merging…" : "Approve & merge"}
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
+      {run.deployStatus && (
+        <div className="amber-console-section">
+          <div className="amber-console-section-label">Deployment</div>
+          {run.deployStatus === "verifying" && (
+            <p className="amber-console-deploy amber-console-deploy--verifying">Checking that the merge actually deployed…</p>
+          )}
+          {run.deployStatus === "verified" && (
+            <p className="amber-console-deploy amber-console-deploy--verified">
+              Deployed and verified live{run.deployedSha ? ` (commit ${run.deployedSha.slice(0, 7)})` : ""}.
+            </p>
+          )}
+          {run.deployStatus === "unverified" && (
+            <p className="amber-console-deploy amber-console-deploy--unverified">
+              {run.deployNote || "Could not confirm the deploy went live."}
+            </p>
+          )}
         </div>
       )}
 

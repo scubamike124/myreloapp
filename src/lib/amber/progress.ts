@@ -29,6 +29,14 @@ export type BuilderRun = {
   /** 1 on a first attempt; >1 means this exact task has been retried. */
   attempt?: number;
   updatedAt?: string;
+  /** Real post-merge deploy verification (amberai's approve.ts calls the
+   *  same Cloudflare health-check poll reelo-dev-bridge already used, now
+   *  wired to this run type too). Absent entirely for a repo with no real
+   *  health-check endpoint -- never a fabricated "deploying" placeholder. */
+  deployStatus?: "verifying" | "verified" | "unverified";
+  deployedSha?: string;
+  deployNote?: string;
+  deployCheckedAt?: string;
 };
 
 export type ActivityLine = { key: string; text: string };
@@ -117,6 +125,16 @@ export function activityFromRunDiff(prev: BuilderRun | null, next: BuilderRun): 
     lines.push({ key: `${id}:merged`, text: "Pull request merged." });
   }
 
+  if (next.deployStatus && next.deployStatus !== prev?.deployStatus) {
+    if (next.deployStatus === "verifying") {
+      lines.push({ key: `${id}:deploy:verifying`, text: "Checking that the merge actually deployed…" });
+    } else if (next.deployStatus === "verified") {
+      lines.push({ key: `${id}:deploy:verified`, text: "Deploy verified live." });
+    } else if (next.deployStatus === "unverified") {
+      lines.push({ key: `${id}:deploy:unverified`, text: "Could not confirm the deploy went live." });
+    }
+  }
+
   if ((next.attempt ?? 1) > (prev?.attempt ?? 1)) {
     lines.push({ key: `${id}:retry:${next.attempt}`, text: `Retrying (attempt ${next.attempt}).` });
   }
@@ -182,6 +200,13 @@ export function publicRun(raw: Record<string, unknown>): BuilderRun {
     completedAt: typeof raw.completedAt === "string" ? raw.completedAt : undefined,
     attempt: typeof raw.attempt === "number" ? raw.attempt : undefined,
     updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : undefined,
+    deployStatus:
+      raw.deployStatus === "verifying" || raw.deployStatus === "verified" || raw.deployStatus === "unverified"
+        ? raw.deployStatus
+        : undefined,
+    deployedSha: typeof raw.deployedSha === "string" ? raw.deployedSha : undefined,
+    deployNote: typeof raw.deployNote === "string" ? sanitizeOwnerText(raw.deployNote, 500) : undefined,
+    deployCheckedAt: typeof raw.deployCheckedAt === "string" ? raw.deployCheckedAt : undefined,
     testEvidence: te
       ? {
           passed: typeof te.passed === "number" ? te.passed : undefined,
