@@ -5,6 +5,8 @@ import Link from "next/link";
 import { classifyAmberMode, shouldSendOnEnter, isAmberFixWorkIntent, type ThreadTurn } from "@/lib/amber/intent";
 import { activityFromRunDiff, publicRun, type BuilderRun } from "@/lib/amber/progress";
 import { useDictation } from "@/lib/amber/use-dictation";
+import { PROJECTS } from "@/lib/amber/project-registry";
+import { resolveDispatchProject } from "@/lib/amber/dispatch";
 import AmberRunWorkspace from "./AmberRunWorkspace";
 import "./amber-fixes.css";
 
@@ -16,15 +18,6 @@ type Msg = {
   content: string;
   at: number;
 };
-
-const PROJECTS = [
-  { key: "reelo", label: "Reelo" },
-  { key: "forma", label: "Forma" },
-  { key: "amber_hq", label: "Amber HQ" },
-  { key: "launch_ready", label: "Launch Ready" },
-  { key: "rest_pilot", label: "Rest Pilot" },
-  { key: "dayli", label: "Dayli" },
-] as const;
 
 const THREAD_KEY = "amber-fixes-thread-v1";
 const DRAFT_KEY = "amber-fixes-draft-v1";
@@ -137,7 +130,7 @@ export default function AmberFixesPanel() {
   };
 
   const streamAmber = useCallback(
-    async (history: Msg[]) => {
+    async (history: Msg[], opts: { alreadyStarted?: boolean; resolvedProjectKey?: string } = {}) => {
       const payload: ThreadTurn[] = history
         .filter((m) => m.role === "user" || m.role === "assistant")
         .map((m) => ({ role: m.role as "user" | "assistant", content: m.content }))
@@ -159,7 +152,13 @@ export default function AmberFixesPanel() {
           context: {
             path: "/amber-builder",
             page: "amber-fix",
-            projectKey,
+            projectKey: opts.resolvedProjectKey || projectKey,
+            // Tells /api/amber a real coding task for this exact message was
+            // already started via startRepair below -- without this, its own
+            // work-intent check fired a SECOND, independent task (via a
+            // different bridge, hardcoded to a different project) for the
+            // same owner message. See dispatch.ts's file comment.
+            alreadyStarted: opts.alreadyStarted || undefined,
             locale: typeof navigator !== "undefined" ? navigator.language : undefined,
             timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           },
@@ -188,12 +187,12 @@ export default function AmberFixesPanel() {
   );
 
   const startRepair = useCallback(
-    async (prompt: string) => {
+    async (prompt: string, resolvedProjectKey: string) => {
       const res = await fetch("/api/amber-builder", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt, projectKey, executeNow: true }),
+        body: JSON.stringify({ prompt, projectKey: resolvedProjectKey, executeNow: true }),
       });
       const data = (await res.json()) as Record<string, unknown>;
       if (!res.ok || data.ok === false) {
@@ -222,7 +221,7 @@ export default function AmberFixesPanel() {
         for (const line of activityFromRunDiff(null, run)) appendActivity(line.text, line.key);
       }
     },
-    [appendActivity, projectKey],
+    [appendActivity],
   );
 
   const pollRuns = useCallback(async () => {
@@ -296,9 +295,29 @@ export default function AmberFixesPanel() {
 
       try {
         if (mode === "execution") {
-          await startRepair(trimmed);
+          const dispatch = resolveDispatchProject(trimmed, projectKey);
+
+          if (dispatch.kind === "ambiguous") {
+            // Two different projects were named -- guessing either one risks
+            // real work landing on the wrong repo. Ask instead.
+            const names = dispatch.candidates.map((c) => c.label).join(" or ");
+            appendActivity(
+              `That mentions more than one project (${names}). Which one should I work on?`,
+              `ambiguous-project:${nid()}`,
+            );
+            return;
+          }
+
+          if (dispatch.source === "text" && dispatch.projectKey !== projectKey) {
+            // The message named a different project than the selected pill --
+            // the text wins, and the pill updates to show it, not silently.
+            setProjectKey(dispatch.projectKey);
+            appendActivity(`Working on ${dispatch.label} — that's what you named.`, `project-switch:${nid()}`);
+          }
+
+          await startRepair(trimmed, dispatch.projectKey);
           try {
-            await streamAmber(next);
+            await streamAmber(next, { alreadyStarted: true, resolvedProjectKey: dispatch.projectKey });
           } catch {
             /* repair already started; a missing chat line is not a failed job */
           }
@@ -315,7 +334,7 @@ export default function AmberFixesPanel() {
         inputRef.current?.focus();
       }
     },
-    [busy, messages, startRepair, streamAmber],
+    [busy, messages, projectKey, appendActivity, startRepair, streamAmber],
   );
 
   useEffect(() => () => abortRef.current?.abort(), []);
