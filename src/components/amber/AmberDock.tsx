@@ -37,7 +37,14 @@ function pickMimeType(): string {
   return "";
 }
 
-const HIDDEN_ON = ["/admin/login"];
+// Amber Fixes (/amber-builder) is itself a full-screen Amber conversation
+// with its own composer, whose Send button sits bottom-right of the screen —
+// the same corner as this launcher (fixed bottom-5/6 right-5/6, z-[70]) above
+// Amber Fixes's own root (z-40). The launcher visually blocked/overlapped
+// Send there. The user is already talking to Amber via Amber Fixes on this
+// one page, so a second "Ask Amber" launcher is also redundant, not just in
+// the way. Hidden here ONLY -- every other page keeps the one global Amber.
+const HIDDEN_ON = ["/admin/login", "/amber-builder"];
 
 /**
  * Any part of the product can summon Amber by dispatching this event. This is
