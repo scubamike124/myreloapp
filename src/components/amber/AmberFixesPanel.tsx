@@ -5,7 +5,7 @@ import Link from "next/link";
 import { classifyAmberMode, shouldSendOnEnter, isAmberFixWorkIntent, type ThreadTurn } from "@/lib/amber/intent";
 import { activityFromRunDiff, publicRun, type BuilderRun } from "@/lib/amber/progress";
 import { useDictation } from "@/lib/amber/use-dictation";
-import { PROJECTS } from "@/lib/amber/project-registry";
+import { PROJECTS, projectLabel } from "@/lib/amber/project-registry";
 import { resolveDispatchProject } from "@/lib/amber/dispatch";
 import AmberRunWorkspace from "./AmberRunWorkspace";
 import "./amber-fixes.css";
@@ -23,6 +23,8 @@ const THREAD_KEY = "amber-fixes-thread-v1";
 const DRAFT_KEY = "amber-fixes-draft-v1";
 const PROJECT_KEY = "amber-fixes-project-v1";
 const SEEN_KEY = "amber-fixes-seen-events-v1";
+const RUN_KEY = "amber-fixes-run-v1";
+const ACTIVE_RUN_ID_KEY = "amber-fixes-active-run-id-v1";
 
 function nid(): string {
   return `m_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
@@ -70,6 +72,18 @@ export default function AmberFixesPanel() {
     setInput(loadJson<string>(DRAFT_KEY, ""));
     setProjectKey(loadJson<string>(PROJECT_KEY, "reelo"));
     seenRef.current = new Set(loadJson<string[]>(SEEN_KEY, []));
+    // Confirmed live: the workspace card vanished on every reload, even
+    // seconds after a real job finished (or mid-run), because currentRun
+    // lived only in React state -- reloading the page made the whole
+    // fixed workspace disappear and fall back to looking like a plain
+    // chat screen again, "fixed" only until the tab refreshed.
+    const storedRun = loadJson<BuilderRun | null>(RUN_KEY, null);
+    if (storedRun) {
+      setCurrentRun(storedRun);
+      runSnapRef.current = storedRun;
+    }
+    const storedActiveRunId = loadJson<string | null>(ACTIVE_RUN_ID_KEY, null);
+    if (storedActiveRunId) setActiveRunId(storedActiveRunId);
     setHydrated(true);
   }, []);
 
@@ -87,6 +101,16 @@ export default function AmberFixesPanel() {
     if (!hydrated) return;
     sessionStorage.setItem(PROJECT_KEY, projectKey);
   }, [hydrated, projectKey]);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    sessionStorage.setItem(RUN_KEY, JSON.stringify(currentRun));
+  }, [hydrated, currentRun]);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    sessionStorage.setItem(ACTIVE_RUN_ID_KEY, JSON.stringify(activeRunId));
+  }, [hydrated, activeRunId]);
 
   const append = useCallback((role: Role, content: string, id?: string) => {
     const msg: Msg = { id: id || nid(), role, content, at: Date.now() };
@@ -369,7 +393,7 @@ export default function AmberFixesPanel() {
         </div>
       </header>
 
-      <AmberRunWorkspace run={currentRun} />
+      <AmberRunWorkspace run={currentRun} idleProjectLabel={projectLabel(projectKey)} />
 
       <div ref={scrollRef} className="amber-fixes-thread" onScroll={onThreadScroll}>
         {hydrated && messages.length === 0 && (
