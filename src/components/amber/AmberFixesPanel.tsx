@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { classifyAmberMode, shouldSendOnEnter, isAmberFixWorkIntent, type ThreadTurn } from "@/lib/amber/intent";
 import { activityFromRunDiff, publicRun, type BuilderRun } from "@/lib/amber/progress";
 import { useDictation } from "@/lib/amber/use-dictation";
@@ -11,6 +12,8 @@ import AmberRunWorkspace from "./AmberRunWorkspace";
 import "./amber-fixes.css";
 
 type Role = "user" | "assistant" | "activity";
+
+type Account = { name: string | null; email: string; role?: "USER" | "ADMIN" | "OWNER" };
 
 type Msg = {
   id: string;
@@ -42,6 +45,9 @@ function loadJson<T>(key: string, fallback: T): T {
 }
 
 export default function AmberFixesPanel() {
+  const router = useRouter();
+  const [account, setAccount] = useState<Account | null>(null);
+  const [signingOut, setSigningOut] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [projectKey, setProjectKey] = useState("reelo");
@@ -66,6 +72,44 @@ export default function AmberFixesPanel() {
     inputRef,
     onError: setError,
   });
+
+  useEffect(() => {
+    // Amber Fixes is a full-screen, fixed-position page (see amber-fixes.css)
+    // with its own header -- the global AuthBar is hidden here (it used to
+    // float on top of the back link/title) and this row is its inline
+    // replacement, same /api/auth source, styled to match this page instead
+    // of overlapping it.
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/auth");
+        const data = await res.json();
+        if (!cancelled && data?.configured && data.user) {
+          setAccount({ name: data.user.name, email: data.user.email, role: data.user.role });
+        }
+      } catch {
+        /* account row is a convenience -- the page still works without it */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const signOut = useCallback(async () => {
+    setSigningOut(true);
+    try {
+      await fetch("/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "logout" }),
+      });
+      router.push("/");
+      router.refresh();
+    } finally {
+      setSigningOut(false);
+    }
+  }, [router]);
 
   useEffect(() => {
     setMessages(loadJson<Msg[]>(THREAD_KEY, []));
@@ -372,9 +416,27 @@ export default function AmberFixesPanel() {
   return (
     <div className="amber-fixes-root">
       <header className="amber-fixes-head">
-        <Link href="/business-center" className="amber-fixes-back">
-          ← Business Center
-        </Link>
+        <div className="amber-fixes-head-top">
+          <Link href="/business-center" className="amber-fixes-back">
+            ← Business Center
+          </Link>
+          {account && (
+            <div className="amber-fixes-account">
+              <span className="amber-fixes-account-name">{account.name || account.email}</span>
+              {(account.role === "OWNER" || account.role === "ADMIN") && (
+                <span className="amber-fixes-account-role">{account.role}</span>
+              )}
+              <button
+                type="button"
+                className="amber-fixes-account-signout"
+                onClick={() => void signOut()}
+                disabled={signingOut}
+              >
+                Sign out
+              </button>
+            </div>
+          )}
+        </div>
         <div className="amber-fixes-titles">
           <h1>Amber Fixes</h1>
           <p>Give Amber a clear outcome. She inspects the repo, implements, tests, and ships the normal workflow.</p>

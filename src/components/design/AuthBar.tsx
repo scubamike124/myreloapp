@@ -9,6 +9,8 @@ type State = {
   user: { id: string; email: string; name: string | null; role?: "USER" | "ADMIN" | "OWNER" } | null;
 };
 
+const HIDDEN_ON = ["/login", "/signup", "/amber-builder"];
+
 /**
  * A persistent sign-in/out control at the top of every page, not buried on
  * /account. Same data source as TokenPanel (/api/auth GET) -- this is
@@ -38,9 +40,14 @@ export default function AuthBar() {
     };
   }, [pathname]);
 
-  // Both pages already have their own sign-in control front and center;
-  // a second one floating in the corner is redundant, not helpful.
-  if (pathname === "/login" || pathname === "/signup") return null;
+  // /login and /signup already have their own sign-in control front and
+  // center. /amber-builder (Amber Fixes) is a full-screen, fixed-position
+  // page with its own header -- confirmed live, this floating pill sat on
+  // top of that header's back link and title, the exact same class of
+  // overlap AmberDock's HIDDEN_ON was created to fix for the Send button.
+  // Amber Fixes renders its own inline account row (name, role, sign out)
+  // instead.
+  if (HIDDEN_ON.includes(pathname)) return null;
   if (!state || !state.configured) return null;
 
   const signOut = async () => {

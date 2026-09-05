@@ -25,17 +25,70 @@
   background: #fff;
 }
 
+.amber-fixes-head-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
 .amber-fixes-back {
   display: inline-block;
   font-size: 0.82rem;
   font-weight: 650;
   color: #1d4ed8;
   text-decoration: none;
-  margin-bottom: 0.45rem;
 }
 
 .amber-fixes-back:hover {
   text-decoration: underline;
+}
+
+.amber-fixes-account {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: #333;
+}
+
+.amber-fixes-account-name {
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 650;
+}
+
+.amber-fixes-account-role {
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #111;
+  padding: 0.14rem 0.4rem;
+  border-radius: 999px;
+}
+
+.amber-fixes-account-signout {
+  appearance: none;
+  border: 1px solid #cfcfc8;
+  background: #fff;
+  color: #333;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 650;
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.amber-fixes-account-signout:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .amber-fixes-titles h1 {
