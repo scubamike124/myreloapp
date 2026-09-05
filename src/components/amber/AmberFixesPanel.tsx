@@ -1,14 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { classifyAmberMode, shouldSendOnEnter, isAmberFixWorkIntent, type ThreadTurn } from "@/lib/amber/intent";
 import { activityFromRunDiff, publicRun, type BuilderRun } from "@/lib/amber/progress";
 import { useDictation } from "@/lib/amber/use-dictation";
 import { PROJECTS, projectLabel } from "@/lib/amber/project-registry";
 import { resolveDispatchProject } from "@/lib/amber/dispatch";
-import AmberRunWorkspace from "./AmberRunWorkspace";
+import AmberProjectSidebar, { type ProjectStatus } from "./AmberProjectSidebar";
+import AmberWorkspaceHeader from "./AmberWorkspaceHeader";
+import AmberActivityConsole from "./AmberActivityConsole";
 import "./amber-fixes.css";
 
 type Role = "user" | "assistant" | "activity";
@@ -28,6 +29,8 @@ const PROJECT_KEY = "amber-fixes-project-v1";
 const SEEN_KEY = "amber-fixes-seen-events-v1";
 const RUN_KEY = "amber-fixes-run-v1";
 const ACTIVE_RUN_ID_KEY = "amber-fixes-active-run-id-v1";
+const SIDEBAR_KEY = "amber-fixes-sidebar-open-v1";
+const LOG_OPEN_KEY = "amber-fixes-log-open-v1";
 
 function nid(): string {
   return `m_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
@@ -58,6 +61,9 @@ export default function AmberFixesPanel() {
   const [hydrated, setHydrated] = useState(false);
   const [activeRunId, setActiveRunId] = useState<string | null>(null);
   const [currentRun, setCurrentRun] = useState<BuilderRun | null>(null);
+  const [recentRuns, setRecentRuns] = useState<BuilderRun[]>([]);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [logOpen, setLogOpen] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -74,11 +80,11 @@ export default function AmberFixesPanel() {
   });
 
   useEffect(() => {
-    // Amber Fixes is a full-screen, fixed-position page (see amber-fixes.css)
-    // with its own header -- the global AuthBar is hidden here (it used to
-    // float on top of the back link/title) and this row is its inline
-    // replacement, same /api/auth source, styled to match this page instead
-    // of overlapping it.
+    // Amber Fixes is a full-screen, fixed-position page with its own chrome
+    // -- the global AuthBar is hidden here (it used to float on top of this
+    // page's own header) and this account block is its inline replacement,
+    // same /api/auth source, rendered in the sidebar footer instead of
+    // floating over the page.
     let cancelled = false;
     (async () => {
       try {
@@ -128,6 +134,13 @@ export default function AmberFixesPanel() {
     }
     const storedActiveRunId = loadJson<string | null>(ACTIVE_RUN_ID_KEY, null);
     if (storedActiveRunId) setActiveRunId(storedActiveRunId);
+    setLogOpen(loadJson<boolean>(LOG_OPEN_KEY, false));
+    // The sidebar defaults open on a real desktop-sized viewport and closed
+    // (a drawer you open on demand) on a phone-sized one -- read once from
+    // the real window width rather than guessing, then let the owner's own
+    // toggle (persisted below) win from then on.
+    const storedSidebar = loadJson<boolean | null>(SIDEBAR_KEY, null);
+    setSidebarOpen(storedSidebar ?? window.innerWidth >= 900);
     setHydrated(true);
   }, []);
 
@@ -155,6 +168,16 @@ export default function AmberFixesPanel() {
     if (!hydrated) return;
     sessionStorage.setItem(ACTIVE_RUN_ID_KEY, JSON.stringify(activeRunId));
   }, [hydrated, activeRunId]);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    sessionStorage.setItem(SIDEBAR_KEY, JSON.stringify(sidebarOpen));
+  }, [hydrated, sidebarOpen]);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    sessionStorage.setItem(LOG_OPEN_KEY, JSON.stringify(logOpen));
+  }, [hydrated, logOpen]);
 
   const append = useCallback((role: Role, content: string, id?: string) => {
     const msg: Msg = { id: id || nid(), role, content, at: Date.now() };
@@ -300,6 +323,8 @@ export default function AmberFixesPanel() {
       const runs: BuilderRun[] = Array.isArray(data.runs)
         ? data.runs.map((r: Record<string, unknown>) => publicRun(r))
         : [];
+      setRecentRuns(runs);
+
       const target =
         activeRunId && activeRunId !== "__latest__"
           ? runs.find((r) => r.id === activeRunId || r.taskId === activeRunId)
@@ -328,12 +353,39 @@ export default function AmberFixesPanel() {
     }
   }, [activeRunId, appendActivity]);
 
+  // Fast poll while a run is active (existing behavior).
   useEffect(() => {
     if (!activeRunId) return;
     void pollRuns();
     const id = setInterval(() => void pollRuns(), 2500);
     return () => clearInterval(id);
   }, [activeRunId, pollRuns]);
+
+  // Slow, always-on poll so the sidebar's per-project status dots reflect
+  // each project's real last-known run even when nothing is active right
+  // now -- same endpoint, same real data, just less often (there is no
+  // separate per-project status API to call instead).
+  useEffect(() => {
+    if (activeRunId) return; // the fast poll above already refreshes recentRuns
+    void pollRuns();
+    const id = setInterval(() => void pollRuns(), 20000);
+    return () => clearInterval(id);
+  }, [activeRunId, pollRuns]);
+
+  const statusByProject = useMemo(() => {
+    const byLabel = new Map<string, BuilderRun>();
+    for (const run of recentRuns) {
+      const label = run.projectName;
+      if (!label || byLabel.has(label)) continue;
+      byLabel.set(label, run);
+    }
+    const out: Record<string, ProjectStatus> = {};
+    for (const p of PROJECTS) {
+      const run = byLabel.get(p.label);
+      if (run) out[p.key] = { status: run.status, prUrl: run.prUrl, mergedAt: run.mergedAt };
+    }
+    return out;
+  }, [recentRuns]);
 
   const send = useCallback(
     async (raw: string) => {
@@ -377,8 +429,8 @@ export default function AmberFixesPanel() {
           }
 
           if (dispatch.source === "text" && dispatch.projectKey !== projectKey) {
-            // The message named a different project than the selected pill --
-            // the text wins, and the pill updates to show it, not silently.
+            // The message named a different project than the selected sidebar
+            // entry -- the text wins, and the selection updates, not silently.
             setProjectKey(dispatch.projectKey);
             appendActivity(`Working on ${dispatch.label} — that's what you named.`, `project-switch:${nid()}`);
           }
@@ -415,149 +467,141 @@ export default function AmberFixesPanel() {
 
   return (
     <div className="amber-fixes-root">
-      <header className="amber-fixes-head">
-        <div className="amber-fixes-head-top">
-          <Link href="/business-center" className="amber-fixes-back">
-            ← Business Center
-          </Link>
-          {account && (
-            <div className="amber-fixes-account">
-              <span className="amber-fixes-account-name">{account.name || account.email}</span>
-              {(account.role === "OWNER" || account.role === "ADMIN") && (
-                <span className="amber-fixes-account-role">{account.role}</span>
-              )}
-              <button
-                type="button"
-                className="amber-fixes-account-signout"
-                onClick={() => void signOut()}
-                disabled={signingOut}
-              >
-                Sign out
-              </button>
-            </div>
-          )}
-        </div>
-        <div className="amber-fixes-titles">
-          <h1>Amber Fixes</h1>
-          <p>Give Amber a clear outcome. She inspects the repo, implements, tests, and ships the normal workflow.</p>
-        </div>
-        <div className="amber-fixes-projects" role="group" aria-label="Repository">
-          {PROJECTS.map((p) => (
-            <button
-              key={p.key}
-              type="button"
-              className={projectKey === p.key ? "is-on" : ""}
-              onClick={() => setProjectKey(p.key)}
-            >
-              {p.label}
-            </button>
-          ))}
-        </div>
-      </header>
-
-      <AmberRunWorkspace run={currentRun} idleProjectLabel={projectLabel(projectKey)} />
-
-      <div ref={scrollRef} className="amber-fixes-thread" onScroll={onThreadScroll}>
-        {hydrated && messages.length === 0 && (
-          <div className="amber-fixes-empty">
-            <p>
-              Hi — I&apos;m Amber. Tell me the Relo outcome you want. I&apos;ll inspect the code, queue the work, and
-              keep you updated — I won&apos;t ask you to act like the developer.
-            </p>
-            <div className="amber-fixes-starters">
-              {[
-                "Fix whatever is broken on the Reelo homepage.",
-                "Update Reelo's Business Center Amber Fix card copy to match how this page actually works.",
-                "Can you make a video?",
-              ].map((s) => (
-                <button key={s} type="button" onClick={() => void send(s)}>
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {messages.map((m) => (
-          <article key={m.id} className={`amber-fixes-msg amber-fixes-msg--${m.role}`}>
-            <div className="amber-fixes-who">
-              {m.role === "user" ? "You" : m.role === "activity" ? "Amber · work" : "Amber"}
-            </div>
-            <div className="amber-fixes-bubble">
-              {m.content || (busy && m.role === "assistant" ? "…" : "")}
-            </div>
-          </article>
-        ))}
-
-        {busy && messages[messages.length - 1]?.role !== "assistant" && (
-          <article className="amber-fixes-msg amber-fixes-msg--assistant">
-            <div className="amber-fixes-who">Amber</div>
-            <div className="amber-fixes-bubble amber-fixes-bubble--pending">Working…</div>
-          </article>
-        )}
-
-        {error && (
-          <p className="amber-fixes-error" role="alert">
-            {error}
-          </p>
-        )}
-      </div>
-
-      {!stickBottom && (
-        <button type="button" className="amber-fixes-jump" onClick={jumpToBottom}>
-          {unseen > 0 ? `New activity · Jump to latest` : "Jump to latest"}
-        </button>
-      )}
-
-      <form
-        className="amber-fixes-composer"
-        onSubmit={(e) => {
-          e.preventDefault();
-          void send(input);
+      <AmberProjectSidebar
+        projects={PROJECTS}
+        activeKey={projectKey}
+        onSelect={(key) => {
+          setProjectKey(key);
+          if (window.innerWidth < 900) setSidebarOpen(false);
         }}
-      >
-        <label className="amber-fixes-sr" htmlFor="amber-fixes-input">
-          Message Amber
-        </label>
-        <textarea
-          id="amber-fixes-input"
-          ref={inputRef}
-          rows={4}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (shouldSendOnEnter(e)) {
-              e.preventDefault();
-              void send(input);
-            }
-          }}
-          placeholder={placeholder}
-          data-amber-builder-prompt="1"
+        statusByProject={statusByProject}
+        collapsed={!sidebarOpen}
+        onToggleCollapse={() => setSidebarOpen((v) => !v)}
+        account={account}
+        signingOut={signingOut}
+        onSignOut={() => void signOut()}
+      />
+
+      <div className="amber-main">
+        <AmberWorkspaceHeader
+          projectLabel={projectLabel(projectKey)}
+          run={currentRun}
+          onOpenSidebar={() => setSidebarOpen(true)}
         />
-        <div className="amber-fixes-composer-bar">
-          <button
-            type="button"
-            className={dictation.listening ? "is-live" : ""}
-            onClick={() => void dictation.toggleDictation()}
-            disabled={dictation.transcribing}
-            aria-label={
-              dictation.listening ? "Stop recording" : dictation.transcribing ? "Transcribing" : "Record a message"
-            }
-            aria-pressed={dictation.listening}
+
+        <div className="amber-main-body">
+          <AmberActivityConsole run={currentRun} idleProjectLabel={projectLabel(projectKey)} />
+
+          <details
+            className="amber-log"
+            open={logOpen}
+            onToggle={(e) => setLogOpen((e.target as HTMLDetailsElement).open)}
           >
-            <MicMark active={dictation.listening || dictation.transcribing} />
-            <span>{dictation.listening ? "Stop" : dictation.transcribing ? "…" : "Mic"}</span>
-          </button>
-          <button
-            type="submit"
-            className="amber-fixes-send"
-            disabled={busy || input.trim().length === 0}
-            data-amber-builder-submit="1"
-          >
-            Send
-          </button>
+            <summary className="amber-log-summary">
+              Conversation{unseen > 0 && !logOpen ? ` · ${unseen} new` : ""}
+            </summary>
+            <div ref={scrollRef} className="amber-fixes-thread" onScroll={onThreadScroll}>
+              {hydrated && messages.length === 0 && (
+                <div className="amber-fixes-empty">
+                  <p>
+                    Hi — I&apos;m Amber. Tell me the outcome you want. I&apos;ll inspect the code, queue the work,
+                    and keep you updated — I won&apos;t ask you to act like the developer.
+                  </p>
+                  <div className="amber-fixes-starters">
+                    {[
+                      "Fix whatever is broken on the homepage.",
+                      "Update this project's docs to match how it actually works.",
+                      "Can you make a video?",
+                    ].map((s) => (
+                      <button key={s} type="button" onClick={() => void send(s)}>
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {messages.map((m) => (
+                <article key={m.id} className={`amber-fixes-msg amber-fixes-msg--${m.role}`}>
+                  <div className="amber-fixes-who">
+                    {m.role === "user" ? "You" : m.role === "activity" ? "Amber · work" : "Amber"}
+                  </div>
+                  <div className="amber-fixes-bubble">{m.content || (busy && m.role === "assistant" ? "…" : "")}</div>
+                </article>
+              ))}
+
+              {busy && messages[messages.length - 1]?.role !== "assistant" && (
+                <article className="amber-fixes-msg amber-fixes-msg--assistant">
+                  <div className="amber-fixes-who">Amber</div>
+                  <div className="amber-fixes-bubble amber-fixes-bubble--pending">Working…</div>
+                </article>
+              )}
+
+              {error && (
+                <p className="amber-fixes-error" role="alert">
+                  {error}
+                </p>
+              )}
+            </div>
+
+            {!stickBottom && (
+              <button type="button" className="amber-fixes-jump" onClick={jumpToBottom}>
+                {unseen > 0 ? `New activity · Jump to latest` : "Jump to latest"}
+              </button>
+            )}
+          </details>
         </div>
-      </form>
+
+        <form
+          className="amber-fixes-composer"
+          onSubmit={(e) => {
+            e.preventDefault();
+            void send(input);
+          }}
+        >
+          <label className="amber-fixes-sr" htmlFor="amber-fixes-input">
+            Message Amber
+          </label>
+          <textarea
+            id="amber-fixes-input"
+            ref={inputRef}
+            rows={3}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (shouldSendOnEnter(e)) {
+                e.preventDefault();
+                void send(input);
+              }
+            }}
+            placeholder={placeholder}
+            data-amber-builder-prompt="1"
+          />
+          <div className="amber-fixes-composer-bar">
+            <button
+              type="button"
+              className={dictation.listening ? "is-live" : ""}
+              onClick={() => void dictation.toggleDictation()}
+              disabled={dictation.transcribing}
+              aria-label={
+                dictation.listening ? "Stop recording" : dictation.transcribing ? "Transcribing" : "Record a message"
+              }
+              aria-pressed={dictation.listening}
+            >
+              <MicMark active={dictation.listening || dictation.transcribing} />
+              <span>{dictation.listening ? "Stop" : dictation.transcribing ? "…" : "Mic"}</span>
+            </button>
+            <button
+              type="submit"
+              className="amber-fixes-send"
+              disabled={busy || input.trim().length === 0}
+              data-amber-builder-submit="1"
+            >
+              Send
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

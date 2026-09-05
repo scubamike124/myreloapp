@@ -1,13 +1,15 @@
-/* Amber Fixes only — do not import from other Business Center screens. */
+/* Amber Fix — standalone AI development platform surface.
+   Do not import from other Business Center screens: this product is meant
+   to stand on its own, separate from Reelo's consumer branding, so it can
+   eventually run in front of other owners/repos without a redesign. */
 
 .amber-fixes-root {
   position: fixed;
   inset: 0;
   z-index: 40;
   display: flex;
-  flex-direction: column;
-  background: #f6f6f4;
-  color: #121212;
+  background: #0b0d12;
+  color: #e7e9ee;
   font-family: var(--font-manrope), "Manrope", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -18,123 +20,653 @@
   transform: none;
 }
 
-.amber-fixes-head {
+/* ---------------------------------------------------------------------- */
+/* Project sidebar                                                        */
+/* ---------------------------------------------------------------------- */
+
+.amber-sidebar {
   flex-shrink: 0;
-  padding: 0.85rem 1rem 0.75rem;
-  border-bottom: 1px solid #d9d9d4;
-  background: #fff;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  background: #12151c;
+  border-right: 1px solid #232838;
+  transition: width 0.18s ease, transform 0.18s ease;
+  overflow: hidden;
 }
 
-.amber-fixes-head-top {
+.amber-sidebar--collapsed {
+  width: 0;
+  border-right-color: transparent;
+}
+
+.amber-sidebar-scrim {
+  display: none;
+}
+
+.amber-sidebar-top {
+  flex-shrink: 0;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
-  margin-bottom: 0.45rem;
+  padding: 0.85rem 0.9rem 0.5rem;
 }
 
-.amber-fixes-back {
-  display: inline-block;
-  font-size: 0.82rem;
+.amber-sidebar-brand {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #f2f3f7;
+  white-space: nowrap;
+}
+
+.amber-sidebar-toggle {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #9aa1b4;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  display: flex;
+}
+
+.amber-sidebar-toggle:hover {
+  background: #1b2029;
+  color: #e7e9ee;
+}
+
+.amber-sidebar-back {
+  flex-shrink: 0;
+  display: block;
+  font-size: 0.78rem;
   font-weight: 650;
-  color: #1d4ed8;
+  color: #8fb3ff;
   text-decoration: none;
+  padding: 0 0.9rem 0.6rem;
+  white-space: nowrap;
 }
 
-.amber-fixes-back:hover {
+.amber-sidebar-back:hover {
   text-decoration: underline;
 }
 
-.amber-fixes-account {
+.amber-sidebar-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.35rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.amber-sidebar-item {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #c3c8d6;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.amber-sidebar-item:hover {
+  background: #1b2029;
+  color: #f2f3f7;
+}
+
+.amber-sidebar-item.is-on {
+  background: #1d2a4a;
+  color: #dce6ff;
+}
+
+.amber-sidebar-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.amber-sidebar-dot--idle {
+  background: #454c5e;
+}
+
+.amber-sidebar-dot--yellow {
+  background: #eab308;
+  animation: amber-pulse 1.4s ease-in-out infinite;
+}
+
+.amber-sidebar-dot--red {
+  background: #f85149;
+}
+
+.amber-sidebar-dot--green {
+  background: #3fb950;
+}
+
+@keyframes amber-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.amber-sidebar-footer {
+  flex-shrink: 0;
+  border-top: 1px solid #232838;
+  padding: 0.7rem 0.9rem calc(0.7rem + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.amber-sidebar-account {
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.78rem;
-  color: #333;
 }
 
-.amber-fixes-account-name {
-  max-width: 9rem;
+.amber-sidebar-account-name {
+  font-size: 0.8rem;
+  font-weight: 650;
+  color: #dfe2ea;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 650;
+  max-width: 8.5rem;
 }
 
-.amber-fixes-account-role {
-  font-size: 0.64rem;
+.amber-sidebar-account-role {
+  font-size: 0.62rem;
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #fff;
-  background: #111;
-  padding: 0.14rem 0.4rem;
+  color: #0b0d12;
+  background: #8fb3ff;
+  padding: 0.1rem 0.35rem;
   border-radius: 999px;
+  flex-shrink: 0;
 }
 
-.amber-fixes-account-signout {
+.amber-sidebar-signout {
   appearance: none;
-  border: 1px solid #cfcfc8;
-  background: #fff;
-  color: #333;
+  border: 1px solid #2b3142;
+  background: transparent;
+  color: #9aa1b4;
   font: inherit;
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 650;
-  padding: 0.28rem 0.6rem;
+  padding: 0.28rem 0.55rem;
   border-radius: 999px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
-.amber-fixes-account-signout:disabled {
+.amber-sidebar-signout:hover {
+  color: #e7e9ee;
+  border-color: #3a4156;
+}
+
+.amber-sidebar-signout:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.amber-fixes-titles h1 {
-  margin: 0;
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: #111;
+/* ---------------------------------------------------------------------- */
+/* Main column                                                            */
+/* ---------------------------------------------------------------------- */
+
+.amber-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.amber-fixes-titles p {
-  margin: 0.2rem 0 0.7rem;
-  font-size: 0.9rem;
-  color: #3f3f3f;
+.amber-devbar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid #232838;
+  background: #12151c;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.amber-devbar-menu {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #9aa1b4;
+  padding: 0.25rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+}
+
+.amber-devbar-menu:hover {
+  color: #e7e9ee;
+  background: #1b2029;
+}
+
+.amber-devbar-project {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.amber-devbar-project-name {
+  font-size: 0.92rem;
+  font-weight: 750;
+  color: #f2f3f7;
+}
+
+.amber-devbar-task {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.72rem;
+  color: #6b7284;
+}
+
+.amber-devbar-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  background: #1b2029;
+  color: #c3c8d6;
+  flex-shrink: 0;
+}
+
+.amber-devbar-status-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+}
+
+.amber-devbar-status-dot--idle {
+  background: #454c5e;
+}
+
+.amber-devbar-status-dot--yellow {
+  background: #eab308;
+}
+
+.amber-devbar-status-dot--red {
+  background: #f85149;
+}
+
+.amber-devbar-status-dot--green {
+  background: #3fb950;
+}
+
+.amber-devbar-engine,
+.amber-devbar-attempt {
+  font-size: 0.74rem;
+  font-weight: 650;
+  color: #6b7284;
+  flex-shrink: 0;
+}
+
+.amber-devbar-pr {
+  margin-left: auto;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #8fb3ff;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.amber-devbar-pr:hover {
+  text-decoration: underline;
+}
+
+.amber-main-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Activity console — the centerpiece                                     */
+/* ---------------------------------------------------------------------- */
+
+.amber-console {
+  flex-shrink: 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid #232838;
+  border-left-width: 4px;
+  border-radius: 0.75rem;
+  background: #171b24;
+}
+
+.amber-console--yellow {
+  border-left-color: #d29922;
+}
+
+.amber-console--red {
+  border-left-color: #f85149;
+}
+
+.amber-console--green {
+  border-left-color: #3fb950;
+}
+
+.amber-console--idle {
+  border-left-color: #2b3142;
+}
+
+.amber-console-idle-title {
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #6b7284;
+}
+
+.amber-console-idle-hint {
+  margin: 0.4rem 0 0;
+  font-size: 0.92rem;
+  color: #9aa1b4;
+  line-height: 1.5;
+}
+
+.amber-console-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0 0 0.85rem;
+  padding: 0;
+  overflow-x: auto;
+}
+
+.amber-console-step {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 650;
+  color: #565d70;
+  white-space: nowrap;
+}
+
+.amber-console-step:not(:last-child)::after {
+  content: "";
+  width: 1.1rem;
+  height: 1px;
+  background: #2b3142;
+  margin-left: 0.35rem;
+}
+
+.amber-console-step-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: #2b3142;
+  flex-shrink: 0;
+}
+
+.amber-console-step.is-done .amber-console-step-dot {
+  background: #3fb950;
+}
+
+.amber-console-step.is-done {
+  color: #7fd996;
+}
+
+.amber-console-step.is-active .amber-console-step-dot {
+  background: #eab308;
+  animation: amber-pulse 1.4s ease-in-out infinite;
+}
+
+.amber-console-step.is-active {
+  color: #f2f3f7;
+}
+
+.amber-console-step.is-merged.is-active .amber-console-step-dot {
+  background: #3fb950;
+  animation: none;
+}
+
+.amber-console-head {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.amber-console-title {
+  min-width: 0;
+  flex: 1;
+}
+
+.amber-console-step-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f2f3f7;
+  overflow-wrap: break-word;
+}
+
+.amber-console-live-dots {
+  display: inline-block;
+  width: 1.2em;
+}
+
+.amber-console-elapsed {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  font-weight: 650;
+  color: #9aa1b4;
+  background: #1b2029;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.amber-console-retry {
+  margin: 0.5rem 0 0;
+  font-size: 0.84rem;
+  font-weight: 650;
+  color: #eab308;
+}
+
+.amber-console-blockers {
+  margin-top: 0.5rem;
+}
+
+.amber-console-blocker {
+  margin: 0.3rem 0 0;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid #4c2626;
+  background: #241416;
+  color: #ffb4ac;
+  border-radius: 0.6rem;
+  font-size: 0.85rem;
   line-height: 1.4;
 }
 
-.amber-fixes-projects {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
+.amber-console-section {
+  margin-top: 0.65rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid #232838;
 }
 
-.amber-fixes-projects button {
-  appearance: none;
-  border: 1px solid #cfcfc8;
-  background: #fff;
-  color: #222;
-  font: inherit;
-  font-size: 0.8rem;
+.amber-console-section-label {
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #6b7284;
+  margin-bottom: 0.35rem;
+}
+
+.amber-console-files {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.84rem;
+  color: #c3c8d6;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.amber-console-files li {
+  overflow-wrap: anywhere;
+}
+
+.amber-console-diff-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
   font-weight: 650;
-  padding: 0.4rem 0.7rem;
-  border-radius: 999px;
-  cursor: pointer;
+  color: #8fb3ff;
+  text-decoration: none;
 }
 
-.amber-fixes-projects button.is-on {
-  background: #111;
-  color: #fff;
-  border-color: #111;
+.amber-console-diff-link:hover {
+  text-decoration: underline;
+}
+
+.amber-console-tests-line {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.amber-console-tests-pass {
+  color: #3fb950;
+  font-weight: 650;
+}
+
+.amber-console-tests-fail {
+  color: #f85149;
+  font-weight: 650;
+}
+
+.amber-console-failures {
+  margin: 0.4rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.82rem;
+  color: #ffb4ac;
+}
+
+.amber-console-pr-link {
+  display: inline-block;
+  font-size: 0.88rem;
+  font-weight: 650;
+  color: #8fb3ff;
+  text-decoration: none;
+}
+
+.amber-console-pr-link:hover {
+  text-decoration: underline;
+}
+
+.amber-console-final {
+  margin-top: 0.7rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.amber-console-final--yellow {
+  background: #3a2f0d;
+  color: #f5d477;
+}
+
+.amber-console-final--red {
+  background: #3a1414;
+  color: #ffb4ac;
+}
+
+.amber-console-final--green {
+  background: #10331d;
+  color: #7fd996;
+}
+
+.amber-console-details {
+  margin-top: 0.65rem;
+  font-size: 0.82rem;
+}
+
+.amber-console-details summary {
+  cursor: pointer;
+  font-weight: 650;
+  color: #9aa1b4;
+}
+
+.amber-console-details dl {
+  margin: 0.5rem 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 0.75rem;
+}
+
+.amber-console-details dt {
+  color: #6b7284;
+  font-weight: 650;
+}
+
+.amber-console-details dd {
+  margin: 0;
+  color: #c3c8d6;
+  overflow-wrap: anywhere;
+}
+
+.amber-console-summary {
+  white-space: pre-wrap;
+  grid-column: 1 / -1;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Conversation log (collapsible, secondary to the console above)         */
+/* ---------------------------------------------------------------------- */
+
+.amber-log {
+  flex-shrink: 0;
+  border: 1px solid #232838;
+  border-radius: 0.75rem;
+  background: #12151c;
+}
+
+.amber-log-summary {
+  cursor: pointer;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #9aa1b4;
+}
+
+.amber-log[open] .amber-log-summary {
+  border-bottom: 1px solid #232838;
 }
 
 .amber-fixes-thread {
-  flex: 1;
+  position: relative;
+  max-height: 22rem;
   overflow-y: auto;
-  padding: 1rem 1rem 5.5rem;
+  padding: 0.9rem;
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
@@ -142,8 +674,8 @@
 
 .amber-fixes-empty {
   max-width: 40rem;
-  color: #333;
-  font-size: 0.98rem;
+  color: #c3c8d6;
+  font-size: 0.95rem;
   line-height: 1.5;
 }
 
@@ -156,14 +688,18 @@
 
 .amber-fixes-starters button {
   text-align: left;
-  border: 1px solid #d4d4ce;
-  background: #fff;
-  color: #171717;
+  border: 1px solid #2b3142;
+  background: #171b24;
+  color: #e7e9ee;
   font: inherit;
-  font-size: 0.92rem;
-  padding: 0.7rem 0.85rem;
+  font-size: 0.9rem;
+  padding: 0.65rem 0.85rem;
   border-radius: 0.75rem;
   cursor: pointer;
+}
+
+.amber-fixes-starters button:hover {
+  border-color: #3a4156;
 }
 
 .amber-fixes-msg {
@@ -180,102 +716,109 @@
 }
 
 .amber-fixes-who {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 750;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #555;
+  color: #6b7284;
   margin-bottom: 0.25rem;
 }
 
 .amber-fixes-msg--user .amber-fixes-who {
   text-align: right;
-  color: #333;
+  color: #9aa1b4;
 }
 
 .amber-fixes-bubble {
   white-space: pre-wrap;
   word-break: break-word;
-  font-size: 0.98rem;
+  font-size: 0.92rem;
   line-height: 1.5;
-  padding: 0.75rem 0.9rem;
+  padding: 0.65rem 0.85rem;
   border-radius: 0.9rem;
-  border: 1px solid #d8d8d2;
-  background: #fff;
-  color: #111;
+  border: 1px solid #232838;
+  background: #171b24;
+  color: #e7e9ee;
 }
 
 .amber-fixes-msg--user .amber-fixes-bubble {
-  background: #171717;
-  color: #fff;
-  border-color: #171717;
+  background: #1d2a4a;
+  color: #dce6ff;
+  border-color: #2c3c66;
 }
 
 .amber-fixes-msg--activity .amber-fixes-bubble {
-  background: #eef2ff;
-  border-color: #c7d2fe;
-  color: #1e1b4b;
-  font-size: 0.92rem;
+  background: #171b24;
+  border-color: #232838;
+  color: #9aa1b4;
+  font-size: 0.86rem;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 .amber-fixes-bubble--pending {
-  color: #444;
+  color: #9aa1b4;
   font-style: italic;
 }
 
 .amber-fixes-error {
   margin: 0;
-  padding: 0.7rem 0.85rem;
-  border: 1px solid #fecaca;
-  background: #fef2f2;
-  color: #7f1d1d;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #4c2626;
+  background: #241416;
+  color: #ffb4ac;
   border-radius: 0.75rem;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   line-height: 1.4;
 }
 
 .amber-fixes-jump {
-  position: absolute;
+  position: sticky;
+  bottom: 0.5rem;
   left: 50%;
-  bottom: 8.6rem;
   transform: translateX(-50%);
-  border: 1px solid #111;
-  background: #111;
-  color: #fff;
+  border: 1px solid #e7e9ee;
+  background: #e7e9ee;
+  color: #12151c;
   font: inherit;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  padding: 0.45rem 0.8rem;
+  padding: 0.4rem 0.75rem;
   border-radius: 999px;
   cursor: pointer;
-  z-index: 2;
 }
+
+/* ---------------------------------------------------------------------- */
+/* Command bar                                                            */
+/* ---------------------------------------------------------------------- */
 
 .amber-fixes-composer {
   flex-shrink: 0;
-  padding: 0.65rem 0.85rem calc(0.75rem + env(safe-area-inset-bottom));
-  border-top: 1px solid #d9d9d4;
-  background: #fff;
+  padding: 0.65rem 0.9rem calc(0.75rem + env(safe-area-inset-bottom));
+  border-top: 1px solid #232838;
+  background: #12151c;
 }
 
 .amber-fixes-composer textarea {
   width: 100%;
-  min-height: 6.2rem;
-  max-height: 12rem;
+  min-height: 4.6rem;
+  max-height: 10rem;
   resize: vertical;
-  border: 1px solid #bdbdb7;
+  border: 1px solid #2b3142;
   border-radius: 0.85rem;
-  padding: 0.8rem 0.9rem;
+  padding: 0.75rem 0.9rem;
   font: inherit;
-  font-size: 1rem;
-  color: #111;
-  background: #fafafa;
+  font-size: 0.96rem;
+  color: #e7e9ee;
+  background: #0f1218;
   outline: none;
 }
 
+.amber-fixes-composer textarea::placeholder {
+  color: #565d70;
+}
+
 .amber-fixes-composer textarea:focus {
-  border-color: #111;
-  background: #fff;
+  border-color: #5b8cff;
 }
 
 .amber-fixes-composer-bar {
@@ -292,25 +835,25 @@
   min-height: 44px;
   padding: 0.5rem 0.95rem;
   border-radius: 0.75rem;
-  border: 1px solid #cfcfc8;
-  background: #fff;
-  color: #111;
+  border: 1px solid #2b3142;
+  background: #171b24;
+  color: #e7e9ee;
   font: inherit;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
 }
 
 .amber-fixes-composer-bar button.is-live {
-  background: #111;
+  background: #f85149;
   color: #fff;
-  border-color: #111;
+  border-color: #f85149;
 }
 
 .amber-fixes-send {
-  background: #111 !important;
-  color: #fff !important;
-  border-color: #111 !important;
+  background: #5b8cff !important;
+  color: #0b0d12 !important;
+  border-color: #5b8cff !important;
 }
 
 .amber-fixes-send:disabled {
@@ -319,13 +862,7 @@
 }
 
 .amber-fixes-mic-live {
-  animation: amber-fixes-pulse 1s ease-in-out infinite;
-}
-
-@keyframes amber-fixes-pulse {
-  50% {
-    opacity: 0.45;
-  }
+  animation: amber-pulse 1s ease-in-out infinite;
 }
 
 .amber-fixes-sr {
@@ -336,274 +873,59 @@
   clip: rect(0 0 0 0);
 }
 
-@media (min-width: 768px) {
-  .amber-fixes-head,
-  .amber-fixes-thread,
+/* ---------------------------------------------------------------------- */
+/* Responsive                                                             */
+/* ---------------------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  .amber-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 5;
+    width: min(82vw, 300px);
+    transform: translateX(-100%);
+    box-shadow: 0.5rem 0 1.5rem rgba(0, 0, 0, 0.4);
+  }
+
+  .amber-sidebar:not(.amber-sidebar--collapsed) {
+    transform: translateX(0);
+  }
+
+  .amber-sidebar--collapsed {
+    width: min(82vw, 300px);
+    border-right-color: #232838;
+  }
+
+  .amber-sidebar-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    border: none;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0;
+    cursor: default;
+  }
+
+  .amber-devbar-project-name {
+    max-width: 9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 900px) {
+  .amber-main-body {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .amber-devbar {
+    padding: 0.7rem 1.5rem;
+  }
+
   .amber-fixes-composer {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-  }
-
-  .amber-fixes-titles h1 {
-    font-size: 1.6rem;
-  }
-
-  .amber-fixes-thread {
-    padding-bottom: 2rem;
-  }
-}
-
-/* Amber run workspace — live execution status, not a chat bubble. */
-.amber-workspace {
-  flex-shrink: 0;
-  margin: 0.75rem 1rem 0;
-  padding: 0.75rem 0.9rem;
-  border: 1px solid #d9d9d4;
-  border-left-width: 4px;
-  border-radius: 0.75rem;
-  background: #fff;
-}
-
-.amber-workspace--yellow {
-  border-left-color: #d97706;
-}
-
-.amber-workspace--red {
-  border-left-color: #dc2626;
-}
-
-.amber-workspace--green {
-  border-left-color: #16a34a;
-}
-
-.amber-workspace--idle {
-  border-left-color: #c7c7c0;
-}
-
-.amber-workspace-dot--idle {
-  background: #b8b8b0;
-}
-
-.amber-workspace-idle-hint {
-  margin: 0.55rem 0 0;
-  font-size: 0.88rem;
-  color: #555;
-  line-height: 1.45;
-}
-
-.amber-workspace-head {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-}
-
-.amber-workspace-dot {
-  width: 0.6rem;
-  height: 0.6rem;
-  border-radius: 999px;
-  flex-shrink: 0;
-}
-
-.amber-workspace-dot--yellow {
-  background: #d97706;
-  animation: amber-workspace-pulse 1.4s ease-in-out infinite;
-}
-
-.amber-workspace-dot--red {
-  background: #dc2626;
-}
-
-.amber-workspace-dot--green {
-  background: #16a34a;
-}
-
-@keyframes amber-workspace-pulse {
-  50% {
-    opacity: 0.35;
-  }
-}
-
-.amber-workspace-title {
-  min-width: 0;
-  flex: 1;
-}
-
-.amber-workspace-job {
-  font-size: 0.72rem;
-  font-weight: 750;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #666;
-}
-
-.amber-workspace-step {
-  font-size: 0.95rem;
-  font-weight: 650;
-  color: #171717;
-  overflow-wrap: break-word;
-}
-
-.amber-workspace-live-dots {
-  display: inline-block;
-  width: 1.2em;
-}
-
-.amber-workspace-elapsed {
-  flex-shrink: 0;
-  font-variant-numeric: tabular-nums;
-  font-size: 0.82rem;
-  font-weight: 650;
-  color: #555;
-  background: #f2f2ef;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-}
-
-.amber-workspace-retry {
-  margin: 0.5rem 0 0;
-  font-size: 0.85rem;
-  font-weight: 650;
-  color: #b45309;
-}
-
-.amber-workspace-blockers {
-  margin-top: 0.5rem;
-}
-
-.amber-workspace-blocker {
-  margin: 0.3rem 0 0;
-  padding: 0.5rem 0.65rem;
-  border: 1px solid #fecaca;
-  background: #fef2f2;
-  color: #7f1d1d;
-  border-radius: 0.6rem;
-  font-size: 0.85rem;
-  line-height: 1.4;
-}
-
-.amber-workspace-section {
-  margin-top: 0.6rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid #ecece7;
-}
-
-.amber-workspace-section-label {
-  font-size: 0.72rem;
-  font-weight: 750;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #777;
-  margin-bottom: 0.3rem;
-}
-
-.amber-workspace-files {
-  margin: 0;
-  padding-left: 1.1rem;
-  font-size: 0.85rem;
-  color: #333;
-  font-family: ui-monospace, "SF Mono", Menlo, monospace;
-}
-
-.amber-workspace-files li {
-  overflow-wrap: anywhere;
-}
-
-.amber-workspace-tests-line {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.amber-workspace-tests-pass {
-  color: #15803d;
-  font-weight: 650;
-}
-
-.amber-workspace-tests-fail {
-  color: #b91c1c;
-  font-weight: 650;
-}
-
-.amber-workspace-failures {
-  margin: 0.4rem 0 0;
-  padding-left: 1.1rem;
-  font-size: 0.82rem;
-  color: #7f1d1d;
-}
-
-.amber-workspace-pr-link {
-  display: inline-block;
-  font-size: 0.88rem;
-  font-weight: 650;
-  color: #1d4ed8;
-  text-decoration: none;
-}
-
-.amber-workspace-pr-link:hover {
-  text-decoration: underline;
-}
-
-.amber-workspace-final {
-  margin-top: 0.65rem;
-  padding: 0.4rem 0.7rem;
-  border-radius: 0.6rem;
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-align: center;
-}
-
-.amber-workspace-final--yellow {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.amber-workspace-final--red {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-.amber-workspace-final--green {
-  background: #dcfce7;
-  color: #14532d;
-}
-
-.amber-workspace-details {
-  margin-top: 0.6rem;
-  font-size: 0.82rem;
-}
-
-.amber-workspace-details summary {
-  cursor: pointer;
-  font-weight: 650;
-  color: #444;
-}
-
-.amber-workspace-details dl {
-  margin: 0.5rem 0 0;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.25rem 0.75rem;
-}
-
-.amber-workspace-details dt {
-  color: #777;
-  font-weight: 650;
-}
-
-.amber-workspace-details dd {
-  margin: 0;
-  color: #222;
-  overflow-wrap: anywhere;
-}
-
-.amber-workspace-summary {
-  white-space: pre-wrap;
-  grid-column: 1 / -1;
-}
-
-@media (min-width: 768px) {
-  .amber-workspace {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
   }
 }
