@@ -323,6 +323,21 @@
   border-left-color: #16a34a;
 }
 
+.amber-workspace--idle {
+  border-left-color: #c7c7c0;
+}
+
+.amber-workspace-dot--idle {
+  background: #b8b8b0;
+}
+
+.amber-workspace-idle-hint {
+  margin: 0.55rem 0 0;
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.45;
+}
+
 .amber-workspace-head {
   display: flex;
   align-items: center;

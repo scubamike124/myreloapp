@@ -58,7 +58,7 @@ function formatElapsed(ms: number): string {
   return m > 0 ? `${m}m ${s}s` : `${s}s`;
 }
 
-export default function AmberRunWorkspace({ run }: { run: BuilderRun | null }) {
+export default function AmberRunWorkspace({ run, idleProjectLabel }: { run: BuilderRun | null; idleProjectLabel?: string }) {
   const isRunning = run?.status === "queued" || run?.status === "running" || run?.status === "testing";
   const [now, setNow] = useState(() => Date.now());
 
@@ -71,7 +71,27 @@ export default function AmberRunWorkspace({ run }: { run: BuilderRun | null }) {
     return () => clearInterval(id);
   }, [isRunning]);
 
-  if (!run) return null;
+  // Confirmed live: with no run at all, this returned null and the page
+  // fell back to looking exactly like the plain chat screen it replaced --
+  // "fixed" only while a job happened to be active. A workspace looks like
+  // a workspace at rest too: this is a real, honest idle status (there
+  // simply is no job), not a placeholder pretending activity exists.
+  if (!run) {
+    return (
+      <section className="amber-workspace amber-workspace--idle" role="status" aria-label="Amber's workspace">
+        <header className="amber-workspace-head">
+          <span className="amber-workspace-dot amber-workspace-dot--idle" aria-hidden />
+          <div className="amber-workspace-title">
+            <div className="amber-workspace-job">{idleProjectLabel || "No project selected"}</div>
+            <div className="amber-workspace-step">No job running</div>
+          </div>
+        </header>
+        <p className="amber-workspace-idle-hint">
+          Tell Amber what to fix, build, or check below — real progress shows here the moment she starts.
+        </p>
+      </section>
+    );
+  }
 
   const tone = toneFor(run);
   const badge = finalBadgeFor(run);
