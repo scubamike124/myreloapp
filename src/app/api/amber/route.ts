@@ -11,6 +11,7 @@ import { runAgentTurn, agentProviderConfigured, type AgentMessage, type AgentEve
 import { commandCenterToolDefs, executeCommandCenterTool } from "@/lib/ai/command-center-tools";
 import { isAmberFixWorkIntent, modeInstruction, type AmberMode } from "@/lib/amber/intent";
 import { amberDevBridgeConfigured, startDevTask } from "@/lib/amber/dev-bridge";
+import { resolveDispatchProject } from "@/lib/amber/dispatch";
 
 // ---------------------------------------------------------------------------
 // Public "Ask Amber" widget — POST /api/amber. Mounted once, unauthenticated,
@@ -105,19 +106,37 @@ function textStream(fn: (controller: ReadableStreamDefaultController<Uint8Array>
  *
  * On Amber Fixes (/amber-builder), work-intent messages do NOT go to the LLM
  * first. Production proved the model still asks "which line / which page"
- * even with strong prompts. For those turns we auto-queue start_dev_task with
- * an investigative brief, then narrate — no clarifying interview.
+ * even with strong prompts. For those turns the live workspace's own send()
+ * already starts the real, project-aware task (startRepair -> amber-builder
+ * -> executeCodingAgent) before this request is even sent — opts.alreadyStarted
+ * says so, and this turn's only job is a brief acknowledgment.
+ *
+ * The autoFix branch below is a defensive fallback for a caller that reaches
+ * this route with a work-intent message but never went through that flow
+ * (a stale client, e.g.). Confirmed live: it used to hardcode "the Relo
+ * (myreloapp) repository" in the brief it wrote — regardless of which
+ * project the owner named or had selected. It now resolves the real target
+ * the same way the primary path does, and refuses rather than silently
+ * mis-targeting when that resolves to a project this specific bridge
+ * (Reelo-only, server-side, in amberai's reelo-dev-bridge) cannot actually
+ * reach.
  */
 function runOwnerTurn(
   messages: Message[],
   contextBlock: string,
-  opts: { onAmberFix: boolean; mode: AmberMode | null },
+  opts: { onAmberFix: boolean; mode: AmberMode | null; projectKey?: string; alreadyStarted?: boolean },
 ): Response {
   if (!agentProviderConfigured()) {
     return new Response(
       "Amber's build/fix tools need ANTHROPIC_API_KEY or OPENAI_API_KEY set on this Reelo service before they'll work — nothing is wired up yet on this deploy.",
       { headers: { "Content-Type": "text/plain; charset=utf-8" } },
     );
+  }
+
+  if (opts.onAmberFix && opts.alreadyStarted) {
+    return new Response("Started — tracking real progress in the workspace above.", {
+      headers: { "Content-Type": "text/plain; charset=utf-8" },
+    });
   }
 
   const lastUser = [...messages].reverse().find((m) => m.role === "user")?.content?.trim() || "";
@@ -130,6 +149,28 @@ function runOwnerTurn(
         controller.enqueue(
           encoder.encode(
             "I would start that Relo change now, but the coding-agent bridge isn't configured on this deploy (REELO_DEV_BRIDGE_SECRET). Once that's set I can inspect the repo and queue the work without asking you for file paths.",
+          ),
+        );
+        return;
+      }
+
+      const dispatch = resolveDispatchProject(lastUser, opts.projectKey || "reelo");
+      if (dispatch.kind === "ambiguous") {
+        controller.enqueue(
+          encoder.encode(
+            `That mentions more than one project (${dispatch.candidates.map((c) => c.label).join(" or ")}). Which one should I work on?`,
+          ),
+        );
+        return;
+      }
+      if (dispatch.projectKey !== "reelo") {
+        // This fallback bridge only ever creates tasks against Reelo's repo
+        // server-side (see amberai's reelo-dev-bridge route) no matter what
+        // this description says — refusing beats silently working on the
+        // wrong project while claiming otherwise.
+        controller.enqueue(
+          encoder.encode(
+            `I can't start that against ${dispatch.label} through this fallback path — it only reaches the Reelo repo today. Try again from the live workspace above, which resolves the project correctly for every product.`,
           ),
         );
         return;
@@ -313,6 +354,8 @@ export async function POST(req: Request) {
   let contextBlock: string;
   let onAmberFix = false;
   let mode: AmberMode | null = null;
+  let projectKey: string | undefined;
+  let alreadyStarted = false;
   try {
     const body = asRecord(await req.json());
     messages = parseMessages(body.messages);
@@ -324,6 +367,8 @@ export async function POST(req: Request) {
       req.headers.get("x-vercel-ip-country") ?? req.headers.get("cf-ipcountry") ?? undefined;
     const ctx = parseContext(body.context);
     onAmberFix = typeof ctx.path === "string" && ctx.path.startsWith("/amber-builder");
+    projectKey = ctx.projectKey;
+    alreadyStarted = ctx.alreadyStarted === true;
     if (body.mode === "execution" || body.mode === "conversation") {
       mode = body.mode;
     }
@@ -340,7 +385,7 @@ export async function POST(req: Request) {
   }
 
   if (await isAdminSession()) {
-    const res = runOwnerTurn(messages, contextBlock, { onAmberFix, mode });
+    const res = runOwnerTurn(messages, contextBlock, { onAmberFix, mode, projectKey, alreadyStarted });
     // Sliding renewal, same intent as middleware.ts's for /admin/*, extended
     // to cover the one major owner surface it never actually reached.
     //

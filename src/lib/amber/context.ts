@@ -1,4 +1,5 @@
 import { TOOLS, LIVE_TOOLS, TOOL_SERVICE } from "@/lib/tools";
+import { isProjectKey } from "@/lib/amber/project-registry";
 
 // ---------------------------------------------------------------------------
 // The context Amber is grounded in. Assembled on the client (it needs the
@@ -20,6 +21,15 @@ export type AmberContext = {
   /** ISO-3166 country from the edge, when the host provides it. Server-set and
    *  therefore trusted over anything the browser claims. */
   country?: string;
+  /** Amber Fixes only: which project the live workspace resolved this
+   *  message against (see dispatch.ts). Validated against the real project
+   *  registry -- an unrecognized value is dropped, never trusted verbatim. */
+  projectKey?: string;
+  /** Amber Fixes only: a coding task for this exact message was already
+   *  started via startRepair before this request was sent. Without this,
+   *  /api/amber's own work-intent check independently queued a second,
+   *  competing task through a different bridge for the same message. */
+  alreadyStarted?: boolean;
   /** Compact workspace summary from lib/workspace `summarize()`. */
   workspace?: {
     total: number;
@@ -207,6 +217,8 @@ export function parseContext(raw: unknown): AmberContext {
     typeof o.timeZone === "string" && /^[A-Za-z]+(?:[_/+-][A-Za-z0-9_+-]+)*$/.test(o.timeZone)
       ? o.timeZone.slice(0, 60)
       : undefined;
+  const projectKey = typeof o.projectKey === "string" && isProjectKey(o.projectKey) ? o.projectKey : undefined;
+  const alreadyStarted = o.alreadyStarted === true;
 
   let workspace: AmberContext["workspace"];
   const w = o.workspace as Record<string, unknown> | undefined;
@@ -244,5 +256,5 @@ export function parseContext(raw: unknown): AmberContext {
     };
   }
 
-  return { path, area: areaFromPath(path), toolSlug, locale, timeZone, workspace };
+  return { path, area: areaFromPath(path), toolSlug, locale, timeZone, workspace, projectKey, alreadyStarted };
 }
