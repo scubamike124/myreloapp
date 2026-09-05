@@ -5,6 +5,7 @@ import Link from "next/link";
 import { classifyAmberMode, shouldSendOnEnter, isAmberFixWorkIntent, type ThreadTurn } from "@/lib/amber/intent";
 import { activityFromRunDiff, publicRun, type BuilderRun } from "@/lib/amber/progress";
 import { useDictation } from "@/lib/amber/use-dictation";
+import AmberRunWorkspace from "./AmberRunWorkspace";
 import "./amber-fixes.css";
 
 type Role = "user" | "assistant" | "activity";
@@ -55,6 +56,7 @@ export default function AmberFixesPanel() {
   const [unseen, setUnseen] = useState(0);
   const [hydrated, setHydrated] = useState(false);
   const [activeRunId, setActiveRunId] = useState<string | null>(null);
+  const [currentRun, setCurrentRun] = useState<BuilderRun | null>(null);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -215,6 +217,7 @@ export default function AmberFixesPanel() {
       const run = publicRun({ ...runRaw, taskId: runRaw.taskId || taskId });
       setActiveRunId(run.id || run.taskId || taskId || "__latest__");
       runSnapRef.current = run;
+      setCurrentRun(run);
       if (events.length === 0 && run.status) {
         for (const line of activityFromRunDiff(null, run)) appendActivity(line.text, line.key);
       }
@@ -244,8 +247,14 @@ export default function AmberFixesPanel() {
           : null;
       for (const line of activityFromRunDiff(prev, target)) appendActivity(line.text, line.key);
       runSnapRef.current = target;
+      setCurrentRun(target);
 
-      const live = target.status === "queued" || target.status === "running" || target.status === "testing";
+      // Keep polling through "succeeded, PR open, not yet merged" too -- the
+      // owner approves via chat/Reelo Command Center separately from this
+      // panel, and without this the workspace would freeze on "needs
+      // approval" forever even after a merge actually happened elsewhere.
+      const pendingApproval = target.status === "succeeded" && Boolean(target.prUrl) && !target.mergedAt;
+      const live = target.status === "queued" || target.status === "running" || target.status === "testing" || pendingApproval;
       if (!live && target.id) setActiveRunId((id) => (id === target.id || id === target.taskId ? null : id));
     } catch {
       /* keep the thread usable if status is briefly unreachable */
@@ -340,6 +349,8 @@ export default function AmberFixesPanel() {
           ))}
         </div>
       </header>
+
+      <AmberRunWorkspace run={currentRun} />
 
       <div ref={scrollRef} className="amber-fixes-thread" onScroll={onThreadScroll}>
         {hydrated && messages.length === 0 && (

@@ -299,3 +299,243 @@
     padding-bottom: 2rem;
   }
 }
+
+/* Amber run workspace — live execution status, not a chat bubble. */
+.amber-workspace {
+  flex-shrink: 0;
+  margin: 0.75rem 1rem 0;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #d9d9d4;
+  border-left-width: 4px;
+  border-radius: 0.75rem;
+  background: #fff;
+}
+
+.amber-workspace--yellow {
+  border-left-color: #d97706;
+}
+
+.amber-workspace--red {
+  border-left-color: #dc2626;
+}
+
+.amber-workspace--green {
+  border-left-color: #16a34a;
+}
+
+.amber-workspace-head {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.amber-workspace-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.amber-workspace-dot--yellow {
+  background: #d97706;
+  animation: amber-workspace-pulse 1.4s ease-in-out infinite;
+}
+
+.amber-workspace-dot--red {
+  background: #dc2626;
+}
+
+.amber-workspace-dot--green {
+  background: #16a34a;
+}
+
+@keyframes amber-workspace-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.amber-workspace-title {
+  min-width: 0;
+  flex: 1;
+}
+
+.amber-workspace-job {
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.amber-workspace-step {
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: #171717;
+  overflow-wrap: break-word;
+}
+
+.amber-workspace-live-dots {
+  display: inline-block;
+  width: 1.2em;
+}
+
+.amber-workspace-elapsed {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.82rem;
+  font-weight: 650;
+  color: #555;
+  background: #f2f2ef;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.amber-workspace-retry {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 650;
+  color: #b45309;
+}
+
+.amber-workspace-blockers {
+  margin-top: 0.5rem;
+}
+
+.amber-workspace-blocker {
+  margin: 0.3rem 0 0;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #7f1d1d;
+  border-radius: 0.6rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.amber-workspace-section {
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #ecece7;
+}
+
+.amber-workspace-section-label {
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #777;
+  margin-bottom: 0.3rem;
+}
+
+.amber-workspace-files {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.85rem;
+  color: #333;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.amber-workspace-files li {
+  overflow-wrap: anywhere;
+}
+
+.amber-workspace-tests-line {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.amber-workspace-tests-pass {
+  color: #15803d;
+  font-weight: 650;
+}
+
+.amber-workspace-tests-fail {
+  color: #b91c1c;
+  font-weight: 650;
+}
+
+.amber-workspace-failures {
+  margin: 0.4rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.82rem;
+  color: #7f1d1d;
+}
+
+.amber-workspace-pr-link {
+  display: inline-block;
+  font-size: 0.88rem;
+  font-weight: 650;
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+.amber-workspace-pr-link:hover {
+  text-decoration: underline;
+}
+
+.amber-workspace-final {
+  margin-top: 0.65rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.amber-workspace-final--yellow {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.amber-workspace-final--red {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.amber-workspace-final--green {
+  background: #dcfce7;
+  color: #14532d;
+}
+
+.amber-workspace-details {
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+}
+
+.amber-workspace-details summary {
+  cursor: pointer;
+  font-weight: 650;
+  color: #444;
+}
+
+.amber-workspace-details dl {
+  margin: 0.5rem 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 0.75rem;
+}
+
+.amber-workspace-details dt {
+  color: #777;
+  font-weight: 650;
+}
+
+.amber-workspace-details dd {
+  margin: 0;
+  color: #222;
+  overflow-wrap: anywhere;
+}
+
+.amber-workspace-summary {
+  white-space: pre-wrap;
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+  .amber-workspace {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+}

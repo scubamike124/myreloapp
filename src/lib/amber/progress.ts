@@ -11,9 +11,23 @@ export type BuilderRun = {
   summary?: string;
   error?: string;
   backend?: string;
-  testEvidence?: { passed?: number; failed?: number; testsRun?: string[] };
+  testEvidence?: { passed?: number; failed?: number; testsRun?: string[]; failures?: string[] };
   changedFiles?: string[];
   prUrl?: string;
+  prNumber?: number;
+  /** Set only once the PR has actually merged (verified, not just requested) —
+   *  see amberai's markCodingAgentRunMerged/listPendingApprovals. A run with
+   *  prUrl but no mergedAt is done working, not done: it is waiting on the
+   *  owner's approval, the same distinction listPendingApprovals() already
+   *  draws elsewhere in this system. */
+  mergedAt?: string;
+  mergedSha?: string;
+  ownerReason?: string;
+  prHandoffWarning?: string;
+  createdAt?: string;
+  completedAt?: string;
+  /** 1 on a first attempt; >1 means this exact task has been retried. */
+  attempt?: number;
   updatedAt?: string;
 };
 
@@ -99,6 +113,14 @@ export function activityFromRunDiff(prev: BuilderRun | null, next: BuilderRun): 
     lines.push({ key: `${id}:pr`, text: `Opened a review pull request.` });
   }
 
+  if (next.mergedAt && next.mergedAt !== prev?.mergedAt) {
+    lines.push({ key: `${id}:merged`, text: "Pull request merged." });
+  }
+
+  if ((next.attempt ?? 1) > (prev?.attempt ?? 1)) {
+    lines.push({ key: `${id}:retry:${next.attempt}`, text: `Retrying (attempt ${next.attempt}).` });
+  }
+
   if (next.error && next.error !== prev?.error) {
     const cleaned = sanitizeOwnerText(next.error, 220);
     if (cleaned && !/sk-|token|secret|password|api[_-]?key/i.test(cleaned)) {
@@ -142,17 +164,32 @@ export function publicRun(raw: Record<string, unknown>): BuilderRun {
     taskId: typeof raw.taskId === "string" ? raw.taskId : undefined,
     status: typeof raw.status === "string" ? raw.status : undefined,
     projectName: typeof raw.projectName === "string" ? raw.projectName : undefined,
-    summary: typeof raw.summary === "string" ? sanitizeOwnerText(raw.summary, 500) : undefined,
-    error: typeof raw.error === "string" ? sanitizeOwnerText(raw.error, 240) : undefined,
+    // amberai's publicCodingRun() already sanitizes and caps these (up to
+    // 12000 chars) -- re-truncating hard here to 500/240 cut a real run's
+    // summary/error before the actually-relevant part. This layer only
+    // guards against a malformed/oversized upstream value, not normal length.
+    summary: typeof raw.summary === "string" ? sanitizeOwnerText(raw.summary, 12000) : undefined,
+    error: typeof raw.error === "string" ? sanitizeOwnerText(raw.error, 12000) : undefined,
     backend: typeof raw.backend === "string" ? raw.backend : undefined,
     changedFiles: files,
     prUrl: typeof raw.prUrl === "string" && raw.prUrl.startsWith("https://") ? raw.prUrl : undefined,
+    prNumber: typeof raw.prNumber === "number" ? raw.prNumber : undefined,
+    mergedAt: typeof raw.mergedAt === "string" ? raw.mergedAt : undefined,
+    mergedSha: typeof raw.mergedSha === "string" ? raw.mergedSha : undefined,
+    ownerReason: typeof raw.ownerReason === "string" ? sanitizeOwnerText(raw.ownerReason, 500) : undefined,
+    prHandoffWarning: typeof raw.prHandoffWarning === "string" ? sanitizeOwnerText(raw.prHandoffWarning, 500) : undefined,
+    createdAt: typeof raw.createdAt === "string" ? raw.createdAt : undefined,
+    completedAt: typeof raw.completedAt === "string" ? raw.completedAt : undefined,
+    attempt: typeof raw.attempt === "number" ? raw.attempt : undefined,
     updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : undefined,
     testEvidence: te
       ? {
           passed: typeof te.passed === "number" ? te.passed : undefined,
           failed: typeof te.failed === "number" ? te.failed : undefined,
           testsRun: Array.isArray(te.testsRun) ? te.testsRun.filter((x): x is string => typeof x === "string").slice(0, 12) : undefined,
+          failures: Array.isArray(te.failures)
+            ? te.failures.filter((x): x is string => typeof x === "string").map((x) => sanitizeOwnerText(x, 600)).slice(0, 5)
+            : undefined,
         }
       : undefined,
   };
