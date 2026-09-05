@@ -184,7 +184,7 @@
 .amber-fixes-jump {
   position: absolute;
   left: 50%;
-  bottom: 8.6rem;
+  bottom: 10.7rem;
   transform: translateX(-50%);
   border: 1px solid #111;
   background: #111;
@@ -200,7 +200,7 @@
 
 .amber-fixes-composer {
   flex-shrink: 0;
-  padding: 0.65rem 0.85rem calc(0.75rem + env(safe-area-inset-bottom));
+  padding: 0.65rem 0.85rem 0.75rem;
   border-top: 1px solid #d9d9d4;
   background: #fff;
 }
@@ -265,6 +265,17 @@
   cursor: not-allowed;
 }
 
+.amber-fixes-footer {
+  flex-shrink: 0;
+  padding: 0.5rem 0.85rem calc(0.55rem + env(safe-area-inset-bottom));
+  border-top: 1px solid #d9d9d4;
+  background: #fff;
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: #555;
+}
+
 .amber-fixes-mic-live {
   animation: amber-fixes-pulse 1s ease-in-out infinite;
 }
@@ -286,7 +297,8 @@
 @media (min-width: 768px) {
   .amber-fixes-head,
   .amber-fixes-thread,
-  .amber-fixes-composer {
+  .amber-fixes-composer,
+  .amber-fixes-footer {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
