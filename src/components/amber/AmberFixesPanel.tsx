@@ -442,6 +442,8 @@ export default function AmberFixesPanel() {
           </button>
         </div>
       </form>
+
+      <footer className="amber-fixes-footer">Amber Fix — Autonomous Coding System.</footer>
     </div>
   );
 }
