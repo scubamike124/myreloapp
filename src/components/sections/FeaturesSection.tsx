@@ -105,7 +105,15 @@ export default function FeaturesSection() {
             <div className="font-display text-lg font-bold">New features. Every week.</div>
             <div className="text-[13.5px]" style={{ color: "#a99a9c" }}>Built for creators. Built for results.</div>
           </div>
-          <Link href="/#how-it-works" className="whitespace-nowrap rounded-[11px] px-5 py-[11px] text-sm font-bold text-white transition-colors hover:bg-[rgba(255,70,85,.12)]" style={{ border: "1px solid rgba(255,70,85,.4)" }}>See Roadmap</Link>
+          {/*
+            Pointed at "/#how-it-works" — the How It Works section of the home
+            page, which is not the roadmap. On /features it also threw the
+            visitor off the page they were reading to land on the home page.
+            The three Phase cards above this button are the roadmap in
+            miniature, and /roadmap is the full version the header and hero
+            menus already link to, so that is where "See Roadmap" goes.
+          */}
+          <Link href="/roadmap" className="whitespace-nowrap rounded-[11px] px-5 py-[11px] text-sm font-bold text-white transition-colors hover:bg-[rgba(255,70,85,.12)]" style={{ border: "1px solid rgba(255,70,85,.4)" }}>See Roadmap</Link>
         </div>
       </section>
     </div>
