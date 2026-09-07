@@ -600,7 +600,14 @@ async function advanceSporeJob(
     result: submission.slice(0, 20000),
   });
   if (delivered.ok) {
-    notes.push(`${label} deliver: ${delivered.detail}`);
+    // `ok` only means Spore accepted the POST. `verified` means the delivery was
+    // afterwards readable back on the task — say which one actually happened
+    // rather than recording an unconfirmed submit as confirmed.
+    notes.push(
+      delivered.verified
+        ? `${label} deliver: ${delivered.detail}`
+        : `${label} deliver accepted but NOT yet confirmed on the task: ${delivered.detail}`,
+    );
     await updateJobProgress({
       userId,
       platformSlug: "sporeagent",

@@ -7,6 +7,7 @@ import {
 } from "./profit";
 import { buildSnapshot } from "./snapshot";
 import { listOpenSporeTasks, sporeDeliverRouteLive, sporeHealth } from "./sporeagent";
+import { proveSporeBidReaches } from "./spore-submit";
 import { ensureSporeAgent, runSkillFitPipelines } from "./pipeline";
 import {
   activeCount,
@@ -223,7 +224,20 @@ export async function runEarningsTick(userId: string): Promise<EarningsRecord> {
   }
 
   const sporeSubmit = await sporeDeliverRouteLive();
-  notes.push(`Spore submit probe: ${sporeSubmit.live ? "marketplace submit available" : "marketplace submit not offered yet"}`);
+  notes.push(
+    sporeSubmit.live
+      ? `Spore submit probe: marketplace submit available at ${sporeSubmit.route}`
+      : `Spore submit probe: ${sporeSubmit.detail}`,
+  );
+
+  // Bidding needs two separate proofs, not one. `submitLive` says there is
+  // somewhere to hand finished work in; `bidProof` says the bid write path
+  // actually reaches Spore. Reachability mode leaves no bid behind, which
+  // matters because Spore has no withdraw-bid route.
+  const bidProof = rec.sporeAgentId
+    ? await proveSporeBidReaches({ agentId: rec.sporeAgentId })
+    : { proven: false, detail: "No Spore agent id yet — bid path cannot be proven.", mode: "reachability" as const, bidId: null, status: 0 };
+  notes.push(`Spore bid path: ${bidProof.detail}`);
 
   // Spore new accepts stay off while hosted /deliver is missing. MoltJobs is only
   // frozen by real in-flight Molt (or other) work — not by Spore's platform gap.
@@ -231,7 +245,8 @@ export async function runEarningsTick(userId: string): Promise<EarningsRecord> {
   notes.push(...preAdvance.notes);
   rec = await loadRecord(userId);
 
-  const allowNewSporeBids = !sporePaused && sporeSubmit.live && !preAdvance.blockedNewAccepts;
+  const allowNewSporeBids =
+    !sporePaused && sporeSubmit.live && bidProof.proven && !preAdvance.blockedNewAccepts;
   if (allowNewSporeBids) {
     const pipe = await runSkillFitPipelines(userId, rec, { spore: true, molt: false });
     rec = pipe.rec;
@@ -244,6 +259,8 @@ export async function runEarningsTick(userId: string): Promise<EarningsRecord> {
   } else {
     if (!sporeSubmit.live) {
       notes.push("New Spore bids paused until marketplace submit exists. In-flight work stays queued. Not paid.");
+    } else if (!bidProof.proven) {
+      notes.push(`New Spore bids paused — bid path not proven: ${bidProof.detail}`);
     }
     for (const task of sporeBoard.tasks) {
       const capability = sporeCanComplete({
@@ -581,9 +598,11 @@ export async function runEarningsTick(userId: string): Promise<EarningsRecord> {
     attention: sporeApiDown
       ? `SporeAgent API issue: ${health.detail}. ${sporeBoard.detail}`
       : rec.sporeAgentId
-        ? sporeSubmit.live
-          ? "Bids live; Amber submits when hosted submit exists."
-          : "Queued work held. New Spore bids off until marketplace submit exists."
+        ? !sporeSubmit.live
+          ? "Queued work held. SporeAgent has no marketplace submit route on their hosted API, so new bids stay off — Amber will not commit to work she cannot hand in. She re-probes every route each tick and turns bidding on by herself the moment one appears."
+          : !bidProof.proven
+            ? `Submit route found at ${sporeSubmit.route}, but the bid path is not proven yet: ${bidProof.detail}`
+            : `Bids live — submit route ${sporeSubmit.route}, bid path proven. Amber performs, QAs and submits.`
         : "Amber auto-registers a Spore agent on the next runnable tick.",
     lastScanAt: now,
     paused: sporePaused,

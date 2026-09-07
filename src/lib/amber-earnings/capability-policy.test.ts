@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { sporeCanComplete, moltCanComplete } from "./policy";
-import { assessSporeCapability } from "./execution-capability";
+import { sporeCanComplete, moltCanComplete } from "./policy.ts";
+import { assessSporeCapability } from "./execution-capability.ts";
 
 describe("Amber work capability families", () => {
   it("recognizes scrape / pytest / translate / RAG / CSV dashboard as performable skills", () => {
@@ -64,6 +64,7 @@ describe("Amber work capability families", () => {
       description: "Build interactive dashboard with charts from CSV.",
       requirements: ["data-viz", "charts", "html"],
       submitLive: false,
+      bidProven: false,
     });
     assert.equal(check.canPerformAllWork, true);
     assert.equal(check.canAcceptOrApply, false);
@@ -77,6 +78,8 @@ describe("Amber work capability families", () => {
       description: "Build interactive dashboard with charts from CSV.",
       requirements: ["data-viz", "charts", "html"],
       submitLive: false,
+      // The bid path is proven; the submit gap alone must still hold bidding off.
+      bidProven: true,
     });
     assert.equal(submitGap.canPerformAllWork, true);
     assert.equal(submitGap.canAcceptOrApply, false);
@@ -90,6 +93,7 @@ describe("Amber work capability families", () => {
       description: "Build interactive dashboard with charts from CSV.",
       requirements: ["data-viz", "charts", "html"],
       submitLive: true,
+      bidProven: true,
     });
     assert.equal(withSubmit.canAcceptOrApply, true);
     assert.equal(withSubmit.canSubmit, true);

@@ -5,6 +5,7 @@
 import { listOpenMoltJobs, moltJobReject } from "./moltjobs";
 import { listOpenWorkProtocolJobs, workProtocolJobReject } from "./workprotocol";
 import { listOpenSporeTasks, sporeDeliverRouteLive } from "./sporeagent";
+import { proveSporeBidReaches } from "./spore-submit";
 import { listOpenBounties, payoutUsdFromListing } from "./taskbounty";
 import { listJobs } from "./persist";
 import { loadRecord } from "./store";
@@ -166,6 +167,12 @@ export async function buildLiveOpportunities(userId: string): Promise<{
   notes.push(`SporeAgent: ${spore.detail}`);
   const sporeSubmit = await sporeDeliverRouteLive();
   notes.push(`Spore submit: ${sporeSubmit.detail}`);
+  // Reachability mode only — this runs on every opportunity scan and must never
+  // leave a real bid behind (Spore has no withdraw-bid route).
+  const sporeBidProof = rec.sporeAgentId
+    ? await proveSporeBidReaches({ agentId: rec.sporeAgentId })
+    : { proven: false, detail: "No Spore agent id yet — bid path cannot be proven." };
+  notes.push(`Spore bid path: ${sporeBidProof.detail}`);
   for (const task of spore.tasks) {
     const key = `sporeagent:${task.id}`;
     const existing = jobByKey.get(key);
@@ -176,6 +183,7 @@ export async function buildLiveOpportunities(userId: string): Promise<{
       description: task.description || "",
       requirements: task.requirements || [],
       submitLive: sporeSubmit.live,
+      bidProven: sporeBidProof.proven,
     });
     const profit = evaluateProfit({
       payoutUsd: Number(task.budget_usd || 0),
