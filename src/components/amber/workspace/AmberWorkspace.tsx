@@ -4,10 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { BuilderRun } from "@/lib/amber/progress";
 import type { ExecutionEvent, JobSummary, RunStatus } from "./types";
+import { isAmberFixWorkIntent } from "@/lib/amber/intent";
 import { Sidebar } from "./Sidebar";
 import { CenterPanel } from "./CenterPanel";
 import { BottomPanels } from "./BottomPanels";
-import { ChatDrawer } from "./ChatDrawer";
+import { ChatDrawer, type ChatMessage } from "./ChatDrawer";
 import { NewTaskModal } from "./NewTaskModal";
 import { StatusDot } from "./StatusDot";
 import { Composer } from "./Composer";
@@ -53,6 +54,9 @@ export function AmberWorkspace() {
   const [approving, setApproving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [starting, setStarting] = useState(false);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [chatBusy, setChatBusy] = useState(false);
+  const chatAbortRef = useRef<AbortController | null>(null);
 
   const activeTaskIdRef = useRef(activeTaskId);
   useEffect(() => {
@@ -134,6 +138,87 @@ export function AmberWorkspace() {
       }
     },
     [projectKey, refreshJobs],
+  );
+
+  // Moved out of ChatDrawer so the main Composer can reach it too: an
+  // ordinary question typed there must never become a dev task (see
+  // handleComposerSubmit below), and answering it for real means calling
+  // the same conversational agent turn (/api/amber) the drawer already used,
+  // with the same real tools (count_ebooks_made, check_job_status, etc.) —
+  // not a second, parallel chat.
+  const sendChat = useCallback(
+    async (text: string) => {
+      const trimmed = text.trim();
+      if (!trimmed || chatBusy) return;
+      const next: ChatMessage[] = [...chatMessages, { role: "user", content: trimmed }];
+      setChatMessages(next);
+      setChatBusy(true);
+      const controller = new AbortController();
+      chatAbortRef.current = controller;
+      try {
+        const res = await fetch("/api/amber", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          signal: controller.signal,
+          body: JSON.stringify({
+            messages: next,
+            context: { path: "/amber-builder", page: "amber-fix", projectKey },
+          }),
+        });
+        if (!res.ok || !res.body) {
+          const data = await res.json().catch(() => ({}));
+          setChatMessages((m) => [...m, { role: "assistant", content: data.error || "Amber couldn't reply just now." }]);
+          return;
+        }
+        setChatMessages((m) => [...m, { role: "assistant", content: "" }]);
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          const chunk = decoder.decode(value, { stream: true });
+          setChatMessages((m) => {
+            const copy = [...m];
+            const last = copy[copy.length - 1];
+            if (last?.role === "assistant") copy[copy.length - 1] = { ...last, content: last.content + chunk };
+            return copy;
+          });
+        }
+      } catch (e) {
+        if ((e as Error).name !== "AbortError") {
+          setChatMessages((m) => [...m, { role: "assistant", content: "Connection lost. Try again." }]);
+        }
+      } finally {
+        setChatBusy(false);
+        chatAbortRef.current = null;
+      }
+    },
+    [chatBusy, chatMessages, projectKey],
+  );
+
+  /**
+   * The Composer is always visible and looks like one plain text box, but
+   * two very different things can happen when it's submitted. Confirmed
+   * live: asking it "Can you see how many ebooks Amber made in the last 7
+   * days" queued a real coding task — inspected the repo, changed 5 files,
+   * ran 125 tests, opened and (via the ordinary approve flow, clicked
+   * without realizing what it actually was) merged a PR — to answer a
+   * question that needed zero code changes. isAmberFixWorkIntent is the
+   * same deterministic classifier /api/amber's own owner-turn fallback
+   * already trusts (see runOwnerTurn there); consulting it here, before
+   * ever touching /api/amber-builder, is what actually closes the gap —
+   * it was already correct and already tested, just never called from the
+   * one place a plain question is most likely to be typed.
+   */
+  const handleComposerSubmit = useCallback(
+    (text: string) => {
+      if (isAmberFixWorkIntent(text)) {
+        return handleNewTask(text);
+      }
+      setChatOpen(true);
+      return sendChat(text);
+    },
+    [handleNewTask, sendChat],
   );
 
   const handleApprove = useCallback(async () => {
@@ -233,11 +318,15 @@ export function AmberWorkspace() {
               <CenterPanel run={activeRun} events={activeTaskId ? events : []} onApprove={handleApprove} approving={approving} />
             )}
           </div>
-          <Composer onSubmit={handleNewTask} busy={starting} placeholder={`Tell Amber what to do on ${PROJECT_LABELS[projectKey] || projectKey}…`} />
+          <Composer
+            onSubmit={handleComposerSubmit}
+            busy={starting || chatBusy}
+            placeholder={`Ask Amber or tell her what to do on ${PROJECT_LABELS[projectKey] || projectKey}…`}
+          />
           <BottomPanels events={activeTaskId ? events : []} />
         </div>
 
-        <ChatDrawer projectKey={projectKey} open={chatOpen} onClose={() => setChatOpen(false)} />
+        <ChatDrawer messages={chatMessages} busy={chatBusy} onSend={sendChat} open={chatOpen} onClose={() => setChatOpen(false)} />
       </div>
 
       {showNewTask && (

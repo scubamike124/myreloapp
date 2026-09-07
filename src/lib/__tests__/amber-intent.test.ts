@@ -1,6 +1,16 @@
+/**
+ * Moved here from src/lib/amber/intent.test.ts, which sat outside the glob
+ * `npm test` actually runs (src/lib/__tests__/*.test.ts only) and so never
+ * executed in CI. That mattered: this classifier is the exact thing that
+ * failed live on "Can you see how many ebooks Amber made in the last 7
+ * days" — it auto-queued a real coding task (5 files changed, a PR opened
+ * and merged) to answer what should have been a read-only lookup. A
+ * dedicated regression file for that classifier that nothing ever ran is
+ * worse than no file at all, because it looks like coverage.
+ */
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { classifyAmberMode, isAmberFixWorkIntent } from "./intent.ts";
+import { classifyAmberMode, isAmberFixWorkIntent } from "../amber/intent.ts";
 
 describe("classifyAmberMode amber-fix", () => {
   it("treats a clear Relo copy/UI objective as execution", () => {
@@ -52,5 +62,24 @@ describe("isAmberFixWorkIntent", () => {
 
   it("still treats a real fix request phrased as a question as work", () => {
     assert.equal(isAmberFixWorkIntent("Can you fix the broken navbar button on the homepage?"), true);
+  });
+
+  // Regression: this is the second live incident, and the reason this file
+  // now runs at all. Same failure shape as the "publish" case above, in the
+  // wild again with different wording — which is exactly why the fix has to
+  // be structural (this classifier is the one thing actually consulted at
+  // every entry point, see amber-fix-composer-gate.test.ts) rather than one
+  // more regex patch aimed at one more sentence.
+  it("does not treat 'how many ebooks were made' as work — the exact sentence that shipped PR #117", () => {
+    assert.equal(isAmberFixWorkIntent("Can you see how many ebooks Amber made in the last 7 days"), false);
+    assert.equal(isAmberFixWorkIntent("Check how many e-books Amber made in the last seven days"), false);
+  });
+
+  it("does not treat other ordinary business-status questions as work", () => {
+    assert.equal(isAmberFixWorkIntent("How many customers signed up this week?"), false);
+    assert.equal(isAmberFixWorkIntent("What's our current inventory of avatar templates?"), false);
+    assert.equal(isAmberFixWorkIntent("Is the Stripe API responding normally right now?"), false);
+    assert.equal(isAmberFixWorkIntent("What activity happened on the account in the last 24 hours?"), false);
+    assert.equal(isAmberFixWorkIntent("How many businesses are on the Forma waitlist?"), false);
   });
 });

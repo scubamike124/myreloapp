@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useState } from "react";
 
-type Msg = { role: "user" | "assistant"; content: string };
+export type ChatMessage = { role: "user" | "assistant"; content: string };
 
 /**
  * Secondary conversation panel — for asking Amber questions or giving her
@@ -10,63 +10,35 @@ type Msg = { role: "user" | "assistant"; content: string };
  * work happens through the explicit "New task" flow, which is unambiguous
  * about which repository and what outcome; a chat message here is never
  * silently turned into a coding task.
+ *
+ * Controlled by AmberWorkspace: the send/stream logic lives there now
+ * because the main Composer also needs to reach it — an ordinary question
+ * typed into the always-visible Composer is routed here too (see
+ * isAmberFixWorkIntent in AmberWorkspace), not into a dev task, so this
+ * drawer and the Composer share one real conversation rather than each
+ * silently keeping its own.
  */
-export function ChatDrawer({ projectKey, open, onClose }: { projectKey: string; open: boolean; onClose: () => void }) {
-  const [messages, setMessages] = useState<Msg[]>([]);
+export function ChatDrawer({
+  messages,
+  busy,
+  onSend,
+  open,
+  onClose,
+}: {
+  messages: ChatMessage[];
+  busy: boolean;
+  onSend: (text: string) => void;
+  open: boolean;
+  onClose: () => void;
+}) {
   const [input, setInput] = useState("");
-  const [busy, setBusy] = useState(false);
-  const abortRef = useRef<AbortController | null>(null);
 
-  const send = useCallback(
-    async (text: string) => {
-      const trimmed = text.trim();
-      if (!trimmed || busy) return;
-      const next: Msg[] = [...messages, { role: "user", content: trimmed }];
-      setMessages(next);
-      setInput("");
-      setBusy(true);
-      const controller = new AbortController();
-      abortRef.current = controller;
-      try {
-        const res = await fetch("/api/amber", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          signal: controller.signal,
-          body: JSON.stringify({
-            messages: next,
-            context: { path: "/amber-builder", page: "amber-fix", projectKey },
-          }),
-        });
-        if (!res.ok || !res.body) {
-          const data = await res.json().catch(() => ({}));
-          setMessages((m) => [...m, { role: "assistant", content: data.error || "Amber couldn't reply just now." }]);
-          return;
-        }
-        setMessages((m) => [...m, { role: "assistant", content: "" }]);
-        const reader = res.body.getReader();
-        const decoder = new TextDecoder();
-        for (;;) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          const chunk = decoder.decode(value, { stream: true });
-          setMessages((m) => {
-            const copy = [...m];
-            const last = copy[copy.length - 1];
-            if (last?.role === "assistant") copy[copy.length - 1] = { ...last, content: last.content + chunk };
-            return copy;
-          });
-        }
-      } catch (e) {
-        if ((e as Error).name !== "AbortError") {
-          setMessages((m) => [...m, { role: "assistant", content: "Connection lost. Try again." }]);
-        }
-      } finally {
-        setBusy(false);
-        abortRef.current = null;
-      }
-    },
-    [busy, messages, projectKey],
-  );
+  const submit = () => {
+    const trimmed = input.trim();
+    if (!trimmed || busy) return;
+    onSend(trimmed);
+    setInput("");
+  };
 
   return (
     <aside
@@ -105,7 +77,7 @@ export function ChatDrawer({ projectKey, open, onClose }: { projectKey: string; 
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          send(input);
+          submit();
         }}
         className="border-t border-white/8 p-2.5"
       >
@@ -117,7 +89,7 @@ export function ChatDrawer({ projectKey, open, onClose }: { projectKey: string; 
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
-                send(input);
+                submit();
               }
             }}
             placeholder="Ask a question…"
