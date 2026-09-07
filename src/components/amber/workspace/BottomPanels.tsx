@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { ExecutionEvent } from "./types";
+import type { ExecutionEvent } from "@/lib/amber/execution-types";
 import { StatusDot } from "./StatusDot";
 import { DiffView } from "./DiffView";
 
@@ -121,7 +121,11 @@ function Empty({ text }: { text: string }) {
  */
 export function BottomPanels({ events }: { events: ExecutionEvent[] }) {
   const [tab, setTab] = useState<TabId>("terminal");
-  const [collapsed, setCollapsed] = useState(false);
+  // Collapsed by default: the live feed (LiveFeed.tsx) is the primary
+  // experience now. This strip stays reachable for real technical detail
+  // but must not compete with it for screen space on load, especially on
+  // a phone where every extra open panel is scroll distance.
+  const [collapsed, setCollapsed] = useState(true);
 
   return (
     <div className="flex flex-col border-t border-white/8" style={{ background: "rgba(10,6,8,.85)" }}>

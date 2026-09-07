@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { BuilderRun } from "@/lib/amber/progress";
-import type { ExecutionEvent, JobSummary, RunStatus } from "./types";
+import type { ExecutionEvent, JobSummary, RunStatus } from "@/lib/amber/execution-types";
 import { isAmberFixWorkIntent } from "@/lib/amber/intent";
 import { Sidebar } from "./Sidebar";
 import { CenterPanel } from "./CenterPanel";

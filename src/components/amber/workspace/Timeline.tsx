@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { ExecutionEvent, EventKind } from "./types";
+import type { ExecutionEvent, EventKind } from "@/lib/amber/execution-types";
 import { StatusDot } from "./StatusDot";
 import { DiffView } from "./DiffView";
 

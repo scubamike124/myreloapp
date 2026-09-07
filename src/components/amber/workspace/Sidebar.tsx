@@ -1,6 +1,6 @@
 "use client";
 
-import type { JobSummary } from "./types";
+import type { JobSummary } from "@/lib/amber/execution-types";
 import { StatusDot } from "./StatusDot";
 
 const PROJECTS = [
