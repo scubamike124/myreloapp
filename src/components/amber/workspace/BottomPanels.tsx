@@ -30,12 +30,12 @@ function TerminalTab({ events }: { events: ExecutionEvent[] }) {
       {lines.map((e) => (
         <div key={e.id}>
           {e.kind === "RUN_COMMAND" ? (
-            <div className="text-emerald-300/90">
-              <span className="text-white/30">$ </span>
+            <div className="text-emerald-700">
+              <span className="text-black/35">$ </span>
               {e.command || e.title}
             </div>
           ) : (
-            <pre className="whitespace-pre-wrap pl-3 text-white/60">{e.detail || e.title}</pre>
+            <pre className="whitespace-pre-wrap pl-3 text-black/55">{e.detail || e.title}</pre>
           )}
         </div>
       ))}
@@ -49,13 +49,13 @@ function TestsTab({ events }: { events: ExecutionEvent[] }) {
   return (
     <ul className="space-y-2">
       {rows.map((e) => (
-        <li key={e.id} className="rounded-lg border border-white/8 bg-white/[.02] p-2.5">
+        <li key={e.id} className="rounded-lg border border-black/8 bg-black/[.015] p-2.5">
           <div className="flex items-center gap-2">
             <StatusDot status={e.status} />
-            <span className="text-[13px] font-medium text-white/85">{e.title}</span>
-            <span className="ml-auto font-mono text-[10px] text-white/30">{timeLabel(e.createdAt)}</span>
+            <span className="text-[13px] font-medium text-black/85">{e.title}</span>
+            <span className="ml-auto font-mono text-[10px] text-black/35">{timeLabel(e.createdAt)}</span>
           </div>
-          {e.detail && <pre className="mt-1.5 whitespace-pre-wrap pl-4 font-mono text-[11.5px] text-white/50">{e.detail}</pre>}
+          {e.detail && <pre className="mt-1.5 whitespace-pre-wrap pl-4 font-mono text-[11.5px] text-black/55">{e.detail}</pre>}
         </li>
       ))}
     </ul>
@@ -70,13 +70,13 @@ function GitDeployTab({ events }: { events: ExecutionEvent[] }) {
   return (
     <ul className="space-y-2">
       {rows.map((e) => (
-        <li key={e.id} className="rounded-lg border border-white/8 bg-white/[.02] p-2.5">
+        <li key={e.id} className="rounded-lg border border-black/8 bg-black/[.015] p-2.5">
           <div className="flex items-center gap-2">
             <StatusDot status={e.status} />
-            <span className="text-[13px] font-medium text-white/85">{e.title}</span>
-            <span className="ml-auto font-mono text-[10px] text-white/30">{timeLabel(e.createdAt)}</span>
+            <span className="text-[13px] font-medium text-black/85">{e.title}</span>
+            <span className="ml-auto font-mono text-[10px] text-black/35">{timeLabel(e.createdAt)}</span>
           </div>
-          {e.detail && <div className="mt-1 pl-4 font-mono text-[11.5px] text-white/45">{e.detail}</div>}
+          {e.detail && <div className="mt-1 pl-4 font-mono text-[11.5px] text-black/50">{e.detail}</div>}
         </li>
       ))}
     </ul>
@@ -90,9 +90,9 @@ function LogsTab({ events }: { events: ExecutionEvent[] }) {
       {events.map((e) => (
         <li key={e.id} className="flex items-start gap-2 text-[12px]">
           <StatusDot status={e.status} className="mt-1" />
-          <span className="font-mono text-[10px] text-white/30">{timeLabel(e.createdAt)}</span>
-          <span className="text-[10px] font-semibold uppercase tracking-wide text-white/30">{e.kind}</span>
-          <span className="min-w-0 flex-1 truncate text-white/75">{e.title}</span>
+          <span className="font-mono text-[10px] text-black/35">{timeLabel(e.createdAt)}</span>
+          <span className="text-[10px] font-semibold uppercase tracking-wide text-black/35">{e.kind}</span>
+          <span className="min-w-0 flex-1 truncate text-black/75">{e.title}</span>
         </li>
       ))}
       {events.some((e) => e.diff) && (
@@ -110,7 +110,7 @@ function LogsTab({ events }: { events: ExecutionEvent[] }) {
 }
 
 function Empty({ text }: { text: string }) {
-  return <p className="py-6 text-center text-[12.5px] text-white/35">{text}</p>;
+  return <p className="py-6 text-center text-[12.5px] text-black/40">{text}</p>;
 }
 
 /**
@@ -128,7 +128,7 @@ export function BottomPanels({ events }: { events: ExecutionEvent[] }) {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
-    <div className="flex flex-col border-t border-white/8" style={{ background: "rgba(10,6,8,.85)" }}>
+    <div className="flex flex-col border-t border-black/8" style={{ background: "#faf9f8" }}>
       <div className="flex items-center gap-1 overflow-x-auto px-2 pt-1.5">
         {TABS.map((t) => (
           <button
@@ -139,7 +139,7 @@ export function BottomPanels({ events }: { events: ExecutionEvent[] }) {
               setCollapsed(false);
             }}
             className={`shrink-0 rounded-t-lg px-3 py-1.5 text-[12px] font-semibold transition-colors ${
-              !collapsed && tab === t.id ? "bg-white/[.06] text-white" : "text-white/40 hover:text-white/70"
+              !collapsed && tab === t.id ? "bg-white text-black/90" : "text-black/40 hover:text-black/70"
             }`}
           >
             {t.label}
@@ -149,13 +149,13 @@ export function BottomPanels({ events }: { events: ExecutionEvent[] }) {
           type="button"
           onClick={() => setCollapsed((c) => !c)}
           aria-label={collapsed ? "Expand panel" : "Collapse panel"}
-          className="ml-auto shrink-0 rounded-lg px-2 py-1.5 text-[12px] text-white/40 hover:text-white/70"
+          className="ml-auto shrink-0 rounded-lg px-2 py-1.5 text-[12px] text-black/40 hover:text-black/70"
         >
           {collapsed ? "▲" : "▼"}
         </button>
       </div>
       {!collapsed && (
-        <div className="max-h-[34vh] overflow-y-auto px-3 py-3 sm:max-h-[30vh]">
+        <div className="max-h-[34vh] overflow-y-auto bg-white px-3 py-3 sm:max-h-[30vh]">
           {tab === "terminal" && <TerminalTab events={events} />}
           {tab === "tests" && <TestsTab events={events} />}
           {tab === "git" && <GitDeployTab events={events} />}

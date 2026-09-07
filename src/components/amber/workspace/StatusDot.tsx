@@ -2,10 +2,10 @@ import type { EventStatus, RunStatus } from "@/lib/amber/execution-types";
 import { colorForStatus } from "@/lib/amber/execution-types";
 
 const DOT_CLASS: Record<ReturnType<typeof colorForStatus>, string> = {
-  red: "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,.6)]",
-  yellow: "bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,.6)]",
-  green: "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,.6)]",
-  neutral: "bg-white/30",
+  red: "bg-red-500",
+  yellow: "bg-amber-500",
+  green: "bg-emerald-500",
+  neutral: "bg-black/25",
 };
 
 /** A small color-coded dot — the one visual language repeated everywhere in
@@ -29,10 +29,10 @@ export function StatusDot({
 }
 
 const TEXT_CLASS: Record<ReturnType<typeof colorForStatus>, string> = {
-  red: "text-red-400",
-  yellow: "text-amber-300",
-  green: "text-emerald-300",
-  neutral: "text-white/50",
+  red: "text-red-600",
+  yellow: "text-amber-700",
+  green: "text-emerald-700",
+  neutral: "text-black/45",
 };
 
 const BADGE_LABEL: Record<string, string> = {

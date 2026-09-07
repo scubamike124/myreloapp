@@ -42,7 +42,7 @@ export function Sidebar({
 
   return (
     <div className="flex h-full flex-col overflow-hidden">
-      <div className="border-b border-white/8 p-3">
+      <div className="border-b border-black/8 p-3">
         <button
           type="button"
           onClick={onNewTask}
@@ -53,8 +53,8 @@ export function Sidebar({
         </button>
       </div>
 
-      <div className="border-b border-white/8 p-3">
-        <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-white/35">Project</div>
+      <div className="border-b border-black/8 p-3">
+        <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-black/40">Project</div>
         <div className="flex flex-wrap gap-1.5">
           {PROJECTS.map((p) => (
             <button
@@ -63,8 +63,8 @@ export function Sidebar({
               onClick={() => onProjectChange(p.key)}
               className={`rounded-lg border px-2.5 py-1 text-[12px] font-medium transition-colors ${
                 p.key === projectKey
-                  ? "border-[rgba(255,70,85,.5)] bg-[rgba(255,60,75,.12)] text-white"
-                  : "border-white/10 text-white/50 hover:border-white/20 hover:text-white/80"
+                  ? "border-[rgba(196,16,28,.4)] bg-[rgba(255,60,75,.08)] text-[#c4101c]"
+                  : "border-black/10 text-black/50 hover:border-black/20 hover:text-black/80"
               }`}
             >
               {p.label}
@@ -74,8 +74,8 @@ export function Sidebar({
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto p-3">
-        <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-white/35">Recent jobs</div>
-        {jobs.length === 0 && <p className="px-1 text-[12px] text-white/35">No jobs yet.</p>}
+        <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-black/40">Recent jobs</div>
+        {jobs.length === 0 && <p className="px-1 text-[12px] text-black/40">No jobs yet.</p>}
         <ul className="space-y-1">
           {jobs.map((job) => (
             <li key={job.taskId}>
@@ -83,14 +83,14 @@ export function Sidebar({
                 type="button"
                 onClick={() => onSelectJob(job.taskId)}
                 className={`w-full rounded-lg px-2.5 py-2 text-left transition-colors ${
-                  job.taskId === activeTaskId ? "bg-white/[.07]" : "hover:bg-white/[.04]"
+                  job.taskId === activeTaskId ? "bg-black/[.06]" : "hover:bg-black/[.04]"
                 }`}
               >
                 <div className="flex items-center gap-2">
                   <StatusDot status={job.status} pulse={job.status === "running" || job.status === "testing"} />
-                  <span className="min-w-0 flex-1 truncate text-[12.5px] font-medium text-white/85">{job.title}</span>
+                  <span className="min-w-0 flex-1 truncate text-[12.5px] font-medium text-black/85">{job.title}</span>
                 </div>
-                <div className="mt-0.5 pl-4 text-[11px] text-white/35">
+                <div className="mt-0.5 pl-4 text-[11px] text-black/40">
                   {job.projectName || "—"} · {relativeTime(job.updatedAt || job.createdAt)}
                 </div>
               </button>
@@ -100,7 +100,7 @@ export function Sidebar({
 
         {withPr.length > 0 && (
           <>
-            <div className="mb-1.5 mt-4 text-[10px] font-semibold uppercase tracking-wider text-white/35">Deployments</div>
+            <div className="mb-1.5 mt-4 text-[10px] font-semibold uppercase tracking-wider text-black/40">Deployments</div>
             <ul className="space-y-1">
               {withPr.map((job) => (
                 <li key={`pr-${job.taskId}`}>
@@ -108,7 +108,7 @@ export function Sidebar({
                     href={job.prUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-[12px] text-white/50 transition-colors hover:bg-white/[.04] hover:text-white/80"
+                    className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-[12px] text-black/55 transition-colors hover:bg-black/[.04] hover:text-black/85"
                   >
                     <span aria-hidden>⎇</span>
                     <span className="min-w-0 flex-1 truncate">{job.title}</span>

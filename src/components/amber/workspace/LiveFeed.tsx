@@ -6,15 +6,19 @@ import { buildFeedItems, type FeedItem, type FeedTone } from "@/lib/amber/feed";
 import { DiffView } from "./DiffView";
 
 const DOT: Record<FeedTone, string> = {
-  pending: "bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,.6)]",
-  ok: "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,.5)]",
-  error: "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,.6)]",
+  pending: "bg-amber-500",
+  ok: "bg-emerald-500",
+  error: "bg-red-500",
 };
 
+// The status of each step is carried by the text color itself, not just the
+// dot beside it — amber while a step is actively working, green once it's
+// verified done, red the moment something fails — so the shape of a run is
+// readable at a glance without inspecting every dot.
 const TEXT: Record<FeedTone, string> = {
-  pending: "text-white/90",
-  ok: "text-white/70",
-  error: "text-red-300",
+  pending: "text-amber-700",
+  ok: "text-emerald-700",
+  error: "text-red-600",
 };
 
 /** Near-bottom threshold, in px, below which the feed counts as "at live". */
@@ -38,19 +42,19 @@ function Row({ item, isLast }: { item: FeedItem; isLast: boolean }) {
           className={`block w-full text-left ${expandable ? "cursor-pointer" : "cursor-default"}`}
         >
           <span className={`text-[14.5px] leading-relaxed ${TEXT[item.tone]}`}>{item.text}</span>
-          {item.meta && <span className="ml-2 text-[12.5px] text-white/40">{item.meta}</span>}
+          {item.meta && <span className="ml-2 text-[12.5px] text-black/45">{item.meta}</span>}
           {item.href && (
             <a
               href={item.href}
               target="_blank"
               rel="noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="ml-2 text-[12.5px] text-sky-300 hover:underline"
+              className="ml-2 text-[12.5px] text-sky-700 hover:underline"
             >
               View ↗
             </a>
           )}
-          {expandable && <span className="ml-1.5 text-[10px] text-white/25">{open ? "▾" : "▸ details"}</span>}
+          {expandable && <span className="ml-1.5 text-[10px] text-black/30">{open ? "▾" : "▸ details"}</span>}
         </button>
 
         {open && (
@@ -58,14 +62,14 @@ function Row({ item, isLast }: { item: FeedItem; isLast: boolean }) {
             {item.events.map((e) => (
               <div key={e.id}>
                 {e.command && (
-                  <pre className="overflow-x-auto rounded-lg bg-black/40 px-2.5 py-1.5 font-mono text-[11px] text-emerald-300/85">
-                    <span className="text-white/30">$ </span>
+                  <pre className="overflow-x-auto rounded-lg border border-black/8 bg-black/[.03] px-2.5 py-1.5 font-mono text-[11px] text-emerald-700">
+                    <span className="text-black/35">$ </span>
                     {e.command}
                   </pre>
                 )}
                 {e.diff && <DiffView diff={e.diff} />}
                 {e.detail && !e.diff && !e.command && (
-                  <pre className="max-h-56 overflow-auto whitespace-pre-wrap rounded-lg bg-black/40 px-2.5 py-1.5 font-mono text-[11px] leading-relaxed text-white/55">
+                  <pre className="max-h-56 overflow-auto whitespace-pre-wrap rounded-lg border border-black/8 bg-black/[.03] px-2.5 py-1.5 font-mono text-[11px] leading-relaxed text-black/60">
                     {e.detail}
                   </pre>
                 )}
@@ -124,7 +128,7 @@ export function LiveFeed({ events, idleLabel }: { events: ExecutionEvent[]; idle
     <div className="relative flex h-full min-h-0 flex-col">
       <div ref={scrollRef} onScroll={onScroll} className="min-h-0 flex-1 overflow-y-auto px-4 py-3 sm:px-5">
         {items.length === 0 ? (
-          <div className="flex h-full min-h-[160px] items-center justify-center text-center text-[13px] text-white/40">{idleLabel}</div>
+          <div className="flex h-full min-h-[160px] items-center justify-center text-center text-[13px] text-black/40">{idleLabel}</div>
         ) : (
           <ol className="space-y-2.5">
             {items.map((item, i) => (

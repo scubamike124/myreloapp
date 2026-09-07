@@ -246,25 +246,25 @@ export function AmberWorkspace() {
   }, [activeTaskId, refreshJobs, refreshEvents]);
 
   return (
-    <div className="fixed inset-0 flex flex-col text-white" style={{ background: "#0a0608" }}>
+    <div className="fixed inset-0 flex flex-col text-black/90" style={{ background: "#ffffff" }}>
       {/* Top bar */}
-      <header className="flex h-12 shrink-0 items-center gap-2 border-b border-white/8 px-3">
-        <button type="button" onClick={() => setSidebarOpen(true)} className="rounded-lg p-1.5 text-white/50 hover:text-white lg:hidden" aria-label="Open jobs">
+      <header className="flex h-12 shrink-0 items-center gap-2 border-b border-black/8 px-3">
+        <button type="button" onClick={() => setSidebarOpen(true)} className="rounded-lg p-1.5 text-black/50 hover:text-black lg:hidden" aria-label="Open jobs">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-        <Link href="/admin" className="hidden text-[13px] font-semibold text-white/40 hover:text-white/70 sm:block">
+        <Link href="/admin" className="hidden text-[13px] font-semibold text-black/40 hover:text-black/70 sm:block">
           ← Admin
         </Link>
         <div className="mx-auto flex items-center gap-2 text-[13px] font-semibold">
-          <span aria-hidden>◆</span> Amber Fixes
-          <span className="hidden text-white/30 sm:inline">· {PROJECT_LABELS[projectKey] || projectKey}</span>
+          <span aria-hidden className="text-[#c4101c]">◆</span> Amber Fixes
+          <span className="hidden text-black/35 sm:inline">· {PROJECT_LABELS[projectKey] || projectKey}</span>
         </div>
         <button
           type="button"
           onClick={() => setChatOpen((o) => !o)}
-          className={`rounded-lg p-1.5 ${chatOpen ? "text-white" : "text-white/50 hover:text-white"}`}
+          className={`rounded-lg p-1.5 ${chatOpen ? "text-black" : "text-black/50 hover:text-black"}`}
           aria-label="Toggle chat"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -274,10 +274,10 @@ export function AmberWorkspace() {
       </header>
 
       {error && (
-        <div className="flex items-center gap-2 border-b border-red-500/20 bg-red-500/[.08] px-4 py-2 text-[12.5px] text-red-300">
+        <div className="flex items-center gap-2 border-b border-red-200 bg-red-50 px-4 py-2 text-[12.5px] text-red-700">
           <StatusDot status="ERROR" />
           {error}
-          <button type="button" onClick={() => setError(null)} className="ml-auto text-red-300/60 hover:text-red-200">
+          <button type="button" onClick={() => setError(null)} className="ml-auto text-red-400 hover:text-red-600">
             ✕
           </button>
         </div>
@@ -286,12 +286,12 @@ export function AmberWorkspace() {
       {/* Body */}
       <div className="flex min-h-0 flex-1">
         {/* Sidebar — overlay on mobile/tablet, static column on desktop */}
-        {sidebarOpen && <div className="fixed inset-0 z-30 bg-black/50 lg:hidden" onClick={() => setSidebarOpen(false)} />}
+        {sidebarOpen && <div className="fixed inset-0 z-30 bg-black/30 lg:hidden" onClick={() => setSidebarOpen(false)} />}
         <div
-          className={`fixed inset-y-0 left-0 z-40 w-72 border-r border-white/8 transition-transform duration-200 lg:static lg:z-auto lg:translate-x-0 ${
+          className={`fixed inset-y-0 left-0 z-40 w-72 border-r border-black/8 transition-transform duration-200 lg:static lg:z-auto lg:translate-x-0 ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
-          style={{ background: "rgba(12,7,9,.98)" }}
+          style={{ background: "#faf9f8" }}
         >
           <Sidebar
             projectKey={projectKey}
@@ -313,7 +313,7 @@ export function AmberWorkspace() {
         <div className="flex min-w-0 flex-1 flex-col">
           <div className="min-h-0 flex-1">
             {starting && !activeRun ? (
-              <div className="flex h-full items-center justify-center text-[13px] text-white/40">Starting task…</div>
+              <div className="flex h-full items-center justify-center text-[13px] text-black/40">Starting task…</div>
             ) : (
               <CenterPanel run={activeRun} events={activeTaskId ? events : []} onApprove={handleApprove} approving={approving} />
             )}
