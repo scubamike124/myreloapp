@@ -73,7 +73,8 @@ function enrichApprovals(rows: ApprovalRow[], rec: Awaited<ReturnType<typeof loa
     if (a.platformSlug === "sporeagent") {
       return {
         ...a,
-        amberCompleted: "Agent id on file. Amber performed and QAed in-flight Spore work. New Spore bids stay off until submit exists.",
+        amberCompleted:
+          "Agent id on file. Amber performed and QAed in-flight Spore work. New bids stay off because SporeAgent's hosted API has no route that accepts a finished deliverable — every candidate submit path returns their catch-all 404. Amber re-probes all of them each tick and switches bidding on herself as soon as one is real.",
         mikeMustDo: "Nothing required unless you want to reuse a different existing Spore agent id.",
         whyRequired: "Optional identity reuse only. Nothing required for queued Spore work.",
         requiredOrOptional: "optional",

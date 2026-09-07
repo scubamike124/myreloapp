@@ -1,3 +1,5 @@
+import { proveSporeBidReaches, resolveSporeSubmitRoute, submitSporeWork } from "./spore-submit";
+
 const API = "https://sporeagent.com/api";
 
 export type SporeTask = {
@@ -136,61 +138,56 @@ export async function acceptSporeBid(taskId: string, bidId: string): Promise<{ o
   return { ok: true, detail: "Bid accepted / task assigned on Spore." };
 }
 
-/** Documented client path uses `result`. Live deploy may 404. */
-export async function sporeDeliverRouteLive(): Promise<{ live: boolean; detail: string }> {
-  const res = await jsonFetch(`${API}/tasks/00000000-0000-0000-0000-000000000000/deliver`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ agent_id: "probe", result: "probe", content: "probe" }),
-  });
-  if (res.status === 400 || res.status === 403) return { live: true, detail: "Hosted /deliver route is present." };
-  if (res.status === 404 && /Task not found/i.test(res.text)) {
-    return { live: true, detail: "Hosted /deliver route is present (unknown task)." };
-  }
-  if (res.status === 404) {
-    return {
-      live: false,
-      detail:
-        "Hosted /deliver is a catch-all 404 — Spore did not deploy marketplace submit. New Spore bids paused; in-flight work stays queued.",
-    };
-  }
-  return { live: res.ok, detail: `Deliver probe HTTP ${res.status}` };
+/**
+ * Is a marketplace submit route live on hosted Spore?
+ *
+ * Delegates to the multi-route resolver in spore-submit.ts. The previous
+ * version probed only `/tasks/:id/deliver`; if Spore shipped submit under any
+ * other name, Amber would have stayed switched off with nothing to tell her.
+ */
+export async function sporeDeliverRouteLive(): Promise<{ live: boolean; detail: string; route: string | null }> {
+  const resolved = await resolveSporeSubmitRoute();
+  return { live: resolved.live, detail: resolved.detail, route: resolved.route };
 }
 
+/**
+ * Submit a deliverable to Spore, then read the task back to confirm it landed.
+ *
+ * `ok` means Spore accepted the POST; `verified` means the delivery was
+ * afterwards visible on the task. Callers should not book anything on `ok`
+ * alone.
+ */
 export async function deliverSporeWork(input: {
   taskId: string;
   agentId: string;
   result: string;
-}): Promise<{ ok: boolean; deliveryId: string | null; detail: string; platformMissing?: boolean }> {
-  const res = await jsonFetch(`${API}/tasks/${encodeURIComponent(input.taskId)}/deliver`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      agent_id: input.agentId,
-      result: input.result,
-      content: input.result,
-    }),
-  });
-  const data = (res.data || {}) as Record<string, unknown>;
-  if (res.status === 404) {
-    const routeMissing = /"Not found"/i.test(res.text) && !/Task not found/i.test(res.text);
-    return {
-      ok: false,
-      deliveryId: null,
-      platformMissing: true,
-      detail: routeMissing
-        ? "Spore hosted Next.js API has no POST /api/tasks/:id/deliver (catch-all 404). Their README: spore_deliver is local MCP only — not on sporeagent.com. Work+QA saved; retrying each tick. Not paid."
-        : "Spore deliver endpoint not available on hosted API (404). Deliverable is verified locally and queued until Spore ships /api/tasks/:id/deliver.",
-    };
-  }
-  if (!res.ok) {
-    return { ok: false, deliveryId: null, detail: `Deliver HTTP ${res.status}: ${res.text.slice(0, 240)}` };
-  }
+}): Promise<{
+  ok: boolean;
+  deliveryId: string | null;
+  detail: string;
+  platformMissing?: boolean;
+  verified?: boolean;
+  route?: string | null;
+}> {
+  const res = await submitSporeWork(input);
   return {
-    ok: true,
-    deliveryId: String(data.delivery_id || data.id || "") || null,
-    detail: `Delivered on Spore (${data.delivery_id || data.id || "ok"}).`,
+    ok: res.ok,
+    deliveryId: res.deliveryId,
+    detail: res.detail,
+    platformMissing: res.platformMissing,
+    verified: res.verified,
+    route: res.route,
   };
+}
+
+/**
+ * Prove Amber can actually reach Spore’s bid handler.
+ *
+ * Reachability mode leaves no bid behind — see spore-submit.ts for why that
+ * matters here (Spore has no withdraw-bid route).
+ */
+export async function proveSporeBidPath(agentId: string) {
+  return proveSporeBidReaches({ agentId });
 }
 
 /** Full Spore Arena cycle — register/join/submit works on production today. */

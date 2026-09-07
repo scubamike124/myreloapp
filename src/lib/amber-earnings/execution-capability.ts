@@ -2,7 +2,7 @@
  * Honest execution capability — discovery is never treated as Ready to Work.
  * Skill fit (can perform) is separate from marketplace pipeline (can accept/submit).
  */
-import { moltCanComplete, sporeCanComplete, taskBountyCanComplete, workProtocolCanComplete } from "./policy";
+import { moltCanComplete, sporeCanComplete, taskBountyCanComplete, workProtocolCanComplete } from "./policy.ts";
 
 export type IntegrationMode =
   | "DISCOVERY_ONLY"
@@ -128,8 +128,14 @@ export function assessSporeCapability(input: {
   title: string;
   description: string;
   requirements: string[];
-  /** Hosted Spore /deliver must be live before Amber claims she can accept. */
+  /** A hosted Spore submit route must be live before Amber claims she can accept. */
   submitLive?: boolean;
+  /**
+   * A bid must have been observed actually reaching Spore's bid handler.
+   * A readable board does not prove the write path works, and a bid here
+   * cannot be withdrawn, so bidding stays off until this is demonstrated.
+   */
+  bidProven?: boolean;
 }): CapabilityCheck {
   const cap = sporeCanComplete({
     title: input.title,
@@ -154,11 +160,18 @@ export function assessSporeCapability(input: {
     missing.push("Spore hosted marketplace submit (/deliver) is not available — Amber will not bid until Spore ships it.");
     pipelineBlockers.push("Spore hosted /deliver not available (cannot complete accept → submit)");
   }
+  const bidProven = input.bidProven === true;
+  if (!bidProven) {
+    missing.push("Spore bid path has not been proven to reach SporeAgent — bidding stays off until it is.");
+    pipelineBlockers.push("Spore bid path unproven (no observed bid reaching SporeAgent)");
+  }
 
   const canPerform = cap.ok;
   if (!canPerform) missing.push(...cap.reasons);
-  // CAN BID only when Amber can finish the pipeline Spore offers today (bid + submit).
-  const canBid = Boolean(input.boardOk && input.hasAgentId && canPerform && submitLive);
+  // CAN BID only when Amber can finish the pipeline Spore offers today: the bid
+  // write path is demonstrated to reach them, AND there is somewhere to hand the
+  // finished work in. A bid without submit is a commitment she cannot honour.
+  const canBid = Boolean(input.boardOk && input.hasAgentId && canPerform && submitLive && bidProven);
   const canSubmit = Boolean(canBid && submitLive);
 
   return {
@@ -366,7 +379,7 @@ export function platformProfiles(input: {
       canSubmit: false,
       canTrackPayment: false,
       summary: input.sporeAgentId
-        ? "Agent id on file. Amber keeps queued work; new Spore bids stay off until marketplace submit exists."
+        ? "Agent id on file. Amber keeps queued work; new Spore bids stay off because the hosted API exposes no marketplace submit route to hand the finished work in through."
         : "Open tasks readable; Amber auto-registers a Spore agent on the execution tick when missing.",
       blockers: input.sporeAgentId ? [] : ["Spore agent id will be auto-registered on tick"],
     },
