@@ -30,7 +30,12 @@ export const PROJECTS: ProjectDef[] = [
   {
     key: "amber_hq",
     label: "Amber HQ",
-    aliases: ["amber hq", "amberhq", "amber one", "amberoneai", "amberai", "amber core"],
+    // sporeagent/spore agent: the third-party bid marketplace Amber's own
+    // earning agent integrates with. Confirmed live: a Reelo owner request
+    // about it named no project at all, fell back to whichever pill was
+    // selected (Reelo), and got queued against the Reelo repo -- which has
+    // none of that integration's code -- instead of Amber HQ, which does.
+    aliases: ["amber hq", "amberhq", "amber one", "amberoneai", "amberai", "amber core", "sporeagent", "spore agent"],
   },
   { key: "launch_ready", label: "Launch Ready", aliases: ["launch ready", "launchready"] },
   { key: "rest_pilot", label: "Rest Pilot", aliases: ["rest pilot", "restpilot"] },
