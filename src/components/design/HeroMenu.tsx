@@ -37,7 +37,15 @@ export default function HeroMenu() {
             <Link href="/roadmap" onClick={() => setOpen(false)} className="mt-2 rounded-lg border-t border-white/10 px-3 pt-3 text-sm font-semibold" style={{ color: "#ff8a92" }}>View full roadmap →</Link>
             <div className="mt-2 flex flex-col gap-2 border-t border-white/10 pt-3">
               <Link href="/dashboard" onClick={() => setOpen(false)} className="rounded-lg px-3 py-2 text-sm font-medium text-white/80">Sign in</Link>
-              <Link href="/create" onClick={() => setOpen(false)} className="rounded-lg px-4 py-2 text-center text-sm font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>Get Started</Link>
+              {/*
+                Was "Get Started", which does not tell a first-time visitor what
+                they would be starting — an account, a trial, a purchase. This
+                button goes to /create, the tool picker, so it names that action
+                instead. It deliberately does not say "free": every tool card on
+                /create shows a token cost, so a free promise here would be
+                contradicted on the very next screen.
+              */}
+              <Link href="/create" onClick={() => setOpen(false)} className="rounded-lg px-4 py-2 text-center text-sm font-bold text-white" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>Start Creating</Link>
             </div>
           </div>
         </div>
