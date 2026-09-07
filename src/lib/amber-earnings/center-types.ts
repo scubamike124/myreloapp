@@ -1,5 +1,5 @@
-import type { IntegrationMode, PlatformCapabilityProfile } from "./execution-capability";
-import type { OpportunityDetail } from "./opportunities";
+import type { IntegrationMode, PlatformCapabilityProfile } from "./execution-capability.ts";
+import type { OpportunityDetail } from "./opportunities.ts";
 
 export type RejectCategory =
   | "automation_prohibited"

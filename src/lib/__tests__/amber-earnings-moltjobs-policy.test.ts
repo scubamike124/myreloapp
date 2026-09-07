@@ -1,9 +1,9 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { moltJobReject, type MoltJob } from "./moltjobs";
-import { moltCanComplete } from "./policy";
-import { evaluateProfit, MOLTJOBS_PLATFORM_FEE_RATE } from "./profit";
-import { DEFAULT_LIMITS } from "./types";
+import { moltJobReject, type MoltJob } from "../amber-earnings/moltjobs.ts";
+import { moltCanComplete } from "../amber-earnings/policy.ts";
+import { evaluateProfit, MOLTJOBS_PLATFORM_FEE_RATE } from "../amber-earnings/profit.ts";
+import { DEFAULT_LIMITS } from "../amber-earnings/types.ts";
 
 function job(partial: Partial<MoltJob>): MoltJob {
   return {

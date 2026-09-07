@@ -2,7 +2,7 @@
  * Honest execution capability — discovery is never treated as Ready to Work.
  * Skill fit (can perform) is separate from marketplace pipeline (can accept/submit).
  */
-import { moltCanComplete, sporeCanComplete, taskBountyCanComplete, workProtocolCanComplete } from "./policy";
+import { moltCanComplete, sporeCanComplete, taskBountyCanComplete, workProtocolCanComplete } from "./policy.ts";
 
 export type IntegrationMode =
   | "DISCOVERY_ONLY"

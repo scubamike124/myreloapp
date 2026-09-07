@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { ensureSchema, sqlAsync } from "@/lib/db";
-import { PLATFORM_CATALOG } from "./catalog";
-import type { ApprovalRow, CenterJobStatus, JobRow, LedgerRow, PlatformRow } from "./center-types";
+import { PLATFORM_CATALOG } from "./catalog.ts";
+import type { ApprovalRow, CenterJobStatus, JobRow, LedgerRow, PlatformRow } from "./center-types.ts";
 
 type Sql = NonNullable<Awaited<ReturnType<typeof sqlAsync>>>;
 

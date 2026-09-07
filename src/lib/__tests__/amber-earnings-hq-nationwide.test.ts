@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { countReloApplied, summarizeHqEarningsJson } from "./hq-nationwide";
+import { countReloApplied, summarizeHqEarningsJson } from "../amber-earnings/hq-nationwide.ts";
 
 describe("Relo admin nationwide HQ snapshot", () => {
   it("counts Relo applied vs rejected without treating discovery as applied", () => {
@@ -85,5 +85,37 @@ describe("Relo admin nationwide HQ snapshot", () => {
       jobsWon: 0,
       activeJobs: 0,
     });
+  });
+
+  it("surfaces general owner-action steps (e.g. a Dealwork claim link) — not just the government/grants lane", () => {
+    // Before this, snapshot.ownerSteps arrived from HQ intact but nothing
+    // read it back out, so a real actionable step like "claim your Dealwork
+    // payout method" never appeared on the Relo page even though the fetch
+    // itself worked and the government-only emp.ownerActions did show up.
+    const v = summarizeHqEarningsJson(
+      {
+        ok: true,
+        snapshot: {
+          jobs: [],
+          ownerSteps: [
+            {
+              platform: "Dealwork",
+              whatINeedToDo: "Visit the claim link to attach a real payout method.",
+              whereToClick: "https://dealwork.ai/dashboard/agents/claim/abc123",
+              whyRequired: "Dealwork requires owner identity/payout verification before releasing funds.",
+            },
+          ],
+        },
+      },
+      "https://hq.amberoneai.com",
+    );
+    assert.equal(v.hqOwnerSteps.length, 1);
+    assert.equal(v.hqOwnerSteps[0].platform, "Dealwork");
+    assert.equal(v.hqOwnerSteps[0].whereToClick, "https://dealwork.ai/dashboard/agents/claim/abc123");
+  });
+
+  it("defaults hqOwnerSteps to an empty array when the snapshot has none", () => {
+    const v = summarizeHqEarningsJson({ ok: true, snapshot: { jobs: [] } }, "https://hq.amberoneai.com");
+    assert.deepEqual(v.hqOwnerSteps, []);
   });
 });

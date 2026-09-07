@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { opportunityStatusFrom, type CapabilityCheck } from "./execution-capability";
+import { opportunityStatusFrom, type CapabilityCheck } from "../amber-earnings/execution-capability.ts";
 
 function check(partial: Partial<CapabilityCheck>): CapabilityCheck {
   return {

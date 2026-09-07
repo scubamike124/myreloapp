@@ -1,4 +1,4 @@
-import type { EarningsJob, EarningsSnapshot, EarningsState } from "./types";
+import type { EarningsJob, EarningsSnapshot, EarningsState } from "./types.ts";
 
 function sum(jobs: EarningsJob[], pick: (j: EarningsJob) => number) {
   return Math.round(jobs.reduce((n, j) => n + pick(j), 0) * 100) / 100;

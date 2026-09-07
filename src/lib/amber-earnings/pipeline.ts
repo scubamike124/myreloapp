@@ -1,8 +1,8 @@
 /**
  * Accept/bid → execute → verify → submit → status for skill-fit opportunities.
  */
-import { sporeCanComplete } from "./policy";
-import { executeSkillFitWork, buyerCommsPolicy } from "./execute-work";
+import { sporeCanComplete } from "./policy.ts";
+import { executeSkillFitWork, buyerCommsPolicy } from "./execute-work.ts";
 import {
   acceptSporeBid,
   deliverSporeWork,
@@ -11,7 +11,7 @@ import {
   placeSporeBid,
   registerSporeAgent,
   type SporeTask,
-} from "./sporeagent";
+} from "./sporeagent.ts";
 import {
   heartbeatMoltAgent,
   listOpenMoltJobs,
@@ -21,10 +21,10 @@ import {
   submitMoltWork,
   verifyMoltJobsKey,
   type MoltJob,
-} from "./moltjobs";
-import { upsertJobRow } from "./persist";
-import type { EarningsRecord } from "./store";
-import { evaluateProfit, MOLTJOBS_PLATFORM_FEE_RATE, SPORE_UNKNOWN_FEE_RATE } from "./profit";
+} from "./moltjobs.ts";
+import { upsertJobRow } from "./persist.ts";
+import type { EarningsRecord } from "./store.ts";
+import { evaluateProfit, MOLTJOBS_PLATFORM_FEE_RATE, SPORE_UNKNOWN_FEE_RATE } from "./profit.ts";
 
 export type PipelineProofStep = {
   at: string;
