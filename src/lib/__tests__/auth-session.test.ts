@@ -22,10 +22,35 @@ const read = (rel: string) => readFileSync(path.join(SRC, rel), "utf8");
 
 test("session cookie is httpOnly, sameSite=lax, and secure in production", () => {
   const route = read("app/api/auth/route.ts");
+  // Anchor the slice explicitly. A bare slice(indexOf(...)) on a renamed
+  // helper silently becomes slice(-1) -- the last character of the file --
+  // and then fails with three confusing regex mismatches instead of saying
+  // the function it was looking for is gone. Assert the anchor first so a
+  // future rename fails by name.
+  assert.ok(
+    route.includes("function applySessionCookie"),
+    "applySessionCookie is the session-cookie helper in /api/auth -- if it was renamed, point this test at the new name rather than deleting the assertions below",
+  );
   const setter = route.slice(route.indexOf("function applySessionCookie"));
   assert.match(setter, /httpOnly:\s*true/, "session cookie must be httpOnly or it's readable by any injected script");
   assert.match(setter, /sameSite:\s*["']lax["']/, "sameSite must stay lax -- stricter breaks OAuth-style redirects back into the app, looser is a CSRF risk");
   assert.match(setter, /secure:\s*process\.env\.NODE_ENV\s*===\s*["']production["']/, "cookie must be marked secure in production or browsers may drop it over HTTPS");
+
+  // The helper above only ever *clears* the cookie today (logout passes
+  // maxAge 0). The code that actually establishes a session cookie is
+  // completeGoogleLogin -- Google Sign-In is the only way in now -- so the
+  // same three properties have to hold there too, or this test is only
+  // guarding the teardown path and a weakened login cookie sails through.
+  const login = read("lib/complete-google-login.ts");
+  assert.ok(
+    login.includes("name: SESSION_COOKIE"),
+    "completeGoogleLogin must still set SESSION_COOKIE -- if the session cookie moved elsewhere, point this test at it",
+  );
+  const fromSession = login.slice(login.indexOf("name: SESSION_COOKIE"));
+  const loginCookie = fromSession.slice(0, fromSession.indexOf("});"));
+  assert.match(loginCookie, /httpOnly:\s*true/, "the session cookie set at Google sign-in must be httpOnly, not just the one cleared at logout");
+  assert.match(loginCookie, /sameSite:\s*["']lax["']/, "the session cookie set at Google sign-in must be sameSite=lax -- this is the cookie that comes back through the OAuth redirect");
+  assert.match(loginCookie, /secure:\s*process\.env\.NODE_ENV\s*===\s*["']production["']/, "the session cookie set at Google sign-in must be secure in production");
 });
 
 test("logout actually clears the session cookie and deletes the server-side session row", () => {
