@@ -109,7 +109,15 @@ export function classifyAmberMode(
   // Pure questions stay conversational — unless they're actionable product
   // objectives on Amber Fixes ("how do we fix the Relo homepage …").
   if (QUESTION.test(trimmed) && !EXEC_NOW.test(trimmed)) {
-    if (onFix && PRODUCT_OBJECTIVE.test(trimmed) && trimmed.length > 40) {
+    // Regression: "How many businesses are on the Forma waitlist?" was
+    // classified execution, purely because "Forma" is a PRODUCT_OBJECTIVE
+    // match and the sentence ran past 40 characters — nothing here checked
+    // that naming a product in a quantity question is not a request to
+    // change it. "How many/how much" is definitionally asking for a number,
+    // never an implementation instruction, regardless of length or which
+    // product it names.
+    const isCountQuestion = /^how (many|much)\b/i.test(trimmed);
+    if (onFix && !isCountQuestion && PRODUCT_OBJECTIVE.test(trimmed) && trimmed.length > 40) {
       return "execution";
     }
     if (!EXEC_VERBS.test(trimmed)) {
