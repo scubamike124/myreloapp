@@ -67,7 +67,7 @@ export function CenterPanel({
         ) : (
           <div>
             <h1 className="text-[15px] font-semibold text-white">No task selected</h1>
-            <p className="mt-1 text-[13px] text-white/45">Start a new task or pick one from Recent jobs.</p>
+            <p className="mt-1 text-[13px] text-white/45">Type below to start one, or pick one from Recent jobs.</p>
           </div>
         )}
       </div>
@@ -127,7 +127,7 @@ export function CenterPanel({
 
       {/* Live timeline */}
       <div className="min-h-0 flex-1 overflow-y-auto px-4 py-3 sm:px-5">
-        <Timeline events={events} emptyLabel={run ? "Starting…" : "Start a task to see Amber work in real time."} />
+        <Timeline events={events} emptyLabel={run ? "Starting…" : "Type below to see Amber work in real time."} />
       </div>
     </div>
   );
