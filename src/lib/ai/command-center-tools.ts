@@ -31,6 +31,7 @@ import { generateDirectionSync, type DirectorSyncResult } from "@/app/api/direct
 import { generateStorybookSync } from "@/app/api/storybook/route";
 import { estimateToolCostUsd, checkSpendAllowed, recordUsage } from "@/lib/ai/cost";
 import { produceCommercial, checkJobStatus, retryJob } from "@/lib/ai/admin-jobs";
+import { countEbooksMade } from "@/lib/ai/admin-content-stats";
 import { scheduleAdminPost, listAdminScheduledPosts, cancelAdminScheduledPost, checkAdminSocialAccounts } from "@/lib/ai/admin-scheduling";
 import { publishToPlatform } from "@/lib/ai/admin-publish";
 import { assertSafeUrl } from "@/lib/api-guard";
@@ -133,6 +134,27 @@ const META_TOOL_DEFS: AgentToolDef[] = [
       type: "object",
       properties: { jobId: { type: "string", description: "The failed job's id." } },
       required: ["jobId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "count_ebooks_made",
+    description:
+      "Read-only: how many e-books (illustrated storybooks) were actually made in the last N whole UTC days. " +
+      "Returns Amber's own Command Center books and customers' books separately, each broken down, plus the " +
+      "exact window counted. This is THE tool for a counting or status question about e-books — answer it with " +
+      "this, never by queueing a dev task to go find out. Report the numbers exactly as returned, say which " +
+      "window they cover, and if `unavailable` is present say which half of the number is missing rather than " +
+      "presenting the rest as the whole picture.",
+    parameters: {
+      type: "object",
+      properties: {
+        days: {
+          type: "number",
+          description: "How many whole UTC days back to count, including today. Defaults to 7. Maximum 365.",
+        },
+      },
+      required: [],
       additionalProperties: false,
     },
   },
@@ -510,6 +532,10 @@ export async function executeCommandCenterTool(
         const caption = str(argObj.caption);
         if (!platform || !mediaUrl) return { ok: false, result: { error: "platform and mediaUrl are required." } };
         const result = await publishToPlatform({ platform, mediaUrl, caption });
+        return { ok: result.ok, result };
+      }
+      if (name === "count_ebooks_made") {
+        const result = await countEbooksMade(argObj.days);
         return { ok: result.ok, result };
       }
       if (name === "check_social_accounts") {
