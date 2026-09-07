@@ -38,7 +38,7 @@ async function requireOwner() {
   return { user };
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   const gate = await requireOwner();
   if ("error" in gate) return NextResponse.json({ error: gate.error }, { status: gate.status });
 
@@ -50,11 +50,20 @@ export async function GET() {
     );
   }
 
-  const res = await fetch(`${HQ}/api/amber-builder`, {
+  const taskId = new URL(req.url).searchParams.get("taskId");
+  const upstreamUrl = taskId
+    ? `${HQ}/api/amber-builder?taskId=${encodeURIComponent(taskId)}`
+    : `${HQ}/api/amber-builder`;
+
+  const res = await fetch(upstreamUrl, {
     headers: { "x-cron-secret": secret },
     cache: "no-store",
   });
   const data = await res.json().catch(() => ({}));
+  // The real, ordered execution trail for one task — passed through as-is,
+  // not reshaped like the run-list response below (there's nothing to
+  // normalize: every field already comes straight from CodingAgentEvent).
+  if (taskId) return NextResponse.json(data, { status: res.status });
   return NextResponse.json(shapeBuilderPayload(data), { status: res.status });
 }
 
