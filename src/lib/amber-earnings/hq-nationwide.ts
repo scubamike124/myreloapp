@@ -223,6 +223,31 @@ function extractHqMoney(snapshot: Record<string, unknown>): HqMoney {
   };
 }
 
+/**
+ * HQ's own general owner-action list (src/lib/amber-earnings/tick.ts's
+ * ownerStepsFor + governmentOwnerSteps on the HQ side) — one owner-only step
+ * per marketplace that needs it: a vaulted key, a device-login approval, or
+ * (Dealwork) the claim link to attach a real payout method. Separate from
+ * `emp.ownerActions`, which is only the government/grants lane; before this,
+ * everything else in `ownerSteps` was fetched from HQ but never read by
+ * anything on this page, so a real, actionable step like "claim your
+ * Dealwork payout" was invisible here even though the data was already
+ * arriving.
+ */
+export type HqOwnerStep = { platform: string; whatINeedToDo: string; whereToClick: string; whyRequired: string };
+
+function extractHqOwnerSteps(snapshot: Record<string, unknown>): HqOwnerStep[] {
+  const raw = Array.isArray(snapshot.ownerSteps) ? snapshot.ownerSteps : [];
+  return raw
+    .filter((s): s is Record<string, unknown> => Boolean(s) && typeof s === "object")
+    .map((s) => ({
+      platform: String(s.platform || "Amber"),
+      whatINeedToDo: String(s.whatINeedToDo || ""),
+      whereToClick: String(s.whereToClick || ""),
+      whyRequired: String(s.whyRequired || ""),
+    }));
+}
+
 export type NationwideView = {
   ok: boolean;
   reason?: string;
@@ -235,6 +260,8 @@ export type NationwideView = {
   emp: NationwideEmp | null;
   /** Real marketplace money (pending payment, verified paid, net profit, jobs won). */
   hqMoney: HqMoney;
+  /** Real owner-only action items across every marketplace (TaskBounty, SporeAgent, MoltJobs, Dealwork) — not just the government/grants lane. */
+  hqOwnerSteps: HqOwnerStep[];
   /** Real Sent/Delivered/Opened/Clicked funnel per outreach campaign (ca_drop/ca_accessibility/ca_vendor_risk). */
   outreachFunnels: OutreachCampaignFunnel[];
   /** Full HQ snapshot metrics (marketplace lanes) when available. */
@@ -297,6 +324,7 @@ export function summarizeHqEarningsJson(json: unknown, hqUrl: string): Nationwid
     empApplied: empOpps.filter((o) => HQ_EMP_APPLIED_STATUSES.has(String(o.status || ""))).length,
     emp,
     hqMoney: extractHqMoney(snapshot),
+    hqOwnerSteps: extractHqOwnerSteps(snapshot),
     outreachFunnels: asOutreachFunnels(root.outreachFunnels),
     snapshot: Object.keys(snapshot).length ? snapshot : null,
     readiness: root.readiness && typeof root.readiness === "object" ? asRecord(root.readiness) : null,
@@ -318,6 +346,7 @@ function emptyView(hqUrl: string, reason: string): NationwideView {
     empApplied: 0,
     emp: null,
     hqMoney: emptyHqMoney(),
+    hqOwnerSteps: [],
     outreachFunnels: [],
     snapshot: null,
     readiness: null,

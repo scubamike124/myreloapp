@@ -1,7 +1,7 @@
 import { currentUser } from "@/lib/accounts";
 import { ensureSchema, sqlAsync } from "@/lib/db";
 import { readRawValue } from "@/lib/env-vault";
-import { DEFAULT_LIMITS, type EarningsState, type MarketplaceId } from "./types";
+import { DEFAULT_LIMITS, type EarningsState, type MarketplaceId } from "./types.ts";
 
 type Sql = NonNullable<Awaited<ReturnType<typeof sqlAsync>>>;
 

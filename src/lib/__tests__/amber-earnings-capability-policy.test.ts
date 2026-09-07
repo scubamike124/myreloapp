@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { sporeCanComplete, moltCanComplete } from "./policy";
-import { assessSporeCapability } from "./execution-capability";
+import { sporeCanComplete, moltCanComplete } from "../amber-earnings/policy.ts";
+import { assessSporeCapability } from "../amber-earnings/execution-capability.ts";
 
 describe("Amber work capability families", () => {
   it("recognizes scrape / pytest / translate / RAG / CSV dashboard as performable skills", () => {

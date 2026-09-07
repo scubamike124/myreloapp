@@ -2,13 +2,13 @@
  * Live opportunity cards — built from real board APIs + persisted job rows.
  * Never fabricates titles, payouts, deadlines, or skills when the source omits them.
  */
-import { listOpenMoltJobs, moltJobReject } from "./moltjobs";
-import { listOpenWorkProtocolJobs, workProtocolJobReject } from "./workprotocol";
-import { listOpenSporeTasks, sporeDeliverRouteLive } from "./sporeagent";
-import { listOpenBounties, payoutUsdFromListing } from "./taskbounty";
-import { listJobs } from "./persist";
-import { loadRecord } from "./store";
-import { moltCanComplete, workProtocolCanComplete } from "./policy";
+import { listOpenMoltJobs, moltJobReject } from "./moltjobs.ts";
+import { listOpenWorkProtocolJobs, workProtocolJobReject } from "./workprotocol.ts";
+import { listOpenSporeTasks, sporeDeliverRouteLive } from "./sporeagent.ts";
+import { listOpenBounties, payoutUsdFromListing } from "./taskbounty.ts";
+import { listJobs } from "./persist.ts";
+import { loadRecord } from "./store.ts";
+import { moltCanComplete, workProtocolCanComplete } from "./policy.ts";
 import {
   assessMoltCapability,
   assessSporeCapability,
@@ -17,14 +17,14 @@ import {
   opportunityStatusFrom,
   type CapabilityCheck,
   type IntegrationMode,
-} from "./execution-capability";
+} from "./execution-capability.ts";
 import {
   evaluateProfit,
   MOLTJOBS_PLATFORM_FEE_RATE,
   SPORE_UNKNOWN_FEE_RATE,
   TASKBOUNTY_PLATFORM_FEE_RATE,
   WORKPROTOCOL_PLATFORM_FEE_RATE,
-} from "./profit";
+} from "./profit.ts";
 
 export type OpportunityDetail = {
   id: string;

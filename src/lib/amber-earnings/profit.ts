@@ -1,4 +1,4 @@
-import type { EarningsLimits, ProfitDecision } from "./types";
+import type { EarningsLimits, ProfitDecision } from "./types.ts";
 
 /** Official TaskBounty split: contributor 80%, platform 20%. */
 export const TASKBOUNTY_PLATFORM_FEE_RATE = 0.2;

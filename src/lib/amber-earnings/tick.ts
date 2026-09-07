@@ -1,13 +1,13 @@
-import { moltCanComplete, sporeCanComplete, taskBountyCanComplete, workProtocolCanComplete } from "./policy";
+import { moltCanComplete, sporeCanComplete, taskBountyCanComplete, workProtocolCanComplete } from "./policy.ts";
 import {
   evaluateProfit,
   MOLTJOBS_PLATFORM_FEE_RATE,
   TASKBOUNTY_PLATFORM_FEE_RATE,
   WORKPROTOCOL_PLATFORM_FEE_RATE,
-} from "./profit";
-import { buildSnapshot } from "./snapshot";
-import { listOpenSporeTasks, sporeDeliverRouteLive, sporeHealth } from "./sporeagent";
-import { ensureSporeAgent, runSkillFitPipelines } from "./pipeline";
+} from "./profit.ts";
+import { buildSnapshot } from "./snapshot.ts";
+import { listOpenSporeTasks, sporeDeliverRouteLive, sporeHealth } from "./sporeagent.ts";
+import { ensureSporeAgent, runSkillFitPipelines } from "./pipeline.ts";
 import {
   activeCount,
   isMarketplaceRunnable,
@@ -18,26 +18,26 @@ import {
   saveRecord,
   upsertJob,
   type EarningsRecord,
-} from "./store";
-import { listOpenBounties, payoutUsdFromListing, pollDeviceLogin, verifyTaskBountyKey } from "./taskbounty";
-import type { EarningsJob, OwnerStep } from "./types";
+} from "./store.ts";
+import { listOpenBounties, payoutUsdFromListing, pollDeviceLogin, verifyTaskBountyKey } from "./taskbounty.ts";
+import type { EarningsJob, OwnerStep } from "./types.ts";
 import {
   heartbeatMoltAgent,
   listOpenMoltJobs,
   moltJobReject,
   placeMoltBid,
   verifyMoltJobsKey,
-} from "./moltjobs";
+} from "./moltjobs.ts";
 import {
   claimWorkProtocolJob,
   listOpenWorkProtocolJobs,
   registerWorkProtocolAgent,
   workProtocolJobReject,
-} from "./workprotocol";
-import { encodeWpAcceptance, newArtifactToken } from "./artifacts";
-import { executeSkillFitWork } from "./execute-work";
-import { advanceInFlightJobs } from "./advance-jobs";
-import { blocksNewAccepts, listJobs, openApproval, seedPlatforms, updatePlatform, upsertJobRow } from "./persist";
+} from "./workprotocol.ts";
+import { encodeWpAcceptance, newArtifactToken } from "./artifacts.ts";
+import { executeSkillFitWork } from "./execute-work.ts";
+import { advanceInFlightJobs } from "./advance-jobs.ts";
+import { blocksNewAccepts, listJobs, openApproval, seedPlatforms, updatePlatform, upsertJobRow } from "./persist.ts";
 
 function jobId(marketplace: string, externalId: string) {
   return `${marketplace}:${externalId}`;

@@ -2,9 +2,9 @@
  * Resume accepted jobs from where they stopped.
  * Never invents platform assignment, submission, or payment.
  */
-import { executeSkillFitWork } from "./execute-work";
-import { sporeCanComplete } from "./policy";
-import { deliverSporeWork, getSporeTask } from "./sporeagent";
+import { executeSkillFitWork } from "./execute-work.ts";
+import { sporeCanComplete } from "./policy.ts";
+import { deliverSporeWork, getSporeTask } from "./sporeagent.ts";
 import {
   getMoltJob,
   getMoltWallet,
@@ -12,22 +12,22 @@ import {
   startMoltJob,
   submitMoltWork,
   verifyMoltJobsKey,
-} from "./moltjobs";
+} from "./moltjobs.ts";
 import {
   artifactPublicUrl,
   deliverableTypeFor,
   encodeWpAcceptance,
   newArtifactToken,
   parseWpAcceptance,
-} from "./artifacts";
+} from "./artifacts.ts";
 import {
   deliverWorkProtocolJob,
   getWorkProtocolJob,
   verifyWorkProtocolKey,
-} from "./workprotocol";
-import { blocksNewAccepts, listJobs, recordConfirmedRevenue, updateJobProgress } from "./persist";
-import type { JobRow } from "./center-types";
-import type { EarningsRecord } from "./store";
+} from "./workprotocol.ts";
+import { blocksNewAccepts, listJobs, recordConfirmedRevenue, updateJobProgress } from "./persist.ts";
+import type { JobRow } from "./center-types.ts";
+import type { EarningsRecord } from "./store.ts";
 
 export type PipelineAction =
   | "perform"

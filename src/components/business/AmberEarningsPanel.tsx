@@ -399,6 +399,36 @@ export default function AmberEarningsPanel() {
                   </div>
                 ) : null}
 
+                {(nationwide.hqOwnerSteps || []).length ? (
+                  <div className="mt-3">
+                    <strong className="text-[14px]">Owner Actions Needed (marketplaces)</strong>
+                    <p className="text-[12px]" style={{ color: muted }}>
+                      One real step per marketplace that needs it — a vaulted key, a device-login approval, or (Dealwork) claiming a payout method. Amber does everything else herself.
+                    </p>
+                    {nationwide.hqOwnerSteps.map((s, idx) => (
+                      <article key={`${s.platform}-${idx}`} className="mt-2 rounded-lg border border-amber-200 bg-amber-50 p-3">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <Badge tone="#b45309">{s.platform}</Badge>
+                          <span className="text-[13px] text-gray-800">{s.whatINeedToDo}</span>
+                        </div>
+                        {s.whyRequired ? (
+                          <p className="mt-1 text-[12px]" style={{ color: muted }}>{s.whyRequired}</p>
+                        ) : null}
+                        {s.whereToClick ? (
+                          <a
+                            href={s.whereToClick}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="mt-1 inline-block text-[12.5px] font-medium text-sky-700 hover:underline"
+                          >
+                            {s.whereToClick} ↗
+                          </a>
+                        ) : null}
+                      </article>
+                    ))}
+                  </div>
+                ) : null}
+
                 <div className="mt-4">
                   <strong className="text-[14px]">HQ marketplace jobs</strong>
                   <p className="text-[12px]" style={{ color: muted }}>Open any row here — status reflects apply / submit / paid on the shared HQ store.</p>
