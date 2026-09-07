@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import AmberFixesPanel from "@/components/amber/AmberFixesPanel";
+import { AmberWorkspace } from "@/components/amber/workspace/AmberWorkspace";
 import { dbConfigured } from "@/lib/db";
 import { requireAdminAccess } from "@/lib/roles";
 
@@ -21,5 +21,5 @@ export default async function AmberBuilderPage() {
     redirect(`/admin/login?next=/amber-builder`);
   }
 
-  return <AmberFixesPanel />;
+  return <AmberWorkspace />;
 }
