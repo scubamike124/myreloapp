@@ -56,7 +56,7 @@ export default function HeroIndex() {
             className="inline-flex items-center gap-2 rounded-lg px-5 py-3 text-[14px] font-bold text-white transition-transform hover:-translate-y-0.5"
             style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)", boxShadow: "0 8px 24px rgba(225,29,42,.4)" }}
           >
-            Start Creating for Free →
+            Create Your First AI Video →
           </Link>
           <Link
             href="/examples"
