@@ -20,14 +20,14 @@ export function NewTaskModal({
   const [text, setText] = useState("");
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
       <div
-        className="w-full max-w-lg rounded-2xl border border-white/10 p-5 shadow-2xl"
-        style={{ background: "rgba(16,10,12,.98)" }}
+        className="w-full max-w-lg rounded-2xl border border-black/10 p-5 shadow-2xl"
+        style={{ background: "#ffffff" }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="mb-1 text-[15px] font-semibold text-white">New task — {projectLabel}</div>
-        <p className="mb-3 text-[12.5px] text-white/45">
+        <div className="mb-1 text-[15px] font-semibold text-black/90">New task — {projectLabel}</div>
+        <p className="mb-3 text-[12.5px] text-black/50">
           Describe the outcome. Amber inspects the repository herself to find what to change — you don&apos;t need to
           name files or line numbers.
         </p>
@@ -37,10 +37,10 @@ export function NewTaskModal({
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder='e.g. "Find a real issue on the pricing page, fix it, test it, and open a PR."'
-          className="w-full resize-none rounded-xl border border-white/10 bg-white/[.03] px-3 py-2.5 text-[13px] text-white placeholder-white/30 outline-none focus:border-[rgba(255,70,85,.5)]"
+          className="w-full resize-none rounded-xl border border-black/12 bg-black/[.02] px-3 py-2.5 text-[13px] text-black/90 placeholder-black/35 outline-none focus:border-[rgba(196,16,28,.45)]"
         />
         <div className="mt-3 flex justify-end gap-2">
-          <button type="button" onClick={onClose} className="rounded-lg px-3 py-2 text-[13px] font-medium text-white/50 hover:text-white/80">
+          <button type="button" onClick={onClose} className="rounded-lg px-3 py-2 text-[13px] font-medium text-black/50 hover:text-black/80">
             Cancel
           </button>
           <button

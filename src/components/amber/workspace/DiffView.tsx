@@ -8,15 +8,15 @@
 export function DiffView({ diff }: { diff: string }) {
   const lines = diff.split("\n");
   return (
-    <pre className="max-h-80 overflow-auto rounded-lg bg-black/40 px-2.5 py-2 font-mono text-[11.5px] leading-relaxed">
+    <pre className="max-h-80 overflow-auto rounded-lg border border-black/8 bg-black/[.03] px-2.5 py-2 font-mono text-[11.5px] leading-relaxed">
       {lines.map((line, i) => {
-        let cls = "text-white/55";
-        if (line.startsWith("+++") || line.startsWith("+")) cls = "text-emerald-300";
-        else if (line.startsWith("---") || line.startsWith("-")) cls = "text-red-300";
-        else if (line.startsWith("@@")) cls = "text-sky-300";
+        let cls = "text-black/55";
+        if (line.startsWith("+++") || line.startsWith("+")) cls = "text-emerald-700";
+        else if (line.startsWith("---") || line.startsWith("-")) cls = "text-red-600";
+        else if (line.startsWith("@@")) cls = "text-sky-700";
         return (
           <div key={i} className={cls}>
-            {line || " "}
+            {line || " "}
           </div>
         );
       })}

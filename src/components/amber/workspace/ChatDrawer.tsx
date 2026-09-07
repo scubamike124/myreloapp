@@ -42,18 +42,18 @@ export function ChatDrawer({
 
   return (
     <aside
-      className={`fixed inset-y-0 right-0 z-40 flex w-full max-w-[380px] flex-col border-l border-white/10 transition-transform duration-200 ${
+      className={`fixed inset-y-0 right-0 z-40 flex w-full max-w-[380px] flex-col border-l border-black/10 transition-transform duration-200 ${
         open ? "translate-x-0" : "translate-x-full"
       } lg:static lg:z-auto lg:h-full lg:max-w-none lg:translate-x-0 lg:border-l ${open ? "lg:flex" : "lg:hidden"}`}
-      style={{ background: "rgba(12,7,9,.98)" }}
+      style={{ background: "#faf9f8" }}
       aria-hidden={!open}
     >
-      <div className="flex items-center justify-between border-b border-white/8 px-3.5 py-3">
+      <div className="flex items-center justify-between border-b border-black/8 px-3.5 py-3">
         <div>
-          <div className="text-[13px] font-semibold text-white/85">Ask Amber</div>
-          <div className="text-[11px] text-white/35">Discussion, not execution</div>
+          <div className="text-[13px] font-semibold text-black/85">Ask Amber</div>
+          <div className="text-[11px] text-black/40">Discussion, not execution</div>
         </div>
-        <button type="button" onClick={onClose} className="rounded-lg p-1.5 text-white/40 hover:text-white lg:hidden" aria-label="Close chat">
+        <button type="button" onClick={onClose} className="rounded-lg p-1.5 text-black/40 hover:text-black lg:hidden" aria-label="Close chat">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M18 6 6 18M6 6l12 12" />
           </svg>
@@ -61,12 +61,12 @@ export function ChatDrawer({
       </div>
 
       <div className="flex-1 space-y-2.5 overflow-y-auto px-3.5 py-3">
-        {messages.length === 0 && <p className="text-[12.5px] leading-relaxed text-white/40">Ask about the plan, the code, or what to try next.</p>}
+        {messages.length === 0 && <p className="text-[12.5px] leading-relaxed text-black/40">Ask about the plan, the code, or what to try next.</p>}
         {messages.map((m, i) => (
           <div key={i} className={m.role === "user" ? "flex justify-end" : "flex justify-start"}>
             <div
               className="max-w-[90%] whitespace-pre-wrap rounded-xl px-3 py-2 text-[12.5px] leading-relaxed"
-              style={m.role === "user" ? { background: "linear-gradient(135deg,#ff3645,#c4101c)", color: "#fff" } : { background: "rgba(255,255,255,.06)", color: "rgba(255,255,255,.85)" }}
+              style={m.role === "user" ? { background: "linear-gradient(135deg,#ff3645,#c4101c)", color: "#fff" } : { background: "#ffffff", color: "rgba(0,0,0,.82)", border: "1px solid rgba(0,0,0,.08)" }}
             >
               {m.content || (busy && i === messages.length - 1 ? "…" : null)}
             </div>
@@ -79,9 +79,9 @@ export function ChatDrawer({
           e.preventDefault();
           submit();
         }}
-        className="border-t border-white/8 p-2.5"
+        className="border-t border-black/8 p-2.5"
       >
-        <div className="flex items-end gap-2 rounded-xl border border-white/10 bg-white/[.03] px-2.5 py-2">
+        <div className="flex items-end gap-2 rounded-xl border border-black/12 bg-white px-2.5 py-2">
           <textarea
             rows={1}
             value={input}
@@ -93,7 +93,7 @@ export function ChatDrawer({
               }
             }}
             placeholder="Ask a question…"
-            className="max-h-24 min-h-[22px] flex-1 resize-none bg-transparent text-[12.5px] text-white placeholder-white/30 outline-none"
+            className="max-h-24 min-h-[22px] flex-1 resize-none bg-transparent text-[12.5px] text-black/85 placeholder-black/30 outline-none"
           />
           <button type="submit" disabled={busy || !input.trim()} className="shrink-0 rounded-lg p-1.5 text-white transition-opacity disabled:opacity-40" style={{ background: "linear-gradient(135deg,#ff3645,#c4101c)" }}>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

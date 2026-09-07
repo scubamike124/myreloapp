@@ -26,10 +26,10 @@ export function Composer({ onSubmit, busy, placeholder }: { onSubmit: (text: str
         e.preventDefault();
         submit();
       }}
-      className="shrink-0 border-t border-white/10 px-3 py-2.5 sm:px-4"
-      style={{ background: "rgba(14,8,10,.97)" }}
+      className="shrink-0 border-t border-black/10 px-3 py-2.5 sm:px-4"
+      style={{ background: "#ffffff" }}
     >
-      <div className="flex items-end gap-2 rounded-2xl border border-white/12 bg-white/[.04] px-3 py-2 focus-within:border-[rgba(255,70,85,.5)]">
+      <div className="flex items-end gap-2 rounded-2xl border border-black/12 bg-black/[.02] px-3 py-2 focus-within:border-[rgba(196,16,28,.45)]">
         <textarea
           rows={1}
           value={text}
@@ -42,7 +42,7 @@ export function Composer({ onSubmit, busy, placeholder }: { onSubmit: (text: str
           }}
           placeholder={placeholder}
           aria-label="Tell Amber what to do"
-          className="max-h-28 min-h-[24px] flex-1 resize-none bg-transparent text-[13.5px] text-white placeholder-white/35 outline-none"
+          className="max-h-28 min-h-[24px] flex-1 resize-none bg-transparent text-[13.5px] text-black/90 placeholder-black/35 outline-none"
         />
         <button
           type="submit"

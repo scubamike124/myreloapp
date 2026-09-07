@@ -24,39 +24,39 @@ export function CenterPanel({
     <div className="flex h-full min-h-0 flex-col overflow-hidden">
       {/* Compact header — status + title only. What Amber is doing right
           now lives in the live feed below, not duplicated up here. */}
-      <div className="shrink-0 border-b border-white/8 px-4 py-2.5 sm:px-5">
+      <div className="shrink-0 border-b border-black/8 px-4 py-2.5 sm:px-5">
         {run ? (
           <div className="flex flex-wrap items-center gap-2">
             <StatusBadge status={(run.status as never) || "queued"} />
-            <h1 className="min-w-0 flex-1 truncate text-[13.5px] font-semibold text-white/90">
+            <h1 className="min-w-0 flex-1 truncate text-[13.5px] font-semibold text-black/90">
               {run.summary?.split("\n")[0]?.slice(0, 140) || run.taskId}
             </h1>
           </div>
         ) : (
-          <h1 className="text-[13.5px] font-semibold text-white/70">No task selected</h1>
+          <h1 className="text-[13.5px] font-semibold text-black/60">No task selected</h1>
         )}
       </div>
 
       {/* Files changed + PR/approve — real, actionable info, kept slim. */}
       {run && (run.changedFiles?.length || run.prUrl) ? (
-        <div className="shrink-0 border-b border-white/8 px-4 py-2 sm:px-5">
+        <div className="shrink-0 border-b border-black/8 px-4 py-2 sm:px-5">
           <div className="flex flex-wrap items-center gap-3">
             {run.changedFiles && run.changedFiles.length > 0 && (
               <button
                 type="button"
                 onClick={() => setShowFiles((s) => !s)}
-                className="text-[12px] font-medium text-white/55 hover:text-white/85"
+                className="text-[12px] font-medium text-black/55 hover:text-black/85"
               >
                 {run.changedFiles.length} file{run.changedFiles.length === 1 ? "" : "s"} changed {showFiles ? "▾" : "▸"}
               </button>
             )}
             {run.prUrl && (
-              <a href={run.prUrl} target="_blank" rel="noreferrer" className="text-[12px] font-medium text-sky-300 hover:underline">
+              <a href={run.prUrl} target="_blank" rel="noreferrer" className="text-[12px] font-medium text-sky-700 hover:underline">
                 Pull request ↗
               </a>
             )}
             {run.mergedAt && (
-              <span className="flex items-center gap-1.5 text-[12px] text-emerald-300">
+              <span className="flex items-center gap-1.5 text-[12px] text-emerald-700">
                 <StatusDot status="OK" /> Merged &amp; deployed
               </span>
             )}
@@ -73,7 +73,7 @@ export function CenterPanel({
             )}
           </div>
           {showFiles && run.changedFiles && run.changedFiles.length > 0 && (
-            <ul className="mt-1.5 space-y-0.5 font-mono text-[11px] text-white/40">
+            <ul className="mt-1.5 space-y-0.5 font-mono text-[11px] text-black/45">
               {run.changedFiles.map((f) => (
                 <li key={f} className="truncate">
                   {f}
@@ -85,7 +85,7 @@ export function CenterPanel({
       ) : null}
 
       {run?.ownerReason && (
-        <div className="mx-4 mt-2 shrink-0 rounded-lg border border-amber-400/25 bg-amber-400/[.06] px-3 py-2 text-[12.5px] text-amber-200 sm:mx-5">
+        <div className="mx-4 mt-2 shrink-0 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-[12.5px] text-amber-800 sm:mx-5">
           {run.ownerReason}
         </div>
       )}
