@@ -10,6 +10,7 @@ import { BottomPanels } from "./BottomPanels";
 import { ChatDrawer } from "./ChatDrawer";
 import { NewTaskModal } from "./NewTaskModal";
 import { StatusDot } from "./StatusDot";
+import { Composer } from "./Composer";
 
 const PROJECT_LABELS: Record<string, string> = {
   reelo: "Reelo",
@@ -232,6 +233,7 @@ export function AmberWorkspace() {
               <CenterPanel run={activeRun} events={activeTaskId ? events : []} onApprove={handleApprove} approving={approving} />
             )}
           </div>
+          <Composer onSubmit={handleNewTask} busy={starting} placeholder={`Tell Amber what to do on ${PROJECT_LABELS[projectKey] || projectKey}…`} />
           <BottomPanels events={activeTaskId ? events : []} />
         </div>
 
