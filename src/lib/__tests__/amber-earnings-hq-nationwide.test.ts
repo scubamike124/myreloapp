@@ -118,4 +118,56 @@ describe("Relo admin nationwide HQ snapshot", () => {
     const v = summarizeHqEarningsJson({ ok: true, snapshot: { jobs: [] } }, "https://hq.amberoneai.com");
     assert.deepEqual(v.hqOwnerSteps, []);
   });
+
+  it("surfaces the combined economic state -- Amber's earned capital, distinct from HQ's marketplace-only hqMoney", () => {
+    // A real ebook sale (Standard Earning Source Interface) plus a real
+    // marketplace payout, combined by HQ's own snapshot.ts -- this page just
+    // has to read the numbers through, not recompute them.
+    const v = summarizeHqEarningsJson(
+      {
+        ok: true,
+        snapshot: {
+          jobs: [],
+          metrics: {
+            pendingPaymentUsd: 0,
+            verifiedPaidRevenueUsd: 0,
+            netProfitUsd: 0,
+            jobsWon: 0,
+            activeJobs: 0,
+            grossRevenueUsd: 14.99,
+            costBreakdown: { ai_model: 0.5, api: 0, marketplace_fee: 0, infra: 0, payment_processing: 0.44, other: 0 },
+            earnedCapitalUsd: 14.05,
+            reservedCapitalUsd: 0,
+            growthCapitalUsd: 0,
+            lifetimeRevenueUsd: 14.99,
+            lifetimeNetProfitUsd: 14.05,
+            firstRealDollarAt: "2026-09-08T00:00:00.000Z",
+            economicState: "SURVIVING",
+          },
+        },
+      },
+      "https://hq.amberoneai.com",
+    );
+    assert.equal(v.hqEconomics.earnedCapitalUsd, 14.05);
+    assert.equal(v.hqEconomics.grossRevenueUsd, 14.99);
+    assert.equal(v.hqEconomics.firstRealDollarAt, "2026-09-08T00:00:00.000Z");
+    assert.equal(v.hqEconomics.economicState, "SURVIVING");
+    assert.equal(v.hqEconomics.costBreakdown.ai_model, 0.5);
+  });
+
+  it("defaults hqEconomics to $0/STARTING when snapshot metrics are missing -- never fabricates a number", () => {
+    const v = summarizeHqEarningsJson({ ok: true, snapshot: { jobs: [] } }, "https://hq.amberoneai.com");
+    assert.equal(v.hqEconomics.earnedCapitalUsd, 0);
+    assert.equal(v.hqEconomics.firstRealDollarAt, null);
+    assert.equal(v.hqEconomics.economicState, "STARTING");
+    assert.deepEqual(v.hqEconomics.costBreakdown, {});
+  });
+
+  it("falls back to STARTING for an economicState value it doesn't recognize, rather than passing it through blindly", () => {
+    const v = summarizeHqEarningsJson(
+      { ok: true, snapshot: { jobs: [], metrics: { economicState: "NOT_A_REAL_STATE" } } },
+      "https://hq.amberoneai.com",
+    );
+    assert.equal(v.hqEconomics.economicState, "STARTING");
+  });
 });

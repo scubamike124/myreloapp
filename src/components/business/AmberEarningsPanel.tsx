@@ -351,6 +351,65 @@ export default function AmberEarningsPanel() {
                   Real TaskBounty / SporeAgent / MoltJobs money from the shared HQ store — a won job shows here as
                   pending until HQ verifies the platform paid out. See it by title below under &ldquo;HQ marketplace jobs.&rdquo;
                 </p>
+
+                <div className="mt-4 border-t pt-4" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="text-[15px] font-bold text-gray-900">Amber&rsquo;s economic state</h3>
+                    <span
+                      className="rounded px-2 py-1 text-[11px] font-bold uppercase"
+                      style={{
+                        color:
+                          nationwide.hqEconomics.economicState === "PROFITABLE" || nationwide.hqEconomics.economicState === "SCALING"
+                            ? "#166534"
+                            : nationwide.hqEconomics.economicState === "AT_RISK" || nationwide.hqEconomics.economicState === "PAUSED"
+                              ? "#991b1b"
+                              : "#92400e",
+                        background:
+                          nationwide.hqEconomics.economicState === "PROFITABLE" || nationwide.hqEconomics.economicState === "SCALING"
+                            ? "#dcfce7"
+                            : nationwide.hqEconomics.economicState === "AT_RISK" || nationwide.hqEconomics.economicState === "PAUSED"
+                              ? "#fee2e2"
+                              : "#fef3c7",
+                      }}
+                    >
+                      {nationwide.hqEconomics.economicState}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-[12px]" style={{ color: muted }}>
+                    Amber-earned capital only — separate from your own funds, starts at $0, and combines every real
+                    marketplace job above with every other real earning source (e.g. ebook sales) reporting through
+                    the same ledger.{" "}
+                    {nationwide.hqEconomics.firstRealDollarAt
+                      ? `First real dollar: ${new Date(nationwide.hqEconomics.firstRealDollarAt).toLocaleDateString()}.`
+                      : "No real dollar earned yet."}
+                  </p>
+                  <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                    {[
+                      ["Earned capital", money(nationwide.hqEconomics.earnedCapitalUsd)],
+                      ["Gross revenue", money(nationwide.hqEconomics.grossRevenueUsd)],
+                      ["Lifetime revenue", money(nationwide.hqEconomics.lifetimeRevenueUsd)],
+                      ["Lifetime net profit", money(nationwide.hqEconomics.lifetimeNetProfitUsd)],
+                      ["Growth capital", money(nationwide.hqEconomics.growthCapitalUsd)],
+                      ["Reserved capital", money(nationwide.hqEconomics.reservedCapitalUsd)],
+                    ].map(([l, v]) => (
+                      <div key={String(l)} className="p-3" style={card}>
+                        <div className="text-[11px] font-bold uppercase" style={{ color: label }}>{l}</div>
+                        <div className="mt-1 text-[18px] font-bold text-gray-900">{v}</div>
+                      </div>
+                    ))}
+                  </div>
+                  {Object.values(nationwide.hqEconomics.costBreakdown).some((v) => v > 0) ? (
+                    <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-5">
+                      {Object.entries(nationwide.hqEconomics.costBreakdown).map(([cat, v]) => (
+                        <div key={cat} className="p-3" style={card}>
+                          <div className="text-[11px] font-bold uppercase" style={{ color: label }}>{cat.replace(/_/g, " ")}</div>
+                          <div className="mt-1 text-[16px] font-bold text-gray-900">{money(v)}</div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+
                 {nationwide.emp ? (
                   <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
                     {[
