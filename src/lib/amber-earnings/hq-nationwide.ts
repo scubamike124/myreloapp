@@ -160,6 +160,7 @@ export type HqMarketplaceJob = {
  * won job's payout sat inside `snapshot` but nothing on the page ever read it,
  * so it was invisible even though the fetch that pulled it in was working.
  */
+/** The 5 marketplace-adapter-only view, kept exactly as before -- nothing reading these fields should notice a change. */
 export type HqMoney = {
   pendingPaymentUsd: number;
   verifiedPaidRevenueUsd: number;
@@ -170,6 +171,42 @@ export type HqMoney = {
 
 function emptyHqMoney(): HqMoney {
   return { pendingPaymentUsd: 0, verifiedPaidRevenueUsd: 0, netProfitUsd: 0, jobsWon: 0, activeJobs: 0 };
+}
+
+export type HqEconomicState = "STARTING" | "SURVIVING" | "PROFITABLE" | "SCALING" | "AT_RISK" | "PAUSED";
+
+/**
+ * The combined true-economics view (marketplace adapters + the Standard
+ * Earning Source Interface's external sources, e.g. ebook sales) -- see
+ * amberai's src/lib/amber-earnings/snapshot.ts for how these are computed.
+ * Distinct from HqMoney above so existing readers of that type are
+ * unaffected by this addition.
+ */
+export type HqEconomics = {
+  grossRevenueUsd: number;
+  costBreakdown: Record<string, number>;
+  earnedCapitalUsd: number;
+  reservedCapitalUsd: number;
+  growthCapitalUsd: number;
+  lifetimeRevenueUsd: number;
+  lifetimeNetProfitUsd: number;
+  /** null until Amber's first real (non-test) dollar has ever landed. */
+  firstRealDollarAt: string | null;
+  economicState: HqEconomicState;
+};
+
+function emptyHqEconomics(): HqEconomics {
+  return {
+    grossRevenueUsd: 0,
+    costBreakdown: {},
+    earnedCapitalUsd: 0,
+    reservedCapitalUsd: 0,
+    growthCapitalUsd: 0,
+    lifetimeRevenueUsd: 0,
+    lifetimeNetProfitUsd: 0,
+    firstRealDollarAt: null,
+    economicState: "STARTING",
+  };
 }
 
 /**
@@ -223,6 +260,28 @@ function extractHqMoney(snapshot: Record<string, unknown>): HqMoney {
   };
 }
 
+const HQ_ECONOMIC_STATES = new Set(["STARTING", "SURVIVING", "PROFITABLE", "SCALING", "AT_RISK", "PAUSED"]);
+
+function extractHqEconomics(snapshot: Record<string, unknown>): HqEconomics {
+  const metrics = asRecord(snapshot.metrics);
+  const num = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : 0);
+  const costBreakdownRaw = asRecord(metrics.costBreakdown);
+  const costBreakdown: Record<string, number> = {};
+  for (const [k, v] of Object.entries(costBreakdownRaw)) costBreakdown[k] = num(v);
+  const stateRaw = typeof metrics.economicState === "string" ? metrics.economicState : "";
+  return {
+    grossRevenueUsd: num(metrics.grossRevenueUsd),
+    costBreakdown,
+    earnedCapitalUsd: num(metrics.earnedCapitalUsd),
+    reservedCapitalUsd: num(metrics.reservedCapitalUsd),
+    growthCapitalUsd: num(metrics.growthCapitalUsd),
+    lifetimeRevenueUsd: num(metrics.lifetimeRevenueUsd),
+    lifetimeNetProfitUsd: num(metrics.lifetimeNetProfitUsd),
+    firstRealDollarAt: typeof metrics.firstRealDollarAt === "string" ? metrics.firstRealDollarAt : null,
+    economicState: (HQ_ECONOMIC_STATES.has(stateRaw) ? stateRaw : "STARTING") as HqEconomicState,
+  };
+}
+
 /**
  * HQ's own general owner-action list (src/lib/amber-earnings/tick.ts's
  * ownerStepsFor + governmentOwnerSteps on the HQ side) — one owner-only step
@@ -260,6 +319,8 @@ export type NationwideView = {
   emp: NationwideEmp | null;
   /** Real marketplace money (pending payment, verified paid, net profit, jobs won). */
   hqMoney: HqMoney;
+  /** True combined economics: marketplaces + every Standard Earning Source Interface source (e.g. ebook sales). Amber-earned capital, distinct from owner funds, starts at $0. */
+  hqEconomics: HqEconomics;
   /** Real owner-only action items across every marketplace (TaskBounty, SporeAgent, MoltJobs, Dealwork) — not just the government/grants lane. */
   hqOwnerSteps: HqOwnerStep[];
   /** Real Sent/Delivered/Opened/Clicked funnel per outreach campaign (ca_drop/ca_accessibility/ca_vendor_risk). */
@@ -324,6 +385,7 @@ export function summarizeHqEarningsJson(json: unknown, hqUrl: string): Nationwid
     empApplied: empOpps.filter((o) => HQ_EMP_APPLIED_STATUSES.has(String(o.status || ""))).length,
     emp,
     hqMoney: extractHqMoney(snapshot),
+    hqEconomics: extractHqEconomics(snapshot),
     hqOwnerSteps: extractHqOwnerSteps(snapshot),
     outreachFunnels: asOutreachFunnels(root.outreachFunnels),
     snapshot: Object.keys(snapshot).length ? snapshot : null,
@@ -346,6 +408,7 @@ function emptyView(hqUrl: string, reason: string): NationwideView {
     empApplied: 0,
     emp: null,
     hqMoney: emptyHqMoney(),
+    hqEconomics: emptyHqEconomics(),
     hqOwnerSteps: [],
     outreachFunnels: [],
     snapshot: null,
