@@ -88,6 +88,25 @@ expires on their schedule rather than ours.
 
 ---
 
+## Amber HQ bridges — one shared secret per bridge, set on both hosts
+
+These connect Reelo to Amber HQ (`hq.amberoneai.com`). Each is a value **you
+generate once** (any long random string, e.g. `openssl rand -hex 32`) and set
+**identically** in two places: Reelo's production env (Cloudflare Workers) and
+Amber HQ's `amber-hq-web` service (Railway). Leave one unset and that bridge is
+simply dark — the feature says "not connected", never errors.
+
+| Key | Unlocks | Unset behaviour |
+| --- | --- | --- |
+| `REELO_ORG_BRIDGE_SECRET` | Admin → **Amber's AI Earnings** (`/admin/amber-ai-earnings`): live division/agent/task status, budgets, pause/resume, emergency stop | Page shows "This page isn't connected yet." |
+| `REELO_DEV_BRIDGE_SECRET` | Command Center sending real engineering tasks to Amber OS (`start_dev_task` / `approve_dev_task`) | Those tools report the bridge is unavailable |
+| `REELO_YT_BRIDGE_SECRET` | Publishing to Amber's shared YouTube channel when an org has no channel of its own | Falls back to "connect a channel" |
+
+Optional base-URL overrides (default `https://hq.amberoneai.com`):
+`AMBER_ORG_BRIDGE_URL`, `AMBER_DEV_BRIDGE_URL`, `AMBER_YT_BRIDGE_URL`.
+
+---
+
 ## Blocking revenue — Stripe
 
 Everything else about billing is now built and tested: accounts, balances, the
