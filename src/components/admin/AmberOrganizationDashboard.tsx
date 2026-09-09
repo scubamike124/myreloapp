@@ -83,6 +83,8 @@ export default function AmberOrganizationDashboard({ initial }: { initial: Organ
   const [notice, setNotice] = useState<Notice>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [confirmingStop, setConfirmingStop] = useState(false);
+  const [editingBudget, setEditingBudget] = useState<string | null>(null);
+  const [budgetDraft, setBudgetDraft] = useState({ daily: "", single: "", cumulative: "" });
   const [pending, startTransition] = useTransition();
 
   const divisionStatusCounts = useMemo(() => countBy(divisions), [divisions]);
@@ -142,6 +144,56 @@ export default function AmberOrganizationDashboard({ initial }: { initial: Organ
     }
     setAgents((prev) => prev.map((x) => (x.id === a.id ? (result.agent as AgentView) : x)));
     setNotice({ kind: "ok", text: `${a.displayName} ${willPause ? "paused" : "resumed"}.` });
+  };
+
+  // set_division_budget is supported end to end (this route -> Amber HQ's
+  // reelo-organization-bridge -> division-store.setDivisionBudget); the owner
+  // needs a way to actually change a cap, not just read it. A blank field
+  // sends null, which Amber HQ treats as "clear this cap".
+  const openBudgetEditor = (d: DivisionView) => {
+    setNotice(null);
+    setEditingBudget(d.id);
+    setBudgetDraft({
+      daily: d.dailyBudgetUsd != null ? String(d.dailyBudgetUsd) : "",
+      single: d.maxSingleSpendUsd != null ? String(d.maxSingleSpendUsd) : "",
+      cumulative: d.maxCumulativeSpendUsd != null ? String(d.maxCumulativeSpendUsd) : "",
+    });
+  };
+
+  // "" -> null (clear the cap); a real number >= 0 -> set it; anything else
+  // -> undefined, which saveBudget rejects before it calls the bridge.
+  const parseUsd = (v: string): number | null | undefined => {
+    const t = v.trim();
+    if (t === "") return null;
+    const n = Number(t);
+    return Number.isFinite(n) && n >= 0 ? n : undefined;
+  };
+
+  const saveBudget = async (d: DivisionView) => {
+    const dailyBudgetUsd = parseUsd(budgetDraft.daily);
+    const maxSingleSpendUsd = parseUsd(budgetDraft.single);
+    const maxCumulativeSpendUsd = parseUsd(budgetDraft.cumulative);
+    if (dailyBudgetUsd === undefined || maxSingleSpendUsd === undefined || maxCumulativeSpendUsd === undefined) {
+      setNotice({ kind: "error", text: "Each budget must be a number ≥ 0, or left blank to clear it." });
+      return;
+    }
+    setBusyId(`budget:${d.id}`);
+    setNotice(null);
+    const result = await postAction({
+      action: "set_division_budget",
+      divisionId: d.id,
+      dailyBudgetUsd,
+      maxSingleSpendUsd,
+      maxCumulativeSpendUsd,
+    });
+    setBusyId(null);
+    if (!result.ok) {
+      setNotice({ kind: "error", text: result.error || "Could not update the budget." });
+      return;
+    }
+    setDivisions((prev) => prev.map((x) => (x.id === d.id ? (result.division as DivisionView) : x)));
+    setEditingBudget(null);
+    setNotice({ kind: "ok", text: `${d.blueprint.name} budget updated.` });
   };
 
   const emergencyStop = async () => {
@@ -258,11 +310,55 @@ export default function AmberOrganizationDashboard({ initial }: { initial: Organ
                     </div>
                     <p className="mt-1 max-w-[560px] text-xs text-white/50">{d.blueprint.mission}</p>
                     {d.pauseReason && <p className="mt-1 text-xs text-[#ffcf9a]">Paused: {d.pauseReason}</p>}
-                    <p className="mt-1 text-[11px] text-white/35">
-                      Budget: {d.dailyBudgetUsd != null ? `$${d.dailyBudgetUsd}/day` : "no daily cap set"}
-                      {d.maxSingleSpendUsd != null && ` · max single $${d.maxSingleSpendUsd}`}
-                      {d.maxCumulativeSpendUsd != null && ` · lifetime cap $${d.maxCumulativeSpendUsd}`}
-                    </p>
+                    {editingBudget === d.id ? (
+                      <div className="mt-2 flex flex-wrap items-end gap-2">
+                        {(
+                          [
+                            ["daily", "Daily $"],
+                            ["single", "Max single $"],
+                            ["cumulative", "Lifetime cap $"],
+                          ] as const
+                        ).map(([key, label]) => (
+                          <label key={key} className="text-[10px] text-white/40">
+                            <span className="block">{label}</span>
+                            <input
+                              type="number"
+                              min="0"
+                              inputMode="decimal"
+                              value={budgetDraft[key]}
+                              onChange={(e) => setBudgetDraft((p) => ({ ...p, [key]: e.target.value }))}
+                              placeholder="none"
+                              className="mt-0.5 w-24 rounded-md border border-white/15 bg-black/40 px-2 py-1 text-xs text-white/80"
+                            />
+                          </label>
+                        ))}
+                        <button
+                          onClick={() => saveBudget(d)}
+                          disabled={busyId === `budget:${d.id}`}
+                          className="rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/80 hover:bg-white/10 disabled:opacity-50"
+                        >
+                          {busyId === `budget:${d.id}` ? "Saving…" : "Save"}
+                        </button>
+                        <button
+                          onClick={() => setEditingBudget(null)}
+                          className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-semibold text-white/60 hover:bg-white/10"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    ) : (
+                      <p className="mt-1 text-[11px] text-white/35">
+                        Budget: {d.dailyBudgetUsd != null ? `$${d.dailyBudgetUsd}/day` : "no daily cap set"}
+                        {d.maxSingleSpendUsd != null && ` · max single $${d.maxSingleSpendUsd}`}
+                        {d.maxCumulativeSpendUsd != null && ` · lifetime cap $${d.maxCumulativeSpendUsd}`}
+                        <button
+                          onClick={() => openBudgetEditor(d)}
+                          className="ml-2 font-semibold text-white/55 underline decoration-white/25 underline-offset-2 hover:text-white/80"
+                        >
+                          Edit
+                        </button>
+                      </p>
+                    )}
                   </div>
                   <button
                     onClick={() => toggleDivision(d)}
