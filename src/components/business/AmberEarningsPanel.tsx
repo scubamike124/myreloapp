@@ -410,6 +410,72 @@ export default function AmberEarningsPanel() {
                   ) : null}
                 </div>
 
+                <div className="mt-4 border-t pt-4" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
+                  <h3 className="text-[15px] font-bold text-gray-900">Verified earnings — by time window</h3>
+                  <p className="mt-1 text-[12px]" style={{ color: muted }}>
+                    Counts a job only once it has real payment evidence — never a task marked done.
+                  </p>
+                  <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                    {([
+                      ["Today", nationwide.hqBreakdowns.windows.today],
+                      ["Last 7 days", nationwide.hqBreakdowns.windows.last7d],
+                      ["Last 30 days", nationwide.hqBreakdowns.windows.last30d],
+                      ["Lifetime", nationwide.hqBreakdowns.windows.lifetime],
+                    ] as const).map(([l, w]) => (
+                      <div key={l} className="p-3" style={card}>
+                        <div className="text-[11px] font-bold uppercase" style={{ color: label }}>{l}</div>
+                        <div className="mt-1 text-[18px] font-bold text-gray-900">{money(w.verifiedPaidRevenueUsd)}</div>
+                        <div className="mt-0.5 text-[11px]" style={{ color: muted }}>
+                          net {money(w.netProfitUsd)} · {w.jobsPaid} paid
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {(nationwide.hqBreakdowns.byDivision.length > 0 || nationwide.hqBreakdowns.byAgent.length > 0) ? (
+                  <div className="mt-4 border-t pt-4" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
+                    <h3 className="text-[15px] font-bold text-gray-900">Revenue by division &amp; agent</h3>
+                    <p className="mt-1 text-[12px]" style={{ color: muted }}>
+                      Every row is real verified payment or a real earning event — zeros are honest, not missing data.
+                    </p>
+                    {([
+                      ["Division", nationwide.hqBreakdowns.byDivision],
+                      ["Agent / worker", nationwide.hqBreakdowns.byAgent],
+                    ] as const).map(([heading, rows]) => (
+                      <div key={heading} className="mt-3 overflow-x-auto">
+                        <div className="text-[11px] font-bold uppercase" style={{ color: label }}>{heading}</div>
+                        <table className="mt-1 w-full min-w-[520px] text-left text-[13px]">
+                          <thead>
+                            <tr style={{ color: label }}>
+                              <th className="py-1 pr-3 font-semibold">Name</th>
+                              <th className="py-1 pr-3 font-semibold">Verified paid</th>
+                              <th className="py-1 pr-3 font-semibold">Pending</th>
+                              <th className="py-1 pr-3 font-semibold">Expenses</th>
+                              <th className="py-1 pr-3 font-semibold">Net</th>
+                              <th className="py-1 pr-3 font-semibold">Won / paid</th>
+                              <th className="py-1 pr-3 font-semibold">In flight</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {rows.map((r) => (
+                              <tr key={r.key} className="border-t" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
+                                <td className="py-1 pr-3 font-medium text-gray-900">{r.key.replace(/_/g, " ")}</td>
+                                <td className="py-1 pr-3">{money(r.verifiedPaidRevenueUsd)}</td>
+                                <td className="py-1 pr-3" style={{ color: muted }}>{money(r.pendingPaymentUsd)}</td>
+                                <td className="py-1 pr-3" style={{ color: muted }}>{money(r.expensesUsd)}</td>
+                                <td className="py-1 pr-3 font-medium">{money(r.netProfitUsd)}</td>
+                                <td className="py-1 pr-3">{r.jobsWon} / {r.jobsPaid}</td>
+                                <td className="py-1 pr-3" style={{ color: muted }}>{r.jobsInFlight}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+
                 {nationwide.emp ? (
                   <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
                     {[

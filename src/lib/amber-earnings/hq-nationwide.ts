@@ -283,6 +283,102 @@ function extractHqEconomics(snapshot: Record<string, unknown>): HqEconomics {
 }
 
 /**
+ * The "revenue by division / agent / marketplace" and "today/7d/30d/lifetime"
+ * breakdowns HQ computes in snapshot.metrics.{byDivision,byAgent,byMarketplace,
+ * windows}. Every figure is real: verified PaymentEvidence or a real
+ * EarningEvent — never a status string or a task marked DONE. Empty until HQ
+ * has that field deployed and Amber has earned something.
+ */
+export type HqEarningsBucket = {
+  key: string;
+  grossRevenueUsd: number;
+  verifiedPaidRevenueUsd: number;
+  pendingPaymentUsd: number;
+  expensesUsd: number;
+  netProfitUsd: number;
+  jobsWon: number;
+  jobsPaid: number;
+  jobsInFlight: number;
+};
+
+export type HqEarningsWindow = {
+  grossRevenueUsd: number;
+  verifiedPaidRevenueUsd: number;
+  expensesUsd: number;
+  netProfitUsd: number;
+  jobsPaid: number;
+};
+
+export type HqBreakdowns = {
+  byMarketplace: HqEarningsBucket[];
+  byDivision: HqEarningsBucket[];
+  byAgent: HqEarningsBucket[];
+  windows: { today: HqEarningsWindow; last7d: HqEarningsWindow; last30d: HqEarningsWindow; lifetime: HqEarningsWindow };
+};
+
+function emptyHqWindow(): HqEarningsWindow {
+  return { grossRevenueUsd: 0, verifiedPaidRevenueUsd: 0, expensesUsd: 0, netProfitUsd: 0, jobsPaid: 0 };
+}
+
+function emptyHqBreakdowns(): HqBreakdowns {
+  return {
+    byMarketplace: [],
+    byDivision: [],
+    byAgent: [],
+    windows: { today: emptyHqWindow(), last7d: emptyHqWindow(), last30d: emptyHqWindow(), lifetime: emptyHqWindow() },
+  };
+}
+
+function asBuckets(v: unknown): HqEarningsBucket[] {
+  if (!Array.isArray(v)) return [];
+  const num = (x: unknown) => (typeof x === "number" && Number.isFinite(x) ? x : 0);
+  return v
+    .filter((b) => b && typeof b === "object")
+    .map((b) => {
+      const r = asRecord(b);
+      return {
+        key: String(r.key || "—"),
+        grossRevenueUsd: num(r.grossRevenueUsd),
+        verifiedPaidRevenueUsd: num(r.verifiedPaidRevenueUsd),
+        pendingPaymentUsd: num(r.pendingPaymentUsd),
+        expensesUsd: num(r.expensesUsd),
+        netProfitUsd: num(r.netProfitUsd),
+        jobsWon: num(r.jobsWon),
+        jobsPaid: num(r.jobsPaid),
+        jobsInFlight: num(r.jobsInFlight),
+      };
+    });
+}
+
+function asWindow(v: unknown): HqEarningsWindow {
+  const r = asRecord(v);
+  const num = (x: unknown) => (typeof x === "number" && Number.isFinite(x) ? x : 0);
+  return {
+    grossRevenueUsd: num(r.grossRevenueUsd),
+    verifiedPaidRevenueUsd: num(r.verifiedPaidRevenueUsd),
+    expensesUsd: num(r.expensesUsd),
+    netProfitUsd: num(r.netProfitUsd),
+    jobsPaid: num(r.jobsPaid),
+  };
+}
+
+function extractHqBreakdowns(snapshot: Record<string, unknown>): HqBreakdowns {
+  const metrics = asRecord(snapshot.metrics);
+  const w = asRecord(metrics.windows);
+  return {
+    byMarketplace: asBuckets(metrics.byMarketplace),
+    byDivision: asBuckets(metrics.byDivision),
+    byAgent: asBuckets(metrics.byAgent),
+    windows: {
+      today: asWindow(w.today),
+      last7d: asWindow(w.last7d),
+      last30d: asWindow(w.last30d),
+      lifetime: asWindow(w.lifetime),
+    },
+  };
+}
+
+/**
  * HQ's own general owner-action list (src/lib/amber-earnings/tick.ts's
  * ownerStepsFor + governmentOwnerSteps on the HQ side) — one owner-only step
  * per marketplace that needs it: a vaulted key, a device-login approval, or
@@ -321,6 +417,8 @@ export type NationwideView = {
   hqMoney: HqMoney;
   /** True combined economics: marketplaces + every Standard Earning Source Interface source (e.g. ebook sales). Amber-earned capital, distinct from owner funds, starts at $0. */
   hqEconomics: HqEconomics;
+  /** Verified money grouped by division / agent / marketplace, and by today/7d/30d/lifetime. All zero until Amber earns her first real dollar. */
+  hqBreakdowns: HqBreakdowns;
   /** Real owner-only action items across every marketplace (TaskBounty, SporeAgent, MoltJobs, Dealwork) — not just the government/grants lane. */
   hqOwnerSteps: HqOwnerStep[];
   /** Real Sent/Delivered/Opened/Clicked funnel per outreach campaign (ca_drop/ca_accessibility/ca_vendor_risk). */
@@ -386,6 +484,7 @@ export function summarizeHqEarningsJson(json: unknown, hqUrl: string): Nationwid
     emp,
     hqMoney: extractHqMoney(snapshot),
     hqEconomics: extractHqEconomics(snapshot),
+    hqBreakdowns: extractHqBreakdowns(snapshot),
     hqOwnerSteps: extractHqOwnerSteps(snapshot),
     outreachFunnels: asOutreachFunnels(root.outreachFunnels),
     snapshot: Object.keys(snapshot).length ? snapshot : null,
@@ -409,6 +508,7 @@ function emptyView(hqUrl: string, reason: string): NationwideView {
     emp: null,
     hqMoney: emptyHqMoney(),
     hqEconomics: emptyHqEconomics(),
+    hqBreakdowns: emptyHqBreakdowns(),
     hqOwnerSteps: [],
     outreachFunnels: [],
     snapshot: null,
