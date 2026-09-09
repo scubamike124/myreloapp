@@ -35,7 +35,9 @@ export default async function AvatarCategoryPage({
     if (!p) notFound();
     title = p.name;
     icon = p.icon;
-    count = search({ primary: slug }, CATALOG).length;
+    // The filter belongs in the count as well as the list — a heading that
+    // counts the unfiltered category above a filtered list is a wrong number.
+    count = search({ primary: slug, filter }, CATALOG).length;
   }
 
   const activeFilter = filter ? getFilter(filter) : undefined;
@@ -61,7 +63,7 @@ export default async function AvatarCategoryPage({
         )}
       </div>
 
-      <AvatarList primary={slug} initialQuery={q ?? ""} />
+      <AvatarList primary={slug} filter={filter ?? ""} initialQuery={q ?? ""} />
     </AppShell>
   );
 }
