@@ -10,6 +10,10 @@ const NAV: NavItem[] = [
   { key: "overview", label: "Overview", href: "/business-center", icon: "home" },
   { key: "builder", label: "Amber Fix", href: "/amber-builder", icon: "code" },
   { key: "earnings", label: "Amber Earnings", href: "/business-center/amber-earnings", icon: "dollar" },
+  // Admin-only page (proxy.ts gates /admin/*); it sits here next to Amber
+  // Earnings because that is where the owner looks for it, the same way
+  // "Amber Fix" above links out to an admin-gated /amber-builder.
+  { key: "aiearnings", label: "Amber's AI Earnings", href: "/admin/amber-ai-earnings", icon: "growth" },
   { key: "property", label: "Property Intelligence", href: "/business-center/property-intelligence", icon: "home" },
   { key: "create", label: "Create", href: "/create", icon: "pen" },
   { key: "library", label: "Video Library", href: "/library", icon: "film" },
@@ -31,6 +35,7 @@ const NAV: NavItem[] = [
 const OVERVIEW_BADGES: Record<string, string> = {
   builder: "NEW",
   earnings: "NEW",
+  aiearnings: "NEW",
   property: "NEW",
   assets: "NEW",
   trend: "SOON",
