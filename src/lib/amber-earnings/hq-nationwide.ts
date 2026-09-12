@@ -537,6 +537,53 @@ export type GrowthReport = {
   notes: string[];
 };
 
+
+/** One stage of the end-to-end funnel. `count: null` means unmeasured. */
+export type PipelineStage = { key: string; label: string; count: number | null; note?: string };
+
+export type PipelineCounts = {
+  stages: PipelineStage[];
+  money: { advertisedUsd: number; obtainableUsd: number; receivedUsd: number };
+  /** Every blockage, in the screening's own words, commonest first. */
+  rejections: Array<{ reason: string; count: number }>;
+  bySource: Array<{ source: string; opportunities: number; priced: number; receivedUsd: number }>;
+  byCountry: Array<{ country: string; opportunities: number; priced: number }>;
+  notes: string[];
+};
+
+function extractPipelineCounts(snapshot: Record<string, unknown>): PipelineCounts | null {
+  const p = asRecord(snapshot.pipelineCounts);
+  if (!Array.isArray(p.stages)) return null;
+  const money = asRecord(p.money);
+  const rows = (key: string) => (Array.isArray(p[key]) ? (p[key] as Record<string, unknown>[]) : []);
+  return {
+    stages: (p.stages as Record<string, unknown>[]).map((st) => ({
+      key: String(st.key || ""),
+      label: String(st.label || ""),
+      count: num(st.count),
+      note: st.note ? String(st.note) : undefined,
+    })),
+    money: {
+      advertisedUsd: num(money.advertisedUsd) ?? 0,
+      obtainableUsd: num(money.obtainableUsd) ?? 0,
+      receivedUsd: num(money.receivedUsd) ?? 0,
+    },
+    rejections: rows("rejections").map((r) => ({ reason: String(r.reason || ""), count: num(r.count) ?? 0 })),
+    bySource: rows("bySource").map((r) => ({
+      source: String(r.source || ""),
+      opportunities: num(r.opportunities) ?? 0,
+      priced: num(r.priced) ?? 0,
+      receivedUsd: num(r.receivedUsd) ?? 0,
+    })),
+    byCountry: rows("byCountry").map((r) => ({
+      country: String(r.country || ""),
+      opportunities: num(r.opportunities) ?? 0,
+      priced: num(r.priced) ?? 0,
+    })),
+    notes: Array.isArray(p.notes) ? p.notes.map(String) : [],
+  };
+}
+
 function extractLaneReport(snapshot: Record<string, unknown>): LaneReport | null {
   const l = asRecord(snapshot.laneReport);
   if (!Array.isArray(l.lanes)) return null;
@@ -766,6 +813,11 @@ export type NationwideView = {
    * Amber cannot enter.
    */
   growthReport: GrowthReport | null;
+  /**
+   * The end-to-end funnel as one narrowing sequence, plus blockage totals
+   * and per-source and per-country counts.
+   */
+  pipelineCounts: PipelineCounts | null;
   /** Real Sent/Delivered/Opened/Clicked funnel per outreach campaign (ca_drop/ca_accessibility/ca_vendor_risk). */
   outreachFunnels: OutreachCampaignFunnel[];
   /** Full HQ snapshot metrics (marketplace lanes) when available. */
@@ -836,6 +888,7 @@ export function summarizeHqEarningsJson(json: unknown, hqUrl: string): Nationwid
     yieldReport: extractYieldReport(snapshot),
     laneReport: extractLaneReport(snapshot),
     growthReport: extractGrowthReport(snapshot),
+    pipelineCounts: extractPipelineCounts(snapshot),
     outreachFunnels: asOutreachFunnels(root.outreachFunnels),
     snapshot: Object.keys(snapshot).length ? snapshot : null,
     readiness: root.readiness && typeof root.readiness === "object" ? asRecord(root.readiness) : null,
@@ -865,6 +918,7 @@ function emptyView(hqUrl: string, reason: string): NationwideView {
     yieldReport: null,
     laneReport: null,
     growthReport: null,
+    pipelineCounts: null,
     outreachFunnels: [],
     snapshot: null,
     readiness: null,

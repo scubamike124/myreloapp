@@ -174,6 +174,170 @@ function Field({ label: l, value }: { label: string; value: ReactNode }) {
  * invites the wrong question — "why not build it?" — and the reason answers
  * it before it is asked.
  */
+/**
+ * The end-to-end funnel, as one narrowing column.
+ *
+ * The stages are shown adjacently and in the order money moves, because
+ * every counting defect this system has produced showed up as a stage larger
+ * than the one above it — 132,082 "discoveries" over 279 listings, twenty
+ * "account-required opportunities" over three real ones, $54,000 "buildable"
+ * over nothing buildable. Put side by side, the next one is visible without
+ * an audit, and HQ writes COUNTING ERROR into its own notes when it happens.
+ *
+ * Three presentation rules, each earned:
+ *
+ * NOT MEASURED IS NOT ZERO. A stage nothing has counted reads as "not
+ * measured". A confident 0 is indistinguishable from a measured absence, and
+ * this system shipped that mistake in four separate counters.
+ *
+ * MONEY SITS APART FROM COUNTS. Advertised, obtainable and received are
+ * dollars; everything above them is a tally. Mixing them is how a pipeline
+ * of activity reads as revenue.
+ *
+ * BLOCKAGES ARE QUOTED, NOT SUMMARISED. The screening's own sentence, with
+ * its count, because a paraphrase loses the thing that makes it checkable.
+ */
+function PipelineFunnel({
+  counts,
+}: {
+  counts: import("@/lib/amber-earnings/hq-nationwide").PipelineCounts | null;
+}) {
+  const [showAll, setShowAll] = useState(false);
+  if (!counts) return null;
+
+  const fig = (v: number | null) =>
+    v === null ? <span style={{ color: muted }}>not measured</span> : <span className="tabular-nums">{v.toLocaleString()}</span>;
+
+  /** The stage where the funnel currently stops, for emphasis. */
+  const firstZero = counts.stages.findIndex((s) => s.count === 0);
+  const problems = counts.notes.filter((n) => n.startsWith("COUNTING ERROR"));
+
+  return (
+    <section className="mt-5">
+      <h2 className="text-[17px] font-bold text-gray-900">The funnel, end to end</h2>
+      <p className="mt-1 text-[13px]" style={{ color: muted }}>
+        Sources checked through money received, in the order it moves. Each stage should be smaller than the one above
+        it.
+      </p>
+
+      {problems.length > 0 ? (
+        <div className="mt-2 rounded-lg border border-red-300 bg-red-50 px-3 py-2">
+          {problems.map((n, i) => (
+            <p key={i} className="text-[13px] font-medium text-red-900">
+              {n}
+            </p>
+          ))}
+        </div>
+      ) : null}
+
+      <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white">
+        {counts.stages.map((s, i) => {
+          const stops = i === firstZero;
+          return (
+            <div
+              key={s.key}
+              className="flex flex-wrap items-baseline gap-2 border-b border-gray-100 px-3 py-2 last:border-b-0"
+              style={stops ? { background: "#fef2f2" } : undefined}
+            >
+              <span className="min-w-[16rem] flex-1 text-[13.5px] text-gray-800">{s.label}</span>
+              <span className={`text-[15px] font-bold ${stops ? "text-red-700" : "text-gray-900"}`}>{fig(s.count)}</span>
+              {s.note ? (
+                <span className="w-full text-[12px]" style={{ color: muted }}>
+                  {s.note}
+                </span>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="mt-2 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+        {[
+          ["Advertised", counts.money.advertisedUsd, muted],
+          ["Obtainable", counts.money.obtainableUsd, undefined],
+          ["Received", counts.money.receivedUsd, undefined],
+        ].map(([l, v, colour], i) => (
+          <div key={i} className="p-3" style={card}>
+            <div className="text-[11px] font-bold uppercase tracking-wide" style={{ color: label }}>
+              {l as string}
+            </div>
+            <div className="mt-1 text-[20px] font-bold tabular-nums" style={{ color: (colour as string) || undefined }}>
+              {money(v as number)}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {counts.rejections.length > 0 ? (
+        <div className="mt-3">
+          <strong className="text-[14px] text-gray-900">Where opportunities stop</strong>
+          <div className="mt-1.5 overflow-hidden rounded-lg border border-gray-200 bg-white">
+            {(showAll ? counts.rejections : counts.rejections.slice(0, 8)).map((r, i) => (
+              <div key={i} className="flex gap-3 border-b border-gray-100 px-3 py-1.5 last:border-b-0">
+                <span className="w-10 shrink-0 text-right text-[13px] font-bold tabular-nums text-gray-900">{r.count}</span>
+                <span className="text-[13px] text-gray-800">{r.reason}</span>
+              </div>
+            ))}
+          </div>
+          {counts.rejections.length > 8 ? (
+            <button
+              type="button"
+              onClick={() => setShowAll(!showAll)}
+              className="mt-1.5 text-[12.5px] font-medium text-sky-700 hover:underline"
+            >
+              {showAll ? "Show fewer" : `Show all ${counts.rejections.length} reasons`}
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+
+      <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
+        <div>
+          <strong className="text-[14px] text-gray-900">By source</strong>
+          <div className="mt-1.5 overflow-hidden rounded-lg border border-gray-200 bg-white">
+            {counts.bySource.slice(0, 10).map((r) => (
+              <div key={r.source} className="flex flex-wrap items-baseline gap-2 border-b border-gray-100 px-3 py-1.5 last:border-b-0">
+                <span className="flex-1 truncate text-[13px] text-gray-800">{r.source}</span>
+                <span className="text-[12px]" style={{ color: muted }}>
+                  {r.priced} priced
+                </span>
+                <span className="text-[14px] font-bold tabular-nums text-gray-900">{r.opportunities}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <strong className="text-[14px] text-gray-900">By country</strong>
+          <div className="mt-1.5 overflow-hidden rounded-lg border border-gray-200 bg-white">
+            {counts.byCountry.slice(0, 10).map((r) => (
+              <div key={r.country} className="flex flex-wrap items-baseline gap-2 border-b border-gray-100 px-3 py-1.5 last:border-b-0">
+                <span className="flex-1 truncate text-[13px] text-gray-800">{r.country}</span>
+                <span className="text-[12px]" style={{ color: muted }}>
+                  {r.priced} priced
+                </span>
+                <span className="text-[14px] font-bold tabular-nums text-gray-900">{r.opportunities}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {counts.notes.filter((n) => !n.startsWith("COUNTING ERROR")).length > 0 ? (
+        <ul className="mt-2 space-y-0.5">
+          {counts.notes
+            .filter((n) => !n.startsWith("COUNTING ERROR"))
+            .map((n, i) => (
+              <li key={i} className="text-[12.5px]" style={{ color: muted }}>
+                {n}
+              </li>
+            ))}
+        </ul>
+      ) : null}
+    </section>
+  );
+}
+
 function SpecialtyCenter({
   lanes,
   growth,
@@ -737,6 +901,9 @@ export default function AmberEarningsPanel() {
         <SourceFunnel report={nationwide?.yieldReport ?? null} />
 
         {/* What the market pays for, under where the effort goes. */}
+        {/* The funnel first: it is the shape of everything below. */}
+        <PipelineFunnel counts={nationwide?.pipelineCounts ?? null} />
+
         <SpecialtyCenter lanes={nationwide?.laneReport ?? null} growth={nationwide?.growthReport ?? null} />
 
 
