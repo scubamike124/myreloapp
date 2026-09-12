@@ -391,6 +391,116 @@ function extractHqBreakdowns(snapshot: Record<string, unknown>): HqBreakdowns {
  */
 export type HqOwnerStep = { platform: string; whatINeedToDo: string; whereToClick: string; whyRequired: string };
 
+/** One item from HQ's consolidated owner queue. */
+export type OwnerActionItem = {
+  id: string;
+  source: string;
+  category: string;
+  whyRequired: string;
+  expectedOpportunity: string;
+  expectedValueUsd: number;
+  exactSteps: string[];
+  whereToClick: string;
+  /** Does clearing this ONE item let money actually move? */
+  revenueBlocking: boolean;
+  origins: string[];
+  resumesFrom: string;
+};
+
+export type OwnerActionQueue = {
+  at: string;
+  actions: OwnerActionItem[];
+  revenueBlockingCount: number;
+  totalExpectedValueUsd: number;
+  unblockedWorkNote: string;
+  duplicatesMerged: number;
+  /**
+   * Items HQ held back because the platform does not pay for work.
+   *
+   * Rendered as a count, not hidden. Twenty sources once looked like twenty
+   * lanes one signup away from revenue and seventeen were shops, archives and
+   * a cosmetic-surgery directory — a silently shorter queue would be the same
+   * error facing the other way.
+   */
+  notPayers: Array<{ source: string; purpose: string; why: string }>;
+};
+
+/** HQ's answer to "what should Amber try next, and how soon does it pay?" */
+export type ShortestPath = {
+  at: string;
+  next: {
+    candidate: { platform: string; externalId: string; title: string; hoursToCash: number };
+    score: number;
+    netPaymentUsd: number;
+    winProbabilityIsMeasured: boolean;
+    reasoning: string;
+  } | null;
+  availableCount: number;
+  blockedCount: number;
+  unprofitableCount: number;
+  notes: string[];
+};
+
+function extractOwnerActionQueue(snapshot: Record<string, unknown>): OwnerActionQueue | null {
+  const q = asRecord(snapshot.ownerActionQueue);
+  if (!Array.isArray(q.actions)) return null;
+  return {
+    at: String(q.at || ""),
+    actions: (q.actions as Record<string, unknown>[]).map((a) => ({
+      id: String(a.id || ""),
+      source: String(a.source || "Amber"),
+      category: String(a.category || ""),
+      whyRequired: String(a.whyRequired || ""),
+      expectedOpportunity: String(a.expectedOpportunity || ""),
+      expectedValueUsd: Number(a.expectedValueUsd) || 0,
+      exactSteps: Array.isArray(a.exactSteps) ? a.exactSteps.map(String) : [],
+      whereToClick: String(a.whereToClick || ""),
+      revenueBlocking: Boolean(a.revenueBlocking),
+      origins: Array.isArray(a.origins) ? a.origins.map(String) : [],
+      resumesFrom: String(a.resumesFrom || ""),
+    })),
+    revenueBlockingCount: Number(q.revenueBlockingCount) || 0,
+    totalExpectedValueUsd: Number(q.totalExpectedValueUsd) || 0,
+    unblockedWorkNote: String(q.unblockedWorkNote || ""),
+    duplicatesMerged: Number(q.duplicatesMerged) || 0,
+    notPayers: Array.isArray(q.notPayers)
+      ? (q.notPayers as Record<string, unknown>[]).map((n) => ({
+          source: String(n.source || ""),
+          purpose: String(n.purpose || ""),
+          why: String(n.why || ""),
+        }))
+      : [],
+  };
+}
+
+function extractShortestPath(snapshot: Record<string, unknown>): ShortestPath | null {
+  const p = asRecord(snapshot.shortestPath);
+  if (!Array.isArray(p.notes)) return null;
+  const next = asRecord(p.next);
+  const candidate = asRecord(next.candidate);
+  return {
+    at: String(p.at || ""),
+    next: next.reasoning
+      ? {
+          candidate: {
+            platform: String(candidate.platform || ""),
+            externalId: String(candidate.externalId || ""),
+            title: String(candidate.title || ""),
+            hoursToCash: Number(candidate.hoursToCash) || 0,
+          },
+          score: Number(next.score) || 0,
+          netPaymentUsd: Number(next.netPaymentUsd) || 0,
+          winProbabilityIsMeasured: Boolean(next.winProbabilityIsMeasured),
+          reasoning: String(next.reasoning || ""),
+        }
+      : null,
+    availableCount: Number(p.availableCount) || 0,
+    blockedCount: Number(p.blockedCount) || 0,
+    unprofitableCount: Number(p.unprofitableCount) || 0,
+    notes: p.notes.map(String),
+  };
+}
+
 function extractHqOwnerSteps(snapshot: Record<string, unknown>): HqOwnerStep[] {
   const raw = Array.isArray(snapshot.ownerSteps) ? snapshot.ownerSteps : [];
   return raw
@@ -421,6 +531,19 @@ export type NationwideView = {
   hqBreakdowns: HqBreakdowns;
   /** Real owner-only action items across every marketplace (TaskBounty, SporeAgent, MoltJobs, Dealwork) — not just the government/grants lane. */
   hqOwnerSteps: HqOwnerStep[];
+  /**
+   * The ONE owner action queue, as HQ consolidated it.
+   *
+   * This page used to render two owner lists of different shapes — the raw
+   * per-marketplace steps and the government lane's own actions — neither
+   * ranked by what clearing the item would unlock. HQ now does the
+   * consolidation, deduplication, ranking and filtering, and this is the
+   * result. Two places computing "what is waiting on the owner" can disagree,
+   * and the one that disagrees is always the one the owner is looking at.
+   */
+  ownerActionQueue: OwnerActionQueue | null;
+  /** The fastest route to the first real dollar, or an honest nothing. */
+  shortestPath: ShortestPath | null;
   /** Real Sent/Delivered/Opened/Clicked funnel per outreach campaign (ca_drop/ca_accessibility/ca_vendor_risk). */
   outreachFunnels: OutreachCampaignFunnel[];
   /** Full HQ snapshot metrics (marketplace lanes) when available. */
@@ -486,6 +609,8 @@ export function summarizeHqEarningsJson(json: unknown, hqUrl: string): Nationwid
     hqEconomics: extractHqEconomics(snapshot),
     hqBreakdowns: extractHqBreakdowns(snapshot),
     hqOwnerSteps: extractHqOwnerSteps(snapshot),
+    ownerActionQueue: extractOwnerActionQueue(snapshot),
+    shortestPath: extractShortestPath(snapshot),
     outreachFunnels: asOutreachFunnels(root.outreachFunnels),
     snapshot: Object.keys(snapshot).length ? snapshot : null,
     readiness: root.readiness && typeof root.readiness === "object" ? asRecord(root.readiness) : null,
@@ -510,6 +635,8 @@ function emptyView(hqUrl: string, reason: string): NationwideView {
     hqEconomics: emptyHqEconomics(),
     hqBreakdowns: emptyHqBreakdowns(),
     hqOwnerSteps: [],
+    ownerActionQueue: null,
+    shortestPath: null,
     outreachFunnels: [],
     snapshot: null,
     readiness: null,
