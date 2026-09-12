@@ -229,3 +229,62 @@ describe("advertised value never appears without obtainable beside it", () => {
     assert.ok(!/\.reduce\(/.test(s), "HQ computes these from both systems of record");
   });
 });
+
+/**
+ * The funnel, end to end, on the page the owner reads.
+ *
+ * Every counting defect this system has produced showed up as a stage larger
+ * than the one above it. Shown adjacently, the next one is visible without an
+ * audit.
+ */
+describe("the funnel is one narrowing column on the page", () => {
+  const section = () => {
+    const src = panel();
+    return src.slice(src.indexOf("function PipelineFunnel"), src.indexOf("function SpecialtyCenter"));
+  };
+
+  it("renders one funnel fed from HQ", () => {
+    const src = panel();
+    assert.equal((src.match(/<PipelineFunnel\b/g) ?? []).length, 1);
+    assert.match(src, /nationwide\?\.pipelineCounts/);
+    assert.match(bridge(), /extractPipelineCounts/);
+  });
+
+  it("surfaces a counting error where it cannot be missed", () => {
+    const s = section();
+    assert.match(s, /COUNTING ERROR/);
+    assert.match(s, /border-red-300/, "and visibly, not as a footnote");
+  });
+
+  it("renders an unmeasured stage as unmeasured", () => {
+    assert.match(section(), /v === null \? <span style=\{\{ color: muted \}\}>not measured<\/span>/);
+  });
+
+  it("keeps money apart from the counts", () => {
+    // Mixing them is how a pipeline of activity reads as revenue.
+    const s = section();
+    assert.match(s, /Advertised/);
+    assert.match(s, /Obtainable/);
+    assert.match(s, /Received/);
+    assert.ok(s.indexOf("counts.stages.map") < s.indexOf("counts.money.advertisedUsd"), "tallies first, dollars after");
+  });
+
+  it("quotes each blockage rather than paraphrasing it", () => {
+    const s = section();
+    assert.match(s, /r\.reason/);
+    assert.match(s, /r\.count/);
+  });
+
+  it("shows per-source and per-country counts without a click", () => {
+    const s = section();
+    assert.match(s, /By source/);
+    assert.match(s, /By country/);
+    assert.match(s, /counts\.bySource\.slice/);
+    assert.match(s, /counts\.byCountry\.slice/);
+  });
+
+  it("does not compute any of it on the client", () => {
+    const s = section().replace(/\/\*[\s\S]*?\*\//g, "");
+    assert.ok(!/\.reduce\(/.test(s), "HQ assembles the funnel from its own systems of record");
+  });
+});
