@@ -9,6 +9,7 @@ const NAV = [
   { href: "/admin/command-center", label: "Command Center", icon: <><path d="M12 3v3M12 18v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M3 12h3M18 12h3M4.9 19.1 7 17M17 7l2.1-2.1" /><circle cx="12" cy="12" r="3.2" /></> },
   { href: "/amber-builder", label: "Amber Fix", icon: <><path d="M12 3v3M12 18v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M3 12h3M18 12h3" /><path d="M9 12h6" /></> },
   { href: "/business-center/amber-earnings", label: "Amber Earnings", icon: <><rect x="2.5" y="5" width="19" height="14" rx="2.5" /><path d="M2.5 10h19" /></> },
+  { href: "/admin/api-command-center", label: "API Command Center", icon: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18" /></> },
   { href: "/admin/amber-ai-earnings", label: "Amber's AI Earnings", icon: <><path d="M3 17l5-6 4 3 5-7 4 4" /><path d="M3 21h18" /></> },
   { href: "/business-center/property-intelligence", label: "Property Intel", icon: <><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /></> },
   { href: "/business-center/pro", label: "Business Center Pro", icon: <><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 20l-4.9 2.6.9-5.5-4-3.9L9.5 7z" /></> },
