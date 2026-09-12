@@ -157,3 +157,75 @@ describe("the source funnel is on the page the owner reads", () => {
     assert.ok(!/\.reduce\(/.test(section.replace(/\/\*[\s\S]*?\*\//g, "")), "HQ computes it from both systems of record");
   });
 });
+
+/**
+ * Specialty markets on the same page.
+ *
+ * Every headline this system has produced has been advertised value: a
+ * $54,000 capability gap that was eight competitions Amber cannot enter,
+ * $4,582 of specialty demand with $0 reachable. Advertised value alone is
+ * how a pipeline looks healthy at $0.00 revenue.
+ */
+describe("advertised value never appears without obtainable beside it", () => {
+  const section = () => {
+    const src = panel();
+    return src.slice(src.indexOf("function SpecialtyCenter"), src.indexOf("function SourceFunnel"));
+  };
+
+  it("renders one specialty section fed from HQ", () => {
+    const src = panel();
+    assert.equal((src.match(/<SpecialtyCenter\b/g) ?? []).length, 1);
+    assert.match(src, /nationwide\?\.laneReport/);
+    assert.match(src, /nationwide\?\.growthReport/);
+    assert.match(bridge(), /extractLaneReport/);
+    assert.match(bridge(), /extractGrowthReport/);
+  });
+
+  it("shows both value figures in every place either appears", () => {
+    const s = section();
+    assert.match(s, /Advertised/);
+    assert.match(s, /Obtainable/);
+    assert.ok(
+      s.indexOf("Advertised") < s.indexOf("Obtainable"),
+      "obtainable reads to the right of advertised, in the stronger position",
+    );
+  });
+
+  it("gives obtainable the visual weight and advertised the muted style", () => {
+    const s = section();
+    assert.match(s, /advertisedValueUsd\)\}\s*\n?\s*<\/td>/);
+    assert.match(s, /font-bold tabular-nums text-gray-900">\s*\n?\s*\{money\(l\.obtainableValueUsd\)\}/);
+  });
+
+  it("explains that an unpriced opportunity is in no lane", () => {
+    assert.match(section(), /unknown, not cheap/);
+  });
+
+  it("states plainly when nothing is worth building", () => {
+    assert.match(section(), /Nothing is worth building yet/);
+  });
+
+  it("names the four conditions rather than just refusing", () => {
+    const s = section();
+    assert.match(s, /more than one buyer/);
+    assert.match(s, /economics that survive the win rate/);
+    assert.match(s, /eligibility path that exists/);
+  });
+
+  it("shows each decision with the reason it was blocked", () => {
+    // The decision alone invites "why not build it?" — the reason answers
+    // that before it is asked.
+    const s = section();
+    assert.match(s, /c\.blockedBy\.map/);
+    assert.match(s, /Blocked:/);
+  });
+
+  it("labels an assumed win probability on screen", () => {
+    assert.match(section(), /an assumption, not a measurement/);
+  });
+
+  it("does not compute any of it on the client", () => {
+    const s = section().replace(/\/\*[\s\S]*?\*\//g, "");
+    assert.ok(!/\.reduce\(/.test(s), "HQ computes these from both systems of record");
+  });
+});

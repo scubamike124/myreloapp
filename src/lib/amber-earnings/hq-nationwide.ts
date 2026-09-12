@@ -487,6 +487,113 @@ function num(v: unknown): number | null {
   return typeof v === "number" && Number.isFinite(v) ? v : null;
 }
 
+
+/** One contract-value lane, with advertised held apart from obtainable. */
+export type LaneRow = {
+  id: string;
+  label: string;
+  minUsd: number;
+  maxUsd: number | null;
+  opportunities: number;
+  advertisedValueUsd: number;
+  /** The subset with a credible route. The only figure that may justify spend. */
+  obtainableValueUsd: number;
+  verifiedRevenueUsd: number;
+  diligence: string[];
+};
+
+export type LaneReport = {
+  lanes: LaneRow[];
+  /** Opportunities publishing no value — in no lane, not in the cheapest. */
+  unpriced: number;
+  notes: string[];
+};
+
+/** One specialty's build case: BUILD, WATCH or REJECT, with the numbers. */
+export type SpecialtyCase = {
+  specialtyId: string;
+  label: string;
+  decision: string;
+  distinctBuyers: number;
+  distinctCountries: number;
+  opportunities: number;
+  advertisedValueUsd: number;
+  obtainableValueUsd: number;
+  winProbability: number | null;
+  winProbabilityIsMeasured: boolean;
+  expectedReturnUsd: number | null;
+  buildCostUsd: number;
+  reuseBreadth: number;
+  blockedBy: string[];
+  reasons: string[];
+};
+
+export type GrowthReport = {
+  cases: SpecialtyCase[];
+  recommended: SpecialtyCase | null;
+  buildCount: number;
+  watchCount: number;
+  rejectCount: number;
+  notes: string[];
+};
+
+function extractLaneReport(snapshot: Record<string, unknown>): LaneReport | null {
+  const l = asRecord(snapshot.laneReport);
+  if (!Array.isArray(l.lanes)) return null;
+  return {
+    lanes: (l.lanes as Record<string, unknown>[]).map((row) => {
+      const lane = asRecord(row.lane);
+      return {
+        id: String(lane.id || ""),
+        label: String(lane.label || ""),
+        minUsd: num(lane.minUsd) ?? 0,
+        maxUsd: num(lane.maxUsd),
+        opportunities: num(row.opportunities) ?? 0,
+        advertisedValueUsd: num(row.advertisedValueUsd) ?? 0,
+        obtainableValueUsd: num(row.obtainableValueUsd) ?? 0,
+        verifiedRevenueUsd: num(row.verifiedRevenueUsd) ?? 0,
+        diligence: Array.isArray(lane.diligence) ? lane.diligence.map(String) : [],
+      };
+    }),
+    unpriced: num(l.unpriced) ?? 0,
+    notes: Array.isArray(l.notes) ? l.notes.map(String) : [],
+  };
+}
+
+function asSpecialtyCase(c: Record<string, unknown>): SpecialtyCase {
+  return {
+    specialtyId: String(c.specialtyId || ""),
+    label: String(c.label || ""),
+    decision: String(c.decision || ""),
+    distinctBuyers: num(c.distinctBuyers) ?? 0,
+    distinctCountries: num(c.distinctCountries) ?? 0,
+    opportunities: num(c.opportunities) ?? 0,
+    advertisedValueUsd: num(c.advertisedValueUsd) ?? 0,
+    obtainableValueUsd: num(c.obtainableValueUsd) ?? 0,
+    winProbability: num(c.winProbability),
+    winProbabilityIsMeasured: Boolean(c.winProbabilityIsMeasured),
+    expectedReturnUsd: num(c.expectedReturnUsd),
+    buildCostUsd: num(c.buildCostUsd) ?? 0,
+    reuseBreadth: num(c.reuseBreadth) ?? 0,
+    blockedBy: Array.isArray(c.blockedBy) ? c.blockedBy.map(String) : [],
+    reasons: Array.isArray(c.reasons) ? c.reasons.map(String) : [],
+  };
+}
+
+function extractGrowthReport(snapshot: Record<string, unknown>): GrowthReport | null {
+  const g = asRecord(snapshot.capabilityGrowth);
+  if (!Array.isArray(g.cases)) return null;
+  const rec = asRecord(g.recommended);
+  return {
+    cases: (g.cases as Record<string, unknown>[]).map(asSpecialtyCase),
+    recommended: rec.specialtyId ? asSpecialtyCase(rec) : null,
+    buildCount: num(g.buildCount) ?? 0,
+    watchCount: num(g.watchCount) ?? 0,
+    rejectCount: num(g.rejectCount) ?? 0,
+    notes: Array.isArray(g.notes) ? g.notes.map(String) : [],
+  };
+}
+
 function extractYieldReport(snapshot: Record<string, unknown>): YieldReport | null {
   const y = asRecord(snapshot.yieldReport);
   if (!Array.isArray(y.sources)) return null;
@@ -649,6 +756,16 @@ export type NationwideView = {
    * whether any of it reached a dollar and where it stopped when it did not.
    */
   yieldReport: YieldReport | null;
+  /** The five contract-value lanes, advertised held apart from obtainable. */
+  laneReport: LaneReport | null;
+  /**
+   * Which specialty the market is paying for, and whether to learn it.
+   *
+   * BUILD requires four independent conditions. The engine this replaces
+   * ranked on advertised value and recommended $54,000 of competitions
+   * Amber cannot enter.
+   */
+  growthReport: GrowthReport | null;
   /** Real Sent/Delivered/Opened/Clicked funnel per outreach campaign (ca_drop/ca_accessibility/ca_vendor_risk). */
   outreachFunnels: OutreachCampaignFunnel[];
   /** Full HQ snapshot metrics (marketplace lanes) when available. */
@@ -717,6 +834,8 @@ export function summarizeHqEarningsJson(json: unknown, hqUrl: string): Nationwid
     ownerActionQueue: extractOwnerActionQueue(snapshot),
     shortestPath: extractShortestPath(snapshot),
     yieldReport: extractYieldReport(snapshot),
+    laneReport: extractLaneReport(snapshot),
+    growthReport: extractGrowthReport(snapshot),
     outreachFunnels: asOutreachFunnels(root.outreachFunnels),
     snapshot: Object.keys(snapshot).length ? snapshot : null,
     readiness: root.readiness && typeof root.readiness === "object" ? asRecord(root.readiness) : null,
@@ -744,6 +863,8 @@ function emptyView(hqUrl: string, reason: string): NationwideView {
     ownerActionQueue: null,
     shortestPath: null,
     yieldReport: null,
+    laneReport: null,
+    growthReport: null,
     outreachFunnels: [],
     snapshot: null,
     readiness: null,
