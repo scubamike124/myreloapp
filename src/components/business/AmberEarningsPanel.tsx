@@ -157,6 +157,187 @@ function Field({ label: l, value }: { label: string; value: ReactNode }) {
  * MONEY IS THE LAST COLUMN AND THE ONLY ONE THAT COUNTS. Everything to its
  * left is effort.
  */
+/**
+ * Value lanes and the specialty build decisions.
+ *
+ * Two questions the page could not answer before: where the money sits by
+ * contract size, and what the market is paying for that Amber cannot yet do.
+ *
+ * The layout is built around one pairing — ADVERTISED against OBTAINABLE.
+ * Every headline this system has produced has been the first kind: a $54,000
+ * capability gap that was eight competitions Amber cannot enter, $4,582 of
+ * specialty demand with $0 reachable. Showing advertised value alone is how
+ * a pipeline looks healthy at $0.00 revenue, so the two are always adjacent
+ * and obtainable is the one given the weight.
+ *
+ * A decision is shown with its blocking reason, because the decision alone
+ * invites the wrong question — "why not build it?" — and the reason answers
+ * it before it is asked.
+ */
+function SpecialtyCenter({
+  lanes,
+  growth,
+}: {
+  lanes: import("@/lib/amber-earnings/hq-nationwide").LaneReport | null;
+  growth: import("@/lib/amber-earnings/hq-nationwide").GrowthReport | null;
+}) {
+  const [openCase, setOpenCase] = useState<string | null>(null);
+  if (!lanes && !growth) return null;
+
+  const decisionTone: Record<string, string> = {
+    BUILD: "#15803d",
+    WATCH: "#b45309",
+    REJECT: "#b91c1c",
+  };
+
+  return (
+    <section className="mt-5">
+      <h2 className="text-[17px] font-bold text-gray-900">Specialty markets</h2>
+      <p className="mt-1 text-[13px]" style={{ color: muted }}>
+        What the market pays for, by contract size and by specialty. Advertised value sits beside what Amber has a
+        credible route to — the second is the only figure that may justify spending.
+      </p>
+
+      {lanes ? (
+        <div className="mt-2.5 overflow-x-auto rounded-lg border border-gray-200 bg-white">
+          <table className="w-full text-[13px]">
+            <thead>
+              <tr className="bg-gray-50">
+                {["Lane", "Opportunities", "Advertised", "Obtainable", "Received"].map((h) => (
+                  <th
+                    key={h}
+                    className="border-b border-gray-200 px-3 py-2 text-left text-[11px] font-bold uppercase tracking-wide"
+                    style={{ color: label }}
+                  >
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {lanes.lanes.map((l) => (
+                <tr key={l.id}>
+                  <td className="border-b border-gray-100 px-3 py-2 font-medium text-gray-900">{l.label}</td>
+                  <td className="border-b border-gray-100 px-3 py-2 tabular-nums">{l.opportunities}</td>
+                  <td className="border-b border-gray-100 px-3 py-2 tabular-nums" style={{ color: muted }}>
+                    {money(l.advertisedValueUsd)}
+                  </td>
+                  <td className="border-b border-gray-100 px-3 py-2 font-bold tabular-nums text-gray-900">
+                    {money(l.obtainableValueUsd)}
+                  </td>
+                  <td className="border-b border-gray-100 px-3 py-2 tabular-nums">{money(l.verifiedRevenueUsd)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : null}
+
+      {lanes && lanes.unpriced > 0 ? (
+        <p className="mt-1.5 text-[12.5px]" style={{ color: muted }}>
+          {lanes.unpriced} opportunity(ies) publish no value at all and are in no lane. An unpriced solicitation is
+          unknown, not cheap — putting it in the smallest lane would give the largest contracts the least scrutiny.
+        </p>
+      ) : null}
+
+      {growth ? (
+        <>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <strong className="text-[14px] text-gray-900">Capability decisions</strong>
+            <Badge tone={growth.buildCount > 0 ? "#15803d" : "#475569"}>
+              {growth.buildCount} build · {growth.watchCount} watch · {growth.rejectCount} reject
+            </Badge>
+          </div>
+
+          {growth.recommended ? (
+            <div className="mt-2 rounded-lg border border-green-200 bg-green-50 p-3">
+              <div className="text-[11px] font-bold uppercase tracking-wide" style={{ color: label }}>
+                Build next
+              </div>
+              <p className="mt-0.5 text-[14px] font-semibold text-gray-900">{growth.recommended.label}</p>
+              <p className="mt-0.5 text-[13px]" style={{ color: muted }}>
+                {money(growth.recommended.obtainableValueUsd)} obtainable from {growth.recommended.distinctBuyers}{" "}
+                buyer(s) · expected return {money(growth.recommended.expectedReturnUsd ?? 0)} on a{" "}
+                {money(growth.recommended.buildCostUsd)} build · reusable across {growth.recommended.reuseBreadth}{" "}
+                industry(ies)
+              </p>
+              {!growth.recommended.winProbabilityIsMeasured ? (
+                <p className="mt-1 text-[12px] font-medium text-amber-700">
+                  Its win probability is an assumption, not a measurement. Amber has won nothing yet.
+                </p>
+              ) : null}
+            </div>
+          ) : (
+            <p className="mt-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-[13px] text-gray-800">
+              <strong>Nothing is worth building yet.</strong> A capability needs more than one buyer, value Amber can
+              actually reach, economics that survive the win rate, and an eligibility path that exists.
+            </p>
+          )}
+
+          <div className="mt-2 space-y-1.5">
+            {growth.cases.slice(0, 12).map((c) => {
+              const open = openCase === c.specialtyId;
+              return (
+                <div key={c.specialtyId} className="overflow-hidden rounded-lg border border-gray-200 bg-white">
+                  <button
+                    type="button"
+                    onClick={() => setOpenCase(open ? null : c.specialtyId)}
+                    aria-expanded={open}
+                    className="flex w-full flex-wrap items-center gap-2 px-3 py-2 text-left hover:bg-gray-50"
+                  >
+                    <Badge tone={decisionTone[c.decision] || "#475569"}>{c.decision.toLowerCase()}</Badge>
+                    <span className="text-[13.5px] font-semibold text-gray-900">{c.label}</span>
+                    <span className="text-[12.5px]" style={{ color: muted }}>
+                      {c.distinctBuyers} buyer(s) · {c.opportunities} opportunity(ies)
+                    </span>
+                    <span className="ml-auto text-[12.5px]" style={{ color: muted }}>
+                      {money(c.advertisedValueUsd)} advertised
+                    </span>
+                    <span className="text-[13.5px] font-bold tabular-nums text-gray-900">
+                      {money(c.obtainableValueUsd)}
+                    </span>
+                  </button>
+
+                  {open ? (
+                    <div className="border-t border-gray-100 bg-gray-50/60 px-3 py-2.5">
+                      <ul className="space-y-0.5">
+                        {c.reasons.map((r, i) => (
+                          <li key={i} className="text-[12.5px] text-gray-800">
+                            {r}
+                          </li>
+                        ))}
+                      </ul>
+                      {c.blockedBy.length > 0 ? (
+                        <ul className="mt-1.5 space-y-0.5">
+                          {c.blockedBy.map((b, i) => (
+                            <li key={i} className="text-[12.5px] font-medium text-amber-800">
+                              Blocked: {b}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+
+          {growth.notes.length > 0 ? (
+            <ul className="mt-2 space-y-0.5">
+              {growth.notes.map((n, i) => (
+                <li key={i} className="text-[12.5px]" style={{ color: muted }}>
+                  {n}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </>
+      ) : null}
+    </section>
+  );
+}
+
 function SourceFunnel({ report }: { report: import("@/lib/amber-earnings/hq-nationwide").YieldReport | null }) {
   const [open, setOpen] = useState<string | null>(null);
   if (!report) return null;
@@ -554,6 +735,9 @@ export default function AmberEarningsPanel() {
 
         {/* Where the effort goes, directly under what is waiting on the owner. */}
         <SourceFunnel report={nationwide?.yieldReport ?? null} />
+
+        {/* What the market pays for, under where the effort goes. */}
+        <SpecialtyCenter lanes={nationwide?.laneReport ?? null} growth={nationwide?.growthReport ?? null} />
 
 
         {/* Pipeline KPIs */}
