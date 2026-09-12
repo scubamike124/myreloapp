@@ -133,6 +133,150 @@ function Field({ label: l, value }: { label: string; value: ReactNode }) {
  * path finds no attemptable work, that is today's true state and it belongs
  * on screen next to the reasons, not replaced by the best of a bad list.
  */
+
+/**
+ * Where the scouts actually work, and what each source produces.
+ *
+ * The figures elsewhere on this page are activity: records fetched, searches
+ * run, opportunities discovered. Every one of them was reading far higher
+ * than the truth. `jobsDiscoveredLifetime` added each raw record on each
+ * search, so a 37-listing board reported 46,293 "jobs discovered" — 129,766
+ * across three sources against 279 distinct opportunities.
+ *
+ * So this shows the two numbers side by side and lets the gap speak. Three
+ * rules about what it says:
+ *
+ * UNMEASURED READS AS UNMEASURED. A counter history never recorded shows
+ * "not measured", never 0. A source with 46,293 fetches and "0 duplicates
+ * suppressed" would look perfectly efficient, which is the opposite of true.
+ *
+ * A VERDICT IS NOT A HEALTH CHECK. Three of five connected sources report
+ * healthy and have never returned a single record. "Answers every request"
+ * and "produces work" are different claims and the verdict states the second.
+ *
+ * MONEY IS THE LAST COLUMN AND THE ONLY ONE THAT COUNTS. Everything to its
+ * left is effort.
+ */
+function SourceFunnel({ report }: { report: import("@/lib/amber-earnings/hq-nationwide").YieldReport | null }) {
+  const [open, setOpen] = useState<string | null>(null);
+  if (!report) return null;
+
+  const t = report.totals;
+  const fig = (v: number | null) =>
+    v === null ? <span style={{ color: muted }}>not measured</span> : <span className="tabular-nums">{v.toLocaleString()}</span>;
+
+  const tone: Record<string, string> = {
+    PRODUCTIVE: "#15803d",
+    RESCANNING: "#b45309",
+    NOTHING_FOR_AMBER: "#b91c1c",
+    IDLE: "#b91c1c",
+    EMPTY: "#b91c1c",
+    STOPPED: "#475569",
+    UNMEASURED: "#475569",
+  };
+
+  const looksPerListing =
+    t.uniqueOpportunities > 0 && t.rawRecordsFetched > 0 ? Math.round(t.rawRecordsFetched / t.uniqueOpportunities) : null;
+
+  return (
+    <section className="mt-5">
+      <h2 className="text-[17px] font-bold text-gray-900">Where the scouts are working</h2>
+      <p className="mt-1 text-[13px]" style={{ color: muted }}>
+        Scouts assigned through money received, per source. Computed from the scout network and the earnings ledger
+        together.
+      </p>
+
+      <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        {[
+          ["Scouts assigned", fig(t.scoutsAssigned)],
+          ["Have ever searched", fig(t.scoutsExecuted)],
+          ["Never ran", fig(t.scoutsNeverExecuted)],
+          ["Records fetched", fig(t.rawRecordsFetched)],
+          ["Distinct opportunities", fig(t.uniqueOpportunities)],
+          ["Verified revenue", <span key="r" className="tabular-nums">{money(t.verifiedRevenueUsd)}</span>],
+        ].map(([l, v], i) => (
+          <div key={i} className="p-3" style={card}>
+            <div className="text-[11px] font-bold uppercase tracking-wide" style={{ color: label }}>{l}</div>
+            <div className="mt-1 text-[18px] font-bold text-gray-900">{v}</div>
+          </div>
+        ))}
+      </div>
+
+      {looksPerListing !== null && looksPerListing >= 20 ? (
+        <p className="mt-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[13px] text-amber-900">
+          <strong className="tabular-nums">{t.rawRecordsFetched.toLocaleString()}</strong> records fetched over{" "}
+          <strong className="tabular-nums">{t.uniqueOpportunities}</strong> distinct opportunities — about{" "}
+          <strong className="tabular-nums">{looksPerListing}</strong> looks per listing. Fetching is not discovery.
+        </p>
+      ) : null}
+
+      <div className="mt-2 space-y-1.5">
+        {report.sources.map((s) => {
+          const isOpen = open === s.source;
+          return (
+            <div key={s.source} className="overflow-hidden rounded-lg border border-gray-200 bg-white">
+              <button
+                type="button"
+                onClick={() => setOpen(isOpen ? null : s.source)}
+                aria-expanded={isOpen}
+                className="flex w-full flex-wrap items-center gap-2 px-3 py-2.5 text-left hover:bg-gray-50"
+              >
+                <Badge tone={tone[s.verdict] || "#475569"}>{s.verdict.replace(/_/g, " ").toLowerCase()}</Badge>
+                <span className="text-[14px] font-semibold text-gray-900">{s.source}</span>
+                <span className="flex-1 text-[13px]" style={{ color: muted }}>{s.summary}</span>
+                <span className="text-[15px] font-bold tabular-nums text-gray-900">{money(s.verifiedRevenueUsd)}</span>
+              </button>
+
+              {isOpen ? (
+                <div className="border-t border-gray-100 bg-gray-50/60 px-3 py-2.5">
+                  <ul className="space-y-1">
+                    {s.stages.map((st) => (
+                      <li key={st.key} className="flex flex-wrap items-baseline gap-2 text-[13px]">
+                        <span className="min-w-[15rem] flex-1 text-gray-800">{st.label}</span>
+                        <span className="font-semibold text-gray-900">{fig(st.count)}</span>
+                        {st.note ? (
+                          <span className="w-full text-[12px] sm:w-auto" style={{ color: muted }}>— {st.note}</span>
+                        ) : null}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {s.overlap.foundByMultipleScouts > 0 ? (
+                    <p className="mt-2 text-[12.5px]" style={{ color: muted }}>
+                      {s.overlap.foundByMultipleScouts} listing(s) found by more than one scout
+                      {s.overlap.avgScoutsPerOpportunity !== null
+                        ? `, averaging ${s.overlap.avgScoutsPerOpportunity} scouts each`
+                        : ""}
+                      {s.overlap.mostScoutsOnOneListing
+                        ? ` — one by ${s.overlap.mostScoutsOnOneListing.scouts} separate scouts`
+                        : ""}
+                      .
+                    </p>
+                  ) : null}
+
+                  {s.mostRescanned ? (
+                    <p className="mt-1 text-[12.5px]" style={{ color: muted }}>
+                      Most re-read: &ldquo;{s.mostRescanned.title}&rdquo; at {s.mostRescanned.sightings} sightings.
+                    </p>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+
+      {report.notes.length > 0 ? (
+        <ul className="mt-2 space-y-0.5">
+          {report.notes.map((n, i) => (
+            <li key={i} className="text-[12.5px]" style={{ color: muted }}>{n}</li>
+          ))}
+        </ul>
+      ) : null}
+    </section>
+  );
+}
+
 function OwnerActions({
   queue,
   path,
@@ -407,6 +551,9 @@ export default function AmberEarningsPanel() {
           only thing on the page that needs the owner rather than Amber.
         */}
         <OwnerActions queue={nationwide?.ownerActionQueue ?? null} path={nationwide?.shortestPath ?? null} />
+
+        {/* Where the effort goes, directly under what is waiting on the owner. */}
+        <SourceFunnel report={nationwide?.yieldReport ?? null} />
 
 
         {/* Pipeline KPIs */}

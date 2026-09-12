@@ -102,3 +102,58 @@ describe("a blocking item is visibly a blocking item", () => {
     assert.match(panel(), /a\.whereToClick/);
   });
 });
+
+/**
+ * The source funnel on the same page.
+ *
+ * Every activity figure this page used to show was reading far higher than
+ * the truth: `jobsDiscoveredLifetime` added each raw record on each search,
+ * so a 37-listing board reported 46,293 "jobs discovered" and 129,766 across
+ * three sources stood against 279 distinct opportunities.
+ */
+describe("the source funnel is on the page the owner reads", () => {
+  it("renders one funnel section fed from HQ", () => {
+    const src = panel();
+    assert.equal((src.match(/<SourceFunnel\b/g) ?? []).length, 1);
+    assert.match(src, /nationwide\?\.yieldReport/);
+    assert.match(bridge(), /extractYieldReport/);
+  });
+
+  it("shows records fetched beside distinct opportunities, never one alone", () => {
+    const src = panel();
+    assert.match(src, /Records fetched/);
+    assert.match(src, /Distinct opportunities/);
+  });
+
+  it("says 'fetching is not discovery' when the ratio is absurd", () => {
+    assert.match(panel(), /Fetching is not discovery/);
+  });
+
+  it("renders an unmeasured counter as unmeasured, not as zero", () => {
+    // A source with 46,293 fetches and "0 duplicates suppressed" would read
+    // as perfectly efficient, which is the opposite of the truth.
+    const src = panel();
+    const fig = src.slice(src.indexOf("function SourceFunnel"), src.indexOf("function OwnerActions"));
+    assert.match(fig, /v === null \? <span style=\{\{ color: muted \}\}>not measured<\/span>/);
+  });
+
+  it("surfaces the idle and duplicate-scout counts", () => {
+    const src = panel();
+    assert.match(src, /Never ran/);
+    assert.match(src, /found by more than one scout/);
+  });
+
+  it("puts verified revenue last, as the only column that counts", () => {
+    const src = panel();
+    const section = src.slice(src.indexOf("function SourceFunnel"), src.indexOf("function OwnerActions"));
+    assert.ok(
+      section.indexOf("Records fetched") < section.indexOf("Verified revenue"),
+      "effort reads left of money",
+    );
+  });
+
+  it("does not re-derive the funnel on the client", () => {
+    const section = panel().slice(panel().indexOf("function SourceFunnel"), panel().indexOf("function OwnerActions"));
+    assert.ok(!/\.reduce\(/.test(section.replace(/\/\*[\s\S]*?\*\//g, "")), "HQ computes it from both systems of record");
+  });
+});
