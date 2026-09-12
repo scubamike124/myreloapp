@@ -127,3 +127,75 @@ export type ResumeFromEmergencyStopResult = { divisionsResumed: number; agentsRe
 export async function resumeFromEmergencyStop(): Promise<ResumeFromEmergencyStopResult> {
   return call<ResumeFromEmergencyStopResult>({ action: "resume_from_emergency_stop" });
 }
+
+// ---------------------------------------------------------------------------
+// International API Command Center
+//
+// Reads the API inventory Amber HQ already maintains rather than keeping a
+// second copy here. One system of record per function: Reelo renders, Amber
+// HQ owns.
+// ---------------------------------------------------------------------------
+
+export type ApiCountryRow = {
+  country: string;
+  name: string;
+  /** APIs whose primary market is this country — the number shown beside it. */
+  apis: number;
+  /** Served without being owned. Reach, kept apart from inventory. */
+  alsoServes: number;
+  live: number;
+  draft: number;
+};
+
+export type ApiCommandCenterSnapshot = {
+  generatedAt: string;
+  totals: {
+    totalApis: number;
+    live: number;
+    draft: number;
+    hidden: number;
+    countriesWithApis: number;
+    unassigned: number;
+    newLast7Days: number;
+    newLast30Days: number;
+  };
+  /**
+   * Null means unmeasured, not zero.
+   *
+   * The catalogue records no payment or customer data, and rendering 0 would
+   * assert the business has earned nothing when the true statement is that
+   * nothing measures it. The UI must show those differently.
+   */
+  revenue: {
+    verifiedLifetimeUsd: number | null;
+    verified30DayUsd: number | null;
+    customers: number | null;
+    note: string;
+  };
+  countries: ApiCountryRow[];
+};
+
+export type CountryApiDetail = {
+  productId: string;
+  name: string;
+  purpose: string | null;
+  category: string | null;
+  status: string;
+  pricingDisplay: string | null;
+  docsUrl: string | null;
+  launchDate: string | null;
+  origin: { title: string; sourceUrl: string; effectiveDate?: string; verifiedAt: string } | null;
+  serves: string[];
+  updatedAt: string;
+};
+
+export async function fetchApiCommandCenter(): Promise<ApiCommandCenterSnapshot> {
+  const data = await call<{ snapshot: ApiCommandCenterSnapshot }>({ action: "api_command_center" });
+  return data.snapshot;
+}
+
+export async function fetchCountryApis(
+  country: string,
+): Promise<{ country: { code: string; name: string }; apis: CountryApiDetail[]; alsoServing: CountryApiDetail[] }> {
+  return call({ action: "api_country_detail", country });
+}
