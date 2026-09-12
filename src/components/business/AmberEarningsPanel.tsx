@@ -105,6 +105,171 @@ function Field({ label: l, value }: { label: string; value: ReactNode }) {
   );
 }
 
+/**
+ * Owner Actions — the one queue, and what Amber does next.
+ *
+ * This page used to carry two owner lists of different shapes, three sections
+ * deep: "Owner Action Queue (HQ)" from the government lane and "Owner Actions
+ * Needed (marketplaces)" from a raw per-platform field. Neither was ranked by
+ * what clearing the item would unlock, so the thing actually worth Michael's
+ * twenty minutes had no way to rise.
+ *
+ * HQ now does the consolidating, ranking and filtering, and this renders that
+ * single result. Two components computing "what is waiting on the owner" can
+ * disagree, and the one that disagrees is always the one being looked at.
+ *
+ * Three deliberate choices about what it says:
+ *
+ * ZERO ITEMS IS A STATEMENT, not an empty div. "Nothing is waiting on you"
+ * is information the owner wants, and rendering nothing looks like a page
+ * that failed to load.
+ *
+ * HELD-BACK SOURCES ARE COUNTED, not hidden. Twenty account-required sources
+ * once looked like twenty lanes one signup away from revenue; seventeen were
+ * shops and archives. A quietly shorter queue is the same error facing the
+ * other way, so the number that was set aside stays on the page.
+ *
+ * "NOTHING IS AVAILABLE" IS SHOWN AS THE ANSWER IT IS. When the shortest
+ * path finds no attemptable work, that is today's true state and it belongs
+ * on screen next to the reasons, not replaced by the best of a bad list.
+ */
+function OwnerActions({
+  queue,
+  path,
+}: {
+  queue: import("@/lib/amber-earnings/hq-nationwide").OwnerActionQueue | null;
+  path: import("@/lib/amber-earnings/hq-nationwide").ShortestPath | null;
+}) {
+  if (!queue && !path) return null;
+
+  const actions = queue?.actions ?? [];
+
+  return (
+    <section className="mt-5">
+      <div className="flex flex-wrap items-center gap-2">
+        <h2 className="text-[17px] font-bold text-gray-900">Owner Actions</h2>
+        {queue ? (
+          <Badge tone={queue.revenueBlockingCount > 0 ? "#b91c1c" : "#475569"}>
+            {actions.length === 0
+              ? "nothing waiting"
+              : `${actions.length} item${actions.length === 1 ? "" : "s"}${
+                  queue.revenueBlockingCount > 0 ? ` · ${queue.revenueBlockingCount} blocking money` : ""
+                }`}
+          </Badge>
+        ) : null}
+      </div>
+
+      {/* What Amber would do next, or why she cannot do anything. */}
+      {path ? (
+        <div
+          className="mt-2 rounded-lg border p-3"
+          style={{ borderColor: path.next ? "#bbf7d0" : "#e2e8f0", background: path.next ? "#f0fdf4" : "#f8fafc" }}
+        >
+          <div className="text-[11px] font-bold uppercase tracking-wide" style={{ color: label }}>
+            Fastest route to the first dollar
+          </div>
+          {path.next ? (
+            <>
+              <p className="mt-1 text-[14px] font-semibold text-gray-900">
+                {path.next.candidate.platform} — {path.next.candidate.title}
+              </p>
+              <p className="mt-0.5 text-[13px]" style={{ color: muted }}>
+                {path.next.reasoning}
+              </p>
+              {!path.next.winProbabilityIsMeasured ? (
+                <p className="mt-1 text-[12px] font-medium text-amber-700">
+                  The win rate in that estimate is assumed, not measured — Amber has won nothing yet.
+                </p>
+              ) : null}
+            </>
+          ) : (
+            <>
+              <p className="mt-1 text-[14px] font-semibold text-gray-900">Nothing is available to attempt right now.</p>
+              <ul className="mt-1 space-y-0.5">
+                {path.notes.slice(1, 6).map((n, i) => (
+                  <li key={i} className="text-[13px]" style={{ color: muted }}>
+                    {n.trim()}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-1 text-[12px]" style={{ color: muted }}>
+                {path.blockedCount} blocked · {path.unprofitableCount} would lose money or pay too little.
+              </p>
+            </>
+          )}
+        </div>
+      ) : null}
+
+      {actions.length === 0 ? (
+        <p className="mt-2 text-[13px]" style={{ color: muted }}>
+          Nothing is waiting on you. {queue?.unblockedWorkNote}
+        </p>
+      ) : (
+        <div className="mt-2 space-y-2">
+          {actions.map((a) => (
+            <article
+              key={a.id}
+              className="rounded-lg border p-3"
+              style={{ borderColor: a.revenueBlocking ? "#fecaca" : "#e2e8f0", background: a.revenueBlocking ? "#fef2f2" : "#fff" }}
+            >
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge tone={a.revenueBlocking ? "#b91c1c" : "#475569"}>{a.source}</Badge>
+                {a.revenueBlocking ? <Badge tone="#b91c1c">blocks money</Badge> : null}
+                {a.expectedValueUsd > 0 ? (
+                  <span className="text-[13px] font-bold text-gray-900">{money(a.expectedValueUsd)} unlocked</span>
+                ) : null}
+              </div>
+
+              <p className="mt-1 text-[14px] font-semibold text-gray-900">{a.expectedOpportunity}</p>
+              {a.whyRequired ? (
+                <p className="mt-0.5 text-[13px]" style={{ color: muted }}>{a.whyRequired}</p>
+              ) : null}
+
+              {a.exactSteps.length > 0 ? (
+                <ol className="mt-1.5 list-decimal space-y-0.5 pl-5">
+                  {a.exactSteps.map((s, i) => (
+                    <li key={i} className="text-[13px] text-gray-800">{s}</li>
+                  ))}
+                </ol>
+              ) : null}
+
+              {a.whereToClick ? (
+                <a
+                  href={a.whereToClick}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-1.5 inline-block text-[12.5px] font-medium text-sky-700 hover:underline"
+                >
+                  {a.whereToClick} ↗
+                </a>
+              ) : null}
+
+              {a.resumesFrom ? (
+                <p className="mt-1 text-[12px]" style={{ color: muted }}>{a.resumesFrom}</p>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      )}
+
+      {queue && queue.notPayers.length > 0 ? (
+        <p className="mt-2 text-[12px]" style={{ color: muted }}>
+          {queue.notPayers.length} source{queue.notPayers.length === 1 ? "" : "s"} held back: not places that pay for
+          work ({[...new Set(queue.notPayers.map((n) => n.source))].slice(0, 6).join(", ")}
+          {queue.notPayers.length > 6 ? "…" : ""}). An account there would not put money in your bank.
+        </p>
+      ) : null}
+
+      {queue && queue.duplicatesMerged > 0 ? (
+        <p className="mt-1 text-[12px]" style={{ color: muted }}>
+          {queue.duplicatesMerged} duplicate{queue.duplicatesMerged === 1 ? "" : "s"} merged — two subsystems
+          describing one errand is still one trip.
+        </p>
+      ) : null}
+    </section>
+  );
+}
+
 export default function AmberEarningsPanel() {
   const [center, setCenter] = useState<EarningsCenter | null>(null);
   const [nationwide, setNationwide] = useState<NationwideView | null>(null);
@@ -235,6 +400,14 @@ export default function AmberEarningsPanel() {
         <p className="mt-2 text-[13px]" style={{ color: muted }}>
           {a?.definition || "Main earnings = verified paid revenue only. Opportunities are never counted as paid."}
         </p>
+
+        {/*
+          Owner Actions — the one queue, directly under the money.
+          Money first because it is the truth; this second because it is the
+          only thing on the page that needs the owner rather than Amber.
+        */}
+        <OwnerActions queue={nationwide?.ownerActionQueue ?? null} path={nationwide?.shortestPath ?? null} />
+
 
         {/* Pipeline KPIs */}
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
@@ -507,47 +680,6 @@ export default function AmberEarningsPanel() {
                         </div>
                         {b.nextRetryAt ? (
                           <p className="mt-1 text-[12px]" style={{ color: muted }}>Next retry {b.nextRetryAt}</p>
-                        ) : null}
-                      </article>
-                    ))}
-                  </div>
-                ) : null}
-
-                {(nationwide.emp?.ownerActions || []).length ? (
-                  <div className="mt-3">
-                    <strong className="text-[14px]">Owner Action Queue (HQ)</strong>
-                    {nationwide.emp!.ownerActions.map((a) => (
-                      <p key={a.id} className="mt-2 text-[13px] text-gray-800">
-                        {a.requiredAction} — <span style={{ color: muted }}>{a.reason}</span>
-                      </p>
-                    ))}
-                  </div>
-                ) : null}
-
-                {(nationwide.hqOwnerSteps || []).length ? (
-                  <div className="mt-3">
-                    <strong className="text-[14px]">Owner Actions Needed (marketplaces)</strong>
-                    <p className="text-[12px]" style={{ color: muted }}>
-                      One real step per marketplace that needs it — a vaulted key, a device-login approval, or (Dealwork) claiming a payout method. Amber does everything else herself.
-                    </p>
-                    {nationwide.hqOwnerSteps.map((s, idx) => (
-                      <article key={`${s.platform}-${idx}`} className="mt-2 rounded-lg border border-amber-200 bg-amber-50 p-3">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <Badge tone="#b45309">{s.platform}</Badge>
-                          <span className="text-[13px] text-gray-800">{s.whatINeedToDo}</span>
-                        </div>
-                        {s.whyRequired ? (
-                          <p className="mt-1 text-[12px]" style={{ color: muted }}>{s.whyRequired}</p>
-                        ) : null}
-                        {s.whereToClick ? (
-                          <a
-                            href={s.whereToClick}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="mt-1 inline-block text-[12.5px] font-medium text-sky-700 hover:underline"
-                          >
-                            {s.whereToClick} ↗
-                          </a>
                         ) : null}
                       </article>
                     ))}
