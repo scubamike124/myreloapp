@@ -441,6 +441,103 @@ export type ShortestPath = {
   notes: string[];
 };
 
+
+/** One measured step in a source's funnel. `count: null` means unmeasured. */
+export type YieldStage = { key: string; label: string; count: number | null; note?: string };
+
+/**
+ * What one source is doing with the capacity it holds.
+ *
+ * Separate from "is it healthy" on purpose: three of five connected sources
+ * report healthy and have never returned a single record.
+ */
+export type SourceYield = {
+  source: string;
+  verdict: string;
+  summary: string;
+  stages: YieldStage[];
+  uniquePerHundredFetched: number | null;
+  recordsPerSearch: number | null;
+  scoutsNeverExecuted: number | null;
+  mostRescanned: { externalId: string; title: string; sightings: number } | null;
+  overlap: {
+    foundByMultipleScouts: number;
+    avgScoutsPerOpportunity: number | null;
+    mostScoutsOnOneListing: { externalId: string; scouts: number } | null;
+  };
+  verifiedRevenueUsd: number;
+};
+
+export type YieldReport = {
+  at: string;
+  sources: SourceYield[];
+  totals: {
+    scoutsAssigned: number;
+    scoutsExecuted: number;
+    scoutsNeverExecuted: number;
+    rawRecordsFetched: number;
+    uniqueOpportunities: number;
+    verifiedRevenueUsd: number;
+    duplicatesSuppressed: number | null;
+  };
+  notes: string[];
+};
+
+function num(v: unknown): number | null {
+  return typeof v === "number" && Number.isFinite(v) ? v : null;
+}
+
+function extractYieldReport(snapshot: Record<string, unknown>): YieldReport | null {
+  const y = asRecord(snapshot.yieldReport);
+  if (!Array.isArray(y.sources)) return null;
+  const t = asRecord(y.totals);
+  return {
+    at: String(y.at || ""),
+    sources: (y.sources as Record<string, unknown>[]).map((s) => {
+      const o = asRecord(s.overlap);
+      const most = asRecord(s.mostRescanned);
+      const mostScouts = asRecord(o.mostScoutsOnOneListing);
+      return {
+        source: String(s.source || ""),
+        verdict: String(s.verdict || ""),
+        summary: String(s.summary || ""),
+        stages: Array.isArray(s.stages)
+          ? (s.stages as Record<string, unknown>[]).map((st) => ({
+              key: String(st.key || ""),
+              label: String(st.label || ""),
+              count: num(st.count),
+              note: st.note ? String(st.note) : undefined,
+            }))
+          : [],
+        uniquePerHundredFetched: num(s.uniquePerHundredFetched),
+        recordsPerSearch: num(s.recordsPerSearch),
+        scoutsNeverExecuted: num(s.scoutsNeverExecuted),
+        mostRescanned: most.externalId
+          ? { externalId: String(most.externalId), title: String(most.title || ""), sightings: num(most.sightings) ?? 0 }
+          : null,
+        overlap: {
+          foundByMultipleScouts: num(o.foundByMultipleScouts) ?? 0,
+          avgScoutsPerOpportunity: num(o.avgScoutsPerOpportunity),
+          mostScoutsOnOneListing: mostScouts.externalId
+            ? { externalId: String(mostScouts.externalId), scouts: num(mostScouts.scouts) ?? 0 }
+            : null,
+        },
+        verifiedRevenueUsd: num(s.verifiedRevenueUsd) ?? 0,
+      };
+    }),
+    totals: {
+      scoutsAssigned: num(t.scoutsAssigned) ?? 0,
+      scoutsExecuted: num(t.scoutsExecuted) ?? 0,
+      scoutsNeverExecuted: num(t.scoutsNeverExecuted) ?? 0,
+      rawRecordsFetched: num(t.rawRecordsFetched) ?? 0,
+      uniqueOpportunities: num(t.uniqueOpportunities) ?? 0,
+      verifiedRevenueUsd: num(t.verifiedRevenueUsd) ?? 0,
+      duplicatesSuppressed: num(t.duplicatesSuppressed),
+    },
+    notes: Array.isArray(y.notes) ? y.notes.map(String) : [],
+  };
+}
+
 function extractOwnerActionQueue(snapshot: Record<string, unknown>): OwnerActionQueue | null {
   const q = asRecord(snapshot.ownerActionQueue);
   if (!Array.isArray(q.actions)) return null;
@@ -544,6 +641,14 @@ export type NationwideView = {
   ownerActionQueue: OwnerActionQueue | null;
   /** The fastest route to the first real dollar, or an honest nothing. */
   shortestPath: ShortestPath | null;
+  /**
+   * The end-to-end funnel per source: scouts assigned to money received.
+   *
+   * Computed by HQ from the scout network and the earnings ledger together.
+   * Everything above it on this page is activity; this is the one that says
+   * whether any of it reached a dollar and where it stopped when it did not.
+   */
+  yieldReport: YieldReport | null;
   /** Real Sent/Delivered/Opened/Clicked funnel per outreach campaign (ca_drop/ca_accessibility/ca_vendor_risk). */
   outreachFunnels: OutreachCampaignFunnel[];
   /** Full HQ snapshot metrics (marketplace lanes) when available. */
@@ -611,6 +716,7 @@ export function summarizeHqEarningsJson(json: unknown, hqUrl: string): Nationwid
     hqOwnerSteps: extractHqOwnerSteps(snapshot),
     ownerActionQueue: extractOwnerActionQueue(snapshot),
     shortestPath: extractShortestPath(snapshot),
+    yieldReport: extractYieldReport(snapshot),
     outreachFunnels: asOutreachFunnels(root.outreachFunnels),
     snapshot: Object.keys(snapshot).length ? snapshot : null,
     readiness: root.readiness && typeof root.readiness === "object" ? asRecord(root.readiness) : null,
@@ -637,6 +743,7 @@ function emptyView(hqUrl: string, reason: string): NationwideView {
     hqOwnerSteps: [],
     ownerActionQueue: null,
     shortestPath: null,
+    yieldReport: null,
     outreachFunnels: [],
     snapshot: null,
     readiness: null,
