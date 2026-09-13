@@ -1,12 +1,12 @@
-import type { IngestedProperty } from "./adapters";
-import { fetchCountyParcelLayer } from "./adapters";
-import { planStatewideScan, type CountyParcelLayer } from "./ca-county-layers";
+import type { IngestedProperty } from "./adapters.ts";
+import { fetchCountyParcelLayer } from "./adapters.ts";
+import { planStatewideScan, type CountyParcelLayer } from "./ca-county-layers.ts";
 import {
   markSourceScan,
   sourceActive,
   sourceCursor,
   upsertProperty,
-} from "./persist";
+} from "./persist.ts";
 
 const STATEWIDE_SLUG = "ca_statewide_parcels";
 
@@ -39,6 +39,7 @@ export async function runStatewideCountyDiscovery(
   const countiesAttempted: string[] = [];
   const countiesFailed: string[] = [];
   let ingested = 0;
+  let checked = 0;
   const deadline = Number(opts?.deadlineMs || 0);
 
   if (!(await sourceActive(userId, STATEWIDE_SLUG))) {
@@ -85,6 +86,7 @@ export async function runStatewideCountyDiscovery(
       }
       offsets[layer.county] = batch.nextOffset;
       ingested += n;
+      checked += batch.rows.length;
       notes.push(`${layer.county}: ingested ${n} public-record parcels${layer.layerUrl.includes("water.ca.gov") ? " (DWR statewide assessor identity)" : ""}.`);
     } catch (e) {
       countiesFailed.push(layer.county);
@@ -99,6 +101,7 @@ export async function runStatewideCountyDiscovery(
     ingested,
     countiesFailed.length ? `${countiesFailed.join(", ")} failed this tick` : "",
     { rotation: plan.nextRotation, offsets, lastCounties: countiesAttempted },
+    checked,
   );
   return { notes, ingested, countiesAttempted, countiesFailed };
 }

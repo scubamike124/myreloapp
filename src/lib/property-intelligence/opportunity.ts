@@ -1,20 +1,20 @@
 import { randomUUID } from "node:crypto";
 import { ensureSchema, sqlAsync } from "@/lib/db";
-import { audit } from "./persist";
-import { criteriaFingerprint, matchBuyBox, type BuyBox } from "./matching";
-import { evaluatePropertyLocation } from "./compliance";
-import { buildConfidentialPreview, reverseIdentificationTest } from "./preview";
-import { qualityGate } from "./quality-gate";
-import { runDeepResearch } from "./deep-research";
+import { audit } from "./persist.ts";
+import { criteriaFingerprint, matchBuyBox, type BuyBox } from "./matching.ts";
+import { evaluatePropertyLocation } from "./compliance.ts";
+import { buildConfidentialPreview, reverseIdentificationTest } from "./preview.ts";
+import { qualityGate } from "./quality-gate.ts";
+import { runDeepResearch } from "./deep-research.ts";
 import {
   AGREEMENT_VERSION,
   MIN_OFFER_MATCH_SCORE,
   PREVIEW_VERSION,
   REPORT_VERSION,
   UNLOCK_PRICE_CENTS,
-} from "./constants";
-import { evaluateOpportunityThesis } from "./opportunity-thesis";
-import { proposedSuccessFeeCents } from "./success-fees";
+} from "./constants.ts";
+import { evaluateOpportunityThesis } from "./opportunity-thesis.ts";
+import { proposedSuccessFeeCents } from "./success-fees.ts";
 
 type Sql = NonNullable<Awaited<ReturnType<typeof sqlAsync>>>;
 

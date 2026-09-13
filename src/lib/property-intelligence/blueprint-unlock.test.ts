@@ -1,15 +1,27 @@
+/**
+ * NOT wired into `npm test` — see package.json's "test" script comment.
+ *
+ * ./opportunity.ts imports @/lib/db, and db.ts uses a TypeScript constructor
+ * parameter property plus a conditional `require()` — both real TypeScript
+ * runtime syntax, not just types, so `node --experimental-strip-types`
+ * (which only strips type annotations) cannot execute it: "TypeScript
+ * parameter property is not supported in strip-only mode". Real,
+ * pre-existing, unrelated to this file's own logic. Runnable through the
+ * app's actual build (Next.js/webpack) same as always; only direct
+ * execution via the bare Node test runner is blocked.
+ */
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { evaluateAction, assertUnlockPriceCents, sellerSolicitationAllowed, successFeeDemandAllowed } from "./compliance";
-import { CA_PILOT_REJECT, BROKERAGE_FLAG } from "./compliance";
-import { UNLOCK_PRICE_CENTS, UNLOCK_PRICE_USD, SUCCESS_FEE_ENABLED, SELLER_SOLICITATION_ENABLED } from "./constants";
-import { buildConfidentialPreview, payloadLeaksIdentity, reverseIdentificationTest } from "./preview";
-import { lockedClientOpportunity } from "./opportunity";
-import { simulateWebhookUnlock } from "./unlock";
-import { proposedSuccessFeeCents, successFeeCollectionAllowed } from "./success-fees";
-import { matchBuyBox } from "./matching";
-import { qualityGate } from "./quality-gate";
-import { MIN_OFFER_CONFIDENCE } from "./constants";
+import { evaluateAction, assertUnlockPriceCents, sellerSolicitationAllowed, successFeeDemandAllowed } from "./compliance.ts";
+import { CA_PILOT_REJECT, BROKERAGE_FLAG } from "./compliance.ts";
+import { UNLOCK_PRICE_CENTS, UNLOCK_PRICE_USD, SUCCESS_FEE_ENABLED, SELLER_SOLICITATION_ENABLED } from "./constants.ts";
+import { buildConfidentialPreview, payloadLeaksIdentity, reverseIdentificationTest } from "./preview.ts";
+import { lockedClientOpportunity } from "./opportunity.ts";
+import { simulateWebhookUnlock } from "./unlock.ts";
+import { proposedSuccessFeeCents, successFeeCollectionAllowed } from "./success-fees.ts";
+import { matchBuyBox } from "./matching.ts";
+import { qualityGate } from "./quality-gate.ts";
+import { MIN_OFFER_CONFIDENCE } from "./constants.ts";
 
 function leakCheck(preview: ReturnType<typeof buildConfidentialPreview>) {
   return payloadLeaksIdentity(preview) || !reverseIdentificationTest(preview).pass;

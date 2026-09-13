@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { parseSfTaxSaleRuns } from "./sf-tax-sale";
+import { parseSfTaxSaleRuns } from "./sf-tax-sale.ts";
 
 function tm(x: number, y: number, text: string) {
   return { x, y, text };

@@ -1,4 +1,4 @@
-import { CA_COUNTIES } from "./california";
+import { CA_COUNTIES } from "./california.ts";
 
 /**
  * Statewide California parcel discovery registry — all 58 counties.

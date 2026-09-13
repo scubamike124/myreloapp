@@ -42,6 +42,17 @@ type Dash = {
     lastCounties: string[];
     countiesTouched: string[];
   };
+  scanner?: {
+    status: "running" | "stalled" | "paused" | "error" | "unconfigured";
+    lastScanAttemptAt: string | null;
+    lastSuccessfulScanAt: string | null;
+    nextScheduledScanAt: string | null;
+    currentCounty: string | null;
+    currentSource: string | null;
+    recordsCheckedLastRun: number;
+    newRecordsLastRun: number;
+    lastError: string | null;
+  };
 };
 
 type AuditRow = {
@@ -79,6 +90,57 @@ function statusClass(kind: "ok" | "warn" | "bad" | "plain") {
   if (kind === "warn") return "pi-card status-warn";
   if (kind === "bad") return "pi-card status-bad";
   return "pi-card";
+}
+
+function timeAgo(iso: string | null): string {
+  if (!iso) return "Never";
+  const ms = Date.now() - new Date(iso).getTime();
+  if (!Number.isFinite(ms)) return "Not available";
+  const mins = Math.round(ms / 60_000);
+  if (mins < 1) return "Just now";
+  if (mins < 60) return `${mins}m ago`;
+  const hours = Math.round(mins / 60);
+  if (hours < 48) return `${hours}h ago`;
+  return `${Math.round(hours / 24)}d ago`;
+}
+
+const SCANNER_STATUS_LABEL: Record<NonNullable<Dash["scanner"]>["status"], { label: string; kind: "ok" | "warn" | "bad" | "plain" }> = {
+  running: { label: "Running", kind: "ok" },
+  paused: { label: "Paused (owner)", kind: "plain" },
+  stalled: { label: "Stalled — no attempt in 30+ min", kind: "bad" },
+  error: { label: "Error — last attempt failed", kind: "bad" },
+  unconfigured: { label: "Not yet run", kind: "warn" },
+};
+
+/**
+ * §4 of the owner's directive: the scanner froze silently for a week because
+ * nothing surfaced its actual runtime state. These nine fields are the
+ * difference between "the dashboard shows a number" and "the owner can tell,
+ * at a glance, whether the number is still moving."
+ */
+function ScannerStatusCard({ scanner }: { scanner: Dash["scanner"] }) {
+  if (!scanner) return null;
+  const s = SCANNER_STATUS_LABEL[scanner.status];
+  return (
+    <div className={statusClass(s.kind)}>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="pi-card-label">Scanner status</div>
+        <span className="pi-card-value" style={{ fontSize: "1.1rem" }}>
+          {s.label}
+        </span>
+      </div>
+      <dl className="pi-facts mt-2">
+        <Fact label="Last scan attempt" value={timeAgo(scanner.lastScanAttemptAt)} />
+        <Fact label="Last successful scan" value={timeAgo(scanner.lastSuccessfulScanAt)} />
+        <Fact label="Next scheduled scan" value={scanner.status === "paused" ? "Paused" : `~${timeAgo(scanner.nextScheduledScanAt)}`} />
+        <Fact label="Current county" value={scanner.currentCounty} />
+        <Fact label="Current source" value={scanner.currentSource} />
+        <Fact label="Records checked this run" value={scanner.recordsCheckedLastRun} />
+        <Fact label="New unique records this run" value={scanner.newRecordsLastRun} />
+        <Fact label="Last error" value={scanner.lastError} />
+      </dl>
+    </div>
+  );
 }
 
 export default function PropertyIntelligencePanel() {
@@ -404,7 +466,22 @@ export default function PropertyIntelligencePanel() {
         ))}
       </div>
 
-      {tab === "dashboard" && (
+      {tab === "dashboard" && !dash && (
+        <div className="pi-audit space-y-4" aria-busy="true" aria-label="Loading Property Intelligence dashboard">
+          <div className="pi-card-value" style={{ height: "1.4rem", width: "40%" }} />
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <div key={i} className="pi-card pi-skeleton" aria-hidden="true">
+                <div className="pi-skeleton-line" style={{ width: "60%" }} />
+                <div className="pi-skeleton-line" style={{ width: "40%", height: "1.6rem", marginTop: 8 }} />
+                <div className="pi-skeleton-line" style={{ width: "80%", marginTop: 8 }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {tab === "dashboard" && dash && (
         <div className="pi-audit space-y-4">
           <h2 className="pi-section-title" style={{ marginTop: 0 }}>
             Auditable pipeline
@@ -413,6 +490,7 @@ export default function PropertyIntelligencePanel() {
             Scanned → First pass → Deep research → Qualified → Offered to client → Paid → Property released. Counts are unique
             properties, not repeated source hits.
           </p>
+          <ScannerStatusCard scanner={dash.scanner} />
           <div className="pi-card">
             <div className="pi-card-label">California search territory</div>
             <div className="pi-card-value" style={{ fontSize: "1.55rem" }}>

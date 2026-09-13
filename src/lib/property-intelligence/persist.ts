@@ -1,14 +1,14 @@
 import { randomUUID } from "node:crypto";
 import { ensureSchema, sqlAsync } from "@/lib/db";
-import { SOURCE_CATALOG } from "./sources";
-import { canonicalKey, normalizeAddress } from "./california";
-import { analyzeProperty } from "./analysis";
-import { runDeepResearch } from "./deep-research";
-import { evaluatePropertyLocation } from "./compliance";
-import { matchBuyBox, type BuyBox } from "./matching";
-import type { IngestedProperty } from "./adapters";
-import { fetchSfAssessorByApn } from "./adapters";
-import { allCaliforniaCounties, countiesWithPublicLayers } from "./ca-county-layers";
+import { SOURCE_CATALOG } from "./sources.ts";
+import { canonicalKey, normalizeAddress } from "./california.ts";
+import { analyzeProperty } from "./analysis.ts";
+import { runDeepResearch } from "./deep-research.ts";
+import { evaluatePropertyLocation } from "./compliance.ts";
+import { matchBuyBox, type BuyBox } from "./matching.ts";
+import type { IngestedProperty } from "./adapters.ts";
+import { fetchSfAssessorByApn } from "./adapters.ts";
+import { allCaliforniaCounties, countiesWithPublicLayers } from "./ca-county-layers.ts";
 
 type Sql = NonNullable<Awaited<ReturnType<typeof sqlAsync>>>;
 
@@ -573,19 +573,39 @@ export async function setSourceActive(userId: string, slug: string, active: bool
   return { ok: true };
 }
 
-export async function markSourceScan(userId: string, slug: string, ok: boolean, records: number, error: string, cursor: Record<string, unknown>) {
+/**
+ * `records` (new/upserted this run — same meaning it always had) and
+ * `checked` (raw records the source actually returned this run, before
+ * dedup — defaults to `records` for a call site not yet passing a real
+ * batch size, so nothing regresses) are both stored per-run, not only
+ * accumulated into the lifetime total, so the Business Center can answer
+ * "did the last run actually find anything" rather than just a running sum
+ * that cannot tell a healthy quiet run from a frozen one.
+ */
+export async function markSourceScan(
+  userId: string,
+  slug: string,
+  ok: boolean,
+  records: number,
+  error: string,
+  cursor: Record<string, unknown>,
+  checked?: number,
+) {
   const q = await db();
   if (!q) return;
   const now = new Date().toISOString();
+  const checkedThisRun = checked ?? records;
   if (ok) {
     await q`
       UPDATE pi_sources SET last_scan_at = ${now}, last_success_at = ${now}, last_error = '',
-        records_collected = records_collected + ${records}, cursor_json = ${JSON.stringify(cursor)}
+        records_collected = records_collected + ${records}, cursor_json = ${JSON.stringify(cursor)},
+        last_run_checked = ${checkedThisRun}, last_run_new = ${records}
       WHERE user_id = ${userId} AND slug = ${slug}
     `;
   } else {
     await q`
-      UPDATE pi_sources SET last_scan_at = ${now}, last_error = ${error}, cursor_json = ${JSON.stringify(cursor)}
+      UPDATE pi_sources SET last_scan_at = ${now}, last_error = ${error}, cursor_json = ${JSON.stringify(cursor)},
+        last_run_checked = ${checkedThisRun}, last_run_new = 0
       WHERE user_id = ${userId} AND slug = ${slug}
     `;
   }

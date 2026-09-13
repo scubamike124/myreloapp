@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { evaluateOpportunityThesis } from "./opportunity-thesis";
-import { reverseIdentificationTest } from "./preview";
+import { evaluateOpportunityThesis } from "./opportunity-thesis.ts";
+import { reverseIdentificationTest } from "./preview.ts";
 
 const BOX = { desiredState: "CA" as const, targetCounties: ["San Francisco"], propertyType: "Residential" };
 

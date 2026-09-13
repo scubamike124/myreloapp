@@ -2,7 +2,7 @@ import {
   MIN_FACT_FIELDS_FOR_SALE,
   MIN_OFFER_CONFIDENCE,
   MIN_OFFER_MATCH_SCORE,
-} from "./constants";
+} from "./constants.ts";
 
 export type QualityInput = {
   exists: boolean;

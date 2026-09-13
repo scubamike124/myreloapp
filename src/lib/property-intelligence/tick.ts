@@ -1,8 +1,8 @@
-import { fetchLaInvestors, fetchSbTaxDefault, fetchSfAssessor } from "./adapters";
-import { fetchSfTaxSale, SF_TAX_SALE_SLUG } from "./sf-tax-sale";
-import { SOURCE_CATALOG } from "./sources";
-import { runStatewideCountyDiscovery } from "./statewide";
-import { allCaliforniaCounties, countiesWithPublicLayers } from "./ca-county-layers";
+import { fetchLaInvestors, fetchSbTaxDefault, fetchSfAssessor } from "./adapters.ts";
+import { fetchSfTaxSale, SF_TAX_SALE_SLUG } from "./sf-tax-sale.ts";
+import { SOURCE_CATALOG } from "./sources.ts";
+import { runStatewideCountyDiscovery } from "./statewide.ts";
+import { allCaliforniaCounties, countiesWithPublicLayers } from "./ca-county-layers.ts";
 import {
   audit,
   listUsersWithPi,
@@ -15,7 +15,7 @@ import {
   sourceCursor,
   upsertInvestor,
   upsertProperty,
-} from "./persist";
+} from "./persist.ts";
 
 /** Cloudflare Worker HTTP/cron wall budget. Discovery must yield so matching still runs. */
 export const PI_TICK_BUDGET_MS = 28_000;
@@ -90,7 +90,7 @@ export async function runPropertyIntelligenceTick(userId: string): Promise<{ not
           notes.push(`SF upsert skip: ${err instanceof Error ? err.message : "error"}`);
         }
       }
-      await markSourceScan(userId, "sfgov_assessor", true, n, "", { offset: batch.nextOffset });
+      await markSourceScan(userId, "sfgov_assessor", true, n, "", { offset: batch.nextOffset }, batch.rows.length);
       notes.push(`San Francisco: ingested ${n} parcels (city-county; not the statewide territory).`);
     });
 
@@ -118,7 +118,7 @@ export async function runPropertyIntelligenceTick(userId: string): Promise<{ not
           notes.push(`SB tax-default upsert skip: ${err instanceof Error ? err.message : "error"}`);
         }
       }
-      await markSourceScan(userId, "sbcounty_tax_default", true, n, "", { offset: batch.nextOffset });
+      await markSourceScan(userId, "sbcounty_tax_default", true, n, "", { offset: batch.nextOffset }, batch.rows.length);
       notes.push(`San Bernardino tax-default overlay: ingested ${n} (distress signal only; not statewide territory).`);
     });
 
@@ -144,7 +144,7 @@ export async function runPropertyIntelligenceTick(userId: string): Promise<{ not
           notes.push(`SF tax-sale upsert skip: ${err instanceof Error ? err.message : "error"}`);
         }
       }
-      await markSourceScan(userId, SF_TAX_SALE_SLUG, true, n, "", { count: n });
+      await markSourceScan(userId, SF_TAX_SALE_SLUG, true, n, "", { count: n }, batch.rows.length);
       notes.push(`San Francisco tax-sale notice: ingested ${n} tax-defaulted auction parcels (official TTC publication; assessee names not stored).`);
     });
   }
@@ -168,7 +168,7 @@ export async function runPropertyIntelligenceTick(userId: string): Promise<{ not
           notes.push(`LA investor upsert skip: ${err instanceof Error ? err.message : "error"}`);
         }
       }
-      await markSourceScan(userId, "lacity_business", true, n, "", { offset: batch.nextOffset });
+      await markSourceScan(userId, "lacity_business", true, n, "", { offset: batch.nextOffset }, batch.rows.length);
       notes.push(`LA business licenses: ${n} CA real-estate prospects (no invented emails).`);
     });
   }
@@ -190,7 +190,7 @@ export async function runPropertyIntelligenceTick(userId: string): Promise<{ not
     notes.push(`Deep research: ${e instanceof Error ? e.message : "failed"}`);
   }
   try {
-    const { runOpportunityPipeline } = await import("./opportunity");
+    const { runOpportunityPipeline } = await import("./opportunity.ts");
     const opp = await runOpportunityPipeline(userId, { deadlineMs: deadline });
     notes.push(`Opportunity pipeline: created ${opp.created}, rejected ${opp.rejected}.`);
   } catch (e) {

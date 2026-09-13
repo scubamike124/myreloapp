@@ -1,6 +1,6 @@
-import { evaluatePropertyLocation } from "./compliance";
-import { canonicalKey, normalizeAddress } from "./california";
-import type { CountyParcelLayer } from "./ca-county-layers";
+import { evaluatePropertyLocation } from "./compliance.ts";
+import { canonicalKey, normalizeAddress } from "./california.ts";
+import type { CountyParcelLayer } from "./ca-county-layers.ts";
 
 export type IngestedProperty = {
   apn: string;

@@ -1,5 +1,5 @@
-import { PREVIEW_VERSION, UNLOCK_PRICE_USD } from "./constants";
-import { bedBathPreviewBand } from "./deep-research";
+import { PREVIEW_VERSION, UNLOCK_PRICE_USD } from "./constants.ts";
+import { bedBathPreviewBand } from "./deep-research.ts";
 
 export type ConfidentialPreview = {
   headline: string;
