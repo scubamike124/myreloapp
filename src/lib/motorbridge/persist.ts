@@ -11,9 +11,24 @@ import { isSyntheticRecord } from "./privacy";
 
 type Sql = NonNullable<Awaited<ReturnType<typeof sqlAsync>>>;
 
+/**
+ * ensureSchema() returns false on a clean "no database configured," but a
+ * live connection that starts failing mid-request (network blip, a
+ * misdirected local DATABASE_URL, anything) throws instead — confirmed live
+ * during this build's own smoke testing. Every function below reads real
+ * business data for dashboards a person is looking at; none of them should
+ * ever 500 a customer- or owner-facing page because the database hiccuped.
+ * Degrading to "unavailable" (null) is always the right answer here, never
+ * an uncaught rejection.
+ */
 async function db(): Promise<Sql | null> {
-  if (!(await ensureSchema())) return null;
-  return sqlAsync();
+  try {
+    if (!(await ensureSchema())) return null;
+    return sqlAsync();
+  } catch (err) {
+    console.error("[motorbridge/persist] database unavailable:", err instanceof Error ? err.message : err);
+    return null;
+  }
 }
 
 export type SaveUploadOptions = {
@@ -173,6 +188,28 @@ export async function getCustomerCounts(): Promise<CustomerCounts> {
     paidCustomers: paidRows[0]?.c ?? 0,
     dataPartners: partnerRows[0]?.c ?? 0,
   };
+}
+
+/**
+ * DISTINCT contributing accounts, not raw rows — ten uploads from one shop
+ * is one source, not ten (§14, and the exact gate intelligence.ts's
+ * gateOnConfidence expects a caller to have already applied). Only counts
+ * rows whose rights explicitly permit aggregate use and that aren't
+ * synthetic test data (§25).
+ */
+export async function getIndependentSourceCount(category?: string): Promise<number> {
+  const q = await db();
+  if (!q) return 0;
+  const rows = category
+    ? ((await q`
+        SELECT COUNT(DISTINCT user_id) AS c FROM motorbridge_uploads
+        WHERE aggregate_analytics_permitted = 1 AND is_synthetic = 0 AND user_id IS NOT NULL AND vehicle_category = ${category}
+      `) as { c: number }[])
+    : ((await q`
+        SELECT COUNT(DISTINCT user_id) AS c FROM motorbridge_uploads
+        WHERE aggregate_analytics_permitted = 1 AND is_synthetic = 0 AND user_id IS NOT NULL
+      `) as { c: number }[]);
+  return rows[0]?.c ?? 0;
 }
 
 export async function isPausedAll(): Promise<boolean> {
