@@ -145,6 +145,36 @@ export async function startTrialIfNeeded(userId: string): Promise<MotorBridgeCus
   return getCustomer(userId);
 }
 
+export type CustomerCounts = {
+  totalCustomers: number;
+  activeTrials: number;
+  paidCustomers: number;
+  dataPartners: number;
+};
+
+/** The real (possibly zero) customer/trial/Data-Partner counts for the Command Center (§40) — a pre-launch product legitimately shows zeros here, and that must render as an honest "not launched yet" state, never a hidden or fabricated number. */
+export async function getCustomerCounts(): Promise<CustomerCounts> {
+  const empty: CustomerCounts = { totalCustomers: 0, activeTrials: 0, paidCustomers: 0, dataPartners: 0 };
+  const q = await db();
+  if (!q) return empty;
+
+  const totalRows = (await q`SELECT COUNT(*) AS c FROM motorbridge_customers`) as { c: number }[];
+  const trialRows = (await q`
+    SELECT COUNT(*) AS c FROM motorbridge_customers WHERE plan = 'trial'
+  `) as { c: number }[];
+  const paidRows = (await q`
+    SELECT COUNT(*) AS c FROM motorbridge_customers WHERE plan NOT IN ('none', 'trial')
+  `) as { c: number }[];
+  const partnerRows = (await q`SELECT COUNT(*) AS c FROM motorbridge_customers WHERE is_data_partner = 1`) as { c: number }[];
+
+  return {
+    totalCustomers: totalRows[0]?.c ?? 0,
+    activeTrials: trialRows[0]?.c ?? 0,
+    paidCustomers: paidRows[0]?.c ?? 0,
+    dataPartners: partnerRows[0]?.c ?? 0,
+  };
+}
+
 export async function isPausedAll(): Promise<boolean> {
   const q = await db();
   if (!q) return false;
