@@ -491,4 +491,78 @@ export async function ensureOwnerToolsSchema(q: Sql, pg: boolean): Promise<void>
       created_at TEXT NOT NULL
     )`,
   );
+
+  // —— MotorBridge ——
+  // "Supported vehicles and diagnostic systems. One data language." One row
+  // per normalized ingest (both anonymous "Test My Log" trials and
+  // authenticated customer imports) rather than a fully relational vehicle/
+  // session graph — the NormalizedRecord already carries that structure as
+  // JSON (types.ts), and a night-one schema that can honestly answer "how
+  // many uploads, by connector, by category, by maturity" beats a bigger
+  // one that can't yet be queried against anything real.
+  await tryExec(
+    q,
+    "motorbridge_uploads",
+    `CREATE TABLE IF NOT EXISTS motorbridge_uploads (
+      id TEXT PRIMARY KEY,
+      user_id TEXT,
+      connector_slug TEXT NOT NULL,
+      legal_access_status TEXT NOT NULL,
+      maturity TEXT NOT NULL,
+      vehicle_category TEXT NOT NULL,
+      origin_label TEXT NOT NULL DEFAULT '',
+      is_trial INTEGER NOT NULL DEFAULT 0,
+      is_synthetic INTEGER NOT NULL DEFAULT 0,
+      warnings_json TEXT NOT NULL DEFAULT '[]',
+      unresolved_field_count INTEGER NOT NULL DEFAULT 0,
+      record_json TEXT NOT NULL,
+      rights_category TEXT NOT NULL DEFAULT 'customer_exported',
+      aggregate_analytics_permitted INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL
+    )`,
+  );
+  await tryExec(
+    q,
+    "motorbridge_uploads_connector_idx",
+    `CREATE INDEX IF NOT EXISTS motorbridge_uploads_connector_idx ON motorbridge_uploads (connector_slug)`,
+  );
+  await tryExec(
+    q,
+    "motorbridge_uploads_user_idx",
+    `CREATE INDEX IF NOT EXISTS motorbridge_uploads_user_idx ON motorbridge_uploads (user_id)`,
+  );
+
+  // Plan/trial/Data Partner state, one row per subscribing account (§31-33).
+  // Prices are provisional hypotheses per the blueprint and deliberately
+  // live in code (entitlements.ts), not in this table, so they can change
+  // without a migration.
+  await tryExec(
+    q,
+    "motorbridge_customers",
+    `CREATE TABLE IF NOT EXISTS motorbridge_customers (
+      user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+      plan TEXT NOT NULL DEFAULT 'none',
+      vehicle_count INTEGER NOT NULL DEFAULT 0,
+      trial_started_at TEXT,
+      trial_ends_at TEXT,
+      is_data_partner INTEGER NOT NULL DEFAULT 0,
+      data_partner_rights_json TEXT NOT NULL DEFAULT '{}',
+      created_at ${NOW},
+      updated_at ${NOW}
+    )`,
+  );
+
+  // Owner kill-switch, mirroring the pause_all convention already used by
+  // pi_config above — a new product line gets the same emergency stop from
+  // day one rather than earning one after something goes wrong.
+  await tryExec(
+    q,
+    "motorbridge_config",
+    `CREATE TABLE IF NOT EXISTS motorbridge_config (
+      id TEXT PRIMARY KEY DEFAULT 'singleton',
+      pause_all INTEGER NOT NULL DEFAULT 0,
+      pause_intelligence INTEGER NOT NULL DEFAULT 0,
+      updated_at ${NOW}
+    )`,
+  );
 }

@@ -15,6 +15,7 @@ const NAV: NavItem[] = [
   // "Amber Fix" above links out to an admin-gated /amber-builder.
   { key: "aiearnings", label: "Amber's AI Earnings", href: "/admin/amber-ai-earnings", icon: "growth" },
   { key: "property", label: "Property Intelligence", href: "/business-center/property-intelligence", icon: "home" },
+  { key: "motorbridge", label: "MotorBridge", href: "/business-center/motorbridge", icon: "gauge" },
   { key: "create", label: "Create", href: "/create", icon: "pen" },
   { key: "library", label: "Video Library", href: "/library", icon: "film" },
   // Both of these once pointed at "#" and were removed for it. They are back
@@ -37,6 +38,7 @@ const OVERVIEW_BADGES: Record<string, string> = {
   earnings: "NEW",
   aiearnings: "NEW",
   property: "NEW",
+  motorbridge: "NEW",
   assets: "NEW",
   trend: "SOON",
 };
