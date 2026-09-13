@@ -6,8 +6,8 @@
  */
 import { randomUUID } from "node:crypto";
 import { ensureSchema, sqlAsync } from "@/lib/db";
-import type { NormalizedRecord } from "./types";
-import { isSyntheticRecord } from "./privacy";
+import type { NormalizedRecord } from "./types.ts";
+import { isSyntheticRecord } from "./privacy.ts";
 
 type Sql = NonNullable<Awaited<ReturnType<typeof sqlAsync>>>;
 

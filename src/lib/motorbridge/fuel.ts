@@ -11,7 +11,7 @@
  * (roughly RON ≈ AKI + 4 to 5) but vary by fuel blend and are NOT a
  * measurement. This file refuses to manufacture one.
  */
-import type { Fuel, FuelType, OctaneRatingMethod } from "./types";
+import type { Fuel, FuelType, OctaneRatingMethod } from "./types.ts";
 
 export function buildFuel(input: {
   fuelType: FuelType;

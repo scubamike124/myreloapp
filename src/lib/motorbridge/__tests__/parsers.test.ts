@@ -1,9 +1,9 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { parseObd2Log } from "../parsers/obd2-log";
-import { parseTelemetryCsv } from "../parsers/telemetry-csv";
-import { parseJ1939Log } from "../parsers/j1939-log";
-import { OBD2_SAMPLE_CSV, TELEMETRY_SAMPLE_CSV, J1939_SAMPLE_CSV } from "../fixtures/content";
+import { parseObd2Log } from "../parsers/obd2-log.ts";
+import { parseTelemetryCsv } from "../parsers/telemetry-csv.ts";
+import { parseJ1939Log } from "../parsers/j1939-log.ts";
+import { OBD2_SAMPLE_CSV, TELEMETRY_SAMPLE_CSV, J1939_SAMPLE_CSV } from "../fixtures/content.ts";
 
 describe("generic OBD-II CSV parser", () => {
   const csv = OBD2_SAMPLE_CSV;

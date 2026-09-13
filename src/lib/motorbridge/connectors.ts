@@ -22,7 +22,7 @@
  * named research targets, not as connectors.
  */
 
-import type { LegalAccessStatus, ConnectorMaturity, VehicleCategory } from "./types";
+import type { LegalAccessStatus, ConnectorMaturity, VehicleCategory } from "./types.ts";
 
 export type ConnectorCatalogEntry = {
   slug: string;

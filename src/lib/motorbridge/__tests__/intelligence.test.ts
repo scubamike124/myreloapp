@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { gateOnConfidence, evaluateEarlyWarning, buildConfidence } from "../intelligence";
-import { MINIMUM_COHORT_SIZE } from "../privacy";
+import { gateOnConfidence, evaluateEarlyWarning, buildConfidence } from "../intelligence.ts";
+import { MINIMUM_COHORT_SIZE } from "../privacy.ts";
 
 describe("gateOnConfidence — a pattern from 7 cars is not 700,000 (§14)", () => {
   it("refuses below the minimum cohort, with the real numbers in the refusal", () => {

@@ -12,8 +12,8 @@
  * never a fabricated pattern (§14: "do not present a pattern from 7 cars
  * as though it represents 700,000").
  */
-import { MINIMUM_COHORT_SIZE, meetsAggregationThreshold } from "./privacy";
-import type { Confidence } from "./types";
+import { MINIMUM_COHORT_SIZE, meetsAggregationThreshold } from "./privacy.ts";
+import type { Confidence } from "./types.ts";
 
 export type IntelligenceCategory =
   | "automotive_repair"

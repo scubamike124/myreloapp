@@ -8,12 +8,12 @@
  * `case` below and nothing else changes downstream.
  */
 import { randomUUID } from "node:crypto";
-import { connectorBySlug } from "./connectors";
-import { parseObd2Log } from "./parsers/obd2-log";
-import { parseTelemetryCsv } from "./parsers/telemetry-csv";
-import { parseJ1939Log } from "./parsers/j1939-log";
-import type { NormalizedRecord, ParseResult, Vehicle, VehicleCategory } from "./types";
-import { SCHEMA_VERSION } from "./types";
+import { connectorBySlug } from "./connectors.ts";
+import { parseObd2Log } from "./parsers/obd2-log.ts";
+import { parseTelemetryCsv } from "./parsers/telemetry-csv.ts";
+import { parseJ1939Log } from "./parsers/j1939-log.ts";
+import type { NormalizedRecord, ParseResult, Vehicle, VehicleCategory } from "./types.ts";
+import { SCHEMA_VERSION } from "./types.ts";
 
 export type NormalizeInput = {
   connectorSlug: string;

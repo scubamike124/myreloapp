@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { buildFuel, octaneEquivalencyWarning, roughRonEstimateFromAki } from "../fuel";
+import { buildFuel, octaneEquivalencyWarning, roughRonEstimateFromAki } from "../fuel.ts";
 
 describe("octane rating — never assume equivalence across methods (§6)", () => {
   it("never derives AKI from a single reported octane number", () => {

@@ -21,7 +21,7 @@
  * unit math in units.ts, fuel math in fuel.ts, privacy handling in privacy.ts.
  */
 
-import type { PressureUnit } from "./units";
+import type { PressureUnit } from "./units.ts";
 
 export const SCHEMA_VERSION = "1.0.0" as const;
 

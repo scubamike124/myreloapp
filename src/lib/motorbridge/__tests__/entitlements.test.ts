@@ -8,7 +8,7 @@ import {
   trialIsActive,
   trialTimeRemainingMs,
   TRIAL_DURATION_MS,
-} from "../entitlements";
+} from "../entitlements.ts";
 
 describe("plan pricing is data, not scattered logic", () => {
   it("every plan with a fixed price has a positive vehicle limit or is trial", () => {

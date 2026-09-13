@@ -12,9 +12,9 @@
  * Connector: generic_j1939_log (connectors.ts). Legal/access status:
  * OPEN_STANDARD, CUSTOMER_EXPORTED_DATA ingestion.
  */
-import { parseCsvWithHeader, findColumn, toNumberOrNull } from "../csv";
-import { pressureMeasurement } from "../units";
-import type { ParseResult, Powertrain, TelemetrySession, Provenance, DieselFields } from "../types";
+import { parseCsvWithHeader, findColumn, toNumberOrNull } from "../csv.ts";
+import { pressureMeasurement } from "../units.ts";
+import type { ParseResult, Powertrain, TelemetrySession, Provenance, DieselFields } from "../types.ts";
 import { randomUUID } from "node:crypto";
 
 const PROVENANCE: Provenance = { kind: "ecu_measured", detail: "generic J1939 diagnostic CSV export", observedAt: null };

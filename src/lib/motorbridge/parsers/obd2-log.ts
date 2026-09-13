@@ -10,9 +10,9 @@
  * Connector: generic_obdii_csv (connectors.ts). Legal/access status:
  * OPEN_STANDARD, CUSTOMER_EXPORTED_DATA ingestion.
  */
-import { parseCsvWithHeader, findColumn, toNumberOrNull } from "../csv";
-import { pressureMeasurement } from "../units";
-import type { ParseResult, Powertrain, TelemetrySession, Provenance } from "../types";
+import { parseCsvWithHeader, findColumn, toNumberOrNull } from "../csv.ts";
+import { pressureMeasurement } from "../units.ts";
+import type { ParseResult, Powertrain, TelemetrySession, Provenance } from "../types.ts";
 import { randomUUID } from "node:crypto";
 
 const PROVENANCE: Provenance = { kind: "scanner_measured", detail: "generic OBD-II CSV export", observedAt: null };

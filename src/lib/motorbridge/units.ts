@@ -8,7 +8,7 @@
  * never destroys the original. Callers build a Measurement<Unit> (types.ts)
  * that keeps both.
  */
-import type { Measurement, Provenance } from "./types";
+import type { Measurement, Provenance } from "./types.ts";
 
 export type TemperatureUnit = "C" | "F";
 export type PressureUnit = "psi" | "bar" | "kpa" | "mpa";

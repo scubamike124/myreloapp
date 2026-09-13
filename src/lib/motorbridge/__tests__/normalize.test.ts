@@ -1,8 +1,8 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { normalizeUpload, convergenceCheck } from "../normalize";
-import { SCHEMA_VERSION } from "../types";
-import { OBD2_SAMPLE_CSV, TELEMETRY_SAMPLE_CSV, J1939_SAMPLE_CSV } from "../fixtures/content";
+import { normalizeUpload, convergenceCheck } from "../normalize.ts";
+import { SCHEMA_VERSION } from "../types.ts";
+import { OBD2_SAMPLE_CSV, TELEMETRY_SAMPLE_CSV, J1939_SAMPLE_CSV } from "../fixtures/content.ts";
 
 describe("normalizeUpload — the single door every connector goes through", () => {
   it("refuses an unknown connector rather than guessing a parser", () => {

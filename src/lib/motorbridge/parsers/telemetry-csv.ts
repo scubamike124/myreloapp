@@ -10,9 +10,9 @@
  *
  * Connector: generic_telemetry_csv (connectors.ts).
  */
-import { parseCsvWithHeader, findColumn, toNumberOrNull } from "../csv";
-import { pressureMeasurement } from "../units";
-import type { ParseResult, Powertrain, TelemetrySession, Provenance } from "../types";
+import { parseCsvWithHeader, findColumn, toNumberOrNull } from "../csv.ts";
+import { pressureMeasurement } from "../units.ts";
+import type { ParseResult, Powertrain, TelemetrySession, Provenance } from "../types.ts";
 import { randomUUID } from "node:crypto";
 
 const PROVENANCE: Provenance = { kind: "telemetry_measured", detail: "generic motorsport telemetry CSV export", observedAt: null };

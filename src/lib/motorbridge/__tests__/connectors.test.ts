@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { CONNECTOR_CATALOG, VENDOR_RESEARCH_QUEUE, testedConnectorCount, connectorBySlug } from "../connectors";
+import { CONNECTOR_CATALOG, VENDOR_RESEARCH_QUEUE, testedConnectorCount, connectorBySlug } from "../connectors.ts";
 
 describe("the connector catalog never claims more than it has proven", () => {
   it("every entry that claims TEST_PASSED has a fixture file", () => {

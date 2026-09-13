@@ -13,7 +13,7 @@ import {
   mpgToL100km,
   temperatureMeasurement,
   pressureMeasurement,
-} from "../units";
+} from "../units.ts";
 
 describe("temperature", () => {
   it("converts F to C and back within rounding", () => {

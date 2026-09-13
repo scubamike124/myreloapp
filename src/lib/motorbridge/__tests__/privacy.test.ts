@@ -8,7 +8,7 @@ import {
   decodeVinTransiently,
   isSyntheticRecord,
   SYNTHETIC_DATA_TAG,
-} from "../privacy";
+} from "../privacy.ts";
 
 describe("detectPii", () => {
   it("flags identifier field names", () => {

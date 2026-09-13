@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { currentUser } from "@/lib/accounts";
 import { getIndependentSourceCount } from "@/lib/motorbridge/persist";
 import { gateOnConfidence } from "@/lib/motorbridge/intelligence";
 
@@ -17,8 +18,17 @@ export const runtime = "nodejs";
  * Today this endpoint has no real customers to aggregate, so it always
  * refuses honestly rather than fabricating a trend. That refusal is the
  * correct behavior, not a bug to work around.
+ *
+ * Requires a signed-in account. Intelligence is a paid product for
+ * "qualified customers" (§26) — a real per-plan entitlement check belongs
+ * here once billing is wired (entitlements.ts has the plan shape already),
+ * but "must be logged in" is the floor and shouldn't wait on that: this
+ * caught its own gap in review — the endpoint was fully anonymous before.
  */
 export async function GET(req: Request) {
+  const user = await currentUser().catch(() => null);
+  if (!user) return NextResponse.json({ error: "Sign in required." }, { status: 401 });
+
   const category = new URL(req.url).searchParams.get("category") ?? undefined;
   const independentSources = await getIndependentSourceCount(category);
 
