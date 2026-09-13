@@ -230,6 +230,13 @@ export async function ensureOwnerToolsSchema(q: Sql, pg: boolean): Promise<void>
       UNIQUE (user_id, slug)
     )`,
   );
+  // Records checked/found on the MOST RECENT run specifically, distinct from
+  // records_collected (cumulative, all-time). Without this the Business
+  // Center could show a lifetime total but never answer "did the last run
+  // actually find anything" — the exact question a frozen scanner needs
+  // answered.
+  await tryExec(q, "pi_sources_last_run_checked", `ALTER TABLE pi_sources ADD COLUMN ${pg ? "IF NOT EXISTS " : ""}last_run_checked INTEGER NOT NULL DEFAULT 0`);
+  await tryExec(q, "pi_sources_last_run_new", `ALTER TABLE pi_sources ADD COLUMN ${pg ? "IF NOT EXISTS " : ""}last_run_new INTEGER NOT NULL DEFAULT 0`);
   await tryExec(
     q,
     "pi_properties",

@@ -1,4 +1,4 @@
-import { SUCCESS_FEE_ENABLED, SUCCESS_FEE_TIERS } from "./constants";
+import { SUCCESS_FEE_ENABLED, SUCCESS_FEE_TIERS } from "./constants.ts";
 
 export function proposedSuccessFeeCents(purchasePriceCents: number | null | undefined): number {
   if (purchasePriceCents == null || !Number.isFinite(purchasePriceCents) || purchasePriceCents < 0) return 0;

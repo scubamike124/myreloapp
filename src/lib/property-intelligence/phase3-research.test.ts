@@ -1,13 +1,13 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { runDeepResearch } from "./deep-research";
-import { qualityGate } from "./quality-gate";
-import { matchBuyBox, summarizeBuyBox, hasSpecificCriteria } from "./matching";
-import { buildConfidentialPreview, reverseIdentificationTest } from "./preview";
-import { MIN_OFFER_CONFIDENCE, MIN_OFFER_MATCH_SCORE } from "./constants";
-import { evaluateOpportunityThesis } from "./opportunity-thesis";
-import { CA_COUNTIES } from "./california";
-import { allCaliforniaCounties, countiesWithPublicLayers, planStatewideScan, COUNTY_PARCEL_LAYERS } from "./ca-county-layers";
+import { runDeepResearch } from "./deep-research.ts";
+import { qualityGate } from "./quality-gate.ts";
+import { matchBuyBox, summarizeBuyBox, hasSpecificCriteria } from "./matching.ts";
+import { buildConfidentialPreview, reverseIdentificationTest } from "./preview.ts";
+import { MIN_OFFER_CONFIDENCE, MIN_OFFER_MATCH_SCORE } from "./constants.ts";
+import { evaluateOpportunityThesis } from "./opportunity-thesis.ts";
+import { CA_COUNTIES } from "./california.ts";
+import { allCaliforniaCounties, countiesWithPublicLayers, planStatewideScan, COUNTY_PARCEL_LAYERS } from "./ca-county-layers.ts";
 
 const SF_PAYLOAD = {
   closed_roll_year: "2023",

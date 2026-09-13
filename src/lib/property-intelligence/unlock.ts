@@ -1,14 +1,14 @@
 import { randomUUID } from "node:crypto";
 import { ensureSchema, sqlAsync } from "@/lib/db";
-import { audit, openNeedsMike } from "./persist";
+import { audit, openNeedsMike } from "./persist.ts";
 import {
   STRIPE_PUBLIC_DESCRIPTION,
   STRIPE_UNLOCK_LOOKUP_KEY,
   UNLOCK_PRICE_CENTS,
   UNLOCK_PRICE_USD,
-} from "./constants";
-import { assertUnlockPriceCents } from "./compliance";
-import { findPaidUnlock, getOpportunityForUser, hasMasterAgreement } from "./opportunity";
+} from "./constants.ts";
+import { assertUnlockPriceCents } from "./compliance.ts";
+import { findPaidUnlock, getOpportunityForUser, hasMasterAgreement } from "./opportunity.ts";
 import { REELO_BUSINESS } from "@/lib/stripe/catalog";
 import {
   findOrCreateCustomer,

@@ -1,7 +1,7 @@
 import { inflateRawSync, inflateSync } from "node:zlib";
-import { evaluatePropertyLocation } from "./compliance";
-import { normalizeAddress, readableSitusAddress } from "./california";
-import type { IngestedProperty } from "./adapters";
+import { evaluatePropertyLocation } from "./compliance.ts";
+import { normalizeAddress, readableSitusAddress } from "./california.ts";
+import type { IngestedProperty } from "./adapters.ts";
 
 export const SF_TAX_SALE_URL =
   "https://sftreasurer.org/file/2026-public-and-sealed-bid-auction-publication/download?attachment=";

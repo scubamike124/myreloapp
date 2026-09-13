@@ -1,4 +1,4 @@
-import { AGREEMENT_VERSION, COMPANY_LEGAL_NAME_DEFAULT, UNLOCK_PRICE_USD } from "./constants";
+import { AGREEMENT_VERSION, COMPANY_LEGAL_NAME_DEFAULT, UNLOCK_PRICE_USD } from "./constants.ts";
 
 export function masterAgreementText(opts?: { companyName?: string; clientName?: string }): string {
   const company = opts?.companyName || COMPANY_LEGAL_NAME_DEFAULT;

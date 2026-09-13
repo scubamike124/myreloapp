@@ -1,5 +1,5 @@
-import { evaluatePropertyLocation } from "./compliance";
-import { MIN_OFFER_MATCH_SCORE } from "./constants";
+import { evaluatePropertyLocation } from "./compliance.ts";
+import { MIN_OFFER_MATCH_SCORE } from "./constants.ts";
 
 export type BuyBox = {
   label?: string;

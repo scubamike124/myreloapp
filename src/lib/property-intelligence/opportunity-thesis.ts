@@ -1,6 +1,6 @@
-import type { BuyBox } from "./matching";
-import { summarizeBuyBox } from "./matching";
-import { findReportedLienAmount } from "./deal-evidence";
+import type { BuyBox } from "./matching.ts";
+import { summarizeBuyBox } from "./matching.ts";
+import { findReportedLienAmount } from "./deal-evidence.ts";
 
 export type ConfidenceKind = "FACT" | "ESTIMATE" | "UNKNOWN";
 

@@ -1,8 +1,8 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { evaluateAction, evaluatePropertyLocation, CA_PILOT_REJECT, BROKERAGE_FLAG } from "./compliance";
-import { analyzeProperty } from "./analysis";
-import { matchBuyBox } from "./matching";
+import { evaluateAction, evaluatePropertyLocation, CA_PILOT_REJECT, BROKERAGE_FLAG } from "./compliance.ts";
+import { analyzeProperty } from "./analysis.ts";
+import { matchBuyBox } from "./matching.ts";
 
 describe("Amber Property Intelligence compliance", () => {
   it("rejects brokerage negotiation", () => {

@@ -161,6 +161,41 @@
   color: #4b5563;
 }
 
+/**
+ * Loading state for the dashboard's first fetch — the owner reported KPI
+ * cards briefly flashing "0" for every stage before the real snapshot
+ * arrived, because the fallback was `value ?? 0` with nothing rendered
+ * differently while `dash` was still null. A skeleton makes "still loading"
+ * and "genuinely zero" visibly different states instead of the same "0".
+ */
+.pi-skeleton {
+  overflow: hidden;
+}
+
+.pi-skeleton-line {
+  height: 0.9rem;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
+  background-size: 400% 100%;
+  animation: pi-skeleton-shimmer 1.4s ease infinite;
+}
+
+@keyframes pi-skeleton-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pi-skeleton-line {
+    animation: none;
+    background: #e5e7eb;
+  }
+}
+
 .pi-row {
   appearance: none;
   -webkit-appearance: none;

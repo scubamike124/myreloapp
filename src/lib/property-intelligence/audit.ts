@@ -11,13 +11,13 @@ import {
   type BuyBox,
   type MatchProperty,
   type RequirementRow,
-} from "./matching";
-import { MIN_OFFER_CONFIDENCE, MIN_OFFER_MATCH_SCORE, SELLER_SOLICITATION_ENABLED } from "./constants";
-import { detectDuplicateProperties } from "./identity";
-import { readableSitusAddress } from "./california";
-import { extractDealEvidence } from "./deal-evidence";
-import { evaluateOpportunityThesis } from "./opportunity-thesis";
-import { enforceOpportunityThesisOnLiveOffers } from "./opportunity";
+} from "./matching.ts";
+import { MIN_OFFER_CONFIDENCE, MIN_OFFER_MATCH_SCORE, SELLER_SOLICITATION_ENABLED } from "./constants.ts";
+import { detectDuplicateProperties } from "./identity.ts";
+import { readableSitusAddress } from "./california.ts";
+import { extractDealEvidence } from "./deal-evidence.ts";
+import { evaluateOpportunityThesis } from "./opportunity-thesis.ts";
+import { enforceOpportunityThesisOnLiveOffers } from "./opportunity.ts";
 
 type Sql = NonNullable<Awaited<ReturnType<typeof sqlAsync>>>;
 
@@ -37,7 +37,7 @@ export const PIPELINE_STAGES = [
 ] as const;
 
 export type PipelineStage = (typeof PIPELINE_STAGES)[number];
-export { detectDuplicateProperties, isReeloOwner } from "./identity";
+export { detectDuplicateProperties, isReeloOwner } from "./identity.ts";
 
 export function na(v: unknown): string {
   if (v == null) return "Not available";
@@ -296,6 +296,117 @@ export async function buildPipelineCounts() {
     clients: Number(clients[0]?.n || 0),
     outreachSent: Number(outreach[0]?.n || 0),
     duplicateQualifiedRows: Math.max(0, qRows - qDistinct),
+  };
+}
+
+export type ScannerStatus = {
+  /** "running" — a source has scanned inside the schedule's own interval; "stalled" — every source has gone well past it; "paused" — the owner turned scanning off; "error" — every source's last attempt failed; "unconfigured" — no source rows at all yet. */
+  status: "running" | "stalled" | "paused" | "error" | "unconfigured";
+  lastScanAttemptAt: string | null;
+  lastSuccessfulScanAt: string | null;
+  /** An estimate from the schedule's own interval, not a guarantee — see the GitHub Actions workflow's own note on schedule-event jitter. */
+  nextScheduledScanAt: string | null;
+  currentCounty: string | null;
+  currentSource: string | null;
+  recordsCheckedLastRun: number;
+  newRecordsLastRun: number;
+  lastError: string | null;
+};
+
+/** How often the external schedule is supposed to call the tick endpoint — kept in one place so "stalled" means the same thing here as the workflow that drives it. */
+const SCAN_INTERVAL_MS = 10 * 60_000;
+/** Past this many missed intervals with no attempt at all, "running" stops being an honest word for it. */
+const STALLED_AFTER_MISSED_INTERVALS = 3;
+
+export async function getScannerStatus(userId: string): Promise<ScannerStatus> {
+  const empty: ScannerStatus = {
+    status: "unconfigured",
+    lastScanAttemptAt: null,
+    lastSuccessfulScanAt: null,
+    nextScheduledScanAt: null,
+    currentCounty: null,
+    currentSource: null,
+    recordsCheckedLastRun: 0,
+    newRecordsLastRun: 0,
+    lastError: null,
+  };
+  const q = await db();
+  if (!q) return empty;
+
+  const cfg = (await q`SELECT pause_all, pause_property_scanning FROM pi_config WHERE user_id = ${userId}`) as {
+    pause_all: number;
+    pause_property_scanning: number;
+  }[];
+  const paused = Boolean(Number(cfg[0]?.pause_all) || Number(cfg[0]?.pause_property_scanning));
+
+  const rows = (await q`
+    SELECT slug, name, last_scan_at, last_success_at, last_error, last_run_checked, last_run_new, cursor_json
+    FROM pi_sources WHERE user_id = ${userId}
+  `) as {
+    slug: string;
+    name: string;
+    last_scan_at: string | null;
+    last_success_at: string | null;
+    last_error: string;
+    last_run_checked: number;
+    last_run_new: number;
+    cursor_json: string;
+  }[];
+  if (!rows.length) return empty;
+
+  // "Most recently touched" across every source, not one hardcoded slug —
+  // whichever source the last real tick actually reached is "current".
+  const byAttempt = [...rows].sort((a, b) => (b.last_scan_at || "").localeCompare(a.last_scan_at || ""));
+  const latest = byAttempt[0]!;
+  const lastScanAttemptAt = latest.last_scan_at || null;
+
+  const bySuccess = rows.filter((r) => r.last_success_at).sort((a, b) => (b.last_success_at as string).localeCompare(a.last_success_at as string));
+  const lastSuccessfulScanAt = bySuccess[0]?.last_success_at || null;
+
+  let currentCounty: string | null = null;
+  try {
+    const statewide = rows.find((r) => r.slug === "ca_statewide_parcels");
+    const cursor = JSON.parse(String(statewide?.cursor_json || "{}")) as { lastCounties?: string[] };
+    currentCounty = cursor.lastCounties?.length ? cursor.lastCounties[cursor.lastCounties.length - 1]! : null;
+  } catch {
+    currentCounty = null;
+  }
+
+  const nextScheduledScanAt = lastScanAttemptAt
+    ? new Date(new Date(lastScanAttemptAt).getTime() + SCAN_INTERVAL_MS).toISOString()
+    : null;
+
+  // A source's most recent attempt failed exactly when it has a last_error
+  // AND that attempt was not also its last success (a source can accumulate
+  // an old last_error from a prior failed run while its most recent run
+  // succeeded and cleared it — markSourceScan blanks last_error on success).
+  const attemptedAtLeastOnce = rows.filter((r) => r.last_scan_at);
+  const everyAttemptFailed =
+    attemptedAtLeastOnce.length > 0 && attemptedAtLeastOnce.every((r) => Boolean(r.last_error) && r.last_success_at !== r.last_scan_at);
+
+  let status: ScannerStatus["status"];
+  if (paused) {
+    status = "paused";
+  } else if (!lastScanAttemptAt) {
+    status = "unconfigured";
+  } else if (Date.now() - new Date(lastScanAttemptAt).getTime() > SCAN_INTERVAL_MS * STALLED_AFTER_MISSED_INTERVALS) {
+    status = "stalled";
+  } else if (everyAttemptFailed) {
+    status = "error";
+  } else {
+    status = "running";
+  }
+
+  return {
+    status,
+    lastScanAttemptAt,
+    lastSuccessfulScanAt,
+    nextScheduledScanAt,
+    currentCounty,
+    currentSource: latest.name || latest.slug || null,
+    recordsCheckedLastRun: Number(latest.last_run_checked || 0),
+    newRecordsLastRun: Number(latest.last_run_new || 0),
+    lastError: latest.last_error || null,
   };
 }
 

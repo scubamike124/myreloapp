@@ -1,0 +1,50 @@
+name: Property Intelligence tick
+
+# The actual, working replacement for the Cloudflare Cron Trigger already
+# configured on the myreloapp Worker (`*/10 * * * *`, dashboard-side). That
+# trigger fires on schedule but invokes nothing: the Worker is built by
+# @opennextjs/cloudflare, and its generated worker.js exports no `scheduled`
+# handler at all -- confirmed absent anywhere in the adapter's build output.
+# A Cloudflare Cron Trigger with no `scheduled()` export to receive it is a
+# no-op, every time, forever. That silent gap is why property scanning froze:
+# nothing was ever driving the tick endpoint on a schedule.
+#
+# This calls the same authenticated endpoint the (non-functional) native
+# trigger was always meant to reach, using PI_CRON_SECRET -- a secret
+# dedicated to this workflow, distinct from CRON_SECRET/ADMIN_SESSION_SECRET,
+# so wiring up the real schedule cannot depend on or invalidate whatever
+# those are already relied on for elsewhere.
+#
+# Known limitation, stated rather than hidden: GitHub Actions documents that
+# `schedule` events can be delayed, and are dropped entirely (not queued)
+# during periods of high platform load. A 10-minute cadence with a small,
+# time-boxed tick (~28s worker budget) tolerates an occasional missed or late
+# run without the pipeline stalling the way a single external cron dependency
+# can -- but this is not a hard real-time guarantee, and if minute-level
+# precision ever matters, this should move to Cloudflare's own scheduled()
+# handler (a genuine adapter change, not a workflow tweak) or an external
+# cron service instead.
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: POST /api/property-intelligence/tick
+        run: |
+          set -e
+          status=$(curl -sS -o /tmp/pi-tick-response.json -w "%{http_code}" \
+            -X POST "https://www.myreelo.com/api/property-intelligence/tick" \
+            -H "Authorization: Bearer ${{ secrets.PI_CRON_SECRET }}" \
+            --max-time 90)
+          echo "HTTP $status"
+          cat /tmp/pi-tick-response.json
+          echo
+          if [ "$status" != "200" ]; then
+            echo "::error::Property Intelligence tick returned HTTP $status"
+            exit 1
+          fi

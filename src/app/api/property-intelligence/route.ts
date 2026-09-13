@@ -20,6 +20,7 @@ import {
   buildPipelineCounts,
   getOwnerBuyBoxDetail,
   getOwnerPropertyDetail,
+  getScannerStatus,
   listPipelineStage,
   verifyQualifiedOpportunities,
   type PipelineStage,
@@ -40,8 +41,10 @@ async function dashboardFor(userId: string, owner: boolean) {
     const dash = await buildDashboard(userId);
   const commerce = await adminCommerceKpis(userId);
   const pipeline = await buildPipelineCounts();
+  const scanner = await getScannerStatus(userId);
   return {
     ...dash,
+    scanner,
     kpis: {
       ...dash.kpis,
       ...commerce,

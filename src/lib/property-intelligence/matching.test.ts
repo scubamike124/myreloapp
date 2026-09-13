@@ -1,9 +1,21 @@
+/**
+ * NOT wired into `npm test` — see package.json's "test" script comment.
+ *
+ * ./identity.ts imports @/lib/db, and db.ts uses a TypeScript constructor
+ * parameter property plus a conditional `require()` — both real TypeScript
+ * runtime syntax, not just types, so `node --experimental-strip-types`
+ * (which only strips type annotations) cannot execute it: "TypeScript
+ * parameter property is not supported in strip-only mode". Real,
+ * pre-existing, unrelated to this file's own logic. Runnable through the
+ * app's actual build (Next.js/webpack) same as always; only direct
+ * execution via the bare Node test runner is blocked.
+ */
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { evaluateBuyBoxRequirements, requirementMatchPercent, criteriaFingerprint, matchBuyBox, type BuyBox, type MatchProperty } from "./matching";
-import { extractDealEvidence } from "./deal-evidence";
-import { readableSitusAddress } from "./california";
-import { detectDuplicateProperties } from "./identity";
+import { evaluateBuyBoxRequirements, requirementMatchPercent, criteriaFingerprint, matchBuyBox, type BuyBox, type MatchProperty } from "./matching.ts";
+import { extractDealEvidence } from "./deal-evidence.ts";
+import { readableSitusAddress } from "./california.ts";
+import { detectDuplicateProperties } from "./identity.ts";
 
 const property: MatchProperty = {
   city: "San Francisco",

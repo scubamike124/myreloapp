@@ -1,4 +1,4 @@
-import { UNLOCK_PRICE_CENTS, UNLOCK_PRICE_USD } from "./constants";
+import { UNLOCK_PRICE_CENTS, UNLOCK_PRICE_USD } from "./constants.ts";
 
 export const CA_PILOT_REJECT =
   "Amber Property Intelligence is currently available for California properties only.";
