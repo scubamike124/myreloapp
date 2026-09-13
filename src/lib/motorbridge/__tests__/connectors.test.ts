@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { CONNECTOR_CATALOG, testedConnectorCount, connectorBySlug } from "../connectors";
+import { CONNECTOR_CATALOG, VENDOR_RESEARCH_QUEUE, testedConnectorCount, connectorBySlug } from "../connectors";
 
 describe("the connector catalog never claims more than it has proven", () => {
   it("every entry that claims TEST_PASSED has a fixture file", () => {
@@ -30,5 +30,22 @@ describe("the connector catalog never claims more than it has proven", () => {
   it("looks up a connector by slug", () => {
     assert.equal(connectorBySlug("generic_obdii_csv")?.name, "Generic OBD-II diagnostic log (CSV)");
     assert.equal(connectorBySlug("does_not_exist"), undefined);
+  });
+});
+
+describe("the vendor research queue records real findings, not filled-in-to-look-complete ones", () => {
+  it("nothing beyond not_started lacks a citation/finding", () => {
+    for (const v of VENDOR_RESEARCH_QUEUE) {
+      if (v.status !== "not_started") {
+        assert.ok(v.note && v.note.length > 20, `${v.vendor} claims ${v.status} but has no real finding attached`);
+      }
+    }
+  });
+
+  it("no vendor jumps straight to documentation_verified without a connector actually built against it", () => {
+    // A vendor only reaches "verified" once a parser exists and passes a real
+    // fixture from that vendor's own export — none of the founding three
+    // connectors are vendor-specific, so nothing here should be verified yet.
+    assert.equal(VENDOR_RESEARCH_QUEUE.filter((v) => v.status === "documentation_verified").length, 0);
   });
 });
