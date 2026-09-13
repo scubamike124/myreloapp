@@ -1,11 +1,8 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import path from "node:path";
 import { normalizeUpload, convergenceCheck } from "../normalize";
 import { SCHEMA_VERSION } from "../types";
-
-const fixture = (name: string) => readFileSync(path.join(__dirname, "..", "fixtures", name), "utf8");
+import { OBD2_SAMPLE_CSV, TELEMETRY_SAMPLE_CSV, J1939_SAMPLE_CSV } from "../fixtures/content";
 
 describe("normalizeUpload — the single door every connector goes through", () => {
   it("refuses an unknown connector rather than guessing a parser", () => {
@@ -16,7 +13,7 @@ describe("normalizeUpload — the single door every connector goes through", () 
   it("stamps the schema version and a legal/access status on every record", () => {
     const outcome = normalizeUpload({
       connectorSlug: "generic_obdii_csv",
-      fileText: fixture("obd2-sample.csv"),
+      fileText: OBD2_SAMPLE_CSV,
       originLabel: "unit test upload",
     });
     assert.equal(outcome.ok, true);
@@ -30,9 +27,9 @@ describe("normalizeUpload — the single door every connector goes through", () 
 describe("§45 — the minimum cross-ecosystem proof", () => {
   it("one mechanic source + one racing source + one diesel/commercial source all converge on the same schema version", () => {
     const { allConverged, results } = convergenceCheck([
-      { connectorSlug: "generic_obdii_csv", fileText: fixture("obd2-sample.csv"), originLabel: "mechanic" },
-      { connectorSlug: "generic_telemetry_csv", fileText: fixture("telemetry-sample.csv"), originLabel: "racing" },
-      { connectorSlug: "generic_j1939_log", fileText: fixture("j1939-sample.csv"), originLabel: "diesel/commercial" },
+      { connectorSlug: "generic_obdii_csv", fileText: OBD2_SAMPLE_CSV, originLabel: "mechanic" },
+      { connectorSlug: "generic_telemetry_csv", fileText: TELEMETRY_SAMPLE_CSV, originLabel: "racing" },
+      { connectorSlug: "generic_j1939_log", fileText: J1939_SAMPLE_CSV, originLabel: "diesel/commercial" },
     ]);
     assert.equal(allConverged, true, JSON.stringify(results));
     assert.equal(results.length, 3);

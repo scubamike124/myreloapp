@@ -1,6 +1,0 @@
-Timestamp,RPM,Vehicle Speed (km/h),Coolant Temp (C),Intake Air Temp (C),Throttle Position (%),Intake Manifold Pressure (kPa),Engine Load (%),Fuel Level (%)
-2026-09-13T14:00:00Z,850,0,88,32,12,32,18,64
-2026-09-13T14:00:01Z,1500,12,89,33,28,45,35,64
-2026-09-13T14:00:02Z,2400,28,90,34,55,72,58,64
-2026-09-13T14:00:03Z,3100,41,91,35,72,88,71,64
-2026-09-13T14:00:04Z,2000,45,91,35,20,40,30,64

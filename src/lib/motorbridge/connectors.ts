@@ -33,6 +33,7 @@ export type ConnectorCatalogEntry = {
   legalAccessStatus: LegalAccessStatus;
   maturity: ConnectorMaturity;
   ingestionMethod: "customer_exported_file" | "official_api" | "official_sdk" | "standards_interface";
+  /** Documentation label only — the real content lives in fixtures/content.ts, keyed by connector slug (FIXTURE_CONTENT_BY_CONNECTOR), so the sample served to a browser and the sample a test runs against can never drift apart. */
   fixtureFile: string | null;
   notes: string;
 };

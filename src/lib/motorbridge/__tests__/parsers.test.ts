@@ -1,15 +1,12 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import path from "node:path";
 import { parseObd2Log } from "../parsers/obd2-log";
 import { parseTelemetryCsv } from "../parsers/telemetry-csv";
 import { parseJ1939Log } from "../parsers/j1939-log";
-
-const fixture = (name: string) => readFileSync(path.join(__dirname, "..", "fixtures", name), "utf8");
+import { OBD2_SAMPLE_CSV, TELEMETRY_SAMPLE_CSV, J1939_SAMPLE_CSV } from "../fixtures/content";
 
 describe("generic OBD-II CSV parser", () => {
-  const csv = fixture("obd2-sample.csv");
+  const csv = OBD2_SAMPLE_CSV;
 
   it("parses every row into a powertrain sample", () => {
     const result = parseObd2Log(csv, "veh-1", "src-1");
@@ -42,7 +39,7 @@ describe("generic OBD-II CSV parser", () => {
 });
 
 describe("generic motorsport telemetry CSV parser", () => {
-  const csv = fixture("telemetry-sample.csv");
+  const csv = TELEMETRY_SAMPLE_CSV;
 
   it("parses every row and prefers boost (psi) over MAP when both could apply", () => {
     const result = parseTelemetryCsv(csv, "veh-2", "src-2");
@@ -66,7 +63,7 @@ describe("generic motorsport telemetry CSV parser", () => {
 });
 
 describe("generic J1939 heavy-duty log parser", () => {
-  const csv = fixture("j1939-sample.csv");
+  const csv = J1939_SAMPLE_CSV;
 
   it("finds columns by SPN number regardless of surrounding label text", () => {
     const result = parseJ1939Log(csv, "veh-3", "src-3");
