@@ -255,6 +255,34 @@ function TwoLedgers({ ops }: { ops: AmberOperations }) {
   );
 }
 
+/** How old this reading is, said plainly once it stops being current. */
+function StaleWarning({
+  fetchedAt,
+  now,
+  loading,
+  onRefresh,
+}: {
+  fetchedAt: string;
+  now: number;
+  loading: boolean;
+  onRefresh: () => void;
+}) {
+  const ageMs = now - Date.parse(fetchedAt);
+  if (!Number.isFinite(ageMs) || ageMs < 120_000) return null;
+
+  const mins = Math.floor(ageMs / 60_000);
+  const age = mins < 60 ? `${mins} minute${mins === 1 ? "" : "s"}` : `${Math.floor(mins / 60)}h ${mins % 60}m`;
+  return (
+    <div className="mt-3 rounded-xl border border-[#f0b429]/40 bg-[#f0b429]/10 p-3 text-[13px] leading-relaxed text-[#f0b429]">
+      <span className="font-semibold">This reading is {age} old.</span> Nothing here is current — it is what
+      production said then, not now.{" "}
+      <button type="button" onClick={onRefresh} disabled={loading} className="underline underline-offset-2 disabled:opacity-50">
+        {loading ? "Reading…" : "Read again"}
+      </button>
+    </div>
+  );
+}
+
 function SectionBlock({ name, title, section }: { name: string; title: string; section: Section }) {
   const [open, setOpen] = useState(false);
   return (
@@ -537,6 +565,33 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
     return () => clearInterval(t);
   }, [refresh]);
 
+  /**
+   * Re-read when the tab comes back into view.
+   *
+   * A background tab has its timers throttled or suspended -- on a phone,
+   * switching apps stops the interval entirely. Production, 2026-09-15: a
+   * reading taken at 13:30 was still on screen at 13:47, down to identical
+   * per-report timings, because the page had never re-fetched. It looked
+   * exactly like current data.
+   *
+   * The interval is the steady heartbeat; this is what covers the case the
+   * interval cannot see.
+   */
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.visibilityState === "visible") refresh();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
+  }, [refresh]);
+
+  /** Ticks once a second so the age below counts up without a re-fetch. */
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const t = setInterval(() => setNow(Date.now()), 1_000);
+    return () => clearInterval(t);
+  }, []);
+
   const s = ops.summary;
 
   return (
@@ -577,6 +632,16 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
           {ops.hqStartedAt && <span>process up since {new Date(ops.hqStartedAt).toLocaleString()}</span>}
           <span>read {new Date(ops.fetchedAt).toLocaleTimeString()}</span>
         </div>
+
+        {/*
+          Age, stated outright once a reading is no longer current.
+
+          "read 1:29:30 PM" is true but easy to read as now, and a status page
+          showing seventeen-minute-old figures as if they were current is the
+          same failure as printing 0 for something never measured: a confident
+          screen that is wrong.
+        */}
+        <StaleWarning fetchedAt={ops.fetchedAt} now={now} loading={loading} onRefresh={refresh} />
 
         {error && <p className="mt-2 text-xs text-[#ff9aa3]">{error}</p>}
 
