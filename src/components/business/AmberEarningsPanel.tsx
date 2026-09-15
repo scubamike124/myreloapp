@@ -525,10 +525,26 @@ function SourceFunnel({ report }: { report: import("@/lib/amber-earnings/hq-nati
 
   return (
     <section className="mt-5">
-      <h2 className="text-[17px] font-bold text-gray-900">Where the scouts are working</h2>
+      {/*
+        Earnings is MONEY; Operations is the workforce.
+
+        The workforce-WIDE view — how many of the 5,120 scouts and 100,000
+        workers actually ran, what they are assigned to, and what is blocked —
+        now lives on Amber Operations, and is not duplicated here.
+
+        What stays is the per-source yield, and it keeps its scout counts
+        deliberately. They are not general workforce telemetry here: they are
+        the control that stops this section's own numbers reading better than
+        they are. This page once reported 46,293 "jobs discovered" for a
+        37-listing board, and the fix was to show effort beside yield, always.
+        Removing "Records fetched" or "Never ran" from THIS section would
+        reopen exactly that. Tests pin both.
+      */}
+      <h2 className="text-[17px] font-bold text-gray-900">What each source has produced, and earned</h2>
       <p className="mt-1 text-[13px]" style={{ color: muted }}>
-        Scouts assigned through money received, per source. Computed from the scout network and the earnings ledger
-        together.
+        Per-source yield and money received, from the scout network and the earnings ledger together.{" "}
+        <a href="/admin/amber-operations" className="underline">Amber Operations</a> has the workforce-wide view — who
+        ran, when, what they are working on, and anything blocked.
       </p>
 
       <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
