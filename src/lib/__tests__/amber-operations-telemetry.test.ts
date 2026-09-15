@@ -721,3 +721,87 @@ describe("the button tries every channel Relo has, not just the one that failed"
     assert.equal(r.channel, "dev-bridge");
   });
 });
+
+
+describe("the button says what Amber actually said", () => {
+  let mod: typeof import("../amber/connect-amber.ts");
+  const prev = { ...process.env };
+  let restore: (() => void) | null = null;
+  const KEYS = ["AMBER_HQ_CRON_SECRET", "CRON_SECRET", "AMBER_BUILDER_SECRET", "SOCIAL_TOKEN_SECRET", "REELO_DEV_BRIDGE_SECRET"];
+
+  before(async () => { mod = await import("../amber/connect-amber.ts"); });
+  afterEach(() => {
+    restore?.(); restore = null;
+    for (const k of KEYS) {
+      if (prev[k] === undefined) delete process.env[k];
+      else process.env[k] = prev[k];
+    }
+  });
+
+  function hq(handler: (url: string) => Response) {
+    const real = globalThis.fetch;
+    globalThis.fetch = (async (u: unknown) => handler(String(u))) as typeof fetch;
+    return () => { globalThis.fetch = real; };
+  }
+
+  it("names the deploy lag instead of blaming the owner", async () => {
+    /**
+     * The exact production response of 2026-09-15: HQ authenticated Relo and
+     * answered {ok:false, error:"Unknown action: connect_relo_bridge"} with a
+     * 400, because its deploy had not caught up. The old code read
+     * result.detail, found nothing, and rendered the generic "Amber could not
+     * complete the connection" — throwing away the one sentence that
+     * explained it, and implying the owner had something to fix.
+     */
+    process.env.REELO_DEV_BRIDGE_SECRET = "dev-bridge-value";
+    restore = hq(() => new Response(JSON.stringify({ ok: false, error: "Unknown action: connect_relo_bridge" }), { status: 400 }));
+
+    const r = await mod.connectAmber();
+    assert.equal(r.outcome, "HQ_NOT_DEPLOYED_YET");
+    assert.match(r.message, /reached Amber and she answered/);
+    assert.match(r.whatToDo ?? "", /Nothing to do/, "this one resolves itself");
+  });
+
+  it("carries HQ's own error through when there is no result object", async () => {
+    process.env.REELO_DEV_BRIDGE_SECRET = "dev-bridge-value";
+    restore = hq(() => new Response(JSON.stringify({ ok: false, error: "Vault is unreadable right now." }), { status: 500 }));
+
+    const r = await mod.connectAmber();
+    assert.equal(r.outcome, "NEEDS_OWNER_ATTENTION");
+    assert.match(r.message, /Vault is unreadable right now/, "Amber's own words, not a generic sentence");
+  });
+
+  it("still prefers a real result detail over the bare error", async () => {
+    process.env.REELO_DEV_BRIDGE_SECRET = "dev-bridge-value";
+    restore = hq(() => new Response(JSON.stringify({
+      ok: false,
+      error: "generic",
+      result: { status: "NO_CLOUDFLARE_TOKEN", detail: "Amber holds a bridge secret but no Cloudflare API token." },
+    }), { status: 200 }));
+
+    const r = await mod.connectAmber();
+    assert.match(r.message, /no Cloudflare API token/);
+    assert.match(r.whatToDo ?? "", /CLOUDFLARE_API_TOKEN to Amber's vault/);
+  });
+
+  it("names the deploy lag on the cron channel too", async () => {
+    process.env.CRON_SECRET = "relo-cron-value";
+    restore = hq(() => new Response(JSON.stringify({ ok: false, error: "Unknown action" }), { status: 400 }));
+    const r = await mod.connectAmber();
+    assert.equal(r.outcome, "HQ_NOT_DEPLOYED_YET");
+    assert.equal(r.channel, "cron");
+  });
+});
+
+describe("'still deploying' is not shown as the owner's problem", () => {
+  for (const file of [
+    "src/components/business/AmberEarningsPanel.tsx",
+    "src/components/admin/AmberOperationsDashboard.tsx",
+  ]) {
+    it(`${file} distinguishes it from NEEDS OWNER ATTENTION`, () => {
+      const src = fs.readFileSync(file, "utf8");
+      assert.match(src, /HQ_NOT_DEPLOYED_YET/);
+      assert.match(src, /ALMOST — AMBER IS STILL DEPLOYING/);
+    });
+  }
+});

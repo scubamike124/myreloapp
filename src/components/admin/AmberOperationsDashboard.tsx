@@ -140,7 +140,11 @@ function ConnectAmberButton({ onConnected }: { onConnected: () => Promise<void> 
           }`}
         >
           <div className={`font-display text-sm font-bold ${connected ? "text-[#7ee787]" : "text-[#ffd479]"}`}>
-            {connected ? "CONNECTED" : "NEEDS OWNER ATTENTION"}
+            {connected
+              ? "CONNECTED"
+              : result.outcome === "HQ_NOT_DEPLOYED_YET"
+                ? "ALMOST — AMBER IS STILL DEPLOYING"
+                : "NEEDS OWNER ATTENTION"}
           </div>
           <p className="mt-1 text-sm leading-relaxed text-white/75">{result.message}</p>
           {result.whatToDo && <p className="mt-1 text-sm leading-relaxed text-white/55">{result.whatToDo}</p>}
