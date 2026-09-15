@@ -99,6 +99,69 @@ describe("Amber operations telemetry", () => {
     assert.equal(s.pipeline, "WORKING");
   });
 
+  it("counts distinct sources from the roll-up when the record list was not requested", async () => {
+    /**
+     * Production, 2026-09-15: the page read "834 real upstream request(s)
+     * recorded across 0 source(s)". The client had started asking for
+     * recordLimit: 0 to keep the response small, so `records` arrived as [] --
+     * and an empty array is not nullish, so it counted zero hosts and RETURNED
+     * 0 instead of falling through to the per-endpoint roll-up.
+     */
+    restore = withBridge((action) => {
+      if (action === "shared_fetch_report") {
+        return { body: { ok: true, recordCount: 4210, records: [],
+          report: { totals: { fetches: 834, reuses: 6792, costUsd: 0.601 }, requestsAvoided: 6792,
+            byEndpoint: [
+              { endpointId: "moltjobs-board", url: "https://moltjobs.io/jobs", fetches: 1, reuses: 52 },
+              { endpointId: "sam-search", url: "https://api.sam.gov/opportunities/v2/search", fetches: 700, reuses: 40 },
+              { endpointId: "sam-other", url: "https://api.sam.gov/opportunities/v2/other", fetches: 133, reuses: 6700 },
+            ] } } };
+      }
+      return { body: { ok: true } };
+    });
+    const { fetchAmberOperations } = await load();
+    const s = (await fetchAmberOperations()).summary;
+
+    assert.equal(s.externalChecksToday, 834);
+    assert.equal(s.uniqueSourcesToday, 2, "two sam.gov endpoints are ONE host; moltjobs is the other");
+    assert.notEqual(s.uniqueSourcesToday, 0, "834 requests cannot have come from nowhere");
+  });
+
+  it("takes the money and the funnel from the revenue report when the funnel report is down", async () => {
+    /**
+     * Production, 2026-09-15: REVENUE read NOT MEASURED while COST and NET
+     * PROFIT read $0.00 from the same live report -- a measurement gap and a
+     * measured zero at once. The client was reading verifiedPaidRevenueUsd,
+     * which is the EARNINGS snapshot's name; this report publishes
+     * moneyReceivedUsd. Its funnel was going unread for the same reason.
+     */
+    restore = withBridge((action) => {
+      if (action === "unique_funnel") return { status: 500, body: { ok: false, error: "aborted due to timeout" } };
+      if (action === "amber_revenue") {
+        return { body: { ok: true, revenue: {
+          moneyReceivedUsd: 15, moneyPendingUsd: 0, workWon: 2, workSubmitted: 3,
+          executableOpportunities: 7, costUsd: 0.6, netProfitUsd: 14.4,
+          diagnostics: { opportunitiesStored: 451 },
+          funnel: [
+            { stage: "FOUND", count: 451 }, { stage: "EXECUTABLE_NOW", count: 7 },
+            { stage: "PURSUED", count: 3 }, { stage: "WON", count: 2 }, { stage: "PAID", count: 1 },
+          ] } } };
+      }
+      return { body: { ok: true } };
+    });
+    const { fetchAmberOperations } = await load();
+    const s = (await fetchAmberOperations()).summary;
+
+    assert.equal(s.revenueUsd, 15, "the field this report actually publishes");
+    assert.equal(s.costUsd, 0.6);
+    assert.equal(s.netUsd, 14.4);
+    assert.equal(s.opportunitiesFound, 451);
+    assert.equal(s.executable, 7);
+    assert.equal(s.pursued, 3);
+    assert.equal(s.won, 2);
+    assert.equal(s.paid, 1, "no tile left unmeasured when a live report carries it");
+  });
+
   it("calls the pipeline NOT WORKING when no real external request was made", async () => {
     restore = withBridge((action) => {
       if (action === "shared_fetch_report") {

@@ -490,16 +490,66 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
   // ---- Real external activity only. ----
   const externalChecksToday = num(at(sf, "report.totals.fetches"));
   const duplicateFetchesPrevented = num(at(sf, "report.totals.reuses")) ?? num(at(sf, "report.requestsAvoided"));
-  const uniqueSourcesToday = uniqueSourcesFrom(at(sf, "records")) ?? (Array.isArray(at(sf, "report.byEndpoint")) ? (at(sf, "report.byEndpoint") as unknown[]).length : null);
+  /**
+   * Counted from the per-endpoint roll-up, not the per-record list.
+   *
+   * This read `records` first, with byEndpoint as a `??` fallback. Then the
+   * client started asking for `recordLimit: 0` to keep the response small, so
+   * `records` arrived as `[]` -- and an empty array is not nullish. It counted
+   * zero distinct hosts and RETURNED 0, so the fallback never ran and the page
+   * said "834 real upstream requests recorded across 0 sources".
+   *
+   * byEndpoint carries a url per row, so hostname de-duplication still applies
+   * and two keys on one host still count as one source. `records` remains a
+   * fallback for a caller that asks for the rows, and an explicit 0 is only
+   * reported when production actually fetched nothing.
+   */
+  const byEndpoint = at(sf, "report.byEndpoint");
+  const uniqueSourcesToday =
+    (Array.isArray(byEndpoint) && byEndpoint.length > 0 ? uniqueSourcesFrom(byEndpoint) : null) ??
+    (Array.isArray(at(sf, "records")) && (at(sf, "records") as unknown[]).length > 0
+      ? uniqueSourcesFrom(at(sf, "records"))
+      : null) ??
+    (externalChecksToday === 0 ? 0 : null);
   const duplicateDispatchesPrevented = num(at(wf, "utilization.duplicateWorkPrevented.last24h"));
 
-  // ---- Money and funnel. ----
-  const opportunitiesFound = stage(fn, ["FOUND", "discovered", "found"]);
-  const executable = stage(fn, ["EXECUTABLE_NOW", "EXECUTABLE", "executable"]);
-  const pursued = stage(fn, ["PURSUED", "pursued"]);
-  const won = stage(fn, ["WON", "won"]);
-  const paid = stage(fn, ["PAID", "paid"]);
-  const revenueUsd = num(at(rev, "revenue.verifiedPaidRevenueUsd")) ?? num(at(rev, "revenue.lifetimeRevenueUsd"));
+  /**
+   * ---- Money and funnel. ----
+   *
+   * The revenue report carries its OWN funnel, with the same stage names, and
+   * it answers when unique_funnel times out. Reading only unique_funnel left
+   * five tiles at NOT MEASURED while the numbers sat in a report that was
+   * already live on the same screen.
+   *
+   * unique_funnel stays first: it is the dedicated report, and the fallback is
+   * a fallback. `{ stages }` is the shape `stage()` expects, so the revenue
+   * report's array is wrapped rather than the helper being widened.
+   */
+  const revenueFunnel = at(rev, "revenue.funnel");
+  const fnFallback = Array.isArray(revenueFunnel) ? { stages: revenueFunnel } : null;
+  const fromFunnel = (names: string[]) => stage(fn, names) ?? stage(fnFallback, names);
+
+  const opportunitiesFound = fromFunnel(["FOUND", "discovered", "found"]) ?? num(at(rev, "revenue.diagnostics.opportunitiesStored"));
+  const executable = fromFunnel(["EXECUTABLE_NOW", "EXECUTABLE", "executable"]) ?? num(at(rev, "revenue.executableOpportunities"));
+  const pursued = fromFunnel(["PURSUED", "pursued"]) ?? num(at(rev, "revenue.workSubmitted"));
+  const won = fromFunnel(["WON", "won"]) ?? num(at(rev, "revenue.workWon"));
+  const paid = fromFunnel(["PAID", "paid"]);
+  /**
+   * moneyReceivedUsd is the field this report actually publishes.
+   *
+   * This read `verifiedPaidRevenueUsd` first -- the name the EARNINGS snapshot
+   * uses -- which does not exist on the revenue report. So REVENUE showed NOT
+   * MEASURED while COST and NET PROFIT showed $0.00 from the very same live
+   * report, which is the worst of both: it looks like a measurement gap and a
+   * measured zero at once.
+   *
+   * The snapshot's names are kept after it, because a caller on a different
+   * shape should still resolve rather than silently read as unmeasured.
+   */
+  const revenueUsd =
+    num(at(rev, "revenue.moneyReceivedUsd")) ??
+    num(at(rev, "revenue.verifiedPaidRevenueUsd")) ??
+    num(at(rev, "revenue.lifetimeRevenueUsd"));
   const costUsd = num(at(rev, "revenue.costUsd")) ?? num(at(rev, "revenue.spentTodayUsd"));
   const netUsd = num(at(rev, "revenue.netProfitUsd")) ?? (revenueUsd !== null && costUsd !== null ? Math.round((revenueUsd - costUsd) * 1e6) / 1e6 : null);
 
