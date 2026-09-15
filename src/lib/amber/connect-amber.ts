@@ -2,9 +2,17 @@
  * The Connect Amber button, server side.
  *
  * ------------------------- WHAT PRESSING IT DOES -------------------------
- * Relo asks Amber HQ to establish the telemetry bridge. Amber then does the
- * work herself, using credentials she already holds: her own bridge secret
- * (her environment and her encrypted vault) and her own Cloudflare API token.
+ * Relo tries, in order, three ways to get one shared telemetry credential
+ * present on both hosts. It stops at the first that works:
+ *
+ *   1. Ask Amber over the HQ cron credential to install it herself.
+ *   2. Ask her the same thing over the dev bridge, if the cron one is refused.
+ *   3. Provision it: Relo generates the value, keeps its own encrypted copy,
+ *      and hands it to Amber over the dev bridge.
+ *
+ * (1) and (2) need Amber to hold a Cloudflare API token, because they write a
+ * Worker secret. Production answered NO_CLOUDFLARE_TOKEN on 2026-09-15, which
+ * is why (3) exists — see provisionBridgeSecret below for the full reasoning.
  *
  * The owner's browser is never given a secret, never asked for one, and never
  * sees one in a response. Every field below is a status word or plain English.
@@ -17,6 +25,7 @@
  * too, and if it does not, both fail for one reason rather than two.
  */
 import { hqBaseUrl, hqSecretCandidates, hqAuthHeaders } from "../amber-earnings/hq-nationwide.ts";
+import { amberOrgBridgeBaseUrl } from "./organization-bridge.ts";
 
 /** What the owner is shown on the button. Never a value, never a log line. */
 export type ConnectOutcome =
@@ -65,13 +74,187 @@ function looksUndeployed(said: string): boolean {
   return /unknown action/i.test(said);
 }
 
+/** The two ways Amber's own Cloudflare path can fail. Both mean: provision instead. */
+function cloudflareIsBlocked(hqStatus: string | null): boolean {
+  return hqStatus === "NO_CLOUDFLARE_TOKEN" || hqStatus === "CLOUDFLARE_REJECTED";
+}
 
-export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () => number }): Promise<ConnectAmberResult> {
+function devBridgeUrl(): string {
+  return `${(process.env.AMBER_DEV_BRIDGE_URL || hqBaseUrl()).replace(/\/$/, "")}/api/internal/reelo-dev-bridge`;
+}
+
+/**
+ * Relo's side of the credential, injectable so tests never touch a database
+ * and never need a real encryption key to exercise the refusal paths.
+ */
+export type BridgeSecretStore = {
+  generateBridgeSecret: () => string;
+  loadStoredBridgeSecret: () => Promise<string | null>;
+  storeBridgeSecret: (secret: string) => Promise<{ ok: boolean; reason?: string }>;
+};
+
+/**
+ * ------------------------- THE PROVISIONING PATH -------------------------
+ * Relo generates the shared credential, keeps its own encrypted copy, and
+ * hands it to Amber over the dev bridge.
+ *
+ * Why this direction, and not the other one. Establishing the bridge needs a
+ * single value present on both hosts. Amber cannot write Relo's side: a Worker
+ * SECRET is writable only through Cloudflare, and production answered
+ * NO_CLOUDFLARE_TOKEN on 2026-09-15 — she holds no token. Relo *can* write its
+ * own side, because nothing requires Relo to READ the value from a Worker
+ * secret; it reads env first and its own encrypted row second, exactly as
+ * Amber reads env first and her vault second.
+ *
+ * The one new exposure is the transmission, and it is bounded: a single
+ * authenticated server-to-server POST over a bridge that already permits
+ * `create_task` — a strictly larger power than holding a telemetry credential.
+ * The value never reaches a browser, never appears in a response, and is never
+ * returned from this function.
+ *
+ * Ordering is deliberate. Relo stores its copy BEFORE transmitting, so a host
+ * that cannot encrypt fails closed without the value having left it.
+ * -------------------------------------------------------------------------
+ */
+async function provisionBridgeSecret(args: {
+  at: string;
+  doFetch: typeof fetch;
+  devSecret: string;
+  store?: BridgeSecretStore;
+}): Promise<ConnectAmberResult> {
+  const { at, doFetch, devSecret } = args;
+  const fail = (message: string, whatToDo: string | null, hqStatus: string | null = null): ConnectAmberResult => ({
+    at,
+    channel: "dev-bridge",
+    outcome: "NEEDS_OWNER_ATTENTION",
+    message,
+    whatToDo,
+    hqStatus,
+  });
+
+  const { generateBridgeSecret, loadStoredBridgeSecret, storeBridgeSecret } =
+    args.store ?? (await import("./bridge-secret-store.ts"));
+
+  /**
+   * Reuse before rotating. Pressing the button twice must not mint a second
+   * credential and leave the first one live in Amber's vault.
+   */
+  const existing = await loadStoredBridgeSecret();
+  const secret = existing ?? generateBridgeSecret();
+
+  if (!existing) {
+    const stored = await storeBridgeSecret(secret);
+    if (!stored.ok) {
+      return fail(
+        "Relo could not store its own copy of the bridge credential, so it did not send one to Amber.",
+        stored.reason ?? null,
+      );
+    }
+  }
+
+  type StoreReply = { ok?: boolean; error?: string; stored?: boolean } | null;
+  let body: StoreReply = null;
+  try {
+    const res = await doFetch(devBridgeUrl(), {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-bridge-secret": devSecret },
+      body: JSON.stringify({ action: "store_org_bridge_secret", secret }),
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+      cache: "no-store",
+    });
+    if (res.status === 401 || res.status === 403) {
+      return fail(
+        "Amber rejected Relo's dev-bridge credential, so Relo could not hand her the telemetry credential.",
+        "Set REELO_DEV_BRIDGE_SECRET to the same value on both hosts.",
+      );
+    }
+    body = (await res.json().catch(() => null)) as StoreReply;
+  } catch (e) {
+    return {
+      at,
+      channel: "dev-bridge",
+      outcome: "HQ_UNREACHABLE",
+      message: `Relo could not reach Amber HQ${e instanceof Error ? ` (${e.message})` : ""}.`,
+      whatToDo: "Check that amber-hq-web is running on Railway.",
+      hqStatus: null,
+    };
+  }
+
+  if (!body?.ok) {
+    const said = hqSaid(body);
+    if (looksUndeployed(said)) {
+      return {
+        at,
+        channel: "dev-bridge",
+        outcome: "HQ_NOT_DEPLOYED_YET",
+        message: "Reelo reached Amber and she answered — but her deployment does not carry this connector yet.",
+        whatToDo: "Nothing to do. Wait a few minutes for Amber to finish deploying, then press again.",
+        hqStatus: null,
+      };
+    }
+    return fail(said || "Amber did not accept the telemetry credential.", null);
+  }
+
+  /**
+   * ---- Proof, not a 200. ----
+   *
+   * Amber answering "stored" proves her half. It does not prove Relo can read
+   * its own row back, and it does not prove the two halves match. Only a real
+   * authenticated call over the bridge proves the thing the button claims, so
+   * CONNECTED is reported from that and nothing less.
+   */
+  const readBack = await loadStoredBridgeSecret();
+  if (readBack !== secret) {
+    return fail(
+      "Amber accepted the credential, but Relo could not read its own copy back.",
+      "Relo's encryption key (SOCIAL_TOKEN_SECRET or VAULT_MASTER_KEY) may have changed since the row was written.",
+    );
+  }
+
+  try {
+    const res = await doFetch(`${amberOrgBridgeBaseUrl()}/api/internal/reelo-organization-bridge`, {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-bridge-secret": readBack },
+      body: JSON.stringify({ action: "deployed_version" }),
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+      cache: "no-store",
+    });
+    const verify = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+    if (!res.ok || !verify?.ok) {
+      return fail(
+        `Amber stored the credential, but the telemetry bridge still rejected it (HTTP ${res.status}).`,
+        "Amber may need a moment to pick up the new value. Press again shortly.",
+      );
+    }
+  } catch (e) {
+    return fail(
+      `Amber stored the credential, but Relo could not confirm the bridge${e instanceof Error ? ` (${e.message})` : ""}.`,
+      "Press again shortly to re-check.",
+    );
+  }
+
+  return {
+    at,
+    channel: "dev-bridge",
+    outcome: "CONNECTED",
+    message: "Amber is connected. Relo established the telemetry credential and confirmed it over the bridge.",
+    whatToDo: null,
+    hqStatus: "PROVISIONED_BY_RELO",
+  };
+}
+
+
+export async function connectAmber(opts?: {
+  fetchImpl?: typeof fetch;
+  now?: () => number;
+  store?: BridgeSecretStore;
+}): Promise<ConnectAmberResult> {
   const at = new Date(opts?.now?.() ?? Date.now()).toISOString();
   const doFetch = opts?.fetchImpl ?? fetch;
   const tokens = hqSecretCandidates();
+  const devSecret = (process.env.REELO_DEV_BRIDGE_SECRET ?? "").trim();
 
-  if (tokens.length === 0 && !process.env.REELO_DEV_BRIDGE_SECRET) {
+  if (tokens.length === 0 && !devSecret) {
     return {
       at,
       channel: null,
@@ -135,6 +318,13 @@ export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () =
           hqStatus: null,
         };
       }
+      /**
+       * Amber's own Cloudflare path being blocked is not the end of the
+       * attempt — it is the exact condition the provisioning path below
+       * exists for. Fall through rather than reporting a dead end.
+       */
+      if (cloudflareIsBlocked(hqStatus) && devSecret) break;
+
       return {
         at,
         channel: "cron",
@@ -166,17 +356,25 @@ export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () =
    * she copies her own CRON_SECRET onto Relo's Worker, which fixes the HQ feed
    * behind the Amber Earnings page at the same time.
    */
-  if (process.env.REELO_DEV_BRIDGE_SECRET) {
-    const devUrl = `${(process.env.AMBER_DEV_BRIDGE_URL || hqBaseUrl()).replace(/\/$/, "")}/api/internal/reelo-dev-bridge`;
+  if (devSecret) {
+    /**
+     * Provisioning runs over this bridge, so it is only worth attempting once
+     * this bridge has proved it authenticates. A dev secret that is itself
+     * rejected cannot carry a credential to Amber, and pretending otherwise
+     * would replace an accurate "every credential was rejected" with a
+     * confusing second failure.
+     */
+    let devAuthenticated = false;
     try {
-      const res = await doFetch(devUrl, {
+      const res = await doFetch(devBridgeUrl(), {
         method: "POST",
-        headers: { "content-type": "application/json", "x-bridge-secret": process.env.REELO_DEV_BRIDGE_SECRET },
+        headers: { "content-type": "application/json", "x-bridge-secret": devSecret },
         body: JSON.stringify({ action: "connect_relo_bridge" }),
         signal: AbortSignal.timeout(TIMEOUT_MS),
         cache: "no-store",
       });
       if (res.status !== 401 && res.status !== 403) {
+        devAuthenticated = true;
         const body = (await res.json().catch(() => null)) as
           | { ok?: boolean; error?: string; result?: { status?: string; detail?: string; cronRepair?: string } }
           | null;
@@ -210,23 +408,31 @@ export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () =
             hqStatus: null,
           };
         }
-        return {
-          at,
-          channel: "dev-bridge",
-          outcome: "NEEDS_OWNER_ATTENTION",
-          message: said || "Amber could not complete the connection.",
-          whatToDo:
-            hqStatus === "NO_CLOUDFLARE_TOKEN"
-              ? "Add CLOUDFLARE_API_TOKEN to Amber's vault so she can set the value on Relo's Worker herself."
-              : hqStatus === "CLOUDFLARE_REJECTED"
-                ? "Amber's Cloudflare token needs the Workers Scripts: Edit permission."
-                : null,
-          hqStatus,
-        };
+        /**
+         * Production, 2026-09-15: this is the branch that actually fired —
+         * the dev bridge authenticated and Amber answered NO_CLOUDFLARE_TOKEN.
+         * So it is not a report; it is the handover to provisioning.
+         */
+        if (!cloudflareIsBlocked(hqStatus)) {
+          return {
+            at,
+            channel: "dev-bridge",
+            outcome: "NEEDS_OWNER_ATTENTION",
+            message: said || "Amber could not complete the connection.",
+            whatToDo: null,
+            hqStatus,
+          };
+        }
       }
     } catch (e) {
       lastError = e instanceof Error ? e.message : "request failed";
     }
+
+    /**
+     * ---- Channel 3: Relo provisions the credential itself. ----
+     * Reached when Amber could answer but could not write Relo's side.
+     */
+    if (devAuthenticated) return await provisionBridgeSecret({ at, doFetch, devSecret, store: opts?.store });
   }
 
   if (lastStatus === 401 || lastStatus === 403) {
