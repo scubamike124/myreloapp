@@ -624,3 +624,100 @@ describe("Connect Amber is reachable from the page the owner signs in to", () =>
     assert.match(banner, /!needSignIn \? \(/);
   });
 });
+
+
+describe("the button tries every channel Relo has, not just the one that failed", () => {
+  let mod: typeof import("../amber/connect-amber.ts");
+  const prev = { ...process.env };
+  let restore: (() => void) | null = null;
+  const KEYS = ["AMBER_HQ_CRON_SECRET", "CRON_SECRET", "AMBER_BUILDER_SECRET", "SOCIAL_TOKEN_SECRET", "REELO_DEV_BRIDGE_SECRET"];
+
+  before(async () => { mod = await import("../amber/connect-amber.ts"); });
+  afterEach(() => {
+    restore?.(); restore = null;
+    for (const k of KEYS) {
+      if (prev[k] === undefined) delete process.env[k];
+      else process.env[k] = prev[k];
+    }
+  });
+
+  function hq(handler: (url: string, init?: RequestInit) => Response) {
+    const real = globalThis.fetch;
+    globalThis.fetch = (async (u: unknown, init?: RequestInit) => handler(String(u), init)) as typeof fetch;
+    return () => { globalThis.fetch = real; };
+  }
+
+  it("falls back to the dev bridge when the cron credential is rejected", async () => {
+    // The exact production failure of 2026-09-15: CRON_SECRET mismatched.
+    process.env.CRON_SECRET = "relo-cron-value";
+    process.env.REELO_DEV_BRIDGE_SECRET = "dev-bridge-value";
+    const tried: string[] = [];
+    restore = hq((url, init) => {
+      tried.push(url.includes("reelo-dev-bridge") ? "dev-bridge" : "cron");
+      if (url.includes("reelo-dev-bridge")) {
+        assert.equal(new Headers(init?.headers ?? {}).get("x-bridge-secret"), "dev-bridge-value");
+        return new Response(JSON.stringify({
+          ok: true,
+          result: { status: "SECRET_INSTALLED", detail: "Amber installed her bridge secret on Relo's Worker.", cronRepair: "SYNCED_TO_RELO" },
+        }), { status: 200 });
+      }
+      return new Response("{}", { status: 401 });
+    });
+
+    const r = await mod.connectAmber();
+    assert.deepEqual(tried, ["cron", "dev-bridge"], "cron first, then the second door");
+    assert.equal(r.outcome, "CONNECTED");
+    assert.equal(r.channel, "dev-bridge");
+    assert.match(r.message, /repaired the credential mismatch/, "and it says the HQ feed is fixed too");
+  });
+
+  it("never returns a credential, on either channel", async () => {
+    process.env.CRON_SECRET = "relo-cron-value";
+    process.env.REELO_DEV_BRIDGE_SECRET = "dev-bridge-value";
+    restore = hq((url) =>
+      url.includes("reelo-dev-bridge")
+        ? new Response(JSON.stringify({ ok: true, result: { status: "SECRET_INSTALLED", detail: "done" } }), { status: 200 })
+        : new Response("{}", { status: 401 }));
+
+    const r = await mod.connectAmber();
+    const serialized = JSON.stringify(r);
+    assert.ok(!serialized.includes("relo-cron-value"));
+    assert.ok(!serialized.includes("dev-bridge-value"));
+  });
+
+  it("does not try the dev bridge when the cron credential already worked", async () => {
+    process.env.CRON_SECRET = "relo-cron-value";
+    process.env.REELO_DEV_BRIDGE_SECRET = "dev-bridge-value";
+    const tried: string[] = [];
+    restore = hq((url) => {
+      tried.push(url.includes("reelo-dev-bridge") ? "dev-bridge" : "cron");
+      return new Response(JSON.stringify({ ok: true, result: { status: "SECRET_INSTALLED", detail: "done" } }), { status: 200 });
+    });
+
+    const r = await mod.connectAmber();
+    assert.deepEqual(tried, ["cron"], "no unnecessary second call");
+    assert.equal(r.channel, "cron");
+  });
+
+  it("reports honestly when BOTH channels are rejected", async () => {
+    process.env.CRON_SECRET = "relo-cron-value";
+    process.env.REELO_DEV_BRIDGE_SECRET = "dev-bridge-value";
+    restore = hq(() => new Response("{}", { status: 401 }));
+
+    const r = await mod.connectAmber();
+    assert.equal(r.outcome, "NO_HQ_CREDENTIAL");
+    assert.equal(r.channel, null);
+    assert.match(r.message, /rejected every credential Relo holds/);
+    assert.match(r.whatToDo ?? "", /dev bridge could not stand in/);
+  });
+
+  it("still tries the dev bridge when Relo has no cron credential at all", async () => {
+    for (const k of ["AMBER_HQ_CRON_SECRET", "CRON_SECRET", "AMBER_BUILDER_SECRET", "SOCIAL_TOKEN_SECRET"]) delete process.env[k];
+    process.env.REELO_DEV_BRIDGE_SECRET = "dev-bridge-value";
+    restore = hq(() => new Response(JSON.stringify({ ok: true, result: { status: "SECRET_INSTALLED", detail: "done" } }), { status: 200 }));
+
+    const r = await mod.connectAmber();
+    assert.equal(r.outcome, "CONNECTED");
+    assert.equal(r.channel, "dev-bridge");
+  });
+});

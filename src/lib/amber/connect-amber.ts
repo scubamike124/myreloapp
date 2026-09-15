@@ -24,6 +24,8 @@ export type ConnectOutcome = "CONNECTED" | "NEEDS_OWNER_ATTENTION" | "NO_HQ_CRED
 export type ConnectAmberResult = {
   at: string;
   outcome: ConnectOutcome;
+  /** Which authenticated channel actually reached Amber. Never a credential. */
+  channel: "cron" | "dev-bridge" | null;
   /** One sentence, in the owner's language. */
   message: string;
   /** What to do about it, when there is something to do. */
@@ -39,9 +41,10 @@ export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () =
   const doFetch = opts?.fetchImpl ?? fetch;
   const tokens = hqSecretCandidates();
 
-  if (tokens.length === 0) {
+  if (tokens.length === 0 && !process.env.REELO_DEV_BRIDGE_SECRET) {
     return {
       at,
+      channel: null,
       outcome: "NO_HQ_CREDENTIAL",
       message: "Relo has no credential for Amber HQ, so it cannot ask Amber to connect.",
       whatToDo:
@@ -77,6 +80,7 @@ export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () =
       if (body?.ok) {
         return {
           at,
+          channel: "cron",
           outcome: "CONNECTED",
           message: detail || "Amber established the connection.",
           whatToDo: null,
@@ -92,6 +96,7 @@ export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () =
        */
       return {
         at,
+        channel: "cron",
         outcome: "NEEDS_OWNER_ATTENTION",
         message: detail || `Amber could not complete the connection (HTTP ${res.status}).`,
         whatToDo:
@@ -107,17 +112,84 @@ export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () =
     }
   }
 
+  /**
+   * ---- The cron credential did not work. Try the other channel. ----
+   *
+   * Measured in production, 2026-09-15: pressing this button returned a 401 —
+   * Relo and HQ hold different CRON_SECRET values. But the cron secret is not
+   * the only thing these two hosts share. The DEV bridge has its own secret
+   * (REELO_DEV_BRIDGE_SECRET), and wherever it is configured it already
+   * authenticates, so there is a second door to try before giving up.
+   *
+   * Reaching Amber over that channel also repairs the cron mismatch itself:
+   * she copies her own CRON_SECRET onto Relo's Worker, which fixes the HQ feed
+   * behind the Amber Earnings page at the same time.
+   */
+  if (process.env.REELO_DEV_BRIDGE_SECRET) {
+    const devUrl = `${(process.env.AMBER_DEV_BRIDGE_URL || hqBaseUrl()).replace(/\/$/, "")}/api/internal/reelo-dev-bridge`;
+    try {
+      const res = await doFetch(devUrl, {
+        method: "POST",
+        headers: { "content-type": "application/json", "x-bridge-secret": process.env.REELO_DEV_BRIDGE_SECRET },
+        body: JSON.stringify({ action: "connect_relo_bridge" }),
+        signal: AbortSignal.timeout(TIMEOUT_MS),
+        cache: "no-store",
+      });
+      if (res.status !== 401 && res.status !== 403) {
+        const body = (await res.json().catch(() => null)) as
+          | { ok?: boolean; result?: { status?: string; detail?: string; cronRepair?: string } }
+          | null;
+        const hqStatus = body?.result?.status ?? null;
+        const detail = body?.result?.detail ?? "";
+        const cronRepair = body?.result?.cronRepair;
+
+        if (body?.ok) {
+          return {
+            at,
+            channel: "dev-bridge",
+            outcome: "CONNECTED",
+            message:
+              (detail || "Amber established the connection.") +
+              (cronRepair === "SYNCED_TO_RELO"
+                ? " She also repaired the credential mismatch that was breaking the HQ feed on this page."
+                : ""),
+            whatToDo: null,
+            hqStatus,
+          };
+        }
+        return {
+          at,
+          channel: "dev-bridge",
+          outcome: "NEEDS_OWNER_ATTENTION",
+          message: detail || "Amber could not complete the connection.",
+          whatToDo:
+            hqStatus === "NO_CLOUDFLARE_TOKEN"
+              ? "Add CLOUDFLARE_API_TOKEN to Amber's vault so she can set the value on Relo's Worker herself."
+              : hqStatus === "CLOUDFLARE_REJECTED"
+                ? "Amber's Cloudflare token needs the Workers Scripts: Edit permission."
+                : null,
+          hqStatus,
+        };
+      }
+    } catch (e) {
+      lastError = e instanceof Error ? e.message : "request failed";
+    }
+  }
+
   if (lastStatus === 401 || lastStatus === 403) {
     return {
       at,
+      channel: null,
       outcome: "NO_HQ_CREDENTIAL",
-      message: "Amber HQ rejected Relo's credential, so Relo could not ask her to connect.",
-      whatToDo: "Relo and Amber HQ are holding different values for CRON_SECRET. Set them to the same value.",
+      message: "Amber HQ rejected every credential Relo holds, so Relo could not ask her to connect.",
+      whatToDo:
+        "Relo and Amber HQ disagree on CRON_SECRET, and the dev bridge could not stand in for it. Set CRON_SECRET to the same value on both hosts.",
       hqStatus: null,
     };
   }
   return {
     at,
+    channel: null,
     outcome: "HQ_UNREACHABLE",
     message: `Relo could not reach Amber HQ${lastError ? ` (${lastError})` : ""}.`,
     whatToDo: "Check that amber-hq-web is running on Railway.",
