@@ -14,7 +14,7 @@
  *     dashboard that prints 0 for both, and they call for opposite responses.
  */
 import { useCallback, useEffect, useState } from "react";
-import type { AmberOperations, OwnerSummary, Section, ReloLedgerRow } from "@/lib/amber/operations-telemetry";
+import type { AmberOperations, OwnerSummary, Section, ReloLedgerRow, LedgerBasis } from "@/lib/amber/operations-telemetry";
 import type { OwnerEscalationView, ActivityEventView } from "@/lib/amber/operations-views";
 import type { ConnectAmberResult } from "@/lib/amber/connect-amber";
 // Values, not just types: imported from the view module so this client
@@ -178,6 +178,21 @@ function StatusPill({ state, label }: { state: "good" | "bad" | "warn" | "unknow
 }
 
 /** A bridge section, expandable to its raw production payload. */
+/** Which standard a booking met, said in the owner's language. */
+function BasisBadge({ basis }: { basis: LedgerBasis }) {
+  const style =
+    basis === "wallet-credit"
+      ? { cls: "border-[#7ee787]/40 bg-[#7ee787]/10 text-[#7ee787]", label: "Wallet credit observed" }
+      : basis === "platform-escrow"
+        ? { cls: "border-[#f0b429]/40 bg-[#f0b429]/10 text-[#f0b429]", label: "Platform-reported escrow" }
+        : { cls: "border-white/15 bg-white/5 text-white/50", label: "Basis not stated" };
+  return (
+    <span className={`mt-1 inline-block rounded-full border px-2 py-0.5 text-[10px] font-semibold ${style.cls}`}>
+      {style.label}
+    </span>
+  );
+}
+
 /**
  * The two ledgers, side by side.
  *
@@ -232,6 +247,15 @@ function TwoLedgers({ ops }: { ops: AmberOperations }) {
         </p>
       )}
 
+      {relo !== null && relo.rows.some((r) => r.basis !== "wallet-credit") && (
+        <p className="mt-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-[12px] leading-relaxed text-white/55">
+          <span className="font-semibold text-white/75">Not every booking meets the same standard.</span> A booking
+          backed by a <em>wallet credit</em> is money observed arriving. One backed by a{" "}
+          <em>platform escrow hash</em> is the marketplace stating it released payment — which is its claim, not an
+          independent confirmation the funds landed. Both are booked; only one is proof of receipt.
+        </p>
+      )}
+
       {relo !== null && relo.rows.length > 0 && (
         <div className="mt-3 space-y-2">
           {relo.rows.map((r: ReloLedgerRow, i: number) => (
@@ -240,6 +264,7 @@ function TwoLedgers({ ops }: { ops: AmberOperations }) {
                 <span className="font-semibold">{r.platformSlug || "unknown platform"}</span>
                 <span className="tabular-nums font-semibold">${r.amountUsd.toFixed(2)}</span>
               </div>
+              <BasisBadge basis={r.basis} />
               <div className="mt-1 break-words text-white/50">{r.note || "no note recorded"}</div>
               <div className="mt-1 text-white/35">
                 {r.occurredAt} &middot; source: {r.source || "unrecorded"} &middot; job: {r.jobId ?? "none"}
