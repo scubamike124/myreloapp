@@ -570,6 +570,47 @@ export function blocksNewAccepts(
   return true;
 }
 
+/**
+ * Every confirmed revenue row Relo itself holds, across all users.
+ *
+ * ===================== WHY THIS EXISTS =====================
+ * Production, 2026-09-15: Amber HQ's ledger reported paymentCount 0 and
+ * $0.00 across 469 jobs, while the Earnings page showed $10 this month and
+ * $15 lifetime. Both were true. They are DIFFERENT LEDGERS -- the page reads
+ * these rows, and Amber HQ never sees them.
+ *
+ * Two systems each reporting "verified paid" and disagreeing by $15 is the
+ * kind of thing an owner must be able to see side by side rather than take on
+ * trust, so the rows are readable and the reconciliation is on the screen.
+ * ===========================================================
+ *
+ * Not scoped to a user, deliberately: the question is what Relo has booked in
+ * total, and an owner-only diagnostic that silently omitted a row would defeat
+ * its own purpose. Its only caller is the admin-gated operations route.
+ */
+export async function listConfirmedRevenueRows(limit = 100): Promise<LedgerRow[]> {
+  const q = await db();
+  if (!q) return [];
+  const rows = (await q`
+    SELECT * FROM amber_earnings_ledger
+    WHERE kind = 'revenue' AND confirmed = 1
+    ORDER BY occurred_at DESC
+    LIMIT ${limit}
+  `) as Record<string, unknown>[];
+  return rows.map((r) => ({
+    id: String(r.id),
+    platformSlug: String(r.platform_slug || ""),
+    jobId: r.job_id ? String(r.job_id) : null,
+    kind: String(r.kind),
+    amountUsd: usd(r.amount_cents),
+    currency: String(r.currency || "USD"),
+    confirmed: Number(r.confirmed) === 1,
+    source: String(r.source || ""),
+    occurredAt: String(r.occurred_at),
+    note: String(r.note || ""),
+  }));
+}
+
 export async function confirmedRevenueInRange(userId: string, fromIso: string): Promise<number> {
   const q = await db();
   if (!q) return 0;
