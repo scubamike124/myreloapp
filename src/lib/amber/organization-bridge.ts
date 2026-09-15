@@ -70,13 +70,49 @@ async function call<T>(body: Record<string, unknown>, opts?: { timeoutMs?: numbe
     signal: AbortSignal.timeout(opts?.timeoutMs ?? 20_000),
     cache: "no-store",
   });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok || data?.ok === false) {
+  /**
+   * A body that cannot be read is a FAILURE, not an empty success.
+   *
+   * This used to be `await res.json().catch(() => ({}))`. A 200 whose body
+   * never finished arriving -- the abort signal firing mid-stream on a large
+   * report -- produced `{}`, which is not `ok === false`, so the call
+   * RESOLVED and the caller recorded a successful section holding nothing.
+   *
+   * Production, 2026-09-15: the dashboard showed "Real external fetches &
+   * dedup — LIVE · 25.0s" while every figure that report feeds read NOT
+   * MEASURED, and the header said "Shared-fetch telemetry unavailable" in the
+   * same breath. The page contradicted itself, and this line was why.
+   *
+   * It is exactly the failure this whole screen exists to prevent: claiming a
+   * measurement that was never taken. So the read failure is kept and
+   * reported, and it names the likely cause, because a body that stops
+   * arriving at the timeout is a report too large to return rather than a
+   * report that is broken.
+   */
+  type Reply = { ok?: boolean; error?: string } | null;
+  let data: Reply = null;
+  let unreadable: string | null = null;
+  try {
+    data = (await res.json()) as Reply;
+  } catch (e) {
+    unreadable = e instanceof Error ? e.message : "the response body could not be read";
+  }
+
+  if (!res.ok) {
     /**
      * The status is preserved in the message because it is the difference
      * between the two failures that need opposite fixes: 401 means the two
      * hosts hold different secrets, anything else means HQ answered badly.
      */
+    throw new Error(data?.error || `Amber's organization bridge call failed (${res.status}).`);
+  }
+  if (unreadable !== null) {
+    throw new Error(
+      `Amber answered ${res.status} but the response body did not finish arriving (${unreadable}). ` +
+        `The report is most likely too large to return within the timeout.`,
+    );
+  }
+  if (data?.ok === false) {
     throw new Error(data?.error || `Amber's organization bridge call failed (${res.status}).`);
   }
   return data as T;

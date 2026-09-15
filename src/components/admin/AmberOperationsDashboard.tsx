@@ -543,7 +543,7 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
 
         {ops.configured && ops.unavailable.length > 0 && (
           <p className="mt-3 text-xs leading-relaxed text-[#ffd479]">
-            {ops.unavailable.length} of 10 production reports could not be read ({ops.unavailable.join(", ")}). The
+            {ops.unavailable.length} of {ops.reportCount} production reports could not be read ({ops.unavailable.join(", ")}). The
             figures they feed show NOT MEASURED.
           </p>
         )}
@@ -584,6 +584,8 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
         <SectionBlock name="shared_fetch_report" title="Real external fetches & dedup" section={ops.sections.sharedFetch} />
         <SectionBlock name="unique_funnel" title="Money funnel" section={ops.sections.funnel} />
         <SectionBlock name="amber_revenue" title="Revenue, cost & net" section={ops.sections.revenue} />
+        {/* The rows behind the money: method, reference, amount, observed at. */}
+        <SectionBlock name="payment_evidence" title="Payment evidence (every dollar counted)" section={ops.sections.paymentEvidence} />
         <SectionBlock name="amber_ecosystem" title="Amber's own audit & manager health" section={ops.sections.ecosystem} />
         <SectionBlock name="owner_escalations" title="Owner escalations (raw)" section={ops.sections.escalations} />
       </section>

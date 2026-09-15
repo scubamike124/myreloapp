@@ -219,9 +219,16 @@ export type AmberOperations = {
     escalations: Section;
     activity: Section;
     ecosystem: Section;
+    paymentEvidence: Section;
   };
   /** Actions that could not be reached, named so a gap is never silent. */
   unavailable: string[];
+  /**
+   * How many reports were attempted. Derived, never written down: the count
+   * was hardcoded as "10" in the UI and adding an eleventh silently made the
+   * sentence wrong.
+   */
+  reportCount: number;
 };
 
 function notConfigured(now: string): AmberOperations {
@@ -262,9 +269,14 @@ function notConfigured(now: string): AmberOperations {
     sections: {
       ownerDashboard: dead, workforce: dead, sharedFetch: dead,
       scoutAudit: dead, organization: dead, revenue: dead, funnel: dead,
-      escalations: dead, activity: dead, ecosystem: dead,
+      escalations: dead, activity: dead, ecosystem: dead, paymentEvidence: dead,
     },
-    unavailable: ["owner_dashboard", "child_workforce_report", "shared_fetch_report", "scout_execution_audit", "overview", "amber_revenue", "unique_funnel", "owner_escalations", "amber_activity", "amber_ecosystem"],
+    unavailable: [
+      "owner_dashboard", "child_workforce_report", "shared_fetch_report", "scout_execution_audit",
+      "overview", "amber_revenue", "unique_funnel", "owner_escalations", "amber_activity",
+      "amber_ecosystem", "payment_evidence",
+    ],
+    reportCount: 11,
   };
 }
 
@@ -351,10 +363,17 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
   // All seven in parallel: the dashboard is a status page, and seven serial
   // 20-second timeouts is not a status page.
   const hqProbe = await probeHqService();
-  const [ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem] = await pooled([
+  const [ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem, paymentEvidence] =
+    await pooled([
     () => section({ action: "owner_dashboard" }),
     () => section({ action: "child_workforce_report" }),
-    () => section({ action: "shared_fetch_report" }),
+    /**
+     * recordLimit: 0 — the totals and the per-endpoint roll-up, without the
+     * per-record list. Unbounded, that list was large enough that the response
+     * body did not finish arriving inside the timeout, and the section was
+     * recorded as LIVE holding nothing. Nothing on this page reads the rows.
+     */
+    () => section({ action: "shared_fetch_report", recordLimit: 0 }),
     () => section({ action: "scout_execution_audit" }),
     () => section({ action: "overview" }),
     () => section({ action: "amber_revenue" }),
@@ -362,9 +381,15 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
     () => section({ action: "owner_escalations" }),
     () => section({ action: "amber_activity", limit: 40 }),
     () => section({ action: "amber_ecosystem" }),
+    /**
+     * The rows behind the money, not a total. Cheap on purpose: it filters the
+     * earnings snapshot rather than building the revenue report, which is one
+     * of the actions currently timing out.
+     */
+    () => section({ action: "payment_evidence" }),
   ]);
 
-  const sections = { ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem };
+  const sections = { ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem, paymentEvidence };
   const unavailable = Object.entries(sections).filter(([, v]) => !v.ok).map(([k]) => k);
 
   /**
@@ -543,6 +568,7 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
     },
     sections,
     unavailable,
+    reportCount: Object.keys(sections).length,
   };
 }
 
