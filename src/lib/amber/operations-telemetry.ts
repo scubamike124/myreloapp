@@ -42,30 +42,51 @@ export type Section<T = unknown> =
   | { ok: false; error: string; ms?: number };
 
 /**
- * Per-call timeout, and why it was raised.
+ * Per-call timeout, and why it is this large.
  *
- * This page renders on Cloudflare Workers, which allow at most SIX
- * simultaneous open connections per invocation, so ten reports run in two
- * waves. Eight seconds was chosen to keep the worst case near twenty.
- *
- * Production, 2026-09-15, first live connection: that budget produced SIX
- * "aborted due to timeout" out of ten, including every money report. A fast
- * page of NOT MEASURED is worth less than a slow page of real numbers, and a
- * status page that refreshes every sixty seconds can afford to wait.
- *
- * So the budget now matches the work: heavy reports genuinely take longer
- * (child_workforce_report summarises 100,000 workers; overview crosses to
- * Postgres). Anything still timing out at this budget is a performance problem
- * in the report itself, which `ms` on each section is there to identify.
+ * Eight seconds produced six timeouts out of ten on the first live reading.
+ * Twenty-five still produced five out of eleven -- but crucially, not the SAME
+ * five. See MAX_PARALLEL below: the budget is sized to absorb queueing on a
+ * server that serves these requests one at a time, not to the cost of any one
+ * report.
  */
-const CALL_TIMEOUT_MS = 25_000;
+const CALL_TIMEOUT_MS = 35_000;
 
 /**
- * Raised to the Workers cap rather than below it. Ten reports over six
- * connections is two waves; over four it was three, which multiplied the
- * timeout budget by an extra round for no benefit.
+ * Two, not six -- lowered on evidence, against the usual instinct.
+ *
+ * Six was chosen as the Cloudflare Workers cap, on the assumption that more
+ * requests in flight meant more work done at once. Two readings thirty minutes
+ * apart showed that assumption is wrong for this server:
+ *
+ *   report                  13:00              13:30
+ *   scout_execution_audit   UNAVAILABLE 25.0s  LIVE 2.3s
+ *   shared_fetch_report     LIVE 5.7s          UNAVAILABLE 25.0s
+ *   child_workforce_report  UNAVAILABLE 25.0s  LIVE 22.2s
+ *
+ * The same report on the same data both succeeds in seconds and times out.
+ * That is not report cost, it is queueing -- and payment_evidence and
+ * amber_ecosystem returning at an identical 15.2s is the proof: two different
+ * reports finishing in the same millisecond were released together, not served
+ * together.
+ *
+ * Amber HQ is a single Node process, and these reports do heavy synchronous
+ * work (a large state file parsed, then 100,000 workers summarised). While one
+ * computes, the event loop is blocked and every other request waits. Firing six
+ * at once does not make the server faster; it starts six clocks at the same
+ * moment for work that happens one after another, so whichever lose the race
+ * all time out together -- and which ones lose varies by whoever got in first.
+ *
+ * With two in flight a request waits behind at most one other, so its budget
+ * covers its own work plus one report rather than five. The page takes longer.
+ * That is the right trade: a slower screen showing every figure beats a fast
+ * one showing half, and it refreshes on its own every sixty seconds.
+ *
+ * The real fix is on Amber's side -- those reports should not block her event
+ * loop for twenty seconds -- and this does not pretend otherwise. It stops the
+ * client from making it worse.
  */
-const MAX_PARALLEL = 6;
+const MAX_PARALLEL = 2;
 
 async function section<T>(body: Record<string, unknown>): Promise<Section<T>> {
   const started = Date.now();
