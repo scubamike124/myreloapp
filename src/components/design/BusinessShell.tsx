@@ -13,6 +13,7 @@ const NAV: NavItem[] = [
   // Admin-only page (proxy.ts gates /admin/*); it sits here next to Amber
   // Earnings because that is where the owner looks for it, the same way
   // "Amber Fix" above links out to an admin-gated /amber-builder.
+  { key: "amberops", label: "Amber Operations", href: "/admin/amber-operations", icon: "growth" },
   { key: "aiearnings", label: "Amber's AI Earnings", href: "/admin/amber-ai-earnings", icon: "growth" },
   { key: "property", label: "Property Intelligence", href: "/business-center/property-intelligence", icon: "home" },
   { key: "motorbridge", label: "MotorBridge", href: "/business-center/motorbridge", icon: "gauge" },

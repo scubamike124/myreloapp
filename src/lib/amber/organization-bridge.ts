@@ -25,6 +25,13 @@ export function amberOrgBridgeConfigured(): boolean {
   return config() !== null;
 }
 
+/**
+ * Call one bridge action.
+ *
+ * Exported as `callAmberBridge` below so the Operations dashboard can reach
+ * the telemetry actions without a second copy of the base-URL/secret config.
+ * The secret is read here and nowhere else, and never leaves the server.
+ */
 async function call<T>(body: Record<string, unknown>): Promise<T> {
   const cfg = config();
   if (!cfg) throw new Error("Amber's organization bridge is not configured (REELO_ORG_BRIDGE_SECRET unset).");
@@ -41,6 +48,11 @@ async function call<T>(body: Record<string, unknown>): Promise<T> {
     throw new Error(data?.error || `Amber's organization bridge call failed (${res.status}).`);
   }
   return data as T;
+}
+
+/** Generic access to any bridge action, for callers outside this module. */
+export async function callAmberBridge<T>(body: Record<string, unknown>): Promise<T> {
+  return call<T>(body);
 }
 
 export type DivisionBlueprintView = {
