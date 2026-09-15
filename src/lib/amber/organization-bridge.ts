@@ -32,7 +32,7 @@ export function amberOrgBridgeConfigured(): boolean {
  * the telemetry actions without a second copy of the base-URL/secret config.
  * The secret is read here and nowhere else, and never leaves the server.
  */
-async function call<T>(body: Record<string, unknown>): Promise<T> {
+async function call<T>(body: Record<string, unknown>, opts?: { timeoutMs?: number }): Promise<T> {
   const cfg = config();
   if (!cfg) throw new Error("Amber's organization bridge is not configured (REELO_ORG_BRIDGE_SECRET unset).");
 
@@ -40,19 +40,24 @@ async function call<T>(body: Record<string, unknown>): Promise<T> {
     method: "POST",
     headers: { "content-type": "application/json", "x-bridge-secret": cfg.secret },
     body: JSON.stringify(body),
-    signal: AbortSignal.timeout(20_000),
+    signal: AbortSignal.timeout(opts?.timeoutMs ?? 20_000),
     cache: "no-store",
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok || data?.ok === false) {
+    /**
+     * The status is preserved in the message because it is the difference
+     * between the two failures that need opposite fixes: 401 means the two
+     * hosts hold different secrets, anything else means HQ answered badly.
+     */
     throw new Error(data?.error || `Amber's organization bridge call failed (${res.status}).`);
   }
   return data as T;
 }
 
 /** Generic access to any bridge action, for callers outside this module. */
-export async function callAmberBridge<T>(body: Record<string, unknown>): Promise<T> {
-  return call<T>(body);
+export async function callAmberBridge<T>(body: Record<string, unknown>, opts?: { timeoutMs?: number }): Promise<T> {
+  return call<T>(body, opts);
 }
 
 export type DivisionBlueprintView = {
