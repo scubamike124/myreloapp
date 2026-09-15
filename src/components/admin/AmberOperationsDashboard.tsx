@@ -88,6 +88,7 @@ function ConnectAmberButton({ onConnected }: { onConnected: () => Promise<void> 
       } else {
         setResult({
           at: new Date().toISOString(),
+          channel: null,
           outcome: "NEEDS_OWNER_ATTENTION",
           message: json.error || "Relo could not complete the request.",
           whatToDo: null,
@@ -97,6 +98,7 @@ function ConnectAmberButton({ onConnected }: { onConnected: () => Promise<void> 
     } catch (e) {
       setResult({
         at: new Date().toISOString(),
+        channel: null,
         outcome: "NEEDS_OWNER_ATTENTION",
         message: e instanceof Error ? e.message : "The request failed.",
         whatToDo: null,
