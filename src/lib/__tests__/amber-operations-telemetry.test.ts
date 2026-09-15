@@ -391,3 +391,66 @@ describe("the live connector diagnoses which link is broken", () => {
     assert.ok(peak > 1, "but still parallel — ten serial calls would be far too slow");
   });
 });
+
+
+describe("HQ's own health is provable without any credential", () => {
+  let mod: typeof import("../amber/operations-telemetry.ts");
+  const prevSecret = process.env.REELO_ORG_BRIDGE_SECRET;
+  let restore: (() => void) | null = null;
+
+  before(async () => { mod = await import("../amber/operations-telemetry.ts"); });
+  afterEach(() => {
+    restore?.(); restore = null;
+    if (prevSecret === undefined) delete process.env.REELO_ORG_BRIDGE_SECRET;
+    else process.env.REELO_ORG_BRIDGE_SECRET = prevSecret;
+  });
+
+  it("reports HQ up and its commit even while the bridge is dark", async () => {
+    // The case that matters most: no secret anywhere, and the owner still
+    // needs to know whether Amber HQ is even running before touching anything.
+    delete process.env.REELO_ORG_BRIDGE_SECRET;
+    const real = globalThis.fetch;
+    let sentAuthHeader = false;
+    globalThis.fetch = (async (u: string | URL | Request, init?: RequestInit) => {
+      const headers = new Headers(init?.headers ?? {});
+      if (headers.has("x-bridge-secret")) sentAuthHeader = true;
+      assert.match(String(u), /\/api\/health\/public$/, "only the public endpoint is called");
+      return new Response(JSON.stringify({ ok: true, version: { commitShort: "7fe148e", commit: "7fe148eb49" } }), { status: 200 });
+    }) as typeof fetch;
+    restore = () => { globalThis.fetch = real; };
+
+    const ops = await mod.fetchAmberOperations();
+    assert.equal(ops.connection.hqServiceUp, true, "HQ is provably alive");
+    assert.equal(ops.connection.hqServiceCommit, "7fe148e");
+    assert.equal(ops.connection.reloSecretPresent, false, "and the missing secret is still named");
+    assert.equal(sentAuthHeader, false, "no credential was used for this probe");
+  });
+
+  it("separates 'HQ is down' from 'HQ is up but the bridge failed'", async () => {
+    process.env.REELO_ORG_BRIDGE_SECRET = "relo-value";
+    const real = globalThis.fetch;
+    globalThis.fetch = (async (u: string | URL | Request) => {
+      // Health answers; the bridge does not.
+      if (/\/api\/health\/public$/.test(String(u))) {
+        return new Response(JSON.stringify({ ok: true, version: { commitShort: "abc1234" } }), { status: 200 });
+      }
+      throw new Error("fetch failed");
+    }) as typeof fetch;
+    restore = () => { globalThis.fetch = real; };
+
+    const c = (await mod.fetchAmberOperations()).connection;
+    assert.equal(c.hqServiceUp, true);
+    assert.match(c.brokenLink ?? "", /Amber HQ is up, but its bridge endpoint/);
+    assert.match(c.fixHint ?? "", /the bridge route itself is failing/);
+  });
+
+  it("reports HQ unknown when even the public endpoint cannot be reached", async () => {
+    delete process.env.REELO_ORG_BRIDGE_SECRET;
+    const real = globalThis.fetch;
+    globalThis.fetch = (async () => { throw new Error("fetch failed"); }) as typeof fetch;
+    restore = () => { globalThis.fetch = real; };
+
+    const c = (await mod.fetchAmberOperations()).connection;
+    assert.equal(c.hqServiceUp, null, "unknown, not false — we could not ask");
+  });
+});

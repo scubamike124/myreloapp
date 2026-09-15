@@ -152,6 +152,17 @@ export type OwnerSummary = {
  * DIFFERENT secrets, which is a different fix from either being unset.
  */
 export type ConnectionDiagnosis = {
+  /**
+   * Is Amber HQ itself up? Answered WITHOUT any credential.
+   *
+   * /api/health/public serves the commit HQ is running and needs no secret,
+   * which is what makes "AMBER HQ: LIVE" provable from Relo even while the
+   * bridge is still dark. Without it, a missing secret and a dead HQ produce
+   * the same silence, and they need opposite fixes.
+   */
+  hqServiceUp: boolean | null;
+  /** The commit Amber HQ is actually serving, from its own process. */
+  hqServiceCommit: string | null;
   /** Is REELO_ORG_BRIDGE_SECRET present on Relo's server? */
   reloSecretPresent: boolean;
   /** Did any call reach Amber HQ and get an HTTP response at all? */
@@ -195,6 +206,8 @@ function notConfigured(now: string): AmberOperations {
   return {
     configured: false,
     connection: {
+      hqServiceUp: null,
+      hqServiceCommit: null,
       reloSecretPresent: false,
       hqReachable: false,
       hqAuthAccepted: false,
@@ -273,12 +286,47 @@ function stage(funnel: unknown, names: string[]): number | null {
   return null;
 }
 
+/**
+ * Ask Amber HQ whether it is alive, using no credential at all.
+ *
+ * Deliberately separate from the bridge calls: this must still answer when the
+ * bridge is dark, because "HQ is down" and "we have no secret" are different
+ * problems and the owner needs to know which one they have.
+ */
+async function probeHqService(): Promise<{ up: boolean | null; commit: string | null }> {
+  const base = (process.env.AMBER_ORG_BRIDGE_URL || "https://hq.amberoneai.com").replace(/\/$/, "");
+  try {
+    const res = await fetch(`${base}/api/health/public`, {
+      signal: AbortSignal.timeout(CALL_TIMEOUT_MS),
+      cache: "no-store",
+    });
+    if (!res.ok) return { up: false, commit: null };
+    const body = (await res.json().catch(() => null)) as unknown;
+    const commit = at(body, "version.commitShort") ?? at(body, "version.commit");
+    return { up: true, commit: typeof commit === "string" ? commit : null };
+  } catch {
+    // No response at all. Distinct from "answered badly", which returns up:false
+    // with a status; here we genuinely could not reach it.
+    return { up: null, commit: null };
+  }
+}
+
 export async function fetchAmberOperations(): Promise<AmberOperations> {
   const now = new Date().toISOString();
-  if (!amberOrgBridgeConfigured()) return notConfigured(now);
+  if (!amberOrgBridgeConfigured()) {
+    // The secret is missing, which is precisely when "is HQ even up?" is the
+    // question the owner needs answered before touching anything.
+    const probe = await probeHqService();
+    const out = notConfigured(now);
+    out.connection.hqServiceUp = probe.up;
+    out.connection.hqServiceCommit = probe.commit;
+    out.hqCommitShort = probe.commit;
+    return out;
+  }
 
   // All seven in parallel: the dashboard is a status page, and seven serial
   // 20-second timeouts is not a status page.
+  const hqProbe = await probeHqService();
   const [ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem] = await pooled([
     () => section({ action: "owner_dashboard" }),
     () => section({ action: "child_workforce_report" }),
@@ -309,6 +357,8 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
   const sawTransportFailure = errors.some((e) => /abort|timeout|fetch failed|network|ENOTFOUND|ECONN/i.test(e));
 
   const connection: ConnectionDiagnosis = {
+    hqServiceUp: hqProbe.up,
+    hqServiceCommit: hqProbe.commit,
     reloSecretPresent: true,
     hqReachable: anyOk || sawAuthRejection || (errors.length > 0 && !sawTransportFailure),
     hqAuthAccepted: anyOk,
@@ -323,8 +373,14 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
       connection.fixHint = "Set REELO_ORG_BRIDGE_SECRET to the SAME value on both Relo (Cloudflare) and Amber HQ (Railway, service amber-hq-web).";
     } else if (sawTransportFailure) {
       connection.hqReachable = false;
-      connection.brokenLink = "Relo's server could not reach Amber HQ at all — no HTTP response.";
-      connection.fixHint = "Check that amber-hq-web is running on Railway and that hq.amberoneai.com resolves.";
+      connection.brokenLink =
+        hqProbe.up === true
+          ? "Amber HQ is up, but its bridge endpoint did not respond to Relo."
+          : "Relo's server could not reach Amber HQ at all — no HTTP response.";
+      connection.fixHint =
+        hqProbe.up === true
+          ? "HQ's public health endpoint answered, so the service is running — the bridge route itself is failing or timing out."
+          : "Check that amber-hq-web is running on Railway and that hq.amberoneai.com resolves.";
     } else {
       connection.brokenLink = "Amber HQ answered, but every report failed.";
       connection.fixHint = errors[0] ?? "See the drill-down sections for the exact error.";
