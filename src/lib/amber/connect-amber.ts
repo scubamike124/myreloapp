@@ -152,7 +152,15 @@ async function provisionBridgeSecret(args: {
     }
   }
 
-  type StoreReply = { ok?: boolean; error?: string; stored?: boolean } | null;
+  type StoreReply = {
+    ok?: boolean;
+    error?: string;
+    stored?: boolean;
+    /** Amber's own check that this exact value opens her bridge. A boolean, never a value. */
+    willAuthenticate?: boolean;
+    /** Only sent when willAuthenticate is false, and only as a boolean. */
+    envVarSet?: boolean;
+  } | null;
   let body: StoreReply = null;
   try {
     const res = await doFetch(devBridgeUrl(), {
@@ -196,6 +204,27 @@ async function provisionBridgeSecret(args: {
   }
 
   /**
+   * Amber checks her own work before Relo trusts it.
+   *
+   * On 2026-09-15 she answered {stored: true} and her bridge rejected the very
+   * same value one call later, because her auth path read the credential
+   * through an env-first resolver that never consulted the row. "Stored" was
+   * true and useless. `willAuthenticate` is the fact that matters, and saying
+   * it here turns an opaque 401 into a named cause.
+   *
+   * Absent on an older deploy, in which case the verification below still
+   * decides -- this narrows the message, it does not replace the proof.
+   */
+  if (body.willAuthenticate === false) {
+    return fail(
+      "Amber stored the credential, but it will not open her telemetry bridge.",
+      body.envVarSet
+        ? "Amber has REELO_ORG_BRIDGE_SECRET set in her own environment, and that value is taking precedence over the one Relo provisioned. Clearing it on Railway lets the provisioned credential take effect."
+        : "Something in Amber's credential store is taking precedence over the row she just wrote.",
+    );
+  }
+
+  /**
    * ---- Proof, not a 200. ----
    *
    * Amber answering "stored" proves her half. It does not prove Relo can read
@@ -223,7 +252,7 @@ async function provisionBridgeSecret(args: {
     if (!res.ok || !verify?.ok) {
       return fail(
         `Amber stored the credential, but the telemetry bridge still rejected it (HTTP ${res.status}).`,
-        "Amber may need a moment to pick up the new value. Press again shortly.",
+        "Press again shortly. If it repeats, something in Amber's credential store is taking precedence over the row she just wrote.",
       );
     }
   } catch (e) {

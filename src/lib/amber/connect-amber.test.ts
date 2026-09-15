@@ -169,6 +169,46 @@ describe("provisioning, when Amber cannot write Relo's side", () => {
     assert.match(verify.url, /reelo-organization-bridge$/, "the telemetry bridge, not the dev bridge");
   });
 
+  it("names the cause when Amber says the value will not open her bridge", async () => {
+    /**
+     * The production failure of 2026-09-15: Amber answered {stored: true} and
+     * her bridge rejected the same value one call later, because her auth path
+     * read it through an env-first resolver that never consulted the row.
+     * "Stored" was true and useless; willAuthenticate is the fact that matters.
+     */
+    const { store } = fakeStore();
+    const h = hq({
+      connect_relo_bridge: { status: 200, body: NO_CF },
+      store_org_bridge_secret: { body: { ok: true, stored: true, willAuthenticate: false, envVarSet: true } },
+      deployed_version: { body: VERIFIED },
+    });
+
+    const r = await connect(h.fetchImpl, store);
+
+    assert.equal(r.outcome, "NEEDS_OWNER_ATTENTION");
+    assert.match(r.whatToDo ?? "", /set in her own environment/);
+    assert.equal(
+      h.calls.filter((c) => c.body.action === "deployed_version").length,
+      0,
+      "no point verifying a value Amber already said will not work",
+    );
+  });
+
+  it("still proves it over the bridge when Amber's deploy does not report that signal", async () => {
+    // An older HQ omits willAuthenticate. The verification decides, as before.
+    const { store } = fakeStore();
+    const h = hq({
+      connect_relo_bridge: { status: 200, body: NO_CF },
+      store_org_bridge_secret: { body: { ok: true, stored: true } },
+      deployed_version: { body: VERIFIED },
+    });
+
+    const r = await connect(h.fetchImpl, store);
+
+    assert.equal(r.outcome, "CONNECTED");
+    assert.equal(h.calls.filter((c) => c.body.action === "deployed_version").length, 1);
+  });
+
   it("says the deploy is behind rather than blaming the owner", async () => {
     const { store } = fakeStore();
     const h = hq({ connect_relo_bridge: { status: 200, body: NO_CF } });
