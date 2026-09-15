@@ -250,7 +250,53 @@ export type AmberOperations = {
    * sentence wrong.
    */
   reportCount: number;
+  /**
+   * Relo's OWN confirmed revenue rows, read locally rather than over the
+   * bridge.
+   *
+   * Production, 2026-09-15: Amber HQ reported paymentCount 0 and $0.00 across
+   * 469 jobs while the Earnings page showed $15 lifetime. Both were true --
+   * they are different ledgers, and nothing on any screen said so.
+   *
+   * null means Relo's database could not be read, which is not the same as no
+   * revenue booked. Same rule as every other figure here.
+   */
+  reloLedger: { totalUsd: number; rows: ReloLedgerRow[] } | null;
 };
+
+/** One booked revenue row, as the owner should be able to audit it. */
+export type ReloLedgerRow = {
+  platformSlug: string;
+  jobId: string | null;
+  amountUsd: number;
+  source: string;
+  occurredAt: string;
+  note: string;
+};
+
+/**
+ * Never throws and never invents a zero: an unreadable database yields null,
+ * so "we could not check" stays distinct from "nothing is booked".
+ */
+async function readReloLedger(): Promise<{ totalUsd: number; rows: ReloLedgerRow[] } | null> {
+  try {
+    const { listConfirmedRevenueRows } = await import("../amber-earnings/persist.ts");
+    const rows = await listConfirmedRevenueRows(100);
+    return {
+      totalUsd: Math.round(rows.reduce((t, r) => t + r.amountUsd, 0) * 100) / 100,
+      rows: rows.map((r) => ({
+        platformSlug: r.platformSlug,
+        jobId: r.jobId,
+        amountUsd: r.amountUsd,
+        source: r.source,
+        occurredAt: r.occurredAt,
+        note: r.note,
+      })),
+    };
+  } catch {
+    return null;
+  }
+}
 
 function notConfigured(now: string): AmberOperations {
   const err = "REELO_ORG_BRIDGE_SECRET is not set on this host, so Amber HQ cannot be reached.";
@@ -298,6 +344,7 @@ function notConfigured(now: string): AmberOperations {
       "amber_ecosystem", "payment_evidence",
     ],
     reportCount: 11,
+    reloLedger: null,
   };
 }
 
@@ -640,6 +687,7 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
     sections,
     unavailable,
     reportCount: Object.keys(sections).length,
+    reloLedger: await readReloLedger(),
   };
 }
 

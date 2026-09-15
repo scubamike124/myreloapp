@@ -14,7 +14,7 @@
  *     dashboard that prints 0 for both, and they call for opposite responses.
  */
 import { useCallback, useEffect, useState } from "react";
-import type { AmberOperations, OwnerSummary, Section } from "@/lib/amber/operations-telemetry";
+import type { AmberOperations, OwnerSummary, Section, ReloLedgerRow } from "@/lib/amber/operations-telemetry";
 import type { OwnerEscalationView, ActivityEventView } from "@/lib/amber/operations-views";
 import type { ConnectAmberResult } from "@/lib/amber/connect-amber";
 // Values, not just types: imported from the view module so this client
@@ -178,6 +178,83 @@ function StatusPill({ state, label }: { state: "good" | "bad" | "warn" | "unknow
 }
 
 /** A bridge section, expandable to its raw production payload. */
+/**
+ * The two ledgers, side by side.
+ *
+ * On 2026-09-15 Amber HQ reported paymentCount 0 and $0.00 across 469 jobs
+ * while the Earnings page showed $15 lifetime. Both were true: the Earnings
+ * page reads Relo's own booked rows and Amber HQ never sees them. Nothing on
+ * any screen said so, so the only way to notice was to ask both and compare
+ * by hand.
+ *
+ * Showing them together makes a disagreement visible the moment it appears,
+ * and names it rather than quietly preferring one number.
+ */
+function TwoLedgers({ ops }: { ops: AmberOperations }) {
+  const relo = ops.reloLedger;
+  const ev = ops.sections.paymentEvidence;
+  const hqTotal = ev.ok ? (ev.data as { evidencedTotalUsd?: number } | null)?.evidencedTotalUsd ?? null : null;
+  const hqCount = ev.ok ? (ev.data as { paymentCount?: number } | null)?.paymentCount ?? null : null;
+  const money = (v: number | null) =>
+    v === null ? <span className="text-sm font-medium text-white/35">NOT MEASURED</span> : `$${v.toFixed(2)}`;
+
+  const disagree = hqTotal !== null && relo !== null && Math.abs(hqTotal - relo.totalUsd) > 0.004;
+
+  return (
+    <section className="mt-4 rounded-2xl border border-white/10 bg-white/[0.02] p-4">
+      <h3 className="font-display text-base font-bold">Where the money figures come from</h3>
+      <p className="mt-1 text-[13px] leading-relaxed text-white/50">
+        Two separate ledgers. The Amber Earnings page reads Relo&rsquo;s; Amber HQ keeps her own and cannot see
+        Relo&rsquo;s. They are shown together so a disagreement is never silent.
+      </p>
+
+      <div className="mt-3 grid grid-cols-2 gap-3">
+        <div className="rounded-xl border border-white/10 p-3">
+          <div className="text-[11px] uppercase tracking-wide text-white/45">Amber HQ ledger</div>
+          <div className="mt-1 font-display text-xl font-bold tabular-nums">{money(hqTotal)}</div>
+          <div className="mt-1 text-[11px] text-white/40">
+            {hqCount === null ? "with payment evidence" : `${hqCount} payment record(s) with evidence`}
+          </div>
+        </div>
+        <div className="rounded-xl border border-white/10 p-3">
+          <div className="text-[11px] uppercase tracking-wide text-white/45">Relo booked ledger</div>
+          <div className="mt-1 font-display text-xl font-bold tabular-nums">{money(relo ? relo.totalUsd : null)}</div>
+          <div className="mt-1 text-[11px] text-white/40">
+            {relo === null ? "database unreadable" : `${relo.rows.length} confirmed revenue row(s)`}
+          </div>
+        </div>
+      </div>
+
+      {disagree && (
+        <p className="mt-3 rounded-xl border border-[#f0b429]/40 bg-[#f0b429]/10 p-3 text-[13px] leading-relaxed text-[#f0b429]">
+          The two ledgers disagree. Neither is wrong on its own terms &mdash; they record different things &mdash; but
+          the Earnings page shows the Relo figure, so that is the one labelled &ldquo;verified paid&rdquo; to you.
+        </p>
+      )}
+
+      {relo !== null && relo.rows.length > 0 && (
+        <div className="mt-3 space-y-2">
+          {relo.rows.map((r: ReloLedgerRow, i: number) => (
+            <div key={`${r.jobId ?? "row"}-${i}`} className="rounded-xl border border-white/10 p-3 text-[12px]">
+              <div className="flex items-baseline justify-between gap-2">
+                <span className="font-semibold">{r.platformSlug || "unknown platform"}</span>
+                <span className="tabular-nums font-semibold">${r.amountUsd.toFixed(2)}</span>
+              </div>
+              <div className="mt-1 break-words text-white/50">{r.note || "no note recorded"}</div>
+              <div className="mt-1 text-white/35">
+                {r.occurredAt} &middot; source: {r.source || "unrecorded"} &middot; job: {r.jobId ?? "none"}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {relo !== null && relo.rows.length === 0 && (
+        <p className="mt-3 text-[13px] text-white/45">Relo has booked no confirmed revenue rows.</p>
+      )}
+    </section>
+  );
+}
+
 function SectionBlock({ name, title, section }: { name: string; title: string; section: Section }) {
   const [open, setOpen] = useState(false);
   return (
@@ -586,6 +663,7 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
         <SectionBlock name="amber_revenue" title="Revenue, cost & net" section={ops.sections.revenue} />
         {/* The rows behind the money: method, reference, amount, observed at. */}
         <SectionBlock name="payment_evidence" title="Payment evidence (every dollar counted)" section={ops.sections.paymentEvidence} />
+        <TwoLedgers ops={ops} />
         <SectionBlock name="amber_ecosystem" title="Amber's own audit & manager health" section={ops.sections.ecosystem} />
         <SectionBlock name="owner_escalations" title="Owner escalations (raw)" section={ops.sections.escalations} />
       </section>
