@@ -117,6 +117,28 @@ export async function POST(req: Request) {
     "hq-set-owner-business",
     "set-owner-business",
   ]);
+  /**
+   * CONNECT AMBER, from the page the owner can actually reach.
+   *
+   * The same connector the Amber Operations page exposes, surfaced here
+   * because /admin/* is behind a login the owner does not use, while this
+   * route is already reachable with their ordinary Reelo session.
+   *
+   * Guarded by the SAME privilege check as every other HQ control action --
+   * requireAdminAccess(), i.e. an OWNER or ADMIN role. It does not widen
+   * access: a signed-in non-privileged user gets 403 exactly as they do for
+   * pausing a marketplace. No secret is accepted from the browser and none is
+   * returned to it; Amber does the work with her own credentials.
+   */
+  if (body.action === "connect-amber") {
+    const { access, res } = await privilegedOr401();
+    if (!access) return res;
+    const { connectAmber } = await import("@/lib/amber/connect-amber");
+    const result = await connectAmber();
+    const base = access.user ? await payload(access.user.id, true) : { ok: true };
+    return NextResponse.json({ ...base, connectAmber: result });
+  }
+
   if (body.action && (hqControl.has(body.action) || body.action === "hq-pause-marketplace")) {
     const { access, res } = await privilegedOr401();
     if (!access) return res;

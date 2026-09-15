@@ -584,3 +584,43 @@ describe("the Connect Amber button and its route", () => {
     assert.match(ui, /<ConnectAmberButton onConnected=\{refresh\}/);
   });
 });
+
+describe("Connect Amber is reachable from the page the owner signs in to", () => {
+  const route = fs.readFileSync("src/app/api/amber-earnings/route.ts", "utf8");
+  const panel = fs.readFileSync("src/components/business/AmberEarningsPanel.tsx", "utf8");
+
+  it("is gated by the SAME privilege check as every other HQ control action", () => {
+    // /business-center is not covered by the admin middleware (matcher is
+    // "/admin/:path*"), so this route's own check is the only thing standing
+    // between a signed-in non-owner and a production configuration change.
+    const block = route.slice(route.indexOf('body.action === "connect-amber"'));
+    const guard = block.indexOf("privilegedOr401()");
+    const work = block.indexOf("connectAmber()");
+    assert.ok(guard !== -1, "the action must call privilegedOr401");
+    assert.ok(work !== -1 && guard < work, "privilege is checked BEFORE anything happens");
+    assert.match(route, /requireAdminAccess/);
+  });
+
+  it("accepts no secret from the browser and returns none", () => {
+    const block = route.slice(
+      route.indexOf('body.action === "connect-amber"'),
+      route.indexOf("hqControl.has(body.action)"),
+    );
+    assert.ok(!block.includes("REELO_ORG_BRIDGE_SECRET"), "the route never handles the secret");
+    assert.ok(!/body\.secret|body\.token/.test(block), "nothing credential-shaped is read from the request");
+  });
+
+  it("shows the owner the three states, on the Earnings page", () => {
+    assert.match(panel, /CONNECT AMBER/);
+    assert.match(panel, /CONNECTING…/);
+    assert.match(panel, /NEEDS OWNER ATTENTION/);
+    assert.match(panel, /act\("connect-amber"\)/, "the button posts the action");
+  });
+
+  it("is hidden until the owner is actually signed in", () => {
+    // A button that 401s is worse than no button: it reads as a broken system
+    // rather than as "you are not signed in".
+    const banner = panel.slice(panel.indexOf("Amber Operations connection") - 400);
+    assert.match(banner, /!needSignIn \? \(/);
+  });
+});
