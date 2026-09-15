@@ -14,15 +14,42 @@
 
 const DEFAULT_BASE_URL = "https://hq.amberoneai.com";
 
-function config(): { baseUrl: string; secret: string } | null {
-  const baseUrl = (process.env.AMBER_ORG_BRIDGE_URL || DEFAULT_BASE_URL).replace(/\/$/, "");
-  const secret = process.env.REELO_ORG_BRIDGE_SECRET ?? "";
-  if (!secret) return null;
-  return { baseUrl, secret };
+export function amberOrgBridgeBaseUrl(): string {
+  return (process.env.AMBER_ORG_BRIDGE_URL || DEFAULT_BASE_URL).replace(/\/$/, "");
 }
 
-export function amberOrgBridgeConfigured(): boolean {
-  return config() !== null;
+/**
+ * The bridge secret: environment first, then the row Relo stores itself.
+ *
+ * Symmetric with how Amber reads hers — env, then her encrypted vault. The
+ * fallback exists because a Worker SECRET can only be written through
+ * Cloudflare, and production established on 2026-09-15 that Amber holds no
+ * Cloudflare token to write it with. The credential therefore has to live
+ * somewhere Relo can actually put it. See bridge-secret-store.ts.
+ *
+ * Env still wins, so a value the owner sets deliberately is never shadowed by
+ * a stored one.
+ */
+async function resolveBridgeSecret(): Promise<string> {
+  const fromEnv = (process.env.REELO_ORG_BRIDGE_SECRET ?? "").trim();
+  if (fromEnv) return fromEnv;
+  try {
+    const { loadStoredBridgeSecret } = await import("./bridge-secret-store");
+    return (await loadStoredBridgeSecret()) ?? "";
+  } catch {
+    // An unreadable store leaves the bridge unconfigured, never open.
+    return "";
+  }
+}
+
+async function config(): Promise<{ baseUrl: string; secret: string } | null> {
+  const secret = await resolveBridgeSecret();
+  if (!secret) return null;
+  return { baseUrl: amberOrgBridgeBaseUrl(), secret };
+}
+
+export async function amberOrgBridgeConfigured(): Promise<boolean> {
+  return (await config()) !== null;
 }
 
 /**
@@ -33,7 +60,7 @@ export function amberOrgBridgeConfigured(): boolean {
  * The secret is read here and nowhere else, and never leaves the server.
  */
 async function call<T>(body: Record<string, unknown>, opts?: { timeoutMs?: number }): Promise<T> {
-  const cfg = config();
+  const cfg = await config();
   if (!cfg) throw new Error("Amber's organization bridge is not configured (REELO_ORG_BRIDGE_SECRET unset).");
 
   const res = await fetch(`${cfg.baseUrl}/api/internal/reelo-organization-bridge`, {

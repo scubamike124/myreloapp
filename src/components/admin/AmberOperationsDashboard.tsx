@@ -14,9 +14,13 @@
  *     dashboard that prints 0 for both, and they call for opposite responses.
  */
 import { useCallback, useEffect, useState } from "react";
-import type { AmberOperations, OwnerSummary, Section, OwnerEscalationView, ActivityEventView } from "@/lib/amber/operations-telemetry";
+import type { AmberOperations, OwnerSummary, Section } from "@/lib/amber/operations-telemetry";
+import type { OwnerEscalationView, ActivityEventView } from "@/lib/amber/operations-views";
 import type { ConnectAmberResult } from "@/lib/amber/connect-amber";
-import { escalationsFrom, activityFrom } from "@/lib/amber/operations-telemetry";
+// Values, not just types: imported from the view module so this client
+// component never pulls the telemetry module's server-only graph into the
+// browser bundle.
+import { escalationsFrom, activityFrom } from "@/lib/amber/operations-views";
 
 const REFRESH_MS = 60_000;
 

@@ -772,16 +772,23 @@ describe("the button says what Amber actually said", () => {
   });
 
   it("still prefers a real result detail over the bare error", async () => {
+    /**
+     * NO_CLOUDFLARE_TOKEN deliberately is NOT the example here any more. That
+     * status no longer produces a message for the owner at all — it is the
+     * handover to the provisioning path, covered in
+     * src/lib/amber/connect-amber.test.ts. Any OTHER failure still reports
+     * Amber's own sentence rather than a vaguer one of ours.
+     */
     process.env.REELO_DEV_BRIDGE_SECRET = "dev-bridge-value";
     restore = hq(() => new Response(JSON.stringify({
       ok: false,
       error: "generic",
-      result: { status: "NO_CLOUDFLARE_TOKEN", detail: "Amber holds a bridge secret but no Cloudflare API token." },
+      result: { status: "FAILED", detail: "Amber's vault rejected the write." },
     }), { status: 200 }));
 
     const r = await mod.connectAmber();
-    assert.match(r.message, /no Cloudflare API token/);
-    assert.match(r.whatToDo ?? "", /CLOUDFLARE_API_TOKEN to Amber's vault/);
+    assert.equal(r.outcome, "NEEDS_OWNER_ATTENTION");
+    assert.match(r.message, /vault rejected the write/);
   });
 
   it("names the deploy lag on the cron channel too", async () => {

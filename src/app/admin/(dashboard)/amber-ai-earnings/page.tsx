@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Amber's AI Earnings — Reelo Admin"
 export const dynamic = "force-dynamic";
 
 export default async function AmberAiEarningsPage() {
-  if (!amberOrgBridgeConfigured()) {
+  if (!(await amberOrgBridgeConfigured())) {
     return (
       <div className="rounded-2xl border border-white/10 bg-black/40 p-6">
         <h1 className="font-display text-2xl font-bold sm:text-[28px]">Amber&apos;s AI Earnings</h1>

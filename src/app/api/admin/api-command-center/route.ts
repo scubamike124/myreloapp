@@ -28,7 +28,7 @@ export async function GET(req: Request) {
   const denied = await requireAdmin();
   if (denied) return denied;
 
-  if (!amberOrgBridgeConfigured()) {
+  if (!(await amberOrgBridgeConfigured())) {
     return NextResponse.json(
       { ok: false, error: "Amber's organization bridge is not configured (REELO_ORG_BRIDGE_SECRET unset)." },
       { status: 503 },

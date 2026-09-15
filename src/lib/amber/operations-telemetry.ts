@@ -313,7 +313,7 @@ async function probeHqService(): Promise<{ up: boolean | null; commit: string | 
 
 export async function fetchAmberOperations(): Promise<AmberOperations> {
   const now = new Date().toISOString();
-  if (!amberOrgBridgeConfigured()) {
+  if (!(await amberOrgBridgeConfigured())) {
     // The secret is missing, which is precisely when "is HQ even up?" is the
     // question the owner needs answered before touching anything.
     const probe = await probeHqService();
@@ -523,116 +523,15 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
 }
 
 
-// ---------------------------------------------------------------------------
-// Owner-facing views of Amber's own reports.
-//
-// Narrowed defensively rather than cast: these cross a network boundary from a
-// separately-deployed service, so a field that is missing must render as
-// missing, never crash the page that is supposed to tell the owner what is
-// wrong.
-// ---------------------------------------------------------------------------
-
-export type RepairAttemptView = { at: string; whatAmberDid: string; result: string | null; worked: boolean };
-
-export type OwnerEscalationView = {
-  id: string;
-  status: "OPEN" | "RESOLVED";
-  urgency: "CRITICAL" | "IMPORTANT" | "MINOR";
-  title: string;
-  whatHappened: string;
-  whatIsAffected: string;
-  whyAmberCannotFix: string;
-  whatWeNeedFromYou: string[];
-  revenueBlocked: boolean;
-  firstSeenAt: string;
-  lastSeenAt: string;
-  seenInAudits: number;
-  repairAttempts: RepairAttemptView[];
-  resolvedAt?: string;
-  resolvedBy?: string;
-  technical?: { rule?: string; severity?: string; evidence?: string; lastAction?: string };
-};
-
-export type ActivityEventView = {
-  id: string;
-  kind: string;
-  level: "good" | "bad" | "info";
-  headline: string;
-  detail: string;
-  firstAt: string;
-  lastAt: string;
-  occurrences: number;
-};
-
-function str(v: unknown, fallback = ""): string {
-  return typeof v === "string" ? v : fallback;
-}
-function strList(v: unknown): string[] {
-  return Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : [];
-}
-
-function toEscalation(raw: unknown): OwnerEscalationView | null {
-  const r = rec(raw);
-  if (!r) return null;
-  const title = str(r.title) || str(r.whatHappened);
-  if (!title) return null;
-  const urgency = r.urgency === "CRITICAL" || r.urgency === "IMPORTANT" || r.urgency === "MINOR" ? r.urgency : "MINOR";
-  return {
-    id: str(r.id, title),
-    status: r.status === "RESOLVED" ? "RESOLVED" : "OPEN",
-    urgency,
-    title,
-    whatHappened: str(r.whatHappened, title),
-    whatIsAffected: str(r.whatIsAffected, "Not stated."),
-    whyAmberCannotFix: str(r.whyAmberCannotFix, "Not stated."),
-    whatWeNeedFromYou: strList(r.whatWeNeedFromYou),
-    revenueBlocked: r.revenueBlocked === true,
-    firstSeenAt: str(r.firstSeenAt),
-    lastSeenAt: str(r.lastSeenAt),
-    seenInAudits: num(r.seenInAudits) ?? 1,
-    repairAttempts: Array.isArray(r.repairAttempts)
-      ? r.repairAttempts.flatMap((a) => {
-          const ar = rec(a);
-          if (!ar) return [];
-          return [{ at: str(ar.at), whatAmberDid: str(ar.whatAmberDid), result: typeof ar.result === "string" ? ar.result : null, worked: ar.worked === true }];
-        })
-      : [],
-    resolvedAt: typeof r.resolvedAt === "string" ? r.resolvedAt : undefined,
-    resolvedBy: typeof r.resolvedBy === "string" ? r.resolvedBy : undefined,
-    technical: rec(r.technical) as OwnerEscalationView["technical"],
-  };
-}
-
-/** Amber's open asks and her recently closed ones. */
-export function escalationsFrom(section: Section): { open: OwnerEscalationView[]; resolved: OwnerEscalationView[] } {
-  if (!section.ok) return { open: [], resolved: [] };
-  const openRaw = at(section.data, "open");
-  const resolvedRaw = at(section.data, "resolved");
-  return {
-    open: (Array.isArray(openRaw) ? openRaw : []).map(toEscalation).filter((x): x is OwnerEscalationView => x !== null),
-    resolved: (Array.isArray(resolvedRaw) ? resolvedRaw : []).map(toEscalation).filter((x): x is OwnerEscalationView => x !== null),
-  };
-}
-
-/** Amber's summarized report of important events. */
-export function activityFrom(section: Section): ActivityEventView[] {
-  if (!section.ok) return [];
-  const raw = at(section.data, "events");
-  if (!Array.isArray(raw)) return [];
-  return raw.flatMap((e) => {
-    const r = rec(e);
-    const headline = str(r?.headline);
-    if (!r || !headline) return [];
-    const level = r.level === "good" || r.level === "bad" ? r.level : "info";
-    return [{
-      id: str(r.id, headline),
-      kind: str(r.kind, "info"),
-      level,
-      headline,
-      detail: str(r.detail),
-      firstAt: str(r.firstAt),
-      lastAt: str(r.lastAt),
-      occurrences: num(r.occurrences) ?? 1,
-    }];
-  });
-}
+/**
+ * Re-exported for callers already reaching for them here. The definitions live
+ * in operations-views.ts so the client bundle can import them without pulling
+ * this module's credentialed I/O along with them.
+ */
+export {
+  escalationsFrom,
+  activityFrom,
+  type RepairAttemptView,
+  type OwnerEscalationView,
+  type ActivityEventView,
+} from "./operations-views.ts";
