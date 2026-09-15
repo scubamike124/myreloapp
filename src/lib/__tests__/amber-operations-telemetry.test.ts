@@ -454,3 +454,133 @@ describe("HQ's own health is provable without any credential", () => {
     assert.equal(c.hqServiceUp, null, "unknown, not false — we could not ask");
   });
 });
+
+describe("Connect Amber — one press, no secrets in the owner's hands", () => {
+  let mod: typeof import("../amber/connect-amber.ts");
+  const prev = { ...process.env };
+  let restore: (() => void) | null = null;
+
+  before(async () => { mod = await import("../amber/connect-amber.ts"); });
+  afterEach(() => {
+    restore?.(); restore = null;
+    for (const k of ["AMBER_HQ_CRON_SECRET", "CRON_SECRET", "AMBER_BUILDER_SECRET", "SOCIAL_TOKEN_SECRET"]) {
+      if (prev[k] === undefined) delete process.env[k];
+      else process.env[k] = prev[k];
+    }
+  });
+
+  function hq(respond: (init?: RequestInit) => Response) {
+    const real = globalThis.fetch;
+    globalThis.fetch = (async (_u: unknown, init?: RequestInit) => respond(init)) as typeof fetch;
+    return () => { globalThis.fetch = real; };
+  }
+
+  it("reports CONNECTED and never returns a secret", async () => {
+    process.env.CRON_SECRET = "hq-cron-value";
+    restore = hq(() => new Response(JSON.stringify({
+      ok: true,
+      result: { status: "SECRET_GENERATED_AND_INSTALLED", detail: "Amber generated a new bridge secret and installed it on Relo's Worker.", secretLength: 64 },
+    }), { status: 200 }));
+
+    const r = await mod.connectAmber();
+    assert.equal(r.outcome, "CONNECTED");
+    assert.equal(r.hqStatus, "SECRET_GENERATED_AND_INSTALLED");
+    assert.ok(!JSON.stringify(r).includes("hq-cron-value"), "the credential never comes back to the browser");
+  });
+
+  it("sends the credential to HQ but never asks the browser for one", async () => {
+    process.env.CRON_SECRET = "hq-cron-value";
+    let sawHeader = false;
+    restore = hq((init) => {
+      sawHeader = new Headers(init?.headers ?? {}).get("x-cron-secret") === "hq-cron-value";
+      return new Response(JSON.stringify({ ok: true, result: { status: "SECRET_INSTALLED", detail: "done" } }), { status: 200 });
+    });
+    await mod.connectAmber();
+    assert.equal(sawHeader, true, "authenticated server-to-server");
+  });
+
+  it("says NEEDS OWNER ATTENTION, in plain English, when Amber cannot finish", async () => {
+    process.env.CRON_SECRET = "hq-cron-value";
+    restore = hq(() => new Response(JSON.stringify({
+      ok: false,
+      result: { status: "NO_CLOUDFLARE_TOKEN", detail: "Amber holds a bridge secret but no Cloudflare API token." },
+    }), { status: 200 }));
+
+    const r = await mod.connectAmber();
+    assert.equal(r.outcome, "NEEDS_OWNER_ATTENTION");
+    assert.match(r.message, /no Cloudflare API token/);
+    assert.match(r.whatToDo ?? "", /CLOUDFLARE_API_TOKEN to Amber's vault/);
+  });
+
+  it("names the Workers permission when Cloudflare refused", async () => {
+    process.env.CRON_SECRET = "x";
+    restore = hq(() => new Response(JSON.stringify({
+      ok: false, result: { status: "CLOUDFLARE_REJECTED", detail: "Cloudflare refused the write (403)." },
+    }), { status: 200 }));
+    const r = await mod.connectAmber();
+    assert.match(r.whatToDo ?? "", /Workers Scripts: Edit/);
+  });
+
+  it("tries every credential Relo holds before giving up", async () => {
+    process.env.AMBER_HQ_CRON_SECRET = "first-wrong";
+    process.env.CRON_SECRET = "second-right";
+    const seen: string[] = [];
+    restore = hq((init) => {
+      const t = new Headers(init?.headers ?? {}).get("x-cron-secret") ?? "";
+      seen.push(t);
+      if (t === "second-right") {
+        return new Response(JSON.stringify({ ok: true, result: { status: "SECRET_INSTALLED", detail: "done" } }), { status: 200 });
+      }
+      return new Response("{}", { status: 401 });
+    });
+
+    const r = await mod.connectAmber();
+    assert.deepEqual(seen, ["first-wrong", "second-right"], "a 401 moves on rather than giving up");
+    assert.equal(r.outcome, "CONNECTED");
+  });
+
+  it("explains itself when Relo holds no HQ credential at all", async () => {
+    for (const k of ["AMBER_HQ_CRON_SECRET", "CRON_SECRET", "AMBER_BUILDER_SECRET", "SOCIAL_TOKEN_SECRET"]) delete process.env[k];
+    const r = await mod.connectAmber();
+    assert.equal(r.outcome, "NO_HQ_CREDENTIAL");
+    assert.match(r.whatToDo ?? "", /same credential the Amber Earnings page needs/);
+  });
+
+  it("reports HQ unreachable rather than blaming the credential", async () => {
+    process.env.CRON_SECRET = "x";
+    const real = globalThis.fetch;
+    globalThis.fetch = (async () => { throw new Error("fetch failed"); }) as typeof fetch;
+    restore = () => { globalThis.fetch = real; };
+    const r = await mod.connectAmber();
+    assert.equal(r.outcome, "HQ_UNREACHABLE");
+    assert.match(r.whatToDo ?? "", /amber-hq-web is running/);
+  });
+});
+
+describe("the Connect Amber button and its route", () => {
+  const route = fs.readFileSync("src/app/api/admin/amber-connect/route.ts", "utf8");
+  const ui = fs.readFileSync("src/components/admin/AmberOperationsDashboard.tsx", "utf8");
+
+  it("is POST-only and admin-guarded", () => {
+    assert.match(route, /export async function POST/);
+    assert.ok(!/export async function GET/.test(route), "a GET that writes can be fired by a prefetch");
+    assert.match(route, /verifySessionToken/);
+    assert.match(route, /ADMIN_COOKIE/);
+  });
+
+  it("accepts no secret from the browser and returns none to it", () => {
+    assert.ok(!/req\.json\(\)/.test(route), "the browser supplies nothing");
+    assert.ok(!route.includes("REELO_ORG_BRIDGE_SECRET"), "the route never handles the secret");
+  });
+
+  it("shows exactly the three states the owner asked for", () => {
+    assert.match(ui, /CONNECTING…/);
+    assert.match(ui, /CONNECT AMBER/);
+    assert.match(ui, /NEEDS OWNER ATTENTION/);
+  });
+
+  it("re-reads the telemetry after connecting, so the page proves it", () => {
+    assert.match(ui, /if \(json\.ok\) await onConnected\(\);/);
+    assert.match(ui, /<ConnectAmberButton onConnected=\{refresh\}/);
+  });
+});

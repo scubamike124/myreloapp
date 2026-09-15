@@ -15,6 +15,7 @@
  */
 import { useCallback, useEffect, useState } from "react";
 import type { AmberOperations, OwnerSummary, Section, OwnerEscalationView, ActivityEventView } from "@/lib/amber/operations-telemetry";
+import type { ConnectAmberResult } from "@/lib/amber/connect-amber";
 import { escalationsFrom, activityFrom } from "@/lib/amber/operations-telemetry";
 
 const REFRESH_MS = 60_000;
@@ -54,6 +55,95 @@ function Tile({ label, children, hint }: { label: string; children: React.ReactN
       <div className="text-[11px] uppercase tracking-wide text-white/45">{label}</div>
       <div className="mt-1 font-display text-xl font-bold leading-tight sm:text-2xl">{children}</div>
       {hint && <div className="mt-1 text-[11px] leading-snug text-white/40">{hint}</div>}
+    </div>
+  );
+}
+
+/**
+ * CONNECT AMBER.
+ *
+ * One press. Relo asks Amber HQ to establish the bridge; Amber does it with
+ * credentials she already holds; Relo then re-reads the telemetry so the page
+ * proves the result rather than merely announcing it.
+ *
+ * The owner is never shown, asked for, or required to copy a secret. Three
+ * states only, in the owner's words: CONNECTING…, CONNECTED, or NEEDS OWNER
+ * ATTENTION with a plain-English reason.
+ */
+function ConnectAmberButton({ onConnected }: { onConnected: () => Promise<void> | void }) {
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState<ConnectAmberResult | null>(null);
+
+  const press = useCallback(async () => {
+    setBusy(true);
+    setResult(null);
+    try {
+      const res = await fetch("/api/admin/amber-connect", { method: "POST" });
+      const json = (await res.json()) as { ok?: boolean; result?: ConnectAmberResult; error?: string };
+      if (json.result) {
+        setResult(json.result);
+        // Prove it. A button that says CONNECTED without the page filling in
+        // has told the owner nothing they can rely on.
+        if (json.ok) await onConnected();
+      } else {
+        setResult({
+          at: new Date().toISOString(),
+          outcome: "NEEDS_OWNER_ATTENTION",
+          message: json.error || "Relo could not complete the request.",
+          whatToDo: null,
+          hqStatus: null,
+        });
+      }
+    } catch (e) {
+      setResult({
+        at: new Date().toISOString(),
+        outcome: "NEEDS_OWNER_ATTENTION",
+        message: e instanceof Error ? e.message : "The request failed.",
+        whatToDo: null,
+        hqStatus: null,
+      });
+    } finally {
+      setBusy(false);
+    }
+  }, [onConnected]);
+
+  const connected = result?.outcome === "CONNECTED";
+
+  return (
+    <div className="mt-3 border-t border-white/10 pt-3">
+      <button
+        type="button"
+        onClick={press}
+        disabled={busy}
+        className={`w-full rounded-xl px-4 py-3 font-display text-base font-bold transition sm:w-auto sm:px-8 ${
+          connected
+            ? "bg-[#7ee787]/15 text-[#7ee787] ring-1 ring-[#7ee787]/40"
+            : "bg-[#ff8892] text-black disabled:opacity-60"
+        }`}
+      >
+        {busy ? "CONNECTING…" : connected ? "CONNECTED ✓" : "CONNECT AMBER"}
+      </button>
+
+      {!result && !busy && (
+        <p className="mt-2 text-xs leading-relaxed text-white/45">
+          Press once. Amber establishes the connection herself using her own credentials — nothing to copy, and no
+          secret is ever shown here.
+        </p>
+      )}
+
+      {result && (
+        <div
+          className={`mt-2 rounded-xl border p-3 ${
+            connected ? "border-[#7ee787]/30 bg-[#7ee787]/[0.06]" : "border-[#ffd479]/30 bg-[#ffd479]/[0.06]"
+          }`}
+        >
+          <div className={`font-display text-sm font-bold ${connected ? "text-[#7ee787]" : "text-[#ffd479]"}`}>
+            {connected ? "CONNECTED" : "NEEDS OWNER ATTENTION"}
+          </div>
+          <p className="mt-1 text-sm leading-relaxed text-white/75">{result.message}</p>
+          {result.whatToDo && <p className="mt-1 text-sm leading-relaxed text-white/55">{result.whatToDo}</p>}
+        </div>
+      )}
     </div>
   );
 }
@@ -417,6 +507,8 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
               {ops.connection.live ? "LIVE" : "NOT LIVE"}
             </span>
           </div>
+          {!ops.connection.live && <ConnectAmberButton onConnected={refresh} />}
+
           {ops.connection.brokenLink && (
             <div className="mt-2 border-t border-white/10 pt-2">
               <p className="text-xs leading-relaxed text-[#ffd479]">{ops.connection.brokenLink}</p>
