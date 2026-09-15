@@ -293,6 +293,9 @@ describe("the operations route is guarded and read-only", () => {
         "amber_ecosystem",
         "amber_revenue",
         "child_workforce_report",
+        // One pass over scout state computing why each opportunity is not
+        // executable. Reads only; writes nothing, dispatches nothing.
+        "opportunity_blockers",
         "overview",
         "owner_dashboard",
         "owner_escalations",
