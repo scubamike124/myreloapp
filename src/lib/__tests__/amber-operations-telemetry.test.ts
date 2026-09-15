@@ -1,4 +1,4 @@
-import { describe, it, beforeEach, afterEach } from "node:test";
+import { describe, it, before, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 
@@ -193,8 +193,8 @@ describe("the operations route is guarded and read-only", () => {
     const actions = [...client.matchAll(/action:\s*"([a-z_]+)"/g)].map((m) => m[1]);
     assert.deepEqual(
       [...actions].sort(),
-      ["amber_revenue", "child_workforce_report", "overview", "owner_dashboard", "scout_execution_audit", "shared_fetch_report", "unique_funnel"],
-      "only the seven read-only reports",
+      ["amber_activity", "amber_ecosystem", "amber_revenue", "child_workforce_report", "overview", "owner_dashboard", "owner_escalations", "scout_execution_audit", "shared_fetch_report", "unique_funnel"],
+      "only read-only reports — no control action",
     );
     for (const control of ["pause", "resume", "emergency_stop", "set_division_budget", "pause_division", "pause_agent"]) {
       assert.ok(!actions.includes(control), `must not call the control action ${control}`);
@@ -203,5 +203,107 @@ describe("the operations route is guarded and read-only", () => {
 
   it("never returns the bridge secret to the browser", () => {
     assert.ok(!src.includes("REELO_ORG_BRIDGE_SECRET"), "the route must not read or echo the secret");
+  });
+});
+
+
+describe("Amber's reports, as the owner sees them", () => {
+  let mod: typeof import("../amber/operations-telemetry.ts");
+  before(async () => { mod = await import("../amber/operations-telemetry.ts"); });
+
+  const ok = (data: unknown) => ({ ok: true as const, data });
+
+  it("reads Amber's open asks, with what she tried and what she needs", () => {
+    const { open, resolved } = mod.escalationsFrom(ok({
+      open: [{
+        id: "AMBER-015::freelancer", status: "OPEN", urgency: "CRITICAL",
+        title: "Freelancer bids cannot be submitted",
+        whatHappened: "Freelancer bids cannot be submitted",
+        whatIsAffected: "Revenue — money cannot move until this is cleared.",
+        whyAmberCannotFix: "Owner must authorize Freelancer OAuth from their own account.",
+        whatWeNeedFromYou: ["Sign in to Freelancer and authorize Amber."],
+        revenueBlocked: true, firstSeenAt: "2026-09-15T10:00:00.000Z", lastSeenAt: "2026-09-15T12:00:00.000Z",
+        seenInAudits: 3,
+        repairAttempts: [{ at: "2026-09-15T10:00:00.000Z", whatAmberDid: "retried the bid", result: "still 401", worked: false }],
+        technical: { rule: "AMBER-015", evidence: "401 on 4 of 4" },
+      }],
+      resolved: [{ id: "x", status: "RESOLVED", title: "Tick had stalled", whatHappened: "Tick had stalled", resolvedBy: "Amber repaired it: restarted the tick", resolvedAt: "2026-09-15T11:00:00.000Z" }],
+    }));
+
+    assert.equal(open.length, 1);
+    assert.equal(open[0].revenueBlocked, true);
+    assert.equal(open[0].repairAttempts[0].worked, false);
+    assert.deepEqual(open[0].whatWeNeedFromYou, ["Sign in to Freelancer and authorize Amber."]);
+    assert.equal(resolved[0].status, "RESOLVED");
+    assert.match(resolved[0].resolvedBy ?? "", /Amber repaired it/);
+  });
+
+  it("survives a malformed or partial escalation instead of blanking the page", () => {
+    const { open } = mod.escalationsFrom(ok({ open: [{ title: "Half a record" }, null, 42, { nothing: true }] }));
+    assert.equal(open.length, 1, "the one usable record renders; the junk is dropped");
+    assert.equal(open[0].status, "OPEN");
+    assert.equal(open[0].whatIsAffected, "Not stated.");
+    assert.deepEqual(open[0].whatWeNeedFromYou, []);
+  });
+
+  it("returns nothing — not an error — when Amber could not be asked", () => {
+    const dead = { ok: false as const, error: "bridge down" };
+    assert.deepEqual(mod.escalationsFrom(dead), { open: [], resolved: [] });
+    assert.deepEqual(mod.activityFrom(dead), []);
+  });
+
+  it("reads Amber's summarized activity", () => {
+    const events = mod.activityFrom(ok({ events: [
+      { id: "a", kind: "repair_completed", level: "good", headline: "Amber fixed something herself", detail: "restarted the tick", firstAt: "2026-09-15T10:00:00.000Z", lastAt: "2026-09-15T10:00:00.000Z", occurrences: 1 },
+      { id: "b", kind: "source_failing", level: "bad", headline: "MoltJobs is not answering", detail: "nothing returned", firstAt: "2026-09-15T08:00:00.000Z", lastAt: "2026-09-15T12:00:00.000Z", occurrences: 24 },
+    ] }));
+    assert.equal(events.length, 2);
+    assert.equal(events[1].occurrences, 24, "a recurring condition carries its count, not 24 rows");
+  });
+
+  it("counts managers from execution evidence, and says when it could not", async () => {
+    const prev = process.env.REELO_ORG_BRIDGE_SECRET;
+    process.env.REELO_ORG_BRIDGE_SECRET = "test-secret";
+    const realFetch = globalThis.fetch;
+    globalThis.fetch = (async (_u: unknown, init?: RequestInit) => {
+      const action = JSON.parse(String(init?.body ?? "{}")).action as string;
+      if (action === "amber_ecosystem") {
+        return new Response(JSON.stringify({ ok: true, live: { managers: { total: 20, withWork: 18 },
+          managerHealth: [{ worked: 3 }, { worked: 0 }, { worked: 7 }] } }), { status: 200 });
+      }
+      return new Response(JSON.stringify({ ok: true }), { status: 200 });
+    }) as typeof fetch;
+    try {
+      const s = (await mod.fetchAmberOperations()).summary;
+      assert.equal(s.managersRegistered, 20);
+      assert.equal(s.managersOperating, 2, "two managers have a real run record — not the 18 with work assigned");
+      assert.equal(s.managersBasis, "execution evidence");
+    } finally {
+      globalThis.fetch = realFetch;
+      if (prev === undefined) delete process.env.REELO_ORG_BRIDGE_SECRET;
+      else process.env.REELO_ORG_BRIDGE_SECRET = prev;
+    }
+  });
+});
+
+describe("the dashboard puts problems where the owner cannot miss them", () => {
+  const src = fs.readFileSync("src/components/admin/AmberOperationsDashboard.tsx", "utf8");
+
+  it("renders Needs your attention ABOVE the summary", () => {
+    const attention = src.indexOf("<NeedsOwnerAttention");
+    const rightNow = src.indexOf('Right now</h2>');
+    assert.ok(attention !== -1 && rightNow !== -1 && attention < rightNow, "attention comes first");
+  });
+
+  it("shows plain English, with technical detail behind a disclosure", () => {
+    assert.match(src, /Amber can&apos;t fix it because:/);
+    assert.match(src, /What Amber needs you to do/);
+    assert.match(src, /Amber already tried:/);
+    assert.match(src, /technical detail/);
+  });
+
+  it("says CONNECTION LOST rather than showing an empty, reassuring page", () => {
+    assert.match(src, /CONNECTION LOST/);
+    assert.match(src, /not the same as/);
   });
 });

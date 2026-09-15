@@ -80,6 +80,16 @@ export type OwnerSummary = {
   /** Workers whose last run produced a result nobody had already got. */
   uniqueResultsProduced: number | null;
 
+  /** Divisions/managers registered, and how many are actually operating. */
+  managersRegistered: number | null;
+  managersOperating: number | null;
+  /** How `managersOperating` was established, so the tile cannot overstate it. */
+  managersBasis: "execution evidence" | "work assigned" | null;
+
+  /** Items Amber cannot clear herself and needs the owner for. */
+  needsOwnerCount: number | null;
+  needsOwnerRevenueBlocking: number | null;
+
   /** REAL upstream requests. Excludes reuses, internal audits and bookkeeping. */
   externalChecksToday: number | null;
   uniqueSourcesToday: number | null;
@@ -116,6 +126,9 @@ export type AmberOperations = {
     organization: Section;
     revenue: Section;
     funnel: Section;
+    escalations: Section;
+    activity: Section;
+    ecosystem: Section;
   };
   /** Actions that could not be reached, named so a gap is never silent. */
   unavailable: string[];
@@ -138,6 +151,8 @@ function notConfigured(now: string): AmberOperations {
       scoutsRegistered: null, scoutsWorking: null,
       workersRegistered: null, workersWorking: null, workersWorking1h: null, workersWorking7d: null,
       uniqueResultsProduced: null,
+      managersRegistered: null, managersOperating: null, managersBasis: null,
+      needsOwnerCount: null, needsOwnerRevenueBlocking: null,
       externalChecksToday: null, uniqueSourcesToday: null,
       duplicateFetchesPrevented: null, duplicateDispatchesPrevented: null,
       opportunitiesFound: null, executable: null, pursued: null, won: null, paid: null,
@@ -147,8 +162,9 @@ function notConfigured(now: string): AmberOperations {
     sections: {
       ownerDashboard: dead, workforce: dead, sharedFetch: dead,
       scoutAudit: dead, organization: dead, revenue: dead, funnel: dead,
+      escalations: dead, activity: dead, ecosystem: dead,
     },
-    unavailable: ["owner_dashboard", "child_workforce_report", "shared_fetch_report", "scout_execution_audit", "overview", "amber_revenue", "unique_funnel"],
+    unavailable: ["owner_dashboard", "child_workforce_report", "shared_fetch_report", "scout_execution_audit", "overview", "amber_revenue", "unique_funnel", "owner_escalations", "amber_activity", "amber_ecosystem"],
   };
 }
 
@@ -200,7 +216,7 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
 
   // All seven in parallel: the dashboard is a status page, and seven serial
   // 20-second timeouts is not a status page.
-  const [ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel] = await Promise.all([
+  const [ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem] = await Promise.all([
     section({ action: "owner_dashboard" }),
     section({ action: "child_workforce_report" }),
     section({ action: "shared_fetch_report" }),
@@ -208,9 +224,12 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
     section({ action: "overview" }),
     section({ action: "amber_revenue" }),
     section({ action: "unique_funnel", days: 1 }),
+    section({ action: "owner_escalations" }),
+    section({ action: "amber_activity", limit: 40 }),
+    section({ action: "amber_ecosystem" }),
   ]);
 
-  const sections = { ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel };
+  const sections = { ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem };
   const unavailable = Object.entries(sections).filter(([, v]) => !v.ok).map(([k]) => k);
 
   const dash = ownerDashboard.ok ? ownerDashboard.data : null;
@@ -218,6 +237,8 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
   const sf = sharedFetch.ok ? sharedFetch.data : null;
   const rev = revenue.ok ? revenue.data : null;
   const fn = funnel.ok ? funnel.data : null;
+  const esc = escalations.ok ? escalations.data : null;
+  const eco = ecosystem.ok ? ecosystem.data : null;
 
   // ---- Build identity, straight from the running process. ----
   const hqCommit = (at(dash, "hqBuild.commit") ?? at(wf, "hqBuild.commit") ?? at(rev, "hqBuild.commit")) as string | null;
@@ -233,6 +254,34 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
   const workersWorking1h = num(at(wf, "windows.last1h.executed")) ?? num(at(wf, "utilization.totals.executedLast1h"));
   const workersWorking7d = num(at(wf, "utilization.totals.executedLast7d"));
   const uniqueResultsProduced = num(at(wf, "utilization.totals.producedUniqueResult"));
+
+  /**
+   * Managers actually operating.
+   *
+   * Preferred basis is EXECUTION: managerHealth rows carry `worked`, a count
+   * of real run records. Only when that is unavailable does this fall back to
+   * `managers.withWork` -- which means work was ASSIGNED, not performed -- and
+   * the basis is reported alongside so the tile can say which it is rather
+   * than quietly passing one off as the other.
+   */
+  const managerHealth = at(eco, "live.managerHealth") ?? at(eco, "recentAudits.0.managerHealth");
+  let managersRegistered = num(at(eco, "live.managers.total")) ?? num(at(eco, "recentAudits.0.managers.total"));
+  let managersOperating: number | null = null;
+  let managersBasis: "execution evidence" | "work assigned" | null = null;
+  if (Array.isArray(managerHealth) && managerHealth.length > 0) {
+    managersRegistered = managersRegistered ?? managerHealth.length;
+    managersOperating = managerHealth.filter((m) => (num(at(m, "worked")) ?? 0) > 0).length;
+    managersBasis = "execution evidence";
+  } else {
+    const withWork = num(at(eco, "live.managers.withWork")) ?? num(at(eco, "recentAudits.0.managers.withWork"));
+    if (withWork !== null) {
+      managersOperating = withWork;
+      managersBasis = "work assigned";
+    }
+  }
+
+  const needsOwnerCount = num(at(esc, "openCount"));
+  const needsOwnerRevenueBlocking = num(at(esc, "revenueBlockingCount"));
 
   // ---- Real external activity only. ----
   const externalChecksToday = num(at(sf, "report.totals.fetches"));
@@ -304,6 +353,8 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
       scoutsRegistered, scoutsWorking,
       workersRegistered, workersWorking, workersWorking1h, workersWorking7d,
       uniqueResultsProduced,
+      managersRegistered, managersOperating, managersBasis,
+      needsOwnerCount, needsOwnerRevenueBlocking,
       externalChecksToday, uniqueSourcesToday,
       duplicateFetchesPrevented, duplicateDispatchesPrevented,
       opportunitiesFound, executable, pursued, won, paid,
@@ -313,4 +364,119 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
     sections,
     unavailable,
   };
+}
+
+
+// ---------------------------------------------------------------------------
+// Owner-facing views of Amber's own reports.
+//
+// Narrowed defensively rather than cast: these cross a network boundary from a
+// separately-deployed service, so a field that is missing must render as
+// missing, never crash the page that is supposed to tell the owner what is
+// wrong.
+// ---------------------------------------------------------------------------
+
+export type RepairAttemptView = { at: string; whatAmberDid: string; result: string | null; worked: boolean };
+
+export type OwnerEscalationView = {
+  id: string;
+  status: "OPEN" | "RESOLVED";
+  urgency: "CRITICAL" | "IMPORTANT" | "MINOR";
+  title: string;
+  whatHappened: string;
+  whatIsAffected: string;
+  whyAmberCannotFix: string;
+  whatWeNeedFromYou: string[];
+  revenueBlocked: boolean;
+  firstSeenAt: string;
+  lastSeenAt: string;
+  seenInAudits: number;
+  repairAttempts: RepairAttemptView[];
+  resolvedAt?: string;
+  resolvedBy?: string;
+  technical?: { rule?: string; severity?: string; evidence?: string; lastAction?: string };
+};
+
+export type ActivityEventView = {
+  id: string;
+  kind: string;
+  level: "good" | "bad" | "info";
+  headline: string;
+  detail: string;
+  firstAt: string;
+  lastAt: string;
+  occurrences: number;
+};
+
+function str(v: unknown, fallback = ""): string {
+  return typeof v === "string" ? v : fallback;
+}
+function strList(v: unknown): string[] {
+  return Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : [];
+}
+
+function toEscalation(raw: unknown): OwnerEscalationView | null {
+  const r = rec(raw);
+  if (!r) return null;
+  const title = str(r.title) || str(r.whatHappened);
+  if (!title) return null;
+  const urgency = r.urgency === "CRITICAL" || r.urgency === "IMPORTANT" || r.urgency === "MINOR" ? r.urgency : "MINOR";
+  return {
+    id: str(r.id, title),
+    status: r.status === "RESOLVED" ? "RESOLVED" : "OPEN",
+    urgency,
+    title,
+    whatHappened: str(r.whatHappened, title),
+    whatIsAffected: str(r.whatIsAffected, "Not stated."),
+    whyAmberCannotFix: str(r.whyAmberCannotFix, "Not stated."),
+    whatWeNeedFromYou: strList(r.whatWeNeedFromYou),
+    revenueBlocked: r.revenueBlocked === true,
+    firstSeenAt: str(r.firstSeenAt),
+    lastSeenAt: str(r.lastSeenAt),
+    seenInAudits: num(r.seenInAudits) ?? 1,
+    repairAttempts: Array.isArray(r.repairAttempts)
+      ? r.repairAttempts.flatMap((a) => {
+          const ar = rec(a);
+          if (!ar) return [];
+          return [{ at: str(ar.at), whatAmberDid: str(ar.whatAmberDid), result: typeof ar.result === "string" ? ar.result : null, worked: ar.worked === true }];
+        })
+      : [],
+    resolvedAt: typeof r.resolvedAt === "string" ? r.resolvedAt : undefined,
+    resolvedBy: typeof r.resolvedBy === "string" ? r.resolvedBy : undefined,
+    technical: rec(r.technical) as OwnerEscalationView["technical"],
+  };
+}
+
+/** Amber's open asks and her recently closed ones. */
+export function escalationsFrom(section: Section): { open: OwnerEscalationView[]; resolved: OwnerEscalationView[] } {
+  if (!section.ok) return { open: [], resolved: [] };
+  const openRaw = at(section.data, "open");
+  const resolvedRaw = at(section.data, "resolved");
+  return {
+    open: (Array.isArray(openRaw) ? openRaw : []).map(toEscalation).filter((x): x is OwnerEscalationView => x !== null),
+    resolved: (Array.isArray(resolvedRaw) ? resolvedRaw : []).map(toEscalation).filter((x): x is OwnerEscalationView => x !== null),
+  };
+}
+
+/** Amber's summarized report of important events. */
+export function activityFrom(section: Section): ActivityEventView[] {
+  if (!section.ok) return [];
+  const raw = at(section.data, "events");
+  if (!Array.isArray(raw)) return [];
+  return raw.flatMap((e) => {
+    const r = rec(e);
+    const headline = str(r?.headline);
+    if (!r || !headline) return [];
+    const level = r.level === "good" || r.level === "bad" ? r.level : "info";
+    return [{
+      id: str(r.id, headline),
+      kind: str(r.kind, "info"),
+      level,
+      headline,
+      detail: str(r.detail),
+      firstAt: str(r.firstAt),
+      lastAt: str(r.lastAt),
+      occurrences: num(r.occurrences) ?? 1,
+    }];
+  });
 }
