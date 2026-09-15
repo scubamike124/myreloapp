@@ -406,6 +406,10 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
         <div className="mt-4 rounded-xl border border-white/10 bg-black/30 p-3">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px]">
             <span className="font-bold uppercase tracking-wide text-white/45">Connection</span>
+            <Link
+              label={`Amber HQ up${ops.connection.hqServiceCommit ? ` (${ops.connection.hqServiceCommit})` : ""}`}
+              ok={ops.connection.hqServiceUp === true}
+            />
             <Link label="Relo has the secret" ok={ops.connection.reloSecretPresent} />
             <Link label="Amber HQ reachable" ok={ops.connection.hqReachable} />
             <Link label="HQ accepted it" ok={ops.connection.hqAuthAccepted} />
