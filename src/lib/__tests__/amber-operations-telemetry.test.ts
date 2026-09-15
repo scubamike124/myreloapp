@@ -291,6 +291,9 @@ describe("the operations route is guarded and read-only", () => {
       [
         "amber_activity",
         "amber_ecosystem",
+        // Reads the revenue report and the persisted tier. Writes only its own
+        // growth record when a tier is genuinely earned; dispatches nothing.
+        "amber_growth",
         "amber_revenue",
         "child_workforce_report",
         // One pass over scout state computing why each opportunity is not

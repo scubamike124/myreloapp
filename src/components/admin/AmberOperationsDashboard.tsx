@@ -264,6 +264,157 @@ function WhyNothingExecutable({ section }: { section: Section }) {
   );
 }
 
+/**
+ * Amber's growth ladder, for the owner.
+ *
+ * The progress bar is the point: Amber's next objective has to be legible at a
+ * glance, and so does the fact that it is bought with evidenced profit and
+ * nothing else. "Excluded" is rendered rather than hidden, because a level
+ * system that does not say what it refuses to count invites the assumption
+ * that activity counts.
+ */
+function AmberGrowth({ section }: { section: Section }) {
+  if (!section.ok) return null;
+  const d = (section.data as { growth?: Record<string, unknown> } | null)?.growth as
+    | {
+        achievedTier?: { id: number; name: string; note: string };
+        nextTier?: { id: number; name: string } | null;
+        holdingEarnedTier?: boolean;
+        qualifyingNetProfitUsd?: number;
+        profitToNextTierUsd?: number | null;
+        progressToNextPct?: number;
+        nextWorkerReward?: number | null;
+        workerAllowance?: number;
+        operatingWorkerAllowance?: number;
+        roi?: number | null;
+        contraction?: { active: boolean; reason: string | null };
+        reinvestment?: {
+          baseUsd: number;
+          earnedUsd: number;
+          ownerCeilingUsd: number;
+          effectiveUsd: number;
+          spentTodayUsd: number;
+          ceilingBinds: boolean;
+        };
+        capacityHonesty?: string;
+        excludedFromQualifying?: string[];
+        summary?: string;
+      }
+    | undefined;
+  if (!d?.achievedTier) return null;
+
+  const pct = Math.max(0, Math.min(100, d.progressToNextPct ?? 0));
+  const money = (v: number | undefined) => `$${(v ?? 0).toFixed(2)}`;
+  const r = d.reinvestment;
+
+  return (
+    <section className="mt-4 rounded-2xl border border-white/10 bg-white/[0.02] p-4">
+      <h3 className="font-display text-base font-bold">Amber Growth</h3>
+      <p className="mt-1 text-[13px] leading-relaxed text-white/50">{d.summary}</p>
+
+      <div className="mt-3 flex items-baseline justify-between gap-2">
+        <span className="font-display text-xl font-bold">
+          Tier {d.achievedTier.id} — {d.achievedTier.name}
+        </span>
+        {d.nextTier && (
+          <span className="text-[12px] text-white/45">
+            next: Tier {d.nextTier.id} — {d.nextTier.name}
+          </span>
+        )}
+      </div>
+
+      {/* Progress to the next tier. */}
+      <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-white/10">
+        <div className="h-full rounded-full bg-[#7ee787]" style={{ width: `${pct}%` }} />
+      </div>
+      <div className="mt-1 flex justify-between text-[11px] text-white/40">
+        <span>{pct}% to next tier</span>
+        {d.profitToNextTierUsd !== null && d.profitToNextTierUsd !== undefined && (
+          <span>{money(d.profitToNextTierUsd)} more qualifying profit</span>
+        )}
+      </div>
+
+      {d.holdingEarnedTier && (
+        <p className="mt-2 rounded-xl border border-white/10 bg-white/[0.03] p-2 text-[12px] text-white/55">
+          This reading is below the tier already earned. The achievement stands; only deployed capacity moves.
+        </p>
+      )}
+
+      <div className="mt-3 grid grid-cols-2 gap-3 text-[12px]">
+        <div className="rounded-xl border border-white/10 p-3">
+          <div className="text-[11px] uppercase tracking-wide text-white/45">Qualifying profit</div>
+          <div className="mt-1 font-display text-lg font-bold tabular-nums">{money(d.qualifyingNetProfitUsd)}</div>
+          <div className="mt-1 text-white/40">evidenced revenue minus cost</div>
+        </div>
+        <div className="rounded-xl border border-white/10 p-3">
+          <div className="text-[11px] uppercase tracking-wide text-white/45">Next reward</div>
+          <div className="mt-1 font-display text-lg font-bold tabular-nums">
+            {d.nextWorkerReward ? `+${d.nextWorkerReward.toLocaleString()}` : "—"}
+          </div>
+          <div className="mt-1 text-white/40">productive worker capacity</div>
+        </div>
+        <div className="rounded-xl border border-white/10 p-3">
+          <div className="text-[11px] uppercase tracking-wide text-white/45">Workers unlocked</div>
+          <div className="mt-1 font-display text-lg font-bold tabular-nums">
+            {(d.operatingWorkerAllowance ?? 0).toLocaleString()}
+          </div>
+          {d.operatingWorkerAllowance !== d.workerAllowance && (
+            <div className="mt-1 text-[#f0b429]">contracted from {(d.workerAllowance ?? 0).toLocaleString()}</div>
+          )}
+        </div>
+        <div className="rounded-xl border border-white/10 p-3">
+          <div className="text-[11px] uppercase tracking-wide text-white/45">ROI</div>
+          <div className="mt-1 font-display text-lg font-bold tabular-nums">
+            {d.roi === null || d.roi === undefined ? (
+              <span className="text-sm font-medium text-white/35">NOT MEASURED</span>
+            ) : (
+              `${d.roi}x`
+            )}
+          </div>
+        </div>
+      </div>
+
+      {r && (
+        <div className="mt-3 rounded-xl border border-white/10 p-3 text-[12px]">
+          <div className="text-[11px] uppercase tracking-wide text-white/45">Reinvestment allowance</div>
+          <div className="mt-1 text-white/70">
+            base {money(r.baseUsd)}/day · earned {money(r.earnedUsd)}/day · your ceiling {money(r.ownerCeilingUsd)}/day
+          </div>
+          <div className="mt-1 font-display text-lg font-bold tabular-nums">
+            {money(r.effectiveUsd)}/day <span className="text-[11px] font-normal text-white/40">spendable</span>
+          </div>
+          <div className="mt-1 text-white/40">spent today {money(r.spentTodayUsd)}</div>
+          {r.ceilingBinds && (
+            <p className="mt-2 rounded-lg border border-[#f0b429]/40 bg-[#f0b429]/10 p-2 text-[#f0b429]">
+              Amber&rsquo;s performance has earned {money(r.earnedUsd)}/day but your ceiling is {money(r.ownerCeilingUsd)}/day.
+              Raising it is your decision — she will never raise it herself.
+            </p>
+          )}
+        </div>
+      )}
+
+      {d.contraction?.active && (
+        <p className="mt-3 rounded-xl border border-[#f0b429]/40 bg-[#f0b429]/10 p-3 text-[12px] leading-relaxed text-[#f0b429]">
+          {d.contraction.reason}
+        </p>
+      )}
+
+      {d.capacityHonesty && <p className="mt-3 text-[12px] leading-relaxed text-white/50">{d.capacityHonesty}</p>}
+
+      {(d.excludedFromQualifying ?? []).length > 0 && (
+        <details className="mt-3">
+          <summary className="cursor-pointer text-[12px] text-white/45">What does NOT count toward a tier</summary>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-[12px] leading-relaxed text-white/50">
+            {(d.excludedFromQualifying ?? []).map((x) => (
+              <li key={x}>{x}</li>
+            ))}
+          </ul>
+        </details>
+      )}
+    </section>
+  );
+}
+
 /** Which standard a booking met, said in the owner's language. */
 function BasisBadge({ basis }: { basis: LedgerBasis }) {
   const style =
@@ -815,6 +966,7 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
         <OwnerBlock s={s} />
       </section>
 
+      <AmberGrowth section={ops.sections.growth} />
       <WhyNothingExecutable section={ops.sections.blockers} />
       <AmberActivity section={ops.sections.activity} />
 
@@ -841,6 +993,7 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
         {/* The rows behind the money: method, reference, amount, observed at. */}
         <SectionBlock name="payment_evidence" title="Payment evidence (every dollar counted)" section={ops.sections.paymentEvidence} />
         <SectionBlock name="opportunity_blockers" title="Why nothing is executable (every opportunity)" section={ops.sections.blockers} />
+        <SectionBlock name="amber_growth" title="Growth ladder (raw)" section={ops.sections.growth} />
         <TwoLedgers ops={ops} />
         <SectionBlock name="amber_ecosystem" title="Amber's own audit & manager health" section={ops.sections.ecosystem} />
         <SectionBlock name="owner_escalations" title="Owner escalations (raw)" section={ops.sections.escalations} />
