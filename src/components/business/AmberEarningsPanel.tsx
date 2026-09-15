@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState, type CSSProperties, type ReactNode } from "react";
+import type { ConnectAmberResult } from "@/lib/amber/connect-amber";
 import Link from "next/link";
 import BusinessShell from "@/components/design/BusinessShell";
 import type {
@@ -779,6 +780,7 @@ export default function AmberEarningsPanel() {
   const [center, setCenter] = useState<EarningsCenter | null>(null);
   const [nationwide, setNationwide] = useState<NationwideView | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
+  const [connectResult, setConnectResult] = useState<ConnectAmberResult | null>(null);
   const [notice, setNotice] = useState("Loading Amber Earnings…");
   const [needSignIn, setNeedSignIn] = useState(false);
   const [platform, setPlatform] = useState<PlatformRow | null>(null);
@@ -853,6 +855,8 @@ export default function AmberEarningsPanel() {
     const json = await res.json();
     if (json.center) setCenter(json.center as EarningsCenter);
     if (json.nationwide) setNationwide(json.nationwide as NationwideView);
+    // Carries a status word and plain English, never a secret — see connect-amber.ts.
+    if (json.connectAmber) setConnectResult(json.connectAmber as ConnectAmberResult);
     if (!res.ok) setNotice(json.error || "Action failed");
     else if (action !== "taskbounty-poll") setNotice(`Done: ${action.replace(/-/g, " ")}`);
     setBusy(null);
@@ -883,6 +887,66 @@ export default function AmberEarningsPanel() {
             <Link href="/login?next=/business-center/amber-earnings" className="rounded-lg bg-gray-900 px-3 py-2 text-[13px] font-bold text-white">
               Sign in
             </Link>
+          </div>
+        ) : null}
+
+        {/*
+          CONNECT AMBER.
+
+          Placed here, on the page the owner actually signs in to, because
+          /admin/* sits behind a login they do not use. One press; Amber
+          establishes the telemetry bridge with credentials she already holds.
+          No secret is shown, requested, or copied.
+        */}
+        {!needSignIn ? (
+          <div className="mt-4 p-4" style={card}>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="min-w-0">
+                <h2 className="text-[17px] font-bold text-gray-900">Amber Operations connection</h2>
+                <p className="mt-1 max-w-2xl text-[13px]" style={{ color: muted }}>
+                  Press once to let Amber connect her live production telemetry to Reelo. She uses her own
+                  credentials — nothing to copy, and no secret is ever shown here.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => act("connect-amber")}
+                disabled={busy === "connect-amber"}
+                className={`rounded-lg px-5 py-3 text-[14px] font-bold text-white disabled:opacity-60 ${
+                  connectResult?.outcome === "CONNECTED" ? "bg-emerald-600" : "bg-gray-900"
+                }`}
+              >
+                {busy === "connect-amber"
+                  ? "CONNECTING…"
+                  : connectResult?.outcome === "CONNECTED"
+                    ? "CONNECTED ✓"
+                    : "CONNECT AMBER"}
+              </button>
+            </div>
+
+            {connectResult ? (
+              <div
+                className="mt-3 rounded-lg p-3"
+                style={{
+                  background: connectResult.outcome === "CONNECTED" ? "#ecfdf5" : "#fffbeb",
+                  border: `1px solid ${connectResult.outcome === "CONNECTED" ? "#a7f3d0" : "#fde68a"}`,
+                }}
+              >
+                <div className="text-[13px] font-bold" style={{ color: connectResult.outcome === "CONNECTED" ? "#047857" : "#92400e" }}>
+                  {connectResult.outcome === "CONNECTED" ? "CONNECTED" : "NEEDS OWNER ATTENTION"}
+                </div>
+                <p className="mt-1 text-[13.5px] text-gray-800">{connectResult.message}</p>
+                {connectResult.whatToDo ? (
+                  <p className="mt-1 text-[13px]" style={{ color: muted }}>{connectResult.whatToDo}</p>
+                ) : null}
+                {connectResult.outcome === "CONNECTED" ? (
+                  <p className="mt-2 text-[13px]" style={{ color: muted }}>
+                    Live telemetry is now available on{" "}
+                    <Link href="/admin/amber-operations" className="underline">Amber Operations</Link>.
+                  </p>
+                ) : null}
+              </div>
+            ) : null}
           </div>
         ) : null}
 
