@@ -264,6 +264,22 @@ export type AmberOperations = {
   reloLedger: { totalUsd: number; rows: ReloLedgerRow[] } | null;
 };
 
+/**
+ * How strongly a booked row is evidenced.
+ *
+ * advance-jobs.ts books on `verified`, and `verified` starts as
+ * `Boolean(live.escrowTxHash)` -- the PLATFORM saying it released escrow. A
+ * stronger check sits directly below it: a job-specific CREDIT transaction in
+ * the wallet, which is money observed arriving. When that one fires it
+ * overwrites `source` with "moltjobs wallet CREDIT ...".
+ *
+ * So the source string already records which standard a row met, and until now
+ * nothing read it. The same file refuses to book from a wallet BALANCE because
+ * a balance "is not job-specific" -- the distinction was understood; it just
+ * was not carried through to the screen.
+ */
+export type LedgerBasis = "wallet-credit" | "platform-escrow" | "unstated";
+
 /** One booked revenue row, as the owner should be able to audit it. */
 export type ReloLedgerRow = {
   platformSlug: string;
@@ -272,7 +288,15 @@ export type ReloLedgerRow = {
   source: string;
   occurredAt: string;
   note: string;
+  basis: LedgerBasis;
 };
+
+/** Read from the source string the booking path itself wrote. */
+export function ledgerBasis(source: string): LedgerBasis {
+  if (/\bcredit\b/i.test(source)) return "wallet-credit";
+  if (/escrow/i.test(source)) return "platform-escrow";
+  return "unstated";
+}
 
 /**
  * Never throws and never invents a zero: an unreadable database yields null,
@@ -291,6 +315,7 @@ async function readReloLedger(): Promise<{ totalUsd: number; rows: ReloLedgerRow
         source: r.source,
         occurredAt: r.occurredAt,
         note: r.note,
+        basis: ledgerBasis(r.source),
       })),
     };
   } catch {

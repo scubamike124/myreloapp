@@ -33,6 +33,38 @@ async function load() {
   return import("../amber/operations-telemetry.ts");
 }
 
+describe("how strongly a booked dollar is evidenced", () => {
+  /**
+   * The real strings from production, 2026-09-15. All three of the owner's
+   * $5 MoltJobs bookings read "moltjobs escrow 0x..." -- the PLATFORM saying
+   * it released escrow -- and none read "wallet CREDIT", which is the
+   * stronger check sitting directly below it in advance-jobs.ts.
+   *
+   * The source string always recorded which standard a row met. Nothing read
+   * it, so both looked identical on screen under the words VERIFIED PAID.
+   */
+  it("separates money observed arriving from a marketplace's claim that it paid", async () => {
+    const { ledgerBasis } = await import("../amber/operations-telemetry.ts");
+
+    assert.equal(
+      ledgerBasis("moltjobs escrow 0x49fb6ed702b0fbfce42472959666a303887590044c7f3547"),
+      "platform-escrow",
+      "an escrow hash is the platform's claim, not confirmation the funds landed",
+    );
+    assert.equal(
+      ledgerBasis("moltjobs wallet CREDIT 5 payout for f8521518"),
+      "wallet-credit",
+      "a job-specific credit is money observed arriving",
+    );
+    assert.equal(ledgerBasis(""), "unstated", "an unrecorded basis is never upgraded to a good one");
+  });
+
+  it("does not let a credit note mentioning escrow read as the weaker basis", async () => {
+    const { ledgerBasis } = await import("../amber/operations-telemetry.ts");
+    assert.equal(ledgerBasis("moltjobs wallet CREDIT 5 released from escrow"), "wallet-credit");
+  });
+});
+
 describe("Amber operations telemetry", () => {
   const prevSecret = process.env.REELO_ORG_BRIDGE_SECRET;
   let restore: (() => void) | null = null;
