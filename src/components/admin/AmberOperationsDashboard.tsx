@@ -192,9 +192,18 @@ function SectionBlock({ name, title, section }: { name: string; title: string; s
           <span className="block truncate text-[11px] text-white/40">{name}</span>
         </span>
         {section.ok ? (
-          <span className="shrink-0 text-[11px] font-semibold text-[#7ee787]">LIVE</span>
+          <span className="shrink-0 text-[11px] font-semibold text-[#7ee787]">
+            LIVE{section.ms === undefined ? "" : ` · ${(section.ms / 1000).toFixed(1)}s`}
+          </span>
         ) : (
-          <span className="shrink-0 text-[11px] font-semibold text-[#ff9aa3]">UNAVAILABLE</span>
+          /**
+           * The elapsed time is shown on failures too. On a timeout it is the
+           * one number that says whether the budget was the problem or the
+           * report is genuinely broken.
+           */
+          <span className="shrink-0 text-[11px] font-semibold text-[#ff9aa3]">
+            UNAVAILABLE{section.ms === undefined ? "" : ` · ${(section.ms / 1000).toFixed(1)}s`}
+          </span>
         )}
       </button>
       {open && (

@@ -28,32 +28,56 @@
  */
 import { amberOrgBridgeConfigured, callAmberBridge } from "./organization-bridge.ts";
 
-/** One bridge action's result, with its failure kept rather than swallowed. */
-export type Section<T = unknown> = { ok: true; data: T } | { ok: false; error: string };
+/**
+ * One bridge action's result, with its failure kept rather than swallowed.
+ *
+ * `ms` is how long the call actually took. It exists because on 2026-09-15 six
+ * of ten reports came back "UNAVAILABLE — aborted due to timeout" and there was
+ * no way to tell a report that needs nine seconds from one that needs ninety.
+ * Recording it turns the drill-down list into a profile of which reports are
+ * slow, which is what decides whether the budget or the report gets fixed.
+ */
+export type Section<T = unknown> =
+  | { ok: true; data: T; ms?: number }
+  | { ok: false; error: string; ms?: number };
 
 /**
- * Per-call timeout, and why it is not the bridge's 20-second default.
+ * Per-call timeout, and why it was raised.
  *
  * This page renders on Cloudflare Workers, which allow at most SIX
- * simultaneous open connections per invocation. Ten reports fired at once
- * therefore run in two waves, so a 20s timeout makes the worst case 40s of
- * blocking server render -- on a phone that is a hung page, and it can exceed
- * the Worker's own request budget. Eight seconds keeps the worst case inside
- * about twenty, and a report that cannot answer in eight seconds is reported
- * as unavailable rather than holding the whole screen hostage.
+ * simultaneous open connections per invocation, so ten reports run in two
+ * waves. Eight seconds was chosen to keep the worst case near twenty.
+ *
+ * Production, 2026-09-15, first live connection: that budget produced SIX
+ * "aborted due to timeout" out of ten, including every money report. A fast
+ * page of NOT MEASURED is worth less than a slow page of real numbers, and a
+ * status page that refreshes every sixty seconds can afford to wait.
+ *
+ * So the budget now matches the work: heavy reports genuinely take longer
+ * (child_workforce_report summarises 100,000 workers; overview crosses to
+ * Postgres). Anything still timing out at this budget is a performance problem
+ * in the report itself, which `ms` on each section is there to identify.
  */
-const CALL_TIMEOUT_MS = 8_000;
+const CALL_TIMEOUT_MS = 25_000;
 
-/** Kept under the Workers cap so the runtime never queues our own requests. */
-const MAX_PARALLEL = 4;
+/**
+ * Raised to the Workers cap rather than below it. Ten reports over six
+ * connections is two waves; over four it was three, which multiplied the
+ * timeout budget by an extra round for no benefit.
+ */
+const MAX_PARALLEL = 6;
 
 async function section<T>(body: Record<string, unknown>): Promise<Section<T>> {
+  const started = Date.now();
   try {
-    return { ok: true, data: await callAmberBridge<T>(body, { timeoutMs: CALL_TIMEOUT_MS }) };
+    const data = await callAmberBridge<T>(body, { timeoutMs: CALL_TIMEOUT_MS });
+    return { ok: true, data, ms: Date.now() - started };
   } catch (e) {
     // One dead action must not blank the whole dashboard: the others still
     // carry real production truth, and the failure is reported as a failure.
-    return { ok: false, error: e instanceof Error ? e.message : "Bridge call failed." };
+    // The elapsed time is kept on failures too -- on a timeout it is the single
+    // most useful number, because it says whether the budget was the problem.
+    return { ok: false, error: e instanceof Error ? e.message : "Bridge call failed.", ms: Date.now() - started };
   }
 }
 
