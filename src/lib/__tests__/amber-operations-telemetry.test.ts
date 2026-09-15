@@ -193,7 +193,21 @@ describe("the operations route is guarded and read-only", () => {
     const actions = [...client.matchAll(/action:\s*"([a-z_]+)"/g)].map((m) => m[1]);
     assert.deepEqual(
       [...actions].sort(),
-      ["amber_activity", "amber_ecosystem", "amber_revenue", "child_workforce_report", "overview", "owner_dashboard", "owner_escalations", "scout_execution_audit", "shared_fetch_report", "unique_funnel"],
+      [
+        "amber_activity",
+        "amber_ecosystem",
+        "amber_revenue",
+        "child_workforce_report",
+        "overview",
+        "owner_dashboard",
+        "owner_escalations",
+        // Reads the earnings snapshot and filters it. It returns the owner's
+        // own payment rows and changes nothing.
+        "payment_evidence",
+        "scout_execution_audit",
+        "shared_fetch_report",
+        "unique_funnel",
+      ],
       "only read-only reports — no control action",
     );
     for (const control of ["pause", "resume", "emergency_stop", "set_division_budget", "pause_division", "pause_agent"]) {
