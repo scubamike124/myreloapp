@@ -927,3 +927,157 @@ describe("'still deploying' is not shown as the owner's problem", () => {
     });
   }
 });
+
+/**
+ * The evidence gap: Workers Working (1H) and Managers Operating reading
+ * NOT MEASURED against a five-figure 24h count.
+ *
+ * Neither was unmeasurable. Production computed the 1h figure per role and
+ * dropped it before it reached `totals`, and it asked manager health "has
+ * this ever run" with no window at all. These tests hold the fix to the rule
+ * the owner set: never infer activity from registration, assignment,
+ * existence or scheduled status.
+ */
+describe("windowed execution evidence", () => {
+  let restore: (() => void) | undefined;
+  const secret = () => {
+    const prev = process.env.REELO_ORG_BRIDGE_SECRET;
+    process.env.REELO_ORG_BRIDGE_SECRET = "test-secret";
+    return () => {
+      if (prev === undefined) delete process.env.REELO_ORG_BRIDGE_SECRET;
+      else process.env.REELO_ORG_BRIDGE_SECRET = prev;
+    };
+  };
+
+  const workforce = (evidence: unknown, utilization?: unknown) => (action: string) => {
+    if (action === "child_workforce_report") return { body: { ok: true, evidence, utilization } };
+    return { body: { ok: true } };
+  };
+
+  afterEach(() => {
+    restore?.();
+    restore = undefined;
+  });
+
+  it("reads all three windows for workers and managers from one report", async () => {
+    const unsetSecret = secret();
+    restore = withBridge(
+      workforce({
+        funnel: { registered: 100_000, unlocked: 1_000, assigned: 69_280, executedLast15m: 318, executedLast1h: 1_204, executedLast24h: 10_379, producedUniqueResult: 0 },
+        windows: [
+          { window: "last15m", label: "15 minutes", workers: 318, managers: 3 },
+          { window: "last1h", label: "1 hour", workers: 1_204, managers: 7 },
+          { window: "last24h", label: "24 hours", workers: 10_379, managers: 13 },
+        ],
+      }),
+    );
+    try {
+      const s = (await load().then((m) => m.fetchAmberOperations())).summary;
+
+      assert.equal(s.workersWorking15m, 318, "no longer NOT MEASURED");
+      assert.equal(s.workersWorking1h, 1_204);
+      assert.equal(s.workersWorking, 10_379);
+      assert.equal(s.managersOperating15m, 3);
+      assert.equal(s.managersOperating1h, 7);
+      assert.equal(s.managersOperating24h, 13);
+      assert.equal(s.managersOperating, 7, "the headline tile is the 1h window, not a lifetime count");
+      assert.equal(s.managersBasis, "windowed execution evidence");
+    } finally {
+      unsetSecret();
+    }
+  });
+
+  it("matches each window by NAME, so a reordered or added window cannot be misread", async () => {
+    const unsetSecret = secret();
+    restore = withBridge(
+      workforce({
+        funnel: { registered: 1, unlocked: 1, assigned: 1, executedLast15m: 0, executedLast1h: 0, executedLast24h: 0, producedUniqueResult: 0 },
+        windows: [
+          { window: "last7d", label: "7 days", workers: 9_999, managers: 19 },
+          { window: "last24h", label: "24 hours", workers: 40, managers: 4 },
+          { window: "last1h", label: "1 hour", workers: 5, managers: 1 },
+        ],
+      }),
+    );
+    try {
+      const s = (await load().then((m) => m.fetchAmberOperations())).summary;
+
+      assert.equal(s.managersOperating1h, 1, "found by name, not by position");
+      assert.equal(s.managersOperating24h, 4);
+      assert.equal(s.managersOperating15m, null, "an absent window is NOT MEASURED, never the nearest one present");
+    } finally {
+      unsetSecret();
+    }
+  });
+
+  it("does NOT fall back to the lifetime manager count when the window says zero", async () => {
+    // The whole defect in one case: 13 divisions have run at some point, and
+    // none in the last hour. Reporting 13 would be the old bug wearing a new
+    // label.
+    const unsetSecret = secret();
+    restore = withBridge((action) => {
+      if (action === "child_workforce_report") {
+        return {
+          body: {
+            ok: true,
+            evidence: {
+              funnel: { registered: 100_000, unlocked: 1_000, assigned: 0, executedLast15m: 0, executedLast1h: 0, executedLast24h: 0, producedUniqueResult: 0 },
+              windows: [
+                { window: "last15m", label: "15 minutes", workers: 0, managers: 0 },
+                { window: "last1h", label: "1 hour", workers: 0, managers: 0 },
+                { window: "last24h", label: "24 hours", workers: 0, managers: 0 },
+              ],
+            },
+          },
+        };
+      }
+      if (action === "amber_ecosystem") {
+        return { body: { ok: true, live: { managers: { total: 20, withWork: 18 }, managerHealth: Array.from({ length: 13 }, () => ({ worked: 4 })) } } };
+      }
+      return { body: { ok: true } };
+    });
+    try {
+      const s = (await load().then((m) => m.fetchAmberOperations())).summary;
+
+      assert.equal(s.managersOperating, 0, "zero in the window is a measurement, not a missing one");
+      assert.equal(s.managersBasis, "windowed execution evidence");
+      assert.equal(s.managersRegistered, 20, "the denominator still comes from the registry");
+    } finally {
+      unsetSecret();
+    }
+  });
+
+  it("still reads NOT MEASURED when the workforce report fails entirely", async () => {
+    const unsetSecret = secret();
+    restore = withBridge((action) => {
+      if (action === "child_workforce_report") return { status: 500, body: { ok: false, error: "boom" } };
+      return { body: { ok: true } };
+    });
+    try {
+      const s = (await load().then((m) => m.fetchAmberOperations())).summary;
+
+      assert.equal(s.workersWorking15m, null, "NULL, never 0 — an unreachable report is not an idle workforce");
+      assert.equal(s.workersWorking1h, null);
+      assert.equal(s.managersOperating1h, null);
+    } finally {
+      unsetSecret();
+    }
+  });
+
+  it("falls back to the utilization totals when HQ has not yet deployed the evidence block", async () => {
+    // Relo and Amber deploy independently. A Relo-first deploy must not
+    // regress the tiles it already had.
+    const unsetSecret = secret();
+    restore = withBridge(workforce(undefined, { totals: { executedLast15m: 12, executedLast1h: 44, executedLast24h: 900 } }));
+    try {
+      const s = (await load().then((m) => m.fetchAmberOperations())).summary;
+
+      assert.equal(s.workersWorking15m, 12);
+      assert.equal(s.workersWorking1h, 44);
+      assert.equal(s.workersWorking, 900);
+    } finally {
+      unsetSecret();
+    }
+  });
+});
+
