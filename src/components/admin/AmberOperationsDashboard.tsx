@@ -273,6 +273,159 @@ function WhyNothingExecutable({ section }: { section: Section }) {
  * system that does not say what it refuses to count invites the assumption
  * that activity counts.
  */
+/**
+ * The execution ladder, end to end, from 100,000 registered down to what
+ * actually produced something nobody already had.
+ *
+ * Every rung below `assigned` comes from a durable record with a timestamp on
+ * it. The rungs above it are capacity and are labelled as such, because the
+ * whole point of this panel is that the drop between them is the real story
+ * and a dashboard that hides it is the thing that made this necessary.
+ */
+function WorkforceEvidence({ section }: { section: Section }) {
+  if (!section.ok) return null;
+  const e = (section.data as { evidence?: Record<string, unknown> } | null)?.evidence as
+    | {
+        funnel?: {
+          registered: number;
+          unlocked: number | null;
+          assigned: number;
+          executedLast15m: number;
+          executedLast1h: number;
+          executedLast24h: number;
+          producedUniqueResult: number;
+        };
+        windows?: Array<{
+          window: string;
+          label: string;
+          workers: number;
+          managers: number;
+          workBreakdown?: Record<string, number>;
+          managerDetail?: Array<{ division: string; runsInWindow: number }>;
+        }>;
+        allowance?: {
+          tierId: number | null;
+          unlockedPerTick: number | null;
+          basePerTickDispatch: number;
+          effectivePerTickDispatch: number;
+          binding: boolean;
+          enforced: boolean;
+          distinctWorkersLast24h: number;
+          unitNote: string;
+          verdict: string;
+        };
+      }
+    | undefined;
+  const f = e?.funnel;
+  if (!f) return null;
+
+  /**
+   * Capacity and evidence are visually separated on purpose. A single column
+   * of descending numbers reads as one funnel, and only the bottom four rungs
+   * are backed by an execution record.
+   */
+  const rungs: Array<{ label: string; value: number | null; evidence: boolean; note: string }> = [
+    { label: "Registered", value: f.registered, evidence: false, note: "Worker specs that exist" },
+    { label: "Unlocked by tier", value: f.unlocked, evidence: false, note: "Deployment ceiling, per tick" },
+    { label: "Uniquely assigned", value: f.assigned, evidence: false, note: "Holds a slice nobody else holds" },
+    { label: "Executed (15m)", value: f.executedLast15m, evidence: true, note: "Run record timestamped in window" },
+    { label: "Executed (1h)", value: f.executedLast1h, evidence: true, note: "Run record timestamped in window" },
+    { label: "Executed (24h)", value: f.executedLast24h, evidence: true, note: "Run record timestamped in window" },
+    { label: "Produced unique result", value: f.producedUniqueResult, evidence: true, note: "Something nobody already had" },
+  ];
+
+  const a = e?.allowance;
+
+  return (
+    <section className="mt-4 rounded-2xl border border-white/10 bg-white/[0.02] p-4">
+      <h3 className="font-display text-base font-bold">Workforce execution evidence</h3>
+      <p className="mt-1 text-[13px] leading-relaxed text-white/50">
+        Registration, assignment and scheduled status are capacity. Only the timestamped rungs below are evidence that
+        anything ran.
+      </p>
+
+      <ol className="mt-3 space-y-1.5">
+        {rungs.map((r) => (
+          <li
+            key={r.label}
+            className={`flex items-baseline justify-between gap-3 rounded-xl border p-2.5 ${
+              r.evidence ? "border-[#7ee787]/25 bg-[#7ee787]/[0.04]" : "border-white/10 bg-white/[0.02]"
+            }`}
+          >
+            <span className="min-w-0">
+              <span className="text-[13px] font-medium">{r.label}</span>
+              <span className="ml-2 text-[11px] text-white/40">{r.note}</span>
+              {!r.evidence && <span className="ml-2 text-[10px] uppercase tracking-wide text-white/30">capacity</span>}
+            </span>
+            <span className="shrink-0 font-display text-lg font-bold tabular-nums">
+              <Num value={r.value} />
+            </span>
+          </li>
+        ))}
+      </ol>
+
+      {Array.isArray(e?.windows) && e.windows.length > 0 && (
+        <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {e.windows.map((w) => {
+            const work = Object.entries(w.workBreakdown ?? {}).sort((x, y) => y[1] - x[1]);
+            return (
+              <div key={w.window} className="rounded-xl border border-white/10 p-3">
+                <div className="text-[11px] uppercase tracking-wide text-white/45">Last {w.label}</div>
+                <div className="mt-1 text-[13px]">
+                  <span className="font-display text-lg font-bold tabular-nums">{w.workers.toLocaleString()}</span>
+                  <span className="ml-1 text-white/45">workers</span>
+                  <span className="mx-1.5 text-white/20">·</span>
+                  <span className="font-display text-lg font-bold tabular-nums">{w.managers.toLocaleString()}</span>
+                  <span className="ml-1 text-white/45">managers</span>
+                </div>
+                {/* What the work actually was. A bare count invites the
+                    assumption that active means useful, and it does not. */}
+                {work.length > 0 ? (
+                  <ul className="mt-2 space-y-0.5 text-[11px] text-white/45">
+                    {work.slice(0, 4).map(([k, n]) => (
+                      <li key={k} className="flex justify-between gap-2">
+                        <span className="truncate">{k.replace(/_/g, " ")}</span>
+                        <span className="tabular-nums">{n.toLocaleString()}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="mt-2 text-[11px] text-white/35">No run recorded in this window.</p>
+                )}
+                {(w.managerDetail ?? []).length > 0 && (
+                  <p className="mt-2 text-[11px] leading-snug text-white/35">
+                    {(w.managerDetail ?? [])
+                      .slice(0, 3)
+                      .map((m) => `${m.division.replace(/_/g, " ")} (${m.runsInWindow})`)
+                      .join(", ")}
+                  </p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {a && (
+        <div
+          className={`mt-3 rounded-xl border p-3 text-[12px] leading-relaxed ${
+            a.enforced ? "border-white/10 bg-white/[0.03] text-white/60" : "border-[#ff9aa3]/30 bg-[#ff9aa3]/[0.05] text-[#ffc9cf]"
+          }`}
+        >
+          <div className="text-[11px] uppercase tracking-wide text-white/45">Growth allowance vs dispatch</div>
+          <p className="mt-1">{a.verdict}</p>
+          <p className="mt-1.5 text-[11px] text-white/40">{a.unitNote}</p>
+          <p className="mt-1.5 text-[11px] text-white/40">
+            Per tick: {a.effectivePerTickDispatch.toLocaleString()} dispatched of {a.basePerTickDispatch.toLocaleString()} base
+            {a.unlockedPerTick !== null && `, ceiling ${a.unlockedPerTick.toLocaleString()}`}
+            {a.tierId !== null && ` (tier ${a.tierId})`}.
+          </p>
+        </div>
+      )}
+    </section>
+  );
+}
+
 function AmberGrowth({ section }: { section: Section }) {
   if (!section.ok) return null;
   const d = (section.data as { growth?: Record<string, unknown> } | null)?.growth as
@@ -767,8 +920,22 @@ function OwnerBlock({ s }: { s: OwnerSummary }) {
       <Tile label="Workers working (24h)" hint="Durable run record in production">
         <Ratio working={s.workersWorking} registered={s.workersRegistered} />
       </Tile>
-      <Tile label="Workers working (1h)"><Num value={s.workersWorking1h} /></Tile>
-      <Tile label="Managers operating" hint={s.managersBasis ? `Basis: ${s.managersBasis}` : undefined}>
+      <Tile label="Workers working (1h)" hint="Distinct workers with a run timestamped in the last hour">
+        <Num value={s.workersWorking1h} />
+      </Tile>
+      <Tile label="Workers working (15m)" hint="The tightest window production can evidence">
+        <Num value={s.workersWorking15m} />
+      </Tile>
+      <Tile
+        label="Managers operating (1h)"
+        hint={
+          s.managersBasis === "windowed execution evidence"
+            ? "Divisions with an owned assignment run timestamped in the last hour"
+            : s.managersBasis
+              ? `Basis: ${s.managersBasis} (lifetime, not windowed)`
+              : undefined
+        }
+      >
         <Ratio working={s.managersOperating} registered={s.managersRegistered} />
       </Tile>
       <Tile label="Unique results produced" hint="Results nobody had already got">
@@ -966,6 +1133,7 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
         <OwnerBlock s={s} />
       </section>
 
+      <WorkforceEvidence section={ops.sections.workforce} />
       <AmberGrowth section={ops.sections.growth} />
       <WhyNothingExecutable section={ops.sections.blockers} />
       <AmberActivity section={ops.sections.activity} />

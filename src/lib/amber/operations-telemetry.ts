@@ -134,6 +134,21 @@ function at(root: unknown, path: string): unknown {
   return cur ?? null;
 }
 
+/**
+ * One window out of the workforce evidence report, found by NAME.
+ *
+ * By name and not by index: `at()` walks objects only, and an index would
+ * silently start reading the wrong window the moment production added a
+ * fourth one or reordered them. A window that is not present is null —
+ * NOT MEASURED — never the nearest one that happens to exist.
+ */
+function evidenceWindow(wf: unknown, key: "last15m" | "last1h" | "last24h"): Record<string, unknown> | null {
+  const windows = at(wf, "evidence.windows");
+  if (!Array.isArray(windows)) return null;
+  const found = windows.find((w) => rec(w)?.window === key);
+  return rec(found);
+}
+
 export type AmberStatus = "RUNNING" | "STOPPED" | "BLOCKED" | "UNKNOWN";
 export type PipelineStatus = "WORKING" | "NOT WORKING" | "UNKNOWN";
 
@@ -151,6 +166,15 @@ export type OwnerSummary = {
   scoutsWorking: number | null;
   workersRegistered: number | null;
   workersWorking: number | null;
+  /**
+   * The short windows.
+   *
+   * These read NOT MEASURED for weeks against a five-figure 24h count, and
+   * neither was unmeasurable: production computed the per-role 1h figure and
+   * dropped it before it reached `totals`. 15m did not exist at all. Both are
+   * now summed from the same timestamped run records the 24h count uses.
+   */
+  workersWorking15m: number | null;
   workersWorking1h: number | null;
   workersWorking7d: number | null;
   /** Workers whose last run produced a result nobody had already got. */
@@ -160,7 +184,11 @@ export type OwnerSummary = {
   managersRegistered: number | null;
   managersOperating: number | null;
   /** How `managersOperating` was established, so the tile cannot overstate it. */
-  managersBasis: "execution evidence" | "work assigned" | null;
+  managersBasis: "windowed execution evidence" | "execution evidence" | "work assigned" | null;
+  /** Managers with a run timestamped inside each window. */
+  managersOperating15m: number | null;
+  managersOperating1h: number | null;
+  managersOperating24h: number | null;
 
   /** Items Amber cannot clear herself and needs the owner for. */
   needsOwnerCount: number | null;
@@ -350,9 +378,10 @@ function notConfigured(now: string): AmberOperations {
       pipeline: "UNKNOWN",
       pipelineReason: err,
       scoutsRegistered: null, scoutsWorking: null,
-      workersRegistered: null, workersWorking: null, workersWorking1h: null, workersWorking7d: null,
+      workersRegistered: null, workersWorking: null, workersWorking15m: null, workersWorking1h: null, workersWorking7d: null,
       uniqueResultsProduced: null,
       managersRegistered: null, managersOperating: null, managersBasis: null,
+      managersOperating15m: null, managersOperating1h: null, managersOperating24h: null,
       needsOwnerCount: null, needsOwnerRevenueBlocking: null,
       externalChecksToday: null, uniqueSourcesToday: null,
       duplicateFetchesPrevented: null, duplicateDispatchesPrevented: null,
@@ -563,8 +592,21 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
   const scoutsRegistered = num(at(dash, "dashboard.scouts.registered"));
   const scoutsWorking = num(at(dash, "dashboard.scouts.executed"));
   const workersRegistered = num(at(wf, "utilization.totals.registered")) ?? num(at(dash, "dashboard.children.registered"));
-  const workersWorking = num(at(wf, "utilization.totals.executedLast24h"));
-  const workersWorking1h = num(at(wf, "windows.last1h.executed")) ?? num(at(wf, "utilization.totals.executedLast1h"));
+  const workersWorking = num(at(wf, "evidence.funnel.executedLast24h")) ?? num(at(wf, "utilization.totals.executedLast24h"));
+  /**
+   * The evidence report first, the utilization totals second.
+   *
+   * Both are the same join over the same timestamped run records, so they
+   * agree; the fallback exists only so a Relo deploy that lands before the HQ
+   * deploy still reads a number instead of regressing to NOT MEASURED.
+   *
+   * `windows.last1h.executed` is deliberately NOT consulted any more. That
+   * path never existed — the window report returns dispatched/productive/
+   * empty/failed/blocked and counts dispatches rather than distinct workers —
+   * so reading it could only ever yield undefined or the wrong unit.
+   */
+  const workersWorking15m = num(at(wf, "evidence.funnel.executedLast15m")) ?? num(at(wf, "utilization.totals.executedLast15m"));
+  const workersWorking1h = num(at(wf, "evidence.funnel.executedLast1h")) ?? num(at(wf, "utilization.totals.executedLast1h"));
   const workersWorking7d = num(at(wf, "utilization.totals.executedLast7d"));
   const uniqueResultsProduced = num(at(wf, "utilization.totals.producedUniqueResult"));
 
@@ -580,8 +622,25 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
   const managerHealth = at(eco, "live.managerHealth") ?? at(eco, "recentAudits.0.managerHealth");
   let managersRegistered = num(at(eco, "live.managers.total")) ?? num(at(eco, "recentAudits.0.managers.total"));
   let managersOperating: number | null = null;
-  let managersBasis: "execution evidence" | "work assigned" | null = null;
-  if (Array.isArray(managerHealth) && managerHealth.length > 0) {
+  let managersBasis: OwnerSummary["managersBasis"] = null;
+
+  /**
+   * Windowed manager evidence, which is what the owner actually asked for.
+   *
+   * The lifetime figure below answers "has this division ever run", which is
+   * why Managers Operating could look healthy while nothing had happened for
+   * a day. These three come from assignment runs with an `at` inside each
+   * window, and the 1h figure is what the headline tile now shows.
+   */
+  const managersOperating15m = num(at(evidenceWindow(wf, "last15m"), "managers"));
+  const managersOperating1h = num(at(evidenceWindow(wf, "last1h"), "managers"));
+  const managersOperating24h = num(at(evidenceWindow(wf, "last24h"), "managers"));
+
+  if (managersOperating1h !== null) {
+    managersOperating = managersOperating1h;
+    managersBasis = "windowed execution evidence";
+    managersRegistered = managersRegistered ?? (Array.isArray(managerHealth) ? managerHealth.length : null);
+  } else if (Array.isArray(managerHealth) && managerHealth.length > 0) {
     managersRegistered = managersRegistered ?? managerHealth.length;
     managersOperating = managerHealth.filter((m) => (num(at(m, "worked")) ?? 0) > 0).length;
     managersBasis = "execution evidence";
@@ -715,9 +774,10 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
     summary: {
       amberStatus, amberStatusReason, pipeline, pipelineReason,
       scoutsRegistered, scoutsWorking,
-      workersRegistered, workersWorking, workersWorking1h, workersWorking7d,
+      workersRegistered, workersWorking, workersWorking15m, workersWorking1h, workersWorking7d,
       uniqueResultsProduced,
       managersRegistered, managersOperating, managersBasis,
+      managersOperating15m, managersOperating1h, managersOperating24h,
       needsOwnerCount, needsOwnerRevenueBlocking,
       externalChecksToday, uniqueSourcesToday,
       duplicateFetchesPrevented, duplicateDispatchesPrevented,
