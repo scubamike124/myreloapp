@@ -188,7 +188,20 @@ function StatusPill({ state, label }: { state: "good" | "bad" | "warn" | "unknow
  */
 function WhyNothingExecutable({ section }: { section: Section }) {
   if (!section.ok) return null;
-  const d = section.data as {
+  const payload = section.data as {
+    report?: Record<string, unknown>;
+    funnel?: {
+      total?: number;
+      gates?: Array<{ stage: string; remaining: number; lost: number; test: string; lostBecause?: Array<{ reason: string; count: number }> }>;
+      bottleneck?: { stage: string; lost: number; why: string } | null;
+    };
+  } | null;
+  /**
+   * The blocker report moved under `report` when the funnel joined it on the
+   * same action. Both shapes are read so a Relo deploy landing before Amber's
+   * still renders rather than blanking the panel.
+   */
+  const d = ((payload?.report ?? payload) ?? null) as {
     total?: number;
     executable?: number;
     repairableByAmber?: number;
@@ -196,8 +209,18 @@ function WhyNothingExecutable({ section }: { section: Section }) {
     balances?: boolean;
     reasons?: Array<{ key: string; label: string; count: number; owner: string | null; whatWouldFix: string }>;
     ownerActions?: Array<{ action: string; sources: string[]; opportunitiesUnblocked: number }>;
+    rejections?: {
+      storedRejected: number;
+      currentQualificationVersion: number;
+      genuine: number;
+      stale: number;
+      staleAndNowPassing: number;
+      note: string;
+    };
   } | null;
   if (!d || typeof d.total !== "number") return null;
+  const funnel = payload?.funnel;
+  const rej = d.rejections;
 
   const reasons = (d.reasons ?? []).filter((r) => r.key !== "executable");
   return (
@@ -223,6 +246,69 @@ function WhyNothingExecutable({ section }: { section: Section }) {
           <div className="mt-1 font-display text-xl font-bold tabular-nums text-[#f0b429]">{d.ownerBlocked ?? 0}</div>
         </div>
       </div>
+
+      {/* The gate-by-gate funnel: which gate actually closed. */}
+      {Array.isArray(funnel?.gates) && funnel.gates.length > 0 && (
+        <div className="mt-3 rounded-xl border border-white/10 p-3">
+          <div className="text-[11px] uppercase tracking-wide text-white/45">Funnel, gate by gate</div>
+          <ol className="mt-2 space-y-1">
+            <li className="flex items-baseline justify-between gap-2 text-[12px]">
+              <span className="text-white/70">total on record</span>
+              <span className="font-display font-bold tabular-nums">{(funnel.total ?? d.total ?? 0).toLocaleString()}</span>
+            </li>
+            {funnel.gates.map((g) => (
+              <li key={g.stage} className="border-t border-white/5 pt-1">
+                <div className="flex items-baseline justify-between gap-2 text-[12px]">
+                  <span className="text-white/70">{g.stage.replace(/_/g, " ")}</span>
+                  <span className="flex items-baseline gap-2">
+                    {g.lost > 0 && <span className="text-[11px] text-[#ff9aa3]">−{g.lost.toLocaleString()}</span>}
+                    <span className="font-display font-bold tabular-nums">
+                      {/* remaining is -1 when the stage could not be measured. */}
+                      {g.remaining < 0 ? <span className="text-sm font-medium text-white/35">NOT MEASURED</span> : g.remaining.toLocaleString()}
+                    </span>
+                  </span>
+                </div>
+                {(g.lostBecause ?? []).slice(0, 2).map((b) => (
+                  <div key={b.reason} className="mt-0.5 text-[11px] leading-snug text-white/35">
+                    {b.reason}
+                    {b.count > 0 && ` (${b.count.toLocaleString()})`}
+                  </div>
+                ))}
+              </li>
+            ))}
+          </ol>
+          {funnel.bottleneck && (
+            <p className="mt-2 text-[11px] leading-snug text-white/45">
+              Biggest loss Amber controls: <span className="text-white/70">{funnel.bottleneck.stage.replace(/_/g, " ")}</span> lost{" "}
+              {funnel.bottleneck.lost.toLocaleString()} — {funnel.bottleneck.why}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Genuine rejections vs stale ones — they look identical on a stored row. */}
+      {rej && rej.storedRejected > 0 && (
+        <div className="mt-3 rounded-xl border border-white/10 p-3 text-[12px]">
+          <div className="text-[11px] uppercase tracking-wide text-white/45">
+            Rejections, by which rules decided them (current v{rej.currentQualificationVersion})
+          </div>
+          <div className="mt-2 grid grid-cols-3 gap-2">
+            <div>
+              <div className="font-display text-lg font-bold tabular-nums">{rej.genuine.toLocaleString()}</div>
+              <div className="text-[11px] text-white/45">genuine — the answer stands</div>
+            </div>
+            <div>
+              <div className="font-display text-lg font-bold tabular-nums text-[#f0b429]">{rej.stale.toLocaleString()}</div>
+              <div className="text-[11px] text-white/45">stale — awaiting re-ask</div>
+            </div>
+            <div>
+              <div className="font-display text-lg font-bold tabular-nums text-[#7ee787]">{rej.staleAndNowPassing.toLocaleString()}</div>
+              <div className="text-[11px] text-white/45">stale AND passing now</div>
+            </div>
+          </div>
+          <p className="mt-2 text-[11px] leading-snug text-white/35">{rej.note}</p>
+        </div>
+      )}
 
       <div className="mt-3 space-y-2">
         {reasons.map((r) => (
