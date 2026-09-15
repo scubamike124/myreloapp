@@ -434,7 +434,13 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
   const [ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem, paymentEvidence] =
     await pooled([
     () => section({ action: "owner_dashboard" }),
-    () => section({ action: "child_workforce_report" }),
+    /**
+     * summaryOnly: the utilization totals and the time windows, without the
+     * per-worker hierarchy, activity, rotation and status lists -- all of which
+     * range over 100,000 workers. Nothing on this page reads them, and
+     * unbounded they made this the last report still failing.
+     */
+    () => section({ action: "child_workforce_report", summaryOnly: true }),
     /**
      * recordLimit: 0 — the totals and the per-endpoint roll-up, without the
      * per-record list. Unbounded, that list was large enough that the response
