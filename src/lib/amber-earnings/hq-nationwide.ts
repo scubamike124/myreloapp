@@ -935,12 +935,19 @@ export function clearHqNationwideCache() {
   cache = null;
 }
 
-function hqBaseUrl(): string {
+export function hqBaseUrl(): string {
   return (process.env.AMBER_HQ_URL || "https://hq.amberoneai.com").replace(/\/$/, "");
 }
 
-/** Prefer CRON_SECRET — Relo's AMBER_BUILDER_SECRET is often unset on HQ. */
-function hqSecretCandidates(): string[] {
+/**
+ * Prefer CRON_SECRET — Relo's AMBER_BUILDER_SECRET is often unset on HQ.
+ *
+ * Exported so the Connect Amber button authenticates to HQ with the SAME
+ * credentials that already power this page. If Amber Earnings can reach HQ
+ * today, so can the button; and if it cannot, both fail for one reason rather
+ * than two, which is the difference between one diagnosis and two.
+ */
+export function hqSecretCandidates(): string[] {
   const seen = new Set<string>();
   const out: string[] = [];
   for (const raw of [
@@ -957,7 +964,8 @@ function hqSecretCandidates(): string[] {
   return out;
 }
 
-function hqAuthHeaders(token: string): Record<string, string> {
+/** Exported alongside the candidates, for the same reason. */
+export function hqAuthHeaders(token: string): Record<string, string> {
   return {
     "x-cron-secret": token,
     Authorization: `Bearer ${token}`,
