@@ -241,6 +241,7 @@ export type AmberOperations = {
     activity: Section;
     ecosystem: Section;
     paymentEvidence: Section;
+    blockers: Section;
   };
   /** Actions that could not be reached, named so a gap is never silent. */
   unavailable: string[];
@@ -361,14 +362,14 @@ function notConfigured(now: string): AmberOperations {
     sections: {
       ownerDashboard: dead, workforce: dead, sharedFetch: dead,
       scoutAudit: dead, organization: dead, revenue: dead, funnel: dead,
-      escalations: dead, activity: dead, ecosystem: dead, paymentEvidence: dead,
+      escalations: dead, activity: dead, ecosystem: dead, paymentEvidence: dead, blockers: dead,
     },
     unavailable: [
       "owner_dashboard", "child_workforce_report", "shared_fetch_report", "scout_execution_audit",
       "overview", "amber_revenue", "unique_funnel", "owner_escalations", "amber_activity",
-      "amber_ecosystem", "payment_evidence",
+      "amber_ecosystem", "payment_evidence", "opportunity_blockers",
     ],
-    reportCount: 11,
+    reportCount: 12,
     reloLedger: null,
   };
 }
@@ -456,7 +457,7 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
   // All seven in parallel: the dashboard is a status page, and seven serial
   // 20-second timeouts is not a status page.
   const hqProbe = await probeHqService();
-  const [ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem, paymentEvidence] =
+  const [ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem, paymentEvidence, blockers] =
     await pooled([
     () => section({ action: "owner_dashboard" }),
     /**
@@ -486,9 +487,15 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
      * of the actions currently timing out.
      */
     () => section({ action: "payment_evidence" }),
+    /**
+     * Why every opportunity on record is not executable. One pass over state
+     * on Amber's side; the answer to the only question that matters once the
+     * funnel reads 451 found and 0 executable.
+     */
+    () => section({ action: "opportunity_blockers" }),
   ]);
 
-  const sections = { ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem, paymentEvidence };
+  const sections = { ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem, paymentEvidence, blockers };
   const unavailable = Object.entries(sections).filter(([, v]) => !v.ok).map(([k]) => k);
 
   /**

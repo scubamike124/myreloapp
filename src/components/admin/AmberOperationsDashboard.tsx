@@ -194,6 +194,107 @@ function BasisBadge({ basis }: { basis: LedgerBasis }) {
 }
 
 /**
+ * The complete reason breakdown, in the owner's language.
+ *
+ * Production reported 451 found and 0 executable. The drill-down carries the
+ * raw report; this is the version that can be read on a phone, and it keeps
+ * the two columns apart on purpose — work Amber owes, and asks only the owner
+ * can answer. Mixing them is how engineering ends up parked in an owner queue.
+ */
+function WhyNothingExecutable({ section }: { section: Section }) {
+  if (!section.ok) return null;
+  const d = section.data as {
+    total?: number;
+    executable?: number;
+    repairableByAmber?: number;
+    ownerBlocked?: number;
+    balances?: boolean;
+    reasons?: Array<{ key: string; label: string; count: number; owner: string | null; whatWouldFix: string }>;
+    ownerActions?: Array<{ action: string; sources: string[]; opportunitiesUnblocked: number }>;
+  } | null;
+  if (!d || typeof d.total !== "number") return null;
+
+  const reasons = (d.reasons ?? []).filter((r) => r.key !== "executable");
+  return (
+    <section className="mt-4 rounded-2xl border border-white/10 bg-white/[0.02] p-4">
+      <h3 className="font-display text-base font-bold">Why nothing is executable</h3>
+      <p className="mt-1 text-[13px] leading-relaxed text-white/50">
+        Every opportunity on record, not a sample. {d.total} found, {d.executable ?? 0} executable.
+      </p>
+
+      {d.balances === false && (
+        <p className="mt-2 rounded-xl border border-[#ff9aa3]/40 bg-[#ff9aa3]/10 p-2 text-[12px] text-[#ff9aa3]">
+          The reason counts do not sum to the total, so this breakdown is incomplete. Read it as such.
+        </p>
+      )}
+
+      <div className="mt-3 grid grid-cols-2 gap-3">
+        <div className="rounded-xl border border-white/10 p-3">
+          <div className="text-[11px] uppercase tracking-wide text-white/45">Amber can fix</div>
+          <div className="mt-1 font-display text-xl font-bold tabular-nums">{d.repairableByAmber ?? 0}</div>
+        </div>
+        <div className="rounded-xl border border-[#f0b429]/30 p-3">
+          <div className="text-[11px] uppercase tracking-wide text-white/45">Needs you</div>
+          <div className="mt-1 font-display text-xl font-bold tabular-nums text-[#f0b429]">{d.ownerBlocked ?? 0}</div>
+        </div>
+      </div>
+
+      <div className="mt-3 space-y-2">
+        {reasons.map((r) => (
+          <div key={r.key} className="rounded-xl border border-white/10 p-3 text-[12px]">
+            <div className="flex items-baseline justify-between gap-2">
+              <span className="font-semibold">{r.label}</span>
+              <span className="shrink-0 tabular-nums font-semibold">{r.count}</span>
+            </div>
+            <div className="mt-1 text-white/50">{r.whatWouldFix}</div>
+            <span
+              className={`mt-1 inline-block rounded-full border px-2 py-0.5 text-[10px] font-semibold ${
+                r.owner === "owner"
+                  ? "border-[#f0b429]/40 bg-[#f0b429]/10 text-[#f0b429]"
+                  : "border-white/15 bg-white/5 text-white/55"
+              }`}
+            >
+              {r.owner === "owner" ? "Needs you" : "Amber's own work"}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {(d.ownerActions ?? []).length > 0 && (
+        <div className="mt-3 rounded-xl border border-[#f0b429]/40 bg-[#f0b429]/10 p-3">
+          <div className="text-[12px] font-semibold text-[#f0b429]">What only you can do</div>
+          <ul className="mt-2 space-y-2">
+            {(d.ownerActions ?? []).map((a) => (
+              <li key={a.action} className="text-[12px] leading-relaxed text-[#f0b429]">
+                {a.action}{" "}
+                <span className="text-[#f0b429]/70">
+                  (unblocks {a.opportunitiesUnblocked} on {a.sources.join(", ")})
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </section>
+  );
+}
+
+/** Which standard a booking met, said in the owner's language. */
+function BasisBadge({ basis }: { basis: LedgerBasis }) {
+  const style =
+    basis === "wallet-credit"
+      ? { cls: "border-[#7ee787]/40 bg-[#7ee787]/10 text-[#7ee787]", label: "Wallet credit observed" }
+      : basis === "platform-escrow"
+        ? { cls: "border-[#f0b429]/40 bg-[#f0b429]/10 text-[#f0b429]", label: "Platform-reported escrow" }
+        : { cls: "border-white/15 bg-white/5 text-white/50", label: "Basis not stated" };
+  return (
+    <span className={`mt-1 inline-block rounded-full border px-2 py-0.5 text-[10px] font-semibold ${style.cls}`}>
+      {style.label}
+    </span>
+  );
+}
+
+/**
  * The two ledgers, side by side.
  *
  * On 2026-09-15 Amber HQ reported paymentCount 0 and $0.00 across 469 jobs
@@ -729,6 +830,7 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
         <OwnerBlock s={s} />
       </section>
 
+      <WhyNothingExecutable section={ops.sections.blockers} />
       <AmberActivity section={ops.sections.activity} />
 
       {s.topIdleReason && (
@@ -753,6 +855,7 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
         <SectionBlock name="amber_revenue" title="Revenue, cost & net" section={ops.sections.revenue} />
         {/* The rows behind the money: method, reference, amount, observed at. */}
         <SectionBlock name="payment_evidence" title="Payment evidence (every dollar counted)" section={ops.sections.paymentEvidence} />
+        <SectionBlock name="opportunity_blockers" title="Why nothing is executable (every opportunity)" section={ops.sections.blockers} />
         <TwoLedgers ops={ops} />
         <SectionBlock name="amber_ecosystem" title="Amber's own audit & manager health" section={ops.sections.ecosystem} />
         <SectionBlock name="owner_escalations" title="Owner escalations (raw)" section={ops.sections.escalations} />
