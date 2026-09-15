@@ -307,3 +307,87 @@ describe("the dashboard puts problems where the owner cannot miss them", () => {
     assert.match(src, /not the same as/);
   });
 });
+
+
+describe("the live connector diagnoses which link is broken", () => {
+  let mod: typeof import("../amber/operations-telemetry.ts");
+  const prevSecret = process.env.REELO_ORG_BRIDGE_SECRET;
+  let restore: (() => void) | null = null;
+
+  before(async () => { mod = await import("../amber/operations-telemetry.ts"); });
+  afterEach(() => {
+    restore?.(); restore = null;
+    if (prevSecret === undefined) delete process.env.REELO_ORG_BRIDGE_SECRET;
+    else process.env.REELO_ORG_BRIDGE_SECRET = prevSecret;
+  });
+
+  /** Replace fetch with a canned bridge response. Returns a restore fn. */
+  function bridge(respond: () => Response) {
+    const real = globalThis.fetch;
+    globalThis.fetch = (async () => respond()) as typeof fetch;
+    return () => { globalThis.fetch = real; };
+  }
+
+  it("names Relo as the broken link when the secret is missing there", async () => {
+    delete process.env.REELO_ORG_BRIDGE_SECRET;
+    const c = (await mod.fetchAmberOperations()).connection;
+    assert.equal(c.live, false);
+    assert.equal(c.reloSecretPresent, false);
+    assert.match(c.brokenLink ?? "", /Relo's server does not have REELO_ORG_BRIDGE_SECRET/);
+    assert.match(c.fixHint ?? "", /same value Amber HQ holds/);
+  });
+
+  it("distinguishes a REJECTED credential from a missing one", async () => {
+    // Both hosts up, both holding secrets — different ones. This needs a
+    // different fix from "unset", and used to render identically.
+    process.env.REELO_ORG_BRIDGE_SECRET = "relo-value";
+    restore = bridge(() => new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401 }));
+
+    const c = (await mod.fetchAmberOperations()).connection;
+    assert.equal(c.reloSecretPresent, true, "Relo has a secret");
+    assert.equal(c.hqReachable, true, "HQ answered — it is up");
+    assert.equal(c.hqAuthAccepted, false, "but it rejected the credential");
+    assert.match(c.brokenLink ?? "", /different secrets/);
+  });
+
+  it("reports HQ unreachable when nothing answers at all", async () => {
+    process.env.REELO_ORG_BRIDGE_SECRET = "relo-value";
+    const real = globalThis.fetch;
+    globalThis.fetch = (async () => { throw new Error("fetch failed"); }) as typeof fetch;
+    restore = () => { globalThis.fetch = real; };
+
+    const c = (await mod.fetchAmberOperations()).connection;
+    assert.equal(c.hqReachable, false);
+    assert.match(c.brokenLink ?? "", /could not reach Amber HQ/);
+  });
+
+  it("reports LIVE with no broken link once HQ answers", async () => {
+    process.env.REELO_ORG_BRIDGE_SECRET = "relo-value";
+    restore = bridge(() => new Response(JSON.stringify({ ok: true, dashboard: { scouts: { registered: 5120, executed: 12 } } }), { status: 200 }));
+
+    const ops = await mod.fetchAmberOperations();
+    assert.equal(ops.connection.live, true);
+    assert.equal(ops.connection.hqAuthAccepted, true);
+    assert.equal(ops.connection.brokenLink, null);
+    assert.equal(ops.summary.scoutsWorking, 12, "and real numbers arrive");
+  });
+
+  it("caps how many calls are in flight, for the Workers 6-connection limit", async () => {
+    process.env.REELO_ORG_BRIDGE_SECRET = "relo-value";
+    let inFlight = 0;
+    let peak = 0;
+    const real = globalThis.fetch;
+    globalThis.fetch = (async () => {
+      inFlight += 1;
+      peak = Math.max(peak, inFlight);
+      await new Promise((r) => setTimeout(r, 5));
+      inFlight -= 1;
+      return new Response(JSON.stringify({ ok: true }), { status: 200 });
+    }) as typeof fetch;
+    restore = () => { globalThis.fetch = real; };
+
+    await mod.fetchAmberOperations();
+    assert.ok(peak <= 6, `peak concurrency ${peak} must stay under the Workers cap of 6`);
+    assert.ok(peak > 1, "but still parallel — ten serial calls would be far too slow");
+  });
+});

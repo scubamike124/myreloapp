@@ -58,6 +58,16 @@ function Tile({ label, children, hint }: { label: string; children: React.ReactN
   );
 }
 
+/** One link in the Amber -> HQ -> Relo chain, with its own state. */
+function Link({ label, ok }: { label: string; ok: boolean }) {
+  return (
+    <span className="inline-flex items-center gap-1 text-white/60">
+      <span className={ok ? "text-[#7ee787]" : "text-[#ff9aa3]"}>{ok ? "✓" : "✗"}</span>
+      {label}
+    </span>
+  );
+}
+
 function StatusPill({ state, label }: { state: "good" | "bad" | "warn" | "unknown"; label: string }) {
   const tone =
     state === "good" ? "border-[#7ee787]/40 bg-[#7ee787]/10 text-[#7ee787]"
@@ -384,15 +394,37 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
 
         {error && <p className="mt-2 text-xs text-[#ff9aa3]">{error}</p>}
 
-        {!ops.configured && (
-          <div className="mt-4 rounded-xl border border-[#ffd479]/30 bg-[#ffd479]/10 p-3">
-            <p className="text-xs leading-relaxed text-[#ffd479]">
-              Not connected to Amber HQ. Set <code>REELO_ORG_BRIDGE_SECRET</code> on this host to the same value
-              already configured on Amber HQ (Railway, service <code>amber-hq-web</code>), then reload. Until then
-              every figure below reads NOT MEASURED rather than zero.
-            </p>
+        {/*
+          The connection, diagnosed rather than described.
+
+          Every failure used to render the same "not connected", so the one
+          thing worth knowing — WHICH end of the chain is wrong — was the one
+          thing the page could not say. Each link reports its own state, and a
+          rejected credential is called out separately from a missing one
+          because they need different fixes.
+        */}
+        <div className="mt-4 rounded-xl border border-white/10 bg-black/30 p-3">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px]">
+            <span className="font-bold uppercase tracking-wide text-white/45">Connection</span>
+            <Link label="Relo has the secret" ok={ops.connection.reloSecretPresent} />
+            <Link label="Amber HQ reachable" ok={ops.connection.hqReachable} />
+            <Link label="HQ accepted it" ok={ops.connection.hqAuthAccepted} />
+            <span className={`font-bold ${ops.connection.live ? "text-[#7ee787]" : "text-[#ff9aa3]"}`}>
+              {ops.connection.live ? "LIVE" : "NOT LIVE"}
+            </span>
           </div>
-        )}
+          {ops.connection.brokenLink && (
+            <div className="mt-2 border-t border-white/10 pt-2">
+              <p className="text-xs leading-relaxed text-[#ffd479]">{ops.connection.brokenLink}</p>
+              {ops.connection.fixHint && (
+                <p className="mt-1 text-xs leading-relaxed text-white/55">{ops.connection.fixHint}</p>
+              )}
+              <p className="mt-1 text-[11px] text-white/35">
+                Until then every figure below reads NOT MEASURED rather than zero.
+              </p>
+            </div>
+          )}
+        </div>
 
         {ops.configured && ops.unavailable.length > 0 && (
           <p className="mt-3 text-xs leading-relaxed text-[#ffd479]">

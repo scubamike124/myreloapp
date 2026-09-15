@@ -31,14 +31,45 @@ import { amberOrgBridgeConfigured, callAmberBridge } from "./organization-bridge
 /** One bridge action's result, with its failure kept rather than swallowed. */
 export type Section<T = unknown> = { ok: true; data: T } | { ok: false; error: string };
 
+/**
+ * Per-call timeout, and why it is not the bridge's 20-second default.
+ *
+ * This page renders on Cloudflare Workers, which allow at most SIX
+ * simultaneous open connections per invocation. Ten reports fired at once
+ * therefore run in two waves, so a 20s timeout makes the worst case 40s of
+ * blocking server render -- on a phone that is a hung page, and it can exceed
+ * the Worker's own request budget. Eight seconds keeps the worst case inside
+ * about twenty, and a report that cannot answer in eight seconds is reported
+ * as unavailable rather than holding the whole screen hostage.
+ */
+const CALL_TIMEOUT_MS = 8_000;
+
+/** Kept under the Workers cap so the runtime never queues our own requests. */
+const MAX_PARALLEL = 4;
+
 async function section<T>(body: Record<string, unknown>): Promise<Section<T>> {
   try {
-    return { ok: true, data: await callAmberBridge<T>(body) };
+    return { ok: true, data: await callAmberBridge<T>(body, { timeoutMs: CALL_TIMEOUT_MS }) };
   } catch (e) {
-    // One dead action must not blank the whole dashboard: the other six still
+    // One dead action must not blank the whole dashboard: the others still
     // carry real production truth, and the failure is reported as a failure.
     return { ok: false, error: e instanceof Error ? e.message : "Bridge call failed." };
   }
+}
+
+/** Run tasks with a hard cap on how many are in flight at once. */
+async function pooled<T>(tasks: Array<() => Promise<T>>, limit = MAX_PARALLEL): Promise<T[]> {
+  const out: T[] = new Array(tasks.length);
+  let next = 0;
+  const workers = Array.from({ length: Math.min(limit, tasks.length) }, async () => {
+    for (;;) {
+      const i = next++;
+      if (i >= tasks.length) return;
+      out[i] = await tasks[i]();
+    }
+  });
+  await Promise.all(workers);
+  return out;
 }
 
 function num(v: unknown): number | null {
@@ -110,8 +141,32 @@ export type OwnerSummary = {
   topIdleReason: string | null;
 };
 
+/**
+ * Which link in the chain is broken, named rather than guessed.
+ *
+ * The chain is: Amber's telemetry -> HQ bridge -> Relo's server -> this page.
+ * Every failure used to arrive as the same "not connected", so the one thing
+ * the owner needed to know -- WHICH end is missing the secret -- was the one
+ * thing the page could not say. These three booleans separate them, and a 401
+ * is called out specifically because it means both hosts are up and holding
+ * DIFFERENT secrets, which is a different fix from either being unset.
+ */
+export type ConnectionDiagnosis = {
+  /** Is REELO_ORG_BRIDGE_SECRET present on Relo's server? */
+  reloSecretPresent: boolean;
+  /** Did any call reach Amber HQ and get an HTTP response at all? */
+  hqReachable: boolean;
+  /** Did HQ accept our secret? False on 401 — the two hosts disagree. */
+  hqAuthAccepted: boolean;
+  live: boolean;
+  /** The single thing to fix, in one sentence. */
+  brokenLink: string | null;
+  fixHint: string | null;
+};
+
 export type AmberOperations = {
   configured: boolean;
+  connection: ConnectionDiagnosis;
   fetchedAt: string;
   /** The commit production is actually serving, straight from the process. */
   hqCommit: string | null;
@@ -139,6 +194,14 @@ function notConfigured(now: string): AmberOperations {
   const dead: Section = { ok: false, error: err };
   return {
     configured: false,
+    connection: {
+      reloSecretPresent: false,
+      hqReachable: false,
+      hqAuthAccepted: false,
+      live: false,
+      brokenLink: "Relo's server does not have REELO_ORG_BRIDGE_SECRET, so it never contacts Amber HQ.",
+      fixHint: "Set REELO_ORG_BRIDGE_SECRET on Relo (Cloudflare Worker secret) to the same value Amber HQ holds (Railway, service amber-hq-web).",
+    },
     fetchedAt: now,
     hqCommit: null,
     hqCommitShort: null,
@@ -216,21 +279,57 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
 
   // All seven in parallel: the dashboard is a status page, and seven serial
   // 20-second timeouts is not a status page.
-  const [ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem] = await Promise.all([
-    section({ action: "owner_dashboard" }),
-    section({ action: "child_workforce_report" }),
-    section({ action: "shared_fetch_report" }),
-    section({ action: "scout_execution_audit" }),
-    section({ action: "overview" }),
-    section({ action: "amber_revenue" }),
-    section({ action: "unique_funnel", days: 1 }),
-    section({ action: "owner_escalations" }),
-    section({ action: "amber_activity", limit: 40 }),
-    section({ action: "amber_ecosystem" }),
+  const [ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem] = await pooled([
+    () => section({ action: "owner_dashboard" }),
+    () => section({ action: "child_workforce_report" }),
+    () => section({ action: "shared_fetch_report" }),
+    () => section({ action: "scout_execution_audit" }),
+    () => section({ action: "overview" }),
+    () => section({ action: "amber_revenue" }),
+    () => section({ action: "unique_funnel", days: 1 }),
+    () => section({ action: "owner_escalations" }),
+    () => section({ action: "amber_activity", limit: 40 }),
+    () => section({ action: "amber_ecosystem" }),
   ]);
 
   const sections = { ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem };
   const unavailable = Object.entries(sections).filter(([, v]) => !v.ok).map(([k]) => k);
+
+  /**
+   * Diagnose the chain from what the calls actually did.
+   *
+   * A 401 is treated separately and deliberately: it proves both hosts are up
+   * and talking, and that they hold DIFFERENT secrets. That is a different
+   * repair from "the secret is missing", and reporting both as "not connected"
+   * is what made this take days to place.
+   */
+  const errors = Object.values(sections).filter((v) => !v.ok).map((v) => (v as { error: string }).error);
+  const anyOk = Object.values(sections).some((v) => v.ok);
+  const sawAuthRejection = errors.some((e) => /\b401\b|unauthor/i.test(e));
+  const sawTransportFailure = errors.some((e) => /abort|timeout|fetch failed|network|ENOTFOUND|ECONN/i.test(e));
+
+  const connection: ConnectionDiagnosis = {
+    reloSecretPresent: true,
+    hqReachable: anyOk || sawAuthRejection || (errors.length > 0 && !sawTransportFailure),
+    hqAuthAccepted: anyOk,
+    live: anyOk,
+    brokenLink: null,
+    fixHint: null,
+  };
+  if (!connection.live) {
+    if (sawAuthRejection) {
+      connection.hqAuthAccepted = false;
+      connection.brokenLink = "Amber HQ rejected Relo's credential — the two hosts are holding different secrets.";
+      connection.fixHint = "Set REELO_ORG_BRIDGE_SECRET to the SAME value on both Relo (Cloudflare) and Amber HQ (Railway, service amber-hq-web).";
+    } else if (sawTransportFailure) {
+      connection.hqReachable = false;
+      connection.brokenLink = "Relo's server could not reach Amber HQ at all — no HTTP response.";
+      connection.fixHint = "Check that amber-hq-web is running on Railway and that hq.amberoneai.com resolves.";
+    } else {
+      connection.brokenLink = "Amber HQ answered, but every report failed.";
+      connection.fixHint = errors[0] ?? "See the drill-down sections for the exact error.";
+    }
+  }
 
   const dash = ownerDashboard.ok ? ownerDashboard.data : null;
   const wf = workforce.ok ? workforce.data : null;
@@ -344,6 +443,7 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
 
   return {
     configured: true,
+    connection,
     fetchedAt: now,
     hqCommit: typeof hqCommit === "string" ? hqCommit : null,
     hqCommitShort: typeof hqCommitShort === "string" ? hqCommitShort : null,
