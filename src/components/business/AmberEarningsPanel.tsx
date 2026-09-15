@@ -933,7 +933,11 @@ export default function AmberEarningsPanel() {
                 }}
               >
                 <div className="text-[13px] font-bold" style={{ color: connectResult.outcome === "CONNECTED" ? "#047857" : "#92400e" }}>
-                  {connectResult.outcome === "CONNECTED" ? "CONNECTED" : "NEEDS OWNER ATTENTION"}
+                  {connectResult.outcome === "CONNECTED"
+                    ? "CONNECTED"
+                    : connectResult.outcome === "HQ_NOT_DEPLOYED_YET"
+                      ? "ALMOST — AMBER IS STILL DEPLOYING"
+                      : "NEEDS OWNER ATTENTION"}
                 </div>
                 <p className="mt-1 text-[13.5px] text-gray-800">{connectResult.message}</p>
                 {connectResult.whatToDo ? (

@@ -19,7 +19,13 @@
 import { hqBaseUrl, hqSecretCandidates, hqAuthHeaders } from "../amber-earnings/hq-nationwide.ts";
 
 /** What the owner is shown on the button. Never a value, never a log line. */
-export type ConnectOutcome = "CONNECTED" | "NEEDS_OWNER_ATTENTION" | "NO_HQ_CREDENTIAL" | "HQ_UNREACHABLE";
+export type ConnectOutcome =
+  | "CONNECTED"
+  | "NEEDS_OWNER_ATTENTION"
+  | "NO_HQ_CREDENTIAL"
+  | "HQ_UNREACHABLE"
+  /** Amber answered, but her deploy does not yet carry the connector. */
+  | "HQ_NOT_DEPLOYED_YET";
 
 export type ConnectAmberResult = {
   at: string;
@@ -35,6 +41,30 @@ export type ConnectAmberResult = {
 };
 
 const TIMEOUT_MS = 30_000;
+
+/**
+ * What Amber actually said, when she said something other than a result.
+ *
+ * Measured in production, 2026-09-15: the dev bridge answered
+ * `{ok:false, error:"Unknown action: connect_relo_bridge"}` with HTTP 400 —
+ * HQ had authenticated Relo but had not yet deployed the connector. This code
+ * read `result.detail`, found nothing, and rendered "Amber could not complete
+ * the connection", which threw away the one sentence that explained it.
+ *
+ * So HQ's own `error` is carried through, and the deploy case is named, since
+ * it resolves itself in minutes and needs no action at all.
+ */
+function hqSaid(body: { error?: unknown; result?: { detail?: string } } | null): string {
+  const detail = typeof body?.result?.detail === "string" ? body.result.detail : "";
+  if (detail) return detail;
+  return typeof body?.error === "string" ? body.error : "";
+}
+
+/** HQ recognising the request but not the action means the deploy is behind. */
+function looksUndeployed(said: string): boolean {
+  return /unknown action/i.test(said);
+}
+
 
 export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () => number }): Promise<ConnectAmberResult> {
   const at = new Date(opts?.now?.() ?? Date.now()).toISOString();
@@ -72,7 +102,7 @@ export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () =
       if (res.status === 401 || res.status === 403) continue;
 
       const body = (await res.json().catch(() => null)) as
-        | { ok?: boolean; result?: { status?: string; detail?: string } }
+        | { ok?: boolean; error?: string; result?: { status?: string; detail?: string } }
         | null;
       const hqStatus = body?.result?.status ?? null;
       const detail = body?.result?.detail ?? "";
@@ -94,11 +124,22 @@ export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () =
        * relo-bridge-connect.ts -- so it is passed through rather than
        * replaced with a vaguer sentence of our own.
        */
+      const said = hqSaid(body);
+      if (looksUndeployed(said)) {
+        return {
+          at,
+          channel: "cron",
+          outcome: "HQ_NOT_DEPLOYED_YET",
+          message: "Reelo reached Amber and she answered — but her deployment does not carry this connector yet.",
+          whatToDo: "Nothing to do. Wait a few minutes for Amber to finish deploying, then press again.",
+          hqStatus: null,
+        };
+      }
       return {
         at,
         channel: "cron",
         outcome: "NEEDS_OWNER_ATTENTION",
-        message: detail || `Amber could not complete the connection (HTTP ${res.status}).`,
+        message: said || `Amber could not complete the connection (HTTP ${res.status}).`,
         whatToDo:
           hqStatus === "NO_CLOUDFLARE_TOKEN"
             ? "Add CLOUDFLARE_API_TOKEN to Amber's vault so she can set the value on Relo's Worker herself."
@@ -137,11 +178,12 @@ export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () =
       });
       if (res.status !== 401 && res.status !== 403) {
         const body = (await res.json().catch(() => null)) as
-          | { ok?: boolean; result?: { status?: string; detail?: string; cronRepair?: string } }
+          | { ok?: boolean; error?: string; result?: { status?: string; detail?: string; cronRepair?: string } }
           | null;
         const hqStatus = body?.result?.status ?? null;
         const detail = body?.result?.detail ?? "";
         const cronRepair = body?.result?.cronRepair;
+        const said = hqSaid(body);
 
         if (body?.ok) {
           return {
@@ -157,11 +199,22 @@ export async function connectAmber(opts?: { fetchImpl?: typeof fetch; now?: () =
             hqStatus,
           };
         }
+        if (looksUndeployed(said)) {
+          return {
+            at,
+            channel: "dev-bridge",
+            outcome: "HQ_NOT_DEPLOYED_YET",
+            message:
+              "Reelo reached Amber and she answered — but her deployment does not carry this connector yet.",
+            whatToDo: "Nothing to do. Wait a few minutes for Amber to finish deploying, then press again.",
+            hqStatus: null,
+          };
+        }
         return {
           at,
           channel: "dev-bridge",
           outcome: "NEEDS_OWNER_ATTENTION",
-          message: detail || "Amber could not complete the connection.",
+          message: said || "Amber could not complete the connection.",
           whatToDo:
             hqStatus === "NO_CLOUDFLARE_TOKEN"
               ? "Add CLOUDFLARE_API_TOKEN to Amber's vault so she can set the value on Relo's Worker herself."
