@@ -217,6 +217,14 @@ function WhyNothingExecutable({ section }: { section: Section }) {
       staleAndNowPassing: number;
       note: string;
     };
+    submitPathBuildQueue?: Array<{
+      source: string;
+      blocked: number;
+      pricedValueUsd: number;
+      unpricedCount: number;
+      largestPayoutUsd: number;
+      whyNoPath: string;
+    }>;
   } | null;
   if (!d || typeof d.total !== "number") return null;
   const funnel = payload?.funnel;
@@ -330,6 +338,37 @@ function WhyNothingExecutable({ section }: { section: Section }) {
           </div>
         ))}
       </div>
+
+      {/* What to build next, ranked by the money actually on those boards. */}
+      {(d.submitPathBuildQueue ?? []).length > 0 && (
+        <div className="mt-3 rounded-xl border border-[#7ee787]/30 bg-[#7ee787]/[0.04] p-3">
+          <div className="text-[12px] font-semibold text-[#7ee787]">Submit paths worth building, highest value first</div>
+          <p className="mt-1 text-[11px] leading-snug text-white/45">
+            Sources whose only blocker is that no submission path exists yet. Ranked on published payouts only — an
+            unpriced notice is counted but never valued.
+          </p>
+          <ul className="mt-2 space-y-2">
+            {(d.submitPathBuildQueue ?? []).slice(0, 6).map((q, i) => (
+              <li key={q.source} className="rounded-lg border border-white/10 p-2 text-[12px]">
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="font-semibold">
+                    {i + 1}. {q.source}
+                  </span>
+                  <span className="shrink-0 tabular-nums font-semibold text-[#7ee787]">
+                    ${q.pricedValueUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  </span>
+                </div>
+                <div className="mt-0.5 text-[11px] text-white/45">
+                  {q.blocked.toLocaleString()} blocked
+                  {q.unpricedCount > 0 && `, ${q.unpricedCount.toLocaleString()} unpriced`}
+                  {q.largestPayoutUsd > 0 && `, largest $${q.largestPayoutUsd.toLocaleString()}`}
+                </div>
+                <div className="mt-0.5 text-[11px] leading-snug text-white/35">{q.whyNoPath}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {(d.ownerActions ?? []).length > 0 && (
         <div className="mt-3 rounded-xl border border-[#f0b429]/40 bg-[#f0b429]/10 p-3">
