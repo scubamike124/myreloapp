@@ -186,6 +186,114 @@ function StatusPill({ state, label }: { state: "good" | "bad" | "warn" | "unknow
  * the two columns apart on purpose — work Amber owes, and asks only the owner
  * can answer. Mixing them is how engineering ends up parked in an owner queue.
  */
+/**
+ * Every opportunity traced end to end, and the six kinds of reason they stop.
+ *
+ * The split is the point. A funnel that ends at zero says nothing about
+ * whether the system is broken or correctly refusing work it should refuse,
+ * and those call for opposite responses. `Software defects` is deliberately
+ * narrow: states the system could not be in if it were working.
+ */
+function OpportunityAudit({ section }: { section: Section }) {
+  if (!section.ok) return null;
+  const a = (section.data as { audit?: Record<string, unknown> } | null)?.audit as
+    | {
+        total?: number;
+        balances?: boolean;
+        ledgerReadable?: boolean;
+        funnel?: Record<string, number | null>;
+        byKind?: Array<{ kind: string; count: number; pricedValueUsd: number }>;
+        byBlocker?: Array<{ blocker: string; kind: string; count: number; pricedValueUsd: number }>;
+        defects?: Array<{ id: string; source: string; firstBlocker: string | null; detail: string; payoutUsd: number }>;
+        blockedOnlyBySubmitPath?: Array<{ source: string; count: number; pricedValueUsd: number; unpricedCount: number }>;
+      }
+    | undefined;
+  if (!a || typeof a.total !== "number") return null;
+
+  const STAGES = ["found", "legitimate", "amber_capable", "payment_verified", "executable", "pursued", "won", "paid"];
+  const KIND_LABEL: Record<string, string> = {
+    software_bug: "Software defect — Amber's to fix",
+    missing_submission_path: "No submission path exists yet",
+    payment_blocker: "Payment cannot be verified or received",
+    capability_blocker: "Amber genuinely cannot do the work",
+    owner_auth_blocker: "Needs you — credentials or authorization",
+    legitimate_rejection: "Correctly rejected",
+  };
+  const defectCount = a.byKind?.find((k) => k.kind === "software_bug")?.count ?? 0;
+
+  return (
+    <section className="mt-4 rounded-2xl border border-white/10 bg-white/[0.02] p-4">
+      <h3 className="font-display text-base font-bold">Every opportunity, traced end to end</h3>
+      <p className="mt-1 text-[13px] leading-relaxed text-white/50">
+        All {a.total.toLocaleString()} on record, not a sample. Each row&rsquo;s FIRST blocker, sorted by what kind of
+        problem it is.
+        {a.balances === false && " The buckets do not sum to the total, so read this as incomplete."}
+      </p>
+
+      <div className="mt-3 grid grid-cols-2 gap-1.5 sm:grid-cols-4">
+        {STAGES.map((stage) => (
+          <div key={stage} className="rounded-xl border border-white/10 p-2.5">
+            <div className="text-[10px] uppercase tracking-wide text-white/45">{stage.replace(/_/g, " ")}</div>
+            <div className="mt-0.5 font-display text-lg font-bold tabular-nums">
+              <Num value={a.funnel?.[stage] ?? null} />
+            </div>
+          </div>
+        ))}
+      </div>
+      {a.ledgerReadable === false && (
+        <p className="mt-2 text-[11px] text-white/40">
+          The earnings ledger could not be read, so pursued / won / paid are NOT MEASURED rather than zero.
+        </p>
+      )}
+
+      <div className="mt-3 space-y-1.5">
+        {(a.byKind ?? []).map((k) => (
+          <div
+            key={k.kind}
+            className={`flex items-baseline justify-between gap-2 rounded-xl border p-2.5 text-[12px] ${
+              k.kind === "software_bug"
+                ? "border-[#ff9aa3]/40 bg-[#ff9aa3]/[0.06]"
+                : k.kind === "owner_auth_blocker"
+                  ? "border-[#f0b429]/30 bg-[#f0b429]/[0.05]"
+                  : "border-white/10"
+            }`}
+          >
+            <span className={k.kind === "software_bug" ? "font-semibold text-[#ff9aa3]" : ""}>
+              {KIND_LABEL[k.kind] ?? k.kind}
+            </span>
+            <span className="flex shrink-0 items-baseline gap-2">
+              {k.pricedValueUsd > 0 && (
+                <span className="text-[11px] text-white/40">
+                  ${k.pricedValueUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                </span>
+              )}
+              <span className="font-display font-bold tabular-nums">{k.count.toLocaleString()}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {defectCount > 0 && (a.defects ?? []).length > 0 && (
+        <div className="mt-3 rounded-xl border border-[#ff9aa3]/40 bg-[#ff9aa3]/[0.06] p-3">
+          <div className="text-[12px] font-semibold text-[#ff9aa3]">
+            Repair queue — {defectCount.toLocaleString()} self-contradictory row(s)
+          </div>
+          <ul className="mt-2 space-y-1.5">
+            {(a.defects ?? []).slice(0, 8).map((d) => (
+              <li key={d.id} className="text-[11px] leading-snug text-white/55">
+                <span className="font-semibold text-white/75">{d.source}</span>
+                <span className="mx-1 text-white/30">·</span>
+                <span className="text-[#ff9aa3]">{d.firstBlocker}</span>
+                <div className="text-white/40">{d.detail}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </section>
+  );
+}
+
 function WhyNothingExecutable({ section }: { section: Section }) {
   if (!section.ok) return null;
   const payload = section.data as {
@@ -1258,6 +1366,7 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
         <OwnerBlock s={s} />
       </section>
 
+      <OpportunityAudit section={ops.sections.audit} />
       <WorkforceEvidence section={ops.sections.workforce} />
       <AmberGrowth section={ops.sections.growth} />
       <WhyNothingExecutable section={ops.sections.blockers} />

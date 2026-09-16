@@ -271,6 +271,7 @@ export type AmberOperations = {
     paymentEvidence: Section;
     blockers: Section;
     growth: Section;
+    audit: Section;
   };
   /** Actions that could not be reached, named so a gap is never silent. */
   unavailable: string[];
@@ -392,12 +393,12 @@ function notConfigured(now: string): AmberOperations {
     sections: {
       ownerDashboard: dead, workforce: dead, sharedFetch: dead,
       scoutAudit: dead, organization: dead, revenue: dead, funnel: dead,
-      escalations: dead, activity: dead, ecosystem: dead, paymentEvidence: dead, blockers: dead, growth: dead,
+      escalations: dead, activity: dead, ecosystem: dead, paymentEvidence: dead, blockers: dead, growth: dead, audit: dead,
     },
     unavailable: [
       "owner_dashboard", "child_workforce_report", "shared_fetch_report", "scout_execution_audit",
       "overview", "amber_revenue", "unique_funnel", "owner_escalations", "amber_activity",
-      "amber_ecosystem", "payment_evidence", "opportunity_blockers", "amber_growth",
+      "amber_ecosystem", "payment_evidence", "opportunity_blockers", "amber_growth", "opportunity_audit",
     ],
     reportCount: 13,
     reloLedger: null,
@@ -487,7 +488,7 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
   // All seven in parallel: the dashboard is a status page, and seven serial
   // 20-second timeouts is not a status page.
   const hqProbe = await probeHqService();
-  const [ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem, paymentEvidence, blockers, growth] =
+  const [ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem, paymentEvidence, blockers, growth, audit] =
     await pooled([
     () => section({ action: "owner_dashboard" }),
     /**
@@ -525,9 +526,15 @@ export async function fetchAmberOperations(): Promise<AmberOperations> {
     () => section({ action: "opportunity_blockers" }),
     /** The growth ladder: what evidenced profit has earned, and what is next. */
     () => section({ action: "amber_growth" }),
+    /**
+     * Every opportunity traced end to end, with its first blocker sorted into
+     * the six kinds. Affordable now that the state read is cached: the audit
+     * itself is a single pass and the ledger join is a map lookup per row.
+     */
+    () => section({ action: "opportunity_audit", defectCap: 25 }),
   ]);
 
-  const sections = { ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem, paymentEvidence, blockers, growth };
+  const sections = { ownerDashboard, workforce, sharedFetch, scoutAudit, organization, revenue, funnel, escalations, activity, ecosystem, paymentEvidence, blockers, growth, audit };
   const unavailable = Object.entries(sections).filter(([, v]) => !v.ok).map(([k]) => k);
 
   /**
