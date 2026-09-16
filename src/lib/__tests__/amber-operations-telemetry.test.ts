@@ -296,6 +296,10 @@ describe("the operations route is guarded and read-only", () => {
         "amber_growth",
         "amber_revenue",
         "child_workforce_report",
+        // Traces every stored opportunity end to end and joins each to its
+        // ledger job. Reads scout state and the earnings snapshot; writes
+        // nothing, bids on nothing, dispatches nothing.
+        "opportunity_audit",
         // One pass over scout state computing why each opportunity is not
         // executable. Reads only; writes nothing, dispatches nothing.
         "opportunity_blockers",
