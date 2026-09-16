@@ -194,6 +194,123 @@ function StatusPill({ state, label }: { state: "good" | "bad" | "warn" | "unknow
  * and those call for opposite responses. `Software defects` is deliberately
  * narrow: states the system could not be in if it were working.
  */
+/**
+ * What Amber repaired on her own ticks, and what she is handing back to be
+ * implemented.
+ *
+ * The handoff is the important half. Amber diagnoses from inside production
+ * and repairs what her authority covers; anything needing a code change comes
+ * back here with the exact opportunities, the gate, the cause and the change —
+ * so a person or Claude can act on it without reaching into production.
+ */
+function AmberRepairs({ section }: { section: Section }) {
+  if (!section.ok) return null;
+  const d = section.data as {
+    runs?: number;
+    handoff?: {
+      at: string | null;
+      codeCommitShort: string | null;
+      total: number;
+      causes?: Array<{
+        failingGate: string;
+        rootCause: string;
+        requiredChange: string;
+        count: number;
+        pricedValueUsd: number;
+        opportunities?: Array<{ id: string; source: string; payoutUsd: number }>;
+      }>;
+    };
+    recent?: Array<{
+      at: string;
+      attempted: number;
+      repaired: number;
+      failedToAdvance: number;
+      unsafeTotal: number;
+      before?: Record<string, number | null>;
+      after?: Record<string, number | null> | null;
+    }>;
+  } | null;
+  if (!d || typeof d.runs !== "number") return null;
+
+  const latest = d.recent?.[0];
+  const causes = d.handoff?.causes ?? [];
+
+  return (
+    <section className="mt-4 rounded-2xl border border-white/10 bg-white/[0.02] p-4">
+      <h3 className="font-display text-base font-bold">Amber&rsquo;s own repairs</h3>
+      <p className="mt-1 text-[13px] leading-relaxed text-white/50">
+        Run inside production on her own ticks, over every opportunity. She repairs only what she can verify afterwards,
+        and hands back anything needing a code change.
+      </p>
+
+      {d.runs === 0 ? (
+        <p className="mt-3 rounded-xl border border-white/10 p-3 text-[12px] text-white/45">
+          No repair run recorded yet. The first one lands on the next scout tick after deploy.
+        </p>
+      ) : (
+        latest && (
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <Tile label="Repairs attempted"><Num value={latest.attempted} /></Tile>
+            <Tile label="Verified advanced" hint="Re-measured, not assumed">
+              <span className={latest.repaired > 0 ? "text-[#7ee787]" : undefined}>
+                <Num value={latest.repaired} />
+              </span>
+            </Tile>
+            <Tile label="Ran without advancing" hint="Recorded, never counted as fixed">
+              <span className={latest.failedToAdvance > 0 ? "text-[#ff9aa3]" : undefined}>
+                <Num value={latest.failedToAdvance} />
+              </span>
+            </Tile>
+            <Tile label="Executable after" hint="Re-run from the beginning">
+              <Num value={(latest.after?.executable ?? latest.before?.executable) ?? null} />
+            </Tile>
+          </div>
+        )
+      )}
+
+      {causes.length > 0 && (
+        <div className="mt-3 space-y-2">
+          <div className="text-[12px] font-semibold text-[#f0b429]">
+            Handed back — needs a code change ({d.handoff?.total.toLocaleString()} opportunity
+            {d.handoff?.total === 1 ? "" : "ies"})
+          </div>
+          {causes.map((c) => (
+            <div key={c.failingGate} className="rounded-xl border border-[#f0b429]/30 bg-[#f0b429]/[0.05] p-3 text-[12px]">
+              <div className="flex items-baseline justify-between gap-2">
+                <span className="font-semibold text-[#f0b429]">{c.failingGate}</span>
+                <span className="shrink-0 tabular-nums text-white/55">
+                  {c.count.toLocaleString()}
+                  {c.pricedValueUsd > 0 && ` · $${c.pricedValueUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })}`}
+                </span>
+              </div>
+              <div className="mt-1 text-white/50">{c.rootCause}</div>
+              <div className="mt-1.5 rounded-lg border border-white/10 bg-white/[0.03] p-2 text-[11px] leading-snug text-white/60">
+                <span className="font-semibold text-white/75">Required change: </span>
+                {c.requiredChange}
+              </div>
+              {(c.opportunities ?? []).length > 0 && (
+                <div className="mt-1.5 text-[11px] text-white/35">
+                  {(c.opportunities ?? [])
+                    .slice(0, 6)
+                    .map((o) => `${o.id} (${o.source})`)
+                    .join(", ")}
+                  {(c.opportunities ?? []).length > 6 && ` +${(c.opportunities ?? []).length - 6} more`}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {d.runs > 0 && causes.length === 0 && (
+        <p className="mt-3 text-[12px] text-[#7ee787]">
+          Nothing handed back. Every defect the last run found was repairable by Amber herself.
+        </p>
+      )}
+    </section>
+  );
+}
+
 function OpportunityAudit({ section }: { section: Section }) {
   if (!section.ok) return null;
   const a = (section.data as { audit?: Record<string, unknown> } | null)?.audit as
@@ -1366,6 +1483,7 @@ export default function AmberOperationsDashboard({ initial }: { initial: AmberOp
         <OwnerBlock s={s} />
       </section>
 
+      <AmberRepairs section={ops.sections.repairs} />
       <OpportunityAudit section={ops.sections.audit} />
       <WorkforceEvidence section={ops.sections.workforce} />
       <AmberGrowth section={ops.sections.growth} />

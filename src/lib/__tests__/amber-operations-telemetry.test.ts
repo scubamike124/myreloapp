@@ -309,6 +309,9 @@ describe("the operations route is guarded and read-only", () => {
         // Reads the earnings snapshot and filters it. It returns the owner's
         // own payment rows and changes nothing.
         "payment_evidence",
+        // Reads the durable journal Amber writes on her own ticks. Reads
+        // only: it does not run a repair and cannot trigger one.
+        "repair_journal",
         "scout_execution_audit",
         "shared_fetch_report",
         "unique_funnel",
