@@ -11,6 +11,8 @@ import {
   resumeAgent,
   emergencyStopAll,
   resumeFromEmergencyStop,
+  listControlPlanePauses,
+  resumeSourcePause,
 } from "@/lib/amber/organization-bridge";
 
 export const runtime = "nodejs";
@@ -65,6 +67,7 @@ export async function POST(req: Request) {
     dailyBudgetUsd?: number | null;
     maxSingleSpendUsd?: number | null;
     maxCumulativeSpendUsd?: number | null;
+    source?: unknown;
   };
 
   try {
@@ -95,6 +98,17 @@ export async function POST(req: Request) {
         return NextResponse.json({ ok: true, ...(await emergencyStopAll()) });
       case "resume_from_emergency_stop":
         return NextResponse.json({ ok: true, ...(await resumeFromEmergencyStop()) });
+      case "list_source_pauses":
+        return NextResponse.json({ ok: true, ...(await listControlPlanePauses()) }, { headers: { "Cache-Control": "no-store" } });
+      case "resume_source": {
+        // Source-scoped only: resumeSourcePause always sends scope "source".
+        // global / bidding pauses cannot be lifted from this control.
+        const source = typeof body.source === "string" ? body.source.trim() : "";
+        if (!/^[a-z0-9][a-z0-9._-]{0,63}$/i.test(source)) {
+          return NextResponse.json({ ok: false, error: "A valid source name is required." }, { status: 400 });
+        }
+        return NextResponse.json({ ok: true, source, ...(await resumeSourcePause(source)) });
+      }
       default:
         break;
     }

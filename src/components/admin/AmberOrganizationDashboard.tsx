@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
-import type { OrganizationOverview, DivisionView, AgentView } from "@/lib/amber/organization-bridge";
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import type { OrganizationOverview, DivisionView, AgentView, ControlPlanePause } from "@/lib/amber/organization-bridge";
 
 type Notice = { kind: "ok" | "error"; text: string } | null;
 
@@ -20,6 +20,8 @@ const STATUS_COLORS: Record<string, { bg: string; fg: string }> = {
   VERIFIED: { bg: "rgba(46,204,113,.2)", fg: "#2ecc71" },
   FAILED: { bg: "rgba(255,70,85,.15)", fg: "#ff9aa3" },
   REJECTED: { bg: "rgba(255,70,85,.15)", fg: "#ff9aa3" },
+  AUTOMATIC: { bg: "rgba(255,159,67,.15)", fg: "#ffcf9a" },
+  OWNER: { bg: "rgba(94,166,255,.15)", fg: "#8ec1ff" },
 };
 
 function StatusPill({ status }: { status: string }) {
@@ -74,6 +76,130 @@ async function postAction(body: Record<string, unknown>): Promise<{ ok: boolean;
   } catch {
     return { ok: false, error: "Network error." };
   }
+}
+
+/**
+ * Amber's enforced control-plane pauses. Only `source:<x>` pauses get a
+ * Resume button; global / bidding pauses are shown but not liftable here.
+ * Success is judged from the pause list Amber RETURNS, never assumed.
+ */
+function SourcePausesPanel() {
+  const [pauses, setPauses] = useState<ControlPlanePause[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<Notice>(null);
+  const [busySource, setBusySource] = useState<string | null>(null);
+
+  // setState only runs in the promise callback, never synchronously in the
+  // effect body. `cancelled` drops a reply that lands after unmount.
+  const load = useCallback(() => {
+    let cancelled = false;
+    postAction({ action: "list_source_pauses" }).then((result) => {
+      if (cancelled) return;
+      setLoading(false);
+      if (!result.ok || !Array.isArray(result.pauses)) {
+        setLoadError(result.error || "Could not read Amber's enforced pauses.");
+        return;
+      }
+      setLoadError(null);
+      setPauses(result.pauses as ControlPlanePause[]);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => load(), [load]);
+
+  const refresh = () => {
+    setLoading(true);
+    setNotice(null);
+    load();
+  };
+
+  const resume = async (source: string) => {
+    const confirmed = window.confirm(
+      `Resume ${source}?\n\n` +
+        `This lifts Amber's enforced pause on ${source} only. Amber's other safety checks stay on: ` +
+        `the live re-read, the profit re-check, bid caps and your owner directives. ` +
+        `Automatic containment will pause ${source} again if it starts failing.`,
+    );
+    if (!confirmed) return;
+    setBusySource(source);
+    setNotice(null);
+    const result = await postAction({ action: "resume_source", source });
+    setBusySource(null);
+    if (!result.ok || !Array.isArray(result.pauses)) {
+      setNotice({ kind: "error", text: result.error || `Could not resume ${source}.` });
+      return;
+    }
+    const after = result.pauses as ControlPlanePause[];
+    setPauses(after);
+    setLoadError(null);
+    if (after.some((p) => p.scope === `source:${source}`)) {
+      setNotice({ kind: "error", text: `The resume did not take effect: Amber still lists source:${source} as paused.` });
+    } else {
+      setNotice({ kind: "ok", text: `${source} is no longer in Amber's enforced pause list.` });
+    }
+  };
+
+  return (
+    <section className="mt-6 rounded-2xl border border-white/10 bg-black/40 p-5">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <h2 className="font-display text-base font-bold">Enforced source pauses</h2>
+        <button
+          onClick={refresh}
+          disabled={loading}
+          className="rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/80 hover:bg-white/10 disabled:opacity-50"
+        >
+          {loading ? "Loading…" : "Refresh"}
+        </button>
+      </div>
+      <p className="max-w-prose text-xs text-white/45">
+        Pauses Amber&apos;s control plane is enforcing right now. Automatic containment pauses a source when it
+        starts failing; lifting one is an owner decision.
+      </p>
+
+      {notice && <Banner tone={notice.kind}>{notice.text}</Banner>}
+      {loadError && <Banner tone="error">{loadError}</Banner>}
+
+      {pauses === null ? (
+        !loadError && <p className="mt-3 text-xs text-white/45">Loading…</p>
+      ) : pauses.length === 0 ? (
+        <p className="mt-3 text-xs text-white/60">No enforced pauses — every source is permitted by the control plane.</p>
+      ) : (
+        <div className="mt-3 space-y-2">
+          {pauses.map((p) => {
+            const source = p.scope.startsWith("source:") ? p.scope.slice("source:".length) : null;
+            return (
+              <div key={p.scope} className="flex flex-wrap items-start justify-between gap-2 rounded-xl border border-white/10 bg-white/[.02] p-3">
+                <div className="min-w-0 text-xs">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-semibold text-white/85">{p.scope}</span>
+                    <span className="text-white/40">paused by</span>
+                    <StatusPill status={(p.pausedBy || "unknown").toUpperCase()} />
+                    <span className="tabular-nums text-white/40">
+                      {Number.isNaN(new Date(p.pausedAt).getTime()) ? p.pausedAt : new Date(p.pausedAt).toLocaleString()}
+                    </span>
+                  </div>
+                  {p.reason && <p className="mt-1 max-w-[560px] text-[#ffcf9a]">{p.reason}</p>}
+                </div>
+                {source && (
+                  <button
+                    onClick={() => resume(source)}
+                    disabled={busySource === source}
+                    className="shrink-0 rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/80 hover:bg-white/10 disabled:opacity-50"
+                  >
+                    {busySource === source ? "Resuming…" : `Resume ${source}`}
+                  </button>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  );
 }
 
 export default function AmberOrganizationDashboard({ initial }: { initial: OrganizationOverview }) {
@@ -294,6 +420,8 @@ export default function AmberOrganizationDashboard({ initial }: { initial: Organ
         <StatCard label="Recent tasks" value={tasks.length} sub={`${taskStatusCounts.VERIFIED ?? 0} verified`} />
         <StatCard label="Failed tasks" value={taskStatusCounts.FAILED ?? 0} sub={`${taskStatusCounts.QUEUED ?? 0} queued`} />
       </div>
+
+      <SourcePausesPanel />
 
       <section className="mt-6 rounded-2xl border border-white/10 bg-black/40 p-5">
         <h2 className="font-display mb-4 text-base font-bold">Divisions (20)</h2>
