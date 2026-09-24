@@ -209,6 +209,52 @@ export async function resumeFromEmergencyStop(): Promise<ResumeFromEmergencyStop
 }
 
 // ---------------------------------------------------------------------------
+// Control-plane pauses (Amber's enforced containment)
+//
+// Amber's automatic containment can pause a whole source (e.g. moltjobs) when
+// it starts failing. Lifting that is deliberately an OWNER action, so the
+// owner gets a button here rather than a secret and a curl command. Only
+// source-scoped pauses can be resumed from Reelo: `global` / `bidding` are not
+// exposed, and there is no pause action at all.
+// ---------------------------------------------------------------------------
+
+export type ControlPlanePause = {
+  /** Rendered scope, e.g. "source:moltjobs", "global", "bidding". */
+  scope: string;
+  reason: string;
+  pausedAt: string;
+  /** "automatic" (containment) or "owner". */
+  pausedBy: string;
+};
+
+/** A source name as Amber keys it. Anything else is refused before the bridge is called. */
+export const SOURCE_NAME_PATTERN = /^[a-z0-9][a-z0-9._-]{0,63}$/i;
+
+/**
+ * A reply without a real `pauses` array is a failure, not "nothing is paused".
+ * Treating it as an empty list would tell the owner a pause was lifted when
+ * nothing confirmed it.
+ */
+function requirePauses(data: { pauses?: unknown }): ControlPlanePause[] {
+  if (!Array.isArray(data?.pauses)) {
+    throw new Error("Amber's bridge answered without a pause list, so the current pauses are unknown.");
+  }
+  return data.pauses as ControlPlanePause[];
+}
+
+export async function listControlPlanePauses(): Promise<{ pauses: ControlPlanePause[] }> {
+  const data = await call<{ pauses?: unknown }>({ action: "list_pauses" });
+  return { pauses: requirePauses(data) };
+}
+
+/** Lift the enforced pause on one source. Returns the pause list AFTER the resume, as Amber reports it. */
+export async function resumeSourcePause(source: string): Promise<{ pauses: ControlPlanePause[] }> {
+  if (!SOURCE_NAME_PATTERN.test(source)) throw new Error("Invalid source name.");
+  const data = await call<{ pauses?: unknown }>({ action: "resume", scope: "source", value: source });
+  return { pauses: requirePauses(data) };
+}
+
+// ---------------------------------------------------------------------------
 // International API Command Center
 //
 // Reads the API inventory Amber HQ already maintains rather than keeping a
