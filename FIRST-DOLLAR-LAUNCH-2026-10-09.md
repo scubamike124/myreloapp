@@ -21,7 +21,7 @@ The shortest path: Ko-fi. A Commission is live the moment it is saved, Ko-fi ask
 - **Text**: final
 - **Public today?** yes: a Commission is live the moment you save it; Ko-fi reviews nothing first
 - **Blocks on (owner only)**: (1) A Ko-fi account connected to Stripe or PayPal in your name (their verification), about 15 min. (2) Switch off the default "Contributor" setting, open Commissions, paste the text below, about 20 min.
-- **Contact address to give the platform**: `listings.kofi@<inbound domain>`
+- **Contact address to give the platform**: `listings.kofi@inbound.myreelo.com`
 - **Once it is live**: Set the inquiry mailbox as the Ko-fi notification email. Amber records each request, drafts the reply, and runs the report for each paid request; you review and send the PDF.
 
 ### The exact final text
@@ -42,7 +42,7 @@ The shortest path: Ko-fi. A Commission is live the moment it is saved, Ko-fi ask
 - **Text**: final
 - **Public today?** after Fiverr's check of a new gig, usually within a day of saving it
 - **Blocks on (owner only)**: (1) Real-name sign-up with phone, the seller profile, ID verification when Fiverr asks for it, a payout method (PayPal, Payoneer or a US bank) and the terms: about 45 min. (2) Paste the gig (title, category, tags, three packages, description, FAQ, requirements, three images): about 25 min.
-- **Contact address to give the platform**: `listings.fiverr@<inbound domain>`
+- **Contact address to give the platform**: `listings.fiverr@inbound.myreelo.com`
 - **Once it is live**: Set the inquiry mailbox as the notification email. Buyer messages must be answered within 24 hours from the Fiverr inbox; Amber drafts each one and runs the report for each order.
 
 ### The exact final text
@@ -68,7 +68,7 @@ The shortest path: Ko-fi. A Commission is live the moment it is saved, Ko-fi ask
 - **Text**: final; the $29 three-page starter is the owner's decision of 2026-10-09
 - **Public today?** after SEOClerks moderates a new service, usually the same day
 - **Blocks on (owner only)**: (1) Sign up, verify the email, accept the seller terms, link PayPal or Payoneer: about 20 min. (2) Paste the two listings: about 15 min.
-- **Contact address to give the platform**: `listings.seoclerks@<inbound domain>`
+- **Contact address to give the platform**: `listings.seoclerks@inbound.myreelo.com`
 - **Once it is live**: Set the inquiry mailbox as the notification email. Amber drafts every reply and runs the report for each paid order.
 
 ### The exact final text
@@ -97,7 +97,7 @@ The shortest path: Ko-fi. A Commission is live the moment it is saved, Ko-fi ask
 - **Text**: the Arabic copy is a DRAFT until an Arabic speaker has reviewed it (owner, 2026-10-09); the structure and prices are approved
 - **Public today?** not today: the Arabic copy waits for a reviewer, then Khamsat reviews the service
 - **Blocks on (owner only)**: (1) Sign up with ID and phone verification, accept the seller terms, PayPal in your own name: about 25 min. (2) An Arabic speaker reads the draft (the structure and prices are approved; the copy stays a draft until then), then paste it: about 10 min.
-- **Contact address to give the platform**: `listings.khamsat@<inbound domain>`
+- **Contact address to give the platform**: `listings.khamsat@inbound.myreelo.com`
 - **Once it is live**: Set the inquiry mailbox as the notification email. Amber drafts replies; delivery must be the person-reviewed PDF, never an automated dump.
 
 ### The exact final text
