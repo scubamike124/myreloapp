@@ -75,6 +75,19 @@ Also tick, in Ko-fi: Settings → Notification Settings → the commission/order
 - Run the report from the order's details: `npm run snapshot:report -- --client "<business>" --out-dir ./snapshot-runs --pdf <urls>`, then `npm run snapshot:review -- <report.md>`; read it; send the PDF by Ko-fi message or email; mark the commission complete in Orders.
 - If none of the pages can be read: refund from PayPal or Stripe and tell the buyer, as the terms say.
 
+## 10. What to screenshot and send back after saving
+
+Send me, in chat or as files in this directory:
+
+1. The link to your public Ko-fi page and, if Ko-fi gives one, the link to the Commissions tab (ko-fi.com/<your page>/commissions).
+2. A screenshot of the public Commissions tab as a visitor sees it: the listing title, the $49 price and the order button. This is the proof the listing is public.
+3. A screenshot of Settings → Payment showing PayPal and/or Stripe as "Connected" (no account numbers or keys; the word "Connected" is enough). This is the proof a buyer can pay.
+4. A screenshot of the Commissions setup with "Your terms" filled in and the pre-purchase messaging option ticked.
+5. A screenshot of Settings → Notification Settings with the commission, order and message emails ticked.
+6. One line: the email address Ko-fi has as your account email, and whether you added the forwarding filter to listings.kofi@inbound.myreelo.com.
+
+With 1 and 2 I record the listing in PUBLISHED_BY_OWNER (its URL, date and text hash) so the #105 report shows it as published and Amber keeps it current; with 6 I know whether requests will reach the mailbox or only your inbox.
+
 ---
 
 # Fiverr, the shorter version (second channel; do Ko-fi first)
