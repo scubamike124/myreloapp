@@ -111,3 +111,11 @@ Amber does neither: publishing and live payments are owner-only by your standing
 ## What Amber does after a reply
 
 Forward the reply to listings.owner_outreach@ your inbound domain, or tell Amber "sent <domain>" / "reply <domain>: <summary>". The prospect leaves the list, is never drafted again, and the reply is recorded with its stage. When an order arrives on either path, the report pipeline runs as for any order and you review the PDF before it goes out.
+
+## Website Snapshot checkout readiness (reviewed 2026-10-09 18:50Z, read-only; nothing switched on)
+
+- Code: the offer page (`/website-snapshot`), the sample, terms and thanks pages, and the three API routes (checkout, intake, verify) exist on main; the Website Snapshot test suite passes 210 of 210 on main; the rendered test-mode walkthrough with screenshots was done earlier today.
+- Gates, as coded: everything answers 404 until `WEBSITE_SNAPSHOT_CHECKOUT=true` on amber-hq-web. With it on, a live Stripe key (`sk_live_…`) is refused with a clear message unless `WEBSITE_SNAPSHOT_LIVE_PAYMENTS=true` is also set; only a test key creates sessions otherwise. Payment is verified by reading the session back from Stripe, so no webhook secret is needed for the order path.
+- The live Stripe key is already in the vault (the API products sell with it). No code change is needed to go live.
+- Owner steps to take $49 on the site (docs/WEBSITE-SNAPSHOT-LAUNCH.md, "Going live"): Stripe account verified with bank and tax complete; set `WEBSITE_SNAPSHOT_CHECKOUT=true` and `WEBSITE_SNAPSHOT_LIVE_PAYMENTS=true` on amber-hq-web; one real $49 order from your own card to prove the loop; then record the live checkout with `npm run listing:published -- site https://hq.amberoneai.com/website-snapshot` is not needed, Amber records it under `site_checkout` when you confirm the order went through.
+- Amber will not set either variable, publish the page, or take a payment without your explicit approval.
