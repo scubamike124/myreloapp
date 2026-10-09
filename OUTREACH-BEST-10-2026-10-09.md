@@ -1,10 +1,12 @@
-# Outreach: the best prospects, with exact drafts — 2026-10-09 22:44Z
+# Outreach: the best prospects, with exact drafts — 2026-10-09 23:27Z
 
 Built by Amber's outreach lane on amber-os-worker from public map data (OpenStreetMap) and one or two public pages of each site: robots.txt checked first, public pages only, plain GET, no login, no cookies, no proxy. Nothing in the lane can send; every email is sent by the owner from their own mail program, or not at all. The queue survives deploys (database mirror). The opener is the owner's wording of 2026-10-09. Where the map had no address, the lane read the site's contact page, then home, once, and recorded any contact address it named. The lane keeps 25 prospects waiting (owner, 2026-10-09) and shows the ten best with drafts; the rest are listed below and move up as the ten are sent or set aside.
 
-Queue: waiting for the owner 22 · not yet looked at 2 · draft failed the review 0 · set aside 12 · emailed by the owner 0 · approved 0. Owner records: 0 sent, 0 reply(ies), 0 domain(s) never contacted.
+Queue 36: waiting for the owner 24 · not yet looked at 0 · draft failed the review 0 · set aside 12 · emailed by the owner 0 · approved 0. Owner records: 0 sent, 0 reply(ies), 0 domain(s) never contacted.
 
-Last run 2026-10-09T22:44:10.103Z: Outreach lane: pulled roofer in Phoenix, AZ (13 map element(s) from overpass-api.de, 12 with a usable website, 12 new, 0 already known); previewed 9, drafted 8, set aside 2; 10 prospect(s) waiting for the owner, 0 emailed by the owner so far. Nothing was sent.
+Last run 2026-10-09T23:27:09.126Z: Outreach lane: 0 of 3 site(s) re-read (contact page, then home) named a contact address; pulled med_spa in Phoenix, AZ (Overpass busy or unreachable (overpass-api.de HTTP 400); the next run tries again); previewed 2, drafted 2, set aside 0; 10 prospect(s) waiting for the owner, 0 emailed by the owner so far. Nothing was sent.
+
+Memory across deploys: restored 36 item(s) and the lane state (saved 2026-10-09T22:44:35.678Z) from the database: the deploy had emptied this service's disk; mirrored 36 item(s) and the lane state to the database.
 
 **The $49 price reply** is shown under each prospect exactly as the #105 report carries it: with the holding sentence until a payment link (Ko-fi Commission or the site checkout) is recorded, then with that link.
 
@@ -65,6 +67,7 @@ Mike
 
 **If they want it fixed**: "If you would rather have these fixed, I can quote that separately once I have looked at the pages." (no fix-pack price exists yet; the owner quotes).
 
+
 ### 2. All Vee’s Plumbing Services — https://allveesplumbing.com/
 
 **First email** (to: cody@allveesplumbing.com)
@@ -106,6 +109,7 @@ Mike
 ```
 
 **If they want it fixed**: "If you would rather have these fixed, I can quote that separately once I have looked at the pages." (no fix-pack price exists yet; the owner quotes).
+
 
 ### 3. Any Hour Services - Electric, Plumbing, Heating & Air — https://anyhourservices.com/arizona/
 
@@ -149,6 +153,7 @@ Mike
 
 **If they want it fixed**: "If you would rather have these fixed, I can quote that separately once I have looked at the pages." (no fix-pack price exists yet; the owner quotes).
 
+
 ### 4. 1st Choice Mechanical & AC Repair — https://1stchoicemechanicalaz.com/
 
 **First email** (to: the address on their contact page)
@@ -190,6 +195,7 @@ Mike
 ```
 
 **If they want it fixed**: "If you would rather have these fixed, I can quote that separately once I have looked at the pages." (no fix-pack price exists yet; the owner quotes).
+
 
 ### 5. Mike's Swat Team Pest & Termite Control — https://www.mikesswatteam.com/
 
@@ -233,6 +239,7 @@ Mike
 
 **If they want it fixed**: "If you would rather have these fixed, I can quote that separately once I have looked at the pages." (no fix-pack price exists yet; the owner quotes).
 
+
 ### 6. Plomero en Phoenix — https://www.miplomeroenphoenix.com/
 
 **First email** (to: info@callplomero.com)
@@ -274,6 +281,7 @@ Mike
 ```
 
 **If they want it fixed**: "If you would rather have these fixed, I can quote that separately once I have looked at the pages." (no fix-pack price exists yet; the owner quotes).
+
 
 ### 7. Cool Blew, Inc. — https://coolblew.com/
 
@@ -317,6 +325,7 @@ Mike
 
 **If they want it fixed**: "If you would rather have these fixed, I can quote that separately once I have looked at the pages." (no fix-pack price exists yet; the owner quotes).
 
+
 ### 8. Arizona Native Roofing — https://arizonanativeroofing.com/scottsdale-roofer/
 
 **First email** (to: info@arizonanativeroofing.com)
@@ -358,6 +367,7 @@ Mike
 ```
 
 **If they want it fixed**: "If you would rather have these fixed, I can quote that separately once I have looked at the pages." (no fix-pack price exists yet; the owner quotes).
+
 
 ### 9. Phoenix Roofers by Allstate Roofing Contractors — https://www.allstateroofingaz.com/phoenix/
 
@@ -401,6 +411,7 @@ Mike
 
 **If they want it fixed**: "If you would rather have these fixed, I can quote that separately once I have looked at the pages." (no fix-pack price exists yet; the owner quotes).
 
+
 ### 10. Stonecreek Roofing — https://stonecreekroofingaz.com/
 
 **First email** (to: info@stonecreekroofingaz.com)
@@ -443,26 +454,23 @@ Mike
 
 **If they want it fixed**: "If you would rather have these fixed, I can quote that separately once I have looked at the pages." (no fix-pack price exists yet; the owner quotes).
 
-## Also waiting for the owner (12 more; drafts in the queue, shown as the ten above are sent or set aside)
 
-| # | Business | Category | Website | Score | Email on file (from) | Queue id |
+## Also waiting for the owner (14 more; drafts in the queue, shown as the ten above are sent or set aside)
+
+
+| # | business | what | website | score | email on file (from) | queue id |
 |---|---|---|---|---|---|---|
 | 11 | Arizona's Best Choice Pest & Termite Services | pest control | https://www.azbestpest.com/ | 43 | no (find it on the site's contact page) | `ol_e0459f2c4fa50025` |
 | 12 | Zippity Split Plumbing, Drain Cleaning, and Sewer Repair | plumber | https://zippitysplitplumbing.com/ | 43 | no (find it on the site's contact page) | `ol_1f7add4abd4223fe` |
 | 13 | Desert Water Plumbing and Rooter | plumber | https://www.desertwateraz.com/water-softener-installation/ | 43 | no (find it on the site's contact page) | `ol_2840b14ee2c47667` |
 | 14 | JLC Roofing Inc | roofer | https://jlcroofingaz.com/ | 43 | no (find it on the site's contact page) | `ol_9fa0295b664282e8` |
-| 15 | Plumber of Phoenix | plumber | https://plumberofphoenix.com/ | 39 | yes (the map) | `ol_3ea9b79cd007442a` |
-| 16 | Arizona Roof Rescue | roofer | https://www.arizonaroofrescue.com/ | 39 | yes (the site's home page) | `ol_973ffb024c202e24` |
-| 17 | Phillips Roofing LLC | roofer | https://phillipsroofing.org/ | 29 | yes (the site's home page) | `ol_16e1b5063dde6b03` |
-| 18 | Goettl Air Conditioning & Plumbing | plumber | https://www.goettl.com/location/phoenix-arizona/ | 23 | no (find it on the site's contact page) | `ol_80b405f1017f06fe` |
-| 19 | Lincoln Air & Plumbing | HVAC | https://lincolnair.com/ | 23 | no (find it on the site's contact page) | `ol_67dee4e380d9c449` |
-| 20 | Mountainside Air Conditioning Repair | HVAC | https://mountainsideair.com/ | 23 | no (find it on the site's contact page) | `ol_88445ecff53d4569` |
-| 21 | Hardacker Roofing LLC | roofer | https://www.hardackerroofing.com/ | 23 | no (find it on the site's contact page) | `ol_527de13b230a585c` |
-| 22 | Phoenix Roofing | roofer | https://phoenixroofing.com/ | 23 | no (find it on the site's contact page) | `ol_b6195af0d6c7a805` |
-
-## What the owner does
-
-1. Pick a prospect, open their contact page for the address if none is on file, paste the first email into your own mail program, send it.
-2. Tell Amber "sent <domain>" (or add it to OUTREACH_SENT in owner-outreach.ts): the prospect leaves this list and is never drafted again.
-3. Forward any reply to listings.owner_outreach@ your inbound domain, or tell Amber: it is recorded as an inquiry with a drafted reply, and the stage is kept.
-4. The next ten appear as these are sent or set aside.
+| 15 | Frontline Consultants & Contracting LLC | roofer | https://www.frontlineconsultantsllc.com/ | 43 | no (find it on the site's contact page) | `ol_d32d346ccd9c4066` |
+| 16 | Plumber of Phoenix | plumber | https://plumberofphoenix.com/ | 39 | yes (the map) | `ol_3ea9b79cd007442a` |
+| 17 | Arizona Roof Rescue | roofer | https://www.arizonaroofrescue.com/ | 39 | yes (the site's home page) | `ol_973ffb024c202e24` |
+| 18 | Phillips Roofing LLC | roofer | https://phillipsroofing.org/ | 29 | yes (the site's home page) | `ol_16e1b5063dde6b03` |
+| 19 | Pioneer Roofing Co. | roofer | https://pioneer-roofing.com/ | 29 | yes (the map) | `ol_ffd9458a04830591` |
+| 20 | Goettl Air Conditioning & Plumbing | plumber | https://www.goettl.com/location/phoenix-arizona/ | 23 | no (find it on the site's contact page) | `ol_80b405f1017f06fe` |
+| 21 | Lincoln Air & Plumbing | HVAC | https://lincolnair.com/ | 23 | no (find it on the site's contact page) | `ol_67dee4e380d9c449` |
+| 22 | Mountainside Air Conditioning Repair | HVAC | https://mountainsideair.com/ | 23 | no (find it on the site's contact page) | `ol_88445ecff53d4569` |
+| 23 | Hardacker Roofing LLC | roofer | https://www.hardackerroofing.com/ | 23 | no (find it on the site's contact page) | `ol_527de13b230a585c` |
+| 24 | Phoenix Roofing | roofer | https://phoenixroofing.com/ | 23 | no (find it on the site's contact page) | `ol_b6195af0d6c7a805` |
