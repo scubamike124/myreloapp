@@ -84,27 +84,27 @@ I check small-business sites for this kind of thing. If it is useful, I can look
 Mike
 ```
 
-## The $49 price reply (kit section 10, as written)
+## The $49 price reply (kit section 10, with your Ko-fi link — updated 2026-10-10 01:15Z)
 
 ```
 Subject: Re: quick website note
 
 It is $49 for up to five public pages. You get a plain-English report with a fix checklist within two business days of ordering. It is a first-pass automated check that a person reviews before sending, not a full audit, so it finds the common things and tells you what to look at next.
 
-You can order here: https://hq.amberoneai.com/website-snapshot (you pay first, then enter the five page addresses). If not, no problem at all.
+You can order here: https://ko-fi.com/michaelmoore64737 (you pay there first, then answer the five questions in the request box). If not, no problem at all.
 
 Mike
 ```
 
-**Do not send this reply yet.** The order link answers 404 today: the page is hidden until `WEBSITE_SNAPSHOT_CHECKOUT=true` is set on amber-hq-web (see below). Until one payment path is live, the honest reply is the same text with the order sentence replaced by "I will send you the order link shortly."
+**Before you send it once:** open https://ko-fi.com/michaelmoore64737 on your phone and check the $49 "Website Snapshot" commission is visible to a visitor who is not signed in. Amber could not check it: ko-fi.com is outside its network policy, and signing in to your Ko-fi account is an owner-only step (your credentials, Ko-fi's CAPTCHA/2FA, payment connection). If the commission is not visible yet, finish steps 4–8 of KO-FI-PASTE-PACKAGE-2026-10-09.md first; the reply above is wrong until then.
+
+Recorded in Amber (PR #773): `PUBLISHED_BY_OWNER["kofi:website_snapshot"]` = the page above. Once deployed, every price reply on #105 carries this link and the holding sentence is gone.
 
 ## What has to be true for someone to pay $49 today (owner steps)
 
-Two payment paths exist. Either one makes the price reply sendable.
+**A. Ko-fi (your first channel, in progress):** the page exists at https://ko-fi.com/michaelmoore64737. Still owner-only: the Commission itself visible and set to $49 with the five buyer questions (paste package sections 1–5), and Ko-fi's payment connection (PayPal or Stripe, Ko-fi's own verification). When a buyer pays, Ko-fi emails you; you send the five page addresses to Amber ("order <domain>, pages: …") and the report follows within two business days.
 
-**A. Ko-fi Commission (no code, about 35 minutes on your phone):** the paste package is in KO-FI-PASTE-PACKAGE-2026-10-09.md (title, $49, description, terms, the five buyer fields, notification email, the taps in order). Needs a Ko-fi account connected to your PayPal or Stripe (Ko-fi's own verification). Once the Commission is public, its link replaces the order link in the price reply, and you send Amber the listing URL so it is recorded. Status: package ready; not published; no URL received.
-
-**B. Website Snapshot checkout on hq.amberoneai.com (two variables, your approval):** on amber-hq-web set `WEBSITE_SNAPSHOT_CHECKOUT=true` and `WEBSITE_SNAPSHOT_LIVE_PAYMENTS=true`; the live Stripe key is already in the vault (the API products sell with it). Railway redeploys the web service; the page and the three API routes appear; then one real $49 order from your own card proves the loop before anyone else is told (docs/WEBSITE-SNAPSHOT-LAUNCH.md, "Going live"). Status: code ready and tested; switches off; waiting on your approval of final publish.
+**B. Website Snapshot checkout on hq.amberoneai.com (not needed while Ko-fi works):** on amber-hq-web set `WEBSITE_SNAPSHOT_CHECKOUT=true` and `WEBSITE_SNAPSHOT_LIVE_PAYMENTS=true`; the live Stripe key is already in the vault. Railway redeploys the web service; the page and the three API routes appear; then one real $49 order from your own card proves the loop. Ko-fi wins over the site link in the price reply while both are recorded.
 
 Amber does neither: publishing and live payments are owner-only by your standing rule.
 
