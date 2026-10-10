@@ -61,6 +61,7 @@ Each gets the opener ("Hi there, I noticed one small issue on your website that 
 - 09:31:52Z: no pull (the queue was at the 25 target), nothing to preview, 25 waiting, all 25 reviewed and passed, files present on disk (volume), nothing sent. **New prospects since the last update: 0.** The last map pull was 00:21Z (med spa, Phoenix: 2 new; both later passed the review).
 - Why no new leads then: the lane stopped pulling at 25 waiting. **#779 deployed at 10:03Z** (proof on #105): the target is 40 waiting and a prospect counts as qualified only after the review passes it.
 - **10:32:15Z run (verified):** pulled dentists in Phoenix: 47 map elements, 42 with a usable website, **25 new** (the per-pull cap). Previewed 7, drafted 4, set aside 6. Queue 63: 29 waiting (25 reviewed and passed + 4 to review next run), 15 not yet looked at, 19 set aside (8 robots.txt, 5 nothing to say, 4 HTTP 403, 1 HTTP 404, 1 review). Qualified: 25. Next hourly run previews 10 more and reviews up to 15.
+- **11:35:56Z run (verified):** reviewed the 4 new dentists, all 4 passed (**qualified 29**); pulled restaurants in Phoenix: 150 map elements, 128 with a usable website, 25 new; previewed 10, drafted 10, set aside 0. Queue 88: 39 waiting (29 qualified + 10 to review next run), 30 not yet looked at, 19 set aside (unchanged reasons). Nothing sent.
 
 ## Review of every prospect (verified on production; per-lead table in RESEARCH-ALL-LEADS-2026-10-10.md)
 
