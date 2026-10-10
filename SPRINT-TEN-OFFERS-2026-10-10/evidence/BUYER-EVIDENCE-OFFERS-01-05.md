@@ -1,5 +1,8 @@
 # Buyer evidence: offers 1 to 5
 
+> **Live-page check (2026-10-10 18:22Z):** Amber's worker opened every cited page once (robots.txt honoured) and looked for each quoted text. Results per item, including which facts are now verified and which pages blocked the check, are in `EVIDENCE-LIVE-CHECK.md`. Only items marked **found** there count as verified; everything else in this file remains a search result.
+
+
 Sprint: ten small service offers, 2026-10-10. Researcher: buyer-evidence agent (offers 1 to 5). Status: COMPLETE first full pass (2026-10-10, about 17:20Z by the container clock). All five offer sections and the summary table are filled; all evidence is search-snippet level (see below).
 
 Method: WebSearch (standard mode; domain-restricted where possible so the snippet comes from the vendor's or marketplace's own page) to find sources; WebFetch was meant to verify each fact. Vendor marketing statistics are labelled as vendor claims. Prices are as shown on the date retrieved (2026-10-10) and may change.
