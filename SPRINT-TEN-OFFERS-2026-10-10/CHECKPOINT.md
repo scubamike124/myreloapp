@@ -33,8 +33,11 @@ Synthetic or redacted data only; client systems stay client-owned, least privile
 ## Log
 
 - 16:47Z: #788 (worker image chosen inside the shared Dockerfile) verified: the worker beacon reports `browser.ok: true`, Chromium 151.0.7922.34, Ubuntu 24.04.4. Sprint begins.
-- 17:20Z: shared core written (types, QA, registry, store, inquiries, visits, failures, owner records, tracker); pages and API routes; tracker wired into the worker's platform push.
-- 17:45Z: found and fixed before any deploy: the middleware's login gate would have refused every inquiry (401); both offers API routes are now on its public list, pinned by a test.
-- 17:50Z: storage verified end to end with a real Prisma client on SQLite: an inquiry, a visit and a failure saved and counted by the tracker.
-- 18:00Z: this session's network blocks page fetches (only search works). Added a worker check that opens each cited page once (robots.txt honoured) and reports whether the quoted text is there: search snippets become verified facts only when found.
-- 18:05Z: the worker's production page probe now reads the offer pages (index every round, one offer and its sample per round), so production status is visible on the beacon.
+- 17:12Z (commit 480d4ff): shared core written (types, QA, registry, store, inquiries, visits, failures, owner records, tracker); pages and API routes; tracker wired into the worker's platform push.
+- 17:19Z (commit bbbb656): found and fixed before any deploy: the middleware's login gate would have refused every inquiry (401); both offers API routes are now on its public list, pinned by a test.
+- 17:15Z: storage verified end to end with a real Prisma client on SQLite: an inquiry, a visit and a failure saved and counted by the tracker.
+- 17:19Z: this session's network blocks page fetches (only search works). Added a worker check that opens each cited page once (robots.txt honoured) and reports whether the quoted text is there: search snippets become verified facts only when found.
+- 17:19Z: the worker's production page probe now reads the offer pages (index every round, one offer and its sample per round), so production status is visible on the beacon.
+- 17:22Z (commit b067a09): test prices set from the buyer evidence (all hypotheses); offer design generated from the registry; both research files done (search-snippet level).
+- 17:23Z: sprint status comment posted on #105 (6100207146), updated in place.
+- Note: log times before 17:23Z were first written from an estimate and corrected against the commit times.
