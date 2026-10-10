@@ -11,7 +11,7 @@ Two causes, both in the record:
 
 **What it takes to let Amber do it next time (your decision, then about a day of work):**
 - A worker image with a browser: base on Microsoft's Playwright image (Debian, Chromium bundled; roughly 1.5 GB more image, more memory on the worker). Draft PR #780 has the Dockerfile change (CI matches main; the first Railway build must be watched); you approve the merge.
-- A written list of platform actions Amber may take on your account (for example `kofi: commission create/edit`), stored as a variable, with the credential in the vault. Amber signs in only for listed actions, logs every step on #105, and still stops at a CAPTCHA, 2FA prompt or payment-connection screen (those are the site's walls, not mine).
+- A written list of platform actions Amber may take on your account, with the credential in the vault. **Draft PR #783 is that list, as code with your words beside each grant** (`platform-actions.ts`): Ko-fi is recorded from your 2026-10-10 message (login, listing create/edit, settings read, inbox read); `listing.publish` is left out because that message named final publish as a stop, and one word from you adds it. The hard stops no grant lifts: payment connection, identity/KYC, CAPTCHA, 2FA, payout/banking, legal signature, spend, secrets. Every step is logged on #105 by field name, never a password, token or code.
 - One recorded pass of the Ko-fi Commission form so the runner knows its fields. Amber's session cannot open ko-fi.com (network policy), so the first pass runs on the worker with you watching the log.
 - **Guess, flagged:** Ko-fi's terms on automated account use were never retrieved (the catalog says so); a datacenter sign-in can trigger a CAPTCHA you never saw on your phone.
 
