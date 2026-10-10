@@ -27,7 +27,8 @@ Synthetic or redacted data only; client systems stay client-owned, least privile
 | 7 | Demos 6, 10 (website booking form, video variations) | demo agent | done: 92 tests; samples 13/13, 14/14; three rendered format previews |
 | 8 | Organic posts, ad copy, connected-channel check | ads agent | done: copy for all ten (27 tests); BLOCKER: no connected owner-owned business page, and the pipeline posts video only |
 | 9 | Registry, pages, intake + attribution, visit counter, tracker on #105 | lead | built and tested (commit bbbb656 on `claude/ten-offers-pilots`): 23 core and evidence tests pass; pages render locally; storage verified against a real Prisma client (SQLite) |
-| 10 | CI, merge, deploy, live verification, proofs on #105 | lead | PR #789 (d83eab6) open, CI running |
+| 10 | CI, merge, deploy, live verification, proofs on #105 | lead | PR #789: first CI failed one ratchet test (fixed in b32c035); CI re-running |
+| 12 | Pilot runner: a client's own files to a reviewed report (importers for offers 1–5, 7–9) | lead + 3 importer agents | runner, offer 5 importer and 26 tests committed (62c9630 on `claude/offers-pilot-runner`); importers 1+2, 3+4, 7+8+9 in progress |
 | 11 | Results table, recommendation, handoff | lead | not started |
 
 ## Log
@@ -44,3 +45,7 @@ Synthetic or redacted data only; client systems stay client-owned, least privile
 - 17:44Z: all ten demos and tests present; 286 offers tests pass; demo QA report: 141 checks, 0 failing (`qa/DEMO-QA-REPORT.md`).
 - 17:46Z: full-repository tsc and CI's qa:typecheck pass; all 21 pages render locally with the pilot notice, the form, the no-charge note and each sample's checks; screenshots in `qa/screenshots/`.
 - 17:47Z: PR #789 opened.
+- 17:54Z: PR #789's first CI: qa-engine passed; the earnings tests failed one test of 3,356: the ratchet that pins every module reading #105's comments (the offer tracker is a new reader). Main passes that step, so the failure was this PR's.
+- 18:02Z (commit b32c035): fixed and hardened. Every #105 comment, Amber's automated reports included, is posted with the owner's credential, so the author cannot tell them apart. The tracker now never reads a comment that carries an Amber report marker (its own how-to example "offer-record: inbox-triage cost $2.40" would otherwise have counted as a real cost), lists record-like lines inside code blocks as "not applied", and edits only the comment that starts with its marker. A decoy test proves an owner "directive", a non-owner $5,000 "paid" line and a quoted marker change nothing; verified revenue stays $0.00. 295 tests pass.
+- 18:08Z: second CI run: the test job now fails only at the pre-existing unit-test step (same as main); qa-engine running.
+- 18:10Z (commit 62c9630, branch `claude/offers-pilot-runner`): pilot runner checkpoint. Every run must declare its data: `--authorized "client, how, when"` for a client's files, or `--synthetic` for invented data, which is refused when any email address or phone number in the files is not a reserved example. A real export can hold no contact details, so their absence never counts as "invented". 26 tests.
