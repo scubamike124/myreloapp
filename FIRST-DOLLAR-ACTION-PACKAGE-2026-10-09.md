@@ -84,21 +84,9 @@ I check small-business sites for this kind of thing. If it is useful, I can look
 Mike
 ```
 
-## The $49 price reply (kit section 10) — HOLD until the Ko-fi commission is visible (updated 2026-10-10 01:35Z)
+## The $49 price reply (kit section 10, with your Ko-fi link — live 2026-10-10 01:40Z)
 
-Your Ko-fi page https://ko-fi.com/michaelmoore64737 is live, but your screenshot shows only the Tip/Support section: no $49 "Website Snapshot" commission or order button yet. So the reply to send today, if anyone asks the price, is the holding version:
-
-```
-Subject: Re: quick website note
-
-It is $49 for up to five public pages. You get a plain-English report with a fix checklist within two business days of ordering. It is a first-pass automated check that a person reviews before sending, not a full audit, so it finds the common things and tells you what to look at next.
-
-I will send you the order link shortly. No obligation either way.
-
-Mike
-```
-
-The version with the link, ready the moment the commission is visible (then I re-run the record without the hold flag and it goes live on #105 too):
+Your Ko-fi commission is visible and orderable (your checkout screen: "Website Snapshot Report — $49", total $49.00, payment screen reached, the buyer pays you directly). This is the reply to send when a prospect asks the price:
 
 ```
 Subject: Re: quick website note
@@ -110,11 +98,11 @@ You can order here: https://ko-fi.com/michaelmoore64737 (you pay there first, th
 Mike
 ```
 
-Recorded in Amber (PR #773): the page, marked not yet visible; the order link is held and the Listings report says so. Your next step: turn on Ko-fi Commissions and publish "Website Snapshot Report — $49" (paste package sections 1–5, phone steps 4–8). Then tell me "commission visible" and I flip the record.
+Recorded in Amber as visible (PR #774, after #773's deploy). Once deployed, every price reply on #105 carries this link. When a buyer pays, Ko-fi emails you; send me "order <domain>, pages: …" with the five page addresses and the report follows within two business days.
 
 ## What has to be true for someone to pay $49 today (owner steps)
 
-**A. Ko-fi (your first channel, in progress):** the page exists at https://ko-fi.com/michaelmoore64737. Still owner-only: the Commission itself visible and set to $49 with the five buyer questions (paste package sections 1–5), and Ko-fi's payment connection (PayPal or Stripe, Ko-fi's own verification). When a buyer pays, Ko-fi emails you; you send the five page addresses to Amber ("order <domain>, pages: …") and the report follows within two business days.
+**A. Ko-fi (your first channel, LIVE 2026-10-10):** https://ko-fi.com/michaelmoore64737, the $49 commission visible and orderable per your checkout screen. When a buyer pays, Ko-fi emails you; you send the five page addresses to Amber ("order <domain>, pages: …") and the report follows within two business days.
 
 **B. Website Snapshot checkout on hq.amberoneai.com (not needed while Ko-fi works):** on amber-hq-web set `WEBSITE_SNAPSHOT_CHECKOUT=true` and `WEBSITE_SNAPSHOT_LIVE_PAYMENTS=true`; the live Stripe key is already in the vault. Railway redeploys the web service; the page and the three API routes appear; then one real $49 order from your own card proves the loop. Ko-fi wins over the site link in the price reply while both are recorded.
 
