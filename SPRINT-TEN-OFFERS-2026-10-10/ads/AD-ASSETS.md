@@ -1,21 +1,21 @@
 # Ten pilot offers: organic launch posts and ad copy
 
-Sprint workstream 8 (ads), 2026-10-10. **Nothing here has been posted, and the ad variants are not to be bought.** The lead decides what is published.
+Sprint workstream 8 (ads), 2026-10-10. **Nothing here has been posted, and the ad variants are not to be bought.** The owner decides what is published.
 
-- Source of truth: `src/lib/offers/ad-copy.ts` on branch `claude/ten-offers-pilots` (worktree `/home/user/wt-offers`). This file is generated from it; if the copy changes there, regenerate this file rather than editing it by hand.
+- Source of truth: `src/lib/offers/ad-copy.ts` in amberai (merged in #789). This file is generated from it; if the copy changes there, regenerate this file rather than editing it by hand.
 - Checks: `src/lib/offers/__tests__/ad-copy.test.ts` (run `npx tsx --test src/lib/offers/__tests__/ad-copy.test.ts`). It enforces the owner's rules on every string: `claimIssues` from `qa.ts` is empty; every post says pilot; no prices or `$`; no "DM", "direct message", "email us", "inbox us"; no guarantee, certified, compliant, partner, trusted or hype words; no unmeasured results, percentages or customer counts; no emojis, no em or en dashes, no hashtag walls, at most one exclamation mark in all ten offers (there are none); the length limits below.
 - Channel status: see `CHANNELS.md` in this folder. **No owner-owned business page is verified as connected for organic posting**, so these posts are ready to publish but not scheduled.
 
 ## How to post
 
-1. **Organic only, and only on owner-owned business channels that are already connected.** Post as the business on its own pages (for example Amber One AI's LinkedIn or Facebook page, or its X, Threads or Bluesky account). No boosting, no promoted posts, no paid placement, no spend of any kind. The owner can also paste any post here by hand on his own pages.
+1. **Organic only, and only on owner-owned business channels that are already connected.** Post as the business on its own pages (for example Amber One AI's LinkedIn or Facebook page, or its X, Threads or Bluesky account). No boosting, no promoted posts, no paid placement, no spend of any kind. The owner can also paste any post here by hand on their own pages.
 2. **Not in groups, communities, forums or other people's pages**, and no tagging people or businesses to reach them. Those are not owner-owned channels.
 3. **One offer per post.** Space posts out: at most one or two offers a day on one page, a few hours apart. (The only measured burst on record, four videos to one TikTok account in about twenty minutes on 2026-08-01, left three of them held for review for a while: commit `602fe0e`.)
 4. **Replace `{link}` with the offer link for that channel**: `https://hq.amberoneai.com/offers/<offer>?src=<channel>&utm_campaign=pilot-launch-2026-10`, built by `offerLink(offer, channel)`. Use these channel names: `linkedin-page`, `facebook-page`, `x`, `threads`, `bluesky` (lowercase letters, digits and hyphens, at most 40 characters; `offerLink` cleans or refuses anything else). The offer page passes `src` and `utm_campaign` to the visit counter and the inquiry form (`src/app/offers/visit-ping.tsx`, `src/app/offers/inquiry-form.tsx`), so the inquiry tracker attributes each visit and inquiry to the post's channel. A link without `?src=` is counted as direct.
 5. **Which text where.** The launch post is for a LinkedIn or Facebook business page (each is at most 700 characters). The short post is for X, Threads or Bluesky: at most 260 characters with the link counted as 23, as X counts it; Bluesky counts the link as written, and every short post still fits Bluesky's 300 with the full `bluesky` link. Instagram and TikTok captions do not carry a clickable link, so these text posts are not meant for them.
 6. **Post the text as it is.** Do not add prices, results, testimonials, emojis or hashtags. If a word has to change, change it in `ad-copy.ts` and rerun the test.
 7. **Questions go to the form on the page.** If someone comments, answer in the comment thread or point to the form; do not move the conversation to a direct message or email during the sprint.
-8. **Keep a record.** For each post: the time, the channel, the offer, the post's URL and the exact link used. The lead's audit comment on #105 can list them.
+8. **Keep a record.** For each post: the time, the channel, the offer, the post's URL and the exact link used. List them in a comment on #105.
 
 Ad variants: written to Meta's recommended lengths (headline at most 40 characters, primary text at most 125, description at most 30) so they are ready if the owner ever approves paid ads. They are not to be bought in this sprint. Each one says pilot.
 

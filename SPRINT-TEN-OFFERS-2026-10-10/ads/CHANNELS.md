@@ -83,7 +83,7 @@ The orchestrator and the approval path are video-only too:
 
 **The blocker:** there is no evidence that any Amber One AI business page is connected. The owner would need to connect one (the Facebook Page is the shortest route) in HQ at `/dashboard/social-publish`, and the pipeline needs a text-post path, because today it only publishes MP4 video.
 
-- **Today, with no code (owner only):** the owner pastes the posts from `AD-ASSETS.md` on his own pages, using the `?src=<channel>` links. Amber cannot do this step.
+- **Today, with no code (owner only):** the owner pastes the posts from `AD-ASSETS.md` on their own pages, using the `?src=<channel>` links. Amber cannot do this step.
 - **Through Amber (owner step, then one small PR):**
   1. **Owner:** connect the Amber One AI Facebook Page in HQ (`/dashboard/social-publish`, Connect Facebook). This needs the Meta app keys in the Vault and `pages_manage_posts`. The adapter takes the first Page the login returns (`meta.ts:100`), so either the login manages only that Page or the code picks the Page by id. A LinkedIn company page would need more: the adapter posts as a person (`urn:li:person`), so it needs an organization author and the `w_organization_social` scope, which LinkedIn grants only to approved apps (LinkedIn's rule; not checked here).
   2. **Code:**
