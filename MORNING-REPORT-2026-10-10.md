@@ -86,6 +86,13 @@ Each gets the opener ("Hi there, I noticed one small issue on your website that 
 - Offer page 200 with the "$49" text; `/sample` and `/terms` 200; checkout switch on; **live payments off** and unchanged; Ko-fi is the payment path. 30 of 30 probes answered, all ticks clean (907 evaluated, 37 accepted), scout tick ok, loop guard 0.
 - Disk note (this session, not production): the Claude session's disk filled while creating a worktree; eight worktrees of merged branches were removed (8.8 GB free now). No effect on Amber.
 
+## Afternoon, 13:20Z: what shipped after the owner's midday questions
+
+- **Browser root cause, made precise (verified in the code's own record):** Amber has a remote-browser path (Browserless) besides local Chromium; the client's comment, written from Railway logs on 2026-09-11, records every production attempt failing with "reached the units usage limit" or "Executable doesn't exist". Both browser paths were dead; whether the Browserless quota has reset is unverified. Draft PR #780 (worker image with Chromium) is the no-spend way; a paid Browserless plan is the other. The #105 answer (comment 6097482913) and #780's body carry this.
+- **PR #781 merged 13:15Z (98afb3e), deploying:** the #105 outreach report gets "Amber's work by day": runs, map pulls (new prospects), sites previewed (drafted, set aside), prospects reviewed (passed, set aside), contact pages re-read (addresses found), emails sent by the owner; today and yesterday, UTC, counted by the lane. The owner's "30 tasks a day" becomes a measured line, not a hand count. Proof follows on #105 after the first run on the new build.
+- **PR #782 opened (c9b1dad), CI running:** a Ko-fi Commission becomes a Website Snapshot order by webhook (verification token from the vault, $49 USD commissions only, one order per transaction, the request text read for the five answers, nothing sent; Ko-fi's test ping is never revenue). Owner step after the deploy, two minutes: paste the webhook URL and the token on ko-fi.com/manage/webhooks (kit §13). Not verified against a real Ko-fi delivery yet; the owner's "Send single test" exercises it.
+- Nothing was sent, bought, enabled or changed in payments.
+
 ## Blockers
 
 - None genuine. Owner-only items unchanged: sending the emails; live payments on the site (not needed); publishing other channels.
