@@ -10,8 +10,8 @@ _Draft in progress; the sections marked **(pending)** fill in as the overnight r
 | #774 | Ko-fi commission confirmed visible and orderable → the $49 price reply carries https://ko-fi.com/michaelmoore64737 | 12/12 probes, ticks clean, the link on all ten replies (02:18Z run) | 6092677936 |
 | #775 | Worker beacon `dataDir` (volume proof) + public page probe | volume mounted at /app/.data, 4,597 MB free, queue + lane state + Railway ledger present at boot | 6092983421 |
 | #776 | Website Snapshot switches tolerant of pasted values; reported as booleans on the health route and beacon | showed the variable present but not "true"; after the owner's retype: present/on/exact true, pages 200 (03:28Z) | 6093204455, 6093326363 |
-| #777 | Prospect review (every waiting prospect re-checked once; failures set aside with the reason) + offer-text check on the page probe | 12/12 probes, ticks clean; first review run 04:20Z: 15 reviewed, 14 passed, 1 set aside (Goettl: site could not be read) | 6093655xxx (see #105, "Deploy verification for #777") |
-| #778 | Services ratchet fix (a regex token read as a sending identifier) | services suite 211/211 locally | **(pending)** |
+| #777 | Prospect review (every waiting prospect re-checked once; failures set aside with the reason) + offer-text check on the page probe | 12/12 probes, ticks clean; first review run 04:20Z: 15 reviewed, 14 passed, 1 set aside (Goettl: site could not be read) | 6093728768 |
+| #778 | Services ratchet fix (a regex token read as a sending identifier) | 12 consecutive clean probes after one unanswered probe at boot; ticks clean; services suite 211/211 | see #105, "Deploy verification for #778" |
 
 ## 2. Production checks
 
