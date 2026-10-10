@@ -13,7 +13,7 @@ Sprint of 2026-10-10, 16:47Z to about 02:47Z. This note is updated as the sprint
 
 - 295 offers tests and CI on PR #789; every sample passes its checks (141 checks at the time of the merge).
 - Production: the worker's page probe reads the offer pages; the first readings after the deploy were HTTP 200 with the pilot notice and the sample's checks (for example 14 of 14 on the job-cost sample).
-- Not yet proven in production: the live form round trip. The worker's one self-test ran before the new web build was serving and got HTTP 401. The fix (retry until it passes) ships with the pilot-runner PR.
+- The live form round trip, proven at 20:53Z: after #790 deployed, the worker's self-test sent a visit (HTTP 204) and an inquiry (HTTP 200) to the public routes, and the tracker read both back from the database. They are marked as Amber's own test and never counted. The first self-test, at 18:17Z, had met the old web build (HTTP 401), because the worker finished deploying before the web service.
 
 ## What remains blocked
 
