@@ -1,0 +1,263 @@
+[
+ {
+  "number": 1,
+  "slug": "missed-call-follow-up",
+  "name": "Missed-Call and Web-Inquiry Follow-Up List",
+  "buyer": "Owners and office managers of home-service businesses (plumbing, HVAC, electrical, roofing, cleaning, landscaping) that take work by phone and web form.",
+  "deliverable": [
+   "A list of every missed call and website inquiry with no recorded reply, most urgent and oldest first, with the reason for each urgency flag.",
+   "Repeat calls from the same number grouped into one lead, with the number of attempts.",
+   "When your missed calls cluster by time of day, and how long replies took for the leads that did get one.",
+   "A draft text or email reply for each open lead, written for you to review, edit and send yourself.",
+   "Calls that mention a safety problem (gas smell, smoke, sparking) listed for a call back by a person, with no written draft."
+  ],
+  "price": {
+   "usd": 199,
+   "unit": "for the two-week pilot (three lists)",
+   "basis": "hypothesis",
+   "note": "A test price for the pilot. It may change after the first pilots."
+  },
+  "status": "pilot",
+  "bookkeeping": false,
+  "qa": {
+   "passed": 17,
+   "total": 17,
+   "failed": []
+  },
+  "evidenceItems": 7
+ },
+ {
+  "number": 2,
+  "slug": "stale-estimate-follow-up",
+  "name": "Stale Estimate Follow-Up List",
+  "buyer": "Contractors and home-service companies that send ten or more estimates a month (remodelers, roofers, HVAC, landscapers, painters).",
+  "deliverable": [
+   "Every open estimate with no contact for 7 days or more, grouped 7–13, 14–29 and 30+ days, with the dollar value waiting in each group.",
+   "A suggested next step for each estimate.",
+   "A draft follow-up email or text for each, naming the job and estimate number, for you to review and send.",
+   "A list of estimates not chased, and why: won, lost, asked not to be contacted, or too old to chase."
+  ],
+  "price": {
+   "usd": 249,
+   "unit": "for four weekly lists",
+   "basis": "hypothesis",
+   "note": "A test price for the pilot. It may change after the first pilots."
+  },
+  "status": "pilot",
+  "bookkeeping": false,
+  "qa": {
+   "passed": 15,
+   "total": 15,
+   "failed": []
+  },
+  "evidenceItems": 7
+ },
+ {
+  "number": 3,
+  "slug": "job-cost-exceptions",
+  "name": "Job-Cost Exception Report",
+  "buyer": "Owners, project managers and bookkeepers of small construction firms (general contractors, remodelers, specialty subcontractors) with 3 to 30 active jobs.",
+  "deliverable": [
+   "For each job: budget, amount spent, percent spent and the percent complete you give us, side by side.",
+   "Budget against actual by cost code.",
+   "Exceptions for review: cost codes over budget, costs on codes outside a job's budget, costs on closed jobs, possible duplicate bills, and jobs where spending runs well ahead of progress.",
+   "Each exception lists the transactions behind it and who should look at it."
+  ],
+  "price": {
+   "usd": 449,
+   "unit": "for up to 10 jobs: the report and one refresh",
+   "basis": "hypothesis",
+   "note": "A test price for the pilot. It may change after the first pilots."
+  },
+  "status": "pilot",
+  "bookkeeping": true,
+  "qa": {
+   "passed": 14,
+   "total": 14,
+   "failed": []
+  },
+  "evidenceItems": 5
+ },
+ {
+  "number": 4,
+  "slug": "receipt-invoice-matching",
+  "name": "Receipt and Invoice Match Review",
+  "buyer": "Bookkeepers, and owners of small businesses who chase missing receipts at month end.",
+  "deliverable": [
+   "Matched pairs: each transaction with its receipt or invoice.",
+   "Exceptions, each explained: payments with no document, documents with no payment found, amounts that differ (a tip or a partial payment), possible duplicate charges or invoices, and documents in another currency.",
+   "For each exception, the question your bookkeeper needs to decide."
+  ],
+  "price": {
+   "usd": 99,
+   "unit": "for one month of one business (bookkeepers: $149 for three client-months)",
+   "basis": "hypothesis",
+   "note": "A test price for the pilot. It may change after the first pilots."
+  },
+  "status": "pilot",
+  "bookkeeping": true,
+  "qa": {
+   "passed": 13,
+   "total": 13,
+   "failed": []
+  },
+  "evidenceItems": 7
+ },
+ {
+  "number": 5,
+  "slug": "unpaid-invoice-tracking",
+  "name": "Unpaid Invoice Tracker with Draft Reminders",
+  "buyer": "Owners and office managers of small service businesses, agencies and trades with 20 or more open invoices.",
+  "deliverable": [
+   "An aging report (current, 1–30, 31–60, 61–90 and 90+ days past due) and the total owed by each customer.",
+   "The invoices that need a reminder this week, and why.",
+   "A draft reminder for each, friendly at first and firmer later, never threatening, with the exact invoice number, balance and due date, for you to review and send.",
+   "A list of invoices not chased, and why: disputed, reminded recently, or paid."
+  ],
+  "price": {
+   "usd": 149,
+   "unit": "for four weekly reports",
+   "basis": "hypothesis",
+   "note": "A test price for the pilot. It may change after the first pilots."
+  },
+  "status": "pilot",
+  "bookkeeping": true,
+  "qa": {
+   "passed": 18,
+   "total": 18,
+   "failed": []
+  },
+  "evidenceItems": 7
+ },
+ {
+  "number": 6,
+  "slug": "website-health-report",
+  "name": "Website Health, Accessibility and Booking-Form Check",
+  "buyer": "Small businesses whose website takes bookings or inquiries: clinics, salons, trades, studios.",
+  "deliverable": [
+   "The Website Snapshot Report: up to 5 public pages checked from their HTML for five common accessibility problems, basic site-health items, and a plain-English fix checklist.",
+   "Pilot addition: each booking or contact form checked for field labels, field types (phone, email, date), required markers, the number of fields, the submit wording, spam protection and a confirmation message, each with a suggested fix."
+  ],
+  "price": {
+   "usd": 49,
+   "unit": "for up to 5 pages (the form check is included during the pilot)",
+   "basis": "existing-price",
+   "note": "The Website Snapshot Report's own price; the form check is the pilot part."
+  },
+  "status": "live-with-pilot-addition",
+  "bookkeeping": false,
+  "qa": {
+   "passed": 13,
+   "total": 13,
+   "failed": []
+  },
+  "evidenceItems": 7
+ },
+ {
+  "number": 7,
+  "slug": "crm-cleanup",
+  "name": "CRM Duplicate and Data-Quality Check",
+  "buyer": "Small sales teams, agencies and service businesses with 1,000 to 20,000 contacts in a CRM or a spreadsheet.",
+  "deliverable": [
+   "Duplicate groups (same email, same phone, same name at the same company, near-identical names), with how sure each match is and why.",
+   "A suggested record to keep in each group, and the reason.",
+   "Conflicts inside a group, such as different owners or stages, flagged for a person to decide.",
+   "Data-quality issues: invalid or missing emails and phones, formatting, state codes, and stale leads.",
+   "A proposed-changes sheet you review and apply in your own CRM."
+  ],
+  "price": {
+   "usd": 99,
+   "unit": "for one report on up to 5,000 records",
+   "basis": "hypothesis",
+   "note": "A test price for the pilot. It may change after the first pilots."
+  },
+  "status": "pilot",
+  "bookkeeping": false,
+  "qa": {
+   "passed": 12,
+   "total": 12,
+   "failed": []
+  },
+  "evidenceItems": 7
+ },
+ {
+  "number": 8,
+  "slug": "inbox-triage",
+  "name": "Support Inbox Triage with Reply Drafts",
+  "buyer": "Small e-commerce, software and service teams with a shared support inbox of 50 to 500 emails a week.",
+  "deliverable": [
+   "Every message sorted into one type: order status, billing, refund request, technical, complaint, sales question, spam or other.",
+   "Urgency flagged with the reason, such as a double charge, a cancellation or a long wait.",
+   "A reply draft for each message that needs one, following your policies, for your team to edit and send.",
+   "Messages about legal threats or safety flagged for a person, with no draft.",
+   "What customers wrote about most that week."
+  ],
+  "price": {
+   "usd": 79,
+   "unit": "for one week of email, up to 150 messages",
+   "basis": "hypothesis",
+   "note": "A test price for the pilot. It may change after the first pilots."
+  },
+  "status": "pilot",
+  "bookkeeping": false,
+  "qa": {
+   "passed": 14,
+   "total": 14,
+   "failed": []
+  },
+  "evidenceItems": 6
+ },
+ {
+  "number": 9,
+  "slug": "catalog-cleanup",
+  "name": "Product Catalog Cleanup and Cross-Store Check",
+  "buyer": "E-commerce sellers on two or more sales channels, such as an online store plus a marketplace, with 100 to 5,000 SKUs.",
+  "deliverable": [
+   "Missing required fields per store: barcode, images, description.",
+   "Barcodes that fail the check-digit test.",
+   "Duplicate SKUs, SKUs in one store only, and price or stock differences between stores.",
+   "Titles over a store's length limit, and inconsistent variant names (XL, X-Large, Extra Large).",
+   "A proposed-changes sheet you review and import yourself."
+  ],
+  "price": {
+   "usd": 99,
+   "unit": "for one report on up to 1,000 SKUs",
+   "basis": "hypothesis",
+   "note": "A test price for the pilot. It may change after the first pilots."
+  },
+  "status": "pilot",
+  "bookkeeping": false,
+  "qa": {
+   "passed": 11,
+   "total": 11,
+   "failed": []
+  },
+  "evidenceItems": 6
+ },
+ {
+  "number": 10,
+  "slug": "video-ad-variations",
+  "name": "Short-Form Ad Variations from Your Video",
+  "buyer": "Local businesses and small brands with existing video footage who post short vertical video.",
+  "deliverable": [
+   "Three vertical (9:16) variations of up to 15 seconds, each opening with a different hook line.",
+   "Burned-in captions, plus caption files (SRT).",
+   "A cut sheet showing which parts of your video each variation uses.",
+   "One round of revisions."
+  ],
+  "price": {
+   "usd": 99,
+   "unit": "for three variations",
+   "basis": "hypothesis",
+   "note": "A test price for the pilot. It may change after the first pilots."
+  },
+  "status": "pilot",
+  "bookkeeping": false,
+  "qa": {
+   "passed": 14,
+   "total": 14,
+   "failed": []
+  },
+  "evidenceItems": 6
+ }
+]

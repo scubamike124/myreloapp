@@ -1,6 +1,6 @@
 # Ten pilot offers: handoff
 
-Sprint of 2026-10-10, 16:47Z to about 02:47Z. `RESULTS.md` has the results table and the recommendation, `RUNNER.md` how to run a pilot on a client's files, and `CHECKPOINT.md` the full log.
+Sprint of 2026-10-10, 16:47Z to about 02:47Z. `RESULTS.md` has the results table and the recommendation, `RUNNER.md` how to run a pilot on a client's files, and `CHECKPOINT.md` the full log. `tools/gen-results.py` regenerates `RESULTS.md` from the latest reports on #105 (usage in its header).
 
 ## What is live
 
