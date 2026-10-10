@@ -1,6 +1,6 @@
 # Ten pilot offers: results
 
-Generated 2026-10-10T18:24Z from the code (registry and demo QA), the research files, and two reports Amber's worker publishes on #105: the live buyer-evidence check (as of 2026-10-10T18:22:31.588Z) and the offer tracker (as of 2026-10-10T18:17:39.576Z).
+Generated 2026-10-10T21:03Z from the code (registry and demo QA), the research files, and two reports Amber's worker publishes on #105: the live buyer-evidence check (as of 2026-10-10T20:57:49.734Z) and the offer tracker (as of 2026-10-10T21:02:54.515Z).
 
 **Revenue: $0.00.** Revenue counts only when payment or escrow is verified. No payment was taken during the sprint, and no pilot is a finished production service.
 
@@ -12,12 +12,12 @@ Generated 2026-10-10T18:24Z from the code (registry and demo QA), the research f
 | 2 | Stale Estimate Follow-Up List | $249 for four weekly lists | 3 if the search results hold; live check: 5 of 7 found | Pilot page and sample; sample QA 15/15 | $0 (no model or paid API) | 0 · 0 · 0 · 0 | Competes with follow-up features already in Jobber and Housecall Pro. |
 | 3 | Job-Cost Exception Report | $449 for up to 10 jobs: the report and one refresh | 3 if the search results hold; live check: 4 of 5 found | Pilot page and sample; sample QA 14/14 | $0 (no model or paid API) | 0 · 0 · 0 · 0 | Percent complete is rarely in any export; the client must supply it. Read-only. |
 | 4 | Receipt and Invoice Match Review | $99 for one month of one business (bookkeepers: $149 for three client-months) | 3 if the search results hold; live check: 4 of 7 found | Pilot page and sample; sample QA 13/13 | $0 (no model or paid API) | 0 · 0 · 0 · 0 | Reads extracted receipt fields, not images. Read-only. |
-| 5 | Unpaid Invoice Tracker with Draft Reminders | $149 for four weekly reports | 4 if the search results hold; live check: 7 of 7 found | Pilot page and sample; sample QA 18/18; runs on client files | $0 (no model or paid API) | 0 · 0 · 0 · 0 | Free built-in reminders exist; the pilot must win on which invoices to chase and how the draft reads. |
-| 6 | Website Health, Accessibility and Booking-Form Check | $49 for up to 5 pages (the form check is included during the pilot) (existing price) | 4 if the search results hold; live check: 5 of 7 found | Pilot page and sample; sample QA 13/13; runs on client files | $0 (no model or paid API) | 0 · 0 · 0 · 0 | The site's own checkout is in Stripe test mode, so Ko-fi is the live payment path. |
+| 5 | Unpaid Invoice Tracker with Draft Reminders | $149 for four weekly reports | 4 if the search results hold; live check: 7 of 7 found | Pilot page and sample; sample QA 18/18 | $0 (no model or paid API) | 0 · 0 · 0 · 0 | Free built-in reminders exist; the pilot must win on which invoices to chase and how the draft reads. |
+| 6 | Website Health, Accessibility and Booking-Form Check | $49 for up to 5 pages (the form check is included during the pilot) (existing price) | 4 if the search results hold; live check: 5 of 7 found | Pilot page and sample; sample QA 13/13 | $0 (no model or paid API) | 0 · 0 · 0 · 0 | The site's own checkout is in Stripe test mode, so Ko-fi is the live payment path. |
 | 7 | CRM Duplicate and Data-Quality Check | $99 for one report on up to 5,000 records | 4 if the search results hold; live check: 2 of 7 found | Pilot page and sample; sample QA 12/12 | $0 (no model or paid API) | 0 · 0 · 0 · 0 | Contact exports are personal data and need a data-handling agreement first. |
 | 8 | Support Inbox Triage with Reply Drafts | $79 for one week of email, up to 150 messages | 3 if the search results hold; live check: 4 of 6 found | Pilot page and sample; sample QA 14/14 | $0 (no model or paid API) | 0 · 0 · 0 · 0 | Customer emails are personal data and need a data-handling agreement; export only, no mailbox access. |
 | 9 | Product Catalog Cleanup and Cross-Store Check | $99 for one report on up to 1,000 SKUs | 3 if the search results hold; live check: 4 of 6 found | Pilot page and sample; sample QA 11/11 | $0 (no model or paid API) | 0 · 0 · 0 · 0 | Needs two exports; buyers mostly pay for ongoing sync, not audits. |
-| 10 | Short-Form Ad Variations from Your Video | $99 for three variations | 4 if the search results hold; live check: 2 of 6 found | Pilot page and sample; sample QA 14/14; runs on client files | $0 (no model or paid API) | 0 · 0 · 0 · 0 | Needs customer video with usage rights; the pilot cuts and captions only. |
+| 10 | Short-Form Ad Variations from Your Video | $99 for three variations | 4 if the search results hold; live check: 2 of 6 found | Pilot page and sample; sample QA 14/14 | $0 (no model or paid API) | 0 · 0 · 0 · 0 | Needs customer video with usage rights; the pilot cuts and captions only. |
 
 Research score: the 1 to 5 rubric in the evidence files, given "if the search results hold up". The strict score is 1 for every offer, because this session could not open the cited pages. The live check is the worker opening each cited page once, with robots.txt honoured, and looking for the quoted text. Only "found" counts as verified.
 
@@ -44,6 +44,8 @@ The rule was written down before the live check ran, and uses buyer evidence onl
 | 10 | Short-Form Ad Variations from Your Video | 0 · 0 · 0 | 1 | 2 of 6 found | inside: Upwork buyers posted $150 and $225 for 3 to 4 hook variations; edited videos $40 to $200 each |
 
 **Recommended: Unpaid Invoice Tracker with Draft Reminders and Website Health, Accessibility and Booking-Form Check.** They rank first on the rule above. The ranking will change as soon as a real buyer replies or pays, because the tracker outranks research.
+
+Not ruled out by evidence against them: CRM Duplicate and Data-Quality Check (4 of 7 cited pages blocked the check); Short-Form Ad Variations from Your Video (4 of 6 cited pages blocked the check). Their evidence leans on marketplace pages that answer automated readers with a bot challenge, so their low verified counts reflect the check's reach. Opening those pages by hand would settle it.
 
 What this rests on: the verified items are asking prices, review counts on paid tools, published surveys and buyers' complaints. None of them is a sale of these pilots. Inquiries so far: 0.
 
@@ -180,7 +182,7 @@ Verified (4 of 6):
 - A brand owner posted on Amazon's seller forums about GTIN exemption problems with their listings. (https://sellercentral.amazon.com/seller-forums/discussions/t/8d796ce6-3a0e-4c1e-89f1-162b45022690)
 
 Not verified (2):
-- A Shopify app markets catalog audits that flag duplicate SKU signals, the closest app match to the pilot's single-store checks.: not found; HTTP 200; 99,239 characters read; quote not on the page (https://apps.shopify.com/catalog-health-2)
+- A Shopify app markets catalog audits that flag duplicate SKU signals, the closest app match to the pilot's single-store checks.: not found; HTTP 200; 99,225 characters read; quote not on the page (https://apps.shopify.com/catalog-health-2)
 - Trade press reports that Amazon told sellers to fix their GTINs or have listings removed.: not found; HTTP 200; 5,870 characters read; quote not on the page (https://www.ecommercebytes.com/?p=17981)
 
 Research summary: Sync apps with large review bases (Marketplace Connect about 1,700–2,000, CedCommerce Etsy 1,185, Trunk about 390); DataFeedWatch from $64/month; Upwork catalog cleanups $50–$1,200. Buyers pay: Sync apps $9–$89/month; feed tools $64–$239/month; Upwork $50–$1,200. Risk: Buyers pay for ongoing sync, not audits: the audit-only apps closest to the pilot show 0 reviews.

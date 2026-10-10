@@ -1,27 +1,29 @@
 # Ten pilot offers: handoff
 
-Sprint of 2026-10-10, 16:47Z to about 02:47Z. This note is updated as the sprint ends; `CHECKPOINT.md` has the full log and `RESULTS.md` the table and recommendation.
+Sprint of 2026-10-10, 16:47Z to about 02:47Z. `RESULTS.md` has the results table and the recommendation, `RUNNER.md` how to run a pilot on a client's files, and `CHECKPOINT.md` the full log.
 
 ## What is live
 
-- **Ten pilot pages and their samples** at https://hq.amberoneai.com/offers (21 pages, not indexed by search engines). Every page says it is a pilot and that nothing is charged online. Merged in amberai PR #789 (115ed6d) and deployed 18:20Z on 2026-10-10.
-- **One shared inquiry form** on every offer page. Each inquiry records which offer and which source (the `src` link parameter) it came from. Nothing is emailed; a person replies.
-- **The offer tracker on #105**, updated by Amber's worker: per offer, visits, inquiries, qualified replies, demo requests, paid pilots, delivery time, direct costs, failures, repeat orders and the demo checks. Revenue counts only verified payments. It reads the owner's `offer-record:` lines on #105 and nothing else as data.
-- **The buyer-evidence check on #105**: the worker opens every cited page once a day (robots.txt honoured) and marks each fact found or not. First run: 41 of 65 facts verified.
+- **Ten pilot pages with their samples** at https://hq.amberoneai.com/offers: 21 pages, kept out of search engines. Every offer page says it is a pilot and that nothing is charged online. They were merged in amberai #789 and deployed at 18:20Z.
+- **One shared inquiry form** on every offer page. Each inquiry records its offer and its source (the `src` link parameter). Nothing is emailed; a person replies.
+- **The offer tracker** (#105, comment 6100695261). Per offer it shows visits, inquiries, qualified replies, demo requests, paid pilots, delivery time, direct costs, failures, repeat orders and the sample checks. Revenue counts only verified payments.
+- **The buyer-evidence check** (#105, comment 6100741402). The worker opens each cited page at most once a day, with robots.txt honoured, and marks each fact found or not.
 
-## What was tested
+## What was tested, and how
 
-- 295 offers tests and CI on PR #789; every sample passes its checks (141 checks at the time of the merge).
-- Production: the worker's page probe reads the offer pages; the first readings after the deploy were HTTP 200 with the pilot notice and the sample's checks (for example 14 of 14 on the job-cost sample).
-- The live form round trip, proven at 20:53Z: after #790 deployed, the worker's self-test sent a visit (HTTP 204) and an inquiry (HTTP 200) to the public routes, and the tracker read both back from the database. They are marked as Amber's own test and never counted. The first self-test, at 18:17Z, had met the old web build (HTTP 401), because the worker finished deploying before the web service.
+- **Pages.** By 19:11Z the worker's probe had read all 21 pages in production. Each answered HTTP 200, each offer page showed its pilot notice, and each sample passed every check.
+- **Intake.** The round trip was proven at 20:53Z: the worker's self-test sent a visit (HTTP 204) and an inquiry (HTTP 200), and the tracker read both back from the database. Self-test rows are never counted.
+- **Evidence.** 41 of 65 cited facts were found on their live pages.
+- **Code.** 389 offers tests pass, and each deploy was checked against the worker beacon: the pages, memory, the event loop and the earnings tick.
+- **Not yet:** a real buyer. Real visits and inquiries are 0, because nothing has been posted anywhere.
 
-## What remains blocked
+## What remains blocked (owner-only)
 
-- **Organic posts:** no owner-owned business page is connected to Amber's publishing, and that pipeline posts video only. The posts and ad copy are ready to paste by hand (`ads/AD-ASSETS.md`), with tracking links.
-- **Payments for the nine new pilots:** none online, by design. A paid pilot needs the owner to send a payment request by hand and record it with `offer-record: <inquiry id> paid $<amount> <payment reference>`.
-- **Website checkout:** the site's own checkout is in Stripe test mode, so Ko-fi stays the live payment path for the $49 Website Snapshot.
-- **Evidence behind bot checks:** 17 cited pages (mostly Upwork and Fiverr) answered with a challenge page and stay unverified.
+- **Organic posts.** No owner-owned business page is connected to Amber's publishing, and that pipeline posts video only. The posts and ad copy are ready to paste by hand, with tracking links, in `ads/AD-ASSETS.md`.
+- **Payment for the nine new pilots.** None is online, by design. For a paid pilot the owner sends a payment request by hand, then records it with `offer-record: <inquiry id> paid $<amount> <payment reference>` on #105.
+- **Website checkout.** The site's own checkout is in Stripe test mode, so Ko-fi stays the live payment path for the $49 Website Snapshot.
+- **Evidence behind bot checks.** 17 cited pages, mostly Upwork and Fiverr, answered with a challenge page. They stay unverified and are not fetched around.
 
 ## Next concrete action
 
-Post the prepared organic posts for the two recommended offers on the business's own channels, using the tracking links in `ads/AD-ASSETS.md`. Then reply to any inquiry the tracker lists within a day, and record each outcome with an `offer-record:` line.
+Paste the prepared posts for the Unpaid Invoice Tracker and the Website Health and Booking-Form Check on the business's own channels. Use their tracking links from `ads/AD-ASSETS.md`. Then reply within a day to any inquiry the tracker lists, and record each outcome with an `offer-record:` line.
