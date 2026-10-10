@@ -32,10 +32,31 @@ Verified on amber-os-worker by the prospect review (see #105 comment 6094179936)
 | 24 | Hardacker Roofing LLC | roofer | https://www.hardackerroofing.com/ (hardackerroofing.com) | — | (in the queue item; compact row on #105) | 23 | no (find it on the site's contact page) | passed 10-10 05:22Z |
 | 25 | Phoenix Roofing | roofer | https://phoenixroofing.com/ (phoenixroofing.com) | — | (in the queue item; compact row on #105) | 23 | no (find it on the site's contact page) | passed 10-10 05:22Z |
 
-## Set aside (13), with reasons
+## Set aside, by name (from the #105 report after #779, 10:32Z run)
 
-From the report's tally (the per-item table arrives with #779): 5 robots.txt disallows the site · 4 the site answered HTTP 403 · 3 every page read, nothing to say · 1 review: the site could not be read now (Goettl Air Conditioning & Plumbing, goettl.com, 04:20Z). Sites that refuse to be read are left alone; no block was bypassed.
+| business | website | reason | when |
+|---|---|---|---|
+| The Sunny Plumber | http://www.thesunnyplumber.com/ | the site answered HTTP 403 | 2026-10-09 17:52Z |
+| Mustang Plumbing & Rooter Service, Inc. | https://www.ethicalcommunity.org/mustangplumbingrooterserviceinc | robots.txt disallows the site | 2026-10-09 17:52Z |
+| Rooter Ranger Plumbing | https://www.rooterranger.com/ | robots.txt disallows the site | 2026-10-09 17:52Z |
+| Hays Cooling Heating & Plumbing | https://hayscoolingandheating.com/ | the site answered HTTP 403 | 2026-10-09 17:52Z |
+| PlumbSmart Plumbing Heating And Air | https://itsjustplumbsmart.com/ | the site answered HTTP 403 | 2026-10-09 17:53Z |
+| Reliant Plumbing & Rooter | https://reliantplumbingandrooter.com/ | every page read, nothing to say | 2026-10-09 17:53Z |
+| Pipe and Wrench LLC. | https://www.pipenwrench.com/ | the site answered HTTP 403 | 2026-10-09 18:00Z |
+| The Trusted Plumber | https://www.thetrustedplumber.com/ | robots.txt disallows the site | 2026-10-09 18:00Z |
+| Quietflex Manufacturing | https://www.quietflex.com/ | every page read, nothing to say | 2026-10-09 18:00Z |
+| Peoria AC Repair | https://www.peoriaacrepairservices.com/ | robots.txt disallows the site | 2026-10-09 18:00Z |
+| Stapleton Roofing | https://www.stapletonroofing.com/ | every page read, nothing to say | 2026-10-09 22:44Z |
+| Pitch Perfect Roofing | https://pitchperfectroofaz.com/ | robots.txt disallows the site | 2026-10-09 22:44Z |
+| Goettl Air Conditioning & Plumbing | https://www.goettl.com/location/phoenix-arizona/ | review: the site could not be read now | 2026-10-10 04:21Z |
+| A Reason to Smile | https://www.r2smile.com/ | robots.txt disallows the site | 2026-10-10 10:32Z |
+| SC Dentistry at Arrowhead | http://topphoenixdentist.com/top-dentists-glendale-az-sc-dentistry-at-arrowhead | robots.txt disallows the site | 2026-10-10 10:32Z |
+| Arizona Biltmore Dentistry | https://arizonabiltmoredentistry.com/ | every page read, nothing to say | 2026-10-10 10:33Z |
+| Bischoff Family Dentistry | https://www.bischofffamilydentistry.com/ | robots.txt disallows the site | 2026-10-10 10:33Z |
+| All in One Benso Family Dental | https://dentalallinone.com/dr-shawn-benso-dds.html | the site answered HTTP 404 | 2026-10-10 10:33Z |
+| Union Hills Family Dentistry | https://unionhillsfamilydentistry.com/ | every page read, nothing to say | 2026-10-10 10:33Z |
 
-## New leads since the last update
+## New leads since the last update (10:32Z run, verified)
 
-None. The last map pull was 00:21Z (med spa, Phoenix: 2 new). Since then the queue has been at or above the 25-waiting target, so the lane did not pull. #779 raises the waiting target to 40 (qualified floor 25), so the next runs pull dentists and restaurants in Phoenix, then Dallas, and review the new ones before they count.
+- Pulled dentists in Phoenix, AZ: 47 map elements, 42 with a usable website, **25 new** queued (the per-pull cap), 0 already known. Previewed 7, drafted 4, set aside 6 (reasons above). 29 now wait for the owner: 25 reviewed and passed, 4 new ones to be reviewed at the next hourly run; 15 pulled but not yet looked at. Qualified (reviewed and passed): 25.
+- The lane runs hourly while prospects are unreviewed or fewer than 40 wait: each run previews 10 more and reviews up to 15. New prospects count as qualified only after the review passes them.
