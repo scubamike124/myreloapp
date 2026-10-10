@@ -162,7 +162,7 @@ Page: https://hq.amberoneai.com/offers/website-health-report
 
 **Who it is for, and where:** For small businesses whose website takes bookings or inquiries, such as clinics, salons, trades and studios; post it on our own Facebook and LinkedIn business pages.
 
-**Note for offer 6:** these posts say the Website Snapshot Report is live and the form check is the pilot, as the owner's offer list says. The report is orderable through the owner's published Ko-fi Commission (commit `c5a1d20`, #774); the #105 listings comment (id 6074182151, as of 2026-10-10 17:01Z) says the site's own checkout is still in test mode. The posts send people to the offer page and its form, not to a checkout.
+**Note for offer 6:** these posts say the Website Snapshot Report is live and the form check is the pilot, as the owner's offer list says. The report is orderable through the owner's published Ko-fi Commission (commit `c5a1d20`, #774; #105 comment 6092677936: the owner reached Ko-fi's payment screen, no test payment made); the #105 listings comment (id 6074182151, as of 2026-10-10 17:01Z) says the site's own checkout is still in test mode. The posts send people to the offer page and its form, not to a checkout.
 
 **Launch post** (LinkedIn or Facebook page; 693 characters before the link is filled in)
 
