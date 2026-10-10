@@ -26,6 +26,12 @@ Sprint of 2026-10-10, 16:47Z to about 02:47Z. `RESULTS.md` has the results table
 - **Website checkout.** The site's own checkout is in Stripe test mode, so Ko-fi stays the live payment path for the $49 Website Snapshot.
 - **Evidence behind a bot check.** One cited Upwork page still answers with a challenge page. It stays unverified and is not fetched around.
 
+## Known limits
+
+- **Counts come from public, unauthenticated submissions.** Anyone, or a bot, can send a visit or an inquiry. The hidden honeypot field, the per-connection limit (6 inquiries per 10 minutes) and the required consent box stop the simple cases. Read each inquiry before treating it as a buyer signal. The tracker keeps counting an inquiry after the owner marks it `not-a-fit` (that shows only in the "Not a fit" total), and the ranking in `RESULTS.md` uses the inquiry count. So after the first real inquiries, regenerate the ranking by reading them, not only the count.
+- **The per-connection limit trusts `X-Forwarded-For`.** The shared helper `clientKey` keys on the first entry of that header. Railway documents `X-Real-IP` as the header its edge sets, and the answers from its staff conflict on whether the edge strips a client-supplied `X-Forwarded-For` (community threads, October 2026). If it does not, a script could get past the limit. Not changed tonight: the helper is shared, and I could not verify the behaviour from here. A follow-up is to key the offer routes on `X-Real-IP`, or to add a cap on the total per hour.
+- **Typed text in the tracker.** A review found that the tracker showed a visitor's name, business and message as live markdown in a comment posted with the owner's credential. Amberai #794 shows them as inline code instead. It is merged only after its CI, deploy and proof are recorded in `CHECKPOINT.md`.
+
 ## Recommendation (details in `RESULTS.md`)
 
 Offers 5 (Unpaid Invoice Tracker) and 6 (Website Health and Booking-Form Check). The rule written down before the live check ranks offers 5, 6 and 7 (CRM cleanup) level. No buyer has replied to any of them. All three have a research score of 4, every one of their cited facts was found, and their prices sit inside what buyers pay. A tie-break added after the tie appeared counts direct spending evidence: buyers' posted budgets and review counts on paid tools. It puts 5 first and 6 ahead of 7. Counting vendors' asking prices as well would put 7 ahead of 6. None of this is a sale, and the first real inquiry outranks all of it.
