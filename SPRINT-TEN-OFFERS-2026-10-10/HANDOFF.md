@@ -15,7 +15,7 @@ Sprint of 2026-10-10, 16:47Z to about 02:47Z. `RESULTS.md` has the results table
 - **Pages.** By 19:11Z the worker's probe had read all 21 pages in production. Each answered HTTP 200, each offer page showed its pilot notice, and each sample passed every check.
 - **Intake.** The round trip was proven at 20:53Z: the worker's self-test sent a visit (HTTP 204) and an inquiry (HTTP 200), and the tracker read both back from the database. Self-test rows are never counted.
 - **Evidence.** 41 of 65 cited facts were found on their live pages.
-- **Code.** 389 offers tests pass, and each deploy was checked against the worker beacon: the pages, memory, the event loop and the earnings tick.
+- **Code.** 383 offers and importer tests pass on main, and each deploy was checked against the worker beacon: the pages, memory, the event loop and the earnings tick.
 - **The runner.** It was run end to end on six fresh export shapes: HubSpot contacts, an mbox inbox, Shopify plus a marketplace, a phone-system call log, Jobber-style quotes and a wide budget sheet. Every report was produced with all its checks passing, and each found the problems planted in its data. One run exposed a real bug, which was fixed before the merge: a call log that marks direction only in an "Action" column listed an already-called-back caller as an open lead.
 - **Not yet:** a real buyer. Real visits and inquiries are 0, because nothing has been posted anywhere.
 
