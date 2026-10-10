@@ -28,3 +28,13 @@ Paused by your instruction, untouched tonight: the Railway token (still not reco
 - One anomaly: the web process had a 10.6 s event-loop stall around 21:45Z (the known memory-pressure pattern, heap near its limit); it did not repeat, and the #768 and #769 deploys restarted the process.
 - Railway's web deployment of #767 failed on Railway's side 59 seconds after the merge (the same code builds cleanly here); #768 replaced it and both services have deployed every commit since. Railway's deploy results are visible as GitHub commit statuses, which I now use to watch deploys.
 - Every earnings tick tonight was clean (evaluated ~906, accepted 37, 0 failures). The loop guard prevented one repeated scout search at 18:57Z.
+
+## Later that evening (00:12Z update)
+
+Three more PRs merged and deployed one at a time, each verified (12+ clean probes, clean earnings tick) with a proof on #105:
+
+- **#770** `npm run outreach:record -- sent|reply|skip <domain>`: when you say "sent <domain>", one command records it in owner-outreach.ts (then commit, PR, deploy); the lane drops the prospect from the list and never drafts that domain again. Replies are recorded with their stage (asked what / asked price / ordered / declined). Proof 6091194978.
+- **#771** the #105 report now says why prospects were set aside. First reading: `Set aside 12: 5 robots.txt disallows the site · 4 the site answered HTTP 403 · 3 every page read, nothing to say.` Nine of twelve refuse to be read; only three are clean sites. Proof 6091440515.
+- **#772** a real blocker found in the 23:27Z run and fixed: the med spa map query used a regex flag Overpass rejects (HTTP 400). The lane read that as "busy", kept the cursor on med spa and retried every 15 minutes, so the queue could not pass 24. The query is corrected and a rejected query now skips the category. Merged 00:10:55Z; its deploy and the first med spa pull are being watched.
+
+Queue at 23:57Z: 24 waiting for the owner (target 25), 12 set aside, 0 to preview; 13 of the 24 have an address on file (10 from the map, 3 from the site). Nothing sends automatically. Health watch re-armed after a container restart at ~23:40Z; no new anomaly.
