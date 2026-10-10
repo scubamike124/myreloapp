@@ -116,7 +116,11 @@ Reviewed 4 (4 passed), re-read 3 contact pages (1 address found), no map pull (e
 ## 15:50Z: #787 verified; #785 merges
 
 - **#787 deployed 15:33Z/15:34Z and verified:** 12 clean probes, 0 non-200, 0 restarts, RSS peak 1,389 MB, event-loop max 4,055 ms (p99 58 ms), earnings tick 15:49Z ok, no duplicates. The browser self-check at this boot reads `ok: false`, `os: "Alpine Linux v3.24"`, `imageBrowsers.dirExists: false`: the expected result, since the image switch has not happened. The operator lists the Dockerfile-path intent as "not yet" applied. Proof comment posted on #105.
-- **#785 (order records mirrored to the database)** merges next, one deploy at a time.
+- **#785 (order records mirrored to the database)** merged 15:51Z as `612a4a6`, deployed 15:59Z (web 15:59:19Z, worker 15:59:29Z) and verified: 12 clean probes, 0 non-200, 0 restarts, RSS peak 1,178 MB, event-loop max 3,344 ms (p99 54 ms), earnings tick 16:13Z ok, no duplicates. Proof posted on #105.
+
+## 16:15Z: the owner's instruction on the Dockerfile path
+
+The owner: Railway's settings point at the repo's shared `railway.json` (`dockerfilePath: "Dockerfile"`); do not change that globally; configure `Dockerfile.osworker` for amber-os-worker only, keep amber-hq-web on its current Dockerfile, deploy both safely, verify the beacon reports the browser. Plan in progress: the selection moves inside the shared Dockerfile (the worker's Playwright-image stages are added to it and the final stage is chosen by Railway's per-service `RAILWAY_SERVICE_NAME` build argument, default web), so `railway.json` stays as it is, web's stages are untouched, and only amber-os-worker builds the browser image. The operator's now-redundant `RAILWAY_DOCKERFILE_PATH` intent is withdrawn in the same change.
 
 ## 15:35Z: a genuine owner-only blocker for the browser
 
