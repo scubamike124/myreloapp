@@ -1,4 +1,4 @@
-# Research on every lead — 2026-10-10 (from Amber's production review; refreshed 09:31Z run)
+# Research on every lead — 2026-10-10 (from Amber's production review; refreshed after the 12:40Z run)
 
 Verified on amber-os-worker by the prospect review (see #105 comment 6094179936): for each prospect the site answered a plain GET (robots.txt allowed), the drafted finding was still on the page it was drafted from (or the draft was re-made from that day's pages), the draft matches the finding, the address on file has a recorded source, no duplicate registrable domain, and the domain is not in the owner's records. Columns "what was seen" and "pages" are only in the ten-best table on #105; for the other 15 the finding is in the queue item and the report's compact table (score, address, review).
 
@@ -31,8 +31,23 @@ Verified on amber-os-worker by the prospect review (see #105 comment 6094179936)
 | 23 | Mountainside Air Conditioning Repair | HVAC | https://mountainsideair.com/ (mountainsideair.com) | — | (in the queue item; compact row on #105) | 23 | no (find it on the site's contact page) | passed 10-10 04:21Z |
 | 24 | Hardacker Roofing LLC | roofer | https://www.hardackerroofing.com/ (hardackerroofing.com) | — | (in the queue item; compact row on #105) | 23 | no (find it on the site's contact page) | passed 10-10 05:22Z |
 | 25 | Phoenix Roofing | roofer | https://phoenixroofing.com/ (phoenixroofing.com) | — | (in the queue item; compact row on #105) | 23 | no (find it on the site's contact page) | passed 10-10 05:22Z |
+| 26 | Aesthetic Dentistry of Arrowhead | dentist | https://www.drgregceyhan.com/ (drgregceyhan.com) | — | (in the queue item; compact row on #105) | 47 | yes (the site's home page) | passed 10-10 11:36Z |
+| 27 | Solomon Pediatric Dental | dentist | https://solomonpediatricdental.com/ (solomonpediatricdental.com) | — | (in the queue item; compact row on #105) | 37 | yes (the site's home page) | passed 10-10 11:36Z |
+| 28 | JC Family Dental | dentist | http://www.jcfamilydentalaz.com/ (jcfamilydentalaz.com) | — | (in the queue item; compact row on #105) | 31 | no (find it on the site's contact page) | passed 10-10 11:36Z |
+| 29 | Alan Persons, DMD | dentist | https://alanpersonsdentist.com/ (alanpersonsdentist.com) | — | (in the queue item; compact row on #105) | 27 | yes (the site's home page) | passed 10-10 11:36Z |
+| 30 | 7th and Bell Dental Group | dentist | https://www.7thandbelldentalgroup.com/ (7thandbelldentalgroup.com) | home, /about-us/, /about-us/contact-us/ (3 of 3; robots.txt allowed; public pages, plain GET) | on your home page, a form field may have no label, so people who use a screen reader may not know what to type; heading order ×1 on the home page | 51 | no (find it on the site's contact page) | passed 10-10 12:41Z |
+| 31 | Bright Now! Dental (North Central Phoenix office of a national chain) | dentist | https://www.brightnow.com/dental-office/north-central-phoenix-dentist/40150/ (brightnow.com) | /dental-office/north-central-phoenix-dentist/40150/, /about-us/ (2 of 2; robots.txt allowed; public pages, plain GET) | on your /dental-office/north-central-phoenix-dentist/40150 page, 2 form fields may have no label, so people who use a screen reader may not know what to type | 51 | no (find it on the site's contact page) | passed 10-10 12:42Z |
+| 32 | Deer Valley Dental Group | dentist | https://www.deervalleydentalgroup.com/ (deervalleydentalgroup.com) | home, /about-us/, /about-us/contact-us/ (3 of 3; robots.txt allowed; public pages, plain GET) | on your home page, a form field may have no label, so people who use a screen reader may not know what to type; heading order ×1 on the home page | 51 | no (find it on the site's contact page) | passed 10-10 12:42Z |
+| 33 | Beautiful Smiles of Arizona | dentist | https://www.beautifulsmilesaz.com/ (beautifulsmilesaz.com) | — | (in the queue item; compact row on #105) | 47 | yes (the map) | passed 10-10 12:41Z |
+| 34 | Arizona 3D Dental Lab, LLC | dentist (a dental lab, not a practice) | https://www.lab.dental/ (lab.dental) | — | (in the queue item; compact row on #105) | 37 | yes (the site's home page) | passed 10-10 12:42Z |
+| 35 | Peoria Healthy Smiles | dentist | https://peoriahealthysmiles.com/ (peoriahealthysmiles.com) | — | (in the queue item; compact row on #105) | 27 | yes (the map) | passed 10-10 12:41Z |
+| 36 | Op Dental Care | dentist | https://www.opdentalcare.com/ (opdentalcare.com) | — | (in the queue item; compact row on #105) | 27 | yes (the map) | passed 10-10 12:41Z |
+| 37 | Center For Dental Rehabilitation | dentist | https://drmtoal.com/ (drmtoal.com) | — | (in the queue item; compact row on #105) | 27 | yes (the map) | passed 10-10 12:42Z |
+| 38 | Dental Depot (Phoenix location of a multi-state chain) | dentist | https://dentaldepotarizona.com/locations/phoenix/ (dentaldepotarizona.com) | — | (in the queue item; compact row on #105) | 21 | no (find it on the site's contact page) | passed 10-10 12:42Z |
 
-## Set aside, by name (from the #105 report after #779, 10:32Z run)
+**Guess, flagged as such (not checked by Amber):** three of the new dentists are offices of chains (Bright Now! Dental, Dental Depot; Aspen Dental was set aside). A chain office usually does not control its own website, so a $49 note to the office is less likely to reach the person who can act on it; the independent practices are the better prospects. Arizona 3D Dental Lab is a dental laboratory, not a practice; the finding is real but the business is a different kind of buyer.
+
+## Set aside, by name (from the #105 report, 12:40Z run; 25 in all: 9 nothing to say, 8 robots.txt, 5 HTTP 403, 2 set aside by the review, 1 HTTP 404)
 
 | business | website | reason | when |
 |---|---|---|---|
@@ -55,8 +70,17 @@ Verified on amber-os-worker by the prospect review (see #105 comment 6094179936)
 | Bischoff Family Dentistry | https://www.bischofffamilydentistry.com/ | robots.txt disallows the site | 2026-10-10 10:33Z |
 | All in One Benso Family Dental | https://dentalallinone.com/dr-shawn-benso-dds.html | the site answered HTTP 404 | 2026-10-10 10:33Z |
 | Union Hills Family Dentistry | https://unionhillsfamilydentistry.com/ | every page read, nothing to say | 2026-10-10 10:33Z |
+| Law's Family Dentistry | https://www.lawsfamilydental.com/ | every page read, nothing to say | 2026-10-10 12:41Z |
+| Cafe Boa | https://www.cafeboa.com/ | every page read, nothing to say | 2026-10-10 12:41Z |
+| Cornish Pasty Co. | https://www.cornishpastyco.com/ | every page read, nothing to say | 2026-10-10 12:41Z |
+| TexAZ Grill | https://texazgrill.com/ | the site answered HTTP 403 | 2026-10-10 12:41Z |
+| Med Fresh Grill | https://medfreshgrill.com/ | every page read, nothing to say | 2026-10-10 12:41Z |
+| Aspen Dental (national chain) | https://www.aspendental.com/ | review: the site could not be read | 2026-10-10 12:42Z |
 
-## New leads since the last update (10:32Z run, verified)
+## New leads since the morning report (verified from the #105 report after each run)
 
-- Pulled dentists in Phoenix, AZ: 47 map elements, 42 with a usable website, **25 new** queued (the per-pull cap), 0 already known. Previewed 7, drafted 4, set aside 6 (reasons above). 29 now wait for the owner: 25 reviewed and passed, 4 new ones to be reviewed at the next hourly run; 15 pulled but not yet looked at. Qualified (reviewed and passed): 25.
+- **10:32Z:** pulled dentists in Phoenix, AZ: 47 map elements, 42 with a usable website, **25 new** queued (the per-pull cap), 0 already known. Previewed 7, drafted 4, set aside 6 (reasons above). Qualified (reviewed and passed): 25.
+- **11:35Z:** reviewed the 4 new dentists, all 4 passed (rows 26-29). Pulled restaurants in Phoenix, AZ: 150 map elements, 128 with a usable website, 25 new. Previewed 10 dentists, drafted 10, set aside 0. Qualified: 29.
+- **12:40Z:** reviewed 10: 9 passed (rows 30-38), 1 set aside (Aspen Dental, the site could not be read at review). Previewed 10 (5 dentists, 5 restaurants): drafted 5, set aside 5 (Law's Family Dentistry, Cafe Boa, Cornish Pasty Co., Med Fresh Grill: every page read, nothing to say; TexAZ Grill: HTTP 403). Pulled plumbers in Dallas, TX: 7 map elements, 7 with a usable website, 7 new. **Qualified: 38** of 43 waiting; 5 still to review at the next hourly run: Beyond Dental Care, Fox Family Dental, Desert Sage Family Dental, Agave Dental, YC's Mongolian Grill. Not yet looked at: 27 (20 Phoenix restaurants, 7 Dallas plumbers). Set aside in all: 25. Nothing sent.
+- New leads found since the morning report: 57 (25 dentists, 25 restaurants, 7 plumbers). Of the 32 looked at so far, 20 were drafted and 12 set aside; of the 14 drafts reviewed so far, 13 passed and 1 was set aside (Aspen Dental).
 - The lane runs hourly while prospects are unreviewed or fewer than 40 wait: each run previews 10 more and reviews up to 15. New prospects count as qualified only after the review passes them.
