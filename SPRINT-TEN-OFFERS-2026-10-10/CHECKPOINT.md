@@ -27,9 +27,9 @@ Synthetic or redacted data only; client systems stay client-owned, least privile
 | 7 | Demos 6, 10 (website booking form, video variations) | demo agent | done: 92 tests; samples 13/13, 14/14; three rendered format previews |
 | 8 | Organic posts, ad copy, connected-channel check | ads agent | done: copy for all ten (27 tests); BLOCKER: no connected owner-owned business page, and the pipeline posts video only |
 | 9 | Registry, pages, intake + attribution, visit counter, tracker on #105 | lead | built and tested (commit bbbb656 on `claude/ten-offers-pilots`): 23 core and evidence tests pass; pages render locally; storage verified against a real Prisma client (SQLite) |
-| 10 | CI, merge, deploy, live verification, proofs on #105 | lead | PR #789: first CI failed one ratchet test (fixed in b32c035); CI re-running |
-| 12 | Pilot runner: a client's own files to a reviewed report (importers for offers 1–5, 7–9) | lead + 3 importer agents | runner, offer 5 importer and 26 tests committed (62c9630 on `claude/offers-pilot-runner`); importers 1+2, 3+4, 7+8+9 in progress |
-| 11 | Results table, recommendation, handoff | lead | not started |
+| 10 | CI, merge, deploy, live verification, proofs on #105 | lead | #789 merged 18:12Z (115ed6d), deployed and verified, proof on #105 (6101970273); #790 (self-test retry) merged 20:49Z (27d3cc2), deploying |
+| 12 | Pilot runner: a client's own files to a reviewed report, all ten offers | lead + 3 importer agents (stopped by a usage limit, finished by the lead) | PR #791 (2a8ff47): importers for all ten offers, 379 offers tests; CI running |
+| 11 | Results table, recommendation, handoff | lead | RESULTS.md (generated; rule declared before the live check) and a first HANDOFF.md written; final versions at the end |
 
 ## Log
 
@@ -49,3 +49,13 @@ Synthetic or redacted data only; client systems stay client-owned, least privile
 - 18:02Z (commit b32c035): fixed and hardened. Every #105 comment, Amber's automated reports included, is posted with the owner's credential, so the author cannot tell them apart. The tracker now never reads a comment that carries an Amber report marker (its own how-to example "offer-record: inbox-triage cost $2.40" would otherwise have counted as a real cost), lists record-like lines inside code blocks as "not applied", and edits only the comment that starts with its marker. A decoy test proves an owner "directive", a non-owner $5,000 "paid" line and a quoted marker change nothing; verified revenue stays $0.00. 295 tests pass.
 - 18:08Z: second CI run: the test job now fails only at the pre-existing unit-test step (same as main); qa-engine running.
 - 18:10Z (commit 62c9630, branch `claude/offers-pilot-runner`): pilot runner checkpoint. Every run must declare its data: `--authorized "client, how, when"` for a client's files, or `--synthetic` for invented data, which is refused when any email address or phone number in the files is not a reserved example. A real export can hold no contact details, so their absence never counts as "invented". 26 tests.
+- 18:12Z: #789 squash-merged as 115ed6d (CI matched main). Railway: worker 18:15Z, web 18:20Z.
+- 18:17Z: the tracker published on #105 (6100695261). Its live form self-test met the old web build (HTTP 401) because the worker finished deploying first, and it ran only once per process.
+- 18:22Z: the worker's buyer-evidence check published (6100741402): 41 of 65 facts found on their pages; 17 bot-challenge pages; 5 quotes not on their pages. Saved as `evidence/EVIDENCE-LIVE-CHECK.md`.
+- 18:2xZ: `RESULTS.md` generated from the registry, the research summary, the live check and the tracker, with the ranking rule written down before the check ran: Unpaid Invoice Tracker (7 of 7 verified) and Website Health and Booking-Form Check (5 of 7). First `HANDOFF.md`.
+- 18:35Z: #789 deploy verified: 12 clean probes, web memory peak 1,238 MB, event loop max 2,710 ms (p99 55 ms), earnings tick clean.
+- 19:11Z: all 21 offer pages probed live (HTTP 200, pilot notice, every sample's checks passing).
+- About 18:30Z to 20:38Z: the session and its three importer agents stopped at a usage limit (it reset at 20:10Z). The agents' importers for offers 1, 2, 3, 7, 8 and 9 were on disk with tests; offer 4's tests were missing.
+- 20:42Z: proof for #789 posted on #105 (6101970273). #790 (self-test retry) opened from main.
+- 20:48Z: the importers finished by the lead: job-cost fixture fixed and skipped jobs recognised by name; contacts listed from every row; offer 4 tests written, and a guard added after the tests showed a card export with positive spending would have reported the card payment as the only spending. 379 offers tests pass.
+- 20:49Z: #790 merged as 27d3cc2 (CI matched main); deploy watch running. 21:0xZ: runner rebased onto main, PR #791 opened (2a8ff47), CI running.
