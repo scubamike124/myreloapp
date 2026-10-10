@@ -1,4 +1,5 @@
 <!-- Copied from Amber's worker report on #105 (comment 6100741402), as of 2026-10-10T18:22:31.588Z. The worker re-runs the check at most once a day per process; #105 holds the latest. -->
+<!-- The worker ran the check again at 2026-10-10T20:57:49Z (a deploy restarted it): every offer's counts were identical to this run. -->
 # Buyer evidence: the live-page check
 
 As of `2026-10-10T18:22:31.588Z`, from amber-os-worker. The sprint's buyer evidence came from web search results; this check opens each cited page once (robots.txt honoured, nothing submitted) and looks for the quoted text. **Only "found" counts as verified.** A blocked page stays unverified; it is never fetched around the block.
