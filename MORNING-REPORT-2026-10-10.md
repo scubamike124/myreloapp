@@ -51,3 +51,37 @@ Each gets the opener ("Hi there, I noticed one small issue on your website that 
 
 - Live payments on the site: your call (`WEBSITE_SNAPSHOT_LIVE_PAYMENTS=true` on amber-hq-web). Not needed for Ko-fi orders.
 - Sending the first three emails: yours, by hand, from the action package.
+
+---
+
+# Morning report, part 2 — 09:45Z (owner's 09:3xZ instructions)
+
+## Latest Amber run (verified)
+
+- 09:31:52Z: no pull (the queue was at the 25 target), nothing to preview, 25 waiting, all 25 reviewed and passed, files present on disk (volume), nothing sent. **New prospects since the last update: 0.** The last map pull was 00:21Z (med spa, Phoenix: 2 new; both later passed the review).
+- Why no new leads: the lane stops pulling when 25 wait. **#779** (open, CI running) raises the waiting target to 40 and counts a prospect as qualified only after the review passes it; its first pull is expected at the first run after the deploy (dentists and restaurants in Phoenix, then pest control in Dallas), with previews the same run and reviews the run after.
+
+## Review of every prospect (verified on production; per-lead table in RESEARCH-ALL-LEADS-2026-10-10.md)
+
+- 25 of 25 waiting prospects passed the production review (04:20Z and 05:22Z): site answers, finding still on the page, draft matches, address source recorded, no duplicate domain, not in your records. 1 set aside by the review (Goettl, site could not be read). 13 set aside in all with reasons; #779 adds the per-item set-aside table to the #105 report so names and reasons are visible, not just the tally.
+- **Guess, flagged as such:** I have not checked any business against a registry or Google listing; "the business is real" rests on OpenStreetMap listing it with a website that answers and names itself. If you want a registry check, it is a separate step.
+
+## Revenue actions prepared (each with evidence and the expected next step)
+
+1. **Send the first three emails** (Seal Out Scorpions, All Vee's Plumbing, Any Hour Services). Evidence: all three passed the review; addresses from the map; drafts in the action package. Next step: you paste and send; tell me "sent <domain>" and I record it with `npm run outreach:record`.
+2. **Follow-up once after five days** (shipping in #779, printed under every prospect's drafts; kit section 8). Evidence: the draft passes the same review rules as the first email (no link, no price, no claims). Next step: yours, five days after each first email, once.
+3. **Grow the pool to 40 waiting, 25+ qualified** (#779). Evidence: 26 of 26 earlier prospects had unique domains and 25 passed; the map still has dentists, restaurants and the Dallas area untouched. Next step: deploy, then the lane pulls and reviews automatically; I report counts.
+4. **Price reply with Ko-fi** is live in every draft (Ko-fi is the payment path; the site switch stays off). Evidence: #105 report, your checkout screen. Next step: none until someone asks the price.
+5. **"If they want it fixed" quote** exists as a sentence only; no fix-pack price. Evidence: kit. Next step: your call on a price after the first report is delivered; nothing to build until then.
+6. **Other listed channels** (Fiverr, SEOClerks, Khamsat) have publish-ready drafts from earlier work. Evidence: #105 Listings report. Next step: owner-only publish; not pursued without your word.
+
+**Not a revenue action (guess):** I expect reply rates for cold notes like these to be low single digits; 25 sends would be needed to expect one conversation. That is an estimate, not a measurement.
+
+## Order flow and production (verified 09:36Z)
+
+- Offer page 200 with the "$49" text; `/sample` and `/terms` 200; checkout switch on; **live payments off** and unchanged; Ko-fi is the payment path. 30 of 30 probes answered, all ticks clean (907 evaluated, 37 accepted), scout tick ok, loop guard 0.
+- Disk note (this session, not production): the Claude session's disk filled while creating a worktree; eight worktrees of merged branches were removed (8.8 GB free now). No effect on Amber.
+
+## Blockers
+
+- None genuine. Owner-only items unchanged: sending the emails; live payments on the site (not needed); publishing other channels.
