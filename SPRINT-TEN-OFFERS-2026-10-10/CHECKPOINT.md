@@ -21,13 +21,13 @@ Synthetic or redacted data only; client systems stay client-owned, least privile
 | 1 | Buyer evidence, offers 1–5 | research agent | running (file growing) |
 | 2 | Buyer evidence, offers 6–10 | research agent | done: every fact is a search snippet (this session cannot fetch pages); now preparing items for the worker's live-page check |
 | 3 | Offer design (deliverable, scope, exclusions, onboarding, test price) | lead | v1 in the registry; prices updated from evidence |
-| 4 | Demos 1, 2, 5 (follow-up family) | demo agent | running |
-| 5 | Demos 3, 4 (bookkeeping, read-only) | demo agent | running |
-| 6 | Demos 7, 8, 9 (data cleanup, triage) | demo agent | running |
-| 7 | Demos 6, 10 (website booking form, video variations) | demo agent | running |
-| 8 | Organic posts, ad copy, connected-channel check | ads agent | running |
+| 4 | Demos 1, 2, 5 (follow-up family) | demo agent | done: 44 tests; samples 17/17, 15/15, 18/18 |
+| 5 | Demos 3, 4 (bookkeeping, read-only) | demo agent | done: 41 tests; samples 14/14, 13/13 |
+| 6 | Demos 7, 8, 9 (data cleanup, triage) | demo agent | done: 57 tests; samples 12/12, 14/14, 11/11 |
+| 7 | Demos 6, 10 (website booking form, video variations) | demo agent | done: 92 tests; samples 13/13, 14/14; three rendered format previews |
+| 8 | Organic posts, ad copy, connected-channel check | ads agent | done: copy for all ten (27 tests); BLOCKER: no connected owner-owned business page, and the pipeline posts video only |
 | 9 | Registry, pages, intake + attribution, visit counter, tracker on #105 | lead | built and tested (commit bbbb656 on `claude/ten-offers-pilots`): 23 core and evidence tests pass; pages render locally; storage verified against a real Prisma client (SQLite) |
-| 10 | CI, merge, deploy, live verification, proofs on #105 | lead | not started |
+| 10 | CI, merge, deploy, live verification, proofs on #105 | lead | PR #789 (d83eab6) open, CI running |
 | 11 | Results table, recommendation, handoff | lead | not started |
 
 ## Log
@@ -41,3 +41,6 @@ Synthetic or redacted data only; client systems stay client-owned, least privile
 - 17:22Z (commit b067a09): test prices set from the buyer evidence (all hypotheses); offer design generated from the registry; both research files done (search-snippet level).
 - 17:23Z: sprint status comment posted on #105 (6100207146), updated in place.
 - Note: log times before 17:23Z were first written from an estimate and corrected against the commit times.
+- 17:44Z: all ten demos and tests present; 286 offers tests pass; demo QA report: 141 checks, 0 failing (`qa/DEMO-QA-REPORT.md`).
+- 17:46Z: full-repository tsc and CI's qa:typecheck pass; all 21 pages render locally with the pilot notice, the form, the no-charge note and each sample's checks; screenshots in `qa/screenshots/`.
+- 17:47Z: PR #789 opened.
