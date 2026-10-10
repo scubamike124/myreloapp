@@ -133,3 +133,11 @@ Amber's Railway operator is refused by Railway with "Not Authorized" on every re
 ## Blockers
 
 - None genuine. Owner-only items unchanged: sending the emails; live payments on the site (not needed); publishing other channels.
+
+## 16:47Z onward: the ten-offer sprint (full report in `SPRINT-TEN-OFFERS-2026-10-10/`)
+
+- **Live:** ten pilot pages with their samples at https://hq.amberoneai.com/offers (amberai #789, deployed 18:20Z). There is one shared inquiry form that records each inquiry's offer and source, and an offer tracker on #105.
+- **Verified:** all 21 pages answered HTTP 200 in production, with the pilot notice and every sample check passing. The inquiry form's round trip was proven at 20:53Z (#790). The worker's live check found 41 of 65 cited buyer-evidence facts on their pages.
+- **Recommendation, by a rule written before the check ran:** the Unpaid Invoice Tracker and the Website Health and Booking-Form Check. The rule ranks any real buyer reply or payment first.
+- **Revenue: $0.00.** No inquiry yet, because no post went out: there is no connected business page, and the publishing pipeline posts video only.
+- **Next:** paste the prepared posts for those two offers (`SPRINT-TEN-OFFERS-2026-10-10/ads/AD-ASSETS.md`), reply to inquiries within a day, and record outcomes with `offer-record:` lines on #105.
