@@ -28,7 +28,8 @@ Synthetic or redacted data only; client systems stay client-owned, least privile
 | 8 | Organic posts, ad copy, connected-channel check | ads agent | done: copy for all ten (27 tests); BLOCKER: no connected owner-owned business page, and the pipeline posts video only |
 | 9 | Registry, pages, intake + attribution, visit counter, tracker on #105 | lead | built and tested (commit bbbb656 on `claude/ten-offers-pilots`): 23 core and evidence tests pass; pages render locally; storage verified against a real Prisma client (SQLite) |
 | 10 | CI, merge, deploy, live verification, proofs on #105 | lead | #789 merged 18:12Z (115ed6d), deployed and verified, proof on #105 (6101970273); #790 (self-test retry) merged 20:49Z (27d3cc2), deploying |
-| 12 | Pilot runner: a client's own files to a reviewed report, all ten offers | lead + 3 importer agents (stopped by a usage limit, finished by the lead) | PR #791 (2a8ff47): importers for all ten offers, 379 offers tests; CI running |
+| 12 | Pilot runner: a client's own files to a reviewed report, all ten offers | lead + 3 importer agents (stopped by a usage limit, finished by the lead) | #791 merged 21:13Z (e6324a9), deploying; 389 offers tests; end-to-end runs on fresh export shapes for offers 1, 2, 3, 7, 8 and 9 |
+| 13 | Evidence: one reachable replacement per unverified item, every offer alike; the report carries its item-list fingerprint | research agent + lead | research running; fingerprint change on `claude/offers-evidence-alt` |
 | 11 | Results table, recommendation, handoff | lead | RESULTS.md (generated; rule declared before the live check) and a first HANDOFF.md written; final versions at the end |
 
 ## Log
@@ -59,3 +60,10 @@ Synthetic or redacted data only; client systems stay client-owned, least privile
 - 20:42Z: proof for #789 posted on #105 (6101970273). #790 (self-test retry) opened from main.
 - 20:48Z: the importers finished by the lead: job-cost fixture fixed and skipped jobs recognised by name; contacts listed from every row; offer 4 tests written, and a guard added after the tests showed a card export with positive spending would have reported the card payment as the only spending. 379 offers tests pass.
 - 20:49Z: #790 merged as 27d3cc2 (CI matched main); deploy watch running. 21:0xZ: runner rebased onto main, PR #791 opened (2a8ff47), CI running.
+- 20:53Z: **the live form round trip is proven**: after #790 deployed, the worker's self-test visit (HTTP 204) and inquiry (HTTP 200) were read back from the database by the tracker. Never counted.
+- 20:57Z: the evidence check re-ran on the deploy restart (the old once-per-process rule): every offer's counts identical to 18:22Z.
+- 21:01Z to 21:03Z: end-to-end runs of the runner on fresh export shapes (HubSpot contacts, an mbox inbox, Shopify plus a marketplace, a phone-system call log, Jobber-style quotes, a wide budget sheet): all reports produced with every check passing. One real gap found and fixed: a call log that marks direction only in an Action column read the business's callback as an inbound call, so an already-called-back caller was listed as an open lead with a drafted text.
+- 21:05Z: the disk allowance filled (no space for a new worktree). Removed five old worktrees that were clean and whose branches were on GitHub at the same commit; nothing unsaved was removed.
+- 21:12Z: #790 deploy verified (12 clean probes, memory peak 1,226 MB, event loop max 3.1 s, earnings tick clean); proof on #105 (6102230458).
+- 21:13Z: #791 (pilot runner) merged as e6324a9 after CI matched main.
+- 21:0xZ: a research agent is finding one reachable source per unverified evidence item (24 items, every offer alike, each offer's item count unchanged). The evidence report will carry its item-list fingerprint, so a changed list is checked at the next run instead of a day later.
