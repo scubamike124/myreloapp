@@ -38,3 +38,9 @@ Three more PRs merged and deployed one at a time, each verified (12+ clean probe
 - **#772** a real blocker found in the 23:27Z run and fixed: the med spa map query used a regex flag Overpass rejects (HTTP 400). The lane read that as "busy", kept the cursor on med spa and retried every 15 minutes, so the queue could not pass 24. The query is corrected and a rejected query now skips the category. Merged 00:10:55Z; its deploy and the first med spa pull are being watched.
 
 Queue at 23:57Z: 24 waiting for the owner (target 25), 12 set aside, 0 to preview; 13 of the 24 have an address on file (10 from the map, 3 from the site). Nothing sends automatically. Health watch re-armed after a container restart at ~23:40Z; no new anomaly.
+
+## Overnight (02:25Z update)
+
+- **Ko-fi is the live order link.** You published the Website Snapshot Report — $49 commission and confirmed it from the checkout screen. Recorded in two steps: #773 held the record while your screenshot showed no commission; #774 flipped it to visible. Since the 02:18Z run every price reply on #105 carries https://ko-fi.com/michaelmoore64737. Proofs 6092442921 (#773) and 6092677936 (#774). The top 3 emails with the Ko-fi price reply are in FIRST-DOLLAR-ACTION-PACKAGE-2026-10-09.md. Nothing sends automatically.
+- **Volume attached** (`amber-os-worker-volume`, /app/.data, 5,000 MB): the worker's 02:06Z boot carried it. #775 (in CI) adds a `dataDir` block to the beacon that proves the mount and the three ledgers under it; its deploy is also the persistence test ("files present on disk").
+- **WEBSITE_SNAPSHOT_CHECKOUT=true** on amber-hq-web: Amber's session cannot reach the public hostname, so #775 also makes the worker probe /website-snapshot (and /sample, /terms) every five minutes; the beacon shows the status. Hold WEBSITE_SNAPSHOT_LIVE_PAYMENTS until you see the page or the beacon shows 200.
