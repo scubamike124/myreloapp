@@ -18,6 +18,8 @@ Mike
 
 None of Amber's five checks is about phones (they are screen-reader and page-structure checks), so no draft says "from a phone". The code and the kit now carry this wording; the ten drafts already in the queue are refreshed to it on the lane's next run after the deploy.
 
+**Review (2026-10-10 04:20Z):** all three re-checked by Amber's prospect review on production: the site answers, the drafted finding is still on the page it was drafted from, the draft matches, the address source is recorded (the map), no duplicate domain, not in your records. Goettl Air Conditioning (a larger company further down the list) was set aside because its site could not be read.
+
 ## 1. Seal Out Scorpions — pest control, Tempe — score 59
 
 - Website: https://sealoutscorpions.com/ (home, /about-us/, /contact-us/ checked)
