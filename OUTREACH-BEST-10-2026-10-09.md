@@ -1,12 +1,12 @@
-# Outreach: the best prospects, with exact drafts — 2026-10-09 23:27Z
+# Outreach: the best prospects, with exact drafts — 2026-10-10 00:21Z
 
 Built by Amber's outreach lane on amber-os-worker from public map data (OpenStreetMap) and one or two public pages of each site: robots.txt checked first, public pages only, plain GET, no login, no cookies, no proxy. Nothing in the lane can send; every email is sent by the owner from their own mail program, or not at all. The queue survives deploys (database mirror). The opener is the owner's wording of 2026-10-09. Where the map had no address, the lane read the site's contact page, then home, once, and recorded any contact address it named. The lane keeps 25 prospects waiting (owner, 2026-10-09) and shows the ten best with drafts; the rest are listed below and move up as the ten are sent or set aside.
 
-Queue 36: waiting for the owner 24 · not yet looked at 0 · draft failed the review 0 · set aside 12 · emailed by the owner 0 · approved 0. Owner records: 0 sent, 0 reply(ies), 0 domain(s) never contacted.
+Queue 38: waiting for the owner 26 · not yet looked at 0 · draft failed the review 0 · set aside 12 · emailed by the owner 0 · approved 0. Owner records: 0 sent, 0 reply(ies), 0 domain(s) never contacted.
 
-Last run 2026-10-09T23:27:09.126Z: Outreach lane: 0 of 3 site(s) re-read (contact page, then home) named a contact address; pulled med_spa in Phoenix, AZ (Overpass busy or unreachable (overpass-api.de HTTP 400); the next run tries again); previewed 2, drafted 2, set aside 0; 10 prospect(s) waiting for the owner, 0 emailed by the owner so far. Nothing was sent.
+Last run 2026-10-10T00:21:13.861Z: Outreach lane: pulled med_spa in Phoenix, AZ (2 map element(s) from lz4.overpass-api.de, 2 with a usable website, 2 new, 0 already known); previewed 2, drafted 2, set aside 0; 10 prospect(s) waiting for the owner, 0 emailed by the owner so far. Nothing was sent.
 
-Memory across deploys: restored 36 item(s) and the lane state (saved 2026-10-09T22:44:35.678Z) from the database: the deploy had emptied this service's disk; mirrored 36 item(s) and the lane state to the database.
+Memory across deploys: restored 36 item(s) and the lane state (saved 2026-10-10T00:14:07.645Z) from the database: the deploy had emptied this service's disk; mirrored 38 item(s) and the lane state to the database.
 
 **The $49 price reply** is shown under each prospect exactly as the #105 report carries it: with the holding sentence until a payment link (Ko-fi Commission or the site checkout) is recorded, then with that link.
 
@@ -455,7 +455,7 @@ Mike
 **If they want it fixed**: "If you would rather have these fixed, I can quote that separately once I have looked at the pages." (no fix-pack price exists yet; the owner quotes).
 
 
-## Also waiting for the owner (14 more; drafts in the queue, shown as the ten above are sent or set aside)
+## Also waiting for the owner (16 more; drafts in the queue, shown as the ten above are sent or set aside)
 
 
 | # | business | what | website | score | email on file (from) | queue id |
@@ -467,10 +467,12 @@ Mike
 | 15 | Frontline Consultants & Contracting LLC | roofer | https://www.frontlineconsultantsllc.com/ | 43 | no (find it on the site's contact page) | `ol_d32d346ccd9c4066` |
 | 16 | Plumber of Phoenix | plumber | https://plumberofphoenix.com/ | 39 | yes (the map) | `ol_3ea9b79cd007442a` |
 | 17 | Arizona Roof Rescue | roofer | https://www.arizonaroofrescue.com/ | 39 | yes (the site's home page) | `ol_973ffb024c202e24` |
-| 18 | Phillips Roofing LLC | roofer | https://phillipsroofing.org/ | 29 | yes (the site's home page) | `ol_16e1b5063dde6b03` |
-| 19 | Pioneer Roofing Co. | roofer | https://pioneer-roofing.com/ | 29 | yes (the map) | `ol_ffd9458a04830591` |
-| 20 | Goettl Air Conditioning & Plumbing | plumber | https://www.goettl.com/location/phoenix-arizona/ | 23 | no (find it on the site's contact page) | `ol_80b405f1017f06fe` |
-| 21 | Lincoln Air & Plumbing | HVAC | https://lincolnair.com/ | 23 | no (find it on the site's contact page) | `ol_67dee4e380d9c449` |
-| 22 | Mountainside Air Conditioning Repair | HVAC | https://mountainsideair.com/ | 23 | no (find it on the site's contact page) | `ol_88445ecff53d4569` |
-| 23 | Hardacker Roofing LLC | roofer | https://www.hardackerroofing.com/ | 23 | no (find it on the site's contact page) | `ol_527de13b230a585c` |
-| 24 | Phoenix Roofing | roofer | https://phoenixroofing.com/ | 23 | no (find it on the site's contact page) | `ol_b6195af0d6c7a805` |
+| 18 | Salon Blissful Med Spa | med spa | https://www.salonblissful.com/ | 37 | yes (the site's home page) | `ol_c32c6c430328e01d` |
+| 19 | Phillips Roofing LLC | roofer | https://phillipsroofing.org/ | 29 | yes (the site's home page) | `ol_16e1b5063dde6b03` |
+| 20 | Pioneer Roofing Co. | roofer | https://pioneer-roofing.com/ | 29 | yes (the map) | `ol_ffd9458a04830591` |
+| 21 | Brazillian Touch MedSpa | med spa | https://www.braziliantouchmedspa.com/ | 27 | yes (the map) | `ol_4a59e36d2166a098` |
+| 22 | Goettl Air Conditioning & Plumbing | plumber | https://www.goettl.com/location/phoenix-arizona/ | 23 | no (find it on the site's contact page) | `ol_80b405f1017f06fe` |
+| 23 | Lincoln Air & Plumbing | HVAC | https://lincolnair.com/ | 23 | no (find it on the site's contact page) | `ol_67dee4e380d9c449` |
+| 24 | Mountainside Air Conditioning Repair | HVAC | https://mountainsideair.com/ | 23 | no (find it on the site's contact page) | `ol_88445ecff53d4569` |
+| 25 | Hardacker Roofing LLC | roofer | https://www.hardackerroofing.com/ | 23 | no (find it on the site's contact page) | `ol_527de13b230a585c` |
+| 26 | Phoenix Roofing | roofer | https://phoenixroofing.com/ | 23 | no (find it on the site's contact page) | `ol_b6195af0d6c7a805` |
