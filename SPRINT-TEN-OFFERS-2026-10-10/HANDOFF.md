@@ -7,6 +7,7 @@ Sprint of 2026-10-10, 16:47Z to about 02:47Z. `RESULTS.md` has the results table
 - **Ten pilot pages with their samples** at https://hq.amberoneai.com/offers: 21 pages, kept out of search engines. Every offer page says it is a pilot and that nothing is charged online. They were merged in amberai #789 and deployed at 18:20Z.
 - **One shared inquiry form** on every offer page. Each inquiry records its offer and its source (the `src` link parameter). Nothing is emailed; a person replies.
 - **The offer tracker** (#105, comment 6100695261). Per offer it shows visits, inquiries, qualified replies, demo requests, paid pilots, delivery time, direct costs, failures, repeat orders and the sample checks. Revenue counts only verified payments.
+- **A pilot runner for all ten offers** (amberai #791, merged 21:13Z). A person runs one command on a client's own exports and gets the offer's report, with the same checks as the samples. `RUNNER.md` lists the files and options per offer. A run is refused unless it names who authorised the client's files, or is declared invented test data with no real-looking contact details in it.
 - **The buyer-evidence check** (#105, comment 6100741402). The worker opens each cited page at most once a day, with robots.txt honoured, and marks each fact found or not.
 
 ## What was tested, and how
