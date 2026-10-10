@@ -18,18 +18,23 @@ Synthetic or redacted data only; client systems stay client-owned, least privile
 
 | # | Workstream | Owner | Status |
 |---|---|---|---|
-| 1 | Buyer evidence, offers 1–5 | research agent | running |
-| 2 | Buyer evidence, offers 6–10 | research agent | running |
+| 1 | Buyer evidence, offers 1–5 | research agent | running (file growing) |
+| 2 | Buyer evidence, offers 6–10 | research agent | done: every fact is a search snippet (this session cannot fetch pages); now preparing items for the worker's live-page check |
 | 3 | Offer design (deliverable, scope, exclusions, onboarding, test price) | lead | v1 in the registry; prices updated from evidence |
 | 4 | Demos 1, 2, 5 (follow-up family) | demo agent | running |
 | 5 | Demos 3, 4 (bookkeeping, read-only) | demo agent | running |
 | 6 | Demos 7, 8, 9 (data cleanup, triage) | demo agent | running |
 | 7 | Demos 6, 10 (website booking form, video variations) | demo agent | running |
 | 8 | Organic posts, ad copy, connected-channel check | ads agent | running |
-| 9 | Registry, pages, intake + attribution, visit counter, tracker on #105 | lead | in progress |
+| 9 | Registry, pages, intake + attribution, visit counter, tracker on #105 | lead | built and tested (commit bbbb656 on `claude/ten-offers-pilots`): 23 core and evidence tests pass; pages render locally; storage verified against a real Prisma client (SQLite) |
 | 10 | CI, merge, deploy, live verification, proofs on #105 | lead | not started |
 | 11 | Results table, recommendation, handoff | lead | not started |
 
 ## Log
 
 - 16:47Z: #788 (worker image chosen inside the shared Dockerfile) verified: the worker beacon reports `browser.ok: true`, Chromium 151.0.7922.34, Ubuntu 24.04.4. Sprint begins.
+- 17:20Z: shared core written (types, QA, registry, store, inquiries, visits, failures, owner records, tracker); pages and API routes; tracker wired into the worker's platform push.
+- 17:45Z: found and fixed before any deploy: the middleware's login gate would have refused every inquiry (401); both offers API routes are now on its public list, pinned by a test.
+- 17:50Z: storage verified end to end with a real Prisma client on SQLite: an inquiry, a visit and a failure saved and counted by the tracker.
+- 18:00Z: this session's network blocks page fetches (only search works). Added a worker check that opens each cited page once (robots.txt honoured) and reports whether the quoted text is there: search snippets become verified facts only when found.
+- 18:05Z: the worker's production page probe now reads the offer pages (index every round, one offer and its sample per round), so production status is visible on the beacon.
