@@ -21,7 +21,7 @@ _Final at 05:30Z. Verified facts carry the time and the #105 comment id that hol
 
 ## 3. Amber's actual runs (verified from the #105 report and the beacon)
 
-- Outreach lane runs since you went to bed: 02:18:45Z (restored 38 items from the database after the #774 boot), 04:20:45Z (first on #777: reviewed 15, 14 passed, 1 set aside; "files present on disk, nothing restored" — the volume held), 05:22:00Z (reviewed 11, 11 passed; files present on disk again). No map pull since 00:21Z (the queue has been at or above 25 waiting). Nothing sent.
+- Outreach lane runs since you went to bed: 02:18:45Z (restored 38 items from the database after the #774 boot), 04:20:45Z (first on #777: reviewed 15, 14 passed, 1 set aside; "files present on disk, nothing restored" — the volume held), 05:22:00Z (reviewed 11, 11 passed; files present on disk again). 07:27:01Z (steady: 25 waiting, all reviewed, nothing to preview, files present on disk). No map pull since 00:21Z (the queue has been at or above 25 waiting). Nothing sent.
 - Earnings ticks: every 5–6 minutes all night, all clean (HQ remote: 907 evaluated, 37 accepted, 0 failures). Platform push and scout ticks clean; scout runs ~30 searches each, 0 new discoveries overnight (the discovery side is flat; that is a measurement, not a change).
 - Ledgers under the volume at 05:21Z: outreach queue 38 files (written 04:21Z), lane state (04:21Z), Railway operator ledger (05:16Z); loop-guard ledger not yet created (nothing refused). 4,596.6 MB free of 4,614.4.
 
