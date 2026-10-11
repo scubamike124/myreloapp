@@ -1,5 +1,20 @@
 # Ten pilot offers: handoff
 
+## Update, 2026-10-11 (the owner's second directive: real buyers, and proof of what Amber can deliver)
+
+This section is current; the sections below were written on 2026-10-10 and are superseded where it says so.
+
+- **Which offers Amber can deliver:** 7 ready for a paid pilot, 2 need work, 1 is not deliverable yet. `READINESS.md` has the table, the exact missing step for each, the evidence (`evidence/fulfilment/`), and how far to trust it. Ready means the pilot runner produced the finished deliverable from invented files and every check passed; it is not a sale and the steps around the runner are manual (see `RUNNER.md`, "What the buyer receives, and the review before it is sent").
+- **What a buyer receives:** a folder (a web page, one CSV per table, a README), not one Markdown file; the report lists the rows it left out (amberai #799).
+- **Where the offers can be posted:** production was read (the worker's read-only report, `ads/CHANNELS.md`). No account is connected; Facebook was never connected through this system; TikTok lapsed; YouTube uploads private; no other service has a credential. The one channel that can carry a per-offer tracked link is a text post with a link on a Facebook Page, which the code can now send (amberai #797) through a lane that creates one planned post per weekday, only for a ready offer, only on a connected Page whose name contains "Amber One", and never after `promo: pause`. **It is dormant until the owner presses Connect on Facebook** (HQ, `/dashboard/social-publish`, choose the Page) and the lane's hardening ships. Nothing has been posted; advertising has not started; a post counts as live only when its link is recorded on #105.
+- **The owner's switches** (plain lines in a #105 comment from the owner's account): `promo: pause` (stop new posts and cancel any not yet sent), `promo: resume`, `promo-page: <Page name>` (allow a connected Page whose name does not contain "Amber One").
+- **What the owner needs to do:** (1) Connect on Facebook; if Meta shows an error, paste its exact text on #105; for posts to be public the Meta app should be in Live mode. (2) Confirm or change the pilot terms (`src/lib/offers/terms.ts`: turnaround targets, the refund rule, 60-day retention). (3) Reply to any inquiry the tracker lists, agree scope, price and date in writing, send the payment request by hand, and record `offer-record:` lines on #105. (4) Delete a client's files after 60 days or when asked.
+- **Resolved since the first handoff:** the form's rate limit no longer trusts a header (Railway's edge drops a client-supplied `X-Forwarded-For` and sets `X-Real-IP`, measured in production; a cap on the total, 30 an hour and 120 a day from the database with self-tests excluded, holds either way); the tracker shows visitor text as code and prints rows read against rows counted; the web stall fix (#798) is deployed, with its measurement in `CHECKPOINT.md` and on #105.
+- **Real funnel numbers, 2026-10-11:** posts live 0, visits 0, inquiries 0, qualified conversations 0, paid orders 0, refunds 0, verified revenue $0.00 (the worker's self-test rows are excluded and never counted).
+- **Recommendation now:** promote the ready offers in the order in `ads/PROMOTION-PLAN.md`, one at a time, and let the first real inquiry outrank the evidence ranking in `RESULTS.md`. Offer 6's live Website Snapshot ($49, Ko-fi) stays orderable, but its pilot form check needs a run on real sites before it is offered.
+
+# (2026-10-10 handoff, kept for the record)
+
 Sprint of 2026-10-10, 16:47Z to about 02:47Z. `RESULTS.md` has the results table and the recommendation, `RUNNER.md` how to run a pilot on a client's files, and `CHECKPOINT.md` the full log. `tools/gen-results.py` regenerates `RESULTS.md` from the latest reports on #105 (usage in its header).
 
 ## What is live

@@ -1,0 +1,19 @@
+Reviewer notes: catalog-cleanup for Invented Test Co, as of 2026-10-11. Keep this file; do not send it to the client.
+Data: invented test data (--synthetic)
+11 of 11 QA checks passed.
+
+No note says rows or messages were left out.
+
+Everything the importer reported (columns read, rows skipped and why, assumptions):
+- Storefront export: read "Handle" as handle, "Variant SKU" as sku, "Title" as title, "Variant Price" as price, "Variant Inventory Qty" as inventory, "Variant Barcode" as gtin, "Body (HTML)" as description, "Vendor" as brand, "Option1 Name" as option1Name, "Option1 Value" as option1Value, "Option2 Name" as option2Name, "Option2 Value" as option2Value, "Status" as status.
+- Storefront export: columns not used: "Type", "Image Position", "Variant Status".
+- Storefront export: images counted from "Image Src", across all the rows of each handle.
+- Storefront export: 167 row(s) hold only extra images of a product (lines 4, 6, 7, 11, 13, 14, 16, 17, 18, 22 and 157 more); they count toward that product's images.
+- Storefront export: 123 product(s) read.
+- Marketplace export: read "seller-sku" as sku, "item-name" as title, "price" as price, "quantity" as inventory, "product-id" as gtin, "product-id-type" as gtinType, "item-description" as description, "brand-name" as brand, "size" as size, "color" as color, "status" as status.
+- Marketplace export: columns not used: "listing-id", "open-date", "item-is-marketplace".
+- Marketplace export: images counted from "image-url".
+- Marketplace export: 1 barcode(s) look like a spreadsheet turned them into a number, such as 2.00482E+12 (lines 44): export them again as text.
+- Marketplace export: 118 product(s) read.
+
+Before sending: open report.html and read it through; read every draft as the person who would send it; settle every failed check and every left-out row above; then send the folder (zip it) yourself. Nothing here sends anything.

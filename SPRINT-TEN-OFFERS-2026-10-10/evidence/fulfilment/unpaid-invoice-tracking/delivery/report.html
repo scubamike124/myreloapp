@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Unpaid Invoice Tracker with Draft Reminders</title><style>body{font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#1c1c1c;background:#fff;margin:0}main{max-width:64rem;margin:0 auto;padding:1.5rem 1rem 3rem}
+h1{font-size:1.6rem}h2{margin-top:2rem;border-bottom:1px solid #bbb;padding-bottom:.25rem}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{border:1px solid #bbb;padding:.35rem .5rem;text-align:left;vertical-align:top}th{background:#eee}blockquote{margin:.5rem 0 1rem;padding:.5rem 1rem;border-left:4px solid #777;background:#f5f5f5;white-space:pre-wrap}
+.warn{border:2px solid #b00020;background:#fdecea;padding:.5rem 1rem}@media (prefers-color-scheme:dark){body{background:#161616;color:#eee}th{background:#2a2a2a}blockquote{background:#222}.warn{background:#3a1a1a}}
+@media print{blockquote,tr{page-break-inside:avoid}}</style></head><body><main>
+<h1>Unpaid Invoice Tracker with Draft Reminders</h1>
+<p><strong>Sample made from invented data.</strong></p>
+<h2>What went in</h2>
+<ul><li>22 invoices in the open-invoices export, issued May 14 to Oct 1</li><li>Terms: Net 30. A reminder is due when an invoice is past due, not disputed, and has had no reminder in the last 14 days</li></ul>
+<h2>Summary</h2>
+<p>Open invoices: 20, total outstanding $52,755.50.</p>
+<p>Overdue: 17 invoices, $49,505.50.</p>
+<p>Reminders due this week: 12.</p>
+<p>Not chased: 7 (each with its reason below).</p>
+<p>Counted as of Sun Oct 11, 2026; your terms are Net 30.</p>
+<h2>Aging</h2>
+<div class="scroll"><table><thead><tr><th>Bucket</th><th>Invoices</th><th>Total</th></tr></thead><tbody><tr><td>Current (not yet due)</td><td>3</td><td>$3,250.00</td></tr><tr><td>1 to 30 days past due</td><td>6</td><td>$8,850.00</td></tr><tr><td>31 to 60 days past due</td><td>6</td><td>$22,825.50</td></tr><tr><td>61 to 90 days past due</td><td>3</td><td>$7,290.00</td></tr><tr><td>More than 90 days past due</td><td>2</td><td>$10,540.00</td></tr><tr><td>Total</td><td>20</td><td>$52,755.50</td></tr></tbody></table></div>
+<p>Open balances only: invoices paid in full or with a credit balance are left out.</p>
+<h2>Outstanding by customer</h2>
+<div class="scroll"><table><thead><tr><th>Customer</th><th>Open invoices</th><th>Outstanding</th><th>Most days past due</th></tr></thead><tbody><tr><td>Harborview Realty</td><td>1</td><td>$9,900.00</td><td>95</td></tr><tr><td>Fairlight Events</td><td>1</td><td>$7,800.00</td><td>60</td></tr><tr><td>Dunmore Tools</td><td>1</td><td>$5,600.00</td><td>31</td></tr><tr><td>Orchard Landscaping</td><td>1</td><td>$4,400.00</td><td>33</td></tr><tr><td>Birchwood Clinic</td><td>1</td><td>$3,450.00</td><td>25</td></tr><tr><td>Northgate Bakery</td><td>1</td><td>$3,150.00</td><td>70</td></tr><tr><td>Meadow Pediatrics</td><td>1</td><td>$2,600.00</td><td>70</td></tr><tr><td>Kestrel Auto</td><td>1</td><td>$2,100.00</td><td>1</td></tr><tr><td>Pioneer Print</td><td>1</td><td>$1,950.00</td><td>50</td></tr><tr><td>Lakeshore Yoga</td><td>1</td><td>$1,800.00</td><td>40</td></tr><tr><td>Valley Vet</td><td>1</td><td>$1,750.00</td><td>not yet due</td></tr><tr><td>Granite Peak Fitness</td><td>1</td><td>$1,540.00</td><td>61</td></tr><tr><td>Elmhurst Dental</td><td>1</td><td>$1,275.50</td><td>45</td></tr><tr><td>Tidewater Plumbing</td><td>1</td><td>$1,200.00</td><td>12</td></tr><tr><td>Timber Hardware</td><td>1</td><td>$1,000.00</td><td>not yet due</td></tr><tr><td>Cobalt Studio</td><td>1</td><td>$890.00</td><td>30</td></tr><tr><td>Quarry Fitness</td><td>1</td><td>$780.00</td><td>20</td></tr><tr><td>Ironwood Cafe</td><td>1</td><td>$640.00</td><td>120</td></tr><tr><td>Union Bakery</td><td>1</td><td>$500.00</td><td>due today</td></tr><tr><td>Juniper Salon</td><td>1</td><td>$430.00</td><td>5</td></tr></tbody></table></div>
+<h2>Reminders due this week</h2>
+<div class="scroll"><table><thead><tr><th>Invoice</th><th>Customer</th><th>Days overdue</th><th>Balance</th><th>Last reminder</th><th>Why</th></tr></thead><tbody><tr><td>I-3009</td><td>Ironwood Cafe</td><td>120</td><td>$640.00</td><td>Sept 11</td><td>120 days past due; last reminder 30 days ago. Tone: firm, with an offer to talk.</td></tr><tr><td>I-3008</td><td>Harborview Realty</td><td>95</td><td>$9,900.00</td><td>none</td><td>95 days past due; no reminder yet. Tone: firm, with an offer to talk.</td></tr><tr><td>I-3014</td><td>Northgate Bakery</td><td>70</td><td>$3,150.00</td><td>Sept 27</td><td>70 days past due; last reminder 14 days ago. Tone: firm, with an offer to talk.</td></tr><tr><td>I-3007</td><td>Granite Peak Fitness</td><td>61</td><td>$1,540.00</td><td>none</td><td>61 days past due; no reminder yet. Tone: firm, with an offer to talk.</td></tr><tr><td>I-3006</td><td>Fairlight Events</td><td>60</td><td>$7,800.00</td><td>none</td><td>60 days past due; no reminder yet. Tone: firm and polite.</td></tr><tr><td>I-3005</td><td>Elmhurst Dental</td><td>45</td><td>$1,275.50</td><td>none</td><td>45 days past due; no reminder yet; $1,000.00 paid of $2,275.50. Tone: firm and polite.</td></tr><tr><td>I-3004</td><td>Dunmore Tools</td><td>31</td><td>$5,600.00</td><td>none</td><td>31 days past due; no reminder yet. Tone: firm and polite.</td></tr><tr><td>I-3003</td><td>Cobalt Studio</td><td>30</td><td>$890.00</td><td>none</td><td>30 days past due; no reminder yet. Tone: friendly.</td></tr><tr><td>I-3002</td><td>Birchwood Clinic</td><td>25</td><td>$3,450.00</td><td>none</td><td>25 days past due; no reminder yet. Tone: friendly.</td></tr><tr><td>I-3001</td><td>Tidewater Plumbing</td><td>12</td><td>$1,200.00</td><td>none</td><td>12 days past due; no reminder yet. Tone: friendly.</td></tr><tr><td>I-3010</td><td>Juniper Salon</td><td>5</td><td>$430.00</td><td>none</td><td>5 days past due; no reminder yet. Tone: friendly.</td></tr><tr><td>I-3011</td><td>Kestrel Auto</td><td>1</td><td>$2,100.00</td><td>none</td><td>1 day past due; no reminder yet. Tone: friendly.</td></tr></tbody></table></div>
+<h2>Draft reminders</h2>
+<p><em>Drafts for you to review, edit and send yourself. Amber does not send messages.</em></p>
+<h3>Draft 1: to gus.parker@example.com (email)</h3>
+<p><strong>Subject:</strong> Invoice I-3009: $640.00 was due June 13</p>
+<blockquote>Hi Gus,
+
+Invoice I-3009 for $640.00 was due on June 13 and is now 120 days past due. Please arrange payment, or reply to let me know when it will be paid. If something is wrong with the invoice or the work, tell me and we can talk it through.
+
+Pay online at https://pay.example.com/invented-test-co or by check to the address on the invoice.
+
+Lena
+Invented Test Co</blockquote>
+<p><em>120 days past due; tone: firm, with an offer to talk.</em></p>
+<h3>Draft 2: to lucia.fernandez@example.com (email)</h3>
+<p><strong>Subject:</strong> Invoice I-3008: $9,900.00 was due July 8</p>
+<blockquote>Hi Lucia,
+
+Invoice I-3008 for $9,900.00 was due on July 8 and is now 95 days past due. Please arrange payment, or reply to let me know when it will be paid. If something is wrong with the invoice or the work, tell me and we can talk it through.
+
+Pay online at https://pay.example.com/invented-test-co or by check to the address on the invoice.
+
+Lena
+Invented Test Co</blockquote>
+<p><em>95 days past due; tone: firm, with an offer to talk.</em></p>
+<h3>Draft 3: to ruth.adler@example.com (email)</h3>
+<p><strong>Subject:</strong> Invoice I-3014: $3,150.00 was due Aug 2</p>
+<blockquote>Hi Ruth,
+
+Invoice I-3014 for $3,150.00 was due on Aug 2 and is now 70 days past due. Please arrange payment, or reply to let me know when it will be paid. If something is wrong with the invoice or the work, tell me and we can talk it through.
+
+Pay online at https://pay.example.com/invented-test-co or by check to the address on the invoice.
+
+Lena
+Invented Test Co</blockquote>
+<p><em>70 days past due; tone: firm, with an offer to talk.</em></p>
+<h3>Draft 4: to chen.wei@example.com (email)</h3>
+<p><strong>Subject:</strong> Invoice I-3007: $1,540.00 was due Aug 11</p>
+<blockquote>Hi Chen,
+
+Invoice I-3007 for $1,540.00 was due on Aug 11 and is now 61 days past due. Please arrange payment, or reply to let me know when it will be paid. If something is wrong with the invoice or the work, tell me and we can talk it through.
+
+Pay online at https://pay.example.com/invented-test-co or by check to the address on the invoice.
+
+Lena
+Invented Test Co</blockquote>
+<p><em>61 days past due; tone: firm, with an offer to talk.</em></p>
+<h3>Draft 5: to joy.okafor@example.com (email)</h3>
+<p><strong>Subject:</strong> Invoice I-3006: $7,800.00 was due Aug 12</p>
+<blockquote>Hi Joy,
+
+Invoice I-3006 for $7,800.00 was due on Aug 12 and is now 60 days past due. Could you let me know when we can expect payment? If you have any questions about the invoice, just reply to this email.
+
+Pay online at https://pay.example.com/invented-test-co or by check to the address on the invoice.
+
+Lena
+Invented Test Co</blockquote>
+<p><em>60 days past due; tone: firm and polite.</em></p>
+<h3>Draft 6: to sara.lindqvist@example.com (email)</h3>
+<p><strong>Subject:</strong> Invoice I-3005: $1,275.50 balance, due Aug 27</p>
+<blockquote>Hi Sara,
+
+The remaining $1,275.50 on invoice I-3005 was due on Aug 27 and is now 45 days past due. Thank you for the $1,000.00 you've already paid. Could you let me know when we can expect payment? If you have any questions about the invoice, just reply to this email.
+
+Pay online at https://pay.example.com/invented-test-co or by check to the address on the invoice.
+
+Lena
+Invented Test Co</blockquote>
+<p><em>45 days past due; tone: firm and polite.</em></p>
+<h3>Draft 7: to pete.dunmore@example.com (email)</h3>
+<p><strong>Subject:</strong> Invoice I-3004: $5,600.00 was due Sept 10</p>
+<blockquote>Hi Pete,
+
+Invoice I-3004 for $5,600.00 was due on Sept 10 and is now 31 days past due. Could you let me know when we can expect payment? If you have any questions about the invoice, just reply to this email.
+
+Pay online at https://pay.example.com/invented-test-co or by check to the address on the invoice.
+
+Lena
+Invented Test Co</blockquote>
+<p><em>31 days past due; tone: firm and polite.</em></p>
+<h3>Draft 8: to eli.navarro@example.com (email)</h3>
+<p><strong>Subject:</strong> Invoice I-3003: $890.00 was due Sept 11</p>
+<blockquote>Hi Eli,
+
+Just a friendly reminder that invoice I-3003 for $890.00 was due on Sept 11. If it's already on its way, thank you, and please ignore this note.
+
+Pay online at https://pay.example.com/invented-test-co or by check to the address on the invoice.
+
+Lena
+Invented Test Co</blockquote>
+<p><em>30 days past due; tone: friendly.</em></p>
+<h3>Draft 9: to anita.rao@example.com (email)</h3>
+<p><strong>Subject:</strong> Invoice I-3002: $3,450.00 was due Sept 16</p>
+<blockquote>Hi Anita,
+
+Just a friendly reminder that invoice I-3002 for $3,450.00 was due on Sept 16. If it's already on its way, thank you, and please ignore this note.
+
+Pay online at https://pay.example.com/invented-test-co or by check to the address on the invoice.
+
+Lena
+Invented Test Co</blockquote>
+<p><em>25 days past due; tone: friendly.</em></p>
+<h3>Draft 10: to marcus.hale@example.com (email)</h3>
+<p><strong>Subject:</strong> Invoice I-3001: $1,200.00 was due Sept 29</p>
+<blockquote>Hi Marcus,
+
+Just a friendly reminder that invoice I-3001 for $1,200.00 was due on Sept 29. If it's already on its way, thank you, and please ignore this note.
+
+Pay online at https://pay.example.com/invented-test-co or by check to the address on the invoice.
+
+Lena
+Invented Test Co</blockquote>
+<p><em>12 days past due; tone: friendly.</em></p>
+<h3>Draft 11: to mina.cho@example.com (email)</h3>
+<p><strong>Subject:</strong> Invoice I-3010: $430.00 was due Oct 6</p>
+<blockquote>Hi Mina,
+
+Just a friendly reminder that invoice I-3010 for $430.00 was due on Oct 6. If it's already on its way, thank you, and please ignore this note.
+
+Pay online at https://pay.example.com/invented-test-co or by check to the address on the invoice.
+
+Lena
+Invented Test Co</blockquote>
+<p><em>5 days past due; tone: friendly.</em></p>
+<h3>Draft 12: to dale.kestrel@example.com (email)</h3>
+<p><strong>Subject:</strong> Invoice I-3011: $2,100.00 was due Oct 10</p>
+<blockquote>Hi Dale,
+
+Just a friendly reminder that invoice I-3011 for $2,100.00 was due on Oct 10. If it's already on its way, thank you, and please ignore this note.
+
+Pay online at https://pay.example.com/invented-test-co or by check to the address on the invoice.
+
+Lena
+Invented Test Co</blockquote>
+<p><em>1 day past due; tone: friendly.</em></p>
+<h2>Not chased, and why</h2>
+<ul><li>I-3012, Lakeshore Yoga: reminded on Oct 6 (5 days ago); next reminder from Oct 20.</li><li>I-3013, Meadow Pediatrics: reminded on Sept 28 (13 days ago); next reminder from Oct 12.</li><li>I-3015, Orchard Landscaping: marked disputed: settle the question with the customer before any reminder.</li><li>I-3016, Pioneer Print: marked disputed: settle the question with the customer before any reminder.</li><li>I-3017, Quarry Fitness: a reminder is due, but there is no usable email on file.</li><li>I-3018, Redwood Law Co: paid in full.</li><li>I-3019, Summit Roofing: credit balance of $50.00 ($1,300.00 paid on $1,250.00 invoiced): check with your bookkeeper.</li></ul>
+<h2>What this is not</h2>
+<p>A read-only review of your open-invoices export. Nothing in your accounting system is changed, and no payment is taken or recorded.</p>
+<p>The reminders are drafts for you to review and send yourself. Amber does not contact your customers, add fees, or decide anything about an account.</p>
+<p>It is not legal advice or advice about taxes. Disputed invoices and credit balances are flagged for you and your bookkeeper to decide.</p>
+<hr>
+<h2>How this report was checked</h2>
+<p>18 of 18 QA checks passed.</p>
+<ul><li>Passed: Aging buckets add up to the total outstanding, to the cent</li><li>Passed: Outstanding by customer adds up to the total outstanding</li><li>Passed: The overdue total equals the past-due aging buckets</li><li>Passed: Reminders listed exactly for past-due, undisputed invoices not reminded in the last 14 days</li><li>Passed: Each draft states its invoice number, balance and due date exactly as computed</li><li>Passed: No draft for disputed, paid, credit-balance, recently reminded, not-yet-due or flagged invoices</li><li>Passed: No draft mentions fees, interest, collections, legal action, credit reports or a final notice</li><li>Passed: Drafts and the reminder table show what is still owed, after partial payments</li><li>Passed: Each draft's tone fits its age: friendly, then firm and polite, then firm with an offer to talk</li><li>Passed: Every invoice not chased is listed once with its reason, and not in the reminder table</li><li>Passed: Every amount is written like $1,234.56</li><li>Passed: No claims of guarantees, certification, compliance, affiliation or unmeasured results</li><li>Passed: Nothing says a message was sent (Amber drafts; a person sends)</li><li>Passed: Every section of messages is labelled as drafts</li><li>Passed: No empty section without a note saying why</li><li>Passed: Every stage of the demo completed</li><li>Passed: No tax advice (read-only review: it flags and explains)</li><li>Passed: Nothing says Amber posted an entry, moved money, paid, refunded or decided</li></ul>
+</main></body></html>

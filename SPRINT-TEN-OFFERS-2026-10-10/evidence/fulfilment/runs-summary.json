@@ -1,0 +1,1058 @@
+{
+ "catalog-cleanup": [
+  {
+   "label": "client-mode",
+   "exit": 0,
+   "secs": 1.74,
+   "checks": "11/11",
+   "message": ""
+  },
+  {
+   "label": "main",
+   "exit": 0,
+   "secs": 1.72,
+   "checks": "11/11",
+   "message": ""
+  },
+  {
+   "label": "messy",
+   "exit": 0,
+   "secs": 1.79,
+   "checks": "11/11",
+   "message": ""
+  },
+  {
+   "label": "neg-bad-option",
+   "exit": 2,
+   "secs": 1.76,
+   "checks": "",
+   "message": "problem: The option \"storefrontTitleMax\" must be a whole number."
+  },
+  {
+   "label": "neg-empty",
+   "exit": 2,
+   "secs": 1.94,
+   "checks": "",
+   "message": "problem: No storefront export was given."
+  },
+  {
+   "label": "neg-missing-file",
+   "exit": 2,
+   "secs": 1.99,
+   "checks": "",
+   "message": "--file marketplace=<path> is required: Marketplace export (Listing export from the marketplace, such as Amazon's All Listings Report or inventory file, or an Et"
+  },
+  {
+   "label": "neg-no-declaration",
+   "exit": 3,
+   "secs": 2.21,
+   "checks": "",
+   "message": "Refused: say what this data is. For a client's files: --authorized \"client, how they authorised it, date\". For invented test data: --synthetic."
+  },
+  {
+   "label": "neg-real-email",
+   "exit": 3,
+   "secs": 1.85,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 1 email address(es), 0 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-phone",
+   "exit": 3,
+   "secs": 1.89,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 1 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-web",
+   "exit": 3,
+   "secs": 1.9,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 0 phone number(s) and 1 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-source-marketplace",
+   "exit": 2,
+   "secs": 2.21,
+   "checks": "",
+   "message": "problem: The option \"sourceOfTruth\" can only be \"storefront\": the review resolves every difference toward the storefront and proposes changes to the marketplace"
+  },
+  {
+   "label": "neg-wrong-columns",
+   "exit": 2,
+   "secs": 1.96,
+   "checks": "",
+   "message": "problem: Storefront export: no column for \"price\" (looked for \"variant price\", \"price\", \"your price\", \"standard price\", \"start price\", \"startprice\", \"regular pr"
+  },
+  {
+   "label": "scale-1000",
+   "exit": 0,
+   "secs": 2.09,
+   "checks": "11/11",
+   "message": ""
+  }
+ ],
+ "crm-cleanup": [
+  {
+   "label": "client-mode",
+   "exit": 0,
+   "secs": 1.8,
+   "checks": "12/12",
+   "message": ""
+  },
+  {
+   "label": "full-defects-audit-only",
+   "exit": 0,
+   "secs": 1.67,
+   "checks": "12/12",
+   "message": ""
+  },
+  {
+   "label": "main",
+   "exit": 0,
+   "secs": 1.78,
+   "checks": "12/12",
+   "message": ""
+  },
+  {
+   "label": "messy",
+   "exit": 0,
+   "secs": 1.78,
+   "checks": "12/12",
+   "message": ""
+  },
+  {
+   "label": "neg-bad-option",
+   "exit": 2,
+   "secs": 1.67,
+   "checks": "",
+   "message": "problem: The option \"defaultStage\" must be lead, qualified, customer or lost."
+  },
+  {
+   "label": "neg-empty",
+   "exit": 2,
+   "secs": 1.75,
+   "checks": "",
+   "message": "problem: No contacts export was given."
+  },
+  {
+   "label": "neg-missing-file",
+   "exit": 2,
+   "secs": 1.75,
+   "checks": "",
+   "message": "--file contacts=<path> is required: Contacts export (CSV of contacts or leads from your CRM (HubSpot, Pipedrive, Zoho, Salesforce) or a spreadsheet: names, emai"
+  },
+  {
+   "label": "neg-no-declaration",
+   "exit": 3,
+   "secs": 1.63,
+   "checks": "",
+   "message": "Refused: say what this data is. For a client's files: --authorized \"client, how they authorised it, date\". For invented test data: --synthetic."
+  },
+  {
+   "label": "neg-no-stage-column",
+   "exit": 2,
+   "secs": 1.68,
+   "checks": "",
+   "message": "problem: Contacts export: no column for the stage (looked for \"lifecycle stage\", \"lifecycle\", \"stage\", \"lead status\", \"status\", \"deal status\"). Set the option d"
+  },
+  {
+   "label": "neg-real-email",
+   "exit": 3,
+   "secs": 1.8,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 1 email address(es), 0 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-phone",
+   "exit": 3,
+   "secs": 1.76,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 1 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-wrong-columns",
+   "exit": 2,
+   "secs": 1.71,
+   "checks": "",
+   "message": "problem: Contacts export: no column for the stage (looked for \"lifecycle stage\", \"lifecycle\", \"stage\", \"lead status\", \"status\", \"deal status\"). Set the option d"
+  },
+  {
+   "label": "scale-5340",
+   "exit": 0,
+   "secs": 2.34,
+   "checks": "12/12",
+   "message": ""
+  }
+ ],
+ "inbox-triage": [
+  {
+   "label": "client-mode",
+   "exit": 0,
+   "secs": 1.77,
+   "checks": "14/14",
+   "message": ""
+  },
+  {
+   "label": "greeting-title",
+   "exit": 0,
+   "secs": 1.49,
+   "checks": "14/14",
+   "message": ""
+  },
+  {
+   "label": "main",
+   "exit": 1,
+   "secs": 1.79,
+   "checks": "12/14",
+   "message": ""
+  },
+  {
+   "label": "messy-gmail-csv",
+   "exit": 1,
+   "secs": 1.85,
+   "checks": "12/14",
+   "message": ""
+  },
+  {
+   "label": "messy-mbox",
+   "exit": 1,
+   "secs": 1.8,
+   "checks": "12/14",
+   "message": ""
+  },
+  {
+   "label": "neg-bad-option",
+   "exit": 2,
+   "secs": 1.76,
+   "checks": "",
+   "message": "problem: The option \"refundWindowDays\" must be a whole number of days."
+  },
+  {
+   "label": "neg-empty",
+   "exit": 2,
+   "secs": 1.69,
+   "checks": "",
+   "message": "problem: No messages export was given."
+  },
+  {
+   "label": "neg-missing-file",
+   "exit": 2,
+   "secs": 1.74,
+   "checks": "",
+   "message": "--file messages=<path> is required: Messages export (CSV of support email from your mail or help-desk tool (date, from, subject, body), or an mbox file such as "
+  },
+  {
+   "label": "neg-missing-option",
+   "exit": 2,
+   "secs": 1.65,
+   "checks": "",
+   "message": "Missing option(s): --opt signOff=… (How the reply drafts are signed (use \\n for a new line))"
+  },
+  {
+   "label": "neg-no-declaration",
+   "exit": 3,
+   "secs": 1.67,
+   "checks": "",
+   "message": "Refused: say what this data is. For a client's files: --authorized \"client, how they authorised it, date\". For invented test data: --synthetic."
+  },
+  {
+   "label": "neg-real-email",
+   "exit": 3,
+   "secs": 1.77,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 1 email address(es), 0 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-phone",
+   "exit": 3,
+   "secs": 1.74,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 1 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-wrong-columns",
+   "exit": 2,
+   "secs": 1.71,
+   "checks": "",
+   "message": "problem: Messages export: no column for the subject or the message text (looked for \"subject\", \"body\", \"text\", \"message\", \"content\", \"description\")."
+  },
+  {
+   "label": "qa-clean",
+   "exit": 0,
+   "secs": 1.74,
+   "checks": "14/14",
+   "message": ""
+  },
+  {
+   "label": "scale-150",
+   "exit": 0,
+   "secs": 1.76,
+   "checks": "14/14",
+   "message": ""
+  },
+  {
+   "label": "with-extras",
+   "exit": 1,
+   "secs": 1.75,
+   "checks": "12/14",
+   "message": ""
+  }
+ ],
+ "job-cost-exceptions": [
+  {
+   "label": "client-mode",
+   "exit": 0,
+   "secs": 1.88,
+   "checks": "14/14",
+   "message": ""
+  },
+  {
+   "label": "gate-vendor",
+   "exit": 1,
+   "secs": 1.83,
+   "checks": "13/14",
+   "message": ""
+  },
+  {
+   "label": "main",
+   "exit": 0,
+   "secs": 1.85,
+   "checks": "14/14",
+   "message": ""
+  },
+  {
+   "label": "messy",
+   "exit": 0,
+   "secs": 1.82,
+   "checks": "14/14",
+   "message": ""
+  },
+  {
+   "label": "neg-bad-option",
+   "exit": 2,
+   "secs": 2.19,
+   "checks": "",
+   "message": "problem: The option \"overBudgetPct\" must be a number of zero or more (it is \"abc\")."
+  },
+  {
+   "label": "neg-empty",
+   "exit": 2,
+   "secs": 2.09,
+   "checks": "",
+   "message": "problem: No job cost detail file was given (CSV from QuickBooks (Job Cost Detail, or Transaction Detail by Customer with one row per transaction), Buildertrend "
+  },
+  {
+   "label": "neg-missing-file",
+   "exit": 2,
+   "secs": 2.11,
+   "checks": "",
+   "message": "--file jobs=<path> is required: Job list (Job, Status (active or closed), Percent Complete (the PM's estimate), and Closed On if known)."
+  },
+  {
+   "label": "neg-no-declaration",
+   "exit": 3,
+   "secs": 2.17,
+   "checks": "",
+   "message": "Refused: say what this data is. For a client's files: --authorized \"client, how they authorised it, date\". For invented test data: --synthetic."
+  },
+  {
+   "label": "neg-real-email",
+   "exit": 3,
+   "secs": 2.26,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 1 email address(es), 0 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-phone",
+   "exit": 3,
+   "secs": 2.26,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 1 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-web",
+   "exit": 3,
+   "secs": 2.21,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 0 phone number(s) and 1 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-wrong-columns",
+   "exit": 2,
+   "secs": 2.09,
+   "checks": "",
+   "message": "problem: Budgets: no column for \"job\" (looked for \"customer job\", \"job\", \"job name\", \"project\", \"project name\", \"customer\", \"customer name\", \"client\", \"client n"
+  },
+  {
+   "label": "no-codes-file",
+   "exit": 0,
+   "secs": 1.73,
+   "checks": "14/14",
+   "message": ""
+  }
+ ],
+ "missed-call-follow-up": [
+  {
+   "label": "client-mode",
+   "exit": 0,
+   "secs": 3.04,
+   "checks": "17/17",
+   "message": ""
+  },
+  {
+   "label": "gate-promise",
+   "exit": 1,
+   "secs": 2.22,
+   "checks": "16/17",
+   "message": ""
+  },
+  {
+   "label": "greeting-title",
+   "exit": 0,
+   "secs": 1.38,
+   "checks": "17/17",
+   "message": ""
+  },
+  {
+   "label": "main",
+   "exit": 0,
+   "secs": 7.63,
+   "checks": "17/17",
+   "message": ""
+  },
+  {
+   "label": "messy",
+   "exit": 0,
+   "secs": 3.19,
+   "checks": "17/17",
+   "message": ""
+  },
+  {
+   "label": "neg-bad-asof",
+   "exit": 2,
+   "secs": 1.84,
+   "checks": "",
+   "message": "--as-of YYYY-MM-DD and --business are required."
+  },
+  {
+   "label": "neg-bad-path",
+   "exit": 2,
+   "secs": 1.88,
+   "checks": "",
+   "message": "Cannot read --file calls=<path> ENOENT: no such file or directory, open '<path>"
+  },
+  {
+   "label": "neg-empty",
+   "exit": 2,
+   "secs": 2.45,
+   "checks": "",
+   "message": "problem: No call-log export was given."
+  },
+  {
+   "label": "neg-missing-file",
+   "exit": 2,
+   "secs": 2.17,
+   "checks": "",
+   "message": "--file calls=<path> is required: Call log (CSV call-log export from your phone system (RingCentral, CallRail, Dialpad, OpenPhone, Grasshopper or similar): date "
+  },
+  {
+   "label": "neg-missing-option",
+   "exit": 2,
+   "secs": 2.68,
+   "checks": "",
+   "message": "Missing option(s): --opt signOff=… (How the replies are signed (use \\n for a new line))"
+  },
+  {
+   "label": "neg-no-declaration",
+   "exit": 3,
+   "secs": 2.45,
+   "checks": "",
+   "message": "Refused: say what this data is. For a client's files: --authorized \"client, how they authorised it, date\". For invented test data: --synthetic."
+  },
+  {
+   "label": "neg-real-email",
+   "exit": 3,
+   "secs": 1.84,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 1 email address(es), 0 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-phone",
+   "exit": 3,
+   "secs": 2.25,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 1 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-wrong-columns",
+   "exit": 2,
+   "secs": 2.32,
+   "checks": "",
+   "message": "problem: Call log: no column for the call's status or length, so a missed call cannot be told from an answered one (looked for \"call status\", \"status\", \"action "
+  },
+  {
+   "label": "scale-492-calls",
+   "exit": 0,
+   "secs": 1.52,
+   "checks": "17/17",
+   "message": ""
+  }
+ ],
+ "receipt-invoice-matching": [
+  {
+   "label": "client-mode",
+   "exit": 0,
+   "secs": 1.74,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "gate-irs",
+   "exit": 1,
+   "secs": 1.85,
+   "checks": "11/13",
+   "message": ""
+  },
+  {
+   "label": "main",
+   "exit": 0,
+   "secs": 1.71,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "main-with-alias",
+   "exit": 0,
+   "secs": 1.9,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "messy",
+   "exit": 0,
+   "secs": 1.98,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "neg-bad-period",
+   "exit": 2,
+   "secs": 1.76,
+   "checks": "",
+   "message": "problem: The period starts (2026-09-30) after it ends (2026-09-01)."
+  },
+  {
+   "label": "neg-empty",
+   "exit": 2,
+   "secs": 1.75,
+   "checks": "",
+   "message": "problem: No receipts and invoices export was given (CSV from your receipt tool (Dext, Hubdoc, Expensify) or a spreadsheet: supplier, date, total, invoice number"
+  },
+  {
+   "label": "neg-missing-file",
+   "exit": 2,
+   "secs": 1.94,
+   "checks": "",
+   "message": "--file documents=<path> is required: Receipts and invoices export (CSV from your receipt tool (Dext, Hubdoc, Expensify) or a spreadsheet: supplier, date, total,"
+  },
+  {
+   "label": "neg-no-declaration",
+   "exit": 3,
+   "secs": 2.14,
+   "checks": "",
+   "message": "Refused: say what this data is. For a client's files: --authorized \"client, how they authorised it, date\". For invented test data: --synthetic."
+  },
+  {
+   "label": "neg-pdf-receipts",
+   "exit": 2,
+   "secs": 1.94,
+   "checks": "",
+   "message": "problem: Documents: no column for \"total\" (looked for \"original amount\", \"total\", \"total amount\", \"amount\", \"gross\", \"gross amount\", \"grand total\", \"invoice tot"
+  },
+  {
+   "label": "neg-photo-receipts",
+   "exit": 2,
+   "secs": 1.89,
+   "checks": "",
+   "message": "problem: Documents: no column for \"total\" (looked for \"original amount\", \"total\", \"total amount\", \"amount\", \"gross\", \"gross amount\", \"grand total\", \"invoice tot"
+  },
+  {
+   "label": "neg-real-email",
+   "exit": 3,
+   "secs": 1.86,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 1 email address(es), 0 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-phone",
+   "exit": 3,
+   "secs": 1.89,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 1 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-wrong-columns",
+   "exit": 2,
+   "secs": 1.7,
+   "checks": "",
+   "message": "problem: Bank export: no column for \"amount\" (looked for \"amount\", \"transaction amount\", \"amount usd\", \"billing amount\", \"value\"), and no debit and credit colum"
+  },
+  {
+   "label": "refused-merchant-domains",
+   "exit": 3,
+   "secs": 1.77,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 0 phone number(s) and 2 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "scale-306-transactions",
+   "exit": 0,
+   "secs": 1.86,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "wrong-sign-default",
+   "exit": 0,
+   "secs": 1.78,
+   "checks": "13/13",
+   "message": ""
+  }
+ ],
+ "stale-estimate-follow-up": [
+  {
+   "label": "client-mode",
+   "exit": 0,
+   "secs": 2.07,
+   "checks": "15/15",
+   "message": ""
+  },
+  {
+   "label": "gate-promo",
+   "exit": 1,
+   "secs": 2.07,
+   "checks": "14/15",
+   "message": ""
+  },
+  {
+   "label": "greeting-title-and-business",
+   "exit": 0,
+   "secs": 1.43,
+   "checks": "15/15",
+   "message": ""
+  },
+  {
+   "label": "main",
+   "exit": 0,
+   "secs": 2.21,
+   "checks": "15/15",
+   "message": ""
+  },
+  {
+   "label": "messy",
+   "exit": 0,
+   "secs": 2.04,
+   "checks": "15/15",
+   "message": ""
+  },
+  {
+   "label": "neg-bad-option",
+   "exit": 2,
+   "secs": 1.9,
+   "checks": "",
+   "message": "problem: The option \"staleAfterDays\" (\"abc\") is not a whole number of days, 1 or more."
+  },
+  {
+   "label": "neg-empty",
+   "exit": 2,
+   "secs": 2.14,
+   "checks": "",
+   "message": "problem: No estimates export was given."
+  },
+  {
+   "label": "neg-missing-file",
+   "exit": 2,
+   "secs": 2.21,
+   "checks": "",
+   "message": "--file estimates=<path> is required: Estimates export (CSV of your estimates or quotes (Jobber, Housecall Pro, QuickBooks, ServiceTitan or a spreadsheet): numbe"
+  },
+  {
+   "label": "neg-missing-option",
+   "exit": 2,
+   "secs": 2.08,
+   "checks": "",
+   "message": "Missing option(s): --opt signOff=… (How the follow-ups are signed (use \\n for a new line))"
+  },
+  {
+   "label": "neg-no-declaration",
+   "exit": 3,
+   "secs": 2,
+   "checks": "",
+   "message": "Refused: say what this data is. For a client's files: --authorized \"client, how they authorised it, date\". For invented test data: --synthetic."
+  },
+  {
+   "label": "neg-real-email",
+   "exit": 3,
+   "secs": 2.14,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 1 email address(es), 0 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-phone",
+   "exit": 3,
+   "secs": 2.06,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 1 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-wrong-columns",
+   "exit": 2,
+   "secs": 2.31,
+   "checks": "",
+   "message": "problem: Estimates export: no column for the job (looked for \"title\", \"job\", \"job title\", \"job name\", \"estimate title\", \"quote title\", \"estimate name\", \"quote n"
+  },
+  {
+   "label": "scale-216-estimates",
+   "exit": 0,
+   "secs": 1.48,
+   "checks": "15/15",
+   "message": ""
+  }
+ ],
+ "unpaid-invoice-tracking": [
+  {
+   "label": "client-mode",
+   "exit": 0,
+   "secs": 1.83,
+   "checks": "18/18",
+   "message": ""
+  },
+  {
+   "label": "gate-fee",
+   "exit": 1,
+   "secs": 1.72,
+   "checks": "17/18",
+   "message": ""
+  },
+  {
+   "label": "gate-legal-name",
+   "exit": 1,
+   "secs": 1.77,
+   "checks": "17/18",
+   "message": ""
+  },
+  {
+   "label": "main",
+   "exit": 0,
+   "secs": 1.85,
+   "checks": "18/18",
+   "message": ""
+  },
+  {
+   "label": "messy",
+   "exit": 0,
+   "secs": 1.73,
+   "checks": "18/18",
+   "message": ""
+  },
+  {
+   "label": "neg-empty",
+   "exit": 2,
+   "secs": 1.71,
+   "checks": "",
+   "message": "problem: No open-invoices export was given."
+  },
+  {
+   "label": "neg-missing-file",
+   "exit": 2,
+   "secs": 1.79,
+   "checks": "",
+   "message": "--file invoices=<path> is required: Open-invoices export (CSV from your accounting software (open invoices or receivables aging detail) or a spreadsheet: invoic"
+  },
+  {
+   "label": "neg-missing-option",
+   "exit": 2,
+   "secs": 1.57,
+   "checks": "",
+   "message": "Missing option(s): --opt paymentInstructions=… (How customers can pay)"
+  },
+  {
+   "label": "neg-no-declaration",
+   "exit": 3,
+   "secs": 1.66,
+   "checks": "",
+   "message": "Refused: say what this data is. For a client's files: --authorized \"client, how they authorised it, date\". For invented test data: --synthetic."
+  },
+  {
+   "label": "neg-real-email",
+   "exit": 3,
+   "secs": 1.78,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 1 email address(es), 0 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-phone",
+   "exit": 3,
+   "secs": 1.78,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 1 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-wrong-columns",
+   "exit": 2,
+   "secs": 1.7,
+   "checks": "",
+   "message": "problem: Open-invoices export: no column for \"amount\" (looked for \"amount\", \"total\", \"invoice total\", \"invoice amount\", \"original amount\")"
+  },
+  {
+   "label": "no-contact-name",
+   "exit": 0,
+   "secs": 1.76,
+   "checks": "18/18",
+   "message": ""
+  },
+  {
+   "label": "qbo-no-email",
+   "exit": 0,
+   "secs": 1.75,
+   "checks": "18/18",
+   "message": ""
+  },
+  {
+   "label": "scale-220-invoices",
+   "exit": 0,
+   "secs": 1.49,
+   "checks": "18/18",
+   "message": ""
+  }
+ ],
+ "video-ad-variations": [
+  {
+   "label": "client-mode",
+   "exit": 0,
+   "secs": 1.76,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "main",
+   "exit": 0,
+   "secs": 1.85,
+   "checks": "14/14",
+   "message": ""
+  },
+  {
+   "label": "messy-srt",
+   "exit": 0,
+   "secs": 1.68,
+   "checks": "14/14",
+   "message": ""
+  },
+  {
+   "label": "messy-vtt",
+   "exit": 0,
+   "secs": 1.67,
+   "checks": "14/14",
+   "message": ""
+  },
+  {
+   "label": "neg-empty",
+   "exit": 2,
+   "secs": 1.79,
+   "checks": "",
+   "message": "problem: No transcript was given."
+  },
+  {
+   "label": "neg-missing-file",
+   "exit": 2,
+   "secs": 1.72,
+   "checks": "",
+   "message": "--file transcript=<path> is required: Transcript of the client's video (an .srt or .vtt caption file of the video, as a caption tool or editor exports it)."
+  },
+  {
+   "label": "neg-missing-option",
+   "exit": 2,
+   "secs": 1.83,
+   "checks": "",
+   "message": "Missing option(s): --opt durationSec=… (The video's length in seconds); --opt width=… (The video's width in pixels); --opt height=… (The video's height in pixel"
+  },
+  {
+   "label": "neg-no-declaration",
+   "exit": 3,
+   "secs": 1.69,
+   "checks": "",
+   "message": "Refused: say what this data is. For a client's files: --authorized \"client, how they authorised it, date\". For invented test data: --synthetic."
+  },
+  {
+   "label": "neg-not-captions",
+   "exit": 2,
+   "secs": 1.76,
+   "checks": "",
+   "message": "problem: The transcript holds no readable cue (expected SRT or WebVTT: a time line such as 00:00:01,000 --> 00:00:03,600, then the words)."
+  },
+  {
+   "label": "neg-real-domain",
+   "exit": 3,
+   "secs": 1.78,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 0 phone number(s) and 1 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-email",
+   "exit": 3,
+   "secs": 1.73,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 1 email address(es), 0 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-rights-not-confirmed",
+   "exit": 1,
+   "secs": 1.66,
+   "checks": "5/8",
+   "message": ""
+  },
+  {
+   "label": "neg-two-hooks",
+   "exit": 2,
+   "secs": 1.71,
+   "checks": "",
+   "message": "problem: Give exactly three hooks separated by | (given: 2)."
+  },
+  {
+   "label": "short-video-length",
+   "exit": 1,
+   "secs": 1.69,
+   "checks": "13/14",
+   "message": ""
+  }
+ ],
+ "website-health-report": [
+  {
+   "label": "client-mode",
+   "exit": 0,
+   "secs": 1.87,
+   "checks": "12/12",
+   "message": ""
+  },
+  {
+   "label": "five-pages",
+   "exit": 0,
+   "secs": 1.51,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "junk-404-page",
+   "exit": 0,
+   "secs": 1.71,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "junk-blocked-page",
+   "exit": 0,
+   "secs": 1.66,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "junk-image",
+   "exit": 0,
+   "secs": 1.86,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "junk-plain-text",
+   "exit": 0,
+   "secs": 1.79,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "main",
+   "exit": 0,
+   "secs": 1.77,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "messy",
+   "exit": 0,
+   "secs": 1.82,
+   "checks": "13/13",
+   "message": ""
+  },
+  {
+   "label": "neg-bad-url",
+   "exit": 2,
+   "secs": 1.79,
+   "checks": "",
+   "message": "problem: Not a web address: not a url."
+  },
+  {
+   "label": "neg-empty",
+   "exit": 2,
+   "secs": 1.73,
+   "checks": "",
+   "message": "problem: 0 page(s) given but 1 address(es) in \"urls\"; give one address per page, in the same order."
+  },
+  {
+   "label": "neg-gap",
+   "exit": 2,
+   "secs": 1.81,
+   "checks": "",
+   "message": "problem: Pages must be given in order without gaps (given: page1, page3)."
+  },
+  {
+   "label": "neg-missing-file",
+   "exit": 2,
+   "secs": 2.01,
+   "checks": "",
+   "message": "--file page1=<path> is required: First page's HTML (the page saved as HTML (in a browser: Save Page As, HTML only), usually the home page)."
+  },
+  {
+   "label": "neg-no-declaration",
+   "exit": 3,
+   "secs": 1.75,
+   "checks": "",
+   "message": "Refused: say what this data is. For a client's files: --authorized \"client, how they authorised it, date\". For invented test data: --synthetic."
+  },
+  {
+   "label": "neg-no-urls",
+   "exit": 2,
+   "secs": 1.83,
+   "checks": "",
+   "message": "Missing option(s): --opt urls=… (The pages' addresses, comma-separated, in the same order as page1, page2…)"
+  },
+  {
+   "label": "neg-real-domain",
+   "exit": 3,
+   "secs": 1.81,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 0 phone number(s) and 1 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-email",
+   "exit": 3,
+   "secs": 2.33,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 1 email address(es), 0 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-real-phone",
+   "exit": 3,
+   "secs": 1.83,
+   "checks": "",
+   "message": "Refused: --synthetic, but the files hold 0 email address(es), 1 phone number(s) and 0 web address(es) that are not reserved examples. A client's files need --au"
+  },
+  {
+   "label": "neg-url-mismatch",
+   "exit": 2,
+   "secs": 1.82,
+   "checks": "",
+   "message": "problem: 2 page(s) given but 1 address(es) in \"urls\"; give one address per page, in the same order."
+  }
+ ]
+}

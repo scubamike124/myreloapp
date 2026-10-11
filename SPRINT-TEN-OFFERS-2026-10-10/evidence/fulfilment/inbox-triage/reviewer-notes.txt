@@ -1,0 +1,18 @@
+Reviewer notes: inbox-triage for Invented Test Co, as of 2026-10-11. Keep this file; do not send it to the client.
+Data: invented test data (--synthetic)
+14 of 14 QA checks passed.
+
+Rows or messages left out of the report (3 note(s)). The report does not list them; check them with the client:
+- Line 35 skipped: an automatic reply or delivery-failure notice, not a customer message.
+- Line 36 skipped: an automatic reply or delivery-failure notice, not a customer message.
+- Line 50 skipped: an automatic reply or delivery-failure notice, not a customer message.
+
+Everything the importer reported (columns read, rows skipped and why, assumptions):
+- Messages export: read "Ticket ID" as id, "Created At" as receivedAt, "Requester Name" as fromName, "Requester Email" as fromEmail, "Subject" as subject, "Description" as body.
+- Line 35 skipped: an automatic reply or delivery-failure notice, not a customer message.
+- Line 36 skipped: an automatic reply or delivery-failure notice, not a customer message.
+- Line 50 skipped: an automatic reply or delivery-failure notice, not a customer message.
+- 2 message(s) quote earlier messages or end with a signature; only their own text is triaged: T-1003, T-1009.
+- 49 message(s) read.
+
+Before sending: open report.html and read it through; read every draft as the person who would send it; settle every failed check and every left-out row above; then send the folder (zip it) yourself. Nothing here sends anything.

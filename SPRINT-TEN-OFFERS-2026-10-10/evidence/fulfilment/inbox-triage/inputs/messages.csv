@@ -1,0 +1,61 @@
+Ticket ID,Created At,Requester Name,Requester Email,Subject,Description
+T-1001,2026-10-05 08:00,Marta Kovacs,marta.kovacs@example.com,Where's my order?,"Hi, I ordered a candle set on Sept 28 (order #20417) and the tracking page hasn't changed in a week. Can you check on it?"
+T-1002,2026-10-06 15:13,Jon Peralta,jon.peralta@example.net,Package never showed up,My order 20533 was supposed to be here Tuesday. Nothing yet. Order #20533
+T-1003,2026-10-07 12:26,Priya Raman,priya.raman@example.org,Refund please,"Hi, I'd like a refund for the lavender candle. It arrived cracked. Order #20502. Photo attached.
+
+-- 
+Priya Raman
+Sent from my phone"
+T-1004,2026-10-08 09:39,Ed Whitaker,ed.whitaker@example.com,Return,"I need to send back the diffuser, it's not what I expected. How do I return it? Order 20488"
+T-1005,2026-10-09 16:52,Lena Fischer,lena.fischer@example.net,Charged twice!!!,I was charged twice for order #20511!!! Please fix this today.
+T-1006,2026-10-10 13:05,Omar Nasser,omar.nasser@example.org,Invoice needed,Can you send me an invoice for order 20399? I need it for my accounting.
+T-1007,2026-10-11 10:18,Grace Tanaka,grace.tanaka@example.com,Receipt,Could you resend my receipt? I lost the email.
+T-1008,2026-10-05 17:31,Victor Almeida,victor.almeida@example.net,Card keeps failing at checkout,My card keeps getting declined on your site but it works everywhere else. Is something wrong with your payment page?
+T-1009,2026-10-06 14:44,Nina Bergstrom,nina.bergstrom@example.org,Can't log in,"I can't log in to my account. It says wrong password even after I reset it twice.
+
+On Mon, Oct 5, 2026 at 9:02 AM Invented Test Co <support@invented-test-co.example> wrote:
+> Hi Nina, did you try resetting from the login page?
+> Support team"
+T-1010,2026-10-07 11:57,Sam Okoye,sam.okoye@example.com,Discount code error,The code WELCOME10 shows an error at checkout. Is it expired?
+T-1011,2026-10-08 08:10,Ines Duarte,ines.duarte@example.net,Site won't load,"Your site won't load on my phone, just a white page."
+T-1012,2026-10-09 15:23,Paul Henning,paul.henning@example.org,Checkout keeps crashing,Every time I press Pay the page crashes and sends me back to the cart.
+T-1013,2026-10-10 12:36,Rhea Kapoor,rhea.kapoor@example.com,Very disappointed,I'm really disappointed with the candle. It barely smells and burns unevenly.
+T-1014,2026-10-11 09:49,Tom Eriksen,tom.eriksen@example.net,Not happy,Not happy at all. The wick was off center and the jar was dirty when it arrived.
+T-1015,2026-10-05 16:02,Alma Reyes,alma.reyes@example.org,Your staff,Your staff member on the phone yesterday was rude and hung up on me.
+T-1016,2026-10-06 13:15,Chen Wu,chen.wu@example.com,Bulk order question,Do you offer discounts for bulk purchases? We need about 200 candles for a wedding in March.
+T-1017,2026-10-07 10:28,Dara Quinn,dara.quinn@example.net,Corporate gifts,We're looking to buy gift sets for our 40 employees in December. Can you send a quote?
+T-1018,2026-10-08 17:41,Faisal Haddad,faisal.haddad@example.org,Stocking your products,I run a small shop and I'm interested in stocking your products. What are your wholesale terms?
+T-1019,2026-10-09 14:54,Max Rankin,max.rankin@example.com,Rank #1 on Google,"Hello, we can get your website to the first page of Google. Our SEO agency offers affordable packages. Reply for a free audit."
+T-1020,2026-10-10 11:07,Linda Cho,linda.cho@example.net,Guest post proposal,I'd like to contribute a guest post to your blog with a few backlinks to my partners.
+T-1021,2026-10-11 08:20,Prize Desk,prizes@example.org,You have won!,"Congratulations, you've won a $500 gift card. Claim it now at http://claim.example.org/prize"
+T-1022,2026-10-05 15:33,Coin Alerts,alerts@example.com,Invest now,Double your money with crypto. Limited time offer.
+T-1023,2026-10-06 12:46,Cheap Watches,deals@example.net,Luxury watches,Buy luxury watches 90% off http://a.example.net http://b.example.net http://c.example.net
+T-1024,2026-10-07 09:59,Gordon Pike,gordon.pike@example.com,Final warning,If you do not respond by Friday I will be contacting my lawyer about the damaged order.
+T-1025,2026-10-08 16:12,Mei Lin,mei.lin@example.org,Reaction to soap,My daughter had an allergic reaction to your lavender soap. We went to the clinic. I want to know what is in it.
+T-1026,2026-10-09 13:25,Rob Castellano,rob.castellano@example.net,Candle jar on fire,The candle jar cracked and caught fire on my kitchen counter. Nobody was hurt but this is dangerous.
+T-1027,2026-10-10 10:38,Iris Vandenberg,iris.vandenberg@example.com,Dispute,I've filed a chargeback with my bank for order 20412 since nobody answered my emails.
+T-1028,2026-10-11 17:51,Dev Malhotra,dev.malhotra@example.net,Burn,The glass jar got so hot it burned my hand and I went to urgent care. This should not happen.
+T-1029,2026-10-05 14:04,Ruth Abernathy,ruth.abernathy@example.org,Cut finger,The jar shattered when I lit it and a piece cut my finger badly. I want someone to call me.
+T-1030,2026-10-06 11:17,Hal Brennan,hal.brennan@example.com,Small claims,I'll see you in small claims court if this isn't sorted out.
+T-1031,2026-10-07 08:30,Zoe Grant,zoe.grant@example.net,Reporting you,I'm reporting you to the Better Business Bureau and the attorney general's consumer office.
+T-1032,2026-10-08 15:43,Kyle Brandt,kyle.brandt@example.org,Opening hours,What time does your store open on Saturdays?
+T-1033,2026-10-09 12:56,Hana Sato,hana.sato@example.com,Thank you!,"Just wanted to say thanks, the candle smells amazing and arrived early. Great job!"
+T-1034,2026-10-10 09:09,Out Of Office,ooo.bot@example.net,Automatic reply: Re: Your order,I am out of the office until October 20 with limited access to email. For urgent matters contact my colleague.
+T-1035,2026-10-11 16:22,Mail Delivery System,mailer-daemon@example.org,Undeliverable: Re: your order update,Your message could not be delivered to the recipient's address. The address was not found.
+T-1036,2026-10-05 13:35,Abel Mensah,abel.mensah@example.com,How long does the 8oz burn?,How long does the 8oz soy candle burn for roughly?
+T-1037,2026-10-06 10:48,Tessa Lund,tessa.lund@example.net,Update on order?,Any update on my order 20470? It's been 9 days now and I haven't heard anything.
+T-1038,2026-10-07 17:01,Wes Calloway,wes.calloway@example.org,Wrong scent,I received the wrong scent. I ordered Vanilla and got Cedar. Order #20466.
+T-1039,2026-10-08 14:14,Bea Lindgren,bea.lindgren@example.com,Change of address,"I need to change the shipping address on order 20520 before it ships, I'm moving next week."
+T-1040,2026-10-09 11:27,Chris Tolliver,chris.tolliver@example.net,Please cancel,Please cancel my order #20531. I ordered by mistake and want to cancel the order today.
+T-1041,2026-10-10 08:40,Yara Nasr,yara.nasr@example.org,Money back,I want my money back. The candle is not what the photos showed. Order #20459.
+T-1042,2026-10-11 15:53,Ivo Petrov,ivo.petrov@example.com,Shipping reimbursement,Please reimburse me for the shipping since my order came two weeks late. Order 20431.
+T-1043,2026-10-05 12:06,Anika Rao,anika.rao@example.net,Billing problem,I think I was double billed for my subscription this month. Please check order #20444.
+T-1044,2026-10-06 09:19,Leo Marchetti,leo.marchetti@example.org,Wrong amount,I was charged $85 but the checkout page said $58. Order #20479.
+T-1045,2026-10-07 16:32,Sofia Duarte,sofia.duarte@example.com,No confirmation email,"I never got my order confirmation email, is my order in?"
+T-1046,2026-10-08 13:45,Brian Oyelaran,brian.oyelaran@example.net,Worst service ever,Worst customer service ever!!! I've been waiting 12 days for an answer and nobody replies!!!
+T-1047,2026-10-09 10:58,Kendra Voss,kendra.voss@example.org,WHERE IS MY ORDER,WHERE IS MY ORDER?? THIS IS UNACCEPTABLE. ORDER 20403 WAS PAID FOR TWO WEEKS AGO.
+T-1048,2026-10-10 17:11,Neil Ashworth,neil.ashworth@example.com,Still no refund,It's been 3 weeks since I returned my order and I still haven't received my refund. Order #20388.
+T-1049,2026-10-11 14:24,Bounce Handler,postmaster@example.net,Delivery Status Notification (Failure),This is an automatically generated Delivery Status Notification. Delivery to the following recipient failed permanently.
+T-1050,2026-10-05 11:37,Quinn Bailey,quinn.bailey@example.org,Do you ship to Canada?,Do you ship to Canada and how much does it cost?
+T-1051,2026-10-06 08:50,Ula Martin,ula.martin@example.com,Gift wrapping,Can you gift wrap an order and include a handwritten note?
+T-1052,2026-10-07 15:03,Tariq Aziz,tariq.aziz@example.net,Exchange for a different scent,I'd like to exchange my Cedar candle for Vanilla. It is still sealed. Order #20455

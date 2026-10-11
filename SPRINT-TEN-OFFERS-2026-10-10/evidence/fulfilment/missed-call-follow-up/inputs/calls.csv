@@ -1,0 +1,42 @@
+Call ID,Start Time,Direction,From,To,Caller Name,Result,Duration (sec),Type,Voicemail Transcription
+c001,2026-10-01 08:05:00,Inbound,(512) 555-0140,(512) 555-0100,Test Caller 1,Answered,60,Voice,
+c002,2026-10-01 10:40:00,Inbound,(512) 555-0141,(512) 555-0100,,Answered,77,Voice,
+c003,2026-10-02 13:15:00,Inbound,(512) 555-0142,(512) 555-0100,,Answered,94,Voice,
+c004,2026-10-02 16:20:00,Inbound,(512) 555-0143,(512) 555-0100,Test Caller 4,Answered,111,Voice,
+c005,2026-10-03 09:05:00,Inbound,(512) 555-0144,(512) 555-0100,,Answered,128,Voice,
+c006,2026-10-03 11:30:00,Inbound,(512) 555-0145,(512) 555-0100,,Answered,145,Voice,
+c007,2026-10-05 07:45:00,Inbound,(512) 555-0146,(512) 555-0100,Test Caller 7,Answered,162,Voice,
+c008,2026-10-05 09:50:00,Inbound,(512) 555-0147,(512) 555-0100,,Answered,179,Voice,
+c009,2026-10-05 16:55:00,Inbound,(512) 555-0148,(512) 555-0100,,Answered,196,Voice,
+c010,2026-10-06 08:30:00,Inbound,(512) 555-0149,(512) 555-0100,Test Caller 10,Answered,213,Voice,
+c011,2026-10-06 11:05:00,Inbound,(512) 555-0150,(512) 555-0100,,Answered,230,Voice,
+c012,2026-10-06 13:45:00,Inbound,(512) 555-0151,(512) 555-0100,,Answered,247,Voice,
+c013,2026-10-07 09:20:00,Inbound,(512) 555-0152,(512) 555-0100,Test Caller 13,Answered,264,Voice,
+c014,2026-10-07 12:10:00,Inbound,(512) 555-0153,(512) 555-0100,,Answered,281,Voice,
+c015,2026-10-08 15:35:00,Inbound,(512) 555-0154,(512) 555-0100,,Answered,298,Voice,
+c016,2026-10-08 08:15:00,Inbound,(512) 555-0155,(512) 555-0100,Test Caller 16,Answered,315,Voice,
+c017,2026-10-09 10:25:00,Inbound,(512) 555-0156,(512) 555-0100,,Answered,332,Voice,
+c018,2026-10-10 14:40:00,Inbound,(512) 555-0157,(512) 555-0100,,Answered,349,Voice,
+m01,2026-10-03 10:20:00,Inbound,(512) 555-0101,(512) 555-0100,WIRELESS CALLER,Missed,0,Voice,
+m02,2026-10-06 06:40:00,Inbound,(512) 555-0102,(512) 555-0100,Gloria Pham,Voicemail,0,Voice,"Hi, my kitchen faucet is dripping and I would like someone to take a look."
+m03,2026-10-07 12:15:00,Inbound,(512) 555-0103,(512) 555-0100,Daniel Ortiz,Voicemail,0,Voice,"The water heater is leaking all over my garage floor, please call me back."
+m04,2026-10-08 19:40:00,Inbound,(512) 555-0104,(512) 555-0100,Mario Costa,Voicemail,0,Voice,"A pipe burst in the basement, there is water everywhere. Call me as soon as you can."
+m05,2026-10-09 08:10:00,Inbound,(512) 555-0105,(512) 555-0100,Helen Marsh,Voicemail,0,Voice,I smell gas near the furnace in the hall closet. Please call me back.
+m06a,2026-10-08 09:00:00,Inbound,(512) 555-0106,(512) 555-0100,Tom Rivera,Missed,0,Voice,
+m06b,2026-10-08 09:20:00,Inbound,(512) 555-0106,(512) 555-0100,Tom Rivera,Missed,0,Voice,
+m06c,2026-10-08 11:45:00,Inbound,(512) 555-0106,(512) 555-0100,Tom Rivera,Voicemail,0,Voice,Calling about a quote for a bathroom repipe. Please call me back.
+m07,2026-10-05 14:00:00,Inbound,(512) 555-0107,(512) 555-0100,Lena Park,Missed,0,Voice,
+m08,2026-10-06 09:00:00,Inbound,(512) 555-0108,(512) 555-0100,Omar Haddad,Missed,0,Voice,
+m09,2026-10-07 16:30:00,Inbound,(512) 555-0109,(512) 555-0100,Joy Nguyen,Voicemail,0,Voice,Need a quote on a new garbage disposal.
+m10,2026-10-10 15:20:00,Inbound,(512) 555-0110,(512) 555-0100,Ravi Menon,Voicemail,0,Voice,"Hi, I want a quote on a water softener, call me back please."
+m12,2026-10-09 13:05:00,Inbound,(512) 555-0111,(512) 555-0100,,Answered,4,Voice,
+o01,2026-10-05 14:30:00,Outbound,(512) 555-0100,(512) 555-0107,,Completed,120,Voice,
+o02,2026-10-06 10:00:00,Outbound,(512) 555-0100,(512) 555-0120,,Completed,300,Voice,
+o03,2026-10-07 15:00:00,Outbound,(512) 555-0100,(512) 555-0121,,Completed,210,Voice,
+o04,2026-10-08 09:30:00,Outbound,(512) 555-0100,(512) 555-0122,,No answer,0,Voice,
+s01,2026-10-02 11:00:00,Inbound,(512) 555-0190,(512) 555-0100,SPAM RISK,Missed,0,Voice,
+s02,2026-10-04 08:00:00,Inbound,(512) 555-0191,(512) 555-0100,,Blocked,0,Voice,
+s03,2026-10-03 13:00:00,Inbound,(512) 555-0192,(512) 555-0100,,Received,30,Fax,
+s04,2026-10-07 08:40:00,Internal,(512) 555-0193,(512) 555-0100,,Answered,40,Voice,
+s05,2026-10-09 11:11:00,Inbound,(512) 555-0194,(512) 555-0100,,Received,0,SMS,
+s06,2026-10-11 09:30:00,Inbound,(512) 555-0113,(512) 555-0100,Late Caller,Missed,0,Voice,

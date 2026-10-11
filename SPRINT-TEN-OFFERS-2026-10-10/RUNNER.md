@@ -1,6 +1,6 @@
 # Running a pilot on a client's files
 
-Generated from the importers in the code (amberai PR #791), so the file and option names below are exactly what the command reads. Nothing is sent, posted, charged or changed: the command writes a report file for a person to review.
+Generated from the importers in the code (amberai PR #791; the delivery folder and the review steps below were added by hand on 2026-10-11), so the file and option names below are exactly what the command reads. Nothing is sent, posted, charged or changed: the command writes a report file for a person to review.
 
 ```
 npx tsx scripts/offers-run.ts <offer> --as-of YYYY-MM-DD --business "Client name" \
@@ -10,6 +10,30 @@ npx tsx scripts/offers-run.ts <offer> --as-of YYYY-MM-DD --business "Client name
 
 - Use `--authorized` only with the client's written permission to use these files. For invented test data use `--synthetic` instead; it is refused when the files hold a real-looking email address or phone number.
 - Exit 0: every check passed. Exit 1: the report is written but marked "not ready to send". Exit 2: a usage or file problem, explained. Exit 3: refused.
+
+## What the buyer receives, and the review before it is sent (updated 2026-10-11, amberai #799)
+
+Add `--bundle ./deliver/client-co` and the run also writes a folder a non-technical buyer can open, and the reviewer's notes next to it:
+
+```
+./deliver/client-co/report.html              the whole report as one web page (any browser; Print, then Save as PDF, for a PDF copy)
+./deliver/client-co/01-<table>.csv ...       one file per table, list and set of drafts (opens in Excel, Numbers or Google Sheets)
+./deliver/client-co/README.txt               what each file is; says the drafts are drafts and nothing was sent
+./deliver/client-co.reviewer-notes.txt       FOR THE REVIEWER ONLY: do not send it. The data declaration, the checks, every row or message the importer left out (listed first), and the importer's other notes
+```
+
+The Markdown report from `--out` is for the person; the folder is for the buyer. Offer 10 also writes its caption files, hook and end-card text and an ffmpeg script into the folder (not deliverable yet: nothing has been rendered).
+
+**Before anything is sent** (every pilot page says a person reviews every report):
+
+1. Run it once on the client's real files with `--authorized "client, how they authorised it, date"`. If it exits 2 it says why: a PDF, a photo, an empty file or a UTF-16 file is named; a bot-check, error or non-HTML page (offer 6) is refused; an export whose amount signs look reversed (offer 4) says how to run it again. Ask the buyer for a readable export; if none can be sent, the page's refund rule applies.
+2. Read `…reviewer-notes.txt`. Settle every failed check and every left-out row (the report also lists the first 12 under "What went in" as "Left out of this report"). The importers' line numbers count non-blank rows, so after a blank line a note can be one row off in Excel; the notes name the invoice, message or estimate too.
+3. Open `report.html` and read it through. Read every draft as the person who would send it. A "Not ready to send" banner is a stop, not a suggestion.
+4. Send the folder, zipped, by email yourself. Nothing here sends anything.
+5. Record the delivery on #105 (`offer-record: <inquiry id> delivered <hours>h`), and a verified payment with its reference (`offer-record: <inquiry id> paid $<amount> <reference>`).
+6. Delete the client's files and the folder after 60 days, or when they ask. There is no tool for this; it is a manual removal.
+
+The terms on each ready page (scope, price, turnaround target, payment, refund, delivery, data) are in `src/lib/offers/terms.ts`; which offers are ready is in `src/lib/offers/readiness.ts` and `READINESS.md`.
 
 ## 1. Missed-Call and Web-Inquiry Follow-Up List (`missed-call-follow-up`)
 

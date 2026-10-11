@@ -1,0 +1,50 @@
+Alder Creek Builders (invented test company)
+Job Cost Detail
+"January 1 through October 11, 2026"
+
+Transaction Type,Date,Num,Customer:Job,Vendor,Memo,Item,Status,Amount
+Bill,2026-08-04,1000,"Alvarez, Rosa:Kitchen remodel",R&D Demolition,Kitchen tear-out,02-200,Paid,"$2,350.00"
+Bill,2026-08-18,1001,"Alvarez, Rosa:Kitchen remodel",Whitfield Trim,Trim and crown,06-200 Finish carpentry,Paid,"$1,800.00"
+Bill,2026-08-21,1002,"Alvarez, Rosa:Kitchen remodel",Keystone Drywall Co.,Hang and finish,09-200,Paid,"$2,650.00"
+Bill,2026-09-02,1003,"Alvarez, Rosa:Kitchen remodel",Oakline Cabinetry,Cabinet deposit,12-300,Paid,"$9,000.00"
+Bill,2026-09-20,1004,"Alvarez, Rosa:Kitchen remodel",Oakline Cabinetry,Cabinet balance,12-300,Paid,"$8,200.00"
+Bill,2026-08-11,1005,"Alvarez, Rosa:Kitchen remodel",Ostrander Plumbing,Rough-in labor,15-400 Plumbing,Paid,"$4,900.00"
+Bill,2026-09-05,1006,"Alvarez, Rosa:Kitchen remodel",Clearwater Plumbing Supply,Fixtures,15-400,Paid,"$2,850.00"
+Vendor Credit,2026-09-12,1007,"Alvarez, Rosa:Kitchen remodel",Clearwater Plumbing Supply,Credit: returned valve,15-400,Paid,-$300.00
+Bill,2026-08-25,1008,"Alvarez, Rosa:Kitchen remodel",Kessler Electric,Rough-in labor,Electrical,Paid,"$3,200.00"
+Bill,2026-09-08,1009,"Alvarez, Rosa:Kitchen remodel",Ridgeway Electric Supply,Fixtures and wire,16-100,Paid,"$2,250.00"
+Invoice,2026-09-30,1010,"Alvarez, Rosa:Kitchen remodel","Alvarez, Rosa",Invoice 1042 to customer,12-300,Open,"$40,000.00"
+Bill,2026-07-20,1011,Briar Creek HOA:Clubhouse deck,Summit Ready-Mix,Footings,03-300,Paid,"$3,600.00"
+Bill,2026-07-28,1012,Briar Creek HOA:Clubhouse deck,Northside Lumber,Framing package,06-100,Paid,"$6,400.00"
+Bill,2026-08-10,1013,Briar Creek HOA:Clubhouse deck,Crestview Framing,Framing labor,06-100,Paid,"$4,800.00"
+Bill,2026-09-12,1014,Briar Creek HOA:Clubhouse deck,Pinecrest Lumber,Decking boards,06-200,Paid,"$3,480.00"
+Bill,2026-09-14,1015,Briar Creek HOA:Clubhouse deck,Pinecrest Lumber,Decking boards,06-200,Paid,"$3,480.00"
+Bill,2026-09-26,1016,Briar Creek HOA:Clubhouse deck,Harborline Painting,Stain,09-900,Paid,"$1,400.00"
+Bill,2026-08-30,1017,"Chen, Wei:Basement finish",Crestview Framing,Framing labor,06-100,Paid,"$3,200.00"
+Bill,2026-09-03,1018,"Chen, Wei:Basement finish",Northside Lumber,Lumber,06-100,Paid,"$1,900.00"
+Bill,2026-09-10,1019,"Chen, Wei:Basement finish",Keystone Drywall Co.,Drywall,09-200,Paid,"$2,400.00"
+Bill,2026-09-16,1020,"Chen, Wei:Basement finish",R&D Demolition,Demo existing walls,02-200,Paid,"$1,100.00"
+Bill,2026-09-15,1021,"Chen, Wei:Basement finish",Ostrander Plumbing,Voided duplicate bill,15-400,Voided,$999.00
+Bill,2026-09-17,1022,"Chen, Wei:Basement finish",R&D Demolition,Haul-off,02-200,Paid,$400.00
+Bill,2026-08-03,1023,"Dunlap, Ray:Bath remodel",R&D Demolition,Bathroom demo,02-200,Paid,"$1,150.00"
+Bill,2026-08-12,1024,"Dunlap, Ray:Bath remodel",Ostrander Plumbing,Rough-in and set fixtures,15-400,Paid,"$4,350.00"
+Bill,2026-08-20,1025,"Dunlap, Ray:Bath remodel",Oakline Cabinetry,Vanity,12-300,Paid,"$2,150.00"
+Bill,2026-09-02,1026,"Dunlap, Ray:Bath remodel",Harborline Painting,Paint,09-900,Paid,$690.00
+Bill,2026-09-28,1027,"Dunlap, Ray:Bath remodel",Clearwater Plumbing Supply,Warranty part,15-400,Paid,$640.00
+Bill,2026-10-03,1028,"Dunlap, Ray:Bath remodel",Sunnyside Site Services,Portable toilet pickup,01-100,Paid,$215.00
+Bill,2026-08-24,1029,Eastside Dental:Office TI,Keystone Drywall Co.,Drywall,09-200,Paid,"$6,100.00"
+Bill,2026-09-05,1030,Eastside Dental:Office TI,Summit Electric,Panel and feeders,16-100,Paid,"$1,250.00"
+Bill,2026-10-14,1031,"Foster, Mia:Garage addition",Northside Lumber,Dated after the as-of date,06-100,Open,$777.00
+Bill,2026-09-10,1032,Eastside Dental:Office TI,Summit Electric,Panel and feeders,16-100,Paid,"$1,250.00"
+Bill,2026-09-11,1033,Eastside Dental:Office TI,Kessler Electric,Rough-in labor,16-100,Paid,"$3,800.00"
+Bill,2026-09-18,1034,Eastside Dental:Office TI,Whitfield Trim,Trim,06-200,Paid,"$2,400.00"
+Bill,2026-09-22,1035,Eastside Dental:Office TI,Insulation Pros,Batt insulation,09-250,Paid,"$1,300.00"
+Bill,2026-09-25,1036,Eastside Dental:Office TI,Harborline Painting,"Paint, suites A-B",09-900,Paid,"$1,100.00"
+Bill,2026-09-19,1037,"Zed, Zoe:Fence",Northside Lumber,Job not in the job list,06-100,Open,$555.00
+Bill,2026-09-25,1038,Eastside Dental:Office TI,Harborline Painting,"Paint, suite C",09-900,Paid,"$1,150.00"
+Bill,2026-09-14,1039,"Foster, Mia:Garage addition",Valley Roll-Off,Dumpster,01-100,Paid,$425.00
+Bill,2026-09-18,1040,"Foster, Mia:Garage addition",Granite Ridge Excavating,Excavation,03-300,Paid,"$2,350.00"
+Bill,2026-09-22,1041,"Foster, Mia:Garage addition",Summit Ready-Mix,Footings,03-300,Paid,"$3,600.00"
+Bill,2026-10-01,1042,"Foster, Mia:Garage addition",Northside Lumber,Framing package,06-100,Paid,"$3,525.00"
+Bill,2026-09-19,1043,"Foster, Mia:Garage addition",Northside Lumber,No cost code,,Open,$333.00
+Total,,,,,,,,"$106,505.00"

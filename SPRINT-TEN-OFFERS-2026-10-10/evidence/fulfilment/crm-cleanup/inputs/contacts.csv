@@ -1,0 +1,321 @@
+ID,Full Name,Company,Email Address,Mobile,City,State,Lead Source,Owner,Stage,Date Added,Last Contacted
+C-0043,"Banerjee, Maya",Company 43 Realty,maya.banerjee.43@co43.example,200.555.0142,Austin,Tex.,Website form,Priya Nair,Customer,2025-08-25,2026-09-21
+C-0307,Gus Abbott,Company 7 Design,alt.gus.abbott.7@co7.example,200.555.0106,Denver,CO,Website form,Priya Nair,Qualified,12/25/2025,2026-09-29
+C-0277,Gus Jorgensen,Company 277 Foods,gus.jorgensen.277@co277.example,(202) 555-0176,Georgetown,TX,Website form,Priya Nair,Customer,10/14/2025,2025-12-17
+C-0287,Quinn Jorgensen,Company 287 Design,quinn.jorgensen.287@co287.example,202.555.0186,Denver,CO,Cold call,Sam Ortiz,Closed Won,2026-05-11,2026-09-18
+C-0106,Pia Dimitrov,Company 106 Dental,pia.dimitrov.106@co106.example,201-555-0105,Round Rock,TX,Directory listing,Priya Nair,Customer,09/08/2025,2026-08-03
+C-0003,Cora Abbott,Company 3 Realty,cora.abbott.3@co3.example,200.555.0102,Cedar Park,TX,Trade show,Dee Walsh,Closed Won,05/04/2026,2026-09-11
+C-0185,Elena Gallagher,Company 185 Plumbing,elena.gallagher.185@co185.example,(201) 555-0184,Austin,TX,Cold call,Sam Ortiz,Qualified,2025-08-14,2026-09-25
+C-0103,"Dimitrov, Maya",Company 103 Design,maya.dimitrov.103@co103.example,201.555.0102,Denver,CO,Website form,Priya Nair,Qualified,03/15/2026,2026-07-29
+C-0113,Wren Dimitrov,Company 113 Plumbing,wren.dimitrov.113@co113.example,(201) 555-0112,Austin,TX,Cold call,Sam Ortiz,Qualified,06/07/2026,2026-07-27
+C-0030,Dara Abbott,Company 30 Auto,dara.abbott.30@co30.example,200-555-0129,Pflugerville,TX,Paid search,Dee Walsh,Prospect,2026-07-13,2026-09-07
+C-0173,Wren Fontaine,Company 173 Foods,wren.fontaine.173@co173.example,(201) 555-0172,Georgetown,TX,Cold call,Sam Ortiz,Lead,07/11/2026,2026-08-22
+C-0050,Tara Banerjee,Company 50 Dental,tara.banerjee.50@co50.example,200-555-0149,Round Rock,TX,Referral,Sam Ortiz,Qualified,01/02/2026,2026-04-12
+C-0099,Ivan Dimitrov,Company 99 Realty,ivan.dimitrov.99@co99.example,200.555.0198,Cedar Park,TX,Trade show,Dee Walsh,Lost,2025-07-31,2026-07-31
+C-0175,Yuki Fontaine,Company 175 Design,yuki.fontaine.175@co175.example,201.555.0174,Denver,CO,Website form,Priya Nair,Qualified,03/23/2026,2026-08-28
+C-0312,"Abbott, Leo",Company 12 Studio,leo.abbott@mail-c9.example,290.555.0110,Kyle,TX,Paid search,Dee Walsh,Lead,05/07/2026,2026-09-02
+C-0235,Yuki Hosseini,Company 235 Realty,yuki.hosseini.235@co235.example,202.555.0134,Cedar Park,TX,Website form,Priya Nair,Prospect,2025-06-08,2026-10-05
+C-0016,Pia Abbott,Company 16 Clinic,pia.abbott.16@co16.example,+1 200 555 0115,Boise,ID,Directory listing,Priya Nair,Customer,06/06/2026,2026-10-02
+C-0293,Wren Jorgensen,Company 293 Foods,wren.jorgensen.293@co293.example,(202) 555-0192,Georgetown,TX,Cold call,Sam Ortiz,Qualified,10/28/2025,2026-10-01
+C-0124,Dev Eriksen,Company 124 Studio,dev.eriksen.124@co124.example,+1 201 555 0123,Kyle,TX,Directory listing,Priya Nair,Customer,2026-04-25,2025-10-20
+C-0246,Femi Ibarra,Company 246 Auto,femi.ibarra.246@co246.example,202-555-0145,Pflugerville,TX,Paid search,Dee Walsh,Prospect,12/19/2025,2026-09-19
+C-0263,Wren Ibarra,Company 263 Design,wren.ibarra.263@co263.example,202.555.0162,Denver,CO,Cold call,Sam Ortiz,Lead,02/15/2026,2026-07-11
+C-0203,"Gallagher, Wren",Company 203 Realty,wren.gallagher.203@co203.example,202.555.0102,Cedar Park,TX,Cold call,Sam Ortiz,Qualified,2026-03-30,2026-10-03
+C-0048,Rosa Banerjee,Company 48 Clinic,rosa.banerjee.48@co48.example,+1 200 555 0147,Boise,ID,Paid search,Dee Walsh,Lead,12/25/2025,2026-04-04
+C-0066,Femi Castillo,Company 66 Dental,femi.castillo.66@co66.example,200-555-0165,Round Rock,TX,Paid search,Dee Walsh,Prospect,05/23/2026,2026-09-19
+C-0131,Kira Eriksen,Company 131 Realty,kira.eriksen.131@co131.example,201.555.0130,Cedar Park,TX,Cold call,Sam Ortiz,Qualified,2026-03-19,2026-08-04
+C-0252,Leo Ibarra,Company 252 Studio,leo.ibarra.252@co252.example,+1 202 555 0151,Kyle,TX,Paid search,Dee Walsh,Lost,07/12/2026,2025-12-21
+C-0283,Maya Jorgensen,Company 283 Realty,maya.jorgensen.283@co283.example,202.555.0182,Cedar Park,TX,Website form,Priya Nair,Qualified,11/26/2025,2026-07-31
+C-0039,ivan banerjee,Company 39 Design,ivan.banerjee.39@co39.example,200.555.0138,Denver,CO,Trade show,Dee Walsh,Prospect,2026-07-13,2026-07-14
+C-0226,"Hosseini, Pia",Company 226 Dental,pia.hosseini.226@co226.example,202-555-0125,Round Rock,TX,Directory listing,Priya Nair,Lead,05/23/2026,2026-07-18
+C-0082,Vik Castillo,Company 82 Dental,vik.castillo.82@co82.example,200-555-0181,Round Rock,TX,Directory listing,Priya Nair,Prospect,05/03/2026,2026-09-13
+C-0176,Zara Fontaine,Company 176 Clinic,zara.fontaine.176@co176.example,+1 201 555 0175,Boise,ID,Referral,Sam Ortiz,Qualified,2025-12-12,2026-09-04
+C-0125,Elena Eriksen,Company 125 Foods,elena.eriksen.125@co125.example,(201) 555-0124,Georgetown,TX,Cold call,Sam Ortiz,Closed Won,06/06/2026,2025-11-13
+C-0071,Kira Castillo,Company 71 Design,kira.castillo.71@co71.example,200.555.0170,Denver,CO,Cold call,Sam Ortiz,Customer,07/17/2026,2026-07-18
+C-0158,Hana Fontaine,Company 158 Auto,hana.fontaine.158@co158.example,201-555-0157,Pflugerville,TX,Referral,Sam Ortiz,Qualified,2025-11-01,2026-08-15
+C-0017,Quinn Abbott,Company 17 Plumbing,quinn.abbott.17@co17.example,(200) 555-0116,Austin,TX,Cold call,Sam Ortiz,Customer,04/04/2026,2026-10-02
+C-0027,"Abbott, Abel",Company 27 Realty,,,Cedar Park,TX,Trade show,Dee Walsh,Lost,11/24/2025,2026-09-21
+C-0155,Elena Fontaine,Company 155 Realty,elena.fontaine.155@co155.example,201.555.0154,Cedar Park,TX,Cold call,Sam Ortiz,Lead,2026-06-08,2026-08-07
+C-0251,Kira Ibarra,Company 251 Realty,kira.ibarra.251@co251.example,202.555.0150,Cedar Park,TX,Cold call,Sam Ortiz,Closed Won,02/01/2026,2025-09-28
+C-0069,Ivan Castillo,Company 69 Foods,ivan.castillo.69@co69.example,(200) 555-0168,Georgetown,TX,Trade show,Dee Walsh,Customer,09/14/2025,2026-07-04
+C-0171,Uma Fontaine,Company 171 Realty,uma.fontaine.171@co171.example,201.555.0170,Cedar Park,TX,Trade show,Dee Walsh,Lost,2025-09-30,2026-09-26
+C-0190,Jules Gallagher,Company 190 Auto,jules.gallagher.190@co190.example,201-555-0189,Pflugerville,TX,Directory listing,Priya Nair,Lead,04/14/2026,2026-09-12
+C-0085,Yuki Castillo,Company 85 Foods,yuki.castillo.85@co85.example,(200) 555-0184,Georgetown,TX,Website form,Priya Nair,Qualified,12/07/2025,2026-10-06
+C-0089,"Castillo, Cyrus",Company 89 Plumbing,cyrus.castillo.89@co89.example,(200) 555-0188,Austin,TX,Cold call,Sam Ortiz,Customer,2025-07-12,2026-08-13
+C-0097,Gus Dimitrov,Company 97 Plumbing,gus.dimitrov.97@co97.example,(200) 555-0196,Austin,TX,Website form,Priya Nair,Closed Won,12/09/2025,2026-09-21
+C-0282,Leo Jorgensen,Company 282 Dental,leo.jorgensen.282@co282.example,202-555-0181,Round Rock,TX,Paid search,Dee Walsh,Lead,05/29/2026,2026-08-25
+C-0206,Zara Gallagher,Company 206 Auto,zara.gallagher.206@co206.example,202-555-0105,Pflugerville,TX,Referral,Sam Ortiz,Closed Won,2025-06-12,2026-06-06
+C-0076,Pia Castillo,Company 76 Studio,pia.castillo.76@co76.example,+1 200 555 0175,Kyle,TX,Directory listing,Priya Nair,Qualified,07/20/2026,2026-07-24
+C-0034,DEV BANERJEE,Company 34 Dental,dev.banerjee.34@co34.example,200-555-0133,Round Rock,TX,Directory listing,Priya Nair,Closed Won,09/06/2025,2026-09-21
+C-0059,Cyrus Banerjee,Company 59 Realty,cyrus.banerjee.59@co59.example,200.555.0158,Cedar Park,TX,Cold call,Sam Ortiz,Lost,2025-09-06,2025-12-15
+C-0107,"Dimitrov, Quinn",Company 107 Realty,quinn.dimitrov.107@co107.example,201.555.0106,Cedar Park,TX,Cold call,Sam Ortiz,Closed Won,05/06/2026,2026-03-17
+C-0288,Rosa Jorgensen,Company 288 Clinic,rosa.jorgensen.288@co288.example,+1 202 555 0187,Boise,ID,Paid search,Dee Walsh,Lost,12/13/2025,2025-12-21
+C-0210,Dara Gallagher,Company 210 Dental,dara.gallagher.210@co210.example,202-555-0109,Round Rock,TX,Paid search,Dee Walsh,Prospect,2025-08-06,2026-08-23
+C-0292,Vik Jorgensen,Company 292 Studio,vik.jorgensen.292@co292.example,+1 202 555 0191,Kyle,TX,Directory listing,Priya Nair,Qualified,05/20/2026,2026-10-03
+C-0179,Cyrus Fontaine,Company 179 Realty,cyrus.fontaine.179@co179.example,201.555.0178,Cedar Park,TX,Cold call,Sam Ortiz,Closed Won,05/17/2026,2026-04-23
+C-0058,Bela Banerjee,Company 58 Dental,bela.banerjee.58@co58.example,200-555-0157,Round Rock,TX,Directory listing,Priya Nair,Qualified,2026-03-05,2026-06-13
+C-0049,Sam Banerjee,Company 49 Plumbing,sam.banerjee.49@co49.example,(200) 555-0148,Austin,TX,Website form,Priya Nair,Qualified,10/21/2025,2026-01-29
+C-0230,"Hosseini, Tara",Company 230 Auto,tara.hosseini.230@co230.example,202-555-0129,Pflugerville,TX,Referral,Sam Ortiz,Qualified,05/02/2026,2026-08-25
+C-0317,Quinn Abbotz,Company 17 Plumbing,quinn.abbotz.17@mail-e17.example,290.555.0118,Austin,TX,Cold call,Sam Ortiz,Prospect,2026-04-04,2026-09-04
+C-0036,FEMI BANERJEE,Company 36 Studio,femi.banerjee.36@co36.example,+1 200 555 0135,Kyle,TX,Paid search,Dee Walsh,Lost,01/14/2026,2026-09-21
+C-0180,Dara Fontaine,Company 180 Studio,dara.fontaine.180@co180.example,+1 201 555 0179,Kyle,TX,Paid search,Dee Walsh,Lost,03/26/2026,2026-04-27
+C-0316,Pia Abbotz,Company 16 Clinic,pia.abbotz.15@mail-e15.example,(290) 555-0116,Boise,ID,Directory listing,Priya Nair,Lead,2026-06-06,2026-07-18
+C-0140,Tara Eriksen,Company 140 Studio,tara.eriksen.140@co140.example,+1 201 555 0139,Kyle,TX,Referral,Sam Ortiz,Qualified,01/25/2026,2026-09-12
+C-0079,Sam Castillo,Company 79 Design,sam.castillo.79@co79.example,200.555.0178,Denver,CO,Website form,Priya Nair,Customer,03/15/2026,2026-03-15
+C-0157,"Fontaine, Gus",Company 157 Foods,gus.fontaine.157@co157.example,(201) 555-0156,Georgetown,TX,Website form,Priya Nair,Qualified,2025-12-13,2026-07-17
+C-0126,Femi Eriksen,Company 126 Auto,femi.eriksen.126@co126.example,201-555-0125,Pflugerville,TX,Paid search,Dee Walsh,Lost,02/22/2026,2026-02-25
+C-0276,Femi Jorgensen,Company 276 Studio,femi.jorgensen.276@co276.example,+1 202 555 0175,Kyle,TX,Paid search,Dee Walsh,Closed Won,09/28/2025,2026-04-17
+C-0094,Dev Dimitrov,Company 94 Auto,dev.dimitrov.94@co94.example,200-555-0193,Pflugerville,TX,Directory listing,Priya Nair,Qualified,2025-10-11,2026-09-12
+C-0041,Kira Banerjee,Company 41 Plumbing,kira.banerjee.41@co41.example,(200) 555-0140,Austin,Texas,Cold call,Sam Ortiz,Qualified,07/13/2026,2026-08-16
+C-0038,hana banerjee,Company 38 Auto,hana.banerjee.38@co38.example,200-555-0137,Pflugerville,TX,Referral,Sam Ortiz,Lead,07/13/2026,2026-07-18
+C-0014,Noor Abbott,Company 14 Auto,noor.abbott.14@co14.example,200-555-0113,Pflugerville,TX,Referral,Sam Ortiz,Closed Won,2026-08-07,2026-09-29
+C-0015,"Abbott, Oscar",Company 15 Design,oscar.abbott.15@co15.example,200.555.0114,Denver,CO,Trade show,Dee Walsh,Customer,04/02/2026,2026-09-29
+C-0298,Bela Jorgensen,Company 298 Dental,bela.jorgensen.298@co298.example,202-555-0197,Round Rock,TX,Directory listing,Priya Nair,Prospect,07/11/2026,2026-08-21
+C-0229,Sam Hosseini,Company 229 Foods,sam.hosseini.229@co229.example,(202) 555-0128,Georgetown,TX,Website form,Priya Nair,Qualified,2025-11-01,2026-09-26
+C-0170,Tara Fontaine,Company 170 Dental,tara.fontaine.170@co170.example,201-555-0169,Round Rock,TX,Referral,Sam Ortiz,Closed Won,02/11/2026,2025-11-26
+C-0134,Noor Eriksen,Company 134 Auto,noor.eriksen.134@co134.example,201-555-0133,Pflugerville,TX,Referral,Sam Ortiz,Customer,07/11/2026,2026-05-03
+C-0161,Kira Fontaine,Company 161 Plumbing,kira.fontaine.161@co161.example,(201) 555-0160,Austin,TX,Cold call,Sam Ortiz,Closed Won,2026-06-12,2026-02-15
+C-0201,Uma Gallagher,Company 201 Plumbing,uma.gallagher.201@co201.example,(202) 555-0100,Austin,TX,Trade show,Dee Walsh,Lead,02/03/2026,2026-07-17
+C-0182,"Gallagher, Ben",Company 182 Auto,ben.gallagher.182@co182.example,201-555-0181,Pflugerville,TX,Referral,Sam Ortiz,Prospect,11/06/2025,2026-08-24
+C-0138,Rosa Eriksen,Company 138 Dental,rosa.eriksen.138@co138.example,201-555-0137,Round Rock,TX,Paid search,Dee Walsh,Lead,2025-11-12,2026-07-10
+C-0193,Maya Gallagher,Company 193 Plumbing,maya.gallagher.193@co193.example,(201) 555-0192,Austin,TX,Website form,Priya Nair,Qualified,09/15/2025,2026-10-01
+C-0300,Dara Jorgensen,Company 300 Studio,dara.jorgensen.300@co300.example,+1 202 555 0199,Kyle,TX,Paid search,Dee Walsh,Lead,04/25/2026,2026-07-17
+C-0139,Sam Eriksen,Company 139 Realty,sam.eriksen.139@co139.example,201.555.0138,Cedar Park,TX,Website form,Priya Nair,Qualified,2026-01-03,2026-07-10
+C-0061,Ava Castillo,Company 61 Foods,ava.castillo.61@co61.example,(200) 555-0160,Georgetown,TX,Website form,Priya Nair,Lost,09/06/2025,2025-12-15
+C-0280,Jules Jorgensen,Company 280 Clinic,jules.jorgensen.280@co280.example,+1 202 555 0179,Boise,ID,Directory listing,Priya Nair,Prospect,07/18/2025,2026-09-01
+C-0102,"Dimitrov, Leo",Company 102 Auto,leo.dimitrov.102@co102.example,201-555-0101,Pflugerville,TX,Paid search,Dee Walsh,Lead,2026-01-07,2026-08-17
+C-0111,Uma Dimitrov,Company 111 Design,uma.dimitrov.111@co111.example,201.555.0110,Denver,CO,Trade show,Dee Walsh,Prospect,08/21/2025,2026-08-10
+C-0243,Cora Ibarra,Company 243 Realty,cora.ibarra.243@co243.example,202.555.0142,Cedar Park,TX,Trade show,Dee Walsh,Lost,08/07/2025,2026-04-27
+C-0052,Vik Banerjee,Company 52 Studio,vik.banerjee.52@co52.example,+1 200 555 0151,Kyle,TX,Directory listing,Priya Nair,Qualified,2025-11-12,2026-02-20
+C-0249,Ivan Ibarra,Company 249 Plumbing,ivan.ibarra.249@co249.example,(202) 555-0148,Austin,TX,Trade show,Dee Walsh,Customer,02/03/2026,2026-02-06
+C-0271,Ava Jorgensen,Company 271 Design,ava.jorgensen.271@co271.example,202.555.0170,Denver,CO,Website form,Priya Nair,Prospect,01/29/2026,2026-08-14
+C-0141,Uma Eriksen,Company 141 Foods,uma.eriksen.141@co141.example,(201) 555-0140,Georgetown,TX,Trade show,Dee Walsh,Customer,2025-08-13,2026-01-26
+C-0187,"Gallagher, Gus",Company 187 Realty,gus.gallagher.187@co187.example,201.555.0186,Cedar Park,TX,Website form,Priya Nair,Closed Won,09/30/2025,2026-02-01
+C-0145,Yuki Eriksen,Company 145 Plumbing,yuki.eriksen.145@co145.example,(201) 555-0144,Austin,TX,Website form,Priya Nair,Lead,03/07/2026,2026-07-26
+C-0163,Maya Fontaine,Company 163 Realty,maya.fontaine.163@co163.example,201.555.0162,Cedar Park,TX,Website form,Priya Nair,Prospect,2026-04-18,2026-08-12
+C-0209,Cyrus Gallagher,Company 209 Plumbing,cyrus.gallagher.209@co209.example,(202) 555-0108,Austin,TX,Cold call,Sam Ortiz,Lead,07/26/2025,2026-07-19
+C-0074,Noor Castillo,Company 74 Dental,noor.castillo.74@co74.example,200-555-0173,Round Rock,TX,Referral,Sam Ortiz,Prospect,02/14/2026,2026-08-24
+C-0216,Femi Hosseini,Company 216 Clinic,femi.hosseini.216@co216.example,+1 202 555 0115,Boise,ID,Paid search,Dee Walsh,Lost,2025-08-24,2025-12-02
+C-0177,Abel Fontaine,Company 177 Plumbing,abel.fontaine.177@co177.example,(201) 555-0176,Austin,TX,Trade show,Dee Walsh,Closed Won,07/23/2025,2026-04-04
+C-0042,"Banerjee, Leo",Company 42 Dental,leo.banerjee.42@co42.example,200-555-0141,Austin,Texas,Paid search,Dee Walsh,Customer,02/03/2026,2026-09-21
+C-0167,Quinn Fontaine,Company 167 Design,quinn.fontaine.167@co167.example,201.555.0166,Denver,CO,Cold call,Sam Ortiz,Qualified,2026-03-23,2026-09-10
+C-0183,Cora Gallagher,Company 183 Design,cora.gallagher.183@co183.example,201.555.0182,Denver,CO,Trade show,Dee Walsh,Lead,02/22/2026,2026-09-15
+C-0147,Abel Eriksen,Company 147 Realty,abel.eriksen.147@co147.example,201.555.0146,Cedar Park,TX,Trade show,Dee Walsh,Prospect,08/03/2026,2026-10-04
+C-0318,Rosa Abbotz,Company 18 Dental,rosa.abbotz.19@mail-e19.example,(290) 555-0120,Round Rock,TX,Paid search,Dee Walsh,Lead,2025-10-26,2026-08-22
+C-0220,Jules Hosseini,Company 220 Studio,jules.hosseini.220@co220.example,+1 202 555 0119,Kyle,TX,Directory listing,Priya Nair,Qualified,09/12/2025,2026-09-19
+C-0166,Pia Fontaine,Company 166 Auto,pia.fontaine.166@co166.example,201-555-0165,Pflugerville,TX,Directory listing,Priya Nair,Qualified,03/17/2026,2026-10-06
+C-0314,"Abbott, Noor",Company 14 Auto Holdings,noor.abbott.2@co14.example,290-555-0113,Pflugerville,TX,Referral,Sam Ortiz,Prospect,2026-08-07,2026-09-05
+C-0222,Leo Hosseini,Company 222 Auto,leo.hosseini.222@co222.example,202-555-0121,Pflugerville,TX,Paid search,Dee Walsh,Customer,12/13/2025,2025-11-03
+C-0160,Jules Fontaine,Company 160 Clinic,jules.fontaine.160@co160.example,+1 201 555 0159,Boise,ID,Directory listing,Priya Nair,Closed Won,07/04/2026,2026-04-14
+C-0035,ELENA BANERJEE,Company 35 Realty,elena.banerjee.35@co35.example,200.555.0134,Cedar Park,TX,Cold call,Sam Ortiz,Customer,2025-07-28,2026-09-21
+C-0137,Quinn Eriksen,Company 137 Plumbing,quinn.eriksen.137@co137.example,(201) 555-0136,Austin,TX,Cold call,Sam Ortiz,Prospect,07/19/2025,2026-07-09
+C-0073,Maya Castillo,Company 73 Plumbing,maya.castillo.73@co73.example,(200) 555-0172,Austin,TX,Website form,Priya Nair,Lead,04/26/2026,2026-09-13
+C-0057,Abel Banerjee,Company 57 Plumbing,abel.banerjee.57@co57.example,(200) 555-0156,Austin,TX,Trade show,Dee Walsh,Qualified,2026-03-05,2026-06-13
+C-0169,"Fontaine, Sam",Company 169 Plumbing,sam.fontaine.169@co169.example,(201) 555-0168,Austin,TX,Website form,Priya Nair,Customer,09/26/2025,2026-10-04
+C-0026,Zara Abbott,Company 26 Dental,,,Round Rock,TX,Referral,Sam Ortiz,Closed Won,07/28/2025,2026-09-21
+C-0228,Rosa Hosseini,Company 228 Studio,rosa.hosseini.228@co228.example,+1 202 555 0127,Kyle,TX,Paid search,Dee Walsh,Lead,2025-07-15,2026-08-12
+C-0120,Dara Dimitrov,Company 120 Clinic,dara.dimitrov.120@co120.example,+1 201 555 0119,Boise,ID,Paid search,Dee Walsh,Prospect,03/08/2026,2026-08-26
+C-0045,Oscar Banerjee,Company 45 Foods,oscar.banerjee.45@co45.example,(200) 555-0144,Georgetown,TX,Trade show,Dee Walsh,Qualified,08/29/2025,2025-12-07
+C-0146,Zara Eriksen,Company 146 Dental,zara.eriksen.146@co146.example,201-555-0145,Round Rock,TX,Referral,Sam Ortiz,Prospect,2026-01-12,2026-08-01
+C-0064,Dev Castillo,Company 64 Clinic,dev.castillo.64@co64.example,+1 200 555 0163,Boise,ID,Directory listing,Priya Nair,Lead,01/26/2026,2026-08-14
+C-0233,"Hosseini, Wren",Company 233 Plumbing,wren.hosseini.233@co233.example,(202) 555-0132,Austin,TX,Cold call,Sam Ortiz,Closed Won,06/25/2025,2026-01-23
+C-0308,Hana Abbott,Company 8 Clinic,alt.hana.abbott.8@co8.example,200-555-0107,Boise,ID,Referral,Sam Ortiz,Qualified,2025-08-14,2026-08-28
+C-0053,Wren Banerjee,Company 53 Foods,wren.banerjee.53@co53.example,(200) 555-0152,Georgetown,TX,Cold call,Sam Ortiz,Prospect,03/06/2026,2026-06-14
+C-0197,Quinn Gallagher,Company 197 Foods,quinn.gallagher.197@co197.example,(201) 555-0196,Georgetown,TX,Cold call,Sam Ortiz,Customer,03/07/2026,2025-09-11
+C-0215,Elena Hosseini,Company 215 Design,elena.hosseini.215@co215.example,202.555.0114,Denver,CO,Cold call,Sam Ortiz,Closed Won,2025-07-31,2026-01-04
+C-0299,Cyrus Jorgensen,Company 299 Realty,cyrus.jorgensen.299@co299.example,202.555.0198,Cedar Park,TX,Cold call,Sam Ortiz,Lead,04/25/2026,2026-07-16
+C-0188,Hana Gallagher,Company 188 Studio,hana.gallagher.188@co188.example,+1 201 555 0187,Kyle,TX,Referral,Sam Ortiz,Closed Won,02/11/2026,2026-03-02
+C-0242,"Ibarra, Ben",Company 242 Dental,ben.ibarra.242@co242.example,202-555-0141,Round Rock,TX,Referral,Sam Ortiz,Customer,2025-07-30,2026-08-23
+C-0001,Ava Abbott,Company 1 Plumbing,ava.abbott.1@co1.example,(200) 555-0100,Austin,TX,Website form,Priya Nair,Closed Won,08/30/2026,2026-09-11
+C-0072,Leo Castillo,Company 72 Clinic,leo.castillo.72@co72.example,+1 200 555 0171,Boise,ID,Paid search,Dee Walsh,Lost,10/20/2025,2026-07-15
+C-0311,Kira Abbott,Company 11 Realty,kira.abbott@mail-c7.example,(290) 555-0108,Cedar Park,TX,Cold call,Sam Ortiz,Prospect,2026-02-24,2026-08-26
+C-0269,Cyrus Ibarra,Company 269 Foods,cyrus.ibarra.269@co269.example,(202) 555-0168,Georgetown,TX,Cold call,Sam Ortiz,Customer,09/19/2025,2026-05-26
+C-0067,Gus Castillo,Company 67 Realty,gus.castillo.67@co67.example,200.555.0166,Cedar Park,TX,Website form,Priya Nair,Qualified,05/29/2026,2026-08-14
+C-0259,Sam Ibarra,Company 259 Realty,sam.ibarra.259@co259.example,202.555.0158,Cedar Park,TX,Website form,Priya Nair,Customer,2025-12-10,2026-02-03
+C-0191,"Gallagher, Kira",Company 191 Design,kira.gallagher.191@co191.example,201.555.0190,Denver,CO,Cold call,Sam Ortiz,Prospect,01/26/2026,2026-09-18
+C-0196,Pia Gallagher,Company 196 Studio,pia.gallagher.196@co196.example,+1 201 555 0195,Kyle,TX,Directory listing,Priya Nair,Customer,09/18/2025,2026-06-27
+C-0122,Ben Eriksen,Company 122 Dental,ben.eriksen.122@co122.example,201-555-0121,Round Rock,TX,Referral,Sam Ortiz,Qualified,2025-07-23,2026-08-16
+C-0060,Dara Banerjee,Company 60 Studio,dara.banerjee.60@co60.example,+1 200 555 0159,Kyle,TX,Paid search,Dee Walsh,Customer,09/06/2025,2025-12-15
+C-0023,Wren Abbott,Company 23 Design,name.@co.example,200.555.0122,Denver,CO,Cold call,Sam Ortiz,Qualified,07/13/2026,2026-09-17
+C-0084,Xavi Castillo,Company 84 Studio,xavi.castillo.84@co84.example,+1 200 555 0183,Kyle,TX,Paid search,Dee Walsh,Lead,2025-06-13,2026-08-27
+C-0096,Femi Dimitrov,Company 96 Clinic,femi.dimitrov.96@co96.example,+1 200 555 0195,Boise,ID,Paid search,Dee Walsh,Closed Won,12/11/2025,2025-11-11
+C-0021,"Abbott, Uma",Company 21 Foods,.name@co.example,(200) 555-0120,Georgetown,TX,Trade show,Dee Walsh,Lead,05/11/2026,2026-07-10
+C-0304,Dev Abbott,Company 4 Studio,DEV.ABBOTT.4@CO4.EXAMPLE ,(290) 555-0104,Kyle,TX,Directory listing,Sam Ortiz,Prospect,2026-01-26,2026-09-22
+C-0013,Maya Abbott,Company 13 Foods,maya.abbott.13@co13.example,(200) 555-0112,Georgetown,TX,Website form,Priya Nair,Customer,09/23/2025,2026-09-26
+C-0211,Ava Hosseini,Company 211 Realty,ava.hosseini.211@co211.example,202.555.0110,Cedar Park,TX,Website form,Priya Nair,Qualified,05/29/2026,2026-10-04
+C-0319,Bea Abbott,Other Company 19 Realty,sam.abbott.19@co19.example,290-555-0121,Cedar Park,TX,Website form,Priya Nair,Lead,2026-05-09,2026-09-17
+C-0024,Xavi Abbott,Company 24 Clinic,na me@co.example,+1 200 555 0123,Boise,ID,Paid search,Dee Walsh,Closed Won,05/08/2026,2026-09-21
+C-0129,Ivan Eriksen,Company 129 Plumbing,ivan.eriksen.129@co129.example,(201) 555-0128,Austin,TX,Trade show,Dee Walsh,Lead,12/06/2025,2026-08-08
+C-0063,"Castillo, Cora",Company 63 Design,cora.castillo.63@co63.example,200.555.0162,Denver,CO,Trade show,Dee Walsh,Lost,2025-09-06,2025-12-15
+C-0054,Xavi Banerjee,Company 54 Auto,xavi.banerjee.54@co54.example,200-555-0153,Pflugerville,TX,Paid search,Dee Walsh,Lead,03/06/2026,2026-06-14
+C-0238,Bela Hosseini,Company 238 Auto,bela.hosseini.238@co238.example,202-555-0137,Pflugerville,TX,Directory listing,Priya Nair,Qualified,04/12/2026,2026-09-20
+C-0101,Kira Dimitrov,Company 101 Foods,kira.dimitrov.101@co101.example,(201) 555-0100,Georgetown,TX,Cold call,Sam Ortiz,Lead,2026-04-19,2026-07-19
+C-0090,Dara Castillo,Company 90 Dental,dara.castillo.90@co90.example,200-555-0189,Round Rock,TX,Paid search,Dee Walsh,Lost,06/20/2025,2025-12-25
+C-0150,Dara Eriksen,Company 150 Auto,dara.eriksen.150@co150.example,201-555-0149,Pflugerville,TX,Paid search,Dee Walsh,Customer,06/17/2026,2025-12-02
+C-0020,Tara Abbott,Company 20 Studio,name@@co.example,+1 200 555 0119,Kyle,TX,Referral,Sam Ortiz,Prospect,2026-07-13,2026-07-30
+C-0121,"Eriksen, Ava",Company 121 Plumbing,ava.eriksen.121@co121.example,(201) 555-0120,Austin,TX,Website form,Priya Nair,Qualified,05/18/2026,2026-07-11
+C-0301,Ava Abbott,Company 1 Plumbing,AVA.ABBOTT.1@CO1.EXAMPLE ,290-555-0101,Austin,TX,Website form,Sam Ortiz,Prospect,06/22/2026,2026-08-21
+C-0162,Leo Fontaine,Company 162 Dental,leo.fontaine.162@co162.example,201-555-0161,Round Rock,TX,Paid search,Dee Walsh,Lost,2026-02-12,2025-11-14
+C-0207,Abel Gallagher,Company 207 Design,abel.gallagher.207@co207.example,202.555.0106,Denver,CO,Trade show,Dee Walsh,Lost,12/30/2025,2026-09-30
+C-0219,Ivan Hosseini,Company 219 Realty,ivan.hosseini.219@co219.example,202.555.0118,Cedar Park,TX,Trade show,Dee Walsh,Lead,11/26/2025,2026-10-05
+C-0274,Dev Jorgensen,Company 274 Dental,dev.jorgensen.274@co274.example,202-555-0173,Round Rock,TX,Directory listing,Priya Nair,Qualified,2025-07-27,2026-09-19
+C-0213,Cora Hosseini,Company 213 Foods,cora.hosseini.213@co213.example,(202) 555-0112,Georgetown,TX,Trade show,Dee Walsh,Customer,08/07/2025,2026-09-29
+C-0087,"Castillo, Abel",Company 87 Design,abel.castillo.87@co87.example,200.555.0186,Denver,CO,Trade show,Dee Walsh,Closed Won,11/07/2025,2025-12-22
+C-0133,Maya Eriksen,Company 133 Foods,maya.eriksen.133@co133.example,(201) 555-0132,Georgetown,TX,Website form,Priya Nair,Customer,2026-02-25,2025-09-09
+C-0005,Elena Abbott,Company 5 Foods,elena.abbott.5@co5.example,(200) 555-0104,Georgetown,TX,Cold call,Sam Ortiz,Closed Won,09/05/2025,2026-09-11
+C-0240,Dara Hosseini,Company 240 Clinic,dara.hosseini.240@co240.example,+1 202 555 0139,Boise,ID,Paid search,Dee Walsh,Customer,12/09/2025,2026-09-19
+C-0135,Oscar Eriksen,Company 135 Design,oscar.eriksen.135@co135.example,201.555.0134,Denver,CO,Trade show,Dee Walsh,Lost,2026-03-18,2025-11-15
+C-0098,Hana Dimitrov,Company 98 Dental,hana.dimitrov.98@co98.example,200-555-0197,Round Rock,TX,Referral,Sam Ortiz,Customer,05/08/2026,2026-03-06
+C-0117,Abel Dimitrov,Company 117 Foods,abel.dimitrov.117@co117.example,(201) 555-0116,Georgetown,TX,Trade show,Dee Walsh,Lost,02/22/2026,2025-11-07
+C-0195,"Gallagher, Oscar",Company 195 Realty,oscar.gallagher.195@co195.example,201.555.0194,Cedar Park,TX,Trade show,Dee Walsh,Customer,2026-05-18,2026-09-05
+C-0100,Jules Dimitrov,Company 100 Studio,jules.dimitrov.100@co100.example,+1 200 555 0199,Kyle,TX,Directory listing,Priya Nair,Prospect,09/15/2025,2026-08-10
+C-0194,Noor Gallagher,Company 194 Dental,noor.gallagher.194@co194.example,201-555-0193,Round Rock,TX,Referral,Sam Ortiz,Qualified,07/24/2025,2026-09-21
+C-0198,Rosa Gallagher,Company 198 Auto,rosa.gallagher.198@co198.example,201-555-0197,Pflugerville,TX,Paid search,Dee Walsh,Lost,2025-07-17,2026-07-13
+C-0178,Bela Fontaine,Company 178 Dental,bela.fontaine.178@co178.example,201-555-0177,Round Rock,TX,Directory listing,Priya Nair,Customer,01/09/2026,2026-02-02
+C-0267,Abel Ibarra,Company 267 Realty,abel.ibarra.267@co267.example,202.555.0166,Cedar Park,TX,Trade show,Dee Walsh,Closed Won,08/12/2025,2026-06-18
+C-0092,Ben Dimitrov,Company 92 Studio,ben.dimitrov.92@co92.example,+1 200 555 0191,Kyle,TX,Referral,Sam Ortiz,Lead,2026-02-02,2026-08-29
+C-0247,"Ibarra, Gus",Company 247 Design,gus.ibarra.247@co247.example,202.555.0146,Denver,CO,Website form,Priya Nair,Qualified,06/15/2026,2026-08-30
+C-0110,Tara Dimitrov,Company 110 Auto,tara.dimitrov.110@co110.example,201-555-0109,Pflugerville,TX,Referral,Sam Ortiz,Lead,02/19/2026,2026-10-01
+C-0080,Tara Castillo,Company 80 Clinic,tara.castillo.80@co80.example,+1 200 555 0179,Boise,ID,Referral,Sam Ortiz,Closed Won,2026-02-26,2025-12-22
+C-0037,gus banerjee,Company 37 Foods,gus.banerjee.37@co37.example,(200) 555-0136,Georgetown,TX,Website form,Priya Nair,Lead,07/13/2026,2026-09-27
+C-0214,Dev Hosseini,Company 214 Auto,dev.hosseini.214@co214.example,202-555-0113,Pflugerville,TX,Directory listing,Priya Nair,Closed Won,04/22/2026,2026-03-25
+C-0255,Oscar Ibarra,Company 255 Design,oscar.ibarra.255@co255.example,202.555.0154,Denver,CO,Trade show,Dee Walsh,Lead,2025-08-12,2026-08-17
+C-0114,Xavi Dimitrov,Company 114 Dental,xavi.dimitrov.114@co114.example,201-555-0113,Round Rock,TX,Paid search,Dee Walsh,Closed Won,10/20/2025,2025-10-05
+C-0199,"Gallagher, Sam",Company 199 Design,sam.gallagher.199@co199.example,201.555.0198,Denver,CO,Website form,Priya Nair,Lead,01/07/2026,2026-09-20
+C-0266,Zara Ibarra,Company 266 Dental,zara.ibarra.266@co266.example,202-555-0165,Round Rock,TX,Referral,Sam Ortiz,Qualified,2026-07-06,2026-09-16
+C-0310,Jules Abbott,Company 10 Dental,alt.jules.abbott.10@co10.example,200.555.0109,Round Rock,TX,Directory listing,Priya Nair,Qualified,02/11/2026,2026-08-23
+C-0164,Noor Fontaine,Company 164 Studio,noor.fontaine.164@co164.example,+1 201 555 0163,Kyle,TX,Referral,Sam Ortiz,Prospect,09/03/2025,2026-09-25
+C-0204,Xavi Gallagher,Company 204 Studio,xavi.gallagher.204@co204.example,+1 202 555 0103,Kyle,TX,Paid search,Dee Walsh,Customer,2026-05-19,2026-06-20
+C-0088,Bela Castillo,Company 88 Clinic,bela.castillo.88@co88.example,+1 200 555 0187,Boise,ID,Directory listing,Priya Nair,Closed Won,02/18/2026,2026-04-27
+C-0245,Elena Ibarra,Company 245 Foods,elena.ibarra.245@co245.example,(202) 555-0144,Georgetown,TX,Cold call,Sam Ortiz,Lead,05/16/2026,2026-08-27
+C-0130,"Eriksen, Jules",Company 130 Dental,jules.eriksen.130@co130.example,201-555-0129,Round Rock,TX,Directory listing,Priya Nair,Qualified,2025-10-20,2026-07-13
+C-0217,Gus Hosseini,Company 217 Plumbing,gus.hosseini.217@co217.example,(202) 555-0116,Austin,TX,Website form,Priya Nair,Lead,02/04/2026,2026-08-02
+C-0068,Hana Castillo,Company 68 Studio,hana.castillo.68@co68.example,+1 200 555 0167,Kyle,TX,Referral,Sam Ortiz,Qualified,07/16/2026,2026-08-13
+C-0151,Ava Fontaine,Company 151 Design,ava.fontaine.151@co151.example,201.555.0150,Denver,CO,Website form,Priya Nair,Customer,2025-09-25,2026-09-24
+C-0309,Ivan Abbott,Company 9 Plumbing,alt.ivan.abbott.9@co9.example,200.555.0108,Austin,TX,Trade show,Dee Walsh,Qualified,06/11/2025,2026-09-26
+C-0132,Leo Eriksen,Company 132 Studio,leo.eriksen.132@co132.example,+1 201 555 0131,Kyle,TX,Paid search,Dee Walsh,Customer,07/09/2026,2026-02-21
+C-0018,Rosa Abbott,Company 18 Dental,rosa.abbott.18@co18.example,200-555-0117,Round Rock,TX,Paid search,Dee Walsh,Closed Won,2025-10-26,2026-10-02
+C-0231,"Hosseini, Uma",Company 231 Design,uma.hosseini.231@co231.example,202.555.0130,Denver,CO,Trade show,Dee Walsh,Customer,10/25/2025,2026-10-07
+C-0083,Wren Castillo,Company 83 Realty,wren.castillo.83@co83.example,200.555.0182,Cedar Park,TX,Cold call,Sam Ortiz,Prospect,03/15/2026,2026-07-09
+C-0051,Uma Banerjee,Company 51 Realty,uma.banerjee.51@co51.example,200.555.0150,Cedar Park,TX,Trade show,Dee Walsh,Qualified,2025-08-28,2025-12-06
+C-0002,Ben Abbott,Company 2 Dental,ben.abbott.2@co2.example,200-555-0101,Round Rock,TX,Referral,Sam Ortiz,Closed Won,11/09/2025,2026-09-11
+C-0227,Quinn Hosseini,Company 227 Realty,quinn.hosseini.227@co227.example,202.555.0126,Cedar Park,TX,Cold call,Sam Ortiz,Lead,04/20/2026,2026-07-31
+C-0225,Oscar Hosseini,Company 225 Plumbing,oscar.hosseini.225@co225.example,(202) 555-0124,Austin,TX,Trade show,Dee Walsh,Lost,2025-12-17,2026-02-15
+C-0313,Maya Abbott,Company 13 Foods,maya.abbott@mail-c11.example,(290) 555-0112,Georgetown,TX,Website form,Priya Nair,Lead,09/23/2025,2026-08-05
+C-0128,"Eriksen, Hana",Company 128 Clinic,hana.eriksen.128@co128.example,+1 201 555 0127,Boise,ID,Referral,Sam Ortiz,Prospect,09/07/2025,2026-08-03
+C-0248,Hana Ibarra,Company 248 Clinic,hana.ibarra.248@co248.example,+1 202 555 0147,Boise,ID,Referral,Sam Ortiz,Qualified,2025-06-16,2026-10-03
+C-0156,Femi Fontaine,Company 156 Studio,femi.fontaine.156@co156.example,+1 201 555 0155,Kyle,TX,Paid search,Dee Walsh,Prospect,05/22/2026,2026-07-10
+C-0077,Quinn Castillo,Company 77 Foods,quinn.castillo.77@co77.example,(200) 555-0176,Georgetown,TX,Cold call,Sam Ortiz,Qualified,05/25/2026,2026-09-10
+C-0208,Bela Gallagher,Company 208 Clinic,bela.gallagher.208@co208.example,+1 202 555 0107,Boise,ID,Directory listing,Priya Nair,Prospect,2025-11-10,2026-08-21
+C-0256,Pia Ibarra,Company 256 Clinic,pia.ibarra.256@co256.example,+1 202 555 0155,Boise,ID,Directory listing,Priya Nair,Qualified,10/22/2025,2026-07-12
+C-0172,Vik Fontaine,Company 172 Studio,vik.fontaine.172@co172.example,+1 201 555 0171,Kyle,TX,Directory listing,Priya Nair,Prospect,12/10/2025,2026-07-30
+C-0234,"Hosseini, Xavi",Company 234 Dental,xavi.hosseini.234@co234.example,202-555-0133,Round Rock,TX,Paid search,Dee Walsh,Lost,2026-06-04,2026-03-17
+C-0254,Noor Ibarra,Company 254 Auto,noor.ibarra.254@co254.example,202-555-0153,Pflugerville,TX,Referral,Sam Ortiz,Prospect,06/24/2025,2026-09-11
+C-0258,Rosa Ibarra,Company 258 Dental,rosa.ibarra.258@co258.example,202-555-0157,Round Rock,TX,Paid search,Dee Walsh,Customer,02/23/2026,2026-08-18
+C-0116,Zara Dimitrov,Company 116 Studio,zara.dimitrov.116@co116.example,+1 201 555 0115,Kyle,TX,Referral,Sam Ortiz,Closed Won,2026-01-05,2026-06-20
+C-0091,Ava Dimitrov,Company 91 Realty,ava.dimitrov.91@co91.example,200.555.0190,Cedar Park,TX,Website form,Priya Nair,Lead,04/04/2026,2026-08-14
+C-0022,Vik Abbott,Company 22 Auto,name..x@co.example,200-555-0121,Pflugerville,TX,Directory listing,Priya Nair,Qualified,07/13/2026,2026-08-08
+C-0296,Zara Jorgensen,Company 296 Clinic,zara.jorgensen.296@co296.example,+1 202 555 0195,Boise,ID,Referral,Sam Ortiz,Customer,2025-07-11,2026-05-17
+C-0136,"Eriksen, Pia",Company 136 Clinic,pia.eriksen.136@co136.example,+1 201 555 0135,Boise,ID,Directory listing,Priya Nair,Prospect,01/25/2026,2026-09-04
+C-0062,Ben Castillo,Company 62 Auto,ben.castillo.62@co62.example,200-555-0161,Pflugerville,TX,Referral,Sam Ortiz,Customer,09/06/2025,2025-12-15
+C-0174,Xavi Fontaine,Company 174 Auto,xavi.fontaine.174@co174.example,201-555-0173,Pflugerville,TX,Paid search,Dee Walsh,Prospect,2025-11-06,2026-09-14
+C-0112,Vik Dimitrov,Company 112 Clinic,vik.dimitrov.112@co112.example,+1 201 555 0111,Boise,ID,Directory listing,Priya Nair,Qualified,07/16/2025,2026-08-10
+C-0153,Cora Fontaine,Company 153 Plumbing,cora.fontaine.153@co153.example,(201) 555-0152,Austin,TX,Trade show,Dee Walsh,Lost,02/11/2026,2026-07-16
+C-0253,Maya Ibarra,Company 253 Foods,maya.ibarra.253@co253.example,(202) 555-0152,Georgetown,TX,Website form,Priya Nair,Lead,2026-02-05,2026-08-17
+C-0119,Cyrus Dimitrov,Company 119 Design,cyrus.dimitrov.119@co119.example,201.555.0118,Denver,CO,Cold call,Sam Ortiz,Prospect,07/13/2026,2026-07-14
+C-0070,"Castillo, Jules",Company 70 Auto,jules.castillo.70@co70.example,200-555-0169,Pflugerville,TX,Directory listing,Priya Nair,Customer,05/10/2026,2026-05-22
+C-0290,Tara Jorgensen,Company 290 Dental,tara.jorgensen.290@co290.example,202-555-0189,Round Rock,TX,Referral,Sam Ortiz,Prospect,2025-07-05,2026-08-11
+C-0221,Kira Hosseini,Company 221 Foods,kira.hosseini.221@co221.example,(202) 555-0120,Georgetown,TX,Cold call,Sam Ortiz,Qualified,09/11/2025,2026-07-17
+C-0109,Sam Dimitrov,Company 109 Foods,sam.dimitrov.109@co109.example,(201) 555-0108,Georgetown,TX,Website form,Priya Nair,Prospect,06/01/2026,2026-07-28
+C-0025,Yuki Abbott,Company 25 Plumbing,,,Austin,TX,Website form,Priya Nair,Customer,2025-12-12,2026-09-21
+C-0260,Tara Ibarra,Company 260 Studio,tara.ibarra.260@co260.example,+1 202 555 0159,Kyle,TX,Referral,Sam Ortiz,Closed Won,05/13/2026,2026-03-25
+C-0007,Gus Abbott,Company 7 Design,gus.abbott.7@co7.example,200.555.0106,Denver,CO,Website form,Priya Nair,Qualified,11/25/2025,2026-08-25
+C-0244,"Ibarra, Dev",Company 244 Studio,dev.ibarra.244@co244.example,+1 202 555 0143,Kyle,TX,Directory listing,Priya Nair,Prospect,2026-03-04,2026-07-27
+C-0165,Oscar Fontaine,Company 165 Foods,oscar.fontaine.165@co165.example,(201) 555-0164,Georgetown,TX,Trade show,Dee Walsh,Lead,04/25/2026,2026-08-02
+C-0143,Wren Eriksen,Company 143 Design,wren.eriksen.143@co143.example,201.555.0142,Denver,CO,Cold call,Sam Ortiz,Closed Won,08/02/2025,2026-10-01
+C-0009,Ivan Abbott,Company 9 Plumbing,ivan.abbott.9@co9.example,(200) 555-0108,Austin,TX,Trade show,Dee Walsh,Qualified,2025-05-12,2026-09-10
+C-0118,Bela Dimitrov,Company 118 Auto,bela.dimitrov.118@co118.example,201-555-0117,Pflugerville,TX,Directory listing,Priya Nair,Prospect,02/08/2026,2026-09-16
+C-0275,Elena Jorgensen,Company 275 Realty,elena.jorgensen.275@co275.example,202.555.0174,Cedar Park,TX,Cold call,Sam Ortiz,Qualified,04/02/2026,2026-08-03
+C-0306,Femi Abbott,Company 6 Auto,FEMI.ABBOTT.6@CO6.EXAMPLE ,290.555.0106,Pflugerville,TX,Paid search,Priya Nair,Prospect,2025-12-20,2026-07-20
+C-0159,"Fontaine, Ivan",Company 159 Design,ivan.fontaine.159@co159.example,201.555.0158,Denver,CO,Trade show,Dee Walsh,Customer,04/27/2026,2026-06-25
+C-0261,Uma Ibarra,Company 261 Foods,uma.ibarra.261@co261.example,(202) 555-0160,Georgetown,TX,Trade show,Dee Walsh,Lost,03/01/2026,2026-09-15
+C-0181,Ava Gallagher,Company 181 Foods,ava.gallagher.181@co181.example,(201) 555-0180,Georgetown,TX,Website form,Priya Nair,Lead,2025-06-11,2026-09-10
+C-0040,Jules Banerjee,Company 40 Clinic,jules.banerjee.40@co40.example,+1 200 555 0139,Austin,Texas,Directory listing,Priya Nair,Qualified,07/13/2026,2026-10-05
+C-0006,Femi Abbott,Company 6 Auto,femi.abbott.6@co6.example,200-555-0105,Pflugerville,TX,Paid search,Dee Walsh,Customer,11/10/2025,2026-09-11
+C-0268,Bela Ibarra,Company 268 Studio,bela.ibarra.268@co268.example,+1 202 555 0167,Kyle,TX,Directory listing,Priya Nair,Closed Won,2026-02-11,2026-08-21
+C-0279,Ivan Jorgensen,Company 279 Design,ivan.jorgensen.279@co279.example,202.555.0178,Denver,CO,Trade show,Dee Walsh,Lost,04/15/2026,2026-03-28
+C-0264,"Ibarra, Xavi",Company 264 Clinic,xavi.ibarra.264@co264.example,+1 202 555 0163,Boise,ID,Paid search,Dee Walsh,Prospect,09/11/2025,2026-08-08
+C-0272,Ben Jorgensen,Company 272 Clinic,ben.jorgensen.272@co272.example,+1 202 555 0171,Boise,ID,Referral,Sam Ortiz,Lead,2026-07-03,2026-07-14
+C-0270,Dara Ibarra,Company 270 Auto,dara.ibarra.270@co270.example,202-555-0169,Pflugerville,TX,Paid search,Dee Walsh,Lost,03/03/2026,2026-03-15
+C-0019,Sam Abbott,Company 19 Realty,sam.abbott.19@co19.example,200.555.0118,Cedar Park,TX,Website form,Priya Nair,Customer,05/09/2026,2026-10-03
+C-0289,Sam Jorgensen,Company 289 Plumbing,sam.jorgensen.289@co289.example,(202) 555-0188,Austin,TX,Website form,Priya Nair,Prospect,2025-07-21,2026-09-08
+C-0320,Bee Abbott,Third Company 19 Realty,c.sam.abbott.19@co19.example,290-555-0121,Cedar Park,TX,Website form,Priya Nair,Lead,05/09/2026,2026-09-01
+C-0297,Abel Jorgensen,Company 297 Plumbing,abel.jorgensen.297@co297.example,(202) 555-0196,Austin,TX,Trade show,Dee Walsh,Lost,12/04/2025,2026-02-03
+C-0078,"Castillo, Rosa",Company 78 Auto,rosa.castillo.78@co78.example,200-555-0177,Pflugerville,TX,Paid search,Dee Walsh,Customer,2026-07-03,2026-06-25
+C-0286,Pia Jorgensen,Company 286 Auto,pia.jorgensen.286@co286.example,202-555-0185,Pflugerville,TX,Directory listing,Priya Nair,Closed Won,07/16/2025,2025-10-20
+C-0218,Hana Hosseini,Company 218 Dental,hana.hosseini.218@co218.example,202-555-0117,Round Rock,TX,Referral,Sam Ortiz,Lead,11/28/2025,2026-07-10
+C-0223,Maya Hosseini,Company 223 Design,maya.hosseini.223@co223.example,202.555.0122,Denver,CO,Website form,Priya Nair,Closed Won,2025-07-28,2025-10-15
+C-0031,Ava Banerjee,Company 31 Design,ava.banerjee.31@co31.example,200.555.0130,Denver,CO,Website form,Priya Nair,Qualified,07/13/2026,2026-08-27
+C-0154,Dev Fontaine,Company 154 Dental,dev.fontaine.154@co154.example,201-555-0153,Round Rock,TX,Directory listing,Priya Nair,Prospect,12/24/2025,2026-09-12
+C-0257,Quinn Ibarra,Company 257 Plumbing,quinn.ibarra.257@co257.example,(202) 555-0156,Austin,TX,Cold call,Sam Ortiz,Qualified,2026-01-20,2026-07-16
+C-0029,"Abbott, Cyrus",Company 29 Foods,cyrus.abbott.29@co29.example,(200) 555-0128,Georgetown,TX,Cold call,Sam Ortiz,Prospect,07/13/2026,2026-08-20
+C-0081,Uma Castillo,Company 81 Plumbing,uma.castillo.81@co81.example,(200) 555-0180,Austin,TX,Trade show,Dee Walsh,Lost,05/12/2026,2026-01-25
+C-0115,Yuki Dimitrov,Company 115 Realty,yuki.dimitrov.115@co115.example,201.555.0114,Cedar Park,TX,Website form,Priya Nair,Closed Won,2026-06-27,2026-08-18
+C-0285,Oscar Jorgensen,Company 285 Foods,oscar.jorgensen.285@co285.example,(202) 555-0184,Georgetown,TX,Trade show,Dee Walsh,Customer,12/07/2025,2025-10-21
+C-0232,Vik Hosseini,Company 232 Clinic,vik.hosseini.232@co232.example,+1 202 555 0131,Boise,ID,Directory listing,Priya Nair,Closed Won,11/21/2025,2025-09-30
+C-0250,Jules Ibarra,Company 250 Dental,jules.ibarra.250@co250.example,202-555-0149,Round Rock,TX,Directory listing,Priya Nair,Customer,2025-07-07,2026-03-08
+C-0047,Quinn Banerjee,Company 47 Design,quinn.banerjee.47@co47.example,200.555.0146,Denver,CO,Cold call,Sam Ortiz,Prospect,01/31/2026,2026-05-11
+C-0291,"Jorgensen, Uma",Company 291 Realty,uma.jorgensen.291@co291.example,202.555.0190,Cedar Park,TX,Trade show,Dee Walsh,Lead,03/29/2026,2026-07-14
+C-0144,Xavi Eriksen,Company 144 Clinic,xavi.eriksen.144@co144.example,+1 201 555 0143,Boise,ID,Paid search,Dee Walsh,Lost,2025-12-30,2026-09-26
+C-0152,Ben Fontaine,Company 152 Clinic,ben.fontaine.152@co152.example,+1 201 555 0151,Boise,ID,Referral,Sam Ortiz,Customer,10/06/2025,2026-07-04
+C-0105,Oscar Dimitrov,Company 105 Plumbing,oscar.dimitrov.105@co105.example,(201) 555-0104,Austin,TX,Trade show,Dee Walsh,Closed Won,11/18/2025,2026-06-18
+C-0305,Elena Abbott,Company 5 Foods,ELENA.ABBOTT.5@CO5.EXAMPLE ,290-555-0105,Georgetown,TX,Cold call,Dee Walsh,Lead,2025-10-15,2026-07-13
+C-0189,Ivan Gallagher,Company 189 Foods,ivan.gallagher.189@co189.example,(201) 555-0188,Georgetown,TX,Trade show,Dee Walsh,Lost,06/22/2026,2026-09-12
+C-0011,Kira Abbott,Company 11 Realty,kira.abbott.11@co11.example,200.555.0110,Cedar Park,TX,Cold call,Sam Ortiz,Customer,02/24/2026,2026-09-26
+C-0075,"Castillo, Oscar",Company 75 Realty,oscar.castillo.75@co75.example,200.555.0174,Cedar Park,TX,Trade show,Dee Walsh,Prospect,2025-09-20,2026-07-25
+C-0265,Yuki Ibarra,Company 265 Plumbing,yuki.ibarra.265@co265.example,(202) 555-0164,Austin,TX,Website form,Priya Nair,Qualified,09/27/2025,2026-08-07
+C-0241,Ava Ibarra,Company 241 Plumbing,ava.ibarra.241@co241.example,(202) 555-0140,Austin,TX,Website form,Priya Nair,Closed Won,08/04/2025,2026-08-11
+C-0033,CORA BANERJEE,Company 33 Plumbing,cora.banerjee.33@co33.example,(200) 555-0132,Austin,TX,Trade show,Dee Walsh,Customer,2025-08-19,2026-09-21
+C-0104,Noor Dimitrov,Company 104 Clinic,noor.dimitrov.104@co104.example,+1 201 555 0103,Boise,ID,Referral,Sam Ortiz,Qualified,12/23/2025,2026-08-29
+C-0148,Bela Eriksen,Company 148 Studio,bela.eriksen.148@co148.example,+1 201 555 0147,Kyle,TX,Directory listing,Priya Nair,Qualified,04/25/2026,2026-08-03
+C-0294,Xavi Jorgensen,Company 294 Auto,xavi.jorgensen.294@co294.example,202-555-0193,Pflugerville,TX,Paid search,Dee Walsh,Closed Won,2025-12-28,2026-10-07
+C-0032,"Banerjee, Ben",Company 32 Clinic,ben.banerjee.32@co32.example,+1 200 555 0131,Boise,ID,Referral,Sam Ortiz,Qualified,07/13/2026,2026-09-02
+C-0008,Hana Abbott,Company 8 Clinic,hana.abbott.8@co8.example,+1 200 555 0107,Boise,ID,Referral,Sam Ortiz,Qualified,07/15/2025,2026-08-09
+C-0295,Yuki Jorgensen,Company 295 Design,yuki.jorgensen.295@co295.example,202.555.0194,Denver,CO,Website form,Priya Nair,Customer,2026-07-09,2026-03-22
+C-0202,Vik Gallagher,Company 202 Dental,vik.gallagher.202@co202.example,202-555-0101,Round Rock,TX,Directory listing,Priya Nair,Qualified,12/07/2025,2026-09-06
+C-0315,Oscar Abbott,Company 15 Design Holdings,oscar.abbott.2@co15.example,290.555.0114,Denver,CO,Trade show,Dee Walsh,Lead,04/02/2026,2026-08-07
+C-0044,Noor Banerjee,Company 44 Studio,noor.banerjee.44@co44.example,+1 200 555 0143,Austin,Tex.,Referral,Sam Ortiz,Closed Won,2025-09-15,2026-09-21
+C-0065,Elena Castillo,Company 65 Plumbing,elena.castillo.65@co65.example,(200) 555-0164,Austin,TX,Cold call,Sam Ortiz,Lead,02/23/2026,2026-10-04
+C-0108,"Dimitrov, Rosa",Company 108 Studio,rosa.dimitrov.108@co108.example,+1 201 555 0107,Kyle,TX,Paid search,Dee Walsh,Lost,03/27/2026,2026-09-14
+C-0273,Cora Jorgensen,Company 273 Plumbing,cora.jorgensen.273@co273.example,(202) 555-0172,Austin,TX,Trade show,Dee Walsh,Lead,2025-07-05,2026-07-11
+C-0010,Jules Abbott,Company 10 Dental,jules.abbott.10@co10.example,200-555-0109,Round Rock,TX,Directory listing,Priya Nair,Qualified,01/12/2026,2026-07-31
+C-0168,Rosa Fontaine,Company 168 Clinic,rosa.fontaine.168@co168.example,+1 201 555 0167,Boise,ID,Paid search,Dee Walsh,Customer,05/31/2026,2025-12-28
+C-0093,Cora Dimitrov,Company 93 Foods,cora.dimitrov.93@co93.example,(200) 555-0192,Georgetown,TX,Trade show,Dee Walsh,Prospect,2025-11-27,2026-08-27
+C-0028,Bela Abbott,Company 28 Studio,,,Kyle,TX,Directory listing,Priya Nair,Lead,07/13/2026,2026-09-09
+C-0278,Hana Jorgensen,Company 278 Auto,hana.jorgensen.278@co278.example,202-555-0177,Pflugerville,TX,Referral,Sam Ortiz,Closed Won,04/03/2026,2026-05-24
+C-0205,"Gallagher, Yuki",Company 205 Foods,yuki.gallagher.205@co205.example,(202) 555-0104,Georgetown,TX,Website form,Priya Nair,Customer,2025-09-11,2026-02-25
+C-0055,Yuki Banerjee,Company 55 Design,yuki.banerjee.55@co55.example,200.555.0154,Denver,CO,Website form,Priya Nair,Prospect,03/06/2026,2026-06-14
+C-0056,Zara Banerjee,Company 56 Clinic,zara.banerjee.56@co56.example,+1 200 555 0155,Boise,ID,Referral,Sam Ortiz,Qualified,03/05/2026,2026-06-13
+C-0303,Cora Abbott,Company 3 Realty,CORA.ABBOTT.3@CO3.EXAMPLE ,+1 290 555 0103,Cedar Park,TX,Trade show,Priya Nair,Prospect,2026-06-13,2026-09-18
+C-0262,Vik Ibarra,Company 262 Auto,vik.ibarra.262@co262.example,202-555-0161,Pflugerville,TX,Directory listing,Priya Nair,Lead,09/30/2025,2026-09-17
+C-0239,Cyrus Hosseini,Company 239 Design,cyrus.hosseini.239@co239.example,202.555.0138,Denver,CO,Cold call,Sam Ortiz,Qualified,12/06/2025,2026-08-23
+C-0186,Femi Gallagher,Company 186 Dental,femi.gallagher.186@co186.example,201-555-0185,Round Rock,TX,Paid search,Dee Walsh,Customer,2025-05-30,2026-03-11
+C-0212,"Hosseini, Ben",Company 212 Studio,ben.hosseini.212@co212.example,+1 202 555 0111,Kyle,TX,Referral,Sam Ortiz,Qualified,11/02/2025,2026-09-09
+C-0142,Vik Eriksen,Company 142 Auto,vik.eriksen.142@co142.example,201-555-0141,Pflugerville,TX,Directory listing,Priya Nair,Customer,01/02/2026,2026-02-22
+C-0302,Ben Abbott,Company 2 Dental,BEN.ABBOTT.2@CO2.EXAMPLE ,290.555.0102,Round Rock,TX,Referral,Dee Walsh,Prospect,2025-12-19,2026-09-04
+C-0004,Dev Abbott,Company 4 Studio,dev.abbott.4@co4.example,+1 200 555 0103,Kyle,TX,Directory listing,Priya Nair,Customer,12/17/2025,2026-09-11
+C-0200,Tara Gallagher,Company 200 Clinic,tara.gallagher.200@co200.example,+1 201 555 0199,Boise,ID,Referral,Sam Ortiz,Prospect,06/10/2026,2026-07-20
+C-0127,Gus Eriksen,Company 127 Design,gus.eriksen.127@co127.example,201.555.0126,Denver,CO,Website form,Priya Nair,Lead,2025-10-28,2026-09-04
+C-0046,Pia Banerjee,Company 46 Auto,pia.banerjee.46@co46.example,200-555-0145,Pflugerville,TX,Directory listing,Priya Nair,Prospect,01/16/2026,2026-04-26
+C-0095,"Dimitrov, Elena",Company 95 Design,elena.dimitrov.95@co95.example,200.555.0194,Denver,CO,Cold call,Sam Ortiz,Qualified,09/20/2025,2026-08-01
+C-0224,Noor Hosseini,Company 224 Clinic,noor.hosseini.224@co224.example,+1 202 555 0123,Boise,ID,Referral,Sam Ortiz,Closed Won,2026-03-15,2025-12-13
+C-0086,Zara Castillo,Company 86 Auto,zara.castillo.86@co86.example,200-555-0185,Pflugerville,TX,Referral,Sam Ortiz,Qualified,05/04/2026,2026-08-13
+C-0237,Abel Hosseini,Company 237 Foods,abel.hosseini.237@co237.example,(202) 555-0136,Georgetown,TX,Trade show,Dee Walsh,Prospect,01/11/2026,2026-09-12
+C-0192,Leo Gallagher,Company 192 Clinic,leo.gallagher.192@co192.example,+1 201 555 0191,Boise,ID,Paid search,Dee Walsh,Lead,2025-12-25,2026-09-13
+C-0184,Dev Gallagher,Company 184 Clinic,dev.gallagher.184@co184.example,+1 201 555 0183,Boise,ID,Directory listing,Priya Nair,Qualified,07/21/2026,2026-08-19
+C-0012,Leo Abbott,Company 12 Studio,leo.abbott.12@co12.example,+1 200 555 0111,Kyle,TX,Paid search,Dee Walsh,Customer,05/07/2026,2026-09-26
+C-0123,"Eriksen, Cora",Company 123 Realty,cora.eriksen.123@co123.example,201.555.0122,Cedar Park,TX,Trade show,Dee Walsh,Closed Won,2026-02-14,2026-05-29
+C-0284,Noor Jorgensen,Company 284 Studio,noor.jorgensen.284@co284.example,+1 202 555 0183,Kyle,TX,Referral,Sam Ortiz,Qualified,10/29/2025,2026-07-31
+C-0149,Cyrus Eriksen,Company 149 Foods,cyrus.eriksen.149@co149.example,(201) 555-0148,Georgetown,TX,Cold call,Sam Ortiz,Qualified,09/04/2025,2026-08-25
+C-0236,Zara Hosseini,Company 236 Studio,zara.hosseini.236@co236.example,+1 202 555 0135,Kyle,TX,Referral,Sam Ortiz,Lead,2025-07-09,2026-09-26
+C-0281,Kira Jorgensen,Company 281 Plumbing,kira.jorgensen.281@co281.example,(202) 555-0180,Austin,TX,Cold call,Sam Ortiz,Prospect,09/04/2025,2026-09-08

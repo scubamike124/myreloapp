@@ -1,0 +1,16 @@
+1
+00:00:00,000 --> 00:00:03,800
+If your dog has a coat that
+needs rescuing, book a groom.
+
+2
+00:00:03,800 --> 00:00:06,800
+Biscuit says thank you too.
+
+3
+00:00:06,800 --> 00:00:09,800
+Maple Lane Dog Grooming.
+
+4
+00:00:09,800 --> 00:00:12,800
+Book online, any time.

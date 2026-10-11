@@ -1,0 +1,1 @@
+npx tsx scripts/offers-run.ts crm-cleanup --as-of 2026-10-11 --business 'Invented Test Co' --file contacts=inputs/contacts.csv --opt 'source=Sales spreadsheet export (invented)' --opt staleAfterDays=120 --synthetic --out report.md --bundle delivery

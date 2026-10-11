@@ -1,0 +1,31 @@
+﻿Job,Cost code,Budget,Actual,Remaining,% used
+"J-201 Alvarez, Rosa:Kitchen remodel",02-200 Demolition,"$2,500.00","$2,350.00",$150.00,94%
+"J-201 Alvarez, Rosa:Kitchen remodel",06-200 Finish carpentry,"$3,500.00","$1,800.00","$1,700.00",51%
+"J-201 Alvarez, Rosa:Kitchen remodel",09-200 Drywall,"$2,800.00","$2,650.00",$150.00,95%
+"J-201 Alvarez, Rosa:Kitchen remodel",12-300 Cabinets and countertops,"$18,000.00","$17,200.00",$800.00,96%
+"J-201 Alvarez, Rosa:Kitchen remodel",15-400 Plumbing,"$6,000.00","$7,450.00","-$1,450.00",124%
+"J-201 Alvarez, Rosa:Kitchen remodel",16-100 Electrical,"$5,000.00","$5,450.00",-$450.00,109%
+J-202 Briar Creek HOA:Clubhouse deck,03-300 Concrete,"$4,000.00","$3,600.00",$400.00,90%
+J-202 Briar Creek HOA:Clubhouse deck,06-100 Rough carpentry,"$10,000.00","$11,200.00","-$1,200.00",112%
+J-202 Briar Creek HOA:Clubhouse deck,06-200 Finish carpentry,"$8,000.00","$6,960.00","$1,040.00",87%
+J-202 Briar Creek HOA:Clubhouse deck,09-900 Painting,"$1,500.00","$1,400.00",$100.00,93%
+"J-203 Chen, Wei:Basement finish",02-200 Demolition,$0.00,"$1,500.00","-$1,500.00",n/a
+"J-203 Chen, Wei:Basement finish",06-100 Rough carpentry,"$8,000.00","$5,100.00","$2,900.00",64%
+"J-203 Chen, Wei:Basement finish",09-200 Drywall,"$2,000.00","$2,400.00",-$400.00,120%
+"J-203 Chen, Wei:Basement finish",15-400 Plumbing,"$3,000.00",$0.00,"$3,000.00",0%
+"J-203 Chen, Wei:Basement finish",16-100 Electrical,"$2,000.00",$0.00,"$2,000.00",0%
+"J-204 Dunlap, Ray:Bath remodel (closed)",01-100 General conditions,$0.00,$215.00,-$215.00,n/a
+"J-204 Dunlap, Ray:Bath remodel (closed)",02-200 Demolition,"$1,200.00","$1,150.00",$50.00,96%
+"J-204 Dunlap, Ray:Bath remodel (closed)",09-900 Painting,$700.00,$690.00,$10.00,99%
+"J-204 Dunlap, Ray:Bath remodel (closed)",12-300 Cabinets and countertops,"$2,200.00","$2,150.00",$50.00,98%
+"J-204 Dunlap, Ray:Bath remodel (closed)",15-400 Plumbing,"$4,500.00","$4,990.00",-$490.00,111%
+J-205 Eastside Dental:Office TI,06-200 Finish carpentry,"$5,000.00","$2,400.00","$2,600.00",48%
+J-205 Eastside Dental:Office TI,09-200 Drywall,"$6,500.00","$6,100.00",$400.00,94%
+J-205 Eastside Dental:Office TI,09-250 (not in cost-code list),$0.00,"$1,300.00","-$1,300.00",n/a
+J-205 Eastside Dental:Office TI,09-900 Painting,"$2,500.00","$2,250.00",$250.00,90%
+J-205 Eastside Dental:Office TI,16-100 Electrical,"$9,000.00","$6,300.00","$2,700.00",70%
+"J-206 Foster, Mia:Garage addition",01-100 General conditions,"$1,500.00",$425.00,"$1,075.00",28%
+"J-206 Foster, Mia:Garage addition",03-300 Concrete,"$9,000.00","$5,950.00","$3,050.00",66%
+"J-206 Foster, Mia:Garage addition",06-100 Rough carpentry,"$12,000.00","$3,525.00","$8,475.00",29%
+"J-206 Foster, Mia:Garage addition",08-100 Doors and windows,"$4,500.00",$0.00,"$4,500.00",0%
+"J-206 Foster, Mia:Garage addition",16-100 Electrical,"$3,000.00",$0.00,"$3,000.00",0%

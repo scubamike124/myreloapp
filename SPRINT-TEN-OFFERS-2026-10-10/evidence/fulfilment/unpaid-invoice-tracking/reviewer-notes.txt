@@ -1,0 +1,16 @@
+Reviewer notes: unpaid-invoice-tracking for Invented Test Co, as of 2026-10-11. Keep this file; do not send it to the client.
+Data: invented test data (--synthetic)
+18 of 18 QA checks passed.
+
+Rows or messages left out of the report (2 note(s)). The report does not list them; check them with the client:
+- Line 24 (invoice I-3023) skipped: due date not readable.
+- Line 25 (invoice I-3024) skipped: amount not readable.
+
+Everything the importer reported (columns read, rows skipped and why, assumptions):
+- Open-invoices export: read "Invoice #" as number, "Client" as customer, "Contact Name" as contactName, "Contact Email" as email, "Issued" as issuedOn, "Due Date" as dueOn, "Invoice Total" as amount, "Amount Paid" as paid, "Balance" as balance, "Last Reminder Sent" as lastReminderOn, "Disputed" as disputed, "Notes" as notes.
+- Line 24 (invoice I-3023) skipped: due date not readable.
+- Line 25 (invoice I-3024) skipped: amount not readable.
+- Line 26 skipped: a total or heading row.
+- 22 invoice row(s) read.
+
+Before sending: open report.html and read it through; read every draft as the person who would send it; settle every failed check and every left-out row above; then send the folder (zip it) yourself. Nothing here sends anything.

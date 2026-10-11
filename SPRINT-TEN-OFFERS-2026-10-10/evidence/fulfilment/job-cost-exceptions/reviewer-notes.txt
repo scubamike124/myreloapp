@@ -1,0 +1,28 @@
+Reviewer notes: job-cost-exceptions for Invented Test Co, as of 2026-10-11. Keep this file; do not send it to the client.
+Data: invented test data (--synthetic)
+14 of 14 QA checks passed.
+
+Rows or messages left out of the report (5 note(s)). The report does not list them; check them with the client:
+- Job cost detail: line 16 skipped: Invoice rows are customer or non-posting rows, not costs.
+- Job cost detail: line 27 ($999.00) skipped: voided or deleted.
+- Job cost detail: line 37 ($777.00) skipped: dated after the as-of date 2026-10-11.
+- Job cost detail: line 43 ($555.00) skipped: job "Zed, Zoe:Fence" is not in the job list.
+- Job cost detail: line 49 ($333.00) skipped: no cost code.
+
+Everything the importer reported (columns read, rows skipped and why, assumptions):
+- Job list: read "Job Number" as id, "Job Name" as name, "Status" as status, "Percent Complete" as percent, "Closed On" as closedOn.
+- Job cost detail: lines 1, 2, 3 above the column headers skipped (a report title or summary).
+- Job cost detail: read "Date" as date, "Customer:Job" as job, "Item" as costCode, "Vendor" as vendor, "Memo" as memo, "Amount" as amount, "Transaction Type" as type, "Status" as status.
+- Job cost detail: columns not used: "Num".
+- Cost-code list: read "Code" as code, "Name" as name.
+- Budgets: read "Job" as job, "Cost Code" as costCode, "Budget" as amount.
+- Job cost detail, line 50 skipped: a total or heading row.
+- Job cost detail: line 16 skipped: Invoice rows are customer or non-posting rows, not costs.
+- Job cost detail: line 27 ($999.00) skipped: voided or deleted.
+- Job cost detail: line 37 ($777.00) skipped: dated after the as-of date 2026-10-11.
+- Job cost detail: line 43 ($555.00) skipped: job "Zed, Zoe:Fence" is not in the job list.
+- Job cost detail: line 49 ($333.00) skipped: no cost code.
+- Matched to a cost code in the cost-code list by its name, by the code the text starts with, or by a sub-item's last part: "06-200 Finish carpentry" as 06-200, "15-400 Plumbing" as 15-400, "Electrical" as 16-100.
+- 6 jobs read (5 active, 1 closed), 27 budget lines, 39 cost rows. Transaction ids are T- and the line in the job cost detail (T-12 is line 12).
+
+Before sending: open report.html and read it through; read every draft as the person who would send it; settle every failed check and every left-out row above; then send the folder (zip it) yourself. Nothing here sends anything.

@@ -1,0 +1,50 @@
+﻿Message,Received,From,Category,Urgency,Why,Order number
+T-1029: Cut finger,2026-10-05 14:04,Ruth Abernathy,needs a person,high,"Needs a person: mentions ""cut my finger"". High: legal or safety message.",none
+T-1037: Update on order?,2026-10-06 10:48,Tessa Lund,other,high,Other: no rule matched. High: waited 9 days.,#20470
+T-1030: Small claims,2026-10-06 11:17,Hal Brennan,needs a person,high,"Needs a person: mentions ""small claims"". High: legal or safety message.",none
+T-1031: Reporting you,2026-10-07 08:30,Zoe Grant,needs a person,high,"Needs a person: mentions ""reporting you to"". High: legal or safety message.",none
+T-1024: Final warning,2026-10-07 09:59,Gordon Pike,needs a person,high,"Needs a person: mentions ""lawyer"". High: legal or safety message.",none
+T-1046: Worst service ever,2026-10-08 13:45,Brian Oyelaran,complaint,high,"Complaint: mentions ""worst"". High: 3 or more exclamation marks; waited 12 days.",none
+T-1025: Reaction to soap,2026-10-08 16:12,Mei Lin,needs a person,high,"Needs a person: mentions ""allergic reaction"". High: legal or safety message.",none
+T-1047: WHERE IS MY ORDER,2026-10-09 10:58,Kendra Voss,order status,high,"Order status: mentions ""where is my order"". High: written mostly in capitals; waited 14 days.",#20403
+T-1040: Please cancel,2026-10-09 11:27,Chris Tolliver,other,high,Other: no rule matched. High: asks to cancel.,#20531
+T-1026: Candle jar on fire,2026-10-09 13:25,Rob Castellano,needs a person,high,"Needs a person: mentions ""fire"". High: legal or safety message.",none
+T-1005: Charged twice!!!,2026-10-09 16:52,Lena Fischer,billing,high,"Billing: mentions ""charged twice"". High: charged twice; 3 or more exclamation marks.",#20511
+T-1027: Dispute,2026-10-10 10:38,Iris Vandenberg,needs a person,high,"Needs a person: mentions ""chargeback"". High: legal or safety message; chargeback.",#20412
+T-1048: Still no refund,2026-10-10 17:11,Neil Ashworth,refund request,high,"Refund request: mentions ""refund"". High: waited 21 days.",#20388
+T-1028: Burn,2026-10-11 17:51,Dev Malhotra,needs a person,high,"Needs a person: mentions ""burned my hand"". High: legal or safety message.",none
+T-1001: Where's my order?,2026-10-05 08:00,Marta Kovacs,order status,medium,"Order status: mentions ""where's my order"".",#20417
+T-1003: Refund please,2026-10-07 12:26,Priya Raman,refund request,medium,"Refund request: mentions ""refund"".",#20502
+T-1041: Money back,2026-10-10 08:40,Yara Nasr,refund request,medium,"Refund request: mentions ""money back"".",#20459
+T-1006: Invoice needed,2026-10-10 13:05,Omar Nasser,billing,medium,"Billing: mentions ""invoice"".",#20399
+T-1007: Receipt,2026-10-11 10:18,Grace Tanaka,billing,medium,"Billing: mentions ""receipt"".",none
+T-1050: Do you ship to Canada?,2026-10-05 11:37,Quinn Bailey,other,low,Other: no rule matched.,none
+T-1043: Billing problem,2026-10-05 12:06,Anika Rao,other,low,Other: no rule matched.,#20444
+T-1036: How long does the 8oz burn?,2026-10-05 13:35,Abel Mensah,other,low,Other: no rule matched.,none
+T-1015: Your staff,2026-10-05 16:02,Alma Reyes,complaint,low,"Complaint: mentions ""rude"".",none
+T-1008: Card keeps failing at checkout,2026-10-05 17:31,Victor Almeida,other,low,Other: no rule matched.,none
+T-1051: Gift wrapping,2026-10-06 08:50,Ula Martin,other,low,Other: no rule matched.,none
+T-1044: Wrong amount,2026-10-06 09:19,Leo Marchetti,other,low,Other: no rule matched.,#20479
+T-1016: Bulk order question,2026-10-06 13:15,Chen Wu,sales question,low,"Sales question: mentions ""bulk"".",none
+T-1009: Can't log in,2026-10-06 14:44,Nina Bergstrom,technical,low,"Technical: mentions ""can't log in"".",none
+T-1002: Package never showed up,2026-10-06 15:13,Jon Peralta,other,low,Other: no rule matched.,#20533
+T-1017: Corporate gifts,2026-10-07 10:28,Dara Quinn,other,low,Other: no rule matched.,none
+T-1010: Discount code error,2026-10-07 11:57,Sam Okoye,technical,low,"Technical: mentions ""error"".",none
+T-1052: Exchange for a different scent,2026-10-07 15:03,Tariq Aziz,other,low,Other: no rule matched.,#20455
+T-1045: No confirmation email,2026-10-07 16:32,Sofia Duarte,other,low,Other: no rule matched.,none
+T-1038: Wrong scent,2026-10-07 17:01,Wes Calloway,other,low,Other: no rule matched.,#20466
+T-1011: Site won't load,2026-10-08 08:10,Ines Duarte,technical,low,"Technical: mentions ""won't load"".",none
+T-1004: Return,2026-10-08 09:39,Ed Whitaker,other,low,Other: no rule matched.,#20488
+T-1039: Change of address,2026-10-08 14:14,Bea Lindgren,other,low,Other: no rule matched.,#20520
+T-1032: Opening hours,2026-10-08 15:43,Kyle Brandt,other,low,Other: no rule matched.,none
+T-1018: Stocking your products,2026-10-08 17:41,Faisal Haddad,sales question,low,"Sales question: mentions ""wholesale"".",none
+T-1033: Thank you!,2026-10-09 12:56,Hana Sato,other,low,Other: no rule matched.,none
+T-1012: Checkout keeps crashing,2026-10-09 15:23,Paul Henning,other,low,Other: no rule matched.,none
+T-1013: Very disappointed,2026-10-10 12:36,Rhea Kapoor,complaint,low,"Complaint: mentions ""disappointed"".",none
+T-1014: Not happy,2026-10-11 09:49,Tom Eriksen,other,low,Other: no rule matched.,none
+T-1042: Shipping reimbursement,2026-10-11 15:53,Ivo Petrov,other,low,Other: no rule matched.,#20431
+T-1022: Invest now,2026-10-05 15:33,Coin Alerts,spam,low,"Spam: mentions ""crypto"".",none
+T-1023: Luxury watches,2026-10-06 12:46,Cheap Watches,spam,low,Spam: 3 links and no order details.,none
+T-1019: Rank #1 on Google,2026-10-09 14:54,Max Rankin,spam,low,"Spam: mentions ""seo agency"".",none
+T-1020: Guest post proposal,2026-10-10 11:07,Linda Cho,spam,low,"Spam: mentions ""guest post"".",none
+T-1021: You have won!,2026-10-11 08:20,Prize Desk,spam,low,"Spam: mentions ""you have won"".",none

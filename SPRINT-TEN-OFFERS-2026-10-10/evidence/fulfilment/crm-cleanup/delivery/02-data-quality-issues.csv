@@ -1,0 +1,22 @@
+﻿Record,Name,Field,Issue,Current value
+C-0043,Maya Banerjee,State,State is not a two-letter code and could not be read as a US state,Tex.
+C-0039,ivan banerjee,Name,Name is in all lowercase,ivan banerjee
+C-0027,Abel Abbott,Email and phone,No email and no phone,(both empty)
+C-0034,DEV BANERJEE,Name,Name is in ALL CAPS,DEV BANERJEE
+C-0036,FEMI BANERJEE,Name,Name is in ALL CAPS,FEMI BANERJEE
+C-0041,Kira Banerjee,State,State is not a two-letter code (reads as TX),Texas
+C-0038,hana banerjee,Name,Name is in all lowercase,hana banerjee
+C-0042,Leo Banerjee,State,State is not a two-letter code (reads as TX),Texas
+C-0035,ELENA BANERJEE,Name,Name is in ALL CAPS,ELENA BANERJEE
+C-0026,Zara Abbott,Email and phone,No email and no phone,(both empty)
+C-0023,Wren Abbott,Email,Email format is not valid,name.@co.example
+C-0021,Uma Abbott,Email,Email format is not valid,.name@co.example
+C-0024,Xavi Abbott,Email,Email format is not valid,na me@co.example
+C-0020,Tara Abbott,Email,Email format is not valid,name@@co.example
+C-0037,gus banerjee,Name,Name is in all lowercase,gus banerjee
+C-0022,Vik Abbott,Email,Email format is not valid,name..x@co.example
+C-0025,Yuki Abbott,Email and phone,No email and no phone,(both empty)
+C-0040,Jules Banerjee,State,State is not a two-letter code (reads as TX),Texas
+C-0033,CORA BANERJEE,Name,Name is in ALL CAPS,CORA BANERJEE
+C-0044,Noor Banerjee,State,State is not a two-letter code and could not be read as a US state,Tex.
+C-0028,Bela Abbott,Email and phone,No email and no phone,(both empty)

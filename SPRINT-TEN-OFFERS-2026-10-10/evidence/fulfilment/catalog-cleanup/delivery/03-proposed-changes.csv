@@ -1,0 +1,52 @@
+﻿Store,SKU,Field,Current,Proposed,Reason
+Marketplace,HC-1001,Brand,(empty),Hearth & Co,Match Hearth Shop (source of truth)
+Marketplace,HC-1002,GTIN,(empty),2000001000748,Match Hearth Shop (source of truth)
+Marketplace,HC-1004,GTIN,(empty),2000001001486,Match Hearth Shop (source of truth)
+Marketplace,HC-1006,GTIN,(empty),2000001002223,Match Hearth Shop (source of truth)
+Marketplace,HC-1010,GTIN,(empty),2000001003701,Match Hearth Shop (source of truth)
+Marketplace,HC-1011,Brand,(empty),Hearth & Co,Match Hearth Shop (source of truth)
+Hearth Shop,HC-1012,Size,x-large,XL,Standard size name
+Marketplace,HC-1014,GTIN,(empty),2000001005187,Match Hearth Shop (source of truth)
+Marketplace,HC-1016,Size,Small,S,Standard size name
+Marketplace,HC-1016,GTIN,(empty),2000001005927,Match Hearth Shop (source of truth)
+Marketplace,HC-1020,GTIN,(empty),2000001007402,Match Hearth Shop (source of truth)
+Marketplace,HC-1021,Brand,(empty),Hearth & Co,Match Hearth Shop (source of truth)
+Marketplace,HC-1022,GTIN,(empty),2000001008140,Match Hearth Shop (source of truth)
+Hearth Shop,HC-1024,Size,large,L,Standard size name
+Marketplace,HC-1028,Size,Extra Large,XL,Standard size name
+Marketplace,HC-1030,GTIN,2000001011103,2000001011102,Match Hearth Shop (source of truth); the current code is not a valid GTIN
+Marketplace,HC-1031,Brand,(empty),Hearth & Co,Match Hearth Shop (source of truth)
+Marketplace,HC-1032,GTIN,2000001011844,2000001011843,Match Hearth Shop (source of truth); the current code is not a valid GTIN
+Marketplace,HC-1034,GTIN,2000001012582,2000001012581,Match Hearth Shop (source of truth); the current code is not a valid GTIN
+Marketplace,HC-1036,GTIN,2000001013329,2000001013328,Match Hearth Shop (source of truth); the current code is not a valid GTIN
+Marketplace,HC-1038,GTIN,2000001014067,2000001014066,Match Hearth Shop (source of truth); the current code is not a valid GTIN
+Marketplace,HC-1040,GTIN,1014806,2000001014806,Match Hearth Shop (source of truth); the current code is not a valid GTIN
+Marketplace,HC-1041,Brand,(empty),Hearth & Co,Match Hearth Shop (source of truth)
+Marketplace,HC-1042,GTIN,2.00482E+12,2000001015544,Match Hearth Shop (source of truth); the current code is not a valid GTIN
+Marketplace,HC-1044,Size,Extra Large,XL,Standard size name
+Marketplace,HC-1044,GTIN,2000002866282,2000001016282,Match Hearth Shop (source of truth)
+Marketplace,HC-1046,GTIN,2000002867029,2000001017029,Match Hearth Shop (source of truth)
+Marketplace,HC-1048,Size,Small,S,Standard size name
+Marketplace,HC-1048,GTIN,2000002867760,2000001017760,Match Hearth Shop (source of truth)
+Marketplace,HC-1051,Brand,Hearth and Co,Hearth & Co,Match Hearth Shop (source of truth)
+Marketplace,HC-1056,Size,S,L,Match Hearth Shop (source of truth)
+Marketplace,HC-1060,Size,M,XL,Match Hearth Shop (source of truth)
+Marketplace,HC-1061,Brand,Hearth and Co,Hearth & Co,Match Hearth Shop (source of truth)
+Marketplace,HC-1064,Color,navy blue,Navy Blue,Standard capitals
+Marketplace,HC-1068,Color,navy blue,Navy Blue,Standard capitals
+Marketplace,HC-1072,Color,navy blue,Navy Blue,Standard capitals
+Marketplace,HC-1076,Color,navy blue,Navy Blue,Standard capitals
+Marketplace,HC-1090,SKU,"""hc-1090""",HC-1090,"Same SKU without extra spaces, in capitals"
+Marketplace,HC-1092,SKU,"""hc-1092""",HC-1092,"Same SKU without extra spaces, in capitals"
+Marketplace,HC-1094,SKU,"""hc-1094""",HC-1094,"Same SKU without extra spaces, in capitals"
+Marketplace,HC-1096,SKU,"""hc-1096""",HC-1096,"Same SKU without extra spaces, in capitals"
+Marketplace,HC-1100,Price,42.5,40.00,Match Hearth Shop (source of truth)
+Marketplace,HC-1101,Price,44,41.50,Match Hearth Shop (source of truth)
+Marketplace,HC-1102,Price,45.5,43.00,Match Hearth Shop (source of truth)
+Marketplace,HC-1103,Price,47,44.50,Match Hearth Shop (source of truth)
+Marketplace,HC-1104,Price,48.5,46.00,Match Hearth Shop (source of truth)
+Marketplace,HC-1105,Price,50,47.50,Match Hearth Shop (source of truth)
+Marketplace,HC-1106,Price,51.5,49.00,Match Hearth Shop (source of truth)
+Marketplace,HC-1107,Price,53,50.50,Match Hearth Shop (source of truth)
+Marketplace,HC-1108,Price,54.5,52.00,Match Hearth Shop (source of truth)
+Marketplace,HC-1109,Price,56,53.50,Match Hearth Shop (source of truth)

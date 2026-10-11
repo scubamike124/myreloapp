@@ -1,0 +1,13 @@
+﻿Lead,First contact,Attempts,Channel,Request,Urgency,Hours waiting
+"Helen Marsh, (512) 555-0105","Fri 9 Oct, 8:10am",1 call,"Phone, voicemail left",I smell gas near the furnace in the hall closet. Please call me back.,"Safety: call back by a person now (""smell gas"")",46
+"Sam Lee, (512) 555-0114","Fri 9 Oct, 3:00pm",1 web form,Website form,Electrical: There is smoke coming from the outlet in the bedroom and the wall feels hot.,"Safety: call back by a person now (""smoke"")",40
+"Daniel Ortiz, (512) 555-0103","Wed 7 Oct, 12:15pm",1 call + 1 web form,Phone and website form,"The water heater is leaking all over my garage floor, please call me back. / Drain cleaning: My basement floo…","Urgent: ""leaking"", ""overflowing""",90
+"Mario Costa, (512) 555-0104","Thu 8 Oct, 7:40pm (after hours)",1 call,"Phone, voicemail left","A pipe burst in the basement, there is water everywhere. Call me as soon as you can.","Urgent: ""burst""",59
+"Unknown caller, (512) 555-0101","Sat 3 Oct, 10:20am",1 call,"Phone, no voicemail",No voicemail left,Normal,188
+"Hector Ruiz, (512) 555-0112","Sun 4 Oct, 9:30am (after hours)",1 web form,Website form,Water softener: Can you install a water softener? We just moved in.,Normal,165
+"Gloria Pham, (512) 555-0102","Tue 6 Oct, 6:40am (after hours)",1 call,"Phone, voicemail left","Hi, my kitchen faucet is dripping and I would like someone to take a look.",Normal,120
+"Priya Shah, priya.shah@example.com","Tue 6 Oct, 9:12pm (after hours)",1 web form,Website form,"Water heater: Looking for a quote to replace a 12-year-old water heater. No rush, sometime this month.",Normal,105
+"Tom Rivera, (512) 555-0106","Thu 8 Oct, 9:00am",3 calls,"Phone, voicemail left",Calling about a quote for a bathroom repipe. Please call me back.,Normal,70
+"Unknown caller, (512) 555-0111","Fri 9 Oct, 1:05pm",1 call,"Phone, no voicemail",No voicemail left,Normal,41
+"Ravi Menon, (512) 555-0110","Sat 10 Oct, 3:20pm",1 call,"Phone, voicemail left","Hi, I want a quote on a water softener, call me back please.",Normal,15
+"Kim Park, kim.park@example.com","Sun 11 Oct, 6:00am (after hours)",1 web form,Website form,"Drain cleaning: Kitchen sink drains very slowly, can someone come this week?",Normal,1

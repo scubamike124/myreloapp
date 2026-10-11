@@ -1,0 +1,79 @@
+﻿Store,SKU,Issue,Detail
+Marketplace,HC-1001,Missing brand,required in Marketplace
+Marketplace,HC-1002,Missing GTIN,required in Marketplace
+Hearth Shop,HC-1003,No images,at least 1 image is needed
+Marketplace,HC-1004,Missing GTIN,required in Marketplace
+Hearth Shop,HC-1005,Description too short,10 characters; at least 50 needed
+Marketplace,HC-1006,Missing GTIN,required in Marketplace
+Hearth Shop,HC-1007,Invalid GTIN,"2000001002590 ends in 0, but its check digit should be 9"
+Hearth Shop,HC-1008,Duplicate SKU,"2 rows use it (rows 9, 10); only the first is compared across stores"
+Marketplace,HC-1010,Missing GTIN,required in Marketplace
+Marketplace,HC-1011,Missing brand,required in Marketplace
+Hearth Shop,HC-1012,Size name not standard,"""x-large""; the standard form is XL"
+Hearth Shop,HC-1013,No images,at least 1 image is needed
+Marketplace,HC-1014,Missing GTIN,required in Marketplace
+Hearth Shop,HC-1015,Description too short,10 characters; at least 50 needed
+Marketplace,HC-1016,Missing GTIN,required in Marketplace
+Marketplace,HC-1016,Size name not standard,"""Small""; the standard form is S"
+Hearth Shop,HC-1017,Invalid GTIN,"2000001006291 ends in 1, but its check digit should be 0"
+Hearth Shop,HC-1018,Duplicate SKU,"2 rows use it (rows 20, 21); only the first is compared across stores"
+Marketplace,HC-1020,Missing GTIN,required in Marketplace
+Marketplace,HC-1021,Missing brand,required in Marketplace
+Marketplace,HC-1022,Missing GTIN,required in Marketplace
+Hearth Shop,HC-1023,No images,at least 1 image is needed
+Hearth Shop,HC-1024,Size name not standard,"""large""; the standard form is L"
+Hearth Shop,HC-1025,Description too short,10 characters; at least 50 needed
+Hearth Shop,HC-1027,Invalid GTIN,"2000001009995 ends in 5, but its check digit should be 4"
+Hearth Shop,HC-1028,Duplicate SKU,"2 rows use it (rows 31, 32); only the first is compared across stores"
+Marketplace,HC-1028,Size name not standard,"""Extra Large""; the standard form is XL"
+Marketplace,HC-1030,Invalid GTIN,"2000001011103 ends in 3, but its check digit should be 2"
+Marketplace,HC-1031,Missing brand,required in Marketplace
+Marketplace,HC-1032,Invalid GTIN,"2000001011844 ends in 4, but its check digit should be 3"
+Hearth Shop,HC-1033,No images,at least 1 image is needed
+Marketplace,HC-1034,Invalid GTIN,"2000001012582 ends in 2, but its check digit should be 1"
+Hearth Shop,HC-1035,Description too short,10 characters; at least 50 needed
+Marketplace,HC-1036,Invalid GTIN,"2000001013329 ends in 9, but its check digit should be 8"
+Hearth Shop,HC-1037,Invalid GTIN,"2000001013695 ends in 5, but its check digit should be 4"
+Marketplace,HC-1038,Invalid GTIN,"2000001014067 ends in 7, but its check digit should be 6"
+Marketplace,HC-1040,Invalid GTIN,"1014806 has 7 digits (a GTIN has 8, 12, 13 or 14; a spreadsheet may have dropped a leading zero)"
+Marketplace,HC-1041,Missing brand,required in Marketplace
+Marketplace,HC-1042,Invalid GTIN,2.00482E+12 contains letters (a GTIN is digits only)
+Hearth Shop,HC-1043,No images,at least 1 image is needed
+Marketplace,HC-1044,Size name not standard,"""Extra Large""; the standard form is XL"
+Hearth Shop,HC-1045,Description too short,10 characters; at least 50 needed
+Hearth Shop,HC-1047,Invalid GTIN,"2000001017396 ends in 6, but its check digit should be 5"
+Marketplace,HC-1048,Size name not standard,"""Small""; the standard form is S"
+Marketplace,HC-1050,No images,at least 1 image is needed
+Marketplace,HC-1052,No images,at least 1 image is needed
+Hearth Shop,HC-1053,No images,at least 1 image is needed
+Marketplace,HC-1054,No images,at least 1 image is needed
+Hearth Shop,HC-1055,Description too short,10 characters; at least 50 needed
+Marketplace,HC-1056,No images,at least 1 image is needed
+Hearth Shop,HC-1057,Invalid GTIN,"2000001021096 ends in 6, but its check digit should be 5"
+Marketplace,HC-1060,Description too short,13 characters; at least 50 needed
+Marketplace,HC-1062,Description too short,13 characters; at least 50 needed
+Hearth Shop,HC-1063,No images,at least 1 image is needed
+Marketplace,HC-1064,Description too short,13 characters; at least 50 needed
+Marketplace,HC-1064,Color name not standard,"""navy blue""; the standard form is Navy Blue"
+Hearth Shop,HC-1065,Description too short,10 characters; at least 50 needed
+Marketplace,HC-1066,Description too short,13 characters; at least 50 needed
+Hearth Shop,HC-1067,Invalid GTIN,20000010O4799 contains letters (a GTIN is digits only)
+Marketplace,HC-1068,Description too short,13 characters; at least 50 needed
+Marketplace,HC-1068,Color name not standard,"""navy blue""; the standard form is Navy Blue"
+Marketplace,HC-1070,Description too short,13 characters; at least 50 needed
+Marketplace,HC-1072,Title too long,212 characters; Marketplace allows 200
+Marketplace,HC-1072,Color name not standard,"""navy blue""; the standard form is Navy Blue"
+Marketplace,HC-1074,Title too long,212 characters; Marketplace allows 200
+Hearth Shop,HC-1075,Description too short,10 characters; at least 50 needed
+Marketplace,HC-1076,Title too long,212 characters; Marketplace allows 200
+Marketplace,HC-1076,Color name not standard,"""navy blue""; the standard form is Navy Blue"
+Hearth Shop,HC-1077,Invalid GTIN,20000010O8490 contains letters (a GTIN is digits only)
+Marketplace,HC-1080,Duplicate SKU,"2 rows use it (rows 204, 205); only the first is compared across stores"
+Marketplace,HC-1082,Duplicate SKU,"2 rows use it (rows 207, 208); only the first is compared across stores"
+Hearth Shop,HC-1085,Description too short,10 characters; at least 50 needed
+Hearth Shop,HC-1087,Title too long,262 characters; Hearth Shop allows 255
+Marketplace,HC-1090,SKU needed cleaning,"""hc-1090"" is matched as HC-1090"
+Marketplace,HC-1092,SKU needed cleaning,"""hc-1092"" is matched as HC-1092"
+Marketplace,HC-1094,SKU needed cleaning,"""hc-1094"" is matched as HC-1094"
+Marketplace,HC-1096,SKU needed cleaning,"""hc-1096"" is matched as HC-1096"
+Marketplace,HC-1098,Price not readable,"""TBD"" is not a price"

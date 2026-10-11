@@ -1,0 +1,38 @@
+Supplier,Invoice Date,Invoice Number,Gross Amount,Currency,Document Type,Filename
+Harbor Coffee,2026-08-02,,12.50,USD,Receipt,harbor-coffee-0802.jpg
+Harbor Coffee,2026-09-01,,12.50,USD,Receipt,harbor-coffee-0901.jpg
+Adobe,2026-09-02,AD-77120,54.99,USD,Invoice,adobe-sep.pdf
+Home Depot,2026-09-03,,143.26,USD,Receipt,home-depot-0903.jpg
+Luna Tacos,2026-09-03,,31.00,USD,Receipt,luna-tacos-0903.jpg
+Amazon,2026-09-04,,86.47,USD,Receipt,amazon-order-114-2.pdf
+Brightwater Utilities,2026-09-04,BW-3321,212.80,USD,Invoice,brightwater-sep.pdf
+Northside Print & Copy,2026-09-05,,76.15,USD,Receipt,northside-0905.jpg
+Blue Heron Bistro,2026-09-06,,50.00,USD,Receipt,blue-heron-0906.jpg
+Shell,2026-09-08,,48.92,USD,Receipt,shell-0908.jpg
+Costco,2026-09-09,,230.45,USD,Receipt,costco-0909.jpg
+United Airlines,2026-09-09,UA-5521,342.10,USD,Invoice,united-ticket.pdf
+GitHub,2026-09-10,GH-30911,21.00,USD,Invoice,github-sep.pdf
+Maple & Main Deli,2026-09-11,,27.85,USD,Receipt,maple-main-0911.jpg
+Zoom,2026-09-11,ZM-6620,15.99,USD,Invoice,zoom-sep.pdf
+Staples,2026-09-12,,64.30,USD,Receipt,staples-0912.jpg
+Staples,2026-09-12,CN-100,-20.00,USD,Credit Note,staples-credit.pdf
+Margot Reyes Design,2026-09-13,MR-1042,1000.00,USD,Invoice,reyes-1042.pdf
+Green Leaf Cafe,2026-09-14,,18.40,USD,Receipt,green-leaf-0914.jpg
+Verizon,2026-09-15,V-9921,189.99,USD,Invoice,verizon-sep.pdf
+Intuit QuickBooks,2026-09-16,IQ-44102,80.00,USD,Invoice,quickbooks-sep.pdf
+Summit Legal Services,2026-09-17,SL-8812,1250.00,USD,Invoice,summit-legal-8812.pdf
+Uber,2026-09-17,,23.58,USD,Receipt,uber-0917.pdf
+Atelier Vogel,2026-09-18,AV-117,180.00,EUR,Invoice,atelier-vogel-117.pdf
+Office Depot,2026-09-19,,112.04,USD,Receipt,office-depot-0919.jpg
+Fernwood Coworking,2026-09-20,FC-2026-09,450.00,USD,Invoice,fernwood-sep.pdf
+Fernwood Coworking,2026-09-20,FC-2026-09,450.00,USD,Invoice,fernwood-sep-copy.pdf
+Geico,2026-09-20,GE-90311,164.20,USD,Invoice,geico-sep.pdf
+PixelNest,2026-09-21,PN-55120,59.99,USD,Invoice,pixelnest-sep.pdf
+Walgreens,2026-09-22,,22.17,USD,Receipt,walgreens-0922.jpg
+Chevron,2026-09-23,,55.30,USD,Receipt,chevron-0923.jpg
+FedEx,2026-09-25,,38.75,USD,Receipt,fedex-0925.jpg
+Riverbend Florist,2026-09-26,,65.00,USD,Receipt,riverbend-0926.jpg
+Lakeside Bakery,2026-09-28,,27.60,USD,Receipt,lakeside-0928.jpg
+Cedar Hardware,2026-09-29,,34.10,USD,Receipt,cedar-hardware-0929.jpg
+First Test Bank,2026-09-30,,9000.00,USD,Statement,bank-statement-sep.pdf
+Mystery Vendor,sometime in sept,,19.99,USD,Receipt,scan-0099.jpg

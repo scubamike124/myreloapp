@@ -1,0 +1,7 @@
+﻿Time of day,Missed calls,Outside your hours
+Before 9am,2,1
+9am to noon,5,0
+Noon to 3pm,3,0
+3pm to 6pm,2,0
+6pm or later,1,1
+Total,13,2

@@ -1,0 +1,20 @@
+﻿Item
+"High: /book page, form #appointment-request: Give each field a visible label tied to it (<label for=""field-id"">); a placeholder is not a label. Fields: ""Full name"" (placeholder only); ""Phone"" (placeholder only); ""Anything we should know?"" (placeholder only)."
+"High: Give each meaningful image a short alt description; use alt="""" for purely decorative images. Pages: home page."
+"Medium: /book page, form #appointment-request: Use type=""email"" (with autocomplete=""email"") for email fields. Fields: Email."
+"Medium: /book page, form #appointment-request: Use type=""tel"" (with autocomplete=""tel"") for phone fields. Fields: ""Phone"" (placeholder only)."
+"Medium: /book page, form #appointment-request: Ask for dates with a date input (type=""date"") or separate day, month and year boxes. Fields: Preferred date."
+"Medium: /book page, form #appointment-request: Show which fields are required: put ""(required)"" or * in their labels, or say ""All fields are required"". Fields: ""Full name"" (placeholder only), Email, ""Phone"" (placeholder only), Preferred date."
+"Medium: /book page, form #appointment-request: Cut the form to what you need to confirm a first visit and ask the rest later. Fields: All 12 visible fields."
+"Medium: contact page, form #contact-form: Use type=""tel"" (with autocomplete=""tel"") for phone fields. Fields: Phone (optional)."
+"Medium (an estimate to confirm by hand): Associate every input, select and textarea with a visible `<label for=…>` or an aria-label. Pages: home page, /book page."
+"Medium: Add a lang attribute to the `<html>` element, for example lang=""en"". Pages: home page, /book page."
+Medium: Use heading levels in order and style with CSS rather than by choosing a heading level for its size. Pages: home page.
+Medium: Test text and background colours with a contrast checker (4.5:1 for normal text). Pages: home page.
+"Medium (site health): These security headers were not found: Content-Security-Policy, Referrer-Policy. Ask whoever hosts the site whether they are set elsewhere or should be added."
+"Low: /book page, form #appointment-request: Add autocomplete=""name"", ""email"" or ""tel"" so phones and browsers can fill these fields in. Fields: ""Full name"" (placeholder only); Email; ""Phone"" (placeholder only)."
+"Low: /book page, form #appointment-request: Name the button for what it does, for example ""Request appointment"". Fields: Submit button (""Submit"")."
+"Low: /book page, form #appointment-request: Find out where form spam is filtered; if nowhere, add a honeypot field or a privacy-friendly challenge."
+"Low: /book page, form #appointment-request: Send a test booking yourself and check what the customer sees and receives next."
+"Then: have a person book a test appointment with only a keyboard, and with a screen reader, and measure colour contrast with a contrast checker."
+"After fixing, ask for a re-check to compare."

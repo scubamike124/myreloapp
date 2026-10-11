@@ -1,0 +1,27 @@
+Reviewer notes: receipt-invoice-matching for Invented Test Co, as of 2026-10-11. Keep this file; do not send it to the client.
+Data: invented test data (--synthetic)
+13 of 13 QA checks passed.
+
+Rows or messages left out of the report (6 note(s)). The report does not list them; check them with the client:
+- Bank export: lines 16, 24, 39 ($6,870.20) skipped: money in (a deposit, refund or payment to the card); this review matches money paid out.
+- Bank export: lines 2, 40 ($223.80) skipped: outside the period 2026-09-01 to 2026-09-30.
+- Documents, line 38 (Mystery Vendor) skipped: date "sometime in sept" not readable.
+- Documents: line 2 skipped: dated outside 2026-08-29 to 2026-10-03 (the period, 3 days either side), so no payment in it could match.
+- Documents: line 18 skipped: a credit note or refund (refunds are left out on the bank side too).
+- Documents: line 37 skipped: not a receipt or an invoice for a purchase (type "Statement").
+
+Everything the importer reported (columns read, rows skipped and why, assumptions):
+- Bank export: read "Posting Date" as date, "Description" as bankText, "Amount" as amount, "Type" as direction.
+- Bank export: columns not used: "Details", "Balance", "Check or Slip #".
+- Documents: read "Supplier" as vendor, "Invoice Date" as date, "Gross Amount" as total, "Invoice Number" as invoiceNumber, "Currency" as currency, "Document Type" as kind, "Filename" as fileName.
+- Bank export: money out or in read from "Type" where it says debit or credit (or a word like Sale or Deposit), otherwise a negative amount is money out (most bank exports; set spendingSign=positive for an export that shows spending as positive).
+- Bank export: no account column; every transaction is labelled "Checking 2290".
+- Bank export: lines 16, 24, 39 ($6,870.20) skipped: money in (a deposit, refund or payment to the card); this review matches money paid out.
+- Bank export: lines 2, 40 ($223.80) skipped: outside the period 2026-09-01 to 2026-09-30.
+- Documents, line 38 (Mystery Vendor) skipped: date "sometime in sept" not readable.
+- Documents: line 2 skipped: dated outside 2026-08-29 to 2026-10-03 (the period, 3 days either side), so no payment in it could match.
+- Documents: line 18 skipped: a credit note or refund (refunds are left out on the bank side too).
+- Documents: line 37 skipped: not a receipt or an invoice for a purchase (type "Statement").
+- 34 money-out transactions from 2026-09-01 to 2026-09-30, 33 documents (19 receipts, 14 invoices). Ids: T- and the line in the bank export, D- and the line in the documents export.
+
+Before sending: open report.html and read it through; read every draft as the person who would send it; settle every failed check and every left-out row above; then send the folder (zip it) yourself. Nothing here sends anything.

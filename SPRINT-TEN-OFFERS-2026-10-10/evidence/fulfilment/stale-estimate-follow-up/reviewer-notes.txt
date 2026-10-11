@@ -1,0 +1,16 @@
+Reviewer notes: stale-estimate-follow-up for Invented Test Co, as of 2026-10-11. Keep this file; do not send it to the client.
+Data: invented test data (--synthetic)
+15 of 15 QA checks passed.
+
+Rows or messages left out of the report (2 note(s)). The report does not list them; check them with the client:
+- Line 27 (estimate E-2026) skipped: a draft, never sent to the customer.
+- Line 28 (estimate E-2027) skipped: status "On hold" is not one this report reads (open, sent, awaiting response, pending, approved, converted, won, declined, lost, archived or expired).
+
+Everything the importer reported (columns read, rows skipped and why, assumptions):
+- Estimates export: read "Quote #" as number, "Client name" as customer, "Contact" as contactName, "Client email" as email, "Client phone" as phone, "Title" as job, "Total" as amount, "Sent date" as sentOn, "Status" as status, "Last contact date" as lastContactOn, "Do not contact" as doNotContact, "Notes" as notes.
+- Line 18 (estimate E-2017): the notes ask not to follow up, so it is marked do not contact.
+- Line 27 (estimate E-2026) skipped: a draft, never sent to the customer.
+- Line 28 (estimate E-2027) skipped: status "On hold" is not one this report reads (open, sent, awaiting response, pending, approved, converted, won, declined, lost, archived or expired).
+- 25 estimate row(s) read: 19 open, 2 won, 2 lost, 1 declined, 1 expired.
+
+Before sending: open report.html and read it through; read every draft as the person who would send it; settle every failed check and every left-out row above; then send the folder (zip it) yourself. Nothing here sends anything.

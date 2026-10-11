@@ -1,0 +1,5 @@
+HTTP/2 200
+content-type: text/html; charset=utf-8
+strict-transport-security: max-age=31536000
+x-frame-options: SAMEORIGIN
+server: invented-test-server

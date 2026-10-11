@@ -1,0 +1,1 @@
+npx tsx scripts/offers-run.ts inbox-triage --as-of 2026-10-11 --business 'Invented Test Co' --opt 'signOff=Alex\nInvented Test Co support' --opt refundWindowDays=30 --opt 'shippingTime=3-5 business days' --opt ownAddresses=invented-test-co.example --file messages=inputs/messages.csv --synthetic --out report.md --bundle delivery

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Contact | Willow &amp; Wren Salon</title>
+</head>
+<body>
+  <main>
+    <h1>Contact us</h1>
+    <form id="contact-form" action="/contact/send" method="post">
+      <p>Fields marked * are required.</p>
+      <label for="c-name">Name *</label>
+      <input id="c-name" name="name" type="text" autocomplete="name" required>
+      <label for="c-email">Email *</label>
+      <input id="c-email" name="email" type="email" autocomplete="email" required>
+      <label for="c-phone">Phone (optional)</label>
+      <input id="c-phone" name="phone" type="text" autocomplete="tel">
+      <label for="c-message">Message *</label>
+      <textarea id="c-message" name="message" rows="5" required></textarea>
+      <div class="hp-field" aria-hidden="true" style="display:none">
+        <label for="c-website">Leave this field empty</label>
+        <input id="c-website" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <input type="hidden" name="_next" value="https://invented-salon.example/contact/thanks">
+      <button type="submit">Send</button>
+      <p class="form-note">We'll reply within one working day.</p>
+    </form>
+  </main>
+  <footer><a href="/privacy">Privacy notice</a></footer>
+</body>
+</html>

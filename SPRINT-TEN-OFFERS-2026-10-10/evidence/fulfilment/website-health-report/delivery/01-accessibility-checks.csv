@@ -1,0 +1,10 @@
+﻿Page,Check,Finding
+home page,Images without alt text,"serious, 3 potential occurrences. Screen-reader users get no description of the image."
+home page,Form fields that may have no accessible name,"moderate, 1 potential occurrence, an estimate to confirm by hand. People using assistive technology cannot tell what a field is for. This is an estimate from counts of fields and labels, so confirm each field by hand."
+home page,No page language declared,"moderate, 1 potential occurrence. Screen readers may pronounce the page with the wrong voice."
+home page,Heading levels skip,"moderate, 1 potential occurrence. A skipped level (for example h2 to h4) makes the page outline harder to navigate with a screen reader."
+home page,Inline colours to review for contrast,"moderate, 1 potential occurrence. Colour declarations were found in the page's HTML. Contrast was NOT measured; this is only a prompt to check."
+/book page,Form fields that may have no accessible name,"moderate, 3 potential occurrences, an estimate to confirm by hand. People using assistive technology cannot tell what a field is for. This is an estimate from counts of fields and labels, so confirm each field by hand."
+/book page,No page language declared,"moderate, 1 potential occurrence. Screen readers may pronounce the page with the wrong voice."
+contact page,All five checks,No findings from the five checks on this page. That does not mean the page is accessible.
+about page,All five checks,No findings from the five checks on this page. That does not mean the page is accessible.

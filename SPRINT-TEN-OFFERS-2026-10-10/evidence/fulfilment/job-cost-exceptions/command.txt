@@ -1,0 +1,1 @@
+npx tsx scripts/offers-run.ts job-cost-exceptions --as-of 2026-10-11 --business 'Invented Test Co' --file budgets=inputs/budgets.csv --file transactions=inputs/transactions.csv --file jobs=inputs/jobs.csv --file codes=inputs/codes.csv --synthetic --out report.md --bundle delivery

@@ -1,0 +1,1 @@
+npx tsx scripts/offers-run.ts catalog-cleanup --as-of 2026-10-11 --business 'Invented Test Co' --file storefront=inputs/storefront.csv --file marketplace=inputs/marketplace.txt --opt 'storefrontName=Hearth Shop' --opt marketplaceName=Marketplace --synthetic --out report.md --bundle delivery

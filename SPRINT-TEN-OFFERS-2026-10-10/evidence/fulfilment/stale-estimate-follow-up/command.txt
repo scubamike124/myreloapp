@@ -1,0 +1,1 @@
+npx tsx scripts/offers-run.ts stale-estimate-follow-up --as-of 2026-10-11 --business 'Invented Test Co' --opt 'signOff=Sam\nInvented Test Co' --opt 'trade=kitchen and bath remodeling' --file estimates=inputs/estimates.csv --opt 'doNotContact=E-2018,Pine Street Dental' --synthetic --out report.md --bundle delivery

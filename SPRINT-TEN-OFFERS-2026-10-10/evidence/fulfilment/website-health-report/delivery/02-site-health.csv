@@ -1,0 +1,9 @@
+﻿Check,Result
+Served over HTTPS,yes
+Content-Security-Policy header,not found
+Strict-Transport-Security header,present
+Clickjacking protection (X-Frame-Options or frame-ancestors),present
+Referrer-Policy header,not found
+Privacy notice linked,link found
+Cookie / privacy-choice wording,none found
+Third-party domains seen in the HTML,"2: cdn.bookwidget.example, fonts.example.net"

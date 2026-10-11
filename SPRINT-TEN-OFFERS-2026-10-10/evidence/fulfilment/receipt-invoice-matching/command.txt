@@ -1,0 +1,1 @@
+npx tsx scripts/offers-run.ts receipt-invoice-matching --as-of 2026-10-11 --business 'Invented Test Co' --opt periodFrom=2026-09-01 --opt periodTo=2026-09-30 --file transactions=inputs/bank.csv --file documents=inputs/documents.csv --opt 'vendorAliases=AMZN MKTP US=Amazon' --opt 'account=Checking 2290' --synthetic --out report.md --bundle delivery

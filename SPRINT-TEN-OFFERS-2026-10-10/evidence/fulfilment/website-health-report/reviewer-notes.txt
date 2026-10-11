@@ -1,0 +1,14 @@
+Reviewer notes: website-health-report for Invented Test Co, as of 2026-10-11. Keep this file; do not send it to the client.
+Data: invented test data (--synthetic)
+13 of 13 QA checks passed.
+
+No note says rows or messages were left out.
+
+Everything the importer reported (columns read, rows skipped and why, assumptions):
+- First page's headers: 4 read.
+- https://invented-salon.example/: 1,362 characters of HTML.
+- https://invented-salon.example/book: 1,699 characters of HTML.
+- https://invented-salon.example/contact: 1,299 characters of HTML.
+- https://invented-salon.example/about: 417 characters of HTML.
+
+Before sending: open report.html and read it through; read every draft as the person who would send it; settle every failed check and every left-out row above; then send the folder (zip it) yourself. Nothing here sends anything.

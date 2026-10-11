@@ -1,0 +1,14 @@
+Reviewer notes: crm-cleanup for Invented Test Co, as of 2026-10-11. Keep this file; do not send it to the client.
+Data: invented test data (--synthetic)
+12 of 12 QA checks passed.
+
+No note says rows or messages were left out.
+
+Everything the importer reported (columns read, rows skipped and why, assumptions):
+- Contacts export: read "ID" as id, "Full Name" as fullName, "Company" as company, "Email Address" as email, "Mobile" as mobile, "City" as city, "State" as state, "Lead Source" as source, "Owner" as owner, "Stage" as stage, "Date Added" as createdOn, "Last Contacted" as lastActivityOn.
+- Stages read: "Qualified" → qualified (74), "Customer" → customer (57), "Prospect" → lead (56), "Lead" → lead (55), "Closed Won" → customer (47), "Lost" → lost (31).
+- Names split into first and last name from "Full Name" on 320 row(s): the last word is the last name, with "de", "van" and similar kept with it; "Reyes, Ana" is read last name first.
+- 316 record(s) have no phone but a mobile number, which is used as the phone (lines 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 and 306 more).
+- 320 contact record(s) read.
+
+Before sending: open report.html and read it through; read every draft as the person who would send it; settle every failed check and every left-out row above; then send the folder (zip it) yourself. Nothing here sends anything.

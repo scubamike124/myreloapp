@@ -1,0 +1,7 @@
+﻿Bucket,Invoices,Total
+Current (not yet due),3,"$3,250.00"
+1 to 30 days past due,6,"$8,850.00"
+31 to 60 days past due,6,"$22,825.50"
+61 to 90 days past due,3,"$7,290.00"
+More than 90 days past due,2,"$10,540.00"
+Total,20,"$52,755.50"

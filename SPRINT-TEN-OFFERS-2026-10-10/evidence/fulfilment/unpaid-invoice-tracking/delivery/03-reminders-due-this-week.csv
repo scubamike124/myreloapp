@@ -1,0 +1,13 @@
+﻿Invoice,Customer,Days overdue,Balance,Last reminder,Why
+I-3009,Ironwood Cafe,120,$640.00,Sept 11,"120 days past due; last reminder 30 days ago. Tone: firm, with an offer to talk."
+I-3008,Harborview Realty,95,"$9,900.00",none,"95 days past due; no reminder yet. Tone: firm, with an offer to talk."
+I-3014,Northgate Bakery,70,"$3,150.00",Sept 27,"70 days past due; last reminder 14 days ago. Tone: firm, with an offer to talk."
+I-3007,Granite Peak Fitness,61,"$1,540.00",none,"61 days past due; no reminder yet. Tone: firm, with an offer to talk."
+I-3006,Fairlight Events,60,"$7,800.00",none,60 days past due; no reminder yet. Tone: firm and polite.
+I-3005,Elmhurst Dental,45,"$1,275.50",none,"45 days past due; no reminder yet; $1,000.00 paid of $2,275.50. Tone: firm and polite."
+I-3004,Dunmore Tools,31,"$5,600.00",none,31 days past due; no reminder yet. Tone: firm and polite.
+I-3003,Cobalt Studio,30,$890.00,none,30 days past due; no reminder yet. Tone: friendly.
+I-3002,Birchwood Clinic,25,"$3,450.00",none,25 days past due; no reminder yet. Tone: friendly.
+I-3001,Tidewater Plumbing,12,"$1,200.00",none,12 days past due; no reminder yet. Tone: friendly.
+I-3010,Juniper Salon,5,$430.00,none,5 days past due; no reminder yet. Tone: friendly.
+I-3011,Kestrel Auto,1,"$2,100.00",none,1 day past due; no reminder yet. Tone: friendly.

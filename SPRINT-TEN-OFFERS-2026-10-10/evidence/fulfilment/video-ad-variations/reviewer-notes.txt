@@ -1,0 +1,10 @@
+Reviewer notes: video-ad-variations for Invented Test Co, as of 2026-10-11. Keep this file; do not send it to the client.
+Data: invented test data (--synthetic)
+14 of 14 QA checks passed.
+
+No note says rows or messages were left out.
+
+Everything the importer reported (columns read, rows skipped and why, assumptions):
+- 32 transcript line(s) read, 0–118 s.
+
+Before sending: open report.html and read it through; read every draft as the person who would send it; settle every failed check and every left-out row above; then send the folder (zip it) yourself. Nothing here sends anything.

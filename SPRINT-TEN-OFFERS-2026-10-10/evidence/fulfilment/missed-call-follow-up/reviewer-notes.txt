@@ -1,0 +1,29 @@
+Reviewer notes: missed-call-follow-up for Invented Test Co, as of 2026-10-11. Keep this file; do not send it to the client.
+Data: invented test data (--synthetic)
+17 of 17 QA checks passed.
+
+Rows or messages left out of the report (6 note(s)). The report does not list them; check them with the client:
+- Call log: line 37 skipped: the caller ID marks it as spam or a scam (the first: "SPAM RISK").
+- Call log: lines 38, 39 and 40 skipped: not a customer call (a fax, an internal call, or marked blocked, spam or wrong number) (the first: "Inbound, Voice, Blocked").
+- Call log: line 41 skipped: an incoming text message, not a call.
+- Call log: line 42 skipped: after the as-of time (2026-10-11 07:00, the opening time), so left for the next report.
+- Website inquiries: line 8 skipped: after the as-of time (2026-10-11 07:00, the opening time), so left for the next report.
+- Website inquiries: line 9 skipped: no usable email address or 10-digit phone number to reply to (the first: "(blank)").
+
+Everything the importer reported (columns read, rows skipped and why, assumptions):
+- Call log: read "Call ID" as id, "Start Time" as at, "From" as from, "To" as to, "Caller Name" as callerName, "Direction" as direction, "Type" as kind, "Result" as status, "Duration (sec)" as duration, "Voicemail Transcription" as transcript.
+- Website inquiries: read "Entry ID" as id, "Submitted At" as at, "Name" as name, "Email" as email, "Phone" as phone, "Service" as service, "Message" as message.
+- Follow-ups: read "Date Sent" as at, "To" as to, "Type" as by.
+- Call log: line 37 skipped: the caller ID marks it as spam or a scam (the first: "SPAM RISK").
+- Call log: lines 38, 39 and 40 skipped: not a customer call (a fax, an internal call, or marked blocked, spam or wrong number) (the first: "Inbound, Voice, Blocked").
+- Call log: line 41 skipped: an incoming text message, not a call.
+- Call log: line 42 skipped: after the as-of time (2026-10-11 07:00, the opening time), so left for the next report.
+- Call log: line 32: marked answered but under 10 seconds long, so counted as missed (the caller most likely reached no one).
+- Call log: 1 caller name(s) are phone-carrier placeholders (such as "WIRELESS CALLER") and are left blank.
+- Website inquiries: line 8 skipped: after the as-of time (2026-10-11 07:00, the opening time), so left for the next report.
+- Website inquiries: line 9 skipped: no usable email address or 10-digit phone number to reply to (the first: "(blank)").
+- Website inquiries: 6 read.
+- Call log: 31 call(s) read, 13 missed and 18 answered.
+- Follow-ups: 8 read (4 from outbound rows in the call log).
+
+Before sending: open report.html and read it through; read every draft as the person who would send it; settle every failed check and every left-out row above; then send the folder (zip it) yourself. Nothing here sends anything.
