@@ -1,22 +1,23 @@
-# Promotion plan 2026-10-11.1: the ten pilot offers on Facebook Page
+# Promotion plan 2026-10-11.2: the ten pilot offers on Facebook Page
 
 Generated from `src/lib/offers/promotion.ts`; the worker builds each post with the same code. Nothing here has been posted.
 
 ## Rules that must all hold before a post is created
 
 1. The offer is marked **ready** in `src/lib/offers/readiness.ts` (the pilot runner was run on invented data through the whole path and the result read). An offer without that record is never promoted and its page takes no orders.
-2. A Facebook Page account is connected (derives CONNECTED and has a chosen Page), and the Page's name matches /amber/i or the owner named it with `promo-page: <name>` on #105. A Page for another brand is never posted to.
-3. The owner has not written `promo: pause` on #105 (a later `promo: resume` lifts it). If #105 cannot be read, nothing is created.
-4. It is a weekday slot at 14:00 UTC (10:00 Eastern, 07:00 Pacific), at least 20 hours after the last post was queued, no more than 7 posts in 7 days, and a slot missed by more than 8 hours waits for the next one. The publish queue also paces posts on one account (Facebook: 20 minutes).
-5. Nothing else is in flight on the channel, and the last two finished posts did not both fail (the owner's `promo: resume` clears that stop).
-6. The post has never been created before: each post is created once and never again, whatever became of it.
+2. A Facebook Page account is connected (derives CONNECTED and has a chosen Page), and the Page's name, as Meta returned it when the owner logged in (never the editable handle), matches /\bamber\s*(?:one|ai)\b/i ("Amber One AI", "AmberOne", "Amber AI" and "AmberAI" do; "Chamber of Commerce", "Camber Auto" and "Amber's Bakery" do not) or the owner named it with `promo-page: <name>` on #105. A Page for another brand is never posted to. If two connected Pages pass, nothing is posted until the owner names the one to use.
+3. The owner has not paused the lane on #105. `promo: pause` pauses it, and so does any other word after `promo:` that is not `resume` or `start` (it is shown on the tracker line as not understood); a pause counts even in an indented block, an HTML comment or a code block that is never closed (only a closed code block or a quote is ignored, so an example does not stop the lane). Only a plain `promo: resume` (or `promo: start`) line lifts it, not one inside a code block, an indented block, a quote or an HTML comment. If #105 cannot be read, nothing is created.
+4. It is a weekday slot at 14:00 UTC (10:00 US Eastern during daylight time, 09:00 in winter), at least 20 hours after the last post was queued, no more than 7 posts in 7 days (a backstop: the slots already keep it to six at most), and a slot missed by more than 8 hours waits for the next one. The publish queue also paces posts on one account (Facebook: 20 minutes).
+5. Nothing else is in flight on the Page (this lane's earlier post, or any other post or video queued on that account), the factory's stop-all and marketing pauses are off, and the plain offer page answers HTTP 200. The last two finished posts did not both fail (the owner's `promo: resume` clears that stop), and a post that Meta did not confirm (it may be live) stops the lane until the owner has checked the Page and written `promo: resume`.
+6. A post is made once. One that Meta accepted, or that may have gone out, is never made again. A job cancelled before anything was sent (the login needed the owner, or the owner paused) is replaced by a fresh job once every gate passes, at most 3 times in all.
 
-Every state change is written to a ledger and shown in the offer tracker on #105 with the post's live link or its exact error. Advertising counts as started on a channel only when a post there is live with its link recorded.
+Every state change is written to a ledger and shown in the offer tracker on #105 with the post's live link or its exact error. A post counts as live only when Meta reads it back with the Page's own token and its link is recorded; advertising counts as started on a channel only then. A post that Meta accepted but that could not be read back is shown as unverified, linked by its post id, and does not count. Open a live link in a logged-out browser window to confirm that the public can see it (a Meta app in Development mode may show posts only to people with a role on the app).
 
 ## The owner's switches (plain lines in a #105 comment from the owner's account)
 
-- `promo: pause` stops new posts and cancels any not yet sent. `promo: resume` starts again.
-- `promo-page: <Page name>` allows a connected Page whose name does not contain "amber".
+- `promo: pause` stops new posts and cancels any not yet sent (a post that has been sent is left alone). `promo: resume` starts again.
+- `promo-page: <Page name>` allows a connected Page whose name does not match Amber One AI's (and chooses between two that do).
+- A comment counts as the owner's only if it comes from the owner's account and does not begin with an Amber report marker (`<!-- amber-... -->`).
 
 ## Order, readiness and text
 
