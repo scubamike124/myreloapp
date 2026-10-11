@@ -12,13 +12,13 @@ This folder is the working record. The live numbers are in one comment on the is
 
 | Piece | What it does | Where | State |
 |---|---|---|---|
-| Funnel measurement | Counts visitors (browser sessions), signups, first study set, came back, free-trial started, checkout started, verified live payments, by source; leaves out synthetic and test accounts; revenue only from Stripe's signed word in live mode | amberai PR #805 (`src/lib/studyproofs/funnel.ts`) | see the PR |
-| Production journey probe | The walk above, plus read-only checks of the OpenAI key, the Stripe key and its mode, Stripe's webhook records, and whether the product's domain can receive mail; names the exact missing requirement | PR #805 (`probe.ts`) | see the PR |
-| Tracker comment | Verdict, funnel, probe, demonstrations, outreach state | PR #805 (`tracker.ts`) | see the PR |
-| Gate on the outreach campaign | The daily 18:30Z tutoring-center campaign sends only while the probe has a current pass (the newest run passed within 36 hours, under the current rules) | follow-up PR | built |
-| Demonstrations | The product's own pipeline run over three sample notes we wrote; kept only if every card and question cites a real line of the notes; posted for review; never edited | follow-up PR (`demo-gen.ts`) | built, waits for the key |
-| Example pages | `/studyproofs/examples/<slug>`: the notes, and everything the product made, each item with its source line | follow-up PR (`examples.ts`) | built, empty until the first reviewed example |
-| Free trials | A code the owner's side makes (an internal route): Student or Pro for a number of days, no card, no charge, one per account, never counted as a payment | follow-up PR (`trial.ts`) | built |
+| Funnel measurement | Counts visitors (browser sessions), signups, first study set, came back, free-trial started, checkout started, verified live payments, by source; leaves out synthetic and test accounts; revenue only from Stripe's signed word in live mode | amberai PR #805 (`src/lib/studyproofs/funnel.ts`), fixed in #807 | merged and deployed |
+| Production journey probe | The walk above, plus read-only checks of the OpenAI key, the Stripe key and its mode, Stripe's webhook records, and whether the product's domain can receive mail; names the exact missing requirement | PRs #805, #806, #807 (`probe.ts`); a real text PDF, accounts that survive between runs and Stripe's customer portal are added in the product-fixes PR | merged and deployed; the additions are in review |
+| Tracker comment | Verdict, funnel, probe, demonstrations, outreach state | PRs #805, #807 (`tracker.ts`) | merged and deployed |
+| Gate on the outreach campaign | The daily 18:30Z tutoring-center campaign sends only while the probe has a current pass (the newest run passed within 36 hours, under the current rules) | PR #806 | merged and deployed; the approval list is empty, so nothing sends |
+| Demonstrations | The product's own pipeline run over three sample notes we wrote; kept only if every card and question cites a real line of the notes; posted for review; never edited | PR #806 (`demo-gen.ts`) | merged; the first attempt (2026-10-11 20:56Z) kept none (4 flashcards from each short sample); the next version tries each sample up to five times |
+| Example pages | `/studyproofs/examples/<slug>`: the notes, and everything the product made, each item with its source line | PR #806 (`examples.ts`) | merged; empty until the first reviewed example |
+| Free trials | A code the owner's side makes (an internal route): Student or Pro for a number of days, no card, no charge, one per account, never counted as a payment | PR #806 (`trial.ts`) | merged and deployed |
 | Video and image renderer | Turns a reviewed demonstration into a 32-second vertical video (silent, captions on screen), a feed image, a pin image and a preview image | `tools/render-demo.mjs` here | built |
 | Community research | Where student-audience promotion is allowed, rules per place, what a first post looks like | `COMMUNITY-RESEARCH.md` here | filed |
 
@@ -26,7 +26,7 @@ This folder is the working record. The live numbers are in one comment on the is
 
 - **Visitors** are browser sessions that loaded a StudyProofs page, once per page per session, after the page loaded (crawlers and link previews are not counted). No IP address or cookie is kept.
 - **Source** is the link's `src` (or the older `ref`) and `campaign`, kept for the browser session so a signup is attributed to the page that brought the student; a source lost between sessions shows as direct.
-- **First study set**: a study set with at least one flashcard or question. **Came back**: activity on a UTC day after the signup day.
+- **First study set**: a study set with at least one flashcard or question. **Came back**: activity six hours or more after signing up on a later UTC day, or twenty hours or more after on any day (so one late-night sitting that crosses midnight is not a return, and a student who comes back the next evening is).
 - **Free trial started**: the account redeemed a trial code. It is never a payment. **Paid (live)**: Stripe's signed webhook for a live checkout session, once per account; the revenue column adds only that first payment.
 - Synthetic accounts (the probe's), the worker's self-test, test-mode payments and the owner's own $1 verification plan are left out of every count.
 
