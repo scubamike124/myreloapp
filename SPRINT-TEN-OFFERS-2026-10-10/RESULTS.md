@@ -220,3 +220,8 @@ Not verified (0):
 - none
 
 Research summary: Upwork buyer job posts with budgets ($150, and $225 for 3–4 hook variations from the same footage with captions); Fiverr video-ad sellers with 1,378 and 442 reviews. Buyers pay: $40–$200 per edited video; $99–$150 per UGC video; AI tools $15–$99/month. Risk: Meta now rewards genuinely different concepts, so hook-only cuts may count as near-duplicates; Meta's own tools, OpusClip and CapCut cap prices.
+
+## StudyProofs (not one of the ten offers): result so far, 2026-10-11 night
+
+The owner's follow-up experiment is to learn whether students use StudyProofs again and pay, so nothing is advertised until the product passes a production walk. Result so far: **the journey works up to payment** (two walks: signup, a real study set from our sample notes, library, quiz, a second sign-in, a free-trial code, a live-mode Checkout session), **two checks fail** (Stripe's webhook list was unread because the worker's vault holds no Stripe key, fixed by reading through the web service; and `studyproofs.com` is unregistered, so every support, refund and privacy address receives nothing: the owner's decision), the old tutoring-center campaign had emailed 19 universities 577 times and is held, and no student, visit or payment is on record yet (visitors 0, first study sets 0, verified payments $0.00). Details and the owner's decisions: `HANDOFF.md` (top section) and `../STUDYPROOFS-EXPERIMENT-2026-10-11/README.md`.
+
