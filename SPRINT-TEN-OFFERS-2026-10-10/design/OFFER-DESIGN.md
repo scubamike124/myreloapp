@@ -1,5 +1,7 @@
 # Ten pilot offers: offer design
 
+> **Written 2026-10-10; read it as the design, not the current page text.** The pages changed on 2026-10-11 (amberai #800): offers 1, 4, 5, 8 and 9 say what the runner can actually read, offer 6's form check is not offered yet, and each page shows whether the pilot is ready for a paid pilot and its terms. `READINESS.md` has the status of each offer, and the registry (`src/lib/offers/registry.ts`) is the source for the wording.
+
 Generated from the offer registry (`src/lib/offers/registry.ts` on branch `claude/ten-offers-pilots`), which the live pages read, so this document and the pages say the same thing. Every price except offer 6's is a **test price (hypothesis)**: no buyer has paid it yet. The price-basis notes summarise the buyer-evidence files in `../evidence/`, whose facts are search snippets until the worker's live-page check marks them found.
 
 Shown on every offer page:
@@ -225,7 +227,7 @@ Shown on every offer page:
 - Up to five page addresses, including your booking or contact page.
 - Confirmation that you own the site or are authorized to ask for the checks.
 
-**Test price:** $49 for up to 5 pages (the form check is included during the pilot) (existing live price).
+**Test price:** $49 for up to 5 pages (existing live price). Once the form check is offered it is added at no extra charge during the pilot; it is not offered yet (see READINESS.md).
 
 **Price basis:** Live price $49 kept (it sits at the bottom of $50–$400 freelance audits). Research suggests testing a $79 report-plus-form bundle later; changing the live price needs the owner. Booking-form comparables are monitoring services at €10–$30/month.
 
