@@ -35,7 +35,7 @@
    "Every open estimate with no contact for 7 days or more, grouped 7–13, 14–29 and 30+ days, with the dollar value waiting in each group.",
    "A suggested next step for each estimate.",
    "A draft follow-up email or text for each, naming the job and estimate number, for you to review and send.",
-   "A list of estimates not chased, and why: won, lost, asked not to be contacted, or too old to chase."
+   "A list of estimates not chased, and why: won, lost, or asked not to be contacted. Estimates sent more than 60 days ago stay in the main list, marked to confirm whether to re-quote, with no draft."
   ],
   "price": {
    "usd": 249,
@@ -140,9 +140,9 @@
   ],
   "price": {
    "usd": 49,
-   "unit": "for up to 5 pages (the form check is included during the pilot)",
+   "unit": "for up to 5 pages",
    "basis": "existing-price",
-   "note": "The Website Snapshot Report's own price; the form check is the pilot part."
+   "note": "The Website Snapshot Report's own price. Once the form check is offered it is added at no extra charge during the pilot."
   },
   "status": "live-with-pilot-addition",
   "bookkeeping": false,
@@ -188,7 +188,7 @@
   "deliverable": [
    "Every message sorted into one type: order status, billing, refund request, technical, complaint, sales question, spam or other.",
    "Urgency flagged with the reason, such as a double charge, a cancellation or a long wait.",
-   "A reply draft for each message that needs one, following your policies, for your team to edit and send.",
+   "A standard reply draft for each message that needs one, in your sign-off and following your refund and shipping policies; your team writes the parts that are about that customer.",
    "Messages about legal threats or safety flagged for a person, with no draft.",
    "What customers wrote about most that week."
   ],
@@ -217,7 +217,7 @@
    "Barcodes that fail the check-digit test.",
    "Duplicate SKUs, SKUs in one store only, and price or stock differences between stores.",
    "Titles over a store's length limit, and inconsistent variant names (XL, X-Large, Extra Large).",
-   "A proposed-changes sheet you review and import yourself."
+   "A proposed-changes sheet (store, SKU, field, current value, proposed value, reason) you review and apply yourself in your own stores. It is a review sheet, not a ready-made import file for either store."
   ],
   "price": {
    "usd": 99,
