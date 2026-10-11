@@ -6,6 +6,20 @@ Rewritten 2026-10-11 from what production holds. The version written on 2026-10-
 
 **Second read, 2026-10-11 12:28Z (the owner's next priority: "reconcile Amber's previous Facebook/TikTok publishing connections and identify the exact missing connection or permission").** A second worker report (amberai #802, merged as `561f386`) reads everything all-time and asks Meta and TikTok whether the app credentials work. Its first run is saved in `evidence/SOCIAL-RECONCILE-2026-10-11T1228Z.md` (#105 comment 6109024258; the list of all 99 vault entry names is left out of the saved copy). Its findings are in "Second read" below and are folded into the conclusion.
 
+## Update, 2026-10-11 (afternoon): promotion beyond Facebook
+
+The owner asked for the free promotion work to go beyond Facebook and not to let one blocked connection hold the others up. Amber can now publish on **five channels**, each on its own weekday slot with its own limits, with a sample image, a tip and a tracked link on every post. Nothing is live yet: four of the five wait for one owner-only step each, and the fifth (our own tip pages) is ready as soon as the code is deployed.
+
+| Channel | Posts as | Slot (UTC) | Needs from the owner | Replies read |
+|---|---|---|---|---|
+| Our tip pages (21 pages on hq.amberoneai.com, announced through IndexNow) | the website | every day 13:00 | nothing | no (the form) |
+| Facebook Page | the Page | weekdays 14:00, at most 2 link posts in 30 days | the Meta login (below) | not yet |
+| Bluesky | the Bluesky account | weekdays 15:00 | an account and an app password in the vault | yes |
+| Threads | the Threads profile | weekdays 16:00 | the Threads use case, a tester role, app keys in the vault, Connect | yes |
+| LinkedIn | the owner's own profile | Tuesday to Thursday 17:00 | a developer app, keys in the vault, Connect, and `promo-page: <name>` on #105 | no (LinkedIn does not allow it) |
+
+Pinterest needs Pinterest's own approval (weeks), Nextdoor has no confirmed publishing route, X's API is paid, and Google Business Profile and Instagram give no per-offer link or are not eligible. The research, with a verdict, confidence and source for every platform and the searches that could not be run, is in `CHANNEL-RESEARCH.md` (raw notes in `evidence/channel-research/`). The exact owner steps with prefilled profile text are in `OWNER-STEPS.md`; the schedule, rules and an example post per channel are in `PROMOTION-PLAN.md`; every post is in `POST-LIBRARY.md`. Items 5 and 6 of the conclusion below describe the code as it was when this page was written; text posts with a tracked link exist now (amberai #801 and the multi-channel lane).
+
 ## Conclusion
 
 1. **No account is connected for publishing right now.** Of 44 account rows, 0 derive to CONNECTED. No publish job was created in the last 30 days. The latest job is from 2026-09-02.
