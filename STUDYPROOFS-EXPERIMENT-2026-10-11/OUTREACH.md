@@ -56,3 +56,20 @@ A first note, for the owner to edit and send:
 2. Whether the trial terms are right: Pro, 120 days, 300 students, no card.
 3. The reply-to address: `hello@studyproofs.com` works only if the domain exists with mail; otherwise either register it (a purchase of about $11 a year, the owner's decision) or approve using `support@amberoneai.com`, the address the owner approved on 2026-10-07 for buyer-facing pages.
 4. Which creators to write to, if any (the owner sends).
+
+## A correction note for the 19 addresses (a draft for the owner to send, or not; Amber sends nothing)
+
+The tracker's send history (mail events, counts only) shows 577 emails to 19 distinct addresses between 2026-09-08 and 2026-10-10, 17 on each of the 13 days from 2026-09-28, and up to 34 to one address. The email offered "free Pro access for your students for one semester", which the product could not grant, and asked for replies at an address that cannot receive mail. Every one of these institutions published its address for this kind of contact, and each email carried an unsubscribe link and the postal address; still, repeated messages are a mistake worth owning. Whether to write once more to say so is the owner's decision. If the answer is yes, the owner sends it from a mailbox that can receive replies (not `hello@studyproofs.com` until that exists). A draft:
+
+> **Subject:** Sorry for the repeated emails from StudyProofs
+>
+> Hello,
+>
+> You may have received several emails from us about StudyProofs over the past weeks. That was our mistake: a fault in our system repeated a message that we meant to send once. One of those messages also mentioned free Pro access for a semester, which we were not able to provide at the time. We are sorry.
+>
+> We have stopped all sending, and you will not hear from us again unless you ask. If you are curious what StudyProofs does, it turns a student's own notes into flashcards and a quiz that show the line of the notes each one came from. There is nothing you need to do.
+>
+> The StudyProofs team
+
+Not recommended: a reply-to of `hello@studyproofs.com` (it receives nothing), or any mention of a new offer in the same message.
+
