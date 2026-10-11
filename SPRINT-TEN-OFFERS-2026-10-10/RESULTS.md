@@ -4,6 +4,8 @@ Generated 2026-10-10T21:56Z from the code (registry and demo QA), the research f
 
 **Revenue: $0.00.** Revenue counts only when payment or escrow is verified. No payment was taken during the sprint, and no pilot is a finished production service.
 
+**Which offers can be delivered (2026-10-11): see `READINESS.md`.** The "Status" column below says only that a page, a sample and a runner exist. After the fulfilment audit, 7 offers are ready for a paid pilot (1, 2, 3, 4, 5, 7, 9), 2 need work (6, 8) and 1 is not deliverable yet (10). The evidence ranking below says which offers buyers appear to want; it does not say which Amber can deliver, and neither says anyone has paid.
+
 ## Results table
 
 | # | Offer | Test price (hypothesis) | Buyer evidence: research score, live check | Status | Direct cost | Tracker: visits · inquiries · qualified · paid | Blocker |
