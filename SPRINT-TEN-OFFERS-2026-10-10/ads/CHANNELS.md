@@ -1,98 +1,89 @@
-# Owner-owned business channels: what is connected for organic posting
+# Owner-owned channels: what is connected, what has been posted, and what Amber can publish
 
-Sprint workstream 8 (ads), checked 2026-10-10 between about 17:00Z and 17:30Z. Read-only: nothing was published, no publish job was enqueued, no social API was called, and nothing in production was changed. Production's database was not read; this session has no credentials for it. Code references are to branch `claude/ten-offers-pilots` at `e31d9e2` (worktree `/home/user/wt-offers`).
+Rewritten 2026-10-11 from what production holds. The version written on 2026-10-10 (about 17:00Z) was code-only: this session cannot read production's database, so it said "no channel is verified as connected" from code and git history alone. The owner said Amber had posted to TikTok and Facebook before, so that conclusion was withdrawn until production could be read. It is read now.
+
+**How it was read.** A read-only worker report (amberai PR #795, merged as `ea8d28f`) reads the `SocialAccount`, `SocialPublishJob` and `SocialApprovalBatch` rows and whether each vault key is present, and edits one marked comment on issue #105. It prints no token, key, password or other secret value, only yes or no for named vault keys, public handles, scope names, dates, post links and short error codes. Its first run is saved verbatim in `evidence/SOCIAL-STATUS-2026-10-11T0417Z.md` (#105 comment 6105360976, as of 2026-10-11 04:17:19Z). Everything in the "Production" section below is from that run. Nothing was posted, connected or changed to produce it.
 
 ## Conclusion
 
-1. **No owner-owned business channel is verified as connected for organic posting.** Nothing we can read (code, docs, git history, issue #105) shows an Amber One AI business page (Facebook, LinkedIn, X, Threads, Bluesky, Instagram) connected to Amber. The only real social posts on record are four TikTok videos to @launchreadyai (the Launch Ready brand, not Amber One AI) on 2026-08-01, made through TikTok Studio by a browser runner, not by the API pipeline.
-2. **Even a connected page could not take a text post with a link today.** The publish pipeline only publishes MP4 video, end to end.
-3. **So none of the ten posts can be published through Amber's pipeline in this sprint** without an owner step (connect a business page in HQ) and a code change (a text-post path). The smallest safe path is at the end of this file.
-4. **Do not enqueue anything to test this.** In production, any `SCHEDULED` publish job is picked up by the next supervisor tick on amber-os-worker: for a connected account, enqueueing a job publishes it; for an unconnected one, it files an owner-action repair task.
+1. **No account is connected for publishing right now.** Of 44 account rows, 0 derive to CONNECTED. No publish job was created in the last 30 days. The latest job is from 2026-09-02.
+2. **Facebook was never connected through this system.** The four Facebook rows (dayli, launchready, myreelo, restpilot) all read `AWAITING_USER_OAUTH` with no token stored; none of the latest 25 jobs is a Facebook job; and the report lists only three approval batches in all (two TikTok, one YouTube and TikTok), none for Facebook. The Meta app id and secret are in the vault, so the app exists, but no login was completed. If Amber posted to Facebook before, it was not through this pipeline's records.
+3. **TikTok did connect, and then lapsed.** `launchready` (`@launchreadyai`, connected 2026-08-23) and `dayli` hold an expired token; the stored refresh token was refused on 2026-09-02 ("Refresh token is invalid or expired"), which failed two jobs that day. The four TikTok videos of 2026-08-01 were made through TikTok Studio by a browser runner (git history), not by this pipeline. The vault holds no TikTok account username or password, so the account cannot be signed in without the owner.
+4. **YouTube is the only channel with posts on record.** 23 YouTube Shorts on four channels (AmberOne 8, Launch Ready 7, Amber E-Book Factory 4, Amber API Marketplace 4) are recorded LIVE_VERIFIED, published between 2026-08-25 19:34Z and 2026-08-26 07:45Z and recorded at 2026-08-26 18:39Z, each with 0 attempts logged and no approval batch, so they were recorded rather than uploaded by the worker's publish loop. Whether they are public is not known (see below). The three channel rows other than Launch Ready read stored status CONNECTED with no token stored, so the pipeline would refuse to publish to them today.
+5. **Even a connected account could not carry a per-offer tracked link today.** Every adapter sends video only (Reels, Shorts, TikTok videos), and on those formats a link in the caption is not a usable tracking link (YouTube made Shorts links unclickable in 2023; Instagram captions carry no clickable link; TikTok has none in a video description; Facebook Reels captions are the same, a point I did not check against Meta's pages). The one format that does carry a clickable per-offer link is a text post with a link on a Facebook Page, which the code cannot send yet.
+6. **So nothing can be posted publicly by Amber tonight without an owner step.** The step is one connection, below. Nothing here asks the owner to create an account or paste a post.
 
-## Verified facts
+## Production, as read at 04:17Z on 2026-10-11
 
-### What the code supports
+### Accounts (44 rows: 4 brands x 10 platforms, plus three extra YouTube channels)
 
-Ten platforms have an adapter (`src/lib/integrations/social/registry.ts:14-25`; Prisma enum `Platform`, `prisma/schema.prisma:50-61`). There is no adapter for Bluesky, Mastodon or Reddit. Several adapters declare `text` in their capabilities, but each `publish()` sends video:
+| Platform | Rows | Stored status | Derived status | Token | Detail |
+|---|---|---|---|---|---|
+| Facebook | dayli, launchready, myreelo, restpilot | AWAITING_USER_OAUTH | AWAITING_USER_OAUTH | none stored | Never connected. |
+| Instagram | the same four | AWAITING_USER_OAUTH | AWAITING_USER_OAUTH | none stored | Never connected. |
+| TikTok | launchready (`launchreadyai`), dayli | EXPIRED | EXPIRED | stored, readable, expired 2026-08-24 | Scopes `video.publish`, `video.upload`, `user.info.basic`; refresh token stored but refused on 2026-09-02. datewise, myreelo, restpilot: never connected. |
+| YouTube | amberone (`AmberOne`), api_marketplace (`Amber API Marketplace`), ebook_factory (`Amber E-Book Factory`) | CONNECTED | AWAITING_USER_OAUTH | none stored | A stored "connected" label with no token behind it. |
+| YouTube | launchready (`Launch Ready`) | EXPIRED | EXPIRED | stored, readable, expired 2026-08-03 | Refresh token stored. |
+| YouTube | dayli, myreelo, restpilot | AWAITING_USER_OAUTH | AWAITING_USER_OAUTH | none | Never connected. |
+| LinkedIn, X, Threads, Pinterest, Google Business Profile, Nextdoor | four brands each | AWAITING_USER_OAUTH | AWAITING_USER_OAUTH | none | Never connected, and no app key in the vault (below). |
 
-| Platform | What `publish()` actually sends | Text post with a link? | Posts as |
-|---|---|---|---|
-| Facebook | A Reel, uploaded to `/{page}/video_reels` (`providers/meta.ts:313`, `339`, `388`); needs the local MP4 | No | The first Page the login returns (`meta.ts:100`) |
-| Instagram | A Reel: `media_type: "REELS"` with a public video URL (`meta.ts:197`, `203`, `225`) | No | Instagram professional account |
-| Threads | `media_type: "VIDEO"` (`meta.ts:425`, `452`); declares `text` (`meta.ts:702`) but returns OWNER_ACTION_REQUIRED without a video URL | No | User |
-| LinkedIn | A video through the Videos API; "LinkedIn needs the local MP4 for chunked upload." (`providers/others.ts:458`); declares `text` (`others.ts:390`) | No | A member profile, `urn:li:person` (`others.ts:474`, `540`), scope `w_member_social` (`others.ts:397`): not a company page |
-| X | Chunked video upload; "X needs the local MP4 for chunked media upload." (`others.ts:688`); declares `text` (`others.ts:609`) | No | User |
-| YouTube | A Short; needs the local MP4 (`others.ts:274`) | No | Channel |
-| Pinterest | A video Pin; needs a board and a public video URL (`others.ts:888`) | No | Board |
-| Google Business Profile | `localPosts` with `mediaFormat: "VIDEO"` (`others.ts:1053`, `1074`) | No | Location |
-| Nextdoor | `body_text` with optional media (`others.ts:1223`): the one adapter that could send text, but the orchestrator rejects it before `publish()` (next table), it needs partner Publish API access (returns NEEDS_APP_REVIEW on 401/403, `others.ts:1233`), and it has no `verifyPublication` | Not reachable | Business profile |
-| TikTok | Video only; "No video file was attached." (`providers/tiktok.ts:220`) | No | Creator account |
+### Vault (yes or no, never values)
 
-The orchestrator and the approval path are video-only too:
+Present: Meta app id and secret (`FACEBOOK_APP_ID`, `FACEBOOK_APP_SECRET`, `META_APP_ID`, `META_APP_SECRET`), TikTok client key and secret, YouTube client id and secret, `YOUTUBE_REFRESH_TOKEN`, `YOUTUBE_CHANNEL_ID`, and the media store keys (`R2_ACCOUNT_ID`, `R2_BUCKET`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`).
 
-| Step | Fact |
-|---|---|
-| Job creation | `createApprovalBatchAndJobs` requires `localMediaPath`, hashes the file and stages it as `video/mp4` (`orchestrator.ts:40`, `51`, `78-79`) |
-| Before every publish | `validatePublishMedia` throws for any adapter without `video` in its media and for any job with no media (`orchestrator.ts:630-639`), called before every publish attempt (`orchestrator.ts:837`) |
-| The publish call | `executePublishJob` always passes `kind: "video"`, `mimeType: "video/mp4"` (`orchestrator.ts:972-979`) |
-| Owner approval API | `/api/social/approve` accepts only an `.mp4` inside `.data/commercial`, `.data/social-media` or `public/amber-social-library` (`approval-policy.ts:8-24`, `src/app/api/social/approve/route.ts:43`) and defaults the brand to `launchready` (`route.ts:61`) |
-| Business picture ads (Instagram, Nextdoor; supervisor stage 12) | Never call a provider: a due post becomes `QUEUED` behind an approval request (`src/lib/business-ads/index.ts:418-460`); nothing in the tree turns that approval into a publish |
-| Advertising Command Center | `postOrganicContent` (`src/lib/advertising/posting.ts:28-66`) also requires `localMediaPath` and has no caller |
+Absent: LinkedIn client id and secret, X API key and secret, Threads access token and app keys, Pinterest app id and secret, Google Business client id and secret, Nextdoor access token, `TIKTOK_ACCOUNT_USERNAME`, `TIKTOK_ACCOUNT_PASSWORD`, `INSTAGRAM_ACCESS_TOKEN`, `R2_PUBLIC_URL`.
 
-### Where the publish worker runs
+### Publish history
 
-- Supervisor stage 13 drains the publish queue on every tick, up to 5 jobs (`src/lib/supervisor/index.ts:831-859`). amber-os-worker runs the supervisor tick each cycle (`scripts/cloud-os-worker.ts:297-301`), and the #105 worker beacon (comment 5737077514) shows supervisor ticks completing (last at 2026-10-10T16:57:52Z). The beacon does not report what stage 13 did.
-- The worker claims any job in `SCHEDULED`, `RETRYING` or `PROCESSING` that is due (`orchestrator.ts:315-327`), paced per account (`post-pacing.ts:29-40`: LinkedIn 60 min, Facebook 20, Threads 30, X 15).
+The report lists the latest 25 jobs and the latest 10 approval batches (there are only three batches).
 
-### What "connected" means, and how to see it
+| When | Platform / brand | Result |
+|---|---|---|
+| 2026-09-02 01:30Z | TikTok / launchready | FAILED, 1 attempt, `token_expired` ("Refresh token is invalid or expired.") |
+| 2026-09-02 01:17Z | TikTok / dayli | FAILED, 1 attempt, `token_expired` |
+| Published 2026-08-25 19:34Z to 2026-08-26 07:45Z; recorded 2026-08-26 18:39Z | YouTube / amberone 8, launchready 7, ebook_factory 4, api_marketplace 4 | 23 x LIVE_VERIFIED, 0 attempts, a youtube.com/shorts link each |
+| Approval batches | 2026-08-23 07:47Z YouTube + TikTok / launchready: PARTIAL_FAILURE; 2026-09-02 TikTok / dayli and TikTok / launchready: FAILED | |
 
-- One `SocialAccount` row per organization, platform and brand key (`prisma/schema.prisma:492-512`). Brand keys in use: dayli, myreelo, restpilot, launchready, datewise, default (`src/lib/social-runtime.ts:22-28`). There is a TikTok brand spec for AmberOne (`businessKey: "amberone"`, YouTube channel `UCjH2Jx_JdCu52XV5L9bNd1Q`, preferred TikTok handle `amberoneai`) in `src/lib/integrations/tiktok/brand-accounts.ts:212-242`: a plan, not proof of a connection.
-- It counts as CONNECTED only when `tokenEncrypted` decrypts to a token that is not expired (or has a refresh token), no scopes are missing, and the status is not NEEDS_APP_REVIEW, EXPIRED or ERROR (`social-runtime.ts:40-79`). App keys alone never count (`docs/SOCIAL_PUBLISHING.md:3`).
-- The row becomes CONNECTED only when the owner finishes Connect in HQ: `/dashboard/social-publish`, the provider's login, then `/api/social/oauth/callback/<platform>` (`src/lib/integrations/social/oauth.ts:232-267`).
-- To see it: `scripts/inspect-instagram-social.ts` reads `amber_hq."SocialAccount"` with production credentials taken from `railway variables --service amber-hq-web` (lines 17-29, 94-111). A connected account shows status CONNECTED, a token length above 0, a handle, and `connectedAt` and scopes in its metadata.
+Titles of the Shorts include "An AI Assistant That Actually Finishes Setup", "Put Local Business Ads On Autopilot with Amber One" and "Small Business Cyber Security Checklist", so they are on-brand for Amber One AI; none is about the ten pilot offers and none carries a pilot offer link.
 
-### Evidence of connected accounts or successful publishes
+## What each adapter sends (code, `src/lib/integrations/social`, unchanged since 2026-08-10)
 
-| Evidence | What it shows |
-|---|---|
-| Commits `6c799e5` (2026-08-02 00:02Z) and `602fe0e` (2026-08-02 08:08Z) | Four TikTok videos went to @launchreadyai on 2026-08-01. The first went public; the others were held "Only me / Content under review" for a while. Launch Ready brand, video only. |
-| Commits `52f8aa8`, `d8ad8da`, `6c799e5` | Those posts were made by `scripts/tiktok-upload-run.ts`, which drives TikTok Studio in a signed-in local Chrome, not by the TikTok API adapter |
-| `docs/evidence/tiktok-live-gate.md` (2026-08-01) | Production TikTok "NOT LIVE_VERIFIED"; blocker: "Finish TikTok Login Kit once per brand so `tokenEncrypted` is set" (lines 4, 20-21) |
-| `docs/evidence/social-adapters-live-gate.md` (2026-08-01) | Every other adapter "LIVE_VERIFIED canaries pending" (line 4) |
-| `src/lib/marketing-os/index.ts:25-38` | Still lists only Instagram and Nextdoor as initial, everything else as future: "promote only after LIVE_VERIFIED canaries" |
-| `src/lib/integrations/social/oauth.ts:164-165` (committed 2026-08-10) | A comment says a strict expiry check "recently blocked valid Instagram callbacks as expired": an Instagram connection was attempted before then. Nothing records whether it ever completed, or for which account. |
-| `scripts/prove-autonomous-publish.ts` (commit `7a3ae20`) | The publish proof ran on a throwaway database and expects OWNER_ACTION_REQUIRED "with no connected account" |
-| Git history | The local clone is shallow (from 2026-09-11). The requested `git log --all -i --grep` finds no commit about Instagram, Facebook, LinkedIn, Threads or Nextdoor; its "tiktok" and "publish" hits are other work (agent marketplaces, listings, #105 reports). On GitHub, the files in `src/lib/integrations/social` were last changed 2026-08-10 (`3e19287`, a commit of uncommitted working-tree files, nothing about a connection). |
-| Issue #105, body and 55 comments (read about 17:05Z) | No comment reports a social account, a connection, a publish job or a social post. Social words there are incidental: a bounty titled "Meta Ads Virtual Card For Facebook And Instagram Billing" (5945240045), `linkedin.com` in a domain census (5857335346), Reddit threads in the listings catalog. The Listings catalog (6074182151, 48 channels) holds no social business page, and its "Owner's hand-sent email" channel is outreach, which this sprint does not allow. |
-| Handles | No Amber One AI LinkedIn, Facebook, X, Threads or Bluesky handle is recorded anywhere in `src`, `docs`, `data` or `scripts`. The only recorded AmberOne channel is the YouTube channel id above, which the pipeline can only post video to. |
+| Platform | `publish()` sends | Text or link post | Posts as | Visibility rule that applies |
+|---|---|---|---|---|
+| Facebook | A Reel, uploaded to `/{page}/video_reels` (`providers/meta.ts`, `publishFacebookReel`) | No | The first Page the login returns (`discoverMetaPage`, `json.data?.[0]`) | A Meta app in Development mode can publish, but the post is visible only to people with a role on the app (Postiz and Magefan; Meta's own page does not state it); the app must be Live for public posts. |
+| Instagram | A Reel | No | The linked Instagram professional account | Captions carry no clickable link. |
+| TikTok | Video only | No | The connected creator | An unaudited TikTok client can post only with `SELF_ONLY` visibility until it passes TikTok's audit (TikTok's content sharing guidelines). |
+| YouTube | A Short, resumable upload; `privacyStatus` is hard-coded `"private"` in both branches of the adapter | No | The authorized channel | Videos uploaded by `videos.insert` from an unaudited API project created after 2020-07-28 are private whatever status is requested (YouTube's `videos.insert` reference). Links in a Short's description and comments are not clickable (YouTube, since 2023-08-31). |
+| LinkedIn, X, Threads, Pinterest, Google Business, Nextdoor | Video (X and LinkedIn need the local MP4; Nextdoor sends `body_text` but the orchestrator rejects a job without a video first) | No | A member profile (LinkedIn), a user (X, Threads) and so on | None of them can connect: the app keys are not in the vault. |
 
-## Unknowns
+The orchestrator, the approval route and the approval policy are video-only too: `createApprovalBatchAndJobs` stages a `video/mp4`; `validatePublishMedia` rejects a job without a video; `/api/social/approve` accepts only an `.mp4` under `.data/commercial`, `.data/social-media` or `public/amber-social-library`. Posting is paced per account (TikTok 60 min, LinkedIn 60, Instagram 30, Threads 30, YouTube 30, Facebook 20, X 15; `post-pacing.ts`).
 
-- Whether any `SocialAccount` in production is CONNECTED, for any platform or brand. Production's database cannot be read from here, and Amber's Railway operator token is refused for reading variables (#105 comment 6084165961).
-- Whether Amber One AI has a Facebook Page, a LinkedIn company page, or X, Threads or Bluesky accounts at all, and who manages them.
-- Whether production's Vault holds Meta (`FACEBOOK_APP_ID`, `FACEBOOK_APP_SECRET`), LinkedIn, X or Threads app keys, and whether the Meta app has `pages_manage_posts` granted.
-- Whether the Instagram connection attempted before 2026-08-10 (`oauth.ts:164-165`) ever completed, and for which account. It would not help here: the Instagram adapter posts Reels only, and Instagram captions carry no clickable link.
-- Whether the AmberOne YouTube channel or the @launchreadyai TikTok is connected now. Neither helps: both are video-only, and @launchreadyai is another brand.
-- Whether supervisor stage 13 has processed any job in production since August. The beacon does not report it.
+## What Amber can publish today
 
-## Can a text post with a link go through the existing pipeline?
+| Format | Where | Today |
+|---|---|---|
+| Text post with a tracked link | Any | **Nowhere.** No adapter sends it, and no account is connected. |
+| Facebook Reel | Facebook | Not connected. |
+| Instagram Reel | Instagram | Not connected. |
+| TikTok video | TikTok | Expired; needs the owner's TikTok login. Would be private until TikTok audits the app. |
+| YouTube Short | YouTube | Private only; the rows hold no usable token. Recorded earlier uploads are not shown to be public. |
 
-**No.** No adapter's `publish()` sends text alone. The orchestrator refuses any job without a video before calling an adapter, and the approval API accepts only an MP4 from the commercial library. Nextdoor's adapter could send text, but the orchestrator rejects it, and it also needs Nextdoor's partner Publish API access, which had not been granted as of `docs/SOCIAL_PUBLISHING.md` (2026-08-01, line 45).
+## The barriers, each at its exact point
 
-## The smallest safe path to one organic text post per offer
+These are owner-only steps (identity, a login with possible CAPTCHA or 2FA, or a setting only the owner controls). Amber stops at each and does nothing else about it.
 
-**The blocker:** there is no evidence that any Amber One AI business page is connected. The owner would need to connect one (the Facebook Page is the shortest route) in HQ at `/dashboard/social-publish`, and the pipeline needs a text-post path, because today it only publishes MP4 video.
+1. **Facebook (the one that matters for tracked links).** Open HQ, `/dashboard/social-publish`, press Connect on Facebook, sign in to Meta, and choose the Page the posts should go on. The adapter takes the first Page the login returns, so the login should manage only the Page the owner wants. For the posts to be public rather than visible only to people with a role on the app, the Meta app should be in Live mode (Meta developer dashboard; third-party sources, to check against Meta's current App Mode docs). Amber cannot sign in to Meta for the owner and does not try.
+2. **TikTok.** `@launchreadyai` needs the Connect TikTok login again, and TikTok keeps unaudited apps private. TikTok is a video platform without a per-offer link, so it is not the channel for this test.
+3. **YouTube.** The adapter uploads private. Public posting needs the owner's explicit posting-mode choice and, per YouTube, a passed API audit. YouTube Shorts links are not clickable, so it cannot carry a per-offer link either.
+4. **Everything else.** LinkedIn, X, Threads, Pinterest, Google Business and Nextdoor need developer apps created by the owner. The brief says not to ask for new accounts, so these stay closed.
 
-- **Today, with no code (owner only):** the owner pastes the posts from `AD-ASSETS.md` on their own pages, using the `?src=<channel>` links. Amber cannot do this step.
-- **Through Amber (owner step, then one small PR):**
-  1. **Owner:** connect the Amber One AI Facebook Page in HQ (`/dashboard/social-publish`, Connect Facebook). This needs the Meta app keys in the Vault and `pages_manage_posts`. The adapter takes the first Page the login returns (`meta.ts:100`), so either the login manages only that Page or the code picks the Page by id. A LinkedIn company page would need more: the adapter posts as a person (`urn:li:person`), so it needs an organization author and the `w_organization_social` scope, which LinkedIn grants only to approved apps (LinkedIn's rule; not checked here).
-  2. **Code:**
-     - A Facebook Page text post: `POST /{page-id}/feed` with `message` and `link`, verified through the post's `permalink_url`.
-     - The orchestrator lets a job with no media through when the adapter declares `text`.
-     - A committed list of the ten posts that the owner approves (offer, platform, channel, not-before time), with each text built as `fillLink(AD_COPY[offer].launchPost, offerLink(offer, "facebook-page"))`.
-  3. **Applied once by the worker, behind an owner switch:**
-     - Each job is created once, with an idempotency key of offer, platform and campaign, and only while the account derives CONNECTED.
-     - A job that ends FAILED or OWNER_ACTION_REQUIRED is never re-created.
-     - Posts go out paced, a few hours apart.
-     - The job refuses any text that differs from the committed list.
-  4. **Audit:** after each LIVE_VERIFIED, one comment on #105 with the offer, the platform, the post URL, the link used and the time. Nothing is edited after posting.
+## Unknowns that remain
+
+- Whether the 23 recorded Shorts are public. The worker can check without a login (YouTube's oEmbed answers for a public or unlisted video and refuses a private one).
+- Whether `YOUTUBE_REFRESH_TOKEN` still works. It has not been tried: the report checks presence only.
+- Whether the Meta app is Live and which Pages the owner manages.
+- Whether earlier Facebook posts exist elsewhere (another tool, or by hand). The database has none.
+
+## Rules the posts follow
+
+Facebook Page posts through the Pages API (a POST to the Page's `/feed` with `message` and `link`) need a Page access token with `pages_manage_posts`; the Platform Terms and Page rules apply (no deceptive or repetitive posting, no engagement bait). The posts for the ten offers say they are pilots, say what the buyer gets and sends, say the sample is made from invented data, carry no price, no result we have not measured and no guarantee, and end with one tracked link. One post per offer per channel, a few hours apart and not more than one a day, never repeated. No direct messages, no cold email, no Reddit, no paid promotion.
