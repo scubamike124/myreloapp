@@ -9,7 +9,7 @@ Rewritten 2026-10-11 from what production holds. The version written on 2026-10-
 1. **No account is connected for publishing right now.** Of 44 account rows, 0 derive to CONNECTED. No publish job was created in the last 30 days. The latest job is from 2026-09-02.
 2. **Facebook was never connected through this system.** The four Facebook rows (dayli, launchready, myreelo, restpilot) all read `AWAITING_USER_OAUTH` with no token stored; none of the latest 25 jobs is a Facebook job; and the report lists only three approval batches in all (two TikTok, one YouTube and TikTok), none for Facebook. The Meta app id and secret are in the vault, so the app exists, but no login was completed. If Amber posted to Facebook before, it was not through this pipeline's records.
 3. **TikTok did connect, and then lapsed.** `launchready` (`@launchreadyai`, connected 2026-08-23) and `dayli` hold an expired token; the stored refresh token was refused on 2026-09-02 ("Refresh token is invalid or expired"), which failed two jobs that day. The four TikTok videos of 2026-08-01 were made through TikTok Studio by a browser runner (git history), not by this pipeline. The vault holds no TikTok account username or password, so the account cannot be signed in without the owner.
-4. **YouTube is the only channel with posts on record.** 23 YouTube Shorts on four channels (AmberOne 8, Launch Ready 7, Amber E-Book Factory 4, Amber API Marketplace 4) are recorded LIVE_VERIFIED, published between 2026-08-25 19:34Z and 2026-08-26 07:45Z and recorded at 2026-08-26 18:39Z, each with 0 attempts logged and no approval batch, so they were recorded rather than uploaded by the worker's publish loop. Whether they are public is not known (see below). The three channel rows other than Launch Ready read stored status CONNECTED with no token stored, so the pipeline would refuse to publish to them today.
+4. **YouTube is the only channel with posts on record.** 23 YouTube Shorts on four channels (AmberOne 8, Launch Ready 7, Amber E-Book Factory 4, Amber API Marketplace 4) are recorded LIVE_VERIFIED, published between 2026-08-25 19:34Z and 2026-08-26 07:45Z and recorded at 2026-08-26 18:39Z, each with 0 attempts logged and no approval batch, so they were recorded rather than uploaded by the worker's publish loop. **Read on 2026-10-11 07:39Z through YouTube's public oEmbed (no login): all 40 Shorts the database records answered as public or unlisted, none refused (private or deleted)** (the report checks up to 40; the vault's `YOUTUBE_POSTING_MODE` is not set). The three channel rows other than Launch Ready read stored status CONNECTED with no token stored, so the pipeline would refuse to publish to them today.
 5. **Even a connected account could not carry a per-offer tracked link today.** Every adapter sends video only (Reels, Shorts, TikTok videos), and on those formats a link in the caption is not a usable tracking link (YouTube made Shorts links unclickable in 2023; Instagram captions carry no clickable link; TikTok has none in a video description; Facebook Reels captions are the same, a point I did not check against Meta's pages). The one format that does carry a clickable per-offer link is a text post with a link on a Facebook Page, which the code cannot send yet.
 6. **So nothing can be posted publicly by Amber tonight without an owner step.** The step is one connection, below. Nothing here asks the owner to create an account or paste a post.
 
@@ -66,7 +66,7 @@ The orchestrator, the approval route and the approval policy are video-only too:
 | Facebook Reel | Facebook | Not connected. |
 | Instagram Reel | Instagram | Not connected. |
 | TikTok video | TikTok | Expired; needs the owner's TikTok login. Would be private until TikTok audits the app. |
-| YouTube Short | YouTube | Private only; the rows hold no usable token. Recorded earlier uploads are not shown to be public. |
+| YouTube Short | YouTube | The adapter in this repository uploads private and the rows hold no usable token, so it cannot post now. The 40 recorded Shorts were read as public or unlisted (2026-10-11), and they show 0 attempts, so they were most likely not uploaded by this adapter as it stands (not established). |
 
 ## The barriers, each at its exact point
 
@@ -79,7 +79,8 @@ These are owner-only steps (identity, a login with possible CAPTCHA or 2FA, or a
 
 ## Unknowns that remain
 
-- Whether the 23 recorded Shorts are public. The worker can check without a login (YouTube's oEmbed answers for a public or unlisted video and refuses a private one).
+- ~~Whether the recorded Shorts are public.~~ Answered 2026-10-11 07:39Z by the worker's read-only check: 40 of 40 answer as public or unlisted.
+- **What drains the publish queue in production.** Answered the same minute: the supervisor tick that is meant to drain it is scheduled (`*/15 * * * *`) but its last run was 2026-08-11T02:30Z, so nothing has drained the queue for two months. A post created by the promotion lane is therefore sent by the lane's own publish pass (amberai #801), not by the supervisor.
 - Whether `YOUTUBE_REFRESH_TOKEN` still works. It has not been tried: the report checks presence only.
 - Whether the Meta app is Live and which Pages the owner manages.
 - Whether earlier Facebook posts exist elsewhere (another tool, or by hand). The database has none.
