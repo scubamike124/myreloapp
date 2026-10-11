@@ -1,5 +1,26 @@
 # Ten pilot offers: handoff
 
+## Update, 2026-10-11 (evening): promotion beyond Facebook (amberai #804, merged 18:21Z, deployed 18:23Z worker and 18:28Z web)
+
+This section is current; the sections below it are superseded where it says so.
+
+- **What is live:** one post, on our own website: https://hq.amberoneai.com/offers/tips/unpaid-invoice-tracking/tip-1 (queued 18:41Z, read back by the tracker, sent to IndexNow). It is a tip page on the owner's site, not a social post. **No third-party channel is live.** Nothing has been sent to anyone or charged; visits 0, inquiries 0, verified revenue $0.00 (the worker's self-test rows are never counted). The proof is comment 6112391726 on #105.
+- **What was built:** one lane that runs **five channels**, each with its own slot, limits and sending method, and 35 posts for the seven ready offers (a launch post, a post that describes the sample, three tips), each with a real sample image and one tracked link. A daily response check reads replies where the platform allows (Bluesky, Threads), keeps each once and prepares a fixed-wording **draft** for a person to send; it sends nothing and never messages anyone. The tracker (#105, comment 6100695261) shows each channel's state, every post with its live link or exact error, the responses, and the funnel by offer and channel.
+
+| Channel | Posts as | Slot (UTC) | State | The one thing missing (owner-only) |
+|---|---|---|---|---|
+| Our tip pages (21 pages under /offers/tips, in the sitemap, announced through IndexNow) | the website | daily 13:00 | **live** | nothing |
+| Facebook Page | the Page | weekdays 14:00; at most 2 link posts in 30 days | no connection | a finished Meta login by someone who manages the Page (see the section below this one) |
+| Bluesky | the account | weekdays 15:00 | no account | an account and an app password in the vault as `BLUESKY_HANDLE` and `BLUESKY_APP_PASSWORD` |
+| Threads | the profile | weekdays 16:00 | no connection | the Threads use case on the Meta app, a Threads Tester role, the keys in the vault, then Connect |
+| LinkedIn | the owner's own profile | Tuesday to Thursday 17:00 | no developer app | a developer app, its keys in the vault, Connect, and `promo-page: <your name>` on #105 |
+
+- **Exact steps, with the profile text to paste:** `ads/OWNER-STEPS.md`. **Why each platform was or was not chosen, with how sure each fact is:** `ads/CHANNEL-RESEARCH.md`. **The plan and the post library:** `ads/PROMOTION-PLAN.md`, `ads/POST-LIBRARY.md`. Pinterest needs Pinterest's own approval (weeks); X is paid and is not offered; Nextdoor, Google Business Profile and Instagram have no usable free route. Amber could not make the accounts itself: the sandbox cannot open any outside website, and each sign-up ends in a phone, CAPTCHA or identity check.
+- **The owner's switches** (plain lines in a #105 comment from the owner's account): `promo: pause` (stops every channel and cancels what is not yet sent), `promo: resume` (a new comment), `promo-page: <name>` (allow a connected account whose name does not look like Amber One AI's). If the switches cannot be read, nothing posts.
+- **Daily schedule once accounts exist:** 13:00 tip page; 14:00 Facebook (weekdays); 15:00 Bluesky (weekdays); 16:00 Threads (weekdays); 17:00 LinkedIn (Tuesday to Thursday). Posts of one offer are at least 72 hours apart on a channel, a post is never sent twice, and an unknown outcome is never retried.
+- **Reviews:** three adversarial reviews (the lane, each publisher, then the fixes themselves). Findings fixed with tests, among them: a pause that could be lifted by editing an old comment, a retry that could double-post, a login check that could expire a good account, a reply draft for someone who had asked us to stop. 1,298 tests pass.
+- **Known limits:** a LinkedIn post cannot be read back by a self-serve app, so it is shown as *accepted, not verified* with its link; Threads link posts show the page's own preview card, not an uploaded image; the tip pages' reach is slow until search engines pick them up.
+
 ## Update, 2026-10-11 (the owner's second directive: real buyers, and proof of what Amber can deliver)
 
 This section is current; the sections below were written on 2026-10-10 and are superseded where it says so.

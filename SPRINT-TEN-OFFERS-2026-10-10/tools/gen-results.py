@@ -132,6 +132,8 @@ L.append(f"**Revenue: {tr_revenue or '$0.00'}.** Revenue counts only when paymen
 L.append("")
 L.append("**Which offers can be delivered (2026-10-11): see `READINESS.md`.** The \"Status\" column below says only that a page, a sample and a runner exist. After the fulfilment audit, 7 offers are ready for a paid pilot (1, 2, 3, 4, 5, 7, 9), 2 need work (6, 8) and 1 is not deliverable yet (10). The evidence ranking below says which offers buyers appear to want; it does not say which Amber can deliver, and neither says anyone has paid.")
 L.append("")
+L.append('**Promotion (2026-10-11, evening): see `HANDOFF.md`.** One post is live: a tip page on our own site (https://hq.amberoneai.com/offers/tips/unpaid-invoice-tracking/tip-1). No third-party channel is live; each of the four others (Facebook Page, Bluesky, Threads, LinkedIn) waits for one owner-only step, listed in `ads/OWNER-STEPS.md`. Visits, inquiries and paid pilots are still 0.')
+L.append("")
 L.append("## Results table")
 L.append("")
 L.append("| # | Offer | Test price (hypothesis) | Buyer evidence: research score, live check | Status | Direct cost | Tracker: visits · inquiries · qualified · paid | Blocker |")
