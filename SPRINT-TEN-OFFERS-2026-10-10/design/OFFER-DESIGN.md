@@ -5,7 +5,7 @@ Generated from the offer registry (`src/lib/offers/registry.ts` on branch `claud
 Shown on every offer page:
 
 - This is a pilot: a small, hands-on version of the service while we learn what works for buyers. It is not a finished product. A person reviews every report before it goes to you.
-- Nothing is charged on this page. If the pilot fits, we confirm the scope, the price and a delivery date with you by email before you send any files or pay anything.
+- Nothing is charged on this page. If the pilot fits, we confirm the scope and the price with you by email before you send any files, and the delivery date before you pay. You pay nothing until we have checked that your files can be read.
 - Send only what the pilot needs. Your files are used only to prepare your report, are kept only while the pilot runs, and are deleted when you ask. We never log into your systems for a pilot.
 
 ## 1. Missed-Call and Web-Inquiry Follow-Up List

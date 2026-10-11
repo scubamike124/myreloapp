@@ -38,7 +38,7 @@ Sprint of 2026-10-10, 16:47Z to about 02:47Z. `RESULTS.md` has the results table
 ## What remains blocked (owner-only)
 
 - **Organic posts.** No owner-owned business page is connected to Amber's publishing, and that pipeline posts video only. The posts and ad copy are ready to paste by hand, with tracking links, in `ads/AD-ASSETS.md`.
-- **Payment for the nine new pilots.** None is online, by design. For a paid pilot the owner sends a payment request by hand, then records it with `offer-record: <inquiry id> paid $<amount> <payment reference>` on #105.
+- **Payment for the nine new pilots.** None is online, by design. For a paid pilot the owner first has the buyer's files checked with the runner (nothing is charged yet), then sends one payment request by hand, then records it with `offer-record: <inquiry id> paid $<amount> <payment reference>` on #105.
 - **Website checkout.** The site's own checkout is in Stripe test mode, so Ko-fi stays the live payment path for the $49 Website Snapshot.
 - **Evidence behind a bot check.** One cited Upwork page still answers with a challenge page. It stays unverified and is not fetched around.
 
