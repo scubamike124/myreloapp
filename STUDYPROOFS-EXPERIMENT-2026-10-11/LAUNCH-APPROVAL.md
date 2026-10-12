@@ -1,6 +1,6 @@
 # StudyProofs launch: the exact posts, links and steps, for your final approval
 
-*Prepared 2026-10-12. Nothing in this page has been posted, sent or paid for. The texts below are copied by a script from `kit/KIT-TEXT.md` (made by `tools/make-kit.mjs` from the reviewed demonstrations), so a number in a caption is the number the product produced.*
+*Prepared 2026-10-12. The same content, with a Copy button on every text and the four DNS records first, is a private page: https://claude.ai/artifact/LH2dVervn8qVqKF9W7ZVUQ (made by `tools/make-kit-page.py`). Nothing in this page has been posted, sent or paid for. The texts below are copied by a script from `kit/KIT-TEXT.md` (made by `tools/make-kit.mjs` from the reviewed demonstrations), so a number in a caption is the number the product produced.*
 
 ## Where things stand (read first)
 
