@@ -1,0 +1,325 @@
+{
+  "slug": "hypothesis-testing",
+  "title": "Hypothesis testing basics",
+  "course": "STAT 200",
+  "sampleVersion": "2026-10-11.1",
+  "packVersion": "2",
+  "generatedAt": "2026-10-12T12:26:26.626Z",
+  "model": "gpt-4o-mini",
+  "material": {
+    "notes": [
+      {
+        "heading": "Hypothesis Testing Basics",
+        "body": "Hypothesis testing involves a null hypothesis (H0) and an alternative hypothesis (H1). The null hypothesis claims that nothing is happening, while the alternative suggests a change or effect.",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Null hypothesis H0: the \"nothing is happening\" claim (for example, the mean score is 70). - Alternative hypothesis H1: what we suspect instead (the mean is not 70, or is greater than 70"
+        }
+      },
+      {
+        "heading": "Test Statistic and Significance Level",
+        "body": "The test statistic measures how far the sample result is from H0 in standard errors. The significance level (alpha) is the predetermined cutoff for making decisions, commonly set at 0.05.",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Test statistic: how far the sample result is from H0, measured in standard errors. - Significance level alpha: the cutoff we choose before looking at the data, commonly 0.05"
+        }
+      },
+      {
+        "heading": "Understanding the p-value",
+        "body": "The p-value indicates the probability of obtaining a result as extreme as the observed one, assuming H0 is true. A decision rule is applied: if p <= alpha, reject H0; if p > alpha, fail to reject H0.",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "The p-value is the probability of getting a result at least as extreme as ours IF H0 is true. - Decision rule: if p <= alpha, reject H0. If p > alpha, fail to reject H0"
+        }
+      },
+      {
+        "heading": "Errors in Hypothesis Testing",
+        "body": "Type I error occurs when H0 is rejected when it is true, with a probability equal to alpha. Type II error happens when H0 is not rejected when it is false, with a probability of beta. Power is defined as 1 - beta.",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Type I error: rejecting H0 when H0 is actually true. Its probability is alpha. - Type II error: failing to reject H0 when H0 is actually false. Its probability is beta"
+        }
+      },
+      {
+        "heading": "Worked Example: z-test",
+        "body": "In a z-test example, the claim is that the average exam score is 70. With a sample mean of 74 from 36 students, the calculated z-value is 2.0, leading to a p-value of approximately 0.0455, which allows us to reject H0.",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Claim: the average exam score is 70. The population standard deviation is sigma = 12 (known). - Sample: n = 36 students, sample mean = 74. - z = (74 - 70) / (12 / sqrt(36)) = 4 / 2 = 2.0"
+        }
+      },
+      {
+        "heading": "Common Mistakes in Hypothesis Testing",
+        "body": "Common mistakes include choosing alpha after seeing the p-value, misinterpreting confidence levels, and confusing statistical significance with practical importance.",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Choosing alpha after seeing the p-value. - Saying \"we are 95% sure H0 is false\". - Confusing statistical significance with practical importance"
+        }
+      }
+    ],
+    "flashcards": [
+      {
+        "id": "fc_demo_hypothesis-testing_1",
+        "front": "What is the null hypothesis (H0)?",
+        "back": "The null hypothesis is the claim that nothing is happening, for example, the mean score is 70.",
+        "topic": "Hypothesis Testing",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Null hypothesis H0: the \"nothing is happening\" claim (for example, the mean score is 70"
+        }
+      },
+      {
+        "id": "fc_demo_hypothesis-testing_2",
+        "front": "What does a p-value represent?",
+        "back": "The p-value represents the probability of getting a result at least as extreme as ours IF H0 is true.",
+        "topic": "p-value",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "The p-value is the probability of getting a result at least as extreme as ours IF H0 is true"
+        }
+      },
+      {
+        "id": "fc_demo_hypothesis-testing_3",
+        "front": "What is a Type I error?",
+        "back": "A Type I error occurs when we reject H0 when it is actually true, with a probability equal to alpha.",
+        "topic": "Errors",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Type I error: rejecting H0 when H0 is actually true. Its probability is alpha"
+        }
+      },
+      {
+        "id": "fc_demo_hypothesis-testing_4",
+        "front": "What is the significance level (alpha)?",
+        "back": "The significance level (alpha) is the cutoff we choose before looking at the data, commonly set at 0.05.",
+        "topic": "Significance Level",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Significance level alpha: the cutoff we choose before looking at the data, commonly 0.05"
+        }
+      },
+      {
+        "id": "fc_demo_hypothesis-testing_5",
+        "front": "What is the power of a test?",
+        "back": "Power is the chance of correctly rejecting a false H0, calculated as 1 - beta.",
+        "topic": "Power",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Power = 1 - beta, the chance of correctly rejecting a false H0"
+        }
+      },
+      {
+        "id": "fc_demo_hypothesis-testing_6",
+        "front": "What does it mean to fail to reject H0?",
+        "back": "Failing to reject H0 means we did not find enough evidence against it; it does not prove H0 is true.",
+        "topic": "Hypothesis Testing",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Fail to reject\" does not prove H0. It means we did not find enough evidence against it"
+        }
+      },
+      {
+        "id": "fc_demo_hypothesis-testing_7",
+        "front": "What is the decision rule for hypothesis testing?",
+        "back": "If p <= alpha, reject H0. If p > alpha, fail to reject H0.",
+        "topic": "Decision Rule",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Decision rule: if p <= alpha, reject H0. If p > alpha, fail to reject H0"
+        }
+      },
+      {
+        "id": "fc_demo_hypothesis-testing_8",
+        "front": "What is a common mistake in hypothesis testing?",
+        "back": "A common mistake is choosing alpha after seeing the p-value.",
+        "topic": "Common Mistakes",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Choosing alpha after seeing the p-value"
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "id": "q_demo_hypothesis-testing_1",
+        "question": "What is the null hypothesis (H0)?",
+        "choices": [
+          "The claim that nothing is happening",
+          "The claim that something is happening",
+          "The probability of making a Type I error",
+          "The significance level of a test"
+        ],
+        "answerIndex": 0,
+        "explanation": "The null hypothesis is the claim that nothing is happening, for example, the mean score is 70.",
+        "topic": "Hypothesis Testing",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Null hypothesis H0: the \"nothing is happening\" claim (for example, the mean score is 70"
+        }
+      },
+      {
+        "id": "q_demo_hypothesis-testing_2",
+        "question": "What does a p-value less than alpha indicate?",
+        "choices": [
+          "Reject H0",
+          "Fail to reject H0",
+          "Accept H0",
+          "Increase alpha"
+        ],
+        "answerIndex": 0,
+        "explanation": "A p-value less than alpha indicates that we reject the null hypothesis.",
+        "topic": "p-value",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Decision rule: if p <= alpha, reject H0"
+        }
+      },
+      {
+        "id": "q_demo_hypothesis-testing_3",
+        "question": "What is a Type II error?",
+        "choices": [
+          "Rejecting H0 when it is true",
+          "Failing to reject H0 when it is false",
+          "Correctly rejecting H0",
+          "None of the above"
+        ],
+        "answerIndex": 1,
+        "explanation": "A Type II error occurs when we fail to reject H0 when it is actually false.",
+        "topic": "Errors",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Type II error: failing to reject H0 when H0 is actually false"
+        }
+      },
+      {
+        "id": "q_demo_hypothesis-testing_4",
+        "question": "What is the significance level commonly set at?",
+        "choices": [
+          "0.01",
+          "0.05",
+          "0.10",
+          "0.15"
+        ],
+        "answerIndex": 1,
+        "explanation": "The significance level is commonly set at 0.05 before conducting the test.",
+        "topic": "Significance Level",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Significance level alpha: the cutoff we choose before looking at the data, commonly 0.05"
+        }
+      },
+      {
+        "id": "q_demo_hypothesis-testing_5",
+        "question": "What does the power of a test represent?",
+        "choices": [
+          "The probability of making a Type I error",
+          "The probability of correctly rejecting a false H0",
+          "The significance level of the test",
+          "The p-value of the test"
+        ],
+        "answerIndex": 1,
+        "explanation": "Power represents the probability of correctly rejecting a false null hypothesis.",
+        "topic": "Power",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Power = 1 - beta, the chance of correctly rejecting a false H0"
+        }
+      },
+      {
+        "id": "q_demo_hypothesis-testing_6",
+        "question": "In a z-test example, what was the sample mean?",
+        "choices": [
+          "70",
+          "74",
+          "36",
+          "12"
+        ],
+        "answerIndex": 1,
+        "explanation": "The sample mean in the z-test example was 74.",
+        "topic": "Worked Example",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Sample: n = 36 students, sample mean = 74"
+        }
+      },
+      {
+        "id": "q_demo_hypothesis-testing_7",
+        "question": "What is a common mistake when conducting hypothesis tests?",
+        "choices": [
+          "Choosing alpha before seeing the p-value",
+          "Choosing alpha after seeing the p-value",
+          "Calculating the p-value correctly",
+          "None of the above"
+        ],
+        "answerIndex": 1,
+        "explanation": "A common mistake is choosing alpha after seeing the p-value, which can bias the results.",
+        "topic": "Common Mistakes",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Choosing alpha after seeing the p-value"
+        }
+      },
+      {
+        "id": "q_demo_hypothesis-testing_8",
+        "question": "What does it mean to fail to reject H0?",
+        "choices": [
+          "We are 95% sure H0 is false",
+          "We did not find enough evidence against H0",
+          "H0 is proven true",
+          "None of the above"
+        ],
+        "answerIndex": 1,
+        "explanation": "Failing to reject H0 means we did not find enough evidence against it; it does not prove H0 is true.",
+        "topic": "Hypothesis Testing",
+        "source": {
+          "materialId": "demo_hypothesis-testing",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Fail to reject\" does not prove H0. It means we did not find enough evidence against it"
+        }
+      }
+    ]
+  }
+}

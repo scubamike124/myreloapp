@@ -1,0 +1,40 @@
+{
+  "slug": "hypothesis-testing",
+  "generatedAt": "2026-10-12T12:26:26.626Z",
+  "model": "gpt-4o-mini",
+  "cards": [
+    {
+      "front": "What is the null hypothesis (H0)?",
+      "back": "The null hypothesis is the claim that nothing is happening, for example, the mean score is 70.",
+      "quote": "Null hypothesis H0: the \"nothing is happening\" claim (for example, the mean score is 70"
+    },
+    {
+      "front": "What is the significance level (alpha)?",
+      "back": "The significance level (alpha) is the cutoff we choose before looking at the data, commonly set at 0.05.",
+      "quote": "Significance level alpha: the cutoff we choose before looking at the data, commonly 0.05"
+    },
+    {
+      "front": "What is a common mistake in hypothesis testing?",
+      "back": "A common mistake is choosing alpha after seeing the p-value.",
+      "quote": "Choosing alpha after seeing the p-value"
+    }
+  ],
+  "quiz": {
+    "question": "What is the null hypothesis (H0)?",
+    "choices": [
+      "The claim that nothing is happening",
+      "The claim that something is happening",
+      "The probability of making a Type I error",
+      "The significance level of a test"
+    ],
+    "answerIndex": 0,
+    "explanation": "The null hypothesis is the claim that nothing is happening, for example, the mean score is 70.",
+    "quote": "Null hypothesis H0: the \"nothing is happening\" claim (for example, the mean score is 70"
+  },
+  "counts": {
+    "flashcards": 8,
+    "quiz": 8,
+    "notes": 6
+  },
+  "seconds": 32
+}

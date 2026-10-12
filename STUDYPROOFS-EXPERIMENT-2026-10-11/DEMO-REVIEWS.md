@@ -1,0 +1,43 @@
+# StudyProofs demonstrations: what was made, what was checked, what was decided
+
+The rule (owner, 2026-10-11): a demonstration is made by the product's own pipeline from sample notes we wrote, shows the input, the study tools and where to try them, and is never edited. Before any is used, a person (here: me, reading the data against the notes) checks it. A study set that cites a line which is not in the notes is not used at all.
+
+How a demonstration is made: the worker runs the product's pipeline (`demo-gen.ts`, pipeline version 2) over a sample note, up to five times, and keeps the first set that passes the product's own bar (enough cards and questions, and every citation a real line of the notes); it posts the data as a comment on #105 (marker `amber-studyproofs-demo:<slug>`). The files here are made from those comments by `tools/demo-from-comment.mjs`, `tools/render-demo.mjs` and `tools/make-kit.mjs`.
+
+## State on 2026-10-12 at 12:59Z
+
+| Sample | Made | Pipeline | Items | Checked | Verdict |
+|---|---|---|---|---|---|
+| BIO 101: Cellular respiration (`cell-respiration`) | 2026-10-12 12:26Z, comment 6115886281 | v2, gpt-4o-mini, 60.9 s | 8 flashcards, 4 quiz questions, 7 note sections | 19 of 19 quotes are in the notes | **usable**, one weak question noted below |
+| STAT 200: Hypothesis testing basics (`hypothesis-testing`) | 2026-10-12 12:26Z, comment 6115891538 | v2, gpt-4o-mini | 8 flashcards, 8 quiz questions, 6 note sections | 22 of 22 quotes are in the notes | **usable** |
+| HIST 120: Why the French Revolution began in 1789 (`french-revolution`) | not made | v2, five tries | the best try had 6 flashcards, 4 quiz questions, 7 note sections | "1 items have no citation" | **not used**; the worker retries after four hours (about 16:26Z) |
+
+## What was checked, for each
+
+1. **The product's own check** (`exampleProblems` in `src/lib/studyproofs/examples.ts`, which runs `demoProblems`): no problems for either.
+2. **An independent citation check:** every source quote of every note section, flashcard and quiz question, lower-cased with punctuation collapsed, is a substring of the sample notes' text. BIO 101: 19 of 19. STAT 200: 22 of 22.
+3. **A read of every item against the notes** (not only the quote): is the answer what the notes say; is each quiz answer key right; are the wrong choices clearly wrong; does anything outside the notes appear as fact.
+4. **A look at every rendered image** (six scenes, feed, pin, preview) for layout and for words the product did not make.
+
+## BIO 101: Cellular respiration
+
+- All eight flashcards agree with the notes (the overall equation; glycolysis in the cytoplasm; pyruvate oxidation gives 1 CO2 and 1 NADH per pyruvate; the Krebs cycle gives 2 ATP per glucose; oxygen is the final electron acceptor; fermentation regenerates NAD+ so glycolysis can go on; most ATP comes from the electron transport chain; 6 CO2 per glucose in total).
+- Quiz: question 1 (net ATP from glycolysis: 2), 2 (what the Krebs cycle produces per glucose), 4 (lactic acid fermentation in muscle cells) are right and clear. **Question 3 is a weak question:** "What is the primary function of the electron transport chain?" has the choices "To produce ATP", "To oxidize NADH", "To pump H+ ions", "To produce CO2", and the key is "To pump H+ ions". The key and the explanation agree with the line it cites (the notes say the chain pumps H+ and builds a gradient, and that ATP synthase makes most of the ATP), but a student could reasonably pick "To produce ATP" or "To oxidize NADH". It is kept as the product made it (editing it would break "unedited"); it is not used in the video, the feed image or the pin (the renderer selects the first eligible question, which is question 1), and the example page shows it with its source line next to the line "AI can make mistakes, so check any study tool against your own notes".
+- Some source quotes are cut where the pipeline limits their length (the overview section's quote ends "(older textbooks say 36-38" without the closing bracket). The words quoted are in the notes.
+- The overview section leaves out "(older textbooks say 36-38)". Nothing is added that is not in the notes.
+
+## STAT 200: Hypothesis testing basics
+
+- All eight flashcards and all eight quiz questions agree with the notes (null hypothesis; p-value; Type I and Type II errors; significance level 0.05; power = 1 - beta; "fail to reject" does not prove H0; the decision rule; choosing alpha after seeing the p-value; the z-test's sample mean of 74). The wrong choices are clearly wrong; the distractor "We are 95% sure H0 is false" is the mistake the notes themselves warn about.
+- Two small paraphrases to note, neither wrong: the "Common Mistakes" section says "misinterpreting confidence levels" for the notes' `Saying "we are 95% sure H0 is false"` (the notes frame it as a mistake about how sure a test makes us, not about confidence intervals); the "Worked Example" section says the p-value is "approximately 0.0455" and omits "two-sided" (the notes say two-sided; the cited line is the z computation).
+- "A p-value less than alpha" in question 2 is a simplification of the notes' "p <= alpha".
+
+## The rendered files (`demos/<slug>/`)
+
+`demo-1080x1920.mp4` (32 s, silent, captions on screen, H.264), `feed-1080x1350.png`, `pin-1000x1500.png`, `preview-1200x630.png`, `selection.json` (what the renderer selected, by fixed length and citation rules: three flashcards and the first eligible quiz question), `example.json` (the reviewed study set, exactly what the registry in amberai holds). Each image says it is made from sample notes we wrote and that AI can make mistakes; the last frame has the product's address and no tracked link (tracked links are in the bio links and captions, one per platform, see `kit/KIT-TEXT.md`).
+
+`kit/KIT-TEXT.md` and `kit/pinterest-bulk.csv` are made by `tools/make-kit.mjs` from `selection.json`. The only change to its fixed copy in this round: the line for a community post no longer says every card has its source line; it says "where it can" (a student's own notes may have lines the product cannot cite, and it says so). The lines about the samples keep "each with the line it came from", which is true for these two: every item is cited.
+
+## What stays closed
+
+Registering these as the example pages (amberai pull request #809, a draft: the JSON files, the three images each, the registry line, five tests; CI mirror 4,940 pass) is ready but is **not merged**: the example pages are indexable and go into the sitemap, which makes them promotion, and the rule is that nothing advertises StudyProofs until a production walk passes. The one failing check is the address students write to (owner decision). When the tracker says "Verdict: the whole journey passed in production", the order is: merge, deploy, check the pages in production (HTTP 200, `index,follow`, the preview image), announce the pages through IndexNow, then the posts in `LAUNCH-KIT.md`.

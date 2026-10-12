@@ -1,0 +1,40 @@
+{
+  "slug": "cell-respiration",
+  "generatedAt": "2026-10-12T12:26:26.626Z",
+  "model": "gpt-4o-mini",
+  "cards": [
+    {
+      "front": "What is the overall equation for cellular respiration?",
+      "back": "C6H12O6 + 6 O2 -> 6 CO2 + 6 H2O + energy.",
+      "quote": "Big picture: cells break down glucose to make ATP. Overall equation: C6H12O6 + 6 O2 -> 6 CO2 + 6 H2O + energy"
+    },
+    {
+      "front": "What is produced during pyruvate oxidation?",
+      "back": "1 CO2 and 1 NADH per pyruvate.",
+      "quote": "Each pyruvate becomes acetyl-CoA, releasing 1 CO2 and making 1 NADH"
+    },
+    {
+      "front": "Where is most ATP produced during cellular respiration?",
+      "back": "In the electron transport chain.",
+      "quote": "Most ATP comes from the electron transport chain, not from glycolysis or the Krebs cycle"
+    }
+  ],
+  "quiz": {
+    "question": "What is the net gain of ATP from glycolysis?",
+    "choices": [
+      "0 ATP",
+      "2 ATP",
+      "4 ATP",
+      "36 ATP"
+    ],
+    "answerIndex": 1,
+    "explanation": "Glycolysis uses 2 ATP and produces 4 ATP, resulting in a net gain of 2 ATP.",
+    "quote": "Uses 2 ATP early on and makes 4 ATP, so the net gain is 2 ATP, plus 2 NADH"
+  },
+  "counts": {
+    "flashcards": 8,
+    "quiz": 4,
+    "notes": 7
+  },
+  "seconds": 32
+}

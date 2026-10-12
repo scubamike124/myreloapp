@@ -1,0 +1,259 @@
+{
+  "slug": "cell-respiration",
+  "title": "Cellular respiration",
+  "course": "BIO 101",
+  "sampleVersion": "2026-10-11.1",
+  "packVersion": "2",
+  "generatedAt": "2026-10-12T12:26:26.626Z",
+  "model": "gpt-4o-mini",
+  "material": {
+    "notes": [
+      {
+        "heading": "Overview of Cellular Respiration",
+        "body": "Cells break down glucose to make ATP. Overall equation: C6H12O6 + 6 O2 -> 6 CO2 + 6 H2O + energy. Eukaryotes get roughly 30-32 ATP per glucose.",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Big picture: cells break down glucose to make ATP. Overall equation: C6H12O6 + 6 O2 -> 6 CO2 + 6 H2O + energy. Eukaryotes get roughly 30-32 ATP per glucose (older textbooks say 36-38"
+        }
+      },
+      {
+        "heading": "Glycolysis",
+        "body": "Happens in the cytoplasm. Does NOT need oxygen. Glucose (6 carbons) is split into 2 pyruvate (3 carbons each). Uses 2 ATP early on and makes 4 ATP, so the net gain is 2 ATP, plus 2 NADH.",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "1. Glycolysis - Happens in the cytoplasm. Does NOT need oxygen. - Glucose (6 carbons) is split into 2 pyruvate (3 carbons each). - Uses 2 ATP early on and makes 4 ATP, so the net gain is 2 ATP, plus 2 NADH"
+        }
+      },
+      {
+        "heading": "Pyruvate Oxidation",
+        "body": "Pyruvate enters the mitochondrial matrix. Each pyruvate becomes acetyl-CoA, releasing 1 CO2 and making 1 NADH.",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "2. Pyruvate oxidation - Pyruvate enters the mitochondrial matrix. - Each pyruvate becomes acetyl-CoA, releasing 1 CO2 and making 1 NADH"
+        }
+      },
+      {
+        "heading": "Krebs Cycle",
+        "body": "In the mitochondrial matrix. Acetyl-CoA joins oxaloacetate to make citrate. Per glucose (two turns of the cycle): 2 ATP, 6 NADH, 2 FADH2 and 4 CO2.",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "3. Krebs cycle (citric acid cycle) - In the mitochondrial matrix. Acetyl-CoA joins oxaloacetate to make citrate. - Per glucose (two turns of the cycle): 2 ATP, 6 NADH, 2 FADH2 and 4 CO2"
+        }
+      },
+      {
+        "heading": "Electron Transport Chain + Chemiosmosis",
+        "body": "On the inner mitochondrial membrane. NADH and FADH2 hand their electrons to protein complexes. Energy from the electrons pumps H+ across the membrane, building a proton gradient. H+ flows back through ATP synthase, which makes most of the ATP (about 26-28 per glucose). Oxygen is the final electron acceptor and ends up as water.",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "4. Electron transport chain + chemiosmosis - On the inner mitochondrial membrane. NADH and FADH2 hand their electrons to protein complexes. - Energy from the electrons pumps H+ across the membrane, building a proton gradient. - H+ flows…"
+        }
+      },
+      {
+        "heading": "Fermentation",
+        "body": "Glycolysis can keep going if NAD+ is regenerated. Lactic acid fermentation (muscle cells): pyruvate -> lactate. Alcohol fermentation (yeast): pyruvate -> ethanol + CO2. Only the 2 ATP from glycolysis per glucose.",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "5. No oxygen? Fermentation - Glycolysis can keep going if NAD+ is regenerated. - Lactic acid fermentation (muscle cells): pyruvate -> lactate. - Alcohol fermentation (yeast): pyruvate -> ethanol + CO2. - Only the 2 ATP from glycolysis per…"
+        }
+      },
+      {
+        "heading": "Exam Traps",
+        "body": "Most ATP comes from the electron transport chain, not from glycolysis or the Krebs cycle. CO2 is released in pyruvate oxidation and in the Krebs cycle: 6 CO2 per glucose in total. The water in the overall equation is made at the end of the electron transport chain, not in glycolysis.",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Exam traps - Most ATP comes from the electron transport chain, not from glycolysis or the Krebs cycle. - CO2 is released in pyruvate oxidation and in the Krebs cycle: 6 CO2 per glucose in total. - The water in the overall equation is made…"
+        }
+      }
+    ],
+    "flashcards": [
+      {
+        "id": "fc_demo_cell-respiration_1",
+        "front": "What is the overall equation for cellular respiration?",
+        "back": "C6H12O6 + 6 O2 -> 6 CO2 + 6 H2O + energy.",
+        "topic": "Cellular Respiration",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Big picture: cells break down glucose to make ATP. Overall equation: C6H12O6 + 6 O2 -> 6 CO2 + 6 H2O + energy"
+        }
+      },
+      {
+        "id": "fc_demo_cell-respiration_2",
+        "front": "Where does glycolysis occur?",
+        "back": "In the cytoplasm.",
+        "topic": "Glycolysis",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Happens in the cytoplasm. Does NOT need oxygen"
+        }
+      },
+      {
+        "id": "fc_demo_cell-respiration_3",
+        "front": "What is produced during pyruvate oxidation?",
+        "back": "1 CO2 and 1 NADH per pyruvate.",
+        "topic": "Pyruvate Oxidation",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Each pyruvate becomes acetyl-CoA, releasing 1 CO2 and making 1 NADH"
+        }
+      },
+      {
+        "id": "fc_demo_cell-respiration_4",
+        "front": "How many ATP are produced in the Krebs cycle per glucose?",
+        "back": "2 ATP.",
+        "topic": "Krebs Cycle",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Per glucose (two turns of the cycle): 2 ATP, 6 NADH, 2 FADH2 and 4 CO2"
+        }
+      },
+      {
+        "id": "fc_demo_cell-respiration_5",
+        "front": "What is the final electron acceptor in the electron transport chain?",
+        "back": "Oxygen.",
+        "topic": "Electron Transport Chain",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Oxygen is the final electron acceptor and ends up as water"
+        }
+      },
+      {
+        "id": "fc_demo_cell-respiration_6",
+        "front": "What happens during fermentation?",
+        "back": "NAD+ is regenerated, allowing glycolysis to continue.",
+        "topic": "Fermentation",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Glycolysis can keep going if NAD+ is regenerated"
+        }
+      },
+      {
+        "id": "fc_demo_cell-respiration_7",
+        "front": "Where is most ATP produced during cellular respiration?",
+        "back": "In the electron transport chain.",
+        "topic": "ATP Production",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Most ATP comes from the electron transport chain, not from glycolysis or the Krebs cycle"
+        }
+      },
+      {
+        "id": "fc_demo_cell-respiration_8",
+        "front": "How many CO2 are released per glucose during cellular respiration?",
+        "back": "6 CO2.",
+        "topic": "CO2 Production",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "CO2 is released in pyruvate oxidation and in the Krebs cycle: 6 CO2 per glucose in total"
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "id": "q_demo_cell-respiration_1",
+        "question": "What is the net gain of ATP from glycolysis?",
+        "choices": [
+          "0 ATP",
+          "2 ATP",
+          "4 ATP",
+          "36 ATP"
+        ],
+        "answerIndex": 1,
+        "explanation": "Glycolysis uses 2 ATP and produces 4 ATP, resulting in a net gain of 2 ATP.",
+        "topic": "Glycolysis",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Uses 2 ATP early on and makes 4 ATP, so the net gain is 2 ATP, plus 2 NADH"
+        }
+      },
+      {
+        "id": "q_demo_cell-respiration_2",
+        "question": "What is produced in the Krebs cycle?",
+        "choices": [
+          "2 ATP, 6 NADH, 2 FADH2, 4 CO2",
+          "4 ATP, 2 NADH, 2 FADH2, 6 CO2",
+          "2 ATP, 4 NADH, 2 FADH2, 4 CO2",
+          "2 ATP, 6 NADH, 4 FADH2, 2 CO2"
+        ],
+        "answerIndex": 0,
+        "explanation": "The Krebs cycle produces 2 ATP, 6 NADH, 2 FADH2, and 4 CO2 per glucose.",
+        "topic": "Krebs Cycle",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Per glucose (two turns of the cycle): 2 ATP, 6 NADH, 2 FADH2 and 4 CO2"
+        }
+      },
+      {
+        "id": "q_demo_cell-respiration_3",
+        "question": "What is the primary function of the electron transport chain?",
+        "choices": [
+          "To produce ATP",
+          "To oxidize NADH",
+          "To pump H+ ions",
+          "To produce CO2"
+        ],
+        "answerIndex": 2,
+        "explanation": "The electron transport chain pumps H+ ions across the membrane, creating a proton gradient used to produce ATP.",
+        "topic": "Electron Transport Chain",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Energy from the electrons pumps H+ across the membrane, building a proton gradient"
+        }
+      },
+      {
+        "id": "q_demo_cell-respiration_4",
+        "question": "What type of fermentation occurs in muscle cells?",
+        "choices": [
+          "Alcohol fermentation",
+          "Lactic acid fermentation",
+          "Both",
+          "Neither"
+        ],
+        "answerIndex": 1,
+        "explanation": "Muscle cells undergo lactic acid fermentation, converting pyruvate to lactate.",
+        "topic": "Fermentation",
+        "source": {
+          "materialId": "demo_cell-respiration",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Lactic acid fermentation (muscle cells): pyruvate -> lactate"
+        }
+      }
+    ]
+  }
+}
