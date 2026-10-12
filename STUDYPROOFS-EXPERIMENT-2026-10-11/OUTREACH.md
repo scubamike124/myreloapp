@@ -36,7 +36,7 @@ The owner asked (2026-10-11) to "approach tutoring centers and student creators 
 >
 > I'm writing from StudyProofs, a small study tool. A student pastes or uploads their own notes and gets flashcards and a quiz back. Where it can, each one shows the line of the notes it came from, and it says when it cannot find one, so it is easy to check.
 >
-> You can see exactly what it makes, unedited, from sample notes we wrote: https://hq.amberoneai.com/studyproofs/examples?src=tutoring-centers&campaign=outreach
+> You can see what it makes from sample notes we wrote, with the line each item came from: https://hq.amberoneai.com/studyproofs/examples?src=tutoring-centers&campaign=outreach
 >
 > If it would help {INSTITUTION}'s students, they can have Pro free for a semester (120 days). No card, nothing is charged, and their notes stay theirs when it ends. They sign up with this link, which fills in the code TUTORING-SEMESTER: https://hq.amberoneai.com/studyproofs/signup?src=tutoring-centers&campaign=outreach&code=TUTORING-SEMESTER (one use per student account, up to 300 students in all).
 >
@@ -46,7 +46,7 @@ The owner asked (2026-10-11) to "approach tutoring centers and student creators 
 >
 > The StudyProofs team
 
-**The fingerprint of this exact text and the trial's terms is `53d7f4d2531d`** (printed on the tracker; the text above is copied from `src/lib/studyproofs/outreach-copy.ts` as merged in amberai #808, and any change to a word or a number gives a new fingerprint that needs new words from the owner). The earlier fingerprint `2a7f67c15748` belonged to a version that said "Each one shows the line of the notes it came from"; it is withdrawn, because the product shows a source only when its quote really occurs in the student's text and says when it cannot find one.
+**The fingerprint of this exact text and the trial's terms is `325af7731b77`** (printed on the tracker; the text above is copied from `src/lib/studyproofs/outreach-copy.ts` as on the `claude/sp-examples-first-two` branch (amberai draft #809; it replaces "exactly what it makes, unedited" because one example question is now reworded by a person and the example page says so), and any change to a word or a number gives a new fingerprint that needs new words from the owner). The earlier fingerprint `2a7f67c15748` belonged to a version that said "Each one shows the line of the notes it came from"; it is withdrawn, because the product shows a source only when its quote really occurs in the student's text and says when it cannot find one. The fingerprint `53d7f4d2531d` belonged to the version that said "exactly what it makes, unedited" and is withdrawn too; none was ever approved.
 
 **Before the owner approves this text**, two claims must be true in production, and the tracker shows both. (1) "Where it can, each one shows the line of the notes it came from": the citation fix is deployed (amberai #808, running since 12:24Z on 2026-10-12), and the production walk of 12:26Z found 11 of 11 citations quoting the pasted notes and 16 of 16 quoting a real PDF's text; each demonstration also has to pass its own check that every citation is a real line of the notes. (2) "A working demonstration": an example page must exist with a reviewed demonstration on it. The pages exist but are empty; two demonstrations (BIO 101, STAT 200) are made and waiting for my review against their notes, and the third (HIST 120) was not made in five tries and is retried by the worker.
 
@@ -56,7 +56,7 @@ Creators are individuals, so this is a person-to-person request: the owner choos
 
 A first note, for the owner to edit and send:
 
-> Hi {name}, I make StudyProofs, a small tool that turns a student's own notes into flashcards and a quiz and shows, where it can, the line of the notes each one came from. I thought it might suit your audience, so here is exactly what it makes from sample notes I wrote, unedited: {link}. If you would like to try it with your own notes, here is a code for a free Pro month with no card: {code}. No obligation, and if you do mention it, please say it is a tool I make and that the cards can contain mistakes. Thank you for looking.
+> Hi {name}, I make StudyProofs, a small tool that turns a student's own notes into flashcards and a quiz and shows, where it can, the line of the notes each one came from. I thought it might suit your audience, so here is what it makes from sample notes I wrote, with the line each item came from: {link}. If you would like to try it with your own notes, here is a code for a free Pro month with no card: {code}. No obligation, and if you do mention it, please say it is a tool I make and that the cards can contain mistakes. Thank you for looking.
 
 ## What the owner decides (one line each)
 

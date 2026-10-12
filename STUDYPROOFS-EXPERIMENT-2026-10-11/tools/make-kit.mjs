@@ -57,7 +57,12 @@ for (const slug of slugs) {
   const story = guard("Story text", `Try it with your own notes (free to start)`);
   const pinTitle = guard("Pin title", clip(`${course} notes → flashcards and a quiz (sample)`, 95));
   const pinDesc = guard("Pin description", `Sample ${course} notes we wrote, turned into flashcards and a quiz by StudyProofs, each with the line of the notes it came from. ${disclosure} Free to try.`);
-  const community = guard("Community post", `We made a free tool that turns your own notes into flashcards and a quiz and, where it can, shows the line each one came from. Here is a sample from ${course} notes we wrote, shown unedited: ${link(slug, "community")} . It makes mistakes sometimes, so check it against your notes. (We make it; delete this if posts like this are not allowed here.)`);
+  // An example a person changed after review (example.json `edits`) is never called unedited: the post says what was changed and that the page shows the original.
+  const examplePath = path.join(demosDir, slug, "example.json");
+  const edits = fs.existsSync(examplePath) ? (JSON.parse(fs.readFileSync(examplePath, "utf8")).edits ?? []) : [];
+  const shown = edits.length ? "shown as the product made it, except one quiz question a person reworded (the page says which, and shows the original)" : "shown unedited";
+  const community = guard("Community post", `We made a free tool that turns your own notes into flashcards and a quiz and, where it can, shows the line each one came from. Here is a sample from ${course} notes we wrote, ${shown}: ${link(slug, "community")} . It makes mistakes sometimes, so check it against your notes. (We make it; delete this if posts like this are not allowed here.)`);
+  if (edits.length && /unedited/i.test(community)) throw new Error(`${slug}: an edited example must not be called unedited`);
   const alt = guard("Alt text", `StudyProofs demonstration: ${course} sample notes become flashcards and a quiz. Example prompt: ${card.front}`);
   rows.push([pinTitle, `${SITE}/studyproofs/examples/${slug}/pin-1000x1500.png`, "StudyProofs: study tools", "", pinDesc, link(slug, "pinterest"), "", `${course},flashcards,study tips,${title}`]);
   lines.push(`## ${title} (${course}): ${n.flashcards} flashcards, ${n.quiz} quiz questions`, "");

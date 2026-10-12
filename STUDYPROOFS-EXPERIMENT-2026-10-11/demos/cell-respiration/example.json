@@ -218,12 +218,12 @@
       },
       {
         "id": "q_demo_cell-respiration_3",
-        "question": "What is the primary function of the electron transport chain?",
+        "question": "According to the notes, what does the energy from the electrons do in the electron transport chain?",
         "choices": [
-          "To produce ATP",
-          "To oxidize NADH",
-          "To pump H+ ions",
-          "To produce CO2"
+          "It splits glucose into two pyruvate",
+          "It turns pyruvate into lactate",
+          "It pumps H+ across the membrane, building a proton gradient",
+          "It releases CO2"
         ],
         "answerIndex": 2,
         "explanation": "The electron transport chain pumps H+ ions across the membrane, creating a proton gradient used to produce ATP.",
@@ -255,5 +255,24 @@
         }
       }
     ]
-  }
+  },
+  "edits": [
+    {
+      "kind": "quiz-question-reworded",
+      "questionId": "q_demo_cell-respiration_3",
+      "on": "2026-10-12",
+      "reason": "The question as StudyProofs wrote it (\"What is the primary function of the electron transport chain?\") had two answers a student could defend, because the chain's energy ends up making ATP and the chain also oxidizes NADH; the new wording asks only what the cited line says.",
+      "original": {
+        "question": "What is the primary function of the electron transport chain?",
+        "choices": [
+          "To produce ATP",
+          "To oxidize NADH",
+          "To pump H+ ions",
+          "To produce CO2"
+        ],
+        "answerIndex": 2,
+        "explanation": "The electron transport chain pumps H+ ions across the membrane, creating a proton gradient used to produce ATP."
+      }
+    }
+  ]
 }

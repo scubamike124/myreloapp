@@ -16,7 +16,7 @@ Description: Sample BIO 101 notes we wrote, turned into 8 flashcards and 4 quiz 
 
 **Pinterest pin** (also in `pinterest-bulk.csv`): BIO 101 notes → flashcards and a quiz (sample). Sample BIO 101 notes we wrote, turned into flashcards and a quiz by StudyProofs, each with the line of the notes it came from. Made by StudyProofs. AI can make mistakes, so check the cards against your notes. Free to try.
 
-**One post in a community that allows it** (only after reading its rules; once; no direct messages): We made a free tool that turns your own notes into flashcards and a quiz and, where it can, shows the line each one came from. Here is a sample from BIO 101 notes we wrote, shown unedited: https://hq.amberoneai.com/studyproofs/examples/cell-respiration?src=community&campaign=cell-respiration . It makes mistakes sometimes, so check it against your notes. (We make it; delete this if posts like this are not allowed here.)
+**One post in a community that allows it** (only after reading its rules; once; no direct messages): We made a free tool that turns your own notes into flashcards and a quiz and, where it can, shows the line each one came from. Here is a sample from BIO 101 notes we wrote, shown as the product made it, except one quiz question a person reworded (the page says which, and shows the original): https://hq.amberoneai.com/studyproofs/examples/cell-respiration?src=community&campaign=cell-respiration . It makes mistakes sometimes, so check it against your notes. (We make it; delete this if posts like this are not allowed here.)
 
 **Image alt text**: StudyProofs demonstration: BIO 101 sample notes become flashcards and a quiz. Example prompt: What is the overall equation for cellular respiration?
 
