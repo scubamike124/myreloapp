@@ -10,7 +10,7 @@ How a demonstration is made: the worker runs the product's pipeline (`demo-gen.t
 |---|---|---|---|---|---|
 | BIO 101: Cellular respiration (`cell-respiration`) | 2026-10-12 12:26Z, comment 6115886281 | v2, gpt-4o-mini, 60.9 s | 8 flashcards, 4 quiz questions, 7 note sections | 19 of 19 quotes are in the notes | **usable**, one weak question noted below |
 | STAT 200: Hypothesis testing basics (`hypothesis-testing`) | 2026-10-12 12:26Z, comment 6115891538 | v2, gpt-4o-mini | 8 flashcards, 8 quiz questions, 6 note sections | 22 of 22 quotes are in the notes | **usable** |
-| HIST 120: Why the French Revolution began in 1789 (`french-revolution`) | not made, twice | v2, five tries each time | 12:26Z: the best try had 6 flashcards, 4 quiz questions, 7 note sections. 16:38Z: 8 flashcards, 8 quiz questions, 6 note sections | both times "1 items have no citation" (the product dropped one source because its quote was not in the notes) | **not used**; the worker tries again every four hours (next about 20:38Z). Nothing is edited to make it pass |
+| HIST 120: Why the French Revolution began in 1789 (`french-revolution`) | not made, three times | v2, five tries each time | 12:26Z: the best try had 6 flashcards, 4 quiz questions, 7 note sections. 16:38Z: 8 flashcards, 8 quiz questions, 6 note sections. 20:38Z: 5 flashcards, 4 quiz questions, 6 note sections | "1 items have no citation" twice, "2 items have no citation" the third time (the product drops a source whose quote is not in the notes) | **not used**; the worker tries again every four hours (next about 00:38Z). Nothing is edited to make it pass |
 
 ## What was checked, for each
 
