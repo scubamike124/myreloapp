@@ -42,7 +42,7 @@ This folder is the working record. The live numbers are in one comment on the is
 ## The two-week test (starts only when the gate is open)
 
 See `LAUNCH-KIT.md` (written when the demonstrations exist) for the day-by-day list. In short, ranked by who can do it:
-1. Amber alone: the example pages (indexable, in the sitemap, announced through IndexNow), the demonstrations, the kit.
+1. Amber alone: the example pages (indexable, in the sitemap), the demonstrations, the kit.
 2. A one-time owner step per platform (create the StudyProofs account; solve any CAPTCHA or phone check): Instagram, TikTok, YouTube, Pinterest; a personal Product Hunt account a week before a launch.
 3. A person posting by hand where the platform allows nothing else (every platform above except the example pages), one place at a time, reading each community's rules first.
 4. Owner-approved outreach to tutoring centers and student creators with the demo and a trial code (nothing is sent to anyone new without the owner's go-ahead).
