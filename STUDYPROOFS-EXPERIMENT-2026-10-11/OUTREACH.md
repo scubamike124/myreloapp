@@ -2,6 +2,12 @@
 
 The owner asked (2026-10-11) to "approach tutoring centers and student creators with a working demo and a limited free trial", and to "check that existing work first". This file records what already existed, what was wrong with it, what changed, and what needs the owner's words.
 
+## State on 2026-10-12 at 12:43Z
+
+- **Held since 2026-10-11 20:54Z.** The mail events show no send after 2026-10-10 18:34Z (the campaign's own state records its last run at 2026-10-11 18:31Z, before the hold, and no send from it appears in the mail events). Both locks are shut: the journey probe's newest run (2026-10-12 12:26Z) failed on one check, the address students write to (`studyproofs.com` has no mail routing), and the owner's approvals list is empty.
+- **What the owner decides is unchanged** (the four lines at the end), and the reply-to address is now the first of them: nothing should be sent to any institution while its replies go nowhere.
+- **The send history is as reported:** 577 emails to 19 distinct addresses, 17 a day from 2026-09-28 to 2026-10-10, up to 34 to one address, 0 complaints, 1 bounce, no reply on record (none could have been received).
+
 ## What already existed (read from the code; the live state is on the tracker comment)
 
 - A **daily campaign** (`src/lib/customer-acquisition/studyproofs-campaign.ts`, work-queue kind `STUDYPROOFS_OUTREACH_TICK`, 18:30 UTC every day). Its own header said it was "NOT wired into any cron"; that was false: it is wired, and it sends whenever the two vault entries `OUTREACH_MAILING_ADDRESS` and `ACQUISITION_UNSUB_SECRET` exist. The only commit in the repository's history that touches the campaign is a large squashed import (5,779 files), so who wired it, and on what authority, could not be established from the code.
@@ -28,7 +34,7 @@ The owner asked (2026-10-11) to "approach tutoring centers and student creators 
 
 > Hi,
 >
-> I'm writing from StudyProofs, a small study tool. A student pastes or uploads their own notes and gets flashcards and a quiz back. Each one shows the line of the notes it came from, so it is easy to check.
+> I'm writing from StudyProofs, a small study tool. A student pastes or uploads their own notes and gets flashcards and a quiz back. Where it can, each one shows the line of the notes it came from, and it says when it cannot find one, so it is easy to check.
 >
 > You can see exactly what it makes, unedited, from sample notes we wrote: https://hq.amberoneai.com/studyproofs/examples?src=tutoring-centers&campaign=outreach
 >
@@ -40,7 +46,9 @@ The owner asked (2026-10-11) to "approach tutoring centers and student creators 
 >
 > The StudyProofs team
 
-**Before the owner approves this text**, two claims must be true in production, and the tracker shows both: "each one shows the line of the notes it came from" (the citation fix must be deployed and the demonstrations must pass their own check that every citation is a real line of the notes) and "a working demonstration" (an example page must exist).
+**The fingerprint of this exact text and the trial's terms is `53d7f4d2531d`** (printed on the tracker; the text above is copied from `src/lib/studyproofs/outreach-copy.ts` as merged in amberai #808, and any change to a word or a number gives a new fingerprint that needs new words from the owner). The earlier fingerprint `2a7f67c15748` belonged to a version that said "Each one shows the line of the notes it came from"; it is withdrawn, because the product shows a source only when its quote really occurs in the student's text and says when it cannot find one.
+
+**Before the owner approves this text**, two claims must be true in production, and the tracker shows both. (1) "Where it can, each one shows the line of the notes it came from": the citation fix is deployed (amberai #808, running since 12:24Z on 2026-10-12), and the production walk of 12:26Z found 11 of 11 citations quoting the pasted notes and 16 of 16 quoting a real PDF's text; each demonstration also has to pass its own check that every citation is a real line of the notes. (2) "A working demonstration": an example page must exist with a reviewed demonstration on it. The pages exist but are empty; two demonstrations (BIO 101, STAT 200) are made and waiting for my review against their notes, and the third (HIST 120) was not made in five tries and is retried by the worker.
 
 ## Student creators (owner-sent, never sent by Amber)
 
@@ -48,7 +56,7 @@ Creators are individuals, so this is a person-to-person request: the owner choos
 
 A first note, for the owner to edit and send:
 
-> Hi {name}, I make StudyProofs, a small tool that turns a student's own notes into flashcards and a quiz and shows the line of the notes each one came from. I thought it might suit your audience, so here is exactly what it makes from sample notes I wrote, unedited: {link}. If you would like to try it with your own notes, here is a code for a free Pro month with no card: {code}. No obligation, and if you do mention it, please say it is a tool I make and that the cards can contain mistakes. Thank you for looking.
+> Hi {name}, I make StudyProofs, a small tool that turns a student's own notes into flashcards and a quiz and shows, where it can, the line of the notes each one came from. I thought it might suit your audience, so here is exactly what it makes from sample notes I wrote, unedited: {link}. If you would like to try it with your own notes, here is a code for a free Pro month with no card: {code}. No obligation, and if you do mention it, please say it is a tool I make and that the cards can contain mistakes. Thank you for looking.
 
 ## What the owner decides (one line each)
 
@@ -67,7 +75,7 @@ The tracker's send history (mail events, counts only) shows 577 emails to 19 dis
 >
 > You may have received several emails from us about StudyProofs over the past weeks. That was our mistake: a fault in our system repeated a message that we meant to send once. One of those messages also mentioned free Pro access for a semester, which we were not able to provide at the time. We are sorry.
 >
-> We have stopped all sending, and you will not hear from us again unless you ask. If you are curious what StudyProofs does, it turns a student's own notes into flashcards and a quiz that show the line of the notes each one came from. There is nothing you need to do.
+> We have stopped all sending, and you will not hear from us again unless you ask. If you are curious what StudyProofs does, it turns a student's own notes into flashcards and a quiz that show, where they can, the line of the notes each one came from. There is nothing you need to do.
 >
 > The StudyProofs team
 

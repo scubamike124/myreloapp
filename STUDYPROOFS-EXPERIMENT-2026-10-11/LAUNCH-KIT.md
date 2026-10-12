@@ -2,6 +2,8 @@
 
 Nothing here starts until the tracker comment on #105 says **"Verdict: the whole journey passed in production"**. Amber advertises nothing before that, and asks nobody to. The text for each demonstration (captions, titles, the Pinterest file) is generated from the reviewed demonstrations by `tools/make-kit.mjs`, so a number in a caption is always the number the product produced; this file is the order of work and the rules.
 
+**State on 2026-10-12 at 12:43Z:** the verdict is still "not ready for students", for one reason only (the support address, `studyproofs.com`, has no mail routing; the owner decides the address). Every other check of the production walk passed at 12:26Z, including a real PDF and Stripe's records. Demonstrations: BIO 101 and STAT 200 are made (every item cited) and waiting for my review against their notes; HIST 120 was not made in five tries and is retried by the worker after four hours. No account, post or link has been published for StudyProofs, and no visit from a promoted link has been counted.
+
 ## What Amber does alone (no account, no owner step)
 
 1. **The example pages** on the product's own site, `/studyproofs/examples/<sample>`: the sample notes we wrote and, unedited, everything the product made from them, each item with its source line, with a tracked link to try it. They are indexable, in the sitemap, and announced to search engines through IndexNow (Bing and Yandex; Google reads the sitemap). Three pages, hand-checked, not a bulk of generated ones.
