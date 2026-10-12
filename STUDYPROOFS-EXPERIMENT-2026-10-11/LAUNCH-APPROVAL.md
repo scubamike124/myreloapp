@@ -9,7 +9,7 @@
 | Student journey in production (signup, upload, PDF, flashcards, quiz, return, trial, checkout session, Stripe records) | **Passes** (production walk 2026-10-12 14:27Z; accounts and saved sets survived a redeploy) |
 | Advertising gate | **Shut** until the production walk passes its last step: the address students write to must receive mail. `support@amberoneai.com` is now the address in the product; it receives nothing until the DNS records in Amber's support-mail comment on #105 are added (see `SUPPORT-EMAIL.md`) |
 | Real payment | **Unverified.** No real transaction has been completed. The checkout session is created and left to expire; the first live payment is counted only when Stripe's signed webhook confirms it. Optional: your own $1 round trip (`HANDOFF.md`, decision 6) |
-| Example pages | Ready (BIO 101, STAT 200) in amberai draft PR #809, merged only when the gate opens. A third (HIST 120) is retried automatically about 16:26Z |
+| Example pages | Ready (BIO 101, STAT 200) in amberai draft PR #809, merged only when the gate opens. A third (HIST 120) was not made in two rounds of five tries (one item without a citation each time); the worker tries again every four hours (next about 20:38Z) |
 | Accounts for any platform below | **None exist.** Every platform needs an account only you can create (identity, phone or CAPTCHA checks) |
 
 ## What I am asking you to approve
