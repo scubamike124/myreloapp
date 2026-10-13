@@ -30,7 +30,7 @@ The worker's try at 12:50Z made a full set under the deployed pipeline (main f15
 
 ## Update, 2026-10-13 ~13:40Z: HIST 120 corrected on the owner's instruction, as recorded changes, kept in draft
 
-The owner's instruction (13:2xZ): add source lines only where the notes support them, correct or remove the unsupported quiz claims and the weak flashcard, regenerate, rerun the citation and example-page checks, do not weaken the source requirement, do not register or publish. Done on the examples branch (`claude/sp-examples-first-two`, draft #809, commit 5aa6786c), with every change recorded in the example's `edits` and shown on its page as a person's change:
+The owner's instruction (13:2xZ): add source lines only where the notes support them, correct or remove the unsupported quiz claims and the weak flashcard, regenerate, rerun the citation and example-page checks, do not weaken the source requirement, do not register or publish. Done on the examples branch (`claude/sp-examples-first-two`, draft #809, commit b134add7), with every change recorded in the example's `edits` and shown on its page as a person's change:
 
 | Change | What the product wrote | What it is now | Why |
 |---|---|---|---|
