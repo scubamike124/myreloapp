@@ -1,6 +1,7 @@
 # Small capability tests: what ran, what was blocked, what it showed
 
-> **Corrected 2026-10-13.** Section 1 describes a **20-row third-party fixture, not the owner's sample** (about 50 commercial building permits
+> **Updated 2026-10-13 (owner's sample received).** Section 1a analyses the owner's real sample, pasted into the session as report text. Section 1 below describes a
+> **20-row third-party fixture, not the owner's sample** (about 50 commercial building permits
 > above $100,000 and 50 mechanical/electrical permits, with recorded contractor details including phone numbers, and source links, in
 > `Austin-Permit-Sample-2026-10-12.html`, not yet transferred to this session). The fixture's "no phone, email, licence or owner column" result
 > described that fixture's filter and is **withdrawn as a statement about the dataset or the owner's sample**. Labels: **[P]** production
@@ -16,6 +17,7 @@ Amber's own code cannot run from here; Amber's numbers below come from her produ
 | Test | Planned | Tried | Worked | Failed | Result |
 |---|---|---|---|---|---|
 | Find the prepared Austin permit sample | 1 | 5 searches (amberai `origin/main` docs and data, `/home/user` filenames, the scratchpad) | 0 | - | **Not accessible at the time** (the owner has since named the file, `Austin-Permit-Sample-2026-10-12.html`, and will transfer it). Only code mentions, the fictional Harborline Home Care site, and an idea note were found |
+| Analyse the owner's sample (pasted report text, 2026-10-13) | 1 | 1 | 1 | 0 | 100 rows (50 building, 50 trade) transcribed into a private file; 13 of 13 figures in the report's own summary re-computed and agree (section 1a) |
 | Live Austin pull (about 300 rows) | 1 | 4 fetches + 1 curl | 0 | 5 | Blocked by network policy |
 | Analyse a public Austin fixture | 1 | 1 | 1 | 0 | 20 real rows, not representative (below) |
 | Greenhouse / Lever / Ashby endpoints (one each) | 12 | 3 | 0 | 3 | Blocked |
@@ -28,7 +30,42 @@ Amber's own code cannot run from here; Amber's numbers below come from her produ
 Failure rate against the target hosts: 6 of 6 for the data sources (100%). That describes this environment, not those
 services' reliability.
 
-## 1. The Austin permit data (opportunity 1)
+## 1a. The owner's sample (received 2026-10-13 as pasted report text) [T on the sample; the pull itself is [R]]
+
+**What it is.** A report collected on 2026-10-12 by the owner's other tool from the City's public Socrata API (no key needed): the 50 most recently issued Commercial-mapped building permits with
+`total_job_valuation` above $100,000 (issue dates 2026-09-15 to 2026-10-11), plus 50 recent Commercial mechanical and electrical permits (2026-10-07 to 2026-10-11), plus the one trade permit linked
+by identifier. It is a **selected sample, not a random one**. I transcribed the two summary tables (permit, site, work class, value, contractor, trade, phone, master id, scope) into a private file,
+added the status and trade-valuation fields from the raw JSON, and ran `tests/austin-permits/analyze_owner_sample.py`. The input file holds contractor names and phone numbers and is not in this repository;
+the aggregate output is in `tests/austin-permits/results/owner_sample_profile_2026-10-13.txt` (it prints no phone number and no personal name).
+
+**Integrity check.** 13 of 13 figures that the report states about the sample (rows, distinct address strings, master ids, work-class split, mechanical/electrical/missing split, master-id count, Final statuses,
+date range) were recomputed from my transcription and agree. The report's population counts (345 commercial building permits issued 09-12 to 10-12; valuation on 124; company on 316; phone on 344) could not be recomputed.
+
+| Measure | Result |
+|---|---|
+| Building sample: rows / distinct address strings / master ids | 50 / 48 / **13** |
+| Largest master id | 35 of 50 rows (70%): one apartment complex with trash enclosures, carports, garages and 9 apartment buildings |
+| Independent projects per week | about 3.4 (13 over 3.9 weeks; the 50-row limit cuts off the first week) |
+| Rows valued at exactly $1,000,000 | 37 of 50; 28 of 29 small site structures are valued at $1,000,000 or more |
+| Valuation if rows are counted / if each master id is counted once | $196.5M / $92.1M (2.13 times overstated); 4 of 4 multi-permit projects repeat one value |
+| Master-level valuations | median $2.05M; 9 of 13 at $1M or more |
+| Contractor company and phone present | 50 of 50; valid 10-digit shape 49 of 50 ("512" is not a phone); 5 of 13 projects have a non-Austin area code |
+| Work classes | 46 New, 2 Shell, 2 Addition and Remodel; all 50 Active |
+| Scope of the 13 projects (by master id) | 4 small site structures; 4 office, storage, industrial or club buildings; 3 multifamily; 2 EV-charging; 2 garage structures; 1 hospital generator and switchboard; 1 restaurant change of use (first match wins, so counts overlap by one) |
+| Trade sample: mechanical / electrical / no contractor | 15 / 23 / 12; the 12 are all sign permits |
+| Sign permits | 17 of 50 (34%) |
+| Mechanical work classes | 8 remodels, 5 change-outs, 1 addition and remodel, 1 repair |
+| Contractor-linked trade permits / distinct companies | 38 / 27 (26 on non-sign permits); 4 companies with 2 to 5 permits |
+| Trade phone in valid shape | 33 of 38 (the 5 others are one company's 12-digit value, all on sign permits) |
+| Trade valuation | none has `total_job_valuation`; 15 have `electrical_valuation_remodel` (7 at $100,000 or more; four siblings at one address repeat $1.6M); mechanical permits show none |
+| Master ids on trade permits | 39 of 50; **0 shared with the building sample**; the one linked record (found by trade master id = building project id) was issued five months before its building permit |
+| Status | 2 Final among the trade permits; one Active record shows a completed date before its issue date (a data anomaly) |
+
+**What this does and does not establish.** It establishes that the City's data carries recorded contractor company and phone for most commercial permits, that source links and dates are present, and that the
+raw feed is noisy in specific, checkable ways (placeholder valuations, repeated sibling permits, sign permits, out-of-area and malformed contacts). It does **not** establish that the numbers are reachable (nobody
+called), that the feed is complete (one 26-day window; the building list is truncated at 50 rows), that suppliers would use it, or that the dataset's terms allow resale.
+
+## 1. The Austin permit data (opportunity 1): the 20-row third-party fixture
 
 **The fixture (not the owner's sample).** The owner's prepared sample was not found at the time. Instead, 20 real rows were taken from a public test fixture in an
 unrelated repository (`beford782/Silverline-Sleep-Procurement`, PR 191, `tests/fixtures/austin_permits_sample.json`). It is

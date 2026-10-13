@@ -1,0 +1,56 @@
+rows: A=50 B=50
+
+=== SAMPLE A: commercial building permits with total_job_valuation > $100,000
+issue dates: 2026-09-15 to 2026-10-11 | span days: 26
+distinct permit numbers: 50 | distinct address strings: 48 | distinct master ids: 13
+largest master id share of rows: 35/50 = 70% | next two: [2, 2]
+work classes: {'Addition and Remodel': 2, 'New': 46, 'Shell': 2} | statuses: {'Active': 50}
+rows whose valuation is exactly $1,000,000: 37/50
+rows describing a small site structure (trash enclosure, carport, detached garage, dumpster enclosure, retaining wall; real parking garages excluded): 29/50; of those valued at least $1,000,000: 28
+sum of valuations if every row is counted: $196,480,228 | counting each master id once (its largest value): $92,067,614 | overstatement factor: 2.13x
+master ids with 2+ permits that all carry an identical valuation: 4/4
+master-level valuation (one value per master, sorted): [175000, 200000, 400000, 500000, 1000000, 1000000, 2050000, 2100000, 2980000, 3000000, 9250000, 17662614, 51750000]
+master-level median $2,050,000; at least $1M: 9/13
+independent master ids by ISO week of first issue: {'2026-W38': 2, '2026-W39': 2, '2026-W40': 5, '2026-W41': 4}
+independent projects per week over the span: 3.4 (span 3.9 weeks)
+phone field state (rows): {'valid10': 49, 'odd_length_3': 1}
+contractor per master id: local area code (512/737) 7, other area code 5, unusable phone value 1 (of 13)
+contractor name artefacts (asterisks or run-together words): 1
+master ids by scope bucket (first match wins): {'restaurant change of use': 1, 'office, storage, industrial or club building': 4, 'EV charging': 2, 'generator or switchboard': 1, 'garage structure': 2, 'multifamily apartments or shell': 3, 'small site structures (enclosures, carports, detached garages, walls)': 4}
+
+=== SAMPLE B: recent commercial mechanical and electrical permits
+issue dates: 2026-10-07 to 2026-10-11 | distinct issue days: 4
+by recorded contractor trade: {'Mechanical Contractor': 15, 'Electrical Contractor': 23, 'missing trade/company/phone': 12}
+permit type: {'MP': 15, 'EP': 35} | statuses: {'Active': 48, 'Final': 2}
+sign permits (work class Wall or sign wording): 17/50; of the 12 rows with no contractor, signs: 12
+non-sign rows: 33 | by work class: {'Change Out': 5, 'New': 2, 'Repair': 4, 'Addition and Remodel': 1, 'Remodel': 19, 'Upgrade': 1, 'Shell': 1}
+mechanical rows by work class: {'Change Out': 5, 'Addition and Remodel': 1, 'Remodel': 8, 'Repair': 1}
+electrical non-sign rows: 18 | by work class: {'New': 2, 'Repair': 3, 'Remodel': 11, 'Upgrade': 1, 'Shell': 1}
+contractor-linked rows 38; distinct contractor companies 27; companies with 2+ permits: 4 (their permit counts: [5, 4, 4, 2])
+non-sign contractor-linked rows 33; distinct companies 26
+phone field state (rows with a contractor): {'valid10': 33, 'odd_length_12': 5}
+rows with an electrical_valuation_remodel figure: 15/50 (of the 23 electrical rows with a contractor); values >= $100,000: 7
+same electrical_valuation_remodel repeated on sibling permits at one address: 4 permits at [1600000.0]
+rows with a master id: 39 | without: 11
+addresses with 2+ trade permits: 5 | rows involved: 15
+
+=== JOIN
+master ids shared between sample A and sample B: 0
+the owner's report found 1 linked electrical record, by the rule trade.masterpermitnum == building.project_id; that record was issued 2026-04-21, five months BEFORE its building permit (2026-10-01)
+
+=== CROSS-CHECK against the report's stated figures
+  OK  A rows: report 50 | recomputed 50
+  OK  A distinct address strings: report 48 | recomputed 48
+  OK  A distinct master ids: report 13 | recomputed 13
+  OK  A New: report 46 | recomputed 46
+  OK  A Shell: report 2 | recomputed 2
+  OK  A Addition and Remodel: report 2 | recomputed 2
+  OK  B mechanical: report 15 | recomputed 15
+  OK  B electrical: report 23 | recomputed 23
+  OK  B missing contractor: report 12 | recomputed 12
+  OK  B with master id: report 39 | recomputed 39
+  OK  B Final status: report 2 | recomputed 2
+  OK  A issue-date range start: report 2026-09-15 | recomputed 2026-09-15
+  OK  A issue-date range end: report 2026-10-11 | recomputed 2026-10-11
+cross-check differences: 0
+population counts quoted by the report (not recomputable here): 345 commercial BP issued 2026-09-12..10-12; valuation present 124 (35.9%), company 316 (91.6%), phone 344 (99.7%)

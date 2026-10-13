@@ -27,9 +27,11 @@ The person who would use it is an outside-sales or branch manager who wants to k
 permits on which commercial projects. Which job titles buy such lists, and what they pay, is **[E]** until the supplier research pass is read
 (see `README.md`, "Buyer niche check").
 **Problem.** Knowing early which contractors have active commercial work, so the supplier can call on them before the equipment and materials are bought.
-**Deliverable (draft [E]).** A weekly email plus CSV, one row per *project* (building permit and its trade permits rolled up): project id, address,
-ZIP, issued date, status, valuation (blank if missing), the named mechanical and electrical contractors with the business phone exactly as the
-permit record shows it, and a link to each permit. City limits only (suburbs are separate jurisdictions; inference).
+**Deliverable (draft [E], revised after the owner's sample).** A daily or weekly digest in two parts, because the sample shows the building permits and the trade
+permits do not line up: (a) new commercial building projects de-duplicated by master id, with scope text, the general contractor and phone exactly as recorded, a flag where
+the valuation looks like a placeholder, and the permit link; (b) mechanical and electrical contractor activity (sign permits removed), grouped by contractor, with scope, square
+footage where recorded, any trade valuation, and the permit link. Honest unknowns stated; no promise of exclusivity, open contracts or verified phones. City limits only
+(suburbs are separate jurisdictions; inference).
 
 *Withdrawn alternative: pool-service owners.* The first version picked a 1-10-technician pool-service company because the 20-row fixture's contact
 and valuation fields were weak. No evidence about pool-service buyers was gathered beyond competitor prices, and the owner's sample contains no
@@ -103,7 +105,17 @@ notices) and could be adapted. **Missing:** an Austin or permit connector (no `d
 exists in `src` or `scripts`), project roll-up, a trade classifier (the test script only defines roofing), a weekly delivery
 job, a paid-subscription path with live payments on.
 
-**What the small test showed** (details in `CAPABILITY-TESTS.md`). **[T] on a 20-row third-party fixture only, not on the owner's sample:** the
+**What the owner's sample showed [T on the sample as pasted; the pull is [R]]** (aggregates only; row-level data stays private):
+- 50 commercial building permits above $100,000 issued 2026-09-15 to 2026-10-11 = **13 independent projects** (master ids), about 3.4 a week; one apartment complex is 35 of the 50 rows. 37 rows are valued at exactly
+  $1,000,000; 28 of 29 small site structures (trash enclosures, carports, detached garages, a dumpster enclosure, retaining walls) are valued at $1,000,000 or more; counting rows instead of master ids overstates value
+  2.13 times. The report says only 35.9% of the 345 commercial building permits issued 09-12 to 10-12 carry a valuation, so the filter itself discards most permits. Contractor company and phone: 50 of 50 (49 valid in shape; one
+  is "512"); 5 of the 13 projects' contractors have non-Austin area codes.
+- 50 recent mechanical/electrical permits (2026-10-07 to 10-11): 15 mechanical, 23 electrical, 12 without a contractor, all 12 of them sign permits; 17 sign permits in all (34%); 5 of 15 mechanical permits are change-outs;
+  27 distinct contractor companies on 38 contractor-linked permits (26 on non-sign permits); phone in valid shape on 33 of 38; none carries a total job valuation, but 15 carry an `electrical_valuation_remodel` (7 at
+  $100,000 or more; four siblings at one address repeat the same $1.6M); 39 carry master ids.
+- **No link between the two samples** (0 shared master ids). The one linked electrical record found by the report was issued five months before its building permit. So the "group trade permits under the parent
+  project" wedge I suggested earlier is not visible in this data.
+- **Earlier fixture result (kept for the record, [T] on a 20-row third-party fixture only):** the
 fixture (all commercial, another team's filter, phone fields not requested) had 19 of 20 rows with missing or zero valuation, 20 rows collapsing to
 14 projects, two same-address groups needing a human, and 19 of 20 with a contractor company named (4 with stray characters). Its lack of phone,
 email, licence and owner columns described *that filter* and is **withdrawn as a finding about the dataset**. The owner reports that the real sample
@@ -115,6 +127,9 @@ the supplier, who sells to the contractors, is a better fit than a homeowner-fac
 Onboarding 0 min; support 5 min a customer a month; maintenance 30 min a week; 20 customers = $980/mo and about 55 min a
 week. Separately, the sample test estimated 20-45 minutes a week of human correction per about 300 raw rows plus 1-2 hours of
 initial tuning (a guess, unmeasured).
+
+**Cost and time, revised [E].** Producing the digest is cheap (rule-based filtering and grouping; no model needed for the rows). The owner's report suggests a $99 subscription and under 30 minutes of owner
+time; both are hypotheses. Austin-only ceiling at $99 to $149 across 8 supplier brands: about $0.8k to $1.2k a month.
 
 **Reaching buyers without paid ads.** A weekly Austin page with opt-in (crowded: Levelset, Zabalist, BuildZoom; Google's
 scaled-content-abuse policy limits mass pages). HBA Austin associate dues are $875/yr (a paid listing, excluded). Channels to
