@@ -1,5 +1,7 @@
 # StudyProofs: a free, organic launch plan for college students (prepared 2026-10-13, for the owner's review)
 
+> **Revised 2026-10-13, later the same day:** the owner asked for a smaller test on accounts that already exist, using only the two reviewed demonstrations, with everything unpublished pending approval and a successful support-flow check. That test is `LAUNCH-TEST-2026-10-13.md` and comes first. This file stays as the channel research (section 2 and the appendix: each platform's rules as the platforms state them) and as the larger plan for later.
+
 **Nothing here has been posted, submitted, sent or paid for. No account exists or was created. Nobody was contacted.** This is the plan and the drafts, written while the support-email flow finishes. Two rules stand over all of it: nothing is published until the tracker on amberai #105 says the production walk passed (today it fails on one step, the address students write to), and every post below goes out only after you approve it, by a person, one platform at a time.
 
 What is new against `LAUNCH-APPROVAL.md` (2026-10-12): the posting rules were re-checked today against each platform's own pages; the channels are ranked by fit and effort; the two weeks are planned day by day with copy for both weeks; six short demo ideas use only the two reviewed examples (BIO 101 and STAT 200; HIST 120 is unapproved and appears nowhere); and the tracking method says how to read whether students create and reuse study material.
