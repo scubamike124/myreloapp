@@ -15,6 +15,10 @@ Nothing in the code could have used a Cloudflare token even if it had been there
 
 **The smallest owner action is one of two things:** (a) create a Cloudflare API token (My Profile, API Tokens, Create Token, template "Edit zone DNS", add the permission Zone, Zone, Read, Zone Resources: Include, Specific zone, `amberoneai.com`) and save it in HQ, Credential Vault as `CLOUDFLARE_API_TOKEN`; Amber adds the records on her next pass (about 15 minutes); or (b) add the four records by hand, below.
 
+## Update, 2026-10-13 (overnight): is another existing domain a better support address? No.
+
+Checked against Amber's own reading of Resend and DNS (03:30Z) and the inventory of the sites' domains: `inbound.myreelo.com` is the only domain that receives mail today, but it is the verification-code inbox domain, Resend has sending disabled for it (no reply could go out as it), and the support inbox's own rule for stray mail on its domain would swallow the verification-code mail, so using it needs two code changes and a Railway variable for a Reelo-branded address. `myreelo.com` can send (service mail already goes out as `noreply@myreelo.com`) but receiving is off and its root mail records were never audited, so adding an MX there risks existing Reelo mail. No other site is in Resend at all, and `studyproofs.com` is not registered. `amberoneai.com` has no mail routing to disturb, is the address every page shows, has the whole inbox behind it, and needs exactly the four records above. Nothing was changed. One optional fifth record, not needed for the test to pass but good for deliverability of replies: TXT `_dmarc` = `v=DMARC1; p=none; rua=mailto:support@amberoneai.com`.
+
 ## The short version
 
 - **The address is `support@amberoneai.com`** (approved by the owner on 2026-10-07 for buyer-facing pages and again on 2026-10-12 for StudyProofs support). It is now the address every StudyProofs page, the legal text, the billing messages, the renewal reminders and the tutoring-center reply-to give.
