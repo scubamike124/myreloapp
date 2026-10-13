@@ -1,0 +1,221 @@
+{
+ "n_rows": 20,
+ "n_distinct_keys": 24,
+ "keys": [
+  "applieddate",
+  "contractor_company_name",
+  "description",
+  "housing_units",
+  "issue_date",
+  "link",
+  "masterpermitnum",
+  "number_of_floors",
+  "original_address1",
+  "original_city",
+  "original_state",
+  "original_zip",
+  "permit_class",
+  "permit_class_mapped",
+  "permit_location",
+  "permit_number",
+  "permit_type_desc",
+  "permittype",
+  "project_id",
+  "remodel_repair_sqft",
+  "status_current",
+  "total_job_valuation",
+  "total_new_add_sqft",
+  "work_class"
+ ],
+ "expected_but_absent_in_data": [
+  "contractor_full_name",
+  "applicant_organization",
+  "applicant_full_name",
+  "contractor_phone",
+  "applicant_phone"
+ ],
+ "counts": {
+  "permittype": [
+   [
+    "BP",
+    12
+   ],
+   [
+    "EP",
+    5
+   ],
+   [
+    "PP",
+    3
+   ]
+  ],
+  "permit_type_desc": [
+   [
+    "Building Permit",
+    12
+   ],
+   [
+    "Electrical Permit",
+    5
+   ],
+   [
+    "Plumbing Permit",
+    3
+   ]
+  ],
+  "permit_class_mapped": [
+   [
+    "Commercial",
+    20
+   ]
+  ],
+  "work_class": [
+   [
+    "Remodel",
+    13
+   ],
+   [
+    "New",
+    4
+   ],
+   [
+    "Upgrade",
+    1
+   ],
+   [
+    "Demolition",
+    1
+   ],
+   [
+    "Projecting",
+    1
+   ]
+  ],
+  "permit_class": [
+   [
+    "C-1000 Commercial Remodel",
+    10
+   ],
+   [
+    "C- 329 Com Structures Other Than Bldg",
+    4
+   ],
+   [
+    "C-1001 Commercial Finish Out",
+    3
+   ],
+   [
+    "Commercial",
+    1
+   ],
+   [
+    "C- 649 Demolition All Other Bldgs Com",
+    1
+   ],
+   [
+    "Sign Permit",
+    1
+   ]
+  ],
+  "status_current": [
+   [
+    "Active",
+    17
+   ],
+   [
+    "Final",
+    3
+   ]
+  ]
+ },
+ "recency": {
+  "min": "2026-06-16",
+  "max": "2026-09-01",
+  "missing_date": 0,
+  "future_dated": 0,
+  "in_window": 20,
+  "window_days": 130,
+  "asof": "2026-10-13"
+ },
+ "valuation": {
+  "positive_primary": 1,
+  "positive_parts": 0,
+  "zero": 1,
+  "absent": 18,
+  "missing_or_zero": 19,
+  "primary_not_positive": 19
+ },
+ "projects": {
+  "rows": 20,
+  "distinct_project_id": 20,
+  "rows_with_master": 19,
+  "distinct_master": 15,
+  "projects_R3": 14,
+  "multi_permit_projects": 3,
+  "rows_in_multi_permit_projects": 9,
+  "mixed_trade_projects": 2,
+  "distinct_address_stems": 12,
+  "address_groups_needing_review": 2,
+  "rows_in_those_groups": 6
+ },
+ "contacts": {
+  "name_fields_present_in_data": {
+   "contractor_company_name": 19
+  },
+  "any_named_party": 19,
+  "phone_columns": [],
+  "email_columns": [],
+  "license_columns": [],
+  "owner_columns": [],
+  "rows_with_any_phone": 0,
+  "builder_names_with_artifacts": 4
+ },
+ "funnel": {
+  "trade": "roofing",
+  "min_valuation": 100000,
+  "steps": [
+   [
+    "raw rows",
+    20,
+    14
+   ],
+   [
+    "issued in last 130 days",
+    20,
+    14
+   ],
+   [
+    "status active/issued",
+    17,
+    12
+   ],
+   [
+    "residential",
+    0,
+    0
+   ],
+   [
+    "BP + work_class addition/new",
+    0,
+    0
+   ],
+   [
+    "valuation >= $100,000",
+    0,
+    0
+   ],
+   [
+    "named builder/applicant",
+    0,
+    0
+   ]
+  ],
+  "qualified_rows": 0,
+  "qualified_projects": 0,
+  "qualified_projects_per_raw_row": 0.0,
+  "qualified_with_phone": 0,
+  "lost_to_missing_or_zero_valuation": 0,
+  "roof_keyword_rows_in_window": 1
+ },
+ "exact_duplicate_rows_removed_on_load": 0
+}

@@ -1,0 +1,56 @@
+AUSTIN ISSUED CONSTRUCTION PERMITS - sample profile
+inputs: /tmp/claude-0/-home-user-myreloapp/2ae6976b-817d-5e45-99d2-f95fe54aa7ec/scratchpad/permit-test/thirdparty-fixture/austin_permits_sample.json
+rows: 20 | distinct keys in data: 24 | asof 2026-10-13 | window 30 days
+!! SMALL SAMPLE (n<100): shares below are NOT population rates.
+
+RULES (documented; change by flags or by editing this file)
+ R1 absent    : key missing, empty, or 'null'.
+ R2 valuation : total_job_valuation > 0 is "known". If absent/zero and the trade-part columns exist
+                (building/electrical/mechanical/plumbing/medgas_valuation) their positive sum is used.
+ R3 project   : rows are linked when they share (a) a non-zero masterpermitnum, (b) a masterpermitnum equal
+                to another row's project_id (trade permit -> parent building permit), (c) the same
+                permit-number stem such as '2026-082819' (its BP/EP/MP/PP), or (d) when a row has NO master:
+                the same address stem and issue dates within 45 days. Connected rows = ONE project.
+                project_id alone is NOT a project key (observed: one id per permit).
+ R4 address   : address stem = address with unit/bldg/suite words and '1/2' removed. Address groups that hold
+                more than one R3 project are 'needs human review' (separate jobs OR one job with two masters).
+ R5 recency   : issue_date within --window-days of --asof.
+ R6 status    : status_current in {active, issued}; Final/expired/void/etc. are out.
+ R7 trade     : roofing = residential, permittype BP, work_class New/Addition (roof still to be bought),
+                total valuation >= --min-valuation, and at least one named builder/applicant.
+
+-- counts (top 10) --
+  permittype: BP=12; EP=5; PP=3
+  permit_type_desc: Building Permit=12; Electrical Permit=5; Plumbing Permit=3
+  permit_class_mapped: Commercial=20
+  work_class: Remodel=13; New=4; Upgrade=1; Demolition=1; Projecting=1
+  permit_class: C-1000 Commercial Remodel=10; C- 329 Com Structures Other Than Bldg=4; C-1001 Commercial Finish Out=3; Commercial=1; C- 649 Demolition All Other Bldgs Com=1; Sign Permit=1
+  status_current: Active=17; Final=3
+-- recency --
+  issue_date 2026-06-16 .. 2026-09-01 | in window: 0/20 (0%) | missing date 0 | future-dated 0
+-- valuation --
+  positive via total_job_valuation: 1/20 (5%) | positive via trade parts: 0 | zero: 1 | absent: 18
+  MISSING OR ZERO overall: 19/20 (95%) | total_job_valuation not positive: 19/20 (95%)
+-- duplicate-project risk --
+  rows 20 | distinct project_id 20 (equal to rows => id is per permit, not per job)
+  rows with masterpermitnum 19/20 (95%) | distinct masters 15
+  PROJECTS after R3 de-dup: 14  (= 70% of rows; 6 rows collapsed)
+  multi-permit projects: 3 (9 rows) | mixed-trade projects (BP+EP/MP/PP): 2
+  distinct address stems: 12 | address groups holding >1 project (human review): 2 (6 rows)
+-- contacts --
+  name fields present in data / rows with a usable name: contractor_company_name=19
+  any named party: 19/20 (95%) | builder names with artefacts (*, double space): 4
+  phone columns in data: NONE | rows with any phone: 0/20 (0%)
+  email columns: NONE | licence columns: NONE | owner columns: NONE
+  expected-but-absent keys in this file: ['contractor_full_name', 'applicant_organization', 'applicant_full_name', 'contractor_phone', 'applicant_phone']
+-- lead funnel: roofing (min valuation $100,000) --
+  step                                           rows  projects
+  raw rows                                         20        14
+  issued in last 30 days                            0         0
+  status active/issued                              0         0
+  residential                                       0         0
+  BP + work_class addition/new                      0         0
+  valuation >= $100,000                             0         0
+  named builder/applicant                           0         0
+  QUALIFIED projects per raw row: 0 / 20 = 0.0
+  qualified rows with a phone: 0 | lost only to missing/zero valuation: 0 | roof-keyword rows in window (already-contracted roofing work): 0
