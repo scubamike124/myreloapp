@@ -28,7 +28,7 @@ permits on which commercial projects. Which job titles buy such lists, and what 
 (see `README.md`, "Buyer niche check").
 **Problem.** Knowing early which contractors have active commercial work, so the supplier can call on them before the equipment and materials are bought.
 **Deliverable (draft [E], revised after the owner's sample).** A daily or weekly digest in two parts, because the sample shows the building permits and the trade
-permits do not line up: (a) new commercial building projects de-duplicated by master id, with scope text, the general contractor and phone exactly as recorded, a flag where
+permits do not line up: (a) new commercial building permits grouped by the City's master ID (a grouping, not a count of independent projects), with scope text, the general contractor and phone exactly as recorded, a flag where
 the valuation looks like a placeholder, and the permit link; (b) mechanical and electrical contractor activity (sign permits removed), grouped by contractor, with scope, square
 footage where recorded, any trade valuation, and the permit link. Honest unknowns stated; no promise of exclusivity, open contracts or verified phones. City limits only
 (suburbs are separate jurisdictions; inference).
@@ -58,7 +58,7 @@ residential pool permits to test it on (commercial building permits and trade pe
 - **Gap:** no named paying Austin supplier or distributor, no dated case study, testimonial or review count for any of these.
 - **Austin-area branches confirmed [V/I], about 8 brands and 13 locations by the agent's count:** Johnstone Supply, Ferguson HVAC, Graybar, Rexel, Wesco, City Electric Supply, Lonestar Electric
   Supply, Century HVAC Distributing. Not confirmed: Gemaire/Watsco, Carrier Enterprise, CED, Crescent, Locke, Border States. Several branches sit outside the City limits (Round Rock, Pflugerville,
-  Manor, Lakeway), which this dataset does not cover. At $149 a month each, the 8 brands give a ceiling near $1,190 a month [E].
+  Manor, Lakeway), which this dataset does not cover. The brand count is unverified and is not a revenue ceiling: several branches or reps per brand could buy, or none, and price and willingness to pay are untested. No revenue figure is inferred from it.
 
 **Why would they choose Amber?** Weak so far. The possible edges are linking each mechanical or electrical permit to its parent commercial
 project, showing the contractor's phone and source link on one line, a weekly cadence, and a price below Construction Monitor's $500/mo
@@ -77,7 +77,7 @@ Whether suppliers value that enough to pay is the open question.
   Address 1, Council District, Jurisdiction, Latitude, Longitude; Total Job Valuation and per-trade valuations (Building, Electrical, Mechanical, Plumbing, MedGas, each with a Remodel twin);
   and contractor columns **Trade, Company Name, Full Name, Phone, Address 1, Address 2**. Not seen (absence unproven): applicant columns, contractor email, licence number. Third-party code
   says `project_id` is one per permit and `masterpermitnum` is the project key. The City publishes no fill rates; an Apify seller says contractor and valuation fields are filled on only part of
-  the file. How many new mechanical/electrical permits a week carry a company name plus a phone is the key unknown, and the owner's sample is the first evidence on it.
+  the file. How many new mechanical/electrical permits a week carry a company name plus a phone is the key unknown; the owner's sample shows the fields exist but, being a capped window, cannot establish a weekly count.
 - No published rate limit; Socrata does not throttle requests that carry an app token unless abusive (dev.socrata.com/docs/app-tokens).
   Anonymous calls share a per-IP pool and can see HTTP 429 (secondary reading).
 - **City terms, quoted by another team (read directly from raw GitHub) [R]:** data are "offered free and without restriction"; "Data accessed through the City of Austin Open Data Portal do not, and should
@@ -106,7 +106,7 @@ exists in `src` or `scripts`), project roll-up, a trade classifier (the test scr
 job, a paid-subscription path with live payments on.
 
 **What the owner's sample showed [T on the sample as pasted; the pull is [R]]** (aggregates only; row-level data stays private):
-- 50 commercial building permits above $100,000 issued 2026-09-15 to 2026-10-11 = **13 independent projects** (master ids), about 3.4 a week; one apartment complex is 35 of the 50 rows. 37 rows are valued at exactly
+- 50 commercial building permits above $100,000 issued 2026-09-15 to 2026-10-11 = **13 master-ID groups** (an administrative grouping, not necessarily 13 independent projects; the 50-row cap sets the window, so no weekly rate follows); one apartment complex is 35 of the 50 rows. 37 rows are valued at exactly
   $1,000,000; 28 of 29 small site structures (trash enclosures, carports, detached garages, a dumpster enclosure, retaining walls) are valued at $1,000,000 or more; counting rows instead of master ids overstates value
   2.13 times. The report says only 35.9% of the 345 commercial building permits issued 09-12 to 10-12 carry a valuation, so the filter itself discards most permits. Contractor company and phone: 50 of 50 (49 valid in shape; one
   is "512"); 5 of the 13 projects' contractors have non-Austin area codes.
@@ -129,7 +129,7 @@ week. Separately, the sample test estimated 20-45 minutes a week of human correc
 initial tuning (a guess, unmeasured).
 
 **Cost and time, revised [E].** Producing the digest is cheap (rule-based filtering and grouping; no model needed for the rows). The owner's report suggests a $99 subscription and under 30 minutes of owner
-time; both are hypotheses. Austin-only ceiling at $99 to $149 across 8 supplier brands: about $0.8k to $1.2k a month.
+time; both are hypotheses. No revenue ceiling or range is inferred from a count of supplier brands; demand, price and the number of decision-makers are all untested.
 
 **Reaching buyers without paid ads.** A weekly Austin page with opt-in (crowded: Levelset, Zabalist, BuildZoom; Google's
 scaled-content-abuse policy limits mass pages). HBA Austin associate dues are $875/yr (a paid listing, excluded). Channels to

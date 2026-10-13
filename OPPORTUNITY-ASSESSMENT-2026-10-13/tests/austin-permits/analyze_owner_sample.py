@@ -62,21 +62,24 @@ for r in A:
     by_master[r["master"]].append(float(r["value"]))
 raw_sum = sum(vals.values())
 master_sum = sum(max(v) for v in by_master.values())
-print(f"sum of valuations if every row is counted: ${raw_sum:,.0f} | counting each master id once (its largest value): ${master_sum:,.0f} | overstatement factor: {raw_sum/master_sum:.2f}x")
+print(f"sum of valuations if every row is counted: ${raw_sum:,.0f} | counting each master-ID group once (its largest value): ${master_sum:,.0f} | overstatement factor: {raw_sum/master_sum:.2f}x")
 same_value_pairs = sum(1 for m, v in by_master.items() if len(v) > 1 and len(set(v)) == 1)
 print(f"master ids with 2+ permits that all carry an identical valuation: {same_value_pairs}/{sum(1 for v in by_master.values() if len(v)>1)}")
 print("master-level valuation (one value per master, sorted):", sorted((int(max(v)) for v in by_master.values())))
 mv = [max(v) for v in by_master.values()]
 print(f"master-level median ${statistics.median(mv):,.0f}; at least $1M: {sum(1 for v in mv if v>=1_000_000)}/{len(mv)}")
 
-# independent projects per ISO week (by the first issue date of each master)
+# Master-ID groups by ISO week of first issue. A master id is the City's administrative grouping of related permits, NOT a count of independent projects
+# (in the trade sample one four-floor remodel carries four master ids). The sample is the 50 most recent permits that pass a filter, so the cap sets the window and
+# may cut off its first day; one window under one filter cannot establish a weekly volume, so no weekly rate is computed or claimed.
 first = {}
 for r in A:
     first[r["master"]] = min(first.get(r["master"], d(r["issued"])), d(r["issued"]))
 wk = collections.Counter(f"{x.isocalendar()[0]}-W{x.isocalendar()[1]:02d}" for x in first.values())
-print("independent master ids by ISO week of first issue:", dict(sorted(wk.items())))
-span_weeks = ((max(dates) - min(dates)).days + 1) / 7
-print(f"independent projects per week over the span: {len(masters)/span_weeks:.1f} (span {span_weeks:.1f} weeks)")
+print("master-ID groups by ISO week of first issue (first week cut by the 50-row cap; not a weekly rate):", dict(sorted(wk.items())))
+earliest = min(dates)
+print(f"master-ID groups first issued after the earliest date ({earliest}, the day the cap may cut off): {sum(1 for x in first.values() if x > earliest)} of {len(first)}")
+print("no weekly rate is computed: one capped window, one filter, and 64% of commercial permits carry no valuation, so the filter cannot see them")
 
 # contacts
 st = collections.Counter(phone_state(r["phone"]) for r in A)

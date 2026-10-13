@@ -7,12 +7,13 @@ largest master id share of rows: 35/50 = 70% | next two: [2, 2]
 work classes: {'Addition and Remodel': 2, 'New': 46, 'Shell': 2} | statuses: {'Active': 50}
 rows whose valuation is exactly $1,000,000: 37/50
 rows describing a small site structure (trash enclosure, carport, detached garage, dumpster enclosure, retaining wall; real parking garages excluded): 29/50; of those valued at least $1,000,000: 28
-sum of valuations if every row is counted: $196,480,228 | counting each master id once (its largest value): $92,067,614 | overstatement factor: 2.13x
+sum of valuations if every row is counted: $196,480,228 | counting each master-ID group once (its largest value): $92,067,614 | overstatement factor: 2.13x
 master ids with 2+ permits that all carry an identical valuation: 4/4
 master-level valuation (one value per master, sorted): [175000, 200000, 400000, 500000, 1000000, 1000000, 2050000, 2100000, 2980000, 3000000, 9250000, 17662614, 51750000]
 master-level median $2,050,000; at least $1M: 9/13
-independent master ids by ISO week of first issue: {'2026-W38': 2, '2026-W39': 2, '2026-W40': 5, '2026-W41': 4}
-independent projects per week over the span: 3.4 (span 3.9 weeks)
+master-ID groups by ISO week of first issue (first week cut by the 50-row cap; not a weekly rate): {'2026-W38': 2, '2026-W39': 2, '2026-W40': 5, '2026-W41': 4}
+master-ID groups first issued after the earliest date (2026-09-15, the day the cap may cut off): 12 of 13
+no weekly rate is computed: one capped window, one filter, and 64% of commercial permits carry no valuation, so the filter cannot see them
 phone field state (rows): {'valid10': 49, 'odd_length_3': 1}
 contractor per master id: local area code (512/737) 7, other area code 5, unusable phone value 1 (of 13)
 contractor name artefacts (asterisks or run-together words): 1

@@ -35,7 +35,7 @@ services' reliability.
 **What it is.** A report collected on 2026-10-12 by the owner's other tool from the City's public Socrata API (no key needed): the 50 most recently issued Commercial-mapped building permits with
 `total_job_valuation` above $100,000 (issue dates 2026-09-15 to 2026-10-11), plus 50 recent Commercial mechanical and electrical permits (2026-10-07 to 2026-10-11), plus the one trade permit linked
 by identifier. It is a **selected sample, not a random one**. I transcribed the two summary tables (permit, site, work class, value, contractor, trade, phone, master id, scope) into a private file,
-added the status and trade-valuation fields from the raw JSON, and ran `tests/austin-permits/analyze_owner_sample.py`. The input file holds contractor names and phone numbers and is not in this repository;
+added the status and trade-valuation fields from the raw JSON, and ran `tests/austin-permits/analyze_owner_sample.py`. (Later on 2026-10-13 all 101 raw records were parsed and the transcription was cross-checked against them: every compared field matched except two electrical-valuation fields the raw records fill in.) The input file holds contractor names and phone numbers and is not in this repository;
 the aggregate output is in `tests/austin-permits/results/owner_sample_profile_2026-10-13.txt` (it prints no phone number and no personal name).
 
 **Integrity check.** 13 of 13 figures that the report states about the sample (rows, distinct address strings, master ids, work-class split, mechanical/electrical/missing split, master-id count, Final statuses,
@@ -45,13 +45,13 @@ date range) were recomputed from my transcription and agree. The report's popula
 |---|---|
 | Building sample: rows / distinct address strings / master ids | 50 / 48 / **13** |
 | Largest master id | 35 of 50 rows (70%): one apartment complex with trash enclosures, carports, garages and 9 apartment buildings |
-| Independent projects per week | about 3.4 (13 over 3.9 weeks; the 50-row limit cuts off the first week) |
+| Master-ID groups by first issue date | 12 first issued on or after Sep 16, plus 1 on Sep 15 (the day the 50-row cap may cut off). **No weekly rate is claimed:** one capped window, one filter, one complex supplying 70% of the rows |
 | Rows valued at exactly $1,000,000 | 37 of 50; 28 of 29 small site structures are valued at $1,000,000 or more |
 | Valuation if rows are counted / if each master id is counted once | $196.5M / $92.1M (2.13 times overstated); 4 of 4 multi-permit projects repeat one value |
 | Master-level valuations | median $2.05M; 9 of 13 at $1M or more |
 | Contractor company and phone present | 50 of 50; valid 10-digit shape 49 of 50 ("512" is not a phone); 5 of 13 projects have a non-Austin area code |
 | Work classes | 46 New, 2 Shell, 2 Addition and Remodel; all 50 Active |
-| Scope of the 13 projects (by master id) | 4 small site structures; 4 office, storage, industrial or club buildings; 3 multifamily; 2 EV-charging; 2 garage structures; 1 hospital generator and switchboard; 1 restaurant change of use (first match wins, so counts overlap by one) |
+| Scope of the 13 master-ID groups | 4 small site structures; 4 office, storage, industrial or club buildings; 3 multifamily; 2 EV-charging; 2 garage structures; 1 hospital generator and switchboard; 1 restaurant change of use (first match wins, so counts overlap by one) |
 | Trade sample: mechanical / electrical / no contractor | 15 / 23 / 12; the 12 are all sign permits |
 | Sign permits | 17 of 50 (34%) |
 | Mechanical work classes | 8 remodels, 5 change-outs, 1 addition and remodel, 1 repair |
@@ -89,7 +89,7 @@ missing valuations. The third, trade-contact limits, **cannot be judged from thi
 recorded contractor phone numbers by the owner's account. Treat each permit as a *signal about a project*, not as a qualified lead.
 
 **Cost and correction time.** The analysis ran in under a second with no model calls and no human corrections (rule-based).
-A weekly summary of about 25 projects would need roughly 2.5k input and 1k output tokens, generated once per trade
+A summary of about 25 projects (an assumed size, not a measured weekly volume) would need roughly 2.5k input and 1k output tokens, generated once per trade
 (estimate). Human correction time was **not measured**; the estimate is 20-45 minutes a week per about 300 raw rows, plus 1-2
 hours of initial tuning (a guess).
 

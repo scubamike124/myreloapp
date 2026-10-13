@@ -9,8 +9,17 @@
 >    sample shows".
 > 2. **The pool-service buyer was a method error.** It was chosen because the fixture's contact and valuation fields were weak, not from evidence about
 >    pool-service buyers. The owner's original target is **commercial HVAC and electrical suppliers**. Pool service is an *untested alternative*.
-> 3. **The first test thresholds were guesses and one is falsified.** I had guessed that a useful list needs at least 15 qualifying projects a week. The
->    sample shows about 3 independent projects a week above $100,000. The thresholds below are rebuilt from the sample.
+> 3. **Three sizing claims in my earlier versions were unsupported and are withdrawn (second correction, 2026-10-13).**
+>    - *"13 independent projects."* The City's master ID groups related permits, but it is an administrative grouping, not a count of independent projects: in the
+>      trade sample one four-floor remodel carries four different master IDs, and in the building sample one master ID holds 35 permits for one complex. A "project"
+>      in my digest is a master-ID group that I then judged by address and scope.
+>    - *"About 3.4 independent projects a week", and the "15 a week" threshold I called falsified.* The sample is the 50 most recent permits that pass a filter, so the
+>      50-row cap, not market activity, sets the window and may cut off its first day; one complex supplies 70% of the rows; and the valuation filter cannot see the 64% of
+>      commercial permits that carry no valuation. One capped window under one filter does not establish a weekly volume. The 15-a-week guess is therefore
+>      **unsupported, not falsified**, and weekly volume is **unknown** until an uncapped count is run.
+>    - *"A ceiling near $0.8k to $1.2k a month from about eight supplier brands."* A brand count is not a revenue ceiling: more than one branch or rep per brand could
+>      buy, or none; other buyer types exist; and price and willingness to pay are untested. The brand count itself came from search summaries and is unverified. No
+>      revenue range follows from it, and none is claimed.
 >
 > Evidence labels: **[P]** production observation (Amber's own reports and counters), **[T]** tested in this sandbox by me or an agent, **[E]**
 > estimate or assumption, **[R]** reported by a third-party source or by the owner's other tool and not independently verified.
@@ -26,7 +35,7 @@ The deploy sequence was not touched. This is an evaluation, not authorization to
 1. **None of the five is ready to build.** None has a buyer who has said yes, and Amber has never delivered a paid report to a real buyer [P].
 2. **Strongest candidate to test first: #1, Austin construction-permit intelligence, for commercial HVAC/electrical suppliers (the owner's own
    target).** Runner-up: #3, hiring signals. It is a close call. The owner's sample makes the data and the contact fields real [T on the sample] but shows
-   thin volume, noisy valuations and no visible link between new building permits and trade permits, and demand is still unproven.
+   noisy valuations and no visible link between new building permits and trade permits; its capped window cannot establish weekly volume, and demand is still unproven.
 3. **Reject for now:** #4 multi-location audits (third), #2 the utility API (fourth), #5 weather monitoring (fifth).
 4. **The binding constraint is reach, not product.** All five score 2 of 5 [E] on reaching buyers without paid ads or cold outreach, and
    Amber's production record is $0 revenue and no customers or replies after 66 days [P]. The next step is a conversation test, not a build.
@@ -57,8 +66,9 @@ stays out of this public repository; the profile script and its aggregate output
 - **Source links and dates are present** on every row, and the newest row was issued the day before extraction.
 
 **Problems the sample exposes**
-- **Volume is thin.** The 50 building permits are only **13 independent projects** (13 master ids), about **3.4 a week** over the 3.9-week span. One apartment complex accounts for **35 of the 50 rows (70%)**.
-  The report also notes that only 35.9% of commercial building permits carry a valuation at all, so the ">$100,000" filter drops at least 64% of them (every permit with no valuation) before it applies the threshold.
+- **Volume cannot be read from this sample.** The 50 building permits fall into **13 master-ID groups** (an administrative grouping, not 13 independent projects), spread over one 26-day window whose first day the
+  50-row cap may cut off. One apartment complex accounts for **35 of the 50 rows (70%)**. The report also notes that only 35.9% of commercial building permits carry a valuation at all, so the ">$100,000" filter
+  drops at least 64% of them (every permit with no valuation) before it applies the threshold. A weekly rate computed from this window would describe the cap and the filter, not the market.
 - **Valuation is unreliable at row level.** 37 of 50 rows carry exactly $1,000,000. 29 rows describe small site structures (trash enclosures, carports, detached garages, a dumpster enclosure, retaining
   walls) and 28 of those are valued at $1,000,000 or more. Permits that share a master id repeat the same valuation (4 of 4 multi-permit projects), so adding rows **overstates value 2.13 times**
   ($196.5M counting rows against $92.1M counting each master id once).
@@ -71,8 +81,8 @@ stays out of this public repository; the profile script and its aggregate output
 - **What is useful:** 27 distinct mechanical and electrical contractors appeared on 38 contractor-linked trade permits in four issue days (26 on non-sign permits), with the scope text and a permit link. Four
   companies pulled 2 to 5 permits each. EV-charging installations, a hospital generator and switchboard project, a self-storage building and apartment shells are visible in the building list.
 
-**Reading [E]:** a de-duplicated, scope-filtered digest is feasible and cheap to produce. It would carry about 3 to 4 large new projects a week and about 25 trade contractors a week. That is a modest
-product for an Austin-only buyer set of about 8 supplier brands, which at an assumed $99 to $149 a month is a ceiling of roughly $0.8k to $1.2k a month. Whether anyone pays is the open question.
+**Reading [E]:** a scope-filtered digest is feasible and cheap to produce. How many large projects or contractors a weekly issue would carry is **unknown**: each sample is one capped window (26 days of building permits,
+about four issue days of trade permits). Whether anyone pays is the open question, and this document makes no revenue estimate from a count of supplier brands.
 
 ## Strongest recommendation: #1, as a test and not a build
 
@@ -118,13 +128,13 @@ recommendation without checking it against your original target or against the s
 | Paying-demand evidence | Vendors court suppliers: Construction Monitor markets to suppliers and a 2024-10-07 post says HVAC and lumber suppliers use permits; Shovels names material suppliers among its customers; ConstructConnect has a suppliers section [R]. Only quantified supplier signal: BuildMapper (British Columbia), "over 135 paying customers" and "$480K ARR" (company-supplied, undated), about $300/mo each (derived), "expanding soon to Texas" [R]. **No named Austin supplier customer, dated case study or review count found** | Construction Monitor sells a pool-permit product at $250/mo; Apify sells new-pool leads from about $30 [R]. No pool-service buyer evidence was ever gathered |
 | Price anchors | ConstructConnect $117-$199 per seat; Construction Monitor $250-$500; Zabalist $19-$99 [R] | $30-$250 a month [R] |
 | Contact data the buyer needs | Contractor company and phone are recorded on 50 of 50 building and 38 of 50 trade permits in your sample [T on the sample]; not verified by calling | Homeowner contact: not in the dataset [R] |
-| How many buyers | About 8 brands and 13 Austin-area branches confirmed (Johnstone, Ferguson HVAC, Graybar, Rexel, Wesco, City Electric Supply, Lonestar Electric Supply, Century HVAC) [R]. At $99 to $149 a month each that is a ceiling near $0.8k to $1.2k a month [E] | Not researched |
+| How many buyers | **Unverified:** a search-summary count of about 8 brands and 13 Austin-area branches (Johnstone, Ferguson HVAC, Graybar, Rexel, Wesco, City Electric Supply, Lonestar Electric Supply, Century HVAC) [R]. A count of companies says how many might be asked, not what they would pay; no revenue ceiling is inferred. A later check of five electrical distributors (search summaries of their own sites) located most branches at mailing addresses in Manor, Round Rock or Pflugerville, which issue their own permits [E] | Not researched |
 | Reach without ads or outreach | Poor: associations are paid (HARDI associate tier $5,500) or unconfirmed [R] | Not researched |
 | Can your sample test it? | Yes, and it was tested (above) | No: it holds commercial building and trade permits, no residential pools |
 
 **Conclusion [E].** Suppliers are the better-fitting hypothesis: the contractor contact fields exist in your sample, the price anchors are higher, and it was your target. It is
 **not a demonstrated better market**: pool demand is equally unproven, and no source shows an Austin supplier paying for a weekly permit list while Construction Monitor,
-ConstructConnect, Dodge, Zabalist and (entering Texas) BuildMapper already exist. Two consequences. First, an Austin-only supplier list has a small ceiling, so it is a *test of whether suppliers pay at
+ConstructConnect, Dodge, Zabalist and (entering Texas) BuildMapper already exist. Two consequences. First, an Austin-only supplier list may be a small market (its size is unknown), so it is a *test of whether suppliers pay at
 all*, not yet a business; a business would need more cities (each needs a column map and a terms check, about a day [E]) or a second buyer type such as contractors. Second, the pool-service idea is not
 rejected, only unsupported; the reason I gave for choosing it was wrong.
 
@@ -135,12 +145,12 @@ unknown. That is a quality claim a branch manager can check against the permit l
 ## The smallest buyer-validation test (no spend, no build, nothing sent by Amber)
 
 1. **Done:** the sample arrived and was analysed (above).
-2. **Me (about one hour, no network needed):** build **one real sample digest from your sample**, labelled as a sample, in two parts: (a) the 13 independent building projects, de-duplicated by master id, with
-   scope text, the general contractor and phone as recorded, and the permit link, flagged where the valuation looks like a placeholder; (b) the 33 non-sign trade permits grouped by contractor (26 companies), with
-   scope, square footage where the record has it, any trade valuation, and the permit link. No numbers added that the record does not hold.
-3. **Owner (about one to two hours):** show it, in person or by your own message, to **five** supplier contacts you already know (the whole Austin market is only about eight brands and thirteen branches [R]). Ask what
-   your report suggests: which of these projects would they pursue, does an alert on the day of issue come before they buy, which fields are missing, and **would they pay $99 a month** for it every week. Amber
-   sends nothing.
+2. **Done (2026-10-13):** I built **one sample digest from your raw records**, labelled as a sample, in two parts: (a) the 13 master-ID groups of building permits (not necessarily independent projects; 10 judged to
+   have electrical content), with scope text, the contractor of record and the permit link; (b) the 18 non-sign electrical permits grouped by contractor (12 companies). Contractor phones appear only in the private copy,
+   as recorded and unverified; the one-page buyer preview carries none. No numbers were added that the record does not hold.
+3. **Owner (about two to three hours; no warm path assumed):** the five distributors were checked against search summaries of their own sites. None shows a person or role that evaluates a service like this; the public
+   channels are branch phone lines and general contact pages. If you send anything, send it yourself through those public business channels (a draft is prepared for your review; Amber sends nothing). Ask whether the
+   sample is **useful, timely and different from what they already use**, and the one question that decides value: of the contractors and projects shown, which were **not already quoted or supplied by them**.
 4. **Pass [E]:** at least 3 of 5 name at least one project or contractor they would phone this week, at least 2 accept a free four-week pilot delivered by hand and name the decision-maker, and at least 1 names $99 a
    month or more. **A positive reply alone is interest; a paid engagement is stronger evidence,** and revenue counts only once a payment is verified. **Stop:** fewer than 2 interested, or all say an incumbent tool already
    covers it. Then run the same test on #3, or stop. If you cannot name five reachable buyers, that is the finding.
@@ -156,7 +166,8 @@ no texting or dialer features; attribution to the City and the department, an "i
 
 ## What only the owner can do
 
-- Run the conversations in step 3 (Amber never sends cold outreach, and this assessment did not authorise any). Say if your research names suppliers and how you would reach them.
+- Decide whether to send the step-3 outreach yourself, through public business channels only (Amber never sends cold outreach, and this assessment did not authorise any). If you know nobody at these suppliers, that is expected
+  and is part of what the test finds out.
 - Optional: add `data.austintexas.gov`, `boards-api.greenhouse.io`, `api.lever.co` and `api.weather.gov` to the cloud environment's allowed domains so a live re-pull and the other tests can run (about 40
   requests, $0). Every live test here failed on network policy, not on the services.
 - Confirm the City's reuse terms before charging.
@@ -173,7 +184,8 @@ no texting or dialer features; attribution to the City and the department, an "i
 
 - No web page could be opened; every competitor and price fact comes from a search summary [R]. Prices are snapshots, review counts are weak proof of paying
   customers, and legal points are summaries, not legal advice.
-- The owner's sample is a selected, non-random pull (most recent by issue date, filtered on valuation) collected by another tool; I could not re-pull it, and I transcribed its two summary tables rather than reading
-  its raw JSON line by line (the raw records were used only to confirm field names, statuses and the trade-valuation fields). Weekly rates come from one 26-day window. No phone has been called.
+- The owner's sample is a selected, non-random pull (most recent by issue date, filtered on valuation, capped at 50 rows per query) collected by another tool; I could not re-pull it. Later on 2026-10-13 I parsed its 101 raw
+  JSON records and cross-checked my first transcription against them (every compared field matched except two electrical-valuation fields that the raw records fill in); the digest was built from the raw records. **No weekly
+  rate is claimed:** each sample is one capped window. No phone has been called.
 - No live Greenhouse, Lever or NWS data was collected [T: 0 of 6 hosts reachable].
 - Cost, support and owner-time figures are [E] unless marked otherwise. The only measured numbers are Amber's own production counters [P], which are not independent.
