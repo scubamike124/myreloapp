@@ -45,6 +45,19 @@ residential pool permits to test it on (commercial building permits and trade pe
 | Dodge, ATTOM, BuildZoom | Dodge "customized"; ATTOM none (300M+ permits, monthly); BuildZoom $5-$100 per lead or $29-$179/mo [V] | None found [U] | Sales-led / sells jobs |
 | Apify Austin actors | $0.10-$150 per 1,000 records; new-pool leads from $30 [V] apify.com/ralarcon/austin-permit-leads/api/openapi | Usage unseen [U] | Raw developer tools |
 
+**Supplier-specific evidence (added 2026-10-13; search summaries, no page opened).**
+- Construction Monitor markets to suppliers; a post dated 2024-10-07 says HVAC and lumber suppliers use permit data [V] blog.constructionmonitor.com. Shovels names material suppliers
+  among its customers [V] thesys.dev/customers/shovels. ConstructConnect has a Suppliers & Distributors section; third-party prices: Starter $117-$129 a month, Professional from
+  $199 per market and seat, Premium from $10,000 a year [U] constructionbids.ai/blog/constructconnect-pricing-guide-2026 (2026). Dodge is custom-quote only [V]. BuildZoom sells custom
+  feeds to manufacturers and distributors [V]. Zabalist (Texas; Austin/Travis) lists $19 / $39 / $99 a month [V] zabalist.com/pricing.
+- **BuildMapper** (British Columbia; pitches "branch reps" daily alerts and matching a branch's customer list to local permits): "over 135 paying customers" and "$480K ARR", with large
+  BC and Alberta suppliers [company-supplied, undated] newventuresbc.com/top-25-spotlight-buildmapper; about $300 a month per customer (derived, [U]); an app listing says "expanding soon to
+  Texas and Florida" [V]. It is the only quantified supplier signal found, and it is Canadian.
+- **Gap:** no named paying Austin supplier or distributor, no dated case study, testimonial or review count for any of these.
+- **Austin-area branches confirmed [V/I], about 8 brands and 13 locations by the agent's count:** Johnstone Supply, Ferguson HVAC, Graybar, Rexel, Wesco, City Electric Supply, Lonestar Electric
+  Supply, Century HVAC Distributing. Not confirmed: Gemaire/Watsco, Carrier Enterprise, CED, Crescent, Locke, Border States. Several branches sit outside the City limits (Round Rock, Pflugerville,
+  Manor, Lakeway), which this dataset does not cover. At $149 a month each, the 8 brands give a ceiling near $1,190 a month [E].
+
 **Why would they choose Amber?** Weak so far. The possible edges are linking each mechanical or electrical permit to its parent commercial
 project, showing the contractor's phone and source link on one line, a weekly cadence, and a price below Construction Monitor's $500/mo
 and Shovels' $599 floor. The city data is free and Apify already sells raw Austin records, so any edge is packaging and price, not structure.
@@ -57,8 +70,23 @@ Whether suppliers value that enough to pay is the open question.
   grant, and the resource-level licence reads "other-license-specified". Another team (HomeSignalG/homesignal-site PR 1414)
   put paid reuse on hold for exactly this reason: the City's terms create no enforceable right and the City may end any
   use. **Get the City's written terms or permission before charging.**
+- **Columns (added 2026-10-13) [R, from the City's own CSV export header via a search summary, header cut off after "Contractor Address 2"]:** Permit Type, Permit Type Desc, Permit Class Mapped,
+  Permit Class, Work Class; Permit Num, Project Name, Project ID, Master Permit Num, Link; Applied Date, Issued Date, Status Current, Status Date, Expires Date, Completed Date; Description; Original
+  Address 1, Council District, Jurisdiction, Latitude, Longitude; Total Job Valuation and per-trade valuations (Building, Electrical, Mechanical, Plumbing, MedGas, each with a Remodel twin);
+  and contractor columns **Trade, Company Name, Full Name, Phone, Address 1, Address 2**. Not seen (absence unproven): applicant columns, contractor email, licence number. Third-party code
+  says `project_id` is one per permit and `masterpermitnum` is the project key. The City publishes no fill rates; an Apify seller says contractor and valuation fields are filled on only part of
+  the file. How many new mechanical/electrical permits a week carry a company name plus a phone is the key unknown, and the owner's sample is the first evidence on it.
 - No published rate limit; Socrata does not throttle requests that carry an app token unless abusive (dev.socrata.com/docs/app-tokens).
   Anonymous calls share a per-IP pool and can see HTTP 429 (secondary reading).
+- **City terms, quoted by another team (read directly from raw GitHub) [R]:** data are "offered free and without restriction"; "Data accessed through the City of Austin Open Data Portal do not, and should
+  not, include controls over its end use"; credit the City and the department; but "The City may require the termination of any and all displays, distribution, or other use of any or all of the data for
+  any reason", and the policy "does not, create any right or benefit ... enforceable at law or in equity". That team's verdict for a paid report was HOLD (PR 1414, merged 2026-09-27).
+- **Lists with contractor phones (summary, not legal advice) [R]:** Texas data-broker registration (Bus. & Com. Code ch. 509, $300; "personal data" excludes publicly available government-record
+  information, so a list drawn only from City records plausibly fits the carve-out, enrichment may not); telephone solicitation and texting (ch. 302, SB 140; registration $200 plus a $10,000
+  bond); the TCPA (business lines generally outside Do-Not-Call; texts and autodialed calls to cell phones need consent; sole proprietors unsettled); CAN-SPAM (no B2B exception). The
+  sender-side rules attach to whoever calls, texts or emails, mostly the supplier; a publisher that adds email or text features takes them on. **Smallest safe design:** company-named contractors only;
+  phone only where the record has a company name, labelled "as published by the City"; no person-only rows, email or mobile enrichment, texting or dialer; attribution, disclaimer, pull date; a
+  removal-request page; a kill switch.
 - Planning stage: "Site Plan Cases" (status, proposed use, applicant, owner, location) was seen only as a mirror listing.
   No zoning or subdivision dataset found.
 - Second metro: Socrata cities need a column map plus a terms check (about a day, assumed). Fort Worth (ArcGIS) and Houston
@@ -103,9 +131,9 @@ owner's sample has been analysed.
 **Top evidence**
 1. https://data.austintexas.gov/Building-and-Development/Issued-Construction-Permits/3syk-w9eu
 2. https://storage.mfn.se/eb6068f5-45cf-40e5-83cc-b99661cc4923/byggfakta-group-continues-expansion-in-the-us.pdf
-3. https://shop.constructionmonitor.com/?post_type=product
-4. https://www.shovels.ai/pricing
-5. https://github.com/HomeSignalG/homesignal-site/pull/1414 (reuse hold)
+3. https://www.newventuresbc.com/top-25-spotlight-buildmapper/ (the one quantified supplier signal)
+4. https://raw.githubusercontent.com/HomeSignalG/homesignal-site/main/docs/corporate-output-austin-issued-permits-2026-09-27.md (City terms, quoted; reuse hold)
+5. https://www.zabalist.com/pricing
 
 ---
 
