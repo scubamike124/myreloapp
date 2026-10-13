@@ -1,0 +1,426 @@
+{
+  "slug": "french-revolution",
+  "title": "Why the French Revolution began in 1789",
+  "course": "HIST 120",
+  "sampleVersion": "2026-10-11.1",
+  "packVersion": "2",
+  "generatedAt": "2026-10-13T12:50:33.965Z",
+  "model": "gpt-4o-mini",
+  "material": {
+    "notes": [
+      {
+        "heading": "Thesis on Causes of the French Revolution",
+        "body": "No single cause. A financial crisis left the old system unable to function, and new ideas plus a food shortage turned a political crisis into a revolution.",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Working thesis: no single cause. A financial crisis left the old system unable to function, and new ideas plus a food shortage turned a political crisis into a revolution"
+        }
+      },
+      {
+        "heading": "Financial Problems",
+        "body": "France had huge debts, partly from wars, including its help for the American Revolution (1778-83). The tax system was unfair and messy: the First Estate (clergy) and the Second Estate (nobles) were exempt from many taxes, so the Third Estate (everyone else, about 98% of the people) paid most of them.",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "France had huge debts, partly from wars, including its help for the American Revolution (1778-83). - The tax system was unfair and messy: the First Estate (clergy) and the Second Estate (nobles) were exempt from many taxes, so the Third Estate (everyone else, about 98% of the people) paid most of them"
+        }
+      },
+      {
+        "heading": "Resistance to Financial Reforms",
+        "body": "Finance ministers (Turgot, Necker, Calonne) tried reforms, and privileged groups blocked them. In 1787 the Assembly of Notables refused Calonne's tax plan.",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Finance ministers (Turgot, Necker, Calonne) tried reforms, and privileged groups blocked them. - In 1787 the Assembly of Notables refused Calonne's tax plan"
+        }
+      },
+      {
+        "heading": "Influence of Enlightenment Ideas",
+        "body": "Enlightenment writers questioned absolute monarchy and inherited privilege: Montesquieu (separation of powers), Voltaire (religious tolerance, free speech), Rousseau (popular sovereignty). Popular pamphlets spread the arguments, for example Sieyes, 'What Is the Third Estate?' (1789).",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Enlightenment writers questioned absolute monarchy and inherited privilege: Montesquieu (separation of powers), Voltaire (religious tolerance, free speech), Rousseau (popular sovereignty). - Popular pamphlets spread the arguments, for example Sieyes, \"What Is the Third Estate?\" (1789)"
+        }
+      },
+      {
+        "heading": "Impact of Hunger",
+        "body": "Poor harvests in 1788 pushed bread prices up sharply in 1789. Many workers spent most of their income on bread.",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Poor harvests in 1788 pushed bread prices up sharply in 1789. Many workers spent most of their income on bread"
+        }
+      },
+      {
+        "heading": "Key Events of 1789",
+        "body": "May 5: Louis XVI opened the Estates-General (the first meeting since 1614). June 17: the Third Estate declared itself the National Assembly. June 20: Tennis Court Oath - the deputies promised not to separate until France had a constitution. July 14: Parisians stormed the Bastille (a fortress and prison, a symbol of royal power). August 4: the Assembly abolished feudal privileges. August 26: Declaration of the Rights of Man and of the Citizen.",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "May 5: Louis XVI opened the Estates-General (the first meeting since 1614). - June 17: the Third Estate declared itself the National Assembly. - June 20: Tennis Court Oath - the deputies promised not to separate until France had a constitution. - July 14: Parisians stormed the Bastille (a fortress and prison, a symbol of royal power). - August 4: the Assembly abolished feudal privileges. - August 26: Declaration of the Rights of Man and of the Citizen"
+        }
+      },
+      {
+        "heading": "Long-term vs Short-term Causes",
+        "body": "Keep long-term causes (debt, unfair taxes, Enlightenment ideas) apart from short-term triggers (the 1788 harvest, the dispute over how the Estates-General should vote).",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Keep long-term causes (debt, unfair taxes, Enlightenment ideas) apart from short-term triggers (the 1788 harvest, the dispute over how the Estates-General should vote"
+        }
+      }
+    ],
+    "flashcards": [
+      {
+        "id": "fc_demo_french-revolution_1",
+        "front": "What was a major financial issue leading to the French Revolution?",
+        "back": "France had huge debts, partly from wars, including its help for the American Revolution (1778-83).",
+        "topic": "Financial Problems",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "France had huge debts, partly from wars, including its help for the American Revolution (1778-83"
+        }
+      },
+      {
+        "id": "fc_demo_french-revolution_2",
+        "front": "Which estates were exempt from many taxes?",
+        "back": "The First Estate (clergy) and the Second Estate (nobles) were exempt from many taxes.",
+        "topic": "Tax System",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "the First Estate (clergy) and the Second Estate (nobles) were exempt from many taxes"
+        }
+      },
+      {
+        "id": "fc_demo_french-revolution_3",
+        "front": "What did the Tennis Court Oath signify?",
+        "back": "The deputies promised not to separate until France had a constitution.",
+        "topic": "Key Events of 1789",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "June 20: Tennis Court Oath - the deputies promised not to separate until France had a constitution"
+        }
+      },
+      {
+        "id": "fc_demo_french-revolution_4",
+        "front": "What was the impact of poor harvests in 1788?",
+        "back": "Poor harvests pushed bread prices up sharply in 1789, leading many workers to spend most of their income on bread.",
+        "topic": "Hunger",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Poor harvests in 1788 pushed bread prices up sharply in 1789. Many workers spent most of their income on bread"
+        }
+      },
+      {
+        "id": "fc_demo_french-revolution_5",
+        "front": "What did Enlightenment writers question?",
+        "back": "They questioned absolute monarchy and inherited privilege.",
+        "topic": "Enlightenment Ideas",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Enlightenment writers questioned absolute monarchy and inherited privilege"
+        }
+      },
+      {
+        "id": "fc_demo_french-revolution_6",
+        "front": "What happened on August 26, 1789?",
+        "back": "The Declaration of the Rights of Man and of the Citizen.",
+        "topic": "Key Events of 1789",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "August 26: Declaration of the Rights of Man and of the Citizen"
+        }
+      },
+      {
+        "id": "fc_demo_french-revolution_7",
+        "front": "What was the role of privileged groups in financial reforms?",
+        "back": "Privileged groups blocked the financial reforms proposed by finance ministers.",
+        "topic": "Resistance to Reforms",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Finance ministers (Turgot, Necker, Calonne) tried reforms, and privileged groups blocked them"
+        }
+      },
+      {
+        "id": "fc_demo_french-revolution_8",
+        "front": "What is a key distinction in causes of the French Revolution?",
+        "back": "Long-term causes include debt and Enlightenment ideas; short-term triggers include the 1788 harvest.",
+        "topic": "Causes of Revolution",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Keep long-term causes (debt, unfair taxes, Enlightenment ideas) apart from short-term triggers (the 1788 harvest, the dispute over how the Estates-General should vote"
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "id": "q_demo_french-revolution_1",
+        "question": "What happened on July 14, 1789?",
+        "choices": [
+          "Parisians stormed the Bastille",
+          "The deputies took the Tennis Court Oath",
+          "Louis XVI opened the Estates-General",
+          "The Assembly abolished feudal privileges"
+        ],
+        "answerIndex": 0,
+        "explanation": "July 14: Parisians stormed the Bastille, a fortress and prison and a symbol of royal power.",
+        "topic": "Key Events of 1789",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "July 14: Parisians stormed the Bastille (a fortress and prison, a symbol of royal power"
+        }
+      },
+      {
+        "id": "q_demo_french-revolution_2",
+        "question": "Which estate represented the majority of the population?",
+        "choices": [
+          "First Estate",
+          "Second Estate",
+          "Third Estate",
+          "Nobility"
+        ],
+        "answerIndex": 2,
+        "explanation": "The Third Estate represented about 98% of the population.",
+        "topic": "Estates System",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "the Third Estate (everyone else, about 98% of the people) paid most of them"
+        }
+      },
+      {
+        "id": "q_demo_french-revolution_3",
+        "question": "What did the Assembly do on August 4, 1789?",
+        "choices": [
+          "It opened the Estates-General",
+          "It abolished feudal privileges",
+          "It declared itself the National Assembly",
+          "It stormed the Bastille"
+        ],
+        "answerIndex": 1,
+        "explanation": "August 4: the Assembly abolished feudal privileges.",
+        "topic": "Consequences of Financial Crisis",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "August 4: the Assembly abolished feudal privileges"
+        }
+      },
+      {
+        "id": "q_demo_french-revolution_4",
+        "question": "Which Enlightenment thinker advocated for popular sovereignty?",
+        "choices": [
+          "Montesquieu",
+          "Voltaire",
+          "Rousseau",
+          "Diderot"
+        ],
+        "answerIndex": 2,
+        "explanation": "Rousseau is known for advocating popular sovereignty.",
+        "topic": "Enlightenment Ideas",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Rousseau (popular sovereignty"
+        }
+      },
+      {
+        "id": "q_demo_french-revolution_5",
+        "question": "What was the main issue with the tax system in France before the Revolution?",
+        "choices": [
+          "It was too simple",
+          "It was fair to all estates",
+          "The Third Estate paid most taxes",
+          "It was based on income"
+        ],
+        "answerIndex": 2,
+        "explanation": "The Third Estate paid most of the taxes while the First and Second Estates were exempt.",
+        "topic": "Tax System",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "the Third Estate (everyone else, about 98% of the people) paid most of them"
+        }
+      },
+      {
+        "id": "q_demo_french-revolution_6",
+        "question": "What did the Assembly of Notables refuse in 1787?",
+        "choices": [
+          "The Tennis Court Oath",
+          "Calonne's tax plan",
+          "The Declaration of the Rights of Man",
+          "The opening of the Estates-General"
+        ],
+        "answerIndex": 1,
+        "explanation": "The Assembly of Notables refused Calonne's tax plan in 1787.",
+        "topic": "Resistance to Reforms",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "In 1787 the Assembly of Notables refused Calonne's tax plan"
+        }
+      },
+      {
+        "id": "q_demo_french-revolution_7",
+        "question": "When had the Estates-General last met before Louis XVI opened it on May 5, 1789?",
+        "choices": [
+          "In 1614",
+          "In 1778",
+          "In 1787",
+          "In 1788"
+        ],
+        "answerIndex": 0,
+        "explanation": "May 5: Louis XVI opened the Estates-General, the first meeting since 1614.",
+        "topic": "Key Events of 1789",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "May 5: Louis XVI opened the Estates-General (the first meeting since 1614"
+        }
+      },
+      {
+        "id": "q_demo_french-revolution_8",
+        "question": "What was the relationship between Enlightenment ideas and the French Revolution?",
+        "choices": [
+          "They had no impact",
+          "They fueled revolutionary sentiments",
+          "They were opposed by the revolutionaries",
+          "They were only popular among the nobility"
+        ],
+        "answerIndex": 1,
+        "explanation": "Enlightenment ideas fueled revolutionary sentiments by questioning absolute monarchy and advocating for rights.",
+        "topic": "Influence of Enlightenment",
+        "source": {
+          "materialId": "demo_french-revolution",
+          "page": null,
+          "timestampSec": null,
+          "quote": "Enlightenment writers questioned absolute monarchy and inherited privilege"
+        }
+      }
+    ]
+  },
+  "edits": [
+    {
+      "kind": "source-line-added",
+      "sectionIndex": 1,
+      "on": "2026-10-13",
+      "reason": "StudyProofs returned this section without a source line. Its text repeats these lines of the notes, so the lines were added as its source; the section's words are unchanged.",
+      "quote": "France had huge debts, partly from wars, including its help for the American Revolution (1778-83). - The tax system was unfair and messy: the First Estate (clergy) and the Second Estate (nobles) were exempt from many taxes, so the Third Estate (everyone else, about 98% of the people) paid most of them"
+    },
+    {
+      "kind": "source-line-added",
+      "sectionIndex": 2,
+      "on": "2026-10-13",
+      "reason": "StudyProofs returned this section without a source line. Its text repeats these lines of the notes, so the lines were added as its source; the section's words are unchanged.",
+      "quote": "Finance ministers (Turgot, Necker, Calonne) tried reforms, and privileged groups blocked them. - In 1787 the Assembly of Notables refused Calonne's tax plan"
+    },
+    {
+      "kind": "source-line-added",
+      "sectionIndex": 3,
+      "on": "2026-10-13",
+      "reason": "StudyProofs returned this section without a source line. Its text repeats these lines of the notes, so the lines were added as its source; the section's words are unchanged.",
+      "quote": "Enlightenment writers questioned absolute monarchy and inherited privilege: Montesquieu (separation of powers), Voltaire (religious tolerance, free speech), Rousseau (popular sovereignty). - Popular pamphlets spread the arguments, for example Sieyes, \"What Is the Third Estate?\" (1789)"
+    },
+    {
+      "kind": "source-line-added",
+      "sectionIndex": 5,
+      "on": "2026-10-13",
+      "reason": "StudyProofs returned this section without a source line. Its text repeats these lines of the notes, so the lines were added as its source; the section's words are unchanged.",
+      "quote": "May 5: Louis XVI opened the Estates-General (the first meeting since 1614). - June 17: the Third Estate declared itself the National Assembly. - June 20: Tennis Court Oath - the deputies promised not to separate until France had a constitution. - July 14: Parisians stormed the Bastille (a fortress and prison, a symbol of royal power). - August 4: the Assembly abolished feudal privileges. - August 26: Declaration of the Rights of Man and of the Citizen"
+    },
+    {
+      "kind": "flashcard-reworded",
+      "cardId": "fc_demo_french-revolution_6",
+      "on": "2026-10-13",
+      "reason": "The answer StudyProofs wrote (\"A document that outlined the rights of citizens and the principles of the revolution\") says more than the notes, which only give the Declaration's date; the new card asks what happened on that date, which is what the cited line says.",
+      "original": {
+        "front": "What was the Declaration of the Rights of Man and of the Citizen?",
+        "back": "A document that outlined the rights of citizens and the principles of the revolution."
+      }
+    },
+    {
+      "kind": "quiz-question-reworded",
+      "questionId": "q_demo_french-revolution_1",
+      "on": "2026-10-13",
+      "reason": "The question as StudyProofs wrote it (\"What event marked the beginning of the French Revolution?\") keyed the storming of the Bastille, but the notes list the events of 1789 without calling any of them the beginning; the new wording asks only what the cited line says happened on July 14.",
+      "original": {
+        "question": "What event marked the beginning of the French Revolution?",
+        "choices": [
+          "The storming of the Bastille",
+          "The Tennis Court Oath",
+          "The opening of the Estates-General",
+          "The Declaration of the Rights of Man"
+        ],
+        "answerIndex": 0,
+        "explanation": "The storming of the Bastille on July 14, 1789, is often seen as the symbolic start of the French Revolution."
+      }
+    },
+    {
+      "kind": "quiz-question-reworded",
+      "questionId": "q_demo_french-revolution_3",
+      "on": "2026-10-13",
+      "reason": "The question as StudyProofs wrote it (\"What was a significant consequence of the financial crisis in France?\") tied the abolition of feudal privileges to the financial crisis, a cause-and-effect the notes do not state; the new wording asks only what the cited line says the Assembly did on August 4.",
+      "original": {
+        "question": "What was a significant consequence of the financial crisis in France?",
+        "choices": [
+          "A decrease in bread prices",
+          "The abolition of feudal privileges",
+          "The rise of Enlightenment ideas",
+          "The establishment of a constitutional monarchy"
+        ],
+        "answerIndex": 1,
+        "explanation": "The financial crisis contributed to the Assembly abolishing feudal privileges on August 4, 1789."
+      }
+    },
+    {
+      "kind": "quiz-question-reworded",
+      "questionId": "q_demo_french-revolution_7",
+      "on": "2026-10-13",
+      "reason": "The question as StudyProofs wrote it (\"What was the significance of the Estates-General meeting in 1789?\") had a wrong choice, \"It resulted in the Tennis Court Oath\", that a student could defend from the notes' own sequence; the new wording asks only for the year the cited line gives, with other years from the notes as the wrong choices.",
+      "original": {
+        "question": "What was the significance of the Estates-General meeting in 1789?",
+        "choices": [
+          "It was the first meeting since 1614",
+          "It led to the abolition of the monarchy",
+          "It established the National Assembly",
+          "It resulted in the Tennis Court Oath"
+        ],
+        "answerIndex": 0,
+        "explanation": "The Estates-General meeting in 1789 was significant as it was the first meeting since 1614."
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "slug": "french-revolution",
+  "generatedAt": "2026-10-13T12:50:33.965Z",
+  "model": "gpt-4o-mini",
+  "cards": [
+    {
+      "front": "What was a major financial issue leading to the French Revolution?",
+      "back": "France had huge debts, partly from wars, including its help for the American Revolution (1778-83).",
+      "quote": "France had huge debts, partly from wars, including its help for the American Revolution (1778-83"
+    },
+    {
+      "front": "What was the impact of poor harvests in 1788?",
+      "back": "Poor harvests pushed bread prices up sharply in 1789, leading many workers to spend most of their income on bread.",
+      "quote": "Poor harvests in 1788 pushed bread prices up sharply in 1789. Many workers spent most of their income on bread"
+    },
+    {
+      "front": "What is a key distinction in causes of the French Revolution?",
+      "back": "Long-term causes include debt and Enlightenment ideas; short-term triggers include the 1788 harvest.",
+      "quote": "Keep long-term causes (debt, unfair taxes, Enlightenment ideas) apart from short-term triggers (the 1788 harvest, the dispute over how the Estates-General should vote"
+    }
+  ],
+  "quiz": {
+    "question": "What happened on July 14, 1789?",
+    "choices": [
+      "Parisians stormed the Bastille",
+      "The deputies took the Tennis Court Oath",
+      "Louis XVI opened the Estates-General",
+      "The Assembly abolished feudal privileges"
+    ],
+    "answerIndex": 0,
+    "explanation": "July 14: Parisians stormed the Bastille, a fortress and prison and a symbol of royal power.",
+    "quote": "July 14: Parisians stormed the Bastille (a fortress and prison, a symbol of royal power"
+  },
+  "counts": {
+    "flashcards": 8,
+    "quiz": 8,
+    "notes": 7
+  },
+  "seconds": 32
+}

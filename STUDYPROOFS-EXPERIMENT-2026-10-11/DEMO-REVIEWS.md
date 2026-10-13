@@ -28,6 +28,20 @@ The worker's try at 12:50Z made a full set under the deployed pipeline (main f15
 - Quiz 3 ("a significant consequence of the financial crisis") keys the abolition of feudal privileges; the notes do not draw that line of cause and effect.
 - Quiz 7 keys "the first meeting since 1614" (in the notes), but its wrong choice "It resulted in the Tennis Court Oath" is defensible from the notes' own sequence, so two answers can be argued.
 
+## Update, 2026-10-13 ~13:40Z: HIST 120 corrected on the owner's instruction, as recorded changes, kept in draft
+
+The owner's instruction (13:2xZ): add source lines only where the notes support them, correct or remove the unsupported quiz claims and the weak flashcard, regenerate, rerun the citation and example-page checks, do not weaken the source requirement, do not register or publish. Done on the examples branch (`claude/sp-examples-first-two`, draft #809, commit 5aa6786c), with every change recorded in the example's `edits` and shown on its page as a person's change:
+
+| Change | What the product wrote | What it is now | Why |
+|---|---|---|---|
+| Note sections 2, 3, 4 and 6 (Financial Problems; Resistance to Financial Reforms; Influence of Enlightenment Ideas; Key Events of 1789) | no source line | the lines of the notes each section repeats, attached as its source | the sections' words were already the notes' words; the source line only says so. Checked like every other citation |
+| Flashcard 6 | "What was the Declaration of the Rights of Man and of the Citizen?" / "A document that outlined the rights of citizens and the principles of the revolution." | "What happened on August 26, 1789?" / "The Declaration of the Rights of Man and of the Citizen." | the old answer said more than the notes; the new card asks what its cited line says |
+| Quiz 1 | "What event marked the beginning of the French Revolution?" (key: the Bastille) | "What happened on July 14, 1789?" (key: Parisians stormed the Bastille; the other choices are other dated events from the notes) | the notes never call any event the beginning |
+| Quiz 3 | "What was a significant consequence of the financial crisis in France?" (key: abolition of feudal privileges) | "What did the Assembly do on August 4, 1789?" (key: it abolished feudal privileges) | the notes do not state that cause and effect |
+| Quiz 7 | "What was the significance of the Estates-General meeting in 1789?" (a wrong choice, "It resulted in the Tennis Court Oath", was defensible) | "When had the Estates-General last met before Louis XVI opened it on May 5, 1789?" (key: 1614; wrong choices: 1778, 1787, 1788, other years from the notes) | one defensible answer only |
+
+Nothing else changed: the other 7 flashcards, 5 questions and 3 sections are exactly what the product returned. The citation rule was made stronger, not weaker: the registry now refuses any note section without a source line or with a line that is not in the notes (before, only cards and questions were checked in code; the page test checked sections). Checks rerun: 23 of 23 items cite a line of the notes; the page shows one source line per item and "8 changes by a person", each named, with the product's wording under the changed card and questions; examples and demo-gen test suites 40 of 40 pass; eslint clean. The set sits in `DRAFT_EXAMPLES`: no page, no metadata, no image, no mention to students, until the owner moves it into the registry. `demos/french-revolution/` holds `example.json` (the draft as committed), the three still images and `selection.json`; no video was made (no ffmpeg in the session's sandbox).
+
 ## What was checked, for each
 
 1. **The product's own check** (`exampleProblems` in `src/lib/studyproofs/examples.ts`, which runs `demoProblems`): no problems for either.
