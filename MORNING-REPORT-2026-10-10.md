@@ -29,15 +29,15 @@ _Final at 05:30Z. Verified facts carry the time and the #105 comment id that hol
 
 - **25 waiting for the owner** (26 before the review). 25 of 25 re-checked on production and passed: the site answers (home HTTP 200, robots.txt allowed, plain GET), the drafted finding is still on the page it was drafted from (or re-drafted from today's pages), the draft matches the finding, the address on file has a recorded source (OpenStreetMap for 10, the site's own page for 5; 10 have no address and the draft says so), no duplicate registrable domain, none in your records. Set aside by the review: Goettl Air Conditioning & Plumbing (goettl.com): the site could not be read now. All 13 set-aside prospects and their reasons are in the report's tally (5 robots.txt disallows, 4 HTTP 403, 3 clean sites, 1 review). No access block was bypassed.
 - What the review does **not** judge: whether a finding is "worth" the note is a human call. All 25 findings are one of four concrete, page-specific items (image without a text description, a form field with no label, no page language, skipped heading level), each with a one-line fix; the drafted reply names the page.
-- The 25, all passed: Seal Out Scorpions, All Vee's Plumbing, Any Hour Services, 1st Choice Mechanical, Mike's Swat Team, Plomero en Phoenix, Cool Blew, Arizona Native Roofing, Allstate Roofing (Phoenix), Stonecreek Roofing, Arizona's Best Choice Pest, Zippity Split Plumbing, Desert Water Plumbing, JLC Roofing, Frontline Consultants & Contracting, Plumber of Phoenix, Arizona Roof Rescue, Salon Blissful Med Spa, Phillips Roofing, Pioneer Roofing, Brazillian Touch MedSpa, Lincoln Air & Plumbing, Mountainside Air, Hardacker Roofing, Phoenix Roofing. Full table with findings, scores, addresses and review times: OUTREACH-BEST-10-2026-10-09.md (refreshed 05:22Z) and the #105 outreach report.
+- [a prospect's name, website and finding: moved to the private repository, docs/outreach/]
 
 Starting point at 02:18Z: 26 waiting for the owner, all 26 domains unique, 15 with an address on file (10 from the map, 5 from the site), 11 without. 12 set aside: 5 robots.txt disallows, 4 answer HTTP 403, 3 clean sites.
 
 ## 5. Best three to contact (all three passed the review at 04:20–04:21Z; exact emails in FIRST-DOLLAR-ACTION-PACKAGE-2026-10-09.md)
 
-1. **Seal Out Scorpions** (pest control, Tempe) — https://sealoutscorpions.com/ — address from the map: support@sealoutscorpions.com — seen: one image on the about page with no text description; one form field with no label. Score 59.
-2. **All Vee's Plumbing Services** (plumber, Phoenix) — https://allveesplumbing.com/ — address from the map — seen: one image on the home page with no text description; four form fields with no label. Score 59.
-3. **Any Hour Services** (electric, plumbing, heating and air; Phoenix) — https://anyhourservices.com/arizona/ — address from the map — seen: two form fields on the /arizona page may have no label; headings skip levels. Score 59. Note: a larger company than the other two; your call whether to lead with it.
+- [a prospect's name, website and finding: moved to the private repository, docs/outreach/]
+- [a prospect's name, website and finding: moved to the private repository, docs/outreach/]
+- [a prospect's name, website and finding: moved to the private repository, docs/outreach/]
 
 Each gets the opener ("Hi there, I noticed one small issue on your website that may affect how some people use the site. Do you want me to send what I saw? Mike"), the "what I saw" reply, and the $49 reply with your Ko-fi link. You send; nothing sends automatically.
 
@@ -67,12 +67,12 @@ Each gets the opener ("Hi there, I noticed one small issue on your website that 
 ## Review of every prospect (verified on production; per-lead table in RESEARCH-ALL-LEADS-2026-10-10.md)
 
 - 25 of 25 waiting prospects passed the production review (04:20Z and 05:22Z): site answers, finding still on the page, draft matches, address source recorded, no duplicate domain, not in your records. 1 set aside by the review (Goettl, site could not be read). 13 set aside in all with reasons; #779 adds the per-item set-aside table to the #105 report so names and reasons are visible, not just the tally.
-- **Update 12:42Z:** 38 of 43 waiting prospects have now passed (13 dentists added between 11:36Z and 12:42Z; rows 26-38 of the research table); 5 wait for the next hourly review. 2 set aside by the review in all (Goettl 04:21Z, Aspen Dental 12:42Z); 25 set aside in all, each with its reason in the #105 set-aside table and in RESEARCH-ALL-LEADS-2026-10-10.md. The best three are unchanged (Seal Out Scorpions, All Vee's Plumbing, Any Hour Services); three new dentists (7th and Bell Dental Group, Bright Now! Dental, Deer Valley Dental Group) now sit at 5-7 of the ten best, and OUTREACH-BEST-10-2026-10-09.md is regenerated from the 12:40Z report.
+- [a prospect's name, website and finding: moved to the private repository, docs/outreach/]
 - **Guess, flagged as such:** I have not checked any business against a registry or Google listing; "the business is real" rests on OpenStreetMap listing it with a website that answers and names itself. If you want a registry check, it is a separate step.
 
 ## Revenue actions prepared (each with evidence and the expected next step)
 
-1. **Send the first three emails** (Seal Out Scorpions, All Vee's Plumbing, Any Hour Services). Evidence: all three passed the review; addresses from the map; drafts in the action package. Next step: you paste and send; tell me "sent <domain>" and I record it with `npm run outreach:record`.
+- [a prospect's name, website and finding: moved to the private repository, docs/outreach/]
 2. **Follow-up once after five days** (shipping in #779, printed under every prospect's drafts; kit section 8). Evidence: the draft passes the same review rules as the first email (no link, no price, no claims). Next step: yours, five days after each first email, once.
 3. **Grow the pool to 40 waiting, 25+ qualified** (#779). Evidence: 26 of 26 earlier prospects had unique domains and 25 passed; the map still has dentists, restaurants and the Dallas area untouched. Next step: deploy, then the lane pulls and reviews automatically; I report counts.
 4. **Price reply with Ko-fi** is live in every draft (Ko-fi is the payment path; the site switch stays off). Evidence: #105 report, your checkout screen. Next step: none until someone asks the price.
