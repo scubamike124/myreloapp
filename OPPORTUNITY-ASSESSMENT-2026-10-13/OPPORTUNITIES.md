@@ -6,6 +6,13 @@ summary of the cited page, not from the page itself. Tags: **[V]** vendor claim,
 **[U]** unverified. "Undated" means the source gave no date. Prices and customer counts are a snapshot, not a
 guarantee. Scores are 1 (worst) to 5 (best) and are judgments from this evidence, not measurements.
 
+**Corrected 2026-10-13.** Sheet 1 originally used pool-service owners as the buyer and a 20-row third-party fixture as the
+"sample". Both were wrong: the owner's original target is commercial HVAC/electrical suppliers, and the owner's real sample
+(about 50 commercial building permits above $100,000 and 50 mechanical/electrical permits, with recorded contractor phones and source
+links) had not been analysed. Sheet 1 below is corrected and marked provisional. Label key used in `README.md`: **[P]** production
+observation, **[T]** tested in this sandbox, **[E]** estimate or assumption, **[R]** reported by a third party and not independently
+verified (the **[V]/[I]/[U]** tags in the sheets are the finer-grained version of [R]).
+
 Three claims were re-checked by a second, independent search (2026-10-13): Construction Monitor's ~1,500 subscribers and
 ~MUSD 6 forecast turnover (acquirer's release, 2023-11-07); the Austin dataset's licence ambiguity; TheirStack's free tier
 (200 API credits a month, $59 for 1,500). Also re-checked: the 2026-08-11 NWS outage, Delaware HB 380 (signed 2026-09-02,
@@ -15,13 +22,18 @@ effective 2027-01-01), Signalbase Pro at €99 a month, and Shovels' $5M seed (J
 
 ## 1. Construction permit and planning intelligence (Austin)
 
-**Buyer.** Owner of a 1-10-technician pool-service company inside the City of Austin. Chosen because address, issue date and
-status are the strong fields in the data; contact and valuation fields are the weak ones.
-**Problem.** Finding newly built pools to pitch first.
-**Deliverable.** Monday 7 am Central email plus CSV, one row per *project* (permits rolled up): project id, address, ZIP,
-council district, issued date, status, completed date, description, valuation (blank if missing), permit link, NEW or
-FINALED flag. No names, phones or emails. City limits only (suburbs are separate jurisdictions; inference). Whether the
-fields can identify pools and completion is **[U]** until tested on a real sample.
+**Buyer (provisional, under verification).** A commercial HVAC or electrical supplier with an Austin branch: the owner's original target.
+The person who would use it is an outside-sales or branch manager who wants to know which mechanical and electrical contractors are pulling
+permits on which commercial projects. Which job titles buy such lists, and what they pay, is **[E]** until the supplier research pass is read
+(see `README.md`, "Buyer niche check").
+**Problem.** Knowing early which contractors have active commercial work, so the supplier can call on them before the equipment and materials are bought.
+**Deliverable (draft [E]).** A weekly email plus CSV, one row per *project* (building permit and its trade permits rolled up): project id, address,
+ZIP, issued date, status, valuation (blank if missing), the named mechanical and electrical contractors with the business phone exactly as the
+permit record shows it, and a link to each permit. City limits only (suburbs are separate jurisdictions; inference).
+
+*Withdrawn alternative: pool-service owners.* The first version picked a 1-10-technician pool-service company because the 20-row fixture's contact
+and valuation fields were weak. No evidence about pool-service buyers was gathered beyond competitor prices, and the owner's sample contains no
+residential pool permits to test it on (commercial building permits and trade permits). It stays on file as an untested alternative.
 
 **Competitors and dated evidence of paying customers**
 
@@ -33,9 +45,10 @@ fields can identify pools and completion is **[U]** until tested on a real sampl
 | Dodge, ATTOM, BuildZoom | Dodge "customized"; ATTOM none (300M+ permits, monthly); BuildZoom $5-$100 per lead or $29-$179/mo [V] | None found [U] | Sales-led / sells jobs |
 | Apify Austin actors | $0.10-$150 per 1,000 records; new-pool leads from $30 [V] apify.com/ralarcon/austin-permit-leads/api/openapi | Usage unseen [U] | Raw developer tools |
 
-**Why would they choose Amber?** Weak. The only edge is a pre-deduplicated pool list at about $49/mo (assumed price)
-against $250 and $599. The city data is free and Apify already sells new-pool leads, so the edge is packaging and price,
-not structure.
+**Why would they choose Amber?** Weak so far. The possible edges are linking each mechanical or electrical permit to its parent commercial
+project, showing the contractor's phone and source link on one line, a weekly cadence, and a price below Construction Monitor's $500/mo
+and Shovels' $599 floor. The city data is free and Apify already sells raw Austin records, so any edge is packaging and price, not structure.
+Whether suppliers value that enough to pay is the open question.
 
 **Sources and reuse limits**
 - *Austin Issued Construction Permits* (Socrata id 3syk-w9eu): free, daily, 2.38M rows, 68 columns [I per catalog listing].
@@ -62,12 +75,13 @@ notices) and could be adapted. **Missing:** an Austin or permit connector (no `d
 exists in `src` or `scripts`), project roll-up, a trade classifier (the test script only defines roofing), a weekly delivery
 job, a paid-subscription path with live payments on.
 
-**What the small test showed** (details in `CAPABILITY-TESTS.md`): the prepared sample was not accessible. A 20-row public
-fixture (all commercial, another team's filter) showed 19 of 20 rows with missing or zero valuation, 20 rows collapsing to
-14 projects, two same-address groups needing a human, 19 of 20 with a contractor company named (4 with stray characters),
-and **no phone, email, licence or owner column at all**. Zero of 20 qualified as a roofing lead. It is a permit-derived
-project list, not a contactable lead list. An issued permit usually means the builder is already hired (inference), so this
-suits downstream trades and suppliers.
+**What the small test showed** (details in `CAPABILITY-TESTS.md`). **[T] on a 20-row third-party fixture only, not on the owner's sample:** the
+fixture (all commercial, another team's filter, phone fields not requested) had 19 of 20 rows with missing or zero valuation, 20 rows collapsing to
+14 projects, two same-address groups needing a human, and 19 of 20 with a contractor company named (4 with stray characters). Its lack of phone,
+email, licence and owner columns described *that filter* and is **withdrawn as a finding about the dataset**. The owner reports that the real sample
+carries recorded contractor phone numbers; I have not seen it. The three conclusions that survive: building and trade permits for one project must
+be rolled up; valuation is often absent on trade permits; and an issued permit usually means the builder is already hired (inference), which is why
+the supplier, who sells to the contractors, is a better fit than a homeowner-facing trade.
 
 **Cost and time (assumptions).** Data $0; compute and email about $0.10-$0.50 per list; card fees about $1.72 on a $49 sale.
 Onboarding 0 min; support 5 min a customer a month; maintenance 30 min a week; 20 customers = $980/mo and about 55 min a
@@ -75,14 +89,16 @@ week. Separately, the sample test estimated 20-45 minutes a week of human correc
 initial tuning (a guess, unmeasured).
 
 **Reaching buyers without paid ads.** A weekly Austin page with opt-in (crowded: Levelset, Zabalist, BuildZoom; Google's
-scaled-content-abuse policy limits mass pages). HBA Austin associate dues are $875/yr (a paid listing, excluded). Pool
-associations, Facebook/Nextdoor groups and partner newsletters were not researched and approaching them is outreach. **No
-proven free channel.**
+scaled-content-abuse policy limits mass pages). HBA Austin associate dues are $875/yr (a paid listing, excluded). Channels to
+suppliers (trade associations, supplier events) are being researched; approaching strangers is outreach and is the owner's decision.
+**No proven free channel yet.**
 
-**Risks and invalidators.** Under 10 pool projects a week; status fields absent; nobody pays $49; the City's terms bar resale.
+**Risks and invalidators.** Too few commercial projects with mechanical/electrical permits per week; contractor phone coverage below
+what a supplier needs; nobody pays; the City's terms bar resale; rules on lists that carry phone numbers (under research).
 
-**Scorecard.** Paying-demand evidence 3 (category proven, pool buyer not). Owner time 4. Delivery reliability 3. Cost 5.
-Access without paid ads 2. Confidence: low (market structure medium; buyer and willingness to pay low).
+**Scorecard [E].** Paying-demand evidence 3 (category proven by other vendors, supplier buyer not yet). Owner time 4. Delivery
+reliability 3. Cost 5. Access without paid ads 2. Confidence: low, and the ranking of this opportunity is provisional until the
+owner's sample has been analysed.
 
 **Top evidence**
 1. https://data.austintexas.gov/Building-and-Development/Issued-Construction-Permits/3syk-w9eu

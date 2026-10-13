@@ -1,5 +1,11 @@
 # Small capability tests: what ran, what was blocked, what it showed
 
+> **Corrected 2026-10-13.** Section 1 describes a **20-row third-party fixture, not the owner's sample** (about 50 commercial building permits
+> above $100,000 and 50 mechanical/electrical permits, with recorded contractor details including phone numbers, and source links, in
+> `Austin-Permit-Sample-2026-10-12.html`, not yet transferred to this session). The fixture's "no phone, email, licence or owner column" result
+> described that fixture's filter and is **withdrawn as a statement about the dataset or the owner's sample**. Labels: **[P]** production
+> observation, **[T]** tested in this sandbox, **[E]** estimate, **[R]** third-party report not independently verified.
+
 **The headline is a limit, not a result.** The sandbox these tests ran in can reach GitHub and nothing else. Every other host
 failed with `getaddrinfo ENOTFOUND`, or with HTTP 403 on the proxy's CONNECT step (`data.austintexas.gov`, `api.weather.gov`,
 `boards-api.greenhouse.io`, `api.lever.co`, `api.ashbyhq.com`, `hq.amberoneai.com`, `amberoneai.com`, `legis.delaware.gov`,
@@ -9,7 +15,7 @@ Amber's own code cannot run from here; Amber's numbers below come from her produ
 
 | Test | Planned | Tried | Worked | Failed | Result |
 |---|---|---|---|---|---|
-| Find the prepared Austin permit sample | 1 | 5 searches (amberai `origin/main` docs and data, `/home/user` filenames, the scratchpad) | 0 | - | **Not accessible.** Only code mentions, the fictional Harborline Home Care site, and an idea note were found |
+| Find the prepared Austin permit sample | 1 | 5 searches (amberai `origin/main` docs and data, `/home/user` filenames, the scratchpad) | 0 | - | **Not accessible at the time** (the owner has since named the file, `Austin-Permit-Sample-2026-10-12.html`, and will transfer it). Only code mentions, the fictional Harborline Home Care site, and an idea note were found |
 | Live Austin pull (about 300 rows) | 1 | 4 fetches + 1 curl | 0 | 5 | Blocked by network policy |
 | Analyse a public Austin fixture | 1 | 1 | 1 | 0 | 20 real rows, not representative (below) |
 | Greenhouse / Lever / Ashby endpoints (one each) | 12 | 3 | 0 | 3 | Blocked |
@@ -24,7 +30,7 @@ services' reliability.
 
 ## 1. The Austin permit data (opportunity 1)
 
-**The sample.** The owner's prepared sample was not found. Instead, 20 real rows were taken from a public test fixture in an
+**The fixture (not the owner's sample).** The owner's prepared sample was not found at the time. Instead, 20 real rows were taken from a public test fixture in an
 unrelated repository (`beford782/Silverline-Sleep-Procurement`, PR 191, `tests/fixtures/austin_permits_sample.json`). It is
 **not a sample of the dataset**: it reflects another team's hotel and senior-living filter, all Commercial, 12 building / 5
 electrical / 3 plumbing permits issued 2026-06-16 to 2026-09-01 (none in the last 30 days), 24 columns, phone fields not
@@ -38,11 +44,12 @@ requested. A 20-row sample can say a problem *exists*; it cannot give a rate.
 | Projects after de-duplication (master permit, parent link, permit-number stem) | **14**; three multi-permit projects hold 9 rows; 2 mixed-trade projects |
 | Same-address groups needing a human | 2 groups, 6 rows |
 | Contractor company named | 19 of 20; 4 names carry stray characters such as `*MAIN**` |
-| Phone, email, licence, owner columns | **None present** (expected-but-absent: contractor and applicant phone and full name) |
+| Phone, email, licence, owner columns | None present **in this fixture**, because that team's filter did not request them (withdrawn as a finding about the dataset or the owner's sample) |
 | Qualified roofing leads (residential building permit, new or addition, active, at least $100,000, named builder, last 30 days) | **0 of 20** (still 0 with a 130-day window; the fixture has no residential rows) |
 
-All three limits the owner named already show in 20 rows: duplicate projects, missing valuations, and no usable trade-contact
-fields. Treat each permit as a *signal about a project*, not as a qualified lead.
+Two of the three limits the owner named show up in these 20 rows [T]: duplicate projects (one project spread over several permits) and
+missing valuations. The third, trade-contact limits, **cannot be judged from this fixture**; it depends on the owner's sample, which carries
+recorded contractor phone numbers by the owner's account. Treat each permit as a *signal about a project*, not as a qualified lead.
 
 **Cost and correction time.** The analysis ran in under a second with no model calls and no human corrections (rule-based).
 A weekly summary of about 25 projects would need roughly 2.5k input and 1k output tokens, generated once per trade
@@ -52,8 +59,16 @@ hours of initial tuning (a guess).
 **Reuse restriction found.** The dataset's licence label reads "Public Domain U.S. Government" while the catalog record defers
 to the City's own open-data terms and the resource-level licence reads "other-license-specified". See `OPPORTUNITIES.md` (1).
 
-**To finish the test:** either the owner points to the prepared sample (a file in this repository would do), or the
-sandbox's network policy allows `data.austintexas.gov`. Then:
+**To finish the test:** either the owner transfers `Austin-Permit-Sample-2026-10-12.html` to the session, or the
+sandbox's network policy allows `data.austintexas.gov`. For the HTML report:
+
+```
+python3 -I tests/austin-permits/analyze_sample_html.py Austin-Permit-Sample-2026-10-12.html --asof "$(date -u +%F)"
+```
+
+`analyze_sample_html.py` reads the report's tables (matching columns by header words), prints counts and fill rates only (never a phone number,
+email address or name), joins trade permits to building permits, and writes row-level output only if asked with `--rows-csv` (keep that file out
+of any repository). Its `--selftest` runs on an invented page and proves only that the code works. For live Socrata JSON:
 
 ```
 bash tests/austin-permits/fetch_sample.sh OUT_DIR 45 1000
