@@ -1,0 +1,45 @@
+name: "StudyProofs demos: render the notes and quiz videos (Chromium + ffmpeg)"
+# Renders two more demonstration videos per reviewed example from the product's own stored output (tools/render-demo.mjs --variant
+# notes|quiz): different scenes of the same example, never a re-cut of the existing video. Commits the files back to this branch.
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/amber-source-promotion-lifecycle-wwlq13]
+    paths: [".github/workflows/sp-render-demos.yml", "STUDYPROOFS-EXPERIMENT-2026-10-11/tools/render-demo.mjs"]
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Playwright's Chromium and ffmpeg
+        run: |
+          npm init -y >/dev/null
+          npm i --no-audit --no-fund playwright >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+          ffmpeg -version | head -1
+      - name: Render notes and quiz variants for both examples
+        env:
+          PW_CHROME: /nonexistent
+        run: |
+          cd STUDYPROOFS-EXPERIMENT-2026-10-11
+          for slug in cell-respiration hypothesis-testing; do
+            for variant in notes quiz; do
+              (cd .. && node STUDYPROOFS-EXPERIMENT-2026-10-11/tools/render-demo.mjs STUDYPROOFS-EXPERIMENT-2026-10-11/demos/$slug/example.json STUDYPROOFS-EXPERIMENT-2026-10-11/demos/$slug --variant $variant --ffmpeg ffmpeg)
+            done
+          done
+          for f in demos/*/demo-notes-1080x1920.mp4 demos/*/demo-quiz-1080x1920.mp4; do
+            echo "$f: $(ffprobe -v error -show_entries format=duration:stream=width,height -of csv=p=0 "$f" | tr '\n' ' ') bytes=$(stat -c %s "$f") sha256=$(sha256sum "$f" | cut -c1-64)"
+          done
+      - name: Commit the rendered files to this branch
+        run: |
+          git config user.name "amber-render-bot"
+          git config user.email "noreply@anthropic.com"
+          git add STUDYPROOFS-EXPERIMENT-2026-10-11/demos/*/demo-notes-1080x1920.mp4 STUDYPROOFS-EXPERIMENT-2026-10-11/demos/*/demo-quiz-1080x1920.mp4 STUDYPROOFS-EXPERIMENT-2026-10-11/demos/*/selection-notes.json STUDYPROOFS-EXPERIMENT-2026-10-11/demos/*/selection-quiz.json STUDYPROOFS-EXPERIMENT-2026-10-11/demos/*/scene-notes-*.png STUDYPROOFS-EXPERIMENT-2026-10-11/demos/*/scene-quiz-*.png
+          git -c commit.gpgsign=false commit -m "StudyProofs demos: notes and quiz videos rendered from the product's own output (runner, Chromium + ffmpeg)" || { echo "nothing to commit"; exit 0; }
+          git push origin HEAD:claude/amber-source-promotion-lifecycle-wwlq13
