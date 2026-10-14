@@ -50,7 +50,7 @@ What is missing is one finished Meta login that returns a Page token; fourteen l
 
 ## D. Threads (20 min)
 
-1. In the Meta developer dashboard open the app, add the use case **Access the Threads API** with `threads_basic` and `threads_content_publish`.
+1. In the Meta developer dashboard open the app, add the use case **Access the Threads API** and list `threads_basic`, `threads_content_publish` and `threads_read_replies` under it (Amber's login asks for all three; a login that asks for a permission the use case does not list can be refused by Meta's dialog).
 2. Add the Valid OAuth Redirect URI `https://hq.amberoneai.com/api/social/oauth/callback/threads`; copy the Threads app id and secret into the Owner Vault as `THREADS_APP_ID` and `THREADS_APP_SECRET`.
 3. Add the Threads profile as a **Threads Tester** under the app's roles and accept the invitation in Threads (Settings, Account, Website permissions, Invites).
 4. In HQ, `/dashboard/social-publish`, Threads, press **Connect**, sign in as that profile and allow. A profile not named StudyProofs or Amber needs the `studyproofs-promo-page: @username` line on #105.
