@@ -1,0 +1,38 @@
+{
+  "slug": "hypothesis-testing",
+  "generatedAt": "2026-10-12T12:26:26.626Z",
+  "model": "gpt-4o-mini",
+  "variant": "quiz",
+  "quiz": [
+    {
+      "question": "What does a p-value less than alpha indicate?",
+      "choices": [
+        "Reject H0",
+        "Fail to reject H0",
+        "Accept H0",
+        "Increase alpha"
+      ],
+      "answerIndex": 0,
+      "explanation": "A p-value less than alpha indicates that we reject the null hypothesis.",
+      "quote": "Decision rule: if p <= alpha, reject H0"
+    },
+    {
+      "question": "What does it mean to fail to reject H0?",
+      "choices": [
+        "We are 95% sure H0 is false",
+        "We did not find enough evidence against H0",
+        "H0 is proven true",
+        "None of the above"
+      ],
+      "answerIndex": 1,
+      "explanation": "Failing to reject H0 means we did not find enough evidence against it; it does not prove H0 is true.",
+      "quote": "Fail to reject\" does not prove H0. It means we did not find enough evidence against it"
+    }
+  ],
+  "counts": {
+    "flashcards": 8,
+    "quiz": 8,
+    "notes": 6
+  },
+  "seconds": 31
+}

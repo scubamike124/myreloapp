@@ -1,0 +1,29 @@
+{
+  "slug": "hypothesis-testing",
+  "generatedAt": "2026-10-12T12:26:26.626Z",
+  "model": "gpt-4o-mini",
+  "variant": "notes",
+  "notes": [
+    {
+      "heading": "Hypothesis Testing Basics",
+      "body": "Hypothesis testing involves a null hypothesis (H0) and an alternative hypothesis (H1). The null hypothesis claims that nothing is happening, while the alternative suggests a change or effect.",
+      "quote": "Null hypothesis H0: the \"nothing is happening\" claim (for example, the mean score is 70). - Alternative hypothesis H1: what we suspect instead (the mean is not 70, or is greater than 70"
+    },
+    {
+      "heading": "Understanding the p-value",
+      "body": "The p-value indicates the probability of obtaining a result as extreme as the observed one, assuming H0 is true. A decision rule is applied: if p <= alpha, reject H0; if p > alpha, fail to reject H0.",
+      "quote": "The p-value is the probability of getting a result at least as extreme as ours IF H0 is true. - Decision rule: if p <= alpha, reject H0. If p > alpha, fail to reject H0"
+    },
+    {
+      "heading": "Common Mistakes in Hypothesis Testing",
+      "body": "Common mistakes include choosing alpha after seeing the p-value, misinterpreting confidence levels, and confusing statistical significance with practical importance.",
+      "quote": "Choosing alpha after seeing the p-value. - Saying \"we are 95% sure H0 is false\". - Confusing statistical significance with practical importance"
+    }
+  ],
+  "counts": {
+    "flashcards": 8,
+    "quiz": 8,
+    "notes": 6
+  },
+  "seconds": 36
+}

@@ -1,0 +1,29 @@
+{
+  "slug": "cell-respiration",
+  "generatedAt": "2026-10-12T12:26:26.626Z",
+  "model": "gpt-4o-mini",
+  "variant": "notes",
+  "notes": [
+    {
+      "heading": "Overview of Cellular Respiration",
+      "body": "Cells break down glucose to make ATP. Overall equation: C6H12O6 + 6 O2 -> 6 CO2 + 6 H2O + energy. Eukaryotes get roughly 30-32 ATP per glucose.",
+      "quote": "Big picture: cells break down glucose to make ATP. Overall equation: C6H12O6 + 6 O2 -> 6 CO2 + 6 H2O + energy. Eukaryotes get roughly 30-32 ATP per glucose (older textbooks say 36-38"
+    },
+    {
+      "heading": "Krebs Cycle",
+      "body": "In the mitochondrial matrix. Acetyl-CoA joins oxaloacetate to make citrate. Per glucose (two turns of the cycle): 2 ATP, 6 NADH, 2 FADH2 and 4 CO2.",
+      "quote": "3. Krebs cycle (citric acid cycle) - In the mitochondrial matrix. Acetyl-CoA joins oxaloacetate to make citrate. - Per glucose (two turns of the cycle): 2 ATP, 6 NADH, 2 FADH2 and 4 CO2"
+    },
+    {
+      "heading": "Exam Traps",
+      "body": "Most ATP comes from the electron transport chain, not from glycolysis or the Krebs cycle. CO2 is released in pyruvate oxidation and in the Krebs cycle: 6 CO2 per glucose in total. The water in the overall equation is made at the end of the electron transport chain, not in glycolysis.",
+      "quote": "Exam traps - Most ATP comes from the electron transport chain, not from glycolysis or the Krebs cycle. - CO2 is released in pyruvate oxidation and in the Krebs cycle: 6 CO2 per glucose in total. - The water in the overall equation is made…"
+    }
+  ],
+  "counts": {
+    "flashcards": 8,
+    "quiz": 4,
+    "notes": 7
+  },
+  "seconds": 36
+}

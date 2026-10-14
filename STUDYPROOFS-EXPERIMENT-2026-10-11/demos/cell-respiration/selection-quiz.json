@@ -1,0 +1,38 @@
+{
+  "slug": "cell-respiration",
+  "generatedAt": "2026-10-12T12:26:26.626Z",
+  "model": "gpt-4o-mini",
+  "variant": "quiz",
+  "quiz": [
+    {
+      "question": "What is produced in the Krebs cycle?",
+      "choices": [
+        "2 ATP, 6 NADH, 2 FADH2, 4 CO2",
+        "4 ATP, 2 NADH, 2 FADH2, 6 CO2",
+        "2 ATP, 4 NADH, 2 FADH2, 4 CO2",
+        "2 ATP, 6 NADH, 4 FADH2, 2 CO2"
+      ],
+      "answerIndex": 0,
+      "explanation": "The Krebs cycle produces 2 ATP, 6 NADH, 2 FADH2, and 4 CO2 per glucose.",
+      "quote": "Per glucose (two turns of the cycle): 2 ATP, 6 NADH, 2 FADH2 and 4 CO2"
+    },
+    {
+      "question": "What type of fermentation occurs in muscle cells?",
+      "choices": [
+        "Alcohol fermentation",
+        "Lactic acid fermentation",
+        "Both",
+        "Neither"
+      ],
+      "answerIndex": 1,
+      "explanation": "Muscle cells undergo lactic acid fermentation, converting pyruvate to lactate.",
+      "quote": "Lactic acid fermentation (muscle cells): pyruvate -> lactate"
+    }
+  ],
+  "counts": {
+    "flashcards": 8,
+    "quiz": 4,
+    "notes": 7
+  },
+  "seconds": 31
+}
