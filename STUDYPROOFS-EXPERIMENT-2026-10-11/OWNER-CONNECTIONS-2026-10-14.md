@@ -1,4 +1,4 @@
-# StudyProofs promotion: the one consolidated list of connection steps (2026-10-14, 22:4xZ)
+# StudyProofs promotion: the one consolidated list of connection steps (2026-10-14, updated 23:15Z)
 
 Everything below is the exact step that stands between a channel and Amber posting on it by herself, with what happens the moment the step is done. Nothing here costs money. Every step is on an account you control; Amber never asks for a password, and nothing is pasted into chat or GitHub (the vault at `/dashboard/vault` is the only place a key goes).
 
@@ -7,7 +7,7 @@ Everything below is the exact step that stands between a channel and Amber posti
 | Channel | Who can post today | What is still needed | About how long | What happens the moment it is done |
 |---|---|---|---|---|
 | 1. Our own example pages, sitemap, IndexNow | Amber, done | nothing | 0 | done: both pages live since 20:51Z, IndexNow accepted all three addresses at 22:12:33Z |
-| 2. YouTube Shorts (the AmberOne channel, through the vault login) | Amber (amberai #834) | nothing to start; **one step only if the first upload comes back private** (see A) | 0 now; 20 min if the audit is needed | the first Short in tonight's 22:00Z to 06:00Z window, then one distinct Short a day for six days; each is shown on the tracker with its public address |
+| 2. YouTube Shorts (the AmberOne channel) | nobody yet: the vault's login is refused by Google (see A) | **a fresh YouTube login: Connect on the YouTube row in HQ** (A); then, only if the first upload comes back private, Google's audit (A2) | 5 min; 20 min more if the audit is needed | the first Short in the next open 22:00Z to 06:00Z window, then one distinct Short a day for six days; each is shown on the tracker with its public address |
 | 3. Facebook Page | nobody | the Meta login for a Page (B) | 15 min | one distinct link post a day at 14:00Z |
 | 4. Bluesky | nobody | an account and an app password in the vault (C) | 10 min | one distinct post a day at 15:00Z, with the sample image |
 | 5. Threads | nobody | the Threads use case on the Meta app, a tester role, the keys in the vault, Connect (D) | 20 min | one distinct post a day at 16:00Z |
@@ -21,16 +21,17 @@ Everything below is the exact step that stands between a channel and Amber posti
 
 Amber's part needs no further word from you: the promotion lane (amberai #834) posts on channels 2 to 6 by itself the moment each is connected, keeps one distinct post a day per channel (no text is repeated within 30 days; LinkedIn three a week), records every post on the StudyProofs tracker (amberai #105, section "Promotion") with its public address and time, and the funnel counts each post's visitors and sign-ups by `src` and `campaign`. To stop everything, write `studyproofs-promo: pause` on #105; `studyproofs-promo: resume` starts it again.
 
-## A. YouTube: only if tonight's upload is kept private
+## A. YouTube: a fresh login (5 min), then the audit only if an upload is kept private
 
-The AmberOne login in the vault can upload. Whether Google shows the upload to the public depends on the Google Cloud project behind that login: a project that has not passed YouTube's API compliance audit has every API upload set to private, whatever the request asks for. Amber reads the privacy back after each upload and the tracker says which it was.
+**What production found (2026-10-14 23:02Z):** the lane's first run tried the vault's AmberOne login (`YOUTUBE_REFRESH_TOKEN_AMBERONE`, saved 2026-08-24) and Google refused it: `invalid_grant` ("Bad Request"), Google's answer for a refresh token that has expired, was revoked, or was replaced by a newer login. The 40 Shorts of August were made with it; it has died since. A Google project whose OAuth consent screen is still in **Testing** gives logins that expire after 7 days, which fits what happened.
 
-If the tracker's YouTube line reads "kept it from the public" (code `youtube_audit`):
+1. In HQ open `/dashboard/social-publish`, Connections, the **YouTube** row for AmberOne, press **Connect**, sign in as the Google account that owns the AmberOne channel, and allow uploading. (From amberai #837 on, the lane tries the vault's two names and then every YouTube row connected in HQ, and uses the first login Google accepts for a channel named StudyProofs or Amber; it shows on the tracker what each login answered, by name, never a token.)
+2. So that this login does not die in 7 days: in console.cloud.google.com, the project of the OAuth client the vault's `YOUTUBE_CLIENT_ID` belongs to, **OAuth consent screen**, publishing status **In production** (an unverified app in production still works for your own account; it only shows a warning screen at login).
+3. Done. The next open slot (22:00Z to 06:00Z, every day) carries the first Short; the tracker shows its public address and time, and the ledger here is updated from it.
 
-1. Sign in to the Google account that owns the AmberOne channel, open console.cloud.google.com, and pick the project whose OAuth client is the one the vault's `YOUTUBE_CLIENT_ID` belongs to (the client id is shown on the project's Credentials page; compare the first characters, never copy the secret).
-2. Submit YouTube's **API Services compliance audit** (the "YouTube API Services, Audit and Quota Extension Form" on support.google.com): the project's number, the client, what the app does (uploads the owner's own demonstration videos to the owner's own channel), and the privacy policy address. Google answers by email; reports say days to a few weeks.
-3. Nothing to change in Amber. Write `studyproofs-promo: resume` on #105 when Google confirms, and the channel starts again at the next 22:00Z slot; the private uploads stay private (delete them in YouTube Studio or make them public there by hand, your choice).
-4. Meanwhile, by hand: YouTube Studio, Upload, the six video files from `demos/` (cards, notes and quiz for each example), the title and description from `kit/KIT-TEXT.md` and the four new ones in amberai's library (titles "Cellular respiration: study notes with where each came from", "Cellular respiration: a 4-question quiz, graded with the reasons", "Hypothesis testing: study notes with where each came from", "Hypothesis testing: an 8-question quiz, graded with the reasons"), privacy Public. Optional: the channel's About link `https://hq.amberoneai.com/studyproofs/examples?src=youtube-about`.
+**A2. Only if the tracker says an upload was kept private** (code `youtube_audit`): a project that has not passed YouTube's API compliance audit has every API upload set to private, whatever the request asks for. Submit YouTube's **API Services compliance audit** form (the "YouTube API Services, Audit and Quota Extension Form" on support.google.com) for that project: what the app does (uploads the owner's own demonstration videos to the owner's own channel), the client, the privacy policy address. Google answers by email (reports say days to a few weeks). Write `studyproofs-promo: resume` on #105 when Google confirms; the private uploads can be made public in YouTube Studio by hand.
+
+**Meanwhile, by hand (10 min a video):** YouTube Studio, Upload, the six video files from `demos/` (cards, notes and quiz for each example), title and description from `kit/KIT-TEXT.md` for the two card videos and from amberai's library for the four others (titles "Cellular respiration: study notes with where each came from", "Cellular respiration: a 4-question quiz, graded with the reasons", "Hypothesis testing: study notes with where each came from", "Hypothesis testing: an 8-question quiz, graded with the reasons"), privacy Public. Optional: the channel's About link `https://hq.amberoneai.com/studyproofs/examples?src=youtube-about`.
 
 ## B. Facebook Page (15 min)
 
