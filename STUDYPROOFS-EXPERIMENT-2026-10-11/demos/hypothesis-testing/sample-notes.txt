@@ -1,0 +1,30 @@
+STAT 200 - Hypothesis testing basics (review sheet)
+
+Setup
+- Null hypothesis H0: the "nothing is happening" claim (for example, the mean score is 70).
+- Alternative hypothesis H1: what we suspect instead (the mean is not 70, or is greater than 70).
+- Test statistic: how far the sample result is from H0, measured in standard errors.
+- Significance level alpha: the cutoff we choose before looking at the data, commonly 0.05.
+
+The p-value
+- The p-value is the probability of getting a result at least as extreme as ours IF H0 is true.
+- Decision rule: if p <= alpha, reject H0. If p > alpha, fail to reject H0.
+- A small p-value is NOT the probability that H0 is true.
+- "Fail to reject" does not prove H0. It means we did not find enough evidence against it.
+
+Errors
+- Type I error: rejecting H0 when H0 is actually true. Its probability is alpha.
+- Type II error: failing to reject H0 when H0 is actually false. Its probability is beta.
+- Power = 1 - beta, the chance of correctly rejecting a false H0. Larger samples and larger true effects raise power.
+
+Worked example (z-test)
+- Claim: the average exam score is 70. The population standard deviation is sigma = 12 (known).
+- Sample: n = 36 students, sample mean = 74.
+- z = (74 - 70) / (12 / sqrt(36)) = 4 / 2 = 2.0
+- The two-sided p-value for z = 2.0 is about 0.0455.
+- Since 0.0455 < 0.05, we reject H0 at the 5% level: the data are evidence that the true mean is not 70.
+
+Common mistakes
+- Choosing alpha after seeing the p-value.
+- Saying "we are 95% sure H0 is false".
+- Confusing statistical significance with practical importance.

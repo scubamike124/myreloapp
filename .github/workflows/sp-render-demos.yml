@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     branches: [claude/amber-source-promotion-lifecycle-wwlq13]
-    paths: [".github/workflows/sp-render-demos.yml", "STUDYPROOFS-EXPERIMENT-2026-10-11/tools/render-demo.mjs"]
+    paths: [".github/workflows/sp-render-demos.yml", "STUDYPROOFS-EXPERIMENT-2026-10-11/tools/render-demo.mjs", "STUDYPROOFS-EXPERIMENT-2026-10-11/demos/*/sample-notes.txt"]
 permissions:
   contents: write
 jobs:
@@ -22,6 +22,7 @@ jobs:
           npm init -y >/dev/null
           npm i --no-audit --no-fund playwright >/dev/null
           npx playwright install --with-deps chromium >/dev/null
+          sudo apt-get update -qq >/dev/null && sudo apt-get install -y -qq ffmpeg >/dev/null
           ffmpeg -version | head -1
       - name: Render notes and quiz variants for both examples
         env:

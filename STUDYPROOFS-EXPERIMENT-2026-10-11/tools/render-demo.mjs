@@ -55,6 +55,15 @@ if (!demoPath || !outDir) {
   process.exit(2);
 }
 const demo = JSON.parse(fs.readFileSync(demoPath, "utf8"));
+// The registry's example.json carries no sample text; the notes we wrote sit next to it as sample-notes.txt (the worker's demo.json carries them inline).
+if (!demo.sampleText) {
+  const notesFile = path.join(path.dirname(demoPath), "sample-notes.txt");
+  if (fs.existsSync(notesFile)) demo.sampleText = fs.readFileSync(notesFile, "utf8");
+}
+if (!demo.sampleText) {
+  console.error("the demo carries no sampleText and no sample-notes.txt sits next to it; the citation check needs the notes");
+  process.exit(2);
+}
 fs.mkdirSync(outDir, { recursive: true });
 
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
