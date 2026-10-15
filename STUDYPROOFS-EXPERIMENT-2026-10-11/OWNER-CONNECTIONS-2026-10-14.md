@@ -1,20 +1,22 @@
-# StudyProofs promotion: the one consolidated list of connection steps (2026-10-14, updated 23:15Z)
+# StudyProofs promotion: the one consolidated list of connection steps (2026-10-14, updated 2026-10-15 18:10Z)
 
 Everything below is the exact step that stands between a channel and Amber posting on it by herself, with what happens the moment the step is done. Nothing here costs money. Every step is on an account you control; Amber never asks for a password, and nothing is pasted into chat or GitHub (the vault at `/dashboard/vault` is the only place a key goes).
 
-## Added 2026-10-15, 16:xxZ: the sites Amber may join by herself, and the one fact each needs from you
+## Added 2026-10-15, 18:10Z: what Amber opens by herself, and what only you can do
 
-Read from each site's own words (`CHANNEL-ELIGIBILITY-2026-10-15.md`): the open Mastodon servers are the only free places that allow a declared, automated brand account. Their sign-up needs a date of birth, which only you can give.
+Your rule of 17:3xZ stands: no birthday to unlock a platform. The vault entry `STUDYPROOFS_SIGNUP_BIRTHDATE` is **no longer asked for**; do not add it. Amber's Mastodon registrar now passes over every server with an age rule (amberai #840), and the only free place whose own words allow a declared business account with no date of birth and a real audience is IndieAgora's PeerTube instance (`CHANNEL-ELIGIBILITY-2026-10-15.md`, rounds 6 to 9).
+
+**Nothing from you:** PeerTube (stream.indieagora.com). Amber opens the `studyproofs` account herself (amberai #841), verifies it through her own mailbox, and uploads the six demonstration videos one a day at 19:00Z; each one's public address and time go on the tracker and in `LAUNCH-LEDGER.md`.
+
+Optional, each unlocking one more channel; none is needed for the above:
 
 | What you do | Where | Then |
 |---|---|---|
-| Put `STUDYPROOFS_SIGNUP_BIRTHDATE` in the vault as YYYY-MM-DD (your own date of birth, or one you choose to stand behind for the business account; the server's rule is 16+) | `/dashboard/vault` | Amber opens @studyproofs on mastodon.social on her next tick (the bot flag on, the bio saying it is automated and run by AmberOne AI), confirms the mail herself, and posts one sample a day at 18:00Z with its picture, worldwide through the fediverse; the tracker shows each post's public address |
-| Optional: `STUDYPROOFS_MASTODON_SERVER` = `https://mstdn.party` (18+) or `https://mstdn.plus` (16+) instead of mastodon.social | the vault | the same, on that server (far smaller reach) |
-| If you would rather not give a date of birth: sign up yourself on mastodon.social as `studyproofs` (2 min), then Settings, Development, New application (read, write), and put `MASTODON_INSTANCE` = `https://mastodon.social` and `MASTODON_ACCESS_TOKEN` in the vault | mastodon.social, then the vault | Amber posts daily from the next slot; set the "This is an automated account" flag in Profile, and the bio from `CHANNEL-ELIGIBILITY-2026-10-15.md` |
+| Mastodon: sign up yourself on mastodon.social as `studyproofs` (2 min; its form asks a date of birth, which is yours to give or not), then Settings, Development, New application (read, write), and put `MASTODON_INSTANCE` = `https://mastodon.social` and `MASTODON_ACCESS_TOKEN` in the vault | mastodon.social, then the vault | Amber posts daily at 18:00Z from the next slot; set the "This is an automated account" flag in Profile, and the bio from `CHANNEL-ELIGIBILITY-2026-10-15.md` |
 | Bluesky: sign up by hand (a phone number is verified by SMS), then App Passwords, and `BLUESKY_HANDLE` + `BLUESKY_APP_PASSWORD` in the vault | bsky.app, then the vault | Amber's existing Bluesky publisher posts daily at 15:00Z |
 | Pixelfed (pictures): sign up by hand (a bot check guards the form), Settings, Applications, a personal access token, and `MASTODON_INSTANCE` = `https://pixelfed.social` + `MASTODON_ACCESS_TOKEN` in the vault, if you prefer it over Mastodon (one Mastodon-style account at a time) | pixelfed.social, then the vault | Amber posts the sample pictures daily |
 
-Everything else on the researched list either forbids automated accounts or promotion in its own words, approves each account by hand, or guards its forms with a bot check: see the eligibility table. Those stay by hand, with the texts already prepared.
+Everything else on the researched list either forbids automated accounts or promotion in its own words, approves each account by hand, or guards its forms with a bot check: see the eligibility tables. Those stay by hand, with the texts already prepared.
 
 ## Where each channel stands right now
 
