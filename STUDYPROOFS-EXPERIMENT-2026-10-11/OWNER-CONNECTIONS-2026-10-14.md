@@ -1,6 +1,17 @@
-# StudyProofs promotion: the one consolidated list of connection steps (2026-10-14, updated 2026-10-15 18:10Z)
+# StudyProofs promotion: the one consolidated list of connection steps (2026-10-14, updated 2026-10-15 19:55Z)
 
 Everything below is the exact step that stands between a channel and Amber posting on it by herself, with what happens the moment the step is done. Nothing here costs money. Every step is on an account you control; Amber never asks for a password, and nothing is pasted into chat or GitHub (the vault at `/dashboard/vault` is the only place a key goes).
+
+## Added 2026-10-15, 19:55Z: the one thing in the way of the PeerTube channel is a GitHub setting of yours
+
+Since 19:19Z GitHub Actions on `scubamike124/amberai` has started no job. Its own words on every attempt: "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings." Until that changes no pull request can get CI (and Amber's read-only runner checks cannot run either). amberai #843, the fix that lets the PeerTube registrar receive its verification mail, is open with its local checks clean and waits for CI.
+
+| What you do | Where | Then |
+|---|---|---|
+| Either: fix the payment or raise the Actions spending limit (GitHub's monthly included minutes for a private repository are used up; more minutes cost money, so this is your call), or wait for the monthly reset | github.com, Settings, Billing & plans | CI runs on #843; it is merged on green under your standing authorization; on the next tick Amber opens `studyproofs` on stream.indieagora.com, verifies it through her mailbox, and uploads the first demonstration video in the 19:00Z to 03:00Z window; its public address and time go on the tracker and in `LAUNCH-LEDGER.md` |
+| Or: say the word to merge #843 on its local checks (36 tests, lint and the type check are clean) without CI | one line to Claude | the same, about 20 minutes sooner |
+
+Nothing else is needed for PeerTube: no vault entry, no Railway or Resend change (the fix uses the inbound domain Amber's mail already receives on).
 
 ## Added 2026-10-15, 18:10Z: what Amber opens by herself, and what only you can do
 
