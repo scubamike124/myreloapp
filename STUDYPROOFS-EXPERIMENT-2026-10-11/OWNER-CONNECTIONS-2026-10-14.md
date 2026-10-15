@@ -17,7 +17,7 @@ Nothing else is needed for PeerTube: no vault entry, no Railway or Resend change
 
 Your rule of 17:3xZ stands: no birthday to unlock a platform. The vault entry `STUDYPROOFS_SIGNUP_BIRTHDATE` is **no longer asked for**; do not add it. Amber's Mastodon registrar now passes over every server with an age rule (amberai #840), and the only free place whose own words allow a declared business account with no date of birth and a real audience is IndieAgora's PeerTube instance (`CHANNEL-ELIGIBILITY-2026-10-15.md`, rounds 6 to 9).
 
-**Nothing from you:** PeerTube (stream.indieagora.com). Amber opens the `studyproofs` account herself (amberai #841), verifies it through her own mailbox, and uploads the six demonstration videos one a day at 19:00Z; each one's public address and time go on the tracker and in `LAUNCH-LEDGER.md`.
+**Done without you:** PeerTube (stream.indieagora.com). Amber opened the `studyproofs` account herself at 21:48Z on 2026-10-15, verified it through her own mailbox, and the first demonstration went live at 23:47Z (https://stream.indieagora.com/videos/watch/d552d5a1-e998-4c88-9153-838b4d6798ce); one more a day at 19:00Z follows, each on the tracker and in `LAUNCH-LEDGER.md`.
 
 Optional, each unlocking one more channel; none is needed for the above:
 
