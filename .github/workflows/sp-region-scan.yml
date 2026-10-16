@@ -1,0 +1,43 @@
+name: sp-region-scan
+# Read-only research for the StudyProofs region scan: for each candidate site, reads its own registration state and rules
+# (public API or rules page), extracts the sentences about advertising, promotion, bots and sign-up requirements, and commits
+# the results as JSON lines under scan/results/. Registers nothing, posts nothing, carries no secret.
+on:
+  push:
+    branches: [claude/amber-source-promotion-lifecycle-wwlq13]
+    paths: ["scan/targets/**", "scan/probe.mjs", ".github/workflows/sp-region-scan.yml"]
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: sp-region-scan
+  cancel-in-progress: false
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Probe every target batch that has no results yet
+        run: |
+          mkdir -p scan/results
+          for f in scan/targets/*.json; do
+            b=$(basename "$f" .json)
+            if [ -s "scan/results/$b.jsonl" ]; then echo "skip $b (has results)"; continue; fi
+            echo "=== $b"
+            node scan/probe.mjs "$f" "scan/results/$b.jsonl" || echo "probe failed for $b"
+            echo "lines: $(wc -l < scan/results/$b.jsonl)"
+          done
+      - name: Commit the results to the branch
+        run: |
+          git config user.name "amber-region-scan"
+          git config user.email "noreply@amberoneai.com"
+          git add scan/results
+          git commit -m "region scan results $(date -u +%FT%TZ)" || { echo "nothing to commit"; exit 0; }
+          git pull --rebase origin ${{ github.ref_name }} || true
+          git push origin HEAD:${{ github.ref_name }}

@@ -1,0 +1,7 @@
+[
+  { "id": "fedidb-mastodon-family", "kind": "directory", "source": "fedidb", "software": ["mastodon", "pleroma", "akkoma", "gotosocial", "friendica", "hubzilla"], "max": 360, "pages": 80 },
+  { "id": "fedidb-misskey-pixelfed-lemmy", "kind": "directory", "source": "fedidb", "software": ["misskey", "firefish", "sharkey", "iceshrimp", "pixelfed", "lemmy", "mbin"], "max": 200, "pages": 80 },
+  { "id": "joinpeertube", "kind": "directory", "source": "joinpeertube", "max": 400 },
+  { "id": "lemmyverse", "kind": "directory", "source": "lemmyverse", "max": 150 },
+  { "id": "nostr-relays", "kind": "directory", "source": "nostrwatch", "max": 60 }
+]
