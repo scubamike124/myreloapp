@@ -1,0 +1,218 @@
+[
+ {
+  "id": "api26:frantic:feed",
+  "kind": "json",
+  "url": "https://gofrantic.com/feed.json",
+  "country": "GLOBAL",
+  "site": "Frantic feed.json",
+  "category": "board-api",
+  "bodyChars": 30000
+ },
+ {
+  "id": "api26:frantic:openapi",
+  "kind": "json",
+  "url": "https://gofrantic.com/openapi.json",
+  "country": "GLOBAL",
+  "site": "Frantic openapi.json",
+  "category": "board-api",
+  "bodyChars": 30000
+ },
+ {
+  "id": "api26:frantic:skill",
+  "kind": "task",
+  "url": "https://gofrantic.com/SKILL.md",
+  "country": "GLOBAL",
+  "site": "Frantic SKILL.md",
+  "category": "board-api",
+  "excerptChars": 20000
+ },
+ {
+  "id": "api26:frantic:launch",
+  "kind": "json",
+  "url": "https://gofrantic.com/launch.json",
+  "country": "GLOBAL",
+  "site": "Frantic launch.json",
+  "category": "board-api",
+  "bodyChars": 12000
+ },
+ {
+  "id": "api26:botbounty:bounties",
+  "kind": "json",
+  "url": "https://botbounty-production.up.railway.app/api/agent/bounties",
+  "country": "GLOBAL",
+  "site": "BotBounty open bounties",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api26:botbounty:skill",
+  "kind": "task",
+  "url": "https://www.botbounty.ai/skill.md",
+  "country": "GLOBAL",
+  "site": "BotBounty skill.md",
+  "category": "board-api",
+  "excerptChars": 12000
+ },
+ {
+  "id": "api26:clawlancer:listings",
+  "kind": "json",
+  "url": "https://clawlancer.ai/api/listings?listing_type=BOUNTY&sort=newest",
+  "country": "GLOBAL",
+  "site": "Clawlancer bounty listings",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api26:clawlancer:skill",
+  "kind": "task",
+  "url": "https://clawlancer.ai/skill.md",
+  "country": "GLOBAL",
+  "site": "Clawlancer skill.md",
+  "category": "board-api",
+  "excerptChars": 12000
+ },
+ {
+  "id": "api26:0xwork:api-root",
+  "kind": "json",
+  "url": "https://api.0xwork.org/",
+  "country": "GLOBAL",
+  "site": "0xWork API root",
+  "category": "board-api",
+  "bodyChars": 8000
+ },
+ {
+  "id": "api26:0xwork:tasks",
+  "kind": "json",
+  "url": "https://api.0xwork.org/tasks",
+  "country": "GLOBAL",
+  "site": "0xWork /tasks",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api26:0xwork:v1-tasks",
+  "kind": "json",
+  "url": "https://api.0xwork.org/v1/tasks",
+  "country": "GLOBAL",
+  "site": "0xWork /v1/tasks",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api26:0xwork:api-tasks",
+  "kind": "json",
+  "url": "https://api.0xwork.org/api/tasks",
+  "country": "GLOBAL",
+  "site": "0xWork /api/tasks",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api26:0xwork:skill",
+  "kind": "task",
+  "url": "https://www.0xwork.org/skill.md",
+  "country": "GLOBAL",
+  "site": "0xWork skill.md",
+  "category": "board-api",
+  "excerptChars": 16000
+ },
+ {
+  "id": "api26:0xwork:llms",
+  "kind": "task",
+  "url": "https://www.0xwork.org/llms.txt",
+  "country": "GLOBAL",
+  "site": "0xWork llms.txt",
+  "category": "board-api",
+  "excerptChars": 12000
+ },
+ {
+  "id": "api26:ugig:gigs",
+  "kind": "json",
+  "url": "https://ugig.net/api/gigs?listing_type=hiring",
+  "country": "GLOBAL",
+  "site": "ugig hiring gigs",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api26:ugig:bounties",
+  "kind": "json",
+  "url": "https://ugig.net/api/bounties",
+  "country": "GLOBAL",
+  "site": "ugig bounties",
+  "category": "board-api",
+  "bodyChars": 30000
+ },
+ {
+  "id": "api26:ugig:skill",
+  "kind": "task",
+  "url": "https://ugig.net/skill.md",
+  "country": "GLOBAL",
+  "site": "ugig skill.md",
+  "category": "board-api",
+  "excerptChars": 20000
+ },
+ {
+  "id": "api26:riner:tasks",
+  "kind": "json",
+  "url": "https://riner.io/api/tasks",
+  "country": "GLOBAL",
+  "site": "Riner /api/tasks",
+  "category": "board-api",
+  "bodyChars": 30000
+ },
+ {
+  "id": "api26:riner:skill",
+  "kind": "task",
+  "url": "https://riner.io/skill.md",
+  "country": "GLOBAL",
+  "site": "Riner skill.md",
+  "category": "board-api",
+  "excerptChars": 12000
+ },
+ {
+  "id": "api26:riner:llms",
+  "kind": "task",
+  "url": "https://riner.io/llms.txt",
+  "country": "GLOBAL",
+  "site": "Riner llms.txt",
+  "category": "board-api",
+  "excerptChars": 12000
+ },
+ {
+  "id": "api26:riner:docs",
+  "kind": "task",
+  "url": "https://riner.io/docs",
+  "country": "GLOBAL",
+  "site": "Riner docs",
+  "category": "board-api",
+  "excerptChars": 16000
+ },
+ {
+  "id": "api26:superteam:skill",
+  "kind": "task",
+  "url": "https://superteam.fun/skill.md",
+  "country": "GLOBAL",
+  "site": "Superteam skill.md",
+  "category": "board-api",
+  "excerptChars": 12000
+ },
+ {
+  "id": "api26:agentpact:needs",
+  "kind": "json",
+  "url": "https://agentpact.xyz/api/needs",
+  "country": "GLOBAL",
+  "site": "AgentPact /api/needs",
+  "category": "board-api",
+  "bodyChars": 30000
+ },
+ {
+  "id": "api26:agentpact:llms",
+  "kind": "task",
+  "url": "https://agentpact.xyz/llms.txt",
+  "country": "GLOBAL",
+  "site": "AgentPact llms.txt",
+  "category": "board-api",
+  "excerptChars": 12000
+ }
+]
