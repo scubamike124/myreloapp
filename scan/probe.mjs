@@ -245,6 +245,25 @@ async function probeJson(t) {
   const text = page.text || "";
   let parsed = null; try { parsed = JSON.parse(text); } catch {}
   const summary = parsed && typeof parsed === "object" ? (Array.isArray(parsed) ? { items: parsed.length, firstKeys: Object.keys(parsed[0] || {}).slice(0, 30) } : { keys: Object.keys(parsed).slice(0, 40) }) : null;
+  // bodyMatch: keep only windows of bodyWindow characters around each match of this pattern (a page's script that matters, not the whole 2 MB).
+  if (t.bodyMatch) {
+    const re = new RegExp(String(t.bodyMatch), "gi");
+    const win = Number(t.bodyWindow) > 0 ? Number(t.bodyWindow) : 1500;
+    const cap = Number(t.bodyChars) > 0 ? Math.min(400000, Number(t.bodyChars)) : 60000;
+    const parts = [];
+    let total = 0;
+    let last = -1;
+    for (const m of text.matchAll(re)) {
+      const start = Math.max(0, m.index - win);
+      if (start < last) continue;
+      const end = Math.min(text.length, m.index + m[0].length + win);
+      parts.push(`@${start}: ${text.slice(start, end)}`);
+      total += end - start;
+      last = end;
+      if (total >= cap) break;
+    }
+    return { reachable: page.status > 0, status: page.status, finalUrl: page.url, chars: text.length, matches: parts.length, summary, body: parts.join("\n…\n").slice(0, cap), error: page.error };
+  }
   return { reachable: page.status > 0, status: page.status, finalUrl: page.url, chars: text.length, summary, body: text.slice(Number(t.bodyFrom) > 0 ? Number(t.bodyFrom) : 0, (Number(t.bodyFrom) > 0 ? Number(t.bodyFrom) : 0) + (Number(t.bodyChars) > 0 ? Math.min(400000, Number(t.bodyChars)) : 8000)), error: page.error };
 }
 
