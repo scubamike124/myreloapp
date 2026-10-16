@@ -271,6 +271,31 @@ async function probeJson(t) {
   return { reachable: page.status > 0, status: page.status, finalUrl: page.url, chars: text.length, summary, body: text.slice(Number(t.bodyFrom) > 0 ? Number(t.bodyFrom) : 0, (Number(t.bodyFrom) > 0 ? Number(t.bodyFrom) : 0) + (Number(t.bodyChars) > 0 ? Math.min(400000, Number(t.bodyChars)) : 8000)), error: page.error };
 }
 
+
+// MCP (streamable HTTP): initialize, then tools/list, both as JSON-RPC POSTs; an SSE answer is unwrapped from its data: lines.
+async function mcpPost(url, payload, session) {
+  const headers = { "Content-Type": "application/json", "MCP-Protocol-Version": "2025-06-18" };
+  if (session) headers["Mcp-Session-Id"] = session;
+  const r = await get(url, { method: "POST", body: JSON.stringify(payload), headers, accept: "application/json, text/event-stream" });
+  let parsed = r.json;
+  if (!parsed && typeof r.text === "string" && r.text.includes("data:")) {
+    const datas = r.text.split("\n").filter((x) => x.startsWith("data:")).map((x) => x.slice(5).trim()).filter(Boolean);
+    for (const d of datas) { try { parsed = JSON.parse(d); } catch {} }
+  }
+  return { status: r.status, body: parsed ?? (typeof r.text === "string" ? r.text.slice(0, 4000) : null), session: r.sessionId ?? null, type: r.type };
+}
+async function probeMcp(t) {
+  const init = await mcpPost(t.url, { jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-06-18", capabilities: {}, clientInfo: { name: "sp-region-scan", version: "1.0" } } }, null);
+  const session = init.session;
+  let tools = null;
+  if (init.status < 400) {
+    await mcpPost(t.url, { jsonrpc: "2.0", method: "notifications/initialized" }, session).catch(() => null);
+    tools = await mcpPost(t.url, { jsonrpc: "2.0", id: 2, method: "tools/list", params: {} }, session);
+  }
+  const cap = Number(t.bodyChars) > 0 ? Math.min(400000, Number(t.bodyChars)) : 60000;
+  return { reachable: init.status > 0, status: init.status, initialize: init.body, session: session ? "present" : "none", tools: tools ? { status: tools.status, body: JSON.stringify(tools.body).slice(0, cap) } : null };
+}
+
 const PROBES = {
   mcp: probeMcp, mastodon: probeMastodon, peertube: probePeertube, lemmy: probeLemmy, pixelfed: probePixelfed, misskey: probeMisskey, nostr: probeNostr, html: probeHtml, signup: probeSignup, task: probeTask, json: probeJson };
 async function run() {
