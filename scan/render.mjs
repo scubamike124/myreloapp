@@ -53,10 +53,12 @@ async function probe(browser, t) {
     // The page's visible text (an excerpt, for the hand review) and each form's action, method and hidden field names — never a value.
     const excerptChars = Math.min(12000, Math.max(500, Number(t.excerptChars) || 3000));
     const excerpt = text.replace(/\s+/g, " ").trim().slice(0, excerptChars);
+    // Each select's options (value and text), so a form's categories, durations and modes are known before any publisher is written.
+    const selects = await page.$$eval("select", (ss) => ss.slice(0, 30).map((sel) => ({ name: (sel.getAttribute("name") || sel.id || "").slice(0, 40), options: Array.from(sel.options).slice(0, 60).map((o) => ({ value: (o.value || "").slice(0, 60), text: (o.textContent || "").replace(/\s+/g, " ").trim().slice(0, 60) })) })));
     // Same-site links (href and text), so the rules, price and help pages behind a menu can be found without guessing paths.
     const links = await page.$$eval("a[href]", (as) => as.slice(0, 400).map((a) => ({ href: (a.getAttribute("href") || "").slice(0, 160), text: (a.textContent || "").replace(/\s+/g, " ").trim().slice(0, 60) })).filter((l) => l.href && !/^(#|javascript:|mailto:|tel:)/i.test(l.href)).slice(0, 120));
     const forms = await page.$$eval("form", (fs) => fs.slice(0, 8).map((f) => ({ action: (f.getAttribute("action") || "").slice(0, 200), method: (f.getAttribute("method") || "get").toLowerCase(), hidden: Array.from(f.querySelectorAll("input[type=hidden]")).map((h) => (h.getAttribute("name") || "").slice(0, 40)).filter(Boolean).slice(0, 20), fields: Array.from(f.querySelectorAll("input,select,textarea")).filter((i) => (i.getAttribute("type") || "") !== "hidden").length })));
-    Object.assign(result, { reachable: status > 0, status, finalUrl: page.url(), hops, title: (await page.title()).slice(0, 120), blocked, formFound: password || (email && inputs.length > 0), email, password, phone, dob, captcha, oauth, inputs: inputs.slice(0, 40), requiredFields: requiredFields.slice(0, 20), labels, sentences, chars: text.length, excerpt, forms, links });
+    Object.assign(result, { reachable: status > 0, status, finalUrl: page.url(), hops, title: (await page.title()).slice(0, 120), blocked, formFound: password || (email && inputs.length > 0), email, password, phone, dob, captcha, oauth, inputs: inputs.slice(0, 40), requiredFields: requiredFields.slice(0, 20), labels, sentences, chars: text.length, excerpt, forms, links, selects });
   } catch (e) {
     result.error = String(e?.message || e).slice(0, 160);
   } finally {

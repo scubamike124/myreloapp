@@ -1,0 +1,58 @@
+[
+ {
+  "id": "render8:IL:myproduct:submit-options",
+  "url": "https://myproduct.co.il/reshut-harabim/submit.php",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct submit form (options)",
+  "excerptChars": 8000
+ },
+ {
+  "id": "render8:DE:dsble:spielregeln-full",
+  "url": "https://www.dsble.de/spielregeln",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB Spielregeln (full)",
+  "excerptChars": 12000
+ },
+ {
+  "id": "render8:DE:dsble:neu-options",
+  "url": "https://www.dsble.de/neu",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB neu (options)",
+  "excerptChars": 2000
+ },
+ {
+  "id": "render8:IT:perstudenti:pubblica-options",
+  "url": "https://www.perstudenti.com/pubblica",
+  "discover": false,
+  "country": "IT",
+  "site": "PerStudenti pubblica (options)",
+  "excerptChars": 5000
+ },
+ {
+  "id": "render8:PK:listcompk:post-ad-options",
+  "url": "https://list.com.pk/post-ad",
+  "discover": false,
+  "country": "PK",
+  "site": "List.com.pk post-ad (options)",
+  "excerptChars": 3000
+ },
+ {
+  "id": "render8:CO:colombiamove:publicar-full",
+  "url": "https://colombiamove.com/publicar",
+  "discover": false,
+  "country": "CO",
+  "site": "Colombia Move publicar (full)",
+  "excerptChars": 8000
+ },
+ {
+  "id": "render8:ID:iklangratiz:home-options",
+  "url": "https://www.iklangratiz.com/",
+  "discover": false,
+  "country": "ID",
+  "site": "IklanGratiz home (options)",
+  "excerptChars": 1000
+ }
+]
