@@ -1,0 +1,77 @@
+[
+ {
+  "id": "cm55:page0",
+  "kind": "json",
+  "url": "https://colombiamove.com/perfil",
+  "country": "CO",
+  "site": "Colombia Move /perfil (raw: page chunk refs, name field)",
+  "category": "classified-board",
+  "bodyMatch": "static/chunks/app/[a-z\\-/]+page-[a-f0-9]+\\.js|displayName|\"name\"|nombre|Nombre",
+  "bodyWindow": 200,
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm55:page1",
+  "kind": "json",
+  "url": "https://colombiamove.com/cuenta",
+  "country": "CO",
+  "site": "Colombia Move /cuenta (raw: page chunk refs, name field)",
+  "category": "classified-board",
+  "bodyMatch": "static/chunks/app/[a-z\\-/]+page-[a-f0-9]+\\.js|displayName|\"name\"|nombre|Nombre",
+  "bodyWindow": 200,
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm55:page2",
+  "kind": "json",
+  "url": "https://colombiamove.com/ajustes",
+  "country": "CO",
+  "site": "Colombia Move /ajustes (raw: page chunk refs, name field)",
+  "category": "classified-board",
+  "bodyMatch": "static/chunks/app/[a-z\\-/]+page-[a-f0-9]+\\.js|displayName|\"name\"|nombre|Nombre",
+  "bodyWindow": 200,
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm55:page3",
+  "kind": "json",
+  "url": "https://colombiamove.com/profile",
+  "country": "CO",
+  "site": "Colombia Move /profile (raw: page chunk refs, name field)",
+  "category": "classified-board",
+  "bodyMatch": "static/chunks/app/[a-z\\-/]+page-[a-f0-9]+\\.js|displayName|\"name\"|nombre|Nombre",
+  "bodyWindow": 200,
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm55:page4",
+  "kind": "json",
+  "url": "https://colombiamove.com/mi-cuenta",
+  "country": "CO",
+  "site": "Colombia Move /mi-cuenta (raw: page chunk refs, name field)",
+  "category": "classified-board",
+  "bodyMatch": "static/chunks/app/[a-z\\-/]+page-[a-f0-9]+\\.js|displayName|\"name\"|nombre|Nombre",
+  "bodyWindow": 200,
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm55:page5",
+  "kind": "json",
+  "url": "https://colombiamove.com/settings",
+  "country": "CO",
+  "site": "Colombia Move /settings (raw: page chunk refs, name field)",
+  "category": "classified-board",
+  "bodyMatch": "static/chunks/app/[a-z\\-/]+page-[a-f0-9]+\\.js|displayName|\"name\"|nombre|Nombre",
+  "bodyWindow": 200,
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm55:perfil-text",
+  "kind": "task",
+  "url": "https://colombiamove.com/perfil",
+  "country": "CO",
+  "site": "Colombia Move /perfil (text and links)",
+  "category": "classified-board",
+  "excerptChars": 4000
+ }
+]
