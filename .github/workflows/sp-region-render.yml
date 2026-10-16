@@ -36,7 +36,8 @@ jobs:
             echo "== $b"
             node scan/render.mjs "$f" "scan/render-results/$b.jsonl" || echo "render failed for $b"
           done
-          rm -f package.json package-lock.json
+          # npm init and install rewrite the tracked package files; put them back or the rebase below refuses to run.
+          git checkout -- package.json package-lock.json
       - name: Commit the results
         run: |
           git config user.name "sp-region-render"
