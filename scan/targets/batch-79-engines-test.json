@@ -1,0 +1,110 @@
+[
+ {
+  "id": "eng79:bing:FR",
+  "kind": "json",
+  "url": "https://www.bing.com/search?q=petites%20annonces%20gratuites%20%C3%A9tudiants%20d%C3%A9poser%20une%20annonce&setlang=en",
+  "country": "FR",
+  "site": "Bing HTML: petites annonces gratuites \u00e9tudiants d\u00e9poser une annonce",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "eng79:mojeek:FR",
+  "kind": "json",
+  "url": "https://www.mojeek.com/search?q=petites%20annonces%20gratuites%20%C3%A9tudiants%20d%C3%A9poser%20une%20annonce",
+  "country": "FR",
+  "site": "Mojeek: petites annonces gratuites \u00e9tudiants d\u00e9poser une annonce",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "eng79:brave:FR",
+  "kind": "json",
+  "url": "https://search.brave.com/search?q=petites%20annonces%20gratuites%20%C3%A9tudiants%20d%C3%A9poser%20une%20annonce&source=web",
+  "country": "FR",
+  "site": "Brave: petites annonces gratuites \u00e9tudiants d\u00e9poser une annonce",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "eng79:yandex:FR",
+  "kind": "json",
+  "url": "https://yandex.com/search/?text=petites%20annonces%20gratuites%20%C3%A9tudiants%20d%C3%A9poser%20une%20annonce",
+  "country": "FR",
+  "site": "Yandex: petites annonces gratuites \u00e9tudiants d\u00e9poser une annonce",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "eng79:bing:IT",
+  "kind": "json",
+  "url": "https://www.bing.com/search?q=annunci%20gratuiti%20studenti%20universitari%20pubblica%20annuncio&setlang=en",
+  "country": "IT",
+  "site": "Bing HTML: annunci gratuiti studenti universitari pubblica annuncio",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "eng79:mojeek:IT",
+  "kind": "json",
+  "url": "https://www.mojeek.com/search?q=annunci%20gratuiti%20studenti%20universitari%20pubblica%20annuncio",
+  "country": "IT",
+  "site": "Mojeek: annunci gratuiti studenti universitari pubblica annuncio",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "eng79:brave:IT",
+  "kind": "json",
+  "url": "https://search.brave.com/search?q=annunci%20gratuiti%20studenti%20universitari%20pubblica%20annuncio&source=web",
+  "country": "IT",
+  "site": "Brave: annunci gratuiti studenti universitari pubblica annuncio",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "eng79:yandex:IT",
+  "kind": "json",
+  "url": "https://yandex.com/search/?text=annunci%20gratuiti%20studenti%20universitari%20pubblica%20annuncio",
+  "country": "IT",
+  "site": "Yandex: annunci gratuiti studenti universitari pubblica annuncio",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "eng79:bing:NG",
+  "kind": "json",
+  "url": "https://www.bing.com/search?q=free%20classifieds%20post%20ad%20students%20Nigeria%20university&setlang=en",
+  "country": "NG",
+  "site": "Bing HTML: free classifieds post ad students Nigeria university",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "eng79:mojeek:NG",
+  "kind": "json",
+  "url": "https://www.mojeek.com/search?q=free%20classifieds%20post%20ad%20students%20Nigeria%20university",
+  "country": "NG",
+  "site": "Mojeek: free classifieds post ad students Nigeria university",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "eng79:brave:NG",
+  "kind": "json",
+  "url": "https://search.brave.com/search?q=free%20classifieds%20post%20ad%20students%20Nigeria%20university&source=web",
+  "country": "NG",
+  "site": "Brave: free classifieds post ad students Nigeria university",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "eng79:yandex:NG",
+  "kind": "json",
+  "url": "https://yandex.com/search/?text=free%20classifieds%20post%20ad%20students%20Nigeria%20university",
+  "country": "NG",
+  "site": "Yandex: free classifieds post ad students Nigeria university",
+  "category": "discovery",
+  "bodyChars": 200000
+ }
+]
