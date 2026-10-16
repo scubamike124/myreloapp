@@ -1,0 +1,47 @@
+[
+ {
+  "id": "api35:clawlancer:listings-full",
+  "kind": "json",
+  "url": "https://clawlancer.ai/api/listings?listing_type=BOUNTY&sort=newest&limit=100",
+  "country": "GLOBAL",
+  "site": "Clawlancer bounty listings (full)",
+  "category": "board-api",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh35:search:label-bounty-2d",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3Abounty+is%3Aissue+is%3Aopen+created%3A%3E%3D2026-10-14&sort=created&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "GitHub issues labelled bounty, open, created since 2026-10-14",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh35:search:algora-label-2d",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3A%22%F0%9F%92%8E+Bounty%22+is%3Aissue+is%3Aopen+created%3A%3E%3D2026-10-14&sort=created&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "GitHub issues with Algora's bounty label, open, created since 2026-10-14",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh35:search:bounty-title-1d",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=bounty+in%3Atitle+is%3Aissue+is%3Aopen+created%3A%3E%3D2026-10-15&sort=created&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "GitHub issues with bounty in the title, open, created since 2026-10-15",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh35:search:label-bounty-updated-1d",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3Abounty+is%3Aissue+is%3Aopen+updated%3A%3E%3D2026-10-15&sort=updated&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "GitHub issues labelled bounty, open, updated since 2026-10-15",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ }
+]
