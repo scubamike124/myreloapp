@@ -44,7 +44,17 @@ async function probe(browser, t) {
     if (typeof t.expand === "string" && t.expand) {
       try {
         const handles = await page.$$(t.expand);
-        for (const h of handles.slice(0, 80)) { try { await h.click({ timeout: 1500 }); } catch {} }
+        const only = typeof t.expandMatch === "string" && t.expandMatch ? new RegExp(t.expandMatch) : null;
+        const startUrl = page.url();
+        for (const h of handles.slice(0, 80)) {
+          try {
+            // Never a link (it would leave the page), and only what reads like a question when expandMatch is given.
+            const text = await h.evaluate((e) => (e.closest("a") ? "" : (e.textContent || "").replace(/\s+/g, " ").trim()));
+            if (!text || (only && !only.test(text))) continue;
+            await h.click({ timeout: 1500 });
+            if (page.url() !== startUrl) { await page.goto(t.url, { waitUntil: "domcontentloaded", timeout: 45000 }); break; }
+          } catch {}
+        }
         await page.waitForTimeout(800);
       } catch {}
     }
