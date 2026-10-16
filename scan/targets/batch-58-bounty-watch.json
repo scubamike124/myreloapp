@@ -1,0 +1,38 @@
+[
+ {
+  "id": "gh58:bounty-watch-131",
+  "kind": "json",
+  "url": "https://api.github.com/repos/abdulsalam-create/bounty-watch/issues/131",
+  "country": "GLOBAL",
+  "site": "bounty-watch digest #131 (what it watches)",
+  "category": "github-bounty-source",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh58:bounty-watch-readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/abdulsalam-create/bounty-watch/readme",
+  "country": "GLOBAL",
+  "site": "bounty-watch README (base64)",
+  "category": "github-bounty-source",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh58:bounty-watch-repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/abdulsalam-create/bounty-watch",
+  "country": "GLOBAL",
+  "site": "bounty-watch repository record",
+  "category": "github-bounty-source",
+  "bodyChars": 8000
+ },
+ {
+  "id": "gh58:bounty-watch-issues",
+  "kind": "json",
+  "url": "https://api.github.com/repos/abdulsalam-create/bounty-watch/issues?state=open&per_page=20&sort=created&direction=desc",
+  "country": "GLOBAL",
+  "site": "bounty-watch newest open issues",
+  "category": "github-bounty-source",
+  "bodyChars": 120000
+ }
+]
