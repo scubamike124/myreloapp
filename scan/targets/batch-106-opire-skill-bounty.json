@@ -1,0 +1,47 @@
+[
+ {
+  "id": "gh106:cbb-issue",
+  "kind": "json",
+  "url": "https://api.github.com/repos/claude-builders-bounty/claude-builders-bounty/issues/1",
+  "country": "GLOBAL",
+  "site": "claude-builders-bounty #1 ($50, Opire)",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh106:cbb-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/claude-builders-bounty/claude-builders-bounty/issues/1/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "claude-builders-bounty #1 comments",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh106:cbb-repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/claude-builders-bounty/claude-builders-bounty",
+  "country": "GLOBAL",
+  "site": "claude-builders-bounty repo",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh106:cbb-readme",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/claude-builders-bounty/claude-builders-bounty/HEAD/README.md",
+  "country": "GLOBAL",
+  "site": "claude-builders-bounty README",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh106:cbb-issues",
+  "kind": "json",
+  "url": "https://api.github.com/repos/claude-builders-bounty/claude-builders-bounty/issues?state=all&per_page=30",
+  "country": "GLOBAL",
+  "site": "claude-builders-bounty issues (paid ones?)",
+  "category": "paid-task",
+  "bodyChars": 120000
+ }
+]
