@@ -1,0 +1,119 @@
+[
+ {
+  "id": "cm48:0",
+  "kind": "task",
+  "url": "https://colombiamove.com/ai/mcp?from=publicar",
+  "country": "CO",
+  "site": "Colombia Move: 'Publicar con IA' / MCP page for AI agents",
+  "category": "classified-board",
+  "excerptChars": 12000
+ },
+ {
+  "id": "cm48:1",
+  "kind": "task",
+  "url": "https://colombiamove.com/importar?source=publicar_shortcut",
+  "country": "CO",
+  "site": "Colombia Move: paste-your-text import path",
+  "category": "classified-board",
+  "excerptChars": 12000
+ },
+ {
+  "id": "cm48:2",
+  "kind": "task",
+  "url": "https://colombiamove.com/ayuda",
+  "country": "CO",
+  "site": "Colombia Move help",
+  "category": "classified-board",
+  "excerptChars": 12000
+ },
+ {
+  "id": "cm48:3",
+  "kind": "task",
+  "url": "https://colombiamove.com/como-funcionan-los-servicios",
+  "country": "CO",
+  "site": "Colombia Move: how services work",
+  "category": "classified-board",
+  "excerptChars": 12000
+ },
+ {
+  "id": "cm48:4",
+  "kind": "task",
+  "url": "https://colombiamove.com/login?redirect=%2Fpublicar",
+  "country": "CO",
+  "site": "Colombia Move sign-in page (methods)",
+  "category": "classified-board",
+  "excerptChars": 12000
+ },
+ {
+  "id": "cm48:5",
+  "kind": "task",
+  "url": "https://colombiamove.com/publicar/whatsapp?source=publicar_shortcut",
+  "country": "CO",
+  "site": "Colombia Move WhatsApp posting path",
+  "category": "classified-board",
+  "excerptChars": 12000
+ },
+ {
+  "id": "cm48:6",
+  "kind": "task",
+  "url": "https://colombiamove.com/servicios-remotos",
+  "country": "CO",
+  "site": "Colombia Move remote services section",
+  "category": "classified-board",
+  "excerptChars": 12000
+ },
+ {
+  "id": "cm48:7",
+  "kind": "task",
+  "url": "https://colombiamove.com/terminos",
+  "country": "CO",
+  "site": "Colombia Move terms (HTTP read)",
+  "category": "classified-board",
+  "excerptChars": 12000
+ },
+ {
+  "id": "cm48:8",
+  "kind": "task",
+  "url": "https://colombiamove.com/blog/publicar-gratis-siempre-colombia-move/",
+  "country": "CO",
+  "site": "Colombia Move blog: free forever",
+  "category": "classified-board",
+  "excerptChars": 12000
+ },
+ {
+  "id": "cm48:mcp-raw",
+  "kind": "json",
+  "url": "https://colombiamove.com/ai/mcp",
+  "country": "CO",
+  "site": "Colombia Move MCP page raw HTML",
+  "category": "classified-board",
+  "bodyChars": 300000
+ },
+ {
+  "id": "cm48:mcp-endpoint",
+  "kind": "json",
+  "url": "https://colombiamove.com/api/mcp",
+  "country": "CO",
+  "site": "Colombia Move MCP endpoint (guess)",
+  "category": "classified-board",
+  "bodyChars": 20000
+ },
+ {
+  "id": "cm48:llms-txt",
+  "kind": "json",
+  "url": "https://colombiamove.com/llms.txt",
+  "country": "CO",
+  "site": "Colombia Move llms.txt (guess)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm48:robots",
+  "kind": "json",
+  "url": "https://colombiamove.com/robots.txt",
+  "country": "CO",
+  "site": "Colombia Move robots.txt",
+  "category": "classified-board",
+  "bodyChars": 20000
+ }
+]
