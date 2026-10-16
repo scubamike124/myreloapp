@@ -1,0 +1,623 @@
+[
+ {
+  "id": "rules82:ar.tuavisoclasificado.com:rules:1",
+  "kind": "json",
+  "url": "https://ar.tuavisoclasificado.com/terminosycondiciones",
+  "country": "AR",
+  "site": "ar.tuavisoclasificado.com rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:ar.tuavisoclasificado.com:post:2",
+  "kind": "signup",
+  "url": "https://ar.tuavisoclasificado.com/avisos/publicar",
+  "country": "AR",
+  "site": "ar.tuavisoclasificado.com post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:ar.tuavisoclasificado.com:account:3",
+  "kind": "signup",
+  "url": "https://ar.tuavisoclasificado.com/usuarios/registro",
+  "country": "AR",
+  "site": "ar.tuavisoclasificado.com account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:avisia.cl:rules:1",
+  "kind": "json",
+  "url": "https://avisia.cl/ayuda",
+  "country": "CL",
+  "site": "avisia.cl rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:avisia.cl:post:2",
+  "kind": "signup",
+  "url": "https://avisia.cl/publicar",
+  "country": "CL",
+  "site": "avisia.cl post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:avisia.cl:account:3",
+  "kind": "signup",
+  "url": "https://avisia.cl/registro",
+  "country": "CL",
+  "site": "avisia.cl account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:avisia.cl:rules:4",
+  "kind": "json",
+  "url": "https://avisia.cl/terminos",
+  "country": "CL",
+  "site": "avisia.cl rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:chilemarketplace.cl:account:1",
+  "kind": "signup",
+  "url": "https://chilemarketplace.cl/registro/",
+  "country": "CL",
+  "site": "chilemarketplace.cl account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:chilemarketplace.cl:rules:2",
+  "kind": "json",
+  "url": "https://chilemarketplace.cl/ayuda-avisos-clasificados-chile/",
+  "country": "CL",
+  "site": "chilemarketplace.cl rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:chilemarketplace.cl:account:3",
+  "kind": "signup",
+  "url": "https://chilemarketplace.cl/registro/?tab=ingreso",
+  "country": "CL",
+  "site": "chilemarketplace.cl account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:chilemarketplace.cl:account:4",
+  "kind": "signup",
+  "url": "https://chilemarketplace.cl/registro/?tab=registro",
+  "country": "CL",
+  "site": "chilemarketplace.cl account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:alamaula.com.ar:post:1",
+  "kind": "signup",
+  "url": "https://alamaula.com.ar/item/new",
+  "country": "AR",
+  "site": "alamaula.com.ar post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:alamaula.com.ar:rules:2",
+  "kind": "json",
+  "url": "https://alamaula.com.ar/ayuda/",
+  "country": "AR",
+  "site": "alamaula.com.ar rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:alamaula.com.ar:account:3",
+  "kind": "signup",
+  "url": "https://alamaula.com.ar/user/register",
+  "country": "AR",
+  "site": "alamaula.com.ar account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:alamaula.com.ar:account:4",
+  "kind": "signup",
+  "url": "https://alamaula.com.ar/user/login",
+  "country": "AR",
+  "site": "alamaula.com.ar account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:alamaula.com.ar:rules:5",
+  "kind": "json",
+  "url": "https://alamaula.com.ar/terminos-y-condiciones-p51",
+  "country": "AR",
+  "site": "alamaula.com.ar rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:alamaula.com.ar:rules:6",
+  "kind": "json",
+  "url": "https://alamaula.com.ar/aviso-legal-p52",
+  "country": "AR",
+  "site": "alamaula.com.ar rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:yia.cl:account:1",
+  "kind": "signup",
+  "url": "https://yia.cl/user/login",
+  "country": "CL",
+  "site": "yia.cl account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:yia.cl:account:2",
+  "kind": "signup",
+  "url": "https://yia.cl/user/register",
+  "country": "CL",
+  "site": "yia.cl account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:okdatos.com:post:1",
+  "kind": "signup",
+  "url": "https://okdatos.com/cl/publish",
+  "country": "CL",
+  "site": "okdatos.com post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:okdatos.com:account:2",
+  "kind": "signup",
+  "url": "https://okdatos.com/cl/login",
+  "country": "CL",
+  "site": "okdatos.com account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:okdatos.com:rules:3",
+  "kind": "json",
+  "url": "https://okdatos.com/cl/terms-and-conditions",
+  "country": "CL",
+  "site": "okdatos.com rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:okdatos.com:rules:4",
+  "kind": "json",
+  "url": "https://okdatos.com/cl/publish-rules",
+  "country": "CL",
+  "site": "okdatos.com rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:gauchada.cl:post:1",
+  "kind": "signup",
+  "url": "https://www.gauchada.cl/publicar-anuncio-gratis/",
+  "country": "CL",
+  "site": "gauchada.cl post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:gauchada.cl:account:2",
+  "kind": "signup",
+  "url": "https://www.gauchada.cl/crear-cuenta/",
+  "country": "CL",
+  "site": "gauchada.cl account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:gauchada.cl:rules:3",
+  "kind": "json",
+  "url": "https://www.gauchada.cl/p/terminos-y-condiciones/",
+  "country": "CL",
+  "site": "gauchada.cl rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:gauchada.cl:rules:4",
+  "kind": "json",
+  "url": "https://www.gauchada.cl/",
+  "country": "CL",
+  "site": "gauchada.cl rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:gauchada.cl:rules:5",
+  "kind": "json",
+  "url": "https://www.gauchada.cl/p/aviso-legal/",
+  "country": "CL",
+  "site": "gauchada.cl rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:publicargratis.cl:account:1",
+  "kind": "signup",
+  "url": "https://safe.evisos.com/login?d=8ExyYBtN5IJvjRNSd4oOgx0CyM%2B85JschdkkikxrWs%2B3VhlV8Q0n8Yl43g%3D%3D",
+  "country": "CL",
+  "site": "publicargratis.cl account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:publicargratis.cl:account:2",
+  "kind": "signup",
+  "url": "https://safe.evisos.com/signup?d=8ExyYBtN5IJvjRNSd4oOgx0CyM%2B85JschdkkikxrWs%2B3VhlV8Q0n8Yl43g%3D%3",
+  "country": "CL",
+  "site": "publicargratis.cl account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:publicargratis.cl:rules:3",
+  "kind": "json",
+  "url": "https://www.publicargratis.cl/faqs",
+  "country": "CL",
+  "site": "publicargratis.cl rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:publicargratis.cl:rules:4",
+  "kind": "json",
+  "url": "https://www.publicargratis.cl/terms-and-conditions.html",
+  "country": "CL",
+  "site": "publicargratis.cl rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:chile.tusavisos.com:rules:1",
+  "kind": "json",
+  "url": "http://www.tusavisos.com/ayuda",
+  "country": "CL",
+  "site": "chile.tusavisos.com rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:chile.tusavisos.com:rules:2",
+  "kind": "json",
+  "url": "http://www.tusavisos.com/ayuda/ayuda_detalle.php?faq=21",
+  "country": "CL",
+  "site": "chile.tusavisos.com rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:mercanuncios.pe:account:1",
+  "kind": "signup",
+  "url": "https://www.mercanuncios.pe/user.php?country=PE&lang=es",
+  "country": "PE",
+  "site": "mercanuncios.pe account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:mercanuncios.pe:account:2",
+  "kind": "signup",
+  "url": "https://www.mercanuncios.pe/login.php?country=PE&lang=es",
+  "country": "PE",
+  "site": "mercanuncios.pe account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:mercanuncios.pe:post:3",
+  "kind": "signup",
+  "url": "https://www.mercanuncios.pe/post.php?post=new",
+  "country": "PE",
+  "site": "mercanuncios.pe post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:mercanuncios.pe:rules:4",
+  "kind": "json",
+  "url": "https://www.mercanuncios.pe/terms.php ",
+  "country": "PE",
+  "site": "mercanuncios.pe rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:wow.com.pe:account:1",
+  "kind": "signup",
+  "url": "https://wow.com.pe/ingresar.php",
+  "country": "PE",
+  "site": "wow.com.pe account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:wow.com.pe:post:2",
+  "kind": "signup",
+  "url": "https://wow.com.pe/postnew.php",
+  "country": "PE",
+  "site": "wow.com.pe post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:wow.com.pe:account:3",
+  "kind": "signup",
+  "url": "https://wow.com.pe/register.php",
+  "country": "PE",
+  "site": "wow.com.pe account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:anuncialogratis.com.mx:post:1",
+  "kind": "signup",
+  "url": "https://anuncialogratis.com.mx/post-an-ad/",
+  "country": "MX",
+  "site": "anuncialogratis.com.mx post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:anuncialogratis.com.mx:account:2",
+  "kind": "signup",
+  "url": "https://anuncialogratis.com.mx/mi-cuenta/",
+  "country": "MX",
+  "site": "anuncialogratis.com.mx account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:anuncialogratis.com.mx:rules:3",
+  "kind": "json",
+  "url": "https://anuncialogratis.com.mx/faq/",
+  "country": "MX",
+  "site": "anuncialogratis.com.mx rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:anuncialogratis.com.mx:rules:4",
+  "kind": "json",
+  "url": "https://anuncialogratis.com.mx/terminos-y-condiciones/",
+  "country": "MX",
+  "site": "anuncialogratis.com.mx rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:anuncialogratis.com.mx:account:5",
+  "kind": "signup",
+  "url": "https://anuncialogratis.com.mx/mi-cuenta/contrasena-perdida/",
+  "country": "MX",
+  "site": "anuncialogratis.com.mx account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:vivalokal.com.br:account:1",
+  "kind": "signup",
+  "url": "https://vivalokal.com.br/entrar.html",
+  "country": "BR",
+  "site": "vivalokal.com.br account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:vivalokal.com.br:account:2",
+  "kind": "signup",
+  "url": "https://vivalokal.com.br/cadastro.html",
+  "country": "BR",
+  "site": "vivalokal.com.br account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:vivalokal.com.br:account:3",
+  "kind": "signup",
+  "url": "https://vivalokal.com.br/entrar.html?next=publicar.html",
+  "country": "BR",
+  "site": "vivalokal.com.br account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:vivalokal.com.br:post:4",
+  "kind": "signup",
+  "url": "https://vivalokal.com.br/categoria/empregos/anunciar-curriculo-procurar-emprego",
+  "country": "BR",
+  "site": "vivalokal.com.br post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:campuskram.de:post:1",
+  "kind": "signup",
+  "url": "https://campuskram.de/anzeige/erstellen",
+  "country": "DE",
+  "site": "campuskram.de post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:campuskram.de:rules:2",
+  "kind": "json",
+  "url": "https://campuskram.de/nutzungsbedingungen",
+  "country": "DE",
+  "site": "campuskram.de rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:classificadosgratis.com.pt:post:1",
+  "kind": "signup",
+  "url": "https://www.classificadosgratis.com.pt/post/",
+  "country": "PT",
+  "site": "classificadosgratis.com.pt post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:classificadosgratis.com.pt:rules:2",
+  "kind": "json",
+  "url": "https://www.classificadosgratis.com.pt/help/",
+  "country": "PT",
+  "site": "classificadosgratis.com.pt rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:classificadosgratis.com.pt:rules:3",
+  "kind": "json",
+  "url": "https://www.classificadosgratis.com.pt/help/#support",
+  "country": "PT",
+  "site": "classificadosgratis.com.pt rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:trovito.pt:account:1",
+  "kind": "signup",
+  "url": "https://www.trovito.pt/login_w/v1/",
+  "country": "PT",
+  "site": "trovito.pt account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:trovito.pt:post:2",
+  "kind": "signup",
+  "url": "https://www.trovito.pt/publicar-anuncios-gratis/",
+  "country": "PT",
+  "site": "trovito.pt post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:trovito.pt:post:3",
+  "kind": "signup",
+  "url": "https://www.trovito.pt/anunciar-imoveis-gratis/",
+  "country": "PT",
+  "site": "trovito.pt post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:trovito.pt:post:4",
+  "kind": "signup",
+  "url": "https://www.trovito.pt/anunciar-carros-gratis/",
+  "country": "PT",
+  "site": "trovito.pt post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:trovito.pt:post:5",
+  "kind": "signup",
+  "url": "https://www.trovito.pt/anunciar-emprego-gratis/",
+  "country": "PT",
+  "site": "trovito.pt post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:trovito.pt:post:6",
+  "kind": "signup",
+  "url": "https://www.trovito.pt/publicar-anuncios-gratis/lisboa/",
+  "country": "PT",
+  "site": "trovito.pt post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:trovito.pt:rules:7",
+  "kind": "json",
+  "url": "https://www.trovito.pt/terms/termos-de-utilizacao/",
+  "country": "PT",
+  "site": "trovito.pt rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:pisodeestudiantes.com:account:1",
+  "kind": "signup",
+  "url": "https://pisodeestudiantes.com/account",
+  "country": "ES",
+  "site": "pisodeestudiantes.com account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:pisodeestudiantes.com:account:2",
+  "kind": "signup",
+  "url": "https://pisodeestudiantes.com/auth",
+  "country": "ES",
+  "site": "pisodeestudiantes.com account page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:pisodeestudiantes.com:post:3",
+  "kind": "signup",
+  "url": "https://pisodeestudiantes.com/publish",
+  "country": "ES",
+  "site": "pisodeestudiantes.com post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:pisodeestudiantes.com:post:4",
+  "kind": "signup",
+  "url": "https://pisodeestudiantes.com/owner/new",
+  "country": "ES",
+  "site": "pisodeestudiantes.com post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:pisodeestudiantes.com:post:5",
+  "kind": "signup",
+  "url": "https://pisodeestudiantes.com/tablon/publicar",
+  "country": "ES",
+  "site": "pisodeestudiantes.com post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "rules82:mexico.wanuncios.com:rules:1",
+  "kind": "json",
+  "url": "https://www.wanuncios.com/condiciones-de-uso/",
+  "country": "MX",
+  "site": "mexico.wanuncios.com rules page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules82:mexico.wanuncios.com:post:2",
+  "kind": "signup",
+  "url": "https://mexico.wanuncios.com/publicar/",
+  "country": "MX",
+  "site": "mexico.wanuncios.com post page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]
