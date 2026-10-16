@@ -1,0 +1,245 @@
+[
+ {
+  "id": "r105:npati.com:rules1",
+  "kind": "json",
+  "url": "https://www.npati.com/services",
+  "country": "CA",
+  "site": "npati.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:npati.com:rules2",
+  "kind": "json",
+  "url": "https://www.npati.com/terms",
+  "country": "CA",
+  "site": "npati.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:npati.com:rules3",
+  "kind": "json",
+  "url": "https://www.npati.com/cookies",
+  "country": "CA",
+  "site": "npati.com rules/help page 3",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:npati.com:rules4",
+  "kind": "json",
+  "url": "https://www.npati.com/privacy",
+  "country": "CA",
+  "site": "npati.com rules/help page 4",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:yardlyfinds.com:rules1",
+  "kind": "json",
+  "url": "https://yardlyfinds.com/terms",
+  "country": "CA",
+  "site": "yardlyfinds.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:campusboard.co.uk:rules1",
+  "kind": "json",
+  "url": "https://www.campusboard.co.uk/about",
+  "country": "GB",
+  "site": "campusboard.co.uk rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:campusboard.co.uk:rules2",
+  "kind": "json",
+  "url": "https://www.campusboard.co.uk/terms",
+  "country": "GB",
+  "site": "campusboard.co.uk rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:campusboard.co:rules1",
+  "kind": "json",
+  "url": "https://www.campusboard.co/about",
+  "country": "US",
+  "site": "campusboard.co rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:campusboard.co:rules2",
+  "kind": "json",
+  "url": "https://www.campusboard.co/terms",
+  "country": "US",
+  "site": "campusboard.co rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:universitybulletinboard.com:rules1",
+  "kind": "json",
+  "url": "https://universitybulletinboard.com/about-us/",
+  "country": "US",
+  "site": "universitybulletinboard.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:rumieapp.com:rules1",
+  "kind": "json",
+  "url": "https://www.rumieapp.com/about-us",
+  "country": "US",
+  "site": "rumieapp.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:rumieapp.com:rules2",
+  "kind": "json",
+  "url": "https://www.rumieapp.com/rumie-privacy-policy",
+  "country": "US",
+  "site": "rumieapp.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:rumieapp.com:rules3",
+  "kind": "json",
+  "url": "https://www.rumieapp.com/privacy-policy",
+  "country": "US",
+  "site": "rumieapp.com rules/help page 3",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:rumieapp.com:rules4",
+  "kind": "json",
+  "url": "https://www.rumieapp.com/refund-policy",
+  "country": "US",
+  "site": "rumieapp.com rules/help page 4",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:quafra.com:rules1",
+  "kind": "json",
+  "url": "https://quafra.com/privacy-policy-2/",
+  "country": "GH",
+  "site": "quafra.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:quafra.com:rules2",
+  "kind": "json",
+  "url": "https://quafra.com/terms-and-conditions/",
+  "country": "GH",
+  "site": "quafra.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:kenyabizlist.com:rules1",
+  "kind": "json",
+  "url": "https://www.kenyabizlist.com/general/TermsOfUse.aspx",
+  "country": "KE",
+  "site": "kenyabizlist.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:kenyabizlist.com:rules2",
+  "kind": "json",
+  "url": "https://www.kenyabizlist.com/general/PrivacyPolicy.aspx",
+  "country": "KE",
+  "site": "kenyabizlist.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:kenyabizlist.com:rules3",
+  "kind": "json",
+  "url": "https://www.kenyabizlist.com/general/about.aspx",
+  "country": "KE",
+  "site": "kenyabizlist.com rules/help page 3",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:za.bambaad.com:rules1",
+  "kind": "json",
+  "url": "https://za.bambaad.com/info/terms-of-use-3",
+  "country": "ZA",
+  "site": "za.bambaad.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:za.bambaad.com:rules2",
+  "kind": "json",
+  "url": "https://za.bambaad.com/info/privacy-policy-5",
+  "country": "ZA",
+  "site": "za.bambaad.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:hongbotong.co.kr:rules1",
+  "kind": "json",
+  "url": "https://hongbotong.co.kr/public/terms.php",
+  "country": "KR",
+  "site": "hongbotong.co.kr rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:hongbotong.co.kr:rulesg",
+  "kind": "json",
+  "url": "https://hongbotong.co.kr/freehongbo",
+  "country": "KR",
+  "site": "hongbotong.co.kr rules/help page g",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:yadlyad.co.il:rulesg",
+  "kind": "json",
+  "url": "https://yadlyad.co.il/terms.php",
+  "country": "IL",
+  "site": "yadlyad.co.il rules/help page g",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:universitybulletinboard.com:rulesg",
+  "kind": "json",
+  "url": "http://universitybulletinboard.com/terms.php",
+  "country": "US",
+  "site": "universitybulletinboard.com rules/help page g",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:adsandclassifieds.com:rulesg",
+  "kind": "json",
+  "url": "https://adsandclassifieds.com/terms",
+  "country": "IE",
+  "site": "adsandclassifieds.com rules/help page g",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r105:freeboard.com.ua:rulesg",
+  "kind": "json",
+  "url": "https://www.freeboard.com.ua/rules.php",
+  "country": "UA",
+  "site": "freeboard.com.ua rules/help page g",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
