@@ -1,0 +1,56 @@
+[
+ {
+  "id": "disc85:FR",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=petites%20annonces%20gratuites%20%C3%A9tudiants%20d%C3%A9poser%20une%20annonce",
+  "country": "FR",
+  "site": "DuckDuckGo: petites annonces gratuites \u00e9tudiants d\u00e9poser une annonce",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc85:IT",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=annunci%20gratuiti%20studenti%20universitari%20pubblica%20annuncio",
+  "country": "IT",
+  "site": "DuckDuckGo: annunci gratuiti studenti universitari pubblica annuncio",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc85:NL",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=gratis%20advertentie%20plaatsen%20studenten%20prikbord",
+  "country": "NL",
+  "site": "DuckDuckGo: gratis advertentie plaatsen studenten prikbord",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc85:PL",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=darmowe%20og%C5%82oszenia%20studenci%20dodaj%20og%C5%82oszenie",
+  "country": "PL",
+  "site": "DuckDuckGo: darmowe og\u0142oszenia studenci dodaj og\u0142oszenie",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc85:TR",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=%C3%BCcretsiz%20ilan%20ver%20%C3%B6%C4%9Frenci%20%C3%BCniversite%20panosu",
+  "country": "TR",
+  "site": "DuckDuckGo: \u00fccretsiz ilan ver \u00f6\u011frenci \u00fcniversite panosu",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc85:NG",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20post%20ad%20students%20Nigeria%20university",
+  "country": "NG",
+  "site": "DuckDuckGo: free classifieds post ad students Nigeria university",
+  "category": "discovery",
+  "bodyChars": 80000
+ }
+]
