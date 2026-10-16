@@ -1,0 +1,22 @@
+[
+ {
+  "id": "r21:station-bounties",
+  "url": "https://station.railway.com/bounties",
+  "country": "GLOBAL",
+  "site": "Railway Central Station bounties (rendered; rules, amounts, who may answer)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 30000
+ },
+ {
+  "id": "r21:station-home",
+  "url": "https://station.railway.com/",
+  "country": "GLOBAL",
+  "site": "Railway Central Station home (rendered; links)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 12000
+ }
+]

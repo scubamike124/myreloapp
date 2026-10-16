@@ -1,0 +1,47 @@
+[
+ {
+  "id": "gh69:corps-jobs-dir",
+  "kind": "json",
+  "url": "https://api.github.com/repos/HCTDIP/corps-jobs/contents/jobs",
+  "country": "GLOBAL",
+  "site": "corps-jobs jobs directory",
+  "category": "bounty-platform",
+  "bodyChars": 20000
+ },
+ {
+  "id": "gh69:railway-latest",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/HCTDIP/corps-jobs/main/reports/railway_bounty_latest.json",
+  "country": "GLOBAL",
+  "site": "the radar's latest Railway bounty list",
+  "category": "bounty-platform",
+  "bodyChars": 200000
+ },
+ {
+  "id": "gh69:railway-radar-py",
+  "kind": "html",
+  "url": "https://raw.githubusercontent.com/HCTDIP/corps-jobs/main/jobs/railway_radar.py",
+  "country": "GLOBAL",
+  "site": "the radar script (its data source and rules)",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh69:railway-radar-py-2",
+  "kind": "html",
+  "url": "https://raw.githubusercontent.com/HCTDIP/corps-jobs/main/jobs/railway_bounty.py",
+  "country": "GLOBAL",
+  "site": "the radar script, other name",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "web69:station-api-bounties",
+  "kind": "json",
+  "url": "https://station.railway.com/api/bounties",
+  "country": "GLOBAL",
+  "site": "Railway Station bounties API (guess)",
+  "category": "bounty-platform",
+  "bodyChars": 200000
+ }
+]
