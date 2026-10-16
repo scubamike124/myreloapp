@@ -1,0 +1,56 @@
+[
+ {
+  "id": "disc87:BE",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=annonces%20gratuites%20%C3%A9tudiants%20Belgique%20d%C3%A9poser",
+  "country": "BE",
+  "site": "DuckDuckGo: annonces gratuites \u00e9tudiants Belgique d\u00e9poser",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc87:AT",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=Studenten%20schwarzes%20Brett%20kostenlos%20inserieren%20%C3%96sterreich",
+  "country": "AT",
+  "site": "DuckDuckGo: Studenten schwarzes Brett kostenlos inserieren \u00d6sterreich",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc87:CH",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=Studenten%20Marktplatz%20gratis%20Inserat%20Schweiz",
+  "country": "CH",
+  "site": "DuckDuckGo: Studenten Marktplatz gratis Inserat Schweiz",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc87:DK",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=gratis%20annonce%20studerende%20opslagstavle",
+  "country": "DK",
+  "site": "DuckDuckGo: gratis annonce studerende opslagstavle",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc87:SE",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=gratis%20annons%20studenter%20anslagstavla",
+  "country": "SE",
+  "site": "DuckDuckGo: gratis annons studenter anslagstavla",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc87:NO",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=gratis%20annonse%20studenter%20oppslagstavle",
+  "country": "NO",
+  "site": "DuckDuckGo: gratis annonse studenter oppslagstavle",
+  "category": "discovery",
+  "bodyChars": 80000
+ }
+]

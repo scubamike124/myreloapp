@@ -1,0 +1,389 @@
+[
+ {
+  "id": "ver86:zeelandnet.nl:home",
+  "kind": "signup",
+  "url": "https://zeelandnet.nl/",
+  "country": "NL",
+  "site": "zeelandnet.nl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:zeelandnet.nl:found",
+  "kind": "signup",
+  "url": "https://www.zeelandnet.nl/prikbord/gratis",
+  "country": "NL",
+  "site": "zeelandnet.nl: ZeelandNet Prikbord - Gratis Advertentie",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:gratisaftehalen.nl:home",
+  "kind": "signup",
+  "url": "https://gratisaftehalen.nl/",
+  "country": "NL",
+  "site": "gratisaftehalen.nl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:gratisaftehalen.nl:found",
+  "kind": "signup",
+  "url": "https://www.gratisaftehalen.nl/advertentie-plaatsen-categorie",
+  "country": "NL",
+  "site": "gratisaftehalen.nl: Advertentie plaatsen | Gratis af te hale",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:speurkoop.nl:home",
+  "kind": "signup",
+  "url": "https://speurkoop.nl/",
+  "country": "NL",
+  "site": "speurkoop.nl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:kowika.nl:home",
+  "kind": "signup",
+  "url": "https://kowika.nl/",
+  "country": "NL",
+  "site": "kowika.nl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:xgratis.nl:home",
+  "kind": "signup",
+  "url": "https://xgratis.nl/",
+  "country": "NL",
+  "site": "xgratis.nl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:xgratis.nl:found",
+  "kind": "signup",
+  "url": "https://www.xgratis.nl/forum/",
+  "country": "NL",
+  "site": "xgratis.nl: Gratis Prikbord - Forumoverzicht",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:genckocaeli.com:home",
+  "kind": "signup",
+  "url": "https://genckocaeli.com/",
+  "country": "TR",
+  "site": "genckocaeli.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:4boni.fr:home",
+  "kind": "signup",
+  "url": "https://4boni.fr/",
+  "country": "FR",
+  "site": "4boni.fr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:denicheo.com:home",
+  "kind": "signup",
+  "url": "https://denicheo.com/",
+  "country": "FR",
+  "site": "denicheo.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:1001annonces.net:home",
+  "kind": "signup",
+  "url": "https://1001annonces.net/",
+  "country": "FR",
+  "site": "1001annonces.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:1001annonces.net:found",
+  "kind": "signup",
+  "url": "https://www.1001annonces.net/fr/",
+  "country": "FR",
+  "site": "1001annonces.net: Petites annonces gratuites en France | 1",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:toutypasse.com:home",
+  "kind": "signup",
+  "url": "https://toutypasse.com/",
+  "country": "FR",
+  "site": "toutypasse.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:toutypasse.com:found",
+  "kind": "signup",
+  "url": "https://www.toutypasse.com/deposer-une-petite-annonce",
+  "country": "FR",
+  "site": "toutypasse.com: Passer une annonce gratuite - TouTyPasse",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:tesannonces.com:home",
+  "kind": "signup",
+  "url": "https://tesannonces.com/",
+  "country": "FR",
+  "site": "tesannonces.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:ogloszenia.dlastudenta.pl:home",
+  "kind": "signup",
+  "url": "https://ogloszenia.dlastudenta.pl/",
+  "country": "PL",
+  "site": "ogloszenia.dlastudenta.pl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:ogloszenia.dlastudenta.pl:found",
+  "kind": "signup",
+  "url": "https://ogloszenia.dlastudenta.pl/dodaj/ogloszenie.html",
+  "country": "PL",
+  "site": "ogloszenia.dlastudenta.pl: Dodaj og\u0142oszenie - dlaStudenta.pl",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:warszawa.dlastudenta.pl:home",
+  "kind": "signup",
+  "url": "https://warszawa.dlastudenta.pl/",
+  "country": "PL",
+  "site": "warszawa.dlastudenta.pl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:warszawa.dlastudenta.pl:found",
+  "kind": "signup",
+  "url": "https://warszawa.dlastudenta.pl/ogloszenia/dodaj/ogloszenie.html",
+  "country": "PL",
+  "site": "warszawa.dlastudenta.pl: Dodaj og\u0142oszenie - Darmowe og\u0142oszenia Wa",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:ogloszetu.pl:home",
+  "kind": "signup",
+  "url": "https://ogloszetu.pl/",
+  "country": "PL",
+  "site": "ogloszetu.pl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:opole.dlastudenta.pl:home",
+  "kind": "signup",
+  "url": "https://opole.dlastudenta.pl/",
+  "country": "PL",
+  "site": "opole.dlastudenta.pl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:opole.dlastudenta.pl:found",
+  "kind": "signup",
+  "url": "https://opole.dlastudenta.pl/ogloszenia/dodaj/ogloszenie.html",
+  "country": "PL",
+  "site": "opole.dlastudenta.pl: Dodaj og\u0142oszenie - Darmowe og\u0142oszenia Op",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:tuoglosze.pl:home",
+  "kind": "signup",
+  "url": "https://tuoglosze.pl/",
+  "country": "PL",
+  "site": "tuoglosze.pl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:darmoweogloszenia.pl:home",
+  "kind": "signup",
+  "url": "https://darmoweogloszenia.pl/",
+  "country": "PL",
+  "site": "darmoweogloszenia.pl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:bachecauniversitaria.it:home",
+  "kind": "signup",
+  "url": "https://bachecauniversitaria.it/",
+  "country": "IT",
+  "site": "bachecauniversitaria.it home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:bachecauniversitaria.it:found",
+  "kind": "signup",
+  "url": "http://bachecauniversitaria.it/bacheca/bacheca_annunci_frm.htm",
+  "country": "IT",
+  "site": "bachecauniversitaria.it: BachecaUniversitaria.it - annunci gratui",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:unistarterpack.it:home",
+  "kind": "signup",
+  "url": "https://unistarterpack.it/",
+  "country": "IT",
+  "site": "unistarterpack.it home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:bachecauniversitaria.com:home",
+  "kind": "signup",
+  "url": "https://bachecauniversitaria.com/",
+  "country": "IT",
+  "site": "bachecauniversitaria.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:annunci.net:home",
+  "kind": "signup",
+  "url": "https://annunci.net/",
+  "country": "IT",
+  "site": "annunci.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:annunci.net:found",
+  "kind": "signup",
+  "url": "https://www.annunci.net/formazione/lezioni-private.html",
+  "country": "IT",
+  "site": "annunci.net: Lezioni private e ripetizioni | Annunci.",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:marketplace.ng:home",
+  "kind": "signup",
+  "url": "https://marketplace.ng/",
+  "country": "NG",
+  "site": "marketplace.ng home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:marketplace.ng:found",
+  "kind": "signup",
+  "url": "https://www.marketplace.ng/blog/free-classified-ads-posting-site-in-nigeria-marketplace-naija",
+  "country": "NG",
+  "site": "marketplace.ng: Free Classified Ads Posting Site in Nige",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:posttotrade.ng:home",
+  "kind": "signup",
+  "url": "https://posttotrade.ng/",
+  "country": "NG",
+  "site": "posttotrade.ng home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:posttotrade.ng:found",
+  "kind": "signup",
+  "url": "https://posttotrade.ng/index.php",
+  "country": "NG",
+  "site": "posttotrade.ng: Free Classified ads in Nigeria",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:kirtafrica.com:home",
+  "kind": "signup",
+  "url": "https://kirtafrica.com/",
+  "country": "NG",
+  "site": "kirtafrica.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:postadz.com:home",
+  "kind": "signup",
+  "url": "https://postadz.com/",
+  "country": "NG",
+  "site": "postadz.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:postadz.com:found",
+  "kind": "signup",
+  "url": "https://postadz.com/browse/country/nigeria",
+  "country": "NG",
+  "site": "postadz.com: Nigeria Classifieds \u2014 Free Local Ads in ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:jekoba.com:home",
+  "kind": "signup",
+  "url": "https://jekoba.com/",
+  "country": "NG",
+  "site": "jekoba.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:opor.ng:home",
+  "kind": "signup",
+  "url": "https://opor.ng/",
+  "country": "NG",
+  "site": "opor.ng home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:opor.ng:found",
+  "kind": "signup",
+  "url": "https://opor.ng/en/board/add.html",
+  "country": "NG",
+  "site": "opor.ng: Post an ad free of charge / Post a free ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:ng.bantumart.com:home",
+  "kind": "signup",
+  "url": "https://ng.bantumart.com/",
+  "country": "NG",
+  "site": "ng.bantumart.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver86:zonahub:search",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=ZonaHub%20marketplace%20Nigerian%20students",
+  "country": "NG",
+  "site": "find ZonaHub's own site",
+  "category": "discovery",
+  "bodyChars": 60000
+ }
+]

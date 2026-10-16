@@ -1,0 +1,200 @@
+[
+ {
+  "id": "r24:4boni.fr",
+  "url": "https://4boni.fr/",
+  "country": "FR",
+  "site": "4boni.fr (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:ogloszenia.dlastudenta.pl",
+  "url": "https://ogloszenia.dlastudenta.pl/dodaj/ogloszenie.html",
+  "country": "PL",
+  "site": "ogloszenia.dlastudenta.pl (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:bachecauniversitaria.it",
+  "url": "http://bachecauniversitaria.it/bacheca/bacheca_annunci_frm.htm",
+  "country": "IT",
+  "site": "bachecauniversitaria.it (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:unistarterpack.it",
+  "url": "https://unistarterpack.it/",
+  "country": "IT",
+  "site": "unistarterpack.it (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:opor.ng",
+  "url": "https://opor.ng/en/board/add.html",
+  "country": "NG",
+  "site": "opor.ng (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:posttotrade.ng",
+  "url": "https://posttotrade.ng/index.php",
+  "country": "NG",
+  "site": "posttotrade.ng (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:kirtafrica.com",
+  "url": "https://kirtafrica.com/",
+  "country": "NG",
+  "site": "kirtafrica.com (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:jekoba.com",
+  "url": "https://jekoba.com/",
+  "country": "NG",
+  "site": "jekoba.com (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:speurkoop.nl",
+  "url": "https://speurkoop.nl/",
+  "country": "NL",
+  "site": "speurkoop.nl (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:kowika.nl",
+  "url": "https://kowika.nl/",
+  "country": "NL",
+  "site": "kowika.nl (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:denicheo.com",
+  "url": "https://www.denicheo.com/",
+  "country": "FR",
+  "site": "denicheo.com (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:toutypasse.com",
+  "url": "https://www.toutypasse.com/deposer-une-petite-annonce",
+  "country": "FR",
+  "site": "toutypasse.com (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:ogloszetu.pl",
+  "url": "https://www.ogloszetu.pl/",
+  "country": "PL",
+  "site": "ogloszetu.pl (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:tuoglosze.pl",
+  "url": "https://tuoglosze.pl/",
+  "country": "PL",
+  "site": "tuoglosze.pl (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:darmoweogloszenia.pl",
+  "url": "https://darmoweogloszenia.pl/",
+  "country": "PL",
+  "site": "darmoweogloszenia.pl (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:genckocaeli.com",
+  "url": "https://www.genckocaeli.com/",
+  "country": "TR",
+  "site": "genckocaeli.com (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:ng.bantumart.com",
+  "url": "https://ng.bantumart.com/",
+  "country": "NG",
+  "site": "ng.bantumart.com (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r24:postadz.com",
+  "url": "https://postadz.com/browse/country/nigeria",
+  "country": "NG",
+  "site": "postadz.com (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ }
+]
