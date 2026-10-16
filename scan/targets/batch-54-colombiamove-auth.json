@@ -1,0 +1,58 @@
+[
+ {
+  "id": "cm54:login-page",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/app/login/page-34a7ce4a82b33429.js",
+  "country": "CO",
+  "site": "Colombia Move login page chunk, in full (the /api/auth/request call and the verification step)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm54:mcp-tokens-a",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/26701-09989dadda0f2c53.js",
+  "country": "CO",
+  "site": "Colombia Move chunk 26701, in full (/api/mcp/tokens)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm54:mcp-tokens-b",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/56815-9971471efe7ea441.js",
+  "country": "CO",
+  "site": "Colombia Move chunk 56815, in full (/api/mcp/tokens)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm54:connect-page",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/app/ai/mcp/connect/page-b63492739399985f.js",
+  "country": "CO",
+  "site": "Colombia Move connect page chunk, in full",
+  "category": "classified-board",
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm54:auth-windows",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/92886-0be8a29aca6d7f80.js",
+  "country": "CO",
+  "site": "Colombia Move chunk 92886 (auth providers, /api/me), in full",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm54:layout-profile",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/app/layout-ec17114d31eb8c13.js",
+  "country": "CO",
+  "site": "Colombia Move layout chunk: windows around /api/profile, /api/me and /api/auth",
+  "category": "classified-board",
+  "bodyMatch": "/api/profile|/api/me|/api/auth",
+  "bodyWindow": 700,
+  "bodyChars": 60000
+ }
+]
