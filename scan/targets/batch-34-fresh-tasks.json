@@ -1,0 +1,200 @@
+[
+ {
+  "id": "api34:frantic:feed",
+  "kind": "json",
+  "url": "https://gofrantic.com/feed.json",
+  "country": "GLOBAL",
+  "site": "Frantic feed.json",
+  "category": "board-api",
+  "bodyChars": 30000
+ },
+ {
+  "id": "api34:frantic:openapi",
+  "kind": "json",
+  "url": "https://gofrantic.com/openapi.json",
+  "country": "GLOBAL",
+  "site": "Frantic openapi.json",
+  "category": "board-api",
+  "bodyChars": 30000
+ },
+ {
+  "id": "api34:frantic:launch",
+  "kind": "json",
+  "url": "https://gofrantic.com/launch.json",
+  "country": "GLOBAL",
+  "site": "Frantic launch.json",
+  "category": "board-api",
+  "bodyChars": 12000
+ },
+ {
+  "id": "api34:botbounty:bounties",
+  "kind": "json",
+  "url": "https://botbounty-production.up.railway.app/api/agent/bounties",
+  "country": "GLOBAL",
+  "site": "BotBounty open bounties",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api34:clawlancer:listings",
+  "kind": "json",
+  "url": "https://clawlancer.ai/api/listings?listing_type=BOUNTY&sort=newest",
+  "country": "GLOBAL",
+  "site": "Clawlancer bounty listings",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api34:0xwork:api-root",
+  "kind": "json",
+  "url": "https://api.0xwork.org/",
+  "country": "GLOBAL",
+  "site": "0xWork API root",
+  "category": "board-api",
+  "bodyChars": 8000
+ },
+ {
+  "id": "api34:0xwork:tasks",
+  "kind": "json",
+  "url": "https://api.0xwork.org/tasks",
+  "country": "GLOBAL",
+  "site": "0xWork /tasks",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api34:0xwork:v1-tasks",
+  "kind": "json",
+  "url": "https://api.0xwork.org/v1/tasks",
+  "country": "GLOBAL",
+  "site": "0xWork /v1/tasks",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api34:0xwork:api-tasks",
+  "kind": "json",
+  "url": "https://api.0xwork.org/api/tasks",
+  "country": "GLOBAL",
+  "site": "0xWork /api/tasks",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api34:ugig:gigs",
+  "kind": "json",
+  "url": "https://ugig.net/api/gigs?listing_type=hiring",
+  "country": "GLOBAL",
+  "site": "ugig hiring gigs",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api34:ugig:bounties",
+  "kind": "json",
+  "url": "https://ugig.net/api/bounties",
+  "country": "GLOBAL",
+  "site": "ugig bounties",
+  "category": "board-api",
+  "bodyChars": 30000
+ },
+ {
+  "id": "api34:riner:tasks",
+  "kind": "json",
+  "url": "https://riner.io/api/tasks",
+  "country": "GLOBAL",
+  "site": "Riner /api/tasks",
+  "category": "board-api",
+  "bodyChars": 30000
+ },
+ {
+  "id": "api34:agentpact:needs",
+  "kind": "json",
+  "url": "https://agentpact.xyz/api/needs",
+  "country": "GLOBAL",
+  "site": "AgentPact /api/needs",
+  "category": "board-api",
+  "bodyChars": 30000
+ },
+ {
+  "id": "api34:clawlancer:listings-full",
+  "kind": "json",
+  "url": "https://clawlancer.ai/api/listings?listing_type=BOUNTY&sort=newest&limit=100",
+  "country": "GLOBAL",
+  "site": "Clawlancer bounty listings (full)",
+  "category": "board-api",
+  "bodyChars": 60000
+ },
+ {
+  "id": "api34:frantic:board",
+  "kind": "json",
+  "url": "https://api.gofrantic.com/v1/board",
+  "country": "GLOBAL",
+  "site": "Frantic /v1/board",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api34:riner:api-v1-tasks",
+  "kind": "json",
+  "url": "https://riner.io/api/v1/tasks",
+  "country": "GLOBAL",
+  "site": "Riner /api/v1/tasks",
+  "category": "board-api",
+  "bodyChars": 30000
+ },
+ {
+  "id": "api34:botbounty:api-bounties",
+  "kind": "json",
+  "url": "https://botbounty-production.up.railway.app/api/bounties",
+  "country": "GLOBAL",
+  "site": "BotBounty /api/bounties",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api34:superteam:live",
+  "kind": "json",
+  "url": "https://superteam.fun/api/listings?type=bounty&take=50",
+  "country": "GLOBAL",
+  "site": "Superteam public listings",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "gh34:search:label-bounty-2d",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3Abounty+is%3Aissue+is%3Aopen+created%3A%3E%3D2026-10-14&sort=created&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "GitHub issues labelled bounty, open, created since 2026-10-14",
+  "category": "github-bounty-search",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh34:search:algora-label-2d",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3A%22%F0%9F%92%8E+Bounty%22+is%3Aissue+is%3Aopen+created%3A%3E%3D2026-10-14&sort=created&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "GitHub issues with Algora's bounty label, open, created since 2026-10-14",
+  "category": "github-bounty-search",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh34:search:bounty-title-1d",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=bounty+in%3Atitle+is%3Aissue+is%3Aopen+created%3A%3E%3D2026-10-15&sort=created&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "GitHub issues with bounty in the title, open, created since 2026-10-15",
+  "category": "github-bounty-search",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh34:search:label-bounty-updated-1d",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3Abounty+is%3Aissue+is%3Aopen+updated%3A%3E%3D2026-10-15&sort=updated&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "GitHub issues labelled bounty, open, updated since 2026-10-15",
+  "category": "github-bounty-search",
+  "bodyChars": 60000
+ }
+]
