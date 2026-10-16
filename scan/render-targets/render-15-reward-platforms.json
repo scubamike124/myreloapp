@@ -1,0 +1,52 @@
+[
+ {
+  "id": "r15:opire-docs",
+  "url": "https://docs.opire.dev/",
+  "country": "GLOBAL",
+  "site": "Opire docs home (rendered; how rewards, claims and payouts work)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 14000
+ },
+ {
+  "id": "r15:opire-home",
+  "url": "https://opire.dev/",
+  "country": "GLOBAL",
+  "site": "Opire home (rendered)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r15:boss-bounties",
+  "url": "https://www.boss.dev/bounties",
+  "country": "GLOBAL",
+  "site": "boss.dev bounties (rendered)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 14000
+ },
+ {
+  "id": "r15:boss-home",
+  "url": "https://www.boss.dev/",
+  "country": "GLOBAL",
+  "site": "boss.dev home (rendered)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r15:gitpay-tasks",
+  "url": "https://gitpay.me/#/tasks",
+  "country": "BR",
+  "site": "Gitpay open tasks (rendered)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 14000
+ }
+]
