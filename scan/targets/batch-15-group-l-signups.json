@@ -1,0 +1,128 @@
+[
+ {
+  "id": "signup15:IL:myproduct-co-il",
+  "kind": "signup",
+  "url": "https://myproduct.co.il/",
+  "discover": true,
+  "country": "IL",
+  "site": "myproduct.co.il",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:TR:serinilan",
+  "kind": "signup",
+  "url": "https://serinilan.net/",
+  "discover": true,
+  "country": "TR",
+  "site": "Serinilan",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:IN:india-classifieds-com",
+  "kind": "signup",
+  "url": "https://www.india-classifieds.com/",
+  "discover": true,
+  "country": "IN",
+  "site": "India-Classifieds.com",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:ZA:ads-africa",
+  "kind": "signup",
+  "url": "https://www.adsafrica.co.za/",
+  "discover": true,
+  "country": "ZA",
+  "site": "Ads Africa",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:ZA:upfeet-south-africa",
+  "kind": "signup",
+  "url": "https://www.upfeet.com/free-classifieds",
+  "discover": true,
+  "country": "ZA",
+  "site": "UpFeet South Africa",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:IL:zehcan",
+  "kind": "signup",
+  "url": "http://zehcan.co.il/",
+  "discover": true,
+  "country": "IL",
+  "site": "ZehCan",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:IL:adtiny",
+  "kind": "signup",
+  "url": "https://www.adtiny.com/",
+  "discover": true,
+  "country": "IL",
+  "site": "AdTiny",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:MA:annuaire-gratuit-du-maroc",
+  "kind": "signup",
+  "url": "https://www.annuaire-gratuit.ma/annonces/",
+  "discover": true,
+  "country": "MA",
+  "site": "Annuaire Gratuit du Maroc",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:EG:qpbd-forumarabia-com",
+  "kind": "signup",
+  "url": "https://qpbd.forumarabia.com/",
+  "discover": true,
+  "country": "EG",
+  "site": "qpbd.forumarabia.com",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:EG:kenooznet-yoo7-com",
+  "kind": "signup",
+  "url": "https://kenooznet.yoo7.com/",
+  "discover": true,
+  "country": "EG",
+  "site": "kenooznet.yoo7.com",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:EG:markzaldawli-yoo7-com",
+  "kind": "signup",
+  "url": "https://markzaldawli.yoo7.com/",
+  "discover": true,
+  "country": "EG",
+  "site": "markzaldawli.yoo7.com",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:IN:my-india-forums",
+  "kind": "signup",
+  "url": "https://myindia.org.in/",
+  "discover": true,
+  "country": "IN",
+  "site": "My India Forums",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:IN:india-classifieds-post",
+  "kind": "signup",
+  "url": "https://www.india-classifieds.com/post-ad",
+  "discover": true,
+  "country": "IN",
+  "site": "India-Classifieds post",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup15:IL:myproduct-co-il-post",
+  "kind": "signup",
+  "url": "https://myproduct.co.il/?id=862&category_id=8",
+  "discover": true,
+  "country": "IL",
+  "site": "myproduct.co.il post",
+  "category": "signup-form"
+ }
+]
