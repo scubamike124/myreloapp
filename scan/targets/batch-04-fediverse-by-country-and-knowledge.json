@@ -1,0 +1,1820 @@
+[
+ {
+  "id": "fedi:101010.pl",
+  "kind": "mastodon",
+  "url": "https://101010.pl",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:about.mastodon.africa",
+  "kind": "mastodon",
+  "url": "https://about.mastodon.africa",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:ahsocial.ar",
+  "kind": "mastodon",
+  "url": "https://ahsocial.ar",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:aus.social",
+  "kind": "mastodon",
+  "url": "https://aus.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:aussie.zone",
+  "kind": "mastodon",
+  "url": "https://aussie.zone",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:bolha.io",
+  "kind": "mastodon",
+  "url": "https://bolha.io",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:bolha.one",
+  "kind": "mastodon",
+  "url": "https://bolha.one",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:bolha.us",
+  "kind": "mastodon",
+  "url": "https://bolha.us",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:c.im",
+  "kind": "mastodon",
+  "url": "https://c.im",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:chilemasto.casa",
+  "kind": "mastodon",
+  "url": "https://chilemasto.casa",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:ciberlandia.pt",
+  "kind": "mastodon",
+  "url": "https://ciberlandia.pt",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:col.social",
+  "kind": "mastodon",
+  "url": "https://col.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:det.social",
+  "kind": "mastodon",
+  "url": "https://det.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:expressional.social",
+  "kind": "mastodon",
+  "url": "https://expressional.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:feddit.dk",
+  "kind": "mastodon",
+  "url": "https://feddit.dk",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:feddit.nu",
+  "kind": "mastodon",
+  "url": "https://feddit.nu",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:feddit.uk",
+  "kind": "mastodon",
+  "url": "https://feddit.uk",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:fedibird.com",
+  "kind": "mastodon",
+  "url": "https://fedibird.com",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:fosstodon.org",
+  "kind": "mastodon",
+  "url": "https://fosstodon.org",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:g0v.social",
+  "kind": "mastodon",
+  "url": "https://g0v.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:hachyderm.io",
+  "kind": "mastodon",
+  "url": "https://hachyderm.io",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:hcommons.social",
+  "kind": "mastodon",
+  "url": "https://hcommons.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:kopiti.am",
+  "kind": "mastodon",
+  "url": "https://kopiti.am",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:legal.lemmy.world",
+  "kind": "mastodon",
+  "url": "https://legal.lemmy.world",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:lemmy.ca",
+  "kind": "mastodon",
+  "url": "https://lemmy.ca",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:lemmy.nz",
+  "kind": "mastodon",
+  "url": "https://lemmy.nz",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:lemmy.world",
+  "kind": "mastodon",
+  "url": "https://lemmy.world",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:libretooth.gr",
+  "kind": "mastodon",
+  "url": "https://libretooth.gr",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:liker.social",
+  "kind": "mastodon",
+  "url": "https://liker.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:lile.cl",
+  "kind": "mastodon",
+  "url": "https://lile.cl",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mamot.fr",
+  "kind": "mastodon",
+  "url": "https://mamot.fr",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mas.to",
+  "kind": "mastodon",
+  "url": "https://mas.to",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:masto.ar",
+  "kind": "mastodon",
+  "url": "https://masto.ar",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:masto.donte.com.br",
+  "kind": "mastodon",
+  "url": "https://masto.donte.com.br",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:masto.pt",
+  "kind": "mastodon",
+  "url": "https://masto.pt",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.ae",
+  "kind": "mastodon",
+  "url": "https://mastodon.ae",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.africa",
+  "kind": "mastodon",
+  "url": "https://mastodon.africa",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.ar",
+  "kind": "mastodon",
+  "url": "https://mastodon.ar",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.at",
+  "kind": "mastodon",
+  "url": "https://mastodon.at",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.au",
+  "kind": "mastodon",
+  "url": "https://mastodon.au",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.bd",
+  "kind": "mastodon",
+  "url": "https://mastodon.bd",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.be",
+  "kind": "mastodon",
+  "url": "https://mastodon.be",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.br",
+  "kind": "mastodon",
+  "url": "https://mastodon.br",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.ca",
+  "kind": "mastodon",
+  "url": "https://mastodon.ca",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.ch",
+  "kind": "mastodon",
+  "url": "https://mastodon.ch",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.cl",
+  "kind": "mastodon",
+  "url": "https://mastodon.cl",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.cloud",
+  "kind": "mastodon",
+  "url": "https://mastodon.cloud",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.co",
+  "kind": "mastodon",
+  "url": "https://mastodon.co",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.com.br",
+  "kind": "mastodon",
+  "url": "https://mastodon.com.br",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.com.pl",
+  "kind": "mastodon",
+  "url": "https://mastodon.com.pl",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.cz",
+  "kind": "mastodon",
+  "url": "https://mastodon.cz",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.de",
+  "kind": "mastodon",
+  "url": "https://mastodon.de",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.dk",
+  "kind": "mastodon",
+  "url": "https://mastodon.dk",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.eg",
+  "kind": "mastodon",
+  "url": "https://mastodon.eg",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.es",
+  "kind": "mastodon",
+  "url": "https://mastodon.es",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.eu",
+  "kind": "mastodon",
+  "url": "https://mastodon.eu",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.fi",
+  "kind": "mastodon",
+  "url": "https://mastodon.fi",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.fr",
+  "kind": "mastodon",
+  "url": "https://mastodon.fr",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.gh",
+  "kind": "mastodon",
+  "url": "https://mastodon.gh",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.gr",
+  "kind": "mastodon",
+  "url": "https://mastodon.gr",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.hk",
+  "kind": "mastodon",
+  "url": "https://mastodon.hk",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.holeyfox.co",
+  "kind": "mastodon",
+  "url": "https://mastodon.holeyfox.co",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.hu",
+  "kind": "mastodon",
+  "url": "https://mastodon.hu",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.ie",
+  "kind": "mastodon",
+  "url": "https://mastodon.ie",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.in",
+  "kind": "mastodon",
+  "url": "https://mastodon.in",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.in.th",
+  "kind": "mastodon",
+  "url": "https://mastodon.in.th",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.it",
+  "kind": "mastodon",
+  "url": "https://mastodon.it",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.jp",
+  "kind": "mastodon",
+  "url": "https://mastodon.jp",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.ke",
+  "kind": "mastodon",
+  "url": "https://mastodon.ke",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.kr",
+  "kind": "mastodon",
+  "url": "https://mastodon.kr",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.la",
+  "kind": "mastodon",
+  "url": "https://mastodon.la",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.london",
+  "kind": "mastodon",
+  "url": "https://mastodon.london",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.ma",
+  "kind": "mastodon",
+  "url": "https://mastodon.ma",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.monoceros.co.za",
+  "kind": "mastodon",
+  "url": "https://mastodon.monoceros.co.za",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.mx",
+  "kind": "mastodon",
+  "url": "https://mastodon.mx",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.my",
+  "kind": "mastodon",
+  "url": "https://mastodon.my",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.ng",
+  "kind": "mastodon",
+  "url": "https://mastodon.ng",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.nl",
+  "kind": "mastodon",
+  "url": "https://mastodon.nl",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.no",
+  "kind": "mastodon",
+  "url": "https://mastodon.no",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.nu",
+  "kind": "mastodon",
+  "url": "https://mastodon.nu",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.nz",
+  "kind": "mastodon",
+  "url": "https://mastodon.nz",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.online",
+  "kind": "mastodon",
+  "url": "https://mastodon.online",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.org.uk",
+  "kind": "mastodon",
+  "url": "https://mastodon.org.uk",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.pe",
+  "kind": "mastodon",
+  "url": "https://mastodon.pe",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.ph",
+  "kind": "mastodon",
+  "url": "https://mastodon.ph",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.pk",
+  "kind": "mastodon",
+  "url": "https://mastodon.pk",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.pl",
+  "kind": "mastodon",
+  "url": "https://mastodon.pl",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.pt",
+  "kind": "mastodon",
+  "url": "https://mastodon.pt",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.ro",
+  "kind": "mastodon",
+  "url": "https://mastodon.ro",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.sa",
+  "kind": "mastodon",
+  "url": "https://mastodon.sa",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.scot",
+  "kind": "mastodon",
+  "url": "https://mastodon.scot",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.se",
+  "kind": "mastodon",
+  "url": "https://mastodon.se",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.sg",
+  "kind": "mastodon",
+  "url": "https://mastodon.sg",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.social",
+  "kind": "mastodon",
+  "url": "https://mastodon.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.tr",
+  "kind": "mastodon",
+  "url": "https://mastodon.tr",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.tw",
+  "kind": "mastodon",
+  "url": "https://mastodon.tw",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.ua",
+  "kind": "mastodon",
+  "url": "https://mastodon.ua",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.uk",
+  "kind": "mastodon",
+  "url": "https://mastodon.uk",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.uno",
+  "kind": "mastodon",
+  "url": "https://mastodon.uno",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.us",
+  "kind": "mastodon",
+  "url": "https://mastodon.us",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.vlaanderen",
+  "kind": "mastodon",
+  "url": "https://mastodon.vlaanderen",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.vn",
+  "kind": "mastodon",
+  "url": "https://mastodon.vn",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.world",
+  "kind": "mastodon",
+  "url": "https://mastodon.world",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodon.za",
+  "kind": "mastodon",
+  "url": "https://mastodon.za",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodonapp.uk",
+  "kind": "mastodon",
+  "url": "https://mastodonapp.uk",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodonczech.cz",
+  "kind": "mastodon",
+  "url": "https://mastodonczech.cz",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodonindonesia.com",
+  "kind": "mastodon",
+  "url": "https://mastodonindonesia.com",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodonsweden.se",
+  "kind": "mastodon",
+  "url": "https://mastodonsweden.se",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mastodontti.fi",
+  "kind": "mastodon",
+  "url": "https://mastodontti.fi",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:matrix.org",
+  "kind": "mastodon",
+  "url": "https://matrix.org",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mementomori.social",
+  "kind": "mastodon",
+  "url": "https://mementomori.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:misskey.id",
+  "kind": "mastodon",
+  "url": "https://misskey.id",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:misskey.io",
+  "kind": "mastodon",
+  "url": "https://misskey.io",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mstdn.ca",
+  "kind": "mastodon",
+  "url": "https://mstdn.ca",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mstdn.jp",
+  "kind": "mastodon",
+  "url": "https://mstdn.jp",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:mstdn.mx",
+  "kind": "mastodon",
+  "url": "https://mstdn.mx",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:nijimiss.moe",
+  "kind": "mastodon",
+  "url": "https://nijimiss.moe",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:nostr.watch",
+  "kind": "mastodon",
+  "url": "https://nostr.watch",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:piaille.fr",
+  "kind": "mastodon",
+  "url": "https://piaille.fr",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:planet.moe",
+  "kind": "mastodon",
+  "url": "https://planet.moe",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:pol.social",
+  "kind": "mastodon",
+  "url": "https://pol.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:qdon.space",
+  "kind": "mastodon",
+  "url": "https://qdon.space",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:rebel.ar",
+  "kind": "mastodon",
+  "url": "https://rebel.ar",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:relay.damus.io",
+  "kind": "mastodon",
+  "url": "https://relay.damus.io",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:scholar.social",
+  "kind": "mastodon",
+  "url": "https://scholar.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:snabelen.no",
+  "kind": "mastodon",
+  "url": "https://snabelen.no",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:social.coop",
+  "kind": "mastodon",
+  "url": "https://social.coop",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:social.slat.org",
+  "kind": "mastodon",
+  "url": "https://social.slat.org",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:social.tchncs.de",
+  "kind": "mastodon",
+  "url": "https://social.tchncs.de",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:social.ua",
+  "kind": "mastodon",
+  "url": "https://social.ua",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:sopuli.xyz",
+  "kind": "mastodon",
+  "url": "https://sopuli.xyz",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:tchafia.be",
+  "kind": "mastodon",
+  "url": "https://tchafia.be",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:techhub.social",
+  "kind": "mastodon",
+  "url": "https://techhub.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:theblower.au",
+  "kind": "mastodon",
+  "url": "https://theblower.au",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:tooot.im",
+  "kind": "mastodon",
+  "url": "https://tooot.im",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:toot.community",
+  "kind": "mastodon",
+  "url": "https://toot.community",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:toot.re",
+  "kind": "mastodon",
+  "url": "https://toot.re",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:tooting.ch",
+  "kind": "mastodon",
+  "url": "https://tooting.ch",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:twingyeo.kr",
+  "kind": "mastodon",
+  "url": "https://twingyeo.kr",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:universeodon.com",
+  "kind": "mastodon",
+  "url": "https://universeodon.com",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:ursal.zone",
+  "kind": "mastodon",
+  "url": "https://ursal.zone",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:view.matrix.org",
+  "kind": "mastodon",
+  "url": "https://view.matrix.org",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:vmst.io",
+  "kind": "mastodon",
+  "url": "https://vmst.io",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:wien.rocks",
+  "kind": "mastodon",
+  "url": "https://wien.rocks",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "fedi:witter.cz",
+  "kind": "mastodon",
+  "url": "https://witter.cz",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "rules:US:craigslist",
+  "kind": "html",
+  "url": "https://www.craigslist.org/about/terms.of.use",
+  "region": "North America",
+  "country": "US",
+  "site": "Craigslist",
+  "category": "classifieds",
+  "free_option": "free local ads incl. services",
+  "audience": "largest US classifieds"
+ },
+ {
+  "id": "rules:US:craigslist-posting-rules",
+  "kind": "html",
+  "url": "https://www.craigslist.org/about/prohibited",
+  "region": "North America",
+  "country": "US",
+  "site": "Craigslist posting rules",
+  "category": "classifieds",
+  "free_option": "",
+  "audience": ""
+ },
+ {
+  "id": "rules:US:oodle",
+  "kind": "html",
+  "url": "https://www.oodle.com/terms/",
+  "region": "North America",
+  "country": "US",
+  "site": "Oodle",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": "US classifieds aggregator"
+ },
+ {
+  "id": "rules:US:geebo",
+  "kind": "html",
+  "url": "https://geebo.com/terms/",
+  "region": "North America",
+  "country": "US",
+  "site": "Geebo",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": "US classifieds"
+ },
+ {
+  "id": "rules:US:hotfrog",
+  "kind": "html",
+  "url": "https://www.hotfrog.com/terms",
+  "region": "North America",
+  "country": "US",
+  "site": "Hotfrog",
+  "category": "directory",
+  "free_option": "free business listing",
+  "audience": "US business directory"
+ },
+ {
+  "id": "rules:US:locanto-us",
+  "kind": "html",
+  "url": "https://www.locanto.com/g/tos/",
+  "region": "North America",
+  "country": "US",
+  "site": "Locanto US",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": "US classifieds"
+ },
+ {
+  "id": "rules:US:college-confidential-forum-rules",
+  "kind": "html",
+  "url": "https://talk.collegeconfidential.com/t/forum-rules/1200000",
+  "region": "North America",
+  "country": "US",
+  "site": "College Confidential forum rules",
+  "category": "student-forum",
+  "free_option": "forum posts",
+  "audience": "US college applicants and students"
+ },
+ {
+  "id": "rules:US:gradcafe-forum-guidelines",
+  "kind": "html",
+  "url": "https://forum.thegradcafe.com/guidelines/",
+  "region": "North America",
+  "country": "US",
+  "site": "GradCafe forum guidelines",
+  "category": "student-forum",
+  "free_option": "forum posts",
+  "audience": "graduate students"
+ },
+ {
+  "id": "rules:US:hacker-news-guidelines-show-hn-",
+  "kind": "html",
+  "url": "https://news.ycombinator.com/newsguidelines.html",
+  "region": "North America",
+  "country": "US",
+  "site": "Hacker News guidelines (Show HN)",
+  "category": "other",
+  "free_option": "Show HN post of your own work",
+  "audience": "tech audience worldwide"
+ },
+ {
+  "id": "rules:US:indie-hackers-community-rules",
+  "kind": "html",
+  "url": "https://www.indiehackers.com/guidelines",
+  "region": "North America",
+  "country": "US",
+  "site": "Indie Hackers community rules",
+  "category": "other",
+  "free_option": "product page and posts",
+  "audience": "founders"
+ },
+ {
+  "id": "rules:US:betapage",
+  "kind": "html",
+  "url": "https://betapage.co/",
+  "region": "North America",
+  "country": "US",
+  "site": "BetaPage",
+  "category": "submit-form",
+  "free_option": "free startup submission",
+  "audience": "early adopters"
+ },
+ {
+  "id": "rules:US:saasworthy-add-product",
+  "kind": "html",
+  "url": "https://www.saasworthy.com/add-product",
+  "region": "North America",
+  "country": "US",
+  "site": "SaaSworthy add product",
+  "category": "submit-form",
+  "free_option": "free product listing",
+  "audience": "SaaS buyers"
+ },
+ {
+  "id": "rules:US:slant",
+  "kind": "html",
+  "url": "https://www.slant.co/",
+  "region": "North America",
+  "country": "US",
+  "site": "Slant",
+  "category": "directory",
+  "free_option": "community product listing",
+  "audience": "comparison shoppers"
+ },
+ {
+  "id": "rules:GLOBAL:insidr-ai-submit-tool",
+  "kind": "html",
+  "url": "https://www.insidr.ai/submit-tool/",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "insidr.ai submit tool",
+  "category": "submit-form",
+  "free_option": "free AI tool submission",
+  "audience": "AI tool seekers"
+ },
+ {
+  "id": "rules:GLOBAL:topai-tools-submit",
+  "kind": "html",
+  "url": "https://topai.tools/submit",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "topai.tools submit",
+  "category": "submit-form",
+  "free_option": "free AI tool submission",
+  "audience": "AI tool seekers"
+ },
+ {
+  "id": "rules:GLOBAL:aitoptools-submit",
+  "kind": "html",
+  "url": "https://aitoptools.com/submit-tool/",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "aitoptools submit",
+  "category": "submit-form",
+  "free_option": "free AI tool submission",
+  "audience": "AI tool seekers"
+ },
+ {
+  "id": "rules:GLOBAL:gpte-ai-submit",
+  "kind": "html",
+  "url": "https://gpte.ai/submit",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "gpte.ai submit",
+  "category": "submit-form",
+  "free_option": "free AI tool submission",
+  "audience": "AI tool seekers"
+ },
+ {
+  "id": "rules:GLOBAL:edtech-impact-vendor-listing",
+  "kind": "html",
+  "url": "https://edtechimpact.com/vendors/",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "EdTech Impact vendor listing",
+  "category": "directory",
+  "free_option": "free vendor listing",
+  "audience": "teachers and schools (UK)"
+ },
+ {
+  "id": "rules:GLOBAL:openpr-free-press-release",
+  "kind": "html",
+  "url": "https://www.openpr.com/news/submit.html",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "openPR free press release",
+  "category": "submit-form",
+  "free_option": "free press release",
+  "audience": "search engines, journalists"
+ },
+ {
+  "id": "rules:GLOBAL:prlog-free-press-release",
+  "kind": "html",
+  "url": "https://www.prlog.org/terms-of-service.html",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "PRLog free press release",
+  "category": "submit-form",
+  "free_option": "free press release",
+  "audience": "search engines"
+ },
+ {
+  "id": "rules:GLOBAL:medium-terms",
+  "kind": "html",
+  "url": "https://policy.medium.com/medium-terms-of-service-9db0094a1e0f",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "Medium terms",
+  "category": "other",
+  "free_option": "article on your own publication",
+  "audience": "readers worldwide"
+ },
+ {
+  "id": "rules:GLOBAL:medium-rules",
+  "kind": "html",
+  "url": "https://policy.medium.com/medium-rules-30e5502c4eb4",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "Medium rules",
+  "category": "other",
+  "free_option": "",
+  "audience": ""
+ },
+ {
+  "id": "rules:GLOBAL:substack-terms",
+  "kind": "html",
+  "url": "https://substack.com/tos",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "Substack terms",
+  "category": "other",
+  "free_option": "own newsletter",
+  "audience": "subscribers"
+ },
+ {
+  "id": "rules:GLOBAL:write-as-terms",
+  "kind": "html",
+  "url": "https://write.as/terms",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "Write.as terms",
+  "category": "other",
+  "free_option": "free blog with API",
+  "audience": "small"
+ },
+ {
+  "id": "rules:GLOBAL:wordpress-com-user-guidelines",
+  "kind": "html",
+  "url": "https://wordpress.com/support/user-guidelines/",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "WordPress.com user guidelines",
+  "category": "other",
+  "free_option": "free blog with API",
+  "audience": "search"
+ },
+ {
+  "id": "rules:GLOBAL:tumblr-community-guidelines",
+  "kind": "html",
+  "url": "https://www.tumblr.com/policy/en/community",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "Tumblr community guidelines",
+  "category": "other",
+  "free_option": "blog posts",
+  "audience": "studyblr community"
+ },
+ {
+  "id": "rules:GLOBAL:startupblink-add-startup",
+  "kind": "html",
+  "url": "https://www.startupblink.com/addstartup",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "StartupBlink add startup",
+  "category": "submit-form",
+  "free_option": "free startup listing",
+  "audience": "global startup map"
+ },
+ {
+  "id": "rules:GLOBAL:crunchbase-add-company",
+  "kind": "html",
+  "url": "https://www.crunchbase.com/add-new",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "Crunchbase add company",
+  "category": "directory",
+  "free_option": "free company profile",
+  "audience": "investors, press"
+ },
+ {
+  "id": "rules:GLOBAL:f6s",
+  "kind": "html",
+  "url": "https://www.f6s.com/terms",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "F6S",
+  "category": "directory",
+  "free_option": "free startup profile",
+  "audience": "founders, programs"
+ },
+ {
+  "id": "rules:CA:kijiji-terms-of-use",
+  "kind": "html",
+  "url": "https://help.kijiji.ca/helpdesk/policies/kijiji-terms-of-use",
+  "region": "North America",
+  "country": "CA",
+  "site": "Kijiji terms of use",
+  "category": "classifieds",
+  "free_option": "free ads incl. services",
+  "audience": "largest Canadian classifieds"
+ },
+ {
+  "id": "rules:CA:kijiji-posting-policies",
+  "kind": "html",
+  "url": "https://help.kijiji.ca/helpdesk/policies/posting-policies",
+  "region": "North America",
+  "country": "CA",
+  "site": "Kijiji posting policies",
+  "category": "classifieds",
+  "free_option": "",
+  "audience": ""
+ },
+ {
+  "id": "rules:CA:hotfrog-canada",
+  "kind": "html",
+  "url": "https://www.hotfrog.ca/terms",
+  "region": "North America",
+  "country": "CA",
+  "site": "Hotfrog Canada",
+  "category": "directory",
+  "free_option": "free business listing",
+  "audience": "Canadian businesses"
+ },
+ {
+  "id": "rules:CA:locanto-canada",
+  "kind": "html",
+  "url": "https://www.locanto.ca/g/tos/",
+  "region": "North America",
+  "country": "CA",
+  "site": "Locanto Canada",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": ""
+ },
+ {
+  "id": "rules:GB:gumtree-uk-terms",
+  "kind": "html",
+  "url": "https://www.gumtree.com/terms_of_use",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "Gumtree UK terms",
+  "category": "classifieds",
+  "free_option": "free ads incl. services",
+  "audience": "largest UK classifieds"
+ },
+ {
+  "id": "rules:GB:the-student-room-community-guidelines",
+  "kind": "html",
+  "url": "https://www.thestudentroom.co.uk/help/community-guidelines",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "The Student Room community guidelines",
+  "category": "student-forum",
+  "free_option": "forum posts",
+  "audience": "largest UK student community"
+ },
+ {
+  "id": "rules:GB:freeads-uk-terms",
+  "kind": "html",
+  "url": "https://www.freeads.co.uk/terms",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "Freeads UK terms",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": ""
+ },
+ {
+  "id": "rules:GB:yell-free-listing",
+  "kind": "html",
+  "url": "https://www.yell.com/free-listing/",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "Yell free listing",
+  "category": "directory",
+  "free_option": "free business listing",
+  "audience": "UK local search"
+ },
+ {
+  "id": "rules:GB:cylex-uk-add-company",
+  "kind": "html",
+  "url": "https://www.cylex-uk.co.uk/add-company.html",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "Cylex UK add company",
+  "category": "directory",
+  "free_option": "free business listing",
+  "audience": ""
+ },
+ {
+  "id": "rules:GB:preloved-terms",
+  "kind": "html",
+  "url": "https://www.preloved.co.uk/terms",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "Preloved terms",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": ""
+ },
+ {
+  "id": "rules:IE:adverts-ie-terms",
+  "kind": "html",
+  "url": "https://www.adverts.ie/terms",
+  "region": "Northern Europe",
+  "country": "IE",
+  "site": "Adverts.ie terms",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": "Irish classifieds"
+ },
+ {
+  "id": "rules:IE:donedeal-terms",
+  "kind": "html",
+  "url": "https://www.donedeal.ie/terms",
+  "region": "Northern Europe",
+  "country": "IE",
+  "site": "DoneDeal terms",
+  "category": "classifieds",
+  "free_option": "ads",
+  "audience": ""
+ },
+ {
+  "id": "rules:IE:boards-ie-terms",
+  "kind": "html",
+  "url": "https://www.boards.ie/help/terms",
+  "region": "Northern Europe",
+  "country": "IE",
+  "site": "Boards.ie terms",
+  "category": "student-forum",
+  "free_option": "forum posts",
+  "audience": "Irish discussion forum incl. students"
+ },
+ {
+  "id": "rules:AU:gumtree-australia-terms",
+  "kind": "html",
+  "url": "https://www.gumtree.com.au/t-terms-of-use.html",
+  "region": "Oceania",
+  "country": "AU",
+  "site": "Gumtree Australia terms",
+  "category": "classifieds",
+  "free_option": "free ads incl. services",
+  "audience": "largest Australian classifieds"
+ },
+ {
+  "id": "rules:AU:whirlpool-forum-rules",
+  "kind": "html",
+  "url": "https://whirlpool.net.au/wiki/forum_rules",
+  "region": "Oceania",
+  "country": "AU",
+  "site": "Whirlpool forum rules",
+  "category": "student-forum",
+  "free_option": "forum posts",
+  "audience": "Australian tech forum incl. students"
+ },
+ {
+  "id": "rules:AU:hotfrog-australia",
+  "kind": "html",
+  "url": "https://www.hotfrog.com.au/terms",
+  "region": "Oceania",
+  "country": "AU",
+  "site": "Hotfrog Australia",
+  "category": "directory",
+  "free_option": "free business listing",
+  "audience": ""
+ },
+ {
+  "id": "rules:AU:truelocal",
+  "kind": "html",
+  "url": "https://www.truelocal.com.au/terms-and-conditions",
+  "region": "Oceania",
+  "country": "AU",
+  "site": "TrueLocal",
+  "category": "directory",
+  "free_option": "free business listing",
+  "audience": "Australian local search"
+ },
+ {
+  "id": "rules:AU:locanto-australia",
+  "kind": "html",
+  "url": "https://www.locanto.com.au/g/tos/",
+  "region": "Oceania",
+  "country": "AU",
+  "site": "Locanto Australia",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": ""
+ },
+ {
+  "id": "rules:NZ:trade-me-terms",
+  "kind": "html",
+  "url": "https://www.trademe.co.nz/c/legal/terms-and-conditions",
+  "region": "Oceania",
+  "country": "NZ",
+  "site": "Trade Me terms",
+  "category": "classifieds",
+  "free_option": "ads (fees for many categories)",
+  "audience": "largest NZ marketplace"
+ },
+ {
+  "id": "rules:NZ:localist-nz",
+  "kind": "html",
+  "url": "https://www.localist.co.nz/terms",
+  "region": "Oceania",
+  "country": "NZ",
+  "site": "Localist NZ",
+  "category": "directory",
+  "free_option": "free business listing",
+  "audience": "NZ local directory"
+ },
+ {
+  "id": "rules:NZ:finda-nz",
+  "kind": "html",
+  "url": "https://www.finda.co.nz/terms",
+  "region": "Oceania",
+  "country": "NZ",
+  "site": "Finda NZ",
+  "category": "directory",
+  "free_option": "free business listing",
+  "audience": ""
+ },
+ {
+  "id": "rules:SE:blocket-annonsregler",
+  "kind": "html",
+  "url": "https://www.blocket.se/annonsregler",
+  "region": "Northern Europe",
+  "country": "SE",
+  "site": "Blocket annonsregler",
+  "category": "classifieds",
+  "free_option": "ads (fees for business)",
+  "audience": "largest Swedish classifieds"
+ },
+ {
+  "id": "rules:SE:flashback-forum-rules",
+  "kind": "html",
+  "url": "https://www.flashback.org/regler",
+  "region": "Northern Europe",
+  "country": "SE",
+  "site": "Flashback forum rules",
+  "category": "student-forum",
+  "free_option": "forum posts",
+  "audience": "largest Swedish forum"
+ },
+ {
+  "id": "rules:SE:citiboard",
+  "kind": "html",
+  "url": "https://citiboard.se/",
+  "region": "Northern Europe",
+  "country": "SE",
+  "site": "Citiboard",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": ""
+ },
+ {
+  "id": "rules:NO:finn-no-vilk-r",
+  "kind": "html",
+  "url": "https://hjelpesenter.finn.no/hc/no/articles/360003716153",
+  "region": "Northern Europe",
+  "country": "NO",
+  "site": "Finn.no vilk\u00e5r",
+  "category": "classifieds",
+  "free_option": "ads (fees)",
+  "audience": "largest Norwegian marketplace"
+ },
+ {
+  "id": "rules:NO:diskusjon-no-regler",
+  "kind": "html",
+  "url": "https://www.diskusjon.no/index.php?/rules/",
+  "region": "Northern Europe",
+  "country": "NO",
+  "site": "Diskusjon.no regler",
+  "category": "student-forum",
+  "free_option": "forum posts",
+  "audience": "Norwegian tech forum"
+ },
+ {
+  "id": "rules:DK:dba-regler",
+  "kind": "html",
+  "url": "https://www.dba.dk/om-dba/regler/",
+  "region": "Northern Europe",
+  "country": "DK",
+  "site": "DBA regler",
+  "category": "classifieds",
+  "free_option": "ads",
+  "audience": "largest Danish classifieds"
+ },
+ {
+  "id": "rules:DK:guloggratis",
+  "kind": "html",
+  "url": "https://www.guloggratis.dk/om-guloggratis/handelsbetingelser",
+  "region": "Northern Europe",
+  "country": "DK",
+  "site": "GulogGratis",
+  "category": "classifieds",
+  "free_option": "free ads for private",
+  "audience": "Danish classifieds"
+ },
+ {
+  "id": "rules:FI:tori-fi-s-nn-t",
+  "kind": "html",
+  "url": "https://www.tori.fi/saannot",
+  "region": "Northern Europe",
+  "country": "FI",
+  "site": "Tori.fi s\u00e4\u00e4nn\u00f6t",
+  "category": "classifieds",
+  "free_option": "ads (fees for business)",
+  "audience": "largest Finnish classifieds"
+ },
+ {
+  "id": "rules:FI:huuto-net",
+  "kind": "html",
+  "url": "https://www.huuto.net/kayttoehdot",
+  "region": "Northern Europe",
+  "country": "FI",
+  "site": "Huuto.net",
+  "category": "classifieds",
+  "free_option": "listings",
+  "audience": ""
+ },
+ {
+  "id": "rules:BR:olx-brasil-regras",
+  "kind": "html",
+  "url": "https://ajuda.olx.com.br/hc/pt-br",
+  "region": "Latin America",
+  "country": "BR",
+  "site": "OLX Brasil regras",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": "largest Brazilian classifieds"
+ },
+ {
+  "id": "rules:BR:startupbase",
+  "kind": "html",
+  "url": "https://startupbase.com.br/",
+  "region": "Latin America",
+  "country": "BR",
+  "site": "StartupBase",
+  "category": "directory",
+  "free_option": "free startup listing",
+  "audience": "Brazilian startup ecosystem"
+ },
+ {
+  "id": "rules:BR:mercado-livre-termos",
+  "kind": "html",
+  "url": "https://www.mercadolivre.com.br/ajuda/Termos-y-condiciones-generales-de-uso_1409",
+  "region": "Latin America",
+  "country": "BR",
+  "site": "Mercado Livre termos",
+  "category": "classifieds",
+  "free_option": "listings (fees)",
+  "audience": ""
+ },
+ {
+  "id": "rules:MX:segundamano-m-xico",
+  "kind": "html",
+  "url": "https://www.segundamano.mx/",
+  "region": "Latin America",
+  "country": "MX",
+  "site": "Segundamano M\u00e9xico",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": "Mexican classifieds"
+ },
+ {
+  "id": "rules:MX:vivanuncios",
+  "kind": "html",
+  "url": "https://www.vivanuncios.com.mx/",
+  "region": "Latin America",
+  "country": "MX",
+  "site": "Vivanuncios",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": ""
+ },
+ {
+  "id": "rules:MX:mercado-libre-m-xico-t-rminos",
+  "kind": "html",
+  "url": "https://www.mercadolibre.com.mx/ayuda/Terminos-y-condiciones-de-uso_1409",
+  "region": "Latin America",
+  "country": "MX",
+  "site": "Mercado Libre M\u00e9xico t\u00e9rminos",
+  "category": "classifieds",
+  "free_option": "listings (fees)",
+  "audience": ""
+ },
+ {
+  "id": "rules:AR:mercado-libre-argentina-t-rminos",
+  "kind": "html",
+  "url": "https://www.mercadolibre.com.ar/ayuda/Terminos-y-condiciones-de-uso_1409",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Mercado Libre Argentina t\u00e9rminos",
+  "category": "classifieds",
+  "free_option": "listings (fees)",
+  "audience": "largest Argentine marketplace"
+ },
+ {
+  "id": "rules:AR:clasificados-la-voz",
+  "kind": "html",
+  "url": "https://clasificados.lavoz.com.ar/",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Clasificados La Voz",
+  "category": "classifieds",
+  "free_option": "ads",
+  "audience": "C\u00f3rdoba classifieds"
+ },
+ {
+  "id": "rules:CL:yapo-cl-t-rminos",
+  "kind": "html",
+  "url": "https://www.yapo.cl/terminos-y-condiciones",
+  "region": "Latin America",
+  "country": "CL",
+  "site": "Yapo.cl t\u00e9rminos",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": "largest Chilean classifieds"
+ },
+ {
+  "id": "rules:CL:mercado-libre-chile",
+  "kind": "html",
+  "url": "https://www.mercadolibre.cl/ayuda/Terminos-y-condiciones-de-uso_1409",
+  "region": "Latin America",
+  "country": "CL",
+  "site": "Mercado Libre Chile",
+  "category": "classifieds",
+  "free_option": "listings (fees)",
+  "audience": ""
+ },
+ {
+  "id": "rules:CO:mercado-libre-colombia",
+  "kind": "html",
+  "url": "https://www.mercadolibre.com.co/ayuda/Terminos-y-condiciones-de-uso_1409",
+  "region": "Latin America",
+  "country": "CO",
+  "site": "Mercado Libre Colombia",
+  "category": "classifieds",
+  "free_option": "listings (fees)",
+  "audience": ""
+ },
+ {
+  "id": "rules:CO:clasificados-el-tiempo",
+  "kind": "html",
+  "url": "https://clasificados.eltiempo.com/",
+  "region": "Latin America",
+  "country": "CO",
+  "site": "Clasificados El Tiempo",
+  "category": "classifieds",
+  "free_option": "ads",
+  "audience": "Colombian newspaper classifieds"
+ },
+ {
+  "id": "rules:PE:mercado-libre-per-",
+  "kind": "html",
+  "url": "https://www.mercadolibre.com.pe/ayuda/Terminos-y-condiciones-de-uso_1409",
+  "region": "Latin America",
+  "country": "PE",
+  "site": "Mercado Libre Per\u00fa",
+  "category": "classifieds",
+  "free_option": "listings (fees)",
+  "audience": ""
+ },
+ {
+  "id": "rules:PE:urbania-computrabajo-not-fit-per-classif",
+  "kind": "html",
+  "url": "https://www.olx.com.pe/",
+  "region": "Latin America",
+  "country": "PE",
+  "site": "Urbania / Computrabajo (not fit) \u2014 Per\u00fa classifieds: Adondevivir? skip",
+  "category": "classifieds",
+  "free_option": "ads",
+  "audience": ""
+ }
+]
