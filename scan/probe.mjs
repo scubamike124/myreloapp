@@ -18,7 +18,7 @@ async function get(url, { accept = "application/json, text/html;q=0.9, */*;q=0.5
     const text = await res.text().catch(() => "");
     let json = null;
     if (/^\s*[[{]/.test(text)) { try { json = JSON.parse(text); } catch { json = null; } }
-    return { status: res.status, url: res.url, text, json, type: res.headers.get("content-type") || "" };
+    return { status: res.status, url: res.url, text, json, type: res.headers.get("content-type") || "", sessionId: res.headers.get("mcp-session-id") || null };
   } catch (e) {
     return { status: 0, url, text: "", json: null, error: String(e?.message || e).slice(0, 120) };
   }
@@ -271,7 +271,8 @@ async function probeJson(t) {
   return { reachable: page.status > 0, status: page.status, finalUrl: page.url, chars: text.length, summary, body: text.slice(Number(t.bodyFrom) > 0 ? Number(t.bodyFrom) : 0, (Number(t.bodyFrom) > 0 ? Number(t.bodyFrom) : 0) + (Number(t.bodyChars) > 0 ? Math.min(400000, Number(t.bodyChars)) : 8000)), error: page.error };
 }
 
-const PROBES = { mastodon: probeMastodon, peertube: probePeertube, lemmy: probeLemmy, pixelfed: probePixelfed, misskey: probeMisskey, nostr: probeNostr, html: probeHtml, signup: probeSignup, task: probeTask, json: probeJson };
+const PROBES = {
+  mcp: probeMcp, mastodon: probeMastodon, peertube: probePeertube, lemmy: probeLemmy, pixelfed: probePixelfed, misskey: probeMisskey, nostr: probeNostr, html: probeHtml, signup: probeSignup, task: probeTask, json: probeJson };
 async function run() {
   let queue = [];
   for (const t of targets) {
