@@ -1,0 +1,146 @@
+[
+ {
+  "id": "visa41:repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data",
+  "country": "GLOBAL",
+  "site": "Diaspora_AI_Visa_data repo record",
+  "category": "github-payout-check",
+  "bodyChars": 20000
+ },
+ {
+  "id": "visa41:readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data/readme",
+  "country": "GLOBAL",
+  "site": "Diaspora_AI_Visa_data README (base64): the bounty programme",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "visa41:issue8",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data/issues/8",
+  "country": "GLOBAL",
+  "site": "Diaspora #8: funding, scope and AI-assisted contribution",
+  "category": "github-payout-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "visa41:issue8-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data/issues/8/comments",
+  "country": "GLOBAL",
+  "site": "Diaspora #8 comments",
+  "category": "github-payout-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "visa41:issue1-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data/issues/1/comments",
+  "country": "GLOBAL",
+  "site": "Diaspora #1 comments (was the completed verification paid?)",
+  "category": "github-payout-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "visa41:issue27-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data/issues/27/comments",
+  "country": "GLOBAL",
+  "site": "Diaspora #27 comments",
+  "category": "github-payout-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "visa41:open",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data/issues?state=open&per_page=30",
+  "country": "GLOBAL",
+  "site": "Diaspora open issues (bounties left?)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "visa41:tree",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data/git/trees/main?recursive=1",
+  "country": "GLOBAL",
+  "site": "Diaspora file tree (bounty files)",
+  "category": "github-payout-check",
+  "bodyChars": 200000
+ },
+ {
+  "id": "earn41:repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Earnly-Build/earnly",
+  "country": "GLOBAL",
+  "site": "Earnly repo record",
+  "category": "github-payout-check",
+  "bodyChars": 20000
+ },
+ {
+  "id": "earn41:readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Earnly-Build/earnly/readme",
+  "country": "GLOBAL",
+  "site": "Earnly README (base64)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "earn41:issue17-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Earnly-Build/earnly/issues/17/comments",
+  "country": "GLOBAL",
+  "site": "Earnly #17 ($60 CI) comments — paid?",
+  "category": "github-payout-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "earn41:open",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Earnly-Build/earnly/issues?state=open&per_page=30",
+  "country": "GLOBAL",
+  "site": "Earnly open issues",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "knos41:repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/drexthealpha/Knos",
+  "country": "GLOBAL",
+  "site": "Knos repo record",
+  "category": "github-payout-check",
+  "bodyChars": 20000
+ },
+ {
+  "id": "knos41:readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/drexthealpha/Knos/readme",
+  "country": "GLOBAL",
+  "site": "Knos README (base64): what it pays and how",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "knos41:issue38-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/drexthealpha/Knos/issues/38/comments",
+  "country": "GLOBAL",
+  "site": "Knos #38 comments (held payment paid?)",
+  "category": "github-payout-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "knos41:open",
+  "kind": "json",
+  "url": "https://api.github.com/repos/drexthealpha/Knos/issues?state=open&per_page=30",
+  "country": "GLOBAL",
+  "site": "Knos open issues",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ }
+]
