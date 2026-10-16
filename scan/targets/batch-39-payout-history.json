@@ -1,0 +1,83 @@
+[
+ {
+  "id": "pay39:paid-in-comments",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3Abounty%20is%3Aissue%20is%3Aclosed%20closed%3A%3E%3D2026-09-16%20paid%20in%3Acomments&sort=updated&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "closed bounty issues since 2026-09-16 whose comments say paid",
+  "category": "github-payout-history",
+  "bodyChars": 400000
+ },
+ {
+  "id": "pay39:paypal-in-comments",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=is%3Aissue%20is%3Aclosed%20closed%3A%3E%3D2026-09-16%20bounty%20paypal%20in%3Acomments&sort=updated&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "closed issues since 2026-09-16 with bounty and paypal in the comments",
+  "category": "github-payout-history",
+  "bodyChars": 400000
+ },
+ {
+  "id": "pay39:bounty-paid-phrase",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=is%3Aissue%20is%3Aclosed%20closed%3A%3E%3D2026-09-01%20%22bounty%20paid%22%20in%3Acomments&sort=updated&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "closed issues since 2026-09-01 with the phrase bounty paid",
+  "category": "github-payout-history",
+  "bodyChars": 400000
+ },
+ {
+  "id": "pay39:algora-awarded",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=commenter%3Aapp%2Falgora-pbc%20is%3Aclosed%20closed%3A%3E%3D2026-10-01%20awarded%20in%3Acomments&sort=updated&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "issues Algora's bot marked awarded since 2026-10-01 (repositories that really paid)",
+  "category": "github-payout-history",
+  "bodyChars": 400000
+ },
+ {
+  "id": "pay39:open-direct-pay",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3Abounty%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-09-16%20paypal%20in%3Abody&sort=created&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "open bounty issues since 2026-09-16 that name PayPal in the body (direct payers)",
+  "category": "github-payout-history",
+  "bodyChars": 400000
+ },
+ {
+  "id": "pay39:open-wise-bank",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-09-16%20bounty%20%22bank%20transfer%22%20in%3Abody&sort=created&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "open issues since 2026-09-16 naming a bank transfer for a bounty",
+  "category": "github-payout-history",
+  "bodyChars": 400000
+ },
+ {
+  "id": "owk39:stats",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/api/stats",
+  "country": "GLOBAL",
+  "site": "owockibot board stats (open count)",
+  "category": "board-api",
+  "bodyChars": 4000
+ },
+ {
+  "id": "owk39:open",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/api/bounties?status=open",
+  "country": "GLOBAL",
+  "site": "owockibot board open bounties",
+  "category": "board-api",
+  "bodyChars": 60000
+ },
+ {
+  "id": "owk39:all",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/api/bounties",
+  "country": "GLOBAL",
+  "site": "owockibot board all bounties (statuses)",
+  "category": "board-api",
+  "bodyChars": 200000
+ }
+]
