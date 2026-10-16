@@ -1,0 +1,128 @@
+[
+ {
+  "id": "gh68:corps-96",
+  "kind": "json",
+  "url": "https://api.github.com/repos/HCTDIP/corps-jobs/issues/96",
+  "country": "GLOBAL",
+  "site": "corps-jobs #96: the Railway bounty digest (what it lists, amounts)",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh68:corps-readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/HCTDIP/corps-jobs/readme",
+  "country": "GLOBAL",
+  "site": "corps-jobs README (what the radar reads and why)",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "web68:station-home",
+  "kind": "html",
+  "url": "https://station.railway.com/",
+  "country": "GLOBAL",
+  "site": "Railway Station home",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "web68:station-bounties",
+  "kind": "html",
+  "url": "https://station.railway.com/bounties",
+  "country": "GLOBAL",
+  "site": "Railway Station bounties page (guess)",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "web68:railway-docs-bounties",
+  "kind": "html",
+  "url": "https://docs.railway.com/reference/bounties",
+  "country": "GLOBAL",
+  "site": "Railway docs: bounties (guess)",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh68:matrixmedia-35",
+  "kind": "json",
+  "url": "https://api.github.com/repos/hanliang97/MatrixMedia/issues/35",
+  "country": "GLOBAL",
+  "site": "MatrixMedia #35: the long-term bounty post welcoming AI agents",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh68:matrixmedia-35-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/hanliang97/MatrixMedia/issues/35/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "its comments",
+  "category": "bounty-platform",
+  "bodyChars": 100000
+ },
+ {
+  "id": "gh68:matrixmedia-30",
+  "kind": "json",
+  "url": "https://api.github.com/repos/hanliang97/MatrixMedia/issues/30",
+  "country": "GLOBAL",
+  "site": "MatrixMedia #30: \u00a550 feature bounty",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh68:matrixmedia-30-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/hanliang97/MatrixMedia/issues/30/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "its comments (payment, claims)",
+  "category": "bounty-platform",
+  "bodyChars": 100000
+ },
+ {
+  "id": "gh68:matrixmedia-repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/hanliang97/MatrixMedia",
+  "country": "GLOBAL",
+  "site": "MatrixMedia repository record",
+  "category": "bounty-platform",
+  "bodyChars": 8000
+ },
+ {
+  "id": "gh68:dsh-readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/FuRongJun-1999/dsh-bounty/readme",
+  "country": "GLOBAL",
+  "site": "dsh-bounty README (rules, payment)",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh68:dsh-71",
+  "kind": "json",
+  "url": "https://api.github.com/repos/FuRongJun-1999/dsh-bounty/issues/71",
+  "country": "GLOBAL",
+  "site": "dsh-bounty #71 (delivered bounty: how it was paid)",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh68:dsh-71-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/FuRongJun-1999/dsh-bounty/issues/71/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "its comments",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh68:dsh-open",
+  "kind": "json",
+  "url": "https://api.github.com/repos/FuRongJun-1999/dsh-bounty/issues?state=open&labels=bounty&per_page=30&sort=created&direction=desc",
+  "country": "GLOBAL",
+  "site": "dsh-bounty open bounty-labelled issues",
+  "category": "bounty-platform",
+  "bodyChars": 300000
+ }
+]
