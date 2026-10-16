@@ -1,0 +1,156 @@
+[
+ {
+  "id": "fedi9:mastodon.bot",
+  "kind": "mastodon",
+  "url": "https://mastodon.bot",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:mastoart.social",
+  "kind": "mastodon",
+  "url": "https://mastoart.social",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:lemmy.world",
+  "kind": "lemmy",
+  "url": "https://lemmy.world",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:nonprofits.masto.host",
+  "kind": "mastodon",
+  "url": "https://nonprofits.masto.host",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:amastodon.uk",
+  "kind": "mastodon",
+  "url": "https://amastodon.uk",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:mastodon.me.uk",
+  "kind": "mastodon",
+  "url": "https://mastodon.me.uk",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:socialbc.ca",
+  "kind": "mastodon",
+  "url": "https://socialbc.ca",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:mas.to",
+  "kind": "mastodon",
+  "url": "https://mas.to",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:hachyderm.io",
+  "kind": "mastodon",
+  "url": "https://hachyderm.io",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:troet.cafe",
+  "kind": "mastodon",
+  "url": "https://troet.cafe",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:nerdculture.de",
+  "kind": "mastodon",
+  "url": "https://nerdculture.de",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:norden.social",
+  "kind": "mastodon",
+  "url": "https://norden.social",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:qoto.org",
+  "kind": "mastodon",
+  "url": "https://qoto.org",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:mstdn.social",
+  "kind": "mastodon",
+  "url": "https://mstdn.social",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:mastodon.gamedev.place",
+  "kind": "mastodon",
+  "url": "https://mastodon.gamedev.place",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:mathstodon.xyz",
+  "kind": "mastodon",
+  "url": "https://mathstodon.xyz",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:infosec.exchange",
+  "kind": "mastodon",
+  "url": "https://infosec.exchange",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:toot.io",
+  "kind": "mastodon",
+  "url": "https://toot.io",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:pixelfed.social",
+  "kind": "pixelfed",
+  "url": "https://pixelfed.social",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:mastodon.acc.sunet.se",
+  "kind": "mastodon",
+  "url": "https://mastodon.acc.sunet.se",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:peertube.social",
+  "kind": "peertube",
+  "url": "https://peertube.social",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "fedi9:lemm.ee",
+  "kind": "lemmy",
+  "url": "https://lemm.ee",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ }
+]
