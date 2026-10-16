@@ -1,0 +1,110 @@
+[
+ {
+  "id": "gh45:label-bounty-today",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3Abounty%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-16&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues labelled bounty created today",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh45:money-bounty-label",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3A%22%F0%9F%92%B0%20bounty%22%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-09&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues with a money-bag bounty label, last week",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh45:bounty-labels-variants",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3A%22bounty%20available%22%2C%22bounty-available%22%2C%22paid%20bounty%22%2C%22has-bounty%22%2C%22bounty%3Aopen%22%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-02&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues with other bounty labels, last two weeks",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh45:issuehunt-funded",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3A%22%F0%9F%92%B5%20Funded%20on%20Issuehunt%22%20is%3Aissue%20is%3Aopen&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open IssueHunt-funded issues",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh45:reward-in-title",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=reward%20in%3Atitle%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-14%20USD&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues with reward and USD in the title, last two days",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh45:paid-task-agents",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=%22for%20AI%20agents%22%20bounty%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-09&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues offering bounties to AI agents, last week",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh45:paypal-bounty-week",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=bounty%20paypal%20in%3Abody%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-09&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues naming PayPal for a bounty, last week",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh45:wise-bounty-week",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=bounty%20wise%20in%3Abody%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-09&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues naming Wise for a bounty, last week",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "api45:clawlancer",
+  "kind": "json",
+  "url": "https://clawlancer.ai/api/listings?listing_type=BOUNTY&sort=newest&limit=100",
+  "country": "GLOBAL",
+  "site": "Clawlancer newest bounties",
+  "category": "board-api",
+  "bodyChars": 400000
+ },
+ {
+  "id": "api45:owockibot-stats",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/stats",
+  "country": "GLOBAL",
+  "site": "owockibot stats",
+  "category": "board-api",
+  "bodyChars": 4000
+ },
+ {
+  "id": "api45:superteam",
+  "kind": "json",
+  "url": "https://superteam.fun/api/listings?type=bounty&take=50",
+  "country": "GLOBAL",
+  "site": "Superteam bounties",
+  "category": "board-api",
+  "bodyChars": 120000
+ },
+ {
+  "id": "api45:frantic",
+  "kind": "json",
+  "url": "https://gofrantic.com/feed.json",
+  "country": "GLOBAL",
+  "site": "Frantic feed",
+  "category": "board-api",
+  "bodyChars": 60000
+ }
+]
