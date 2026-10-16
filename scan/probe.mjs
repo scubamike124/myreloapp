@@ -12,7 +12,9 @@ const now = () => new Date().toISOString();
 
 async function get(url, { accept = "application/json, text/html;q=0.9, */*;q=0.5", method = "GET", body, headers = {}, ms = 15000 } = {}) {
   try {
-    const res = await fetch(url, { method, body, redirect: "follow", headers: { Accept: accept, "User-Agent": UA, ...headers }, signal: AbortSignal.timeout(ms) });
+    // GitHub's API: the workflow's own token lifts the shared-IP limit of 60 requests an hour. Never logged; sent to api.github.com only.
+    const auth = /^https:\/\/api\.github\.com\//.test(url) && process.env.GITHUB_API_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}` } : {};
+    const res = await fetch(url, { method, body, redirect: "follow", headers: { Accept: accept, "User-Agent": UA, ...auth, ...headers }, signal: AbortSignal.timeout(ms) });
     const text = await res.text().catch(() => "");
     let json = null;
     if (/^\s*[[{]/.test(text)) { try { json = JSON.parse(text); } catch { json = null; } }

@@ -9,6 +9,9 @@ on:
   workflow_dispatch: {}
 permissions:
   contents: write
+env:
+  # The workflow's own token, for GitHub API reads only (scan/probe.mjs sends it to api.github.com and nowhere else).
+  GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 concurrency:
   group: sp-region-scan
   cancel-in-progress: false
