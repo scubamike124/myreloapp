@@ -1,0 +1,191 @@
+[
+ {
+  "id": "chk36:sbl:issue76",
+  "kind": "json",
+  "url": "https://api.github.com/repos/SecureBananaLabs/bug-bounty/issues/76",
+  "country": "GLOBAL",
+  "site": "SecureBananaLabs bug-bounty #76 ($430 poem) body",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:sbl:issue80",
+  "kind": "json",
+  "url": "https://api.github.com/repos/SecureBananaLabs/bug-bounty/issues/80",
+  "country": "GLOBAL",
+  "site": "SecureBananaLabs bug-bounty #80 ($780 pixel art) body",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:sbl:issue76-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/SecureBananaLabs/bug-bounty/issues/76/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "SecureBananaLabs #76 comments",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:sbl:closed",
+  "kind": "json",
+  "url": "https://api.github.com/repos/SecureBananaLabs/bug-bounty/issues?state=closed&per_page=30",
+  "country": "GLOBAL",
+  "site": "SecureBananaLabs closed issues (any paid?)",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:sbl:repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/SecureBananaLabs/bug-bounty",
+  "country": "GLOBAL",
+  "site": "SecureBananaLabs repo record",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:sbl:readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/SecureBananaLabs/bug-bounty/readme",
+  "country": "GLOBAL",
+  "site": "SecureBananaLabs README (base64)",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:plaza:1915",
+  "kind": "json",
+  "url": "https://api.github.com/repos/zhangjiayang6835-cyber/bounty-plaza/issues/1915",
+  "country": "GLOBAL",
+  "site": "bounty-plaza #1915 ($105) body",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:plaza:1903",
+  "kind": "json",
+  "url": "https://api.github.com/repos/zhangjiayang6835-cyber/bounty-plaza/issues/1903",
+  "country": "GLOBAL",
+  "site": "bounty-plaza #1903 ($75 unit tests) body",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:plaza:1891",
+  "kind": "json",
+  "url": "https://api.github.com/repos/zhangjiayang6835-cyber/bounty-plaza/issues/1891",
+  "country": "GLOBAL",
+  "site": "bounty-plaza #1891 (open bounties digest) body",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:plaza:1891-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/zhangjiayang6835-cyber/bounty-plaza/issues/1891/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "bounty-plaza #1891 comments",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:plaza:closed",
+  "kind": "json",
+  "url": "https://api.github.com/repos/zhangjiayang6835-cyber/bounty-plaza/issues?state=closed&labels=bounty&per_page=30",
+  "country": "GLOBAL",
+  "site": "bounty-plaza closed bounty issues",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:plaza:repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/zhangjiayang6835-cyber/bounty-plaza",
+  "country": "GLOBAL",
+  "site": "bounty-plaza repo record",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:plaza:readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/zhangjiayang6835-cyber/bounty-plaza/readme",
+  "country": "GLOBAL",
+  "site": "bounty-plaza README (base64)",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:spaceapp:65",
+  "kind": "json",
+  "url": "https://api.github.com/repos/oll4com/spaceapp/issues/65",
+  "country": "GLOBAL",
+  "site": "spaceapp #65 ($450) body",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:spaceapp:60",
+  "kind": "json",
+  "url": "https://api.github.com/repos/oll4com/spaceapp/issues/60",
+  "country": "GLOBAL",
+  "site": "spaceapp #60 ($400 Temporal tests) body",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:spaceapp:closed",
+  "kind": "json",
+  "url": "https://api.github.com/repos/oll4com/spaceapp/issues?state=closed&per_page=30",
+  "country": "GLOBAL",
+  "site": "spaceapp closed issues (paid bounties?)",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:spaceapp:repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/oll4com/spaceapp",
+  "country": "GLOBAL",
+  "site": "spaceapp repo record",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:omi:21854",
+  "kind": "json",
+  "url": "https://api.github.com/repos/BasedHardware/omi/issues/21854",
+  "country": "GLOBAL",
+  "site": "omi #21854 ($50 bounty proposal) body",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:omi:21854-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/BasedHardware/omi/issues/21854/comments?per_page=30",
+  "country": "GLOBAL",
+  "site": "omi #21854 comments",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk36:algora:oll4com",
+  "kind": "task",
+  "url": "https://algora.io/oll4com",
+  "country": "GLOBAL",
+  "site": "Algora org page for oll4com (paid bounties history)",
+  "category": "github-bounty-check",
+  "excerptChars": 12000
+ },
+ {
+  "id": "chk36:algora:omi",
+  "kind": "task",
+  "url": "https://algora.io/omi",
+  "country": "GLOBAL",
+  "site": "Algora org page for omi (paid bounties history)",
+  "category": "github-bounty-check",
+  "excerptChars": 12000
+ }
+]
