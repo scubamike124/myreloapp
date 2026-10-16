@@ -1,0 +1,65 @@
+[
+ {
+  "id": "gh63:clapper-5",
+  "kind": "json",
+  "url": "https://api.github.com/repos/jbilcke-hf/clapper/issues/5",
+  "country": "GLOBAL",
+  "site": "boss.dev $1,050: clapper #5",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh63:clapper-10",
+  "kind": "json",
+  "url": "https://api.github.com/repos/jbilcke-hf/clapper/issues/10",
+  "country": "GLOBAL",
+  "site": "boss.dev $500: clapper #10",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh63:qortal-122",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Qortal/qortal/issues/122",
+  "country": "GLOBAL",
+  "site": "boss.dev $250: qortal #122",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh63:mpv-61",
+  "kind": "json",
+  "url": "https://api.github.com/repos/jaseg/python-mpv/issues/61",
+  "country": "GLOBAL",
+  "site": "boss.dev $250: python-mpv #61",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh63:sheetsee-24",
+  "kind": "json",
+  "url": "https://api.github.com/repos/jlord/sheetsee-tables/issues/24",
+  "country": "GLOBAL",
+  "site": "boss.dev $100: sheetsee-tables #24",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh63:allure-1108",
+  "kind": "json",
+  "url": "https://api.github.com/repos/allure-framework/allure2/issues/1108",
+  "country": "GLOBAL",
+  "site": "boss.dev $100: allure2 #1108",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh63:svelte-1639",
+  "kind": "json",
+  "url": "https://api.github.com/repos/sveltejs/svelte/issues/1639",
+  "country": "GLOBAL",
+  "site": "boss.dev \u00a3100: svelte #1639",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ }
+]
