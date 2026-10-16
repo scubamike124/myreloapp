@@ -1,0 +1,307 @@
+[
+ {
+  "id": "rules18:Israel:study-co-il-student-boards-forum:home",
+  "kind": "html",
+  "url": "https://www.study.co.il/",
+  "country": "Israel",
+  "site": "study.co.il (לימודים בישראל) student boards + forum (home)",
+  "category": "classifieds",
+  "free_option": "Free posting on student-specific boards: student job offers ('בחינם תוך 15 שניות'), student apartments ('הפרסום אינו דורש הרשמה או תשלום'), scholarships (free, cannot be edited after posting), private-tutor board (seen by 'thousands of daily visitors'); site also runs a forum (forum/print.asp?f=7).",
+  "audience": "Israeli university/college students and applicants (site is a study-in-Israel portal)"
+ },
+ {
+  "id": "signup18:Israel:study-co-il-student-boards-forum",
+  "kind": "signup",
+  "url": "https://www.study.co.il/",
+  "country": "Israel",
+  "site": "study.co.il (לימודים בישראל) student boards + forum",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:Nigeria:kamposa-campus-classifieds-for-nigerian-:home",
+  "kind": "html",
+  "url": "https://www.kamposa.com/",
+  "country": "Nigeria",
+  "site": "Kamposa (campus classifieds for Nigerian tertiary students) (home)",
+  "category": "classifieds",
+  "free_option": "Free adverts; no account needed; listings reviewed before going live and removed after about three weeks (per 2016/2017 Techpoint profile).",
+  "audience": "Students of Nigerian higher institutions, campus by campus"
+ },
+ {
+  "id": "signup18:Nigeria:kamposa-campus-classifieds-for-nigerian-",
+  "kind": "signup",
+  "url": "https://www.kamposa.com/",
+  "country": "Nigeria",
+  "site": "Kamposa (campus classifieds for Nigerian tertiary students)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:Nigeria:boardx-nigerian-student-classifieds-:home",
+  "kind": "html",
+  "url": "https://techpoint.africa/2018/02/05/boardx-profile/",
+  "country": "Nigeria",
+  "site": "boardX (Nigerian student classifieds) (home)",
+  "category": "classifieds",
+  "free_option": "Advertise on campuses at no charge (per 2018 Techpoint profile).",
+  "audience": "Nigerian university students (launched 1 Oct 2017)"
+ },
+ {
+  "id": "signup18:Nigeria:boardx-nigerian-student-classifieds-",
+  "kind": "signup",
+  "url": "https://techpoint.africa/2018/02/05/boardx-profile/",
+  "country": "Nigeria",
+  "site": "boardX (Nigerian student classifieds)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:South Korea:-campuspick-app-with-:home",
+  "kind": "html",
+  "url": "https://www.campuspick.com/",
+  "country": "South Korea",
+  "site": "캠퍼스픽 Campuspick (에브리커리어) — 대학생 커뮤니티/동아리/공모전/대외활동 app with 게시 요청 (home)",
+  "category": "student-forum",
+  "free_option": "Site has a '게시 요청' (posting request) menu for people who want 동아리/공모전/대외활동 listed; a Dailypop review (~6 years old) says the listing request is free: send a simple form and photo, reviewed internally, uploaded within 3-4 days; a club organiser's review on Linkareer says uploads go through an approva",
+  "audience": "Korean university students (community, clubs, contests, extracurricular activities)"
+ },
+ {
+  "id": "rules18:South Korea:-campuspick-app-with-:sign-up page",
+  "kind": "html",
+  "url": "https://play.google.com/store/apps/details?id=com.vinulabs.campuspick",
+  "country": "South Korea",
+  "site": "캠퍼스픽 Campuspick (에브리커리어) — 대학생 커뮤니티/동아리/공모전/대외활동 app with 게시 요청 (sign-up page)",
+  "category": "student-forum",
+  "free_option": "Site has a '게시 요청' (posting request) menu for people who want 동아리/공모전/대외활동 listed; a Dailypop review (~6 years old) says the listing request is free: send a simple form and photo, reviewed internally, uploaded within 3-4 days; a club organiser's review on Linkareer says uploads go through an approva",
+  "audience": "Korean university students (community, clubs, contests, extracurricular activities)"
+ },
+ {
+  "id": "signup18:South Korea:-campuspick-app-with-",
+  "kind": "signup",
+  "url": "https://play.google.com/store/apps/details?id=com.vinulabs.campuspick",
+  "country": "South Korea",
+  "site": "캠퍼스픽 Campuspick (에브리커리어) — 대학생 커뮤니티/동아리/공모전/대외활동 app with 게시 요청",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:Bangladesh:daffodil-international-university-forum-:rules page",
+  "kind": "html",
+  "url": "https://forum.daffodilvarsity.edu.bd/index.php/topic,57440.0.html",
+  "country": "Bangladesh",
+  "site": "Daffodil International University Forum (forum.daffodilvarsity.edu.bd) (rules page)",
+  "category": "student-forum",
+  "free_option": "Free member posting on a large university-run SMF forum; policy says it wants reliable educational material from students, faculty 'and others' and sets no minimum or maximum number of posts.",
+  "audience": "Daffodil International University students and faculty (one of Bangladesh's largest university forums)"
+ },
+ {
+  "id": "rules18:Bangladesh:daffodil-international-university-forum-:home",
+  "kind": "html",
+  "url": "https://forum.daffodilvarsity.edu.bd/",
+  "country": "Bangladesh",
+  "site": "Daffodil International University Forum (forum.daffodilvarsity.edu.bd) (home)",
+  "category": "student-forum",
+  "free_option": "Free member posting on a large university-run SMF forum; policy says it wants reliable educational material from students, faculty 'and others' and sets no minimum or maximum number of posts.",
+  "audience": "Daffodil International University students and faculty (one of Bangladesh's largest university forums)"
+ },
+ {
+  "id": "signup18:Bangladesh:daffodil-international-university-forum-",
+  "kind": "signup",
+  "url": "https://forum.daffodilvarsity.edu.bd/",
+  "country": "Bangladesh",
+  "site": "Daffodil International University Forum (forum.daffodilvarsity.edu.bd)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:Vietnam:ybox-vn-k-nh-th-ng-tin-ch-t-l-ng-cao-c-a:home",
+  "kind": "html",
+  "url": "https://ybox.vn/",
+  "country": "Vietnam",
+  "site": "YBOX.vn — Kênh thông tin chất lượng cao của sinh viên & giới trẻ (home)",
+  "category": "directory",
+  "free_option": "Organisations post their own opportunities (events, contests, scholarships, careers); fee not stated in any source seen.",
+  "audience": "Vietnamese students and young people (launched 2013 at Foreign Trade University)"
+ },
+ {
+  "id": "signup18:Vietnam:ybox-vn-k-nh-th-ng-tin-ch-t-l-ng-cao-c-a",
+  "kind": "signup",
+  "url": "https://ybox.vn/",
+  "country": "Vietnam",
+  "site": "YBOX.vn — Kênh thông tin chất lượng cao của sinh viên & giới trẻ",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:South Africa:gimmenotes:home",
+  "kind": "html",
+  "url": "https://gimmenotes.co.za/",
+  "country": "South Africa",
+  "site": "GimmeNotes (home)",
+  "category": "other",
+  "free_option": "Free account; students upload and download study materials (notes, summaries, past papers) at no cost.",
+  "audience": "South African university students, especially UNISA distance students"
+ },
+ {
+  "id": "signup18:South Africa:gimmenotes",
+  "kind": "signup",
+  "url": "https://gimmenotes.co.za/",
+  "country": "South Africa",
+  "site": "GimmeNotes",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:Australia:thinkswap:home",
+  "kind": "html",
+  "url": "https://www.thinkswap.com/",
+  "country": "Australia",
+  "site": "Thinkswap (home)",
+  "category": "other",
+  "free_option": "Uploading your own study material is free and earns credits (credits are otherwise bought); catalogue organised by university and subject.",
+  "audience": "Australian secondary and tertiary students (covers most universities in each state)"
+ },
+ {
+  "id": "signup18:Australia:thinkswap",
+  "kind": "signup",
+  "url": "https://www.thinkswap.com/",
+  "country": "Australia",
+  "site": "Thinkswap",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:Malaysia:aiskosong-student-discount-discovery-app:home",
+  "kind": "html",
+  "url": "https://vulcanpost.com/463171/aiskosong-discount-discovery-app-students-malaysia",
+  "country": "Malaysia",
+  "site": "AisKosong (student discount discovery app) (home)",
+  "category": "other",
+  "free_option": "Free app listing student discounts (mostly Klang Valley); described as a marketing channel for merchants, but the merchant listing process and any fee are not described.",
+  "audience": "Malaysian university students in the Klang Valley"
+ },
+ {
+  "id": "signup18:Malaysia:aiskosong-student-discount-discovery-app",
+  "kind": "signup",
+  "url": "https://vulcanpost.com/463171/aiskosong-discount-discovery-app-students-malaysia",
+  "country": "Malaysia",
+  "site": "AisKosong (student discount discovery app)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:Japan; Thailand:clearnote-clear-note-sharing-app:home",
+  "kind": "html",
+  "url": "https://www.clearnotebooks.com/",
+  "country": "Japan; Thailand",
+  "site": "Clearnote (Clear) note-sharing app (home)",
+  "category": "other",
+  "free_option": "Users post their own notes for free (450,000+ user-posted notes per a 2023 media kit); Thai edition claims 1.1 million monthly Thai students.",
+  "audience": "Mostly junior/senior high-school students in Japan; Thai students (level mix not stated) — weaker fit for a university-focused tool"
+ },
+ {
+  "id": "signup18:Japan; Thailand:clearnote-clear-note-sharing-app",
+  "kind": "signup",
+  "url": "https://www.clearnotebooks.com/",
+  "country": "Japan; Thailand",
+  "site": "Clearnote (Clear) note-sharing app",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:Saudi Arabia:-ckfu-org-:home",
+  "kind": "html",
+  "url": "https://vb.ckfu.org/",
+  "country": "Saudi Arabia",
+  "site": "ملتقى طلاب وطالبات جامعة الملك فيصل / جامعة الدمام (ckfu.org) (home)",
+  "category": "student-forum",
+  "free_option": "Large free vBulletin student forum for KFU distance-learning students, with per-university subforums (e.g. PMU at /f78); an advertising section and its rules were not found in search results.",
+  "audience": "King Faisal University and Imam Abdulrahman (Dammam) distance/affiliate students; also PMU students"
+ },
+ {
+  "id": "signup18:Saudi Arabia:-ckfu-org-",
+  "kind": "signup",
+  "url": "https://vb.ckfu.org/",
+  "country": "Saudi Arabia",
+  "site": "ملتقى طلاب وطالبات جامعة الملك فيصل / جامعة الدمام (ckfu.org)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:Saudi Arabia:-alseu-com-:home",
+  "kind": "html",
+  "url": "https://www.alseu.com/",
+  "country": "Saudi Arabia",
+  "site": "منتدى طلاب وطالبات الجامعة السعودية الإلكترونية (alseu.com) (home)",
+  "category": "student-forum",
+  "free_option": "Student forum for Saudi Electronic University that has an advertising space; free vs paid not stated.",
+  "audience": "Saudi Electronic University students"
+ },
+ {
+  "id": "signup18:Saudi Arabia:-alseu-com-",
+  "kind": "signup",
+  "url": "https://www.alseu.com/",
+  "country": "Saudi Arabia",
+  "site": "منتدى طلاب وطالبات الجامعة السعودية الإلكترونية (alseu.com)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:multi-country (ISIC affiliates; verify the local office for each of IN, PK, BD, JP, KR, TW, HK, SG, MY, ID, TH, PH, VN, AU, NZ, AE, SA, IL, TR, EG, MA, NG, KE, GH, ZA):isic-benefit-provider-work-with-us-progr:home",
+  "kind": "html",
+  "url": "https://isic.org/work-with-us/benefit-provider",
+  "country": "multi-country (ISIC affiliates; verify the local office for each of IN, PK, BD, JP, KR, TW, HK, SG, MY, ID, TH, PH, VN, AU, NZ, AE, SA, IL, TR, EG, MA, NG, KE, GH, ZA)",
+  "site": "ISIC — benefit provider / 'Work with us' programme (local affiliates in most target countries) (home)",
+  "category": "other",
+  "free_option": "Businesses offer a student discount/benefit and get listed to cardholders; no fee schedule seen. Only the ISIC Cyprus affiliate (out of scope) explicitly says participating businesses get 'free exposure on the website'.",
+  "audience": "ISIC cardholding students in each country"
+ },
+ {
+  "id": "signup18:multi-country (ISIC affiliates; verify the local office for each of IN, PK, BD, JP, KR, TW, HK, SG, MY, ID, TH, PH, VN, AU, NZ, AE, SA, IL, TR, EG, MA, NG, KE, GH, ZA):isic-benefit-provider-work-with-us-progr",
+  "kind": "signup",
+  "url": "https://isic.org/work-with-us/benefit-provider",
+  "country": "multi-country (ISIC affiliates; verify the local office for each of IN, PK, BD, JP, KR, TW, HK, SG, MY, ID, TH, PH, VN, AU, NZ, AE, SA, IL, TR, EG, MA, NG, KE, GH, ZA)",
+  "site": "ISIC — benefit provider / 'Work with us' programme (local affiliates in most target countries)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:Turkey:dersnot-com-ai-assisted-lecture-note-sha:home",
+  "kind": "html",
+  "url": "https://dersnot.com/",
+  "country": "Turkey",
+  "site": "dersnot.com (AI-assisted lecture-note sharing platform) (home)",
+  "category": "other",
+  "free_option": "Users upload notes, browsable by university/department/course; whether all access is free is not stated.",
+  "audience": "Turkish university students"
+ },
+ {
+  "id": "signup18:Turkey:dersnot-com-ai-assisted-lecture-note-sha",
+  "kind": "signup",
+  "url": "https://dersnot.com/",
+  "country": "Turkey",
+  "site": "dersnot.com (AI-assisted lecture-note sharing platform)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules18:India:fests-info-india-college-fest-event-aggr:home",
+  "kind": "html",
+  "url": "https://fests.info/",
+  "country": "India",
+  "site": "fests.info (India college fest/event aggregator with 'submit an event' page) (home)",
+  "category": "directory",
+  "free_option": "Public 'submit an event or fest' page; fee not stated. Only fits if StudyProofs runs a student event/webinar, not for a tool listing.",
+  "audience": "Indian college students following campus fests, workshops and seminars"
+ },
+ {
+  "id": "signup18:India:fests-info-india-college-fest-event-aggr",
+  "kind": "signup",
+  "url": "https://fests.info/",
+  "country": "India",
+  "site": "fests.info (India college fest/event aggregator with 'submit an event' page)",
+  "category": "signup-form",
+  "discover": true
+ }
+]

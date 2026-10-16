@@ -1,0 +1,802 @@
+[
+ {
+  "id": "rules17:Germany:dsb-das-schwarze-brett-dsble-de-:rules page",
+  "kind": "html",
+  "url": "https://www.dsble.de/neu",
+  "country": "Germany",
+  "site": "DSB - Das Schwarze Brett (dsble.de) (rules page)",
+  "category": "classifieds",
+  "free_option": "Free classified ads, no registration needed; city-based boards (Leipzig, Berlin and others) aimed at students.",
+  "audience": "Students in German university cities (Leipzig, Berlin, etc.) and general public."
+ },
+ {
+  "id": "rules17:Germany:dsb-das-schwarze-brett-dsble-de-:home",
+  "kind": "html",
+  "url": "https://www.dsble.de/",
+  "country": "Germany",
+  "site": "DSB - Das Schwarze Brett (dsble.de) (home)",
+  "category": "classifieds",
+  "free_option": "Free classified ads, no registration needed; city-based boards (Leipzig, Berlin and others) aimed at students.",
+  "audience": "Students in German university cities (Leipzig, Berlin, etc.) and general public."
+ },
+ {
+  "id": "signup17:Germany:dsb-das-schwarze-brett-dsble-de-",
+  "kind": "signup",
+  "url": "https://www.dsble.de/neu",
+  "country": "Germany",
+  "site": "DSB - Das Schwarze Brett (dsble.de)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Germany:schwarzes-brett-leipzig-leipzig-sachsen-:home",
+  "kind": "html",
+  "url": "https://www.leipzig-sachsen.de/kleinanzeigen/schwarzes-brett-uni-leipzig.html",
+  "country": "Germany",
+  "site": "Schwarzes Brett Leipzig (leipzig-sachsen.de) (home)",
+  "category": "classifieds",
+  "free_option": "Free online ads 'von und für Studenten' of Uni Leipzig.",
+  "audience": "Uni Leipzig students."
+ },
+ {
+  "id": "signup17:Germany:schwarzes-brett-leipzig-leipzig-sachsen-",
+  "kind": "signup",
+  "url": "https://www.leipzig-sachsen.de/kleinanzeigen/schwarzes-brett-uni-leipzig.html",
+  "country": "Germany",
+  "site": "Schwarzes Brett Leipzig (leipzig-sachsen.de)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Germany:studenten-rabatte-de:home",
+  "kind": "html",
+  "url": "https://www.studenten-rabatte.de/marken",
+  "country": "Germany",
+  "site": "studenten-rabatte.de (home)",
+  "category": "other",
+  "free_option": "Site invites providers to publish their own student discount free of charge ('Kostenlos mitmachen!').",
+  "audience": "German-speaking students looking for discounts."
+ },
+ {
+  "id": "rules17:Germany:studenten-rabatte-de:sign-up page",
+  "kind": "html",
+  "url": "https://www.studenten-rabatte.de/",
+  "country": "Germany",
+  "site": "studenten-rabatte.de (sign-up page)",
+  "category": "other",
+  "free_option": "Site invites providers to publish their own student discount free of charge ('Kostenlos mitmachen!').",
+  "audience": "German-speaking students looking for discounts."
+ },
+ {
+  "id": "signup17:Germany:studenten-rabatte-de",
+  "kind": "signup",
+  "url": "https://www.studenten-rabatte.de/",
+  "country": "Germany",
+  "site": "studenten-rabatte.de",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Germany:uni-bremen-schwarzes-brett-studip-help-b:rules page",
+  "kind": "html",
+  "url": "https://blogs.uni-bremen.de/hilfestudipbremen/schwarzes-brett/",
+  "country": "Germany",
+  "site": "Uni Bremen Schwarzes Brett (StudIP help blog) (rules page)",
+  "category": "classifieds",
+  "free_option": "Free campus board inside Stud.IP, but ads need a university connection and commercial ads are removed; 14-day runtime.",
+  "audience": "Uni Bremen students."
+ },
+ {
+  "id": "signup17:Germany:uni-bremen-schwarzes-brett-studip-help-b",
+  "kind": "signup",
+  "url": "https://blogs.uni-bremen.de/hilfestudipbremen/schwarzes-brett/",
+  "country": "Germany",
+  "site": "Uni Bremen Schwarzes Brett (StudIP help blog)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Germany:studydrive:rules page",
+  "kind": "html",
+  "url": "https://www.studydrive.net/en/tag/general-conditions-of-use",
+  "country": "Germany",
+  "site": "Studydrive (rules page)",
+  "category": "other",
+  "free_option": "Free account; users upload their own documents to their own university's course pages and earn credits.",
+  "audience": "University students, strongest in DACH; also NL/FR/IT/ES."
+ },
+ {
+  "id": "rules17:Germany:studydrive:home",
+  "kind": "html",
+  "url": "https://www.studydrive.net/",
+  "country": "Germany",
+  "site": "Studydrive (home)",
+  "category": "other",
+  "free_option": "Free account; users upload their own documents to their own university's course pages and earn credits.",
+  "audience": "University students, strongest in DACH; also NL/FR/IT/ES."
+ },
+ {
+  "id": "signup17:Germany:studydrive",
+  "kind": "signup",
+  "url": "https://www.studydrive.net/",
+  "country": "Germany",
+  "site": "Studydrive",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Austria:-h-schwarzes-brett-bundes-h-:rules page",
+  "kind": "html",
+  "url": "https://schwarzesbrett.oeh.ac.at/jobs/schwarzesbrett-oehat/",
+  "country": "Austria",
+  "site": "ÖH Schwarzes Brett (Bundes-ÖH) (rules page)",
+  "category": "classifieds",
+  "free_option": "All services free; board for jobs, housing and internships run by the national student union.",
+  "audience": "Austrian university students nationwide."
+ },
+ {
+  "id": "rules17:Austria:-h-schwarzes-brett-bundes-h-:home",
+  "kind": "html",
+  "url": "https://schwarzesbrett.oeh.ac.at/",
+  "country": "Austria",
+  "site": "ÖH Schwarzes Brett (Bundes-ÖH) (home)",
+  "category": "classifieds",
+  "free_option": "All services free; board for jobs, housing and internships run by the national student union.",
+  "audience": "Austrian university students nationwide."
+ },
+ {
+  "id": "signup17:Austria:-h-schwarzes-brett-bundes-h-",
+  "kind": "signup",
+  "url": "https://schwarzesbrett.oeh.ac.at/",
+  "country": "Austria",
+  "site": "ÖH Schwarzes Brett (Bundes-ÖH)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Switzerland:uzh-alumni-marktplatz:home",
+  "kind": "html",
+  "url": "https://www.news.uzh.ch/en/articles/2017/marktplatz.html",
+  "country": "Switzerland",
+  "site": "UZH Alumni Marktplatz (home)",
+  "category": "classifieds",
+  "free_option": "Basic ads free; paid premium placement optional. Used by UZH/ETH students and staff for jobs, flats, study groups.",
+  "audience": "Students and staff of UZH, ETH and other Zurich universities."
+ },
+ {
+  "id": "signup17:Switzerland:uzh-alumni-marktplatz",
+  "kind": "signup",
+  "url": "https://www.news.uzh.ch/en/articles/2017/marktplatz.html",
+  "country": "Switzerland",
+  "site": "UZH Alumni Marktplatz",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:United Kingdom:campusboard:home",
+  "kind": "html",
+  "url": "https://www.campusboard.co.uk/",
+  "country": "United Kingdom",
+  "site": "Campusboard (home)",
+  "category": "classifieds",
+  "free_option": "Student campus marketplace (textbooks, rooms, items, flatmates) per UK city/campus; cost not stated in snippets.",
+  "audience": "UK university students by campus (London, Dundee, Manchester etc.)."
+ },
+ {
+  "id": "rules17:United Kingdom:campusboard:sign-up page",
+  "kind": "html",
+  "url": "https://www.campusboard.co.uk/campuses/23--university-of-manchester--university-of-manchester-campus--manchester?category=marketplace",
+  "country": "United Kingdom",
+  "site": "Campusboard (sign-up page)",
+  "category": "classifieds",
+  "free_option": "Student campus marketplace (textbooks, rooms, items, flatmates) per UK city/campus; cost not stated in snippets.",
+  "audience": "UK university students by campus (London, Dundee, Manchester etc.)."
+ },
+ {
+  "id": "signup17:United Kingdom:campusboard",
+  "kind": "signup",
+  "url": "https://www.campusboard.co.uk/campuses/23--university-of-manchester--university-of-manchester-campus--manchester?category=marketplace",
+  "country": "United Kingdom",
+  "site": "Campusboard",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:United Kingdom:save-the-student-submit-a-deal:home",
+  "kind": "html",
+  "url": "https://www.savethestudent.org/student-deals",
+  "country": "United Kingdom",
+  "site": "Save the Student - Submit a deal (home)",
+  "category": "other",
+  "free_option": "Editorial student-deals section with a 'Submit a deal' option; no fee mentioned.",
+  "audience": "UK students (large student money site)."
+ },
+ {
+  "id": "signup17:United Kingdom:save-the-student-submit-a-deal",
+  "kind": "signup",
+  "url": "https://www.savethestudent.org/student-deals",
+  "country": "United Kingdom",
+  "site": "Save the Student - Submit a deal",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:France:le-coin-tudiant-forum-:home",
+  "kind": "html",
+  "url": "https://lecoinetudiant.kanak.fr/",
+  "country": "France",
+  "site": "Le Coin étudiant (forum) (home)",
+  "category": "student-forum",
+  "free_option": "Free student forum with a 'Petites annonces' section plus 'petits boulots / bons plans' section.",
+  "audience": "French students."
+ },
+ {
+  "id": "signup17:France:le-coin-tudiant-forum-",
+  "kind": "signup",
+  "url": "https://lecoinetudiant.kanak.fr/",
+  "country": "France",
+  "site": "Le Coin étudiant (forum)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:France:plan-te-campus-petites-annonces:home",
+  "kind": "html",
+  "url": "https://www.planetecampus.com/annonce_etudiant/",
+  "country": "France",
+  "site": "Planète Campus - petites annonces (home)",
+  "category": "classifieds",
+  "free_option": "Free ad posting; categories seen are housing, flatshare, buy/sell.",
+  "audience": "French students (student media site)."
+ },
+ {
+  "id": "signup17:France:plan-te-campus-petites-annonces",
+  "kind": "signup",
+  "url": "https://www.planetecampus.com/annonce_etudiant/",
+  "country": "France",
+  "site": "Planète Campus - petites annonces",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:France:universit-lyon-1-petites-annonces-portai:rules page",
+  "kind": "html",
+  "url": "https://etu.univ-lyon1.fr/communaute-lyon-1/petites-annonces",
+  "country": "France",
+  "site": "Université Lyon 1 - Petites annonces (portail étudiant) (rules page)",
+  "category": "classifieds",
+  "free_option": "Free campus board; posting restricted to Lyon 1 students, staff and public/partner organisations.",
+  "audience": "Université Lyon 1 students."
+ },
+ {
+  "id": "signup17:France:universit-lyon-1-petites-annonces-portai",
+  "kind": "signup",
+  "url": "https://etu.univ-lyon1.fr/communaute-lyon-1/petites-annonces",
+  "country": "France",
+  "site": "Université Lyon 1 - Petites annonces (portail étudiant)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "fedi17:Netherlands:eindhoven-student-mastodon-listed-on-mas",
+  "kind": "mastodon",
+  "url": "https://mastodonservers.net",
+  "country": "Netherlands",
+  "site": "Eindhoven Student Mastodon (listed on mastodonservers.net)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Mastodon server 'for all students in Eindhoven'; registration status not confirmed.",
+  "audience": "Students in Eindhoven (TU/e, Fontys)."
+ },
+ {
+  "id": "rules17:Spain:cr-nica-universitaria-tabl-n-de-anuncios:home",
+  "kind": "html",
+  "url": "https://cronicauniversitaria.es/tablon-de-anuncios/",
+  "country": "Spain",
+  "site": "Crónica Universitaria - Tablón de anuncios (Salamanca) (home)",
+  "category": "classifieds",
+  "free_option": "Student classifieds (flats, jobs, apuntes, clases particulares) with recent 2026 posts.",
+  "audience": "Students of USAL, UPSA and other centres in Salamanca/Zamora/Ávila/Béjar."
+ },
+ {
+  "id": "signup17:Spain:cr-nica-universitaria-tabl-n-de-anuncios",
+  "kind": "signup",
+  "url": "https://cronicauniversitaria.es/tablon-de-anuncios/",
+  "country": "Spain",
+  "site": "Crónica Universitaria - Tablón de anuncios (Salamanca)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Spain:universidad-de-murcia-tabl-n-de-anuncios:rules page",
+  "kind": "html",
+  "url": "https://www.um.es/web/siu/servicios/tablon/",
+  "country": "Spain",
+  "site": "Universidad de Murcia - Tablón de anuncios (SIU) (rules page)",
+  "category": "classifieds",
+  "free_option": "Free public message board for the university community (flats, private lessons, books).",
+  "audience": "Universidad de Murcia community."
+ },
+ {
+  "id": "signup17:Spain:universidad-de-murcia-tabl-n-de-anuncios",
+  "kind": "signup",
+  "url": "https://www.um.es/web/siu/servicios/tablon/",
+  "country": "Spain",
+  "site": "Universidad de Murcia - Tablón de anuncios (SIU)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Spain:wuolah:rules page",
+  "kind": "html",
+  "url": "https://wuolah.com/terms",
+  "country": "Spain",
+  "site": "Wuolah (rules page)",
+  "category": "other",
+  "free_option": "Free account; students upload apuntes and earn from ad-supported downloads.",
+  "audience": "Spanish (and Latin American) university students; largest apuntes bank in Spain."
+ },
+ {
+  "id": "rules17:Spain:wuolah:home",
+  "kind": "html",
+  "url": "https://wuolah.com/",
+  "country": "Spain",
+  "site": "Wuolah (home)",
+  "category": "other",
+  "free_option": "Free account; students upload apuntes and earn from ad-supported downloads.",
+  "audience": "Spanish (and Latin American) university students; largest apuntes bank in Spain."
+ },
+ {
+  "id": "rules17:Spain:wuolah:sign-up page",
+  "kind": "html",
+  "url": "https://wuolah.com/join",
+  "country": "Spain",
+  "site": "Wuolah (sign-up page)",
+  "category": "other",
+  "free_option": "Free account; students upload apuntes and earn from ad-supported downloads.",
+  "audience": "Spanish (and Latin American) university students; largest apuntes bank in Spain."
+ },
+ {
+  "id": "signup17:Spain:wuolah",
+  "kind": "signup",
+  "url": "https://wuolah.com/join",
+  "country": "Spain",
+  "site": "Wuolah",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Italy:perstudenti-com:home",
+  "kind": "html",
+  "url": "https://perstudenti.com/",
+  "country": "Italy",
+  "site": "PerStudenti.com (home)",
+  "category": "classifieds",
+  "free_option": "Classifieds platform for university students: sell/buy/exchange books, notes and services; has an 'inserisci annuncio' button.",
+  "audience": "Italian university students."
+ },
+ {
+  "id": "signup17:Italy:perstudenti-com",
+  "kind": "signup",
+  "url": "https://perstudenti.com/",
+  "country": "Italy",
+  "site": "PerStudenti.com",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Italy:annuncistudenti-net:home",
+  "kind": "html",
+  "url": "http://www.annuncistudenti.net/annunci/index.php",
+  "country": "Italy",
+  "site": "annuncistudenti.net (home)",
+  "category": "classifieds",
+  "free_option": "Free ads for housing, books, notes after creating an account; site says it reposts ads to social networks for free.",
+  "audience": "Italian students."
+ },
+ {
+  "id": "signup17:Italy:annuncistudenti-net",
+  "kind": "signup",
+  "url": "http://www.annuncistudenti.net/annunci/index.php",
+  "country": "Italy",
+  "site": "annuncistudenti.net",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Italy:docsity:rules page",
+  "kind": "html",
+  "url": "https://support.docsity.com/hc/en-us/articles/360005953920-What-am-I-unable-to-upload-on-Docsity",
+  "country": "Italy",
+  "site": "Docsity (rules page)",
+  "category": "other",
+  "free_option": "Free account; upload own notes/summaries (free share or sell); documents reviewed before listing.",
+  "audience": "University students in Italy, Spain, Portugal, Poland, UK, etc."
+ },
+ {
+  "id": "rules17:Italy:docsity:home",
+  "kind": "html",
+  "url": "https://www.docsity.com/",
+  "country": "Italy",
+  "site": "Docsity (home)",
+  "category": "other",
+  "free_option": "Free account; upload own notes/summaries (free share or sell); documents reviewed before listing.",
+  "audience": "University students in Italy, Spain, Portugal, Poland, UK, etc."
+ },
+ {
+  "id": "signup17:Italy:docsity",
+  "kind": "signup",
+  "url": "https://www.docsity.com/",
+  "country": "Italy",
+  "site": "Docsity",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Italy:skuola-net-invio-appunti-notes-section-n:rules page",
+  "kind": "html",
+  "url": "https://www.skuola.net/eventi-informazioni/regolamento-classifica.html",
+  "country": "Italy",
+  "site": "Skuola.net - invio appunti (notes section, not the forum) (rules page)",
+  "category": "other",
+  "free_option": "Free submission of original appunti with title/description; staff moderation; points and monthly prizes.",
+  "audience": "Italian secondary-school and university students."
+ },
+ {
+  "id": "rules17:Italy:skuola-net-invio-appunti-notes-section-n:home",
+  "kind": "html",
+  "url": "https://www.skuola.net/scuola/appunti-ki-lo-sa.html",
+  "country": "Italy",
+  "site": "Skuola.net - invio appunti (notes section, not the forum) (home)",
+  "category": "other",
+  "free_option": "Free submission of original appunti with title/description; staff moderation; points and monthly prizes.",
+  "audience": "Italian secondary-school and university students."
+ },
+ {
+  "id": "rules17:Italy:skuola-net-invio-appunti-notes-section-n:sign-up page",
+  "kind": "html",
+  "url": "https://www.skuola.net/",
+  "country": "Italy",
+  "site": "Skuola.net - invio appunti (notes section, not the forum) (sign-up page)",
+  "category": "other",
+  "free_option": "Free submission of original appunti with title/description; staff moderation; points and monthly prizes.",
+  "audience": "Italian secondary-school and university students."
+ },
+ {
+  "id": "signup17:Italy:skuola-net-invio-appunti-notes-section-n",
+  "kind": "signup",
+  "url": "https://www.skuola.net/",
+  "country": "Italy",
+  "site": "Skuola.net - invio appunti (notes section, not the forum)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Italy:studenti-unimi-telegram-network-annunci-:rules page",
+  "kind": "html",
+  "url": "https://studentiunimi.it/",
+  "country": "Italy",
+  "site": "Studenti UniMi (Telegram network, annunci group) (rules page)",
+  "category": "student-forum",
+  "free_option": "Student-run Telegram groups for Università degli Studi di Milano with a dedicated 'annunci' group separate from discussion.",
+  "audience": "UniMi students."
+ },
+ {
+  "id": "signup17:Italy:studenti-unimi-telegram-network-annunci-",
+  "kind": "signup",
+  "url": "https://studentiunimi.it/",
+  "country": "Italy",
+  "site": "Studenti UniMi (Telegram network, annunci group)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Greece:foititis-app-foititis-com-:rules page",
+  "kind": "html",
+  "url": "https://app.foititis.com/",
+  "country": "Greece",
+  "site": "Foititis (app.foititis.com) (rules page)",
+  "category": "classifieds",
+  "free_option": "Members can post small ads (flatshare, books, equipment, notes); published after admin approval.",
+  "audience": "Greek university students."
+ },
+ {
+  "id": "signup17:Greece:foititis-app-foititis-com-",
+  "kind": "signup",
+  "url": "https://app.foititis.com/",
+  "country": "Greece",
+  "site": "Foititis (app.foititis.com)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Greece:trelosfoititis:home",
+  "kind": "html",
+  "url": "https://trelosfoititis.gr/",
+  "country": "Greece",
+  "site": "TrelosFoititis (home)",
+  "category": "other",
+  "free_option": "Student hub hosting past exam papers and notes from many Greek universities plus professor reviews.",
+  "audience": "Greek students (AUTH, NKUA, Patras, Crete...)."
+ },
+ {
+  "id": "signup17:Greece:trelosfoititis",
+  "kind": "signup",
+  "url": "https://trelosfoititis.gr/",
+  "country": "Greece",
+  "site": "TrelosFoititis",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Poland:studencior-pl:home",
+  "kind": "html",
+  "url": "https://www.studencior.pl/",
+  "country": "Poland",
+  "site": "Studencior.pl (home)",
+  "category": "classifieds",
+  "free_option": "Free student classifieds, no registration; categories housing, jobs, tutoring; city boards (e.g. Łódź).",
+  "audience": "Polish students by city."
+ },
+ {
+  "id": "signup17:Poland:studencior-pl",
+  "kind": "signup",
+  "url": "https://www.studencior.pl/",
+  "country": "Poland",
+  "site": "Studencior.pl",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Poland:akademickie-rozmowy-arkrakow-com-pl-:home",
+  "kind": "html",
+  "url": "https://arkrakow.com.pl/",
+  "country": "Poland",
+  "site": "Akademickie Rozmowy (arkrakow.com.pl) (home)",
+  "category": "student-forum",
+  "free_option": "General academic forum with 'Aktualności i ogłoszenia' and a free jobs/internships ads section; posts from 2026 visible.",
+  "audience": "Kraków/Polish students and academics."
+ },
+ {
+  "id": "signup17:Poland:akademickie-rozmowy-arkrakow-com-pl-",
+  "kind": "signup",
+  "url": "https://arkrakow.com.pl/",
+  "country": "Poland",
+  "site": "Akademickie Rozmowy (arkrakow.com.pl)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Poland:forum-studenta-forumdyskusyjne-net-:home",
+  "kind": "html",
+  "url": "http://forumdyskusyjne.net/viewforum.php?f=64",
+  "country": "Poland",
+  "site": "Forum Studenta (forumdyskusyjne.net) (home)",
+  "category": "student-forum",
+  "free_option": "Student sub-forum listing 'ogłoszenia' among its topics.",
+  "audience": "Polish students (part of a general multi-topic forum)."
+ },
+ {
+  "id": "rules17:Poland:forum-studenta-forumdyskusyjne-net-:sign-up page",
+  "kind": "html",
+  "url": "http://forumdyskusyjne.net/",
+  "country": "Poland",
+  "site": "Forum Studenta (forumdyskusyjne.net) (sign-up page)",
+  "category": "student-forum",
+  "free_option": "Student sub-forum listing 'ogłoszenia' among its topics.",
+  "audience": "Polish students (part of a general multi-topic forum)."
+ },
+ {
+  "id": "signup17:Poland:forum-studenta-forumdyskusyjne-net-",
+  "kind": "signup",
+  "url": "http://forumdyskusyjne.net/",
+  "country": "Poland",
+  "site": "Forum Studenta (forumdyskusyjne.net)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Poland:studencimedycyny-pl-forum:home",
+  "kind": "html",
+  "url": "http://www.studencimedycyny.pl/forum/",
+  "country": "Poland",
+  "site": "StudenciMedycyny.pl forum (home)",
+  "category": "student-forum",
+  "free_option": "Medical/pharmacy student forum with a materials-exchange (buy/sell/swap) section.",
+  "audience": "Polish medicine and pharmacy students."
+ },
+ {
+  "id": "signup17:Poland:studencimedycyny-pl-forum",
+  "kind": "signup",
+  "url": "http://www.studencimedycyny.pl/forum/",
+  "country": "Poland",
+  "site": "StudenciMedycyny.pl forum",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Poland:notatek-pl:home",
+  "kind": "html",
+  "url": "https://notatek.pl/",
+  "country": "Poland",
+  "site": "Notatek.pl (home)",
+  "category": "other",
+  "free_option": "Free note-sharing portal; uploads are human-checked and tagged by university/subject/lecturer.",
+  "audience": "Polish university students."
+ },
+ {
+  "id": "signup17:Poland:notatek-pl",
+  "kind": "signup",
+  "url": "https://notatek.pl/",
+  "country": "Poland",
+  "site": "Notatek.pl",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Czechia:prim-t-cz:home",
+  "kind": "html",
+  "url": "https://www.primat.cz/",
+  "country": "Czechia",
+  "site": "Primát.cz (home)",
+  "category": "other",
+  "free_option": "Free registration; students share study materials; older sources mention a textbook exchange and forum.",
+  "audience": "Czech university students (largest CZ study-material site)."
+ },
+ {
+  "id": "signup17:Czechia:prim-t-cz",
+  "kind": "signup",
+  "url": "https://www.primat.cz/",
+  "country": "Czechia",
+  "site": "Primát.cz",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Hungary:di-koldal-hu:home",
+  "kind": "html",
+  "url": "https://diakoldal.hu/",
+  "country": "Hungary",
+  "site": "Diákoldal.hu (home)",
+  "category": "classifieds",
+  "free_option": "Student site combining notes, used-textbook ads, tutors and student jobs.",
+  "audience": "Hungarian students."
+ },
+ {
+  "id": "signup17:Hungary:di-koldal-hu",
+  "kind": "signup",
+  "url": "https://diakoldal.hu/",
+  "country": "Hungary",
+  "site": "Diákoldal.hu",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Hungary:doksi-net:home",
+  "kind": "html",
+  "url": "https://doksi.net/",
+  "country": "Hungary",
+  "site": "doksi.net (home)",
+  "category": "other",
+  "free_option": "Document-sharing site hosting downloadable Hungarian university notes.",
+  "audience": "Hungarian students."
+ },
+ {
+  "id": "signup17:Hungary:doksi-net",
+  "kind": "signup",
+  "url": "https://doksi.net/",
+  "country": "Hungary",
+  "site": "doksi.net",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Ukraine:parta-ua:home",
+  "kind": "html",
+  "url": "https://parta.ua/",
+  "country": "Ukraine",
+  "site": "Parta.ua (home)",
+  "category": "directory",
+  "free_option": "Education portal with university catalogue, tutors, courses and 'various announcements'.",
+  "audience": "Ukrainian applicants and students."
+ },
+ {
+  "id": "signup17:Ukraine:parta-ua",
+  "kind": "signup",
+  "url": "https://parta.ua/",
+  "country": "Ukraine",
+  "site": "Parta.ua",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules17:Netherlands:studocu-studeersnel:rules page",
+  "kind": "html",
+  "url": "https://www.studocu.com/en-us/terms",
+  "country": "Netherlands",
+  "site": "StuDocu / Studeersnel (rules page)",
+  "category": "other",
+  "free_option": "Free account; upload own study documents to unlock content.",
+  "audience": "University students across Europe (Amsterdam-based)."
+ },
+ {
+  "id": "rules17:Netherlands:studocu-studeersnel:home",
+  "kind": "html",
+  "url": "https://www.studocu.com/",
+  "country": "Netherlands",
+  "site": "StuDocu / Studeersnel (home)",
+  "category": "other",
+  "free_option": "Free account; upload own study documents to unlock content.",
+  "audience": "University students across Europe (Amsterdam-based)."
+ },
+ {
+  "id": "signup17:Netherlands:studocu-studeersnel",
+  "kind": "signup",
+  "url": "https://www.studocu.com/",
+  "country": "Netherlands",
+  "site": "StuDocu / Studeersnel",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "fedi17:International (EN):hcommons-social-humanities-commons-masto",
+  "kind": "mastodon",
+  "url": "https://hcommons.social",
+  "country": "International (EN)",
+  "site": "hcommons.social (Humanities Commons Mastodon)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Open sign-up at launch for anyone with an interest in research and education, students included.",
+  "audience": "Humanities scholars and students worldwide."
+ },
+ {
+  "id": "rules17:International (EN):hcommons-social-humanities-commons-masto:rules page",
+  "kind": "html",
+  "url": "https://about.hcommons.org/2022/11/07/humanities-commons-launches-mastodon-server-open-to-scholars/",
+  "country": "International (EN)",
+  "site": "hcommons.social (Humanities Commons Mastodon) (rules page)",
+  "category": "fediverse",
+  "free_option": "Open sign-up at launch for anyone with an interest in research and education, students included.",
+  "audience": "Humanities scholars and students worldwide."
+ },
+ {
+  "id": "fedi17:International (EN):science-social",
+  "kind": "mastodon",
+  "url": "https://science.social",
+  "country": "International (EN)",
+  "site": "science.social",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "General science Mastodon instance explicitly for students as well as scientists.",
+  "audience": "Science students and scientists."
+ },
+ {
+  "id": "rules17:International (EN):science-social:rules page",
+  "kind": "html",
+  "url": "https://fediverse.party/en/portal/servers/",
+  "country": "International (EN)",
+  "site": "science.social (rules page)",
+  "category": "fediverse",
+  "free_option": "General science Mastodon instance explicitly for students as well as scientists.",
+  "audience": "Science students and scientists."
+ },
+ {
+  "id": "rules17:International:mastodonservers-net-students-servers-lis:home",
+  "kind": "html",
+  "url": "https://mastodonservers.net/servers/students",
+  "country": "International",
+  "site": "mastodonservers.net - Students servers list (home)",
+  "category": "directory",
+  "free_option": "Directory of student-oriented Mastodon servers (e.g. Eindhoven Student Mastodon, an unofficial TUM server 'MastoTUM', Wayne.social).",
+  "audience": "Students seeking fediverse servers."
+ },
+ {
+  "id": "signup17:International:mastodonservers-net-students-servers-lis",
+  "kind": "signup",
+  "url": "https://mastodonservers.net/servers/students",
+  "country": "International",
+  "site": "mastodonservers.net - Students servers list",
+  "category": "signup-form",
+  "discover": true
+ }
+]

@@ -1,0 +1,338 @@
+[
+ {
+  "id": "render17:Germany:dsb-das-schwarze-brett-dsble-de-",
+  "url": "https://www.dsble.de/neu",
+  "discover": true,
+  "country": "Germany",
+  "site": "DSB - Das Schwarze Brett (dsble.de)"
+ },
+ {
+  "id": "render17:Germany:schwarzes-brett-leipzig-leipzig-sachsen-",
+  "url": "https://www.leipzig-sachsen.de/kleinanzeigen/schwarzes-brett-uni-leipzig.html",
+  "discover": true,
+  "country": "Germany",
+  "site": "Schwarzes Brett Leipzig (leipzig-sachsen.de)"
+ },
+ {
+  "id": "render17:Germany:studenten-rabatte-de",
+  "url": "https://www.studenten-rabatte.de/",
+  "discover": true,
+  "country": "Germany",
+  "site": "studenten-rabatte.de"
+ },
+ {
+  "id": "render17:Germany:uni-bremen-schwarzes-brett-studip-help-b",
+  "url": "https://blogs.uni-bremen.de/hilfestudipbremen/schwarzes-brett/",
+  "discover": true,
+  "country": "Germany",
+  "site": "Uni Bremen Schwarzes Brett (StudIP help blog)"
+ },
+ {
+  "id": "render17:Germany:studydrive",
+  "url": "https://www.studydrive.net/",
+  "discover": true,
+  "country": "Germany",
+  "site": "Studydrive"
+ },
+ {
+  "id": "render17:Austria:-h-schwarzes-brett-bundes-h-",
+  "url": "https://schwarzesbrett.oeh.ac.at/",
+  "discover": true,
+  "country": "Austria",
+  "site": "ÖH Schwarzes Brett (Bundes-ÖH)"
+ },
+ {
+  "id": "render17:Switzerland:uzh-alumni-marktplatz",
+  "url": "https://www.news.uzh.ch/en/articles/2017/marktplatz.html",
+  "discover": true,
+  "country": "Switzerland",
+  "site": "UZH Alumni Marktplatz"
+ },
+ {
+  "id": "render17:United Kingdom:campusboard",
+  "url": "https://www.campusboard.co.uk/campuses/23--university-of-manchester--university-of-manchester-campus--manchester?category=marketplace",
+  "discover": true,
+  "country": "United Kingdom",
+  "site": "Campusboard"
+ },
+ {
+  "id": "render17:United Kingdom:save-the-student-submit-a-deal",
+  "url": "https://www.savethestudent.org/student-deals",
+  "discover": true,
+  "country": "United Kingdom",
+  "site": "Save the Student - Submit a deal"
+ },
+ {
+  "id": "render17:France:le-coin-tudiant-forum-",
+  "url": "https://lecoinetudiant.kanak.fr/",
+  "discover": true,
+  "country": "France",
+  "site": "Le Coin étudiant (forum)"
+ },
+ {
+  "id": "render17:France:plan-te-campus-petites-annonces",
+  "url": "https://www.planetecampus.com/annonce_etudiant/",
+  "discover": true,
+  "country": "France",
+  "site": "Planète Campus - petites annonces"
+ },
+ {
+  "id": "render17:France:universit-lyon-1-petites-annonces-portai",
+  "url": "https://etu.univ-lyon1.fr/communaute-lyon-1/petites-annonces",
+  "discover": true,
+  "country": "France",
+  "site": "Université Lyon 1 - Petites annonces (portail étudiant)"
+ },
+ {
+  "id": "render17:Spain:cr-nica-universitaria-tabl-n-de-anuncios",
+  "url": "https://cronicauniversitaria.es/tablon-de-anuncios/",
+  "discover": true,
+  "country": "Spain",
+  "site": "Crónica Universitaria - Tablón de anuncios (Salamanca)"
+ },
+ {
+  "id": "render17:Spain:universidad-de-murcia-tabl-n-de-anuncios",
+  "url": "https://www.um.es/web/siu/servicios/tablon/",
+  "discover": true,
+  "country": "Spain",
+  "site": "Universidad de Murcia - Tablón de anuncios (SIU)"
+ },
+ {
+  "id": "render17:Spain:wuolah",
+  "url": "https://wuolah.com/join",
+  "discover": true,
+  "country": "Spain",
+  "site": "Wuolah"
+ },
+ {
+  "id": "render17:Italy:perstudenti-com",
+  "url": "https://perstudenti.com/",
+  "discover": true,
+  "country": "Italy",
+  "site": "PerStudenti.com"
+ },
+ {
+  "id": "render17:Italy:annuncistudenti-net",
+  "url": "http://www.annuncistudenti.net/annunci/index.php",
+  "discover": true,
+  "country": "Italy",
+  "site": "annuncistudenti.net"
+ },
+ {
+  "id": "render17:Italy:docsity",
+  "url": "https://www.docsity.com/",
+  "discover": true,
+  "country": "Italy",
+  "site": "Docsity"
+ },
+ {
+  "id": "render17:Italy:skuola-net-invio-appunti-notes-section-n",
+  "url": "https://www.skuola.net/",
+  "discover": true,
+  "country": "Italy",
+  "site": "Skuola.net - invio appunti (notes section, not the forum)"
+ },
+ {
+  "id": "render17:Italy:studenti-unimi-telegram-network-annunci-",
+  "url": "https://studentiunimi.it/",
+  "discover": true,
+  "country": "Italy",
+  "site": "Studenti UniMi (Telegram network, annunci group)"
+ },
+ {
+  "id": "render17:Greece:foititis-app-foititis-com-",
+  "url": "https://app.foititis.com/",
+  "discover": true,
+  "country": "Greece",
+  "site": "Foititis (app.foititis.com)"
+ },
+ {
+  "id": "render17:Greece:trelosfoititis",
+  "url": "https://trelosfoititis.gr/",
+  "discover": true,
+  "country": "Greece",
+  "site": "TrelosFoititis"
+ },
+ {
+  "id": "render17:Poland:studencior-pl",
+  "url": "https://www.studencior.pl/",
+  "discover": true,
+  "country": "Poland",
+  "site": "Studencior.pl"
+ },
+ {
+  "id": "render17:Poland:akademickie-rozmowy-arkrakow-com-pl-",
+  "url": "https://arkrakow.com.pl/",
+  "discover": true,
+  "country": "Poland",
+  "site": "Akademickie Rozmowy (arkrakow.com.pl)"
+ },
+ {
+  "id": "render17:Poland:forum-studenta-forumdyskusyjne-net-",
+  "url": "http://forumdyskusyjne.net/",
+  "discover": true,
+  "country": "Poland",
+  "site": "Forum Studenta (forumdyskusyjne.net)"
+ },
+ {
+  "id": "render17:Poland:studencimedycyny-pl-forum",
+  "url": "http://www.studencimedycyny.pl/forum/",
+  "discover": true,
+  "country": "Poland",
+  "site": "StudenciMedycyny.pl forum"
+ },
+ {
+  "id": "render17:Poland:notatek-pl",
+  "url": "https://notatek.pl/",
+  "discover": true,
+  "country": "Poland",
+  "site": "Notatek.pl"
+ },
+ {
+  "id": "render17:Czechia:prim-t-cz",
+  "url": "https://www.primat.cz/",
+  "discover": true,
+  "country": "Czechia",
+  "site": "Primát.cz"
+ },
+ {
+  "id": "render17:Hungary:di-koldal-hu",
+  "url": "https://diakoldal.hu/",
+  "discover": true,
+  "country": "Hungary",
+  "site": "Diákoldal.hu"
+ },
+ {
+  "id": "render17:Hungary:doksi-net",
+  "url": "https://doksi.net/",
+  "discover": true,
+  "country": "Hungary",
+  "site": "doksi.net"
+ },
+ {
+  "id": "render17:Ukraine:parta-ua",
+  "url": "https://parta.ua/",
+  "discover": true,
+  "country": "Ukraine",
+  "site": "Parta.ua"
+ },
+ {
+  "id": "render17:Netherlands:studocu-studeersnel",
+  "url": "https://www.studocu.com/",
+  "discover": true,
+  "country": "Netherlands",
+  "site": "StuDocu / Studeersnel"
+ },
+ {
+  "id": "render17:International:mastodonservers-net-students-servers-lis",
+  "url": "https://mastodonservers.net/servers/students",
+  "discover": true,
+  "country": "International",
+  "site": "mastodonservers.net - Students servers list"
+ },
+ {
+  "id": "render18:Israel:study-co-il-student-boards-forum",
+  "url": "https://www.study.co.il/",
+  "discover": true,
+  "country": "Israel",
+  "site": "study.co.il (לימודים בישראל) student boards + forum"
+ },
+ {
+  "id": "render18:Nigeria:kamposa-campus-classifieds-for-nigerian-",
+  "url": "https://www.kamposa.com/",
+  "discover": true,
+  "country": "Nigeria",
+  "site": "Kamposa (campus classifieds for Nigerian tertiary students)"
+ },
+ {
+  "id": "render18:Nigeria:boardx-nigerian-student-classifieds-",
+  "url": "https://techpoint.africa/2018/02/05/boardx-profile/",
+  "discover": true,
+  "country": "Nigeria",
+  "site": "boardX (Nigerian student classifieds)"
+ },
+ {
+  "id": "render18:South Korea:-campuspick-app-with-",
+  "url": "https://play.google.com/store/apps/details?id=com.vinulabs.campuspick",
+  "discover": true,
+  "country": "South Korea",
+  "site": "캠퍼스픽 Campuspick (에브리커리어) — 대학생 커뮤니티/동아리/공모전/대외활동 app with 게시 요청"
+ },
+ {
+  "id": "render18:Bangladesh:daffodil-international-university-forum-",
+  "url": "https://forum.daffodilvarsity.edu.bd/",
+  "discover": true,
+  "country": "Bangladesh",
+  "site": "Daffodil International University Forum (forum.daffodilvarsity.edu.bd)"
+ },
+ {
+  "id": "render18:Vietnam:ybox-vn-k-nh-th-ng-tin-ch-t-l-ng-cao-c-a",
+  "url": "https://ybox.vn/",
+  "discover": true,
+  "country": "Vietnam",
+  "site": "YBOX.vn — Kênh thông tin chất lượng cao của sinh viên & giới trẻ"
+ },
+ {
+  "id": "render18:South Africa:gimmenotes",
+  "url": "https://gimmenotes.co.za/",
+  "discover": true,
+  "country": "South Africa",
+  "site": "GimmeNotes"
+ },
+ {
+  "id": "render18:Australia:thinkswap",
+  "url": "https://www.thinkswap.com/",
+  "discover": true,
+  "country": "Australia",
+  "site": "Thinkswap"
+ },
+ {
+  "id": "render18:Malaysia:aiskosong-student-discount-discovery-app",
+  "url": "https://vulcanpost.com/463171/aiskosong-discount-discovery-app-students-malaysia",
+  "discover": true,
+  "country": "Malaysia",
+  "site": "AisKosong (student discount discovery app)"
+ },
+ {
+  "id": "render18:Japan; Thailand:clearnote-clear-note-sharing-app",
+  "url": "https://www.clearnotebooks.com/",
+  "discover": true,
+  "country": "Japan; Thailand",
+  "site": "Clearnote (Clear) note-sharing app"
+ },
+ {
+  "id": "render18:Saudi Arabia:-ckfu-org-",
+  "url": "https://vb.ckfu.org/",
+  "discover": true,
+  "country": "Saudi Arabia",
+  "site": "ملتقى طلاب وطالبات جامعة الملك فيصل / جامعة الدمام (ckfu.org)"
+ },
+ {
+  "id": "render18:Saudi Arabia:-alseu-com-",
+  "url": "https://www.alseu.com/",
+  "discover": true,
+  "country": "Saudi Arabia",
+  "site": "منتدى طلاب وطالبات الجامعة السعودية الإلكترونية (alseu.com)"
+ },
+ {
+  "id": "render18:multi-country (ISIC affiliates; verify the local office for each of IN, PK, BD, JP, KR, TW, HK, SG, MY, ID, TH, PH, VN, AU, NZ, AE, SA, IL, TR, EG, MA, NG, KE, GH, ZA):isic-benefit-provider-work-with-us-progr",
+  "url": "https://isic.org/work-with-us/benefit-provider",
+  "discover": true,
+  "country": "multi-country (ISIC affiliates; verify the local office for each of IN, PK, BD, JP, KR, TW, HK, SG, MY, ID, TH, PH, VN, AU, NZ, AE, SA, IL, TR, EG, MA, NG, KE, GH, ZA)",
+  "site": "ISIC — benefit provider / 'Work with us' programme (local affiliates in most target countries)"
+ },
+ {
+  "id": "render18:Turkey:dersnot-com-ai-assisted-lecture-note-sha",
+  "url": "https://dersnot.com/",
+  "discover": true,
+  "country": "Turkey",
+  "site": "dersnot.com (AI-assisted lecture-note sharing platform)"
+ },
+ {
+  "id": "render18:India:fests-info-india-college-fest-event-aggr",
+  "url": "https://fests.info/",
+  "discover": true,
+  "country": "India",
+  "site": "fests.info (India college fest/event aggregator with 'submit an event' page)"
+ }
+]
