@@ -1,0 +1,865 @@
+[
+ {
+  "id": "rules12:US:classifiedads-com:rules page",
+  "kind": "html",
+  "url": "https://www.classifiedads.com/terms (help/FAQ: https://www.classifiedads.com/help)",
+  "country": "US",
+  "site": "ClassifiedAds.com (rules page)",
+  "category": "classifieds",
+  "free_option": "Free Classified Ads Online (site title); free ad, an account is created after the first ad",
+  "audience": "US-wide city pages (Wichita, Charlotte, El Paso seen); size not seen",
+  "region": "North America"
+ },
+ {
+  "id": "rules12:US:classifiedads-com:home",
+  "kind": "html",
+  "url": "https://www.classifiedads.com/",
+  "country": "US",
+  "site": "ClassifiedAds.com (home)",
+  "category": "classifieds",
+  "free_option": "Free Classified Ads Online (site title); free ad, an account is created after the first ad",
+  "audience": "US-wide city pages (Wichita, Charlotte, El Paso seen); size not seen",
+  "region": "North America"
+ },
+ {
+  "id": "signup12:US:classifiedads-com",
+  "kind": "signup",
+  "url": "https://www.classifiedads.com/post.php (no account needed to post; login page https://www.classifiedads.com/login.php)",
+  "country": "US",
+  "site": "ClassifiedAds.com",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules12:US:geebo:rules page",
+  "kind": "html",
+  "url": "https://geebo.com/terms-of-use/",
+  "country": "US",
+  "site": "Geebo (rules page)",
+  "category": "classifieds",
+  "free_option": "Geebo.com Free Classifieds Ads: Services at Geebo (page title)",
+  "audience": "US, city subdomains; size not seen",
+  "region": "North America"
+ },
+ {
+  "id": "rules12:US:geebo:home",
+  "kind": "html",
+  "url": "https://geebo.com/",
+  "country": "US",
+  "site": "Geebo (home)",
+  "category": "classifieds",
+  "free_option": "Geebo.com Free Classifieds Ads: Services at Geebo (page title)",
+  "audience": "US, city subdomains; size not seen",
+  "region": "North America"
+ },
+ {
+  "id": "signup12:US:geebo",
+  "kind": "signup",
+  "url": "https://geebo.com/services/add/ (services post form; sign-up page not seen)",
+  "country": "US",
+  "site": "Geebo",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules12:US:adpost:rules page",
+  "kind": "html",
+  "url": "https://tostracker.app/document/adpost (archived copy of 'Adpost - Terms of Service', captured 2026-03-01; official URL not surfaced)",
+  "country": "US",
+  "site": "Adpost (rules page)",
+  "category": "classifieds",
+  "free_option": "[third-party] ad posting services available free and at prices set according to priority ranking",
+  "audience": "not seen",
+  "region": "North America"
+ },
+ {
+  "id": "rules12:US:adpost:home",
+  "kind": "html",
+  "url": "https://www.adpost.com/",
+  "country": "US",
+  "site": "Adpost (home)",
+  "category": "classifieds",
+  "free_option": "[third-party] ad posting services available free and at prices set according to priority ranking",
+  "audience": "not seen",
+  "region": "North America"
+ },
+ {
+  "id": "rules12:BR:classificadosdegraca-com:home",
+  "kind": "html",
+  "url": "https://www.classificadosdegraca.com/",
+  "country": "BR",
+  "site": "ClassificadosDeGraca.com (home)",
+  "category": "classifieds",
+  "free_option": "Classificados grátis em Brasil (site title); 'Classificados gratis em Brasil - Publicar um Anúncio'",
+  "audience": "Brazil, per-city subdomains (São Paulo, Rio, Guarulhos, Niterói...); 4.267 ads in Cursos - Aulas",
+  "region": "Latin America"
+ },
+ {
+  "id": "rules12:BR:classisite:home",
+  "kind": "html",
+  "url": "https://www.classisite.com.br/",
+  "country": "BR",
+  "site": "Classisite (home)",
+  "category": "classifieds",
+  "free_option": "Anúncios Classificados Grátis (site title)",
+  "audience": "not seen",
+  "region": "Latin America"
+ },
+ {
+  "id": "rules12:BR:classificados-brasil:home",
+  "kind": "html",
+  "url": "https://www.classificados-brasil.com/",
+  "country": "BR",
+  "site": "Classificados Brasil (home)",
+  "category": "classifieds",
+  "free_option": "publicar anúncios grátis em poucos cliques (snippet paraphrase)",
+  "audience": "not seen",
+  "region": "Latin America"
+ },
+ {
+  "id": "rules12:AR:anunciar-co-argentina-:home",
+  "kind": "html",
+  "url": "https://argentina.anunciar.co/",
+  "country": "AR",
+  "site": "Anunciar.co (Argentina) (home)",
+  "category": "classifieds",
+  "free_option": "Publica tus anuncios sin ningún costo",
+  "audience": "Argentina; site title 'Avisos clasificados gratis Argentina'",
+  "region": "Latin America"
+ },
+ {
+  "id": "rules12:AR:anuncios-argentina-com:home",
+  "kind": "html",
+  "url": "https://www.anuncios-argentina.com/",
+  "country": "AR",
+  "site": "Anuncios-Argentina.com (home)",
+  "category": "classifieds",
+  "free_option": "Anuncios gratis en Argentina (site title)",
+  "audience": "not seen",
+  "region": "Latin America"
+ },
+ {
+  "id": "rules12:AR:tusclases-com-ar:home",
+  "kind": "html",
+  "url": "https://www.tusclases.com.ar/anunciarse/",
+  "country": "AR",
+  "site": "Tusclases.com.ar (home)",
+  "category": "classifieds",
+  "free_option": "anuncio gratuito; snippet paraphrase: es gratis publicar, con opciones para academias e institutos",
+  "audience": "not seen",
+  "region": "Latin America"
+ },
+ {
+  "id": "signup12:AR:tusclases-com-ar",
+  "kind": "signup",
+  "url": "https://www.tusclases.com.ar/anunciarse/ ('¿Qué tipo de anuncio gratuito quieres publicar?')",
+  "country": "AR",
+  "site": "Tusclases.com.ar",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules12:IT:bakeca-it:rules page",
+  "kind": "html",
+  "url": "https://www.bakeca.it/info/regole_pubblicazione/ (Regole di pubblicazione)",
+  "country": "IT",
+  "site": "Bakeca.it (rules page)",
+  "category": "classifieds",
+  "free_option": "Pubblica annuncio gratuito; free users: same ad on one province and one category ('su una sola provincia e su una sola categoria'); up to 5 non-duplicate course ads",
+  "audience": "Italy, city sub-sites (Torino, Bologna, ...); size not seen; snippet: aziende o scuole possono proporre corsi professionali in questa sezione",
+  "region": "Southern Europe"
+ },
+ {
+  "id": "rules12:IT:bakeca-it:home",
+  "kind": "html",
+  "url": "https://www.bakeca.it/",
+  "country": "IT",
+  "site": "Bakeca.it (home)",
+  "category": "classifieds",
+  "free_option": "Pubblica annuncio gratuito; free users: same ad on one province and one category ('su una sola provincia e su una sola categoria'); up to 5 non-duplicate course ads",
+  "audience": "Italy, city sub-sites (Torino, Bologna, ...); size not seen; snippet: aziende o scuole possono proporre corsi professionali in questa sezione",
+  "region": "Southern Europe"
+ },
+ {
+  "id": "signup12:IT:bakeca-it",
+  "kind": "signup",
+  "url": "https://www.bakeca.it/inserisci/annuncio/ ('Pubblica annuncio gratuito su Bakeca Italia'); category entry e.g. https://www.bakeca.it/inserisci/annuncio/sel_categoria/corsi-lingua-lezioni",
+  "country": "IT",
+  "site": "Bakeca.it",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules12:GB:freeads-co-uk:home",
+  "kind": "html",
+  "url": "https://www.freeads.co.uk/",
+  "country": "GB",
+  "site": "Freeads.co.uk (home)",
+  "category": "classifieds",
+  "free_option": "[snippet paraphrase] a classifieds site where businesses can list services for free; paid upgrades place an ad in a featured gallery",
+  "audience": "UK town pages; e.g. 454 Business Help ads in Addlestone",
+  "region": "Western Europe"
+ },
+ {
+  "id": "rules12:IE:adverts-ie:home",
+  "kind": "html",
+  "url": "https://www.adverts.ie/",
+  "country": "IE",
+  "site": "Adverts.ie (home)",
+  "category": "classifieds",
+  "free_option": "[app-store listing paraphrase] free to join, with no listing fees in nearly all categories; businesses can set up a shop account",
+  "audience": "Ireland; not seen",
+  "region": "Western Europe"
+ },
+ {
+  "id": "rules12:CH:anibis-ch:home",
+  "kind": "html",
+  "url": "https://www.anibis.ch/",
+  "country": "CH",
+  "site": "Anibis.ch (home)",
+  "category": "classifieds",
+  "free_option": "free listings remain but trimmed since Nov 2023 (five free pictures per listing instead of ten); business sellers = users with more than 50 listings pointed to paid plans",
+  "audience": "Switzerland; not seen",
+  "region": "Western Europe"
+ },
+ {
+  "id": "rules12:GR:freelist-gr:home",
+  "kind": "html",
+  "url": "https://www.freelist.gr/",
+  "country": "GR",
+  "site": "FreeList.gr (home)",
+  "category": "classifieds",
+  "free_option": "Λίστα δωρεάν αγγελιών; δωρεάν μικρές αγγελίες (snippet)",
+  "audience": "χιλιάδες αγγελίες από όλη την Ελλάδα και την Κύπρο (snippet)",
+  "region": "Southern Europe"
+ },
+ {
+  "id": "rules12:GR:ix-gr:home",
+  "kind": "html",
+  "url": "https://www.ix.gr/",
+  "country": "GR",
+  "site": "ix.gr (home)",
+  "category": "classifieds",
+  "free_option": "η καταχώρηση αγγελίας για ιδιώτες είναι δωρεάν για οποιαδήποτε διάρκεια",
+  "audience": "not seen",
+  "region": "Southern Europe"
+ },
+ {
+  "id": "signup12:GR:ix-gr",
+  "kind": "signup",
+  "url": "https://www.ix.gr/classifieds/new ('Δωρεάν Καταχώρηση Αγγελίας')",
+  "country": "GR",
+  "site": "ix.gr",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules12:GR:idietera-gr:rules page",
+  "kind": "html",
+  "url": "https://www.idietera.gr/node/7993 ('Πώς λειτουργεί το idietera.gr')",
+  "country": "GR",
+  "site": "idietera.gr (rules page)",
+  "category": "classifieds",
+  "free_option": "δημιουργήστε λογαριασμό και δημοσιεύστε την αγγελία σας εντελώς δωρεάν; χωρίς προμήθεια",
+  "audience": "not seen",
+  "region": "Southern Europe"
+ },
+ {
+  "id": "rules12:GR:idietera-gr:home",
+  "kind": "html",
+  "url": "https://www.idietera.gr/",
+  "country": "GR",
+  "site": "idietera.gr (home)",
+  "category": "classifieds",
+  "free_option": "δημιουργήστε λογαριασμό και δημοσιεύστε την αγγελία σας εντελώς δωρεάν; χωρίς προμήθεια",
+  "audience": "not seen",
+  "region": "Southern Europe"
+ },
+ {
+  "id": "rules12:PL:lento-pl:rules page",
+  "kind": "html",
+  "url": "https://www.lento.pl/pomoc.html (Pomoc)",
+  "country": "PL",
+  "site": "Lento.pl (rules page)",
+  "category": "classifieds",
+  "free_option": "Adding ads is free within per-category limits; promotion optional and paid; 90-day listing; free refresh after 24 h",
+  "audience": "Poland, local town sub-sites (e.g. tlen.lento.pl); size not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:PL:lento-pl:home",
+  "kind": "html",
+  "url": "https://www.lento.pl/",
+  "country": "PL",
+  "site": "Lento.pl (home)",
+  "category": "classifieds",
+  "free_option": "Adding ads is free within per-category limits; promotion optional and paid; 90-day listing; free refresh after 24 h",
+  "audience": "Poland, local town sub-sites (e.g. tlen.lento.pl); size not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "signup12:PL:lento-pl",
+  "kind": "signup",
+  "url": "https://www.lento.pl/dodaj-ogloszenie.html ('Dodaj ogłoszenie za darmo - Szybko i bezpłatnie dam ogłoszenie'); no separate sign-up",
+  "country": "PL",
+  "site": "Lento.pl",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules12:PL:sprzedajemy-pl:home",
+  "kind": "html",
+  "url": "https://sprzedajemy.pl/",
+  "country": "PL",
+  "site": "Sprzedajemy.pl (home)",
+  "category": "classifieds",
+  "free_option": "[snippet paraphrase] Its listings are free, and it does not require registration.",
+  "audience": "not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:CZ:hyperinzerce-cz:home",
+  "kind": "html",
+  "url": "https://www.hyperinzerce.cz/",
+  "country": "CZ",
+  "site": "Hyperinzerce.cz (home)",
+  "category": "classifieds",
+  "free_option": "[press-release paraphrase] free classified-ad service where the public and entrepreneurs can post ad offers or requests online at no cost; free business directory 'Adresář firem'",
+  "audience": "not seen (undated company press release)",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:HU:hirdetesingyen-hu:home",
+  "kind": "html",
+  "url": "https://www.hirdetesingyen.hu/",
+  "country": "HU",
+  "site": "Hirdetesingyen.hu (home)",
+  "category": "classifieds",
+  "free_option": "Hirdetés ingyen - ingyenes apró hirdetés feladás",
+  "audience": "not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:HU:aprohirdetes-biz:rules page",
+  "kind": "html",
+  "url": "https://aprohirdetes.biz/hirdetesfeladas.php (Hirdetés feladás page with limits)",
+  "country": "HU",
+  "site": "Aprohirdetes.biz (rules page)",
+  "category": "classifieds",
+  "free_option": "minden regisztrált felhasználó témánként 2, összesen pedig 10 ingyenes apróhirdetést adhat fel",
+  "audience": "not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:HU:aprohirdetes-biz:home",
+  "kind": "html",
+  "url": "https://aprohirdetes.biz/",
+  "country": "HU",
+  "site": "Aprohirdetes.biz (home)",
+  "category": "classifieds",
+  "free_option": "minden regisztrált felhasználó témánként 2, összesen pedig 10 ingyenes apróhirdetést adhat fel",
+  "audience": "not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:HU:aprohirdetes24-hu:home",
+  "kind": "html",
+  "url": "https://aprohirdetes24.hu/",
+  "country": "HU",
+  "site": "Aprohirdetes24.hu (home)",
+  "category": "classifieds",
+  "free_option": "Egy Felhasználónak maximum 20 darab, képes ingyenes hirdetés feladás -ára biztosítunk lehetőséget",
+  "audience": "not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:HU:ingyen-aprohirdetes-hu:home",
+  "kind": "html",
+  "url": "http://ingyen-aprohirdetes.hu/",
+  "country": "HU",
+  "site": "Ingyen-aprohirdetes.hu (home)",
+  "category": "classifieds",
+  "free_option": "Ingyenes hirdetés feladás másodpercek alatt",
+  "audience": "not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:HU:addelma-hu:home",
+  "kind": "html",
+  "url": "https://addelma.hu/",
+  "country": "HU",
+  "site": "Addelma.hu (home)",
+  "category": "classifieds",
+  "free_option": "Apróhirdetések, ingyenes hirdetés feladás",
+  "audience": "not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:RO:publi24-ro:rules page",
+  "kind": "html",
+  "url": "https://ajutor.publi24.ro/reguli-adaugare-anunt/ (Anexă Termeni și condiții); pricing https://ajutor.publi24.ro/preturi-si-modalitati-de-plata/; FAQ https://ajutor.publi24.ro/intrebari-frecvente/",
+  "country": "RO",
+  "site": "Publi24.ro (rules page)",
+  "category": "classifieds",
+  "free_option": "[snippet paraphrase] In most categories ads are free, with the exceptions listed below (paid tiers in Auto, Animals); maximum number of free ads per account is 500",
+  "audience": "Romania; app on Google Play (https://play.google.com/store/apps/details?id=ro.publi24)",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:RO:publi24-ro:home",
+  "kind": "html",
+  "url": "https://www.publi24.ro/",
+  "country": "RO",
+  "site": "Publi24.ro (home)",
+  "category": "classifieds",
+  "free_option": "[snippet paraphrase] In most categories ads are free, with the exceptions listed below (paid tiers in Auto, Animals); maximum number of free ads per account is 500",
+  "audience": "Romania; app on Google Play (https://play.google.com/store/apps/details?id=ro.publi24)",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "signup12:RO:publi24-ro",
+  "kind": "signup",
+  "url": "https://www.publi24.ro/login",
+  "country": "RO",
+  "site": "Publi24.ro",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules12:UA:freetrade-com-ua:home",
+  "kind": "html",
+  "url": "https://freetrade.com.ua/",
+  "country": "UA",
+  "site": "FreeTrade.com.ua (home)",
+  "category": "classifieds",
+  "free_option": "Оголошення додаються безкоштовно та розміщуються на обраний період з можливістю подальшого подовження або видалення.",
+  "audience": "Ukraine-wide; not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:UA:bou-com-ua:home",
+  "kind": "html",
+  "url": "https://bou.com.ua/",
+  "country": "UA",
+  "site": "bou.com.ua (home)",
+  "category": "classifieds",
+  "free_option": "Безкоштовні оголошення України",
+  "audience": "not seen; snippet: page shows company ads offering training services",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:BG:bazar-bg:home",
+  "kind": "html",
+  "url": "https://bazar.bg/",
+  "country": "BG",
+  "site": "Bazar.bg (home)",
+  "category": "classifieds",
+  "free_option": "Безплатни обяви (app title)",
+  "audience": "16 862 ads in Услуги/бизнес, 1 385 in Курсове и обучение (snippet)",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:BG:alo-bg:rules page",
+  "kind": "html",
+  "url": "https://www.alo.bg/about_us.php (about); paid options https://www.alo.bg/info_promote.php",
+  "country": "BG",
+  "site": "Alo.bg (rules page)",
+  "category": "classifieds",
+  "free_option": "Alo.bg е платформа за безплатни обяви; paid Топ/Супер топ are optional",
+  "audience": "not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:BG:alo-bg:home",
+  "kind": "html",
+  "url": "https://www.alo.bg/",
+  "country": "BG",
+  "site": "Alo.bg (home)",
+  "category": "classifieds",
+  "free_option": "Alo.bg е платформа за безплатни обяви; paid Топ/Супер топ are optional",
+  "audience": "not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "rules12:SA:expatriates-com:rules page",
+  "kind": "html",
+  "url": "https://www.expatriates.com/html/terms.of.use.html",
+  "country": "SA",
+  "site": "Expatriates.com (rules page)",
+  "category": "classifieds",
+  "free_option": "place a free classified ad and browse classifieds ads in your city or country",
+  "audience": "Gulf expat cities (Riyadh, Khobar, Dammam, Manama) plus other countries (Jordan, Estonia seen); new postings live about 30 minutes after activation",
+  "region": "Middle East & North Africa"
+ },
+ {
+  "id": "rules12:SA:expatriates-com:home",
+  "kind": "html",
+  "url": "https://www.expatriates.com/",
+  "country": "SA",
+  "site": "Expatriates.com (home)",
+  "category": "classifieds",
+  "free_option": "place a free classified ad and browse classifieds ads in your city or country",
+  "audience": "Gulf expat cities (Riyadh, Khobar, Dammam, Manama) plus other countries (Jordan, Estonia seen); new postings live about 30 minutes after activation",
+  "region": "Middle East & North Africa"
+ },
+ {
+  "id": "signup12:SA:expatriates-com",
+  "kind": "signup",
+  "url": "https://www.expatriates.com/scripts/users/create_account.epl (Create Account); posting flow https://www.expatriates.com/scripts/posting/poststep1.epl ('Place a Free Ad Step 1 of 3')",
+  "country": "SA",
+  "site": "Expatriates.com",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules12:AE:mourjan:rules page",
+  "kind": "html",
+  "url": "https://www.mourjan.com/about/en/ (about; terms/FAQ/post pages exist per llms.txt https://www.mourjan.com/llms.txt but URLs not seen)",
+  "country": "AE",
+  "site": "Mourjan (rules page)",
+  "category": "classifieds",
+  "free_option": "Mourjan.com offers free basic ad posting, and it offers paid Premium Advertising Solutions to enhance visibility and transaction speed.",
+  "audience": "MENA; app '1M+ downloads' (third-party listing); operator Mourjan Classifieds FZ-LLC, active since 2010",
+  "region": "Middle East & North Africa"
+ },
+ {
+  "id": "rules12:AE:mourjan:home",
+  "kind": "html",
+  "url": "https://www.mourjan.com/",
+  "country": "AE",
+  "site": "Mourjan (home)",
+  "category": "classifieds",
+  "free_option": "Mourjan.com offers free basic ad posting, and it offers paid Premium Advertising Solutions to enhance visibility and transaction speed.",
+  "audience": "MENA; app '1M+ downloads' (third-party listing); operator Mourjan Classifieds FZ-LLC, active since 2010",
+  "region": "Middle East & North Africa"
+ },
+ {
+  "id": "rules12:N/A (pan-Arab):e3lanfree-com-:home",
+  "kind": "html",
+  "url": "https://e3lanfree.com/",
+  "country": "N/A (pan-Arab)",
+  "site": "e3lanfree.com (إعلان مجاني) (home)",
+  "category": "classifieds",
+  "free_option": "[snippet paraphrase] fair-use policy allows three free ads per month per user",
+  "audience": "not seen",
+  "region": "Middle East & North Africa"
+ },
+ {
+  "id": "rules12:N/A (pan-Arab):aielanat-com-:home",
+  "kind": "html",
+  "url": "https://www.aielanat.com/",
+  "country": "N/A (pan-Arab)",
+  "site": "aielanat.com (موقع إعلانك) (home)",
+  "category": "classifieds",
+  "free_option": "اضافه اعلان مجانا بدون تسجيل",
+  "audience": "not seen",
+  "region": "Middle East & North Africa"
+ },
+ {
+  "id": "signup12:N/A (pan-Arab):aielanat-com-",
+  "kind": "signup",
+  "url": "https://www.aielanat.com/register/ (optional); guest posting via https://www.aielanat.com/اضافه-اعلان-مجانا/",
+  "country": "N/A (pan-Arab)",
+  "site": "aielanat.com (موقع إعلانك)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules12:N/A (pan-Arab):dakanarab-com-:home",
+  "kind": "html",
+  "url": "https://dakanarab.com/",
+  "country": "N/A (pan-Arab)",
+  "site": "Dakanarab.com (دكان العرب) (home)",
+  "category": "classifieds",
+  "free_option": "الإعلانات المبوبة المجانية",
+  "audience": "covers Arab countries (snippet)",
+  "region": "Middle East & North Africa"
+ },
+ {
+  "id": "rules12:ZW:classifieds-co-zw:home",
+  "kind": "html",
+  "url": "https://www.classifieds.co.zw/",
+  "country": "ZW",
+  "site": "Classifieds.co.zw (home)",
+  "category": "classifieds",
+  "free_option": "2018 report: limit of 5 free ads, unlimited for a monthly fee of $10; 2011: free for any business, payment only for a Storefront",
+  "audience": "registering more than 8 million monthly page views (2011 headline)",
+  "region": "Sub-Saharan Africa"
+ },
+ {
+  "id": "rules12:SN:coinafrique:home",
+  "kind": "html",
+  "url": "https://coinafrique.com/",
+  "country": "SN",
+  "site": "CoinAfrique (home)",
+  "category": "classifieds",
+  "free_option": "[snippet paraphrase] free to use, with ads posted at no cost across francophone Africa; number of free ads limited (2020); paid visibility offers since Jan 2020",
+  "audience": "francophone Africa (Senegal, Côte d'Ivoire, Benin...); 500 000 milestone headline",
+  "region": "Sub-Saharan Africa"
+ },
+ {
+  "id": "rules12:ID:iklangratiz-com:home",
+  "kind": "html",
+  "url": "https://www.iklangratiz.com/",
+  "country": "ID",
+  "site": "IklanGratiz.com (home)",
+  "category": "classifieds",
+  "free_option": "pasang iklan gratis tanpa daftar",
+  "audience": "not seen",
+  "region": "Southeast Asia"
+ },
+ {
+  "id": "rules12:VN:muaban-net:rules page",
+  "kind": "html",
+  "url": "https://muaban.net/wiki/quy-dinh-dang-tin-tren-muabannet (QUY ĐỊNH ĐĂNG TIN, updated 14/03/2025); terms https://muaban.net/wiki/dieu-khoan-su-dung-muabannet/; per-category rules https://muaban.net/wiki/quy-dinh-dang-tin-theo-tung-chuyen-muc-muabannet/",
+  "country": "VN",
+  "site": "Muaban.net (rules page)",
+  "category": "classifieds",
+  "free_option": "[snippet paraphrase] from 01/8/2024, when posting listings for real estate, jobs, or vehicles, you receive one regular free post per category (services category not confirmed)",
+  "audience": "Vietnam; not seen",
+  "region": "Southeast Asia"
+ },
+ {
+  "id": "rules12:VN:muaban-net:home",
+  "kind": "html",
+  "url": "https://muaban.net/",
+  "country": "VN",
+  "site": "Muaban.net (home)",
+  "category": "classifieds",
+  "free_option": "[snippet paraphrase] from 01/8/2024, when posting listings for real estate, jobs, or vehicles, you receive one regular free post per category (services category not confirmed)",
+  "audience": "Vietnam; not seen",
+  "region": "Southeast Asia"
+ },
+ {
+  "id": "rules12:US:classifiedads-com-help",
+  "kind": "html",
+  "url": "https://www.classifiedads.com/help",
+  "country": "US",
+  "site": "ClassifiedAds.com help",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules12:US:classifiedads-com-terms",
+  "kind": "html",
+  "url": "https://www.classifiedads.com/terms",
+  "country": "US",
+  "site": "ClassifiedAds.com terms",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules12:SA:expatriates-com-create-account",
+  "kind": "html",
+  "url": "https://www.expatriates.com/scripts/users/create_account.epl",
+  "country": "SA",
+  "site": "Expatriates.com create account",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules12:PL:lento-pl-pomoc",
+  "kind": "html",
+  "url": "https://www.lento.pl/pomoc.html",
+  "country": "PL",
+  "site": "Lento.pl pomoc",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules12:PL:lento-pl-dodaj",
+  "kind": "html",
+  "url": "https://www.lento.pl/dodaj-ogloszenie.html",
+  "country": "PL",
+  "site": "Lento.pl dodaj",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules12:IT:bakeca-it-regole",
+  "kind": "html",
+  "url": "https://www.bakeca.it/info/regole_pubblicazione/",
+  "country": "IT",
+  "site": "Bakeca.it regole",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules12:US:geebo-services-add",
+  "kind": "html",
+  "url": "https://geebo.com/services/add/",
+  "country": "US",
+  "site": "Geebo services add",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules12:RO:publi24-reguli",
+  "kind": "html",
+  "url": "https://ajutor.publi24.ro/reguli-adaugare-anunt/",
+  "country": "RO",
+  "site": "Publi24 reguli",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules12:JP:jimoty-verification",
+  "kind": "html",
+  "url": "https://jmty.jp/about/verification",
+  "country": "JP",
+  "site": "Jimoty verification",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules12:GB:preloved-business-definition",
+  "kind": "html",
+  "url": "https://www.preloved.co.uk/business/define",
+  "country": "GB",
+  "site": "Preloved business definition",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules12:PT:custojusto-rules",
+  "kind": "html",
+  "url": "https://custojusto.pt/ajuda-rules",
+  "country": "PT",
+  "site": "CustoJusto rules",
+  "category": "classifieds"
+ },
+ {
+  "id": "signup12:US:classifiedads-com",
+  "kind": "signup",
+  "url": "https://www.classifiedads.com/",
+  "country": "US",
+  "site": "ClassifiedAds.com",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:SA:expatriates-com",
+  "kind": "signup",
+  "url": "https://www.expatriates.com/scripts/users/create_account.epl",
+  "country": "SA",
+  "site": "Expatriates.com",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:PL:lento-pl",
+  "kind": "signup",
+  "url": "https://www.lento.pl/dodaj-ogloszenie.html",
+  "country": "PL",
+  "site": "Lento.pl",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:IT:bakeca-it",
+  "kind": "signup",
+  "url": "https://www.bakeca.it/",
+  "country": "IT",
+  "site": "Bakeca.it",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:UA:freetrade-com-ua",
+  "kind": "signup",
+  "url": "https://freetrade.com.ua/",
+  "country": "UA",
+  "site": "FreeTrade.com.ua",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:US:geebo",
+  "kind": "signup",
+  "url": "https://geebo.com/services/add/",
+  "country": "US",
+  "site": "Geebo",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:BG:alo-bg",
+  "kind": "signup",
+  "url": "https://www.alo.bg/",
+  "country": "BG",
+  "site": "Alo.bg",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:BG:bazar-bg",
+  "kind": "signup",
+  "url": "https://bazar.bg/",
+  "country": "BG",
+  "site": "Bazar.bg",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:AE:mourjan",
+  "kind": "signup",
+  "url": "https://www.mourjan.com/",
+  "country": "AE",
+  "site": "Mourjan",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:HU:hirdetesingyen-hu",
+  "kind": "signup",
+  "url": "https://hirdetesingyen.hu/",
+  "country": "HU",
+  "site": "Hirdetesingyen.hu",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:HU:ingyen-aprohirdetes-hu",
+  "kind": "signup",
+  "url": "https://ingyen-aprohirdetes.hu/",
+  "country": "HU",
+  "site": "Ingyen-aprohirdetes.hu",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:HU:aprohirdetes24-hu",
+  "kind": "signup",
+  "url": "https://aprohirdetes24.hu/",
+  "country": "HU",
+  "site": "Aprohirdetes24.hu",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:GB:freeads-co-uk",
+  "kind": "signup",
+  "url": "https://www.freeads.co.uk/",
+  "country": "GB",
+  "site": "Freeads.co.uk",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:GR:freelist-gr",
+  "kind": "signup",
+  "url": "https://www.freelist.gr/",
+  "country": "GR",
+  "site": "FreeList.gr",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:AR:anunciar-co",
+  "kind": "signup",
+  "url": "https://anunciar.co/",
+  "country": "AR",
+  "site": "Anunciar.co",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "signup12:ID:iklangratiz",
+  "kind": "signup",
+  "url": "https://www.iklangratiz.com/",
+  "country": "ID",
+  "site": "IklanGratiz",
+  "category": "signup-form",
+  "discover": true
+ }
+]
