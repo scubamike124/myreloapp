@@ -2,6 +2,8 @@
 
 One line per post, whoever made it. Amber's own posts (Facebook Page, Threads, Bluesky, LinkedIn through the publish queue) are recorded by her promotion lane as they happen and shown in the **Promotion** section of the StudyProofs tracker on amberai #105 (post, channel, account, state, live address or error); this file carries the by-hand posts and a copy of the lane's lines when the week is read. Performance is read from the tracker's funnel by source (`src`: `x`, `linkedin`, `facebook`, `threads`, `bluesky`, `examples`): visitors, signups, first study set, came back, trials, checkouts, verified live payments.
 
+State on 2026-10-16 20:04Z: **three live posts.** New: PeerTube, "Cellular respiration: study notes with where each came from" (bio-notes-with-sources), published 2026-10-16T20:00:36Z on the StudyProofs channel at https://stream.indieagora.com/videos/watch/a8991332-c648-4aea-8865-17fc45df0825 — read back publicly by a GitHub runner at 20:03:18Z (API record: privacy Public, state Published; the watch page carries the title; the channel's public list shows two videos). The lane made it at its 19:59Z tick, the first after the 20-hour gap from yesterday's upload ended at 19:46Z. The other two live posts are unchanged.
+
 State on 2026-10-16 19:37Z: **two live posts** (unchanged). New accounts: uri.life created, blocked at the server's CAPTCHA (owner's step); c7.io created, waiting for its confirmation mail. #857 merged (15183521).
 
 State on 2026-10-16 19:28Z: **two live posts** (unchanged). amberai #856 merged (07c10292): Mastodon accounts on uri.life (Korea) and c7.io (Chinese-speaking creators) are opened by the registrar from the next ticks; their first posts count only once read back publicly. PeerTube's upload is due after 19:46Z.
