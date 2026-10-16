@@ -1,0 +1,83 @@
+[
+ {
+  "id": "chk38:chokepoint:bounties-md",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Element-Ventures-Canada-Ltd/openchokepoint/contents/BOUNTIES.md",
+  "country": "GLOBAL",
+  "site": "openchokepoint BOUNTIES.md (base64): amounts, payment rail, CLA",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk38:chokepoint:readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Element-Ventures-Canada-Ltd/openchokepoint/readme",
+  "country": "GLOBAL",
+  "site": "openchokepoint README (base64)",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk38:chokepoint:repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Element-Ventures-Canada-Ltd/openchokepoint",
+  "country": "GLOBAL",
+  "site": "openchokepoint repo record",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk38:chokepoint:closed",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Element-Ventures-Canada-Ltd/openchokepoint/issues?state=closed&per_page=30",
+  "country": "GLOBAL",
+  "site": "openchokepoint closed issues (paid slices?)",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk38:chokepoint:16-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Element-Ventures-Canada-Ltd/openchokepoint/issues/16/comments",
+  "country": "GLOBAL",
+  "site": "openchokepoint #16 comments",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk38:spaceapp:tree",
+  "kind": "json",
+  "url": "https://api.github.com/repos/oll4com/spaceapp/git/trees/main?recursive=1",
+  "country": "GLOBAL",
+  "site": "spaceapp file tree (to find the bounty terms file)",
+  "category": "github-bounty-check",
+  "bodyChars": 400000
+ },
+ {
+  "id": "chk38:spaceapp:contributing",
+  "kind": "json",
+  "url": "https://api.github.com/repos/oll4com/spaceapp/contents/CONTRIBUTING.md",
+  "country": "GLOBAL",
+  "site": "spaceapp CONTRIBUTING.md (base64)",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk38:spaceapp:pulls",
+  "kind": "json",
+  "url": "https://api.github.com/repos/oll4com/spaceapp/pulls?state=all&per_page=30&sort=updated&direction=desc",
+  "country": "GLOBAL",
+  "site": "spaceapp pull requests (merged bounty PRs?)",
+  "category": "github-bounty-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "chk38:chokepoint:tree",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Element-Ventures-Canada-Ltd/openchokepoint/git/trees/main?recursive=1",
+  "country": "GLOBAL",
+  "site": "openchokepoint file tree",
+  "category": "github-bounty-check",
+  "bodyChars": 200000
+ }
+]
