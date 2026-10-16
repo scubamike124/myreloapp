@@ -1,0 +1,483 @@
+[
+ {
+  "code": "US",
+  "name": "United States",
+  "languages": [
+   "en"
+  ],
+  "region": "North America"
+ },
+ {
+  "code": "GB",
+  "name": "United Kingdom",
+  "languages": [
+   "en"
+  ],
+  "region": "Northern Europe"
+ },
+ {
+  "code": "CA",
+  "name": "Canada",
+  "languages": [
+   "en",
+   "fr"
+  ],
+  "region": "North America"
+ },
+ {
+  "code": "AU",
+  "name": "Australia",
+  "languages": [
+   "en"
+  ],
+  "region": "Oceania"
+ },
+ {
+  "code": "DE",
+  "name": "Germany",
+  "languages": [
+   "de",
+   "en"
+  ],
+  "region": "Western Europe"
+ },
+ {
+  "code": "FR",
+  "name": "France",
+  "languages": [
+   "fr",
+   "en"
+  ],
+  "region": "Western Europe"
+ },
+ {
+  "code": "NL",
+  "name": "Netherlands",
+  "languages": [
+   "nl",
+   "en"
+  ],
+  "region": "Western Europe"
+ },
+ {
+  "code": "IE",
+  "name": "Ireland",
+  "languages": [
+   "en"
+  ],
+  "region": "Northern Europe"
+ },
+ {
+  "code": "ES",
+  "name": "Spain",
+  "languages": [
+   "es",
+   "en"
+  ],
+  "region": "Southern Europe"
+ },
+ {
+  "code": "IT",
+  "name": "Italy",
+  "languages": [
+   "it",
+   "en"
+  ],
+  "region": "Southern Europe"
+ },
+ {
+  "code": "PL",
+  "name": "Poland",
+  "languages": [
+   "pl",
+   "en"
+  ],
+  "region": "Central & Eastern Europe"
+ },
+ {
+  "code": "IN",
+  "name": "India",
+  "languages": [
+   "en",
+   "hi"
+  ],
+  "region": "South Asia"
+ },
+ {
+  "code": "BR",
+  "name": "Brazil",
+  "languages": [
+   "pt",
+   "en"
+  ],
+  "region": "Latin America"
+ },
+ {
+  "code": "MX",
+  "name": "Mexico",
+  "languages": [
+   "es",
+   "en"
+  ],
+  "region": "Latin America"
+ },
+ {
+  "code": "SG",
+  "name": "Singapore",
+  "languages": [
+   "en"
+  ],
+  "region": "Southeast Asia"
+ },
+ {
+  "code": "ZA",
+  "name": "South Africa",
+  "languages": [
+   "en"
+  ],
+  "region": "Sub-Saharan Africa"
+ },
+ {
+  "code": "SE",
+  "name": "Sweden",
+  "languages": [
+   "sv",
+   "en"
+  ],
+  "region": "Northern Europe"
+ },
+ {
+  "code": "NO",
+  "name": "Norway",
+  "languages": [
+   "no",
+   "en"
+  ],
+  "region": "Northern Europe"
+ },
+ {
+  "code": "DK",
+  "name": "Denmark",
+  "languages": [
+   "da",
+   "en"
+  ],
+  "region": "Northern Europe"
+ },
+ {
+  "code": "FI",
+  "name": "Finland",
+  "languages": [
+   "fi",
+   "sv",
+   "en"
+  ],
+  "region": "Northern Europe"
+ },
+ {
+  "code": "CH",
+  "name": "Switzerland",
+  "languages": [
+   "de",
+   "fr",
+   "en"
+  ],
+  "region": "Western Europe"
+ },
+ {
+  "code": "AT",
+  "name": "Austria",
+  "languages": [
+   "de",
+   "en"
+  ],
+  "region": "Western Europe"
+ },
+ {
+  "code": "BE",
+  "name": "Belgium",
+  "languages": [
+   "nl",
+   "fr",
+   "en"
+  ],
+  "region": "Western Europe"
+ },
+ {
+  "code": "PT",
+  "name": "Portugal",
+  "languages": [
+   "pt",
+   "en"
+  ],
+  "region": "Southern Europe"
+ },
+ {
+  "code": "GR",
+  "name": "Greece",
+  "languages": [
+   "el",
+   "en"
+  ],
+  "region": "Southern Europe"
+ },
+ {
+  "code": "CZ",
+  "name": "Czechia",
+  "languages": [
+   "cs",
+   "en"
+  ],
+  "region": "Central & Eastern Europe"
+ },
+ {
+  "code": "RO",
+  "name": "Romania",
+  "languages": [
+   "ro",
+   "en"
+  ],
+  "region": "Central & Eastern Europe"
+ },
+ {
+  "code": "HU",
+  "name": "Hungary",
+  "languages": [
+   "hu",
+   "en"
+  ],
+  "region": "Central & Eastern Europe"
+ },
+ {
+  "code": "UA",
+  "name": "Ukraine",
+  "languages": [
+   "uk",
+   "en"
+  ],
+  "region": "Central & Eastern Europe"
+ },
+ {
+  "code": "AE",
+  "name": "United Arab Emirates",
+  "languages": [
+   "ar",
+   "en"
+  ],
+  "region": "Middle East & North Africa"
+ },
+ {
+  "code": "SA",
+  "name": "Saudi Arabia",
+  "languages": [
+   "ar",
+   "en"
+  ],
+  "region": "Middle East & North Africa"
+ },
+ {
+  "code": "IL",
+  "name": "Israel",
+  "languages": [
+   "he",
+   "en"
+  ],
+  "region": "Middle East & North Africa"
+ },
+ {
+  "code": "TR",
+  "name": "Turkey",
+  "languages": [
+   "tr",
+   "en"
+  ],
+  "region": "Middle East & North Africa"
+ },
+ {
+  "code": "JP",
+  "name": "Japan",
+  "languages": [
+   "ja",
+   "en"
+  ],
+  "region": "East Asia"
+ },
+ {
+  "code": "KR",
+  "name": "South Korea",
+  "languages": [
+   "ko",
+   "en"
+  ],
+  "region": "East Asia"
+ },
+ {
+  "code": "PH",
+  "name": "Philippines",
+  "languages": [
+   "en",
+   "tl"
+  ],
+  "region": "Southeast Asia"
+ },
+ {
+  "code": "ID",
+  "name": "Indonesia",
+  "languages": [
+   "id",
+   "en"
+  ],
+  "region": "Southeast Asia"
+ },
+ {
+  "code": "VN",
+  "name": "Vietnam",
+  "languages": [
+   "vi",
+   "en"
+  ],
+  "region": "Southeast Asia"
+ },
+ {
+  "code": "TH",
+  "name": "Thailand",
+  "languages": [
+   "th",
+   "en"
+  ],
+  "region": "Southeast Asia"
+ },
+ {
+  "code": "MY",
+  "name": "Malaysia",
+  "languages": [
+   "ms",
+   "en"
+  ],
+  "region": "Southeast Asia"
+ },
+ {
+  "code": "HK",
+  "name": "Hong Kong",
+  "languages": [
+   "zh",
+   "en"
+  ],
+  "region": "East Asia"
+ },
+ {
+  "code": "TW",
+  "name": "Taiwan",
+  "languages": [
+   "zh",
+   "en"
+  ],
+  "region": "East Asia"
+ },
+ {
+  "code": "PK",
+  "name": "Pakistan",
+  "languages": [
+   "en",
+   "ur"
+  ],
+  "region": "South Asia"
+ },
+ {
+  "code": "BD",
+  "name": "Bangladesh",
+  "languages": [
+   "bn",
+   "en"
+  ],
+  "region": "South Asia"
+ },
+ {
+  "code": "NZ",
+  "name": "New Zealand",
+  "languages": [
+   "en"
+  ],
+  "region": "Oceania"
+ },
+ {
+  "code": "AR",
+  "name": "Argentina",
+  "languages": [
+   "es",
+   "en"
+  ],
+  "region": "Latin America"
+ },
+ {
+  "code": "CL",
+  "name": "Chile",
+  "languages": [
+   "es",
+   "en"
+  ],
+  "region": "Latin America"
+ },
+ {
+  "code": "CO",
+  "name": "Colombia",
+  "languages": [
+   "es",
+   "en"
+  ],
+  "region": "Latin America"
+ },
+ {
+  "code": "PE",
+  "name": "Peru",
+  "languages": [
+   "es",
+   "en"
+  ],
+  "region": "Latin America"
+ },
+ {
+  "code": "NG",
+  "name": "Nigeria",
+  "languages": [
+   "en"
+  ],
+  "region": "Sub-Saharan Africa"
+ },
+ {
+  "code": "EG",
+  "name": "Egypt",
+  "languages": [
+   "ar",
+   "en"
+  ],
+  "region": "Middle East & North Africa"
+ },
+ {
+  "code": "KE",
+  "name": "Kenya",
+  "languages": [
+   "en",
+   "sw"
+  ],
+  "region": "Sub-Saharan Africa"
+ },
+ {
+  "code": "MA",
+  "name": "Morocco",
+  "languages": [
+   "ar",
+   "fr",
+   "en"
+  ],
+  "region": "Middle East & North Africa"
+ },
+ {
+  "code": "GH",
+  "name": "Ghana",
+  "languages": [
+   "en"
+  ],
+  "region": "Sub-Saharan Africa"
+ }
+]
