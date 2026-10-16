@@ -1,0 +1,44 @@
+[
+ {
+  "id": "fedidb-mastodon-family-wide",
+  "kind": "directory",
+  "source": "fedidb",
+  "software": [
+   "mastodon",
+   "pleroma",
+   "akkoma",
+   "gotosocial",
+   "friendica",
+   "hubzilla",
+   "mbin"
+  ],
+  "max": 2500,
+  "pages": 220
+ },
+ {
+  "id": "fedidb-misskey-family-wide",
+  "kind": "directory",
+  "source": "fedidb",
+  "software": [
+   "misskey",
+   "firefish",
+   "sharkey",
+   "iceshrimp",
+   "calckey"
+  ],
+  "max": 600,
+  "pages": 220
+ },
+ {
+  "id": "lemmyverse-wide",
+  "kind": "directory",
+  "source": "lemmyverse",
+  "max": 600
+ },
+ {
+  "id": "joinpeertube-wide",
+  "kind": "directory",
+  "source": "joinpeertube",
+  "max": 900
+ }
+]

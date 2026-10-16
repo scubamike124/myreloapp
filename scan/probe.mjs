@@ -176,7 +176,49 @@ async function expandDirectory(t) {
   return list;
 }
 
-const PROBES = { mastodon: probeMastodon, peertube: probePeertube, lemmy: probeLemmy, pixelfed: probePixelfed, misskey: probeMisskey, nostr: probeNostr, html: probeHtml };
+// The sign-up form itself: which fields it asks for (e-mail, password, phone, date of birth), which CAPTCHA it loads, whether it is
+// login-with-Google-only or a JavaScript-only shell. Reads the page; fills nothing, submits nothing. With `discover`, a home page is
+// followed to its own sign-up link first.
+const SIGNUP_LINK = /(register|signup|sign-up|sign_up|\bjoin\b|inscription|inscri|registro|registrar|cadastr|registrier|anmeld|rejestr|registrace|regisztr|inregistr|реєстр|регистр|kayit|kayıt|会員登録|新規登録|회원가입|注册|註冊|đăng-ký|dang-ky|สมัคร|daftar|opret|skapa konto|luo tunnus|crear cuenta|criar conta|créer un compte|create account|create an account)/i;
+const NOT_SIGNUP = /(login|signin|sign-in|log-in|facebook\.com|twitter\.com|x\.com|instagram\.com|linkedin\.com|youtube\.com|apple\.com|google\.com|unsubscribe|newsletter)/i;
+async function probeSignup(t) {
+  const html5 = { accept: "text/html,application/xhtml+xml,*/*;q=0.8", ms: 20000 };
+  let page = await get(t.url, html5);
+  let url = page.url || t.url; const hops = [];
+  const hasPassword = (h) => /<input[^>]+type=["']?password/i.test(h);
+  if (!hasPassword(page.text) && t.discover !== false) {
+    const links = [...str(page.text).matchAll(/<a\s[^>]*href\s*=\s*["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi)].map((m) => ({ href: m[1], text: stripTags(m[2]).trim().slice(0, 60) }));
+    const cand = links.find((l) => (SIGNUP_LINK.test(l.href) || SIGNUP_LINK.test(l.text)) && !NOT_SIGNUP.test(l.href));
+    if (cand) {
+      try { url = new URL(cand.href, url).toString(); } catch { url = cand.href; }
+      hops.push(url);
+      page = await get(url, html5);
+    }
+  }
+  const html = str(page.text);
+  const title = (html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "").replace(/\s+/g, " ").trim().slice(0, 120);
+  const inputs = [...html.matchAll(/<input\b[^>]*>/gi)].map((m) => m[0]).map((tag) => ({
+    type: (tag.match(/type\s*=\s*["']?([\w-]+)/i) || [])[1] || "text",
+    name: (tag.match(/\bname\s*=\s*["']?([^"'\s>]+)/i) || [])[1] || "",
+    placeholder: (tag.match(/placeholder\s*=\s*["']([^"']*)["']/i) || [])[1] || "",
+    autocomplete: (tag.match(/autocomplete\s*=\s*["']?([\w-]+)/i) || [])[1] || "",
+  })).filter((i) => !["hidden", "submit", "button", "image", "reset", "search"].includes(i.type.toLowerCase()));
+  const selects = [...html.matchAll(/<select\b[^>]*name\s*=\s*["']?([^"'\s>]+)/gi)].map((m) => m[1]);
+  const fieldText = inputs.map((i) => `${i.type} ${i.name} ${i.placeholder} ${i.autocomplete}`).join(" | ") + " | " + selects.join(" ");
+  const labels = stripTags(html.replace(/<label\b[^>]*>/gi, " [label] ")).slice(0, 6000);
+  const text = stripTags(html);
+  const captcha = { hcaptcha: /hcaptcha\.com|h-captcha/i.test(html), recaptcha: /recaptcha|g-recaptcha/i.test(html), turnstile: /turnstile|cf-turnstile/i.test(html), other: /captcha/i.test(html) && !/hcaptcha|recaptcha|turnstile/i.test(html) };
+  const phone = /type\s*=\s*["']?tel\b/i.test(html) || /\b(tel|phone|mobile|telefon|t[eé]l[eé]phone|tel[eé]fono|celular|电话|手机|電話|휴대폰|số điện thoại|โทรศัพท์)\b/i.test(fieldText);
+  const dob = /birth|\bdob\b|geburt|naissance|nacimiento|nascimento|誕生|生年月日|생년월일|出生/i.test(fieldText) || (/type\s*=\s*["']?date\b/i.test(html) && /birth|geburt|naissance|nacimiento|nascimento|age/i.test(labels));
+  const email = /type\s*=\s*["']?email\b/i.test(html) || /email|e-mail|correo|courriel|メール|이메일|邮箱/i.test(fieldText);
+  const password = hasPassword(html);
+  const oauth = { google: /accounts\.google\.com|continue with google|sign (in|up) with google|google-signin|googleusercontent/i.test(html), facebook: /facebook\.com\/(dialog|login|v\d)|continue with facebook/i.test(html), apple: /appleid\.apple\.com|sign in with apple/i.test(html), github: /github\.com\/login\/oauth|continue with github/i.test(html) };
+  const jsOnly = inputs.length === 0 && /__NEXT_DATA__|data-reactroot|id="app"|id="root"|ng-app|nuxt/i.test(html);
+  const blocked = /just a moment|checking your browser|verify you are human|cf-chl|challenge-platform|pardon our interruption/i.test(html) || [403, 429, 503].includes(page.status);
+  return { reachable: page.status > 0, status: page.status, finalUrl: url, hops, title, blocked, formFound: password || (email && inputs.length > 0), email, password, phone, dob, captcha, oauth, jsOnly, inputs: inputs.slice(0, 30), selects: selects.slice(0, 15), signupExtracts: pickSentences(text, SIGNUP, 6), chars: text.length, error: page.error };
+}
+
+const PROBES = { mastodon: probeMastodon, peertube: probePeertube, lemmy: probeLemmy, pixelfed: probePixelfed, misskey: probeMisskey, nostr: probeNostr, html: probeHtml, signup: probeSignup };
 async function run() {
   let queue = [];
   for (const t of targets) {

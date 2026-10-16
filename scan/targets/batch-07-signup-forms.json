@@ -1,0 +1,904 @@
+[
+ {
+  "id": "signup7:PL:forum-studia-net",
+  "kind": "signup",
+  "url": "https://forum.studia.net/register/",
+  "discover": false,
+  "country": "PL",
+  "site": "Forum.Studia.net",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:RO:romaniaunita-com-forum",
+  "kind": "signup",
+  "url": "https://www.romaniaunita.com/",
+  "discover": true,
+  "country": "RO",
+  "site": "RomaniaUnita.com forum",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:KR:phdkim-net",
+  "kind": "signup",
+  "url": "https://phdkim.net/",
+  "discover": true,
+  "country": "KR",
+  "site": "phdkim.net",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:TH:pantip-pantipmarket-s-account-",
+  "kind": "signup",
+  "url": "https://pantip.com/register/email",
+  "discover": false,
+  "country": "TH",
+  "site": "Pantip (PantipMarket's account)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:TH:pantipmarket",
+  "kind": "signup",
+  "url": "https://www.pantipmarket.com/",
+  "discover": true,
+  "country": "TH",
+  "site": "PantipMarket",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:AR:evisos-argentina",
+  "kind": "signup",
+  "url": "https://www.evisos.com.ar/",
+  "discover": true,
+  "country": "AR",
+  "site": "Evisos Argentina",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:MX:evisos-m-xico",
+  "kind": "signup",
+  "url": "https://www.evisos.com.mx/",
+  "discover": true,
+  "country": "MX",
+  "site": "Evisos México",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:CL:evisos-chile",
+  "kind": "signup",
+  "url": "https://www.evisos.cl/",
+  "discover": true,
+  "country": "CL",
+  "site": "Evisos Chile",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:CO:evisos-colombia",
+  "kind": "signup",
+  "url": "https://www.evisos.com.co/",
+  "discover": true,
+  "country": "CO",
+  "site": "Evisos Colombia",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:ES:tabl-n-de-anuncios",
+  "kind": "signup",
+  "url": "https://www.tablondeanuncios.com/",
+  "discover": true,
+  "country": "ES",
+  "site": "Tablón de Anuncios",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:DE:quoka",
+  "kind": "signup",
+  "url": "https://www.quoka.de/",
+  "discover": true,
+  "country": "DE",
+  "site": "Quoka",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:FR:paruvendu",
+  "kind": "signup",
+  "url": "https://www.paruvendu.fr/",
+  "discover": true,
+  "country": "FR",
+  "site": "ParuVendu",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:FR:toutunservice-fr",
+  "kind": "signup",
+  "url": "https://www.toutunservice.fr/",
+  "discover": true,
+  "country": "FR",
+  "site": "Toutunservice.fr",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:CO:colombia-move",
+  "kind": "signup",
+  "url": "https://colombiamove.com/",
+  "discover": true,
+  "country": "CO",
+  "site": "Colombia Move",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:CO:colombia-move-publicar-",
+  "kind": "signup",
+  "url": "https://colombiamove.com/publicar",
+  "discover": true,
+  "country": "CO",
+  "site": "Colombia Move (publicar)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:PK:list-com-pk",
+  "kind": "signup",
+  "url": "https://list.com.pk/",
+  "discover": true,
+  "country": "PK",
+  "site": "List.com.pk",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:expat-com",
+  "kind": "signup",
+  "url": "https://www.expat.com/en/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "Expat.com",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:uno-directory",
+  "kind": "signup",
+  "url": "https://uno.directory/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "UNO Directory",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:PK:startup-pk",
+  "kind": "signup",
+  "url": "https://startup.pk/",
+  "discover": true,
+  "country": "PK",
+  "site": "Startup.pk",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GB:educational-app-store",
+  "kind": "signup",
+  "url": "https://www.educationalappstore.com/",
+  "discover": true,
+  "country": "GB",
+  "site": "Educational App Store",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:NL:speurders-nl",
+  "kind": "signup",
+  "url": "https://www.speurders.nl/",
+  "discover": true,
+  "country": "NL",
+  "site": "Speurders.nl",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:CZ:hyperinzerce-cz",
+  "kind": "signup",
+  "url": "https://www.hyperinzerce.cz/",
+  "discover": true,
+  "country": "CZ",
+  "site": "Hyperinzerce.cz",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:UA:ukrboard",
+  "kind": "signup",
+  "url": "https://ukrboard.com.ua/",
+  "discover": true,
+  "country": "UA",
+  "site": "Ukrboard",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:RO:anuntul-ro",
+  "kind": "signup",
+  "url": "https://www.anuntul.ro/",
+  "discover": true,
+  "country": "RO",
+  "site": "Anuntul.ro",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:MA:marocannonces",
+  "kind": "signup",
+  "url": "https://www.marocannonces.com/",
+  "discover": true,
+  "country": "MA",
+  "site": "Marocannonces",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:SG:sg-ads-online",
+  "kind": "signup",
+  "url": "https://www.sgadsonline.com/",
+  "discover": true,
+  "country": "SG",
+  "site": "SG Ads Online",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:IN:click-in",
+  "kind": "signup",
+  "url": "https://www.click.in/",
+  "discover": true,
+  "country": "IN",
+  "site": "Click.in",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:BD:aponhut",
+  "kind": "signup",
+  "url": "https://www.aponhut.com/",
+  "discover": true,
+  "country": "BD",
+  "site": "Aponhut",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:PT:uniarea-forum",
+  "kind": "signup",
+  "url": "https://www.uniarea.com/forum/",
+  "discover": true,
+  "country": "PT",
+  "site": "Uniarea forum",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:NL:fok-forum",
+  "kind": "signup",
+  "url": "https://forum.fok.nl/",
+  "discover": true,
+  "country": "NL",
+  "site": "FOK!forum",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:DE:studis-online-fragen-brett",
+  "kind": "signup",
+  "url": "https://www.studis-online.de/Fragen-Brett/",
+  "discover": true,
+  "country": "DE",
+  "site": "Studis Online Fragen-Brett",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:HU:egyetemistak-hu",
+  "kind": "signup",
+  "url": "https://egyetemistak.hu/",
+  "discover": true,
+  "country": "HU",
+  "site": "Egyetemistak.hu",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:IL:tapuz-forums",
+  "kind": "signup",
+  "url": "https://www.tapuz.co.il/forums",
+  "discover": true,
+  "country": "IL",
+  "site": "Tapuz forums",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:UA:dou-ua",
+  "kind": "signup",
+  "url": "https://dou.ua/",
+  "discover": true,
+  "country": "UA",
+  "site": "DOU.ua",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:ZA:studentroom-co-za",
+  "kind": "signup",
+  "url": "https://www.studentroom.co.za/",
+  "discover": true,
+  "country": "ZA",
+  "site": "Studentroom.co.za",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:BR:f-rum-pir2",
+  "kind": "signup",
+  "url": "https://pir2.forumeiros.com/",
+  "discover": true,
+  "country": "BR",
+  "site": "Fórum PiR2",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:AR:ser-universitario-foro",
+  "kind": "signup",
+  "url": "https://seruniversitario.com/foro",
+  "discover": true,
+  "country": "AR",
+  "site": "Ser Universitario foro",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:FR:vivastreet-fr",
+  "kind": "signup",
+  "url": "https://www.vivastreet.com/",
+  "discover": true,
+  "country": "FR",
+  "site": "Vivastreet FR",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GB:vivastreet-uk",
+  "kind": "signup",
+  "url": "https://www.vivastreet.co.uk/",
+  "discover": true,
+  "country": "GB",
+  "site": "Vivastreet UK",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:BE:vivastreet-be",
+  "kind": "signup",
+  "url": "https://www.vivastreet.be/",
+  "discover": true,
+  "country": "BE",
+  "site": "Vivastreet BE",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:BE:2dehands-be",
+  "kind": "signup",
+  "url": "https://www.2dehands.be/",
+  "discover": true,
+  "country": "BE",
+  "site": "2dehands.be",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:AT:willhaben",
+  "kind": "signup",
+  "url": "https://www.willhaben.at/",
+  "discover": true,
+  "country": "AT",
+  "site": "willhaben",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:CZ:sbazar-cz",
+  "kind": "signup",
+  "url": "https://www.sbazar.cz/",
+  "discover": true,
+  "country": "CZ",
+  "site": "Sbazar.cz",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:CZ:bazos-cz",
+  "kind": "signup",
+  "url": "https://www.bazos.cz/",
+  "discover": true,
+  "country": "CZ",
+  "site": "Bazos.cz",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:UA:obyava-ua",
+  "kind": "signup",
+  "url": "https://obyava.ua/",
+  "discover": true,
+  "country": "UA",
+  "site": "OBYAVA.ua",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:DK:guloggratis",
+  "kind": "signup",
+  "url": "https://www.guloggratis.dk/",
+  "discover": true,
+  "country": "DK",
+  "site": "GulogGratis",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:SE:citiboard",
+  "kind": "signup",
+  "url": "https://citiboard.se/",
+  "discover": true,
+  "country": "SE",
+  "site": "Citiboard",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:NL:marktplaats",
+  "kind": "signup",
+  "url": "https://www.marktplaats.nl/",
+  "discover": true,
+  "country": "NL",
+  "site": "Marktplaats",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:DE:kleinanzeigen",
+  "kind": "signup",
+  "url": "https://www.kleinanzeigen.de/",
+  "discover": true,
+  "country": "DE",
+  "site": "Kleinanzeigen",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:JP:-",
+  "kind": "signup",
+  "url": "https://jmty.jp/",
+  "discover": true,
+  "country": "JP",
+  "site": "ジモティー",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:MY:mudah-my",
+  "kind": "signup",
+  "url": "https://www.mudah.my/",
+  "discover": true,
+  "country": "MY",
+  "site": "Mudah.my",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:TH:kaidee",
+  "kind": "signup",
+  "url": "https://www.kaidee.com/",
+  "discover": true,
+  "country": "TH",
+  "site": "Kaidee",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:IL:yad2",
+  "kind": "signup",
+  "url": "https://www.yad2.co.il/",
+  "discover": true,
+  "country": "IL",
+  "site": "Yad2",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:KE:businesslist-co-ke",
+  "kind": "signup",
+  "url": "https://www.businesslist.co.ke/",
+  "discover": true,
+  "country": "KE",
+  "site": "Businesslist.co.ke",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:NG:businesslist-com-ng",
+  "kind": "signup",
+  "url": "https://www.businesslist.com.ng/",
+  "discover": true,
+  "country": "NG",
+  "site": "Businesslist.com.ng",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:ZA:sa-yellow",
+  "kind": "signup",
+  "url": "https://www.sayellow.com/",
+  "discover": true,
+  "country": "ZA",
+  "site": "SA Yellow",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:DK:amino-dk",
+  "kind": "signup",
+  "url": "https://www.amino.dk/",
+  "discover": true,
+  "country": "DK",
+  "site": "Amino.dk",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:BR:tabnews",
+  "kind": "signup",
+  "url": "https://tabnews.com.br/cadastro",
+  "discover": false,
+  "country": "BR",
+  "site": "TabNews",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:dev-to",
+  "kind": "signup",
+  "url": "https://dev.to/enter?state=new-user",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "dev.to",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:hashnode",
+  "kind": "signup",
+  "url": "https://hashnode.com/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "Hashnode",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:write-as",
+  "kind": "signup",
+  "url": "https://write.as/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "Write.as",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:indie-hackers",
+  "kind": "signup",
+  "url": "https://www.indiehackers.com/sign-up",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Indie Hackers",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:bear-blog",
+  "kind": "signup",
+  "url": "https://bearblog.dev/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "Bear Blog",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:mataroa",
+  "kind": "signup",
+  "url": "https://mataroa.blog/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "Mataroa",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:US:uloop",
+  "kind": "signup",
+  "url": "https://www.uloop.com/",
+  "discover": true,
+  "country": "US",
+  "site": "Uloop",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:telegraph-telegra-ph-",
+  "kind": "signup",
+  "url": "https://telegra.ph/",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Telegraph (telegra.ph)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:startup-buffer",
+  "kind": "signup",
+  "url": "https://startupbuffer.com/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "Startup Buffer",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:startupranking",
+  "kind": "signup",
+  "url": "https://www.startupranking.com/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "StartupRanking",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:sideprojectors",
+  "kind": "signup",
+  "url": "https://www.sideprojectors.com/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "SideProjectors",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:launched-io",
+  "kind": "signup",
+  "url": "https://launched.io/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "Launched.io",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:lemmy-lemmy-ml",
+  "kind": "signup",
+  "url": "https://lemmy.ml/signup",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Lemmy: lemmy.ml",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:lemmy-sopuli-xyz",
+  "kind": "signup",
+  "url": "https://sopuli.xyz/signup",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Lemmy: sopuli.xyz",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:lemmy-lemmy-dbzer0-com",
+  "kind": "signup",
+  "url": "https://lemmy.dbzer0.com/signup",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Lemmy: lemmy.dbzer0.com",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:lemmy-lemm-ee",
+  "kind": "signup",
+  "url": "https://lemm.ee/signup",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Lemmy: lemm.ee",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:lemmy-lemmy-zip",
+  "kind": "signup",
+  "url": "https://lemmy.zip/signup",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Lemmy: lemmy.zip",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:lemmy-programming-dev",
+  "kind": "signup",
+  "url": "https://programming.dev/signup",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Lemmy: programming.dev",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:lemmy-discuss-online",
+  "kind": "signup",
+  "url": "https://discuss.online/signup",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Lemmy: discuss.online",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup7:GLOBAL:lemmy-lemmy-today",
+  "kind": "signup",
+  "url": "https://lemmy.today/signup",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Lemmy: lemmy.today",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules7:GLOBAL:dev-to-terms",
+  "kind": "html",
+  "url": "https://dev.to/terms",
+  "country": "GLOBAL",
+  "site": "dev.to terms",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:dev-to-code-of-conduct",
+  "kind": "html",
+  "url": "https://dev.to/code-of-conduct",
+  "country": "GLOBAL",
+  "site": "dev.to code of conduct",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:dev-to-content-policy-faq-",
+  "kind": "html",
+  "url": "https://dev.to/faq",
+  "country": "GLOBAL",
+  "site": "dev.to content policy (FAQ)",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:hashnode-terms",
+  "kind": "html",
+  "url": "https://hashnode.com/terms",
+  "country": "GLOBAL",
+  "site": "Hashnode terms",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:hashnode-community-guidelines",
+  "kind": "html",
+  "url": "https://hashnode.com/community-guidelines",
+  "country": "GLOBAL",
+  "site": "Hashnode community guidelines",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:write-as-about-guidelines",
+  "kind": "html",
+  "url": "https://write.as/about",
+  "country": "GLOBAL",
+  "site": "Write.as about / guidelines",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:write-as-content-policy",
+  "kind": "html",
+  "url": "https://write.as/content-policy",
+  "country": "GLOBAL",
+  "site": "Write.as content policy",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:bear-blog-terms",
+  "kind": "html",
+  "url": "https://bearblog.dev/terms/",
+  "country": "GLOBAL",
+  "site": "Bear Blog terms",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:mataroa-guidelines",
+  "kind": "html",
+  "url": "https://mataroa.blog/guides/",
+  "country": "GLOBAL",
+  "site": "Mataroa guidelines",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:telegraph-terms",
+  "kind": "html",
+  "url": "https://telegra.ph/api",
+  "country": "GLOBAL",
+  "site": "Telegraph terms",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:lemmy-ml-legal",
+  "kind": "html",
+  "url": "https://lemmy.ml/legal",
+  "country": "GLOBAL",
+  "site": "Lemmy.ml legal",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:lemmy-dbzer0-com-legal",
+  "kind": "html",
+  "url": "https://lemmy.dbzer0.com/legal",
+  "country": "GLOBAL",
+  "site": "lemmy.dbzer0.com legal",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:lemm-ee-legal",
+  "kind": "html",
+  "url": "https://lemm.ee/legal",
+  "country": "GLOBAL",
+  "site": "lemm.ee legal",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:lemmy-zip-legal",
+  "kind": "html",
+  "url": "https://lemmy.zip/legal",
+  "country": "GLOBAL",
+  "site": "lemmy.zip legal",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:programming-dev-legal",
+  "kind": "html",
+  "url": "https://programming.dev/legal",
+  "country": "GLOBAL",
+  "site": "programming.dev legal",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:discuss-online-legal",
+  "kind": "html",
+  "url": "https://discuss.online/legal",
+  "country": "GLOBAL",
+  "site": "discuss.online legal",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:lemmy-today-legal",
+  "kind": "html",
+  "url": "https://lemmy.today/legal",
+  "country": "GLOBAL",
+  "site": "lemmy.today legal",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:sopuli-xyz-legal",
+  "kind": "html",
+  "url": "https://sopuli.xyz/legal",
+  "country": "GLOBAL",
+  "site": "sopuli.xyz legal",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:expat-com-terms",
+  "kind": "html",
+  "url": "https://www.expat.com/en/terms-of-use.html",
+  "country": "GLOBAL",
+  "site": "Expat.com terms",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:expat-com-classifieds-charter",
+  "kind": "html",
+  "url": "https://www.expat.com/en/classifieds-charter.html",
+  "country": "GLOBAL",
+  "site": "Expat.com classifieds charter",
+  "category": "other"
+ },
+ {
+  "id": "rules7:US:uloop-terms",
+  "kind": "html",
+  "url": "https://www.uloop.com/about/terms",
+  "country": "US",
+  "site": "Uloop terms",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:startup-buffer-submit",
+  "kind": "html",
+  "url": "https://startupbuffer.com/submit",
+  "country": "GLOBAL",
+  "site": "Startup Buffer submit",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:startupranking-add-startup",
+  "kind": "html",
+  "url": "https://www.startupranking.com/add-startup",
+  "country": "GLOBAL",
+  "site": "StartupRanking add startup",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:sideprojectors-submit",
+  "kind": "html",
+  "url": "https://www.sideprojectors.com/project/submit",
+  "country": "GLOBAL",
+  "site": "SideProjectors submit",
+  "category": "other"
+ },
+ {
+  "id": "rules7:GLOBAL:indie-hackers-community-guidelines",
+  "kind": "html",
+  "url": "https://www.indiehackers.com/community-guidelines",
+  "country": "GLOBAL",
+  "site": "Indie Hackers community guidelines",
+  "category": "other"
+ }
+]
