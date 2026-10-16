@@ -1,0 +1,29 @@
+[
+ {
+  "id": "raw30:myproduct:home",
+  "kind": "json",
+  "url": "https://myproduct.co.il/",
+  "country": "IL",
+  "site": "myproduct.co.il home page, raw HTML (the quick form's markup, required attributes and the script that fills the sub-category list)",
+  "category": "classified-board",
+  "bodyChars": 400000
+ },
+ {
+  "id": "raw30:myproduct:cat-shonot",
+  "kind": "json",
+  "url": "https://myproduct.co.il/reshut-harabim/category/c_1769374235_0",
+  "country": "IL",
+  "site": "myproduct.co.il category page 'שונות', raw HTML (its sub-category select)",
+  "category": "classified-board",
+  "bodyChars": 120000
+ },
+ {
+  "id": "raw30:myproduct:submit-page",
+  "kind": "json",
+  "url": "https://myproduct.co.il/reshut-harabim/submit.php",
+  "country": "IL",
+  "site": "myproduct.co.il full submit page, raw HTML (field names, required attributes, scripts)",
+  "category": "classified-board",
+  "bodyChars": 300000
+ }
+]

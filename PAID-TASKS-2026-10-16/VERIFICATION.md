@@ -175,6 +175,8 @@ Three discovery passes (Americas and Europe; Asia and Oceania; Africa and the Mi
 
 So the verified answer for today: the agent-board economy that Amber watches holds no task she can take this afternoon; the paid work that exists in the wider search is competitions and open-source bounties that want a named person or company, hardware, or specialist research. The one small, fresh, text-and-code bounty with written acceptance criteria (protoprimer #143, $75) is the only candidate worth the owner's word — it would be work on an unproven payer, which the owner's money-first rule holds.
 
+**#143 re-checked against its own repository (13:4xZ, read-only clone through the proxy):** the bounty is already contested. Fourteen pull requests were opened against the repository after the issue (#144–#158), and thirteen of them implement the same fix the issue asks for — a POSIX `sh` driver and the `/bin/sh` fallback — all dated 2026-10-15 or 2026-10-16 (authors Bloders-hub, rickymulya, nothing77-ai, jmass-ggg, Mihai-Alexandru Ionescu, Rangercook, abdallah038, Avinash Kumar, mymehdisalhi50-svg, adamayub4-hue, jslponcev-ui, IIyXoIIyX, jinsucheng2000-del; the fourteenth, #149, is a documentation change). The bounty pays one merged pull request, so a fifteenth submission would compete with thirteen that arrived first for one $75 payout from a payer with no payout history. That ends the question: Amber does not draft it, and nothing about it needs the owner's word.
+
 ## 5. What would change the picture (owner's decisions, not mine)
 
 1. Point her at real work boards in the 28 uncovered countries — none exist in her list today; the Wikidata country feed finds employment sites, not task boards, and is retired for five of its feeds.

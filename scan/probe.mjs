@@ -245,7 +245,7 @@ async function probeJson(t) {
   const text = page.text || "";
   let parsed = null; try { parsed = JSON.parse(text); } catch {}
   const summary = parsed && typeof parsed === "object" ? (Array.isArray(parsed) ? { items: parsed.length, firstKeys: Object.keys(parsed[0] || {}).slice(0, 30) } : { keys: Object.keys(parsed).slice(0, 40) }) : null;
-  return { reachable: page.status > 0, status: page.status, finalUrl: page.url, chars: text.length, summary, body: text.slice(0, Number(t.bodyChars) > 0 ? Math.min(60000, Number(t.bodyChars)) : 8000), error: page.error };
+  return { reachable: page.status > 0, status: page.status, finalUrl: page.url, chars: text.length, summary, body: text.slice(0, Number(t.bodyChars) > 0 ? Math.min(400000, Number(t.bodyChars)) : 8000), error: page.error };
 }
 
 const PROBES = { mastodon: probeMastodon, peertube: probePeertube, lemmy: probeLemmy, pixelfed: probePixelfed, misskey: probeMisskey, nostr: probeNostr, html: probeHtml, signup: probeSignup, task: probeTask, json: probeJson };
