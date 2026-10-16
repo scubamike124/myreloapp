@@ -1,0 +1,40 @@
+[
+ {
+  "id": "r18:boss-earner",
+  "url": "https://www.boss.dev/doc/get-started",
+  "country": "GLOBAL",
+  "site": "boss.dev get started (who can earn, the 23 countries, payouts)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 16000
+ },
+ {
+  "id": "r18:boss-pricing",
+  "url": "https://www.boss.dev/pricing",
+  "country": "GLOBAL",
+  "site": "boss.dev pricing (fees on bounties)",
+  "category": "bounty-platform",
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r18:boss-terms",
+  "url": "https://www.boss.dev/terms",
+  "country": "GLOBAL",
+  "site": "boss.dev terms of use",
+  "category": "bounty-platform",
+  "fullText": true,
+  "excerptChars": 16000
+ },
+ {
+  "id": "r18:boss-qortal",
+  "url": "https://www.boss.dev/issue/github/I_kwDOEJLUl85mXGD6",
+  "country": "GLOBAL",
+  "site": "boss.dev bounty page: qortal #122",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ }
+]
