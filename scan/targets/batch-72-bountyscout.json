@@ -1,0 +1,38 @@
+[
+ {
+  "id": "gh72:bountyscout-1601",
+  "kind": "json",
+  "url": "https://api.github.com/repos/dev-kp-eloper/BountyScout/issues/1601",
+  "country": "GLOBAL",
+  "site": "BountyScout #1601 (the ten opportunities)",
+  "category": "github-bounty-source",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh72:bountyscout-readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/dev-kp-eloper/BountyScout/readme",
+  "country": "GLOBAL",
+  "site": "BountyScout README (sources)",
+  "category": "github-bounty-source",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh72:paraspell-readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/paraspell/xcm-tools/readme",
+  "country": "GLOBAL",
+  "site": "paraspell/xcm-tools README (bug bounty terms?)",
+  "category": "github-bounty-source",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh72:paraspell-2161",
+  "kind": "json",
+  "url": "https://api.github.com/repos/paraspell/xcm-tools/issues/2161",
+  "country": "GLOBAL",
+  "site": "paraspell #2161 body",
+  "category": "github-bounty-source",
+  "bodyChars": 40000
+ }
+]
