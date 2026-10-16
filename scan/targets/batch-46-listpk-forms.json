@@ -1,0 +1,58 @@
+[
+ {
+  "id": "lpk46:register-raw",
+  "kind": "json",
+  "url": "https://list.com.pk/member/register/",
+  "country": "PK",
+  "site": "list.com.pk registration page, raw HTML (form fields, hidden values, links)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "lpk46:register-forms",
+  "kind": "json",
+  "url": "https://list.com.pk/member/register/",
+  "country": "PK",
+  "site": "list.com.pk registration page: the form windows only",
+  "category": "classified-board",
+  "bodyMatch": "<form",
+  "bodyWindow": 4000,
+  "bodyChars": 60000
+ },
+ {
+  "id": "lpk46:member-post-ad",
+  "kind": "json",
+  "url": "https://list.com.pk/member/post-ad/",
+  "country": "PK",
+  "site": "list.com.pk members-only ad page (logged out: shows the login form or redirects)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "lpk46:member-root",
+  "kind": "json",
+  "url": "https://list.com.pk/member/",
+  "country": "PK",
+  "site": "list.com.pk member root (sign-in page?)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "lpk46:login",
+  "kind": "json",
+  "url": "https://list.com.pk/member/login/",
+  "country": "PK",
+  "site": "list.com.pk login page (guessed path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "lpk46:home-links",
+  "kind": "task",
+  "url": "https://list.com.pk/",
+  "country": "PK",
+  "site": "list.com.pk home page: links (sign-in path, post-ad path)",
+  "category": "classified-board",
+  "excerptChars": 3000
+ }
+]
