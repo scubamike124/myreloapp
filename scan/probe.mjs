@@ -223,9 +223,9 @@ async function probeSignup(t) {
 // sentences that say whether it is open, closed, awarded or expired, its deadline and its reward. Reads only; never applies or bids.
 const TASK_WORDS = /\b(open|closed|close[ds]?|completed|complete|awarded|expired|expire[sd]?|deadline|due|ends?|ending|status|reward|bounty|budget|prize|paid|payment|payout|escrow|funded|apply|submission|submit|claim|winner|accepted|cancelled|canceled|archived|no longer|not found|404|hiring|filled|taken|in progress|pending|draft)\b/i;
 async function probeTask(t) {
-  const page = await getPage(t.url);
-  const html = page.body || "";
-  const text = stripHtml(html);
+  const page = await get(t.url, { accept: "text/html,application/xhtml+xml,*/*;q=0.8", ms: 20000 });
+  const html = page.text || "";
+  const text = stripTags(html);
   const title = (html.match(/<title[^>]*>([^<]{0,200})/i) || [])[1] || "";
   const sentences = text.split(/(?<=[.!?])\s+|\n+/).map((x) => x.trim()).filter((x) => x.length > 8 && x.length < 300 && TASK_WORDS.test(x)).slice(0, 18);
   const jsonLd = (html.match(/<script[^>]+application\/ld\+json[^>]*>([\s\S]{0,4000}?)<\/script>/i) || [])[1] || "";
