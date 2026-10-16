@@ -1,0 +1,695 @@
+[
+ {
+  "id": "ver92:xos.ro:home",
+  "kind": "signup",
+  "url": "https://xos.ro/",
+  "country": "RO",
+  "site": "xos.ro home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:xos.ro:found",
+  "kind": "signup",
+  "url": "https://www.xos.ro/",
+  "country": "RO",
+  "site": "xos.ro : Anunturi Gratuite — XOS.ro",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:anuntgratuit.ro:home",
+  "kind": "signup",
+  "url": "https://anuntgratuit.ro/",
+  "country": "RO",
+  "site": "anuntgratuit.ro home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:anuntgratuit.ro:found",
+  "kind": "signup",
+  "url": "https://www.anuntgratuit.ro/anunturi",
+  "country": "RO",
+  "site": "anuntgratuit.ro : Toate Anunțurile Gratuite din România | AnunțGratu",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:anuntz.ro:home",
+  "kind": "signup",
+  "url": "https://anuntz.ro/",
+  "country": "RO",
+  "site": "anuntz.ro home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:ivu.ro:home",
+  "kind": "signup",
+  "url": "https://ivu.ro/",
+  "country": "RO",
+  "site": "ivu.ro home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:vindeorice.ro:home",
+  "kind": "signup",
+  "url": "https://vindeorice.ro/",
+  "country": "RO",
+  "site": "vindeorice.ro home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:oriceanuntonline.ro:home",
+  "kind": "signup",
+  "url": "https://oriceanuntonline.ro/",
+  "country": "RO",
+  "site": "oriceanuntonline.ro home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:hirdetotabla.duen.hu:home",
+  "kind": "signup",
+  "url": "https://hirdetotabla.duen.hu/",
+  "country": "HU",
+  "site": "hirdetotabla.duen.hu home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:fititospito.gr:home",
+  "kind": "signup",
+  "url": "https://fititospito.gr/",
+  "country": "GR",
+  "site": "fititospito.gr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:fititospito.gr:found",
+  "kind": "signup",
+  "url": "https://fititospito.gr/dorean-kataxorisi/",
+  "country": "GR",
+  "site": "fititospito.gr : Δωρεάν Καταχώρηση Αγγελιών Ακινήτων - Fititospito.",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:edouleia.gr:home",
+  "kind": "signup",
+  "url": "https://edouleia.gr/",
+  "country": "GR",
+  "site": "edouleia.gr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:edouleia.gr:found",
+  "kind": "signup",
+  "url": "https://edouleia.gr/kataxorisi-aggelias/",
+  "country": "GR",
+  "site": "edouleia.gr : Καταχώρηση αγγελίας εργασίας (100% δωρεάν) | edoul",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:aggelies247.com:home",
+  "kind": "signup",
+  "url": "https://aggelies247.com/",
+  "country": "GR",
+  "site": "aggelies247.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:aggelies247.com:found",
+  "kind": "signup",
+  "url": "https://www.aggelies247.com/kataxorisi-aggelias",
+  "country": "GR",
+  "site": "aggelies247.com : Καταχώριση Αγγελίας - Aggelies247",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:sygkatoikos.com:home",
+  "kind": "signup",
+  "url": "https://sygkatoikos.com/",
+  "country": "GR",
+  "site": "sygkatoikos.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:buylistas.com:home",
+  "kind": "signup",
+  "url": "https://buylistas.com/",
+  "country": "GR",
+  "site": "buylistas.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:borsata.eu:home",
+  "kind": "signup",
+  "url": "https://borsata.eu/",
+  "country": "BG",
+  "site": "borsata.eu home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:borsata.eu:found",
+  "kind": "signup",
+  "url": "https://www.borsata.eu/",
+  "country": "BG",
+  "site": "borsata.eu : Борсата | Безплатни обяви в България",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:bezplatno.net:home",
+  "kind": "signup",
+  "url": "https://bezplatno.net/",
+  "country": "BG",
+  "site": "bezplatno.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:bezplatno.net:found",
+  "kind": "signup",
+  "url": "https://www.bezplatno.net/%D0%BE%D0%B1%D1%8F%D0%B2%D0%B8/%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D1%83%D0%B2%D0%B0%D0%B9-%D0%BD%D0%BE%D0%B2%D0%B0-%D0%BE%D0%B1%D1%8F%D0%B2%D0%B0",
+  "country": "BG",
+  "site": "bezplatno.net : Публикувай Нова Обява | Безплатно.net",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:samo.bg:home",
+  "kind": "signup",
+  "url": "https://samo.bg/",
+  "country": "BG",
+  "site": "samo.bg home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:dalaveri.bg:home",
+  "kind": "signup",
+  "url": "https://dalaveri.bg/",
+  "country": "BG",
+  "site": "dalaveri.bg home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:plixo.bg:home",
+  "kind": "signup",
+  "url": "https://plixo.bg/",
+  "country": "BG",
+  "site": "plixo.bg home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:malkiobiavi.bg:home",
+  "kind": "signup",
+  "url": "https://malkiobiavi.bg/",
+  "country": "BG",
+  "site": "malkiobiavi.bg home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:malkiobiavi.bg:found",
+  "kind": "signup",
+  "url": "https://malkiobiavi.bg/?page=language&locale=bg_BG",
+  "country": "BG",
+  "site": "malkiobiavi.bg : МалкиОбяви.БГ - Намери и публикувай обяви за работ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:grad.bg:home",
+  "kind": "signup",
+  "url": "https://grad.bg/",
+  "country": "BG",
+  "site": "grad.bg home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:freeboard.com.ua:home",
+  "kind": "signup",
+  "url": "https://freeboard.com.ua/",
+  "country": "UA",
+  "site": "freeboard.com.ua home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:freeboard.com.ua:found",
+  "kind": "signup",
+  "url": "https://www.freeboard.com.ua/",
+  "country": "UA",
+  "site": "freeboard.com.ua : Безкоштовні оголошення на freeboard.com.ua - Безко",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:doska.io:home",
+  "kind": "signup",
+  "url": "https://doska.io/",
+  "country": "UA",
+  "site": "doska.io home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:ndo.ua:home",
+  "kind": "signup",
+  "url": "https://ndo.ua/",
+  "country": "UA",
+  "site": "ndo.ua home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:ndo.ua:found",
+  "kind": "signup",
+  "url": "https://www.ndo.ua/uk/bezkoshtovni-oholoshennia",
+  "country": "UA",
+  "site": "ndo.ua : Безкоштовні оголошення України — подати оголошення",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:eboard.ua:home",
+  "kind": "signup",
+  "url": "https://eboard.ua/",
+  "country": "UA",
+  "site": "eboard.ua home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:bboard.com.ua:home",
+  "kind": "signup",
+  "url": "https://bboard.com.ua/",
+  "country": "UA",
+  "site": "bboard.com.ua home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:bboard.com.ua:found",
+  "kind": "signup",
+  "url": "https://www.bboard.com.ua/",
+  "country": "UA",
+  "site": "bboard.com.ua : Дошка оголошень «Bboard»: безкоштовні приватні ого",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:board.if.ua:home",
+  "kind": "signup",
+  "url": "https://board.if.ua/",
+  "country": "UA",
+  "site": "board.if.ua home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:objavlenie.com.ua:home",
+  "kind": "signup",
+  "url": "https://objavlenie.com.ua/",
+  "country": "UA",
+  "site": "objavlenie.com.ua home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:objavlenie.com.ua:found",
+  "kind": "signup",
+  "url": "https://www.objavlenie.com.ua/",
+  "country": "UA",
+  "site": "objavlenie.com.ua : Безкоштовні Оголошення",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:classifiedsuae.ae:home",
+  "kind": "signup",
+  "url": "https://classifiedsuae.ae/",
+  "country": "AE",
+  "site": "classifiedsuae.ae home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:classifiedsuae.ae:found",
+  "kind": "signup",
+  "url": "https://classifiedsuae.ae/en",
+  "country": "AE",
+  "site": "classifiedsuae.ae : Classifieds UAE — Free Classified Ads in the Emira",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:ae.rubizzle.com:home",
+  "kind": "signup",
+  "url": "https://ae.rubizzle.com/",
+  "country": "AE",
+  "site": "ae.rubizzle.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:kullk.com:home",
+  "kind": "signup",
+  "url": "https://kullk.com/",
+  "country": "AE",
+  "site": "kullk.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:kullk.com:found",
+  "kind": "signup",
+  "url": "https://www.kullk.com/classified/",
+  "country": "AE",
+  "site": "kullk.com : Free Classified Ads UAE | Buy & Sell Online | KULL",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:dbizle.com:home",
+  "kind": "signup",
+  "url": "https://dbizle.com/",
+  "country": "AE",
+  "site": "dbizle.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:uae.gemclassified.com:home",
+  "kind": "signup",
+  "url": "https://uae.gemclassified.com/",
+  "country": "AE",
+  "site": "uae.gemclassified.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:uae.ads4me.com:home",
+  "kind": "signup",
+  "url": "https://uae.ads4me.com/",
+  "country": "AE",
+  "site": "uae.ads4me.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:classifydubai.com:home",
+  "kind": "signup",
+  "url": "https://classifydubai.com/",
+  "country": "AE",
+  "site": "classifydubai.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:classifydubai.com:found",
+  "kind": "signup",
+  "url": "https://www.classifydubai.com/",
+  "country": "AE",
+  "site": "classifydubai.com : Free Classified Ads in Dubai & UAE",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:emiratesadz.com:home",
+  "kind": "signup",
+  "url": "https://emiratesadz.com/",
+  "country": "AE",
+  "site": "emiratesadz.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:dabaannonce.ma:home",
+  "kind": "signup",
+  "url": "https://dabaannonce.ma/",
+  "country": "MA",
+  "site": "dabaannonce.ma home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:publimaroc.com:home",
+  "kind": "signup",
+  "url": "https://publimaroc.com/",
+  "country": "MA",
+  "site": "publimaroc.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:publimaroc.com:found",
+  "kind": "signup",
+  "url": "https://www.publimaroc.com/",
+  "country": "MA",
+  "site": "publimaroc.com : Petites annonces gratuites au Maroc - Publimaroc",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:lbuvette.com:home",
+  "kind": "signup",
+  "url": "https://lbuvette.com/",
+  "country": "MA",
+  "site": "lbuvette.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:lbuvette.com:found",
+  "kind": "signup",
+  "url": "https://lbuvette.com/etudiants",
+  "country": "MA",
+  "site": "lbuvette.com : Espace Étudiants — LBuvette",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:professionnels.ma:home",
+  "kind": "signup",
+  "url": "https://professionnels.ma/",
+  "country": "MA",
+  "site": "professionnels.ma home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:professionnels.ma:found",
+  "kind": "signup",
+  "url": "https://www.professionnels.ma/maroc-annonce",
+  "country": "MA",
+  "site": "professionnels.ma : Maroc Annonce | Déposer des annonces gratuitement ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:ozannonces.ma:home",
+  "kind": "signup",
+  "url": "https://ozannonces.ma/",
+  "country": "MA",
+  "site": "ozannonces.ma home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:quicherchequoi.com:home",
+  "kind": "signup",
+  "url": "https://quicherchequoi.com/",
+  "country": "MA",
+  "site": "quicherchequoi.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:quicherchequoi.com:found",
+  "kind": "signup",
+  "url": "https://www.quicherchequoi.com/",
+  "country": "MA",
+  "site": "quicherchequoi.com : Annonces gratuites au Maroc | Qui Cherche Quoi",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:annoncesmaroc.ma:home",
+  "kind": "signup",
+  "url": "https://annoncesmaroc.ma/",
+  "country": "MA",
+  "site": "annoncesmaroc.ma home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:annoncesmaroc.ma:found",
+  "kind": "signup",
+  "url": "https://www.annoncesmaroc.ma/create",
+  "country": "MA",
+  "site": "annoncesmaroc.ma : Déposer une annonce gratuite - Immobilier, Emploi,",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:souqmaroc.org:home",
+  "kind": "signup",
+  "url": "https://souqmaroc.org/",
+  "country": "MA",
+  "site": "souqmaroc.org home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:souika.ma:home",
+  "kind": "signup",
+  "url": "https://souika.ma/",
+  "country": "MA",
+  "site": "souika.ma home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:souika.ma:found",
+  "kind": "signup",
+  "url": "https://www.souika.ma/deposer-une-annonce",
+  "country": "MA",
+  "site": "souika.ma : Souika.ma, Déposer une annonce en un clic",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:pirsumon.com:home",
+  "kind": "signup",
+  "url": "https://pirsumon.com/",
+  "country": "IL",
+  "site": "pirsumon.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:pirsumon.com:found",
+  "kind": "signup",
+  "url": "https://www.pirsumon.com/",
+  "country": "IL",
+  "site": "pirsumon.com : פרסומון | פירסומון - לוח מודעות חינם",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:student.study.co.il:home",
+  "kind": "signup",
+  "url": "https://student.study.co.il/",
+  "country": "IL",
+  "site": "student.study.co.il home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:student.study.co.il:found",
+  "kind": "signup",
+  "url": "https://student.study.co.il/%D7%A4%D7%A8%D7%A1%D7%95%D7%9D-%D7%93%D7%A8%D7%95%D7%A9%D7%99%D7%9D-%D7%A1%D7%98%D7%95%D7%93%D7%A0%D7%98%D7%99%D7%9D/",
+  "country": "IL",
+  "site": "student.study.co.il : פרסום דרושים סטודנטים, משרות, הצעות עבודה לסטודנטי",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:bipbip.co.il:home",
+  "kind": "signup",
+  "url": "https://bipbip.co.il/",
+  "country": "IL",
+  "site": "bipbip.co.il home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:bipbip.co.il:found",
+  "kind": "signup",
+  "url": "https://www.bipbip.co.il/",
+  "country": "IL",
+  "site": "bipbip.co.il : לוח מודעות חינם - BipBip",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:yadlyad.co.il:home",
+  "kind": "signup",
+  "url": "https://yadlyad.co.il/",
+  "country": "IL",
+  "site": "yadlyad.co.il home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:yadlyad.co.il:found",
+  "kind": "signup",
+  "url": "https://www.yadlyad.co.il/",
+  "country": "IL",
+  "site": "yadlyad.co.il : יד ליד - לוח מודעות חינם בישראל",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:eg.dalil-e3lank.com:home",
+  "kind": "signup",
+  "url": "https://eg.dalil-e3lank.com/",
+  "country": "EG",
+  "site": "eg.dalil-e3lank.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:eg.dalil-e3lank.com:found",
+  "kind": "signup",
+  "url": "https://eg.dalil-e3lank.com/ad_category/%D8%A7%D8%B9%D9%84%D8%A7%D9%86%D8%A7%D8%AA-%D9%85%D8%A8%D9%88%D8%A8%D8%A9/",
+  "country": "EG",
+  "site": "eg.dalil-e3lank.com : اعلانات مبوبة - خدمات مصر | دليل إعلانك مصر",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:mrkaka.com:home",
+  "kind": "signup",
+  "url": "https://mrkaka.com/",
+  "country": "EG",
+  "site": "mrkaka.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:mrkaka.com:found",
+  "kind": "signup",
+  "url": "https://www.mrkaka.com/eg",
+  "country": "EG",
+  "site": "mrkaka.com : إعلانات مبوبة مجانية إعلانات في , مصر | Mrkaka - ن",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver92:horira.com:home",
+  "kind": "signup",
+  "url": "https://horira.com/",
+  "country": "EG",
+  "site": "horira.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]

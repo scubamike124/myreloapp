@@ -1,0 +1,155 @@
+[
+ {
+  "id": "r94:opor:agreement",
+  "kind": "json",
+  "url": "https://opor.ng/en/user-agreement/",
+  "country": "NG",
+  "site": "opor.ng user agreement",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:opor:faqgeneral",
+  "kind": "json",
+  "url": "https://opor.ng/en/faq/general/",
+  "country": "NG",
+  "site": "opor.ng FAQ general",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:studenteninserate:help",
+  "kind": "json",
+  "url": "https://www.studenteninserate.at/help",
+  "country": "AT",
+  "site": "studenteninserate.at help",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:marktde:nutzung",
+  "kind": "json",
+  "url": "https://www.markt.de/nutzungsbedingungen.htm",
+  "country": "DE",
+  "site": "markt.de Nutzungsbedingungen (markt.ch redirects here)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:inserate24:terms",
+  "kind": "json",
+  "url": "https://www.inserate24.com/terms",
+  "country": "CH",
+  "site": "inserate24 AGB",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:inserate24:help",
+  "kind": "json",
+  "url": "https://www.inserate24.com/help",
+  "country": "CH",
+  "site": "inserate24 help",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:flohmarkt24:agb",
+  "kind": "json",
+  "url": "https://www.flohmarkt24.ch/agb/",
+  "country": "CH",
+  "site": "flohmarkt24.ch AGB",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:flohmarkt24:faq",
+  "kind": "json",
+  "url": "https://www.flohmarkt24.ch/faq/",
+  "country": "CH",
+  "site": "flohmarkt24.ch FAQ",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:schweizerinserate:agb",
+  "kind": "json",
+  "url": "https://schweizer-inserate.ch/agb/",
+  "country": "CH",
+  "site": "schweizer-inserate.ch AGB",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:schweizerinserate:faq",
+  "kind": "json",
+  "url": "https://schweizer-inserate.ch/faq/",
+  "country": "CH",
+  "site": "schweizer-inserate.ch FAQ",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:okannonces:faq",
+  "kind": "json",
+  "url": "https://okannonces.com/page/faq",
+  "country": "BE",
+  "site": "aannonce.com / okannonces FAQ",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:studentbe:terms",
+  "kind": "json",
+  "url": "https://www.student.be/nl/algemene-voorwaarden-en-privacybeleid/",
+  "country": "BE",
+  "site": "student.be terms",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:yabaa:agb",
+  "kind": "json",
+  "url": "https://yabaa.ch/agb",
+  "country": "CH",
+  "site": "yabaa.ch AGB (guess)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:yabaa:nutzung",
+  "kind": "json",
+  "url": "https://yabaa.ch/nutzungsbedingungen",
+  "country": "CH",
+  "site": "yabaa.ch Nutzungsbedingungen (guess)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:kowika:contact",
+  "kind": "json",
+  "url": "https://kowika.nl/contact/",
+  "country": "NL",
+  "site": "kowika.nl help and contact",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:kowika:veilig",
+  "kind": "json",
+  "url": "https://kowika.nl/veilig-handelen/",
+  "country": "NL",
+  "site": "kowika.nl safe trading (guess)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r94:flohmarkt24:register",
+  "kind": "json",
+  "url": "https://www.flohmarkt24.ch/login-register/?tab=registrieren",
+  "country": "CH",
+  "site": "flohmarkt24.ch registration page text",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]

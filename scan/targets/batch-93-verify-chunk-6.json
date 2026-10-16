@@ -1,0 +1,614 @@
+[
+ {
+  "id": "ver93:ads.kenyaeducation.info:home",
+  "kind": "signup",
+  "url": "https://ads.kenyaeducation.info/",
+  "country": "KE",
+  "site": "ads.kenyaeducation.info home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:ads.kenyaeducation.info:found",
+  "kind": "signup",
+  "url": "https://ads.kenyaeducation.info/university",
+  "country": "KE",
+  "site": "ads.kenyaeducation.info : Free Kenya Classifieds for university, university ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:hapa.ke:home",
+  "kind": "signup",
+  "url": "https://hapa.ke/",
+  "country": "KE",
+  "site": "hapa.ke home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:mrkaka.com:home",
+  "kind": "signup",
+  "url": "https://mrkaka.com/",
+  "country": "KE",
+  "site": "mrkaka.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:mrkaka.com:found",
+  "kind": "signup",
+  "url": "https://www.mrkaka.com/ke",
+  "country": "KE",
+  "site": "mrkaka.com : Free Classifieds Ads in , Kenya | Mrkaka - Post & ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:kenyabizlist.com:home",
+  "kind": "signup",
+  "url": "https://kenyabizlist.com/",
+  "country": "KE",
+  "site": "kenyabizlist.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:kenyabizlist.com:found",
+  "kind": "signup",
+  "url": "https://www.kenyabizlist.com/classifieds/",
+  "country": "KE",
+  "site": "kenyabizlist.com : Free Classifieds in Kenya: Buy & Sell online",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:dealkenya.com:home",
+  "kind": "signup",
+  "url": "https://dealkenya.com/",
+  "country": "KE",
+  "site": "dealkenya.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:adpostman.com:home",
+  "kind": "signup",
+  "url": "https://adpostman.com/",
+  "country": "KE",
+  "site": "adpostman.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:adpostman.com:found",
+  "kind": "signup",
+  "url": "https://adpostman.com/listing-location/kenya/",
+  "country": "KE",
+  "site": "adpostman.com : Free Classifieds Kenya | Adpostman",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:lifestudiantin.com:home",
+  "kind": "signup",
+  "url": "https://lifestudiantin.com/",
+  "country": "SN",
+  "site": "lifestudiantin.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:lifestudiantin.com:found",
+  "kind": "signup",
+  "url": "https://www.lifestudiantin.com/",
+  "country": "SN",
+  "site": "lifestudiantin.com : La plateforme de tous les étudiants de Dakar",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:alloetudiant.com:home",
+  "kind": "signup",
+  "url": "https://alloetudiant.com/",
+  "country": "SN",
+  "site": "alloetudiant.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:dakarvente.com:home",
+  "kind": "signup",
+  "url": "https://dakarvente.com/",
+  "country": "SN",
+  "site": "dakarvente.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:dakarvente.com:found",
+  "kind": "signup",
+  "url": "https://dakarvente.com/fr/accueil",
+  "country": "SN",
+  "site": "dakarvente.com : Dakarvente - Petites Annonces Gratuites et E-comme",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:senemarket.sn:home",
+  "kind": "signup",
+  "url": "https://senemarket.sn/",
+  "country": "SN",
+  "site": "senemarket.sn home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:senemarket.sn:found",
+  "kind": "signup",
+  "url": "https://www.senemarket.sn/",
+  "country": "SN",
+  "site": "senemarket.sn : Senemarket.sn - Petites annonces gratuites au Séné",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:senannonces.sn:home",
+  "kind": "signup",
+  "url": "https://senannonces.sn/",
+  "country": "SN",
+  "site": "senannonces.sn home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:senannonces.sn:found",
+  "kind": "signup",
+  "url": "https://www.senannonces.sn/index.php",
+  "country": "SN",
+  "site": "senannonces.sn : Accueil — SenAnnonces",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:yess.sn:home",
+  "kind": "signup",
+  "url": "https://yess.sn/",
+  "country": "SN",
+  "site": "yess.sn home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:kaaylook.com:home",
+  "kind": "signup",
+  "url": "https://kaaylook.com/",
+  "country": "SN",
+  "site": "kaaylook.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:toutsuiteannonces.com:home",
+  "kind": "signup",
+  "url": "https://toutsuiteannonces.com/",
+  "country": "SN",
+  "site": "toutsuiteannonces.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:toutsuiteannonces.com:found",
+  "kind": "signup",
+  "url": "https://www.toutsuiteannonces.com/",
+  "country": "SN",
+  "site": "toutsuiteannonces.com : TOUT DE SUITE — Petites annonces au Sénégal",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:dakarconnect.com:home",
+  "kind": "signup",
+  "url": "https://dakarconnect.com/",
+  "country": "SN",
+  "site": "dakarconnect.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:dakarconnect.com:found",
+  "kind": "signup",
+  "url": "https://www.dakarconnect.com/?lang=fr",
+  "country": "SN",
+  "site": "dakarconnect.com : DakarConnect - Petites Annonces au Sénégal",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:postadz.com:home",
+  "kind": "signup",
+  "url": "https://postadz.com/",
+  "country": "GH",
+  "site": "postadz.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:postadz.com:found",
+  "kind": "signup",
+  "url": "https://postadz.com/browse/country/ghana",
+  "country": "GH",
+  "site": "postadz.com : Ghana Classifieds — Free Local Ads in Ghana | Post",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:quafra.com:home",
+  "kind": "signup",
+  "url": "https://quafra.com/",
+  "country": "GH",
+  "site": "quafra.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:ghanasummary.com:home",
+  "kind": "signup",
+  "url": "https://ghanasummary.com/",
+  "country": "GH",
+  "site": "ghanasummary.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:ghanasummary.com:found",
+  "kind": "signup",
+  "url": "https://www.ghanasummary.com/classifieds",
+  "country": "GH",
+  "site": "ghanasummary.com : Ghana Classifieds - Buy, Sell & Post Free Ads - Gh",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:pepapa.com.gh:home",
+  "kind": "signup",
+  "url": "https://pepapa.com.gh/",
+  "country": "GH",
+  "site": "pepapa.com.gh home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:pepapa.com.gh:found",
+  "kind": "signup",
+  "url": "https://www.pepapa.com.gh/",
+  "country": "GH",
+  "site": "pepapa.com.gh : Post free ads on Pepapa Ghana. AI-powered classifi",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:ads.ghanaeducation.info:home",
+  "kind": "signup",
+  "url": "https://ads.ghanaeducation.info/",
+  "country": "GH",
+  "site": "ads.ghanaeducation.info home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:yennton.com:home",
+  "kind": "signup",
+  "url": "https://yennton.com/",
+  "country": "GH",
+  "site": "yennton.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:adsnex.com:home",
+  "kind": "signup",
+  "url": "https://adsnex.com/",
+  "country": "ZA",
+  "site": "adsnex.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:adsnex.com:found",
+  "kind": "signup",
+  "url": "https://www.adsnex.com/?country=ZA",
+  "country": "ZA",
+  "site": "adsnex.com : Ads Nex | Classified Ads | South Africa",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:thefreeadforum.com:home",
+  "kind": "signup",
+  "url": "https://thefreeadforum.com/",
+  "country": "ZA",
+  "site": "thefreeadforum.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:thefreeadforum.com:found",
+  "kind": "signup",
+  "url": "https://www.thefreeadforum.com/postclassifieds/search/country,ZA",
+  "country": "ZA",
+  "site": "thefreeadforum.com : South Africa | Post Classified Ads for Free with T",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:classads.co.za:home",
+  "kind": "signup",
+  "url": "https://classads.co.za/",
+  "country": "ZA",
+  "site": "classads.co.za home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:classads.co.za:found",
+  "kind": "signup",
+  "url": "http://www.classads.co.za/",
+  "country": "ZA",
+  "site": "classads.co.za : Free Classified Ads | Free Classifieds | Free Ads ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:publicads.co.za:home",
+  "kind": "signup",
+  "url": "https://publicads.co.za/",
+  "country": "ZA",
+  "site": "publicads.co.za home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:publicads.co.za:found",
+  "kind": "signup",
+  "url": "https://www.publicads.co.za/new-listing",
+  "country": "ZA",
+  "site": "publicads.co.za : Post A Free Classified Ad South Africa | Free Ads ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:adsafrica.co.za:home",
+  "kind": "signup",
+  "url": "https://adsafrica.co.za/",
+  "country": "ZA",
+  "site": "adsafrica.co.za home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:adsafrica.co.za:found",
+  "kind": "signup",
+  "url": "https://www.adsafrica.co.za/post",
+  "country": "ZA",
+  "site": "adsafrica.co.za : Step 1: select a category - free classifieds in So",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:za.bambaad.com:home",
+  "kind": "signup",
+  "url": "https://za.bambaad.com/",
+  "country": "ZA",
+  "site": "za.bambaad.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:classifieds.co.zw:home",
+  "kind": "signup",
+  "url": "https://classifieds.co.zw/",
+  "country": "ZW",
+  "site": "classifieds.co.zw home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:classifieds.co.zw:found",
+  "kind": "signup",
+  "url": "https://www.classifieds.co.zw/",
+  "country": "ZW",
+  "site": "classifieds.co.zw : Zimbabwe Classifieds.co.zw | Property, Cars, Elect",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:zw.classifieds4w.com:home",
+  "kind": "signup",
+  "url": "https://zw.classifieds4w.com/",
+  "country": "ZW",
+  "site": "zw.classifieds4w.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:zw.afribaba.com:home",
+  "kind": "signup",
+  "url": "https://zw.afribaba.com/",
+  "country": "ZW",
+  "site": "zw.afribaba.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:zw.afribaba.com:found",
+  "kind": "signup",
+  "url": "https://zw.afribaba.com/post.php",
+  "country": "ZW",
+  "site": "zw.afribaba.com : Post an ad Zimbabwe ZW | Zw.afribaba.com",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:ziviso.co.zw:home",
+  "kind": "signup",
+  "url": "https://ziviso.co.zw/",
+  "country": "ZW",
+  "site": "ziviso.co.zw home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:ziviso.co.zw:found",
+  "kind": "signup",
+  "url": "https://www.ziviso.co.zw/",
+  "country": "ZW",
+  "site": "ziviso.co.zw : Ziviso — Free Classifieds & Online Marketplace in ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:muamat.com:home",
+  "kind": "signup",
+  "url": "https://muamat.com/",
+  "country": "ZW",
+  "site": "muamat.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:muamat.com:found",
+  "kind": "signup",
+  "url": "https://www.muamat.com/classifieds/-51_Zimbabwe/",
+  "country": "ZW",
+  "site": "muamat.com : Zimbabwe: Jobs, Vehicles, Sale, Buy - Free Classif",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:onebusiness.co.zw:home",
+  "kind": "signup",
+  "url": "https://onebusiness.co.zw/",
+  "country": "ZW",
+  "site": "onebusiness.co.zw home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:onebusiness.co.zw:found",
+  "kind": "signup",
+  "url": "https://www.onebusiness.co.zw/",
+  "country": "ZW",
+  "site": "onebusiness.co.zw : OneBusiness Zimbabwe - Free Classifieds, Cars, Hou",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:popup.co.zw:home",
+  "kind": "signup",
+  "url": "https://popup.co.zw/",
+  "country": "ZW",
+  "site": "popup.co.zw home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:popup.co.zw:found",
+  "kind": "signup",
+  "url": "https://www.popup.co.zw/",
+  "country": "ZW",
+  "site": "popup.co.zw : Popup Classifieds Zimabwe | buyers and sellers mar",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:etacky.com:home",
+  "kind": "signup",
+  "url": "https://etacky.com/",
+  "country": "IN",
+  "site": "etacky.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:etacky.com:found",
+  "kind": "signup",
+  "url": "https://etacky.com/education-ads",
+  "country": "IN",
+  "site": "etacky.com : Post Free Education Ads Online | Classifieds - Eta",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:zumvu.com:home",
+  "kind": "signup",
+  "url": "https://zumvu.com/",
+  "country": "IN",
+  "site": "zumvu.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:zumvu.com:found",
+  "kind": "signup",
+  "url": "https://zumvu.com/marketplace/in/",
+  "country": "IN",
+  "site": "zumvu.com : India Classifieds Ads, Post free Classified Ads in",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:classikam.com:home",
+  "kind": "signup",
+  "url": "https://classikam.com/",
+  "country": "IN",
+  "site": "classikam.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:classikam.com:found",
+  "kind": "signup",
+  "url": "https://www.classikam.com/",
+  "country": "IN",
+  "site": "classikam.com : ClassiKam: Free Classifieds in India",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:friads.com:home",
+  "kind": "signup",
+  "url": "https://friads.com/",
+  "country": "IN",
+  "site": "friads.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:postforads.com:home",
+  "kind": "signup",
+  "url": "https://postforads.com/",
+  "country": "IN",
+  "site": "postforads.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:postforads.com:found",
+  "kind": "signup",
+  "url": "https://www.postforads.com/",
+  "country": "IN",
+  "site": "postforads.com : Post Free Classified Ads, Free Classifieds In Indi",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver93:classified.nadbai.com:home",
+  "kind": "signup",
+  "url": "https://classified.nadbai.com/",
+  "country": "IN",
+  "site": "classified.nadbai.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]

@@ -1,0 +1,56 @@
+[
+ {
+  "id": "disc95:PK",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20students%20Pakistan%20post%20ad%20university",
+  "country": "PK",
+  "site": "DuckDuckGo: free classifieds students Pakistan post ad university",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc95:BD",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20students%20Bangladesh%20post%20ad",
+  "country": "BD",
+  "site": "DuckDuckGo: free classifieds students Bangladesh post ad",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc95:PH",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20students%20Philippines%20post%20ad%20university",
+  "country": "PH",
+  "site": "DuckDuckGo: free classifieds students Philippines post ad university",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc95:ID",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=iklan%20gratis%20mahasiswa%20pasang%20iklan%20kampus",
+  "country": "ID",
+  "site": "DuckDuckGo: iklan gratis mahasiswa pasang iklan kampus",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc95:MY",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20students%20Malaysia%20post%20ad%20university",
+  "country": "MY",
+  "site": "DuckDuckGo: free classifieds students Malaysia post ad university",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc95:SG",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20students%20Singapore%20post%20ad%20university",
+  "country": "SG",
+  "site": "DuckDuckGo: free classifieds students Singapore post ad university",
+  "category": "discovery",
+  "bodyChars": 80000
+ }
+]

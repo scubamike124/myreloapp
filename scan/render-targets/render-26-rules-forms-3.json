@@ -1,0 +1,178 @@
+[
+ {
+  "id": "r26:privatmarkt:terms",
+  "url": "https://privatmarkt.ch/terms",
+  "country": "CH",
+  "site": "privatmarkt.ch terms (Cloudflare blocks plain fetches)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 12000
+ },
+ {
+  "id": "r26:privatmarkt:rules",
+  "url": "https://privatmarkt.ch/rules",
+  "country": "CH",
+  "site": "privatmarkt.ch listing rules",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 12000
+ },
+ {
+  "id": "r26:bantumart:terms",
+  "url": "https://ng.bantumart.com/terms",
+  "country": "NG",
+  "site": "bantumart terms (JS app)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 12000
+ },
+ {
+  "id": "r26:bantumart:faq",
+  "url": "https://ng.bantumart.com/frequently_asked_questions",
+  "country": "NG",
+  "site": "bantumart FAQ (JS app)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 12000
+ },
+ {
+  "id": "r26:bantumart:post",
+  "url": "https://ng.bantumart.com/post_ad",
+  "country": "NG",
+  "site": "bantumart post form (JS app)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r26:gratisannonse:home",
+  "url": "https://gratis-annonse.no/",
+  "country": "NO",
+  "site": "gratis-annonse.no home: FAQ text and the posting form",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 16000
+ },
+ {
+  "id": "r26:studenteninserate:new",
+  "url": "https://www.studenteninserate.at/inserat/new",
+  "country": "AT",
+  "site": "studenteninserate.at posting form",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r26:kowika:plaatsen",
+  "url": "https://kowika.nl/advertentie-plaatsen/",
+  "country": "NL",
+  "site": "kowika.nl posting page (login wall?)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r26:kowika:registreren",
+  "url": "https://kowika.nl/registreren/",
+  "country": "NL",
+  "site": "kowika.nl registration form (labels, required fields)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r26:flohmarkt24:register",
+  "url": "https://www.flohmarkt24.ch/login-register/?tab=registrieren",
+  "country": "CH",
+  "site": "flohmarkt24.ch registration form",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r26:flohmarkt24:post",
+  "url": "https://www.flohmarkt24.ch/inserat-aufgeben/",
+  "country": "CH",
+  "site": "flohmarkt24.ch posting form (guess)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r26:darmowe:start",
+  "url": "https://darmoweogloszenia.pl/start",
+  "country": "PL",
+  "site": "darmoweogloszenia.pl first steps",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r26:bacheca:board",
+  "url": "http://bachecauniversitaria.it/bacheca/",
+  "country": "IT",
+  "site": "bachecauniversitaria.it board index",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r26:yabaa:home",
+  "url": "https://yabaa.ch/",
+  "country": "CH",
+  "site": "yabaa.ch home links and text",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r26:schweizerinserate:home",
+  "url": "https://schweizer-inserate.ch/",
+  "country": "CH",
+  "site": "schweizer-inserate.ch home links",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r26:inserate24:home",
+  "url": "https://www.inserate24.com/ch",
+  "country": "CH",
+  "site": "inserate24 Swiss home links",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ }
+]
