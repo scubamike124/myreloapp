@@ -1,0 +1,485 @@
+[
+ {
+  "id": "rules19:United States (global program):github-education-partners-student-develo:rules page",
+  "kind": "html",
+  "url": "https://github.com/education/partners",
+  "country": "United States (global program)",
+  "site": "GitHub Education – Partners (Student Developer Pack / free tools for students) (rules page)",
+  "category": "directory",
+  "free_option": "Free partnership application (Resource Partner); listed tool must be free to students; selective, ~5-10 new partners/year",
+  "audience": "Verified student developers worldwide holding the Student Developer Pack (millions of students, US-heavy)"
+ },
+ {
+  "id": "signup19:United States (global program):github-education-partners-student-develo",
+  "kind": "signup",
+  "url": "https://github.com/education/partners",
+  "country": "United States (global program)",
+  "site": "GitHub Education – Partners (Student Developer Pack / free tools for students)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:United States:the-sentinel-online-classifieds-kennesaw:rules page",
+  "kind": "html",
+  "url": "https://campus.kennesaw.edu/current-students/student-affairs/involvement/student-media/advertising/resources/",
+  "country": "United States",
+  "site": "The Sentinel Online Classifieds (Kennesaw State University Student Media) (rules page)",
+  "category": "classifieds",
+  "free_option": "Described as a complimentary (free) online classifieds service for readers, campus and surrounding community",
+  "audience": "Kennesaw State University students, staff and nearby community (single large campus)"
+ },
+ {
+  "id": "signup19:United States:the-sentinel-online-classifieds-kennesaw",
+  "kind": "signup",
+  "url": "https://campus.kennesaw.edu/current-students/student-affairs/involvement/student-media/advertising/resources/",
+  "country": "United States",
+  "site": "The Sentinel Online Classifieds (Kennesaw State University Student Media)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:United States (English, global):ai-student-discount-aistudentdiscount-co:rules page",
+  "kind": "html",
+  "url": "https://aistudentdiscount.com/advertise/",
+  "country": "United States (English, global)",
+  "site": "AI Student Discount (aistudentdiscount.com) (rules page)",
+  "category": "other",
+  "free_option": "Free listing for an AI tool that runs a student discount or education plan (reviewed, may be declined); paid featured/affiliate tiers also exist",
+  "audience": "Students searching for AI-tool student discounts (English-speaking, US-heavy)"
+ },
+ {
+  "id": "rules19:United States (English, global):ai-student-discount-aistudentdiscount-co:home",
+  "kind": "html",
+  "url": "https://aistudentdiscount.com/",
+  "country": "United States (English, global)",
+  "site": "AI Student Discount (aistudentdiscount.com) (home)",
+  "category": "other",
+  "free_option": "Free listing for an AI tool that runs a student discount or education plan (reviewed, may be declined); paid featured/affiliate tiers also exist",
+  "audience": "Students searching for AI-tool student discounts (English-speaking, US-heavy)"
+ },
+ {
+  "id": "signup19:United States (English, global):ai-student-discount-aistudentdiscount-co",
+  "kind": "signup",
+  "url": "https://aistudentdiscount.com/advertise/",
+  "country": "United States (English, global)",
+  "site": "AI Student Discount (aistudentdiscount.com)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:Global (English; lists opportunities for US, Canada and Latin America):youth-opportunities-youthop-com-:rules page",
+  "kind": "html",
+  "url": "https://www.youthop.com/post",
+  "country": "Global (English; lists opportunities for US, Canada and Latin America)",
+  "site": "Youth Opportunities (youthop.com) (rules page)",
+  "category": "directory",
+  "free_option": "Public submission form or email to share an opportunity; no fee stated; internal approval before publishing",
+  "audience": "Young people and students worldwide seeking scholarships, internships, competitions, free programs"
+ },
+ {
+  "id": "rules19:Global (English; lists opportunities for US, Canada and Latin America):youth-opportunities-youthop-com-:home",
+  "kind": "html",
+  "url": "https://www.youthop.com/",
+  "country": "Global (English; lists opportunities for US, Canada and Latin America)",
+  "site": "Youth Opportunities (youthop.com) (home)",
+  "category": "directory",
+  "free_option": "Public submission form or email to share an opportunity; no fee stated; internal approval before publishing",
+  "audience": "Young people and students worldwide seeking scholarships, internships, competitions, free programs"
+ },
+ {
+  "id": "signup19:Global (English; lists opportunities for US, Canada and Latin America):youth-opportunities-youthop-com-",
+  "kind": "signup",
+  "url": "https://www.youthop.com/post",
+  "country": "Global (English; lists opportunities for US, Canada and Latin America)",
+  "site": "Youth Opportunities (youthop.com)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:Global (English):opportunity-desk:rules page",
+  "kind": "html",
+  "url": "https://opportunitydesk.org/submit-opportunity/",
+  "country": "Global (English)",
+  "site": "Opportunity Desk (rules page)",
+  "category": "directory",
+  "free_option": "Fully funded / free opportunities posted free; listings with applicant fees are charged at banner-ad rates",
+  "audience": "Young people, professionals, researchers worldwide (for-profit and not-for-profit organizations may submit)"
+ },
+ {
+  "id": "rules19:Global (English):opportunity-desk:home",
+  "kind": "html",
+  "url": "https://opportunitydesk.org/",
+  "country": "Global (English)",
+  "site": "Opportunity Desk (home)",
+  "category": "directory",
+  "free_option": "Fully funded / free opportunities posted free; listings with applicant fees are charged at banner-ad rates",
+  "audience": "Young people, professionals, researchers worldwide (for-profit and not-for-profit organizations may submit)"
+ },
+ {
+  "id": "signup19:Global (English):opportunity-desk",
+  "kind": "signup",
+  "url": "https://opportunitydesk.org/submit-opportunity/",
+  "country": "Global (English)",
+  "site": "Opportunity Desk",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "fedi19:United States (hosted by Humanities Commons / Michigan State University; global):hcommons-social-humanities-commons-masto",
+  "kind": "mastodon",
+  "url": "https://hcommons.social",
+  "country": "United States (hosted by Humanities Commons / Michigan State University; global)",
+  "site": "hcommons.social (Humanities Commons Mastodon server)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Free account; registration open by admin approval",
+  "audience": "Humanities scholars, grad students, librarians, mostly North America"
+ },
+ {
+  "id": "rules19:United States (hosted by Humanities Commons / Michigan State University; global):hcommons-social-humanities-commons-masto:rules page",
+  "kind": "html",
+  "url": "https://about.hcommons.org/2022/11/07/humanities-commons-launches-mastodon-server-open-to-scholars/",
+  "country": "United States (hosted by Humanities Commons / Michigan State University; global)",
+  "site": "hcommons.social (Humanities Commons Mastodon server) (rules page)",
+  "category": "fediverse",
+  "free_option": "Free account; registration open by admin approval",
+  "audience": "Humanities scholars, grad students, librarians, mostly North America"
+ },
+ {
+  "id": "fedi19:Global (English):fediscience-org-mastodon-for-scientists-",
+  "kind": "mastodon",
+  "url": "https://fediscience.org",
+  "country": "Global (English)",
+  "site": "fediscience.org (Mastodon for scientists)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Free account by admin approval; auto-posting apps tolerated if kept under control",
+  "audience": "Scientists and PhD students worldwide"
+ },
+ {
+  "id": "rules19:Global (English):fediscience-org-mastodon-for-scientists-:rules page",
+  "kind": "html",
+  "url": "https://fediscience.org/about",
+  "country": "Global (English)",
+  "site": "fediscience.org (Mastodon for scientists) (rules page)",
+  "category": "fediverse",
+  "free_option": "Free account by admin approval; auto-posting apps tolerated if kept under control",
+  "audience": "Scientists and PhD students worldwide"
+ },
+ {
+  "id": "fedi19:Global (English):sciences-social-mastodon-for-social-scie",
+  "kind": "mastodon",
+  "url": "https://sciences.social",
+  "country": "Global (English)",
+  "site": "sciences.social (Mastodon for social scientists)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Free account after admin approval",
+  "audience": "Social scientists and graduate students"
+ },
+ {
+  "id": "rules19:Global (English):sciences-social-mastodon-for-social-scie:rules page",
+  "kind": "html",
+  "url": "https://sciences.social/about",
+  "country": "Global (English)",
+  "site": "sciences.social (Mastodon for social scientists) (rules page)",
+  "category": "fediverse",
+  "free_option": "Free account after admin approval",
+  "audience": "Social scientists and graduate students"
+ },
+ {
+  "id": "fedi19:Global (English):scholar-social-mastodon-for-academics-",
+  "kind": "mastodon",
+  "url": "https://scholar.social",
+  "country": "Global (English)",
+  "site": "scholar.social (Mastodon for academics)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Free account; current registration status (open/closed/application) not confirmed",
+  "audience": "Academics incl. grad students and undergrads, English-speaking"
+ },
+ {
+  "id": "rules19:Global (English):scholar-social-mastodon-for-academics-:rules page",
+  "kind": "html",
+  "url": "https://scholar.social/about",
+  "country": "Global (English)",
+  "site": "scholar.social (Mastodon for academics) (rules page)",
+  "category": "fediverse",
+  "free_option": "Free account; current registration status (open/closed/application) not confirmed",
+  "audience": "Academics incl. grad students and undergrads, English-speaking"
+ },
+ {
+  "id": "fedi19:Canada:lemmy-ca-canadian-lemmy-instance-hosts-c",
+  "kind": "mastodon",
+  "url": "https://lemmy.ca",
+  "country": "Canada",
+  "site": "lemmy.ca (Canadian Lemmy instance; hosts campus community !ubc@lemmy.ca)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Free account on a Canadian instance; campus community for UBC exists; general Canadian communities (!canada)",
+  "audience": "Canadians on Lemmy; UBC students in !ubc; other campus communities not confirmed"
+ },
+ {
+  "id": "rules19:Canada:lemmy-ca-canadian-lemmy-instance-hosts-c:rules page",
+  "kind": "html",
+  "url": "https://fedecan.ca/en/guidelines/2-lemmy-ca",
+  "country": "Canada",
+  "site": "lemmy.ca (Canadian Lemmy instance; hosts campus community !ubc@lemmy.ca) (rules page)",
+  "category": "fediverse",
+  "free_option": "Free account on a Canadian instance; campus community for UBC exists; general Canadian communities (!canada)",
+  "audience": "Canadians on Lemmy; UBC students in !ubc; other campus communities not confirmed"
+ },
+ {
+  "id": "fedi19:Brazil:lemmy-eco-br-brazilian-lemmy-instance-",
+  "kind": "mastodon",
+  "url": "https://lemmy.eco.br",
+  "country": "Brazil",
+  "site": "lemmy.eco.br (Brazilian Lemmy instance)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Free account on a Brazilian general instance; no student community confirmed",
+  "audience": "Brazilian Lemmy users (small, tech-leaning); students only as a subset"
+ },
+ {
+  "id": "fedi19:Brazil:bolha-us-brazilian-mastodon-instance-",
+  "kind": "mastodon",
+  "url": "https://bolha.us",
+  "country": "Brazil",
+  "site": "bolha.us (Brazilian Mastodon instance)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Free account; listed among Brazilian instances accepting registrations (stuff.lema.org list)",
+  "audience": "Brazilian tech community, students as a subset"
+ },
+ {
+  "id": "rules19:Brazil:bolha-us-brazilian-mastodon-instance-:rules page",
+  "kind": "html",
+  "url": "https://bolha.us/about",
+  "country": "Brazil",
+  "site": "bolha.us (Brazilian Mastodon instance) (rules page)",
+  "category": "fediverse",
+  "free_option": "Free account; listed among Brazilian instances accepting registrations (stuff.lema.org list)",
+  "audience": "Brazilian tech community, students as a subset"
+ },
+ {
+  "id": "fedi19:Mexico:mujico-org-mexican-lemmy-instance-",
+  "kind": "mastodon",
+  "url": "https://mujico.org",
+  "country": "Mexico",
+  "site": "mujico.org (Mexican Lemmy instance)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Unverified; only seen named in a community-compiled list of national Lemmy instances",
+  "audience": "Mexican Lemmy users (size unknown)"
+ },
+ {
+  "id": "rules19:Mexico (verifies students in Chile, Argentina, Colombia, Peru too):destu-latam-descuentos-para-estudiantes-:rules page",
+  "kind": "html",
+  "url": "https://www.descuentoestudiante.com.mx/empresa",
+  "country": "Mexico (verifies students in Chile, Argentina, Colombia, Peru too)",
+  "site": "Destu LATAM – Descuentos para estudiantes (descuentoestudiante.com.mx) (rules page)",
+  "category": "other",
+  "free_option": "Brand onboarding page ('Empresa'); merchant cost not stated",
+  "audience": "Verified university students in MX, CL, AR, CO, PE"
+ },
+ {
+  "id": "rules19:Mexico (verifies students in Chile, Argentina, Colombia, Peru too):destu-latam-descuentos-para-estudiantes-:home",
+  "kind": "html",
+  "url": "https://www.descuentoestudiante.com.mx/",
+  "country": "Mexico (verifies students in Chile, Argentina, Colombia, Peru too)",
+  "site": "Destu LATAM – Descuentos para estudiantes (descuentoestudiante.com.mx) (home)",
+  "category": "other",
+  "free_option": "Brand onboarding page ('Empresa'); merchant cost not stated",
+  "audience": "Verified university students in MX, CL, AR, CO, PE"
+ },
+ {
+  "id": "signup19:Mexico (verifies students in Chile, Argentina, Colombia, Peru too):destu-latam-descuentos-para-estudiantes-",
+  "kind": "signup",
+  "url": "https://www.descuentoestudiante.com.mx/empresa",
+  "country": "Mexico (verifies students in Chile, Argentina, Colombia, Peru too)",
+  "site": "Destu LATAM – Descuentos para estudiantes (descuentoestudiante.com.mx)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:Peru:todostudents-peru-student-discounts-:rules page",
+  "kind": "html",
+  "url": "https://todostudents.com/",
+  "country": "Peru",
+  "site": "TodoStudents (Peru student discounts) (rules page)",
+  "category": "other",
+  "free_option": "Student side is free with verification; merchant/brand listing terms not found",
+  "audience": "Peruvian university students"
+ },
+ {
+  "id": "signup19:Peru:todostudents-peru-student-discounts-",
+  "kind": "signup",
+  "url": "https://todostudents.com/",
+  "country": "Peru",
+  "site": "TodoStudents (Peru student discounts)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:Spain-based; LatAm subforums for Argentina, Chile, Colombia, Mexico:casimedicos-foro-de-estudiantes-de-medic:rules page",
+  "kind": "html",
+  "url": "https://www.casimedicos.com/foro/",
+  "country": "Spain-based; LatAm subforums for Argentina, Chile, Colombia, Mexico",
+  "site": "casiMedicos – Foro de Estudiantes de Medicina (subforos Argentina, Chile, Colombia, México) (rules page)",
+  "category": "student-forum",
+  "free_option": "Free forum account; file-sharing section for class notes and guides; per-country subforums",
+  "audience": "Medical students and doctors, Spanish-speaking, with country subforums"
+ },
+ {
+  "id": "signup19:Spain-based; LatAm subforums for Argentina, Chile, Colombia, Mexico:casimedicos-foro-de-estudiantes-de-medic",
+  "kind": "signup",
+  "url": "https://www.casimedicos.com/foro/",
+  "country": "Spain-based; LatAm subforums for Argentina, Chile, Colombia, Mexico",
+  "site": "casiMedicos – Foro de Estudiantes de Medicina (subforos Argentina, Chile, Colombia, México)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:Argentina:altillo-com-argentina-ex-menes-apuntes-y:rules page",
+  "kind": "html",
+  "url": "https://www.altillo.com/",
+  "country": "Argentina",
+  "site": "Altillo.com (Argentina – exámenes, apuntes y resúmenes por universidad) (rules page)",
+  "category": "other",
+  "free_option": "Free site; accepts student-submitted exams/notes organized by university and faculty (submission form not verified)",
+  "audience": "Argentine university students (UBA and other universities)"
+ },
+ {
+  "id": "signup19:Argentina:altillo-com-argentina-ex-menes-apuntes-y",
+  "kind": "signup",
+  "url": "https://www.altillo.com/",
+  "country": "Argentina",
+  "site": "Altillo.com (Argentina – exámenes, apuntes y resúmenes por universidad)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:Argentina:apuntify-apuntify-ar-:rules page",
+  "kind": "html",
+  "url": "https://apuntify.ar/",
+  "country": "Argentina",
+  "site": "Apuntify (apuntify.ar) (rules page)",
+  "category": "other",
+  "free_option": "Collaborative note-sharing platform (free status and upload rules not verified)",
+  "audience": "Argentine university students"
+ },
+ {
+  "id": "signup19:Argentina:apuntify-apuntify-ar-",
+  "kind": "signup",
+  "url": "https://apuntify.ar/",
+  "country": "Argentina",
+  "site": "Apuntify (apuntify.ar)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:Chile:avisos-clasificados-2-0-universidad-de-c:rules page",
+  "kind": "html",
+  "url": "http://www6.udec.cl/clasificados2/",
+  "country": "Chile",
+  "site": "Avisos Clasificados 2.0 – Universidad de Concepción (UdeC) (rules page)",
+  "category": "classifieds",
+  "free_option": "University classifieds board with 2026 postings; posting cost/eligibility not stated",
+  "audience": "Universidad de Concepción students and staff"
+ },
+ {
+  "id": "signup19:Chile:avisos-clasificados-2-0-universidad-de-c",
+  "kind": "signup",
+  "url": "http://www6.udec.cl/clasificados2/",
+  "country": "Chile",
+  "site": "Avisos Clasificados 2.0 – Universidad de Concepción (UdeC)",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:Brazil:science-arena-divulgue-sua-oportunidade:rules page",
+  "kind": "html",
+  "url": "https://www.sciencearena.org/divulgue-sua-oportunidade/",
+  "country": "Brazil",
+  "site": "Science Arena – Divulgue sua oportunidade (rules page)",
+  "category": "directory",
+  "free_option": "Free listing of jobs, scholarships, calls and other opportunities, but only health-science related",
+  "audience": "Brazilian health-science researchers and graduate students"
+ },
+ {
+  "id": "signup19:Brazil:science-arena-divulgue-sua-oportunidade",
+  "kind": "signup",
+  "url": "https://www.sciencearena.org/divulgue-sua-oportunidade/",
+  "country": "Brazil",
+  "site": "Science Arena – Divulgue sua oportunidade",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:Brazil:puc-sp-est-gios-divulgue-sua-vaga-gratui:rules page",
+  "kind": "html",
+  "url": "https://pucsp.br/estagios/divulgue-sua-vaga-gratuitamente",
+  "country": "Brazil",
+  "site": "PUC-SP Estágios – Divulgue sua vaga gratuitamente (rules page)",
+  "category": "classifieds",
+  "free_option": "Free organization registration and free posting of internship/opportunity vacancies to PUC-SP students",
+  "audience": "PUC-SP students (São Paulo)"
+ },
+ {
+  "id": "signup19:Brazil:puc-sp-est-gios-divulgue-sua-vaga-gratui",
+  "kind": "signup",
+  "url": "https://pucsp.br/estagios/divulgue-sua-vaga-gratuitamente",
+  "country": "Brazil",
+  "site": "PUC-SP Estágios – Divulgue sua vaga gratuitamente",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:Latin America (Spanish; MX, CO, AR, CL, PE):becas-para-latinos-publica-tu-beca:rules page",
+  "kind": "html",
+  "url": "https://becasparalatinos.com/publica-tu-beca/",
+  "country": "Latin America (Spanish; MX, CO, AR, CL, PE)",
+  "site": "Becas para Latinos – Publica tu beca (rules page)",
+  "category": "directory",
+  "free_option": "Scholarship-listing submission page; cost not stated",
+  "audience": "Latin American students seeking scholarships"
+ },
+ {
+  "id": "signup19:Latin America (Spanish; MX, CO, AR, CL, PE):becas-para-latinos-publica-tu-beca",
+  "kind": "signup",
+  "url": "https://becasparalatinos.com/publica-tu-beca/",
+  "country": "Latin America (Spanish; MX, CO, AR, CL, PE)",
+  "site": "Becas para Latinos – Publica tu beca",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "rules19:United States, Canada, Brazil, Mexico, Argentina, Chile, Colombia, Peru:studocu-localized-sites-for-us-ca-br-mx-:rules page",
+  "kind": "html",
+  "url": "https://help.studocu.com/hc/en-us/articles/360021675991-What-type-of-documents-do-you-accept",
+  "country": "United States, Canada, Brazil, Mexico, Argentina, Chile, Colombia, Peru",
+  "site": "Studocu (localized sites for US, CA, BR, MX, AR, CL, CO, PE) (rules page)",
+  "category": "other",
+  "free_option": "Free account; uploading own notes/summaries is free and unlocks access; documents are reviewed for uniqueness and quality",
+  "audience": "University students in all eight target countries (largest multi-country note-sharing site)"
+ },
+ {
+  "id": "rules19:United States, Canada, Brazil, Mexico, Argentina, Chile, Colombia, Peru:studocu-localized-sites-for-us-ca-br-mx-:home",
+  "kind": "html",
+  "url": "https://www.studocu.com/",
+  "country": "United States, Canada, Brazil, Mexico, Argentina, Chile, Colombia, Peru",
+  "site": "Studocu (localized sites for US, CA, BR, MX, AR, CL, CO, PE) (home)",
+  "category": "other",
+  "free_option": "Free account; uploading own notes/summaries is free and unlocks access; documents are reviewed for uniqueness and quality",
+  "audience": "University students in all eight target countries (largest multi-country note-sharing site)"
+ },
+ {
+  "id": "signup19:United States, Canada, Brazil, Mexico, Argentina, Chile, Colombia, Peru:studocu-localized-sites-for-us-ca-br-mx-",
+  "kind": "signup",
+  "url": "https://www.studocu.com/",
+  "country": "United States, Canada, Brazil, Mexico, Argentina, Chile, Colombia, Peru",
+  "site": "Studocu (localized sites for US, CA, BR, MX, AR, CL, CO, PE)",
+  "category": "signup-form",
+  "discover": true
+ }
+]

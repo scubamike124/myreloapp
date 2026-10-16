@@ -50,7 +50,10 @@ async function probe(browser, t) {
     const oauth = { google: /accounts\.google\.com|continue with google|sign (in|up) with google|google-signin/i.test(html), facebook: /facebook\.com\/(dialog|login|v\d)|continue with facebook/i.test(html), apple: /appleid\.apple\.com|sign in with apple/i.test(html), github: /github\.com\/login\/oauth|continue with github/i.test(html) };
     const sentences = text.split(/(?<=[.!?。！？])\s+|\n+/).map((s) => s.trim()).filter((s) => s.length > 25 && s.length < 400 && KEYWORDS.test(s)).slice(0, 14);
     const requiredFields = inputs.filter((i) => i.required && i.visible).map((i) => `${i.type}:${i.name || i.id || i.placeholder || "?"}`);
-    Object.assign(result, { reachable: status > 0, status, finalUrl: page.url(), hops, title: (await page.title()).slice(0, 120), blocked, formFound: password || (email && inputs.length > 0), email, password, phone, dob, captcha, oauth, inputs: inputs.slice(0, 40), requiredFields: requiredFields.slice(0, 20), labels, sentences, chars: text.length });
+    // The page's visible text (an excerpt, for the hand review) and each form's action, method and hidden field names — never a value.
+    const excerpt = text.replace(/\s+/g, " ").trim().slice(0, 3000);
+    const forms = await page.$$eval("form", (fs) => fs.slice(0, 8).map((f) => ({ action: (f.getAttribute("action") || "").slice(0, 200), method: (f.getAttribute("method") || "get").toLowerCase(), hidden: Array.from(f.querySelectorAll("input[type=hidden]")).map((h) => (h.getAttribute("name") || "").slice(0, 40)).filter(Boolean).slice(0, 20), fields: Array.from(f.querySelectorAll("input,select,textarea")).filter((i) => (i.getAttribute("type") || "") !== "hidden").length })));
+    Object.assign(result, { reachable: status > 0, status, finalUrl: page.url(), hops, title: (await page.title()).slice(0, 120), blocked, formFound: password || (email && inputs.length > 0), email, password, phone, dob, captcha, oauth, inputs: inputs.slice(0, 40), requiredFields: requiredFields.slice(0, 20), labels, sentences, chars: text.length, excerpt, forms });
   } catch (e) {
     result.error = String(e?.message || e).slice(0, 160);
   } finally {

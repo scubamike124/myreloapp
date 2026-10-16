@@ -1,0 +1,100 @@
+[
+ {
+  "id": "render3:ID:iklangratiz:link-ad",
+  "url": "https://www.iklangratiz.com/hubungi-kami/pasang-iklan-link/",
+  "discover": false,
+  "country": "ID",
+  "site": "IklanGratiz link-ad page"
+ },
+ {
+  "id": "render3:ID:iklangratiz:home",
+  "url": "https://www.iklangratiz.com/",
+  "discover": false,
+  "country": "ID",
+  "site": "IklanGratiz home"
+ },
+ {
+  "id": "render3:ID:iklangratiz:rules",
+  "url": "https://www.iklangratiz.com/peraturan-aup-tos/",
+  "discover": false,
+  "country": "ID",
+  "site": "IklanGratiz rules"
+ },
+ {
+  "id": "render3:ID:iklangratiz:pasang",
+  "url": "https://www.iklangratiz.com/pasang-iklan/",
+  "discover": false,
+  "country": "ID",
+  "site": "IklanGratiz pasang-iklan"
+ },
+ {
+  "id": "render3:CO:colombiamove:publicar",
+  "url": "https://colombiamove.com/publicar",
+  "discover": false,
+  "country": "CO",
+  "site": "Colombia Move publicar"
+ },
+ {
+  "id": "render3:CO:colombiamove:home",
+  "url": "https://colombiamove.com/",
+  "discover": false,
+  "country": "CO",
+  "site": "Colombia Move home"
+ },
+ {
+  "id": "render3:IL:myproduct:home",
+  "url": "https://myproduct.co.il/",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct.co.il home"
+ },
+ {
+  "id": "render3:IL:myproduct:register",
+  "url": "https://myproduct.co.il/reshut-harabim/rb/register.php",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct.co.il register"
+ },
+ {
+  "id": "render3:PK:listcompk:register",
+  "url": "https://list.com.pk/member/register/",
+  "discover": false,
+  "country": "PK",
+  "site": "List.com.pk register"
+ },
+ {
+  "id": "render3:PK:listcompk:post",
+  "url": "https://list.com.pk/post-ad",
+  "discover": false,
+  "country": "PK",
+  "site": "List.com.pk post-ad"
+ },
+ {
+  "id": "render3:DE:dsble:home",
+  "url": "https://www.dsble.de/",
+  "discover": true,
+  "country": "DE",
+  "site": "DSB Das Schwarze Brett"
+ },
+ {
+  "id": "render3:DE:dsble:neu",
+  "url": "https://www.dsble.de/neu",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB neu"
+ },
+ {
+  "id": "render3:PL:studencior:home",
+  "url": "https://studencior.pl/",
+  "discover": true,
+  "country": "PL",
+  "site": "Studencior"
+ },
+ {
+  "id": "render3:IL:study-co-il:home",
+  "url": "https://www.study.co.il/",
+  "discover": true,
+  "country": "IL",
+  "site": "study.co.il"
+ }
+]
