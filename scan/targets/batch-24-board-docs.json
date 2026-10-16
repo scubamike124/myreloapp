@@ -1,0 +1,1098 @@
+[
+ {
+  "id": "docs24:agentpact:skill-md",
+  "kind": "task",
+  "url": "https://agentpact.xyz/skill.md",
+  "country": "GLOBAL",
+  "site": "agentpact /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentpact:llms-txt",
+  "kind": "task",
+  "url": "https://agentpact.xyz/llms.txt",
+  "country": "GLOBAL",
+  "site": "agentpact /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentpact:docs",
+  "kind": "task",
+  "url": "https://agentpact.xyz/docs",
+  "country": "GLOBAL",
+  "site": "agentpact /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentpact:api",
+  "kind": "task",
+  "url": "https://agentpact.xyz/api",
+  "country": "GLOBAL",
+  "site": "agentpact /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentpact:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://agentpact.xyz/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "agentpact /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentpact:agents",
+  "kind": "task",
+  "url": "https://agentpact.xyz/agents",
+  "country": "GLOBAL",
+  "site": "agentpact /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentpact:developers",
+  "kind": "task",
+  "url": "https://agentpact.xyz/developers",
+  "country": "GLOBAL",
+  "site": "agentpact /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentpact:faq",
+  "kind": "task",
+  "url": "https://agentpact.xyz/faq",
+  "country": "GLOBAL",
+  "site": "agentpact /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentpact:terms",
+  "kind": "task",
+  "url": "https://agentpact.xyz/terms",
+  "country": "GLOBAL",
+  "site": "agentpact /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:deskcrew:skill-md",
+  "kind": "task",
+  "url": "https://deskcrew.io/skill.md",
+  "country": "GLOBAL",
+  "site": "deskcrew /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:deskcrew:llms-txt",
+  "kind": "task",
+  "url": "https://deskcrew.io/llms.txt",
+  "country": "GLOBAL",
+  "site": "deskcrew /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:deskcrew:docs",
+  "kind": "task",
+  "url": "https://deskcrew.io/docs",
+  "country": "GLOBAL",
+  "site": "deskcrew /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:deskcrew:api",
+  "kind": "task",
+  "url": "https://deskcrew.io/api",
+  "country": "GLOBAL",
+  "site": "deskcrew /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:deskcrew:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://deskcrew.io/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "deskcrew /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:deskcrew:agents",
+  "kind": "task",
+  "url": "https://deskcrew.io/agents",
+  "country": "GLOBAL",
+  "site": "deskcrew /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:deskcrew:developers",
+  "kind": "task",
+  "url": "https://deskcrew.io/developers",
+  "country": "GLOBAL",
+  "site": "deskcrew /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:deskcrew:faq",
+  "kind": "task",
+  "url": "https://deskcrew.io/faq",
+  "country": "GLOBAL",
+  "site": "deskcrew /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:deskcrew:terms",
+  "kind": "task",
+  "url": "https://deskcrew.io/terms",
+  "country": "GLOBAL",
+  "site": "deskcrew /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:0xwork:skill-md",
+  "kind": "task",
+  "url": "https://www.0xwork.org/skill.md",
+  "country": "GLOBAL",
+  "site": "0xwork /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:0xwork:llms-txt",
+  "kind": "task",
+  "url": "https://www.0xwork.org/llms.txt",
+  "country": "GLOBAL",
+  "site": "0xwork /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:0xwork:docs",
+  "kind": "task",
+  "url": "https://www.0xwork.org/docs",
+  "country": "GLOBAL",
+  "site": "0xwork /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:0xwork:api",
+  "kind": "task",
+  "url": "https://www.0xwork.org/api",
+  "country": "GLOBAL",
+  "site": "0xwork /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:0xwork:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://www.0xwork.org/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "0xwork /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:0xwork:agents",
+  "kind": "task",
+  "url": "https://www.0xwork.org/agents",
+  "country": "GLOBAL",
+  "site": "0xwork /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:0xwork:developers",
+  "kind": "task",
+  "url": "https://www.0xwork.org/developers",
+  "country": "GLOBAL",
+  "site": "0xwork /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:0xwork:faq",
+  "kind": "task",
+  "url": "https://www.0xwork.org/faq",
+  "country": "GLOBAL",
+  "site": "0xwork /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:0xwork:terms",
+  "kind": "task",
+  "url": "https://www.0xwork.org/terms",
+  "country": "GLOBAL",
+  "site": "0xwork /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:frantic:skill-md",
+  "kind": "task",
+  "url": "https://gofrantic.com/skill.md",
+  "country": "GLOBAL",
+  "site": "frantic /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:frantic:llms-txt",
+  "kind": "task",
+  "url": "https://gofrantic.com/llms.txt",
+  "country": "GLOBAL",
+  "site": "frantic /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:frantic:docs",
+  "kind": "task",
+  "url": "https://gofrantic.com/docs",
+  "country": "GLOBAL",
+  "site": "frantic /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:frantic:api",
+  "kind": "task",
+  "url": "https://gofrantic.com/api",
+  "country": "GLOBAL",
+  "site": "frantic /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:frantic:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://gofrantic.com/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "frantic /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:frantic:agents",
+  "kind": "task",
+  "url": "https://gofrantic.com/agents",
+  "country": "GLOBAL",
+  "site": "frantic /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:frantic:developers",
+  "kind": "task",
+  "url": "https://gofrantic.com/developers",
+  "country": "GLOBAL",
+  "site": "frantic /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:frantic:faq",
+  "kind": "task",
+  "url": "https://gofrantic.com/faq",
+  "country": "GLOBAL",
+  "site": "frantic /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:frantic:terms",
+  "kind": "task",
+  "url": "https://gofrantic.com/terms",
+  "country": "GLOBAL",
+  "site": "frantic /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:riner:skill-md",
+  "kind": "task",
+  "url": "https://riner.io/skill.md",
+  "country": "GLOBAL",
+  "site": "riner /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:riner:llms-txt",
+  "kind": "task",
+  "url": "https://riner.io/llms.txt",
+  "country": "GLOBAL",
+  "site": "riner /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:riner:docs",
+  "kind": "task",
+  "url": "https://riner.io/docs",
+  "country": "GLOBAL",
+  "site": "riner /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:riner:api",
+  "kind": "task",
+  "url": "https://riner.io/api",
+  "country": "GLOBAL",
+  "site": "riner /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:riner:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://riner.io/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "riner /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:riner:agents",
+  "kind": "task",
+  "url": "https://riner.io/agents",
+  "country": "GLOBAL",
+  "site": "riner /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:riner:developers",
+  "kind": "task",
+  "url": "https://riner.io/developers",
+  "country": "GLOBAL",
+  "site": "riner /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:riner:faq",
+  "kind": "task",
+  "url": "https://riner.io/faq",
+  "country": "GLOBAL",
+  "site": "riner /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:riner:terms",
+  "kind": "task",
+  "url": "https://riner.io/terms",
+  "country": "GLOBAL",
+  "site": "riner /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawearn:skill-md",
+  "kind": "task",
+  "url": "https://aiagentstore.ai/skill.md",
+  "country": "GLOBAL",
+  "site": "clawearn /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawearn:llms-txt",
+  "kind": "task",
+  "url": "https://aiagentstore.ai/llms.txt",
+  "country": "GLOBAL",
+  "site": "clawearn /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawearn:docs",
+  "kind": "task",
+  "url": "https://aiagentstore.ai/docs",
+  "country": "GLOBAL",
+  "site": "clawearn /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawearn:api",
+  "kind": "task",
+  "url": "https://aiagentstore.ai/api",
+  "country": "GLOBAL",
+  "site": "clawearn /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawearn:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://aiagentstore.ai/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "clawearn /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawearn:agents",
+  "kind": "task",
+  "url": "https://aiagentstore.ai/agents",
+  "country": "GLOBAL",
+  "site": "clawearn /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawearn:developers",
+  "kind": "task",
+  "url": "https://aiagentstore.ai/developers",
+  "country": "GLOBAL",
+  "site": "clawearn /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawearn:faq",
+  "kind": "task",
+  "url": "https://aiagentstore.ai/faq",
+  "country": "GLOBAL",
+  "site": "clawearn /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawearn:terms",
+  "kind": "task",
+  "url": "https://aiagentstore.ai/terms",
+  "country": "GLOBAL",
+  "site": "clawearn /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawlancer:skill-md",
+  "kind": "task",
+  "url": "https://clawlancer.ai/skill.md",
+  "country": "GLOBAL",
+  "site": "clawlancer /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawlancer:llms-txt",
+  "kind": "task",
+  "url": "https://clawlancer.ai/llms.txt",
+  "country": "GLOBAL",
+  "site": "clawlancer /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawlancer:docs",
+  "kind": "task",
+  "url": "https://clawlancer.ai/docs",
+  "country": "GLOBAL",
+  "site": "clawlancer /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawlancer:api",
+  "kind": "task",
+  "url": "https://clawlancer.ai/api",
+  "country": "GLOBAL",
+  "site": "clawlancer /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawlancer:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://clawlancer.ai/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "clawlancer /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawlancer:agents",
+  "kind": "task",
+  "url": "https://clawlancer.ai/agents",
+  "country": "GLOBAL",
+  "site": "clawlancer /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawlancer:developers",
+  "kind": "task",
+  "url": "https://clawlancer.ai/developers",
+  "country": "GLOBAL",
+  "site": "clawlancer /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawlancer:faq",
+  "kind": "task",
+  "url": "https://clawlancer.ai/faq",
+  "country": "GLOBAL",
+  "site": "clawlancer /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawlancer:terms",
+  "kind": "task",
+  "url": "https://clawlancer.ai/terms",
+  "country": "GLOBAL",
+  "site": "clawlancer /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentbounty:skill-md",
+  "kind": "task",
+  "url": "https://agentbounty.org/skill.md",
+  "country": "GLOBAL",
+  "site": "agentbounty /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentbounty:llms-txt",
+  "kind": "task",
+  "url": "https://agentbounty.org/llms.txt",
+  "country": "GLOBAL",
+  "site": "agentbounty /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentbounty:docs",
+  "kind": "task",
+  "url": "https://agentbounty.org/docs",
+  "country": "GLOBAL",
+  "site": "agentbounty /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentbounty:api",
+  "kind": "task",
+  "url": "https://agentbounty.org/api",
+  "country": "GLOBAL",
+  "site": "agentbounty /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentbounty:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://agentbounty.org/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "agentbounty /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentbounty:agents",
+  "kind": "task",
+  "url": "https://agentbounty.org/agents",
+  "country": "GLOBAL",
+  "site": "agentbounty /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentbounty:developers",
+  "kind": "task",
+  "url": "https://agentbounty.org/developers",
+  "country": "GLOBAL",
+  "site": "agentbounty /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentbounty:faq",
+  "kind": "task",
+  "url": "https://agentbounty.org/faq",
+  "country": "GLOBAL",
+  "site": "agentbounty /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentbounty:terms",
+  "kind": "task",
+  "url": "https://agentbounty.org/terms",
+  "country": "GLOBAL",
+  "site": "agentbounty /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:opentask:skill-md",
+  "kind": "task",
+  "url": "https://opentask.ai/skill.md",
+  "country": "GLOBAL",
+  "site": "opentask /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:opentask:llms-txt",
+  "kind": "task",
+  "url": "https://opentask.ai/llms.txt",
+  "country": "GLOBAL",
+  "site": "opentask /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:opentask:docs",
+  "kind": "task",
+  "url": "https://opentask.ai/docs",
+  "country": "GLOBAL",
+  "site": "opentask /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:opentask:api",
+  "kind": "task",
+  "url": "https://opentask.ai/api",
+  "country": "GLOBAL",
+  "site": "opentask /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:opentask:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://opentask.ai/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "opentask /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:opentask:agents",
+  "kind": "task",
+  "url": "https://opentask.ai/agents",
+  "country": "GLOBAL",
+  "site": "opentask /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:opentask:developers",
+  "kind": "task",
+  "url": "https://opentask.ai/developers",
+  "country": "GLOBAL",
+  "site": "opentask /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:opentask:faq",
+  "kind": "task",
+  "url": "https://opentask.ai/faq",
+  "country": "GLOBAL",
+  "site": "opentask /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:opentask:terms",
+  "kind": "task",
+  "url": "https://opentask.ai/terms",
+  "country": "GLOBAL",
+  "site": "opentask /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:ugig:skill-md",
+  "kind": "task",
+  "url": "https://ugig.net/skill.md",
+  "country": "GLOBAL",
+  "site": "ugig /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:ugig:llms-txt",
+  "kind": "task",
+  "url": "https://ugig.net/llms.txt",
+  "country": "GLOBAL",
+  "site": "ugig /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:ugig:docs",
+  "kind": "task",
+  "url": "https://ugig.net/docs",
+  "country": "GLOBAL",
+  "site": "ugig /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:ugig:api",
+  "kind": "task",
+  "url": "https://ugig.net/api",
+  "country": "GLOBAL",
+  "site": "ugig /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:ugig:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://ugig.net/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "ugig /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:ugig:agents",
+  "kind": "task",
+  "url": "https://ugig.net/agents",
+  "country": "GLOBAL",
+  "site": "ugig /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:ugig:developers",
+  "kind": "task",
+  "url": "https://ugig.net/developers",
+  "country": "GLOBAL",
+  "site": "ugig /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:ugig:faq",
+  "kind": "task",
+  "url": "https://ugig.net/faq",
+  "country": "GLOBAL",
+  "site": "ugig /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:ugig:terms",
+  "kind": "task",
+  "url": "https://ugig.net/terms",
+  "country": "GLOBAL",
+  "site": "ugig /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clustly:skill-md",
+  "kind": "task",
+  "url": "https://clustly.ai/skill.md",
+  "country": "GLOBAL",
+  "site": "clustly /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clustly:llms-txt",
+  "kind": "task",
+  "url": "https://clustly.ai/llms.txt",
+  "country": "GLOBAL",
+  "site": "clustly /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clustly:docs",
+  "kind": "task",
+  "url": "https://clustly.ai/docs",
+  "country": "GLOBAL",
+  "site": "clustly /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clustly:api",
+  "kind": "task",
+  "url": "https://clustly.ai/api",
+  "country": "GLOBAL",
+  "site": "clustly /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clustly:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://clustly.ai/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "clustly /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clustly:agents",
+  "kind": "task",
+  "url": "https://clustly.ai/agents",
+  "country": "GLOBAL",
+  "site": "clustly /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clustly:developers",
+  "kind": "task",
+  "url": "https://clustly.ai/developers",
+  "country": "GLOBAL",
+  "site": "clustly /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clustly:faq",
+  "kind": "task",
+  "url": "https://clustly.ai/faq",
+  "country": "GLOBAL",
+  "site": "clustly /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clustly:terms",
+  "kind": "task",
+  "url": "https://clustly.ai/terms",
+  "country": "GLOBAL",
+  "site": "clustly /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:botbounty:skill-md",
+  "kind": "task",
+  "url": "https://www.botbounty.ai/skill.md",
+  "country": "GLOBAL",
+  "site": "botbounty /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:botbounty:llms-txt",
+  "kind": "task",
+  "url": "https://www.botbounty.ai/llms.txt",
+  "country": "GLOBAL",
+  "site": "botbounty /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:botbounty:docs",
+  "kind": "task",
+  "url": "https://www.botbounty.ai/docs",
+  "country": "GLOBAL",
+  "site": "botbounty /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:botbounty:api",
+  "kind": "task",
+  "url": "https://www.botbounty.ai/api",
+  "country": "GLOBAL",
+  "site": "botbounty /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:botbounty:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://www.botbounty.ai/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "botbounty /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:botbounty:agents",
+  "kind": "task",
+  "url": "https://www.botbounty.ai/agents",
+  "country": "GLOBAL",
+  "site": "botbounty /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:botbounty:developers",
+  "kind": "task",
+  "url": "https://www.botbounty.ai/developers",
+  "country": "GLOBAL",
+  "site": "botbounty /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:botbounty:faq",
+  "kind": "task",
+  "url": "https://www.botbounty.ai/faq",
+  "country": "GLOBAL",
+  "site": "botbounty /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:botbounty:terms",
+  "kind": "task",
+  "url": "https://www.botbounty.ai/terms",
+  "country": "GLOBAL",
+  "site": "botbounty /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentmesh:skill-md",
+  "kind": "task",
+  "url": "https://agentmesh.help/skill.md",
+  "country": "GLOBAL",
+  "site": "agentmesh /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentmesh:llms-txt",
+  "kind": "task",
+  "url": "https://agentmesh.help/llms.txt",
+  "country": "GLOBAL",
+  "site": "agentmesh /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentmesh:docs",
+  "kind": "task",
+  "url": "https://agentmesh.help/docs",
+  "country": "GLOBAL",
+  "site": "agentmesh /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentmesh:api",
+  "kind": "task",
+  "url": "https://agentmesh.help/api",
+  "country": "GLOBAL",
+  "site": "agentmesh /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentmesh:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://agentmesh.help/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "agentmesh /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentmesh:agents",
+  "kind": "task",
+  "url": "https://agentmesh.help/agents",
+  "country": "GLOBAL",
+  "site": "agentmesh /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentmesh:developers",
+  "kind": "task",
+  "url": "https://agentmesh.help/developers",
+  "country": "GLOBAL",
+  "site": "agentmesh /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentmesh:faq",
+  "kind": "task",
+  "url": "https://agentmesh.help/faq",
+  "country": "GLOBAL",
+  "site": "agentmesh /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:agentmesh:terms",
+  "kind": "task",
+  "url": "https://agentmesh.help/terms",
+  "country": "GLOBAL",
+  "site": "agentmesh /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:toku:skill-md",
+  "kind": "task",
+  "url": "https://www.toku.agency/skill.md",
+  "country": "GLOBAL",
+  "site": "toku /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:toku:llms-txt",
+  "kind": "task",
+  "url": "https://www.toku.agency/llms.txt",
+  "country": "GLOBAL",
+  "site": "toku /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:toku:docs",
+  "kind": "task",
+  "url": "https://www.toku.agency/docs",
+  "country": "GLOBAL",
+  "site": "toku /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:toku:api",
+  "kind": "task",
+  "url": "https://www.toku.agency/api",
+  "country": "GLOBAL",
+  "site": "toku /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:toku:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://www.toku.agency/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "toku /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:toku:agents",
+  "kind": "task",
+  "url": "https://www.toku.agency/agents",
+  "country": "GLOBAL",
+  "site": "toku /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:toku:developers",
+  "kind": "task",
+  "url": "https://www.toku.agency/developers",
+  "country": "GLOBAL",
+  "site": "toku /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:toku:faq",
+  "kind": "task",
+  "url": "https://www.toku.agency/faq",
+  "country": "GLOBAL",
+  "site": "toku /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:toku:terms",
+  "kind": "task",
+  "url": "https://www.toku.agency/terms",
+  "country": "GLOBAL",
+  "site": "toku /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:superteam:skill-md",
+  "kind": "task",
+  "url": "https://superteam.fun/skill.md",
+  "country": "GLOBAL",
+  "site": "superteam /skill.md",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:superteam:llms-txt",
+  "kind": "task",
+  "url": "https://superteam.fun/llms.txt",
+  "country": "GLOBAL",
+  "site": "superteam /llms.txt",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:superteam:docs",
+  "kind": "task",
+  "url": "https://superteam.fun/docs",
+  "country": "GLOBAL",
+  "site": "superteam /docs",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:superteam:api",
+  "kind": "task",
+  "url": "https://superteam.fun/api",
+  "country": "GLOBAL",
+  "site": "superteam /api",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:superteam:-well-known-agent-json",
+  "kind": "task",
+  "url": "https://superteam.fun/.well-known/agent.json",
+  "country": "GLOBAL",
+  "site": "superteam /.well-known/agent.json",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:superteam:agents",
+  "kind": "task",
+  "url": "https://superteam.fun/agents",
+  "country": "GLOBAL",
+  "site": "superteam /agents",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:superteam:developers",
+  "kind": "task",
+  "url": "https://superteam.fun/developers",
+  "country": "GLOBAL",
+  "site": "superteam /developers",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:superteam:faq",
+  "kind": "task",
+  "url": "https://superteam.fun/faq",
+  "country": "GLOBAL",
+  "site": "superteam /faq",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:superteam:terms",
+  "kind": "task",
+  "url": "https://superteam.fun/terms",
+  "country": "GLOBAL",
+  "site": "superteam /terms",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:clawearn:page",
+  "kind": "task",
+  "url": "https://aiagentstore.ai/claw-earn",
+  "country": "GLOBAL",
+  "site": "Claw Earn page",
+  "category": "paid-task-docs"
+ },
+ {
+  "id": "docs24:deskcrew:earn",
+  "kind": "task",
+  "url": "https://deskcrew.io/earn",
+  "country": "GLOBAL",
+  "site": "DeskCrew earn",
+  "category": "paid-task-docs"
+ }
+]
