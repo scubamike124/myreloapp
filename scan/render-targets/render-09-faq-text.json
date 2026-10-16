@@ -1,0 +1,52 @@
+[
+ {
+  "id": "render9:IL:myproduct:home-options",
+  "url": "https://myproduct.co.il/",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct home quick form (options)",
+  "excerptChars": 2500
+ },
+ {
+  "id": "render9:IT:perstudenti:faq-full",
+  "url": "https://www.perstudenti.com/faq",
+  "discover": false,
+  "country": "IT",
+  "site": "PerStudenti FAQ (full text)",
+  "excerptChars": 12000,
+  "fullText": true
+ },
+ {
+  "id": "render9:IT:perstudenti:privacy",
+  "url": "https://www.perstudenti.com/privacy",
+  "discover": false,
+  "country": "IT",
+  "site": "PerStudenti privacy (guess)",
+  "excerptChars": 3000
+ },
+ {
+  "id": "render9:IT:perstudenti:termini-e-condizioni",
+  "url": "https://www.perstudenti.com/termini-e-condizioni",
+  "discover": false,
+  "country": "IT",
+  "site": "PerStudenti termini-e-condizioni (guess)",
+  "excerptChars": 12000
+ },
+ {
+  "id": "render9:IT:perstudenti:chi-siamo",
+  "url": "https://www.perstudenti.com/chi-siamo",
+  "discover": false,
+  "country": "IT",
+  "site": "PerStudenti chi siamo",
+  "excerptChars": 6000
+ },
+ {
+  "id": "render9:DE:dsble:spielregeln-gewerblich",
+  "url": "https://www.dsble.de/spielregeln",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB Spielregeln (full text)",
+  "excerptChars": 12000,
+  "fullText": true
+ }
+]

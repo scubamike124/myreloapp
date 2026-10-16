@@ -40,7 +40,8 @@ async function probe(browser, t) {
     const inputs = await page.$$eval("input, select, textarea", (els) => els.map((e) => ({ tag: e.tagName.toLowerCase(), type: (e.getAttribute("type") || (e.tagName.toLowerCase() === "input" ? "text" : e.tagName.toLowerCase())).toLowerCase(), name: e.getAttribute("name") || "", id: e.id || "", placeholder: e.getAttribute("placeholder") || "", required: e.hasAttribute("required"), autocomplete: e.getAttribute("autocomplete") || "", visible: !!(e.offsetWidth || e.offsetHeight || e.getClientRects().length) })).filter((i) => !["hidden", "submit", "button", "image", "reset", "search"].includes(i.type)));
     const labels = await page.$$eval("label", (ls) => ls.map((l) => (l.textContent || "").replace(/\s+/g, " ").trim().slice(0, 60)).filter(Boolean).slice(0, 40));
     const html = await page.content();
-    const text = await page.evaluate(() => document.body ? document.body.innerText : "");
+    // innerText is what a visitor sees; a target with fullText:true also takes the collapsed text (FAQ answers, hidden panels).
+    const text = await page.evaluate((full) => (document.body ? (full ? document.body.textContent : document.body.innerText) : "") || "", t.fullText === true);
     const fieldText = inputs.map((i) => `${i.type} ${i.name} ${i.id} ${i.placeholder} ${i.autocomplete}`).join(" | ") + " | " + labels.join(" | ");
     const captcha = { hcaptcha: /hcaptcha\.com|h-captcha/i.test(html), recaptcha: /recaptcha|g-recaptcha/i.test(html), turnstile: /turnstile|cf-turnstile/i.test(html), other: /captcha/i.test(html) && !/hcaptcha|recaptcha|turnstile/i.test(html) };
     const phone = inputs.some((i) => i.type === "tel") || /\b(tel|phone|mobile|telefon|t[eé]l[eé]phone|tel[eé]fono|celular|電話|手机|휴대폰|số điện thoại|โทรศัพท์|טלפון|هاتف|جوال)\b/i.test(fieldText);
