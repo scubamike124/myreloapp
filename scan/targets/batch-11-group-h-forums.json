@@ -1,0 +1,413 @@
+[
+ {
+  "id": "rules11:KR:phdkim-net-:rules_url",
+  "kind": "html",
+  "url": "https://phdkim.net/board/promotion/list",
+  "country": "KR",
+  "region": null,
+  "site": "phdkim.net (김박사넷) (rules page)",
+  "category": "student-forum",
+  "free_option": "홍보 게시판 (Promotion board)",
+  "audience": "Korean graduate students, PhD candidates and researchers (grad-school/lab review community); size not shown in snippets"
+ },
+ {
+  "id": "signup11:KR:phdkim-net-",
+  "kind": "signup",
+  "url": "https://phdkim.net/",
+  "discover": true,
+  "country": "KR",
+  "site": "phdkim.net (김박사넷)",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:GLOBAL:moodle-org-community-forums:rules_url",
+  "kind": "html",
+  "url": "https://docs.moodle.org/test/Policy_on_Advertising (same text mirrored at docs.moodle.org/2x/ca/Policy_on_Advertising; code of conduct at moodle.org/mod/page/view.php?id=7080)",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "moodle.org community forums (rules page)",
+  "category": "student-forum",
+  "free_option": "Any moodle.org discussion forum, in-context only (no dedicated showcase board); commercial affiliation may also be stated in the user profile ('All participants are welcome ... to write about and even",
+  "audience": "Moodle administrators, teachers and developers worldwide; very large (size not shown in snippets)"
+ },
+ {
+  "id": "rules11:GLOBAL:moodle-org-community-forums:url",
+  "kind": "html",
+  "url": "https://moodle.org/mod/page/view.php?id=7080",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "moodle.org community forums (board)",
+  "category": "student-forum",
+  "free_option": "Any moodle.org discussion forum, in-context only (no dedicated showcase board); commercial affiliation may also be stated in the user profile ('All participants are welcome ... to write about and even",
+  "audience": "Moodle administrators, teachers and developers worldwide; very large (size not shown in snippets)"
+ },
+ {
+  "id": "signup11:GLOBAL:moodle-org-community-forums",
+  "kind": "signup",
+  "url": "https://moodle.org/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "moodle.org community forums",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:GLOBAL:forum-freecodecamp-org:rules_url",
+  "kind": "html",
+  "url": "https://forum.freecodecamp.org/guidelines",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "forum.freecodecamp.org (rules page)",
+  "category": "student-forum",
+  "free_option": "I Built This (project-feedback)",
+  "audience": "coding learners worldwide; very large Discourse forum (size not shown in snippets)"
+ },
+ {
+  "id": "rules11:GLOBAL:forum-freecodecamp-org:url",
+  "kind": "html",
+  "url": "https://forum.freecodecamp.org/c/project-feedback/409",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "forum.freecodecamp.org (board)",
+  "category": "student-forum",
+  "free_option": "I Built This (project-feedback)",
+  "audience": "coding learners worldwide; very large Discourse forum (size not shown in snippets)"
+ },
+ {
+  "id": "signup11:GLOBAL:forum-freecodecamp-org",
+  "kind": "signup",
+  "url": "https://forum.freecodecamp.org/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "forum.freecodecamp.org",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:GLOBAL:discuss-codecademy-com-codecademy-forums:url",
+  "kind": "html",
+  "url": "https://discuss.codecademy.com/",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "discuss.codecademy.com (Codecademy Forums) (board)",
+  "category": "student-forum",
+  "free_option": "Projects",
+  "audience": "Codecademy learners; size not shown"
+ },
+ {
+  "id": "signup11:GLOBAL:discuss-codecademy-com-codecademy-forums",
+  "kind": "signup",
+  "url": "https://discuss.codecademy.com/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "discuss.codecademy.com (Codecademy Forums)",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:IN:pagalguy-com-pagalguy-:rules_url",
+  "kind": "html",
+  "url": "https://www.pagalguy.com/t/rules-posting-guidelines-reloaded/3009987 (Channels rules: https://www.pagalguy.com/articles/channels-posting-rules-and-guidelines-13287)",
+  "country": "IN",
+  "region": null,
+  "site": "pagalguy.com (PaGaLGuY) (rules page)",
+  "category": "student-forum",
+  "free_option": "Signature field only (no ad board; ads require emailed permission; Channels articles may carry a short bio in the Signature field or at the end of an article)",
+  "audience": "Indian MBA/CAT and other exam aspirants; one of India's largest student forums (size not shown)"
+ },
+ {
+  "id": "rules11:IN:pagalguy-com-pagalguy-:url",
+  "kind": "html",
+  "url": "https://www.pagalguy.com/t/rules-posting-guidelines-reloaded/3009987",
+  "country": "IN",
+  "region": null,
+  "site": "pagalguy.com (PaGaLGuY) (board)",
+  "category": "student-forum",
+  "free_option": "Signature field only (no ad board; ads require emailed permission; Channels articles may carry a short bio in the Signature field or at the end of an article)",
+  "audience": "Indian MBA/CAT and other exam aspirants; one of India's largest student forums (size not shown)"
+ },
+ {
+  "id": "signup11:IN:pagalguy-com-pagalguy-",
+  "kind": "signup",
+  "url": "https://www.pagalguy.com/",
+  "discover": true,
+  "country": "IN",
+  "site": "pagalguy.com (PaGaLGuY)",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:FR:pass-education-fr-forum-enseignant:rules_url",
+  "kind": "html",
+  "url": "https://www.pass-education.fr/forum-enseignant/categories/",
+  "country": "FR",
+  "region": null,
+  "site": "pass-education.fr — Forum enseignant (rules page)",
+  "category": "student-forum",
+  "free_option": "Petites annonces et échanges",
+  "audience": "French primary/secondary teachers (site sells teaching resources); size not shown"
+ },
+ {
+  "id": "rules11:FR:pass-education-fr-forum-enseignant:url",
+  "kind": "html",
+  "url": "https://www.pass-education.fr/forum-enseignant/petites-annonces-echanges/",
+  "country": "FR",
+  "region": null,
+  "site": "pass-education.fr — Forum enseignant (board)",
+  "category": "student-forum",
+  "free_option": "Petites annonces et échanges",
+  "audience": "French primary/secondary teachers (site sells teaching resources); size not shown"
+ },
+ {
+  "id": "signup11:FR:pass-education-fr-forum-enseignant",
+  "kind": "signup",
+  "url": "https://www.pass-education.fr/",
+  "discover": true,
+  "country": "FR",
+  "site": "pass-education.fr — Forum enseignant",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:US:1point3acres-com-:rules_url",
+  "kind": "html",
+  "url": "https://www.1point3acres.com/bbs/ (board list); 发帖必看/版规 example https://www.1point3acres.com/bbs/thread-388670-1-1.html",
+  "country": "US",
+  "region": null,
+  "site": "1point3acres.com (一亩三分地) (rules page)",
+  "category": "student-forum",
+  "free_option": "其他广告 (Other adverts) / 跳蚤市场 (flea market) / 租房广告",
+  "audience": "Chinese students and graduates in North America (admissions, jobs, immigration); very large"
+ },
+ {
+  "id": "rules11:US:1point3acres-com-:url",
+  "kind": "html",
+  "url": "https://www.1point3acres.com/bbs/thread-127280-1-1.html",
+  "country": "US",
+  "region": null,
+  "site": "1point3acres.com (一亩三分地) (board)",
+  "category": "student-forum",
+  "free_option": "其他广告 (Other adverts) / 跳蚤市场 (flea market) / 租房广告",
+  "audience": "Chinese students and graduates in North America (admissions, jobs, immigration); very large"
+ },
+ {
+  "id": "signup11:US:1point3acres-com-",
+  "kind": "signup",
+  "url": "https://www.1point3acres.com/",
+  "discover": true,
+  "country": "US",
+  "site": "1point3acres.com (一亩三分地)",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:GLOBAL:community-wanikani-com-wanikani-communit:rules_url",
+  "kind": "html",
+  "url": "https://www.wanikani.com/terms (advertising section); welcome/guidelines thread https://community.wanikani.com/t/welcome-to-the-wanikani-community-please-read-this-first-%E2%9C%A8/8",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "community.wanikani.com (WaniKani Community) (rules page)",
+  "category": "student-forum",
+  "free_option": "unknown (promotion governed by the ToS advertising section; the forum has resources categories)",
+  "audience": "Japanese-language learners using WaniKani; large Discourse forum (size not shown)"
+ },
+ {
+  "id": "rules11:GLOBAL:community-wanikani-com-wanikani-communit:url",
+  "kind": "html",
+  "url": "https://community.wanikani.com/",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "community.wanikani.com (WaniKani Community) (board)",
+  "category": "student-forum",
+  "free_option": "unknown (promotion governed by the ToS advertising section; the forum has resources categories)",
+  "audience": "Japanese-language learners using WaniKani; large Discourse forum (size not shown)"
+ },
+ {
+  "id": "signup11:GLOBAL:community-wanikani-com-wanikani-communit",
+  "kind": "signup",
+  "url": "https://community.wanikani.com/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "community.wanikani.com (WaniKani Community)",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:US:sharemylesson-com-aft-share-my-lesson-:url",
+  "kind": "html",
+  "url": "https://sharemylesson.com/",
+  "country": "US",
+  "region": null,
+  "site": "sharemylesson.com (AFT Share My Lesson) (board)",
+  "category": "student-forum",
+  "free_option": "Resource upload ('share your resource')",
+  "audience": "US K-12 teachers (AFT's free lesson-sharing platform); size not shown"
+ },
+ {
+  "id": "signup11:US:sharemylesson-com-aft-share-my-lesson-",
+  "kind": "signup",
+  "url": "https://sharemylesson.com/",
+  "discover": true,
+  "country": "US",
+  "site": "sharemylesson.com (AFT Share My Lesson)",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:GLOBAL:superprof-com-tutoring-marketplace-count:url",
+  "kind": "html",
+  "url": "https://www.superprof.com/",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "superprof.com (tutoring marketplace, country sites) (board)",
+  "category": "student-forum",
+  "free_option": "Tutor ad / profile",
+  "audience": "learners seeking private tutors in many countries (size not shown)"
+ },
+ {
+  "id": "signup11:GLOBAL:superprof-com-tutoring-marketplace-count",
+  "kind": "signup",
+  "url": "https://www.superprof.com/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "superprof.com (tutoring marketplace, country sites)",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:VN:raovatsinhvien-com:url",
+  "kind": "html",
+  "url": "https://raovatsinhvien.com/",
+  "country": "VN",
+  "region": null,
+  "site": "raovatsinhvien.com (board)",
+  "category": "student-forum",
+  "free_option": "whole forum is a free classifieds board aimed at students",
+  "audience": "Vietnamese students; size not shown; may be a low-moderation SEO classifieds forum (listed in kenhsinhvien.vn 'diễn đàn rao vặt miễn phí' link threads)"
+ },
+ {
+  "id": "signup11:VN:raovatsinhvien-com",
+  "kind": "signup",
+  "url": "https://raovatsinhvien.com/",
+  "discover": true,
+  "country": "VN",
+  "site": "raovatsinhvien.com",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:GLOBAL:lemmy-c-selfpromo-home-instance-not-iden:url",
+  "kind": "html",
+  "url": "https://discuss.coding.social/t/self-promotion-on-lemmy/381",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "Lemmy — /c/selfpromo (home instance not identified) (board)",
+  "category": "student-forum",
+  "free_option": "/c/selfpromo",
+  "audience": "unknown; may be inactive. Other threads recommend !imadethis@lemm.ee (lemm.ee instance) as a place to share your own work"
+ },
+ {
+  "id": "signup11:GLOBAL:lemmy-c-selfpromo-home-instance-not-iden",
+  "kind": "signup",
+  "url": "https://discuss.coding.social/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "Lemmy — /c/selfpromo (home instance not identified)",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:GLOBAL:lemmy-ml-open-e-resources:rules_url",
+  "kind": "html",
+  "url": "https://lemmy.ml/c/open_e_resources",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "lemmy.ml — !open_e_resources (rules page)",
+  "category": "student-forum",
+  "free_option": "Open Educational Resources",
+  "audience": "small Fediverse OER community; size not shown"
+ },
+ {
+  "id": "signup11:GLOBAL:lemmy-ml-open-e-resources",
+  "kind": "signup",
+  "url": "https://lemmy.ml/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "lemmy.ml — !open_e_resources",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:GLOBAL:codidact-com-network-languages-codidact-:rules_url",
+  "kind": "html",
+  "url": "https://photo.codidact.com/policy/spam",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "codidact.com network (languages.codidact.com is the learner community) (rules page)",
+  "category": "student-forum",
+  "free_option": "resource posts (per the question title)",
+  "audience": "small Q&A network; language learners"
+ },
+ {
+  "id": "rules11:GLOBAL:codidact-com-network-languages-codidact-:url",
+  "kind": "html",
+  "url": "https://languages.codidact.com/q/277376",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "codidact.com network (languages.codidact.com is the learner community) (board)",
+  "category": "student-forum",
+  "free_option": "resource posts (per the question title)",
+  "audience": "small Q&A network; language learners"
+ },
+ {
+  "id": "signup11:GLOBAL:codidact-com-network-languages-codidact-",
+  "kind": "signup",
+  "url": "https://languages.codidact.com/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "codidact.com network (languages.codidact.com is the learner community)",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules11:GLOBAL:moodle-org-advertising-policy",
+  "kind": "html",
+  "url": "https://docs.moodle.org/en/Policy_on_Advertising",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "moodle.org advertising policy",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules11:US:share-my-lesson-terms",
+  "kind": "html",
+  "url": "https://sharemylesson.com/terms-use",
+  "country": "US",
+  "region": null,
+  "site": "Share My Lesson terms",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules11:US:share-my-lesson-upload",
+  "kind": "html",
+  "url": "https://sharemylesson.com/upload",
+  "country": "US",
+  "region": null,
+  "site": "Share My Lesson upload",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules11:GLOBAL:wanikani-terms",
+  "kind": "html",
+  "url": "https://www.wanikani.com/terms",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "WaniKani terms",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules11:VN:raovatsinhvien-com-rules",
+  "kind": "html",
+  "url": "https://raovatsinhvien.com/help/terms/",
+  "country": "VN",
+  "region": null,
+  "site": "raovatsinhvien.com rules",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules11:US:1point3acres-ad-board",
+  "kind": "html",
+  "url": "https://www.1point3acres.com/bbs/forum-91-1.html",
+  "country": "US",
+  "region": null,
+  "site": "1point3acres ad board",
+  "category": "student-forum"
+ }
+]
