@@ -1,0 +1,56 @@
+[
+ {
+  "id": "cm62:q-herramienta",
+  "kind": "json",
+  "url": "https://colombiamove.com/api/public/listings?q=herramienta%20de%20estudio",
+  "country": "CO",
+  "site": "Colombia Move public search: herramienta%20de%20estudio",
+  "category": "promotion-verify",
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm62:q-graded",
+  "kind": "json",
+  "url": "https://colombiamove.com/api/public/listings?q=graded",
+  "country": "CO",
+  "site": "Colombia Move public search: graded",
+  "category": "promotion-verify",
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm62:q-amberoneai",
+  "kind": "json",
+  "url": "https://colombiamove.com/api/public/listings?q=amberoneai",
+  "country": "CO",
+  "site": "Colombia Move public search: amberoneai",
+  "category": "promotion-verify",
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm62:q-estudiantes",
+  "kind": "json",
+  "url": "https://colombiamove.com/api/public/listings?q=estudiantes",
+  "country": "CO",
+  "site": "Colombia Move public search: estudiantes",
+  "category": "promotion-verify",
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm62:sitemap",
+  "kind": "html",
+  "url": "https://colombiamove.com/sitemap.xml",
+  "country": "CO",
+  "site": "Colombia Move sitemap",
+  "category": "promotion-verify",
+  "bodyChars": 400000
+ },
+ {
+  "id": "cm62:listing-nofollow",
+  "kind": "html",
+  "url": "https://colombiamove.com/anuncio/the-quiz-is-graded-with-the-reasons-bio-101-sample-f029babf",
+  "country": "CO",
+  "site": "the listing page again (headers)",
+  "category": "promotion-verify",
+  "bodyChars": 5000
+ }
+]
