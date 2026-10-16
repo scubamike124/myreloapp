@@ -1,0 +1,57 @@
+[
+ {
+  "id": "r28:gratisannonse:settinn",
+  "url": "https://gratis-annonse.no/sett-inn",
+  "country": "NO",
+  "site": "gratis-annonse.no posting form (fields, CAPTCHA?)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r28:gratisannonse:faq",
+  "url": "https://gratis-annonse.no/#faq",
+  "country": "NO",
+  "site": "gratis-annonse.no FAQ (rules)",
+  "category": "classified-board",
+  "forms": false,
+  "links": false,
+  "fullText": true,
+  "excerptChars": 20000
+ },
+ {
+  "id": "r28:privatmarkt:register",
+  "url": "https://www.privatmarkt.ch/register",
+  "country": "CH",
+  "site": "privatmarkt.ch registration (e-mail only?)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r28:lbuvette:etudiants",
+  "url": "https://lbuvette.com/etudiants",
+  "country": "MA",
+  "site": "lbuvette.com student space (text, links)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r28:alloetudiant:home",
+  "url": "https://alloetudiant.com/",
+  "country": "SN",
+  "site": "alloetudiant.com student marketplace (links, text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ }
+]
