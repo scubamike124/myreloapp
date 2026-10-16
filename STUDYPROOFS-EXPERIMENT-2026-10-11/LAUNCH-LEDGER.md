@@ -2,6 +2,8 @@
 
 One line per post, whoever made it. Amber's own posts (Facebook Page, Threads, Bluesky, LinkedIn through the publish queue) are recorded by her promotion lane as they happen and shown in the **Promotion** section of the StudyProofs tracker on amberai #105 (post, channel, account, state, live address or error); this file carries the by-hand posts and a copy of the lane's lines when the week is read. Performance is read from the tracker's funnel by source (`src`: `x`, `linkedin`, `facebook`, `threads`, `bluesky`, `examples`): visitors, signups, first study set, came back, trials, checkouts, verified live payments.
 
+State on 2026-10-16 18:53Z: **two live posts** (unchanged). The tracker's 18:43Z tick marked the Colombia Move listing of 17:12Z failed (removed by the board; the account's key refused). Nothing counted from Colombia Move. Next: a second and third Mastodon account (uri.life, c7.io) through the registrar, on its own PR.
+
 State on 2026-10-16 18:33Z: **two live posts** (unchanged). amberai #855 merged (860cf057): a direct post counts as live only while its platform shows it; the Colombia Move row flips to removed at the first tick after the deploy. No Mastodon post today (20-hour gap from 07:19Z); PeerTube is served at the 20:20Z tick.
 
 State on 2026-10-16 18:03Z: **two live posts** (unchanged). Colombia Move: the board refuses the account's key since the 17:58Z tick; with the listing gone (HTTP 404) this reads as a suspension of the new account by the board's moderation. The channel is blocked; nothing is counted; the owner decides whether Amber writes to the board.
