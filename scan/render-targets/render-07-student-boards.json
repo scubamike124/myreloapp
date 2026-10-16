@@ -1,0 +1,138 @@
+[
+ {
+  "id": "render7:DE:dsble:rules",
+  "url": "https://www.dsble.de/rules",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB Nutzungsbedingungen",
+  "excerptChars": 12000
+ },
+ {
+  "id": "render7:DE:dsble:prices",
+  "url": "https://www.dsble.de/prices",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB Preisliste",
+  "excerptChars": 8000
+ },
+ {
+  "id": "render7:DE:dsble:kurse-neu",
+  "url": "https://www.dsble.de/kurse/neues/angebot",
+  "discover": true,
+  "country": "DE",
+  "site": "DSB Kurse anbieten form",
+  "excerptChars": 4000
+ },
+ {
+  "id": "render7:IT:perstudenti:pubblica",
+  "url": "https://www.perstudenti.com/pubblica",
+  "discover": true,
+  "country": "IT",
+  "site": "PerStudenti pubblica",
+  "excerptChars": 5000
+ },
+ {
+  "id": "render7:IT:perstudenti:faq",
+  "url": "https://www.perstudenti.com/faq",
+  "discover": false,
+  "country": "IT",
+  "site": "PerStudenti FAQ",
+  "excerptChars": 12000
+ },
+ {
+  "id": "render7:IT:perstudenti:registrati",
+  "url": "https://www.perstudenti.com/registrati",
+  "discover": true,
+  "country": "IT",
+  "site": "PerStudenti registrati",
+  "excerptChars": 3000
+ },
+ {
+  "id": "render7:IT:perstudenti:termini",
+  "url": "https://www.perstudenti.com/termini",
+  "discover": false,
+  "country": "IT",
+  "site": "PerStudenti termini (guess)",
+  "excerptChars": 12000
+ },
+ {
+  "id": "render7:AT:oeh:agb",
+  "url": "https://schwarzesbrett.oeh.ac.at/volles-service/agb/",
+  "discover": false,
+  "country": "AT",
+  "site": "ÖH Schwarzes Brett AGB",
+  "excerptChars": 12000
+ },
+ {
+  "id": "render7:AT:oeh:faq",
+  "url": "https://schwarzesbrett.oeh.ac.at/volles-service/faq/",
+  "discover": false,
+  "country": "AT",
+  "site": "ÖH Schwarzes Brett FAQ",
+  "excerptChars": 12000
+ },
+ {
+  "id": "render7:AT:oeh:register",
+  "url": "https://schwarzesbrett.oeh.ac.at/login/neu-registrieren/",
+  "discover": true,
+  "country": "AT",
+  "site": "ÖH Schwarzes Brett registration",
+  "excerptChars": 4000
+ },
+ {
+  "id": "render7:IL:study-co-il:advertise",
+  "url": "https://www.study.co.il/P31897/",
+  "discover": false,
+  "country": "IL",
+  "site": "study.co.il advertise-with-us",
+  "excerptChars": 8000
+ },
+ {
+  "id": "render7:IL:study-co-il:terms",
+  "url": "https://www.study.co.il/%D7%AA%D7%A7%D7%A0%D7%95%D7%9F/",
+  "discover": false,
+  "country": "IL",
+  "site": "study.co.il terms",
+  "excerptChars": 12000
+ },
+ {
+  "id": "render7:IL:study-co-il:forum37",
+  "url": "https://www.study.co.il/forum/forum.asp?f=37",
+  "discover": true,
+  "country": "IL",
+  "site": "study.co.il forum 37",
+  "excerptChars": 4000
+ },
+ {
+  "id": "render7:IL:myproduct:submit",
+  "url": "https://myproduct.co.il/reshut-harabim/submit.php",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct submit form",
+  "excerptChars": 6000
+ },
+ {
+  "id": "render7:IL:myproduct:business-submit",
+  "url": "https://myproduct.co.il/reshut-harabim/business/business_submit.php",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct business card form",
+  "excerptChars": 6000
+ },
+ {
+  "id": "render7:CZ:primat:registrace",
+  "url": "https://www.primat.cz/registrace",
+  "discover": true,
+  "country": "CZ",
+  "site": "Primát registrace",
+  "excerptChars": 4000
+ },
+ {
+  "id": "render7:CZ:primat:podminky",
+  "url": "https://www.primat.cz/podminky",
+  "discover": false,
+  "country": "CZ",
+  "site": "Primát podmínky (guess)",
+  "excerptChars": 10000
+ }
+]
