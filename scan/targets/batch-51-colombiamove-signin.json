@@ -1,0 +1,132 @@
+[
+ {
+  "id": "cm51:chunk0",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/4bd1b696-f998cba21de05210.js",
+  "country": "CO",
+  "site": "Colombia Move JS chunk: sign-in and key-creation API paths",
+  "category": "classified-board",
+  "bodyMatch": "/api/auth|/api/login|/api/session|/api/mcp/|magic|otp|sendCode|verify-?code|verifyEmail|email_link|signIn|createToken|mcp_token|cm_mcp",
+  "bodyWindow": 400,
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm51:chunk1",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/93794-a0c514c3ad245de1.js",
+  "country": "CO",
+  "site": "Colombia Move JS chunk: sign-in and key-creation API paths",
+  "category": "classified-board",
+  "bodyMatch": "/api/auth|/api/login|/api/session|/api/mcp/|magic|otp|sendCode|verify-?code|verifyEmail|email_link|signIn|createToken|mcp_token|cm_mcp",
+  "bodyWindow": 400,
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm51:chunk2",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/main-app-fca60470ebdfd285.js",
+  "country": "CO",
+  "site": "Colombia Move JS chunk: sign-in and key-creation API paths",
+  "category": "classified-board",
+  "bodyMatch": "/api/auth|/api/login|/api/session|/api/mcp/|magic|otp|sendCode|verify-?code|verifyEmail|email_link|signIn|createToken|mcp_token|cm_mcp",
+  "bodyWindow": 400,
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm51:chunk3",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/98500-a602af09e0569ab1.js",
+  "country": "CO",
+  "site": "Colombia Move JS chunk: sign-in and key-creation API paths",
+  "category": "classified-board",
+  "bodyMatch": "/api/auth|/api/login|/api/session|/api/mcp/|magic|otp|sendCode|verify-?code|verifyEmail|email_link|signIn|createToken|mcp_token|cm_mcp",
+  "bodyWindow": 400,
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm51:chunk4",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/51111-6e3316301755611f.js",
+  "country": "CO",
+  "site": "Colombia Move JS chunk: sign-in and key-creation API paths",
+  "category": "classified-board",
+  "bodyMatch": "/api/auth|/api/login|/api/session|/api/mcp/|magic|otp|sendCode|verify-?code|verifyEmail|email_link|signIn|createToken|mcp_token|cm_mcp",
+  "bodyWindow": 400,
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm51:chunk5",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/62077-6798ee63c3df0f38.js",
+  "country": "CO",
+  "site": "Colombia Move JS chunk: sign-in and key-creation API paths",
+  "category": "classified-board",
+  "bodyMatch": "/api/auth|/api/login|/api/session|/api/mcp/|magic|otp|sendCode|verify-?code|verifyEmail|email_link|signIn|createToken|mcp_token|cm_mcp",
+  "bodyWindow": 400,
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm51:chunk6",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/54932-c322a6a945ee92b7.js",
+  "country": "CO",
+  "site": "Colombia Move JS chunk: sign-in and key-creation API paths",
+  "category": "classified-board",
+  "bodyMatch": "/api/auth|/api/login|/api/session|/api/mcp/|magic|otp|sendCode|verify-?code|verifyEmail|email_link|signIn|createToken|mcp_token|cm_mcp",
+  "bodyWindow": 400,
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm51:chunk7",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/41869-58c53fa306f63cbf.js",
+  "country": "CO",
+  "site": "Colombia Move JS chunk: sign-in and key-creation API paths",
+  "category": "classified-board",
+  "bodyMatch": "/api/auth|/api/login|/api/session|/api/mcp/|magic|otp|sendCode|verify-?code|verifyEmail|email_link|signIn|createToken|mcp_token|cm_mcp",
+  "bodyWindow": 400,
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm51:chunk8",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/8869-4943f6f34bf0036b.js",
+  "country": "CO",
+  "site": "Colombia Move JS chunk: sign-in and key-creation API paths",
+  "category": "classified-board",
+  "bodyMatch": "/api/auth|/api/login|/api/session|/api/mcp/|magic|otp|sendCode|verify-?code|verifyEmail|email_link|signIn|createToken|mcp_token|cm_mcp",
+  "bodyWindow": 400,
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm51:chunk9",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/43583-8258d438292d3d63.js",
+  "country": "CO",
+  "site": "Colombia Move JS chunk: sign-in and key-creation API paths",
+  "category": "classified-board",
+  "bodyMatch": "/api/auth|/api/login|/api/session|/api/mcp/|magic|otp|sendCode|verify-?code|verifyEmail|email_link|signIn|createToken|mcp_token|cm_mcp",
+  "bodyWindow": 400,
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm51:login-raw",
+  "kind": "json",
+  "url": "https://colombiamove.com/login?redirect=%2Fai%2Fmcp%2Fconnect",
+  "country": "CO",
+  "site": "Colombia Move login page raw (its own chunk list)",
+  "category": "classified-board",
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm51:connect-raw-scripts",
+  "kind": "json",
+  "url": "https://colombiamove.com/ai/mcp/connect",
+  "country": "CO",
+  "site": "Colombia Move connect page: script windows for the key-creation call",
+  "category": "classified-board",
+  "bodyMatch": "/api/mcp/|createToken|cm_mcp|Crear|clave|token",
+  "bodyWindow": 500,
+  "bodyChars": 120000
+ }
+]
