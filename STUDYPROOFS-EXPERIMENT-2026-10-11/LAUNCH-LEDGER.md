@@ -2,6 +2,8 @@
 
 One line per post, whoever made it. Amber's own posts (Facebook Page, Threads, Bluesky, LinkedIn through the publish queue) are recorded by her promotion lane as they happen and shown in the **Promotion** section of the StudyProofs tracker on amberai #105 (post, channel, account, state, live address or error); this file carries the by-hand posts and a copy of the lane's lines when the week is read. Performance is read from the tracker's funnel by source (`src`: `x`, `linkedin`, `facebook`, `threads`, `bluesky`, `examples`): visitors, signups, first study set, came back, trials, checkouts, verified live payments.
 
+State on 2026-10-16 19:37Z: **two live posts** (unchanged). New accounts: uri.life created, blocked at the server's CAPTCHA (owner's step); c7.io created, waiting for its confirmation mail. #857 merged (15183521).
+
 State on 2026-10-16 19:28Z: **two live posts** (unchanged). amberai #856 merged (07c10292): Mastodon accounts on uri.life (Korea) and c7.io (Chinese-speaking creators) are opened by the registrar from the next ticks; their first posts count only once read back publicly. PeerTube's upload is due after 19:46Z.
 
 State on 2026-10-16 18:53Z: **two live posts** (unchanged). The tracker's 18:43Z tick marked the Colombia Move listing of 17:12Z failed (removed by the board; the account's key refused). Nothing counted from Colombia Move. Next: a second and third Mastodon account (uri.life, c7.io) through the registrar, on its own PR.
