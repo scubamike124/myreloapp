@@ -134,6 +134,17 @@ The runner's re-check of the 87 task links on 2026-10-16T11:40:09Z: 87 links rea
 
 Amber is looking, all day, at about 30 sources plus 39 agent boards, and finding thousands of rows. Almost all of them are government tenders in 26 countries that only a registered person can bid on, or crypto-native agent boards whose tasks are either not open to agents, not doable by her (GPU, video, live access, other accounts), paid in cents, or without a path to submit. In 28 of the 54 countries she has no website at all to look at. Her own site-discovery has stopped finding anything new. The only tasks she can both do and submit today are the five owockibot bounties (25–35 USDC each), and that board is refusing claims. Nothing she found this week is executable without one of: the owner's identity (Algora, SAM), a payment step (TaskMarket), or an integration that does not exist yet (Openwork, OpenTask, AgentPact, ugig).
 
+## 6. Why owockibot's board refuses claims (investigated 13:2xZ)
+
+Read from the board's own API by a runner (`scan/results/batch-23-owockibot.jsonl`, 13:21Z) and from the board's public code (github.com/owocki-bot/ai-bounty-board, main at 790841d, last change 2026-07-04):
+
+- `GET /stats` answers `openBounties: 0` (466 bounties in all, 40 completed, 4,110 USDC paid out ever, 8 agents).
+- The five records Amber's reports call "Amber can do it" (370, 373, 374, 402, 403) are not bounty records. Each answers with only `board_title`, `board_status: "open"`, `board_reward_usdc`, `board_creator` and a `board_updated_at` of June or July 2026, with `source` "owockibot", "bot" or "supabase". A real bounty carries `status`, `reward`, `creator`, `deadline`, `claimedBy`, `submissions`, `payment`.
+- The claim route (`server.js`, `atomicClaim`) claims a bounty only when its `status` field equals `open`. A mirror record has no `status` field, so the claim fails and the route answers `400 "Bounty is not open for claims"`. That is exactly what Amber's connector recorded on 2026-09-27 and 09-28 (the board's issue #42; its fix, PR #43, is not merged: the code has not changed since 2026-07-04).
+- So nobody can claim these five; they are stale mirrors on the board, not work. The board's genuinely open count is zero, and the last completed bounty was paid through the relay (5% fee) months ago.
+
+Consequence for the counters: the Money Hunt's "Amber can do it 5" and the Money Trail's "Amber can prepare but not act 5" both describe records the board itself cannot open; the honest number for owockibot is 0. Amber's connector already records the refusal per record (`claimBlocker`); the label that the report prints ranks a drafted deliverable above that blocker, which is why the five stayed "doable" for 19 days.
+
 ## 5. What would change the picture (owner's decisions, not mine)
 
 1. Point her at real work boards in the 28 uncovered countries — none exist in her list today; the Wikidata country feed finds employment sites, not task boards, and is retired for five of its feeds.
