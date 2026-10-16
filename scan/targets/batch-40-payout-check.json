@@ -1,0 +1,200 @@
+[
+ {
+  "id": "owk40:stats",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/stats",
+  "country": "GLOBAL",
+  "site": "owockibot board stats",
+  "category": "board-api",
+  "bodyChars": 200000
+ },
+ {
+  "id": "owk40:all",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/bounties",
+  "country": "GLOBAL",
+  "site": "owockibot board bounties",
+  "category": "board-api",
+  "bodyChars": 200000
+ },
+ {
+  "id": "owk40:open",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/bounties?status=open",
+  "country": "GLOBAL",
+  "site": "owockibot board bounties?status=open",
+  "category": "board-api",
+  "bodyChars": 200000
+ },
+ {
+  "id": "owk40:b373",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/bounties/373",
+  "country": "GLOBAL",
+  "site": "owockibot board bounties/373",
+  "category": "board-api",
+  "bodyChars": 200000
+ },
+ {
+  "id": "owk40:b402",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/bounties/402",
+  "country": "GLOBAL",
+  "site": "owockibot board bounties/402",
+  "category": "board-api",
+  "bodyChars": 200000
+ },
+ {
+  "id": "par40:readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/readme",
+  "country": "GLOBAL",
+  "site": "Parabola README (base64) — bounty terms and payment rail",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "par40:open-bounties",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues?state=open&labels=bounty&per_page=50",
+  "country": "GLOBAL",
+  "site": "Parabola open bounty issues",
+  "category": "github-payout-check",
+  "bodyChars": 200000
+ },
+ {
+  "id": "par40:closed-all",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues?state=closed&per_page=50",
+  "country": "GLOBAL",
+  "site": "Parabola closed issues and PRs (what was merged, when)",
+  "category": "github-payout-check",
+  "bodyChars": 200000
+ },
+ {
+  "id": "par40:pulls",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/pulls?state=all&per_page=50&sort=updated&direction=desc",
+  "country": "GLOBAL",
+  "site": "Parabola pull requests (merged = paid?)",
+  "category": "github-payout-check",
+  "bodyChars": 200000
+ },
+ {
+  "id": "par40:c1",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues/1/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "Parabola #1 comments (payment confirmation?)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "par40:c13",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues/13/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "Parabola #13 comments (payment confirmation?)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "par40:c22",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues/22/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "Parabola #22 comments (payment confirmation?)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "par40:c26",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues/26/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "Parabola #26 comments (payment confirmation?)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "par40:c29",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues/29/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "Parabola #29 comments (payment confirmation?)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "par40:pr24-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues/24/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "Parabola PR #24 comments (payment after merge?)",
+  "category": "github-payout-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "par40:contributors",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/contributors?per_page=20",
+  "country": "GLOBAL",
+  "site": "Parabola contributors",
+  "category": "github-payout-check",
+  "bodyChars": 20000
+ },
+ {
+  "id": "par40:org",
+  "kind": "json",
+  "url": "https://api.github.com/orgs/Parabola-org",
+  "country": "GLOBAL",
+  "site": "Parabola org record",
+  "category": "github-payout-check",
+  "bodyChars": 20000
+ },
+ {
+  "id": "omi40:c21747",
+  "kind": "json",
+  "url": "https://api.github.com/repos/BasedHardware/omi/issues/21747/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "omi #21747 comments (bounty paid by PayPal?)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "omi40:c21262",
+  "kind": "json",
+  "url": "https://api.github.com/repos/BasedHardware/omi/issues/21262/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "omi #21262 comments (bounty paid by PayPal?)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "omi40:c21223",
+  "kind": "json",
+  "url": "https://api.github.com/repos/BasedHardware/omi/issues/21223/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "omi #21223 comments (bounty paid by PayPal?)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "omi40:bounty-doc",
+  "kind": "json",
+  "url": "https://api.github.com/repos/BasedHardware/omi/contents/docs/bounties.md",
+  "country": "GLOBAL",
+  "site": "omi bounties doc (may 404)",
+  "category": "github-payout-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "omi40:readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/BasedHardware/omi/readme",
+  "country": "GLOBAL",
+  "site": "omi README (bounty section?)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ }
+]
