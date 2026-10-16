@@ -1,0 +1,42 @@
+[
+ {
+  "id": "r19:boss-clapper-5",
+  "url": "https://www.boss.dev/issue/github/I_kwDOMDHvl86MsjT4",
+  "country": "GLOBAL",
+  "site": "boss.dev bounty page: clapper #5 ($1,050)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 9000
+ },
+ {
+  "id": "r19:boss-clapper-10",
+  "url": "https://www.boss.dev/issue/github/I_kwDOMDHvl86O6ONz",
+  "country": "GLOBAL",
+  "site": "boss.dev bounty page: clapper #10 ($500)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 9000
+ },
+ {
+  "id": "r19:boss-sheetsee-24",
+  "url": "https://www.boss.dev/issue/github/I_kwDOANE9Nc5Md0Px",
+  "country": "GLOBAL",
+  "site": "boss.dev bounty page: sheetsee-tables #24 ($100)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 9000
+ },
+ {
+  "id": "r19:boss-doc-pricing",
+  "url": "https://www.boss.dev/doc/pricing",
+  "country": "GLOBAL",
+  "site": "boss.dev pricing doc",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 9000
+ }
+]
