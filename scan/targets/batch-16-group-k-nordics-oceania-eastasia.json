@@ -1,0 +1,352 @@
+[
+ {
+  "id": "rules16:NO:tass-tass-no-:home",
+  "kind": "html",
+  "url": "https://tass.no/",
+  "country": "NO",
+  "site": "TASS (tass.no) (home)",
+  "category": "classifieds",
+  "free_option": "legge ut annonser gratis (as described by Gulesider's directory entry)",
+  "audience": "Norway, private persons and businesses; very new site (thehub.io: founded 2026, 1-10 employees) — size not seen"
+ },
+ {
+  "id": "fedi16:NO:i1-no-mastodon-norwegian-tech-startup-co",
+  "kind": "mastodon",
+  "url": "https://i1.no",
+  "country": "NO",
+  "site": "i1.no (Mastodon, Norwegian tech/startup community)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "free Mastodon account, admin approval",
+  "audience": "people in Norway's tech and startup community; user count not seen"
+ },
+ {
+  "id": "rules16:NO:i1-no-mastodon-norwegian-tech-startup-co:rules page",
+  "kind": "html",
+  "url": "https://mastodon.help/instances?id=23065 (directory listing of the server's about/rules)",
+  "country": "NO",
+  "site": "i1.no (Mastodon, Norwegian tech/startup community) (rules page)",
+  "category": "fediverse",
+  "free_option": "free Mastodon account, admin approval",
+  "audience": "people in Norway's tech and startup community; user count not seen"
+ },
+ {
+  "id": "fedi16:DK:mstdn-dk-mastodon-danmark-",
+  "kind": "mastodon",
+  "url": "https://mstdn.dk",
+  "country": "DK",
+  "site": "mstdn.dk (Mastodon Danmark)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "free account; company/association accounts only by prior agreement",
+  "audience": "Danish-speaking Mastodon users; size not seen"
+ },
+ {
+  "id": "rules16:DK:mstdn-dk-mastodon-danmark-:rules page",
+  "kind": "html",
+  "url": "https://mastodon.help/instances?id=13495 (directory listing of rules)",
+  "country": "DK",
+  "site": "mstdn.dk (Mastodon Danmark) (rules page)",
+  "category": "fediverse",
+  "free_option": "free account; company/association accounts only by prior agreement",
+  "audience": "Danish-speaking Mastodon users; size not seen"
+ },
+ {
+  "id": "fedi16:FI:olifant-fi-mastodon-",
+  "kind": "mastodon",
+  "url": "https://olifant.fi",
+  "country": "FI",
+  "site": "olifant.fi (Mastodon)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "free account, admin approval",
+  "audience": "Finnish-language general server; size not seen"
+ },
+ {
+  "id": "fedi16:FI:kalakukko-social-mastodon-",
+  "kind": "mastodon",
+  "url": "https://kalakukko.social",
+  "country": "FI",
+  "site": "kalakukko.social (Mastodon)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "free account, admin approval",
+  "audience": "Finnish-language server; size not seen"
+ },
+ {
+  "id": "fedi16:FI:sopuli-sopuli-xyz-lemmy-",
+  "kind": "mastodon",
+  "url": "https://sopuli.xyz",
+  "country": "FI",
+  "site": "Sopuli (sopuli.xyz, Lemmy)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "free account (hosting supported by optional Patreon)",
+  "audience": "Finnish general-purpose Lemmy instance, 2,500+ users (2023)"
+ },
+ {
+  "id": "rules16:FI:sopuli-sopuli-xyz-lemmy-:rules page",
+  "kind": "html",
+  "url": "https://www.patreon.com/posts/introduction-85000725 (founder's introduction; instance sidebar not read)",
+  "country": "FI",
+  "site": "Sopuli (sopuli.xyz, Lemmy) (rules page)",
+  "category": "fediverse",
+  "free_option": "free account (hosting supported by optional Patreon)",
+  "audience": "Finnish general-purpose Lemmy instance, 2,500+ users (2023)"
+ },
+ {
+  "id": "rules16:AU:locanto-australia:rules page",
+  "kind": "html",
+  "url": "https://www.locanto.com.au/g/tos/ (not read)",
+  "country": "AU",
+  "site": "Locanto Australia (rules page)",
+  "category": "classifieds",
+  "free_option": "free user-to-user classified ads; paid upgrades optional",
+  "audience": "Australian general public; sister sites locanto.co.nz and locanto.hk exist but were not verified in this pass"
+ },
+ {
+  "id": "rules16:AU:locanto-australia:home",
+  "kind": "html",
+  "url": "https://www.locanto.com.au/",
+  "country": "AU",
+  "site": "Locanto Australia (home)",
+  "category": "classifieds",
+  "free_option": "free user-to-user classified ads; paid upgrades optional",
+  "audience": "Australian general public; sister sites locanto.co.nz and locanto.hk exist but were not verified in this pass"
+ },
+ {
+  "id": "rules16:AU:hotfrog-australia:rules page",
+  "kind": "html",
+  "url": "https://www.synup.com/how-to/claim-add-hotfrog-listing and https://www.advicelocal.com/blog/how-to-add-your-business-to-hotfrog/ (how-to guides)",
+  "country": "AU",
+  "site": "Hotfrog Australia (rules page)",
+  "category": "directory",
+  "free_option": "basic profile free; paid 'Hotfrog AdVantage' upgrade optional",
+  "audience": "local-business searchers; Yext says Hotfrog \"operates in 38 countries\" (NZ edition hotfrog.co.nz; Nordic/Asian editions not confirmed in this pass)"
+ },
+ {
+  "id": "rules16:AU:hotfrog-australia:home",
+  "kind": "html",
+  "url": "https://www.hotfrog.com.au/",
+  "country": "AU",
+  "site": "Hotfrog Australia (home)",
+  "category": "directory",
+  "free_option": "basic profile free; paid 'Hotfrog AdVantage' upgrade optional",
+  "audience": "local-business searchers; Yext says Hotfrog \"operates in 38 countries\" (NZ edition hotfrog.co.nz; Nordic/Asian editions not confirmed in this pass)"
+ },
+ {
+  "id": "fedi16:NZ:lemmy-nz",
+  "kind": "mastodon",
+  "url": "https://lemmy.nz",
+  "country": "NZ",
+  "site": "Lemmy.nz",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "free account via registration application",
+  "audience": "New Zealand general Lemmy instance, hosted in Auckland; size not seen"
+ },
+ {
+  "id": "rules16:HK:asiaxpat-hong-kong-classifieds:rules page",
+  "kind": "html",
+  "url": "https://faqs.groovehq.com/help/how-do-i-place-a-classifieds-advertisement (AsiaXPAT help)",
+  "country": "HK",
+  "site": "AsiaXPAT Hong Kong classifieds (rules page)",
+  "category": "classifieds",
+  "free_option": "free ad option (editor-reviewed); paid 'Urgent' upgrade optional",
+  "audience": "Hong Kong expatriate community; size not seen"
+ },
+ {
+  "id": "rules16:HK:asiaxpat-hong-kong-classifieds:home",
+  "kind": "html",
+  "url": "https://hongkong.asiaxpat.com/",
+  "country": "HK",
+  "site": "AsiaXPAT Hong Kong classifieds (home)",
+  "category": "classifieds",
+  "free_option": "free ad option (editor-reviewed); paid 'Urgent' upgrade optional",
+  "audience": "Hong Kong expatriate community; size not seen"
+ },
+ {
+  "id": "rules16:HK:whub-whub-io-:rules page",
+  "kind": "html",
+  "url": "https://www.startmeup.hk/startup-resources/whub/ (InvestHK description); https://hkstartupsociety.hktdc.com/sc/events/whub-office-hours-1 (2019 profile help event)",
+  "country": "HK",
+  "site": "WHub (whub.io) (rules page)",
+  "category": "directory",
+  "free_option": "startup profile; fee not stated in sources seen",
+  "audience": "Hong Kong startup ecosystem; \"over 3,000 listed on its website\" (FCCIHK article)"
+ },
+ {
+  "id": "rules16:HK:whub-whub-io-:home",
+  "kind": "html",
+  "url": "https://www.whub.io/",
+  "country": "HK",
+  "site": "WHub (whub.io) (home)",
+  "category": "directory",
+  "free_option": "startup profile; fee not stated in sources seen",
+  "audience": "Hong Kong startup ecosystem; \"over 3,000 listed on its website\" (FCCIHK article)"
+ },
+ {
+  "id": "rules16:KR:geeknews-news-hada-io-show-gn:rules page",
+  "kind": "html",
+  "url": "https://news.hada.io/blog/show (Show GN rules) and https://news.hada.io/guidelines",
+  "country": "KR",
+  "site": "GeekNews (news.hada.io) — Show GN (rules page)",
+  "category": "student-forum",
+  "free_option": "free post in the Show GN section for things you built yourself",
+  "audience": "Korean developer/tech community (GeekNews, with a weekly newsletter; size not seen)"
+ },
+ {
+  "id": "rules16:KR:geeknews-news-hada-io-show-gn:home",
+  "kind": "html",
+  "url": "https://news.hada.io/show",
+  "country": "KR",
+  "site": "GeekNews (news.hada.io) — Show GN (home)",
+  "category": "student-forum",
+  "free_option": "free post in the Show GN section for things you built yourself",
+  "audience": "Korean developer/tech community (GeekNews, with a weekly newsletter; size not seen)"
+ },
+ {
+  "id": "rules16:KR:disquiet-disquiet-io-:rules page",
+  "kind": "html",
+  "url": "https://club.disquiet.io/product-guide (프로덕트 작성 및 수정 가이드)",
+  "country": "KR",
+  "site": "Disquiet (disquiet.io) (rules page)",
+  "category": "directory",
+  "free_option": "product registration (프로덕트 공유하기); fee not stated in sources seen",
+  "audience": "Korean IT product makers (planning/dev/design); size not seen"
+ },
+ {
+  "id": "rules16:KR:disquiet-disquiet-io-:home",
+  "kind": "html",
+  "url": "https://disquiet.io/",
+  "country": "KR",
+  "site": "Disquiet (disquiet.io) (home)",
+  "category": "directory",
+  "free_option": "product registration (프로덕트 공유하기); fee not stated in sources seen",
+  "audience": "Korean IT product makers (planning/dev/design); size not seen"
+ },
+ {
+  "id": "rules16:KR:-i-boss-co-kr-rules:rules page",
+  "kind": "html",
+  "url": "https://www.i-boss.co.kr/ab-6515-6 (광고 규정 page returned by search)",
+  "country": "KR",
+  "site": "아이보스 (i-boss.co.kr) — 홍보/광고 게시판 rules (rules page)",
+  "category": "student-forum",
+  "free_option": "unknown",
+  "audience": "Korean online-marketing practitioners community"
+ },
+ {
+  "id": "rules16:KR:-i-boss-co-kr-rules:home",
+  "kind": "html",
+  "url": "https://www.i-boss.co.kr/",
+  "country": "KR",
+  "site": "아이보스 (i-boss.co.kr) — 홍보/광고 게시판 rules (home)",
+  "category": "student-forum",
+  "free_option": "unknown",
+  "audience": "Korean online-marketing practitioners community"
+ },
+ {
+  "id": "rules16:JP:-wiki-wikiwiki-jp-publicity-:rules page",
+  "kind": "html",
+  "url": "https://wikiwiki.jp/publicity/MenuBar",
+  "country": "JP",
+  "site": "なんでも宣伝 wiki (wikiwiki.jp/publicity) (rules page)",
+  "category": "student-forum",
+  "free_option": "free wiki pages for promotion, by medium (ウェブサイト / YouTube / X / ブログ ...)",
+  "audience": "small; unknown"
+ },
+ {
+  "id": "rules16:JP:-wiki-wikiwiki-jp-publicity-:home",
+  "kind": "html",
+  "url": "https://wikiwiki.jp/publicity/",
+  "country": "JP",
+  "site": "なんでも宣伝 wiki (wikiwiki.jp/publicity) (home)",
+  "category": "student-forum",
+  "free_option": "free wiki pages for promotion, by medium (ウェブサイト / YouTube / X / ブログ ...)",
+  "audience": "small; unknown"
+ },
+ {
+  "id": "rules16:JP:creww-creww-me-:home",
+  "kind": "html",
+  "url": "https://creww.me/",
+  "country": "JP",
+  "site": "Creww (creww.me) (home)",
+  "category": "directory",
+  "free_option": "startup registration; fee not stated in sources seen",
+  "audience": "Japanese startups seeking corporate open-innovation programs; 7,500+ startups registered (2023)"
+ },
+ {
+  "id": "rules16:KR:-rocketpunch-com-:home",
+  "kind": "html",
+  "url": "https://www.rocketpunch.com/",
+  "country": "KR",
+  "site": "로켓펀치 (rocketpunch.com) (home)",
+  "category": "directory",
+  "free_option": "free profile (app listed as Free); company-profile terms not seen",
+  "audience": "Korean career/business network with company pages; size not seen"
+ },
+ {
+  "id": "rules16:AU:locanto-australia-terms",
+  "kind": "html",
+  "url": "https://www.locanto.com.au/g/tos/",
+  "country": "AU",
+  "site": "Locanto Australia terms",
+  "category": "other"
+ },
+ {
+  "id": "rules16:KR:geeknews-show-gn-rules",
+  "kind": "html",
+  "url": "https://news.hada.io/blog/show",
+  "country": "KR",
+  "site": "GeekNews Show GN rules",
+  "category": "other"
+ },
+ {
+  "id": "rules16:KR:disquiet-product-guide",
+  "kind": "html",
+  "url": "https://club.disquiet.io/product-guide",
+  "country": "KR",
+  "site": "Disquiet product guide",
+  "category": "other"
+ },
+ {
+  "id": "rules16:NO:tass-vilkår",
+  "kind": "html",
+  "url": "https://tass.no/vilkar",
+  "country": "NO",
+  "site": "TASS vilkår",
+  "category": "other"
+ },
+ {
+  "id": "rules16:JP:misskey.day-server-list",
+  "kind": "html",
+  "url": "https://misskey.day/",
+  "country": "JP",
+  "site": "misskey.day server list",
+  "category": "other"
+ },
+ {
+  "id": "rules16:JP:servers.misskey.ink",
+  "kind": "html",
+  "url": "https://servers.misskey.ink/",
+  "country": "JP",
+  "site": "servers.misskey.ink",
+  "category": "other"
+ },
+ {
+  "id": "rules16:HK:asiaxpat-classifieds-terms",
+  "kind": "html",
+  "url": "https://hongkong.asiaxpat.com/classifieds/terms/",
+  "country": "HK",
+  "site": "AsiaXPAT classifieds terms",
+  "category": "other"
+ },
+ {
+  "id": "rules16:AU:hotfrog-au-free-profile",
+  "kind": "html",
+  "url": "https://www.hotfrog.com.au/add-business",
+  "country": "AU",
+  "site": "Hotfrog AU free profile",
+  "category": "other"
+ }
+]
