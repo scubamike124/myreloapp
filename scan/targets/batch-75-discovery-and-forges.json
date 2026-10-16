@@ -1,0 +1,56 @@
+[
+ {
+  "id": "disc75:ddg-html",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20for%20students%20Nairobi%20post%20ad%20free",
+  "country": "KE",
+  "site": "DuckDuckGo HTML results (test of search from the runner)",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "disc75:bing-rss",
+  "kind": "json",
+  "url": "https://www.bing.com/search?q=free%20classifieds%20for%20students%20Nairobi%20post%20ad%20free&format=rss",
+  "country": "KE",
+  "site": "Bing RSS results (test of search from the runner)",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "disc75:ddg-lite",
+  "kind": "json",
+  "url": "https://lite.duckduckgo.com/lite/?q=free%20classifieds%20for%20students%20Nairobi%20post%20ad%20free",
+  "country": "KE",
+  "site": "DuckDuckGo lite results (test)",
+  "category": "discovery",
+  "bodyChars": 200000
+ },
+ {
+  "id": "gh76:codeberg-bounty",
+  "kind": "json",
+  "url": "https://codeberg.org/api/v1/repos/issues/search?q=bounty&state=open&type=issues&limit=50&sort=created&order=desc",
+  "country": "GLOBAL",
+  "site": "Codeberg: open issues matching bounty (new source)",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh76:gitea-bounty",
+  "kind": "json",
+  "url": "https://gitea.com/api/v1/repos/issues/search?q=bounty&state=open&type=issues&limit=50&sort=created&order=desc",
+  "country": "GLOBAL",
+  "site": "Gitea.com: open issues matching bounty (new source)",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh76:codeberg-reward",
+  "kind": "json",
+  "url": "https://codeberg.org/api/v1/repos/issues/search?q=reward%20paid&state=open&type=issues&limit=50&sort=created&order=desc",
+  "country": "GLOBAL",
+  "site": "Codeberg: open issues matching reward paid",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ }
+]
