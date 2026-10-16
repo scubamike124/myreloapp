@@ -1,0 +1,422 @@
+[
+ {
+  "id": "render1:CO:colombia-move-posting-form",
+  "url": "https://colombiamove.com/publicar",
+  "discover": false,
+  "country": "CO",
+  "site": "Colombia Move posting form"
+ },
+ {
+  "id": "render1:PK:list-com-pk-registration",
+  "url": "https://list.com.pk/member/register/",
+  "discover": false,
+  "country": "PK",
+  "site": "List.com.pk registration"
+ },
+ {
+  "id": "render1:PK:list-com-pk-post-ad",
+  "url": "https://list.com.pk/post-ad",
+  "discover": false,
+  "country": "PK",
+  "site": "List.com.pk post ad"
+ },
+ {
+  "id": "render1:ID:iklangratiz-posting-form",
+  "url": "https://www.iklangratiz.com/p/pasang-iklan.html",
+  "discover": false,
+  "country": "ID",
+  "site": "IklanGratiz posting form"
+ },
+ {
+  "id": "render1:IL:myproduct-co-il-registration",
+  "url": "https://myproduct.co.il/reshut-harabim/rb/register.php",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct.co.il registration"
+ },
+ {
+  "id": "render1:IL:myproduct-co-il-posting",
+  "url": "https://myproduct.co.il/",
+  "discover": true,
+  "country": "IL",
+  "site": "myproduct.co.il posting"
+ },
+ {
+  "id": "render1:AR:evisos-argentina",
+  "url": "https://www.evisos.com.ar/",
+  "discover": true,
+  "country": "AR",
+  "site": "Evisos Argentina"
+ },
+ {
+  "id": "render1:MX:evisos-m-xico",
+  "url": "https://www.evisos.com.mx/",
+  "discover": true,
+  "country": "MX",
+  "site": "Evisos México"
+ },
+ {
+  "id": "render1:CL:evisos-chile",
+  "url": "https://www.evisos.cl/",
+  "discover": true,
+  "country": "CL",
+  "site": "Evisos Chile"
+ },
+ {
+  "id": "render1:CO:evisos-colombia",
+  "url": "https://www.evisos.com.co/",
+  "discover": true,
+  "country": "CO",
+  "site": "Evisos Colombia"
+ },
+ {
+  "id": "render1:AR:anunciar-co-argentina",
+  "url": "https://argentina.anunciar.co/register",
+  "discover": false,
+  "country": "AR",
+  "site": "Anunciar.co Argentina"
+ },
+ {
+  "id": "render1:ES:tabl-n-de-anuncios",
+  "url": "https://www.tablondeanuncios.com/",
+  "discover": true,
+  "country": "ES",
+  "site": "Tablón de Anuncios"
+ },
+ {
+  "id": "render1:CZ:hyperinzerce-cz",
+  "url": "https://www.hyperinzerce.cz/",
+  "discover": true,
+  "country": "CZ",
+  "site": "Hyperinzerce.cz"
+ },
+ {
+  "id": "render1:BG:alo-bg",
+  "url": "https://www.alo.bg/",
+  "discover": true,
+  "country": "BG",
+  "site": "Alo.bg"
+ },
+ {
+  "id": "render1:AE:mourjan",
+  "url": "https://www.mourjan.com/post/",
+  "discover": true,
+  "country": "AE",
+  "site": "Mourjan"
+ },
+ {
+  "id": "render1:N/A:e3lanfree-com",
+  "url": "https://e3lanfree.com/",
+  "discover": true,
+  "country": "N/A",
+  "site": "e3lanfree.com"
+ },
+ {
+  "id": "render1:UA:freetrade-com-ua",
+  "url": "https://freetrade.com.ua/",
+  "discover": true,
+  "country": "UA",
+  "site": "FreeTrade.com.ua"
+ },
+ {
+  "id": "render1:HU:ingyen-aprohirdetes-hu",
+  "url": "http://ingyen-aprohirdetes.hu/",
+  "discover": true,
+  "country": "HU",
+  "site": "Ingyen-aprohirdetes.hu"
+ },
+ {
+  "id": "render1:HU:aprohirdetes-biz",
+  "url": "https://aprohirdetes.biz/",
+  "discover": true,
+  "country": "HU",
+  "site": "Aprohirdetes.biz"
+ },
+ {
+  "id": "render1:IL:adtiny",
+  "url": "https://www.adtiny.com/register/?grp=7",
+  "discover": false,
+  "country": "IL",
+  "site": "AdTiny"
+ },
+ {
+  "id": "render1:IL:zehcan",
+  "url": "http://zehcan.co.il/",
+  "discover": true,
+  "country": "IL",
+  "site": "ZehCan"
+ },
+ {
+  "id": "render1:TR:serinilan",
+  "url": "https://serinilan.net/",
+  "discover": true,
+  "country": "TR",
+  "site": "Serinilan"
+ },
+ {
+  "id": "render1:IN:india-classifieds-com",
+  "url": "https://www.india-classifieds.com/",
+  "discover": true,
+  "country": "IN",
+  "site": "India-Classifieds.com"
+ },
+ {
+  "id": "render1:NL:fok-forum-registration",
+  "url": "https://forum.fok.nl/user/register",
+  "discover": false,
+  "country": "NL",
+  "site": "FOK!forum registration"
+ },
+ {
+  "id": "render1:NL:speurders-nl",
+  "url": "https://www.speurders.nl/",
+  "discover": true,
+  "country": "NL",
+  "site": "Speurders.nl"
+ },
+ {
+  "id": "render1:DE:quoka",
+  "url": "https://www.quoka.de/",
+  "discover": true,
+  "country": "DE",
+  "site": "Quoka"
+ },
+ {
+  "id": "render1:TH:kaidee",
+  "url": "https://www.kaidee.com/",
+  "discover": true,
+  "country": "TH",
+  "site": "Kaidee"
+ },
+ {
+  "id": "render1:IL:yad2",
+  "url": "https://www.yad2.co.il/",
+  "discover": true,
+  "country": "IL",
+  "site": "Yad2"
+ },
+ {
+  "id": "render1:SE:citiboard",
+  "url": "https://citiboard.se/",
+  "discover": true,
+  "country": "SE",
+  "site": "Citiboard"
+ },
+ {
+  "id": "render1:DK:guloggratis",
+  "url": "https://www.guloggratis.dk/annonce/opret",
+  "discover": false,
+  "country": "DK",
+  "site": "GulogGratis"
+ },
+ {
+  "id": "render1:GLOBAL:expat-com",
+  "url": "https://www.expat.com/en/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "Expat.com"
+ },
+ {
+  "id": "render1:AU:locanto-australia-terms",
+  "url": "https://www.locanto.com.au/g/tos/",
+  "discover": false,
+  "country": "AU",
+  "site": "Locanto Australia terms"
+ },
+ {
+  "id": "render1:AU:hotfrog-australia-add-business",
+  "url": "https://www.hotfrog.com.au/add-business",
+  "discover": false,
+  "country": "AU",
+  "site": "Hotfrog Australia add business"
+ },
+ {
+  "id": "render1:PL:lento-pl-pomoc",
+  "url": "https://www.lento.pl/pomoc.html",
+  "discover": false,
+  "country": "PL",
+  "site": "Lento.pl pomoc"
+ },
+ {
+  "id": "render1:PL:lento-pl-dodaj",
+  "url": "https://www.lento.pl/dodaj-ogloszenie.html",
+  "discover": false,
+  "country": "PL",
+  "site": "Lento.pl dodaj"
+ },
+ {
+  "id": "render1:IT:bakeca-it-regole",
+  "url": "https://www.bakeca.it/info/regole_pubblicazione/",
+  "discover": false,
+  "country": "IT",
+  "site": "Bakeca.it regole"
+ },
+ {
+  "id": "render1:US:classifiedads-com-help",
+  "url": "https://www.classifiedads.com/help",
+  "discover": false,
+  "country": "US",
+  "site": "ClassifiedAds.com help"
+ },
+ {
+  "id": "render1:US:classifiedads-com-post",
+  "url": "https://www.classifiedads.com/",
+  "discover": true,
+  "country": "US",
+  "site": "ClassifiedAds.com post"
+ },
+ {
+  "id": "render1:SA:expatriates-com-create-account",
+  "url": "https://www.expatriates.com/scripts/users/create_account.epl",
+  "discover": false,
+  "country": "SA",
+  "site": "Expatriates.com create account"
+ },
+ {
+  "id": "render1:SA:expatriates-com-terms",
+  "url": "https://www.expatriates.com/html/terms.of.use.html",
+  "discover": false,
+  "country": "SA",
+  "site": "Expatriates.com terms"
+ },
+ {
+  "id": "render1:GLOBAL:share-your-startup-submit",
+  "url": "https://shareyourstartup.com/submit",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Share Your Startup submit"
+ },
+ {
+  "id": "render1:KR:phdkim-net",
+  "url": "https://phdkim.net/",
+  "discover": true,
+  "country": "KR",
+  "site": "phdkim.net"
+ },
+ {
+  "id": "render1:TH:pantipmarket",
+  "url": "https://www.pantipmarket.com/",
+  "discover": true,
+  "country": "TH",
+  "site": "PantipMarket"
+ },
+ {
+  "id": "render1:EG:kenooznet-forum-registration",
+  "url": "https://kenooznet.yoo7.com/register",
+  "discover": false,
+  "country": "EG",
+  "site": "kenooznet forum registration"
+ },
+ {
+  "id": "render1:EG:markzaldawli-forum-registration",
+  "url": "https://markzaldawli.yoo7.com/register",
+  "discover": false,
+  "country": "EG",
+  "site": "markzaldawli forum registration"
+ },
+ {
+  "id": "render1:IN:my-india-forums-registration",
+  "url": "https://myindia.org.in/",
+  "discover": true,
+  "country": "IN",
+  "site": "My India Forums registration"
+ },
+ {
+  "id": "render1:MA:annuaire-gratuit-du-maroc",
+  "url": "https://www.annuaire-gratuit.ma/annonces/",
+  "discover": true,
+  "country": "MA",
+  "site": "Annuaire Gratuit du Maroc"
+ },
+ {
+  "id": "render1:ZA:upfeet-south-africa",
+  "url": "https://www.upfeet.com/free-classifieds",
+  "discover": true,
+  "country": "ZA",
+  "site": "UpFeet South Africa"
+ },
+ {
+  "id": "render1:GR:freelist-gr-registration",
+  "url": "https://www.freelist.gr/register.php",
+  "discover": false,
+  "country": "GR",
+  "site": "FreeList.gr registration"
+ },
+ {
+  "id": "render1:BG:bazar-bg",
+  "url": "https://bazar.bg/",
+  "discover": true,
+  "country": "BG",
+  "site": "Bazar.bg"
+ },
+ {
+  "id": "render1:RO:publi24-registration",
+  "url": "https://www.publi24.ro/login",
+  "discover": false,
+  "country": "RO",
+  "site": "Publi24 registration"
+ },
+ {
+  "id": "render1:GLOBAL:dev-to-sign-up",
+  "url": "https://dev.to/users/sign_up",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "dev.to sign-up"
+ },
+ {
+  "id": "render1:GLOBAL:hashnode-onboarding",
+  "url": "https://hashnode.com/onboard",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Hashnode onboarding"
+ },
+ {
+  "id": "render1:GLOBAL:mataroa-sign-up",
+  "url": "https://mataroa.blog/accounts/create/",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Mataroa sign-up"
+ },
+ {
+  "id": "render1:US:uloop-registration",
+  "url": "https://www.uloop.com/customer_register.htm",
+  "discover": false,
+  "country": "US",
+  "site": "Uloop registration"
+ },
+ {
+  "id": "render1:GB:vivastreet-uk",
+  "url": "https://www.vivastreet.co.uk/",
+  "discover": true,
+  "country": "GB",
+  "site": "Vivastreet UK"
+ },
+ {
+  "id": "render1:FR:vivastreet-fr",
+  "url": "https://www.vivastreet.com/",
+  "discover": true,
+  "country": "FR",
+  "site": "Vivastreet FR"
+ },
+ {
+  "id": "render1:BE:2dehands-be",
+  "url": "https://www.2dehands.be/",
+  "discover": true,
+  "country": "BE",
+  "site": "2dehands.be"
+ },
+ {
+  "id": "render1:AT:willhaben-registration",
+  "url": "https://www.willhaben.at/iad/myprofile/register",
+  "discover": false,
+  "country": "AT",
+  "site": "willhaben registration"
+ },
+ {
+  "id": "render1:JP:-sign-up",
+  "url": "https://jmty.jp/users/sign_up",
+  "discover": false,
+  "country": "JP",
+  "site": "ジモティー sign-up"
+ }
+]
