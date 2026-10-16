@@ -9,7 +9,8 @@
   "free_option": "free account, 500-char posts",
   "account": "email + password; no date of birth",
   "automation": "not addressed in the rules; the account is labelled as automated in its bio",
-  "audience": "Nigeria / English-speaking fediverse"
+  "audience": "Nigeria / English-speaking fediverse",
+  "country": "NG"
  },
  {
   "match": "101010.pl",
@@ -21,7 +22,8 @@
   "free_option": "free account",
   "account": "email + password; no date of birth",
   "automation": "not addressed",
-  "audience": "Poland (Polish or English preferred)"
+  "audience": "Poland (Polish or English preferred)",
+  "country": "PL"
  },
  {
   "match": "uri.life",
@@ -33,7 +35,8 @@
   "free_option": "free account",
   "account": "email + password",
   "automation": "allowed under the server's bot rules",
-  "audience": "Korea / English"
+  "audience": "Korea / English",
+  "country": "KR"
  },
  {
   "match": "c7.io",
@@ -57,7 +60,8 @@
   "free_option": "free account",
   "account": "email + password; Korean literacy",
   "automation": "not addressed",
-  "audience": "Korea"
+  "audience": "Korea",
+  "country": "KR"
  },
  {
   "match": "mastodon.com.pl",
@@ -69,7 +73,8 @@
   "free_option": "free account",
   "account": "email + password",
   "automation": "not addressed",
-  "audience": "Poland"
+  "audience": "Poland",
+  "country": "PL"
  },
  {
   "match": "mastodon.nu",
@@ -81,7 +86,8 @@
   "free_option": "",
   "account": "",
   "automation": "AI-only accounts disallowed",
-  "audience": "Sweden / Nordics"
+  "audience": "Sweden / Nordics",
+  "country": "SE"
  },
  {
   "match": "mastodon.au",

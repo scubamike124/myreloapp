@@ -193,6 +193,7 @@ for r in rows:
         account = n.get("account_requirements") or ""
         automation = n.get("automation_note") or ""
     if man:
+        if man.get("country"): t = {**t, "country": man["country"]}
         v = man["verdict"]; quote = man.get("quote") or quote; note = man.get("note") or note
         basis = man.get("basis") or ""; can_act = man.get("can_act") or ""
         free_option = man.get("free_option") or free_option; audience = man.get("audience") or audience

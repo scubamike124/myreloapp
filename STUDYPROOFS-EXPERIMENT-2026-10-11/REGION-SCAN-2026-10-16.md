@@ -1,6 +1,6 @@
 # StudyProofs free-promotion region scan — 2026-10-16
 
-Built 2026-10-16 07:32Z from 6272 read-only probes (5125 distinct pages and servers, 4717 distinct sites) made by GitHub Actions runners during the night of 2026-10-15/16, plus the hand review in `scan/review/verdicts.json`. Regenerate with `python3 -I scan/report.py`. The CSV beside this file carries every row.
+Built 2026-10-16 07:33Z from 6272 read-only probes (5125 distinct pages and servers, 4717 distinct sites) made by GitHub Actions runners during the night of 2026-10-15/16, plus the hand review in `scan/review/verdicts.json`. Regenerate with `python3 -I scan/report.py`. The CSV beside this file carries every row.
 
 **Standard.** A site counts as **qualified** only when its own current rules or submission page, read tonight, allow a free StudyProofs listing or promotional post and nothing on the page asks for a date of birth, phone number, identity check, CAPTCHA bypass, payment or a manual approval. "Allowed with conditions" means the page allows it with a condition (labelled ads, an introduction first, a backlink, a specific language) or shows free posting but the account rules were not fully read. Everything else is listed under the reason it was skipped. Research and account set-ups are not advertisements: only a publicly verified post counts as live.
 
@@ -22,9 +22,9 @@ The owner's note asked for "all 36 regions in our existing region list"; the lis
 | North America | CA, US | 628 | 576 | **0** | 1 | 0 | 9 | 512 (7 / 1 / 0 / 2 / 392 / 1 / 1 / 27 / 4 / 77) | 52 (23 / 21 / 8) | 54 |
 | Northern Europe | DK, FI, GB, IE, NO, SE | 303 | 250 | **1** | 1 | 0 | 7 | 230 (4 / 1 / 0 / 0 / 154 / 0 / 1 / 7 / 17 / 46) | 53 (19 / 24 / 10) | 11 |
 | Oceania | AU, NZ | 53 | 38 | **0** | 0 | 0 | 0 | 34 (0 / 0 / 0 / 0 / 19 / 0 / 1 / 0 / 10 / 4) | 15 (10 / 2 / 3) | 4 |
-| Western Europe | AT, BE, CH, DE, FR, NL | 1561 | 1482 | **1** | 4 | 0 | 15 | 1372 (5 / 2 / 0 / 0 / 919 / 0 / 0 / 27 / 8 / 411) | 79 (15 / 60 / 4) | 90 |
+| Western Europe | AT, BE, CH, DE, FR, NL | 1559 | 1480 | **0** | 3 | 0 | 15 | 1372 (5 / 2 / 0 / 0 / 919 / 0 / 0 / 27 / 8 / 411) | 79 (15 / 60 / 4) | 90 |
 | Southern Europe | ES, GR, IT, PT | 271 | 251 | **0** | 3 | 0 | 6 | 230 (3 / 1 / 0 / 0 / 196 / 0 / 0 / 1 / 2 / 27) | 20 (5 / 12 / 3) | 12 |
-| Central & Eastern Europe | CZ, HU, PL, RO, UA | 105 | 77 | **0** | 4 | 0 | 1 | 54 (1 / 1 / 0 / 0 / 31 / 0 / 0 / 4 / 5 / 12) | 28 (10 / 10 / 8) | 18 |
+| Central & Eastern Europe | CZ, HU, PL, RO, UA | 107 | 79 | **1** | 5 | 0 | 1 | 54 (1 / 1 / 0 / 0 / 31 / 0 / 0 / 4 / 5 / 12) | 28 (10 / 10 / 8) | 18 |
 | South Asia | BD, IN, PK | 34 | 19 | **1** | 1 | 0 | 1 | 12 (0 / 2 / 0 / 0 / 3 / 0 / 0 / 1 / 4 / 2) | 15 (7 / 6 / 2) | 4 |
 | Latin America | AR, BR, CL, CO, MX, PE | 88 | 60 | **1** | 7 | 0 | 1 | 35 (1 / 2 / 0 / 1 / 18 / 0 / 0 / 0 / 4 / 9) | 28 (11 / 12 / 5) | 16 |
 | Southeast Asia | ID, MY, PH, SG, TH, VN | 80 | 55 | **0** | 1 | 0 | 3 | 43 (1 / 3 / 0 / 0 / 30 / 0 / 0 / 5 / 0 / 4) | 25 (13 / 12 / 0) | 8 |
@@ -41,7 +41,7 @@ Verified from the site's own rules or submission page. `basis` in the CSV says w
 
 | Region | Country | Site | Free option | Audience | Promotion rule (their words) | Account requirements | Automation | Source | Amber can act? |
 |---|---|---|---|---|---|---|---|---|---|
-| Western Europe | DE | 101010.pl (fediverse) | free account | Poland (Polish or English preferred) | Powstrzymaj się od agresywnej reklamy (produktów, polityków, ideologii i czegokolwiek innego). | email + password; no date of birth | not addressed | https://101010.pl | yes: registrar candidate 2 (used only if CITAD fails) |
+| Central & Eastern Europe | PL | 101010.pl (fediverse) | free account | Poland (Polish or English preferred) | Powstrzymaj się od agresywnej reklamy (produktów, polityków, ideologii i czegokolwiek innego). | email + password; no date of birth | not addressed | https://101010.pl | yes: registrar candidate 2 (used only if CITAD fails) |
 | East Asia | KR | uri.life (우리.인생) (fediverse) | free account | Korea / English | (rules read in full on 2026-10-16: bots are allowed under the server's extra bot rules; no advertising ban) | email + password | allowed under the server's bot rules | https://uri.life | yes: registrar candidate 3 |
 | Sub-Saharan Africa | NG | social.citad.org.ng (CITAD) (fediverse) | free account, 500-char posts | Nigeria / English-speaking fediverse | Spam, scams, impersonation, phishing, fake engagement, and misleading information are prohibited. | email + password; no date of birth | not addressed in the rules; the account is labelled as automated in its bio | https://social.citad.org.ng | yes: registrar candidate 1; account opens at the next worker tick after #847 deploys |
 | East Asia | TW | c7.io (希奇❕) (fediverse) | free account | Chinese-speaking creators | Registration with disposable email addresses is not allowed. (AI-generated content must be disclosed.) | email + password | AI disclosure required | https://c7.io | yes: registrar candidate 4 |
@@ -56,7 +56,7 @@ The page allows a free post or listing under a condition, or shows free posting 
 | Region | Country | Site | Free option | Audience | Promotion rule (their words) | Account requirements | Automation | Source | Amber can act? |
 |---|---|---|---|---|---|---|---|---|---|
 | East Asia | KR | qdon.space (큐돈) (fediverse) | free account | Korea | 혼란을 유발하는 광고 금지 — 광고임을 명확히 밝히지 않는 스텔스 마케팅(일명 뒷광고) 등을 금지합니다. 광고임을 명확히 알 수 있는 정직하고 투명한 형태의 광고는 허용됩니다. | email + password; Korean literacy | not addressed | https://qdon.space | yes, with a Korean-language post labelled 광고; not acted tonight (the lane runs one Mastodon account, in English) |
-| Western Europe | FR | mastodon.com.pl (Mastodon Poland) (fediverse) | free account | Poland | No spamming or explicit advertising allowed without proper introduction and/or other activity. … Upon creating an account, it is required to introduce oneself using the hashtag #introduction in one's post. | email + password | not addressed | https://mastodon.com.pl | yes, after an introduction post; not acted (one Mastodon account per lane) |
+| Central & Eastern Europe | PL | mastodon.com.pl (Mastodon Poland) (fediverse) | free account | Poland | No spamming or explicit advertising allowed without proper introduction and/or other activity. … Upon creating an account, it is required to introduce oneself using the hashtag #introduction in one's post. | email + password | not addressed | https://mastodon.com.pl | yes, after an introduction post; not acted (one Mastodon account per lane) |
 | Western Europe | DE | Quoka (classifieds) | free ad | Germany | Kostenlos inserieren | Email registration; commercial status declaration | Not stated | https://www.quoka.de/ | maybe |
 | Western Europe | NL | FOK!forum (student-forum) | Free forum posting; has school/study subforums | Netherlands (large general forum) | (registration form: member name and e-mail address only; the forum's rules on advertising were not readable) | member name + e-mail | Not stated | https://forum.fok.nl/ | maybe (e-mail-only registration; rules unread) |
 | Southern Europe | ES | Tablon de Anuncios (classifieds) | free ad | Spain | Cómo poner anuncios gratis en Internet … Editor de anuncios gratis | Email | Not stated | https://www.tablondeanuncios.com/ | maybe |
