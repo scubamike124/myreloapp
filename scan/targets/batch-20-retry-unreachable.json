@@ -1,0 +1,2730 @@
+[
+ {
+  "id": "retry20:misskey-tos:x.miku.today",
+  "kind": "html",
+  "url": "www.mikufans.com.cn",
+  "region": "fediverse",
+  "note": "Misskey terms or about page"
+ },
+ {
+  "id": "retry20:rules:DE:kleinanzeigen-gratis-com",
+  "kind": "html",
+  "url": "https://www.kleinanzeigen-gratis.com/",
+  "region": "Western Europe",
+  "country": "DE",
+  "site": "Kleinanzeigen-Gratis.com",
+  "category": "classifieds",
+  "free_option": "Operator claims unlimited free ads for commercial and private advertisers, 150-day runtime, covering DE/AT/CH (2013 press release)",
+  "audience": "German-speaking DE/AT/CH; small audience"
+ },
+ {
+  "id": "retry20:rules:DE:uni-protokolle-de-foren",
+  "kind": "html",
+  "url": "https://www.uni-protokolle.de/foren/",
+  "region": "Western Europe",
+  "country": "DE",
+  "site": "uni-protokolle.de Foren",
+  "category": "student-forum",
+  "free_option": "Free forum posting",
+  "audience": "Long-running German student forum (phpBB), medium activity"
+ },
+ {
+  "id": "retry20:rules:FR:aixploria",
+  "kind": "html",
+  "url": "https://www.aixploria.com/fr/ajouter-ia/",
+  "region": "Western Europe",
+  "country": "FR",
+  "site": "Aixploria",
+  "category": "submit-form",
+  "free_option": "French/English AI tools directory with 'Ajouter une IA' submission; free basic listing believed available with paid fast-track (from memory, not confirmed - search blocked)",
+  "audience": "One of the largest French-language AI tool directories"
+ },
+ {
+  "id": "retry20:rules:NL:techleap-startup-finder",
+  "kind": "html",
+  "url": "https://techleap.nl/blog/discover-the-dutch-tech-ecosystem-with-startup-finder/",
+  "region": "Western Europe",
+  "country": "NL",
+  "site": "TechLeap Startup Finder",
+  "category": "directory",
+  "free_option": "Free database of Dutch startups and scaleups; founders claim/update or create a profile",
+  "audience": "Dutch tech ecosystem, investors, clients"
+ },
+ {
+  "id": "retry20:rules:IT:subito-it",
+  "kind": "html",
+  "url": "https://info.subito.it/regole.htm",
+  "region": "Southern Europe",
+  "country": "IT",
+  "site": "Subito.it",
+  "category": "classifieds",
+  "free_option": "Free posting in most categories; Servizi category offers paid visibility options; business accounts",
+  "audience": "Italy's largest classifieds (Adevinta)"
+ },
+ {
+  "id": "retry20:rules:IT:locanto-italia",
+  "kind": "html",
+  "url": "https://www.locanto.it/g/tos/",
+  "region": "Southern Europe",
+  "country": "IT",
+  "site": "Locanto Italia",
+  "category": "classifieds",
+  "free_option": "Free ads incl. Servizi/Lezioni; business ads allowed",
+  "audience": "Moderate"
+ },
+ {
+  "id": "retry20:rules:PT:locanto-portugal",
+  "kind": "html",
+  "url": "https://www.locanto.pt/g/tos/",
+  "region": "Southern Europe",
+  "country": "PT",
+  "site": "Locanto Portugal",
+  "category": "classifieds",
+  "free_option": "Free ads incl. servicos; business ads allowed",
+  "audience": "Moderate"
+ },
+ {
+  "id": "retry20:rules:PT:diretorio-de-empresas-portuguesas-codigo",
+  "kind": "html",
+  "url": "https://codigopostal.ciberforma.pt/dir/",
+  "region": "Southern Europe",
+  "country": "PT",
+  "site": "Diretorio de Empresas Portuguesas (Codigo Postal)",
+  "category": "directory",
+  "free_option": "Simple registration 100% free",
+  "audience": "Small Portuguese business directory"
+ },
+ {
+  "id": "retry20:rules:GR:ix-gr",
+  "kind": "html",
+  "url": "https://www.ix.gr/classifieds/new",
+  "region": "Southern Europe",
+  "country": "GR",
+  "site": "ix.gr",
+  "category": "classifieds",
+  "free_option": "Private listings free for any duration (site claim)",
+  "audience": "Mid-size Greek classifieds"
+ },
+ {
+  "id": "retry20:rules:GR:aggeliopolis-gr",
+  "kind": "html",
+  "url": "https://www.aggeliopolis.gr/",
+  "region": "Southern Europe",
+  "country": "GR",
+  "site": "aggeliopolis.gr",
+  "category": "classifieds",
+  "free_option": "Free Greek classifieds (from memory; not found in search)",
+  "audience": "Mid-size"
+ },
+ {
+  "id": "retry20:rules:GR:studentguru-gr",
+  "kind": "html",
+  "url": "https://www.studentguru.gr/about-us/",
+  "region": "Southern Europe",
+  "country": "GR",
+  "site": "StudentGuru.gr",
+  "category": "student-forum",
+  "free_option": "Listed by paso.gr as online community of technology students with 14,000+ members; current pages show a thesis-writing service, forum status uncertain",
+  "audience": "Greek students (uncertain)"
+ },
+ {
+  "id": "retry20:rules:PL:gumtree-pl",
+  "kind": "html",
+  "url": "https://www.gumtree.pl/regulamin",
+  "region": "Central & Eastern Europe",
+  "country": "PL",
+  "site": "Gumtree.pl",
+  "category": "classifieds",
+  "free_option": "Free basic listings incl. Uslugi category",
+  "audience": "General Polish consumers"
+ },
+ {
+  "id": "retry20:rules:PL:pol-social",
+  "kind": "html",
+  "url": "https://pol.social/about",
+  "region": "Central & Eastern Europe",
+  "country": "PL",
+  "site": "pol.social",
+  "category": "fediverse",
+  "free_option": "Free account (registration mode not confirmed)",
+  "audience": "Polish-speaking fediverse users"
+ },
+ {
+  "id": "retry20:rules:RO:lajumate-ro",
+  "kind": "html",
+  "url": "https://lajumate.ro/termeni-si-conditii",
+  "region": "Central & Eastern Europe",
+  "country": "RO",
+  "site": "Lajumate.ro",
+  "category": "classifieds",
+  "free_option": "Free classifieds",
+  "audience": "Romanian consumers"
+ },
+ {
+  "id": "retry20:rules:RO:micapublicitate-ro",
+  "kind": "html",
+  "url": "https://www.micapublicitate.ro/",
+  "region": "Central & Eastern Europe",
+  "country": "RO",
+  "site": "Micapublicitate.ro",
+  "category": "classifieds",
+  "free_option": "Free ads for both natural and legal persons (launch announcement)",
+  "audience": "Romanian consumers"
+ },
+ {
+  "id": "retry20:rules:SA:ckfu-student-forum",
+  "kind": "html",
+  "url": "https://www.ckfu.org/",
+  "region": "Middle East & North Africa",
+  "country": "SA",
+  "site": "CKFU student forum",
+  "category": "student-forum",
+  "free_option": "Free forum account (King Faisal University students forum, large)",
+  "audience": "Saudi university students"
+ },
+ {
+  "id": "retry20:rules:SA:cofe-cup-kau-students-forum-",
+  "kind": "html",
+  "url": "https://www.cofe-cup.net/",
+  "region": "Middle East & North Africa",
+  "country": "SA",
+  "site": "Cofe-cup (KAU students forum)",
+  "category": "student-forum",
+  "free_option": "Free forum account",
+  "audience": "Saudi university students (King Abdulaziz Univ.)"
+ },
+ {
+  "id": "retry20:rules:IL:tapuz-forums",
+  "kind": "html",
+  "url": "https://www.tapuz.co.il/forums",
+  "region": "Middle East & North Africa",
+  "country": "IL",
+  "site": "Tapuz forums",
+  "category": "student-forum",
+  "free_option": "Free account; student forums exist",
+  "audience": "Israeli general public incl. students"
+ },
+ {
+  "id": "retry20:fedi:misskey-hub.net",
+  "kind": "mastodon",
+  "url": "https://misskey-hub.net",
+  "region": "East Asia",
+  "country": "JP",
+  "site": "Misskey Hub サーバー一覧 (official Misskey server directory)"
+ },
+ {
+  "id": "retry20:rules:JP:pr-times-free-press-release-distribution",
+  "kind": "html",
+  "url": "https://prtimes.jp/startup_challenge/",
+  "region": "East Asia",
+  "country": "JP",
+  "site": "PR TIMES スタートアップチャレンジ (free press-release distribution for young startups)",
+  "category": "submit-form",
+  "free_option": "Startups within ~2 years of founding can distribute press releases on PR TIMES free of charge under the スタートアップチャレンジ programme",
+  "audience": "Japanese media and general public; releases are syndicated to many news portals"
+ },
+ {
+  "id": "retry20:fedi:wiki.mastodon.kr",
+  "kind": "mastodon",
+  "url": "https://wiki.mastodon.kr",
+  "region": "East Asia",
+  "country": "KR",
+  "site": "한국 마스토돈 연합위키 - 한국어 인스턴스 목록"
+ },
+ {
+  "id": "retry20:rules:TW:meet-business-next-",
+  "kind": "html",
+  "url": "https://meet.bnext.com.tw/",
+  "region": "East Asia",
+  "country": "TW",
+  "site": "Meet 創業小聚 (Business Next) 新創資料庫",
+  "category": "directory",
+  "free_option": "Free startup profile in the Meet startup database",
+  "audience": "Taiwan startup ecosystem, investors, media"
+ },
+ {
+  "id": "retry20:rules:HK:88db-hong-kong",
+  "kind": "html",
+  "url": "https://www.88db.com.hk/terms",
+  "region": "East Asia",
+  "country": "HK",
+  "site": "88DB Hong Kong",
+  "category": "classifieds",
+  "free_option": "Free business/service listings (教育/補習 categories) with optional paid upgrades",
+  "audience": "Large HK local-services audience (HK-founded platform)"
+ },
+ {
+  "id": "retry20:rules:HK:lihkg-",
+  "kind": "html",
+  "url": "https://lihkg.com/terms",
+  "region": "East Asia",
+  "country": "HK",
+  "site": "LIHKG 連登",
+  "category": "student-forum",
+  "free_option": "Free account; dominant young/student forum in HK; advertising is heavily restricted",
+  "audience": "Very large HK youth/student audience"
+ },
+ {
+  "id": "retry20:rules:HK:whub",
+  "kind": "html",
+  "url": "https://whub.io/terms",
+  "region": "East Asia",
+  "country": "HK",
+  "site": "WHub",
+  "category": "directory",
+  "free_option": "Free startup profile in HK's largest startup community platform",
+  "audience": "HK/Asia startup ecosystem, talent, investors"
+ },
+ {
+  "id": "retry20:rules:PK:olx-pakistan",
+  "kind": "html",
+  "url": "https://www.olx.com.pk/terms-of-use",
+  "region": "South Asia",
+  "country": "PK",
+  "site": "OLX Pakistan",
+  "category": "classifieds",
+  "free_option": "Free ads with per-category limits; Services category",
+  "audience": "Pakistan's largest classifieds audience"
+ },
+ {
+  "id": "retry20:rules:PK:locanto-pakistan",
+  "kind": "html",
+  "url": "https://www.locanto.pk/terms/",
+  "region": "South Asia",
+  "country": "PK",
+  "site": "Locanto Pakistan",
+  "category": "classifieds",
+  "free_option": "Free ads incl. Services and Classes",
+  "audience": "Mid-sized Pakistani audience"
+ },
+ {
+  "id": "retry20:rules:PK:p-sha-pakistan-startup-directory",
+  "kind": "html",
+  "url": "https://startups.pasha.org.pk/about",
+  "region": "South Asia",
+  "country": "PK",
+  "site": "P@SHA Pakistan Startup Directory",
+  "category": "directory",
+  "free_option": "No fee, no equity; curated and vetted registry of Pakistani startups",
+  "audience": "Pakistani tech industry (P@SHA = Pakistan Software Houses Association)"
+ },
+ {
+  "id": "retry20:rules:BD:eibazar-com",
+  "kind": "html",
+  "url": "https://eibazar.com/",
+  "region": "South Asia",
+  "country": "BD",
+  "site": "eibazar.com",
+  "category": "classifieds",
+  "free_option": "Free ad posting (per 2018 Prothom Alo launch report; current status to verify)",
+  "audience": "Bangladeshi classifieds users"
+ },
+ {
+  "id": "retry20:rules:BD:dhakasnob-business-directory",
+  "kind": "html",
+  "url": "https://dhakasnob.com/",
+  "region": "South Asia",
+  "country": "BD",
+  "site": "Dhakasnob business directory",
+  "category": "directory",
+  "free_option": "Free basic listing (name, number, location); featured listings paid",
+  "audience": "Dhaka local businesses/consumers"
+ },
+ {
+  "id": "retry20:rules:SG:classifiedsg",
+  "kind": "html",
+  "url": "https://www.classifiedsg.com/",
+  "region": "Southeast Asia",
+  "country": "SG",
+  "site": "ClassifiedSG",
+  "category": "classifieds",
+  "free_option": "Free classified ads (named in a list of SG free classifieds sites)",
+  "audience": "Small general SG audience"
+ },
+ {
+  "id": "retry20:rules:SG:sgsearch",
+  "kind": "html",
+  "url": "https://www.sgsearch.com/",
+  "region": "Southeast Asia",
+  "country": "SG",
+  "site": "SGSearch",
+  "category": "directory",
+  "free_option": "Free business listing (cited as free-to-join in a Singapore citation list)",
+  "audience": "Local SEO/business directory users"
+ },
+ {
+  "id": "retry20:rules:SG:ibusiness-singapore",
+  "kind": "html",
+  "url": "https://www.ibusiness.com.sg/",
+  "region": "Southeast Asia",
+  "country": "SG",
+  "site": "iBusiness Singapore",
+  "category": "directory",
+  "free_option": "Free business listing (cited as free-to-join)",
+  "audience": "Local business directory users"
+ },
+ {
+  "id": "retry20:rules:PH:mybenta",
+  "kind": "html",
+  "url": "https://www.mybenta.com/",
+  "region": "Southeast Asia",
+  "country": "PH",
+  "site": "MyBenta",
+  "category": "classifieds",
+  "free_option": "Free Philippine classified ads (long-running site; NOT confirmed by search in this run)",
+  "audience": "Filipino buyers/sellers"
+ },
+ {
+  "id": "retry20:rules:PH:mastodon-ph",
+  "kind": "html",
+  "url": "https://mastodon.ph/about",
+  "region": "Southeast Asia",
+  "country": "PH",
+  "site": "mastodon.ph",
+  "category": "fediverse",
+  "free_option": "Filipino-language Mastodon server; registration requires approval",
+  "audience": "Filipino fediverse users"
+ },
+ {
+  "id": "retry20:rules:ID:olx-indonesia",
+  "kind": "html",
+  "url": "https://help.olx.co.id/hc/id/articles/360029388451-Peraturan-OLX",
+  "region": "Southeast Asia",
+  "country": "ID",
+  "site": "OLX Indonesia",
+  "category": "classifieds",
+  "free_option": "Free ad quota per account (Jasa/services category exists); paid quota beyond trial",
+  "audience": "Indonesia's largest classifieds site"
+ },
+ {
+  "id": "retry20:rules:ID:mastodon-indonesia",
+  "kind": "html",
+  "url": "https://mastodonindonesia.com/about",
+  "region": "Southeast Asia",
+  "country": "ID",
+  "site": "Mastodon Indonesia",
+  "category": "fediverse",
+  "free_option": "Open registration, no manual approval (per mastodonservers.net listing, dated)",
+  "audience": "Indonesian fediverse users (~100+ accounts listed)"
+ },
+ {
+  "id": "retry20:rules:ID:indonetwork",
+  "kind": "html",
+  "url": "https://www.indonetwork.co.id/",
+  "region": "Southeast Asia",
+  "country": "ID",
+  "site": "Indonetwork",
+  "category": "directory",
+  "free_option": "Free member company listing (named among free local directories; free tier not re-verified)",
+  "audience": "Indonesian B2B buyers"
+ },
+ {
+  "id": "retry20:rules:ID:pendekar-iklan",
+  "kind": "html",
+  "url": "https://pendekariklan.com/",
+  "region": "Southeast Asia",
+  "country": "ID",
+  "site": "Pendekar Iklan",
+  "category": "classifieds",
+  "free_option": "Free classified posting after a one-time registration (per an Indonesian blog)",
+  "audience": "Low-traffic Indonesian free-ads site"
+ },
+ {
+  "id": "retry20:rules:VN:numbala",
+  "kind": "html",
+  "url": "https://numbala.vn/",
+  "region": "Southeast Asia",
+  "country": "VN",
+  "site": "Numbala",
+  "category": "classifieds",
+  "free_option": "Anyone can post buy/sell listings free (per a Vietnamese roundup)",
+  "audience": "Small VN classifieds audience"
+ },
+ {
+  "id": "retry20:rules:MY:locanto-malaysia",
+  "kind": "html",
+  "url": "https://www.locanto.my/",
+  "region": "Southeast Asia",
+  "country": "MY",
+  "site": "Locanto Malaysia",
+  "category": "classifieds",
+  "free_option": "Free classified ad (domain to verify; not returned by search in this run)",
+  "audience": "General public in Malaysia"
+ },
+ {
+  "id": "retry20:rules:ZA:gal-co-za",
+  "kind": "html",
+  "url": "https://www.gal.co.za/",
+  "region": "Sub-Saharan Africa",
+  "country": "ZA",
+  "site": "gAL.co.za",
+  "category": "student-forum",
+  "free_option": "Youth/student community with regional sections; promotion rules not captured",
+  "audience": "SA youth and students"
+ },
+ {
+  "id": "retry20:rules:NG:densiva",
+  "kind": "html",
+  "url": "https://densiva.ng/",
+  "region": "Sub-Saharan Africa",
+  "country": "NG",
+  "site": "Densiva",
+  "category": "classifieds",
+  "free_option": "No-commission marketplace; sellers and service providers post ads free with unlimited daily postings (company's own claim)",
+  "audience": "Small/new Nigerian audience"
+ },
+ {
+  "id": "retry20:rules:NG:mastodon-holeyfox-co",
+  "kind": "html",
+  "url": "https://mastodon.holeyfox.co/about",
+  "region": "Sub-Saharan Africa",
+  "country": "NG",
+  "site": "mastodon.holeyfox.co",
+  "category": "fediverse",
+  "free_option": "Listed as a Nigerian Mastodon server; registration status not captured",
+  "audience": "Small Nigerian fediverse community"
+ },
+ {
+  "id": "retry20:rules:KE:adgraft",
+  "kind": "html",
+  "url": "https://www.adgraft.com/",
+  "region": "Sub-Saharan Africa",
+  "country": "KE",
+  "site": "Adgraft",
+  "category": "classifieds",
+  "free_option": "Free and premium listings",
+  "audience": "Small Kenyan audience"
+ },
+ {
+  "id": "retry20:rules:KE:jedi-co-ke",
+  "kind": "html",
+  "url": "https://jedi.co.ke/",
+  "region": "Sub-Saharan Africa",
+  "country": "KE",
+  "site": "Jedi.co.ke",
+  "category": "classifieds",
+  "free_option": "Free and premium listings",
+  "audience": "Small Kenyan audience"
+ },
+ {
+  "id": "retry20:fedi:about.mastodon.africa",
+  "kind": "mastodon",
+  "url": "https://about.mastodon.africa",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:aussie.zone",
+  "kind": "mastodon",
+  "url": "https://aussie.zone",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:bolha.io",
+  "kind": "mastodon",
+  "url": "https://bolha.io",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:legal.lemmy.world",
+  "kind": "mastodon",
+  "url": "https://legal.lemmy.world",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:liker.social",
+  "kind": "mastodon",
+  "url": "https://liker.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:masto.ar",
+  "kind": "mastodon",
+  "url": "https://masto.ar",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.ae",
+  "kind": "mastodon",
+  "url": "https://mastodon.ae",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.ar",
+  "kind": "mastodon",
+  "url": "https://mastodon.ar",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.at",
+  "kind": "mastodon",
+  "url": "https://mastodon.at",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.br",
+  "kind": "mastodon",
+  "url": "https://mastodon.br",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.ca",
+  "kind": "mastodon",
+  "url": "https://mastodon.ca",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.ch",
+  "kind": "mastodon",
+  "url": "https://mastodon.ch",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.cloud",
+  "kind": "mastodon",
+  "url": "https://mastodon.cloud",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.co",
+  "kind": "mastodon",
+  "url": "https://mastodon.co",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.cz",
+  "kind": "mastodon",
+  "url": "https://mastodon.cz",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.dk",
+  "kind": "mastodon",
+  "url": "https://mastodon.dk",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.eg",
+  "kind": "mastodon",
+  "url": "https://mastodon.eg",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.es",
+  "kind": "mastodon",
+  "url": "https://mastodon.es",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.eu",
+  "kind": "mastodon",
+  "url": "https://mastodon.eu",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.fi",
+  "kind": "mastodon",
+  "url": "https://mastodon.fi",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.gh",
+  "kind": "mastodon",
+  "url": "https://mastodon.gh",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.gr",
+  "kind": "mastodon",
+  "url": "https://mastodon.gr",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.holeyfox.co",
+  "kind": "mastodon",
+  "url": "https://mastodon.holeyfox.co",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.hu",
+  "kind": "mastodon",
+  "url": "https://mastodon.hu",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.in",
+  "kind": "mastodon",
+  "url": "https://mastodon.in",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.it",
+  "kind": "mastodon",
+  "url": "https://mastodon.it",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.jp",
+  "kind": "mastodon",
+  "url": "https://mastodon.jp",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.ke",
+  "kind": "mastodon",
+  "url": "https://mastodon.ke",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.kr",
+  "kind": "mastodon",
+  "url": "https://mastodon.kr",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.ma",
+  "kind": "mastodon",
+  "url": "https://mastodon.ma",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.ng",
+  "kind": "mastodon",
+  "url": "https://mastodon.ng",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.no",
+  "kind": "mastodon",
+  "url": "https://mastodon.no",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.pe",
+  "kind": "mastodon",
+  "url": "https://mastodon.pe",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.ph",
+  "kind": "mastodon",
+  "url": "https://mastodon.ph",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.pk",
+  "kind": "mastodon",
+  "url": "https://mastodon.pk",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.pl",
+  "kind": "mastodon",
+  "url": "https://mastodon.pl",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.pt",
+  "kind": "mastodon",
+  "url": "https://mastodon.pt",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.ro",
+  "kind": "mastodon",
+  "url": "https://mastodon.ro",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.sa",
+  "kind": "mastodon",
+  "url": "https://mastodon.sa",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.se",
+  "kind": "mastodon",
+  "url": "https://mastodon.se",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.tr",
+  "kind": "mastodon",
+  "url": "https://mastodon.tr",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.tw",
+  "kind": "mastodon",
+  "url": "https://mastodon.tw",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.ua",
+  "kind": "mastodon",
+  "url": "https://mastodon.ua",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.uk",
+  "kind": "mastodon",
+  "url": "https://mastodon.uk",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.us",
+  "kind": "mastodon",
+  "url": "https://mastodon.us",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.vn",
+  "kind": "mastodon",
+  "url": "https://mastodon.vn",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodon.za",
+  "kind": "mastodon",
+  "url": "https://mastodon.za",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:mastodonindonesia.com",
+  "kind": "mastodon",
+  "url": "https://mastodonindonesia.com",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:matrix.org",
+  "kind": "mastodon",
+  "url": "https://matrix.org",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:misskey.id",
+  "kind": "mastodon",
+  "url": "https://misskey.id",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:misskey.io",
+  "kind": "mastodon",
+  "url": "https://misskey.io",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:nostr.watch",
+  "kind": "mastodon",
+  "url": "https://nostr.watch",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:pol.social",
+  "kind": "mastodon",
+  "url": "https://pol.social",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:social.ua",
+  "kind": "mastodon",
+  "url": "https://social.ua",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:view.matrix.org",
+  "kind": "mastodon",
+  "url": "https://view.matrix.org",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:fedi:vmst.io",
+  "kind": "mastodon",
+  "url": "https://vmst.io",
+  "region": "fediverse",
+  "note": "agent-named or country-named server, read by API"
+ },
+ {
+  "id": "retry20:rules:US:geebo",
+  "kind": "html",
+  "url": "https://geebo.com/terms/",
+  "region": "North America",
+  "country": "US",
+  "site": "Geebo",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": "US classifieds"
+ },
+ {
+  "id": "retry20:rules:US:gradcafe-forum-guidelines",
+  "kind": "html",
+  "url": "https://forum.thegradcafe.com/guidelines/",
+  "region": "North America",
+  "country": "US",
+  "site": "GradCafe forum guidelines",
+  "category": "student-forum",
+  "free_option": "forum posts",
+  "audience": "graduate students"
+ },
+ {
+  "id": "retry20:rules:GLOBAL:aitoptools-submit",
+  "kind": "html",
+  "url": "https://aitoptools.com/submit-tool/",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "aitoptools submit",
+  "category": "submit-form",
+  "free_option": "free AI tool submission",
+  "audience": "AI tool seekers"
+ },
+ {
+  "id": "retry20:rules:GLOBAL:gpte-ai-submit",
+  "kind": "html",
+  "url": "https://gpte.ai/submit",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "gpte.ai submit",
+  "category": "submit-form",
+  "free_option": "free AI tool submission",
+  "audience": "AI tool seekers"
+ },
+ {
+  "id": "retry20:rules:GLOBAL:edtech-impact-vendor-listing",
+  "kind": "html",
+  "url": "https://edtechimpact.com/vendors/",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "EdTech Impact vendor listing",
+  "category": "directory",
+  "free_option": "free vendor listing",
+  "audience": "teachers and schools (UK)"
+ },
+ {
+  "id": "retry20:rules:GLOBAL:prlog-free-press-release",
+  "kind": "html",
+  "url": "https://www.prlog.org/terms-of-service.html",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "PRLog free press release",
+  "category": "submit-form",
+  "free_option": "free press release",
+  "audience": "search engines"
+ },
+ {
+  "id": "retry20:rules:GLOBAL:write-as-terms",
+  "kind": "html",
+  "url": "https://write.as/terms",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "Write.as terms",
+  "category": "other",
+  "free_option": "free blog with API",
+  "audience": "small"
+ },
+ {
+  "id": "retry20:rules:GB:gumtree-uk-terms",
+  "kind": "html",
+  "url": "https://www.gumtree.com/terms_of_use",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "Gumtree UK terms",
+  "category": "classifieds",
+  "free_option": "free ads incl. services",
+  "audience": "largest UK classifieds"
+ },
+ {
+  "id": "retry20:rules:IE:donedeal-terms",
+  "kind": "html",
+  "url": "https://www.donedeal.ie/terms",
+  "region": "Northern Europe",
+  "country": "IE",
+  "site": "DoneDeal terms",
+  "category": "classifieds",
+  "free_option": "ads",
+  "audience": ""
+ },
+ {
+  "id": "retry20:rules:NZ:trade-me-terms",
+  "kind": "html",
+  "url": "https://www.trademe.co.nz/c/legal/terms-and-conditions",
+  "region": "Oceania",
+  "country": "NZ",
+  "site": "Trade Me terms",
+  "category": "classifieds",
+  "free_option": "ads (fees for many categories)",
+  "audience": "largest NZ marketplace"
+ },
+ {
+  "id": "retry20:rules:NZ:finda-nz",
+  "kind": "html",
+  "url": "https://www.finda.co.nz/terms",
+  "region": "Oceania",
+  "country": "NZ",
+  "site": "Finda NZ",
+  "category": "directory",
+  "free_option": "free business listing",
+  "audience": ""
+ },
+ {
+  "id": "retry20:rules:SE:blocket-annonsregler",
+  "kind": "html",
+  "url": "https://www.blocket.se/annonsregler",
+  "region": "Northern Europe",
+  "country": "SE",
+  "site": "Blocket annonsregler",
+  "category": "classifieds",
+  "free_option": "ads (fees for business)",
+  "audience": "largest Swedish classifieds"
+ },
+ {
+  "id": "retry20:rules:DK:dba-regler",
+  "kind": "html",
+  "url": "https://www.dba.dk/om-dba/regler/",
+  "region": "Northern Europe",
+  "country": "DK",
+  "site": "DBA regler",
+  "category": "classifieds",
+  "free_option": "ads",
+  "audience": "largest Danish classifieds"
+ },
+ {
+  "id": "retry20:rules:DK:guloggratis",
+  "kind": "html",
+  "url": "https://www.guloggratis.dk/om-guloggratis/handelsbetingelser",
+  "region": "Northern Europe",
+  "country": "DK",
+  "site": "GulogGratis",
+  "category": "classifieds",
+  "free_option": "free ads for private",
+  "audience": "Danish classifieds"
+ },
+ {
+  "id": "retry20:rules:FI:tori-fi-s-nn-t",
+  "kind": "html",
+  "url": "https://www.tori.fi/saannot",
+  "region": "Northern Europe",
+  "country": "FI",
+  "site": "Tori.fi säännöt",
+  "category": "classifieds",
+  "free_option": "ads (fees for business)",
+  "audience": "largest Finnish classifieds"
+ },
+ {
+  "id": "retry20:rules:BR:olx-brasil-regras",
+  "kind": "html",
+  "url": "https://ajuda.olx.com.br/hc/pt-br",
+  "region": "Latin America",
+  "country": "BR",
+  "site": "OLX Brasil regras",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": "largest Brazilian classifieds"
+ },
+ {
+  "id": "retry20:rules:BR:startupbase",
+  "kind": "html",
+  "url": "https://startupbase.com.br/",
+  "region": "Latin America",
+  "country": "BR",
+  "site": "StartupBase",
+  "category": "directory",
+  "free_option": "free startup listing",
+  "audience": "Brazilian startup ecosystem"
+ },
+ {
+  "id": "retry20:rules:AR:mercado-libre-argentina-t-rminos",
+  "kind": "html",
+  "url": "https://www.mercadolibre.com.ar/ayuda/Terminos-y-condiciones-de-uso_1409",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Mercado Libre Argentina términos",
+  "category": "classifieds",
+  "free_option": "listings (fees)",
+  "audience": "largest Argentine marketplace"
+ },
+ {
+  "id": "retry20:rules:CO:mercado-libre-colombia",
+  "kind": "html",
+  "url": "https://www.mercadolibre.com.co/ayuda/Terminos-y-condiciones-de-uso_1409",
+  "region": "Latin America",
+  "country": "CO",
+  "site": "Mercado Libre Colombia",
+  "category": "classifieds",
+  "free_option": "listings (fees)",
+  "audience": ""
+ },
+ {
+  "id": "retry20:rules:CO:clasificados-el-tiempo",
+  "kind": "html",
+  "url": "https://clasificados.eltiempo.com/",
+  "region": "Latin America",
+  "country": "CO",
+  "site": "Clasificados El Tiempo",
+  "category": "classifieds",
+  "free_option": "ads",
+  "audience": "Colombian newspaper classifieds"
+ },
+ {
+  "id": "retry20:rules:PE:mercado-libre-per-",
+  "kind": "html",
+  "url": "https://www.mercadolibre.com.pe/ayuda/Terminos-y-condiciones-de-uso_1409",
+  "region": "Latin America",
+  "country": "PE",
+  "site": "Mercado Libre Perú",
+  "category": "classifieds",
+  "free_option": "listings (fees)",
+  "audience": ""
+ },
+ {
+  "id": "retry20:rules:PE:urbania-computrabajo-not-fit-per-classif",
+  "kind": "html",
+  "url": "https://www.olx.com.pe/",
+  "region": "Latin America",
+  "country": "PE",
+  "site": "Urbania / Computrabajo (not fit) — Perú classifieds: Adondevivir? skip",
+  "category": "classifieds",
+  "free_option": "ads",
+  "audience": ""
+ },
+ {
+  "id": "retry20:rules:US:uloop-college-classifieds-network-",
+  "kind": "html",
+  "url": "https://www.uloop.com/terms",
+  "region": "North America",
+  "country": "US",
+  "site": "Uloop (college classifieds network)",
+  "category": "classifieds",
+  "free_option": "Free classified listings across hundreds of US campus sites (categories such as tutors, jobs, housing, 'for sale'); paid upgrades exist",
+  "audience": "US college students; network of campus classifieds pages (size unknown; moderate)",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:US:nextdoor-us-business-page",
+  "kind": "html",
+  "url": "https://help.nextdoor.com/s/article/Business-Guidelines",
+  "region": "North America",
+  "country": "US",
+  "site": "Nextdoor (US) - Business Page",
+  "category": "other",
+  "free_option": "Free business page plus free 'Business Posts' to nearby neighborhoods; paid Local Deals/ads optional",
+  "audience": "US neighborhoods; ~1 in 3 US households (company claim); hyper-local",
+  "rules_url_alt": "https://help.nextdoor.com/s/article/Community-Guidelines",
+  "confidence": 2
+ },
+ {
+  "id": "retry20:rules:US:nextdoor-us-business-page-alt",
+  "kind": "html",
+  "url": "https://help.nextdoor.com/s/article/Community-Guidelines",
+  "region": "North America",
+  "country": "US",
+  "site": "Nextdoor (US) - Business Page (alt rules page)",
+  "category": "other",
+  "free_option": "Free business page plus free 'Business Posts' to nearby neighborhoods; paid Local Deals/ads optional",
+  "audience": "US neighborhoods; ~1 in 3 US households (company claim); hyper-local",
+  "confidence": 2
+ },
+ {
+  "id": "retry20:rules:US:alternativeto",
+  "kind": "html",
+  "url": "https://alternativeto.net/about/guidelines/",
+  "region": "North America",
+  "country": "US",
+  "site": "AlternativeTo",
+  "category": "directory",
+  "free_option": "Free 'add app' listing (moderated); users can list it as an alternative to Quizlet/Anki/Notion etc.",
+  "audience": "Global software seekers (tens of millions of monthly visits, approx.); strong SEO for 'X alternatives'",
+  "rules_url_alt": null,
+  "confidence": 4
+ },
+ {
+  "id": "retry20:rules:CA:lespac-qu-bec-",
+  "kind": "html",
+  "url": "https://www.lespac.com/conditions",
+  "region": "North America",
+  "country": "CA",
+  "site": "LesPAC (Québec)",
+  "category": "classifieds",
+  "free_option": "Free private ads; business ('commerçant') accounts may need a paid package - verify current pricing",
+  "audience": "Quebec French-speaking classifieds (hundreds of thousands monthly, approx.)",
+  "rules_url_alt": null,
+  "confidence": 2
+ },
+ {
+  "id": "retry20:rules:CA:yellowpages-ca",
+  "kind": "html",
+  "url": "https://www.yellowpages.ca/free-listing",
+  "region": "North America",
+  "country": "CA",
+  "site": "YellowPages.ca",
+  "category": "directory",
+  "free_option": "Free basic business listing (paid upgrades optional)",
+  "audience": "Canada-wide consumer directory (large)",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:CA:startup-montr-al-r-pertoire-des-startups",
+  "kind": "html",
+  "url": "https://startupmontreal.com/repertoire-des-startups/",
+  "region": "North America",
+  "country": "CA",
+  "site": "Startup Montréal - Répertoire des startups",
+  "category": "directory",
+  "free_option": "Free startup profile in the Montreal startup directory (Montreal-area startups)",
+  "audience": "Quebec/Montreal startup ecosystem, investors, media",
+  "rules_url_alt": null,
+  "confidence": 2
+ },
+ {
+  "id": "retry20:rules:CA:alloprof-zone-d-entraide",
+  "kind": "html",
+  "url": "https://www.alloprof.qc.ca/fr/zone-d-entraide",
+  "region": "North America",
+  "country": "CA",
+  "site": "Alloprof - Zone d'entraide",
+  "category": "student-forum",
+  "free_option": "Free student Q&A community; advertising/promotion not allowed (non-profit, K-12/CEGEP)",
+  "audience": "Quebec secondary and CEGEP students (very large in Quebec)",
+  "rules_url_alt": null,
+  "confidence": 1
+ },
+ {
+  "id": "retry20:rules:AU:gumtree-australia",
+  "kind": "html",
+  "url": "https://help.gumtree.com.au/AU/s/article/Posting-policies",
+  "region": "Oceania",
+  "country": "AU",
+  "site": "Gumtree Australia",
+  "category": "classifieds",
+  "free_option": "Free ads in 'Services for Hire' / 'Classes & Lessons' (business sellers allowed; some categories and extras are paid)",
+  "audience": "Australia's largest classifieds (~7M monthly visitors, approx.)",
+  "rules_url_alt": "https://help.gumtree.com.au/AU/s/",
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:AU:gumtree-australia-alt",
+  "kind": "html",
+  "url": "https://help.gumtree.com.au/AU/s/",
+  "region": "Oceania",
+  "country": "AU",
+  "site": "Gumtree Australia (alt rules page)",
+  "category": "classifieds",
+  "free_option": "Free ads in 'Services for Hire' / 'Classes & Lessons' (business sellers allowed; some categories and extras are paid)",
+  "audience": "Australia's largest classifieds (~7M monthly visitors, approx.)",
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:NZ:trade-me-alt",
+  "kind": "html",
+  "url": "https://www.trademe.co.nz/a/help/terms-and-conditions",
+  "region": "Oceania",
+  "country": "NZ",
+  "site": "Trade Me (alt rules page)",
+  "category": "classifieds",
+  "free_option": "General listings are free up to a monthly allowance; 'Services' category listings may carry a listing fee - verify; business accounts allowed",
+  "audience": "NZ's dominant marketplace (most-visited NZ site; millions of monthly users)",
+  "confidence": 2
+ },
+ {
+  "id": "retry20:rules:NZ:nzs-com",
+  "kind": "html",
+  "url": "https://www.nzs.com/",
+  "region": "Oceania",
+  "country": "NZ",
+  "site": "NZS.com",
+  "category": "directory",
+  "free_option": "Free NZ website/business listing",
+  "audience": "NZ web directory (small-moderate)",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:NZ:geekzone-forums",
+  "kind": "html",
+  "url": "https://www.geekzone.co.nz/FUG.asp",
+  "region": "Oceania",
+  "country": "NZ",
+  "site": "Geekzone forums",
+  "category": "student-forum",
+  "free_option": "Free forum; Forum Usage Guidelines prohibit advertising/self-promotion",
+  "audience": "NZ's largest tech forum (tens of thousands of members), many students",
+  "rules_url_alt": null,
+  "confidence": 1
+ },
+ {
+  "id": "retry20:rules:GB:gumtree-uk",
+  "kind": "html",
+  "url": "https://help.gumtree.com/s/article/Posting-rules",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "Gumtree UK",
+  "category": "classifieds",
+  "free_option": "Free ads in 'Services' / 'Tuition & Classes'; business sellers allowed (some categories such as Jobs/Property/Motors for trade are paid)",
+  "audience": "UK's largest classifieds (~10M+ monthly visitors, approx.)",
+  "rules_url_alt": "https://help.gumtree.com/s/",
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:IE:studyclix-discussion-boards-",
+  "kind": "html",
+  "url": "https://www.studyclix.ie/terms",
+  "region": "Northern Europe",
+  "country": "IE",
+  "site": "Studyclix (discussion boards)",
+  "category": "student-forum",
+  "free_option": "Free student discussion community; advertising not permitted (commercial partners only)",
+  "audience": "Irish Junior Cycle / Leaving Cert students (very large in Ireland; secondary level)",
+  "rules_url_alt": null,
+  "confidence": 1
+ },
+ {
+  "id": "retry20:rules:SE:blocket",
+  "kind": "html",
+  "url": "https://support.blocket.se/hc/sv",
+  "region": "Northern Europe",
+  "country": "SE",
+  "site": "Blocket",
+  "category": "classifieds",
+  "free_option": "Private ads are free in most categories, but company ('företag') ads are paid - treat as pay-only for a business",
+  "audience": "Sweden's dominant classifieds site (millions of weekly visitors)",
+  "rules_url_alt": null,
+  "confidence": 1
+ },
+ {
+  "id": "retry20:rules:SE:locanto-sverige",
+  "kind": "html",
+  "url": "https://www.locanto.se/help/",
+  "region": "Northern Europe",
+  "country": "SE",
+  "site": "Locanto Sverige",
+  "category": "classifieds",
+  "free_option": "Free business ads (Tjänster/Kurser)",
+  "audience": "Swedish classifieds (small)",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:NO:locanto-norge",
+  "kind": "html",
+  "url": "https://www.locanto.no/help/",
+  "region": "Northern Europe",
+  "country": "NO",
+  "site": "Locanto Norge",
+  "category": "classifieds",
+  "free_option": "Free business ads (Tjenester/Kurs)",
+  "audience": "Norwegian classifieds (small)",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:NO:skolediskusjon-no-studienett-",
+  "kind": "html",
+  "url": "https://www.skolediskusjon.no/",
+  "region": "Northern Europe",
+  "country": "NO",
+  "site": "Skolediskusjon.no (Studienett)",
+  "category": "student-forum",
+  "free_option": "Free student discussion forum; advertising prohibited; verify the forum is still active",
+  "audience": "Norwegian upper-secondary and university students (moderate)",
+  "rules_url_alt": null,
+  "confidence": 1
+ },
+ {
+  "id": "retry20:rules:DK:dba-dk-den-bl-avis-",
+  "kind": "html",
+  "url": "https://hjaelp.dba.dk/hc/da",
+  "region": "Northern Europe",
+  "country": "DK",
+  "site": "DBA.dk (Den Blå Avis)",
+  "category": "classifieds",
+  "free_option": "Private ads free; business ('erhverv') ads require a paid business account in most categories - verify",
+  "audience": "Denmark's largest classifieds (very large)",
+  "rules_url_alt": null,
+  "confidence": 1
+ },
+ {
+  "id": "retry20:rules:DK:locanto-danmark",
+  "kind": "html",
+  "url": "https://www.locanto.dk/help/",
+  "region": "Northern Europe",
+  "country": "DK",
+  "site": "Locanto Danmark",
+  "category": "classifieds",
+  "free_option": "Free business ads (Services/Kurser)",
+  "audience": "Danish classifieds (small)",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:FI:tori-fi",
+  "kind": "html",
+  "url": "https://www.tori.fi/info/",
+  "region": "Northern Europe",
+  "country": "FI",
+  "site": "Tori.fi",
+  "category": "classifieds",
+  "free_option": "Private ads free in most categories; company ads ('yritysilmoitus') generally paid - verify for 'Palvelut'",
+  "audience": "Finland's largest classifieds (very large)",
+  "rules_url_alt": null,
+  "confidence": 1
+ },
+ {
+  "id": "retry20:rules:FI:locanto-suomi",
+  "kind": "html",
+  "url": "https://www.locanto.fi/help/",
+  "region": "Northern Europe",
+  "country": "FI",
+  "site": "Locanto Suomi",
+  "category": "classifieds",
+  "free_option": "Free business ads (Palvelut/Kurssit)",
+  "audience": "Finnish classifieds (small)",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:FI:suomi24-keskustelu",
+  "kind": "html",
+  "url": "https://www.suomi24.fi/kayttoehdot",
+  "region": "Northern Europe",
+  "country": "FI",
+  "site": "Suomi24 Keskustelu",
+  "category": "student-forum",
+  "free_option": "Free forum with study/education boards; rules forbid advertising (commercial messages require paid ads)",
+  "audience": "Finland's largest general forum (hundreds of thousands monthly, approx.)",
+  "rules_url_alt": null,
+  "confidence": 1
+ },
+ {
+  "id": "retry20:rules:FI:ylilauta",
+  "kind": "html",
+  "url": "https://ylilauta.org/rules",
+  "region": "Northern Europe",
+  "country": "FI",
+  "site": "Ylilauta",
+  "category": "student-forum",
+  "free_option": "Free anonymous imageboard with student-heavy boards; rules forbid advertising",
+  "audience": "Young Finnish audience (large)",
+  "rules_url_alt": null,
+  "confidence": 1
+ },
+ {
+  "id": "retry20:rules:MX:doplim-mexico",
+  "kind": "html",
+  "url": "https://www.doplim.mx/",
+  "region": "Latin America",
+  "country": "MX",
+  "site": "Doplim Mexico",
+  "category": "classifieds",
+  "free_option": "Free classified ads incl. services/education; paid 'destacados'",
+  "audience": "General public; low-moderation network (has adult sections)",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:CO:clasf-colombia",
+  "kind": "html",
+  "url": "https://www.clasf.co/",
+  "region": "Latin America",
+  "country": "CO",
+  "site": "Clasf Colombia",
+  "category": "classifieds",
+  "free_option": "Completely free classified ads (per Pulzo roundup); paid promotion optional",
+  "audience": "Colombian general public",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:PE:doplim-peru",
+  "kind": "html",
+  "url": "https://www.doplim.pe/",
+  "region": "Latin America",
+  "country": "PE",
+  "site": "Doplim Peru",
+  "category": "classifieds",
+  "free_option": "Free classified ads incl. services/education; paid highlights",
+  "audience": "General public classifieds network",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:PE:evisos-peru",
+  "kind": "html",
+  "url": "https://www.evisos.pe/",
+  "region": "Latin America",
+  "country": "PE",
+  "site": "Evisos Peru",
+  "category": "classifieds",
+  "free_option": "Free classified ads; paid highlights",
+  "audience": "General public classifieds network (widely scraped/indexed in Peru)",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:GLOBAL:ai-tool-hunt",
+  "kind": "html",
+  "url": "https://www.aitoolhunt.com/addTool",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "AI Tool Hunt",
+  "category": "directory",
+  "free_option": "Free 'Add Tool' submission (paid promotion optional)",
+  "audience": "~80k monthly visits",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:GLOBAL:whattheai",
+  "kind": "html",
+  "url": "https://whattheai.tech/submit-a-tool/",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "WhatTheAI",
+  "category": "directory",
+  "free_option": "Free user submissions (12,000+ tools); paid upsell shown on submit page",
+  "audience": "~35k+ monthly visits",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:GLOBAL:launched-",
+  "kind": "html",
+  "url": "https://launched.io/SubmitStartup",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "Launched!",
+  "category": "directory",
+  "free_option": "Free startup submission (~33k monthly visits)",
+  "audience": "Startup watchers/early adopters",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules:GLOBAL:awesome-ai-tools-github-list-",
+  "kind": "html",
+  "url": "https://github.com/mahseema/awesome-ai-tools/blob/main/CONTRIBUTING.md",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "awesome-ai-tools (GitHub list)",
+  "category": "directory",
+  "free_option": "Free: add your tool via pull request (one tool per PR; altern.ai link if available)",
+  "audience": "~6.4k stars; developers and AI enthusiasts",
+  "rules_url_alt": null,
+  "confidence": 3
+ },
+ {
+  "id": "retry20:rules6:PL:forum-studia-net-guidelines",
+  "kind": "html",
+  "url": "https://forum.studia.net/guidelines/",
+  "region": "Central & Eastern Europe",
+  "country": "PL",
+  "site": "Forum.Studia.net guidelines",
+  "category": "student-forum"
+ },
+ {
+  "id": "retry20:rules6:RO:romaniaunita-com-registration",
+  "kind": "html",
+  "url": "https://www.romaniaunita.com/register/",
+  "region": "Central & Eastern Europe",
+  "country": "RO",
+  "site": "RomaniaUnita.com registration",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules6:RO:romaniaunita-com-terms",
+  "kind": "html",
+  "url": "https://www.romaniaunita.com/terms/",
+  "region": "Central & Eastern Europe",
+  "country": "RO",
+  "site": "RomaniaUnita.com terms",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules6:RO:romaniaunita-com-mica-publicitate-board",
+  "kind": "html",
+  "url": "https://www.romaniaunita.com/forum/34-mica-publicitate/",
+  "region": "Central & Eastern Europe",
+  "country": "RO",
+  "site": "RomaniaUnita.com Mica Publicitate board",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules6:KR:phdkim-net-sign-up",
+  "kind": "html",
+  "url": "https://phdkim.net/member/join/",
+  "region": "East Asia",
+  "country": "KR",
+  "site": "phdkim.net sign-up",
+  "category": "student-forum"
+ },
+ {
+  "id": "retry20:rules6:KR:phdkim-net-sign-up-alt-",
+  "kind": "html",
+  "url": "https://phdkim.net/member/signup/",
+  "region": "East Asia",
+  "country": "KR",
+  "site": "phdkim.net sign-up (alt)",
+  "category": "student-forum"
+ },
+ {
+  "id": "retry20:rules6:KR:phdkim-net-terms",
+  "kind": "html",
+  "url": "https://phdkim.net/terms/",
+  "region": "East Asia",
+  "country": "KR",
+  "site": "phdkim.net terms",
+  "category": "student-forum"
+ },
+ {
+  "id": "retry20:rules6:KR:phdkim-net-promotion-board-write",
+  "kind": "html",
+  "url": "https://phdkim.net/board/promotion/write/",
+  "region": "East Asia",
+  "country": "KR",
+  "site": "phdkim.net promotion board write",
+  "category": "student-forum"
+ },
+ {
+  "id": "retry20:rules6:TH:pantipmarket-help",
+  "kind": "html",
+  "url": "https://www.pantipmarket.com/help/",
+  "region": "Southeast Asia",
+  "country": "TH",
+  "site": "PantipMarket help",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:TH:pantipmarket-terms",
+  "kind": "html",
+  "url": "https://www.pantipmarket.com/terms/",
+  "region": "Southeast Asia",
+  "country": "TH",
+  "site": "PantipMarket terms",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:GLOBAL:uno-directory-listing-guidelines",
+  "kind": "html",
+  "url": "https://uno.directory/guidelines",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "UNO Directory listing guidelines",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules6:GLOBAL:saashub-terms",
+  "kind": "html",
+  "url": "https://www.saashub.com/terms",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "SaaSHub terms",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules6:DE:quoka-agb",
+  "kind": "html",
+  "url": "https://www.quoka.de/agb.html",
+  "region": "Western Europe",
+  "country": "DE",
+  "site": "Quoka AGB",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:DE:quoka-anzeigenregeln",
+  "kind": "html",
+  "url": "https://www.quoka.de/anzeigenregeln.html",
+  "region": "Western Europe",
+  "country": "DE",
+  "site": "Quoka Anzeigenregeln",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:DE:quoka-registrierung",
+  "kind": "html",
+  "url": "https://www.quoka.de/registrieren.html",
+  "region": "Western Europe",
+  "country": "DE",
+  "site": "Quoka Registrierung",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:FR:paruvendu-cgu",
+  "kind": "html",
+  "url": "https://www.paruvendu.fr/communfo/defaultcommunfo/defaultcommunfo/cgu",
+  "region": "Western Europe",
+  "country": "FR",
+  "site": "ParuVendu CGU",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:FR:paruvendu-conditions",
+  "kind": "html",
+  "url": "https://www.paruvendu.fr/cgu/",
+  "region": "Western Europe",
+  "country": "FR",
+  "site": "ParuVendu conditions",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:FR:toutunservice-fr-cgu",
+  "kind": "html",
+  "url": "https://www.toutunservice.fr/cgu",
+  "region": "Western Europe",
+  "country": "FR",
+  "site": "Toutunservice.fr CGU",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:ES:tabl-n-de-anuncios-condiciones",
+  "kind": "html",
+  "url": "https://www.tablondeanuncios.com/condiciones.htm",
+  "region": "Southern Europe",
+  "country": "ES",
+  "site": "Tablón de Anuncios condiciones",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:ES:tabl-n-de-anuncios-ayuda",
+  "kind": "html",
+  "url": "https://www.tablondeanuncios.com/ayuda.htm",
+  "region": "Southern Europe",
+  "country": "ES",
+  "site": "Tablón de Anuncios ayuda",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:ES:tabl-n-de-anuncios-publicar",
+  "kind": "html",
+  "url": "https://www.tablondeanuncios.com/publicar-anuncio.htm",
+  "region": "Southern Europe",
+  "country": "ES",
+  "site": "Tablón de Anuncios publicar",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:AR:evisos-argentina-t-rminos",
+  "kind": "html",
+  "url": "https://www.evisos.com.ar/terminos-y-condiciones",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Evisos Argentina términos",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:AR:evisos-argentina-publicar",
+  "kind": "html",
+  "url": "https://www.evisos.com.ar/publicar",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Evisos Argentina publicar",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:AR:evisos-argentina-ayuda",
+  "kind": "html",
+  "url": "https://www.evisos.com.ar/ayuda",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Evisos Argentina ayuda",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:MX:evisos-m-xico-t-rminos",
+  "kind": "html",
+  "url": "https://www.evisos.com.mx/terminos-y-condiciones",
+  "region": "Latin America",
+  "country": "MX",
+  "site": "Evisos México términos",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:PE:expat-com-legal",
+  "kind": "html",
+  "url": "https://www.expat.com/en/legal.html",
+  "region": "Latin America",
+  "country": "PE",
+  "site": "Expat.com legal",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:PE:expat-com-classifieds-rules",
+  "kind": "html",
+  "url": "https://www.expat.com/en/classifieds-rules.html",
+  "region": "Latin America",
+  "country": "PE",
+  "site": "Expat.com classifieds rules",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:ZA:sa-yellow-terms",
+  "kind": "html",
+  "url": "https://www.sayellow.com/terms",
+  "region": "Sub-Saharan Africa",
+  "country": "ZA",
+  "site": "SA Yellow terms",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules6:PT:startup-portugal-hub",
+  "kind": "html",
+  "url": "https://startupportugal.com/hub/",
+  "region": "Southern Europe",
+  "country": "PT",
+  "site": "Startup Portugal hub",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules6:PT:startup-hub-portugal",
+  "kind": "html",
+  "url": "https://startuphub.startupportugal.com/",
+  "region": "Southern Europe",
+  "country": "PT",
+  "site": "Startup Hub Portugal",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules6:GB:educational-app-store-ai-tool-submission",
+  "kind": "html",
+  "url": "https://www.educationalappstore.com/ai-tool-submission-guide",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "Educational App Store AI tool submission guide",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules6:GB:educational-app-store-developers",
+  "kind": "html",
+  "url": "https://www.educationalappstore.com/developers",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "Educational App Store developers",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules6:CZ:sbazar-pravidla",
+  "kind": "html",
+  "url": "https://www.sbazar.cz/pravidla",
+  "region": "Central & Eastern Europe",
+  "country": "CZ",
+  "site": "Sbazar pravidla",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:CZ:hyperinzerce-podm-nky",
+  "kind": "html",
+  "url": "https://www.hyperinzerce.cz/podminky/",
+  "region": "Central & Eastern Europe",
+  "country": "CZ",
+  "site": "Hyperinzerce podmínky",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:MA:marocannonces-conditions",
+  "kind": "html",
+  "url": "https://www.marocannonces.com/conditions.php",
+  "region": "Middle East & North Africa",
+  "country": "MA",
+  "site": "Marocannonces conditions",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:MA:marocannonces-d-poser",
+  "kind": "html",
+  "url": "https://www.marocannonces.com/deposer.php",
+  "region": "Middle East & North Africa",
+  "country": "MA",
+  "site": "Marocannonces déposer",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:UA:ukrboard-",
+  "kind": "html",
+  "url": "https://ukrboard.com.ua/rules",
+  "region": "Central & Eastern Europe",
+  "country": "UA",
+  "site": "Ukrboard правила",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:UA:ukrboard-add",
+  "kind": "html",
+  "url": "https://ukrboard.com.ua/add",
+  "region": "Central & Eastern Europe",
+  "country": "UA",
+  "site": "Ukrboard add",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:RO:anuntul-ro-termeni",
+  "kind": "html",
+  "url": "https://www.anuntul.ro/termeni-si-conditii",
+  "region": "Central & Eastern Europe",
+  "country": "RO",
+  "site": "Anuntul.ro termeni",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:BD:aponhut-terms",
+  "kind": "html",
+  "url": "https://www.aponhut.com/terms",
+  "region": "South Asia",
+  "country": "BD",
+  "site": "Aponhut terms",
+  "category": "classifieds"
+ },
+ {
+  "id": "retry20:rules6:NL:fok-forum-regels",
+  "kind": "html",
+  "url": "https://forum.fok.nl/regels",
+  "region": "Western Europe",
+  "country": "NL",
+  "site": "FOK!forum regels",
+  "category": "student-forum"
+ },
+ {
+  "id": "retry20:rules6:DE:studis-online-fragen-brett-regeln",
+  "kind": "html",
+  "url": "https://www.studis-online.de/Fragen-Brett/regeln.php",
+  "region": "Western Europe",
+  "country": "DE",
+  "site": "Studis Online Fragen-Brett Regeln",
+  "category": "student-forum"
+ },
+ {
+  "id": "retry20:rules6:HU:egyetemistak-hu-szab-lyzat",
+  "kind": "html",
+  "url": "https://egyetemistak.hu/szabalyzat",
+  "region": "Central & Eastern Europe",
+  "country": "HU",
+  "site": "Egyetemistak.hu szabályzat",
+  "category": "student-forum"
+ },
+ {
+  "id": "retry20:rules6:UA:dou-ua-rules",
+  "kind": "html",
+  "url": "https://dou.ua/forums/rules/",
+  "region": "Central & Eastern Europe",
+  "country": "UA",
+  "site": "DOU.ua rules",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules6:ZA:studentroom-co-za-terms",
+  "kind": "html",
+  "url": "https://www.studentroom.co.za/terms",
+  "region": "Sub-Saharan Africa",
+  "country": "ZA",
+  "site": "Studentroom.co.za terms",
+  "category": "student-forum"
+ },
+ {
+  "id": "retry20:rules6:AR:ser-universitario-foro-reglas",
+  "kind": "html",
+  "url": "https://seruniversitario.com/foro/reglas",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Ser Universitario foro reglas",
+  "category": "student-forum"
+ },
+ {
+  "id": "retry20:rules6:TR:startups-watch-register",
+  "kind": "html",
+  "url": "https://startups.watch/register",
+  "region": "Middle East & North Africa",
+  "country": "TR",
+  "site": "startups.watch register",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules6:TR:startups-watch-terms",
+  "kind": "html",
+  "url": "https://startups.watch/terms",
+  "region": "Middle East & North Africa",
+  "country": "TR",
+  "site": "startups.watch terms",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules6:JP:-rules-board-info-",
+  "kind": "html",
+  "url": "https://jbbs.shitaraba.net/bbs/read.cgi/internet/18891/1/",
+  "region": "East Asia",
+  "country": "JP",
+  "site": "したらば 宣伝掲示板 rules (board info)",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules6:IL:tapuz-forums-rules",
+  "kind": "html",
+  "url": "https://www.tapuz.co.il/forums/help/terms/",
+  "region": "Middle East & North Africa",
+  "country": "IL",
+  "site": "Tapuz forums rules",
+  "category": "student-forum"
+ },
+ {
+  "id": "retry20:rules6:KE:businesslist-co-ke-add-company",
+  "kind": "html",
+  "url": "https://www.businesslist.co.ke/add-company",
+  "region": "Sub-Saharan Africa",
+  "country": "KE",
+  "site": "Businesslist.co.ke add company",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules6:NG:businesslist-com-ng-add-company",
+  "kind": "html",
+  "url": "https://www.businesslist.com.ng/add-company",
+  "region": "Sub-Saharan Africa",
+  "country": "NG",
+  "site": "Businesslist.com.ng add company",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules6:GH:businessghana-add-listing",
+  "kind": "html",
+  "url": "https://www.businessghana.com/site/business/add",
+  "region": "Sub-Saharan Africa",
+  "country": "GH",
+  "site": "BusinessGhana add listing",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules6:GLOBAL:microlaunch-pricing",
+  "kind": "html",
+  "url": "https://microlaunch.net/pricing",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "MicroLaunch pricing",
+  "category": "directory"
+ },
+ {
+  "id": "retry20:rules7:GLOBAL:write-as-content-policy",
+  "kind": "html",
+  "url": "https://write.as/content-policy",
+  "country": "GLOBAL",
+  "site": "Write.as content policy",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules7:GLOBAL:bear-blog-terms",
+  "kind": "html",
+  "url": "https://bearblog.dev/terms/",
+  "country": "GLOBAL",
+  "site": "Bear Blog terms",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules7:GLOBAL:expat-com-terms",
+  "kind": "html",
+  "url": "https://www.expat.com/en/terms-of-use.html",
+  "country": "GLOBAL",
+  "site": "Expat.com terms",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules7:GLOBAL:expat-com-classifieds-charter",
+  "kind": "html",
+  "url": "https://www.expat.com/en/classifieds-charter.html",
+  "country": "GLOBAL",
+  "site": "Expat.com classifieds charter",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules7:US:uloop-terms",
+  "kind": "html",
+  "url": "https://www.uloop.com/about/terms",
+  "country": "US",
+  "site": "Uloop terms",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules7:GLOBAL:startupranking-add-startup",
+  "kind": "html",
+  "url": "https://www.startupranking.com/add-startup",
+  "country": "GLOBAL",
+  "site": "StartupRanking add startup",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules7:GLOBAL:indie-hackers-community-guidelines",
+  "kind": "html",
+  "url": "https://www.indiehackers.com/community-guidelines",
+  "country": "GLOBAL",
+  "site": "Indie Hackers community guidelines",
+  "category": "other"
+ },
+ {
+  "id": "retry20:fedi9:nonprofits.masto.host",
+  "kind": "mastodon",
+  "url": "https://nonprofits.masto.host",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "retry20:fedi9:amastodon.uk",
+  "kind": "mastodon",
+  "url": "https://amastodon.uk",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "retry20:fedi9:qoto.org",
+  "kind": "mastodon",
+  "url": "https://qoto.org",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "retry20:fedi9:peertube.social",
+  "kind": "peertube",
+  "url": "https://peertube.social",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "retry20:fedi9:lemm.ee",
+  "kind": "lemmy",
+  "url": "https://lemm.ee",
+  "region": "fediverse",
+  "note": "named by the fediverse discovery pass (group G), read by API"
+ },
+ {
+  "id": "retry20:rules10:GLOBAL:uneed:rules_url",
+  "kind": "html",
+  "url": "https://www.uneed.best/how-it-works ; https://www.uneed.best/pricing",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "Uneed (rules page)",
+  "category": "directory",
+  "free_option": "'Join the line (free): You join the waiting line from your dashboard, and the next available free slot is assigned to you automatically.' Free line can be up to 5 months out; 'free users can have only one product in the waiting line at a time'. Paid: 'a fee of $29.99 allows you to skip the line and ",
+  "audience": "makers and early adopters; daily launch batches; size not seen"
+ },
+ {
+  "id": "retry20:rules10:SG:ai-tool-scoop:rules_url",
+  "kind": "html",
+  "url": "https://aitoolscoop.com/terms-of-service/ ; https://aitoolscoop.com/about/",
+  "country": "SG",
+  "region": null,
+  "site": "AI Tool Scoop (rules page)",
+  "category": "directory",
+  "free_option": "Submit page headline: 'Limited Time Free · Permanent Listing'. About page: accepts tool submissions from developers and companies; 'Free listings are available for all qualif...' (snippet truncated).",
+  "audience": "AI-tool seekers; has an 'AI Education' feature grouping with 18 categories (AI tutors, study planners, vocabulary builders); self-reported LLM-citation figures"
+ },
+ {
+  "id": "retry20:rules10:US:iste-learning-technology-directory-edtec:rules_url",
+  "kind": "html",
+  "url": "https://www.iste.org/ltd-faqs ; https://ltd.iste.org/faq",
+  "country": "US",
+  "region": null,
+  "site": "ISTE Learning Technology Directory / EdTech Index (rules page)",
+  "category": "directory",
+  "free_option": "'There is no cost for companies to register or update their products on the EdTech Index.'",
+  "audience": "K-12 decision-makers ('Increase Your Visibility to Decision-Makers'); 'a central hub to showcase their products'"
+ },
+ {
+  "id": "retry20:rules10:DE:startbase-b-rse-stuttgart-startup-platfo:submit_url",
+  "kind": "html",
+  "url": "https://www.startbase.de/ (profile creation)",
+  "country": "DE",
+  "region": null,
+  "site": "Startbase (Börse Stuttgart startup platform) (submit page)",
+  "category": "directory",
+  "free_option": "2020 press report: 'Seit Jahresanfang haben mehr als 3.000 Startups kostenfrei ein Profil auf Startbase erstellt.'",
+  "audience": "investors, corporates, ecosystem partners; 3,000+ startup profiles (2020)"
+ },
+ {
+  "id": "retry20:rules10:BR:startup-base-abstartups-brazil-:url",
+  "kind": "html",
+  "url": "https://startupbase.com.br/ (URL from memory; not shown in results)",
+  "country": "BR",
+  "region": null,
+  "site": "Startup Base (ABStartups, Brazil) (home)",
+  "category": "directory",
+  "free_option": "'o cadastro na plataforma é gratuito e engloba o Mapeamento de Startups 2026'",
+  "audience": "Brazilian innovation ecosystem; interactive map, open indicator panel"
+ },
+ {
+  "id": "retry20:rules10:GLOBAL:makers-page:submit_url",
+  "kind": "html",
+  "url": "https://makers.page/ (submission flow not seen)",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "makers.page (submit page)",
+  "category": "directory",
+  "free_option": "free; dofollow links on approved profiles (per roundup)",
+  "audience": "indie makers; size not seen"
+ },
+ {
+  "id": "retry20:rules10:GLOBAL:openhunts:submit_url",
+  "kind": "html",
+  "url": "https://openhunts.com/ (submit flow not seen)",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "OpenHunts (submit page)",
+  "category": "directory",
+  "free_option": "free tier 'includes a full week of exposure and being featured on the homepage, but has a current queue time of approximately 44 weeks'; paid $9.90 premium launch / $20 highlight per week",
+  "audience": "launch-platform audience; size not seen"
+ },
+ {
+  "id": "retry20:rules11:GLOBAL:discuss-codecademy-com-codecademy-forums:url",
+  "kind": "html",
+  "url": "https://discuss.codecademy.com/",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "discuss.codecademy.com (Codecademy Forums) (board)",
+  "category": "student-forum",
+  "free_option": "Projects",
+  "audience": "Codecademy learners; size not shown"
+ },
+ {
+  "id": "retry20:rules11:IN:pagalguy-com-pagalguy-:rules_url",
+  "kind": "html",
+  "url": "https://www.pagalguy.com/t/rules-posting-guidelines-reloaded/3009987 (Channels rules: https://www.pagalguy.com/articles/channels-posting-rules-and-guidelines-13287)",
+  "country": "IN",
+  "region": null,
+  "site": "pagalguy.com (PaGaLGuY) (rules page)",
+  "category": "student-forum",
+  "free_option": "Signature field only (no ad board; ads require emailed permission; Channels articles may carry a short bio in the Signature field or at the end of an article)",
+  "audience": "Indian MBA/CAT and other exam aspirants; one of India's largest student forums (size not shown)"
+ },
+ {
+  "id": "retry20:rules11:GLOBAL:community-wanikani-com-wanikani-communit:rules_url",
+  "kind": "html",
+  "url": "https://www.wanikani.com/terms (advertising section); welcome/guidelines thread https://community.wanikani.com/t/welcome-to-the-wanikani-community-please-read-this-first-%E2%9C%A8/8",
+  "country": "GLOBAL",
+  "region": "Global",
+  "site": "community.wanikani.com (WaniKani Community) (rules page)",
+  "category": "student-forum",
+  "free_option": "unknown (promotion governed by the ToS advertising section; the forum has resources categories)",
+  "audience": "Japanese-language learners using WaniKani; large Discourse forum (size not shown)"
+ },
+ {
+  "id": "retry20:rules12:GR:idietera-gr:rules page",
+  "kind": "html",
+  "url": "https://www.idietera.gr/node/7993 ('Πώς λειτουργεί το idietera.gr')",
+  "country": "GR",
+  "site": "idietera.gr (rules page)",
+  "category": "classifieds",
+  "free_option": "δημιουργήστε λογαριασμό και δημοσιεύστε την αγγελία σας εντελώς δωρεάν; χωρίς προμήθεια",
+  "audience": "not seen",
+  "region": "Southern Europe"
+ },
+ {
+  "id": "retry20:rules12:HU:aprohirdetes-biz:rules page",
+  "kind": "html",
+  "url": "https://aprohirdetes.biz/hirdetesfeladas.php (Hirdetés feladás page with limits)",
+  "country": "HU",
+  "site": "Aprohirdetes.biz (rules page)",
+  "category": "classifieds",
+  "free_option": "minden regisztrált felhasználó témánként 2, összesen pedig 10 ingyenes apróhirdetést adhat fel",
+  "audience": "not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "retry20:rules12:RO:publi24-ro:rules page",
+  "kind": "html",
+  "url": "https://ajutor.publi24.ro/reguli-adaugare-anunt/ (Anexă Termeni și condiții); pricing https://ajutor.publi24.ro/preturi-si-modalitati-de-plata/; FAQ https://ajutor.publi24.ro/intrebari-frecvente/",
+  "country": "RO",
+  "site": "Publi24.ro (rules page)",
+  "category": "classifieds",
+  "free_option": "[snippet paraphrase] In most categories ads are free, with the exceptions listed below (paid tiers in Auto, Animals); maximum number of free ads per account is 500",
+  "audience": "Romania; app on Google Play (https://play.google.com/store/apps/details?id=ro.publi24)",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "retry20:rules12:BG:alo-bg:rules page",
+  "kind": "html",
+  "url": "https://www.alo.bg/about_us.php (about); paid options https://www.alo.bg/info_promote.php",
+  "country": "BG",
+  "site": "Alo.bg (rules page)",
+  "category": "classifieds",
+  "free_option": "Alo.bg е платформа за безплатни обяви; paid Топ/Супер топ are optional",
+  "audience": "not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "retry20:rules12:BG:alo-bg:home",
+  "kind": "html",
+  "url": "https://www.alo.bg/",
+  "country": "BG",
+  "site": "Alo.bg (home)",
+  "category": "classifieds",
+  "free_option": "Alo.bg е платформа за безплатни обяви; paid Топ/Супер топ are optional",
+  "audience": "not seen",
+  "region": "Central-Eastern Europe"
+ },
+ {
+  "id": "retry20:rules12:SN:coinafrique:home",
+  "kind": "html",
+  "url": "https://coinafrique.com/",
+  "country": "SN",
+  "site": "CoinAfrique (home)",
+  "category": "classifieds",
+  "free_option": "[snippet paraphrase] free to use, with ads posted at no cost across francophone Africa; number of free ads limited (2020); paid visibility offers since Jan 2020",
+  "audience": "francophone Africa (Senegal, Côte d'Ivoire, Benin...); 500 000 milestone headline",
+  "region": "Sub-Saharan Africa"
+ },
+ {
+  "id": "retry20:rules12:VN:muaban-net:rules page",
+  "kind": "html",
+  "url": "https://muaban.net/wiki/quy-dinh-dang-tin-tren-muabannet (QUY ĐỊNH ĐĂNG TIN, updated 14/03/2025); terms https://muaban.net/wiki/dieu-khoan-su-dung-muabannet/; per-category rules https://muaban.net/wiki/quy-dinh-dang-tin-theo-tung-chuyen-muc-muabannet/",
+  "country": "VN",
+  "site": "Muaban.net (rules page)",
+  "category": "classifieds",
+  "free_option": "[snippet paraphrase] from 01/8/2024, when posting listings for real estate, jobs, or vehicles, you receive one regular free post per category (services category not confirmed)",
+  "audience": "Vietnam; not seen",
+  "region": "Southeast Asia"
+ },
+ {
+  "id": "retry20:rules13:GR:freelist-gr-terms",
+  "kind": "html",
+  "url": "https://www.freelist.gr/oroi-xrisis",
+  "country": "GR",
+  "site": "FreeList.gr terms",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:GR:freelist-gr-add",
+  "kind": "html",
+  "url": "https://www.freelist.gr/add",
+  "country": "GR",
+  "site": "FreeList.gr add",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:BG:bazar-bg-rules",
+  "kind": "html",
+  "url": "https://bazar.bg/pravila",
+  "country": "BG",
+  "site": "Bazar.bg rules",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:BG:bazar-bg-terms",
+  "kind": "html",
+  "url": "https://bazar.bg/usloviya",
+  "country": "BG",
+  "site": "Bazar.bg terms",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:GLOBAL:share-your-startup-faq",
+  "kind": "html",
+  "url": "https://shareyourstartup.com/faq",
+  "country": "GLOBAL",
+  "site": "Share Your Startup FAQ",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:N/A:dakanarab-terms",
+  "kind": "html",
+  "url": "https://dakanarab.com/terms",
+  "country": "N/A",
+  "site": "Dakanarab terms",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:BR:classificados-brasil-termos",
+  "kind": "html",
+  "url": "https://www.classificados-brasil.com/termos",
+  "country": "BR",
+  "site": "Classificados Brasil termos",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:BR:classisite-termos",
+  "kind": "html",
+  "url": "https://www.classisite.com.br/termos",
+  "country": "BR",
+  "site": "Classisite termos",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:HU:ingyen-aprohirdetes-szab-lyzat",
+  "kind": "html",
+  "url": "http://ingyen-aprohirdetes.hu/szabalyzat.php",
+  "country": "HU",
+  "site": "Ingyen-aprohirdetes szabályzat",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:HU:aprohirdetes-biz-felad-s",
+  "kind": "html",
+  "url": "https://aprohirdetes.biz/feladas.php",
+  "country": "HU",
+  "site": "Aprohirdetes.biz feladás",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:UA:freetrade-agreement",
+  "kind": "html",
+  "url": "https://freetrade.com.ua/agreement",
+  "country": "UA",
+  "site": "FreeTrade agreement",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:UA:freetrade-add",
+  "kind": "html",
+  "url": "https://freetrade.com.ua/add",
+  "country": "UA",
+  "site": "FreeTrade add",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:NL:fok-huisregels",
+  "kind": "html",
+  "url": "https://www.fok.nl/huisregels",
+  "country": "NL",
+  "site": "FOK! huisregels",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:GLOBAL:dev-to-community-moderation",
+  "kind": "html",
+  "url": "https://dev.to/p/community_moderation",
+  "country": "GLOBAL",
+  "site": "dev.to community moderation",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:GLOBAL:dev-to-content-policy",
+  "kind": "html",
+  "url": "https://dev.to/p/content_policy",
+  "country": "GLOBAL",
+  "site": "dev.to content policy",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:ES:tabl-n-de-anuncios-condiciones",
+  "kind": "html",
+  "url": "https://www.tablondeanuncios.com/condiciones-de-uso.htm",
+  "country": "ES",
+  "site": "Tablón de Anuncios condiciones",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules13:ES:tabl-n-de-anuncios-ayuda",
+  "kind": "html",
+  "url": "https://www.tablondeanuncios.com/ayuda-anunciar.htm",
+  "country": "ES",
+  "site": "Tablón de Anuncios ayuda",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules14:IN:kuknus-classifieds:home",
+  "kind": "html",
+  "url": "https://www.kuknus.com/",
+  "country": "IN",
+  "site": "Kuknus Classifieds (home)",
+  "category": "classifieds",
+  "free_option": "Posting is free, but premium ad packages are available for wider reach",
+  "audience": "India-wide general classifieds; size not seen"
+ },
+ {
+  "id": "retry20:rules14:BD:future-startup-submit-startup-:home",
+  "kind": "html",
+  "url": "https://futurestartup.com/",
+  "country": "BD",
+  "site": "Future Startup (Submit Startup) (home)",
+  "category": "directory",
+  "free_option": "free submission not confirmed",
+  "audience": "Bangladesh startup/business readership; size not seen"
+ },
+ {
+  "id": "retry20:rules14:TR:serinilan:home",
+  "kind": "html",
+  "url": "https://serinilan.net/",
+  "country": "TR",
+  "site": "Serinilan (home)",
+  "category": "classifieds",
+  "free_option": "ÜYE OLMADAN ÜCRETSİZ İLAN VER",
+  "audience": "Turkey general classifieds; size not seen"
+ },
+ {
+  "id": "retry20:rules14:TR:mastodon-com-tr:rules page",
+  "kind": "html",
+  "url": "https://mastodon.com.tr/about (not fetched)",
+  "country": "TR",
+  "site": "mastodon.com.tr (rules page)",
+  "category": "fediverse",
+  "free_option": "free Mastodon account",
+  "audience": "Turkish-language general server; size not confirmed"
+ },
+ {
+  "id": "retry20:rules14:MA:soukaffaires-ma:home",
+  "kind": "html",
+  "url": "https://www.soukaffaires.ma/ (domain as named in press; not fetched)",
+  "country": "MA",
+  "site": "Soukaffaires.ma (home)",
+  "category": "classifieds",
+  "free_option": "petites annonces gratuites",
+  "audience": "Morocco and diaspora; size not seen; press item undated in snippet"
+ },
+ {
+  "id": "retry20:rules14:NG:lagos-list:home",
+  "kind": "html",
+  "url": "https://www.lagoslist.com/ (domain inferred from name; not returned in results)",
+  "country": "NG",
+  "site": "Lagos List (home)",
+  "category": "classifieds",
+  "free_option": "free classified ads and free business directory listing",
+  "audience": "Lagos businesses and residents; also has a forum; size not seen; source dated 2012, current status unverified"
+ },
+ {
+  "id": "retry20:rules14:KE:sebule-kenya:home",
+  "kind": "html",
+  "url": "https://kenya.sebule.com/",
+  "country": "KE",
+  "site": "Sebule Kenya (home)",
+  "category": "classifieds",
+  "free_option": "post an ad for free",
+  "audience": "Kenya; size not seen"
+ },
+ {
+  "id": "retry20:rules14:ZA:upfeet-south-africa:home",
+  "kind": "html",
+  "url": "https://www.upfeet.com/free-classifieds",
+  "country": "ZA",
+  "site": "UpFeet South Africa (home)",
+  "category": "classifieds",
+  "free_option": "free ads post without registration",
+  "audience": "South Africa; size not seen"
+ },
+ {
+  "id": "retry20:fedi14:ZZ:discover-african-mastodon-servers",
+  "kind": "mastodon",
+  "url": "https://discover.mastodon.africa",
+  "country": "ZZ",
+  "site": "Discover: African Mastodon Servers",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "directory of open-registration African servers",
+  "audience": "pan-Africa directory; no Kenyan, Nigerian or Ghanaian server seen in snippets"
+ },
+ {
+  "id": "retry20:rules16:AU:hotfrog-australia:rules page",
+  "kind": "html",
+  "url": "https://www.synup.com/how-to/claim-add-hotfrog-listing and https://www.advicelocal.com/blog/how-to-add-your-business-to-hotfrog/ (how-to guides)",
+  "country": "AU",
+  "site": "Hotfrog Australia (rules page)",
+  "category": "directory",
+  "free_option": "basic profile free; paid 'Hotfrog AdVantage' upgrade optional",
+  "audience": "local-business searchers; Yext says Hotfrog \"operates in 38 countries\" (NZ edition hotfrog.co.nz; Nordic/Asian editions not confirmed in this pass)"
+ },
+ {
+  "id": "retry20:rules16:HK:whub-whub-io-:rules page",
+  "kind": "html",
+  "url": "https://www.startmeup.hk/startup-resources/whub/ (InvestHK description); https://hkstartupsociety.hktdc.com/sc/events/whub-office-hours-1 (2019 profile help event)",
+  "country": "HK",
+  "site": "WHub (whub.io) (rules page)",
+  "category": "directory",
+  "free_option": "startup profile; fee not stated in sources seen",
+  "audience": "Hong Kong startup ecosystem; \"over 3,000 listed on its website\" (FCCIHK article)"
+ },
+ {
+  "id": "retry20:rules16:HK:whub-whub-io-:home",
+  "kind": "html",
+  "url": "https://www.whub.io/",
+  "country": "HK",
+  "site": "WHub (whub.io) (home)",
+  "category": "directory",
+  "free_option": "startup profile; fee not stated in sources seen",
+  "audience": "Hong Kong startup ecosystem; \"over 3,000 listed on its website\" (FCCIHK article)"
+ },
+ {
+  "id": "retry20:rules16:KR:geeknews-news-hada-io-show-gn:rules page",
+  "kind": "html",
+  "url": "https://news.hada.io/blog/show (Show GN rules) and https://news.hada.io/guidelines",
+  "country": "KR",
+  "site": "GeekNews (news.hada.io) — Show GN (rules page)",
+  "category": "student-forum",
+  "free_option": "free post in the Show GN section for things you built yourself",
+  "audience": "Korean developer/tech community (GeekNews, with a weekly newsletter; size not seen)"
+ },
+ {
+  "id": "retry20:rules16:KR:disquiet-disquiet-io-:rules page",
+  "kind": "html",
+  "url": "https://club.disquiet.io/product-guide (프로덕트 작성 및 수정 가이드)",
+  "country": "KR",
+  "site": "Disquiet (disquiet.io) (rules page)",
+  "category": "directory",
+  "free_option": "product registration (프로덕트 공유하기); fee not stated in sources seen",
+  "audience": "Korean IT product makers (planning/dev/design); size not seen"
+ },
+ {
+  "id": "retry20:rules16:KR:disquiet-product-guide",
+  "kind": "html",
+  "url": "https://club.disquiet.io/product-guide",
+  "country": "KR",
+  "site": "Disquiet product guide",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules16:AU:hotfrog-au-free-profile",
+  "kind": "html",
+  "url": "https://www.hotfrog.com.au/add-business",
+  "country": "AU",
+  "site": "Hotfrog AU free profile",
+  "category": "other"
+ },
+ {
+  "id": "retry20:rules17:France:plan-te-campus-petites-annonces:home",
+  "kind": "html",
+  "url": "https://www.planetecampus.com/annonce_etudiant/",
+  "country": "France",
+  "site": "Planète Campus - petites annonces (home)",
+  "category": "classifieds",
+  "free_option": "Free ad posting; categories seen are housing, flatshare, buy/sell.",
+  "audience": "French students (student media site)."
+ },
+ {
+  "id": "retry20:fedi17:Netherlands:eindhoven-student-mastodon-listed-on-mas",
+  "kind": "mastodon",
+  "url": "https://mastodonservers.net",
+  "country": "Netherlands",
+  "site": "Eindhoven Student Mastodon (listed on mastodonservers.net)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Mastodon server 'for all students in Eindhoven'; registration status not confirmed.",
+  "audience": "Students in Eindhoven (TU/e, Fontys)."
+ },
+ {
+  "id": "retry20:rules17:Italy:annuncistudenti-net:home",
+  "kind": "html",
+  "url": "http://www.annuncistudenti.net/annunci/index.php",
+  "country": "Italy",
+  "site": "annuncistudenti.net (home)",
+  "category": "classifieds",
+  "free_option": "Free ads for housing, books, notes after creating an account; site says it reposts ads to social networks for free.",
+  "audience": "Italian students."
+ },
+ {
+  "id": "retry20:rules17:Poland:forum-studenta-forumdyskusyjne-net-:sign-up page",
+  "kind": "html",
+  "url": "http://forumdyskusyjne.net/",
+  "country": "Poland",
+  "site": "Forum Studenta (forumdyskusyjne.net) (sign-up page)",
+  "category": "student-forum",
+  "free_option": "Student sub-forum listing 'ogłoszenia' among its topics.",
+  "audience": "Polish students (part of a general multi-topic forum)."
+ },
+ {
+  "id": "retry20:fedi17:International (EN):science-social",
+  "kind": "mastodon",
+  "url": "https://science.social",
+  "country": "International (EN)",
+  "site": "science.social",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "General science Mastodon instance explicitly for students as well as scientists.",
+  "audience": "Science students and scientists."
+ },
+ {
+  "id": "retry20:rules18:Saudi Arabia:-ckfu-org-:home",
+  "kind": "html",
+  "url": "https://vb.ckfu.org/",
+  "country": "Saudi Arabia",
+  "site": "ملتقى طلاب وطالبات جامعة الملك فيصل / جامعة الدمام (ckfu.org) (home)",
+  "category": "student-forum",
+  "free_option": "Large free vBulletin student forum for KFU distance-learning students, with per-university subforums (e.g. PMU at /f78); an advertising section and its rules were not found in search results.",
+  "audience": "King Faisal University and Imam Abdulrahman (Dammam) distance/affiliate students; also PMU students"
+ },
+ {
+  "id": "retry20:rules18:Saudi Arabia:-alseu-com-:home",
+  "kind": "html",
+  "url": "https://www.alseu.com/",
+  "country": "Saudi Arabia",
+  "site": "منتدى طلاب وطالبات الجامعة السعودية الإلكترونية (alseu.com) (home)",
+  "category": "student-forum",
+  "free_option": "Student forum for Saudi Electronic University that has an advertising space; free vs paid not stated.",
+  "audience": "Saudi Electronic University students"
+ },
+ {
+  "id": "retry20:fedi19:Brazil:lemmy-eco-br-brazilian-lemmy-instance-",
+  "kind": "mastodon",
+  "url": "https://lemmy.eco.br",
+  "country": "Brazil",
+  "site": "lemmy.eco.br (Brazilian Lemmy instance)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Free account on a Brazilian general instance; no student community confirmed",
+  "audience": "Brazilian Lemmy users (small, tech-leaning); students only as a subset"
+ },
+ {
+  "id": "retry20:fedi19:Mexico:mujico-org-mexican-lemmy-instance-",
+  "kind": "mastodon",
+  "url": "https://mujico.org",
+  "country": "Mexico",
+  "site": "mujico.org (Mexican Lemmy instance)",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "Unverified; only seen named in a community-compiled list of national Lemmy instances",
+  "audience": "Mexican Lemmy users (size unknown)"
+ },
+ {
+  "id": "retry20:rules19:Argentina:apuntify-apuntify-ar-:rules page",
+  "kind": "html",
+  "url": "https://apuntify.ar/",
+  "country": "Argentina",
+  "site": "Apuntify (apuntify.ar) (rules page)",
+  "category": "other",
+  "free_option": "Collaborative note-sharing platform (free status and upload rules not verified)",
+  "audience": "Argentine university students"
+ }
+]
