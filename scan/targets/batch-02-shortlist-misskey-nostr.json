@@ -1,0 +1,455 @@
+[
+ {
+  "id": "mastodon-rules:social.citad.org.ng",
+  "kind": "mastodon",
+  "url": "https://social.citad.org.ng",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:social.citad.org.ng",
+  "kind": "html",
+  "url": "https://social.citad.org.ng/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:101010.pl",
+  "kind": "mastodon",
+  "url": "https://101010.pl",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:101010.pl",
+  "kind": "html",
+  "url": "https://101010.pl/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:uri.life",
+  "kind": "mastodon",
+  "url": "https://uri.life",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:uri.life",
+  "kind": "html",
+  "url": "https://uri.life/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:c7.io",
+  "kind": "mastodon",
+  "url": "https://c7.io",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:c7.io",
+  "kind": "html",
+  "url": "https://c7.io/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:truthsocial.co.in",
+  "kind": "mastodon",
+  "url": "https://truthsocial.co.in",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:truthsocial.co.in",
+  "kind": "html",
+  "url": "https://truthsocial.co.in/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:theatl.social",
+  "kind": "mastodon",
+  "url": "https://theatl.social",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:theatl.social",
+  "kind": "html",
+  "url": "https://theatl.social/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:test.cztwitter.cz",
+  "kind": "mastodon",
+  "url": "https://test.cztwitter.cz",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:test.cztwitter.cz",
+  "kind": "html",
+  "url": "https://test.cztwitter.cz/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:social.cleverlibre.org",
+  "kind": "mastodon",
+  "url": "https://social.cleverlibre.org",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:social.cleverlibre.org",
+  "kind": "html",
+  "url": "https://social.cleverlibre.org/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:social.mindplex.ai",
+  "kind": "mastodon",
+  "url": "https://social.mindplex.ai",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:social.mindplex.ai",
+  "kind": "html",
+  "url": "https://social.mindplex.ai/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:miraiverse.xyz",
+  "kind": "mastodon",
+  "url": "https://miraiverse.xyz",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:miraiverse.xyz",
+  "kind": "html",
+  "url": "https://miraiverse.xyz/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:devs.live",
+  "kind": "mastodon",
+  "url": "https://devs.live",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:devs.live",
+  "kind": "html",
+  "url": "https://devs.live/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:shelter.moe",
+  "kind": "mastodon",
+  "url": "https://shelter.moe",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:shelter.moe",
+  "kind": "html",
+  "url": "https://shelter.moe/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:mastodon.com.pl",
+  "kind": "mastodon",
+  "url": "https://mastodon.com.pl",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:mastodon.com.pl",
+  "kind": "html",
+  "url": "https://mastodon.com.pl/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "mastodon-rules:link.baai.ac.cn",
+  "kind": "mastodon",
+  "url": "https://link.baai.ac.cn",
+  "region": "fediverse",
+  "note": "shortlist re-read with rule hints"
+ },
+ {
+  "id": "about:link.baai.ac.cn",
+  "kind": "html",
+  "url": "https://link.baai.ac.cn/about",
+  "region": "fediverse",
+  "note": "about page in full"
+ },
+ {
+  "id": "misskey-tos:wowcool.moe",
+  "kind": "html",
+  "url": "https://cdn.wowcool.moe/pages/terms.html",
+  "region": "fediverse",
+  "note": "Misskey terms or about page"
+ },
+ {
+  "id": "misskey-tos:misskey.palmie.jp",
+  "kind": "html",
+  "url": "https://misskey.palmie.jp/about",
+  "region": "fediverse",
+  "note": "Misskey terms or about page"
+ },
+ {
+  "id": "misskey-tos:mk.spook.social",
+  "kind": "html",
+  "url": "https://mk.spook.social/about",
+  "region": "fediverse",
+  "note": "Misskey terms or about page"
+ },
+ {
+  "id": "misskey-tos:misskey.takeko.cyou",
+  "kind": "html",
+  "url": "https://misskey.takeko.cyou/about",
+  "region": "fediverse",
+  "note": "Misskey terms or about page"
+ },
+ {
+  "id": "misskey-tos:misskey.2000cho.me",
+  "kind": "html",
+  "url": "https://misskey.2000cho.me/about",
+  "region": "fediverse",
+  "note": "Misskey terms or about page"
+ },
+ {
+  "id": "misskey-tos:mi2.icu",
+  "kind": "html",
+  "url": "https://mi2.icu/about",
+  "region": "fediverse",
+  "note": "Misskey terms or about page"
+ },
+ {
+  "id": "misskey-tos:msk.ilnk.info",
+  "kind": "html",
+  "url": "https://etnfed.ru/tos",
+  "region": "fediverse",
+  "note": "Misskey terms or about page"
+ },
+ {
+  "id": "misskey-tos:hub.imikufans.com",
+  "kind": "html",
+  "url": "https://hub.imikufans.com/about",
+  "region": "fediverse",
+  "note": "Misskey terms or about page"
+ },
+ {
+  "id": "misskey-tos:x.miku.today",
+  "kind": "html",
+  "url": "www.mikufans.com.cn",
+  "region": "fediverse",
+  "note": "Misskey terms or about page"
+ },
+ {
+  "id": "misskey-tos:metreee.com",
+  "kind": "html",
+  "url": "https://metreee.com/about",
+  "region": "fediverse",
+  "note": "Misskey terms or about page"
+ },
+ {
+  "id": "misskey-tos:glimpster.sk",
+  "kind": "html",
+  "url": "https://glimpster.sk/about",
+  "region": "fediverse",
+  "note": "Misskey terms or about page"
+ },
+ {
+  "id": "nostr:relay.damus.io",
+  "kind": "nostr",
+  "url": "wss://relay.damus.io",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:nos.lol",
+  "kind": "nostr",
+  "url": "wss://nos.lol",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.nostr.band",
+  "kind": "nostr",
+  "url": "wss://relay.nostr.band",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.primal.net",
+  "kind": "nostr",
+  "url": "wss://relay.primal.net",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.snort.social",
+  "kind": "nostr",
+  "url": "wss://relay.snort.social",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:nostr.mom",
+  "kind": "nostr",
+  "url": "wss://nostr.mom",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.nostr.bg",
+  "kind": "nostr",
+  "url": "wss://relay.nostr.bg",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:nostr-pub.wellorder.net",
+  "kind": "nostr",
+  "url": "wss://nostr-pub.wellorder.net",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:offchain.pub",
+  "kind": "nostr",
+  "url": "wss://offchain.pub",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:nostr.oxtr.dev",
+  "kind": "nostr",
+  "url": "wss://nostr.oxtr.dev",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.mostr.pub",
+  "kind": "nostr",
+  "url": "wss://relay.mostr.pub",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:nostr.land",
+  "kind": "nostr",
+  "url": "wss://nostr.land",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.nostr.info",
+  "kind": "nostr",
+  "url": "wss://relay.nostr.info",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relayable.org",
+  "kind": "nostr",
+  "url": "wss://relayable.org",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:nostr.bitcoiner.social",
+  "kind": "nostr",
+  "url": "wss://nostr.bitcoiner.social",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.nostrplebs.com",
+  "kind": "nostr",
+  "url": "wss://relay.nostrplebs.com",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:eden.nostr.land",
+  "kind": "nostr",
+  "url": "wss://eden.nostr.land",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:nostr.wine",
+  "kind": "nostr",
+  "url": "wss://nostr.wine",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:purplepag.es",
+  "kind": "nostr",
+  "url": "wss://purplepag.es",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.current.fyi",
+  "kind": "nostr",
+  "url": "wss://relay.current.fyi",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:nostr.fmt.wiz.biz",
+  "kind": "nostr",
+  "url": "wss://nostr.fmt.wiz.biz",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.nostr.com.au",
+  "kind": "nostr",
+  "url": "wss://relay.nostr.com.au",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:nostr.einundzwanzig.space",
+  "kind": "nostr",
+  "url": "wss://nostr.einundzwanzig.space",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.nostr.wirednet.jp",
+  "kind": "nostr",
+  "url": "wss://relay.nostr.wirednet.jp",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:nostr-relay.nokotaro.com",
+  "kind": "nostr",
+  "url": "wss://nostr-relay.nokotaro.com",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.nostrich.de",
+  "kind": "nostr",
+  "url": "wss://relay.nostrich.de",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:nostr.sebastix.dev",
+  "kind": "nostr",
+  "url": "wss://nostr.sebastix.dev",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.lexingtonbitcoin.org",
+  "kind": "nostr",
+  "url": "wss://relay.lexingtonbitcoin.org",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:nostr.vulpem.com",
+  "kind": "nostr",
+  "url": "wss://nostr.vulpem.com",
+  "region": "Global"
+ },
+ {
+  "id": "nostr:relay.nostr.ch",
+  "kind": "nostr",
+  "url": "wss://relay.nostr.ch",
+  "region": "Global"
+ }
+]

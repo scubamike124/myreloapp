@@ -75,7 +75,7 @@ async function probeMastodon(t) {
     return { reachable: true, api: "v1", title: str(j.title), users: j.stats?.user_count ?? null, languages: j.languages || [], registrations: reg, rules: ruleTexts, description: desc.slice(0, 400), bans: banScan([...ruleTexts, desc]), extracts: pickSentences(desc) };
   }
   const j = v2.json; const r = isObj(j.registrations) ? j.registrations : {};
-  const ruleTexts = Array.isArray(rules.json) ? rules.json.map((x) => str(x.text)).filter(Boolean) : Array.isArray(j.rules) ? j.rules.map((x) => str(x.text)) : [];
+  const ruleTexts = Array.isArray(rules.json) ? rules.json.map((x) => (str(x.hint) ? `${str(x.text)} — ${str(x.hint)}` : str(x.text))).filter(Boolean) : Array.isArray(j.rules) ? j.rules.map((x) => str(x.text)) : [];
   const extended = isObj(ext.json) ? stripTags(str(ext.json.content)) : "";
   const desc = stripTags(str(j.description));
   const texts = [...ruleTexts, desc, extended];
