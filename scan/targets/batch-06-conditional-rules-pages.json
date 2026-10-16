@@ -1,0 +1,794 @@
+[
+ {
+  "id": "rules6:PL:forum-studia-net-registration",
+  "kind": "html",
+  "url": "https://forum.studia.net/register/",
+  "region": "Central & Eastern Europe",
+  "country": "PL",
+  "site": "Forum.Studia.net registration",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:PL:forum-studia-net-terms",
+  "kind": "html",
+  "url": "https://forum.studia.net/terms/",
+  "region": "Central & Eastern Europe",
+  "country": "PL",
+  "site": "Forum.Studia.net terms",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:PL:forum-studia-net-guidelines",
+  "kind": "html",
+  "url": "https://forum.studia.net/guidelines/",
+  "region": "Central & Eastern Europe",
+  "country": "PL",
+  "site": "Forum.Studia.net guidelines",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:RO:romaniaunita-com-registration",
+  "kind": "html",
+  "url": "https://www.romaniaunita.com/register/",
+  "region": "Central & Eastern Europe",
+  "country": "RO",
+  "site": "RomaniaUnita.com registration",
+  "category": "other"
+ },
+ {
+  "id": "rules6:RO:romaniaunita-com-terms",
+  "kind": "html",
+  "url": "https://www.romaniaunita.com/terms/",
+  "region": "Central & Eastern Europe",
+  "country": "RO",
+  "site": "RomaniaUnita.com terms",
+  "category": "other"
+ },
+ {
+  "id": "rules6:RO:romaniaunita-com-mica-publicitate-board",
+  "kind": "html",
+  "url": "https://www.romaniaunita.com/forum/34-mica-publicitate/",
+  "region": "Central & Eastern Europe",
+  "country": "RO",
+  "site": "RomaniaUnita.com Mica Publicitate board",
+  "category": "other"
+ },
+ {
+  "id": "rules6:KR:phdkim-net-sign-up",
+  "kind": "html",
+  "url": "https://phdkim.net/member/join/",
+  "region": "East Asia",
+  "country": "KR",
+  "site": "phdkim.net sign-up",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:KR:phdkim-net-sign-up-alt-",
+  "kind": "html",
+  "url": "https://phdkim.net/member/signup/",
+  "region": "East Asia",
+  "country": "KR",
+  "site": "phdkim.net sign-up (alt)",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:KR:phdkim-net-terms",
+  "kind": "html",
+  "url": "https://phdkim.net/terms/",
+  "region": "East Asia",
+  "country": "KR",
+  "site": "phdkim.net terms",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:KR:phdkim-net-promotion-board-write",
+  "kind": "html",
+  "url": "https://phdkim.net/board/promotion/write/",
+  "region": "East Asia",
+  "country": "KR",
+  "site": "phdkim.net promotion board write",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:TH:pantipmarket-help",
+  "kind": "html",
+  "url": "https://www.pantipmarket.com/help/",
+  "region": "Southeast Asia",
+  "country": "TH",
+  "site": "PantipMarket help",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:TH:pantipmarket-terms",
+  "kind": "html",
+  "url": "https://www.pantipmarket.com/terms/",
+  "region": "Southeast Asia",
+  "country": "TH",
+  "site": "PantipMarket terms",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:TH:pantip-registration",
+  "kind": "html",
+  "url": "https://pantip.com/register",
+  "region": "Southeast Asia",
+  "country": "TH",
+  "site": "Pantip registration",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:GLOBAL:uno-directory-terms",
+  "kind": "html",
+  "url": "https://uno.directory/terms",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "UNO Directory terms",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:GLOBAL:uno-directory-listing-guidelines",
+  "kind": "html",
+  "url": "https://uno.directory/guidelines",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "UNO Directory listing guidelines",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:GLOBAL:saashub-terms",
+  "kind": "html",
+  "url": "https://www.saashub.com/terms",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "SaaSHub terms",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:GLOBAL:saashub-submit-list",
+  "kind": "html",
+  "url": "https://www.saashub.com/submit/list",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "SaaSHub submit list",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:DE:quoka-agb",
+  "kind": "html",
+  "url": "https://www.quoka.de/agb.html",
+  "region": "Western Europe",
+  "country": "DE",
+  "site": "Quoka AGB",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:DE:quoka-anzeigenregeln",
+  "kind": "html",
+  "url": "https://www.quoka.de/anzeigenregeln.html",
+  "region": "Western Europe",
+  "country": "DE",
+  "site": "Quoka Anzeigenregeln",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:DE:quoka-registrierung",
+  "kind": "html",
+  "url": "https://www.quoka.de/registrieren.html",
+  "region": "Western Europe",
+  "country": "DE",
+  "site": "Quoka Registrierung",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:FR:paruvendu-cgu",
+  "kind": "html",
+  "url": "https://www.paruvendu.fr/communfo/defaultcommunfo/defaultcommunfo/cgu",
+  "region": "Western Europe",
+  "country": "FR",
+  "site": "ParuVendu CGU",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:FR:paruvendu-conditions",
+  "kind": "html",
+  "url": "https://www.paruvendu.fr/cgu/",
+  "region": "Western Europe",
+  "country": "FR",
+  "site": "ParuVendu conditions",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:FR:toutunservice-fr",
+  "kind": "html",
+  "url": "https://www.toutunservice.fr/",
+  "region": "Western Europe",
+  "country": "FR",
+  "site": "Toutunservice.fr",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:FR:toutunservice-fr-cgu",
+  "kind": "html",
+  "url": "https://www.toutunservice.fr/cgu",
+  "region": "Western Europe",
+  "country": "FR",
+  "site": "Toutunservice.fr CGU",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:ES:tabl-n-de-anuncios-condiciones",
+  "kind": "html",
+  "url": "https://www.tablondeanuncios.com/condiciones.htm",
+  "region": "Southern Europe",
+  "country": "ES",
+  "site": "Tablón de Anuncios condiciones",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:ES:tabl-n-de-anuncios-ayuda",
+  "kind": "html",
+  "url": "https://www.tablondeanuncios.com/ayuda.htm",
+  "region": "Southern Europe",
+  "country": "ES",
+  "site": "Tablón de Anuncios ayuda",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:ES:tabl-n-de-anuncios-publicar",
+  "kind": "html",
+  "url": "https://www.tablondeanuncios.com/publicar-anuncio.htm",
+  "region": "Southern Europe",
+  "country": "ES",
+  "site": "Tablón de Anuncios publicar",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:AR:evisos-argentina-t-rminos",
+  "kind": "html",
+  "url": "https://www.evisos.com.ar/terminos-y-condiciones",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Evisos Argentina términos",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:AR:evisos-argentina-publicar",
+  "kind": "html",
+  "url": "https://www.evisos.com.ar/publicar",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Evisos Argentina publicar",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:AR:evisos-argentina-ayuda",
+  "kind": "html",
+  "url": "https://www.evisos.com.ar/ayuda",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Evisos Argentina ayuda",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:MX:evisos-m-xico-t-rminos",
+  "kind": "html",
+  "url": "https://www.evisos.com.mx/terminos-y-condiciones",
+  "region": "Latin America",
+  "country": "MX",
+  "site": "Evisos México términos",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:CO:colombia-move-t-rminos",
+  "kind": "html",
+  "url": "https://colombiamove.com/terminos",
+  "region": "Latin America",
+  "country": "CO",
+  "site": "Colombia Move términos",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:CO:colombia-move-publicar",
+  "kind": "html",
+  "url": "https://colombiamove.com/publicar",
+  "region": "Latin America",
+  "country": "CO",
+  "site": "Colombia Move publicar",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:CO:colombia-move-home",
+  "kind": "html",
+  "url": "https://colombiamove.com/",
+  "region": "Latin America",
+  "country": "CO",
+  "site": "Colombia Move home",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:PE:expat-com-legal",
+  "kind": "html",
+  "url": "https://www.expat.com/en/legal.html",
+  "region": "Latin America",
+  "country": "PE",
+  "site": "Expat.com legal",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:PE:expat-com-classifieds-rules",
+  "kind": "html",
+  "url": "https://www.expat.com/en/classifieds-rules.html",
+  "region": "Latin America",
+  "country": "PE",
+  "site": "Expat.com classifieds rules",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:ZA:sa-yellow-add-listing",
+  "kind": "html",
+  "url": "https://www.sayellow.com/add-listing",
+  "region": "Sub-Saharan Africa",
+  "country": "ZA",
+  "site": "SA Yellow add listing",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:ZA:sa-yellow-terms",
+  "kind": "html",
+  "url": "https://www.sayellow.com/terms",
+  "region": "Sub-Saharan Africa",
+  "country": "ZA",
+  "site": "SA Yellow terms",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:ZA:sa-yellow-free-listing",
+  "kind": "html",
+  "url": "https://www.sayellow.com/free-listing",
+  "region": "Sub-Saharan Africa",
+  "country": "ZA",
+  "site": "SA Yellow free listing",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:AR:develop-argentina-publicar",
+  "kind": "html",
+  "url": "https://developargentina.com/directorio/publicar",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Develop Argentina publicar",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:AR:develop-argentina-directorio",
+  "kind": "html",
+  "url": "https://developargentina.com/directorio",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Develop Argentina directorio",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:PT:startup-portugal-hub",
+  "kind": "html",
+  "url": "https://startupportugal.com/hub/",
+  "region": "Southern Europe",
+  "country": "PT",
+  "site": "Startup Portugal hub",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:PT:startup-hub-portugal",
+  "kind": "html",
+  "url": "https://startuphub.startupportugal.com/",
+  "region": "Southern Europe",
+  "country": "PT",
+  "site": "Startup Hub Portugal",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:GB:educational-app-store-submit-app",
+  "kind": "html",
+  "url": "https://www.educationalappstore.com/developers/submit-app",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "Educational App Store submit app",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:GB:educational-app-store-ai-tool-submission",
+  "kind": "html",
+  "url": "https://www.educationalappstore.com/ai-tool-submission-guide",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "Educational App Store AI tool submission guide",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:GB:educational-app-store-developers",
+  "kind": "html",
+  "url": "https://www.educationalappstore.com/developers",
+  "region": "Northern Europe",
+  "country": "GB",
+  "site": "Educational App Store developers",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:DK:amino-dk-regler",
+  "kind": "html",
+  "url": "https://www.amino.dk/regler",
+  "region": "Northern Europe",
+  "country": "DK",
+  "site": "Amino.dk regler",
+  "category": "other"
+ },
+ {
+  "id": "rules6:DK:amino-dk-betingelser",
+  "kind": "html",
+  "url": "https://www.amino.dk/betingelser",
+  "region": "Northern Europe",
+  "country": "DK",
+  "site": "Amino.dk betingelser",
+  "category": "other"
+ },
+ {
+  "id": "rules6:DK:amino-dk-opret",
+  "kind": "html",
+  "url": "https://www.amino.dk/opret",
+  "region": "Northern Europe",
+  "country": "DK",
+  "site": "Amino.dk opret",
+  "category": "other"
+ },
+ {
+  "id": "rules6:BR:tabnews-termos-de-uso",
+  "kind": "html",
+  "url": "https://tabnews.com.br/termos-de-uso",
+  "region": "Latin America",
+  "country": "BR",
+  "site": "TabNews termos de uso",
+  "category": "other"
+ },
+ {
+  "id": "rules6:BR:tabnews-cadastro",
+  "kind": "html",
+  "url": "https://tabnews.com.br/cadastro",
+  "region": "Latin America",
+  "country": "BR",
+  "site": "TabNews cadastro",
+  "category": "other"
+ },
+ {
+  "id": "rules6:NL:speurders-nl-voorwaarden",
+  "kind": "html",
+  "url": "https://www.speurders.nl/voorwaarden",
+  "region": "Western Europe",
+  "country": "NL",
+  "site": "Speurders.nl voorwaarden",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:NL:speurders-nl-regels",
+  "kind": "html",
+  "url": "https://www.speurders.nl/regels",
+  "region": "Western Europe",
+  "country": "NL",
+  "site": "Speurders.nl regels",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:NL:speurders-nl-plaatsen",
+  "kind": "html",
+  "url": "https://www.speurders.nl/plaatsen",
+  "region": "Western Europe",
+  "country": "NL",
+  "site": "Speurders.nl plaatsen",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:PK:list-com-pk-terms",
+  "kind": "html",
+  "url": "https://www.list.com.pk/terms",
+  "region": "South Asia",
+  "country": "PK",
+  "site": "List.com.pk terms",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:PK:list-com-pk-post-ad",
+  "kind": "html",
+  "url": "https://www.list.com.pk/post-ad",
+  "region": "South Asia",
+  "country": "PK",
+  "site": "List.com.pk post ad",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:IN:click-in-terms",
+  "kind": "html",
+  "url": "https://www.click.in/terms",
+  "region": "South Asia",
+  "country": "IN",
+  "site": "Click.in terms",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:IN:click-in-post-free-ad",
+  "kind": "html",
+  "url": "https://www.click.in/post-free-ad",
+  "region": "South Asia",
+  "country": "IN",
+  "site": "Click.in post free ad",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:CZ:sbazar-pravidla",
+  "kind": "html",
+  "url": "https://www.sbazar.cz/pravidla",
+  "region": "Central & Eastern Europe",
+  "country": "CZ",
+  "site": "Sbazar pravidla",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:CZ:sbazar-podm-nky",
+  "kind": "html",
+  "url": "https://napoveda.sbazar.cz/",
+  "region": "Central & Eastern Europe",
+  "country": "CZ",
+  "site": "Sbazar podmínky",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:CZ:hyperinzerce-podm-nky",
+  "kind": "html",
+  "url": "https://www.hyperinzerce.cz/podminky/",
+  "region": "Central & Eastern Europe",
+  "country": "CZ",
+  "site": "Hyperinzerce podmínky",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:MA:marocannonces-conditions",
+  "kind": "html",
+  "url": "https://www.marocannonces.com/conditions.php",
+  "region": "Middle East & North Africa",
+  "country": "MA",
+  "site": "Marocannonces conditions",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:MA:marocannonces-d-poser",
+  "kind": "html",
+  "url": "https://www.marocannonces.com/deposer.php",
+  "region": "Middle East & North Africa",
+  "country": "MA",
+  "site": "Marocannonces déposer",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:UA:ukrboard-",
+  "kind": "html",
+  "url": "https://ukrboard.com.ua/rules",
+  "region": "Central & Eastern Europe",
+  "country": "UA",
+  "site": "Ukrboard правила",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:UA:ukrboard-add",
+  "kind": "html",
+  "url": "https://ukrboard.com.ua/add",
+  "region": "Central & Eastern Europe",
+  "country": "UA",
+  "site": "Ukrboard add",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:RO:anuntul-ro-termeni",
+  "kind": "html",
+  "url": "https://www.anuntul.ro/termeni-si-conditii",
+  "region": "Central & Eastern Europe",
+  "country": "RO",
+  "site": "Anuntul.ro termeni",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:BD:aponhut-terms",
+  "kind": "html",
+  "url": "https://www.aponhut.com/terms",
+  "region": "South Asia",
+  "country": "BD",
+  "site": "Aponhut terms",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:NL:fok-forum-regels",
+  "kind": "html",
+  "url": "https://forum.fok.nl/regels",
+  "region": "Western Europe",
+  "country": "NL",
+  "site": "FOK!forum regels",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:PT:uniarea-forum-help-terms",
+  "kind": "html",
+  "url": "https://www.uniarea.com/forum/help/terms/",
+  "region": "Southern Europe",
+  "country": "PT",
+  "site": "Uniarea forum help/terms",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:DE:studis-online-fragen-brett-regeln",
+  "kind": "html",
+  "url": "https://www.studis-online.de/Fragen-Brett/regeln.php",
+  "region": "Western Europe",
+  "country": "DE",
+  "site": "Studis Online Fragen-Brett Regeln",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:HU:egyetemistak-hu-szab-lyzat",
+  "kind": "html",
+  "url": "https://egyetemistak.hu/szabalyzat",
+  "region": "Central & Eastern Europe",
+  "country": "HU",
+  "site": "Egyetemistak.hu szabályzat",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:UA:dou-ua-rules",
+  "kind": "html",
+  "url": "https://dou.ua/forums/rules/",
+  "region": "Central & Eastern Europe",
+  "country": "UA",
+  "site": "DOU.ua rules",
+  "category": "other"
+ },
+ {
+  "id": "rules6:ZA:studentroom-co-za-terms",
+  "kind": "html",
+  "url": "https://www.studentroom.co.za/terms",
+  "region": "Sub-Saharan Africa",
+  "country": "ZA",
+  "site": "Studentroom.co.za terms",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:BR:f-rum-pir2-regras",
+  "kind": "html",
+  "url": "https://pir2.forumeiros.com/t1-regras-do-forum",
+  "region": "Latin America",
+  "country": "BR",
+  "site": "Fórum PiR2 regras",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:AR:ser-universitario-foro-reglas",
+  "kind": "html",
+  "url": "https://seruniversitario.com/foro/reglas",
+  "region": "Latin America",
+  "country": "AR",
+  "site": "Ser Universitario foro reglas",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:VN:tinh-t-n-i-quy",
+  "kind": "html",
+  "url": "https://tinhte.vn/help/terms/",
+  "region": "Southeast Asia",
+  "country": "VN",
+  "site": "Tinh tế nội quy",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:TR:startups-watch-register",
+  "kind": "html",
+  "url": "https://startups.watch/register",
+  "region": "Middle East & North Africa",
+  "country": "TR",
+  "site": "startups.watch register",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:TR:startups-watch-terms",
+  "kind": "html",
+  "url": "https://startups.watch/terms",
+  "region": "Middle East & North Africa",
+  "country": "TR",
+  "site": "startups.watch terms",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:JP:-rules-board-info-",
+  "kind": "html",
+  "url": "https://jbbs.shitaraba.net/bbs/read.cgi/internet/18891/1/",
+  "region": "East Asia",
+  "country": "JP",
+  "site": "したらば 宣伝掲示板 rules (board info)",
+  "category": "other"
+ },
+ {
+  "id": "rules6:SG:sg-ads-online-terms",
+  "kind": "html",
+  "url": "https://www.sgadsonline.com/terms",
+  "region": "Southeast Asia",
+  "country": "SG",
+  "site": "SG Ads Online terms",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:SG:sg-ads-online-post",
+  "kind": "html",
+  "url": "https://www.sgadsonline.com/post",
+  "region": "Southeast Asia",
+  "country": "SG",
+  "site": "SG Ads Online post",
+  "category": "classifieds"
+ },
+ {
+  "id": "rules6:IL:tapuz-forums-rules",
+  "kind": "html",
+  "url": "https://www.tapuz.co.il/forums/help/terms/",
+  "region": "Middle East & North Africa",
+  "country": "IL",
+  "site": "Tapuz forums rules",
+  "category": "student-forum"
+ },
+ {
+  "id": "rules6:KE:businesslist-co-ke-add-company",
+  "kind": "html",
+  "url": "https://www.businesslist.co.ke/add-company",
+  "region": "Sub-Saharan Africa",
+  "country": "KE",
+  "site": "Businesslist.co.ke add company",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:NG:businesslist-com-ng-add-company",
+  "kind": "html",
+  "url": "https://www.businesslist.com.ng/add-company",
+  "region": "Sub-Saharan Africa",
+  "country": "NG",
+  "site": "Businesslist.com.ng add company",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:GH:businessghana-add-listing",
+  "kind": "html",
+  "url": "https://www.businessghana.com/site/business/add",
+  "region": "Sub-Saharan Africa",
+  "country": "GH",
+  "site": "BusinessGhana add listing",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:GLOBAL:next-gen-tools-terms",
+  "kind": "html",
+  "url": "https://nextgentools.me/terms",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "Next Gen Tools terms",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:GLOBAL:microlaunch-submit",
+  "kind": "html",
+  "url": "https://microlaunch.net/submit",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "MicroLaunch submit",
+  "category": "directory"
+ },
+ {
+  "id": "rules6:GLOBAL:microlaunch-pricing",
+  "kind": "html",
+  "url": "https://microlaunch.net/pricing",
+  "region": "Global",
+  "country": "GLOBAL",
+  "site": "MicroLaunch pricing",
+  "category": "directory"
+ }
+]
