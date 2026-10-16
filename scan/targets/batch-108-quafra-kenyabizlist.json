@@ -1,0 +1,65 @@
+[
+ {
+  "id": "r108:quafra:home",
+  "kind": "json",
+  "url": "https://quafra.com/",
+  "country": "GH",
+  "site": "quafra.com home HTML in full (the registration modal's script endpoint: rtcl ajax action)",
+  "category": "classified-board",
+  "bodyChars": 300000
+ },
+ {
+  "id": "r108:quafra:listingform",
+  "kind": "json",
+  "url": "https://quafra.com/listing-form/",
+  "country": "GH",
+  "site": "quafra.com posting page (Classified Listing's usual slug)",
+  "category": "classified-board",
+  "bodyChars": 300000
+ },
+ {
+  "id": "r108:quafra:checkout",
+  "kind": "json",
+  "url": "https://quafra.com/checkout/submission/",
+  "country": "GH",
+  "site": "quafra.com posting page (alternate slug)",
+  "category": "classified-board",
+  "bodyChars": 300000
+ },
+ {
+  "id": "r108:quafra:register2",
+  "kind": "json",
+  "url": "https://quafra.com/register/",
+  "country": "GH",
+  "site": "quafra.com registration page (alternate slug)",
+  "category": "classified-board",
+  "bodyChars": 300000
+ },
+ {
+  "id": "r108:kenyabizlist:home",
+  "kind": "json",
+  "url": "https://www.kenyabizlist.com/",
+  "country": "KE",
+  "site": "kenyabizlist.com home HTML (the Join link's target)",
+  "category": "classified-board",
+  "bodyChars": 300000
+ },
+ {
+  "id": "r108:kenyabizlist:register",
+  "kind": "json",
+  "url": "https://www.kenyabizlist.com/members/register.aspx",
+  "country": "KE",
+  "site": "kenyabizlist.com registration (guess)",
+  "category": "classified-board",
+  "bodyChars": 300000
+ },
+ {
+  "id": "r108:kenyabizlist:join",
+  "kind": "json",
+  "url": "https://www.kenyabizlist.com/members/join.aspx",
+  "country": "KE",
+  "site": "kenyabizlist.com registration (guess 2)",
+  "category": "classified-board",
+  "bodyChars": 300000
+ }
+]

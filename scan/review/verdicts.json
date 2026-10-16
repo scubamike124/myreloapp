@@ -7702,16 +7702,16 @@
  {
   "match": "freeboard.com.ua",
   "verdict": "unverified",
-  "quote": "new_announcement.php (rendered, no login): region, category, name, type, text, three photos, e-mail, phone; no required marks and no CAPTCHA; the rules page is 1.3k chars in a legacy encoding and /rules.php answers 404.",
+  "quote": "new_announcement.php (rendered, no login): region, category, name, type, text, three photos, e-mail, phone; no required marks and no CAPTCHA; the home page decodes as 'Розмістити оголошення | Оголошення | Товари | Мій аккаунт'; rules.html, rules.php and about.php answer 404 — no rules page found.",
   "note": "A legacy Ukrainian board whose ad form needs no account or CAPTCHA; its rules text is not readable in the stored encoding.",
-  "can_act": "yes, pending the rules' text and the form's server-side requirements (adapter not built)",
+  "can_act": "yes, pending any rules text (none found on the site) and the form's server-side requirements (adapter not built)",
   "basis": "unread",
   "free_option": "free ads (title)",
   "account": "form without login",
   "automation": "unread",
   "audience": "general public",
   "country": "UA",
-  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); rules read 21:37Z (batch 105) after the registration probes of 21:22Z (batch 103 / render 30)"
+  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); rules read 21:37Z (batch 105) after the registration probes of 21:22Z (batch 103 / render 30); follow-up render 32 (22:15Z)"
  },
  {
   "match": "board.if.ua",
@@ -8024,16 +8024,16 @@
  {
   "match": "yadlyad.co.il",
   "verdict": "unverified",
-  "quote": "Registration (rendered): name, e-mail, password required; phone optional; no CAPTCHA; /terms.php answers an empty page; no terms found on the site.",
+  "quote": "Registration (rendered): name, e-mail, password required; phone optional; no CAPTCHA; /terms, /terms.php and /about.php answer 404 or an empty page: no terms found on the site.",
   "note": "Israeli free notice board; e-mail registration without CAPTCHA or a required phone; terms not found.",
-  "can_act": "yes, pending the terms (not found on the site) and the ad form after login (adapter not built)",
+  "can_act": "maybe (terms not found on the site; the ad form after login unread)",
   "basis": "unread",
   "free_option": "free ads (title)",
   "account": "name + email + password",
   "automation": "unread",
   "audience": "general public",
   "country": "IL",
-  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); rules read 21:37Z (batch 105) after the registration probes of 21:22Z (batch 103 / render 30)"
+  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); rules read 21:37Z (batch 105) after the registration probes of 21:22Z (batch 103 / render 30); follow-up render 32 (22:15Z)"
  },
  {
   "match": "eg.dalil-e3lank.com",
@@ -8122,16 +8122,16 @@
  {
   "match": "kenyabizlist.com",
   "verdict": "conditional",
-  "quote": "Terms of use: 'a website offering business listing and directory services'; 'you agree you will not: Post listings for non-existent businesses… Post fake business reviews'; about: 'list your business, post classified ads'; signup.aspx: an ASP.NET form (username/e-mail and password), no CAPTCHA, no phone.",
+  "quote": "Terms of use: a business listing and directory service; 'you will not: Post listings for non-existent businesses'; members/signup.aspx (rendered) shows a sign-in form (username, password), so the registration form itself was not found yet.",
   "note": "Business directory and classifieds; e-mail registration without CAPTCHA; the listing form sits behind the login.",
-  "can_act": "yes, pending the listing form after registration (adapter not built)",
+  "can_act": "maybe (the registration page is not found yet; the sign-up link is read in batch 108)",
   "basis": "no-prohibition",
   "free_option": "free ads",
   "account": "email + password",
   "automation": "not addressed",
   "audience": "general public",
   "country": "KE",
-  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); rules read 21:37Z (batch 105) after the registration probes of 21:22Z (batch 103 / render 30)"
+  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); rules read 21:37Z (batch 105) after the registration probes of 21:22Z (batch 103 / render 30); follow-up render 32 (22:15Z)"
  },
  {
   "match": "adpostman.com",
@@ -8220,16 +8220,16 @@
  {
   "match": "yess.sn",
   "verdict": "conditional",
-  "quote": "'La marketplace gratuite du Sénégal'; /publier (rendered): one required field, 'Votre adresse e-mail', and no CAPTCHA — a mail-first posting flow.",
+  "quote": "'La marketplace gratuite du Sénégal'; /publier (rendered twice): one required field, 'Votre adresse e-mail', no CAPTCHA — a mail-first posting flow; the guessed terms paths lead to the listings page, so no terms were found.",
   "note": "Posting starts from an e-mail address (likely a link by mail); the next step is unread; the terms page was not fetched.",
-  "can_act": "maybe: a mail-first posting flow; the step after the e-mail and the terms are unread",
+  "can_act": "maybe: a mail-first posting flow whose next step and terms are unread",
   "basis": "no-prohibition",
   "free_option": "free ads",
   "account": "e-mail (mail-first)",
   "automation": "not addressed",
   "audience": "general public",
   "country": "SN",
-  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30)"
+  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); follow-up render 32 (22:15Z)"
  },
  {
   "match": "kaaylook.com",
@@ -8290,16 +8290,16 @@
  {
   "match": "quafra.com",
   "verdict": "qualified",
-  "quote": "'100% FREE Classifieds in Ghana. Post free ads'; terms (13k chars): no automation, advertising or business ban found; registration (rendered modal): username, e-mail, password, privacy and T&C boxes — required: username, e-mail, password; no phone, no CAPTCHA.",
-  "note": "Ghanaian free classifieds (a WordPress Classified Listing site); e-mail registration without CAPTCHA or phone; the ad form sits behind the login.",
-  "can_act": "yes by web form: registration through Amber's mailbox, login, then the ad form (adapter not built yet; nothing registered or posted)",
+  "quote": "'100% FREE Classifieds in Ghana. Post free ads'; terms (13k chars): no automation, advertising or business ban found; the registration modal (rendered) asks username, e-mail, password and the privacy and T&C boxes — required: username, e-mail, password; no phone, no CAPTCHA; the modal's form has no plain action (a script sends it), and /post-an-ad/ answers 404.",
+  "note": "Ghanaian free classifieds (a WordPress Classified Listing site); e-mail registration without CAPTCHA or phone; the modal's script endpoint and the real posting page are read next (batch 108) before an adapter.",
+  "can_act": "yes by web form once the registration endpoint and the posting page are read (batch 108); adapter not built yet; nothing registered or posted",
   "basis": "no-prohibition",
   "free_option": "free ads",
   "account": "username + email + password",
   "automation": "not addressed",
   "audience": "general public",
   "country": "GH",
-  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30)"
+  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); follow-up render 32 (22:15Z)"
  },
  {
   "match": "ghanasummary.com",
@@ -8429,17 +8429,17 @@
  },
  {
   "match": "za.bambaad.com",
-  "verdict": "conditional",
-  "quote": "Terms: e-mail verification; automated and human review; paid options exist. /post-an-ad (rendered without a login): category, status, type, title, text, price, dates, language, civility, first name, phone…; required: category, title, text; no CAPTCHA.",
-  "note": "An ad form reachable without a login whose only required fields are category, title and text (server-side rules unread).",
-  "can_act": "yes, pending a read of the form's server-side requirements (phone?) and the public read-back (adapter not built)",
-  "basis": "no-prohibition",
+  "verdict": "skip-captcha",
+  "quote": "/post-an-ad (rendered in full): the ad form carries the account fields (first name, name, phone, e-mail, password) and an image CAPTCHA (captchab.php with a refresh button).",
+  "note": "An image CAPTCHA on the ad form.",
+  "can_act": "no (image CAPTCHA on the ad form)",
+  "basis": "form",
   "free_option": "free ads",
   "account": "form without login (e-mail verification offered)",
   "automation": "not addressed",
   "audience": "general public",
   "country": "ZA",
-  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30)"
+  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); follow-up render 32 (22:15Z)"
  },
  {
   "match": "classifieds.co.zw",
@@ -9409,17 +9409,17 @@
  },
  {
   "match": "npati.com",
-  "verdict": "conditional",
-  "quote": "Terms: 'marketplace transactions and commercial integrations must be used by an adult or a duly authorized business representative'; banned: 'fraud, spam, malware, unauthorized scraping, security circumvention, impersonation'; a section 'NPATI PLUGINS, APPS, AI AND AUTOMATED WORKFLOWS' describes AI-assisted and automated publishing as part of the product; registration: e-mail and password, no CAPTCHA flagged.",
-  "note": "A Canadian/US classifieds and video marketplace whose terms expressly contemplate automated and AI-assisted publishing by business representatives.",
-  "can_act": "yes, pending the registration form's fields (render) and the ad form after login (adapter not built)",
-  "basis": "no-prohibition",
+  "verdict": "skip-captcha",
+  "quote": "Terms: automated and AI-assisted publishing is part of the product; the registration form (rendered at /register and /ca/sign-up) carries Cloudflare Turnstile and a 'Continue with Google' button.",
+  "note": "CAPTCHA at registration.",
+  "can_act": "owner by hand (Turnstile at registration)",
+  "basis": "form",
   "free_option": "free ads",
   "account": "email + password",
   "automation": "unread",
   "audience": "Canada",
   "country": "CA",
-  "found": "search discovery 2026-10-16 21:18Z (DuckDuckGo from the runner, batch 101), registration pages read 21:22Z (batch 103); rules read 21:37Z (batch 105) after the registration probes of 21:22Z (batch 103 / render 30)"
+  "found": "search discovery 2026-10-16 21:18Z (DuckDuckGo from the runner, batch 101), registration pages read 21:22Z (batch 103); rules read 21:37Z (batch 105) after the registration probes of 21:22Z (batch 103 / render 30); follow-up render 32 (22:15Z)"
  },
  {
   "match": "eclassify.ca",
