@@ -1,0 +1,5 @@
+[
+ {"id": "raw31:myproduct:home-tail-1", "kind": "json", "url": "https://myproduct.co.il/", "country": "IL", "site": "myproduct.co.il home page, raw HTML from character 380,000 (the quick form's scripts)", "category": "classified-board", "bodyFrom": 380000, "bodyChars": 400000},
+ {"id": "raw31:myproduct:home-tail-2", "kind": "json", "url": "https://myproduct.co.il/", "country": "IL", "site": "myproduct.co.il home page, raw HTML from character 780,000", "category": "classified-board", "bodyFrom": 780000, "bodyChars": 400000},
+ {"id": "raw31:myproduct:submit-tail", "kind": "json", "url": "https://myproduct.co.il/reshut-harabim/submit.php", "country": "IL", "site": "myproduct.co.il full submit page, raw HTML from character 290,000 (its scripts)", "category": "classified-board", "bodyFrom": 290000, "bodyChars": 400000}
+]
