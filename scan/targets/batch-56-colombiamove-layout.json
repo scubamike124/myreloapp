@@ -1,0 +1,40 @@
+[
+ {
+  "id": "cm56:layout-full",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/app/layout-ec17114d31eb8c13.js",
+  "country": "CO",
+  "site": "Colombia Move layout chunk in full (nav hrefs, /api/me fields)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "cm56:auth-chunk-full",
+  "kind": "json",
+  "url": "https://colombiamove.com/_next/static/chunks/92886-0be8a29aca6d7f80.js",
+  "country": "CO",
+  "site": "Colombia Move auth chunk in full (/api/me, sign-in providers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm56:api-me",
+  "kind": "json",
+  "url": "https://colombiamove.com/api/me",
+  "country": "CO",
+  "site": "Colombia Move /api/me signed out (shape of the answer)",
+  "category": "classified-board",
+  "bodyChars": 4000
+ },
+ {
+  "id": "cm56:mis-anuncios",
+  "kind": "json",
+  "url": "https://colombiamove.com/mis-anuncios",
+  "country": "CO",
+  "site": "Colombia Move /mis-anuncios (page chunk refs)",
+  "category": "classified-board",
+  "bodyMatch": "static/chunks/app/[a-z\\-/\\[\\]]+page-[a-f0-9]+\\.js",
+  "bodyWindow": 120,
+  "bodyChars": 20000
+ }
+]
