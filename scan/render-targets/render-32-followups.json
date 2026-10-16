@@ -1,0 +1,178 @@
+[
+ {
+  "id": "r32:npati:register",
+  "url": "https://www.npati.com/register",
+  "country": "CA",
+  "site": "npati.com registration form (fields, CAPTCHA?)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r32:npati:signup",
+  "url": "https://www.npati.com/signup",
+  "country": "CA",
+  "site": "npati.com sign-up (alternate path)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r32:npati:ca",
+  "url": "https://www.npati.com/ca/",
+  "country": "CA",
+  "site": "npati.com Canada home (links to register/post)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 4000
+ },
+ {
+  "id": "r32:quafra:register",
+  "url": "https://quafra.com/?action=register",
+  "country": "GH",
+  "site": "quafra.com registration modal (its real form action)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r32:quafra:home",
+  "url": "https://quafra.com/",
+  "country": "GH",
+  "site": "quafra.com home (registration modal markup, links)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r32:quafra:post",
+  "url": "https://quafra.com/post-an-ad/",
+  "country": "GH",
+  "site": "quafra.com post-an-ad page (login wall or form)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r32:yess:publier",
+  "url": "https://yess.sn/publier",
+  "country": "SN",
+  "site": "yess.sn mail-first posting step (form, text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r32:yess:conditions",
+  "url": "https://yess.sn/conditions",
+  "country": "SN",
+  "site": "yess.sn terms (guess)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r32:yess:cgu",
+  "url": "https://yess.sn/cgu",
+  "country": "SN",
+  "site": "yess.sn terms (guess 2)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r32:freeboard:rules",
+  "url": "https://www.freeboard.com.ua/rules.html",
+  "country": "UA",
+  "site": "freeboard.com.ua rules (browser decodes the legacy encoding)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r32:freeboard:about",
+  "url": "https://www.freeboard.com.ua/about.php",
+  "country": "UA",
+  "site": "freeboard.com.ua about/rules (guess)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r32:freeboard:home",
+  "url": "https://www.freeboard.com.ua/",
+  "country": "UA",
+  "site": "freeboard.com.ua home (rules link, decoded text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r32:kenyabizlist:signup",
+  "url": "https://www.kenyabizlist.com/members/signup.aspx",
+  "country": "KE",
+  "site": "kenyabizlist.com sign-up (ASP.NET fields, CAPTCHA?)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r32:bambaad:post",
+  "url": "https://za.bambaad.com/post-an-ad",
+  "country": "ZA",
+  "site": "za.bambaad.com ad form (required marks, CAPTCHA?)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r32:yadlyad:terms",
+  "url": "https://yadlyad.co.il/terms",
+  "country": "IL",
+  "site": "yadlyad.co.il terms (guess)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r32:yadlyad:about",
+  "url": "https://yadlyad.co.il/about.php",
+  "country": "IL",
+  "site": "yadlyad.co.il about (guess)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ }
+]
