@@ -1,0 +1,40 @@
+[
+ {
+  "id": "r17:boss-open",
+  "url": "https://www.boss.dev/issues/open",
+  "country": "GLOBAL",
+  "site": "boss.dev open bounties (rendered)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 16000
+ },
+ {
+  "id": "r17:gitpay-explore",
+  "url": "https://gitpay.me/#/explore",
+  "country": "BR",
+  "site": "Gitpay explore (rendered)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 16000
+ },
+ {
+  "id": "r17:opire-pricing",
+  "url": "https://docs.opire.dev/rewards/pricing",
+  "country": "GLOBAL",
+  "site": "Opire costs and payments",
+  "category": "bounty-platform",
+  "fullText": true,
+  "excerptChars": 10000
+ },
+ {
+  "id": "r17:opire-lifecycle",
+  "url": "https://docs.opire.dev/rewards/lifecycle",
+  "country": "GLOBAL",
+  "site": "Opire reward lifecycle (claim and payout)",
+  "category": "bounty-platform",
+  "fullText": true,
+  "excerptChars": 10000
+ }
+]
