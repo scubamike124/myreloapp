@@ -210,6 +210,14 @@ for r in rows:
     if prev is None or ORDER.index(v) < ORDER.index(prev["verdict"]) or (prev["verdict"] == v and r["_batch"] > prev["batch"]):
         out[key] = rec
 recs = list(out.values())
+# One row per site for the tables and totals: pages of the same host collapse onto the host's best row (the CSV keeps every page).
+best_by_host = {}
+for x in recs:
+    if x["kind"] == "signup": continue
+    hk = host_of(x["url"]).replace("www.", "")
+    cur = best_by_host.get(hk)
+    if cur is None or ORDER.index(x["verdict"]) < ORDER.index(cur["verdict"]): best_by_host[hk] = x
+site_recs = [x for x in recs if x["kind"] == "signup" or best_by_host.get(host_of(x["url"]).replace("www.", "")) is x]
 
 def reg_key(x): return (REGIONS + EXTRA_REGIONS).index(x) if x in REGIONS + EXTRA_REGIONS else 99
 recs.sort(key=lambda x: (reg_key(x["region"]), x["country"] or "~", ORDER.index(x["verdict"]), x["site"].lower()))
@@ -224,7 +232,7 @@ with open(OUT_CSV, "w", newline="") as f:
 # ---------- Markdown ----------
 live = json.load(open(R("scan/review/live.json")))
 by_region = collections.defaultdict(list)
-for x in recs:
+for x in site_recs:
     if x["kind"] != "signup": by_region[x["region"]].append(x)
 def count(xs, *vs): return sum(1 for x in xs if x["verdict"] in vs)
 SKIPS = [v for v in ORDER if v.startswith("skip-")]
@@ -232,7 +240,7 @@ NOTREAD = ["blocked", "unreachable", "missing"]
 now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%MZ")
 md = []
 md.append(f"# StudyProofs free-promotion region scan — {DAY}\n")
-md.append(f"Built {now} from {len(rows)} read-only probes ({len(recs)} distinct sites) made by GitHub Actions runners during the night of 2026-10-15/16, plus the hand review in `scan/review/verdicts.json`. Regenerate with `python3 -I scan/report.py`. The CSV beside this file carries every row.\n")
+md.append(f"Built {now} from {len(rows)} read-only probes ({len(recs)} distinct pages and servers, {sum(1 for x in site_recs if x['kind'] != 'signup')} distinct sites) made by GitHub Actions runners during the night of 2026-10-15/16, plus the hand review in `scan/review/verdicts.json`. Regenerate with `python3 -I scan/report.py`. The CSV beside this file carries every row.\n")
 md.append("**Standard.** A site counts as **qualified** only when its own current rules or submission page, read tonight, allow a free StudyProofs listing or promotional post and nothing on the page asks for a date of birth, phone number, identity check, CAPTCHA bypass, payment or a manual approval. \"Allowed with conditions\" means the page allows it with a condition (labelled ads, an introduction first, a backlink, a specific language) or shows free posting but the account rules were not fully read. Everything else is listed under the reason it was skipped. Research and account set-ups are not advertisements: only a publicly verified post counts as live.\n")
 md.append("The owner's note asked for \"all 36 regions in our existing region list\"; the list in the code (`src/lib/scout-network/country-registry.ts` and `countries.ts` in amberai) has 12 regions and 54 countries, and all 54 are covered below, with a Global row for worldwide directories and protocols and one row for fediverse servers outside the 54.\n")
 md.append("## Live posts (publicly verified)\n")
@@ -263,21 +271,21 @@ def table(xs, title, blurb=""):
         q = (x["quote"] or "").replace("|", "\\|").replace("\n", " ")
         md.append(f"| {x['region']} | {x['country'] or '—'} | {x['site']} ({x['category']}) | {(x['free_option'] or '—').replace('|','/')} | {(x['audience'] or '—').replace('|','/')} | {q or '—'} | {(x['account'] or '—').replace('|','/')} | {(x['automation'] or '—').replace('|','/')} | {x['url']} | {(x['can_act'] or '—').replace('|','/')} |")
     md.append("")
-table([x for x in recs if x["verdict"] == "qualified"], "Qualified sites", "Verified from the site's own rules or submission page. `basis` in the CSV says whether the page allows promotion explicitly or simply has no rule against it while prohibiting spam.")
-table([x for x in recs if x["verdict"] == "conditional"], "Allowed with conditions", "The page allows a free post or listing under a condition, or shows free posting while the sign-up rules were not fully read tonight. None of these was acted on.")
-table([x for x in recs if x["verdict"] == "open-allows"], "Open servers whose rules speak of bots, brands or promotion as allowed (first pass)", "Found by the scanner's wording match on open-registration servers; each still needs the hand review before it counts as qualified.")
-rel = [x for x in recs if x["verdict"] == "open-relay"]
+table([x for x in site_recs if x["verdict"] == "qualified"], "Qualified sites", "Verified from the site's own rules or submission page. `basis` in the CSV says whether the page allows promotion explicitly or simply has no rule against it while prohibiting spam.")
+table([x for x in site_recs if x["verdict"] == "conditional"], "Allowed with conditions", "The page allows a free post or listing under a condition, or shows free posting while the sign-up rules were not fully read tonight. None of these was acted on.")
+table([x for x in site_recs if x["verdict"] == "open-allows"], "Open servers whose rules speak of bots, brands or promotion as allowed (first pass)", "Found by the scanner's wording match on open-registration servers; each still needs the hand review before it counts as qualified.")
+rel = [x for x in site_recs if x["verdict"] == "open-relay"]
 md.append("## Open Nostr relays\n")
 md.append(f"{len(rel)} relays answered a NIP-11 policy request with no payment, auth or write restriction: " + ", ".join(sorted(host_of(x['url']) for x in rel)) + ". Nostr has no accounts and no site rules; a post needs a keypair and a publisher (secp256k1 signing), which is not built, and the audience is not students. Recorded, not acted.\n")
 md.append("## Rules that prohibit advertising, promotion or automation\n")
 md.append("| Region | Country | Site | Their words | Source |\n|---|---|---|---|---|")
-for x in [x for x in recs if x["verdict"] == "banned"]:
+for x in [x for x in site_recs if x["verdict"] == "banned"]:
     md.append(f"| {x['region']} | {x['country'] or '—'} | {x['site']} | {(x['quote'] or x['note'] or '—').replace('|','/').replace(chr(10),' ')[:260]} | {x['url']} |")
 md.append("")
 md.append("## Skipped sites and why\n")
 md.append("Counts per reason, with the sites named (fediverse servers by host). The CSV has every row with its quote.\n")
 for s in SKIPS:
-    xs = [x for x in recs if x["verdict"] == s]
+    xs = [x for x in site_recs if x["verdict"] == s]
     if not xs: continue
     names = [f"{x['site'].split(' (')[0]}" + (f" [{x['country']}]" if x['country'] else "") for x in xs]
     shown = names[:60]
@@ -286,7 +294,7 @@ for s in SKIPS:
 md.append("")
 md.append("## Not read tonight\n")
 for s in NOTREAD:
-    xs = [x for x in recs if x["verdict"] == s]
+    xs = [x for x in site_recs if x["verdict"] == s]
     if not xs: continue
     names = sorted({x['site'].split(' (')[0] for x in xs})
     md.append(f"- **{VERDICT_LABEL[s]}** — {len(xs)}: " + "; ".join(names[:80]) + (f" … and {len(names)-80} more" if len(names) > 80 else ""))
@@ -299,7 +307,7 @@ if sg:
     for x in sorted(sg, key=lambda x: (ORDER.index(x["verdict"]), x["country"] or "", x["site"])):
         md.append(f"| {x['country'] or '—'} | {x['site']} | {VERDICT_LABEL[x['verdict']].replace('Sign-up form read: ', '')} | {(x['note'] or '').replace('|', '/')[:200]} | {x['url']} |")
     md.append("")
-unv = [x for x in recs if x["verdict"] == "unverified"]
+unv = [x for x in site_recs if x["verdict"] == "unverified"]
 md.append("## Read, but not qualified\n")
 md.append(f"{len(unv)} pages or servers answered, but nothing on them says a free promotional post or listing is allowed (open fediverse servers with no rule about promotion, home pages without the rules, JavaScript-only pages). They stay out of the qualified count on purpose; the CSV lists them.\n")
 md.append("## Method and limits\n")
