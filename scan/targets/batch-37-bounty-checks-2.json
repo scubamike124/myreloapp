@@ -1,0 +1,173 @@
+[
+ {
+  "id": "chk37:parabola:13",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues/13",
+  "country": "GLOBAL",
+  "site": "Parabola #13 ($75 unit tests) body — the original of bounty-plaza #1903",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:parabola:1",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues/1",
+  "country": "GLOBAL",
+  "site": "Parabola #1 ($105) body — the original of bounty-plaza #1915",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:parabola:13-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues/13/comments?per_page=30",
+  "country": "GLOBAL",
+  "site": "Parabola #13 comments",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:parabola:repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola",
+  "country": "GLOBAL",
+  "site": "Parabola repo record",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:parabola:readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/readme",
+  "country": "GLOBAL",
+  "site": "Parabola README (base64)",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:parabola:closed",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues?state=closed&per_page=30",
+  "country": "GLOBAL",
+  "site": "Parabola closed issues (paid?)",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:parabola:open",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues?state=open&per_page=30",
+  "country": "GLOBAL",
+  "site": "Parabola open issues (how many bounties, since when)",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:paraloom:959",
+  "kind": "json",
+  "url": "https://api.github.com/repos/paraloom-labs/paraloom-core/issues/959",
+  "country": "GLOBAL",
+  "site": "paraloom-core #959 ($150 USD) body",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:paraloom:961-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/paraloom-labs/paraloom-core/issues/961/comments?per_page=20",
+  "country": "GLOBAL",
+  "site": "paraloom-core #961 comments",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:paraloom:repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/paraloom-labs/paraloom-core",
+  "country": "GLOBAL",
+  "site": "paraloom-core repo record",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:chokepoint:16",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Element-Ventures-Canada-Ltd/openchokepoint/issues/16",
+  "country": "GLOBAL",
+  "site": "openchokepoint #16 (Slice A) body",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:chokepoint:3",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Element-Ventures-Canada-Ltd/openchokepoint/issues/3",
+  "country": "GLOBAL",
+  "site": "openchokepoint #3 (open call) body",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:chokepoint:3-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Element-Ventures-Canada-Ltd/openchokepoint/issues/3/comments?per_page=30",
+  "country": "GLOBAL",
+  "site": "openchokepoint #3 comments",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:neatroots:236",
+  "kind": "json",
+  "url": "https://api.github.com/repos/neatlogs/neatroots/issues/236",
+  "country": "GLOBAL",
+  "site": "neatroots #236 (regression suites bounty) body",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:gohybrid:5",
+  "kind": "json",
+  "url": "https://api.github.com/repos/limitlessprojects/Go-Hybrid/issues/5",
+  "country": "GLOBAL",
+  "site": "Go-Hybrid #5 (bounty track) body",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:spaceapp:65-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/oll4com/spaceapp/issues/65/comments?per_page=30",
+  "country": "GLOBAL",
+  "site": "spaceapp #65 comments (attempts, rules)",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:spaceapp:62-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/oll4com/spaceapp/issues/62/comments?per_page=30",
+  "country": "GLOBAL",
+  "site": "spaceapp #62 comments",
+  "category": "github-bounty-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "chk37:algora:spaceapp",
+  "kind": "task",
+  "url": "https://algora.io/oll4com/spaceapp",
+  "country": "GLOBAL",
+  "site": "Algora page for oll4com/spaceapp",
+  "category": "github-bounty-check",
+  "excerptChars": 8000
+ },
+ {
+  "id": "chk37:algora:bounties",
+  "kind": "task",
+  "url": "https://algora.io/bounties",
+  "country": "GLOBAL",
+  "site": "Algora open bounties page",
+  "category": "github-bounty-check",
+  "excerptChars": 12000
+ }
+]
