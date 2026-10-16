@@ -1,0 +1,38 @@
+[
+ {
+  "id": "cm61:listing-html",
+  "kind": "html",
+  "url": "https://colombiamove.com/anuncio/the-quiz-is-graded-with-the-reasons-bio-101-sample-f029babf",
+  "country": "CO",
+  "site": "the Colombia Move listing's own page (public read)",
+  "category": "promotion-verify",
+  "bodyChars": 300000
+ },
+ {
+  "id": "cm61:public-search-studyproofs",
+  "kind": "json",
+  "url": "https://colombiamove.com/api/public/listings?q=StudyProofs",
+  "country": "CO",
+  "site": "Colombia Move public search: StudyProofs",
+  "category": "promotion-verify",
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm61:public-search-quiz",
+  "kind": "json",
+  "url": "https://colombiamove.com/api/public/listings?q=quiz",
+  "country": "CO",
+  "site": "Colombia Move public search: quiz",
+  "category": "promotion-verify",
+  "bodyChars": 60000
+ },
+ {
+  "id": "cm61:buscar-html",
+  "kind": "html",
+  "url": "https://colombiamove.com/buscar?q=StudyProofs",
+  "country": "CO",
+  "site": "Colombia Move search page for StudyProofs",
+  "category": "promotion-verify",
+  "bodyChars": 300000
+ }
+]
