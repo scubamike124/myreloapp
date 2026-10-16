@@ -1,1 +1,1010 @@
-[]
+[
+ {
+  "id": "ver83:georgiavisioncare.com:home",
+  "kind": "signup",
+  "url": "https://georgiavisioncare.com/",
+  "country": "BE",
+  "site": "georgiavisioncare.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:shipt.com:home",
+  "kind": "signup",
+  "url": "https://shipt.com/",
+  "country": "AT",
+  "site": "shipt.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:meijer.com:home",
+  "kind": "signup",
+  "url": "https://meijer.com/",
+  "country": "AT",
+  "site": "meijer.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:outlook.office.com:home",
+  "kind": "signup",
+  "url": "https://outlook.office.com/",
+  "country": "FR",
+  "site": "outlook.office.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:merriam-webster.com:home",
+  "kind": "signup",
+  "url": "https://merriam-webster.com/",
+  "country": "DK",
+  "site": "merriam-webster.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:vocabulary.com:home",
+  "kind": "signup",
+  "url": "https://vocabulary.com/",
+  "country": "DK",
+  "site": "vocabulary.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:dictionary.cambridge.org:home",
+  "kind": "signup",
+  "url": "https://dictionary.cambridge.org/",
+  "country": "DK",
+  "site": "dictionary.cambridge.org home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:dictionary.com:home",
+  "kind": "signup",
+  "url": "https://dictionary.com/",
+  "country": "DK",
+  "site": "dictionary.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:gratis.com:home",
+  "kind": "signup",
+  "url": "https://gratis.com/",
+  "country": "DK",
+  "site": "gratis.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:spanishdict.com:home",
+  "kind": "signup",
+  "url": "https://spanishdict.com/",
+  "country": "DK",
+  "site": "spanishdict.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:englishwordchamps.com:home",
+  "kind": "signup",
+  "url": "https://englishwordchamps.com/",
+  "country": "DK",
+  "site": "englishwordchamps.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:collinsdictionary.com:home",
+  "kind": "signup",
+  "url": "https://collinsdictionary.com/",
+  "country": "DK",
+  "site": "collinsdictionary.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:lucity.lawrenceks.org:home",
+  "kind": "signup",
+  "url": "https://lucity.lawrenceks.org/",
+  "country": "CH",
+  "site": "lucity.lawrenceks.org home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:gis.lawrenceks.org:home",
+  "kind": "signup",
+  "url": "https://gis.lawrenceks.org/",
+  "country": "CH",
+  "site": "gis.lawrenceks.org home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:copywritersboard.com:home",
+  "kind": "signup",
+  "url": "https://copywritersboard.com/",
+  "country": "FI",
+  "site": "copywritersboard.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:ryrob.com:home",
+  "kind": "signup",
+  "url": "https://ryrob.com/",
+  "country": "FI",
+  "site": "ryrob.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:dorik.com:home",
+  "kind": "signup",
+  "url": "https://dorik.com/",
+  "country": "FI",
+  "site": "dorik.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:nealschaffer.com:home",
+  "kind": "signup",
+  "url": "https://nealschaffer.com/",
+  "country": "FI",
+  "site": "nealschaffer.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:webnode.com:home",
+  "kind": "signup",
+  "url": "https://webnode.com/",
+  "country": "FI",
+  "site": "webnode.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:adobe.com:home",
+  "kind": "signup",
+  "url": "https://adobe.com/",
+  "country": "FI",
+  "site": "adobe.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:entrepreneurnut.com:home",
+  "kind": "signup",
+  "url": "https://entrepreneurnut.com/",
+  "country": "FI",
+  "site": "entrepreneurnut.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:teleprompter.com:home",
+  "kind": "signup",
+  "url": "https://teleprompter.com/",
+  "country": "FI",
+  "site": "teleprompter.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:mail.yahoo.com:home",
+  "kind": "signup",
+  "url": "https://mail.yahoo.com/",
+  "country": "IT",
+  "site": "mail.yahoo.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:login.yahoo.com:home",
+  "kind": "signup",
+  "url": "https://login.yahoo.com/",
+  "country": "IT",
+  "site": "login.yahoo.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:help.yahoo.com:home",
+  "kind": "signup",
+  "url": "https://help.yahoo.com/",
+  "country": "IT",
+  "site": "help.yahoo.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:yahoo.com:home",
+  "kind": "signup",
+  "url": "https://yahoo.com/",
+  "country": "IT",
+  "site": "yahoo.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:mobile.yahoo.com:home",
+  "kind": "signup",
+  "url": "https://mobile.yahoo.com/",
+  "country": "IT",
+  "site": "mobile.yahoo.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:metrobyt-mobile.com:home",
+  "kind": "signup",
+  "url": "https://metrobyt-mobile.com/",
+  "country": "PL",
+  "site": "metrobyt-mobile.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:hola.metrobyt-mobile.com:home",
+  "kind": "signup",
+  "url": "https://hola.metrobyt-mobile.com/",
+  "country": "PL",
+  "site": "hola.metrobyt-mobile.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:promo.metrobyt-mobile.com:home",
+  "kind": "signup",
+  "url": "https://promo.metrobyt-mobile.com/",
+  "country": "PL",
+  "site": "promo.metrobyt-mobile.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:walmart.com:home",
+  "kind": "signup",
+  "url": "https://walmart.com/",
+  "country": "BG",
+  "site": "walmart.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:consumeraffairs.com:home",
+  "kind": "signup",
+  "url": "https://consumeraffairs.com/",
+  "country": "BG",
+  "site": "consumeraffairs.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:thedailyautomotive.com:home",
+  "kind": "signup",
+  "url": "https://thedailyautomotive.com/",
+  "country": "BG",
+  "site": "thedailyautomotive.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:chamberofcommerce.com:home",
+  "kind": "signup",
+  "url": "https://chamberofcommerce.com/",
+  "country": "BG",
+  "site": "chamberofcommerce.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:superpages.com:home",
+  "kind": "signup",
+  "url": "https://superpages.com/",
+  "country": "BG",
+  "site": "superpages.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:loc8nearme.com:home",
+  "kind": "signup",
+  "url": "https://loc8nearme.com/",
+  "country": "BG",
+  "site": "loc8nearme.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:yellowpages.com:home",
+  "kind": "signup",
+  "url": "https://yellowpages.com/",
+  "country": "BG",
+  "site": "yellowpages.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:stackoverflow.com:home",
+  "kind": "signup",
+  "url": "https://stackoverflow.com/",
+  "country": "RO",
+  "site": "stackoverflow.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:ja.stackoverflow.com:home",
+  "kind": "signup",
+  "url": "https://ja.stackoverflow.com/",
+  "country": "RO",
+  "site": "ja.stackoverflow.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:gowrestle.com:home",
+  "kind": "signup",
+  "url": "https://gowrestle.com/",
+  "country": "CZ",
+  "site": "gowrestle.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:cagematch.net:home",
+  "kind": "signup",
+  "url": "https://cagematch.net/",
+  "country": "CZ",
+  "site": "cagematch.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:prowrestling.fandom.com:home",
+  "kind": "signup",
+  "url": "https://prowrestling.fandom.com/",
+  "country": "CZ",
+  "site": "prowrestling.fandom.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:vimeo.com:home",
+  "kind": "signup",
+  "url": "https://vimeo.com/",
+  "country": "CZ",
+  "site": "vimeo.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:privacysavvy.com:home",
+  "kind": "signup",
+  "url": "https://privacysavvy.com/",
+  "country": "CZ",
+  "site": "privacysavvy.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:marcustheatres.com:home",
+  "kind": "signup",
+  "url": "https://marcustheatres.com/",
+  "country": "GR",
+  "site": "marcustheatres.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:cart.marcustheatres.com:home",
+  "kind": "signup",
+  "url": "https://cart.marcustheatres.com/",
+  "country": "GR",
+  "site": "cart.marcustheatres.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:movieflex.marcustheatres.com:home",
+  "kind": "signup",
+  "url": "https://movieflex.marcustheatres.com/",
+  "country": "GR",
+  "site": "movieflex.marcustheatres.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:ticketing.marcustheatres.com:home",
+  "kind": "signup",
+  "url": "https://ticketing.marcustheatres.com/",
+  "country": "GR",
+  "site": "ticketing.marcustheatres.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:arxiv.org:home",
+  "kind": "signup",
+  "url": "https://arxiv.org/",
+  "country": "UA",
+  "site": "arxiv.org home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:towardsdatascience.com:home",
+  "kind": "signup",
+  "url": "https://towardsdatascience.com/",
+  "country": "UA",
+  "site": "towardsdatascience.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:transformer-circuits.pub:home",
+  "kind": "signup",
+  "url": "https://transformer-circuits.pub/",
+  "country": "UA",
+  "site": "transformer-circuits.pub home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:theorempath.com:home",
+  "kind": "signup",
+  "url": "https://theorempath.com/",
+  "country": "UA",
+  "site": "theorempath.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:lesswrong.com:home",
+  "kind": "signup",
+  "url": "https://lesswrong.com/",
+  "country": "UA",
+  "site": "lesswrong.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:mccormickml.com:home",
+  "kind": "signup",
+  "url": "https://mccormickml.com/",
+  "country": "UA",
+  "site": "mccormickml.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:go281.user.srcf.net:home",
+  "kind": "signup",
+  "url": "https://go281.user.srcf.net/",
+  "country": "UA",
+  "site": "go281.user.srcf.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:consumersenergy.com:home",
+  "kind": "signup",
+  "url": "https://consumersenergy.com/",
+  "country": "IL",
+  "site": "consumersenergy.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:cepass.consumersenergy.com:home",
+  "kind": "signup",
+  "url": "https://cepass.consumersenergy.com/",
+  "country": "IL",
+  "site": "cepass.consumersenergy.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:construction.consumersenergy.com:home",
+  "kind": "signup",
+  "url": "https://construction.consumersenergy.com/",
+  "country": "IL",
+  "site": "construction.consumersenergy.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:careers.consumersenergy.com:home",
+  "kind": "signup",
+  "url": "https://careers.consumersenergy.com/",
+  "country": "IL",
+  "site": "careers.consumersenergy.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:greenbutton.consumersenergy.com:home",
+  "kind": "signup",
+  "url": "https://greenbutton.consumersenergy.com/",
+  "country": "IL",
+  "site": "greenbutton.consumersenergy.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:streetlights.consumersenergy.com:home",
+  "kind": "signup",
+  "url": "https://streetlights.consumersenergy.com/",
+  "country": "IL",
+  "site": "streetlights.consumersenergy.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:zillow.com:home",
+  "kind": "signup",
+  "url": "https://zillow.com/",
+  "country": "TR",
+  "site": "zillow.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:realtor.com:home",
+  "kind": "signup",
+  "url": "https://realtor.com/",
+  "country": "TR",
+  "site": "realtor.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:har.com:home",
+  "kind": "signup",
+  "url": "https://har.com/",
+  "country": "TR",
+  "site": "har.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:redfin.com:home",
+  "kind": "signup",
+  "url": "https://redfin.com/",
+  "country": "TR",
+  "site": "redfin.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:texasally.com:home",
+  "kind": "signup",
+  "url": "https://texasally.com/",
+  "country": "TR",
+  "site": "texasally.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:trulia.com:home",
+  "kind": "signup",
+  "url": "https://trulia.com/",
+  "country": "TR",
+  "site": "trulia.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:era.com:home",
+  "kind": "signup",
+  "url": "https://era.com/",
+  "country": "TR",
+  "site": "era.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:poki.com:home",
+  "kind": "signup",
+  "url": "https://poki.com/",
+  "country": "NG",
+  "site": "poki.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:crazygames.com:home",
+  "kind": "signup",
+  "url": "https://crazygames.com/",
+  "country": "NG",
+  "site": "crazygames.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:friv.com:home",
+  "kind": "signup",
+  "url": "https://friv.com/",
+  "country": "NG",
+  "site": "friv.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:onlinegames.io:home",
+  "kind": "signup",
+  "url": "https://onlinegames.io/",
+  "country": "NG",
+  "site": "onlinegames.io home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:msn.com:home",
+  "kind": "signup",
+  "url": "https://msn.com/",
+  "country": "NG",
+  "site": "msn.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:freegames.org:home",
+  "kind": "signup",
+  "url": "https://freegames.org/",
+  "country": "NG",
+  "site": "freegames.org home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:arkadium.com:home",
+  "kind": "signup",
+  "url": "https://arkadium.com/",
+  "country": "NG",
+  "site": "arkadium.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:thetonerdoctor.com:home",
+  "kind": "signup",
+  "url": "https://thetonerdoctor.com/",
+  "country": "SA",
+  "site": "thetonerdoctor.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:broadwaydirect.com:home",
+  "kind": "signup",
+  "url": "https://broadwaydirect.com/",
+  "country": "MA",
+  "site": "broadwaydirect.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:first-avenue.com:home",
+  "kind": "signup",
+  "url": "https://first-avenue.com/",
+  "country": "MA",
+  "site": "first-avenue.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:palacetheatre.net:home",
+  "kind": "signup",
+  "url": "https://palacetheatre.net/",
+  "country": "MA",
+  "site": "palacetheatre.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:palacetheatre.org:home",
+  "kind": "signup",
+  "url": "https://palacetheatre.org/",
+  "country": "MA",
+  "site": "palacetheatre.org home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:palacealbany.org:home",
+  "kind": "signup",
+  "url": "https://palacealbany.org/",
+  "country": "MA",
+  "site": "palacealbany.org home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:seatplan.com:home",
+  "kind": "signup",
+  "url": "https://seatplan.com/",
+  "country": "MA",
+  "site": "seatplan.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:palacetheatre.us:home",
+  "kind": "signup",
+  "url": "https://palacetheatre.us/",
+  "country": "MA",
+  "site": "palacetheatre.us home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:stateslaws.com:home",
+  "kind": "signup",
+  "url": "https://stateslaws.com/",
+  "country": "EG",
+  "site": "stateslaws.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:backstage.com:home",
+  "kind": "signup",
+  "url": "https://backstage.com/",
+  "country": "SN",
+  "site": "backstage.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:help.backstage.com:home",
+  "kind": "signup",
+  "url": "https://help.backstage.com/",
+  "country": "SN",
+  "site": "help.backstage.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:go.backstage.com:home",
+  "kind": "signup",
+  "url": "https://go.backstage.com/",
+  "country": "SN",
+  "site": "go.backstage.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:ruangguru.com:home",
+  "kind": "signup",
+  "url": "https://ruangguru.com/",
+  "country": "ID",
+  "site": "ruangguru.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:brainacademy.id:home",
+  "kind": "signup",
+  "url": "https://brainacademy.id/",
+  "country": "ID",
+  "site": "brainacademy.id home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:en.wiktionary.org:home",
+  "kind": "signup",
+  "url": "https://en.wiktionary.org/",
+  "country": "ID",
+  "site": "en.wiktionary.org home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:gramedia.com:home",
+  "kind": "signup",
+  "url": "https://gramedia.com/",
+  "country": "ID",
+  "site": "gramedia.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:wordhippo.com:home",
+  "kind": "signup",
+  "url": "https://wordhippo.com/",
+  "country": "ID",
+  "site": "wordhippo.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:verified.capitalone.com:home",
+  "kind": "signup",
+  "url": "https://verified.capitalone.com/",
+  "country": "VN",
+  "site": "verified.capitalone.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:capitalone.com:home",
+  "kind": "signup",
+  "url": "https://capitalone.com/",
+  "country": "VN",
+  "site": "capitalone.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:travel.capitalone.com:home",
+  "kind": "signup",
+  "url": "https://travel.capitalone.com/",
+  "country": "VN",
+  "site": "travel.capitalone.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:menards.capitalone.com:home",
+  "kind": "signup",
+  "url": "https://menards.capitalone.com/",
+  "country": "VN",
+  "site": "menards.capitalone.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:bergdorfgoodman.capitalone.com:home",
+  "kind": "signup",
+  "url": "https://bergdorfgoodman.capitalone.com/",
+  "country": "VN",
+  "site": "bergdorfgoodman.capitalone.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:accuweather.com:home",
+  "kind": "signup",
+  "url": "https://accuweather.com/",
+  "country": "TW",
+  "site": "accuweather.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:weather.com:home",
+  "kind": "signup",
+  "url": "https://weather.com/",
+  "country": "TW",
+  "site": "weather.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:wunderground.com:home",
+  "kind": "signup",
+  "url": "https://wunderground.com/",
+  "country": "TW",
+  "site": "wunderground.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:kfoxtv.com:home",
+  "kind": "signup",
+  "url": "https://kfoxtv.com/",
+  "country": "TW",
+  "site": "kfoxtv.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:ktsm.com:home",
+  "kind": "signup",
+  "url": "https://ktsm.com/",
+  "country": "TW",
+  "site": "ktsm.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:mouthfulsfood.com:home",
+  "kind": "signup",
+  "url": "https://mouthfulsfood.com/",
+  "country": "JP",
+  "site": "mouthfulsfood.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:travel.usnews.com:home",
+  "kind": "signup",
+  "url": "https://travel.usnews.com/",
+  "country": "KR",
+  "site": "travel.usnews.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:britannica.com:home",
+  "kind": "signup",
+  "url": "https://britannica.com/",
+  "country": "KR",
+  "site": "britannica.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:parisjetaime.com:home",
+  "kind": "signup",
+  "url": "https://parisjetaime.com/",
+  "country": "KR",
+  "site": "parisjetaime.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:city-paris.fr:home",
+  "kind": "signup",
+  "url": "https://city-paris.fr/",
+  "country": "KR",
+  "site": "city-paris.fr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:paris.fr:home",
+  "kind": "signup",
+  "url": "https://paris.fr/",
+  "country": "KR",
+  "site": "paris.fr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:introducingparis.com:home",
+  "kind": "signup",
+  "url": "https://introducingparis.com/",
+  "country": "KR",
+  "site": "introducingparis.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:earthtrekkers.com:home",
+  "kind": "signup",
+  "url": "https://earthtrekkers.com/",
+  "country": "KR",
+  "site": "earthtrekkers.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:airliners.net:home",
+  "kind": "signup",
+  "url": "https://airliners.net/",
+  "country": "HK",
+  "site": "airliners.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver83:flyertalk.com:home",
+  "kind": "signup",
+  "url": "https://flyertalk.com/",
+  "country": "HK",
+  "site": "flyertalk.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]

@@ -1,0 +1,362 @@
+[
+ {
+  "id": "rules84:chilemarketplace.cl:terminos",
+  "kind": "json",
+  "url": "https://chilemarketplace.cl/terminos",
+  "country": "CL",
+  "site": "chilemarketplace.cl terms (guessed path /terminos)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:chilemarketplace.cl:terminos-y-condiciones",
+  "kind": "json",
+  "url": "https://chilemarketplace.cl/terminos-y-condiciones",
+  "country": "CL",
+  "site": "chilemarketplace.cl terms (guessed path /terminos-y-condiciones)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:chilemarketplace.cl:terms",
+  "kind": "json",
+  "url": "https://chilemarketplace.cl/terms",
+  "country": "CL",
+  "site": "chilemarketplace.cl terms (guessed path /terms)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:chilemarketplace.cl:condiciones",
+  "kind": "json",
+  "url": "https://chilemarketplace.cl/condiciones",
+  "country": "CL",
+  "site": "chilemarketplace.cl terms (guessed path /condiciones)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:chilemarketplace.cl:legal",
+  "kind": "json",
+  "url": "https://chilemarketplace.cl/legal",
+  "country": "CL",
+  "site": "chilemarketplace.cl terms (guessed path /legal)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:chilemarketplace.cl:terminos.php",
+  "kind": "json",
+  "url": "https://chilemarketplace.cl/terminos.php",
+  "country": "CL",
+  "site": "chilemarketplace.cl terms (guessed path /terminos.php)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:chilemarketplace.cl:terms.php",
+  "kind": "json",
+  "url": "https://chilemarketplace.cl/terms.php",
+  "country": "CL",
+  "site": "chilemarketplace.cl terms (guessed path /terms.php)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:chilemarketplace.cl:page-terms",
+  "kind": "json",
+  "url": "https://chilemarketplace.cl/page/terms",
+  "country": "CL",
+  "site": "chilemarketplace.cl terms (guessed path /page/terms)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:chilemarketplace.cl:politicas",
+  "kind": "json",
+  "url": "https://chilemarketplace.cl/politicas",
+  "country": "CL",
+  "site": "chilemarketplace.cl terms (guessed path /politicas)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:chilemarketplace.cl:terminos-y-condiciones",
+  "kind": "json",
+  "url": "https://chilemarketplace.cl/terminos-y-condiciones/",
+  "country": "CL",
+  "site": "chilemarketplace.cl terms (guessed path /terminos-y-condiciones/)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:yia.cl:terminos",
+  "kind": "json",
+  "url": "https://yia.cl/terminos",
+  "country": "CL",
+  "site": "yia.cl terms (guessed path /terminos)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:yia.cl:terminos-y-condiciones",
+  "kind": "json",
+  "url": "https://yia.cl/terminos-y-condiciones",
+  "country": "CL",
+  "site": "yia.cl terms (guessed path /terminos-y-condiciones)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:yia.cl:terms",
+  "kind": "json",
+  "url": "https://yia.cl/terms",
+  "country": "CL",
+  "site": "yia.cl terms (guessed path /terms)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:yia.cl:condiciones",
+  "kind": "json",
+  "url": "https://yia.cl/condiciones",
+  "country": "CL",
+  "site": "yia.cl terms (guessed path /condiciones)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:yia.cl:legal",
+  "kind": "json",
+  "url": "https://yia.cl/legal",
+  "country": "CL",
+  "site": "yia.cl terms (guessed path /legal)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:yia.cl:terminos.php",
+  "kind": "json",
+  "url": "https://yia.cl/terminos.php",
+  "country": "CL",
+  "site": "yia.cl terms (guessed path /terminos.php)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:yia.cl:terms.php",
+  "kind": "json",
+  "url": "https://yia.cl/terms.php",
+  "country": "CL",
+  "site": "yia.cl terms (guessed path /terms.php)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:yia.cl:page-terms",
+  "kind": "json",
+  "url": "https://yia.cl/page/terms",
+  "country": "CL",
+  "site": "yia.cl terms (guessed path /page/terms)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:yia.cl:politicas",
+  "kind": "json",
+  "url": "https://yia.cl/politicas",
+  "country": "CL",
+  "site": "yia.cl terms (guessed path /politicas)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:yia.cl:terminos-y-condiciones",
+  "kind": "json",
+  "url": "https://yia.cl/terminos-y-condiciones/",
+  "country": "CL",
+  "site": "yia.cl terms (guessed path /terminos-y-condiciones/)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:wow.com.pe:terminos",
+  "kind": "json",
+  "url": "https://wow.com.pe/terminos",
+  "country": "PE",
+  "site": "wow.com.pe terms (guessed path /terminos)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:wow.com.pe:terminos-y-condiciones",
+  "kind": "json",
+  "url": "https://wow.com.pe/terminos-y-condiciones",
+  "country": "PE",
+  "site": "wow.com.pe terms (guessed path /terminos-y-condiciones)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:wow.com.pe:terms",
+  "kind": "json",
+  "url": "https://wow.com.pe/terms",
+  "country": "PE",
+  "site": "wow.com.pe terms (guessed path /terms)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:wow.com.pe:condiciones",
+  "kind": "json",
+  "url": "https://wow.com.pe/condiciones",
+  "country": "PE",
+  "site": "wow.com.pe terms (guessed path /condiciones)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:wow.com.pe:legal",
+  "kind": "json",
+  "url": "https://wow.com.pe/legal",
+  "country": "PE",
+  "site": "wow.com.pe terms (guessed path /legal)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:wow.com.pe:terminos.php",
+  "kind": "json",
+  "url": "https://wow.com.pe/terminos.php",
+  "country": "PE",
+  "site": "wow.com.pe terms (guessed path /terminos.php)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:wow.com.pe:terms.php",
+  "kind": "json",
+  "url": "https://wow.com.pe/terms.php",
+  "country": "PE",
+  "site": "wow.com.pe terms (guessed path /terms.php)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:wow.com.pe:page-terms",
+  "kind": "json",
+  "url": "https://wow.com.pe/page/terms",
+  "country": "PE",
+  "site": "wow.com.pe terms (guessed path /page/terms)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:wow.com.pe:politicas",
+  "kind": "json",
+  "url": "https://wow.com.pe/politicas",
+  "country": "PE",
+  "site": "wow.com.pe terms (guessed path /politicas)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:wow.com.pe:terminos-y-condiciones",
+  "kind": "json",
+  "url": "https://wow.com.pe/terminos-y-condiciones/",
+  "country": "PE",
+  "site": "wow.com.pe terms (guessed path /terminos-y-condiciones/)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:pisodeestudiantes.com:terminos",
+  "kind": "json",
+  "url": "https://pisodeestudiantes.com/terminos",
+  "country": "ES",
+  "site": "pisodeestudiantes.com terms (guessed path /terminos)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:pisodeestudiantes.com:terminos-y-condiciones",
+  "kind": "json",
+  "url": "https://pisodeestudiantes.com/terminos-y-condiciones",
+  "country": "ES",
+  "site": "pisodeestudiantes.com terms (guessed path /terminos-y-condiciones)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:pisodeestudiantes.com:terms",
+  "kind": "json",
+  "url": "https://pisodeestudiantes.com/terms",
+  "country": "ES",
+  "site": "pisodeestudiantes.com terms (guessed path /terms)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:pisodeestudiantes.com:condiciones",
+  "kind": "json",
+  "url": "https://pisodeestudiantes.com/condiciones",
+  "country": "ES",
+  "site": "pisodeestudiantes.com terms (guessed path /condiciones)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:pisodeestudiantes.com:legal",
+  "kind": "json",
+  "url": "https://pisodeestudiantes.com/legal",
+  "country": "ES",
+  "site": "pisodeestudiantes.com terms (guessed path /legal)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:pisodeestudiantes.com:terminos.php",
+  "kind": "json",
+  "url": "https://pisodeestudiantes.com/terminos.php",
+  "country": "ES",
+  "site": "pisodeestudiantes.com terms (guessed path /terminos.php)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:pisodeestudiantes.com:terms.php",
+  "kind": "json",
+  "url": "https://pisodeestudiantes.com/terms.php",
+  "country": "ES",
+  "site": "pisodeestudiantes.com terms (guessed path /terms.php)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:pisodeestudiantes.com:page-terms",
+  "kind": "json",
+  "url": "https://pisodeestudiantes.com/page/terms",
+  "country": "ES",
+  "site": "pisodeestudiantes.com terms (guessed path /page/terms)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:pisodeestudiantes.com:politicas",
+  "kind": "json",
+  "url": "https://pisodeestudiantes.com/politicas",
+  "country": "ES",
+  "site": "pisodeestudiantes.com terms (guessed path /politicas)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "rules84:pisodeestudiantes.com:terminos-y-condiciones",
+  "kind": "json",
+  "url": "https://pisodeestudiantes.com/terminos-y-condiciones/",
+  "country": "ES",
+  "site": "pisodeestudiantes.com terms (guessed path /terminos-y-condiciones/)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
