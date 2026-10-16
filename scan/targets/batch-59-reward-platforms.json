@@ -1,0 +1,110 @@
+[
+ {
+  "id": "gh59:opire-bot-open",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=commenter%3Aopire-bot%20is%3Aissue%20is%3Aopen&sort=updated&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "open issues where Opire's bot commented (rewards)",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh59:opire-word-open",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=%22opire%22%20in%3Acomments%20is%3Aissue%20is%3Aopen%20updated%3A%3E%3D2026-09-01&sort=updated&order=desc&per_page=50",
+  "country": "GLOBAL",
+  "site": "open issues mentioning Opire in comments, updated since September",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "web59:opire-home",
+  "kind": "html",
+  "url": "https://opire.dev/",
+  "country": "GLOBAL",
+  "site": "Opire home",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "web59:opire-docs",
+  "kind": "html",
+  "url": "https://docs.opire.dev/",
+  "country": "GLOBAL",
+  "site": "Opire docs",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "api59:opire-rewards",
+  "kind": "json",
+  "url": "https://api.opire.dev/rewards?status=open",
+  "country": "GLOBAL",
+  "site": "Opire rewards API (guess)",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "web59:boss-home",
+  "kind": "html",
+  "url": "https://boss.dev/",
+  "country": "GLOBAL",
+  "site": "boss.dev home",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "web59:boss-bounties",
+  "kind": "html",
+  "url": "https://boss.dev/bounties",
+  "country": "GLOBAL",
+  "site": "boss.dev bounties",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "web59:boss-issues",
+  "kind": "html",
+  "url": "https://boss.dev/issues",
+  "country": "GLOBAL",
+  "site": "boss.dev issues",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "web59:gitpay-home",
+  "kind": "html",
+  "url": "https://gitpay.me/",
+  "country": "BR",
+  "site": "Gitpay home",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "api59:gitpay-tasks",
+  "kind": "json",
+  "url": "https://api.gitpay.me/tasks",
+  "country": "BR",
+  "site": "Gitpay tasks API (guess)",
+  "category": "bounty-platform",
+  "bodyChars": 200000
+ },
+ {
+  "id": "web59:polar-issues",
+  "kind": "html",
+  "url": "https://polar.sh/issues",
+  "country": "GLOBAL",
+  "site": "Polar issue funding page",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "api59:colombiamove-public-studyproofs-2",
+  "kind": "json",
+  "url": "https://colombiamove.com/api/public/listings?q=StudyProofs",
+  "country": "CO",
+  "site": "Colombia Move public listings search for StudyProofs (second read)",
+  "category": "promotion-verify",
+  "bodyChars": 20000
+ }
+]
