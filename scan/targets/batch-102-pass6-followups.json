@@ -1,0 +1,83 @@
+[
+ {
+  "id": "gh102:parabola-issue",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues/4",
+  "country": "GLOBAL",
+  "site": "Parabola #4 ($105 bounty mirrored by bounty-plaza)",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh102:parabola-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola/issues/4/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "Parabola #4 comments (claims, payment terms)",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh102:parabola-repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Parabola-org/parabola",
+  "country": "GLOBAL",
+  "site": "Parabola repo (age, stars, license)",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh102:parabola-bounties",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=repo:Parabola-org/parabola%20bounty%20in:title&sort=updated&order=desc&per_page=30",
+  "country": "GLOBAL",
+  "site": "Parabola bounty issues (history: paid ones?)",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh102:parabola-contrib",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/Parabola-org/parabola/HEAD/CONTRIBUTING.md",
+  "country": "GLOBAL",
+  "site": "Parabola CONTRIBUTING (AI policy?)",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh102:parabola-readme",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/Parabola-org/parabola/HEAD/README.md",
+  "country": "GLOBAL",
+  "site": "Parabola README",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh102:edgechains-issue",
+  "kind": "json",
+  "url": "https://api.github.com/repos/arakoodev/EdgeChains/issues/290",
+  "country": "GLOBAL",
+  "site": "EdgeChains #290 ($50, mirrored by bounty-watcher)",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh102:edgechains-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/arakoodev/EdgeChains/issues/290/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "EdgeChains #290 comments",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh102:bawes-issue",
+  "kind": "json",
+  "url": "https://api.github.com/repos/BAWES-Universe/workadventure-universe/issues/1",
+  "country": "GLOBAL",
+  "site": "BAWES Universe #1 ($150 epic)",
+  "category": "paid-task",
+  "bodyChars": 120000
+ }
+]
