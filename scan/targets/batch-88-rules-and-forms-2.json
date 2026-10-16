@@ -1,0 +1,524 @@
+[
+ {
+  "id": "r88:4boni:cgu",
+  "kind": "json",
+  "url": "https://4boni.fr/conditions-generales-dutilisation/",
+  "country": "FR",
+  "site": "4boni CGU",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:4boni:mentions",
+  "kind": "json",
+  "url": "https://4boni.fr/index.php/termes-et-conditions/",
+  "country": "FR",
+  "site": "4boni mentions",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:4boni:inscription",
+  "kind": "signup",
+  "url": "https://4boni.fr/inscription/",
+  "country": "FR",
+  "site": "4boni registration",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:4boni:publier",
+  "kind": "signup",
+  "url": "https://4boni.fr/index.php/publier-une-annonce/",
+  "country": "FR",
+  "site": "4boni post",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:dlastudenta:regulamin",
+  "kind": "json",
+  "url": "https://www.dlastudenta.pl/regulamin",
+  "country": "PL",
+  "site": "dlaStudenta regulamin (guess)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:dlastudenta:regulamin2",
+  "kind": "json",
+  "url": "https://ogloszenia.dlastudenta.pl/regulamin.html",
+  "country": "PL",
+  "site": "dlaStudenta ogloszenia regulamin (guess)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:dlastudenta:dodaj",
+  "kind": "signup",
+  "url": "https://ogloszenia.dlastudenta.pl/dodaj/ogloszenie.html",
+  "country": "PL",
+  "site": "dlaStudenta add ad form",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:opor:faq",
+  "kind": "json",
+  "url": "https://opor.ng/en/faq/",
+  "country": "NG",
+  "site": "opor FAQ",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:opor:faqboard",
+  "kind": "json",
+  "url": "https://opor.ng/en/faq/board/",
+  "country": "NG",
+  "site": "opor FAQ board",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:opor:register",
+  "kind": "signup",
+  "url": "https://opor.ng/en/office/register/",
+  "country": "NG",
+  "site": "opor registration",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:opor:add",
+  "kind": "signup",
+  "url": "https://opor.ng/en/board/add.html",
+  "country": "NG",
+  "site": "opor add ad",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:jekoba:terms",
+  "kind": "json",
+  "url": "https://jekoba.com/terms-of-use/",
+  "country": "NG",
+  "site": "Jekoba terms",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:jekoba:register",
+  "kind": "signup",
+  "url": "https://jekoba.com/my-account/registration/",
+  "country": "NG",
+  "site": "Jekoba registration",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:jekoba:post",
+  "kind": "signup",
+  "url": "https://jekoba.com/post-an-ad/",
+  "country": "NG",
+  "site": "Jekoba post ad",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:posttotrade:register",
+  "kind": "signup",
+  "url": "https://posttotrade.ng/user/register",
+  "country": "NG",
+  "site": "PostToTrade registration",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:posttotrade:terms",
+  "kind": "json",
+  "url": "https://posttotrade.ng/terms-and-conditions-p24",
+  "country": "NG",
+  "site": "PostToTrade terms (guess p24)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:posttotrade:terms2",
+  "kind": "json",
+  "url": "https://posttotrade.ng/terms-p24",
+  "country": "NG",
+  "site": "PostToTrade terms (guess)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:toutypasse:cgu",
+  "kind": "json",
+  "url": "https://www.toutypasse.com/cgu",
+  "country": "FR",
+  "site": "TouTyPasse CGU",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:toutypasse:faq",
+  "kind": "json",
+  "url": "https://www.toutypasse.com/faq-aide",
+  "country": "FR",
+  "site": "TouTyPasse FAQ",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:toutypasse:compte",
+  "kind": "signup",
+  "url": "https://www.toutypasse.com/creer-mon-compte",
+  "country": "FR",
+  "site": "TouTyPasse create account",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:toutypasse:deposer",
+  "kind": "signup",
+  "url": "https://www.toutypasse.com/deposer-une-petite-annonce",
+  "country": "FR",
+  "site": "TouTyPasse post",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:kowika:terms",
+  "kind": "json",
+  "url": "https://kowika.nl/terms/",
+  "country": "NL",
+  "site": "Kowika terms",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:kowika:registreren",
+  "kind": "signup",
+  "url": "https://kowika.nl/registreren/",
+  "country": "NL",
+  "site": "Kowika registration",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:kowika:plaatsen",
+  "kind": "signup",
+  "url": "https://kowika.nl/advertentie-plaatsen/",
+  "country": "NL",
+  "site": "Kowika post",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:speurkoop:registreren",
+  "kind": "signup",
+  "url": "https://speurkoop.nl/registreren/",
+  "country": "NL",
+  "site": "Speurkoop registration",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:speurkoop:plaatsen",
+  "kind": "signup",
+  "url": "https://speurkoop.nl/advertentie-plaatsen/",
+  "country": "NL",
+  "site": "Speurkoop post",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:speurkoop:voorwaarden",
+  "kind": "json",
+  "url": "https://speurkoop.nl/algemene-voorwaarden/",
+  "country": "NL",
+  "site": "Speurkoop terms (guess)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:bantumart:terms",
+  "kind": "json",
+  "url": "https://ng.bantumart.com/terms",
+  "country": "NG",
+  "site": "Bantumart terms",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:bantumart:faq",
+  "kind": "json",
+  "url": "https://ng.bantumart.com/frequently_asked_questions",
+  "country": "NG",
+  "site": "Bantumart FAQ",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:bantumart:signup",
+  "kind": "signup",
+  "url": "https://ng.bantumart.com/sign_up",
+  "country": "NG",
+  "site": "Bantumart sign up",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:bantumart:post",
+  "kind": "signup",
+  "url": "https://ng.bantumart.com/post_ad",
+  "country": "NG",
+  "site": "Bantumart post ad",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:tuoglosze:dodaj",
+  "kind": "signup",
+  "url": "https://tuoglosze.pl/dodaj-do-listy/",
+  "country": "PL",
+  "site": "tuoglosze add",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:tuoglosze:regulamin",
+  "kind": "json",
+  "url": "https://tuoglosze.pl/regulamin/",
+  "country": "PL",
+  "site": "tuoglosze regulamin (guess)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:darmoweogloszenia:start",
+  "kind": "signup",
+  "url": "https://darmoweogloszenia.pl/start",
+  "country": "PL",
+  "site": "darmoweogloszenia add",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:darmoweogloszenia:regulamin",
+  "kind": "json",
+  "url": "https://darmoweogloszenia.pl/regulamin",
+  "country": "PL",
+  "site": "darmoweogloszenia regulamin (guess)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:kampusplug:home",
+  "kind": "signup",
+  "url": "https://www.kampusplug.com/",
+  "country": "NG",
+  "site": "KampusPlug home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:kampusplug:sell",
+  "kind": "signup",
+  "url": "https://www.kampusplug.com/used/sell",
+  "country": "NG",
+  "site": "KampusPlug sell",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:pruv:home",
+  "kind": "signup",
+  "url": "https://pruv.com.ng/",
+  "country": "NG",
+  "site": "Pruv home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:studenteninserate:home",
+  "kind": "signup",
+  "url": "https://www.studenteninserate.at/",
+  "country": "AT",
+  "site": "Studenteninserate home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:studenteninserate:agb",
+  "kind": "json",
+  "url": "https://www.studenteninserate.at/agb",
+  "country": "AT",
+  "site": "Studenteninserate AGB (guess)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:studenteninserate:nutzung",
+  "kind": "json",
+  "url": "https://www.studenteninserate.at/nutzungsbedingungen",
+  "country": "AT",
+  "site": "Studenteninserate Nutzungsbedingungen (guess)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:studisale:home",
+  "kind": "signup",
+  "url": "https://www.studisale.ch/",
+  "country": "CH",
+  "site": "Studisale home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:jekote:home",
+  "kind": "signup",
+  "url": "https://jekote.be/fr/petites-annonces",
+  "country": "BE",
+  "site": "Jekote student classifieds",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:jekote:root",
+  "kind": "signup",
+  "url": "https://jekote.be/",
+  "country": "BE",
+  "site": "Jekote home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:studentbe:home",
+  "kind": "signup",
+  "url": "https://www.student.be/fr/",
+  "country": "BE",
+  "site": "Student.be home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:annoncesbelgique:home",
+  "kind": "signup",
+  "url": "https://www.annoncesbelgique.be/",
+  "country": "BE",
+  "site": "annoncesbelgique home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:aannonce:be",
+  "kind": "signup",
+  "url": "https://aannonce.com/be",
+  "country": "BE",
+  "site": "aannonce Belgium",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:quefaire:home",
+  "kind": "signup",
+  "url": "https://www.quefaire.be/",
+  "country": "BE",
+  "site": "quefaire home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:yabaa:home",
+  "kind": "signup",
+  "url": "https://yabaa.ch/",
+  "country": "CH",
+  "site": "Yabaa home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:flohmarkt24:home",
+  "kind": "signup",
+  "url": "https://www.flohmarkt24.ch/",
+  "country": "CH",
+  "site": "Flohmarkt24 home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:marktch:home",
+  "kind": "signup",
+  "url": "https://www.markt.ch/",
+  "country": "CH",
+  "site": "markt.ch home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:privatmarkt:home",
+  "kind": "signup",
+  "url": "https://www.privatmarkt.ch/",
+  "country": "CH",
+  "site": "Privatmarkt home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:inserate24:home",
+  "kind": "signup",
+  "url": "https://www.inserate24.com/ch",
+  "country": "CH",
+  "site": "inserate24 CH",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:schweizerinserate:home",
+  "kind": "signup",
+  "url": "https://www.schweizer-inserate.ch/",
+  "country": "CH",
+  "site": "Schweizer Inserate home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:gratisannonse:home",
+  "kind": "signup",
+  "url": "https://gratis-annonse.no/",
+  "country": "NO",
+  "site": "gratis-annonse.no home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:studentposter:home",
+  "kind": "signup",
+  "url": "https://studentposter.se/",
+  "country": "SE",
+  "site": "Studentposter home",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r88:bacheca:frm",
+  "kind": "json",
+  "url": "http://bachecauniversitaria.it/bacheca/bacheca_annunci_frm.htm",
+  "country": "IT",
+  "site": "BachecaUniversitaria form page (text)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r88:bacheca:home",
+  "kind": "json",
+  "url": "http://bachecauniversitaria.it/",
+  "country": "IT",
+  "site": "BachecaUniversitaria home (text)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]

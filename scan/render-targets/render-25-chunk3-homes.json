@@ -1,0 +1,200 @@
+[
+ {
+  "id": "r25:studenteninserate.at",
+  "url": "https://studenteninserate.at/",
+  "country": "AT",
+  "site": "studenteninserate.at (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:studisale.ch",
+  "url": "https://studisale.ch/",
+  "country": "CH",
+  "site": "studisale.ch (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:jekote.be",
+  "url": "https://jekote.be/",
+  "country": "BE",
+  "site": "jekote.be (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:student.be",
+  "url": "https://student.be/",
+  "country": "BE",
+  "site": "student.be (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:kampusplug.com",
+  "url": "https://www.kampusplug.com/",
+  "country": "NG",
+  "site": "kampusplug.com (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:pruv.com.ng",
+  "url": "https://pruv.com.ng/",
+  "country": "NG",
+  "site": "pruv.com.ng (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:yabaa.ch",
+  "url": "https://yabaa.ch/",
+  "country": "CH",
+  "site": "yabaa.ch (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:markt.ch",
+  "url": "https://markt.ch/",
+  "country": "CH",
+  "site": "markt.ch (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:privatmarkt.ch",
+  "url": "https://privatmarkt.ch/",
+  "country": "CH",
+  "site": "privatmarkt.ch (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:flohmarkt24.ch",
+  "url": "https://flohmarkt24.ch/",
+  "country": "CH",
+  "site": "flohmarkt24.ch (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:inserate24.com",
+  "url": "https://www.inserate24.com/ch",
+  "country": "CH",
+  "site": "inserate24.com (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:schweizer-inserate.ch",
+  "url": "https://schweizer-inserate.ch/",
+  "country": "CH",
+  "site": "schweizer-inserate.ch (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:annoncesbelgique.be",
+  "url": "https://annoncesbelgique.be/",
+  "country": "BE",
+  "site": "annoncesbelgique.be (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:aannonce.com",
+  "url": "https://aannonce.com/be",
+  "country": "BE",
+  "site": "aannonce.com (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:quefaire.be",
+  "url": "https://quefaire.be/",
+  "country": "BE",
+  "site": "quefaire.be (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:gratis-annonse.no",
+  "url": "https://gratis-annonse.no/",
+  "country": "NO",
+  "site": "gratis-annonse.no (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:studentposter.se",
+  "url": "https://studentposter.se/",
+  "country": "SE",
+  "site": "studentposter.se (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r25:bantumart.com",
+  "url": "https://ng.bantumart.com/",
+  "country": "NG",
+  "site": "bantumart.com (links to rules, registration and posting; forms; text)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ }
+]
