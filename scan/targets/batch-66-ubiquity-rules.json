@@ -1,0 +1,74 @@
+[
+ {
+  "id": "gh66:ai-readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity/ai.ubq.fi/readme",
+  "country": "GLOBAL",
+  "site": "ai.ubq.fi README (base64)",
+  "category": "bounty-platform",
+  "bodyChars": 80000
+ },
+ {
+  "id": "gh66:ai-contributing",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity/ai.ubq.fi/contents/CONTRIBUTING.md",
+  "country": "GLOBAL",
+  "site": "ai.ubq.fi CONTRIBUTING (base64)",
+  "category": "bounty-platform",
+  "bodyChars": 80000
+ },
+ {
+  "id": "gh66:ai-683-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity/ai.ubq.fi/issues/683/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "ai.ubq.fi #683 ($300, closed 2026-10-02): its comments (the payout trail)",
+  "category": "bounty-platform",
+  "bodyChars": 200000
+ },
+ {
+  "id": "gh66:ai-1041",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity/ai.ubq.fi/issues/1041",
+  "country": "GLOBAL",
+  "site": "ai.ubq.fi #1041 ($150, open): the task",
+  "category": "bounty-platform",
+  "bodyChars": 40000
+ },
+ {
+  "id": "gh66:ai-1041-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity/ai.ubq.fi/issues/1041/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "ai.ubq.fi #1041 comments",
+  "category": "bounty-platform",
+  "bodyChars": 100000
+ },
+ {
+  "id": "gh66:start-readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity-os-marketplace/command-start-stop/readme",
+  "country": "GLOBAL",
+  "site": "the /start command's rules (base64)",
+  "category": "bounty-platform",
+  "bodyChars": 80000
+ },
+ {
+  "id": "gh66:ubq-os-config",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity/ai.ubq.fi/contents/.github/.ubiquity-os.config.yml",
+  "country": "GLOBAL",
+  "site": "ai.ubq.fi's UbiquityOS config (base64)",
+  "category": "bounty-platform",
+  "bodyChars": 80000
+ },
+ {
+  "id": "gh66:ubiquity-org-config",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity/.ubiquity-os/contents/.github/.ubiquity-os.config.yml",
+  "country": "GLOBAL",
+  "site": "the org-level UbiquityOS config (base64)",
+  "category": "bounty-platform",
+  "bodyChars": 80000
+ }
+]
