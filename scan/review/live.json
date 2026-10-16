@@ -1,3 +1,20 @@
 [
- {"when": "2026-10-15 23:47:13Z", "platform": "PeerTube (stream.indieagora.com)", "account": "StudyProofs (studyproofs, channel studyproofs_demos)", "post": "quiz-graded: \"Cellular respiration: a 4-question quiz, graded with the reasons\"", "url": "https://stream.indieagora.com/videos/watch/d552d5a1-e998-4c88-9153-838b4d6798ce", "verified": "read back publicly by a GitHub runner at 23:56Z (privacy public, 1 video on the channel)", "region": "Fediverse (video), global"}
+ {
+  "when": "2026-10-15 23:47:13Z",
+  "platform": "PeerTube (stream.indieagora.com)",
+  "account": "StudyProofs (studyproofs, channel studyproofs_demos)",
+  "post": "quiz-graded: \"Cellular respiration: a 4-question quiz, graded with the reasons\"",
+  "url": "https://stream.indieagora.com/videos/watch/d552d5a1-e998-4c88-9153-838b4d6798ce",
+  "verified": "read back publicly by a GitHub runner at 23:56Z (privacy public, 1 video on the channel)",
+  "region": "Fediverse (video), global"
+ },
+ {
+  "when": "2026-10-16 07:19:40Z",
+  "platform": "Mastodon (101010.pl)",
+  "account": "StudyProofs (@studyproofs, bot-flagged, AI disclosure in the bio)",
+  "post": "notes-with-sources: \"From STAT 200 sample notes: 6 note sections, each with its source line, ending on the common mistakes.\"",
+  "url": "https://101010.pl/@studyproofs/117449371188624497",
+  "verified": "read back publicly by a GitHub runner at 07:26:13Z (visibility public, statuses_count 1)",
+  "region": "Central & Eastern Europe (Poland), fediverse-wide"
+ }
 ]

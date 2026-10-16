@@ -1,6 +1,6 @@
 # StudyProofs free-promotion region scan — 2026-10-16
 
-Built 2026-10-16 07:11Z from 1975 read-only probes (1896 distinct sites) made by GitHub Actions runners during the night of 2026-10-15/16, plus the hand review in `scan/review/verdicts.json`. Regenerate with `python3 -I scan/report.py`. The CSV beside this file carries every row.
+Built 2026-10-16 07:27Z from 1975 read-only probes (1896 distinct sites) made by GitHub Actions runners during the night of 2026-10-15/16, plus the hand review in `scan/review/verdicts.json`. Regenerate with `python3 -I scan/report.py`. The CSV beside this file carries every row.
 
 **Standard.** A site counts as **qualified** only when its own current rules or submission page, read tonight, allow a free StudyProofs listing or promotional post and nothing on the page asks for a date of birth, phone number, identity check, CAPTCHA bypass, payment or a manual approval. "Allowed with conditions" means the page allows it with a condition (labelled ads, an introduction first, a backlink, a specific language) or shows free posting but the account rules were not fully read. Everything else is listed under the reason it was skipped. Research and account set-ups are not advertisements: only a publicly verified post counts as live.
 
@@ -11,8 +11,9 @@ The owner's note asked for "all 36 regions in our existing region list"; the lis
 | Time (UTC) | Platform | Account | Post | Public URL | Verification |
 |---|---|---|---|---|---|
 | 2026-10-15 23:47:13Z | PeerTube (stream.indieagora.com) | StudyProofs (studyproofs, channel studyproofs_demos) | quiz-graded: "Cellular respiration: a 4-question quiz, graded with the reasons" | https://stream.indieagora.com/videos/watch/d552d5a1-e998-4c88-9153-838b4d6798ce | read back publicly by a GitHub runner at 23:56Z (privacy public, 1 video on the channel) |
+| 2026-10-16 07:19:40Z | Mastodon (101010.pl) | StudyProofs (@studyproofs, bot-flagged, AI disclosure in the bio) | notes-with-sources: "From STAT 200 sample notes: 6 note sections, each with its source line, ending on the common mistakes." | https://101010.pl/@studyproofs/117449371188624497 | read back publicly by a GitHub runner at 07:26:13Z (visibility public, statuses_count 1) |
 
-1 live post(s). Nothing else was posted tonight; see the "Amber can act" column for what is queued.
+2 live post(s). Nothing else was posted tonight; see the "Amber can act" column for what is queued.
 
 ## Totals by region
 
