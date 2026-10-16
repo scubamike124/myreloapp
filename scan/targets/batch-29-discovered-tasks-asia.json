@@ -1,0 +1,425 @@
+[
+ {
+  "id": "disc29:000",
+  "kind": "task",
+  "url": "https://github.com/tenstorrent/tt-metal/issues/58986",
+  "country": "GLOBAL",
+  "site": "https://github.com/tenstorrent/tt-metal/issues/58986",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:001",
+  "kind": "task",
+  "url": "https://docs.tenstorrent.com/bounty_terms.html",
+  "country": "GLOBAL",
+  "site": "https://docs.tenstorrent.com/bounty_terms.html",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:002",
+  "kind": "task",
+  "url": "https://github.com/tenstorrent/tt-metal/issues/56908",
+  "country": "GLOBAL",
+  "site": "https://github.com/tenstorrent/tt-metal/issues/56908",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:003",
+  "kind": "task",
+  "url": "https://github.com/tenstorrent/tt-metal/issues/53787",
+  "country": "GLOBAL",
+  "site": "https://github.com/tenstorrent/tt-metal/issues/53787",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:004",
+  "kind": "task",
+  "url": "https://github.com/tenstorrent/tt-metal/issues/51655",
+  "country": "GLOBAL",
+  "site": "https://github.com/tenstorrent/tt-metal/issues/51655",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:005",
+  "kind": "task",
+  "url": "https://github.com/tenstorrent/tt-metal/issues/59732",
+  "country": "GLOBAL",
+  "site": "https://github.com/tenstorrent/tt-metal/issues/59732",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:006",
+  "kind": "task",
+  "url": "https://github.com/uvsmtid/protoprimer/issues/143",
+  "country": "GLOBAL",
+  "site": "https://github.com/uvsmtid/protoprimer/issues/143",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:007",
+  "kind": "task",
+  "url": "https://github.com/uvsmtid/protoprimer",
+  "country": "GLOBAL",
+  "site": "https://github.com/uvsmtid/protoprimer",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:008",
+  "kind": "task",
+  "url": "https://github.com/verdikta/verdikta-applications/issues/76",
+  "country": "GLOBAL",
+  "site": "https://github.com/verdikta/verdikta-applications/issues/76",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:009",
+  "kind": "task",
+  "url": "https://poidh.xyz",
+  "country": "GLOBAL",
+  "site": "https://poidh.xyz",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:010",
+  "kind": "task",
+  "url": "https://github.com/NSPG13/agent-bounties/issues/1632",
+  "country": "GLOBAL",
+  "site": "https://github.com/NSPG13/agent-bounties/issues/1632",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:011",
+  "kind": "task",
+  "url": "https://agentbounties.app",
+  "country": "GLOBAL",
+  "site": "https://agentbounties.app",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:012",
+  "kind": "task",
+  "url": "https://github.com/Element-Ventures-Canada-Ltd/openchokepoint/issues/19",
+  "country": "GLOBAL",
+  "site": "https://github.com/Element-Ventures-Canada-Ltd/openchokepoint/issues/19",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:013",
+  "kind": "task",
+  "url": "https://github.com/Element-Ventures-Canada-Ltd/openchokepoint/blob/main/BOUNTIES.md",
+  "country": "GLOBAL",
+  "site": "https://github.com/Element-Ventures-Canada-Ltd/openchokepoint/blob/main/BOUNTIES",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:014",
+  "kind": "task",
+  "url": "https://github.com/claude-builders-bounty/claude-builders-bounty/issues/1",
+  "country": "GLOBAL",
+  "site": "https://github.com/claude-builders-bounty/claude-builders-bounty/issues/1",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:015",
+  "kind": "task",
+  "url": "https://opire.dev",
+  "country": "GLOBAL",
+  "site": "https://opire.dev",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:016",
+  "kind": "task",
+  "url": "https://github.com/claude-builders-bounty/claude-builders-bounty/issues/2",
+  "country": "GLOBAL",
+  "site": "https://github.com/claude-builders-bounty/claude-builders-bounty/issues/2",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:017",
+  "kind": "task",
+  "url": "https://github.com/claude-builders-bounty/claude-builders-bounty/issues/3",
+  "country": "GLOBAL",
+  "site": "https://github.com/claude-builders-bounty/claude-builders-bounty/issues/3",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:018",
+  "kind": "task",
+  "url": "https://github.com/claude-builders-bounty/claude-builders-bounty/issues/4",
+  "country": "GLOBAL",
+  "site": "https://github.com/claude-builders-bounty/claude-builders-bounty/issues/4",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:019",
+  "kind": "task",
+  "url": "https://github.com/claude-builders-bounty/claude-builders-bounty/issues/5",
+  "country": "GLOBAL",
+  "site": "https://github.com/claude-builders-bounty/claude-builders-bounty/issues/5",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:020",
+  "kind": "task",
+  "url": "https://github.com/auscaster/frantic-board/issues/277",
+  "country": "GLOBAL",
+  "site": "https://github.com/auscaster/frantic-board/issues/277",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:021",
+  "kind": "task",
+  "url": "https://github.com/Spectral-Finance/lux/issues/103",
+  "country": "GLOBAL",
+  "site": "https://github.com/Spectral-Finance/lux/issues/103",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:022",
+  "kind": "task",
+  "url": "https://github.com/Spectral-Finance/lux",
+  "country": "GLOBAL",
+  "site": "https://github.com/Spectral-Finance/lux",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:023",
+  "kind": "task",
+  "url": "https://github.com/Spectral-Finance/lux/issues/102",
+  "country": "GLOBAL",
+  "site": "https://github.com/Spectral-Finance/lux/issues/102",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:024",
+  "kind": "task",
+  "url": "https://github.com/warpspeedopen-source/warpspeed-bounties/issues/3",
+  "country": "GLOBAL",
+  "site": "https://github.com/warpspeedopen-source/warpspeed-bounties/issues/3",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:025",
+  "kind": "task",
+  "url": "https://warpspeedopen.org/bounties",
+  "country": "GLOBAL",
+  "site": "https://warpspeedopen.org/bounties",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:026",
+  "kind": "task",
+  "url": "https://github.com/warpspeedopen-source/warpspeed-bounties/issues/4",
+  "country": "GLOBAL",
+  "site": "https://github.com/warpspeedopen-source/warpspeed-bounties/issues/4",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:027",
+  "kind": "task",
+  "url": "https://github.com/copperheadhq/copperhead/issues/66",
+  "country": "GLOBAL",
+  "site": "https://github.com/copperheadhq/copperhead/issues/66",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:028",
+  "kind": "task",
+  "url": "https://github.com/copperheadhq/copperhead",
+  "country": "GLOBAL",
+  "site": "https://github.com/copperheadhq/copperhead",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:029",
+  "kind": "task",
+  "url": "https://github.com/aLexzzz430/Cognitive-OS/issues/5",
+  "country": "GLOBAL",
+  "site": "https://github.com/aLexzzz430/Cognitive-OS/issues/5",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:030",
+  "kind": "task",
+  "url": "https://github.com/aLexzzz430/Cognitive-OS",
+  "country": "GLOBAL",
+  "site": "https://github.com/aLexzzz430/Cognitive-OS",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:031",
+  "kind": "task",
+  "url": "https://github.com/weilixiong/TentOfTrials/issues/5",
+  "country": "GLOBAL",
+  "site": "https://github.com/weilixiong/TentOfTrials/issues/5",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:032",
+  "kind": "task",
+  "url": "https://github.com/weilixiong/TentOfTrials",
+  "country": "GLOBAL",
+  "site": "https://github.com/weilixiong/TentOfTrials",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:033",
+  "kind": "task",
+  "url": "https://github.com/aeternity/bounties/issues/6",
+  "country": "GLOBAL",
+  "site": "https://github.com/aeternity/bounties/issues/6",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:034",
+  "kind": "task",
+  "url": "https://github.com/aeternity/bounties",
+  "country": "GLOBAL",
+  "site": "https://github.com/aeternity/bounties",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:035",
+  "kind": "task",
+  "url": "https://www.nedo.go.jp/koubo/CD2_100451.html",
+  "country": "GLOBAL",
+  "site": "https://www.nedo.go.jp/koubo/CD2_100451.html",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:036",
+  "kind": "task",
+  "url": "https://signate.jp",
+  "country": "GLOBAL",
+  "site": "https://signate.jp",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:037",
+  "kind": "task",
+  "url": "https://www.mod.go.jp/atla/kousouken/aichall_the5th.html",
+  "country": "GLOBAL",
+  "site": "https://www.mod.go.jp/atla/kousouken/aichall_the5th.html",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:038",
+  "kind": "task",
+  "url": "https://service.signate.jp/campaign/aircombat-challenge-2026",
+  "country": "GLOBAL",
+  "site": "https://service.signate.jp/campaign/aircombat-challenge-2026",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:039",
+  "kind": "task",
+  "url": "https://www.hackquest.io/hackathons/Bittensor-Global-Subnet-Hackathon",
+  "country": "GLOBAL",
+  "site": "https://www.hackquest.io/hackathons/Bittensor-Global-Subnet-Hackathon",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:040",
+  "kind": "task",
+  "url": "https://www.hackquest.io",
+  "country": "GLOBAL",
+  "site": "https://www.hackquest.io",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:041",
+  "kind": "task",
+  "url": "https://unstop.com/hackathons/hackcache26-government-college-of-engineering-and-technology-jammu-1744316",
+  "country": "GLOBAL",
+  "site": "https://unstop.com/hackathons/hackcache26-government-college-of-engineering-and-",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:042",
+  "kind": "task",
+  "url": "https://unstop.com/hackathons",
+  "country": "GLOBAL",
+  "site": "https://unstop.com/hackathons",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:043",
+  "kind": "task",
+  "url": "https://unstop.com/hackathons/multimodal-ai-hackathon-2026-iit-mandi-1755408",
+  "country": "GLOBAL",
+  "site": "https://unstop.com/hackathons/multimodal-ai-hackathon-2026-iit-mandi-1755408",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:044",
+  "kind": "task",
+  "url": "https://company.solafune.com/news/solafune-hosts-identifying-deforestation-drivers-competition-to-investigate-deforestation",
+  "country": "GLOBAL",
+  "site": "https://company.solafune.com/news/solafune-hosts-identifying-deforestation-drive",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:045",
+  "kind": "task",
+  "url": "https://community.solafune.com",
+  "country": "GLOBAL",
+  "site": "https://community.solafune.com",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ },
+ {
+  "id": "disc29:046",
+  "kind": "task",
+  "url": "https://competition.bitgrit.net/",
+  "country": "GLOBAL",
+  "site": "https://competition.bitgrit.net/",
+  "category": "discovered-task",
+  "excerptChars": 3000
+ }
+]
