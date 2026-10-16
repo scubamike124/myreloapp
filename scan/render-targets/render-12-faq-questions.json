@@ -1,12 +1,12 @@
 [
  {
-  "id": "render11:IT:perstudenti:faq-questions",
+  "id": "render12:IT:perstudenti:faq-questions",
   "url": "https://www.perstudenti.com/faq",
   "discover": false,
   "country": "IT",
   "site": "PerStudenti FAQ (questions clicked)",
   "excerptChars": 12000,
   "expand": "h2, h3, h4, h5, button, summary, [aria-expanded], .faq-question, .accordion-button, [role=button], dt, p, span, div",
-  "expandMatch": "\\\\?\\\\s*$"
+  "expandMatch": "\\?\\s*$"
  }
 ]
