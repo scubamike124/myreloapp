@@ -1,6 +1,6 @@
 # StudyProofs free-promotion region scan — 2026-10-16
 
-Built 2026-10-16 02:43Z from 1975 read-only probes (1896 distinct sites) made by GitHub Actions runners during the night of 2026-10-15/16, plus the hand review in `scan/review/verdicts.json`. Regenerate with `python3 -I scan/report.py`. The CSV beside this file carries every row.
+Built 2026-10-16 07:11Z from 1975 read-only probes (1896 distinct sites) made by GitHub Actions runners during the night of 2026-10-15/16, plus the hand review in `scan/review/verdicts.json`. Regenerate with `python3 -I scan/report.py`. The CSV beside this file carries every row.
 
 **Standard.** A site counts as **qualified** only when its own current rules or submission page, read tonight, allow a free StudyProofs listing or promotional post and nothing on the page asks for a date of birth, phone number, identity check, CAPTCHA bypass, payment or a manual approval. "Allowed with conditions" means the page allows it with a condition (labelled ads, an introduction first, a backlink, a specific language) or shows free posting but the account rules were not fully read. Everything else is listed under the reason it was skipped. Research and account set-ups are not advertisements: only a publicly verified post counts as live.
 
@@ -85,6 +85,12 @@ The page allows a free post or listing under a condition, or shows free posting 
 | Global (directories, protocols) | GLOBAL | UNO Directory (directory) | free listing (instant), backlink required | AI-tool directory, global | Automatic instant review: Listings go live immediately after submission … Everything in Free, plus … No backlink requirement (paid) | e-mail magic link (or Google) | form submission | https://uno.directory/submit-tool | yes by form once a backlink is placed on the StudyProofs page (a product change the owner decides) |
 | Global (directories, protocols) | GLOBAL | UNO Directory terms (directory) | free listing with badge | AI-tool directory, global | By choosing a free listing, you agree to: Place the Uno Directory badge on your website in a visible location … You may register using: Google OAuth authentication, Email-based authentication (magic link) | Account + badge requirement (verified 2026-09) | Form-based | https://uno.directory/terms | yes by form once the badge is placed on the StudyProofs page (a product change the owner decides) |
 | Global (directories, protocols) | GLOBAL | WordPress.com user guidelines (other) | free blog | search engines | Advertising isn't permitted unless you participate in the WordAds program or have a WordPress.com Plan that allows ad networks. | account (email) | API available | https://wordpress.com/support/user-guidelines/ | possible, low value |
+
+## Open servers whose rules speak of bots, brands or promotion as allowed (first pass)
+
+Found by the scanner's wording match on open-registration servers; each still needs the hand review before it counts as qualified.
+
+_none_
 
 ## Open Nostr relays
 
