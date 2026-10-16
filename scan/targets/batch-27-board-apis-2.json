@@ -1,0 +1,128 @@
+[
+ {
+  "id": "api27:clawlancer:listings-full",
+  "kind": "json",
+  "url": "https://clawlancer.ai/api/listings?listing_type=BOUNTY&sort=newest&limit=100",
+  "country": "GLOBAL",
+  "site": "Clawlancer bounty listings (full)",
+  "category": "board-api",
+  "bodyChars": 60000
+ },
+ {
+  "id": "api27:clawlancer:marketplace",
+  "kind": "task",
+  "url": "https://clawlancer.ai/marketplace",
+  "country": "GLOBAL",
+  "site": "Clawlancer marketplace page",
+  "category": "board-api",
+  "excerptChars": 12000
+ },
+ {
+  "id": "api27:frantic:b130",
+  "kind": "task",
+  "url": "https://gofrantic.com/bounties/130",
+  "country": "GLOBAL",
+  "site": "Frantic bounty 130",
+  "category": "board-api",
+  "excerptChars": 8000
+ },
+ {
+  "id": "api27:frantic:b129",
+  "kind": "task",
+  "url": "https://gofrantic.com/bounties/129",
+  "country": "GLOBAL",
+  "site": "Frantic bounty 129",
+  "category": "board-api",
+  "excerptChars": 8000
+ },
+ {
+  "id": "api27:frantic:b128",
+  "kind": "task",
+  "url": "https://gofrantic.com/bounties/128",
+  "country": "GLOBAL",
+  "site": "Frantic bounty 128",
+  "category": "board-api",
+  "excerptChars": 8000
+ },
+ {
+  "id": "api27:frantic:b97",
+  "kind": "task",
+  "url": "https://gofrantic.com/bounties/p-ce0199eecf",
+  "country": "GLOBAL",
+  "site": "Frantic bounty 97 (first bounty on the house)",
+  "category": "board-api",
+  "excerptChars": 8000
+ },
+ {
+  "id": "api27:frantic:board",
+  "kind": "json",
+  "url": "https://api.gofrantic.com/v1/board",
+  "country": "GLOBAL",
+  "site": "Frantic /v1/board",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api27:frantic:rules",
+  "kind": "task",
+  "url": "https://gofrantic.com/RULES.md",
+  "country": "GLOBAL",
+  "site": "Frantic RULES.md",
+  "category": "board-api",
+  "excerptChars": 16000
+ },
+ {
+  "id": "api27:riner:tasks-page",
+  "kind": "task",
+  "url": "https://riner.io/tasks",
+  "country": "GLOBAL",
+  "site": "Riner tasks page",
+  "category": "board-api",
+  "excerptChars": 12000
+ },
+ {
+  "id": "api27:riner:api-v1-tasks",
+  "kind": "json",
+  "url": "https://riner.io/api/v1/tasks",
+  "country": "GLOBAL",
+  "site": "Riner /api/v1/tasks",
+  "category": "board-api",
+  "bodyChars": 30000
+ },
+ {
+  "id": "api27:botbounty:bounties-page",
+  "kind": "task",
+  "url": "https://www.botbounty.ai/bounties",
+  "country": "GLOBAL",
+  "site": "BotBounty bounties page",
+  "category": "board-api",
+  "excerptChars": 12000
+ },
+ {
+  "id": "api27:botbounty:api-bounties",
+  "kind": "json",
+  "url": "https://botbounty-production.up.railway.app/api/bounties",
+  "country": "GLOBAL",
+  "site": "BotBounty /api/bounties",
+  "category": "board-api",
+  "bodyChars": 40000
+ },
+ {
+  "id": "api27:ugig:gig-12",
+  "kind": "task",
+  "url": "https://ugig.net/gigs/cb657568-9a71-4379-8bab-1f1fdf71d967",
+  "country": "GLOBAL",
+  "site": "ugig $12 CSV/JSON gig",
+  "category": "board-api",
+  "excerptChars": 6000
+ },
+ {
+  "id": "api27:superteam:live",
+  "kind": "json",
+  "url": "https://superteam.fun/api/listings?type=bounty&take=50",
+  "country": "GLOBAL",
+  "site": "Superteam public listings",
+  "category": "board-api",
+  "bodyChars": 40000
+ }
+]
