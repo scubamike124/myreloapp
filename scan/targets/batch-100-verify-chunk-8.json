@@ -1,0 +1,371 @@
+[
+ {
+  "id": "ver100:freead.kr:home",
+  "kind": "signup",
+  "url": "https://freead.kr/",
+  "country": "KR",
+  "site": "freead.kr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:freead.kr:found",
+  "kind": "signup",
+  "url": "https://freead.kr/bbs/page.php?hid=intro",
+  "country": "KR",
+  "site": "freead.kr : Introduction > 프리애드:: 누구나 무료광고",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:hongbotong.co.kr:home",
+  "kind": "signup",
+  "url": "https://hongbotong.co.kr/",
+  "country": "KR",
+  "site": "hongbotong.co.kr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:hongbotong.co.kr:found",
+  "kind": "signup",
+  "url": "https://hongbotong.co.kr/freehongbo",
+  "country": "KR",
+  "site": "hongbotong.co.kr : 자유홍보 — 무료 홍보 · 홍보통",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:free5.co.kr:home",
+  "kind": "signup",
+  "url": "https://free5.co.kr/",
+  "country": "KR",
+  "site": "free5.co.kr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:free5.co.kr:found",
+  "kind": "signup",
+  "url": "https://www.free5.co.kr/fpage",
+  "country": "KR",
+  "site": "free5.co.kr : 프리오 - 처음오셨나요? - 무료광고",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:macaosarang.com:home",
+  "kind": "signup",
+  "url": "https://macaosarang.com/",
+  "country": "KR",
+  "site": "macaosarang.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:macaosarang.com:found",
+  "kind": "signup",
+  "url": "https://macaosarang.com/pr",
+  "country": "KR",
+  "site": "macaosarang.com : 무료 자유 광고 홍보 - 마카오사랑닷컴",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:getonstage.kr:home",
+  "kind": "signup",
+  "url": "https://getonstage.kr/",
+  "country": "KR",
+  "site": "getonstage.kr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:getonstage.kr:found",
+  "kind": "signup",
+  "url": "https://getonstage.kr/39/?bmode=view&idx=166315823",
+  "country": "KR",
+  "site": "getonstage.kr : 온스테이지 무료 광고 게시판 오픈 안내 : Onstage",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:contestkorea.com:home",
+  "kind": "signup",
+  "url": "https://contestkorea.com/",
+  "country": "KR",
+  "site": "contestkorea.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:contestkorea.com:found",
+  "kind": "signup",
+  "url": "https://www.contestkorea.com/boad/bd_free/egolist.php?bd=3",
+  "country": "KR",
+  "site": "contestkorea.com : 커뮤니티 > 자유게시판 - 콘테스트코리아",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:student-bbs-campus-board.com:home",
+  "kind": "signup",
+  "url": "https://student-bbs-campus-board.com/",
+  "country": "JP",
+  "site": "student-bbs-campus-board.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:talk.jp:home",
+  "kind": "signup",
+  "url": "https://talk.jp/",
+  "country": "JP",
+  "site": "talk.jp home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:talk.jp:found",
+  "kind": "signup",
+  "url": "https://talk.jp/boards/student",
+  "country": "JP",
+  "site": "talk.jp : 大学学部・研究板 | みんなの掲示板 Talk (トーク)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:college-channel.com:home",
+  "kind": "signup",
+  "url": "https://college-channel.com/",
+  "country": "JP",
+  "site": "college-channel.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:collen.jp:home",
+  "kind": "signup",
+  "url": "https://collen.jp/",
+  "country": "JP",
+  "site": "collen.jp home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:huuhuu.jp:home",
+  "kind": "signup",
+  "url": "https://huuhuu.jp/",
+  "country": "JP",
+  "site": "huuhuu.jp home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:huuhuu.jp:found",
+  "kind": "signup",
+  "url": "https://www.huuhuu.jp/board",
+  "country": "JP",
+  "site": "huuhuu.jp : 大学生掲示板 - 授業・大学生活・サークル情報 | huuhuu",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:rara.jp:home",
+  "kind": "signup",
+  "url": "https://rara.jp/",
+  "country": "JP",
+  "site": "rara.jp home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:rara.jp:found",
+  "kind": "signup",
+  "url": "https://rara.jp/schoolbbs/",
+  "country": "JP",
+  "site": "rara.jp : 学校掲示板",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:hk.classi4u.com:home",
+  "kind": "signup",
+  "url": "https://hk.classi4u.com/",
+  "country": "HK",
+  "site": "hk.classi4u.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:classifieds.hk:home",
+  "kind": "signup",
+  "url": "https://classifieds.hk/",
+  "country": "HK",
+  "site": "classifieds.hk home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:classifieds.hk:found",
+  "kind": "signup",
+  "url": "http://www.classifieds.hk/categories",
+  "country": "HK",
+  "site": "classifieds.hk : Find Classified Ads by Category- classifieds.hk...",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:geoexpat.com:home",
+  "kind": "signup",
+  "url": "https://geoexpat.com/",
+  "country": "HK",
+  "site": "geoexpat.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:geoexpat.com:found",
+  "kind": "signup",
+  "url": "https://geoexpat.com/classifieds/%EF%BC%89",
+  "country": "HK",
+  "site": "geoexpat.com : Free Hong Kong Classifieds :: Hong Kong GeoExpat",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:opinify.ai:home",
+  "kind": "signup",
+  "url": "https://opinify.ai/",
+  "country": "HK",
+  "site": "opinify.ai home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:opinify.ai:found",
+  "kind": "signup",
+  "url": "https://www.opinify.ai/opinilist/campus/university-of-hong-kong",
+  "country": "HK",
+  "site": "opinify.ai : OpiniList University of Hong Kong - Campus Classif",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:raovatsinhvien.com:home",
+  "kind": "signup",
+  "url": "https://raovatsinhvien.com/",
+  "country": "VN",
+  "site": "raovatsinhvien.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:dangtin.forumvi.com:home",
+  "kind": "signup",
+  "url": "https://dangtin.forumvi.com/",
+  "country": "VN",
+  "site": "dangtin.forumvi.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:raovatvn.net:home",
+  "kind": "signup",
+  "url": "https://raovatvn.net/",
+  "country": "VN",
+  "site": "raovatvn.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:raovatvn.com:home",
+  "kind": "signup",
+  "url": "https://raovatvn.com/",
+  "country": "VN",
+  "site": "raovatvn.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:webraovat.net.vn:home",
+  "kind": "signup",
+  "url": "https://webraovat.net.vn/",
+  "country": "VN",
+  "site": "webraovat.net.vn home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:webraovat.net.vn:found",
+  "kind": "signup",
+  "url": "https://www.webraovat.net.vn/",
+  "country": "VN",
+  "site": "webraovat.net.vn : WebRaoVat | Rao vặt miễn phí | Rao vặt online | Đă",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:raovat.vnexpress.net:home",
+  "kind": "signup",
+  "url": "https://raovat.vnexpress.net/",
+  "country": "VN",
+  "site": "raovat.vnexpress.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:internth.com:home",
+  "kind": "signup",
+  "url": "https://internth.com/",
+  "country": "TH",
+  "site": "internth.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:camphub.in.th:home",
+  "kind": "signup",
+  "url": "https://camphub.in.th/",
+  "country": "TH",
+  "site": "camphub.in.th home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:camphub.in.th:found",
+  "kind": "signup",
+  "url": "https://www.camphub.in.th/",
+  "country": "TH",
+  "site": "camphub.in.th : Camphub - แคมป์ฮับ รวมค่ายและกิจกรรมเพื่อให้วัยรุ่",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:bulinks.bu.ac.th:home",
+  "kind": "signup",
+  "url": "https://bulinks.bu.ac.th/",
+  "country": "TH",
+  "site": "bulinks.bu.ac.th home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:yclas.com:home",
+  "kind": "signup",
+  "url": "https://yclas.com/",
+  "country": "TW",
+  "site": "yclas.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver100:yclas.com:found",
+  "kind": "signup",
+  "url": "https://yclas.com/zh-tw/free-for-education-universities.html",
+  "country": "TW",
+  "site": "yclas.com : 為學校與大學打造的免費分類廣告網站 | Yclas",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]

@@ -1,0 +1,56 @@
+[
+ {
+  "id": "disc101:AU",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20students%20Australia%20post%20ad%20university",
+  "country": "AU",
+  "site": "DuckDuckGo: free classifieds students Australia post ad university",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc101:NZ",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20students%20New%20Zealand%20post%20ad%20university",
+  "country": "NZ",
+  "site": "DuckDuckGo: free classifieds students New Zealand post ad university",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc101:CA",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20students%20Canada%20post%20ad%20campus",
+  "country": "CA",
+  "site": "DuckDuckGo: free classifieds students Canada post ad campus",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc101:US",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20college%20students%20post%20ad%20campus%20board",
+  "country": "US",
+  "site": "DuckDuckGo: free classifieds college students post ad campus board",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc101:GB",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20students%20UK%20post%20ad%20university%20noticeboard",
+  "country": "GB",
+  "site": "DuckDuckGo: free classifieds students UK post ad university noticeboard",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc101:IE",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classifieds%20students%20Ireland%20post%20ad%20college",
+  "country": "IE",
+  "site": "DuckDuckGo: free classifieds students Ireland post ad college",
+  "category": "discovery",
+  "bodyChars": 80000
+ }
+]

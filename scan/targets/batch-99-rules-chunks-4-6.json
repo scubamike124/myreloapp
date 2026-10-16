@@ -1,0 +1,1073 @@
+[
+ {
+  "id": "r99:xos.ro:rules1",
+  "kind": "json",
+  "url": "https://www.xos.ro/conditii-de-utilizare",
+  "country": "RO",
+  "site": "xos.ro rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:xos.ro:post",
+  "kind": "signup",
+  "url": "https://www.xos.ro/oferte/anunt-nou",
+  "country": "RO",
+  "site": "xos.ro posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:anuntz.ro:rules1",
+  "kind": "json",
+  "url": "https://anuntz.ro/p/termeni-si-conditii",
+  "country": "RO",
+  "site": "anuntz.ro rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:anuntz.ro:reg",
+  "kind": "signup",
+  "url": "https://anuntz.ro/register",
+  "country": "RO",
+  "site": "anuntz.ro registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:anuntz.ro:post",
+  "kind": "signup",
+  "url": "https://anuntz.ro/adauga",
+  "country": "RO",
+  "site": "anuntz.ro posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:anuntgratuit.ro:rules1",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/termeni-si-conditii",
+  "country": "RO",
+  "site": "anuntgratuit.ro rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:anuntgratuit.ro:reg",
+  "kind": "signup",
+  "url": "https://www.anuntgratuit.ro/login",
+  "country": "RO",
+  "site": "anuntgratuit.ro registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:aggelies247.com:rules1",
+  "kind": "json",
+  "url": "https://www.aggelies247.com/about",
+  "country": "GR",
+  "site": "aggelies247.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:aggelies247.com:rules2",
+  "kind": "json",
+  "url": "https://www.aggelies247.com/oroi-hrisis",
+  "country": "GR",
+  "site": "aggelies247.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:aggelies247.com:rules3",
+  "kind": "json",
+  "url": "https://www.aggelies247.com/faq",
+  "country": "GR",
+  "site": "aggelies247.com rules/help page 3",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:aggelies247.com:reg",
+  "kind": "signup",
+  "url": "https://www.aggelies247.com/user/login",
+  "country": "GR",
+  "site": "aggelies247.com registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:aggelies247.com:post",
+  "kind": "signup",
+  "url": "https://www.aggelies247.com/news",
+  "country": "GR",
+  "site": "aggelies247.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:borsata.eu:post",
+  "kind": "signup",
+  "url": "https://borsata.eu",
+  "country": "BG",
+  "site": "borsata.eu posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:buylistas.com:rules1",
+  "kind": "json",
+  "url": "https://buylistas.com/privacy-policy-buylistas.html",
+  "country": "GR",
+  "site": "buylistas.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:buylistas.com:reg",
+  "kind": "signup",
+  "url": "https://buylistas.com/login-form.html",
+  "country": "GR",
+  "site": "buylistas.com registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:buylistas.com:post",
+  "kind": "signup",
+  "url": "https://buylistas.com/post-advert.html",
+  "country": "GR",
+  "site": "buylistas.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:dalaveri.bg:reg",
+  "kind": "signup",
+  "url": "https://dalaveri.bg/web/login?redirect=/my/ads/new",
+  "country": "BG",
+  "site": "dalaveri.bg registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:dalaveri.bg:post",
+  "kind": "signup",
+  "url": "https://dalaveri.bg/my/ads/new",
+  "country": "BG",
+  "site": "dalaveri.bg posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:malkiobiavi.bg:rules1",
+  "kind": "json",
+  "url": "https://malkiobiavi.bg/obiavi_category/blagotvoritelnost-i-dareniya",
+  "country": "BG",
+  "site": "malkiobiavi.bg rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:malkiobiavi.bg:rules2",
+  "kind": "json",
+  "url": "https://malkiobiavi.bg/blog/kak-da-prodavame-print-izkustvo-s-pomoshtta-na-malki-bezplatni-obyavi/",
+  "country": "BG",
+  "site": "malkiobiavi.bg rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:malkiobiavi.bg:rules3",
+  "kind": "json",
+  "url": "https://malkiobiavi.bg/privacy-policy/",
+  "country": "BG",
+  "site": "malkiobiavi.bg rules/help page 3",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:malkiobiavi.bg:post",
+  "kind": "signup",
+  "url": "https://malkiobiavi.bg/dobavi-obyava/",
+  "country": "BG",
+  "site": "malkiobiavi.bg posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:grad.bg:rules1",
+  "kind": "json",
+  "url": "https://grad.bg/agb",
+  "country": "BG",
+  "site": "grad.bg rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:grad.bg:reg",
+  "kind": "signup",
+  "url": "https://grad.bg/n-146111-Какво_включва_годишният_оборот_за_регистрация_по_ЗДДС_и_кога_сделките_с_имоти_участват_в_него#h1",
+  "country": "BG",
+  "site": "grad.bg registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:freeboard.com.ua:rules1",
+  "kind": "json",
+  "url": "https://www.freeboard.com.ua/pages.php/page_i/9",
+  "country": "UA",
+  "site": "freeboard.com.ua rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:freeboard.com.ua:post",
+  "kind": "signup",
+  "url": "https://www.freeboard.com.ua/new_announcement.php",
+  "country": "UA",
+  "site": "freeboard.com.ua posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:board.if.ua:rules1",
+  "kind": "json",
+  "url": "https://board.if.ua/pravyla-ta-umovy-korystuvannya",
+  "country": "UA",
+  "site": "board.if.ua rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:board.if.ua:rules2",
+  "kind": "json",
+  "url": "https://board.if.ua/privacy-policy",
+  "country": "UA",
+  "site": "board.if.ua rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:board.if.ua:post",
+  "kind": "signup",
+  "url": "https://board.if.ua/board-post-new-ad",
+  "country": "UA",
+  "site": "board.if.ua posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:bboard.com.ua:rules1",
+  "kind": "json",
+  "url": "https://www.bboard.com.ua/ua/faq/general/#22",
+  "country": "UA",
+  "site": "bboard.com.ua rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:bboard.com.ua:rules2",
+  "kind": "json",
+  "url": "https://www.bboard.com.ua/ua/faq/board/#30",
+  "country": "UA",
+  "site": "bboard.com.ua rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:bboard.com.ua:rules3",
+  "kind": "json",
+  "url": "https://www.bboard.com.ua/ua/faq/board/#19",
+  "country": "UA",
+  "site": "bboard.com.ua rules/help page 3",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:bboard.com.ua:reg",
+  "kind": "signup",
+  "url": "https://www.bboard.com.ua/ua/office/login/",
+  "country": "UA",
+  "site": "bboard.com.ua registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:bboard.com.ua:post",
+  "kind": "signup",
+  "url": "https://www.bboard.com.ua/ua/add/",
+  "country": "UA",
+  "site": "bboard.com.ua posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:classifiedsuae.ae:reg",
+  "kind": "signup",
+  "url": "https://classifiedsuae.ae/en/register/company",
+  "country": "AE",
+  "site": "classifiedsuae.ae registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:classifiedsuae.ae:post",
+  "kind": "signup",
+  "url": "https://classifiedsuae.ae/en/new",
+  "country": "AE",
+  "site": "classifiedsuae.ae posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:ae.rubizzle.com:rules1",
+  "kind": "json",
+  "url": "https://ae.rubizzle.com/terms-and-conditions",
+  "country": "AE",
+  "site": "ae.rubizzle.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:ae.rubizzle.com:rules2",
+  "kind": "json",
+  "url": "https://ae.rubizzle.com/privacy-policy",
+  "country": "AE",
+  "site": "ae.rubizzle.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:dbizle.com:rules1",
+  "kind": "json",
+  "url": "https://dbizle.com/terms-and-conditions",
+  "country": "AE",
+  "site": "dbizle.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:dbizle.com:rules2",
+  "kind": "json",
+  "url": "https://dbizle.com/privacy-policy",
+  "country": "AE",
+  "site": "dbizle.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:uae.ads4me.com:rules1",
+  "kind": "json",
+  "url": "https://uae.ads4me.com/page/terms",
+  "country": "AE",
+  "site": "uae.ads4me.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:uae.ads4me.com:rules2",
+  "kind": "json",
+  "url": "https://uae.ads4me.com/page/about-us",
+  "country": "AE",
+  "site": "uae.ads4me.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:uae.ads4me.com:rules3",
+  "kind": "json",
+  "url": "https://uae.ads4me.com/page/privacy-policy",
+  "country": "AE",
+  "site": "uae.ads4me.com rules/help page 3",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:uae.ads4me.com:reg",
+  "kind": "signup",
+  "url": "https://uae.ads4me.com/login",
+  "country": "AE",
+  "site": "uae.ads4me.com registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:uae.ads4me.com:post",
+  "kind": "signup",
+  "url": "https://uae.ads4me.com/ads/create",
+  "country": "AE",
+  "site": "uae.ads4me.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:dabaannonce.ma:rules1",
+  "kind": "json",
+  "url": "https://dabaannonce.ma/guide/deposer-annonce-gratuite-maroc",
+  "country": "MA",
+  "site": "dabaannonce.ma rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:dabaannonce.ma:post",
+  "kind": "signup",
+  "url": "https://dabaannonce.ma/",
+  "country": "MA",
+  "site": "dabaannonce.ma posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:classifydubai.com:reg",
+  "kind": "signup",
+  "url": "https://www.classifydubai.com/my-account/registration/",
+  "country": "AE",
+  "site": "classifydubai.com registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:classifydubai.com:post",
+  "kind": "signup",
+  "url": "https://www.classifydubai.com/post-an-ad/",
+  "country": "AE",
+  "site": "classifydubai.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:ozannonces.ma:rules1",
+  "kind": "json",
+  "url": "https://ozannonces.ma/faq.php",
+  "country": "MA",
+  "site": "ozannonces.ma rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:ozannonces.ma:rules2",
+  "kind": "json",
+  "url": "https://ozannonces.ma/terms.php",
+  "country": "MA",
+  "site": "ozannonces.ma rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:ozannonces.ma:rules3",
+  "kind": "json",
+  "url": "https://ozannonces.ma/charte-civisme.php",
+  "country": "MA",
+  "site": "ozannonces.ma rules/help page 3",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:ozannonces.ma:reg",
+  "kind": "signup",
+  "url": "https://ozannonces.ma/connexion_correct.php",
+  "country": "MA",
+  "site": "ozannonces.ma registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:ozannonces.ma:post",
+  "kind": "signup",
+  "url": "https://ozannonces.ma/formulaire_depot_annonce.php",
+  "country": "MA",
+  "site": "ozannonces.ma posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:lbuvette.com:rules1",
+  "kind": "json",
+  "url": "https://lbuvette.com/conditions-utilisation",
+  "country": "MA",
+  "site": "lbuvette.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:lbuvette.com:rules2",
+  "kind": "json",
+  "url": "https://lbuvette.com/faq",
+  "country": "MA",
+  "site": "lbuvette.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:lbuvette.com:rules3",
+  "kind": "json",
+  "url": "https://lbuvette.com/mentions-legales",
+  "country": "MA",
+  "site": "lbuvette.com rules/help page 3",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:lbuvette.com:reg",
+  "kind": "signup",
+  "url": "https://lbuvette.com/connexion",
+  "country": "MA",
+  "site": "lbuvette.com registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:lbuvette.com:post",
+  "kind": "signup",
+  "url": "https://lbuvette.com/etudiants/deposer",
+  "country": "MA",
+  "site": "lbuvette.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:professionnels.ma:rules1",
+  "kind": "json",
+  "url": "https://www.professionnels.ma/regles-pub",
+  "country": "MA",
+  "site": "professionnels.ma rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:professionnels.ma:reg",
+  "kind": "signup",
+  "url": "https://www.professionnels.ma/user/register",
+  "country": "MA",
+  "site": "professionnels.ma registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:professionnels.ma:post",
+  "kind": "signup",
+  "url": "https://www.professionnels.ma/maroc-annonce",
+  "country": "MA",
+  "site": "professionnels.ma posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:souika.ma:rules1",
+  "kind": "json",
+  "url": "https://www.souika.ma/conditions-generales",
+  "country": "MA",
+  "site": "souika.ma rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:souika.ma:rules2",
+  "kind": "json",
+  "url": "https://www.souika.ma/aide",
+  "country": "MA",
+  "site": "souika.ma rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:souika.ma:reg",
+  "kind": "signup",
+  "url": "https://www.souika.ma/login",
+  "country": "MA",
+  "site": "souika.ma registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:souika.ma:post",
+  "kind": "signup",
+  "url": "https://www.souika.ma/deposer-une-annonce",
+  "country": "MA",
+  "site": "souika.ma posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:souqmaroc.org:rules1",
+  "kind": "json",
+  "url": "https://souqmaroc.org/conditions-utilisation",
+  "country": "MA",
+  "site": "souqmaroc.org rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:souqmaroc.org:reg",
+  "kind": "signup",
+  "url": "https://souqmaroc.org/auth?mode=login",
+  "country": "MA",
+  "site": "souqmaroc.org registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:souqmaroc.org:post",
+  "kind": "signup",
+  "url": "https://souqmaroc.org/deposer",
+  "country": "MA",
+  "site": "souqmaroc.org posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:pirsumon.com:reg",
+  "kind": "signup",
+  "url": "https://www.pirsumon.com/login",
+  "country": "IL",
+  "site": "pirsumon.com registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:pirsumon.com:post",
+  "kind": "signup",
+  "url": "https://www.pirsumon.com/",
+  "country": "IL",
+  "site": "pirsumon.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:bipbip.co.il:rules1",
+  "kind": "json",
+  "url": "https://bipbip.co.il/privacy-policy.html",
+  "country": "IL",
+  "site": "bipbip.co.il rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:bipbip.co.il:reg",
+  "kind": "signup",
+  "url": "https://bipbip.co.il/General/Login.asp",
+  "country": "IL",
+  "site": "bipbip.co.il registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:yadlyad.co.il:reg",
+  "kind": "signup",
+  "url": "https://yadlyad.co.il/login.php",
+  "country": "IL",
+  "site": "yadlyad.co.il registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:yadlyad.co.il:post",
+  "kind": "signup",
+  "url": "https://yadlyad.co.il/post_ad.php",
+  "country": "IL",
+  "site": "yadlyad.co.il posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:kenyabizlist.com:rules1",
+  "kind": "json",
+  "url": "https://www.kenyabizlist.com/general/TermsOfUse.aspx",
+  "country": "KE",
+  "site": "kenyabizlist.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:kenyabizlist.com:rules2",
+  "kind": "json",
+  "url": "https://www.kenyabizlist.com/general/PrivacyPolicy.aspx",
+  "country": "KE",
+  "site": "kenyabizlist.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:kenyabizlist.com:rules3",
+  "kind": "json",
+  "url": "https://www.kenyabizlist.com/general/about.aspx",
+  "country": "KE",
+  "site": "kenyabizlist.com rules/help page 3",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:kenyabizlist.com:reg",
+  "kind": "signup",
+  "url": "https://www.kenyabizlist.com/members/login.aspx",
+  "country": "KE",
+  "site": "kenyabizlist.com registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:kenyabizlist.com:post",
+  "kind": "signup",
+  "url": "https://www.kenyabizlist.com/classifieds/post-ad.aspx",
+  "country": "KE",
+  "site": "kenyabizlist.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:lifestudiantin.com:reg",
+  "kind": "signup",
+  "url": "https://www.lifestudiantin.com/connexion",
+  "country": "SN",
+  "site": "lifestudiantin.com registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:lifestudiantin.com:post",
+  "kind": "signup",
+  "url": "https://www.lifestudiantin.com/annonces",
+  "country": "SN",
+  "site": "lifestudiantin.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:alloetudiant.com:reg",
+  "kind": "signup",
+  "url": "https://alloetudiant.com/connexion",
+  "country": "SN",
+  "site": "alloetudiant.com registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:yess.sn:rules1",
+  "kind": "json",
+  "url": "https://yess.sn/about",
+  "country": "SN",
+  "site": "yess.sn rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:yess.sn:rules2",
+  "kind": "json",
+  "url": "https://yess.sn/help",
+  "country": "SN",
+  "site": "yess.sn rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:yess.sn:post",
+  "kind": "signup",
+  "url": "https://yess.sn/publier",
+  "country": "SN",
+  "site": "yess.sn posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:senannonces.sn:rules1",
+  "kind": "json",
+  "url": "https://senannonces.sn/conditions.php",
+  "country": "SN",
+  "site": "senannonces.sn rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:senannonces.sn:rules2",
+  "kind": "json",
+  "url": "https://senannonces.sn/contact.php",
+  "country": "SN",
+  "site": "senannonces.sn rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:senannonces.sn:reg",
+  "kind": "signup",
+  "url": "https://senannonces.sn/connexion.php",
+  "country": "SN",
+  "site": "senannonces.sn registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:senannonces.sn:post",
+  "kind": "signup",
+  "url": "https://senannonces.sn/compte-pro.php",
+  "country": "SN",
+  "site": "senannonces.sn posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:kaaylook.com:rules1",
+  "kind": "json",
+  "url": "https://kaaylook.com/conditions",
+  "country": "SN",
+  "site": "kaaylook.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:kaaylook.com:post",
+  "kind": "signup",
+  "url": "https://kaaylook.com/annonces",
+  "country": "SN",
+  "site": "kaaylook.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:postadz.com:rules1",
+  "kind": "json",
+  "url": "https://postadz.com/ad/cead880d-016a-476c-84f0-88a5a7040b08",
+  "country": "GH",
+  "site": "postadz.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:postadz.com:rules2",
+  "kind": "json",
+  "url": "https://postadz.com/ad/d53e9b5a-ea39-418c-8112-948a22f5a8f4",
+  "country": "GH",
+  "site": "postadz.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:postadz.com:post",
+  "kind": "signup",
+  "url": "https://postadz.com/",
+  "country": "GH",
+  "site": "postadz.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:ghanasummary.com:rules1",
+  "kind": "json",
+  "url": "https://ghanasummary.com/about",
+  "country": "GH",
+  "site": "ghanasummary.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:ghanasummary.com:post",
+  "kind": "signup",
+  "url": "https://ghanasummary.com/classifieds/post",
+  "country": "GH",
+  "site": "ghanasummary.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:quafra.com:rules1",
+  "kind": "json",
+  "url": "https://quafra.com/privacy-policy-2/",
+  "country": "GH",
+  "site": "quafra.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:quafra.com:rules2",
+  "kind": "json",
+  "url": "https://quafra.com/terms-and-conditions/",
+  "country": "GH",
+  "site": "quafra.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:quafra.com:post",
+  "kind": "signup",
+  "url": "https://quafra.com/add-listing/",
+  "country": "GH",
+  "site": "quafra.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:pepapa.com.gh:reg",
+  "kind": "signup",
+  "url": "https://www.pepapa.com.gh/login",
+  "country": "GH",
+  "site": "pepapa.com.gh registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:classads.co.za:rules1",
+  "kind": "json",
+  "url": "https://www.classads.co.za/privacy-policy-p28",
+  "country": "ZA",
+  "site": "classads.co.za rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:classads.co.za:rules2",
+  "kind": "json",
+  "url": "https://www.classads.co.za/about-us-p29",
+  "country": "ZA",
+  "site": "classads.co.za rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:classads.co.za:rules3",
+  "kind": "json",
+  "url": "https://www.classads.co.za/terms-of-use-p30",
+  "country": "ZA",
+  "site": "classads.co.za rules/help page 3",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:classads.co.za:post",
+  "kind": "signup",
+  "url": "https://www.classads.co.za/item/new",
+  "country": "ZA",
+  "site": "classads.co.za posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:za.bambaad.com:rules1",
+  "kind": "json",
+  "url": "https://za.bambaad.com/info/terms-of-use-3",
+  "country": "ZA",
+  "site": "za.bambaad.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:za.bambaad.com:rules2",
+  "kind": "json",
+  "url": "https://za.bambaad.com/info/privacy-policy-5",
+  "country": "ZA",
+  "site": "za.bambaad.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:za.bambaad.com:reg",
+  "kind": "signup",
+  "url": "https://za.bambaad.com/acc_connexion.php?back=SearchAlert",
+  "country": "ZA",
+  "site": "za.bambaad.com registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:za.bambaad.com:post",
+  "kind": "signup",
+  "url": "https://za.bambaad.com/post-an-ad",
+  "country": "ZA",
+  "site": "za.bambaad.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:ziviso.co.zw:reg",
+  "kind": "signup",
+  "url": "https://ziviso.co.zw/login",
+  "country": "ZW",
+  "site": "ziviso.co.zw registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:ziviso.co.zw:post",
+  "kind": "signup",
+  "url": "https://ziviso.co.zw/listings/new",
+  "country": "ZW",
+  "site": "ziviso.co.zw posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:muamat.com:rules1",
+  "kind": "json",
+  "url": "https://www.muamat.com/terms.php",
+  "country": "ZW",
+  "site": "muamat.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:muamat.com:rules2",
+  "kind": "json",
+  "url": "https://www.muamat.com/index.php?view=page&pagename=faq",
+  "country": "ZW",
+  "site": "muamat.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:muamat.com:post",
+  "kind": "signup",
+  "url": "https://www.muamat.com/index.php?view=post&cityid=-2&lang=en",
+  "country": "ZW",
+  "site": "muamat.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:friads.com:rules1",
+  "kind": "json",
+  "url": "https://friads.com/about.php",
+  "country": "IN",
+  "site": "friads.com rules/help page 1",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:friads.com:rules2",
+  "kind": "json",
+  "url": "https://friads.com/terms.php",
+  "country": "IN",
+  "site": "friads.com rules/help page 2",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r99:friads.com:reg",
+  "kind": "signup",
+  "url": "https://friads.com/login.php",
+  "country": "IN",
+  "site": "friads.com registration page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:friads.com:post",
+  "kind": "signup",
+  "url": "https://friads.com/post-ad.php",
+  "country": "IN",
+  "site": "friads.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r99:classified.nadbai.com:post",
+  "kind": "signup",
+  "url": "https://classified.nadbai.com/services/online-services/public-notice-advertisement-in-newspaper_i12257",
+  "country": "IN",
+  "site": "classified.nadbai.com posting page",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]
