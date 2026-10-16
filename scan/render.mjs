@@ -40,6 +40,14 @@ async function probe(browser, t) {
     const inputs = await page.$$eval("input, select, textarea", (els) => els.map((e) => ({ tag: e.tagName.toLowerCase(), type: (e.getAttribute("type") || (e.tagName.toLowerCase() === "input" ? "text" : e.tagName.toLowerCase())).toLowerCase(), name: e.getAttribute("name") || "", id: e.id || "", placeholder: e.getAttribute("placeholder") || "", required: e.hasAttribute("required"), autocomplete: e.getAttribute("autocomplete") || "", visible: !!(e.offsetWidth || e.offsetHeight || e.getClientRects().length) })).filter((i) => !["hidden", "submit", "button", "image", "reset", "search"].includes(i.type)));
     const labels = await page.$$eval("label", (ls) => ls.map((l) => (l.textContent || "").replace(/\s+/g, " ").trim().slice(0, 60)).filter(Boolean).slice(0, 40));
     const html = await page.content();
+    // A target with expand:"<css selector>" first clicks what matches (FAQ questions, collapsed panels), so their answers are in the text.
+    if (typeof t.expand === "string" && t.expand) {
+      try {
+        const handles = await page.$$(t.expand);
+        for (const h of handles.slice(0, 80)) { try { await h.click({ timeout: 1500 }); } catch {} }
+        await page.waitForTimeout(800);
+      } catch {}
+    }
     // innerText is what a visitor sees; a target with fullText:true also takes the collapsed text (FAQ answers, hidden panels).
     const text = await page.evaluate((full) => (document.body ? (full ? document.body.textContent : document.body.innerText) : "") || "", t.fullText === true);
     const fieldText = inputs.map((i) => `${i.type} ${i.name} ${i.id} ${i.placeholder} ${i.autocomplete}`).join(" | ") + " | " + labels.join(" | ");

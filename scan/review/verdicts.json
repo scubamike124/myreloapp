@@ -5684,7 +5684,7 @@
  {
   "match": "https://www.dsble.de/",
   "verdict": "conditional",
-  "quote": "Preisliste: Kleinanzeigen sind garantiert kostenfrei … das Veröffentlichen von privaten und gewerblichen Kleinanzeigen ist und bleibt garantiert kostenlos. Spielregeln: Wenn du ein gewerblicher Anbieter bist, dann beachte bitte Deine Impressumspflicht … Wenn uns etwas zu stark nach Spam aussieht, dann veröffentlichen wir es nicht. AGB: Die übersandten Inhalte werden verzögert veröffentlicht, um eine vorherige Überprüfung zu ermöglichen.",
+  "quote": "Preisliste: Kleinanzeigen sind garantiert kostenfrei … das Veröffentlichen von privaten und gewerblichen Kleinanzeigen ist und bleibt garantiert kostenlos. Spielregeln: Wenn du ein gewerblicher Anbieter bist, dann beachte bitte Deine Impressumspflicht … Wenn uns etwas zu stark nach Spam aussieht, dann veröffentlichen wir es nicht. AGB: Die übersandten Inhalte werden verzögert veröffentlicht, um eine vorherige Überprüfung zu ermöglichen. Spielregeln (gewerblich): Du kannst sehr gern gewerbliche Kleinanzeigen auf dem Brett veröffentlichen … Wenn du gewerblich tätig bist, dann bist du verpflichtet, ein Impressum in deiner Kleinanzeige zu veröffentlichen (Name und Anschrift des Anbieters sowie Name des Vertretungsberechtigten, E-Mail-Adresse, Registernummer, Umsatzsteueridentifikationsnummer).",
   "note": "Student classifieds for the German-speaking cities (Leipzig-based): private and commercial ads are free, no account (form at /neu: category incl. 'Kurse & Sprachen' and 'Sonstiges', title, text, e-mail, contact, offer/request, city incl. 'überregional', duration 1 week to 12 months; a Rails token; no CAPTCHA, phone or date of birth). Two things stand between Amber and a post: every ad is reviewed by the site before it appears (a delay, and spam-looking ads are not published), and a commercial advertiser must put an Impressum (the business's legal name, address and contact) in the ad — the owner's words, not Amber's. Links are shown but not clickable on free ads.",
   "can_act": "owner: provide the Impressum lines and accept the site's pre-publication review; the publisher is then a small adapter",
   "basis": "explicit",
@@ -5889,7 +5889,7 @@
   "match": "https://www.perstudenti.com/",
   "verdict": "conditional",
   "quote": "Pubblica un annuncio gratis … Crea il tuo account: Utente Privato / Utente Business, Nome, Cognome, Email, Password, Provincia (opzionale) … FAQ: Pubblicare un annuncio è gratuito? Chi può iscriversi a PerStudenti.com?",
-  "note": "Italian student marketplace with a business account type and a Servizi category (Ripetizioni e tutoraggio …); registration is name, surname, e-mail and password with no CAPTCHA, phone or date of birth seen; posting is a three-step form behind the login. The FAQ's answers (free? who may register?) are collapsed on the page and are being read in full.",
+  "note": "Italian student marketplace with a business account type and a Servizi category (Ripetizioni e tutoraggio …); registration is name, surname, e-mail and password with no CAPTCHA, phone or date of birth seen; posting is a three-step form behind the login. The FAQ's answers (free? who may register?) load only when a question is clicked; a browser pass that clicks them is queued.",
   "can_act": "likely, once the FAQ answers are read (free posting, business accounts)",
   "basis": "",
   "free_option": "",

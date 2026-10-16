@@ -1,0 +1,11 @@
+[
+ {
+  "id": "render10:IT:perstudenti:faq-expanded",
+  "url": "https://www.perstudenti.com/faq",
+  "discover": false,
+  "country": "IT",
+  "site": "PerStudenti FAQ (expanded)",
+  "excerptChars": 12000,
+  "expand": "button, summary, [aria-expanded], .faq-question, .accordion-header, h3"
+ }
+]
