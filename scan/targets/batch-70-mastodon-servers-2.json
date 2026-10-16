@@ -1,0 +1,110 @@
+[
+ {
+  "id": "ms70:uri-life:instance",
+  "kind": "json",
+  "url": "https://uri.life/api/v2/instance",
+  "country": "KR",
+  "site": "https://uri.life instance (registrations, approval, rules summary)",
+  "category": "mastodon-server",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ms70:uri-life:rules",
+  "kind": "json",
+  "url": "https://uri.life/api/v1/instance/rules",
+  "country": "KR",
+  "site": "https://uri.life rules",
+  "category": "mastodon-server",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ms70:uri-life:extended_description",
+  "kind": "json",
+  "url": "https://uri.life/api/v1/instance/extended_description",
+  "country": "KR",
+  "site": "https://uri.life extended description",
+  "category": "mastodon-server",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ms70:c7-io:instance",
+  "kind": "json",
+  "url": "https://c7.io/api/v2/instance",
+  "country": "CN",
+  "site": "https://c7.io instance (registrations, approval, rules summary)",
+  "category": "mastodon-server",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ms70:c7-io:rules",
+  "kind": "json",
+  "url": "https://c7.io/api/v1/instance/rules",
+  "country": "CN",
+  "site": "https://c7.io rules",
+  "category": "mastodon-server",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ms70:c7-io:extended_description",
+  "kind": "json",
+  "url": "https://c7.io/api/v1/instance/extended_description",
+  "country": "CN",
+  "site": "https://c7.io extended description",
+  "category": "mastodon-server",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ms70:qdon-space:instance",
+  "kind": "json",
+  "url": "https://qdon.space/api/v2/instance",
+  "country": "KR",
+  "site": "https://qdon.space instance (registrations, approval, rules summary)",
+  "category": "mastodon-server",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ms70:qdon-space:rules",
+  "kind": "json",
+  "url": "https://qdon.space/api/v1/instance/rules",
+  "country": "KR",
+  "site": "https://qdon.space rules",
+  "category": "mastodon-server",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ms70:qdon-space:extended_description",
+  "kind": "json",
+  "url": "https://qdon.space/api/v1/instance/extended_description",
+  "country": "KR",
+  "site": "https://qdon.space extended description",
+  "category": "mastodon-server",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ms70:mastodon-com-pl:instance",
+  "kind": "json",
+  "url": "https://mastodon.com.pl/api/v2/instance",
+  "country": "PL",
+  "site": "https://mastodon.com.pl instance (registrations, approval, rules summary)",
+  "category": "mastodon-server",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ms70:mastodon-com-pl:rules",
+  "kind": "json",
+  "url": "https://mastodon.com.pl/api/v1/instance/rules",
+  "country": "PL",
+  "site": "https://mastodon.com.pl rules",
+  "category": "mastodon-server",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ms70:mastodon-com-pl:extended_description",
+  "kind": "json",
+  "url": "https://mastodon.com.pl/api/v1/instance/extended_description",
+  "country": "PL",
+  "site": "https://mastodon.com.pl extended description",
+  "category": "mastodon-server",
+  "bodyChars": 60000
+ }
+]
