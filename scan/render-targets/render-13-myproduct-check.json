@@ -1,0 +1,74 @@
+[
+ {
+  "id": "render13:IL:myproduct:home",
+  "url": "https://myproduct.co.il/",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct home (browser)",
+  "excerptChars": 8000
+ },
+ {
+  "id": "render13:IL:myproduct:whats-new",
+  "url": "https://myproduct.co.il/reshut-harabim/whats-new.php",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct whats-new (browser)",
+  "excerptChars": 8000
+ },
+ {
+  "id": "render13:IL:myproduct:search-studyproofs",
+  "url": "https://myproduct.co.il/reshut-harabim/search.php?q=StudyProofs",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct search-studyproofs (browser)",
+  "excerptChars": 8000
+ },
+ {
+  "id": "render13:IL:myproduct:search-he",
+  "url": "https://myproduct.co.il/reshut-harabim/search.php?q=%D7%A1%D7%98%D7%95%D7%93%D7%A0%D7%98%D7%99%D7%9D",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct search-he (browser)",
+  "excerptChars": 8000
+ },
+ {
+  "id": "render13:IL:myproduct:cat-finds",
+  "url": "https://myproduct.co.il/reshut-harabim/category/c_1770144095_0",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct cat-finds (browser)",
+  "excerptChars": 8000
+ },
+ {
+  "id": "render13:IL:myproduct:cat-misc",
+  "url": "https://myproduct.co.il/reshut-harabim/category/c_1769374235_0",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct cat-misc (browser)",
+  "excerptChars": 8000
+ },
+ {
+  "id": "render13:IL:myproduct:cat-products",
+  "url": "https://myproduct.co.il/reshut-harabim/category/c_1783807812_0",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct cat-products (browser)",
+  "excerptChars": 8000
+ },
+ {
+  "id": "render13:IL:myproduct:all",
+  "url": "https://myproduct.co.il/reshut-harabim/search.php",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct all (browser)",
+  "excerptChars": 8000
+ },
+ {
+  "id": "render13:IL:myproduct:plus",
+  "url": "https://myproduct.co.il/reshut-harabim/search.php?luach=plus",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct plus (browser)",
+  "excerptChars": 8000
+ }
+]

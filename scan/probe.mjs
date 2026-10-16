@@ -233,7 +233,9 @@ async function probeTask(t) {
   const money = [...new Set((text.match(/(?:\$|USD|USDC|EUR|€|£|GBP)\s?\d[\d,.]*\s?(?:USDC|USD|EUR|GBP)?|\d[\d,.]*\s?(?:USDC|USD|EUR|GBP|\$)/g) || []))].slice(0, 12);
   const closedWords = /\b(closed|completed|awarded|expired|cancelled|canceled|archived|no longer accepting|not accepting|has ended|was awarded|winner announced|filled)\b/i.test(text);
   const openWords = /\b(open|accepting|apply now|submit|claim|available|in progress|active)\b/i.test(text);
-  return { reachable: page.status > 0, status: page.status, finalUrl: page.url, title: title.trim().slice(0, 160), chars: text.length, closedWords, openWords, dates, money, sentences, jsonLd: jsonLd.replace(/\s+/g, " ").slice(0, 800), error: page.error };
+  const excerpt = Number(t.excerptChars) > 0 ? text.replace(/\s+/g, " ").slice(0, Math.min(20000, Number(t.excerptChars))) : undefined;
+  const links = Number(t.excerptChars) > 0 ? [...html.matchAll(/href=["']([^"']{1,200})["']/gi)].map((m) => m[1]).filter((h) => !/^(#|javascript:|mailto:|tel:)/i.test(h)).slice(0, 300) : undefined;
+  return { reachable: page.status > 0, status: page.status, finalUrl: page.url, title: title.trim().slice(0, 160), chars: text.length, closedWords, openWords, dates, money, sentences, jsonLd: jsonLd.replace(/\s+/g, " ").slice(0, 800), excerpt, links, error: page.error };
 }
 
 

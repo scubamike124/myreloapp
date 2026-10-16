@@ -1,0 +1,83 @@
+[
+ {
+  "id": "mp25:home",
+  "kind": "task",
+  "url": "https://myproduct.co.il/",
+  "country": "IL",
+  "site": "myproduct home",
+  "category": "classified-check",
+  "excerptChars": 6000
+ },
+ {
+  "id": "mp25:whats-new",
+  "kind": "task",
+  "url": "https://myproduct.co.il/reshut-harabim/whats-new.php",
+  "country": "IL",
+  "site": "myproduct whats-new",
+  "category": "classified-check",
+  "excerptChars": 6000
+ },
+ {
+  "id": "mp25:search-studyproofs",
+  "kind": "task",
+  "url": "https://myproduct.co.il/reshut-harabim/search.php?q=StudyProofs",
+  "country": "IL",
+  "site": "myproduct search-studyproofs",
+  "category": "classified-check",
+  "excerptChars": 6000
+ },
+ {
+  "id": "mp25:search-he",
+  "kind": "task",
+  "url": "https://myproduct.co.il/reshut-harabim/search.php?q=%D7%A1%D7%98%D7%95%D7%93%D7%A0%D7%98%D7%99%D7%9D",
+  "country": "IL",
+  "site": "myproduct search-he",
+  "category": "classified-check",
+  "excerptChars": 6000
+ },
+ {
+  "id": "mp25:cat-finds",
+  "kind": "task",
+  "url": "https://myproduct.co.il/reshut-harabim/category/c_1770144095_0",
+  "country": "IL",
+  "site": "myproduct cat-finds",
+  "category": "classified-check",
+  "excerptChars": 6000
+ },
+ {
+  "id": "mp25:cat-misc",
+  "kind": "task",
+  "url": "https://myproduct.co.il/reshut-harabim/category/c_1769374235_0",
+  "country": "IL",
+  "site": "myproduct cat-misc",
+  "category": "classified-check",
+  "excerptChars": 6000
+ },
+ {
+  "id": "mp25:cat-products",
+  "kind": "task",
+  "url": "https://myproduct.co.il/reshut-harabim/category/c_1783807812_0",
+  "country": "IL",
+  "site": "myproduct cat-products",
+  "category": "classified-check",
+  "excerptChars": 6000
+ },
+ {
+  "id": "mp25:all",
+  "kind": "task",
+  "url": "https://myproduct.co.il/reshut-harabim/search.php",
+  "country": "IL",
+  "site": "myproduct all",
+  "category": "classified-check",
+  "excerptChars": 6000
+ },
+ {
+  "id": "mp25:plus",
+  "kind": "task",
+  "url": "https://myproduct.co.il/reshut-harabim/search.php?luach=plus",
+  "country": "IL",
+  "site": "myproduct plus",
+  "category": "classified-check",
+  "excerptChars": 6000
+ }
+]
