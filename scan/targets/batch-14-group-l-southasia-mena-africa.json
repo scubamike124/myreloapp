@@ -1,0 +1,415 @@
+[
+ {
+  "id": "rules14:IN:kuknus-classifieds:home",
+  "kind": "html",
+  "url": "https://www.kuknus.com/",
+  "country": "IN",
+  "site": "Kuknus Classifieds (home)",
+  "category": "classifieds",
+  "free_option": "Posting is free, but premium ad packages are available for wider reach",
+  "audience": "India-wide general classifieds; size not seen"
+ },
+ {
+  "id": "rules14:IN:wait4ads:rules page",
+  "kind": "html",
+  "url": "https://www.wait4ads.com/Blog/free-ads-posting-sites-in-india-without-registration",
+  "country": "IN",
+  "site": "Wait4Ads (rules page)",
+  "category": "classifieds",
+  "free_option": "Free Classified Ads in India (site title)",
+  "audience": "India; size not seen"
+ },
+ {
+  "id": "rules14:IN:wait4ads:home",
+  "kind": "html",
+  "url": "https://www.wait4ads.com/",
+  "country": "IN",
+  "site": "Wait4Ads (home)",
+  "category": "classifieds",
+  "free_option": "Free Classified Ads in India (site title)",
+  "audience": "India; size not seen"
+ },
+ {
+  "id": "rules14:IN:postyourfreeads:home",
+  "kind": "html",
+  "url": "https://www.postyourfreeads.com/",
+  "country": "IN",
+  "site": "PostYourFreeAds (home)",
+  "category": "classifieds",
+  "free_option": "100% free, no sign-up (per search summary)",
+  "audience": "India; size not seen"
+ },
+ {
+  "id": "rules14:IN:india-classifieds-com:home",
+  "kind": "html",
+  "url": "https://www.india-classifieds.com/",
+  "country": "IN",
+  "site": "India-Classifieds.com (home)",
+  "category": "classifieds",
+  "free_option": "free Indian classified ads without registration (per search summary)",
+  "audience": "India; size not seen"
+ },
+ {
+  "id": "rules14:IN:adpost4u:home",
+  "kind": "html",
+  "url": "https://www.adpost4u.com/",
+  "country": "IN",
+  "site": "AdPost4u (home)",
+  "category": "classifieds",
+  "free_option": "ads can be posted without registration (per search summary of its description)",
+  "audience": "India; size not seen"
+ },
+ {
+  "id": "rules14:IN:my-india-forums:rules page",
+  "kind": "html",
+  "url": "https://myindia.org.in/rules",
+  "country": "IN",
+  "site": "My India Forums (rules page)",
+  "category": "student-forum",
+  "free_option": "dedicated 'Promote Your Business' board",
+  "audience": "general Indian discussion forum, not student-specific; size not seen"
+ },
+ {
+  "id": "rules14:IN:my-india-forums:home",
+  "kind": "html",
+  "url": "https://myindia.org.in/",
+  "country": "IN",
+  "site": "My India Forums (home)",
+  "category": "student-forum",
+  "free_option": "dedicated 'Promote Your Business' board",
+  "audience": "general Indian discussion forum, not student-specific; size not seen"
+ },
+ {
+  "id": "fedi14:PK:paktodon",
+  "kind": "mastodon",
+  "url": "https://paktodon.asia",
+  "country": "PK",
+  "site": "Paktodon",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "free Mastodon account",
+  "audience": "528 total users (nodeinfo 2026), Pakistan/Global South focus"
+ },
+ {
+  "id": "rules14:PK:paktodon:rules page",
+  "kind": "html",
+  "url": "https://paktodon.asia/about (not fetched); directory entry https://www.mastodon.help/instances?id=20278",
+  "country": "PK",
+  "site": "Paktodon (rules page)",
+  "category": "fediverse",
+  "free_option": "free Mastodon account",
+  "audience": "528 total users (nodeinfo 2026), Pakistan/Global South focus"
+ },
+ {
+  "id": "rules14:BD:future-startup-submit-startup-:home",
+  "kind": "html",
+  "url": "https://futurestartup.com/",
+  "country": "BD",
+  "site": "Future Startup (Submit Startup) (home)",
+  "category": "directory",
+  "free_option": "free submission not confirmed",
+  "audience": "Bangladesh startup/business readership; size not seen"
+ },
+ {
+  "id": "rules14:TR:serinilan:home",
+  "kind": "html",
+  "url": "https://serinilan.net/",
+  "country": "TR",
+  "site": "Serinilan (home)",
+  "category": "classifieds",
+  "free_option": "ÜYE OLMADAN ÜCRETSİZ İLAN VER",
+  "audience": "Turkey general classifieds; size not seen"
+ },
+ {
+  "id": "rules14:TR:serinilan:sign-up page",
+  "kind": "html",
+  "url": "https://serinilan.net/content/item-new.php (post without membership)",
+  "country": "TR",
+  "site": "Serinilan (sign-up page)",
+  "category": "classifieds",
+  "free_option": "ÜYE OLMADAN ÜCRETSİZ İLAN VER",
+  "audience": "Turkey general classifieds; size not seen"
+ },
+ {
+  "id": "signup14:TR:serinilan",
+  "kind": "signup",
+  "url": "https://serinilan.net/content/item-new.php (post without membership)",
+  "country": "TR",
+  "site": "Serinilan",
+  "category": "signup-form",
+  "discover": true
+ },
+ {
+  "id": "fedi14:TR:mastodon-com-tr",
+  "kind": "mastodon",
+  "url": "https://mastodon.com.tr",
+  "country": "TR",
+  "site": "mastodon.com.tr",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "free Mastodon account",
+  "audience": "Turkish-language general server; size not confirmed"
+ },
+ {
+  "id": "rules14:TR:mastodon-com-tr:rules page",
+  "kind": "html",
+  "url": "https://mastodon.com.tr/about (not fetched)",
+  "country": "TR",
+  "site": "mastodon.com.tr (rules page)",
+  "category": "fediverse",
+  "free_option": "free Mastodon account",
+  "audience": "Turkish-language general server; size not confirmed"
+ },
+ {
+  "id": "rules14:TR:startup-buffer:rules page",
+  "kind": "html",
+  "url": "https://webrazzi.com/2016/01/27/startup-buffer-turkiyeden-cikan-uluslararasi-girisim-listeleme-girisimi/",
+  "country": "TR",
+  "site": "Startup Buffer (rules page)",
+  "category": "directory",
+  "free_option": "listing free; featured placement paid",
+  "audience": "international startup list run from Ankara; size not seen; current status unverified (2016 source)"
+ },
+ {
+  "id": "rules14:TR:startup-buffer:home",
+  "kind": "html",
+  "url": "https://startupbuffer.com/ (domain not seen in snippet; named in webrazzi article)",
+  "country": "TR",
+  "site": "Startup Buffer (home)",
+  "category": "directory",
+  "free_option": "listing free; featured placement paid",
+  "audience": "international startup list run from Ankara; size not seen; current status unverified (2016 source)"
+ },
+ {
+  "id": "rules14:IL:myproduct-co-il-:rules page",
+  "kind": "html",
+  "url": "https://myproduct.co.il/?id=862&category_id=8",
+  "country": "IL",
+  "site": "myproduct.co.il (לוח מודעות חינם) (rules page)",
+  "category": "classifieds",
+  "free_option": "free ads, no registration, no payment",
+  "audience": "Israel; size not seen"
+ },
+ {
+  "id": "rules14:IL:myproduct-co-il-:home",
+  "kind": "html",
+  "url": "https://myproduct.co.il/",
+  "country": "IL",
+  "site": "myproduct.co.il (לוח מודעות חינם) (home)",
+  "category": "classifieds",
+  "free_option": "free ads, no registration, no payment",
+  "audience": "Israel; size not seen"
+ },
+ {
+  "id": "rules14:IL:zuze-:home",
+  "kind": "html",
+  "url": "https://www.zuze.co.il/",
+  "country": "IL",
+  "site": "Zuze (תרי זוזי) (home)",
+  "category": "classifieds",
+  "free_option": "advertising on the site is free of charge",
+  "audience": "Haredi (ultra-Orthodox) community board incl. business/services categories; size not seen"
+ },
+ {
+  "id": "rules14:IL:luach-kol-israel-:home",
+  "kind": "html",
+  "url": "https://www.callil.co.il/",
+  "country": "IL",
+  "site": "Luach Kol Israel (לוח כל ישראל) (home)",
+  "category": "classifieds",
+  "free_option": "all postings free; optional paid VIP upgrade",
+  "audience": "Israel general board with professionals (בעלי מקצוע) category; size not seen"
+ },
+ {
+  "id": "rules14:IL:zehcan-:home",
+  "kind": "html",
+  "url": "http://zehcan.co.il/",
+  "country": "IL",
+  "site": "ZehCan (זה כאן) (home)",
+  "category": "classifieds",
+  "free_option": "לוח מודעות חינמי לפרסום חופשי",
+  "audience": "Israel; size not seen; also hosts content articles"
+ },
+ {
+  "id": "rules14:IL:adtiny:home",
+  "kind": "html",
+  "url": "https://www.adtiny.com/",
+  "country": "IL",
+  "site": "AdTiny (home)",
+  "category": "classifieds",
+  "free_option": "post for free without registering",
+  "audience": "Israel second-hand search engine/board; size not seen"
+ },
+ {
+  "id": "rules14:IL:mcom1-co-il:home",
+  "kind": "html",
+  "url": "https://www.mcom1.co.il/",
+  "country": "IL",
+  "site": "mcom1.co.il (home)",
+  "category": "classifieds",
+  "free_option": "הלוח שנותן פרסום חינם",
+  "audience": "Israel; size not seen"
+ },
+ {
+  "id": "rules14:MA:soukaffaires-ma:home",
+  "kind": "html",
+  "url": "https://www.soukaffaires.ma/ (domain as named in press; not fetched)",
+  "country": "MA",
+  "site": "Soukaffaires.ma (home)",
+  "category": "classifieds",
+  "free_option": "petites annonces gratuites",
+  "audience": "Morocco and diaspora; size not seen; press item undated in snippet"
+ },
+ {
+  "id": "rules14:MA:annuaire-gratuit-du-maroc-annonces:home",
+  "kind": "html",
+  "url": "https://www.annuaire-gratuit.ma/annonces/",
+  "country": "MA",
+  "site": "Annuaire Gratuit du Maroc - Annonces (home)",
+  "category": "classifieds",
+  "free_option": "Déposez votre annonce (free directory site)",
+  "audience": "Morocco; size not seen"
+ },
+ {
+  "id": "rules14:EG:-zabroker-the-broker-:home",
+  "kind": "html",
+  "url": "https://zabroker.com/ (domain inferred from name; not shown in snippets)",
+  "country": "EG",
+  "site": "ذا بروكر (Zabroker / The Broker) (home)",
+  "category": "classifieds",
+  "free_option": "free ads, no time limit; paid options exist",
+  "audience": "Egypt, UAE, Saudi and wider Arab world; size not seen"
+ },
+ {
+  "id": "rules14:EG:-:home",
+  "kind": "html",
+  "url": "https://markzaldawli.yoo7.com/f27-%D9%82%D8%B3%D9%85-%D8%A7%D9%84%D8%A7%D8%B9%D9%84%D8%A7%D9%86%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9-%D8%B6%D8%B9-%D8%A7%D8%B9%D9%84%D8%A7%D9%86%D9%83-%D9%87%D9%86%D8%A7%D9%87%D8%B0%D8%A7-%D8%A7%D9%84%D9%82%D8%B3%D9%85-%D9%85%D8%AE%D8%B5%D8%B5-%D9%81%D9%82%D8%B7-%D9%84%D9%84%D8%A3%D8%B9%D9%84%D8%A7%D9%86",
+  "country": "EG",
+  "site": "منتدى المركز الدولي - قسم الاعلانات المجانية (home)",
+  "category": "student-forum",
+  "free_option": "قسم الاعلانات المجانية (ضع اعلانك هنا)",
+  "audience": "small Arabic forumotion community; country not stated (yoo7.com is forumotion's Arabic/Egyptian brand)"
+ },
+ {
+  "id": "rules14:EG:-:home",
+  "kind": "html",
+  "url": "https://kenooznet.yoo7.com/t40678-%D8%AE%D8%AF%D9%85%D8%A9-%D8%A7%D8%B9%D9%84%D8%A7%D9%86%D8%A7%D8%AA-%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9-%D9%85%D9%86%D8%AA%D8%AF%D9%8A%D8%A7%D8%AA-%D8%B5%D9%86%D8%A7%D8%A8%D9%8A%D8%B1-%D8%A7%D9%84%D8%B9%D9%84%D9%85-%D9%88%D8%A7%D9%84%D9%85%D8%B9%D8%B1%D9%81%D8%A9",
+  "country": "EG",
+  "site": "منتديات صنابير العلم والمعرفة - خدمة اعلانات مجانية (home)",
+  "category": "student-forum",
+  "free_option": "خدمة اعلانات مجانية",
+  "audience": "Arabic education/knowledge forum ('العلم والمعرفة'); size not seen; country not stated"
+ },
+ {
+  "id": "rules14:EG:-:home",
+  "kind": "html",
+  "url": "https://bramjnet.foroactivo.com/f2-montada",
+  "country": "EG",
+  "site": "منتدى برامج نت - قسم الإعلانات المجانية (home)",
+  "category": "student-forum",
+  "free_option": "قسم الإعلانات المجانية",
+  "audience": "Arabic software/tech forum; size not seen; country not stated"
+ },
+ {
+  "id": "rules14:EG:-qpbd-forumarabia-com-:home",
+  "kind": "html",
+  "url": "https://qpbd.forumarabia.com/",
+  "country": "EG",
+  "site": "شبكة الاعلانية (qpbd.forumarabia.com) (home)",
+  "category": "student-forum",
+  "free_option": "free ad posting incl. a section for training/education courses",
+  "audience": "Arabic ad-posting forum; size not seen; country not stated"
+ },
+ {
+  "id": "rules14:EG:-:home",
+  "kind": "html",
+  "url": "https://fatakat-hawaa.ahlamontada.com/f2-montada",
+  "country": "EG",
+  "site": "فتكات - قسم الإعلانات المجانية (home)",
+  "category": "student-forum",
+  "free_option": "قسم الإعلانات المجانية",
+  "audience": "Arabic women's forum; size not seen"
+ },
+ {
+  "id": "rules14:NG:lagos-list:home",
+  "kind": "html",
+  "url": "https://www.lagoslist.com/ (domain inferred from name; not returned in results)",
+  "country": "NG",
+  "site": "Lagos List (home)",
+  "category": "classifieds",
+  "free_option": "free classified ads and free business directory listing",
+  "audience": "Lagos businesses and residents; also has a forum; size not seen; source dated 2012, current status unverified"
+ },
+ {
+  "id": "rules14:KE:sebule-kenya:home",
+  "kind": "html",
+  "url": "https://kenya.sebule.com/",
+  "country": "KE",
+  "site": "Sebule Kenya (home)",
+  "category": "classifieds",
+  "free_option": "post an ad for free",
+  "audience": "Kenya; size not seen"
+ },
+ {
+  "id": "rules14:ZA:upfeet-south-africa:home",
+  "kind": "html",
+  "url": "https://www.upfeet.com/free-classifieds",
+  "country": "ZA",
+  "site": "UpFeet South Africa (home)",
+  "category": "classifieds",
+  "free_option": "free ads post without registration",
+  "audience": "South Africa; size not seen"
+ },
+ {
+  "id": "rules14:ZA:ads-africa:home",
+  "kind": "html",
+  "url": "https://www.adsafrica.co.za/",
+  "country": "ZA",
+  "site": "Ads Africa (home)",
+  "category": "classifieds",
+  "free_option": "free ads",
+  "audience": "South Africa; size not seen"
+ },
+ {
+  "id": "fedi14:ZZ:sasa-africa",
+  "kind": "mastodon",
+  "url": "https://sasa.africa",
+  "country": "ZZ",
+  "site": "sasa.africa",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "open registrations",
+  "audience": "about 9 users; pan-African .africa domain, country not stated"
+ },
+ {
+  "id": "fedi14:ZZ:discover-african-mastodon-servers",
+  "kind": "mastodon",
+  "url": "https://discover.mastodon.africa",
+  "country": "ZZ",
+  "site": "Discover: African Mastodon Servers",
+  "category": "fediverse",
+  "region": "fediverse",
+  "free_option": "directory of open-registration African servers",
+  "audience": "pan-Africa directory; no Kenyan, Nigerian or Ghanaian server seen in snippets"
+ },
+ {
+  "id": "rules14:ZZ:startuplist-africa:rules page",
+  "kind": "html",
+  "url": "https://startuplist.africa/countries",
+  "country": "ZZ",
+  "site": "StartupList Africa (rules page)",
+  "category": "directory",
+  "free_option": "startup profiles; self-serve submission not confirmed",
+  "audience": "3,102 startups listed; covers Nigeria, Kenya, Ghana (121 for Ghana)"
+ },
+ {
+  "id": "rules14:ZZ:startuplist-africa:home",
+  "kind": "html",
+  "url": "https://startuplist.africa/",
+  "country": "ZZ",
+  "site": "StartupList Africa (home)",
+  "category": "directory",
+  "free_option": "startup profiles; self-serve submission not confirmed",
+  "audience": "3,102 startups listed; covers Nigeria, Kenya, Ghana (121 for Ghana)"
+ }
+]
