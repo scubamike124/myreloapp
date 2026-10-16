@@ -1,0 +1,344 @@
+[
+ {
+  "id": "ver97:adbazarbd.com:home",
+  "kind": "signup",
+  "url": "https://adbazarbd.com/",
+  "country": "BD",
+  "site": "adbazarbd.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:bangladesh.classifiedsfree.co:home",
+  "kind": "signup",
+  "url": "https://bangladesh.classifiedsfree.co/",
+  "country": "BD",
+  "site": "bangladesh.classifiedsfree.co home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:bangladesh.classifiedsfree.co:found",
+  "kind": "signup",
+  "url": "https://bangladesh.classifiedsfree.co/bangladesh-classifieds/add/post-a-free-classified-ad",
+  "country": "BD",
+  "site": "bangladesh.classifiedsfree.co : Post a free classified ad in Bangladesh, free clas",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:olxbd.com:home",
+  "kind": "signup",
+  "url": "https://olxbd.com/",
+  "country": "BD",
+  "site": "olxbd.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:clickbd.com:home",
+  "kind": "signup",
+  "url": "https://clickbd.com/",
+  "country": "BD",
+  "site": "clickbd.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:clickbd.com:found",
+  "kind": "signup",
+  "url": "https://www.clickbd.com/classifieds/",
+  "country": "BD",
+  "site": "clickbd.com : Free Classified Ads in Bangladesh- Buy & Sell Used",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:bangladesh.jantareview.com:home",
+  "kind": "signup",
+  "url": "https://bangladesh.jantareview.com/",
+  "country": "BD",
+  "site": "bangladesh.jantareview.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:bangladesh.jantareview.com:found",
+  "kind": "signup",
+  "url": "https://bangladesh.jantareview.com/Dhaka/Classifieds",
+  "country": "BD",
+  "site": "bangladesh.jantareview.com : Free Classifieds Ads | Post Local Ads in Dhaka | B",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:pakifieds.com:home",
+  "kind": "signup",
+  "url": "https://pakifieds.com/",
+  "country": "PK",
+  "site": "pakifieds.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:postkr.pk:home",
+  "kind": "signup",
+  "url": "https://postkr.pk/",
+  "country": "PK",
+  "site": "postkr.pk home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:postkr.pk:found",
+  "kind": "signup",
+  "url": "https://postkr.pk/index.php",
+  "country": "PK",
+  "site": "postkr.pk : Buy & Sell Anything in Pakistan - Pakistan's No.1 ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:freeads.com.pk:home",
+  "kind": "signup",
+  "url": "https://freeads.com.pk/",
+  "country": "PK",
+  "site": "freeads.com.pk home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:freeads.com.pk:found",
+  "kind": "signup",
+  "url": "https://www.freeads.com.pk/",
+  "country": "PK",
+  "site": "freeads.com.pk : Free Ads - Free Classified Ads in Pakistan | Buy &",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:adslab.pk:home",
+  "kind": "signup",
+  "url": "https://adslab.pk/",
+  "country": "PK",
+  "site": "adslab.pk home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:dealdone.pk:home",
+  "kind": "signup",
+  "url": "https://dealdone.pk/",
+  "country": "PK",
+  "site": "dealdone.pk home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:rumahiklan.com:home",
+  "kind": "signup",
+  "url": "https://rumahiklan.com/",
+  "country": "ID",
+  "site": "rumahiklan.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:adpost.com:home",
+  "kind": "signup",
+  "url": "https://adpost.com/",
+  "country": "SG",
+  "site": "adpost.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:adpost.com:found",
+  "kind": "signup",
+  "url": "https://www.adpost.com/sg/",
+  "country": "SG",
+  "site": "adpost.com : Adpost.com Singapore Classifieds, AI Chatbots > Si",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:singaporeda.com:home",
+  "kind": "signup",
+  "url": "https://singaporeda.com/",
+  "country": "SG",
+  "site": "singaporeda.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:singaporeda.com:found",
+  "kind": "signup",
+  "url": "https://www.singaporeda.com/",
+  "country": "SG",
+  "site": "singaporeda.com : The All-New Singaporeda.com - Lightning Fast Mobil",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:spotdeal.sg:home",
+  "kind": "signup",
+  "url": "https://spotdeal.sg/",
+  "country": "SG",
+  "site": "spotdeal.sg home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:freeads.sg:home",
+  "kind": "signup",
+  "url": "https://freeads.sg/",
+  "country": "SG",
+  "site": "freeads.sg home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:freeads.sg:found",
+  "kind": "signup",
+  "url": "https://freeads.sg/home/en/sg",
+  "country": "SG",
+  "site": "freeads.sg : FREEADS",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:ads.singaporeeducation.info:home",
+  "kind": "signup",
+  "url": "https://ads.singaporeeducation.info/",
+  "country": "SG",
+  "site": "ads.singaporeeducation.info home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:ads.singaporeeducation.info:found",
+  "kind": "signup",
+  "url": "https://ads.singaporeeducation.info/1",
+  "country": "SG",
+  "site": "ads.singaporeeducation.info : Free Singapore Classifieds, Singapore Education Cl",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:singapore.classifiedsfree.co:home",
+  "kind": "signup",
+  "url": "https://singapore.classifiedsfree.co/",
+  "country": "SG",
+  "site": "singapore.classifiedsfree.co home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:ads.malaysiaeducation.info:home",
+  "kind": "signup",
+  "url": "https://ads.malaysiaeducation.info/",
+  "country": "MY",
+  "site": "ads.malaysiaeducation.info home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:ads.malaysiaeducation.info:found",
+  "kind": "signup",
+  "url": "https://ads.malaysiaeducation.info/university",
+  "country": "MY",
+  "site": "ads.malaysiaeducation.info : Free Malaysia Classifieds for university, universi",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:malaysia.classifiedsfree.co:home",
+  "kind": "signup",
+  "url": "https://malaysia.classifiedsfree.co/",
+  "country": "MY",
+  "site": "malaysia.classifiedsfree.co home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:malaysia.classifiedsfree.co:found",
+  "kind": "signup",
+  "url": "https://malaysia.classifiedsfree.co/malaysia-classifieds/add/post-a-free-classified-ad",
+  "country": "MY",
+  "site": "malaysia.classifiedsfree.co : Post a free classified ad in Malaysia, free classi",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:sell.com.my:home",
+  "kind": "signup",
+  "url": "https://sell.com.my/",
+  "country": "MY",
+  "site": "sell.com.my home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:sell.com.my:found",
+  "kind": "signup",
+  "url": "https://sell.com.my/en/services/sell-com-my-free-classifieds-in-malaysia-advertise-free-to-locals-ne",
+  "country": "MY",
+  "site": "sell.com.my : Sell.com.my - Free Classifieds in Malaysia. Advert",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:lifenavi.com:home",
+  "kind": "signup",
+  "url": "https://lifenavi.com/",
+  "country": "PH",
+  "site": "lifenavi.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:lifenavi.com:found",
+  "kind": "signup",
+  "url": "https://lifenavi.com/ph",
+  "country": "PH",
+  "site": "lifenavi.com : Free Classified Ads Philippines - Post Jobs, Prope",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:staging.postads.ph:home",
+  "kind": "signup",
+  "url": "https://staging.postads.ph/",
+  "country": "PH",
+  "site": "staging.postads.ph home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:ads.philippineseducation.info:home",
+  "kind": "signup",
+  "url": "https://ads.philippineseducation.info/",
+  "country": "PH",
+  "site": "ads.philippineseducation.info home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:ads.philippineseducation.info:found",
+  "kind": "signup",
+  "url": "https://ads.philippineseducation.info/university",
+  "country": "PH",
+  "site": "ads.philippineseducation.info : Free Philippines Classifieds for university, unive",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver97:myhanap.com:home",
+  "kind": "signup",
+  "url": "https://myhanap.com/",
+  "country": "PH",
+  "site": "myhanap.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]
