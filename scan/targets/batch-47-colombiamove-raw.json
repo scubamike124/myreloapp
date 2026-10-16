@@ -1,0 +1,31 @@
+[
+ {
+  "id": "cm47:publicar-raw",
+  "kind": "json",
+  "url": "https://colombiamove.com/publicar",
+  "country": "CO",
+  "site": "Colombia Move wizard page, raw HTML (framework, inline scripts, API paths)",
+  "category": "classified-board",
+  "bodyChars": 400000
+ },
+ {
+  "id": "cm47:publicar-api-windows",
+  "kind": "json",
+  "url": "https://colombiamove.com/publicar",
+  "country": "CO",
+  "site": "Colombia Move wizard page: windows around fetch/api/action/csrf",
+  "category": "classified-board",
+  "bodyMatch": "fetch\\(|/api/|action=\"|csrf|_token|wire:|x-data|hx-post|livewire",
+  "bodyWindow": 1200,
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm47:home-raw",
+  "kind": "json",
+  "url": "https://colombiamove.com/",
+  "country": "CO",
+  "site": "Colombia Move home, raw HTML",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]

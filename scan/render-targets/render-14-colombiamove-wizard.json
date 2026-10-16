@@ -1,0 +1,5 @@
+[
+ {"id": "cm14:publicar", "url": "https://colombiamove.com/publicar", "country": "CO", "site": "Colombia Move posting wizard, step 1 (forms, selects, links, full text)", "category": "classified-board", "forms": true, "selects": true, "links": true, "fullText": true, "excerptChars": 12000},
+ {"id": "cm14:home", "url": "https://colombiamove.com/", "country": "CO", "site": "Colombia Move home (links to categories and the wizard)", "category": "classified-board", "forms": true, "links": true, "excerptChars": 6000},
+ {"id": "cm14:terminos", "url": "https://colombiamove.com/terminos", "country": "CO", "site": "Colombia Move terms (full text)", "category": "classified-board", "fullText": true, "excerptChars": 12000}
+]
