@@ -1,0 +1,74 @@
+[
+ {
+  "id": "gh64:clapper-repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/jbilcke-hf/clapper",
+  "country": "GLOBAL",
+  "site": "clapper repository record",
+  "category": "bounty-platform",
+  "bodyChars": 8000
+ },
+ {
+  "id": "gh64:clapper-5-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/jbilcke-hf/clapper/issues/5/comments?per_page=100",
+  "country": "GLOBAL",
+  "site": "clapper #5 comments",
+  "category": "bounty-platform",
+  "bodyChars": 200000
+ },
+ {
+  "id": "gh64:clapper-10-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/jbilcke-hf/clapper/issues/10/comments?per_page=100",
+  "country": "GLOBAL",
+  "site": "clapper #10 comments",
+  "category": "bounty-platform",
+  "bodyChars": 200000
+ },
+ {
+  "id": "gh64:clapper-prs-comfy",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=repo%3Ajbilcke-hf%2Fclapper%20is%3Apr%20ComfyUI&sort=updated&order=desc&per_page=30",
+  "country": "GLOBAL",
+  "site": "clapper PRs about ComfyUI",
+  "category": "bounty-platform",
+  "bodyChars": 200000
+ },
+ {
+  "id": "gh64:clapper-prs-timeline",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=repo%3Ajbilcke-hf%2Fclapper%20is%3Apr%20timeline%20clips&sort=updated&order=desc&per_page=30",
+  "country": "GLOBAL",
+  "site": "clapper PRs about timeline clips",
+  "category": "bounty-platform",
+  "bodyChars": 200000
+ },
+ {
+  "id": "gh64:clapper-open-prs",
+  "kind": "json",
+  "url": "https://api.github.com/repos/jbilcke-hf/clapper/pulls?state=open&per_page=50&sort=updated&direction=desc",
+  "country": "GLOBAL",
+  "site": "clapper open PRs",
+  "category": "bounty-platform",
+  "bodyChars": 200000
+ },
+ {
+  "id": "gh64:sheetsee-24-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/jlord/sheetsee-tables/issues/24/comments?per_page=100",
+  "country": "GLOBAL",
+  "site": "sheetsee-tables #24 comments",
+  "category": "bounty-platform",
+  "bodyChars": 200000
+ },
+ {
+  "id": "gh64:sheetsee-repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/jlord/sheetsee-tables",
+  "country": "GLOBAL",
+  "site": "sheetsee-tables repository record",
+  "category": "bounty-platform",
+  "bodyChars": 8000
+ }
+]

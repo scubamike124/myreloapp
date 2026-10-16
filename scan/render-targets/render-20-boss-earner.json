@@ -1,0 +1,22 @@
+[
+ {
+  "id": "r20:boss-get-started-long",
+  "url": "https://www.boss.dev/doc/get-started",
+  "country": "GLOBAL",
+  "site": "boss.dev get started, whole text (the earner section)",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 60000
+ },
+ {
+  "id": "r20:boss-docs",
+  "url": "https://www.boss.dev/doc/",
+  "country": "GLOBAL",
+  "site": "boss.dev documentation index",
+  "category": "bounty-platform",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 30000
+ }
+]
