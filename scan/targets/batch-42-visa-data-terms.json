@@ -1,0 +1,47 @@
+[
+ {
+  "id": "visa42:open-json",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data/contents/bounties/open.json",
+  "country": "GLOBAL",
+  "site": "Diaspora bounties/open.json (base64): the open bounties and rates",
+  "category": "github-payout-check",
+  "bodyChars": 200000
+ },
+ {
+  "id": "visa42:contributing",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data/contents/CONTRIBUTING.md",
+  "country": "GLOBAL",
+  "site": "Diaspora CONTRIBUTING.md (base64): AI Contributions & Review Policy, payment rules",
+  "category": "github-payout-check",
+  "bodyChars": 200000
+ },
+ {
+  "id": "visa42:closed-prs",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data/pulls?state=closed&per_page=30&sort=updated&direction=desc",
+  "country": "GLOBAL",
+  "site": "Diaspora merged PRs (who got bounties)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ },
+ {
+  "id": "visa42:issue11-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data/issues/11/comments",
+  "country": "GLOBAL",
+  "site": "Diaspora PR #11 comments (the merged GH→GB verification: paid?)",
+  "category": "github-payout-check",
+  "bodyChars": 60000
+ },
+ {
+  "id": "visa42:commits",
+  "kind": "json",
+  "url": "https://api.github.com/repos/angeloasante/Diaspora_AI_Visa_data/commits?per_page=30",
+  "country": "GLOBAL",
+  "site": "Diaspora recent commits (changelog / payment ledger?)",
+  "category": "github-payout-check",
+  "bodyChars": 120000
+ }
+]
