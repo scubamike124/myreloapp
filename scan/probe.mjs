@@ -7,6 +7,30 @@ import fs from "node:fs";
 const [, , targetsPath, outPath] = process.argv;
 const targets = JSON.parse(fs.readFileSync(targetsPath, "utf8"));
 const out = fs.createWriteStream(outPath, { flags: "a" });
+
+/**
+ * Stored page bodies are third parties' pages, which sometimes embed their own keys (a Mapbox token in a map widget, an analytics key);
+ * GitHub's push protection refuses a commit that carries one. Anything token-shaped is replaced before a line is written, so a result
+ * never holds a secret, ours or anyone's.
+ */
+const TOKEN_SHAPES = [
+  /\b[ps]k\.eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}/g, // Mapbox public/secret tokens
+  /\bAKIA[0-9A-Z]{16}\b/g, // AWS access key ids
+  /\bgh[pousr]_[A-Za-z0-9]{30,}\b/g, // GitHub tokens
+  /\bgithub_pat_[A-Za-z0-9_]{30,}\b/g,
+  /\bxox[baprs]-[A-Za-z0-9-]{10,}\b/g, // Slack tokens
+  /\bAIza[0-9A-Za-z_-]{30,}\b/g, // Google API keys
+  /\bsk_(live|test)_[A-Za-z0-9]{16,}\b/g, // Stripe secret keys
+  /\bsk-[A-Za-z0-9_-]{20,}\b/g, // OpenAI-style secret keys
+  /\bey[A-Za-z0-9_-]{20,}\.ey[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\b/g, // JWTs
+  /\bSG\.[A-Za-z0-9_-]{16,}\.[A-Za-z0-9_-]{16,}\b/g, // SendGrid keys
+];
+export function scrubTokens(line) {
+  let s = line;
+  for (const re of TOKEN_SHAPES) s = s.replace(re, "[redacted-token]");
+  return s;
+}
+
 const UA = "StudyProofs-region-scan/1.0 (read-only research of public rules; https://hq.amberoneai.com/studyproofs)";
 const now = () => new Date().toISOString();
 
@@ -308,11 +332,11 @@ async function run() {
   async function worker() {
     for (;;) {
       const t = queue.shift(); if (!t) return;
-      if (t.kind === "note") { out.write(JSON.stringify({ ...t, at: now() }) + "\n"); continue; }
+      if (t.kind === "note") { out.write(scrubTokens(JSON.stringify({ ...t, at: now() })) + "\n"); continue; }
       const probe = PROBES[t.kind] || probeHtml;
       let result;
       try { result = await probe(t); } catch (e) { result = { reachable: false, error: String(e?.message || e).slice(0, 120) }; }
-      out.write(JSON.stringify({ ...t, at: now(), result }) + "\n");
+      out.write(scrubTokens(JSON.stringify({ ...t, at: now(), result })) + "\n");
       done++; if (done % 25 === 0) console.log(`${done}/${total}`);
     }
   }
