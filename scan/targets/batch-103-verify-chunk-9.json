@@ -1,0 +1,371 @@
+[
+ {
+  "id": "ver103:adsandclassifieds.com:home",
+  "kind": "signup",
+  "url": "https://adsandclassifieds.com/",
+  "country": "IE",
+  "site": "adsandclassifieds.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:adsandclassifieds.com:found",
+  "kind": "signup",
+  "url": "https://adsandclassifieds.com/classifieds/ireland",
+  "country": "IE",
+  "site": "adsandclassifieds.com : Classifieds in Ireland | AdsAndClassifieds.com",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:adverts.ie:home",
+  "kind": "signup",
+  "url": "https://adverts.ie/",
+  "country": "IE",
+  "site": "adverts.ie home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:adverts.ie:found",
+  "kind": "signup",
+  "url": "https://www.adverts.ie/results/free+ads",
+  "country": "IE",
+  "site": "adverts.ie : Free ads | 14,302 for sale in Ireland - Adverts.ie",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:npati.com:home",
+  "kind": "signup",
+  "url": "https://npati.com/",
+  "country": "CA",
+  "site": "npati.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:npati.com:found",
+  "kind": "signup",
+  "url": "https://www.npati.com/ca/",
+  "country": "CA",
+  "site": "npati.com : NPATI Canada: Free Classified Ads & Video Marketpl",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:classifieds.ca:home",
+  "kind": "signup",
+  "url": "https://classifieds.ca/",
+  "country": "CA",
+  "site": "classifieds.ca home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:classifieds.ca:found",
+  "kind": "signup",
+  "url": "https://classifieds.ca/default.aspx",
+  "country": "CA",
+  "site": "classifieds.ca : classifieds - Canada's premiere free classifieds b",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:classifiedads.com:home",
+  "kind": "signup",
+  "url": "https://classifiedads.com/",
+  "country": "CA",
+  "site": "classifiedads.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:classifiedads.com:found",
+  "kind": "signup",
+  "url": "https://www.classifiedads.com/canada-r135.html",
+  "country": "CA",
+  "site": "classifiedads.com : Canada Classifieds",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:classifiedads.ca:home",
+  "kind": "signup",
+  "url": "https://classifiedads.ca/",
+  "country": "CA",
+  "site": "classifiedads.ca home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:classifiedads.ca:found",
+  "kind": "signup",
+  "url": "https://www.classifiedads.ca/post.php",
+  "country": "CA",
+  "site": "classifiedads.ca : Post a Free Ad — ClassifiedAds.ca",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:marketlister.ca:home",
+  "kind": "signup",
+  "url": "https://marketlister.ca/",
+  "country": "CA",
+  "site": "marketlister.ca home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:marketlister.ca:found",
+  "kind": "signup",
+  "url": "https://www.marketlister.ca/",
+  "country": "CA",
+  "site": "marketlister.ca : Free Classified Ads Canada | Buy and Sell Locally ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:yardlyfinds.com:home",
+  "kind": "signup",
+  "url": "https://yardlyfinds.com/",
+  "country": "CA",
+  "site": "yardlyfinds.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:yardlyfinds.com:found",
+  "kind": "signup",
+  "url": "https://yardlyfinds.com/classified",
+  "country": "CA",
+  "site": "yardlyfinds.com : Classifieds - Buy & Sell Locally Near You | Yardly",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:eclassify.ca:home",
+  "kind": "signup",
+  "url": "https://eclassify.ca/",
+  "country": "CA",
+  "site": "eclassify.ca home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:eclassify.ca:found",
+  "kind": "signup",
+  "url": "https://www.eclassify.ca/listings/",
+  "country": "CA",
+  "site": "eclassify.ca : Free Classified Ads in Canada | eClassify.ca",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:campusboard.co.uk:home",
+  "kind": "signup",
+  "url": "https://campusboard.co.uk/",
+  "country": "GB",
+  "site": "campusboard.co.uk home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:campusboard.co.uk:found",
+  "kind": "signup",
+  "url": "https://www.campusboard.co.uk/city/London?category=all",
+  "country": "GB",
+  "site": "campusboard.co.uk : London | Student Marketplace | Campusboard",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:studentfreestuff.com:home",
+  "kind": "signup",
+  "url": "https://studentfreestuff.com/",
+  "country": "GB",
+  "site": "studentfreestuff.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:studentfreestuff.com:found",
+  "kind": "signup",
+  "url": "https://www.studentfreestuff.com/",
+  "country": "GB",
+  "site": "studentfreestuff.com : Student Free Stuff | UK Freebies, Samples & Compet",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:adjoy.uk:home",
+  "kind": "signup",
+  "url": "https://adjoy.uk/",
+  "country": "GB",
+  "site": "adjoy.uk home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:adjoy.uk:found",
+  "kind": "signup",
+  "url": "https://www.adjoy.uk/",
+  "country": "GB",
+  "site": "adjoy.uk : Adjoy.uk - Free Classified Ads in the UK",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:unipol.org.uk:home",
+  "kind": "signup",
+  "url": "https://unipol.org.uk/",
+  "country": "GB",
+  "site": "unipol.org.uk home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:unipol.org.uk:found",
+  "kind": "signup",
+  "url": "https://www.unipol.org.uk/notice-board/",
+  "country": "GB",
+  "site": "unipol.org.uk : Student Noticeboard: Your Hub for Housing Announce",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:gopost.com.au:home",
+  "kind": "signup",
+  "url": "https://gopost.com.au/",
+  "country": "AU",
+  "site": "gopost.com.au home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:gopost.com.au:found",
+  "kind": "signup",
+  "url": "https://www.gopost.com.au/",
+  "country": "AU",
+  "site": "gopost.com.au : gopost.com.au Free Online Classifieds and Classifi",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:listads.com.au:home",
+  "kind": "signup",
+  "url": "https://listads.com.au/",
+  "country": "AU",
+  "site": "listads.com.au home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:smallads.com.au:home",
+  "kind": "signup",
+  "url": "https://smallads.com.au/",
+  "country": "AU",
+  "site": "smallads.com.au home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:auclassifieds.com.au:home",
+  "kind": "signup",
+  "url": "https://auclassifieds.com.au/",
+  "country": "AU",
+  "site": "auclassifieds.com.au home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:auclassifieds.com.au:found",
+  "kind": "signup",
+  "url": "https://www.auclassifieds.com.au/",
+  "country": "AU",
+  "site": "auclassifieds.com.au : Free Classifieds Australia, Free Ads - AU Classifi",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:campusboard.co:home",
+  "kind": "signup",
+  "url": "https://campusboard.co/",
+  "country": "US",
+  "site": "campusboard.co home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:campusboard.co:found",
+  "kind": "signup",
+  "url": "https://www.campusboard.co/listings/new?listingType=everything",
+  "country": "US",
+  "site": "campusboard.co : Sell Unwated Items on Campusboard",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:universitybulletinboard.com:home",
+  "kind": "signup",
+  "url": "https://universitybulletinboard.com/",
+  "country": "US",
+  "site": "universitybulletinboard.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:universitybulletinboard.com:found",
+  "kind": "signup",
+  "url": "http://universitybulletinboard.com/",
+  "country": "US",
+  "site": "universitybulletinboard.com : University Bulletin Board | Classifieds Ads for Co",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:uloop.com:home",
+  "kind": "signup",
+  "url": "https://uloop.com/",
+  "country": "US",
+  "site": "uloop.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:uloop.com:found",
+  "kind": "signup",
+  "url": "https://www.uloop.com/classifieds",
+  "country": "US",
+  "site": "uloop.com : Uloop | College Classifieds - Student Housing, Int",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:snaggboard.com:home",
+  "kind": "signup",
+  "url": "https://snaggboard.com/",
+  "country": "US",
+  "site": "snaggboard.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:rumieapp.com:home",
+  "kind": "signup",
+  "url": "https://rumieapp.com/",
+  "country": "US",
+  "site": "rumieapp.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver103:rumieapp.com:found",
+  "kind": "signup",
+  "url": "https://www.rumieapp.com/",
+  "country": "US",
+  "site": "rumieapp.com : rumie - College Marketplace",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]
