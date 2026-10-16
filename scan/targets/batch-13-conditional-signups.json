@@ -1,0 +1,582 @@
+[
+ {
+  "id": "signup13:AR:anunciar-co-argentina-",
+  "kind": "signup",
+  "url": "https://argentina.anunciar.co/",
+  "discover": true,
+  "country": "AR",
+  "site": "Anunciar.co (Argentina)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:GR:freelist-gr",
+  "kind": "signup",
+  "url": "https://www.freelist.gr/",
+  "discover": true,
+  "country": "GR",
+  "site": "FreeList.gr",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:BG:alo-bg",
+  "kind": "signup",
+  "url": "https://www.alo.bg/",
+  "discover": true,
+  "country": "BG",
+  "site": "Alo.bg",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:BG:bazar-bg",
+  "kind": "signup",
+  "url": "https://bazar.bg/",
+  "discover": true,
+  "country": "BG",
+  "site": "Bazar.bg",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:AE:mourjan",
+  "kind": "signup",
+  "url": "https://www.mourjan.com/",
+  "discover": true,
+  "country": "AE",
+  "site": "Mourjan",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:GLOBAL:share-your-startup",
+  "kind": "signup",
+  "url": "https://shareyourstartup.com/",
+  "discover": true,
+  "country": "GLOBAL",
+  "site": "Share Your Startup",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:N/A:e3lanfree-com",
+  "kind": "signup",
+  "url": "https://e3lanfree.com/",
+  "discover": true,
+  "country": "N/A",
+  "site": "e3lanfree.com",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:N/A:dakanarab-com",
+  "kind": "signup",
+  "url": "https://dakanarab.com/",
+  "discover": true,
+  "country": "N/A",
+  "site": "Dakanarab.com",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:BR:classificados-brasil",
+  "kind": "signup",
+  "url": "https://www.classificados-brasil.com/",
+  "discover": true,
+  "country": "BR",
+  "site": "Classificados Brasil",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:BR:classisite",
+  "kind": "signup",
+  "url": "https://www.classisite.com.br/",
+  "discover": true,
+  "country": "BR",
+  "site": "Classisite",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:HU:ingyen-aprohirdetes-hu",
+  "kind": "signup",
+  "url": "http://ingyen-aprohirdetes.hu/",
+  "discover": true,
+  "country": "HU",
+  "site": "Ingyen-aprohirdetes.hu",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:HU:aprohirdetes-biz",
+  "kind": "signup",
+  "url": "https://aprohirdetes.biz/",
+  "discover": true,
+  "country": "HU",
+  "site": "Aprohirdetes.biz",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:UA:freetrade-com-ua",
+  "kind": "signup",
+  "url": "https://freetrade.com.ua/",
+  "discover": true,
+  "country": "UA",
+  "site": "FreeTrade.com.ua",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:ID:iklangratiz",
+  "kind": "signup",
+  "url": "https://www.iklangratiz.com/",
+  "discover": true,
+  "country": "ID",
+  "site": "IklanGratiz",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:AR:evisos-argentina-registro-",
+  "kind": "signup",
+  "url": "https://www.evisos.com.ar/registro",
+  "discover": false,
+  "country": "AR",
+  "site": "Evisos Argentina (registro)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:AR:evisos-argentina-login-",
+  "kind": "signup",
+  "url": "https://www.evisos.com.ar/login",
+  "discover": false,
+  "country": "AR",
+  "site": "Evisos Argentina (login)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:ES:tabl-n-de-anuncios-anunciar-",
+  "kind": "signup",
+  "url": "https://www.tablondeanuncios.com/anunciar.htm",
+  "discover": false,
+  "country": "ES",
+  "site": "Tablón de Anuncios (anunciar)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:DE:quoka-anzeige-aufgeben-",
+  "kind": "signup",
+  "url": "https://www.quoka.de/anzeige-aufgeben/",
+  "discover": false,
+  "country": "DE",
+  "site": "Quoka (Anzeige aufgeben)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:DE:quoka-login-",
+  "kind": "signup",
+  "url": "https://www.quoka.de/login/",
+  "discover": false,
+  "country": "DE",
+  "site": "Quoka (Login)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:CZ:hyperinzerce-registrace-",
+  "kind": "signup",
+  "url": "https://www.hyperinzerce.cz/registrace/",
+  "discover": false,
+  "country": "CZ",
+  "site": "Hyperinzerce (registrace)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:NL:speurders-registreren-",
+  "kind": "signup",
+  "url": "https://www.speurders.nl/account/registreren",
+  "discover": false,
+  "country": "NL",
+  "site": "Speurders (registreren)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:RO:romaniaunita-register-",
+  "kind": "signup",
+  "url": "https://www.romaniaunita.com/index.php?/register/",
+  "discover": false,
+  "country": "RO",
+  "site": "RomaniaUnita (register)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:KR:phdkim-net-signup-",
+  "kind": "signup",
+  "url": "https://phdkim.net/signup/",
+  "discover": false,
+  "country": "KR",
+  "site": "phdkim.net (signup)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:KR:phdkim-net-login-",
+  "kind": "signup",
+  "url": "https://phdkim.net/login/",
+  "discover": false,
+  "country": "KR",
+  "site": "phdkim.net (login)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:PK:startup-pk-register-",
+  "kind": "signup",
+  "url": "https://startup.pk/register/",
+  "discover": false,
+  "country": "PK",
+  "site": "Startup.pk (register)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:RO:anuntul-ro-inregistrare-",
+  "kind": "signup",
+  "url": "https://www.anuntul.ro/cont/inregistrare",
+  "discover": false,
+  "country": "RO",
+  "site": "Anuntul.ro (inregistrare)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:UA:ukrboard-registration-",
+  "kind": "signup",
+  "url": "https://www.ukrboard.com.ua/registration/",
+  "discover": false,
+  "country": "UA",
+  "site": "Ukrboard (registration)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:SG:sg-ads-online-register-",
+  "kind": "signup",
+  "url": "https://www.sgadsonline.com/register",
+  "discover": false,
+  "country": "SG",
+  "site": "SG Ads Online (register)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:IN:click-in-register-",
+  "kind": "signup",
+  "url": "https://www.click.in/register/",
+  "discover": false,
+  "country": "IN",
+  "site": "Click.in (register)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:BD:aponhut-register-",
+  "kind": "signup",
+  "url": "https://www.aponhut.com/register",
+  "discover": false,
+  "country": "BD",
+  "site": "Aponhut (register)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:UA:dou-ua-register-",
+  "kind": "signup",
+  "url": "https://dou.ua/register/",
+  "discover": false,
+  "country": "UA",
+  "site": "DOU.ua (register)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:ZA:studentroom-co-za-register-",
+  "kind": "signup",
+  "url": "https://www.studentroom.co.za/register",
+  "discover": false,
+  "country": "ZA",
+  "site": "Studentroom.co.za (register)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:HU:egyetemistak-hu-regisztracio-",
+  "kind": "signup",
+  "url": "https://egyetemistak.hu/regisztracio",
+  "discover": false,
+  "country": "HU",
+  "site": "Egyetemistak.hu (regisztracio)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:GLOBAL:expat-com-register-",
+  "kind": "signup",
+  "url": "https://www.expat.com/en/register.html",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "Expat.com (register)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:GLOBAL:dev-to-sign-up-",
+  "kind": "signup",
+  "url": "https://dev.to/users/sign_up",
+  "discover": false,
+  "country": "GLOBAL",
+  "site": "dev.to (sign up)",
+  "category": "signup-form"
+ },
+ {
+  "id": "signup13:NL:fok-forum-register-page-",
+  "kind": "signup",
+  "url": "https://forum.fok.nl/user/register",
+  "discover": false,
+  "country": "NL",
+  "site": "FOK!forum (register page)",
+  "category": "signup-form"
+ },
+ {
+  "id": "rules13:AE:mourjan-llms-txt-page-index-",
+  "kind": "html",
+  "url": "https://www.mourjan.com/llms.txt",
+  "country": "AE",
+  "site": "Mourjan llms.txt (page index)",
+  "category": "other"
+ },
+ {
+  "id": "rules13:AE:mourjan-post-ad",
+  "kind": "html",
+  "url": "https://www.mourjan.com/post/",
+  "country": "AE",
+  "site": "Mourjan post ad",
+  "category": "other"
+ },
+ {
+  "id": "rules13:AE:mourjan-terms",
+  "kind": "html",
+  "url": "https://www.mourjan.com/terms/",
+  "country": "AE",
+  "site": "Mourjan terms",
+  "category": "other"
+ },
+ {
+  "id": "rules13:GR:freelist-gr-terms",
+  "kind": "html",
+  "url": "https://www.freelist.gr/oroi-xrisis",
+  "country": "GR",
+  "site": "FreeList.gr terms",
+  "category": "other"
+ },
+ {
+  "id": "rules13:GR:freelist-gr-add",
+  "kind": "html",
+  "url": "https://www.freelist.gr/add",
+  "country": "GR",
+  "site": "FreeList.gr add",
+  "category": "other"
+ },
+ {
+  "id": "rules13:BG:alo-bg-about",
+  "kind": "html",
+  "url": "https://www.alo.bg/about_us.php",
+  "country": "BG",
+  "site": "Alo.bg about",
+  "category": "other"
+ },
+ {
+  "id": "rules13:BG:alo-bg-promote",
+  "kind": "html",
+  "url": "https://www.alo.bg/info_promote.php",
+  "country": "BG",
+  "site": "Alo.bg promote",
+  "category": "other"
+ },
+ {
+  "id": "rules13:BG:bazar-bg-rules",
+  "kind": "html",
+  "url": "https://bazar.bg/pravila",
+  "country": "BG",
+  "site": "Bazar.bg rules",
+  "category": "other"
+ },
+ {
+  "id": "rules13:BG:bazar-bg-terms",
+  "kind": "html",
+  "url": "https://bazar.bg/usloviya",
+  "country": "BG",
+  "site": "Bazar.bg terms",
+  "category": "other"
+ },
+ {
+  "id": "rules13:GLOBAL:share-your-startup-submit",
+  "kind": "html",
+  "url": "https://shareyourstartup.com/submit",
+  "country": "GLOBAL",
+  "site": "Share Your Startup submit",
+  "category": "other"
+ },
+ {
+  "id": "rules13:GLOBAL:share-your-startup-faq",
+  "kind": "html",
+  "url": "https://shareyourstartup.com/faq",
+  "country": "GLOBAL",
+  "site": "Share Your Startup FAQ",
+  "category": "other"
+ },
+ {
+  "id": "rules13:GLOBAL:share-your-startup-about",
+  "kind": "html",
+  "url": "https://shareyourstartup.com/about",
+  "country": "GLOBAL",
+  "site": "Share Your Startup about",
+  "category": "other"
+ },
+ {
+  "id": "rules13:N/A:e3lanfree-terms",
+  "kind": "html",
+  "url": "https://e3lanfree.com/terms/",
+  "country": "N/A",
+  "site": "e3lanfree terms",
+  "category": "other"
+ },
+ {
+  "id": "rules13:N/A:dakanarab-terms",
+  "kind": "html",
+  "url": "https://dakanarab.com/terms",
+  "country": "N/A",
+  "site": "Dakanarab terms",
+  "category": "other"
+ },
+ {
+  "id": "rules13:BR:classificados-brasil-termos",
+  "kind": "html",
+  "url": "https://www.classificados-brasil.com/termos",
+  "country": "BR",
+  "site": "Classificados Brasil termos",
+  "category": "other"
+ },
+ {
+  "id": "rules13:BR:classisite-termos",
+  "kind": "html",
+  "url": "https://www.classisite.com.br/termos",
+  "country": "BR",
+  "site": "Classisite termos",
+  "category": "other"
+ },
+ {
+  "id": "rules13:HU:ingyen-aprohirdetes-szab-lyzat",
+  "kind": "html",
+  "url": "http://ingyen-aprohirdetes.hu/szabalyzat.php",
+  "country": "HU",
+  "site": "Ingyen-aprohirdetes szabályzat",
+  "category": "other"
+ },
+ {
+  "id": "rules13:HU:aprohirdetes-biz-felad-s",
+  "kind": "html",
+  "url": "https://aprohirdetes.biz/feladas.php",
+  "country": "HU",
+  "site": "Aprohirdetes.biz feladás",
+  "category": "other"
+ },
+ {
+  "id": "rules13:UA:freetrade-agreement",
+  "kind": "html",
+  "url": "https://freetrade.com.ua/agreement",
+  "country": "UA",
+  "site": "FreeTrade agreement",
+  "category": "other"
+ },
+ {
+  "id": "rules13:UA:freetrade-add",
+  "kind": "html",
+  "url": "https://freetrade.com.ua/add",
+  "country": "UA",
+  "site": "FreeTrade add",
+  "category": "other"
+ },
+ {
+  "id": "rules13:ID:iklangratiz-pasang-iklan",
+  "kind": "html",
+  "url": "https://www.iklangratiz.com/p/pasang-iklan.html",
+  "country": "ID",
+  "site": "IklanGratiz pasang iklan",
+  "category": "other"
+ },
+ {
+  "id": "rules13:ID:iklangratiz-peraturan",
+  "kind": "html",
+  "url": "https://www.iklangratiz.com/p/peraturan.html",
+  "country": "ID",
+  "site": "IklanGratiz peraturan",
+  "category": "other"
+ },
+ {
+  "id": "rules13:NL:fok-huisregels",
+  "kind": "html",
+  "url": "https://www.fok.nl/huisregels",
+  "country": "NL",
+  "site": "FOK! huisregels",
+  "category": "other"
+ },
+ {
+  "id": "rules13:NL:fok-forum-faq",
+  "kind": "html",
+  "url": "https://forum.fok.nl/faq",
+  "country": "NL",
+  "site": "FOK!forum FAQ",
+  "category": "other"
+ },
+ {
+  "id": "rules13:GLOBAL:dev-to-editor-guide",
+  "kind": "html",
+  "url": "https://dev.to/p/editor_guide",
+  "country": "GLOBAL",
+  "site": "dev.to editor guide",
+  "category": "other"
+ },
+ {
+  "id": "rules13:GLOBAL:dev-to-community-moderation",
+  "kind": "html",
+  "url": "https://dev.to/p/community_moderation",
+  "country": "GLOBAL",
+  "site": "dev.to community moderation",
+  "category": "other"
+ },
+ {
+  "id": "rules13:GLOBAL:dev-to-content-policy",
+  "kind": "html",
+  "url": "https://dev.to/p/content_policy",
+  "country": "GLOBAL",
+  "site": "dev.to content policy",
+  "category": "other"
+ },
+ {
+  "id": "rules13:GLOBAL:expat-com-classifieds",
+  "kind": "html",
+  "url": "https://www.expat.com/en/classifieds/",
+  "country": "GLOBAL",
+  "site": "Expat.com classifieds",
+  "category": "other"
+ },
+ {
+  "id": "rules13:AR:anunciar-co-t-rminos",
+  "kind": "html",
+  "url": "https://argentina.anunciar.co/terminos-y-condiciones",
+  "country": "AR",
+  "site": "Anunciar.co términos",
+  "category": "other"
+ },
+ {
+  "id": "rules13:AR:anunciar-co-publicar",
+  "kind": "html",
+  "url": "https://argentina.anunciar.co/publicar",
+  "country": "AR",
+  "site": "Anunciar.co publicar",
+  "category": "other"
+ },
+ {
+  "id": "rules13:ES:tabl-n-de-anuncios-condiciones",
+  "kind": "html",
+  "url": "https://www.tablondeanuncios.com/condiciones-de-uso.htm",
+  "country": "ES",
+  "site": "Tablón de Anuncios condiciones",
+  "category": "other"
+ },
+ {
+  "id": "rules13:ES:tabl-n-de-anuncios-ayuda",
+  "kind": "html",
+  "url": "https://www.tablondeanuncios.com/ayuda-anunciar.htm",
+  "country": "ES",
+  "site": "Tablón de Anuncios ayuda",
+  "category": "other"
+ }
+]
