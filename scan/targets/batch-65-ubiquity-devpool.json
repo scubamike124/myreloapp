@@ -1,0 +1,74 @@
+[
+ {
+  "id": "gh65:devpool-repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity/devpool-directory",
+  "country": "GLOBAL",
+  "site": "devpool-directory repository record",
+  "category": "bounty-platform",
+  "bodyChars": 8000
+ },
+ {
+  "id": "gh65:devpool-readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity/devpool-directory/readme",
+  "country": "GLOBAL",
+  "site": "devpool-directory README (base64)",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh65:devpool-open",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity/devpool-directory/issues?state=open&per_page=60&sort=created&direction=desc",
+  "country": "GLOBAL",
+  "site": "devpool-directory newest open tasks",
+  "category": "bounty-platform",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh65:devpool-closed",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity/devpool-directory/issues?state=closed&per_page=30&sort=updated&direction=desc",
+  "country": "GLOBAL",
+  "site": "devpool-directory recently closed tasks",
+  "category": "bounty-platform",
+  "bodyChars": 300000
+ },
+ {
+  "id": "gh65:ubiquity-github-readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/ubiquity/.github/readme",
+  "country": "GLOBAL",
+  "site": "Ubiquity org README (base64)",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "web65:work-ubq",
+  "kind": "html",
+  "url": "https://work.ubq.fi/",
+  "country": "GLOBAL",
+  "site": "Ubiquity work board",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "web65:dao-devpool",
+  "kind": "html",
+  "url": "https://dao.ubq.fi/devpool",
+  "country": "GLOBAL",
+  "site": "Ubiquity DAO DevPool page",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh65:paid-sample",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=org%3Aubiquity%20is%3Aissue%20is%3Aclosed%20%22permit%22%20in%3Acomments%20closed%3A%3E%3D2026-09-01&sort=updated&order=desc&per_page=20",
+  "country": "GLOBAL",
+  "site": "Ubiquity issues closed since September with a permit (payout) in the comments",
+  "category": "bounty-platform",
+  "bodyChars": 400000
+ }
+]
