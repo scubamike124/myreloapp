@@ -1,0 +1,90 @@
+[
+ {
+  "id": "owocki23:bounties",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/bounties",
+  "country": "GLOBAL",
+  "site": "owockibot /bounties",
+  "category": "paid-task",
+  "bodyChars": 60000
+ },
+ {
+  "id": "owocki23:stats",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/stats",
+  "country": "GLOBAL",
+  "site": "owockibot /stats",
+  "category": "paid-task",
+  "bodyChars": 8000
+ },
+ {
+  "id": "owocki23:health",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/health",
+  "country": "GLOBAL",
+  "site": "owockibot /health",
+  "category": "paid-task"
+ },
+ {
+  "id": "owocki23:api-bounties",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/api/bounties",
+  "country": "GLOBAL",
+  "site": "owockibot /api/bounties",
+  "category": "paid-task",
+  "bodyChars": 20000
+ },
+ {
+  "id": "owocki23:bounty-370",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/bounties/370",
+  "country": "GLOBAL",
+  "site": "owockibot bounty 370",
+  "category": "paid-task",
+  "bodyChars": 12000
+ },
+ {
+  "id": "owocki23:bounty-373",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/bounties/373",
+  "country": "GLOBAL",
+  "site": "owockibot bounty 373",
+  "category": "paid-task",
+  "bodyChars": 12000
+ },
+ {
+  "id": "owocki23:bounty-374",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/bounties/374",
+  "country": "GLOBAL",
+  "site": "owockibot bounty 374",
+  "category": "paid-task",
+  "bodyChars": 12000
+ },
+ {
+  "id": "owocki23:bounty-402",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/bounties/402",
+  "country": "GLOBAL",
+  "site": "owockibot bounty 402",
+  "category": "paid-task",
+  "bodyChars": 12000
+ },
+ {
+  "id": "owocki23:bounty-403",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/bounties/403",
+  "country": "GLOBAL",
+  "site": "owockibot bounty 403",
+  "category": "paid-task",
+  "bodyChars": 12000
+ },
+ {
+  "id": "owocki23:home",
+  "kind": "task",
+  "url": "https://bounty.owockibot.xyz/",
+  "country": "GLOBAL",
+  "site": "owockibot home",
+  "category": "paid-task"
+ }
+]

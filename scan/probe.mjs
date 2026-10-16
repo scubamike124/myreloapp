@@ -236,7 +236,17 @@ async function probeTask(t) {
   return { reachable: page.status > 0, status: page.status, finalUrl: page.url, title: title.trim().slice(0, 160), chars: text.length, closedWords, openWords, dates, money, sentences, jsonLd: jsonLd.replace(/\s+/g, " ").slice(0, 800), error: page.error };
 }
 
-const PROBES = { mastodon: probeMastodon, peertube: probePeertube, lemmy: probeLemmy, pixelfed: probePixelfed, misskey: probeMisskey, nostr: probeNostr, html: probeHtml, signup: probeSignup, task: probeTask };
+
+// A JSON endpoint (a board's API), read as is: status and the first part of the body, for a hand review. Reads only.
+async function probeJson(t) {
+  const page = await get(t.url, { accept: "application/json, */*;q=0.5", ms: 20000 });
+  const text = page.text || "";
+  let parsed = null; try { parsed = JSON.parse(text); } catch {}
+  const summary = parsed && typeof parsed === "object" ? (Array.isArray(parsed) ? { items: parsed.length, firstKeys: Object.keys(parsed[0] || {}).slice(0, 30) } : { keys: Object.keys(parsed).slice(0, 40) }) : null;
+  return { reachable: page.status > 0, status: page.status, finalUrl: page.url, chars: text.length, summary, body: text.slice(0, Number(t.bodyChars) > 0 ? Math.min(60000, Number(t.bodyChars)) : 8000), error: page.error };
+}
+
+const PROBES = { mastodon: probeMastodon, peertube: probePeertube, lemmy: probeLemmy, pixelfed: probePixelfed, misskey: probeMisskey, nostr: probeNostr, html: probeHtml, signup: probeSignup, task: probeTask, json: probeJson };
 async function run() {
   let queue = [];
   for (const t of targets) {
