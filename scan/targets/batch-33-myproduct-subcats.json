@@ -1,0 +1,4 @@
+[
+ {"id": "raw33:myproduct:subcats-map", "kind": "json", "url": "https://myproduct.co.il/", "country": "IL", "site": "myproduct.co.il home page: the quick form's sub-category map (subCatsByCategoryId), first 400,000 characters", "category": "classified-board", "bodyMatch": "const subCatsByCategoryId = ", "bodyAfter": 399000, "bodyChars": 400000},
+ {"id": "raw33:myproduct:category-map", "kind": "json", "url": "https://myproduct.co.il/", "country": "IL", "site": "myproduct.co.il home page: the quick form's category code map (categoryIdByCode) in full", "category": "classified-board", "bodyMatch": "const categoryIdByCode = ", "bodyAfter": 6000, "bodyChars": 8000}
+]

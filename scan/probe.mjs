@@ -254,9 +254,11 @@ async function probeJson(t) {
     let total = 0;
     let last = -1;
     for (const m of text.matchAll(re)) {
-      const start = Math.max(0, m.index - win);
+      // bodyAfter: a one-sided window, the text that follows the match (a page's data map, for instance).
+      const after = Number(t.bodyAfter) > 0 ? Number(t.bodyAfter) : 0;
+      const start = after ? m.index : Math.max(0, m.index - win);
       if (start < last) continue;
-      const end = Math.min(text.length, m.index + m[0].length + win);
+      const end = Math.min(text.length, m.index + m[0].length + (after || win));
       parts.push(`@${start}: ${text.slice(start, end)}`);
       total += end - start;
       last = end;
