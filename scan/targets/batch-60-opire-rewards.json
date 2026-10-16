@@ -1,0 +1,101 @@
+[
+ {
+  "id": "gh60:bugb-1",
+  "kind": "json",
+  "url": "https://api.github.com/repos/rodrigompy/bugb/issues/1",
+  "country": "GLOBAL",
+  "site": "Opire $100 reward: rodrigompy/bugb #1 body",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh60:bugb-1-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/rodrigompy/bugb/issues/1/comments?per_page=100",
+  "country": "GLOBAL",
+  "site": "its comments",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh60:bugb-repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/rodrigompy/bugb",
+  "country": "GLOBAL",
+  "site": "the repository record",
+  "category": "bounty-platform",
+  "bodyChars": 8000
+ },
+ {
+  "id": "gh60:bugb-readme",
+  "kind": "json",
+  "url": "https://api.github.com/repos/rodrigompy/bugb/readme",
+  "country": "GLOBAL",
+  "site": "its README (base64)",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ },
+ {
+  "id": "gh60:rencfs-3",
+  "kind": "json",
+  "url": "https://api.github.com/repos/radumarias/rencfs/issues/3",
+  "country": "GLOBAL",
+  "site": "Opire $42 reward: radumarias/rencfs #3 body",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh60:rencfs-3-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/radumarias/rencfs/issues/3/comments?per_page=100",
+  "country": "GLOBAL",
+  "site": "its comments",
+  "category": "bounty-platform",
+  "bodyChars": 120000
+ },
+ {
+  "id": "api60:opire-all",
+  "kind": "json",
+  "url": "https://api.opire.dev/rewards",
+  "country": "GLOBAL",
+  "site": "Opire rewards, no filter",
+  "category": "bounty-platform",
+  "bodyChars": 400000
+ },
+ {
+  "id": "api60:opire-claimed",
+  "kind": "json",
+  "url": "https://api.opire.dev/rewards?status=claimed",
+  "country": "GLOBAL",
+  "site": "Opire rewards claimed",
+  "category": "bounty-platform",
+  "bodyChars": 400000
+ },
+ {
+  "id": "api60:opire-completed",
+  "kind": "json",
+  "url": "https://api.opire.dev/rewards?status=completed",
+  "country": "GLOBAL",
+  "site": "Opire rewards completed",
+  "category": "bounty-platform",
+  "bodyChars": 400000
+ },
+ {
+  "id": "api60:opire-paid",
+  "kind": "json",
+  "url": "https://api.opire.dev/rewards?status=paid",
+  "country": "GLOBAL",
+  "site": "Opire rewards paid",
+  "category": "bounty-platform",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh60:devpool-opire",
+  "kind": "json",
+  "url": "https://api.github.com/repos/devpool-directory/devpool-directory/issues/5030",
+  "country": "GLOBAL",
+  "site": "devpool-directory's Opire entry",
+  "category": "bounty-platform",
+  "bodyChars": 60000
+ }
+]
