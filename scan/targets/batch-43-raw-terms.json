@@ -1,0 +1,38 @@
+[
+ {
+  "id": "visa43:open-json",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/angeloasante/Diaspora_AI_Visa_data/main/bounties/open.json",
+  "country": "GLOBAL",
+  "site": "Diaspora bounties/open.json (raw)",
+  "category": "github-payout-check",
+  "bodyChars": 200000
+ },
+ {
+  "id": "visa43:contributing",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/angeloasante/Diaspora_AI_Visa_data/main/CONTRIBUTING.md",
+  "country": "GLOBAL",
+  "site": "Diaspora CONTRIBUTING.md (raw): AI policy, payment rules",
+  "category": "github-payout-check",
+  "bodyChars": 200000
+ },
+ {
+  "id": "visa43:readme",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/angeloasante/Diaspora_AI_Visa_data/main/README.md",
+  "country": "GLOBAL",
+  "site": "Diaspora README (raw)",
+  "category": "github-payout-check",
+  "bodyChars": 100000
+ },
+ {
+  "id": "spaceapp43:license",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/oll4com/spaceapp/main/LICENSE",
+  "country": "GLOBAL",
+  "site": "spaceapp LICENSE (contributions accepted under it)",
+  "category": "github-payout-check",
+  "bodyChars": 40000
+ }
+]
