@@ -1,0 +1,110 @@
+[
+ {
+  "id": "cm49:mcp-llms",
+  "kind": "json",
+  "url": "https://colombiamove.com/ai/mcp/llms.txt",
+  "country": "CO",
+  "site": "Colombia Move MCP tools, endpoint and auth (llms.txt)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "cm49:skill-md",
+  "kind": "json",
+  "url": "https://colombiamove.com/skill.md",
+  "country": "CO",
+  "site": "Colombia Move skill.md for AI apps",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "cm49:agent-skills",
+  "kind": "json",
+  "url": "https://colombiamove.com/.well-known/agent-skills/index.json",
+  "country": "CO",
+  "site": "Colombia Move agent skills index",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "cm49:oauth-as",
+  "kind": "json",
+  "url": "https://colombiamove.com/.well-known/oauth-authorization-server",
+  "country": "CO",
+  "site": "OAuth authorization server metadata (root)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "cm49:oauth-as-mcp",
+  "kind": "json",
+  "url": "https://colombiamove.com/.well-known/oauth-authorization-server/mcp",
+  "country": "CO",
+  "site": "OAuth authorization server metadata for /mcp (RFC 8414 path form)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "cm49:oauth-pr",
+  "kind": "json",
+  "url": "https://colombiamove.com/.well-known/oauth-protected-resource",
+  "country": "CO",
+  "site": "OAuth protected resource metadata (root)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "cm49:oauth-pr-mcp",
+  "kind": "json",
+  "url": "https://colombiamove.com/.well-known/oauth-protected-resource/mcp",
+  "country": "CO",
+  "site": "OAuth protected resource metadata for /mcp",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "cm49:api-docs",
+  "kind": "json",
+  "url": "https://colombiamove.com/api/docs",
+  "country": "CO",
+  "site": "Colombia Move API docs (allowed in robots)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "cm49:public-listings",
+  "kind": "json",
+  "url": "https://colombiamove.com/api/public/listings?q=StudyProofs",
+  "country": "CO",
+  "site": "public listings API, a search for StudyProofs",
+  "category": "classified-board",
+  "bodyChars": 120000
+ },
+ {
+  "id": "cm49:mcp-get",
+  "kind": "json",
+  "url": "https://colombiamove.com/mcp",
+  "country": "CO",
+  "site": "the MCP endpoint itself (GET; expect 401/405 with a WWW-Authenticate hint)",
+  "category": "classified-board",
+  "bodyChars": 20000
+ },
+ {
+  "id": "cm49:en-mcp",
+  "kind": "json",
+  "url": "https://colombiamove.com/en/ai/mcp",
+  "country": "CO",
+  "site": "the English MCP page",
+  "category": "classified-board",
+  "bodyChars": 300000
+ },
+ {
+  "id": "cm49:mcp-connect",
+  "kind": "json",
+  "url": "https://colombiamove.com/ai/mcp/connect",
+  "country": "CO",
+  "site": "the MCP connect page",
+  "category": "classified-board",
+  "bodyChars": 300000
+ }
+]
