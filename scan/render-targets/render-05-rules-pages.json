@@ -1,0 +1,107 @@
+[
+ {
+  "id": "render5:DE:dsble:nutzungsbedingungen",
+  "url": "https://www.dsble.de/nutzungsbedingungen",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB terms"
+ },
+ {
+  "id": "render5:DE:dsble:agb",
+  "url": "https://www.dsble.de/agb",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB AGB"
+ },
+ {
+  "id": "render5:DE:dsble:regeln",
+  "url": "https://www.dsble.de/regeln",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB Regeln"
+ },
+ {
+  "id": "render5:DE:dsble:faq",
+  "url": "https://www.dsble.de/faq",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB FAQ"
+ },
+ {
+  "id": "render5:DE:dsble:hilfe",
+  "url": "https://www.dsble.de/hilfe",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB Hilfe"
+ },
+ {
+  "id": "render5:DE:dsble:impressum",
+  "url": "https://www.dsble.de/impressum",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB Impressum"
+ },
+ {
+  "id": "render5:DE:dsble:kurse",
+  "url": "https://www.dsble.de/kurse-sprachen",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB Kurse & Sprachen"
+ },
+ {
+  "id": "render5:DE:dsble:sonstiges",
+  "url": "https://www.dsble.de/sonstiges",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB Sonstiges"
+ },
+ {
+  "id": "render5:CO:colombiamove:terminos",
+  "url": "https://colombiamove.com/terminos",
+  "discover": false,
+  "country": "CO",
+  "site": "Colombia Move terms"
+ },
+ {
+  "id": "render5:CO:colombiamove:ayuda",
+  "url": "https://colombiamove.com/ayuda",
+  "discover": false,
+  "country": "CO",
+  "site": "Colombia Move help"
+ },
+ {
+  "id": "render5:IL:study-co-il:jobs",
+  "url": "https://www.study.co.il/jobs/",
+  "discover": false,
+  "country": "IL",
+  "site": "study.co.il jobs board"
+ },
+ {
+  "id": "render5:IL:study-co-il:forum",
+  "url": "https://www.study.co.il/forum/",
+  "discover": false,
+  "country": "IL",
+  "site": "study.co.il forum"
+ },
+ {
+  "id": "render5:IL:myproduct:terms",
+  "url": "https://myproduct.co.il/reshut-harabim/terms.php",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct terms"
+ },
+ {
+  "id": "render5:IL:myproduct:help",
+  "url": "https://myproduct.co.il/reshut-harabim/help.php",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct help"
+ },
+ {
+  "id": "render5:PK:listcompk:terms",
+  "url": "https://list.com.pk/terms.php",
+  "discover": false,
+  "country": "PK",
+  "site": "List.com.pk terms"
+ }
+]
