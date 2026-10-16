@@ -145,6 +145,34 @@ Read from the board's own API by a runner (`scan/results/batch-23-owockibot.json
 
 Consequence for the counters: the Money Hunt's "Amber can do it 5" and the Money Trail's "Amber can prepare but not act 5" both describe records the board itself cannot open; the honest number for owockibot is 0. Amber's connector already records the refusal per record (`claimBlocker`); the label that the report prints ranks a drafted deliverable above that blocker, which is why the five stayed "doable" for 19 days.
 
+## 7. The search for open tasks across the 54 countries (13:1xZ–13:4xZ)
+
+Three discovery passes (Americas and Europe; Asia and Oceania; Africa and the Middle East), each with about 45 web searches, looked for paid tasks, bounties or competitions posted or updated in the last 14 days that an agent could complete and submit without a government ID. Their files are in `discovery/` (55 entries; every fact is a search snippet unless the GitHub issue body was read through the API, which the Asia pass did for its bounties). A runner is reading every link they named (`scan/results/batch-28-…` and `batch-29-…`).
+
+**The agent boards that are live, read from their own APIs by the runner (13:3xZ):**
+
+| board | open now | what it is | why Amber cannot take it today |
+|---|---|---|---|
+| Clawlancer | 47 bounties | research, writing, code — every one $0.03–$1 ("Starter Gigs (≤$1) 47") | all under the owner's $4 floor |
+| Frantic | 4 | #128 $8 and #129 $16 "earn a citation on an external site" (outreach), #130 $3 "answer live Reddit threads" (posting from an account), #97 "fund your own $10 bounty" (spend) | outreach, social posting and spending are outside Amber's rules; claims also need a verified contact identity or a GitHub identity older than three months |
+| Riner | 6 | "Promote WineHood token" $2, "find vulnerabilities on the Riner website" $3 (expired), "create 7–8 posts on Moltbook" | promotion of a token, live security testing, social posting |
+| Superteam Earn | 14 | Twitter threads, "talk to 5 users", content for events, a trading competition, a Solana mobile app | social posting and outreach; a payout needs a human claimant (KYC) |
+| ugig | 20 "hiring" gigs, 9 bounties | the gigs are service offers by other agents mislabelled as hiring (the "$12 CSV/JSON conversion" is one agent's offer with 29 applications); the bounties pay in FLAPJAX tokens | not tasks, or not money |
+| BotBounty | unknown | its API answers HTTP 500 and its page shows "Live (0)" | down |
+| 0xWork | unknown | its API did not answer the runner; the skill file says claiming needs a wallet that stakes | a stake is a bond (none approved) |
+| AgentPact | 528 needs | 3 paid deals ever settled on the platform, 54 practice deals at $0 | no money flows; registration and offers not built |
+| owockibot | 0 | see §6 | the board's own count is zero |
+
+**What the search passes found that is real, open and paid (snippet evidence unless noted):**
+
+- Competitions with cash prizes that take an online submission: ARC White-Box Estimation Challenge 2026 on AIcrowd (pool over $150,000, submissions close 2026-10-17 23:59Z — one day; interpretability research with compute through the organiser's tooling; LLM use allowed with disclosure); Comfy Dev Platform Challenge ($10,000 grand prize, closes 2026-10-19; an open-source repo on their platform plus a demo video); Vesuvius Challenge (a guaranteed $20,000 a month; scroll-ink detection research); DEV Community Hacktoberfest weekly challenges ($250 and $100–$200 per category; a published DEV post; week 2 runs to 2026-10-18); OpenCV AI Competition ($12,000; via Devpost); CHIMERA-Agent round 2 (€1,500; medical-imaging containers); lablab.ai AI Genesis (prizes "TBA"; video and slides). Every one needs an account in a person's or company's name and, at payout, tax or identity forms; the research ones are days of specialist work; two need a video.
+- GitHub bounties with the issue body read in full (Asia pass): Tenstorrent tt-metal #58986 ($1,000, created 2026-10-02), #53787 ($5,000, a proposed fix in the issue), #56908 ($3,000), #51655 ($1,000) — all need their Wormhole/Blackhole hardware or simulator for the final test; uvsmtid/protoprimer #143 ($75 for a merged PR, created 2026-10-15, pure Python and POSIX shell with written acceptance criteria; payment rail unstated); warpSpeed OPEN #4 ($750) and #3 ($440) (sign-up at their site, a maintainer-confirmed claim, paid at 100% completion after merge); copperheadhq/copperhead #66 ($50; needs a KiCad environment and an LLM key); aLexzzz430/Cognitive-OS #5 ($3,000 "research packet", an individual maintainer who "handles payment privately" — funder unverified); Verdikta on Poidh (~$30 a slot, but you must first fund a $10 task — spending).
+- Everything else the passes found was closed, in person, students-only, nationals-only, token-paid, or an aggregator.
+
+**What Amber's own gates say about the two that fit her work:** uvsmtid/protoprimer #143 and Tenstorrent #53787 are GitHub bounties, the lane the owner approved on 2026-09-27 for automatic claims "provided every existing safety gate passes, the repository allows AI work, payment history is verified". Neither repository has a bounty payout on record (no platform bot, no award history), so the gate "payment history verified" fails and the Money Trail would class both as *blocked by no payout proof*; Tenstorrent also needs hardware for the acceptance test. Nothing else found today passes the owner's floor, the no-spend, no-outreach, no-social-posting rules and the no-KYC rule at once.
+
+So the verified answer for today: the agent-board economy that Amber watches holds no task she can take this afternoon; the paid work that exists in the wider search is competitions and open-source bounties that want a named person or company, hardware, or specialist research. The one small, fresh, text-and-code bounty with written acceptance criteria (protoprimer #143, $75) is the only candidate worth the owner's word — it would be work on an unproven payer, which the owner's money-first rule holds.
+
 ## 5. What would change the picture (owner's decisions, not mine)
 
 1. Point her at real work boards in the 28 uncovered countries — none exist in her list today; the Wikidata country feed finds employment sites, not task boards, and is retired for five of its feeds.
