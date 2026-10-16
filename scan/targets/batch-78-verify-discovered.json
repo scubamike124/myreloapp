@@ -1,0 +1,479 @@
+[
+ {
+  "id": "ver78:queroanuncios.com.br:home",
+  "kind": "signup",
+  "url": "https://queroanuncios.com.br/",
+  "country": "BR",
+  "site": "queroanuncios.com.br home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:vivalokal.com.br:home",
+  "kind": "signup",
+  "url": "https://vivalokal.com.br/",
+  "country": "BR",
+  "site": "vivalokal.com.br home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:alamaula.com.ar:home",
+  "kind": "signup",
+  "url": "https://alamaula.com.ar/",
+  "country": "AR",
+  "site": "alamaula.com.ar home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:alamaula.com.ar:found",
+  "kind": "html",
+  "url": "https://alamaula.com.ar/blog/article/dnde-publicar-avisos-gratis-en-argentina-en-2026-b116",
+  "country": "AR",
+  "site": "alamaula.com.ar: D\u00f3nde publicar avisos gratis en Argentina en 2026",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:post.clasiar.com:home",
+  "kind": "signup",
+  "url": "https://post.clasiar.com/",
+  "country": "AR",
+  "site": "post.clasiar.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:post.clasiar.com:found",
+  "kind": "html",
+  "url": "https://post.clasiar.com/ads/add",
+  "country": "AR",
+  "site": "post.clasiar.com: Publicar clasificados en Argentina. Publica tus av",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:post.evisos.com.ar:home",
+  "kind": "signup",
+  "url": "https://post.evisos.com.ar/",
+  "country": "AR",
+  "site": "post.evisos.com.ar home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:post.evisos.com.ar:found",
+  "kind": "html",
+  "url": "https://post.evisos.com.ar/ads/add",
+  "country": "AR",
+  "site": "post.evisos.com.ar: Publicar clasificados en Argentina. Publica tus av",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:ar.tuavisoclasificado.com:home",
+  "kind": "signup",
+  "url": "https://ar.tuavisoclasificado.com/",
+  "country": "AR",
+  "site": "ar.tuavisoclasificado.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:anuncioslocales.com.ar:home",
+  "kind": "signup",
+  "url": "https://anuncioslocales.com.ar/",
+  "country": "AR",
+  "site": "anuncioslocales.com.ar home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:trovito.pt:home",
+  "kind": "signup",
+  "url": "https://trovito.pt/",
+  "country": "PT",
+  "site": "trovito.pt home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:trovito.pt:found",
+  "kind": "html",
+  "url": "https://www.trovito.pt/publicar-anuncios-gratis/",
+  "country": "PT",
+  "site": "trovito.pt: Publicar An\u00fancios Gr\u00e1tis em Portugal | Trovito",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:anunciosparatodos.com:home",
+  "kind": "signup",
+  "url": "https://anunciosparatodos.com/",
+  "country": "PT",
+  "site": "anunciosparatodos.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:anunciante.pt:home",
+  "kind": "signup",
+  "url": "https://anunciante.pt/",
+  "country": "PT",
+  "site": "anunciante.pt home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:anunciante.pt:found",
+  "kind": "html",
+  "url": "https://anunciante.pt/categorias-de-anuncios-gratis/",
+  "country": "PT",
+  "site": "anunciante.pt: Categorias de an\u00fancios gr\u00e1tis | anunciante.pt",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:classificadosgratis.com.pt:home",
+  "kind": "signup",
+  "url": "https://classificadosgratis.com.pt/",
+  "country": "PT",
+  "site": "classificadosgratis.com.pt home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:chilemarketplace.cl:home",
+  "kind": "signup",
+  "url": "https://chilemarketplace.cl/",
+  "country": "CL",
+  "site": "chilemarketplace.cl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:avisia.cl:home",
+  "kind": "signup",
+  "url": "https://avisia.cl/",
+  "country": "CL",
+  "site": "avisia.cl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:gauchada.cl:home",
+  "kind": "signup",
+  "url": "https://gauchada.cl/",
+  "country": "CL",
+  "site": "gauchada.cl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:post.evisos.cl:home",
+  "kind": "signup",
+  "url": "https://post.evisos.cl/",
+  "country": "CL",
+  "site": "post.evisos.cl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:post.evisos.cl:found",
+  "kind": "html",
+  "url": "https://post.evisos.cl/ads/add",
+  "country": "CL",
+  "site": "post.evisos.cl: Publicar clasificados en Chile. Publica tus avisos",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:publicargratis.cl:home",
+  "kind": "signup",
+  "url": "https://publicargratis.cl/",
+  "country": "CL",
+  "site": "publicargratis.cl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:okdatos.com:home",
+  "kind": "signup",
+  "url": "https://okdatos.com/",
+  "country": "CL",
+  "site": "okdatos.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:okdatos.com:found",
+  "kind": "html",
+  "url": "https://okdatos.com/cl",
+  "country": "CL",
+  "site": "okdatos.com: Marketplace de Anuncios Gratis Chile | Clasificado",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:yia.cl:home",
+  "kind": "signup",
+  "url": "https://yia.cl/",
+  "country": "CL",
+  "site": "yia.cl home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:chile.tusavisos.com:home",
+  "kind": "signup",
+  "url": "https://chile.tusavisos.com/",
+  "country": "CL",
+  "site": "chile.tusavisos.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:tablondeanuncios.com.mx:home",
+  "kind": "signup",
+  "url": "https://tablondeanuncios.com.mx/",
+  "country": "MX",
+  "site": "tablondeanuncios.com.mx home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:tablondeanuncios.com.mx:found",
+  "kind": "html",
+  "url": "https://www.tablondeanuncios.com.mx/anuncio_editar.php",
+  "country": "MX",
+  "site": "tablondeanuncios.com.mx: Poner anuncios gratis, Publicar Anuncio gratis par",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:mexico.wanuncios.com:home",
+  "kind": "signup",
+  "url": "https://mexico.wanuncios.com/",
+  "country": "MX",
+  "site": "mexico.wanuncios.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:anuncialogratis.com.mx:home",
+  "kind": "signup",
+  "url": "https://anuncialogratis.com.mx/",
+  "country": "MX",
+  "site": "anuncialogratis.com.mx home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:pisodeestudiantes.com:home",
+  "kind": "signup",
+  "url": "https://pisodeestudiantes.com/",
+  "country": "ES",
+  "site": "pisodeestudiantes.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:pisodeestudiantes.com:found",
+  "kind": "html",
+  "url": "https://pisodeestudiantes.com/tablon",
+  "country": "ES",
+  "site": "pisodeestudiantes.com: Tabl\u00f3n de estudiantes \u2014 Busca habitaci\u00f3n, piso o c",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:unileon.es:home",
+  "kind": "signup",
+  "url": "https://unileon.es/",
+  "country": "ES",
+  "site": "unileon.es home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:unileon.es:found",
+  "kind": "html",
+  "url": "https://www.unileon.es/universidad/tablon-de-anuncios",
+  "country": "ES",
+  "site": "unileon.es: Tabl\u00f3n de anuncios | Universidad de Le\u00f3n - unileon",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:campuskram.de:home",
+  "kind": "signup",
+  "url": "https://campuskram.de/",
+  "country": "DE",
+  "site": "campuskram.de home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:campuskram.de:found",
+  "kind": "html",
+  "url": "http://www.campuskram.de/",
+  "country": "DE",
+  "site": "campuskram.de: Campuskram - Willkommen",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:schwarzesbrett.uni-osnabrueck.de:home",
+  "kind": "signup",
+  "url": "https://schwarzesbrett.uni-osnabrueck.de/",
+  "country": "DE",
+  "site": "schwarzesbrett.uni-osnabrueck.de home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:studserv.de:home",
+  "kind": "signup",
+  "url": "https://studserv.de/",
+  "country": "DE",
+  "site": "studserv.de home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:studserv.de:found",
+  "kind": "html",
+  "url": "https://www.studserv.de/campusboerse/index.php",
+  "country": "DE",
+  "site": "studserv.de: Studserv.de - Campusb\u00f6rse",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:swb.uni-kassel.de:home",
+  "kind": "signup",
+  "url": "https://swb.uni-kassel.de/",
+  "country": "DE",
+  "site": "swb.uni-kassel.de home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:swb.uni-kassel.de:found",
+  "kind": "html",
+  "url": "https://swb.uni-kassel.de/?page=1",
+  "country": "DE",
+  "site": "swb.uni-kassel.de: Startseite - Schwarzes Brett der Universit\u00e4t Kasse",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:portal.mytum.de:home",
+  "kind": "signup",
+  "url": "https://portal.mytum.de/",
+  "country": "DE",
+  "site": "portal.mytum.de home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:portal.mytum.de:found",
+  "kind": "html",
+  "url": "https://portal.mytum.de/schwarzesbrett/folder_listing/",
+  "country": "DE",
+  "site": "portal.mytum.de: TUM - Schwarzes Brett",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:lima.wanuncios.com:home",
+  "kind": "signup",
+  "url": "https://lima.wanuncios.com/",
+  "country": "PE",
+  "site": "lima.wanuncios.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:lima.wanuncios.com:found",
+  "kind": "html",
+  "url": "https://lima.wanuncios.com/publicar/",
+  "country": "PE",
+  "site": "lima.wanuncios.com: Publicar anuncios gratis en Lima",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:wow.com.pe:home",
+  "kind": "signup",
+  "url": "https://wow.com.pe/",
+  "country": "PE",
+  "site": "wow.com.pe home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:postadverts.com:home",
+  "kind": "signup",
+  "url": "https://postadverts.com/",
+  "country": "PE",
+  "site": "postadverts.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:postadverts.com:found",
+  "kind": "html",
+  "url": "https://postadverts.com/es/lima-peru/",
+  "country": "PE",
+  "site": "postadverts.com: Publicar anuncios gratis Lima",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:mercanuncios.pe:home",
+  "kind": "signup",
+  "url": "https://mercanuncios.pe/",
+  "country": "PE",
+  "site": "mercanuncios.pe home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:clasificados.peru13.com:home",
+  "kind": "signup",
+  "url": "https://clasificados.peru13.com/",
+  "country": "PE",
+  "site": "clasificados.peru13.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:clasificados.peru13.com:found",
+  "kind": "html",
+  "url": "https://clasificados.peru13.com/publicar-anuncio/",
+  "country": "PE",
+  "site": "clasificados.peru13.com: Publicar anuncio - Publicar Avisos, Anuncios y Cla",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:elclasificado.com:home",
+  "kind": "signup",
+  "url": "https://elclasificado.com/",
+  "country": "PE",
+  "site": "elclasificado.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver78:elclasificado.com:found",
+  "kind": "html",
+  "url": "https://elclasificado.com/peru-lima",
+  "country": "PE",
+  "site": "elclasificado.com: Anuncios Clasificados en Lima, LIM | El Clasificad",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]
