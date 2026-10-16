@@ -8122,16 +8122,16 @@
  {
   "match": "kenyabizlist.com",
   "verdict": "conditional",
-  "quote": "Terms of use: a business listing and directory service; 'you will not: Post listings for non-existent businesses'; members/signup.aspx (rendered) shows a sign-in form (username, password), so the registration form itself was not found yet.",
+  "quote": "Terms of use: a business listing and directory service ('you will not: Post listings for non-existent businesses'); the 'Join' link's target is not in the home page's anchors (members/signup.aspx shows a sign-in form; register.aspx and join.aspx answer 404).",
   "note": "Business directory and classifieds; e-mail registration without CAPTCHA; the listing form sits behind the login.",
-  "can_act": "maybe (the registration page is not found yet; the sign-up link is read in batch 108)",
+  "can_act": "maybe (the registration page is not found; a browser read of the Join link is needed)",
   "basis": "no-prohibition",
   "free_option": "free ads",
   "account": "email + password",
   "automation": "not addressed",
   "audience": "general public",
   "country": "KE",
-  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); rules read 21:37Z (batch 105) after the registration probes of 21:22Z (batch 103 / render 30); follow-up render 32 (22:15Z)"
+  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); rules read 21:37Z (batch 105) after the registration probes of 21:22Z (batch 103 / render 30); follow-up render 32 (22:15Z); batch 108 (22:17Z)"
  },
  {
   "match": "adpostman.com",
@@ -8290,16 +8290,16 @@
  {
   "match": "quafra.com",
   "verdict": "qualified",
-  "quote": "'100% FREE Classifieds in Ghana. Post free ads'; terms (13k chars): no automation, advertising or business ban found; the registration modal (rendered) asks username, e-mail, password and the privacy and T&C boxes — required: username, e-mail, password; no phone, no CAPTCHA; the modal's form has no plain action (a script sends it), and /post-an-ad/ answers 404.",
-  "note": "Ghanaian free classifieds (a WordPress Classified Listing site); e-mail registration without CAPTCHA or phone; the modal's script endpoint and the real posting page are read next (batch 108) before an adapter.",
-  "can_act": "yes by web form once the registration endpoint and the posting page are read (batch 108); adapter not built yet; nothing registered or posted",
+  "quote": "'100% FREE Classifieds in Ghana. Post free ads'; terms (13k chars): no automation, advertising or business ban found. The site runs the Directorist plugin: its sign-up form (class directorist__authentication__signup; username, e-mail, password, privacy and T&C boxes; no phone, no CAPTCHA) posts by script to admin-ajax.php, and listings are added at /listing-form/?directory_type=… behind the login.",
+  "note": "Ghanaian free classifieds on Directorist; e-mail registration without CAPTCHA or phone, sent by the page's script rather than a plain form, so the adapter needs the script's action name (read from the page's JavaScript next).",
+  "can_act": "yes once the sign-up script's admin-ajax action is read; adapter not built yet; nothing registered or posted",
   "basis": "no-prohibition",
   "free_option": "free ads",
   "account": "username + email + password",
   "automation": "not addressed",
   "audience": "general public",
   "country": "GH",
-  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); follow-up render 32 (22:15Z)"
+  "found": "search discovery 2026-10-16 (DuckDuckGo from the runner), rules 21:18Z (batch 99), registration and posting forms rendered 21:22Z (render 30); follow-up render 32 (22:15Z); batch 108 (22:17Z)"
  },
  {
   "match": "ghanasummary.com",
