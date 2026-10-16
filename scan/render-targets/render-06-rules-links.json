@@ -1,0 +1,138 @@
+[
+ {
+  "id": "render6:DE:dsble:imprint-links",
+  "url": "https://www.dsble.de/imprint",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB imprint (links)",
+  "excerptChars": 2000
+ },
+ {
+  "id": "render6:DE:dsble:spielregeln",
+  "url": "https://www.dsble.de/spielregeln",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB Spielregeln",
+  "excerptChars": 9000
+ },
+ {
+  "id": "render6:DE:dsble:preisliste",
+  "url": "https://www.dsble.de/preisliste",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB Preisliste",
+  "excerptChars": 6000
+ },
+ {
+  "id": "render6:DE:dsble:terms",
+  "url": "https://www.dsble.de/terms",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB terms (guess)",
+  "excerptChars": 9000
+ },
+ {
+  "id": "render6:DE:dsble:nutzung",
+  "url": "https://www.dsble.de/nutzung",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB Nutzungsbedingungen (guess)",
+  "excerptChars": 9000
+ },
+ {
+  "id": "render6:DE:dsble:agb-full",
+  "url": "https://www.dsble.de/agb",
+  "discover": false,
+  "country": "DE",
+  "site": "DSB AGB (full)",
+  "excerptChars": 12000
+ },
+ {
+  "id": "render6:CO:colombiamove:ayuda-full",
+  "url": "https://colombiamove.com/ayuda",
+  "discover": false,
+  "country": "CO",
+  "site": "Colombia Move help (full)",
+  "excerptChars": 12000
+ },
+ {
+  "id": "render6:CO:colombiamove:terminos-full",
+  "url": "https://colombiamove.com/terminos",
+  "discover": false,
+  "country": "CO",
+  "site": "Colombia Move terms (full)",
+  "excerptChars": 12000
+ },
+ {
+  "id": "render6:IL:myproduct:home-links",
+  "url": "https://myproduct.co.il/",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct.co.il home (links)",
+  "excerptChars": 1500
+ },
+ {
+  "id": "render6:IL:myproduct:instructions",
+  "url": "https://myproduct.co.il/reshut-harabim/instructions.php",
+  "discover": false,
+  "country": "IL",
+  "site": "myproduct instructions (guess)",
+  "excerptChars": 9000
+ },
+ {
+  "id": "render6:IL:study-co-il:home-links",
+  "url": "https://www.study.co.il/",
+  "discover": false,
+  "country": "IL",
+  "site": "study.co.il home (links)",
+  "excerptChars": 1500
+ },
+ {
+  "id": "render6:PK:listcompk:terms-full",
+  "url": "https://list.com.pk/terms.php",
+  "discover": false,
+  "country": "PK",
+  "site": "List.com.pk terms (full)",
+  "excerptChars": 12000
+ },
+ {
+  "id": "render6:DE:leipzig-sachsen:brett",
+  "url": "https://www.leipzig-sachsen.de/kleinanzeigen/schwarzes-brett-uni-leipzig/",
+  "discover": true,
+  "country": "DE",
+  "site": "Schwarzes Brett Leipzig (links)",
+  "excerptChars": 4000
+ },
+ {
+  "id": "render6:IT:perstudenti:home-links",
+  "url": "https://www.perstudenti.com/",
+  "discover": true,
+  "country": "IT",
+  "site": "PerStudenti (links)",
+  "excerptChars": 4000
+ },
+ {
+  "id": "render6:CZ:primat:home-links",
+  "url": "https://www.primat.cz/",
+  "discover": false,
+  "country": "CZ",
+  "site": "Primát.cz (links)",
+  "excerptChars": 3000
+ },
+ {
+  "id": "render6:AT:oeh:brett",
+  "url": "https://schwarzesbrett.oeh.ac.at/",
+  "discover": true,
+  "country": "AT",
+  "site": "ÖH Schwarzes Brett (links)",
+  "excerptChars": 4000
+ },
+ {
+  "id": "render6:CH:uzh:marktplatz",
+  "url": "https://www.marktplatz.uzh.ch/",
+  "discover": true,
+  "country": "CH",
+  "site": "UZH Marktplatz",
+  "excerptChars": 4000
+ }
+]
