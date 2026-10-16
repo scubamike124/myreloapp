@@ -43,11 +43,16 @@ VERDICT_LABEL = {
     "unreachable": "Not read: unreachable or not resolving",
     "missing": "Not read: rules page returned 404",
     "unverified": "Read, but no rule about free posting or promotion was found (not counted as qualified)",
+    "open-allows": "Open registration and a rule that mentions bots, brands or own-work promotion as allowed (first pass; hand review pending)",
+    "signup-email-only": "Sign-up form read: asks for e-mail and password only (no phone, date of birth or CAPTCHA seen)",
+    "signup-unclear": "Sign-up form read: fields not readable (JavaScript shell or no form found)",
 }
 ORDER = list(VERDICT_LABEL)
+SKIP_FROM_SUMMARY = {"signup-email-only", "signup-unclear"}
 
 BAN = re.compile(r"(no (advertis|promot|commercial|spam)|advertis\w* (is|are) (not|forbidden|prohibited)|(advertis|promot|commercial)\w*.{0,60}(not allowed|forbidden|prohibited|banned|will be (removed|suspended|deleted|actioned))|keine werbung|werbung.{0,40}(verboten|untersagt|nicht erlaubt)|publicit[ée].{0,40}(interdit|prohib)|pas de pub|publicidad.{0,40}(prohibid|no (está|esta) permitid)|pubblicit[àa].{0,40}(vietat|non (è|e) (consentit|permess))|nessuna pubblicit|vietat.{0,30}pubblicit|reklam\w*.{0,40}(zakaz|niedozwol|zabronion)|zakaz.{0,30}reklam|宣伝.{0,20}禁止|広告.{0,20}禁止|广告.{0,20}(禁止|不允许)|광고.{0,20}(금지|불가)|automated accounts? (are|is) (not|prohibited|forbidden)|bots? (are|is) (not allowed|prohibited|forbidden|banned)|no (automated|bot) accounts)", re.I)
 
+ALLOW = re.compile(r"(bots? (are|is) (allowed|welcome|permitted|ok|fine)|bot accounts? (are|is) (allowed|welcome|permitted)|automated accounts? (are|is) (allowed|welcome|permitted|fine)|(bots|automated accounts)[^.]{0,80}(must|should|need to) (be )?(marked|flagged|labelled|labeled|identif)|(companies|businesses|organi[sz]ations|brands|commercial accounts)[^.]{0,40}(are |is )?(welcome|allowed|permitted)|(advertis|promot)\w*[^.]{0,60}(own work|your own|allowed|permitted|is fine|is ok)|self[- ]promotion (is )?(allowed|welcome|fine|ok)|bots sind (erlaubt|willkommen)|bots? (sont|est) (autoris|bienvenu)|bots? (permitid|bienvenid)|boty (są )?dozwolon|広告.{0,20}(可|OK|許可)|bot.{0,20}(可|OK|許可)|광고.{0,20}허용|봇.{0,20}허용)", re.I)
 verdicts = json.load(open(R("scan/review/verdicts.json")))
 V_BY_HOST, V_BY_URL = {}, {}
 def norm_url(u): return (u or "").strip().rstrip("/").lower()
@@ -124,6 +129,8 @@ def auto_verdict(r):
         for s in rules:
             if BAN.search(s): return "banned", s[:300], ""
         if b.get("blocked"): return "banned", b.get("quote") or "", b.get("why") or ""
+        for s in rules + [res.get("description") or ""]:
+            if ALLOW.search(s): return "open-allows", s[:300], "open registration; a rule speaks of bots, brands or promotion as allowed"
         return "unverified", "", "open registration; no rule about promotion found; not individually reviewed"
     if k == "lemmy":
         mode = res.get("registration_mode")
@@ -148,6 +155,16 @@ def auto_verdict(r):
         if res.get("videoQuota") == 0: return "skip-fit", "", "no upload quota"
         if b.get("blocked"): return "banned", b.get("quote") or "", b.get("why") or ""
         return "unverified", "", "open sign-up; terms carry no statement about promotion; not individually reviewed"
+    if k == "signup":
+        if res.get("blocked"): return "blocked", "", f"HTTP {res.get('status')}"
+        cap = res.get("captcha") or {}
+        if any(cap.values()): return "skip-captcha", "", "CAPTCHA on the sign-up form (" + ", ".join(k2 for k2, v in cap.items() if v) + ")"
+        if res.get("phone"): return "skip-phone", "", "phone field on the sign-up form"
+        if res.get("dob"): return "skip-age", "", "date-of-birth field on the sign-up form"
+        oauth = res.get("oauth") or {}
+        if not res.get("formFound") and any(oauth.values()): return "skip-identity", "", "sign-up only through " + ", ".join(k2 for k2, v in oauth.items() if v)
+        if res.get("formFound") and res.get("email"): return "signup-email-only", "", "fields: " + ", ".join(f"{i.get('type')}:{i.get('name') or i.get('placeholder') or '?'}" for i in (res.get("inputs") or [])[:8])
+        return "signup-unclear", "", "no readable form" + (" (JavaScript shell)" if res.get("jsOnly") else "")
     if k == "nostr":
         if res.get("payments_required") or res.get("fees"): return "skip-payment", "", "paid relay"
         if res.get("auth_required"): return "skip-identity", "", "auth required"
@@ -184,8 +201,9 @@ for r in rows:
     region, code = region_for(r, t, code)
     res = r.get("result") or {}
     site = t.get("site") or res.get("title") or r.get("title") or h or url
-    if r.get("kind") != "html": site = f"{h}" + (f" ({res.get('title')})" if res.get("title") and res.get("title") != h else "")
-    cat = t.get("category") or {"mastodon": "fediverse", "peertube": "fediverse video", "lemmy": "fediverse forum", "misskey": "fediverse", "pixelfed": "fediverse photos", "nostr": "nostr relay"}.get(r.get("kind"), "other")
+    if r.get("kind") not in ("html", "signup"): site = f"{h}" + (f" ({res.get('title')})" if res.get("title") and res.get("title") != h else "")
+    cat = t.get("category") or {"mastodon": "fediverse", "peertube": "fediverse video", "lemmy": "fediverse forum", "misskey": "fediverse", "pixelfed": "fediverse photos", "nostr": "nostr relay", "signup": "signup-form"}.get(r.get("kind"), "other")
+    if r.get("kind") == "signup": key = "signup:" + norm_url(url)
     users = res.get("users") or r.get("users")
     rec = {"region": region, "country": code or "", "site": site, "category": cat, "kind": r.get("kind"), "url": url, "verdict": v, "basis": basis, "quote": quote, "free_option": free_option, "audience": audience, "account": account, "automation": automation, "can_act": can_act, "note": note, "users": users, "status": res.get("status") if r.get("kind") == "html" else ("api" if res.get("reachable") else "down"), "batch": r["_batch"], "at": r.get("at")}
     prev = out.get(key)
@@ -206,7 +224,8 @@ with open(OUT_CSV, "w", newline="") as f:
 # ---------- Markdown ----------
 live = json.load(open(R("scan/review/live.json")))
 by_region = collections.defaultdict(list)
-for x in recs: by_region[x["region"]].append(x)
+for x in recs:
+    if x["kind"] != "signup": by_region[x["region"]].append(x)
 def count(xs, *vs): return sum(1 for x in xs if x["verdict"] in vs)
 SKIPS = [v for v in ORDER if v.startswith("skip-")]
 NOTREAD = ["blocked", "unreachable", "missing"]
@@ -246,6 +265,7 @@ def table(xs, title, blurb=""):
     md.append("")
 table([x for x in recs if x["verdict"] == "qualified"], "Qualified sites", "Verified from the site's own rules or submission page. `basis` in the CSV says whether the page allows promotion explicitly or simply has no rule against it while prohibiting spam.")
 table([x for x in recs if x["verdict"] == "conditional"], "Allowed with conditions", "The page allows a free post or listing under a condition, or shows free posting while the sign-up rules were not fully read tonight. None of these was acted on.")
+table([x for x in recs if x["verdict"] == "open-allows"], "Open servers whose rules speak of bots, brands or promotion as allowed (first pass)", "Found by the scanner's wording match on open-registration servers; each still needs the hand review before it counts as qualified.")
 rel = [x for x in recs if x["verdict"] == "open-relay"]
 md.append("## Open Nostr relays\n")
 md.append(f"{len(rel)} relays answered a NIP-11 policy request with no payment, auth or write restriction: " + ", ".join(sorted(host_of(x['url']) for x in rel)) + ". Nostr has no accounts and no site rules; a post needs a keypair and a publisher (secp256k1 signing), which is not built, and the audience is not students. Recorded, not acted.\n")
@@ -271,6 +291,14 @@ for s in NOTREAD:
     names = sorted({x['site'].split(' (')[0] for x in xs})
     md.append(f"- **{VERDICT_LABEL[s]}** — {len(xs)}: " + "; ".join(names[:80]) + (f" … and {len(names)-80} more" if len(names) > 80 else ""))
 md.append("")
+sg = [x for x in recs if x["kind"] == "signup"]
+if sg:
+    md.append("## Sign-up forms read\n")
+    md.append("What each site's own registration form asks for, read without filling anything (a home page was followed to its sign-up link). E-mail-only forms are the ones Amber could use; a phone, date-of-birth or CAPTCHA field is a recorded blocker.\n")
+    md.append("| Country | Site | Form | Finding | Page |\n|---|---|---|---|---|")
+    for x in sorted(sg, key=lambda x: (ORDER.index(x["verdict"]), x["country"] or "", x["site"])):
+        md.append(f"| {x['country'] or '—'} | {x['site']} | {VERDICT_LABEL[x['verdict']].replace('Sign-up form read: ', '')} | {(x['note'] or '').replace('|', '/')[:200]} | {x['url']} |")
+    md.append("")
 unv = [x for x in recs if x["verdict"] == "unverified"]
 md.append("## Read, but not qualified\n")
 md.append(f"{len(unv)} pages or servers answered, but nothing on them says a free promotional post or listing is allowed (open fediverse servers with no rule about promotion, home pages without the rules, JavaScript-only pages). They stay out of the qualified count on purpose; the CSV lists them.\n")
