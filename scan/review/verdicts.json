@@ -5888,12 +5888,12 @@
  {
   "match": "https://www.perstudenti.com/",
   "verdict": "conditional",
-  "quote": "Pubblica un annuncio gratis … Crea il tuo account: Utente Privato / Utente Business, Nome, Cognome, Email, Password, Provincia (opzionale) … FAQ: Pubblicare un annuncio è gratuito? Chi può iscriversi a PerStudenti.com?",
-  "note": "Italian student marketplace with a business account type and a Servizi category (Ripetizioni e tutoraggio …); registration is name, surname, e-mail and password with no CAPTCHA, phone or date of birth seen; posting is a three-step form behind the login. The FAQ's answers (free? who may register?) load only when a question is clicked; a browser pass that clicks them is queued.",
-  "can_act": "likely, once the FAQ answers are read (free posting, business accounts)",
+  "quote": "FAQ (read 11:34Z by clicking each question): Registrarsi è gratuito … inserisci nome, cognome, email e una password sicura. Riceverai una email di conferma. Chi può iscriversi? PerStudenti.com è aperto a tutti gli studenti universitari italiani e a chiunque voglia acquistare o vendere oggetti all'interno della community studentesca. Per le aziende è disponibile un account Business dedicato. Pubblicare un annuncio base è completamente gratuito. Gli annunci vengono revisionati dal nostro team prima della pubblicazione. Di solito il processo richiede poche ore. Gli annunci rimangono online per 30 giorni.",
+  "note": "Italian student marketplace: business accounts welcome by its own FAQ, free basic listings for 30 days, registration by e-mail and password with a confirmation link, no CAPTCHA, phone or date of birth seen. The one condition: every listing is reviewed by the site's team before it appears (usually a few hours) — a pre-publication review, like DSB's. Its categories are goods and student services (Ripetizioni e tutoraggio …).",
+  "can_act": "owner: say whether a listing that waits a few hours for the site's review counts; then the adapter (registration through Amber's mailbox, then the three-step form)",
   "basis": "",
   "free_option": "",
-  "account": "e-mail + password (business account type offered)",
+  "account": "e-mail + password (business account type), confirmation link",
   "automation": "not addressed",
   "audience": "students, IT"
  },

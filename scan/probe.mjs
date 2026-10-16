@@ -218,7 +218,25 @@ async function probeSignup(t) {
   return { reachable: page.status > 0, status: page.status, finalUrl: url, hops, title, blocked, formFound: password || (email && inputs.length > 0), email, password, phone, dob, captcha, oauth, jsOnly, inputs: inputs.slice(0, 30), selects: selects.slice(0, 15), signupExtracts: pickSentences(text, SIGNUP, 6), chars: text.length, error: page.error };
 }
 
-const PROBES = { mastodon: probeMastodon, peertube: probePeertube, lemmy: probeLemmy, pixelfed: probePixelfed, misskey: probeMisskey, nostr: probeNostr, html: probeHtml, signup: probeSignup };
+
+// A paid-task listing (owner, 2026-10-16: "verify all of it to see if we can actually do them"): the page's status, title and the
+// sentences that say whether it is open, closed, awarded or expired, its deadline and its reward. Reads only; never applies or bids.
+const TASK_WORDS = /\b(open|closed|close[ds]?|completed|complete|awarded|expired|expire[sd]?|deadline|due|ends?|ending|status|reward|bounty|budget|prize|paid|payment|payout|escrow|funded|apply|submission|submit|claim|winner|accepted|cancelled|canceled|archived|no longer|not found|404|hiring|filled|taken|in progress|pending|draft)\b/i;
+async function probeTask(t) {
+  const page = await getPage(t.url);
+  const html = page.body || "";
+  const text = stripHtml(html);
+  const title = (html.match(/<title[^>]*>([^<]{0,200})/i) || [])[1] || "";
+  const sentences = text.split(/(?<=[.!?])\s+|\n+/).map((x) => x.trim()).filter((x) => x.length > 8 && x.length < 300 && TASK_WORDS.test(x)).slice(0, 18);
+  const jsonLd = (html.match(/<script[^>]+application\/ld\+json[^>]*>([\s\S]{0,4000}?)<\/script>/i) || [])[1] || "";
+  const dates = [...new Set((text.match(/\b20\d\d-\d\d-\d\d(?:T[\d:.]+Z?)?\b|\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.? \d{1,2},? 20\d\d\b/g) || []))].slice(0, 12);
+  const money = [...new Set((text.match(/(?:\$|USD|USDC|EUR|€|£|GBP)\s?\d[\d,.]*\s?(?:USDC|USD|EUR|GBP)?|\d[\d,.]*\s?(?:USDC|USD|EUR|GBP|\$)/g) || []))].slice(0, 12);
+  const closedWords = /\b(closed|completed|awarded|expired|cancelled|canceled|archived|no longer accepting|not accepting|has ended|was awarded|winner announced|filled)\b/i.test(text);
+  const openWords = /\b(open|accepting|apply now|submit|claim|available|in progress|active)\b/i.test(text);
+  return { reachable: page.status > 0, status: page.status, finalUrl: page.url, title: title.trim().slice(0, 160), chars: text.length, closedWords, openWords, dates, money, sentences, jsonLd: jsonLd.replace(/\s+/g, " ").slice(0, 800), error: page.error };
+}
+
+const PROBES = { mastodon: probeMastodon, peertube: probePeertube, lemmy: probeLemmy, pixelfed: probePixelfed, misskey: probeMisskey, nostr: probeNostr, html: probeHtml, signup: probeSignup, task: probeTask };
 async function run() {
   let queue = [];
   for (const t of targets) {
