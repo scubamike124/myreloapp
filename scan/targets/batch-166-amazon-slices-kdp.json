@@ -1,0 +1,129 @@
+[
+ {
+  "id": "a166:zgbs-11357541011-350000",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/bestsellers/books/11357541011",
+  "country": "US",
+  "site": "Amazon Best Sellers: Coloring Books for Grown-Ups (body slice from 350000)",
+  "category": "diagnostic",
+  "bodyFrom": 350000,
+  "bodyChars": 400000
+ },
+ {
+  "id": "a166:zgbs-11357541011-700000",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/bestsellers/books/11357541011",
+  "country": "US",
+  "site": "Amazon Best Sellers: Coloring Books for Grown-Ups (body slice from 700000)",
+  "category": "diagnostic",
+  "bodyFrom": 700000,
+  "bodyChars": 400000
+ },
+ {
+  "id": "a166:zgbs-3374-350000",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/bestsellers/books/3374",
+  "country": "US",
+  "site": "Amazon Best Sellers: Children's Coloring Books (body slice from 350000)",
+  "category": "diagnostic",
+  "bodyFrom": 350000,
+  "bodyChars": 400000
+ },
+ {
+  "id": "a166:zgbs-3374-700000",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/bestsellers/books/3374",
+  "country": "US",
+  "site": "Amazon Best Sellers: Children's Coloring Books (body slice from 700000)",
+  "category": "diagnostic",
+  "bodyFrom": 700000,
+  "bodyChars": 400000
+ },
+ {
+  "id": "a166:zgbs-14279714011-350000",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/bestsellers/books/14279714011",
+  "country": "US",
+  "site": "Amazon Best Sellers: Fantasy & SF coloring (body slice from 350000)",
+  "category": "diagnostic",
+  "bodyFrom": 350000,
+  "bodyChars": 400000
+ },
+ {
+  "id": "a166:zgbs-14279714011-700000",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/bestsellers/books/14279714011",
+  "country": "US",
+  "site": "Amazon Best Sellers: Fantasy & SF coloring (body slice from 700000)",
+  "category": "diagnostic",
+  "bodyFrom": 700000,
+  "bodyChars": 400000
+ },
+ {
+  "id": "a166:new-releases-300000",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/new-releases/books/11357541011",
+  "country": "US",
+  "site": "Amazon New Releases: Coloring Books for Grown-Ups (body slice from 300000)",
+  "category": "diagnostic",
+  "bodyFrom": 300000,
+  "bodyChars": 400000
+ },
+ {
+  "id": "a166:new-releases-650000",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/new-releases/books/11357541011",
+  "country": "US",
+  "site": "Amazon New Releases: Coloring Books for Grown-Ups (body slice from 650000)",
+  "category": "diagnostic",
+  "bodyFrom": 650000,
+  "bodyChars": 400000
+ },
+ {
+  "id": "a166:movers-and-shakers-300000",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/movers-and-shakers/books/11357541011",
+  "country": "US",
+  "site": "Amazon Movers & Shakers: Coloring Books for Grown-Ups (body slice from 300000)",
+  "category": "diagnostic",
+  "bodyFrom": 300000,
+  "bodyChars": 400000
+ },
+ {
+  "id": "a166:movers-and-shakers-650000",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/movers-and-shakers/books/11357541011",
+  "country": "US",
+  "site": "Amazon Movers & Shakers: Coloring Books for Grown-Ups (body slice from 650000)",
+  "category": "diagnostic",
+  "bodyFrom": 650000,
+  "bodyChars": 400000
+ },
+ {
+  "id": "k166:GVBQ3CMEQW3W2VL6",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/GVBQ3CMEQW3W2VL6",
+  "country": "GLOBAL",
+  "site": "KDP help: set trim size, bleed and margins",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k166:G202169030",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G202169030",
+  "country": "GLOBAL",
+  "site": "KDP help: format images in your book",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k166:create-a-book",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G200635650",
+  "country": "GLOBAL",
+  "site": "KDP help: create a book (title limits)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ }
+]
