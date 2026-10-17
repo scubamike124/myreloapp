@@ -1,0 +1,101 @@
+[
+ {
+  "id": "gh173:label-bounty-today",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3Abounty%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-17T16%3A30%3A00Z&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues labelled bounty created since 16:30Z 2026-10-17",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh173:algora-today",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3A%22%F0%9F%92%8E%20Bounty%22%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-17T16%3A30%3A00Z&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open Algora-labelled issues created since 16:30Z 2026-10-17",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh173:bounty-title-today",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=bounty%20in%3Atitle%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-17T16%3A30%3A00Z&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues with bounty in the title created since 16:30Z 2026-10-17",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh173:paypal-today",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=bounty%20paypal%20in%3Abody%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-17T16%3A30%3A00Z&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues naming PayPal for a bounty, created since 16:30Z 2026-10-17",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh173:updated-bounty-4h",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3Abounty%20is%3Aissue%20is%3Aopen%20updated%3A%3E%3D2026-10-17T16%3A30%3A00Z&sort=updated&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open bounty issues updated since 16:30Z 2026-10-17",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "api173:owockibot-stats",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/stats",
+  "country": "GLOBAL",
+  "site": "owockibot stats",
+  "category": "board-api",
+  "bodyChars": 4000
+ },
+ {
+  "id": "api173:owockibot-open",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/bounties?status=open",
+  "country": "GLOBAL",
+  "site": "owockibot open bounties",
+  "category": "board-api",
+  "bodyChars": 60000
+ },
+ {
+  "id": "pt173:api",
+  "kind": "json",
+  "url": "https://stream.indieagora.com/api/v1/videos/47019fc4-c6bf-4632-b49b-ede0fc179d95",
+  "country": "GLOBAL",
+  "site": "PeerTube API: the 19:03Z video's public record (promotion verification)",
+  "category": "promotion-verify",
+  "bodyChars": 60000
+ },
+ {
+  "id": "pt173:watch",
+  "kind": "html",
+  "url": "https://stream.indieagora.com/videos/watch/47019fc4-c6bf-4632-b49b-ede0fc179d95",
+  "country": "GLOBAL",
+  "site": "PeerTube watch page of the 19:03Z video",
+  "category": "promotion-verify",
+  "bodyChars": 200000
+ },
+ {
+  "id": "ma173:status",
+  "kind": "json",
+  "url": "https://101010.pl/api/v1/statuses/117457590558570679",
+  "country": "GLOBAL",
+  "site": "Mastodon API: the 18:09Z post's public record (promotion verification)",
+  "category": "promotion-verify",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ma173:page",
+  "kind": "html",
+  "url": "https://101010.pl/@studyproofs/117457590558570679",
+  "country": "GLOBAL",
+  "site": "Mastodon page of the 18:09Z post",
+  "category": "promotion-verify",
+  "bodyChars": 120000
+ }
+]
