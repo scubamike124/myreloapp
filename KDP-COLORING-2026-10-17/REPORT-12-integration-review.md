@@ -35,4 +35,39 @@ No selector in any of the three has been checked against live KDP (no Amazon acc
 
 ## Alternatives beyond the named three
 
-(Search of other Claude Code skills, MCP servers, API routes and open-source KDP helpers: see the section below, added when that review finished.)
+A second review searched for other Claude Code skills, MCP servers, API routes and open-source KDP helpers (about 55 repositories cloned shallow and read; none of their code was run against Amazon). Its evidence tags are the same: **[A]** is the review agent's reading, **[V]** I ran or checked it myself.
+
+**Bottom line: nothing found is a compliant, headless, phone-authorised KDP uploader, and no public KDP publishing API turned up.** What is useful is offline: validators, cover maths and safe-flow designs.
+
+| Project (licence) | What it is | Fit |
+|---|---|---|
+| KanadeK/proofmill (MIT) | Print-PDF preflight for paperbacks: trim and bleed, page count, embedded fonts, safe area, image DPI, cover size from spine maths. No network code [A]. | **Used as a check: see "Run on Book 1" below.** |
+| pabygon/kdp-cover-preflight (CC-BY-4.0) | Cover and spine maths, paperback and hardcover, four paper types [A]. | **Used as a cross-check: matches Book 1's cover size [V].** Its hardcover constants disagree with another calculator, so verify those against Amazon's calculator before anyone relies on them [A]. |
+| beyondtahir/beyondwords (MIT, 15 days old, 83 stars that may be promotional) | Attended Playwright tool with a hash-bound plan, a typed `APPROVE <plan-hash>`, an execute journal, and a release gate that must hold a ten-key owner record before any publish click [A]. | **Design to learn from, not a dependency** (Python, mass-AI-book scope). Amber already binds approval to a digest of the files; the same idea gives the iPhone approval page a plan hash to show. |
+| ocrosby/claude-config `skills/kdp` (MIT) | Playwright paperback pre-fill that never clicks Publish and uses semantic locators [A]. | Reference for the locator pattern and the "never publish" stance. |
+| pushkar-mishra/BookForge (MIT), LaFerraille/kdp-book-creator (MIT) | Markdown to paperback and EPUB pipelines, with EPUBCheck in the build [A]. | References only; Amber's EPUB builder (amberai #886) already passes the W3C validator in CI. |
+| alanherron/kdp-cover-math (MIT), anicolao/mathpub (GPL-3.0) | A narrow cover calculator with tests; an interior-and-cover uploader for an existing draft, hash-bound, fail-closed, cannot publish [A]. | Oracle for tests; design only (GPL means no copying). |
+
+**Rejected, by reason** [A]: stealth, automation-hiding flags or human mimicry (eight repositories, among them AlfaOtto/kdp-automation-studio, tenlifejosh/agentreach, victorpreston/amazon_kdp_upload_automation, duccoicbn/kdp-agent, BrahimAkar/Amazon-KDP-Automater); CAPTCHA solving, account creation or scraping with rotating identities (jc-hello/amazon-registration-tool, rxpelle/kdp-scout); stored passwords or a stored one-time-code secret (adw495/kdp-autopublisher, encrypter15/kdpsubmissionbot); unauditable or unlicensed (mindattic/KdpPublish, closed browser extensions); abandoned or stubs (misarb/SpiderKDP, whodeanie/kdp-listing-publisher, others).
+
+**Is there an API?** No public KDP publishing or listing API was found; independent projects and commercial uploaders all drive the website [A]. The Amazon Ads API is real but advertising only [A]. The Selling Partner API is for sellers; whether it reaches KDP titles is unverified [U]. **PublishDrive does publish API documentation**: I read its Distribution API page directly in scan batch 176 (a production and a sandbox base URL, an `apikey` header; the review agent could not reach that host and so called the claim unverified, which is a gap in its access, not a contradiction). IngramSpark and Draft2Digital: no public title-setup API found [A].
+
+### Run on Book 1 (independent checks, 2026-10-17 21:30Z, nothing sent anywhere)
+
+| Check | Result |
+|---|---|
+| ProofMill 0.1.0, profile `kdp-paperback`, interior: 8.5 x 11 in, black ink, white paper, 104 pages | **PASS: 0 errors, 0 warnings**; two notes that the two fonts are embedded as subsets. Its SHA-256 of the file equals the one in `SHA256SUMS` (9b395c9d...) [V] |
+| ProofMill, cover: 104-page spine, 8.5 x 11 in | **PASS: 0 errors, 0 warnings**; SHA-256 equals ours (7a3619be...) [V] |
+| pabygon's cover maths, 8.5 x 11, 104 pages, white | 17.4842 x 11.25 in = **1258.86 x 810.00 pt**, spine 0.2342 in, spine text allowed: the same size as the cover file and as Amber's own QA check [V] |
+
+How these were run: the tools' two Python dependencies went into a throwaway virtual environment, ProofMill ran from its source folder with no install of the package, and the cover maths ran as plain functions; nothing was copied into amberai. **Limits:** both calculators use the same published spine factor (0.002252 in per page for white paper) as Amber's own, so agreement on the cover size is a consistency check, not an Amazon confirmation. The ProofMill measurements of the actual PDF files (trim, fonts, safe area) are independent of Amber's code. Amazon's Previewer is the final word and has not been seen.
+
+### What this changes
+
+- **Nothing is adopted as a dependency.** ProofMill can be re-run on any future package the same way; a small sidecar script would make that repeatable and is worth doing when a second book exists.
+- **Approval design:** the iPhone approval page (cloud route) should show a plan hash and the pre-check summary, and Amber's evidence file already provides the journal; this is the part of beyondwords worth copying as an idea.
+- **E-book covers and EPUBCheck:** the EPUB work already runs the W3C validator in CI.
+
+### Not verified
+
+Amazon's agent clause and Terms 4.3 (secondary summaries disagree on the clause's date; Amazon's page is the source and was last read earlier today); PublishDrive, IngramSpark and Draft2Digital pages beyond the one I read; live behaviour of any tool on KDP; the contents of closed browser extensions. Popularity is thin everywhere: every candidate is under five months old and mostly single-maintainer.
