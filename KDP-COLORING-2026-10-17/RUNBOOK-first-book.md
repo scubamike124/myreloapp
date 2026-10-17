@@ -27,6 +27,8 @@ Goal: "Bold & Easy Patterns" appears on your KDP Bookshelf as a **Draft**, confi
 | `NOT SIGNED IN in time` | The window waited 20 minutes | Run it again when you are ready |
 | `Not started: no authorization decision` | Step 2 is not done | Do step 2 |
 | `The book files are not what was checked` | A PDF changed | Stop and tell Amber |
+| `KDP shows on the pricing page:` followed by a message about tax, bank or account setup | Your KDP account needs something only you can give | Finish it in KDP yourself. Amber never touches tax, bank or identity details. Then run again |
+| `NOTHING WAS PRESSED` with a list of differences | KDP stores something that is not what you reviewed | Send Amber the list. Nothing was published |
 
 Running the script again is safe. It finds the title on the Bookshelf and reopens it. It never creates a second one, and it does not touch a title that is already submitted.
 
