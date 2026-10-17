@@ -1,0 +1,65 @@
+[
+ {
+  "id": "gh107:label-bounty-today",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3Abounty%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-16T23%3A00%3A00Z&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues labelled bounty created since 17:00Z 2026-10-16",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh107:algora-today",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3A%22%F0%9F%92%8E%20Bounty%22%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-16T23%3A00%3A00Z&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open Algora-labelled issues created since 17:00Z 2026-10-16",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh107:bounty-title-today",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=bounty%20in%3Atitle%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-16T23%3A00%3A00Z&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues with bounty in the title created since 17:00Z 2026-10-16",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh107:paypal-today",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=bounty%20paypal%20in%3Abody%20is%3Aissue%20is%3Aopen%20created%3A%3E%3D2026-10-16T23%3A00%3A00Z&sort=created&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open issues naming PayPal for a bounty, created since 17:00Z 2026-10-16",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "gh107:updated-bounty-4h",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=label%3Abounty%20is%3Aissue%20is%3Aopen%20updated%3A%3E%3D2026-10-16T23%3A30%3A00Z&sort=updated&order=desc&per_page=100",
+  "country": "GLOBAL",
+  "site": "open bounty issues updated since 17:30Z today",
+  "category": "github-bounty-search",
+  "bodyChars": 400000
+ },
+ {
+  "id": "api107:owockibot-stats",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/stats",
+  "country": "GLOBAL",
+  "site": "owockibot stats",
+  "category": "board-api",
+  "bodyChars": 4000
+ },
+ {
+  "id": "api107:owockibot-open",
+  "kind": "json",
+  "url": "https://bounty.owockibot.xyz/bounties?status=open",
+  "country": "GLOBAL",
+  "site": "owockibot open bounties",
+  "category": "board-api",
+  "bodyChars": 60000
+ }
+]
