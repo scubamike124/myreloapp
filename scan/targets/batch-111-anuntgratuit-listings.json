@@ -1,0 +1,38 @@
+[
+ {
+  "id": "r111:anuntgratuit:index",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/anunturi",
+  "country": "RO",
+  "site": "anuntgratuit.ro listing index (the shape of a listing's address)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r111:anuntgratuit:home",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/",
+  "country": "RO",
+  "site": "anuntgratuit.ro home (listing links, categories)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r111:anuntgratuit:categories",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/categorii",
+  "country": "RO",
+  "site": "anuntgratuit.ro categories (guess)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r111:anuntgratuit:adauga",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/anunturi/adauga",
+  "country": "RO",
+  "site": "anuntgratuit.ro ad form without a login (what the page shows: a login wall or the form)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ }
+]
