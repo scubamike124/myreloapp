@@ -1,0 +1,191 @@
+[
+ {
+  "id": "r140:inzerce2:form-full",
+  "kind": "json",
+  "url": "https://inzerce2.cz/pridat-inzerat/",
+  "country": "CZ",
+  "site": "inzerce2.cz posting form, whole page (the 200k read stopped after the category selects; zip code, phone, e-mail, consent fields)",
+  "category": "classified-board",
+  "bodyChars": 450000
+ },
+ {
+  "id": "r140:inzerce2:podminky",
+  "kind": "json",
+  "url": "https://inzerce2.cz/podminky",
+  "country": "CZ",
+  "site": "inzerce2.cz rules (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:inzerce2:pravidla",
+  "kind": "json",
+  "url": "https://inzerce2.cz/pravidla",
+  "country": "CZ",
+  "site": "inzerce2.cz rules (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:inzerce2:obchodni",
+  "kind": "json",
+  "url": "https://inzerce2.cz/obchodni-podminky",
+  "country": "CZ",
+  "site": "inzerce2.cz rules (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:bazos:sluzby-form",
+  "kind": "json",
+  "url": "https://sluzby.bazos.cz/pridat-inzerat.php",
+  "country": "CZ",
+  "site": "Bazoš services section posting form as served (phone, SMS, e-mail, place fields)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:bazos:podminky",
+  "kind": "json",
+  "url": "https://www.bazos.cz/podminky.php",
+  "country": "CZ",
+  "site": "Bazoš rules",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:bazik:pridat",
+  "kind": "json",
+  "url": "https://bazik.cz/pridat",
+  "country": "CZ",
+  "site": "Bazik posting page as served",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:bazik:podminky",
+  "kind": "json",
+  "url": "https://bazik.cz/podminky",
+  "country": "CZ",
+  "site": "Bazik rules",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:bazik:cenik",
+  "kind": "json",
+  "url": "https://bazik.cz/cenik",
+  "country": "CZ",
+  "site": "Bazik price list",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:nox:rules",
+  "kind": "json",
+  "url": "https://nox.bg/rules.php",
+  "country": "BG",
+  "site": "NOX.bg general terms",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:nox:register-firm",
+  "kind": "json",
+  "url": "https://nox.bg/register.html?group=4",
+  "country": "BG",
+  "site": "NOX.bg company registration form (group 4)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:nox:pre-register-firm",
+  "kind": "json",
+  "url": "https://nox.bg/pre-register.html?group=4",
+  "country": "BG",
+  "site": "NOX.bg company registration choice (group 4)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:nox:pre-submit",
+  "kind": "json",
+  "url": "https://nox.bg/pre-submit.html",
+  "country": "BG",
+  "site": "NOX.bg posting entry page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:aggelioforos:register",
+  "kind": "json",
+  "url": "https://www.aggelioforos.gr/syndesi-eggrafi/?tab=eggrafi",
+  "country": "GR",
+  "site": "Aggelioforos registration form as served",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:aggelioforos:post",
+  "kind": "json",
+  "url": "https://www.aggelioforos.gr/pinakas/dimiourgia/",
+  "country": "GR",
+  "site": "Aggelioforos posting page as served (login gate?)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:aggelioforos:contact",
+  "kind": "json",
+  "url": "https://www.aggelioforos.gr/epikoinonia/",
+  "country": "GR",
+  "site": "Aggelioforos contact page (footer links to the terms)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:aggelioforos:oroi",
+  "kind": "json",
+  "url": "https://www.aggelioforos.gr/oroi-xrisis/",
+  "country": "GR",
+  "site": "Aggelioforos terms (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:aggelioforos:oroi2",
+  "kind": "json",
+  "url": "https://www.aggelioforos.gr/oroi-chrisis/",
+  "country": "GR",
+  "site": "Aggelioforos terms (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:1inzerce:home",
+  "kind": "json",
+  "url": "https://www.1inzerce.cz/",
+  "country": "CZ",
+  "site": "1inzerce.cz home re-read (the 02:40Z read failed with status 0)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:1inzerce:registrace",
+  "kind": "json",
+  "url": "https://www.1inzerce.cz/registrace",
+  "country": "CZ",
+  "site": "1inzerce.cz registration (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r140:1inzerce:podminky",
+  "kind": "json",
+  "url": "https://www.1inzerce.cz/podminky",
+  "country": "CZ",
+  "site": "1inzerce.cz rules (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]

@@ -1,0 +1,68 @@
+[
+ {
+  "id": "r35:myreelo:features",
+  "url": "https://www.myreelo.com/features",
+  "country": "US",
+  "site": "Reelo features page rendered (the root redirects a new visitor to /signup)",
+  "category": "product-page",
+  "forms": false,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r35:myreelo:how",
+  "url": "https://www.myreelo.com/how-it-works",
+  "country": "US",
+  "site": "Reelo how-it-works page rendered",
+  "category": "product-page",
+  "forms": false,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r35:myreelo:capabilities",
+  "url": "https://www.myreelo.com/capabilities",
+  "country": "US",
+  "site": "Reelo full feature list rendered (Story Book?)",
+  "category": "product-page",
+  "forms": false,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r35:myreelo:examples",
+  "url": "https://www.myreelo.com/examples",
+  "country": "US",
+  "site": "Reelo examples page rendered",
+  "category": "product-page",
+  "forms": false,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r35:myreelo:faq",
+  "url": "https://www.myreelo.com/faq",
+  "country": "US",
+  "site": "Reelo FAQ rendered (plans, tokens)",
+  "category": "product-page",
+  "forms": false,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ },
+ {
+  "id": "r35:myreelo:pricing",
+  "url": "https://www.myreelo.com/#pricing",
+  "country": "US",
+  "site": "Reelo pricing section rendered",
+  "category": "product-page",
+  "forms": false,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 6000
+ }
+]
