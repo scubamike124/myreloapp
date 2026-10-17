@@ -77,6 +77,9 @@ targets = {}
 for f in sorted(glob.glob(R("scan/targets/*.json"))):
     for t in json.load(open(f)): targets[t["id"]] = t
 
+# Reads that are not candidates (the production site's health, a page read again to settle one question) never become rows.
+EXCLUDED_CATEGORIES = {"production-health", "diagnostic"}
+
 rows = []
 for f in sorted(glob.glob(R("scan/results/*.jsonl"))):
     batch = os.path.basename(f).replace(".jsonl", "")
@@ -85,6 +88,7 @@ for f in sorted(glob.glob(R("scan/results/*.jsonl"))):
         if not line: continue
         r = json.loads(line)
         if r.get("kind") == "note": continue
+        if (targets.get(r.get("id")) or {}).get("category") in EXCLUDED_CATEGORIES: continue
         r["_batch"] = batch
         rows.append(r)
 

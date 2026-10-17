@@ -5,7 +5,7 @@
   "url": "https://colombia.casinuevo.com/login",
   "country": "CO",
   "site": "Casinuevo Colombia login page (the registrar reads a CAPTCHA marker on it)",
-  "category": "classifieds",
+  "category": "diagnostic",
   "bodyChars": 120000
  },
  {
@@ -14,7 +14,7 @@
   "url": "https://colombia.casinuevo.com/login/",
   "country": "CO",
   "site": "Casinuevo Colombia login page with a slash",
-  "category": "classifieds",
+  "category": "diagnostic",
   "bodyChars": 120000
  }
 ]
