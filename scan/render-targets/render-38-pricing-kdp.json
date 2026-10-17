@@ -1,0 +1,43 @@
+[
+ {
+  "id": "r38:openai-pricing",
+  "url": "https://openai.com/api/pricing/",
+  "site": "OpenAI API pricing rendered (image generation rows)",
+  "country": "GLOBAL",
+  "category": "diagnostic",
+  "links": false,
+  "fullText": true,
+  "excerptChars": 20000
+ },
+ {
+  "id": "r38:openai-pricing-docs",
+  "url": "https://platform.openai.com/docs/pricing",
+  "site": "OpenAI platform pricing docs rendered",
+  "country": "GLOBAL",
+  "category": "diagnostic",
+  "links": false,
+  "fullText": true,
+  "excerptChars": 20000
+ },
+ {
+  "id": "r38:kdp-cover-calculator",
+  "url": "https://kdp.amazon.com/en_US/cover-calculator",
+  "site": "KDP cover calculator rendered (fields)",
+  "country": "GLOBAL",
+  "category": "diagnostic",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 8000
+ },
+ {
+  "id": "r38:kdp-help-ai",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G200672390",
+  "site": "KDP content guidelines rendered (AI content section)",
+  "country": "GLOBAL",
+  "category": "diagnostic",
+  "links": true,
+  "fullText": true,
+  "excerptChars": 20000
+ }
+]
