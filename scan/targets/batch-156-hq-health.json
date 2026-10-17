@@ -1,0 +1,29 @@
+[
+ {
+  "id": "h156:hq-health",
+  "kind": "json",
+  "url": "https://hq.amberoneai.com/api/health/public",
+  "country": "GLOBAL",
+  "site": "hq.amberoneai.com public health (status, build)",
+  "category": "production-health",
+  "bodyChars": 4000
+ },
+ {
+  "id": "h156:studyproofs-page",
+  "kind": "json",
+  "url": "https://hq.amberoneai.com/studyproofs",
+  "country": "GLOBAL",
+  "site": "StudyProofs landing page (status, title)",
+  "category": "production-health",
+  "bodyChars": 4000
+ },
+ {
+  "id": "h156:hq-root",
+  "kind": "json",
+  "url": "https://hq.amberoneai.com/",
+  "country": "GLOBAL",
+  "site": "Amber HQ root (status)",
+  "category": "production-health",
+  "bodyChars": 4000
+ }
+]
