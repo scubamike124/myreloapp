@@ -1,0 +1,35 @@
+[
+ {
+  "id": "r34:datewise:home",
+  "url": "https://datewiseai.com/",
+  "country": "US",
+  "site": "DateWise AI home rendered in a browser (features, plans, links)",
+  "category": "product-page",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 4000
+ },
+ {
+  "id": "r34:myreelo:home",
+  "url": "https://www.myreelo.com/",
+  "country": "US",
+  "site": "MyReelo / Reelo home rendered (features, whether Story Book is still offered)",
+  "category": "product-page",
+  "forms": false,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 4000
+ },
+ {
+  "id": "r34:launchreadyal:home",
+  "url": "https://launchreadyal.com/",
+  "country": "US",
+  "site": "LaunchReady (launchreadyal.com) rendered (features, prices, links)",
+  "category": "product-page",
+  "forms": false,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 4000
+ }
+]

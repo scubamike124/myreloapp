@@ -1,0 +1,74 @@
+[
+ {
+  "id": "r139:inzerce2:form",
+  "kind": "json",
+  "url": "https://inzerce2.cz/pridat-inzerat/",
+  "country": "CZ",
+  "site": "inzerce2.cz posting form as served (fields, place, phone, captcha)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r139:inzerce2:home",
+  "kind": "json",
+  "url": "https://inzerce2.cz/",
+  "country": "CZ",
+  "site": "inzerce2.cz home (rules links)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r139:aggelioforos:home",
+  "kind": "json",
+  "url": "https://www.aggelioforos.gr/",
+  "country": "GR",
+  "site": "aggelioforos.gr home (rules and posting links)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r139:nox:pre-register",
+  "kind": "json",
+  "url": "https://nox.bg/pre-register.html",
+  "country": "BG",
+  "site": "nox.bg pre-registration page as served",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r139:nox:home",
+  "kind": "json",
+  "url": "https://nox.bg/",
+  "country": "BG",
+  "site": "nox.bg home (rules links)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r139:1inzerce:home",
+  "kind": "json",
+  "url": "https://www.1inzerce.cz/",
+  "country": "CZ",
+  "site": "1inzerce.cz home (registration and rules links)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r139:bazik:home",
+  "kind": "json",
+  "url": "https://bazik.cz/",
+  "country": "CZ",
+  "site": "bazik.cz home (posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r139:bazos:podat",
+  "kind": "json",
+  "url": "https://www.bazos.cz/pridat-inzerat.php",
+  "country": "CZ",
+  "site": "bazos.cz posting page as served",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
