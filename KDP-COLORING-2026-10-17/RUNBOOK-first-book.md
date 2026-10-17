@@ -15,7 +15,7 @@ Goal: "Bold & Easy Patterns" appears on your KDP Bookshelf as a **Draft**, confi
 4. **Sign in yourself** in that window: password, code and any puzzle are yours. Never type them anywhere else. Then leave the window alone while it fills the fields and uploads the two PDFs. That takes a few minutes.
 5. **Read the Previewer.** It opens by itself after the files are processed. Check the margins and the cover. Click **Approve** yourself.
 6. **Finish the list.** When the terminal prints `RESULT`, it also prints what is left for you in the same window. Always on that list: the AI-content choices and KDP's confirmation (the facts and the wording are in `KDP-COPY-SHEET.txt`), and the Pricing page's terms box. **Do not click Publish.**
-7. **Send Amber two things:** the `RESULT` block copied from the terminal, and a screenshot of the Bookshelf row with your name and email hidden. The script also saved its own Bookshelf screenshot in `.data/kdp-coloring/bold-patterns-01/bookshelf-after.png`.
+7. **Send Amber two things:** the `RESULT` block copied from the terminal, and a screenshot of the Bookshelf row with your name and email hidden. The script also saved its own Bookshelf screenshot in `.data/kdp-coloring/bold-patterns-01/bookshelf-after.png`. If the list it printed is long, also send the three `dom-*.json` files from the same folder: they hold the ids and labels of KDP's form fields and no values, so a wrong field can be fixed in one round.
 
 ## What the terminal tells you
 
