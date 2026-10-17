@@ -1,0 +1,353 @@
+[
+ {
+  "id": "ver137:guloggratis.dk:home",
+  "kind": "signup",
+  "url": "https://guloggratis.dk/",
+  "country": "DK",
+  "site": "guloggratis.dk home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:guloggratis.dk:found",
+  "kind": "signup",
+  "url": "https://www.guloggratis.dk/annonce/opret",
+  "country": "DK",
+  "site": "guloggratis.dk page the search found: Gul&Gratis - dit online marked med salg af nyt og ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:annoncelight.dk:home",
+  "kind": "signup",
+  "url": "https://annoncelight.dk/",
+  "country": "DK",
+  "site": "annoncelight.dk home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:annoncelight.dk:found",
+  "kind": "signup",
+  "url": "https://annoncelight.dk/help",
+  "country": "DK",
+  "site": "annoncelight.dk page the search found: Hjælp - Annoncelight",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:annoncelisten.dk:home",
+  "kind": "signup",
+  "url": "https://annoncelisten.dk/",
+  "country": "DK",
+  "site": "annoncelisten.dk home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:annoncelisten.dk:found",
+  "kind": "signup",
+  "url": "https://www.annoncelisten.dk/opret-annonce/",
+  "country": "DK",
+  "site": "annoncelisten.dk page the search found: Opret annonce nemt og hurtigt på Annoncelisten.dk",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:onlineannoncer.dk:home",
+  "kind": "signup",
+  "url": "https://onlineannoncer.dk/",
+  "country": "DK",
+  "site": "onlineannoncer.dk home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:bezplatno.bg:home",
+  "kind": "signup",
+  "url": "https://bezplatno.bg/",
+  "country": "BG",
+  "site": "bezplatno.bg home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:nox.bg:home",
+  "kind": "signup",
+  "url": "https://nox.bg/",
+  "country": "BG",
+  "site": "nox.bg home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:aizar.bg:home",
+  "kind": "signup",
+  "url": "https://aizar.bg/",
+  "country": "BG",
+  "site": "aizar.bg home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:prodadeno.bg:home",
+  "kind": "signup",
+  "url": "https://prodadeno.bg/",
+  "country": "BG",
+  "site": "prodadeno.bg home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:ix.gr:home",
+  "kind": "signup",
+  "url": "https://ix.gr/",
+  "country": "GR",
+  "site": "ix.gr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:ix.gr:found",
+  "kind": "signup",
+  "url": "https://www.ix.gr/classifieds/new/",
+  "country": "GR",
+  "site": "ix.gr page the search found: Δωρεάν Καταχώρηση Αγγελίας - IX.gr",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:freelist.gr:home",
+  "kind": "signup",
+  "url": "https://freelist.gr/",
+  "country": "GR",
+  "site": "freelist.gr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:freelist.gr:found",
+  "kind": "signup",
+  "url": "https://www.freelist.gr/adPost.php?catId=4",
+  "country": "GR",
+  "site": "freelist.gr page the search found: Δημοσίευση δωρεάν αγγελίας άμεσα - FreeList.gr - Δ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:aggelioforos.gr:home",
+  "kind": "signup",
+  "url": "https://aggelioforos.gr/",
+  "country": "GR",
+  "site": "aggelioforos.gr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:inadz.gr:home",
+  "kind": "signup",
+  "url": "https://inadz.gr/",
+  "country": "GR",
+  "site": "inadz.gr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:inadz.gr:found",
+  "kind": "signup",
+  "url": "https://www.inadz.gr/katachorisi-dorean-angelias/",
+  "country": "GR",
+  "site": "inadz.gr page the search found: Καταχώρηση δωρεάν αγγελίας - inAdz.gr | Online αγο",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:inzerce2.cz:home",
+  "kind": "signup",
+  "url": "https://inzerce2.cz/",
+  "country": "CZ",
+  "site": "inzerce2.cz home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:inzerce2.cz:found",
+  "kind": "signup",
+  "url": "https://inzerce2.cz/pridat-inzerat/",
+  "country": "CZ",
+  "site": "inzerce2.cz page the search found: Přidat inzerát zdarma | inzerce2.cz",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:bazik.cz:home",
+  "kind": "signup",
+  "url": "https://bazik.cz/",
+  "country": "CZ",
+  "site": "bazik.cz home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:anobazar.cz:home",
+  "kind": "signup",
+  "url": "https://anobazar.cz/",
+  "country": "CZ",
+  "site": "anobazar.cz home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:anobazar.cz:found",
+  "kind": "signup",
+  "url": "https://anobazar.cz/vlozit-inzerat",
+  "country": "CZ",
+  "site": "anobazar.cz page the search found: Vložit inzerát, Inzerce zdarma, Bazar",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:avizo.cz:home",
+  "kind": "signup",
+  "url": "https://avizo.cz/",
+  "country": "CZ",
+  "site": "avizo.cz home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:bazos.cz:home",
+  "kind": "signup",
+  "url": "https://bazos.cz/",
+  "country": "CZ",
+  "site": "bazos.cz home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:bazos.cz:found",
+  "kind": "signup",
+  "url": "https://www.bazos.cz/pridat-inzerat.php",
+  "country": "CZ",
+  "site": "bazos.cz page the search found: Podat inzerát - Inzerce zdarma | Bazos.cz",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:1inzerce.cz:home",
+  "kind": "signup",
+  "url": "https://1inzerce.cz/",
+  "country": "CZ",
+  "site": "1inzerce.cz home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:profiinzert.cz:home",
+  "kind": "signup",
+  "url": "https://profiinzert.cz/",
+  "country": "CZ",
+  "site": "profiinzert.cz home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:profiinzert.cz:found",
+  "kind": "signup",
+  "url": "http://www.profiinzert.cz/podat-inzerat/",
+  "country": "CZ",
+  "site": "profiinzert.cz page the search found: ProfiINZERT.cz - Bezplatně podat inzerát, on-line ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:annonce.cz:home",
+  "kind": "signup",
+  "url": "https://annonce.cz/",
+  "country": "CZ",
+  "site": "annonce.cz home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:shanet.cz:home",
+  "kind": "signup",
+  "url": "https://shanet.cz/",
+  "country": "CZ",
+  "site": "shanet.cz home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:a-z.be:home",
+  "kind": "signup",
+  "url": "https://a-z.be/",
+  "country": "BE",
+  "site": "a-z.be home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:a-z.be:found",
+  "kind": "signup",
+  "url": "http://www.a-z.be/zoekertjeplaatsen.html",
+  "country": "BE",
+  "site": "a-z.be page the search found: Gratis zoekertje plaatsen...",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:marketplace24.be:home",
+  "kind": "signup",
+  "url": "https://marketplace24.be/",
+  "country": "BE",
+  "site": "marketplace24.be home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:marketplace24.be:found",
+  "kind": "signup",
+  "url": "https://marketplace24.be/nl",
+  "country": "BE",
+  "site": "marketplace24.be page the search found: Marketplace België: gratis zoekertjes en tweedehan",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:search-belgium.com:home",
+  "kind": "signup",
+  "url": "https://search-belgium.com/",
+  "country": "BE",
+  "site": "search-belgium.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:search-belgium.com:found",
+  "kind": "signup",
+  "url": "https://search-belgium.com/zoekertjes/",
+  "country": "BE",
+  "site": "search-belgium.com page the search found: Zoekertjes - SB Zoekertjes en 2dehands, GRATIS Zoe",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:studmarkt.be:home",
+  "kind": "signup",
+  "url": "https://studmarkt.be/",
+  "country": "BE",
+  "site": "studmarkt.be home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver137:wirly.be:home",
+  "kind": "signup",
+  "url": "https://wirly.be/",
+  "country": "BE",
+  "site": "wirly.be home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]

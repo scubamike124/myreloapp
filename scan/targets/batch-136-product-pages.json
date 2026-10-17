@@ -1,0 +1,56 @@
+[
+ {
+  "id": "r136:0",
+  "kind": "json",
+  "url": "https://datewiseai.com/",
+  "country": "US",
+  "site": "DateWise AI home: current features, plans, live links",
+  "category": "product-page",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r136:1",
+  "kind": "json",
+  "url": "https://launchreadyal.com/",
+  "country": "US",
+  "site": "LaunchReady (launchreadyal.com) home: current features and links",
+  "category": "product-page",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r136:2",
+  "kind": "json",
+  "url": "https://launchready.ai/",
+  "country": "US",
+  "site": "launchready.ai home (whether it is the same product or a redirect)",
+  "category": "product-page",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r136:3",
+  "kind": "json",
+  "url": "https://www.myreelo.com/",
+  "country": "US",
+  "site": "MyReelo / Story Book home: current features and links",
+  "category": "product-page",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r136:4",
+  "kind": "json",
+  "url": "https://hq.amberoneai.com/studyproofs",
+  "country": "US",
+  "site": "StudyProofs landing page (the address shown in the video; confirms it is live)",
+  "category": "product-page",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r136:studyproofs-landing-markers",
+  "kind": "html",
+  "url": "https://hq.amberoneai.com/studyproofs",
+  "country": "US",
+  "site": "StudyProofs landing (status, title, text extract)",
+  "category": "product-page",
+  "bodyChars": 60000
+ }
+]
