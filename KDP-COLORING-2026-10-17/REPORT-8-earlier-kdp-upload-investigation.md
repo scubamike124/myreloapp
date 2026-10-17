@@ -50,7 +50,7 @@ Amazon's Agent Terms (Conditions of Use, "Agents"; the page says last updated 20
 
 As written on 28 August, both scripts **fell short of two of those requirements**: no Agent label, and Chromium launched with `--disable-blink-features=AutomationControlled`, a flag whose purpose is to hide the automation marker. Neither script solves a CAPTCHA (they wait for you). So: **it worked technically because Amazon did not block it; it was not compliant as written.** I have no evidence that Amazon objected, and I cannot see your account's messages.
 
-**Restoring it safely needs no rebuild and no contact with Amazon.** amberai **#877** (open, checks running) changes the two old scripts and aligns the paperback script:
+**Restoring it safely needs no rebuild and no contact with Amazon.** amberai **#877** (checks green at 16:41Z; **merged 16:41:59Z as `c0f10304`**) changed the two old scripts and aligned the paperback script:
 - sends `Agent/AmberOne` on every request; removes the concealment flag;
 - stops answering the AI question and stops ticking the Pricing checkbox: both are left to you;
 - start only when `kdp/cloud/authorization/amazon.json` records **your** decision. The file's basis can be Amazon's written reply **or your own recorded decision to proceed under the published Agent Terms**. You can give that decision in the chat and I create the file from your words.
@@ -59,7 +59,7 @@ As written on 28 August, both scripts **fell short of two of those requirements*
 1. **Ask first** (the support text is in `KDP-SUPPORT-REQUEST.txt`). Lowest risk, costs a day or two.
 2. **Proceed without asking**, with your recorded decision: run the corrected script on the laptop, you present, one title, drafts only, and watch for any Amazon notice. The risk is Amazon's discretion; the account holds your published e-books.
 
-My recommendation is option 1 for the first run, because the cost is small and the downside is your account. The choice is yours; either way the corrected script is the one to run, not the 28 August versions.
+My recommendation is option 1 for the first run, because the cost is small and the downside is your account. The choice is yours; either way the corrected script is the one to run, not the 28 August versions. amberai **#879** (open) adds a read-only connection check as the very first run: it signs in, reads your Bookshelf, saves a screenshot and the visible text on your laptop, and changes nothing (`RUNBOOK-laptop-first-run.md`).
 
 ## 5. What changed, exactly
 
