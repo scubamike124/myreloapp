@@ -9914,16 +9914,16 @@
  {
   "match": "inserate.net",
   "verdict": "conditional",
-  "quote": "'Ein Inserat gratis aufgeben (Schritt 2 von 5)' without registration; Nutzungsbedingungen (14k chars, no automation words): commercial offers to other users only 'über vom Betreiber zur Verfügung gestellte Systeme' (the operator's own systems, which the ad form is); bans affiliate/MLM promotion and spam.",
-  "note": "Austrian classifieds network (Jetzt Medien); five-step wizard without registration (Marktplatz › Kategorie › Basisdaten › Inhalt › Vorschau) with 'Dienstleistungen › Computer und Internet' and 'Ausbildung und Nachhilfe' categories; step 3's form is being read (batch 125).",
-  "can_act": "maybe (rules allow; the form's fields, any CAPTCHA and the read-back are being read)",
+  "quote": "Step 3 of 5 ('Die Basisdaten Ihres Inserates eingeben'): a plain form with inserent_email, a box 'Ich akzeptiere die Nutzungsbedingungen und die Datenschutzerklärung', and 'Wo bieten Sie das Inserat an? - PLZ & Ort' (a four-digit Austrian postcode and a town); no CAPTCHA; the title and description come at step 4 ('Inhalt'), the preview at step 5. Nutzungsbedingungen: no automation ban; commercial offers only through the operator's own systems (the wizard is one).",
+  "note": "Austrian classifieds network without registration; a five-step wizard (category › e-mail and place › content › preview) that a wizard adapter could walk; it asks a postcode and town where the offer is made, which an online service has no truthful Austrian answer to unless the owner names one (the capital, or skip).",
+  "can_act": "owner's decision (a postcode and town are required at step 3; the wizard needs its own adapter; step 4's fields are read only after step 3 is sent)",
   "basis": "no-prohibition",
   "free_option": "free ads",
   "account": "none seen yet",
   "automation": "not addressed",
   "audience": "general public",
   "country": "AT",
-  "found": "search discovery 2026-10-17 00:40Z (DuckDuckGo from the runner, chunk 10, batch 116); home and posting pages read 00:43Z (batch 118), page bodies 00:46Z (batch 122), rules and forms read 00:50Z (batch 123)"
+  "found": "search discovery 2026-10-17 00:40Z (DuckDuckGo from the runner, chunk 10, batch 116); home and posting pages read 00:43Z (batch 118), page bodies 00:46Z (batch 122), rules and forms read 00:50Z (batch 123); step 3 read 00:57Z (batch 125)"
  },
  {
   "match": "mercatinoannunci.it",
@@ -9970,8 +9970,8 @@
  {
   "match": "rubrikkannonser.no",
   "verdict": "conditional",
-  "quote": "Vilkår og betingelser (2.6k chars): 'Meldings spam fører til utestengning'; no automation or business ban; registration asks e-mail, password and a terms box (no CAPTCHA, no phone) on a HivePress form sent by script to the site's REST API.",
-  "note": "Norwegian free classifieds on HivePress; the registration and the listing submission are script-sent (REST), so an adapter would talk to the API the page's script uses; rules allow.",
+  "quote": "Vilkår og betingelser (2.6k chars): 'Meldings spam fører til utestengning'; no automation or business ban; registration asks e-mail, password and a terms box (no CAPTCHA, no phone) on a HivePress form sent by script to the site's REST API. The registration form posts by script to /wp-json/hivepress/v1/users (e-mail, password, a terms box) and says 'Vennligst sjekk din e-post for å aktivere kontoen din' (an activation mail); /submit-listing/ sends a guest to the login.",
+  "note": "Norwegian free classifieds on HivePress; registration and listing submission go through the plugin's REST API (an activation mail, then the submission steps); rules allow; a HivePress adapter is a separate build.",
   "can_act": "maybe (rules allow; needs a HivePress REST adapter; the submission page is being read)",
   "basis": "no-prohibition",
   "free_option": "free ads",
@@ -9979,7 +9979,7 @@
   "automation": "not addressed",
   "audience": "general public",
   "country": "NO",
-  "found": "search discovery 2026-10-17 00:40Z (DuckDuckGo from the runner, chunk 10, batch 116); home and posting pages read 00:43Z (batch 118), page bodies 00:46Z (batch 122), rules and forms read 00:50Z (batch 123)"
+  "found": "search discovery 2026-10-17 00:40Z (DuckDuckGo from the runner, chunk 10, batch 116); home and posting pages read 00:43Z (batch 118), page bodies 00:46Z (batch 122), rules and forms read 00:50Z (batch 123); submission page read 00:57Z (batch 125)"
  },
  {
   "match": "torg.adressa.no",
@@ -9997,17 +9997,17 @@
  },
  {
   "match": "mypost.com.tw",
-  "verdict": "unverified",
-  "quote": "'myPost 免費廣告網 — 網路廣告免費刊登平台' (free ad posting); /create-listing/ sends a guest to the WordPress login (/login/, fields log and pwd); the about page carries no rules words; the registration page is being read (batch 125).",
-  "note": "Taiwanese free ad platform on WordPress; posting behind a login; registration and rules unread.",
-  "can_act": "maybe (registration page and rules not yet read)",
-  "basis": "unread",
+  "verdict": "skip-closed",
+  "quote": "/register/ and wp-login.php?action=register both land on /login/?registration=disabled: registration is closed; posting (/create-listing/) needs a login.",
+  "note": "Taiwanese free ad platform on WordPress whose registration is closed.",
+  "can_act": "no (registration closed)",
+  "basis": "closed",
   "free_option": "free ads",
   "account": "WordPress login",
   "automation": "not addressed",
   "audience": "general public",
   "country": "TW",
-  "found": "search discovery 2026-10-17 00:40Z (DuckDuckGo from the runner, chunk 10, batch 116); home and posting pages read 00:43Z (batch 118), page bodies 00:46Z (batch 122), rules and forms read 00:50Z (batch 123)"
+  "found": "search discovery 2026-10-17 00:40Z (DuckDuckGo from the runner, chunk 10, batch 116); home and posting pages read 00:43Z (batch 118), page bodies 00:46Z (batch 122), rules and forms read 00:50Z (batch 123); registration read 00:57Z (batch 125)"
  },
  {
   "match": "rewangiklan.my.id",
