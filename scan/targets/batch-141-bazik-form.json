@@ -1,0 +1,20 @@
+[
+ {
+  "id": "r141:bazik:pridat-full",
+  "kind": "json",
+  "url": "https://bazik.cz/pridat",
+  "country": "CZ",
+  "site": "Bazik posting form, whole page (fields, location box, consent, mail step)",
+  "category": "classified-board",
+  "bodyChars": 700000
+ },
+ {
+  "id": "r141:1inzerce:rules1",
+  "kind": "json",
+  "url": "https://www.1inzerce.cz/stranka/pravidla",
+  "country": "CZ",
+  "site": "1inzerce.cz rules page linked as 'Pravidla inzerce'",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
