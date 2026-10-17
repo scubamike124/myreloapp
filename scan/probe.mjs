@@ -31,7 +31,9 @@ export function scrubTokens(line) {
   return s;
 }
 
-const UA = "StudyProofs-region-scan/1.0 (read-only research of public rules; https://hq.amberoneai.com/studyproofs)";
+// "Agent/AmberOne" is the token Amazon's Conditions of Use (Agent Terms, last updated 2026-08-14) require in the user agent of every request
+// made by software acting for a person; it is sent on every request, to every host, because it is true everywhere.
+const UA = "StudyProofs-region-scan/1.0 Agent/AmberOne (read-only research of public rules; https://hq.amberoneai.com/studyproofs)";
 const now = () => new Date().toISOString();
 
 async function get(url, { accept = "application/json, text/html;q=0.9, */*;q=0.5", method = "GET", body, headers = {}, ms = 15000 } = {}) {

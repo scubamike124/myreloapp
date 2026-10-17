@@ -37,7 +37,7 @@ const NOT_SIGNUP = /(login|signin|sign-in|log-in|facebook\.com|twitter\.com|x\.c
 const KEYWORDS = /advertis|promot|spam|commercial|marketing|\bbots?\b|automat|self[- ]?promo|business|werbung|publicit|comercial|pubblicit|reklam|реклам|広告|宣伝|광고|홍보|广告|free|gratis|kostenlos|gratuit|grátis|ücretsiz|безкоштов|無料|무료|免费|phone|telefon|téléphone|teléfono|birth|geburt|naissance|nacimiento|captcha|approval|moderat|review/i;
 
 async function probe(browser, t) {
-  const ctx = await browser.newContext({ userAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36 StudyProofs-region-scan/1.0 (read-only research of public rules)", locale: t.locale || "en-US", viewport: { width: 1280, height: 900 } });
+  const ctx = await browser.newContext({ userAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36 StudyProofs-region-scan/1.0 Agent/AmberOne (read-only research of public rules)", locale: t.locale || "en-US", viewport: { width: 1280, height: 900 } });
   const page = await ctx.newPage();
   const hops = [];
   const result = { reachable: false };
