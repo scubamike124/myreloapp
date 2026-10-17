@@ -1,0 +1,20 @@
+[
+ {
+  "id": "r133:youtube:oembed",
+  "kind": "json",
+  "url": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fshorts%2Fdsbz_AhX74s&format=json",
+  "country": "US",
+  "site": "YouTube oEmbed for the first StudyProofs Short (title, channel name and link; answers only for a public video)",
+  "category": "video",
+  "bodyChars": 20000
+ },
+ {
+  "id": "r133:youtube:short-page",
+  "kind": "json",
+  "url": "https://www.youtube.com/shorts/dsbz_AhX74s",
+  "country": "US",
+  "site": "the Short's public page (title, channel, description; a private video shows an unavailable notice)",
+  "category": "video",
+  "bodyChars": 250000
+ }
+]
