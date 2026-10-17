@@ -1,0 +1,29 @@
+[
+ {
+  "id": "k169:G2BWJN2BY98T5PV2",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G2BWJN2BY98T5PV2",
+  "country": "GLOBAL",
+  "site": "KDP help: Authors & Contributors (pen names, what the contributor field may hold)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k169:G201097560",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G201097560",
+  "country": "GLOBAL",
+  "site": "KDP help: Metadata guidelines for books (title, contributor and keyword rules)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k169:G200634350",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G200634350",
+  "country": "GLOBAL",
+  "site": "KDP help: Manage your KDP account (account name vs pen name)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ }
+]
