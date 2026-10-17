@@ -1,0 +1,326 @@
+[
+ {
+  "id": "r129:doplim-mx:conditions",
+  "kind": "json",
+  "url": "https://www.doplim.com.mx/conditions-use.html",
+  "country": "MX",
+  "site": "doplim.com.mx Condiciones de Uso",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:doplim-pt:post",
+  "kind": "json",
+  "url": "https://www.doplim.pt/post-ad.html",
+  "country": "PT",
+  "site": "doplim.pt posting form without registration, as served",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:doplim-pt:conditions",
+  "kind": "json",
+  "url": "https://www.doplim.pt/conditions-use.html",
+  "country": "PT",
+  "site": "doplim.pt Condições de Uso",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:sitioanuncios:rules",
+  "kind": "json",
+  "url": "https://www.sitioanuncios.com/peru/condiciones-de-publicacion.html",
+  "country": "PE",
+  "site": "sitioanuncios.com Condiciones de Publicación",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:oyeanuncios:rules",
+  "kind": "json",
+  "url": "https://oyeanuncios.com/page/oyeanuncios-reglas-para-publicar",
+  "country": "MX",
+  "site": "oyeanuncios.com Reglas para Publicar",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:oyeanuncios:terms",
+  "kind": "json",
+  "url": "https://oyeanuncios.com/page/oyeanuncios-terminos-y-condiciones",
+  "country": "MX",
+  "site": "oyeanuncios.com Términos y Condiciones",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:anunciomx:terms",
+  "kind": "json",
+  "url": "https://www.anunciomx.com/pagina/condiciones-de-uso-y-privacidad",
+  "country": "MX",
+  "site": "anunciomx.com Condiciones de Uso",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:emponda:faq",
+  "kind": "json",
+  "url": "https://emponda.com/FAQ.html",
+  "country": "AR",
+  "site": "emponda.com FAQ",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:tusavisos:terms",
+  "kind": "json",
+  "url": "http://www.tusavisos.com/ayuda/ayuda_detalle.php?faq=21",
+  "country": "AR",
+  "site": "tusavisos.com Términos de Uso",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:aynify:legal",
+  "kind": "json",
+  "url": "https://aynify.pe/legal.html",
+  "country": "PE",
+  "site": "aynify.pe Términos de uso",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:expoanuncios:legal",
+  "kind": "json",
+  "url": "https://expoanuncios.es/aviso-legal/",
+  "country": "ES",
+  "site": "expoanuncios.es Aviso Legal",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:annonsera:post",
+  "kind": "json",
+  "url": "https://annonsera.se/user/sign-in",
+  "country": "SE",
+  "site": "annonsera.se posting page: Ny Annons",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:emponda:p0",
+  "kind": "json",
+  "url": "https://emponda.com/item/add",
+  "country": "AR",
+  "site": "emponda.com page: Añadir un anuncio",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:emponda:p1",
+  "kind": "json",
+  "url": "https://emponda.com/item/add",
+  "country": "AR",
+  "site": "emponda.com page: Publicar un anuncio privado",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:anunciomx:p0",
+  "kind": "json",
+  "url": "https://www.anunciomx.com/login?loc=new_listing.php",
+  "country": "MX",
+  "site": "anunciomx.com page: ¡Publicar Anuncio!",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:anunciomx:p1",
+  "kind": "json",
+  "url": "https://www.anunciomx.com/register",
+  "country": "MX",
+  "site": "anunciomx.com page: Registrarse",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:oyeanuncios:reg",
+  "kind": "json",
+  "url": "https://oyeanuncios.com/signup",
+  "country": "MX",
+  "site": "oyeanuncios.com page: Registro",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:sitioanuncios:p0",
+  "kind": "json",
+  "url": "https://www.sitioanuncios.com/peru/publicar-anuncio.html",
+  "country": "PE",
+  "site": "sitioanuncios.com page: Publicar un Anuncio Gratis",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:sitioanuncios:p1",
+  "kind": "json",
+  "url": "https://www.sitioanuncios.com/peru/publicar-anuncio.html",
+  "country": "PE",
+  "site": "sitioanuncios.com page: Publicar Anuncio",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-0",
+  "kind": "json",
+  "url": "https://www.bonsanuncios.pt/publicar-um-anuncio.html",
+  "country": "PT",
+  "site": "bonsanuncios.pt posting page as served",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-1",
+  "kind": "json",
+  "url": "https://www.bonsanuncios.pt/",
+  "country": "PT",
+  "site": "bonsanuncios.pt home (rules links)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-2",
+  "kind": "json",
+  "url": "https://www.custojusto.pt/ai",
+  "country": "PT",
+  "site": "custojusto.pt Inserir Anúncio page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-3",
+  "kind": "json",
+  "url": "https://www.custojusto.pt/",
+  "country": "PT",
+  "site": "custojusto.pt home (rules links)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-4",
+  "kind": "json",
+  "url": "https://www.studenteninserate.de/",
+  "country": "DE",
+  "site": "studenteninserate.de home (registration link, rules links)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-5",
+  "kind": "json",
+  "url": "https://www.lokale-kleinanzeigen.de/kostenlos-inserieren.html",
+  "country": "DE",
+  "site": "lokale-kleinanzeigen.de posting form without registration as served",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-6",
+  "kind": "json",
+  "url": "https://www.lokale-kleinanzeigen.de/",
+  "country": "DE",
+  "site": "lokale-kleinanzeigen.de home (rules links)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-7",
+  "kind": "json",
+  "url": "https://www.bestofannonces.com/",
+  "country": "FR",
+  "site": "bestofannonces.com home (posting and rules links)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-8",
+  "kind": "json",
+  "url": "https://www.1001annonces.net/fr/",
+  "country": "FR",
+  "site": "1001annonces.net home (posting and rules links)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-9",
+  "kind": "json",
+  "url": "https://www.tesannonces.com/",
+  "country": "FR",
+  "site": "tesannonces.com home",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-10",
+  "kind": "json",
+  "url": "https://www.annonces.net/fr/",
+  "country": "FR",
+  "site": "annonces.net home",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-11",
+  "kind": "json",
+  "url": "https://oho4sale.com/",
+  "country": "TH",
+  "site": "oho4sale.com home (posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-12",
+  "kind": "json",
+  "url": "https://smeleader.com/submit.php",
+  "country": "TH",
+  "site": "smeleader.com submit page (types)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-13",
+  "kind": "json",
+  "url": "https://ie.classi4u.com/",
+  "country": "IE",
+  "site": "classi4u Ireland home",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:c12-14",
+  "kind": "json",
+  "url": "https://cheerads.com/",
+  "country": "IE",
+  "site": "cheerads.com home (registration link, rules)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r129:studenteninserate-de:register",
+  "kind": "signup",
+  "url": "https://www.studenteninserate.de/register/",
+  "country": "DE",
+  "site": "studenteninserate.de registration markers",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r129:studenteninserate-de:terms",
+  "kind": "json",
+  "url": "https://www.studenteninserate.de/terms",
+  "country": "DE",
+  "site": "studenteninserate.de Nutzungsbedingungen",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
