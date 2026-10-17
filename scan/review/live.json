@@ -43,5 +43,23 @@
     "url": "https://myproduct.co.il/reshut-harabim/item.php?id=8062",
     "verified": "read back without a login by a GitHub runner at 12:14:39Z (HTTP 200; the page's title \"The free plan, stated plainly\"; final address /reshut-harabim/ad/8062-The-free-plan-stated-plainly); the lane's ledger row reads live; batch 162; a 12-hour listing, gone about 00:10Z 2026-10-18",
     "region": "Middle East & North Africa, IL"
+  },
+  {
+    "when": "2026-10-17 18:09:58Z",
+    "platform": "Mastodon (101010.pl)",
+    "account": "StudyProofs (@studyproofs, bot-flagged, AI disclosure in the bio)",
+    "post": "stays-after-cancel: \"Cancel and what you made stays in your library. Cancelling is in Stripe's portal, not a support ticket.\"",
+    "url": "https://101010.pl/@studyproofs/117457590558570679",
+    "verified": "read back publicly by a GitHub runner at 19:38:23Z (visibility public, language en, account bot true; the status page answers HTTP 200); batch 173",
+    "region": "Central & Eastern Europe (Poland), fediverse-wide"
+  },
+  {
+    "when": "2026-10-17 19:04:35Z",
+    "platform": "PeerTube (stream.indieagora.com)",
+    "account": "StudyProofs (studyproofs, channel studyproofs_demos)",
+    "post": "notes-with-sources: \"Hypothesis testing: study notes with where each came from\"",
+    "url": "https://stream.indieagora.com/videos/watch/47019fc4-c6bf-4632-b49b-ede0fc179d95",
+    "verified": "read back publicly by a GitHub runner at 19:38:23Z (API: privacy Public, state Published, publishedAt 19:04:35.983Z, 36 s; the watch page answers HTTP 200); batch 173",
+    "region": "Fediverse (video), global"
   }
 ]
