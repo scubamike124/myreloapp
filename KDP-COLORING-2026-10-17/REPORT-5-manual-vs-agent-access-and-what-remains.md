@@ -97,3 +97,8 @@ Earliest realistic date for item 7: after Amazon's reply plus about a day of wor
 - My earlier research made 94 read-only requests to Amazon hosts without the Agent token (disclosed in Report 3); the saved lists in this public repository are a compilation of Amazon listing data, and the Conditions of Use license excludes "collection and use of any product listings, descriptions, or prices"
   and "robots, or similar data gathering and extraction tools". I have made no further Amazon reads and will not. I recommend removing the raw list files (`amazon-lists-2026-10-17.json`, `amazon-products-2026-10-17.json`) from this public repository in a normal commit (the history keeps them) and keeping only my aggregated findings. I have not done it; say the word.
 - No second KDP account, no spend, nothing published.
+
+## 7. Update 2026-10-17 15:35Z: amberai #876 is merged
+
+All three checks (qa-engine, test, assist) were green on the head commit at 15:34Z, and the pull request merged as commit `52d12cae`. What is now on main: the disclosed remote browser (refuses Amazon, private addresses and unlisted ports unless you commit the authorization file), its 23-check self-test, a workflow that runs the self-test only, the generated iPhone copy sheet, and the draft script's gate. Nothing in it contacts Amazon. Table row 4 of section 5 (move the browser to a permitted host and re-run the self-test there) is unchanged.
+
