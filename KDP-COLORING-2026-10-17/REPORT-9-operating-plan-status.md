@@ -6,7 +6,7 @@ Tags: **[T]** tested or demonstrated, with the evidence named; **[E]** exists in
 ## Bottom line
 
 1. **The KDP connection is not finished.** Your own sign-in works (Safari). Amber acting needs your decision on Amazon (ask first, or record your own decision) and the laptop; the corrected scripts are merged (#877, 16:41Z) and a read-only connection check is merged too (#879, 16:55Z). Report 8 has the evidence on the earlier upload: two laptop scripts, no record of a run, not autonomous.
-2. **The e-books are fewer than 100 and are PDFs, not EPUBs.** Production reads 36 ready for sale; the code's own note says "Blueprint cited 92"; the full count is being read by pull request #878 (section 1).
+2. **The store holds 56 e-books, not about 100, and they are PDFs, not EPUBs.** 36 are finished and live on your storefront. 20 were started on 11 September and never finished (section 1).
 3. **Coloring books: one full pipeline works [T]**, but its art is code-drawn icon style and the upload step has never run on KDP's real pages.
 4. **YouTube: uploading works [T]** (one Short a day, a library of 40 recorded Shorts all public), but only for StudyProofs, at one a day.
 5. **Continuous Amazon market research cannot be built the way the plan describes.** Amazon's Conditions of Use exclude data-mining and robots, so a daily bestseller scraper would break them. Permitted substitutes are in section 5.
@@ -17,11 +17,12 @@ Tags: **[T]** tested or demonstrated, with the evidence named; **[E]** exists in
 | Question | Evidence | Tag |
 |---|---|---|
 | How many are ready for sale? | **36**, from the production worker's beacon, `ebookRevenue.ready` (tracker #105, comment 5737077514, rewritten 2026-10-17 16:08Z). The October 12 audit read the same 36. | [T] |
-| Is the total larger? | The factory's own dashboard note reads "Blueprint cited 92 books. Live factory inventory is N titles (M ready for sale)". N is not visible from here: the books live on amber-hq-web's volume. **amberai #878 (merged 16:54:15Z as `bca55082`) publishes N and every book as one #105 comment once production has deployed it** (title, category, stage, sale status, short and long word counts, PDFs, cover, premium and technical QA, KDP record), plus the names of any Amazon or KDP credential. | [E] until #878 is merged and read |
+| Is the total larger? | **56 in the store**, from the report amberai #878 published on the tracker at 18:13Z (comment 6238364871): 36 ready for sale and 20 held back. The 20 are unfinished: 13 at spec (no text yet), 3 writing, 2 rewriting, 1 in technical QA, 1 in product QA, all started 2026-09-11, none with a cover; four have PDFs but failed premium QA (scores 0 to 20). The 36 finished books were all made 20 to 25 August, all have covers, and pass the factory's own premium QA (60 to 100) and technical QA. | [T] |
 | Where are they stored? | `.data/ebook-factory/` on amber-hq-web's persistent volume (`books.json`, `manuscripts/`, `pdfs/`, `covers/`). **Not in git, not on your laptop, not on the worker.** The `data/ebook-factory/books.json` in the repository is five test books made on 2026-10-10. | [T] code; [?] volume contents |
 | Format? | **PDF only**, a short and a long edition per book (`fileFormat: "pdf"`). No EPUB exists in either repository (the one EPUB I know of, for the Los Angeles guide, is on your laptop). | [T] code |
+| Any Amazon or KDP credential in Amber's vault? | **None.** The #878 report read the names of all configured vault entries and site logins at 18:13Z and found none that mentions Amazon, KDP or Kindle (names only; no value was read). | [T] |
 | Why do you remember about 100? | The code cites a "blueprint" of 92 books and says "Amber will not invent missing books". The factory's kill switch is on today and its latest tick researched and advanced nothing (beacon, 16:08Z); the October 12 audit places its activity before 11 September. | [T] |
-| Published anywhere? | The beacon's `assetsPublished: 0` counts traffic assets, not books. Whether your own storefront is live is part of #878's report. None is on KDP: the factory marks KDP as `needs_owner_submission` and its directory says KDP has no listing API. | [T] code; [?] storefront |
+| Published anywhere? | **Your own storefront is live and lists the 36** (public catalog read from a runner at 17:44Z; the catalog is not locked). **None is on KDP**: the factory's KDP record reads `needs_owner_submission` for 33 books and none is listed, and its directory says KDP has no listing API. Whether your store's checkout takes real payments is not verified. The beacon's `assetsPublished: 0` counts traffic assets, not books. | [T] |
 
 ## 2. What it takes to make them Kindle-ready
 
