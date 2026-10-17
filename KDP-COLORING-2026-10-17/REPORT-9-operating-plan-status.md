@@ -46,7 +46,7 @@ Tags: **[T]** tested or demonstrated, with the evidence named; **[E]** exists in
 
 | Capability | Evidence | Tag |
 |---|---|---|
-| Builder: interior PDF, full-wrap cover PDF, listing metadata, QA report, copy sheet for the iPhone | Book 1 (8.5 × 11 in, 104 pages, 37 motif families). Builds in 2 seconds; all QA checks pass; **byte-identical** on this machine and on a GitHub runner (runs 39038455158 and 39042986067; hashes in Reports 2 and 4) | [T] |
+| Builder: interior PDF, full-wrap cover PDF, listing metadata, QA report, copy sheet for the iPhone | Book 1 (8.5 × 11 in, 104 pages, 37 motif families). Builds in 2 seconds; all QA checks pass; **byte-identical** on this machine and on a GitHub runner (the runner of main, run 39042986067; hashes in Report 4) | [T] |
 | Cloud build, laptop off | `kdp-coloring-build.yml`, 46 to 47 seconds, about one billed minute | [T] |
 | KDP math | Trim, spine, bleed, printing cost and royalty ($9.99 gives $3.15 at 60 percent) | [T] against KDP's published tables |
 | AI-disclosure answers | Images Yes, text Yes, translations No for code-drawn art written by an AI | [T] reasoning; [?] Amazon's view |
@@ -63,7 +63,7 @@ Tags: **[T]** tested or demonstrated, with the evidence named; **[E]** exists in
 | A record of earlier Shorts | 40 Shorts recorded as published, all 40 answered as public or unlisted at 15:54Z today (YouTube's oEmbed, no login) | [T] |
 | Schedule | One upload a day at 22:00 UTC, at most 7 in 7 days, nothing repeated within 30 days, inside the worker's recurring tick. **The second automatic upload is due tonight at 22:00Z and is not yet verified.** | [T] design; [?] repeat |
 | Cloud video rendering | `sp-video-render.yml`, Remotion on a GitHub runner, 30-minute limit, file kept as an artifact | [T] one render |
-| Channels with a stored login | AmberOne, Amber API Marketplace, Amber E-Book Factory connected; Launch Ready expired | [T] 11 October read |
+| Channels with a stored login | AmberOne, Amber API Marketplace, Amber E-Book Factory connected; Launch Ready expired | [T] the worker's social report, refreshed 15:55Z |
 | Public posting approval | Your approval of 2026-10-14 covers the StudyProofs lane only. For coloring books your message asks for Shorts "once we have published books"; each public upload needs that gate kept | [T] |
 | Limits | YouTube's default API quota is 10,000 units a day; whether one upload costs 1,600 or about 100 units is disputed by sources, and three a day fits either way. Remotion is free for individuals and for-profit companies of up to three employees | [?] cost per upload |
 
