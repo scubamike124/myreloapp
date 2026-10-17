@@ -1,0 +1,20 @@
+[
+ {
+  "id": "hq175:ebook-revenue-catalog",
+  "kind": "json",
+  "url": "https://hq.amberoneai.com/api/ebook-revenue/catalog",
+  "country": "GLOBAL",
+  "site": "Amber HQ public e-book catalog, whole response (the owner's own site, public, no credential)",
+  "category": "own-site-check",
+  "bodyChars": 400000
+ },
+ {
+  "id": "hq175:ebook-factory-catalog",
+  "kind": "json",
+  "url": "https://hq.amberoneai.com/api/ebook-factory/catalog",
+  "country": "GLOBAL",
+  "site": "Amber HQ older public e-book catalog, whole response (public, no credential)",
+  "category": "own-site-check",
+  "bodyChars": 400000
+ }
+]
