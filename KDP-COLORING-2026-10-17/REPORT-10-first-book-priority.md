@@ -32,8 +32,8 @@ I found no record that an upload happened. Two laptop scripts were written for i
 ## What was built (amberai pull requests #880, #881, #882)
 
 - **#880, merged:** the book package, process notes and a draft script that fills KDP's own fields, uploads both PDFs, saves with Save as Draft, and then reloads your Bookshelf to say whether the title is on it; a helper where you record your own decision at a terminal.
-- **#881, in CI:** an independent check of the interior found one page (the spiral, page 23) 0.10 in from the page edge, against KDP's 0.25 in minimum. It is fixed, the QA now measures the margins of every page, and the book is rebuilt. The cover is byte-identical.
-- **#882, in CI:** the approved publication. It reads back what KDP stores, compares every field with the package, asks you at a terminal, presses Publish once, and reads the Bookshelf again. The connection check can also open a Live title's product page once and say whether it can be bought.
+- **#881, merged:** an independent check of the interior found one page (the spiral, page 23) 0.10 in from the page edge, against KDP's 0.25 in minimum. It is fixed, the QA now measures the margins of every page, and the book is rebuilt. The cover is byte-identical and the interior is new: its checksum and size in the earlier reports (Report 4) are the old build's, and `kdp/books/bold-patterns-01/SHA256SUMS` is the current one.
+- **#882, merged:** the approved publication. It reads back what KDP stores, compares every field with the package, asks you at a terminal, presses Publish once, and reads the Bookshelf again. The connection check can also open a Live title's product page once and say whether it can be bought.
 - All tested against a local copy of KDP: it never publishes without your typed word, never duplicates a title, and stops at any puzzle, block or sign-out. **Not tested: Amazon's real pages.** The first run is the real test, and the scripts save a values-free digest of each KDP form so a wrong field can be fixed in one round.
 
 ## What I need from you
