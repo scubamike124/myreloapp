@@ -1,0 +1,56 @@
+[
+ {
+  "id": "gh110:lux-issue",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Spectral-Finance/lux/issues/102",
+  "country": "GLOBAL",
+  "site": "Spectral-Finance/lux #102 ($350 Rust testing framework)",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh110:lux-comments",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Spectral-Finance/lux/issues/102/comments?per_page=50",
+  "country": "GLOBAL",
+  "site": "lux #102 comments (claims, payout)",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh110:lux-repo",
+  "kind": "json",
+  "url": "https://api.github.com/repos/Spectral-Finance/lux",
+  "country": "GLOBAL",
+  "site": "lux repo",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh110:lux-contrib",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/Spectral-Finance/lux/HEAD/CONTRIBUTING.md",
+  "country": "GLOBAL",
+  "site": "lux CONTRIBUTING",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh110:lux-bounties",
+  "kind": "json",
+  "url": "https://api.github.com/search/issues?q=repo:Spectral-Finance/lux%20label:bounty&sort=updated&order=desc&per_page=30",
+  "country": "GLOBAL",
+  "site": "lux bounty issues (paid history?)",
+  "category": "paid-task",
+  "bodyChars": 120000
+ },
+ {
+  "id": "gh110:lux-readme",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/Spectral-Finance/lux/HEAD/README.md",
+  "country": "GLOBAL",
+  "site": "lux README",
+  "category": "paid-task",
+  "bodyChars": 120000
+ }
+]
