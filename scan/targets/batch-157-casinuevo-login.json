@@ -1,0 +1,20 @@
+[
+ {
+  "id": "r157:casinuevo:login",
+  "kind": "html",
+  "url": "https://colombia.casinuevo.com/login",
+  "country": "CO",
+  "site": "Casinuevo Colombia login page (the registrar reads a CAPTCHA marker on it)",
+  "category": "classifieds",
+  "bodyChars": 120000
+ },
+ {
+  "id": "r157:casinuevo:login-slash",
+  "kind": "html",
+  "url": "https://colombia.casinuevo.com/login/",
+  "country": "CO",
+  "site": "Casinuevo Colombia login page with a slash",
+  "category": "classifieds",
+  "bodyChars": 120000
+ }
+]
