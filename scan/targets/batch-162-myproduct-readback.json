@@ -1,0 +1,20 @@
+[
+ {
+  "id": "v162:myproduct:item-8062",
+  "kind": "html",
+  "url": "https://myproduct.co.il/reshut-harabim/item.php?id=8062",
+  "country": "IL",
+  "site": "myproduct.co.il listing 8062 (the lane's first 12-hour listing after the resume; public read-back)",
+  "category": "diagnostic",
+  "bodyChars": 60000
+ },
+ {
+  "id": "v162:myproduct:whats-new",
+  "kind": "html",
+  "url": "https://myproduct.co.il/reshut-harabim/whats-new.php",
+  "country": "IL",
+  "site": "myproduct.co.il what-is-new page (does it list the StudyProofs listing?)",
+  "category": "diagnostic",
+  "bodyChars": 60000
+ }
+]
