@@ -8,9 +8,10 @@ Everything below is in this repository with its evidence; nothing was spent, no 
 |---|---|---|---|---|
 | 2026-10-15 23:47:13 | PeerTube (stream.indieagora.com) | StudyProofs (studyproofs, channel studyproofs_demos) | quiz-graded: "Cellular respiration: a 4-question quiz, graded with the reasons" | https://stream.indieagora.com/videos/watch/d552d5a1-e998-4c88-9153-838b4d6798ce |
 | 2026-10-16 07:19:40 | Mastodon (101010.pl) | StudyProofs (@studyproofs, bot-flagged, bio with the AI disc | notes-with-sources: "From STAT 200 sample notes: 6 note sections, each with its source lin | https://101010.pl/@studyproofs/117449371188624497 |
+| 2026-10-16 20:00:36 | PeerTube (stream.indieagora.com) | StudyProofs (studyproofs, channel studyproofs_demos) | bio-notes-with-sources: "Cellular respiration: study notes with where each came from" | https://stream.indieagora.com/videos/watch/a8991332-c648-4aea-8865-17fc45df0825 |
 | 2026-10-17 01:17 | YouTube Shorts | AmberOne (https://www.youtube.com/@AmberOne-i2t) | bio-sample: "Cellular respiration: notes in, flashcards and a quiz out" | https://www.youtube.com/shorts/dsbz_AhX74s |
 
-Four public posts in all (3 rows in LAUNCH-LEDGER.md), each read back by a GitHub runner. New since the last report: the first YouTube Short (01:17Z, channel AmberOne, verified by the runner's oEmbed read). The YouTube slot is daily at 22:00Z (the next upload is the lane's own; the 22:45Z check-in verifies it); PeerTube and Mastodon keep one post a day at 19:00Z and 18:00Z.
+Four public posts in all (4 rows in LAUNCH-LEDGER.md), each read back by a GitHub runner. New since the last report: the first YouTube Short (01:17Z, channel AmberOne, verified by the runner's oEmbed read). The YouTube slot is daily at 22:00Z (the next upload is the lane's own; the 22:45Z check-in verifies it); PeerTube and Mastodon keep one post a day at 19:00Z and 18:00Z.
 
 ## What changed overnight
 
@@ -59,6 +60,6 @@ Skipped, by reason (sites): approval 2452, closed 908, captcha 514, fit 141, pho
 3. **myproduct.co.il**: stays stopped until `studyproofs-promo: resume` on #105.
 4. **Kowika.nl**: drop it, or say if another mailbox should receive its mail; nothing more is sent on its own.
 5. **Paid work behind a payout identity**: Algora and Opire bounties need a Stripe account in your name; the hold stands until you say otherwise.
-6. **Next registrar board**: aggelioforos.gr (Greece, a Listivo board: username, e-mail, password, no CAPTCHA marker, terms without a ban) — its ad form sits inside the member panel, so the place field is read after a registration under your existing authorization; it is held like AnunțGratuit if the field demands a locality. I proceed unless you say no.
+6. **Next registrar board**: none is ready. aggelioforos.gr (Greece) looked like one (username, e-mail, password, no CAPTCHA marker, terms without a ban), but its login, registration and posting forms are Listivo's script-driven forms (no form action, inputs without names, a nonce posted to admin-ajax), which the generic registrar cannot fill; it is deferred with the other script-only boards (quafra.com, the Classicads boards) until a dedicated adapter is worth building. Nothing is registered there.
 
 Evidence and times for everything above: `SPRINT-TEN-OFFERS-2026-10-10/HANDOFF.md` (addenda 02:55Z–07:15Z), `PAID-TASKS-2026-10-16/VERIFICATION.md` §7, `STUDYPROOFS-EXPERIMENT-2026-10-11/LAUNCH-LEDGER.md`, tracker comment 6113510213 on amberai #105.
