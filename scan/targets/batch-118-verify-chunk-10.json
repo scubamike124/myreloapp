@@ -1,0 +1,398 @@
+[
+ {
+  "id": "ver118:addelma.hu:home",
+  "kind": "signup",
+  "url": "https://addelma.hu/",
+  "country": "HU",
+  "site": "addelma.hu home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:addelma.hu:found",
+  "kind": "signup",
+  "url": "https://addelma.hu/hirdetesfeladas",
+  "country": "HU",
+  "site": "addelma.hu page the search found (posting or registration)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:aprohirdetesingyen.hu:home",
+  "kind": "signup",
+  "url": "https://aprohirdetesingyen.hu/",
+  "country": "HU",
+  "site": "aprohirdetesingyen.hu home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:startapro.hu:home",
+  "kind": "signup",
+  "url": "https://startapro.hu/",
+  "country": "HU",
+  "site": "startapro.hu home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:aprohirdetese.hu:home",
+  "kind": "signup",
+  "url": "https://aprohirdetese.hu/",
+  "country": "HU",
+  "site": "aprohirdetese.hu home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:maxapro.hu:home",
+  "kind": "signup",
+  "url": "https://maxapro.hu/",
+  "country": "HU",
+  "site": "maxapro.hu home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:armagnes.com:home",
+  "kind": "signup",
+  "url": "https://armagnes.com/",
+  "country": "HU",
+  "site": "armagnes.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:armagnes.com:found",
+  "kind": "signup",
+  "url": "https://www.armagnes.com/hirdetesFeladas/",
+  "country": "HU",
+  "site": "armagnes.com page the search found (posting or registration)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:nextapro.hu:home",
+  "kind": "signup",
+  "url": "https://nextapro.hu/",
+  "country": "HU",
+  "site": "nextapro.hu home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:eladhatatlan.hu:home",
+  "kind": "signup",
+  "url": "https://eladhatatlan.hu/",
+  "country": "HU",
+  "site": "eladhatatlan.hu home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:mypost.com.tw:home",
+  "kind": "signup",
+  "url": "https://mypost.com.tw/",
+  "country": "TW",
+  "site": "mypost.com.tw home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:etaiwan.asia:home",
+  "kind": "signup",
+  "url": "https://etaiwan.asia/",
+  "country": "TW",
+  "site": "etaiwan.asia home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:etaiwan.com.tw:home",
+  "kind": "signup",
+  "url": "https://etaiwan.com.tw/",
+  "country": "TW",
+  "site": "etaiwan.com.tw home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:etaiwan.com.tw:found",
+  "kind": "signup",
+  "url": "https://www.etaiwan.com.tw/21766",
+  "country": "TW",
+  "site": "etaiwan.com.tw page the search found (posting or registration)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:kleinanzeigen.at:home",
+  "kind": "signup",
+  "url": "https://kleinanzeigen.at/",
+  "country": "AT",
+  "site": "kleinanzeigen.at home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:studenteninserate.at:home",
+  "kind": "signup",
+  "url": "https://studenteninserate.at/",
+  "country": "AT",
+  "site": "studenteninserate.at home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:kleinanzeigen.co.at:home",
+  "kind": "signup",
+  "url": "https://kleinanzeigen.co.at/",
+  "country": "AT",
+  "site": "kleinanzeigen.co.at home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:dealplatz.at:home",
+  "kind": "signup",
+  "url": "https://dealplatz.at/",
+  "country": "AT",
+  "site": "dealplatz.at home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:flohmarkt.at:home",
+  "kind": "signup",
+  "url": "https://flohmarkt.at/",
+  "country": "AT",
+  "site": "flohmarkt.at home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:flohmarkt.at:found",
+  "kind": "signup",
+  "url": "https://www.flohmarkt.at/inserieren.php",
+  "country": "AT",
+  "site": "flohmarkt.at page the search found (posting or registration)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:inserate.net:home",
+  "kind": "signup",
+  "url": "https://inserate.net/",
+  "country": "AT",
+  "site": "inserate.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:inserate.net:found",
+  "kind": "signup",
+  "url": "https://www.inserate.net/inserat-ohne-anmeldung/",
+  "country": "AT",
+  "site": "inserate.net page the search found (posting or registration)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:meininserat.at:home",
+  "kind": "signup",
+  "url": "https://meininserat.at/",
+  "country": "AT",
+  "site": "meininserat.at home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:rubrikkannonser.no:home",
+  "kind": "signup",
+  "url": "https://rubrikkannonser.no/",
+  "country": "NO",
+  "site": "rubrikkannonser.no home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:tass.no:home",
+  "kind": "signup",
+  "url": "https://tass.no/",
+  "country": "NO",
+  "site": "tass.no home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:leggut.no:home",
+  "kind": "signup",
+  "url": "https://leggut.no/",
+  "country": "NO",
+  "site": "leggut.no home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:leggut.no:found",
+  "kind": "signup",
+  "url": "https://www.leggut.no/annonseportal",
+  "country": "NO",
+  "site": "leggut.no page the search found (posting or registration)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:bytto.no:home",
+  "kind": "signup",
+  "url": "https://bytto.no/",
+  "country": "NO",
+  "site": "bytto.no home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:bytto.no:found",
+  "kind": "signup",
+  "url": "https://bytto.no/gratis-annonser-norge",
+  "country": "NO",
+  "site": "bytto.no page the search found (posting or registration)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:vidaro.no:home",
+  "kind": "signup",
+  "url": "https://vidaro.no/",
+  "country": "NO",
+  "site": "vidaro.no home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:torg.adressa.no:home",
+  "kind": "signup",
+  "url": "https://torg.adressa.no/",
+  "country": "NO",
+  "site": "torg.adressa.no home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:gratisannonse.com:home",
+  "kind": "signup",
+  "url": "https://gratisannonse.com/",
+  "country": "NO",
+  "site": "gratisannonse.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:gratisannonse.com:found",
+  "kind": "signup",
+  "url": "https://gratisannonse.com/listings/",
+  "country": "NO",
+  "site": "gratisannonse.com page the search found (posting or registration)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:rumahiklan.com:home",
+  "kind": "signup",
+  "url": "https://rumahiklan.com/",
+  "country": "ID",
+  "site": "rumahiklan.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:rewangiklan.my.id:home",
+  "kind": "signup",
+  "url": "https://rewangiklan.my.id/",
+  "country": "ID",
+  "site": "rewangiklan.my.id home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:rewangiklan.my.id:found",
+  "kind": "signup",
+  "url": "https://rewangiklan.my.id/pasang.html",
+  "country": "ID",
+  "site": "rewangiklan.my.id page the search found (posting or registration)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:iklanlaris.web.id:home",
+  "kind": "signup",
+  "url": "https://iklanlaris.web.id/",
+  "country": "ID",
+  "site": "iklanlaris.web.id home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:gratis.it:home",
+  "kind": "signup",
+  "url": "https://gratis.it/",
+  "country": "IT",
+  "site": "gratis.it home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:mercatinoannunci.it:home",
+  "kind": "signup",
+  "url": "https://mercatinoannunci.it/",
+  "country": "IT",
+  "site": "mercatinoannunci.it home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:mercatinoannunci.it:found",
+  "kind": "signup",
+  "url": "https://www.mercatinoannunci.it/inserisci.jsp?guest=s",
+  "country": "IT",
+  "site": "mercatinoannunci.it page the search found (posting or registration)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:adboom.it:home",
+  "kind": "signup",
+  "url": "https://adboom.it/",
+  "country": "IT",
+  "site": "adboom.it home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:adboom.it:found",
+  "kind": "signup",
+  "url": "https://www.adboom.it/it/inserisci-annuncio.html",
+  "country": "IT",
+  "site": "adboom.it page the search found (posting or registration)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:subito.it:home",
+  "kind": "signup",
+  "url": "https://subito.it/",
+  "country": "IT",
+  "site": "subito.it home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver118:subito.it:found",
+  "kind": "signup",
+  "url": "https://www.subito.it/vendere/",
+  "country": "IT",
+  "site": "subito.it page the search found (posting or registration)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]
