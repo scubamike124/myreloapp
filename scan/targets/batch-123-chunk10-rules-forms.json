@@ -1,0 +1,254 @@
+[
+ {
+  "id": "r123:flohmarkt:rules",
+  "kind": "json",
+  "url": "https://www.flohmarkt.at/nutzungsbedingungen.php",
+  "country": "AT",
+  "site": "flohmarkt.at Nutzungsbedingungen",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:flohmarkt:post0",
+  "kind": "json",
+  "url": "https://www.flohmarkt.at/baudienstleistungen/index.php?aktion=neu",
+  "country": "AT",
+  "site": "flohmarkt.at posting form without registration: Baudienstleistungen",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:flohmarkt:post1",
+  "kind": "json",
+  "url": "https://www.flohmarkt.at/pc/index.php?aktion=neu",
+  "country": "AT",
+  "site": "flohmarkt.at posting form without registration: Computer",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:flohmarkt:post2",
+  "kind": "json",
+  "url": "https://www.flohmarkt.at/tablet/index.php?aktion=neu",
+  "country": "AT",
+  "site": "flohmarkt.at posting form without registration: Tablet-Computer",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:flohmarkt:post0-markers",
+  "kind": "signup",
+  "url": "https://www.flohmarkt.at/baudienstleistungen/index.php?aktion=neu",
+  "country": "AT",
+  "site": "flohmarkt.at posting form markers: Baudienstleistungen",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r123:flohmarkt:post1-markers",
+  "kind": "signup",
+  "url": "https://www.flohmarkt.at/pc/index.php?aktion=neu",
+  "country": "AT",
+  "site": "flohmarkt.at posting form markers: Computer",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r123:inserate:rules",
+  "kind": "json",
+  "url": "https://www.inserate.net/nutzungsbedingungen/",
+  "country": "AT",
+  "site": "inserate.net Nutzungsbedingungen",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:inserate:agb",
+  "kind": "json",
+  "url": "https://www.inserate.net/agb/",
+  "country": "AT",
+  "site": "inserate.net AGB",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:inserate:step-dienst",
+  "kind": "json",
+  "url": "https://www.inserate.net/inserat-ohne-anmeldung/eintragen.html?kat=6x44x29x9",
+  "country": "AT",
+  "site": "inserate.net step after choosing Dienstleistungen (sub-categories or the form)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:inserate:step-schule",
+  "kind": "json",
+  "url": "https://www.inserate.net/inserat-ohne-anmeldung/eintragen.html?kat=6x44x27x9",
+  "country": "AT",
+  "site": "inserate.net step after choosing Büro, Schreibwaren und Schule",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:mercatino:rules",
+  "kind": "json",
+  "url": "https://www.mercatinoannunci.it/faqRegolamentoFrame.jsp",
+  "country": "IT",
+  "site": "mercatinoannunci.it FAQ e regolamento",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:mercatino:step1-markers",
+  "kind": "signup",
+  "url": "https://www.mercatinoannunci.it/inserisci.jsp?guest=s",
+  "country": "IT",
+  "site": "mercatinoannunci.it guest posting step 1 markers",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r123:eladhatatlan:rules",
+  "kind": "json",
+  "url": "https://eladhatatlan.hu/szabalyzat/",
+  "country": "HU",
+  "site": "eladhatatlan.hu Szabályzat",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:eladhatatlan:post",
+  "kind": "json",
+  "url": "https://eladhatatlan.hu/uj-hirdetes-feladasa/",
+  "country": "HU",
+  "site": "eladhatatlan.hu posting page (WPAdverts form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:eladhatatlan:post-markers",
+  "kind": "signup",
+  "url": "https://eladhatatlan.hu/uj-hirdetes-feladasa/",
+  "country": "HU",
+  "site": "eladhatatlan.hu posting page markers",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r123:mypost:about",
+  "kind": "json",
+  "url": "https://www.mypost.com.tw/about_mypost/",
+  "country": "TW",
+  "site": "mypost.com.tw about page (rules words)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:mypost:create",
+  "kind": "json",
+  "url": "https://www.mypost.com.tw/create-listing/",
+  "country": "TW",
+  "site": "mypost.com.tw create-listing page as served",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:mypost:create-markers",
+  "kind": "signup",
+  "url": "https://www.mypost.com.tw/create-listing/",
+  "country": "TW",
+  "site": "mypost.com.tw create-listing markers",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r123:rubrikk:regvilkar",
+  "kind": "json",
+  "url": "https://rubrikkannonser.no/registreringsvilkar/",
+  "country": "NO",
+  "site": "rubrikkannonser.no Registreringsvilkår",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:rubrikk:vilkar",
+  "kind": "json",
+  "url": "https://rubrikkannonser.no/vilkar-og-betingelser/",
+  "country": "NO",
+  "site": "rubrikkannonser.no Vilkår og Betingelser",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:torg:terms",
+  "kind": "json",
+  "url": "https://torg.adressa.no/terms_and_conditions",
+  "country": "NO",
+  "site": "torg.adressa.no Vilkår",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:torg:categories",
+  "kind": "json",
+  "url": "https://torg.adressa.no/categories",
+  "country": "NO",
+  "site": "torg.adressa.no Opprett annonse (categories, prices)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:adboom:rules",
+  "kind": "json",
+  "url": "https://www.adboom.it/it/regole.html",
+  "country": "IT",
+  "site": "adboom.it Regole e Condizioni d'uso",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:startapro:rules1",
+  "kind": "json",
+  "url": "https://info.startapro.hu/hirdetesi-szabalyzat/",
+  "country": "HU",
+  "site": "startapro.hu Hirdetési szabályzat",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:startapro:rules2",
+  "kind": "json",
+  "url": "https://info.startapro.hu/felhasznalasi-feltetelek/",
+  "country": "HU",
+  "site": "startapro.hu Felhasználási feltételek",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:startapro:post-markers",
+  "kind": "signup",
+  "url": "https://www.startapro.hu/hirdetesfeladas",
+  "country": "HU",
+  "site": "startapro.hu Hirdetésfeladás markers",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r123:studenteninserate:terms",
+  "kind": "json",
+  "url": "https://www.studenteninserate.at/terms",
+  "country": "AT",
+  "site": "studenteninserate.at Nutzungsbedingungen",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r123:studenteninserate:conditions",
+  "kind": "json",
+  "url": "https://www.studenteninserate.at/conditions",
+  "country": "AT",
+  "site": "studenteninserate.at AGB",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
