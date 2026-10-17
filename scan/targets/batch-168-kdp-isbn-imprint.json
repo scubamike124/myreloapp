@@ -1,0 +1,38 @@
+[
+ {
+  "id": "k168:GTJ8LBXL6Z4WV5QX",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/GTJ8LBXL6Z4WV5QX",
+  "country": "GLOBAL",
+  "site": "KDP help: Get an ISBN (free KDP ISBN, imprint 'Independently published', eligibility)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k168:G201834170",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G201834170",
+  "country": "GLOBAL",
+  "site": "KDP help: What is an ISBN and Imprint?",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k168:G7DMSKCM9DVS65TC",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G7DMSKCM9DVS65TC",
+  "country": "GLOBAL",
+  "site": "KDP help: What is an ISBN and Imprint Name?",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k168:G200672390",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G200672390",
+  "country": "GLOBAL",
+  "site": "KDP help: Content guidelines (AI-generated content disclosure, re-read for the draft)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ }
+]
