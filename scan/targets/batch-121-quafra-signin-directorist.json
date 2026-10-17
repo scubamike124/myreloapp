@@ -1,0 +1,47 @@
+[
+ {
+  "id": "r121:quafra:sign-in-html",
+  "kind": "json",
+  "url": "https://quafra.com/sign-in/",
+  "country": "GH",
+  "site": "quafra.com sign-in page (both the sign-in and the sign-up forms as served: fields, action, nonce names)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r121:quafra:wp-login",
+  "kind": "signup",
+  "url": "https://quafra.com/wp-login.php",
+  "country": "GH",
+  "site": "quafra.com WordPress login page (whether the standard login form is served)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r121:directorist:classes-index",
+  "kind": "json",
+  "url": "https://plugins.svn.wordpress.org/directorist/trunk/includes/classes/",
+  "country": "GH",
+  "site": "Directorist plugin source index (WordPress.org SVN): the class files, to find the registration handler",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r121:directorist:ajax-handler",
+  "kind": "json",
+  "url": "https://plugins.svn.wordpress.org/directorist/trunk/includes/classes/class-ajax-handler.php",
+  "country": "GH",
+  "site": "Directorist ajax handler source (the login and registration actions)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r121:directorist:registration",
+  "kind": "json",
+  "url": "https://plugins.svn.wordpress.org/directorist/trunk/includes/classes/class-registration.php",
+  "country": "GH",
+  "site": "Directorist registration source (how the sign-up form is handled)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ }
+]
