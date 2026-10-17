@@ -1,0 +1,218 @@
+[
+ {
+  "id": "r130:doplim-mx:help",
+  "kind": "json",
+  "url": "https://help.doplim.com.mx/",
+  "country": "MX",
+  "site": "help.doplim.com.mx index (how an ad is published: activation mail, moderation)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r130:doplim-pt:help",
+  "kind": "json",
+  "url": "https://help.doplim.pt/",
+  "country": "PT",
+  "site": "help.doplim.pt index (how an ad is published)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r130:doplim-mx:faq",
+  "kind": "json",
+  "url": "https://www.doplim.com.mx/faq.html",
+  "country": "MX",
+  "site": "doplim.com.mx FAQ (if served)",
+  "category": "classified-board",
+  "bodyChars": 120000
+ },
+ {
+  "id": "r130:bonsanuncios:legal",
+  "kind": "json",
+  "url": "https://www.bonsanuncios.pt/legal/",
+  "country": "PT",
+  "site": "bonsanuncios.pt Informação Legal (rules)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r130:lokale-kleinanzeigen:agb",
+  "kind": "json",
+  "url": "https://www.lokale-kleinanzeigen.de/agb.html",
+  "country": "DE",
+  "site": "lokale-kleinanzeigen.de AGB",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r130:1001annonces:rules",
+  "kind": "json",
+  "url": "https://www.1001annonces.net/fr/info/Regles-de-diffusion-2",
+  "country": "FR",
+  "site": "1001annonces.net Règles de diffusion",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r130:1001annonces:cgu",
+  "kind": "json",
+  "url": "https://www.1001annonces.net/fr/info/Infos-legales-et-CGU-3",
+  "country": "FR",
+  "site": "1001annonces.net CGU",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r130:1001annonces:deposit",
+  "kind": "signup",
+  "url": "https://www.1001annonces.net/fr/acc_connexion.php?back=FormDeposit",
+  "country": "FR",
+  "site": "1001annonces.net deposit (login or registration form markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r130:1001annonces:deposit-body",
+  "kind": "json",
+  "url": "https://www.1001annonces.net/fr/acc_connexion.php?back=FormDeposit",
+  "country": "FR",
+  "site": "1001annonces.net deposit page as served",
+  "category": "classified-board",
+  "bodyChars": 120000
+ },
+ {
+  "id": "r130:studenteninserate-de:agb",
+  "kind": "json",
+  "url": "https://www.studenteninserate.de/allgemeine-geschaeftsbedingungen.html",
+  "country": "DE",
+  "site": "studenteninserate.de AGB",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r130:studenteninserate-de:nutzung",
+  "kind": "json",
+  "url": "https://www.studenteninserate.de/nutzungsbedingungen.html",
+  "country": "DE",
+  "site": "studenteninserate.de Nutzungsbedingungen",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r130:studenteninserate-de:aufgeben",
+  "kind": "signup",
+  "url": "https://www.studenteninserate.de/mymanager/?returnurl=new",
+  "country": "DE",
+  "site": "studenteninserate.de 'Kleinanzeige aufgeben' (login or registration markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r130:studenteninserate-de:aufgeben-body",
+  "kind": "json",
+  "url": "https://www.studenteninserate.de/mymanager/?returnurl=new",
+  "country": "DE",
+  "site": "studenteninserate.de mymanager page as served",
+  "category": "classified-board",
+  "bodyChars": 120000
+ },
+ {
+  "id": "r130:classi4u:terms",
+  "kind": "json",
+  "url": "https://ie.classi4u.com/classiterms.php",
+  "country": "IE",
+  "site": "classi4u Terms of Use",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r130:classi4u:post",
+  "kind": "signup",
+  "url": "https://ie.classi4u.com/post-ad",
+  "country": "IE",
+  "site": "classi4u post-ad markers",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r130:classi4u:post-body",
+  "kind": "json",
+  "url": "https://ie.classi4u.com/post-ad",
+  "country": "IE",
+  "site": "classi4u post-ad page as served",
+  "category": "classified-board",
+  "bodyChars": 120000
+ },
+ {
+  "id": "r130:oho4sale:post",
+  "kind": "json",
+  "url": "https://www.oho4sale.com/ลงประกาศฟรี/",
+  "country": "TH",
+  "site": "oho4sale.com posting page as served",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r130:oho4sale:post-markers",
+  "kind": "signup",
+  "url": "https://www.oho4sale.com/ลงประกาศฟรี/",
+  "country": "TH",
+  "site": "oho4sale.com posting page markers",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r130:smeleader:terms",
+  "kind": "json",
+  "url": "https://smeleader.com/terms.php",
+  "country": "TH",
+  "site": "smeleader.com ข้อกำหนดการใช้งาน (terms)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r130:smeleader:directory",
+  "kind": "json",
+  "url": "https://smeleader.com/submit-directory.php",
+  "country": "TH",
+  "site": "smeleader.com business directory submission as served",
+  "category": "classified-board",
+  "bodyChars": 120000
+ },
+ {
+  "id": "r130:emponda:register",
+  "kind": "signup",
+  "url": "https://emponda.com/user/register",
+  "country": "AR",
+  "site": "emponda.com registration markers",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r130:emponda:register-body",
+  "kind": "json",
+  "url": "https://emponda.com/user/register",
+  "country": "AR",
+  "site": "emponda.com registration page as served",
+  "category": "classified-board",
+  "bodyChars": 120000
+ },
+ {
+  "id": "r130:sitioanuncios:account",
+  "kind": "signup",
+  "url": "https://www.sitioanuncios.com/peru/mi-cuenta/crear-una-cuenta.html",
+  "country": "PE",
+  "site": "sitioanuncios.com account creation markers",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r130:sitioanuncios:ayuda",
+  "kind": "json",
+  "url": "https://www.sitioanuncios.com/peru/ayuda.html",
+  "country": "PE",
+  "site": "sitioanuncios.com Ayuda (how ads are published)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
