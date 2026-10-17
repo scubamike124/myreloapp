@@ -482,3 +482,9 @@ Applied: doplim.com.mx (a required Mexican state, 33 options, none online), dopl
 - **c7.io (Mastodon, Chinese-speaking creators)**: still pending-confirmation; the server has been asked for the mail 7 times, at most hourly after the first 20 minutes (mastodon-registrar.ts: RESEND_AFTER_MS 20 min, RESEND_EVERY_MS 1 h), and the last ask was answered HTTP 401. The three-hour give-up applies only when another candidate server exists, and c7.io is the lane's only one, so it waits and asks hourly. A small follow-up: stop asking after a few refused (401) asks and keep checking the mailbox daily — queued behind the open PRs.
 - **Kowika**: the re-sent registration's mail awaited 72 minutes at 04:02Z (the board registrar gives up at four hours).
 - **In CI**: #869 (Casinuevo, registrar's third board) and #870 (the render workflow's ffprobe).
+
+### Addendum 04:15Z (2026-10-17) — Casinuevo merged (#869); the c7.io resend cap (#871)
+
+- **amberai #869 merged** at 04:11:19Z as ddccd7e8 (CI green): Casinuevo Colombia is the registrar's third board. Once Railway deploys the worker (watched), the registrar opens the account on its next tick through the board's form and Amber's mailbox; the tracker's Casinuevo line (watched) then shows the registration, the confirmation mail and, inside the login, the ad form as served. Nothing is posted until the form is mapped under the place rule.
+- **amberai #871** (head 49e06c82; tsc, 18 registrar tests, eslint clean): the Mastodon registrar stops asking a server for the confirmation mail after two asks it refused with 401/403 (c7.io's case), says so on the tracker and keeps checking the mailbox each tick. Merges on green.
+- **#870** (the render workflow's ffprobe) still in its test job at 04:13Z; on green it merges and the render is dispatched once more for the artifact and the pushed branch.
