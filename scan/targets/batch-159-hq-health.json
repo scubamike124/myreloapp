@@ -1,0 +1,11 @@
+[
+ {
+  "id": "h159:hq-health",
+  "kind": "json",
+  "url": "https://hq.amberoneai.com/api/health/public",
+  "country": "GLOBAL",
+  "site": "hq.amberoneai.com public health after the #872 deploy (worker tick age)",
+  "category": "production-health",
+  "bodyChars": 4000
+ }
+]
