@@ -1,0 +1,38 @@
+[
+ {
+  "id": "r124:directorist:class-user",
+  "kind": "json",
+  "url": "https://plugins.svn.wordpress.org/directorist/trunk/includes/classes/class-user.php",
+  "country": "GH",
+  "site": "Directorist user class source (the sign-up form's server handler: fields, checks, mails)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r124:directorist:pending-registration",
+  "kind": "json",
+  "url": "https://plugins.svn.wordpress.org/directorist/trunk/includes/classes/class-pending-registration.php",
+  "country": "GH",
+  "site": "Directorist pending-registration source (e-mail verification or approval after sign-up)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r124:directorist:add-listing",
+  "kind": "json",
+  "url": "https://plugins.svn.wordpress.org/directorist/trunk/includes/classes/class-add-listing.php",
+  "country": "GH",
+  "site": "Directorist add-listing source (how a listing form is submitted and whether it is published or pending)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r124:directorist:submission-controller",
+  "kind": "json",
+  "url": "https://plugins.svn.wordpress.org/directorist/trunk/includes/classes/class-submission-controller.php",
+  "country": "GH",
+  "site": "Directorist submission controller source (the listing submission request)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ }
+]
