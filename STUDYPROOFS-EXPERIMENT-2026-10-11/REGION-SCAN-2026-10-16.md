@@ -1,6 +1,6 @@
 # StudyProofs free-promotion region scan — 2026-10-16
 
-Built 2026-10-17 03:33Z from 9183 read-only probes (6528 distinct pages and servers, 5102 distinct sites) made by GitHub Actions runners during the night of 2026-10-15/16, plus the hand review in `scan/review/verdicts.json`. Regenerate with `python3 -I scan/report.py`. The CSV beside this file carries every row.
+Built 2026-10-17 03:36Z from 9191 read-only probes (6528 distinct pages and servers, 5102 distinct sites) made by GitHub Actions runners during the night of 2026-10-15/16, plus the hand review in `scan/review/verdicts.json`. Regenerate with `python3 -I scan/report.py`. The CSV beside this file carries every row.
 
 **Standard.** A site counts as **qualified** only when its own current rules or submission page, read tonight, allow a free StudyProofs listing or promotional post and nothing on the page asks for a date of birth, phone number, identity check, CAPTCHA bypass, payment or a manual approval. "Allowed with conditions" means the page allows it with a condition (labelled ads, an introduction first, a backlink, a specific language) or shows free posting but the account rules were not fully read. Everything else is listed under the reason it was skipped. Research and account set-ups are not advertisements: only a publicly verified post counts as live.
 
@@ -28,14 +28,14 @@ The owner's note asked for "all 36 regions in our existing region list"; the lis
 | Southern Europe | ES, GR, IT, PT | 287 | 266 | **0** | 2 | 0 | 6 | 232 (3 / 1 / 0 / 0 / 196 / 0 / 0 / 2 / 2 / 28) | 21 (6 / 12 / 3) | 26 |
 | Central & Eastern Europe | CZ, HU, PL, RO, UA | 124 | 95 | **1** | 5 | 0 | 1 | 61 (1 / 2 / 0 / 0 / 31 / 0 / 0 / 9 / 6 / 12) | 29 (9 / 12 / 8) | 27 |
 | South Asia | BD, IN, PK | 42 | 25 | **0** | 3 | 0 | 2 | 15 (0 / 4 / 0 / 0 / 4 / 0 / 0 / 1 / 4 / 2) | 17 (8 / 7 / 2) | 5 |
-| Latin America | AR, BR, CL, CO, MX, PE | 143 | 99 | **1** | 12 | 0 | 3 | 46 (1 / 4 / 1 / 1 / 18 / 0 / 0 / 4 / 8 / 9) | 44 (19 / 19 / 6) | 37 |
+| Latin America | AR, BR, CL, CO, MX, PE | 143 | 99 | **1** | 10 | 0 | 3 | 46 (1 / 4 / 1 / 1 / 18 / 0 / 0 / 4 / 8 / 9) | 44 (19 / 19 / 6) | 39 |
 | Southeast Asia | ID, MY, PH, SG, TH, VN | 83 | 60 | **0** | 2 | 0 | 3 | 46 (1 / 4 / 0 / 1 / 30 / 0 / 0 / 6 / 0 / 4) | 23 (13 / 10 / 0) | 9 |
 | Sub-Saharan Africa | GH, KE, NG, SN, ZA, ZW | 54 | 27 | **2** | 0 | 0 | 0 | 17 (3 / 0 / 0 / 0 / 3 / 0 / 0 / 9 / 1 / 1) | 27 (12 / 14 / 1) | 8 |
 | Middle East & North Africa | AE, EG, IL, MA, N/A (pan-Arab), SA, TR | 80 | 53 | **1** | 6 | 0 | 1 | 28 (0 / 4 / 0 / 0 / 3 / 0 / 0 / 9 / 8 / 4) | 27 (18 / 7 / 2) | 17 |
 | East Asia | HK, JP, KR, TW | 258 | 235 | **1** | 6 | 0 | 1 | 185 (4 / 2 / 1 / 0 / 133 / 0 / 0 / 29 / 2 / 14) | 23 (11 / 9 / 3) | 42 |
 | Global (directories, protocols) | — | 97 | 66 | **0** | 3 | 16 | 5 | 33 (1 / 0 / 3 / 8 / 14 / 0 / 0 / 5 / 2 / 0) | 31 (13 / 13 / 5) | 9 |
 | Fediverse servers outside the 54 countries | AM, Argentina, Australia, Austria, BG, BY, Bangladesh, Brazil, CN, Canada, Chile, Czechia, France, GE, Germany, Global (English), Global (English; lists opportunities for US, Canada and Latin America), Greece, HR, Hungary, India, International (EN), Israel, Italy, Japan; Thailand, KZ, LT, LU, LV, Latin America (Spanish; MX, CO, AR, CL, PE), MG, MO, Malaysia, Mexico, Mexico (verifies students in Chile, Argentina, Colombia, Peru too), Netherlands, Nigeria, PF, PR, Peru, Poland, RU, SI, SN, SY, Saudi Arabia, South Africa, South Korea, Spain, Spain-based; LatAm subforums for Argentina, Chile, Colombia, Mexico, Switzerland, TN, Turkey, UY, Ukraine, United Kingdom, United States, United States (English, global), United States (hosted by Humanities Commons / Michigan State University; global), United States, Canada, Brazil, Mexico, Argentina, Chile, Colombia, Peru, Vietnam, YE, ZW, ZZ, multi-country (ISIC affiliates; verify the local office for each of IN, PK, BD, JP, KR, TW, HK, SG, MY, ID, TH, PH, VN, AU, NZ, AE, SA, IL, TR, EG, MA, NG, KE, GH, ZA) | 1339 | 1204 | **2** | 9 | 0 | 14 | 982 (11 / 2 / 0 / 0 / 527 / 0 / 0 / 147 / 7 / 288) | 135 (16 / 112 / 7) | 197 |
-| **All** | 54 | **5102** | 4522 | **9** | 58 | 16 | 69 | 3802 (42 / 27 / 6 / 13 / 2440 / 1 / 3 / 287 / 80 / 903) | 580 (195 / 323 / 62) | 568 |
+| **All** | 54 | **5102** | 4522 | **9** | 56 | 16 | 69 | 3802 (42 / 27 / 6 / 13 / 2440 / 1 / 3 / 287 / 80 / 903) | 580 (195 / 323 / 62) | 570 |
 
 ## Qualified sites
 
@@ -121,9 +121,7 @@ The page allows a free post or listing under a condition, or shows free posting 
 | South Asia | IN | My India Forums (rules page) (student-forum) | dedicated 'Promote Your Business' board | India (small forum) | No Spamming or Self-Promotion: Do not post advertisements, referral links, or repeated copy-paste content. (Subforums: Promote Your Business, Guest Posts - Free Backlinks) | unknown (forum registration; fields not seen) | — | https://myindia.org.in/rules | maybe (only in that subforum; registration not read) |
 | Middle East & North Africa | TR | Serinilan (sign-up page) (classifieds) | ÜYE OLMADAN ÜCRETSİZ İLAN VER | Turkey general classifieds; size not seen | — | no membership; form has name, e-mail and phone fields (whether phone is mandatory not seen) | — | https://serinilan.net/content/item-new.php (post without membership) | maybe |
 | Middle East & North Africa | EG | فتكات - قسم الإعلانات المجانية (home) (student-forum) | قسم الإعلانات المجانية | Arabic-speaking (small forum) | انشر اعلانك مجانا (post your ad for free) … يمكنك تسويق منتجاتك مجاناً | none per summary; not verified | — | https://kenooznet.yoo7.com/t40678-%D8%AE%D8%AF%D9%85%D8%A9-%D8%A7%D8%B9%D9%84%D8%A7%D9%86%D8%A7%D8%AA-%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9-%D9%85%D9%86%D8%AA%D8%AF%D9%8A%D8%A7%D8%AA-%D8%B5%D9%86%D8%A7%D8%A8%D9%8A%D8%B1-%D8%A7%D9%84%D8%B9%D9%84%D9%85-%D9%88%D8%A7%D9%84%D9%85%D8%B9%D8%B1%D9%81%D8%A9 | maybe (registration not read) |
-| Latin America | CO | avisos-colombia.com (classified-board) | free ads | general public | Publicar Anuncio · Mis Anuncios · Seleccione una ciudad | unknown | not addressed | https://avisos-colombia.com/ | maybe (posting form and place rule unread) |
 | Latin America | CO | colombia.casinuevo.com (classified-board) | free ads | general public | Para poder utilizar el Servicio es necesario el previo registro del Usuario … 'Por seguridad, no se publican teléfonos, emails ni enlaces de WhatsApp en el título o la descripción: los retiraremos al guardar.' | unknown | not addressed | https://colombia.casinuevo.com/registro | yes: registrar candidate (board-casinuevo) |
-| Latin America | CL | avisos-chile.com (classified-board) | free ads | general public | Publicar Anuncio · Mis Anuncios · Seleccione una ciudad | unknown | not addressed | https://avisos-chile.com/ | maybe (posting form and place rule unread) |
 | Latin America | CL | clasificadosweb.cl (classified-board) | free ads | general public | Está estrictamente prohibido publicar, ofrecer, promover o facilitar a través de la Plataforma: servicios sexuales … material que infrinja derechos de autor … (its terms); registration: e-mail, password and its confirmation only. | unknown | not addressed | https://clasificadosweb.cl/guias | maybe later (script-driven registration) |
 | East Asia | KR | GeekNews (news.hada.io) — Show GN (home) (student-forum) | one Show GN post | Korean developers and makers | Show GN: 새로운 서비스와 오픈소스 알리기 … 같은 서비스나 프로젝트를 다시 홍보하거나 Show GN 제한을 피하기 위한 등록은 허용되지 않습니다 (one Show post per service; sign-ups may post links only after a week) | account, one-week wait | not addressed; a maker's own post | https://news.hada.io/show | owner by hand (one Show GN post) |
 | East Asia | JP | なんでも宣伝 wiki (wikiwiki.jp/publicity) (home) (student-forum) | free wiki entry | Japan (tiny) | ルール: 宣伝したいものならなんでもＯＫです。ただし、18禁に関係するサイトやＳＮＳの情報を宣伝するのは禁止します。 | none | — | https://wikiwiki.jp/publicity/ | possible by wiki edit; low value |
@@ -1327,7 +1325,7 @@ What each site's own registration form asks for, read without filling anything (
 
 ## Read, but not qualified
 
-658 pages or servers answered, but nothing on them says a free promotional post or listing is allowed (open fediverse servers with no rule about promotion, home pages without the rules, JavaScript-only pages). They stay out of the qualified count on purpose; the CSV lists them.
+660 pages or servers answered, but nothing on them says a free promotional post or listing is allowed (open fediverse servers with no rule about promotion, home pages without the rules, JavaScript-only pages). They stay out of the qualified count on purpose; the CSV lists them.
 
 ## Method and limits
 

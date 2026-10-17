@@ -1,0 +1,74 @@
+[
+ {
+  "id": "disc150:PE:0",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=anuncios%20clasificados%20gratis%20per%C3%BA%20publicar%20sin%20registro",
+  "country": "PE",
+  "site": "DuckDuckGo: anuncios clasificados gratis perú publicar sin registro",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc150:PE:1",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=foro%20estudiantes%20universitarios%20per%C3%BA",
+  "country": "PE",
+  "site": "DuckDuckGo: foro estudiantes universitarios perú",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc150:MX:0",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=anuncios%20clasificados%20gratis%20m%C3%A9xico%20publicar%20sin%20registro",
+  "country": "MX",
+  "site": "DuckDuckGo: anuncios clasificados gratis méxico publicar sin registro",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc150:MX:1",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=foro%20estudiantes%20universitarios%20m%C3%A9xico",
+  "country": "MX",
+  "site": "DuckDuckGo: foro estudiantes universitarios méxico",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc150:AR:0",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=avisos%20clasificados%20gratis%20argentina%20publicar%20sin%20registro",
+  "country": "AR",
+  "site": "DuckDuckGo: avisos clasificados gratis argentina publicar sin registro",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc150:AR:1",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=foro%20estudiantes%20universitarios%20argentina",
+  "country": "AR",
+  "site": "DuckDuckGo: foro estudiantes universitarios argentina",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc150:BR:0",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=an%C3%BAncios%20gr%C3%A1tis%20brasil%20publicar%20sem%20cadastro",
+  "country": "BR",
+  "site": "DuckDuckGo: anúncios grátis brasil publicar sem cadastro",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc150:BR:1",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=f%C3%B3rum%20estudantes%20universit%C3%A1rios%20brasil",
+  "country": "BR",
+  "site": "DuckDuckGo: fórum estudantes universitários brasil",
+  "category": "discovery",
+  "bodyChars": 80000
+ }
+]
