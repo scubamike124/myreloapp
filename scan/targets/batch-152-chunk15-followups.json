@@ -1,0 +1,119 @@
+[
+ {
+  "id": "r152:publicid:pe",
+  "kind": "json",
+  "url": "https://publicid.ad/pais/pe",
+  "country": "PE",
+  "site": "publicid.ad Peru page (guest posting, place, rules links)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r152:publicid:terms",
+  "kind": "json",
+  "url": "https://publicid.ad/terminos",
+  "country": "PE",
+  "site": "publicid.ad terms (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r152:publicid:publicar",
+  "kind": "json",
+  "url": "https://publicid.ad/publicar",
+  "country": "PE",
+  "site": "publicid.ad posting page (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r152:mpa:new",
+  "kind": "json",
+  "url": "https://marketplaceargentino.com/new",
+  "country": "AR",
+  "site": "Marketplace Argentino posting page (login gate, place)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r152:mpa:ingresar",
+  "kind": "json",
+  "url": "https://marketplaceargentino.com/ingresar",
+  "country": "AR",
+  "site": "Marketplace Argentino login/registration",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r152:mpa:terminos",
+  "kind": "json",
+  "url": "https://marketplaceargentino.com/terminos",
+  "country": "AR",
+  "site": "Marketplace Argentino terms (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r152:quero:cadastro",
+  "kind": "json",
+  "url": "https://www.queroanuncios.com.br/cadastro",
+  "country": "BR",
+  "site": "Quero Anúncios registration form",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r152:quero:publicar",
+  "kind": "json",
+  "url": "https://www.queroanuncios.com.br/publicar-anuncio",
+  "country": "BR",
+  "site": "Quero Anúncios posting page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r152:quero:termos",
+  "kind": "json",
+  "url": "https://www.queroanuncios.com.br/termos",
+  "country": "BR",
+  "site": "Quero Anúncios terms",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r152:anuncio.com.pe:home",
+  "kind": "json",
+  "url": "https://anuncio.com.pe/",
+  "country": "PE",
+  "site": "anuncio.com.pe home (from a Peruvian listicle; rules, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r152:anunciosgratuitosperu.com:home",
+  "kind": "json",
+  "url": "https://anunciosgratuitosperu.com/",
+  "country": "PE",
+  "site": "anunciosgratuitosperu.com home (from a Peruvian listicle; rules, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r152:anuxi.pe:home",
+  "kind": "json",
+  "url": "https://anuxi.pe/",
+  "country": "PE",
+  "site": "anuxi.pe home (from a Peruvian listicle; rules, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r152:vendelo.org:home",
+  "kind": "json",
+  "url": "https://vendelo.org/",
+  "country": "PE",
+  "site": "vendelo.org home (from a Peruvian listicle; rules, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
