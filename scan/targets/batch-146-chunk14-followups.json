@@ -1,0 +1,245 @@
+[
+ {
+  "id": "r146:avisos-colombia:post",
+  "kind": "json",
+  "url": "https://www.avisos-colombia.com/post/",
+  "country": "CO",
+  "site": "avisos-colombia posting page (form, city, phone, captcha)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:avisos-colombia:help",
+  "kind": "json",
+  "url": "https://www.avisos-colombia.com/help/",
+  "country": "CO",
+  "site": "avisos-colombia help/rules",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:avisos-chile:post",
+  "kind": "json",
+  "url": "https://www.avisos-chile.com/post/",
+  "country": "CL",
+  "site": "avisos-chile posting page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:colombiads:terms",
+  "kind": "json",
+  "url": "https://www.colombiads.com/terms/",
+  "country": "CO",
+  "site": "Colombiads terms",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:colombiads:register",
+  "kind": "json",
+  "url": "https://www.colombiads.com/register.php",
+  "country": "CO",
+  "site": "Colombiads registration form",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:colombiads:ayuda",
+  "kind": "json",
+  "url": "https://www.colombiads.com/ayuda/",
+  "country": "CO",
+  "site": "Colombiads help",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:gvanga:terms",
+  "kind": "json",
+  "url": "https://gvanga.com/es/page/terminos-de-uso-y-politicas-de-publicacion/",
+  "country": "CO",
+  "site": "Gvanga terms and posting policies",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:gvanga:signup",
+  "kind": "json",
+  "url": "https://gvanga.com/es/site/signup/",
+  "country": "CO",
+  "site": "Gvanga registration form",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:gvanga:create",
+  "kind": "json",
+  "url": "https://gvanga.com/es/create-ad/",
+  "country": "CO",
+  "site": "Gvanga posting page (login gate?)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:anunciar-co:register",
+  "kind": "json",
+  "url": "https://www.anunciar.com.co/register",
+  "country": "CO",
+  "site": "Anunciar Colombia registration",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:anunciar-co:tutorial",
+  "kind": "json",
+  "url": "https://www.anunciar.com.co/tutorial-anunciar-gratis",
+  "country": "CO",
+  "site": "Anunciar Colombia posting tutorial (steps, phone, city)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:anunciar-co:terms",
+  "kind": "json",
+  "url": "https://www.anunciar.com.co/terminos-y-condiciones",
+  "country": "CO",
+  "site": "Anunciar Colombia terms (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:casinuevo:terms",
+  "kind": "json",
+  "url": "https://colombia.casinuevo.com/terminos",
+  "country": "CO",
+  "site": "Casinuevo terms",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:casinuevo:registro",
+  "kind": "json",
+  "url": "https://colombia.casinuevo.com/registro",
+  "country": "CO",
+  "site": "Casinuevo registration page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:casinuevo:post-full",
+  "kind": "json",
+  "url": "https://colombia.casinuevo.com/poner-anuncios-gratis/",
+  "country": "CO",
+  "site": "Casinuevo posting page, whole (form, phone, place)",
+  "category": "classified-board",
+  "bodyChars": 450000
+ },
+ {
+  "id": "r146:runiv:tos",
+  "kind": "json",
+  "url": "https://comunidad.universitarios.cl/tos",
+  "country": "CL",
+  "site": "Red de Universitarios (Discourse) terms",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:runiv:about",
+  "kind": "json",
+  "url": "https://comunidad.universitarios.cl/about.json",
+  "country": "CL",
+  "site": "Red de Universitarios Discourse about (registration, stats)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:runiv:faq",
+  "kind": "json",
+  "url": "https://comunidad.universitarios.cl/faq",
+  "country": "CL",
+  "site": "Red de Universitarios guidelines",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:clasificadosweb:register",
+  "kind": "json",
+  "url": "https://clasificadosweb.cl/register",
+  "country": "CL",
+  "site": "ClasificadosWeb registration form",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:clasificadosweb:terminos",
+  "kind": "json",
+  "url": "https://clasificadosweb.cl/terminos",
+  "country": "CL",
+  "site": "ClasificadosWeb terms (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:clasificadosweb:terms",
+  "kind": "json",
+  "url": "https://clasificadosweb.cl/terms",
+  "country": "CL",
+  "site": "ClasificadosWeb terms (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:uniapp:reglas",
+  "kind": "json",
+  "url": "https://uniapp.cl/reglas",
+  "country": "CL",
+  "site": "UNI APP rules",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:uniapp:registro",
+  "kind": "json",
+  "url": "https://uniapp.cl/registro",
+  "country": "CL",
+  "site": "UNI APP registration form",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:yaviso:publicar",
+  "kind": "json",
+  "url": "https://yaviso.cl/publicar",
+  "country": "CL",
+  "site": "Yaviso posting page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:yaviso:terminos",
+  "kind": "json",
+  "url": "https://yaviso.cl/terminos",
+  "country": "CL",
+  "site": "Yaviso terms (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:anuto:login",
+  "kind": "json",
+  "url": "https://co.anuto.app/login",
+  "country": "CO",
+  "site": "Anuto login (registration fields?)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r146:anuto:post",
+  "kind": "json",
+  "url": "https://co.anuto.app/post",
+  "country": "CO",
+  "site": "Anuto posting (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
