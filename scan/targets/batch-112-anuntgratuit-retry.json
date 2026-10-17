@@ -1,0 +1,29 @@
+[
+ {
+  "id": "r112:anuntgratuit:index",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/anunturi",
+  "country": "RO",
+  "site": "anuntgratuit.ro listing index, retry",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r112:anuntgratuit:home",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/",
+  "country": "RO",
+  "site": "anuntgratuit.ro home, retry",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r112:anuntgratuit:robots",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/robots.txt",
+  "country": "RO",
+  "site": "anuntgratuit.ro robots.txt (a block?)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ }
+]

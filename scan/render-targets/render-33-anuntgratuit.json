@@ -1,0 +1,35 @@
+[
+ {
+  "id": "r33:anuntgratuit:index",
+  "url": "https://www.anuntgratuit.ro/anunturi",
+  "country": "RO",
+  "site": "anuntgratuit.ro listing index (listing links)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 2000
+ },
+ {
+  "id": "r33:anuntgratuit:home",
+  "url": "https://www.anuntgratuit.ro/",
+  "country": "RO",
+  "site": "anuntgratuit.ro home (listing links, categories)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 2000
+ },
+ {
+  "id": "r33:anuntgratuit:adauga",
+  "url": "https://www.anuntgratuit.ro/anunturi/adauga",
+  "country": "RO",
+  "site": "anuntgratuit.ro ad form without a login",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 4000
+ }
+]
