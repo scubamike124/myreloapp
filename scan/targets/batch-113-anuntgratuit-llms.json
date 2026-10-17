@@ -1,0 +1,56 @@
+[
+ {
+  "id": "r113:anuntgratuit:llms",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/llms.txt",
+  "country": "RO",
+  "site": "anuntgratuit.ro llms.txt (the site's own guide for AI agents)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r113:anuntgratuit:llmsfull",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/llms-full.txt",
+  "country": "RO",
+  "site": "anuntgratuit.ro llms-full.txt",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r113:anuntgratuit:oferta",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/oferta/",
+  "country": "RO",
+  "site": "anuntgratuit.ro /oferta/ (listing pages root)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r113:anuntgratuit:anunturi-slash",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/anunturi/",
+  "country": "RO",
+  "site": "anuntgratuit.ro /anunturi/ with a slash",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r113:anuntgratuit:sitemap",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/sitemap.xml",
+  "country": "RO",
+  "site": "anuntgratuit.ro sitemap (listing addresses)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r113:anuntgratuit:dashboard-adauga",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/dashboard/adauga-anunt",
+  "country": "RO",
+  "site": "anuntgratuit.ro ad form path without a login (redirect?)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]
