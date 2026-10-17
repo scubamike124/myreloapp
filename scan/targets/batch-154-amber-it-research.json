@@ -1,0 +1,227 @@
+[
+ {
+  "id": "it154:anthropic-pricing",
+  "kind": "json",
+  "url": "https://docs.anthropic.com/en/docs/about-claude/pricing",
+  "country": "GLOBAL",
+  "site": "Claude API prices per model (input/output per MTok, caching, batch)",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:anthropic-pricing2",
+  "kind": "json",
+  "url": "https://www.anthropic.com/pricing",
+  "country": "GLOBAL",
+  "site": "Anthropic pricing page",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:railway-pricing",
+  "kind": "json",
+  "url": "https://railway.com/pricing",
+  "country": "GLOBAL",
+  "site": "Railway plan and usage prices",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:hetzner-cloud",
+  "kind": "json",
+  "url": "https://www.hetzner.com/cloud/",
+  "country": "GLOBAL",
+  "site": "Hetzner cloud server plans and prices",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:supabase-pricing",
+  "kind": "json",
+  "url": "https://supabase.com/pricing",
+  "country": "GLOBAL",
+  "site": "Supabase plan prices",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:stripe-pricing",
+  "kind": "json",
+  "url": "https://stripe.com/pricing",
+  "country": "GLOBAL",
+  "site": "Stripe fees",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:wazuh-requirements",
+  "kind": "json",
+  "url": "https://documentation.wazuh.com/current/quickstart.html",
+  "country": "GLOBAL",
+  "site": "Wazuh hardware requirements by agent count",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:wazuh-install-req",
+  "kind": "json",
+  "url": "https://documentation.wazuh.com/current/installation-guide/wazuh-server/index.html",
+  "country": "GLOBAL",
+  "site": "Wazuh server requirements",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:zabbix-requirements",
+  "kind": "json",
+  "url": "https://www.zabbix.com/documentation/current/en/manual/installation/requirements",
+  "country": "GLOBAL",
+  "site": "Zabbix hardware requirement examples",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:zabbix-license",
+  "kind": "json",
+  "url": "https://www.zabbix.com/license",
+  "country": "GLOBAL",
+  "site": "Zabbix licence terms",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:grafana-license",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/grafana/grafana/main/LICENSE",
+  "country": "GLOBAL",
+  "site": "Grafana licence",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:wazuh-license",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/wazuh/wazuh/master/LICENSE",
+  "country": "GLOBAL",
+  "site": "Wazuh licence",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:fleet-license",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/fleetdm/fleet/main/LICENSE",
+  "country": "GLOBAL",
+  "site": "Fleet (osquery) licence",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:meshcentral-license",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/Ylianst/MeshCentral/master/LICENSE",
+  "country": "GLOBAL",
+  "site": "MeshCentral licence",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:velociraptor-license",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/Velocidex/velociraptor/master/LICENSE",
+  "country": "GLOBAL",
+  "site": "Velociraptor licence",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:netdata-license",
+  "kind": "json",
+  "url": "https://raw.githubusercontent.com/netdata/netdata/master/LICENSE",
+  "country": "GLOBAL",
+  "site": "Netdata licence",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:action1-pricing",
+  "kind": "json",
+  "url": "https://www.action1.com/pricing/",
+  "country": "GLOBAL",
+  "site": "Action1 pricing (free 200 endpoints?)",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:ninjaone-pricing",
+  "kind": "json",
+  "url": "https://www.ninjaone.com/pricing/",
+  "country": "GLOBAL",
+  "site": "NinjaOne pricing page",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:atera-pricing",
+  "kind": "json",
+  "url": "https://www.atera.com/pricing/",
+  "country": "GLOBAL",
+  "site": "Atera pricing per technician",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:vanta-pricing",
+  "kind": "json",
+  "url": "https://www.vanta.com/pricing",
+  "country": "GLOBAL",
+  "site": "Vanta SOC 2 tooling pricing",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:apple-dev",
+  "kind": "json",
+  "url": "https://developer.apple.com/support/compare-memberships/",
+  "country": "GLOBAL",
+  "site": "Apple Developer Program fee",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:tailscale-pricing",
+  "kind": "json",
+  "url": "https://tailscale.com/pricing",
+  "country": "GLOBAL",
+  "site": "Tailscale pricing (device connectivity alternative)",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:fleet-pricing",
+  "kind": "json",
+  "url": "https://fleetdm.com/pricing",
+  "country": "GLOBAL",
+  "site": "Fleet pricing (free tier?)",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:zabbix-cloud",
+  "kind": "json",
+  "url": "https://www.zabbix.com/cloud",
+  "country": "GLOBAL",
+  "site": "Zabbix Cloud pricing (alternative to self-hosting)",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ },
+ {
+  "id": "it154:grafana-cloud",
+  "kind": "json",
+  "url": "https://grafana.com/pricing/",
+  "country": "GLOBAL",
+  "site": "Grafana Cloud free tier and pricing",
+  "category": "amber-it-research",
+  "bodyChars": 250000
+ }
+]
