@@ -1,0 +1,137 @@
+[
+ {
+  "id": "r151:clasiperu.com:home",
+  "kind": "json",
+  "url": "https://clasiperu.com/",
+  "country": "PE",
+  "site": "clasiperu.com home (rules links, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:publicid.ad:home",
+  "kind": "json",
+  "url": "https://publicid.ad/",
+  "country": "PE",
+  "site": "publicid.ad home (rules links, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:lima.ciudadanuncios.pe:home",
+  "kind": "json",
+  "url": "https://lima.ciudadanuncios.pe/",
+  "country": "PE",
+  "site": "lima.ciudadanuncios.pe home (rules links, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:lima.ciudadanuncios.pe:page",
+  "kind": "json",
+  "url": "https://lima.ciudadanuncios.pe/?ref=w3use",
+  "country": "PE",
+  "site": "lima.ciudadanuncios.pe page found by the search: Anuncios gratis en Perú - Lima - avisos y anuncios",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:blog.anunxio.com:page",
+  "kind": "json",
+  "url": "https://blog.anunxio.com/las-10-paginas-de-anuncios-clasificados-gratis-en-peru/",
+  "country": "PE",
+  "site": "blog.anunxio.com listicle of free boards (hosts to harvest, not a board)",
+  "category": "discovery-list",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:forumeja.org.br:home",
+  "kind": "json",
+  "url": "https://forumeja.org.br/",
+  "country": "BR",
+  "site": "forumeja.org.br home (rules links, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:forumeja.org.br:page",
+  "kind": "json",
+  "url": "https://forumeja.org.br/outros-assuntos/estudantes-universitarios/",
+  "country": "BR",
+  "site": "forumeja.org.br page found by the search: Estudantes universitários - Fórum EJA Brasil",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:utnianos.com.ar:home",
+  "kind": "json",
+  "url": "https://utnianos.com.ar/",
+  "country": "AR",
+  "site": "utnianos.com.ar home (rules links, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:utnianos.com.ar:page",
+  "kind": "json",
+  "url": "https://www.utnianos.com.ar/foro/index.php",
+  "country": "AR",
+  "site": "utnianos.com.ar page found by the search: UTNianos | Comunidad Foro UTN | BiblioUTN | Apunte",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:chatargentina.net:home",
+  "kind": "json",
+  "url": "https://chatargentina.net/",
+  "country": "AR",
+  "site": "chatargentina.net home (rules links, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:tuclasificado.com.ar:home",
+  "kind": "json",
+  "url": "https://tuclasificado.com.ar/",
+  "country": "AR",
+  "site": "tuclasificado.com.ar home (rules links, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:marketplaceargentino.com:home",
+  "kind": "json",
+  "url": "https://marketplaceargentino.com/",
+  "country": "AR",
+  "site": "marketplaceargentino.com home (rules links, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:ecommercenapratica.com:page",
+  "kind": "json",
+  "url": "https://ecommercenapratica.com/blog/anunciar-gratis/",
+  "country": "BR",
+  "site": "ecommercenapratica.com listicle of free boards (hosts to harvest, not a board)",
+  "category": "discovery-list",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:anuncy.com:home",
+  "kind": "json",
+  "url": "https://anuncy.com/",
+  "country": "BR",
+  "site": "anuncy.com home (rules links, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r151:queroanuncios.com.br:home",
+  "kind": "json",
+  "url": "https://queroanuncios.com.br/",
+  "country": "BR",
+  "site": "queroanuncios.com.br home (rules links, registration, posting link)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
