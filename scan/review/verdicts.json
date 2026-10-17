@@ -11467,10 +11467,10 @@
  },
  {
   "match": "colombia.casinuevo.com",
-  "verdict": "conditional",
+  "verdict": "skip-captcha",
   "quote": "Para poder utilizar el Servicio es necesario el previo registro del Usuario … 'Por seguridad, no se publican teléfonos, emails ni enlaces de WhatsApp en el título o la descripción: los retiraremos al guardar.'",
-  "note": "Terms, registration and the whole posting form read 03:26Z (batch 146). Registration: name, e-mail, password, confirmation, terms — no phone, no CAPTCHA marker. Posting (POST /poner-anuncios-gratis/, after login): title*, description*, category* (17, 'Servicios' among them), images, video, a price (blank = 'a consultar'), and a location box with hidden province/locality/district/lat/lng fields that carries no required mark. The terms (Casinuevo, Spain) ban sexual, pyramid, misleading and live-animal ads and promotional reviews, not business ads, links or automation; they note automated filtering. Registrar candidate: the account registers by mail, the form is read inside the login, and the location stays empty under the place rule unless the server demands it.",
-  "can_act": "yes: registrar candidate (board-casinuevo)",
+  "note": "Terms, registration and the whole posting form read 03:26Z (batch 146). Registration: name, e-mail, password, confirmation, terms — no phone, no CAPTCHA marker. Posting (POST /poner-anuncios-gratis/, after login): title*, description*, category* (17, 'Servicios' among them), images, video, a price (blank = 'a consultar'), and a location box with hidden province/locality/district/lat/lng fields that carries no required mark. The terms (Casinuevo, Spain) ban sexual, pyramid, misleading and live-animal ads and promotional reviews, not business ads, links or automation; they note automated filtering. Registrar candidate: the account registers by mail, the form is read inside the login, and the location stays empty under the place rule unless the server demands it. Update 2026-10-17 04:50Z: the registrar sent the registration at 04:36Z (confirmation mail awaited) and then found the login page protected by reCAPTCHA (the page's own badge text; the registration page carries none); Amber never solves or evades a CAPTCHA, so the board is skipped: the ad-form mapping is written and tested on branch claude/casinuevo-ad-form (no PR) for the day a login path without a CAPTCHA exists.",
+  "can_act": "no: the login page is protected by reCAPTCHA (read 2026-10-17 04:50Z: \"Sitio protegido por reCAPTCHA, la Política de Privacidad y los Términos del Servicio de Google aplican\"); Amber never solves or evades one, so the account cannot sign in to post",
   "basis": "read",
   "free_option": "free ads",
   "account": "unknown",
