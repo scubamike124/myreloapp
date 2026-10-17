@@ -140,4 +140,4 @@ test) and Cloudflare's free quick tunnel; no new service.
 
 1. Whether to send the Support question above (it is the only way to a definitive answer on automation).
 2. Whether to make Book 1's draft by hand now with the kit, and confirm the images answer is Yes.
-3. Whether Amber may merge the cloud assist browser (amberai pull request, tested on fake sites only) so it is ready if Amazon says yes.
+3. Nothing to decide for the cloud assist browser: it is inert for Amazon (refused in code), so Amber merges it on green CI under the standing authorization; it is ready if Amazon says yes.
