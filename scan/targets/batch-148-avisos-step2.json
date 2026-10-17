@@ -1,0 +1,47 @@
+[
+ {
+  "id": "r148:avisos-colombia:add-90",
+  "kind": "json",
+  "url": "https://www.avisos-colombia.com/post/add/?selector=90",
+  "country": "CO",
+  "site": "avisos-colombia posting step 2 for 'Servicios' (fields, city with 'Toda Colombia'?, phone, captcha)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r148:avisos-chile:add-90",
+  "kind": "json",
+  "url": "https://www.avisos-chile.com/post/add/?selector=90",
+  "country": "CL",
+  "site": "avisos-chile posting step 2 for 'Servicios'",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r148:avisos-colombia:add-83",
+  "kind": "json",
+  "url": "https://www.avisos-colombia.com/post/add/?selector=83",
+  "country": "CO",
+  "site": "avisos-colombia posting step 2 for 'Clases y Cursos' (fields, city with 'Toda Colombia'?, phone, captcha)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r148:avisos-chile:add-83",
+  "kind": "json",
+  "url": "https://www.avisos-chile.com/post/add/?selector=83",
+  "country": "CL",
+  "site": "avisos-chile posting step 2 for 'Clases y Cursos'",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r148:avisos-colombia:selectcity",
+  "kind": "json",
+  "url": "https://www.avisos-colombia.com/selectcity/",
+  "country": "CO",
+  "site": "avisos-colombia city chooser (is 'Toda Colombia' a posting place?)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
