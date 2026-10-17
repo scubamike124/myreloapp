@@ -1,0 +1,506 @@
+[
+ {
+  "id": "ver126:annonsly.se:home",
+  "kind": "signup",
+  "url": "https://annonsly.se/",
+  "country": "SE",
+  "site": "annonsly.se home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:annonsly.se:found",
+  "kind": "signup",
+  "url": "https://www.annonsly.se/gratis-annonser.php",
+  "country": "SE",
+  "site": "annonsly.se page the search found: Gratis annonser | Annonsera gratis online | Annons",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:pryl.se:home",
+  "kind": "signup",
+  "url": "https://pryl.se/",
+  "country": "SE",
+  "site": "pryl.se home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:pryl.se:found",
+  "kind": "signup",
+  "url": "https://pryl.se/annonsera-gratis/",
+  "country": "SE",
+  "site": "pryl.se page the search found: Lägg in en annons gratis! - Pryl.se",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:annonz.se:home",
+  "kind": "signup",
+  "url": "https://annonz.se/",
+  "country": "SE",
+  "site": "annonz.se home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:fyndare.se:home",
+  "kind": "signup",
+  "url": "https://fyndare.se/",
+  "country": "SE",
+  "site": "fyndare.se home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:fyndare.se:found",
+  "kind": "signup",
+  "url": "https://fyndare.se/sidor/gratis-annonsering",
+  "country": "SE",
+  "site": "fyndare.se page the search found: Gratis annonsering - Lägg upp din annons kostnadsf",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:annonsera.se:home",
+  "kind": "signup",
+  "url": "https://annonsera.se/",
+  "country": "SE",
+  "site": "annonsera.se home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:klasificados.net:home",
+  "kind": "signup",
+  "url": "https://klasificados.net/",
+  "country": "ES",
+  "site": "klasificados.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:klasificados.net:found",
+  "kind": "signup",
+  "url": "https://klasificados.net/publicar",
+  "country": "ES",
+  "site": "klasificados.net page the search found: Publicar anuncio gratis - Klasificados",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:expoanuncios.es:home",
+  "kind": "signup",
+  "url": "https://expoanuncios.es/",
+  "country": "ES",
+  "site": "expoanuncios.es home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:expoanuncios.es:found",
+  "kind": "signup",
+  "url": "https://expoanuncios.es/poner-anuncio-gratis/",
+  "country": "ES",
+  "site": "expoanuncios.es page the search found: Poner Anuncio Gratis sin Registro - expoanuncios.e",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:todoanuncio.es:home",
+  "kind": "signup",
+  "url": "https://todoanuncio.es/",
+  "country": "ES",
+  "site": "todoanuncio.es home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:todoanuncio.es:found",
+  "kind": "signup",
+  "url": "https://www.todoanuncio.es/",
+  "country": "ES",
+  "site": "todoanuncio.es page the search found: Todoanuncio.es - La web de anuncios clasificados g",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:eanuncios.com:home",
+  "kind": "signup",
+  "url": "https://eanuncios.com/",
+  "country": "ES",
+  "site": "eanuncios.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:eanuncios.com:found",
+  "kind": "signup",
+  "url": "https://www.eanuncios.com/anuncios-gratis/",
+  "country": "ES",
+  "site": "eanuncios.com page the search found: Publica anuncios gratis de segunda mano y nuevos",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:localviva.com.br:home",
+  "kind": "signup",
+  "url": "https://localviva.com.br/",
+  "country": "BR",
+  "site": "localviva.com.br home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:localviva.com.br:found",
+  "kind": "signup",
+  "url": "https://localviva.com.br/portal-de-classificados-gratuitos",
+  "country": "BR",
+  "site": "localviva.com.br page the search found: Portal de Classificados Gratuitos - Local Viva Anú",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:infograu.com.br:home",
+  "kind": "signup",
+  "url": "https://infograu.com.br/",
+  "country": "BR",
+  "site": "infograu.com.br home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:infograu.com.br:found",
+  "kind": "signup",
+  "url": "https://www.infograu.com.br/",
+  "country": "BR",
+  "site": "infograu.com.br page the search found: Classificados grátis: produtos e serviços | InfoGr",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:zapanuncios.com.br:home",
+  "kind": "signup",
+  "url": "https://zapanuncios.com.br/",
+  "country": "BR",
+  "site": "zapanuncios.com.br home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:desapega.net:home",
+  "kind": "signup",
+  "url": "https://desapega.net/",
+  "country": "BR",
+  "site": "desapega.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:desapega.net:found",
+  "kind": "signup",
+  "url": "https://www.desapega.net/",
+  "country": "BR",
+  "site": "desapega.net page the search found: Desapega - Classificados Grátis: Compre, Venda e T",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:sitioanuncios.com:home",
+  "kind": "signup",
+  "url": "https://sitioanuncios.com/",
+  "country": "PE",
+  "site": "sitioanuncios.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:sitioanuncios.com:found",
+  "kind": "signup",
+  "url": "https://www.sitioanuncios.com/peru/",
+  "country": "PE",
+  "site": "sitioanuncios.com page the search found: Sitioanuncios Perú - Anuncios clasificados gratuit",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:aynify.pe:home",
+  "kind": "signup",
+  "url": "https://aynify.pe/",
+  "country": "PE",
+  "site": "aynify.pe home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:aynify.pe:found",
+  "kind": "signup",
+  "url": "https://aynify.pe/publicar",
+  "country": "PE",
+  "site": "aynify.pe page the search found: Publicar anuncio gratis — Aynify Perú",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:planetaperu.pe:home",
+  "kind": "signup",
+  "url": "https://planetaperu.pe/",
+  "country": "PE",
+  "site": "planetaperu.pe home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:planetaperu.pe:found",
+  "kind": "signup",
+  "url": "https://www.planetaperu.pe/post-ad",
+  "country": "PE",
+  "site": "planetaperu.pe page the search found: Publicar un anuncio gratis en Perú - PlanetaPeru",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:doplim.com.pe:home",
+  "kind": "signup",
+  "url": "https://doplim.com.pe/",
+  "country": "PE",
+  "site": "doplim.com.pe home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:doplim.com.pe:found",
+  "kind": "signup",
+  "url": "https://www.doplim.com.pe/post-ad.html",
+  "country": "PE",
+  "site": "doplim.com.pe page the search found: Publicar Anuncios Gratis | Publicar Clasificados G",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:marketplaceperu.com.pe:home",
+  "kind": "signup",
+  "url": "https://marketplaceperu.com.pe/",
+  "country": "PE",
+  "site": "marketplaceperu.com.pe home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:peru.wanuncios.com:home",
+  "kind": "signup",
+  "url": "https://peru.wanuncios.com/",
+  "country": "PE",
+  "site": "peru.wanuncios.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:peru.wanuncios.com:found",
+  "kind": "signup",
+  "url": "https://peru.wanuncios.com/publicar/",
+  "country": "PE",
+  "site": "peru.wanuncios.com page the search found: Publicar anuncios gratis en Perú",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:servidos.ar:home",
+  "kind": "signup",
+  "url": "https://servidos.ar/",
+  "country": "AR",
+  "site": "servidos.ar home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:servidos.ar:found",
+  "kind": "signup",
+  "url": "https://servidos.ar/clasificados/publicar-gratis",
+  "country": "AR",
+  "site": "servidos.ar page the search found: Publicar Aviso Gratis Argentina | Clasificados Sin",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:argentina.anunciar.co:home",
+  "kind": "signup",
+  "url": "https://argentina.anunciar.co/",
+  "country": "AR",
+  "site": "argentina.anunciar.co home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:locanto.com.ar:home",
+  "kind": "signup",
+  "url": "https://locanto.com.ar/",
+  "country": "AR",
+  "site": "locanto.com.ar home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:locanto.com.ar:found",
+  "kind": "signup",
+  "url": "https://www.locanto.com.ar/",
+  "country": "AR",
+  "site": "locanto.com.ar page the search found: Avisos clasificados gratis - Locanto™ Argentina",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:emponda.com:home",
+  "kind": "signup",
+  "url": "https://emponda.com/",
+  "country": "AR",
+  "site": "emponda.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:argentina.tusavisos.com:home",
+  "kind": "signup",
+  "url": "https://argentina.tusavisos.com/",
+  "country": "AR",
+  "site": "argentina.tusavisos.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:argentina.tusavisos.com:found",
+  "kind": "signup",
+  "url": "https://www.argentina.tusavisos.com/",
+  "country": "AR",
+  "site": "argentina.tusavisos.com page the search found: Avisos clasificados gratis en Argentina - TusAviso",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:aranuncios.com:home",
+  "kind": "signup",
+  "url": "https://aranuncios.com/",
+  "country": "AR",
+  "site": "aranuncios.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:aranuncios.com:found",
+  "kind": "signup",
+  "url": "https://www.aranuncios.com/",
+  "country": "AR",
+  "site": "aranuncios.com page the search found: Argentina - Anuncios, Avisos Clasificados Gratis A",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:mxanuncios.com:home",
+  "kind": "signup",
+  "url": "https://mxanuncios.com/",
+  "country": "MX",
+  "site": "mxanuncios.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:mxanuncios.com:found",
+  "kind": "signup",
+  "url": "https://www.mxanuncios.com/",
+  "country": "MX",
+  "site": "mxanuncios.com page the search found: México - Anuncios y Avisos Clasificados Gratis | M",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:mexico.anunciar.co:home",
+  "kind": "signup",
+  "url": "https://mexico.anunciar.co/",
+  "country": "MX",
+  "site": "mexico.anunciar.co home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:anunciomx.com:home",
+  "kind": "signup",
+  "url": "https://anunciomx.com/",
+  "country": "MX",
+  "site": "anunciomx.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:anunciomx.com:found",
+  "kind": "signup",
+  "url": "https://www.anunciomx.com/",
+  "country": "MX",
+  "site": "anunciomx.com page the search found: Publicar Anuncios Gratis en México - Comprar y Ven",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:doplim.com.mx:home",
+  "kind": "signup",
+  "url": "https://doplim.com.mx/",
+  "country": "MX",
+  "site": "doplim.com.mx home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:doplim.com.mx:found",
+  "kind": "signup",
+  "url": "https://www.doplim.com.mx/",
+  "country": "MX",
+  "site": "doplim.com.mx page the search found: Anuncios Clasificados Gratis en México | Doplim",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:mx.clasificados.st:home",
+  "kind": "signup",
+  "url": "https://mx.clasificados.st/",
+  "country": "MX",
+  "site": "mx.clasificados.st home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:oyeanuncios.com:home",
+  "kind": "signup",
+  "url": "https://oyeanuncios.com/",
+  "country": "MX",
+  "site": "oyeanuncios.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:oyeanuncios.com:found",
+  "kind": "signup",
+  "url": "https://oyeanuncios.com/home/es/mx",
+  "country": "MX",
+  "site": "oyeanuncios.com page the search found: Oyeanuncios - Publica Anuncios Gratis",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:post.clasimexico.com:home",
+  "kind": "signup",
+  "url": "https://post.clasimexico.com/",
+  "country": "MX",
+  "site": "post.clasimexico.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver126:post.clasimexico.com:found",
+  "kind": "signup",
+  "url": "https://post.clasimexico.com/ads/add",
+  "country": "MX",
+  "site": "post.clasimexico.com page the search found: Publicar clasificados en Mexico. Publica tus aviso",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]

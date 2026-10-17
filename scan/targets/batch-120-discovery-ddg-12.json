@@ -1,0 +1,56 @@
+[
+ {
+  "id": "disc120:DE",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=kostenlose%20Kleinanzeigen%20inserieren%20ohne%20Anmeldung%20Studenten%20Uni",
+  "country": "DE",
+  "site": "DuckDuckGo: kostenlose Kleinanzeigen inserieren ohne Anmeldung Studenten Uni",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc120:FR",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=petites%20annonces%20gratuites%20d%C3%A9poser%20une%20annonce%20sans%20inscription%20%C3%A9tudiants",
+  "country": "FR",
+  "site": "DuckDuckGo: petites annonces gratuites déposer une annonce sans inscription étudiants",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc120:IE",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=free%20classified%20ads%20Ireland%20post%20ad%20no%20registration%20students",
+  "country": "IE",
+  "site": "DuckDuckGo: free classified ads Ireland post ad no registration students",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc120:PT",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=an%C3%BAncios%20gr%C3%A1tis%20Portugal%20publicar%20an%C3%BAncio%20sem%20registo%20estudantes",
+  "country": "PT",
+  "site": "DuckDuckGo: anúncios grátis Portugal publicar anúncio sem registo estudantes",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc120:TH",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=%E0%B8%A5%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9F%E0%B8%A3%E0%B8%B5%20%E0%B9%84%E0%B8%A1%E0%B9%88%E0%B8%95%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%AA%E0%B8%A1%E0%B8%B1%E0%B8%84%E0%B8%A3%E0%B8%AA%E0%B8%A1%E0%B8%B2%E0%B8%8A%E0%B8%B4%E0%B8%81%20%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2",
+  "country": "TH",
+  "site": "DuckDuckGo: ลงประกาศฟรี ไม่ต้องสมัครสมาชิก นักศึกษา",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc120:MY",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=iklan%20percuma%20Malaysia%20pasang%20iklan%20tanpa%20daftar%20pelajar",
+  "country": "MY",
+  "site": "DuckDuckGo: iklan percuma Malaysia pasang iklan tanpa daftar pelajar",
+  "category": "discovery",
+  "bodyChars": 80000
+ }
+]
