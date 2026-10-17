@@ -1,0 +1,86 @@
+BOLD & EASY PATTERNS — bold-patterns-01 — KDP PAPERBACK DRAFT, FIELD BY FIELD
+Prepared 2026-10-17 by Amber. Save as DRAFT only. Never tap "Publish Your Paperback Book".
+
+On the iPhone: open kdp.amazon.com in Safari, tap the "aA" button, choose "Request Desktop Website" (the KDP forms are easier on the desktop layout). Sign in with your own Amazon login and code. Long-press a value below to copy it, then paste it into KDP.
+
+FILES (save both to the Files app first; KDP's "Browse" button opens it)
+  bold-patterns-01-INTERIOR-v2.pdf   443,028 bytes   sha256 20578482363365d9...
+  bold-patterns-01-COVER-v2.pdf       14,011 bytes   sha256 7a3619be0e330d41...
+  (full-wrap cover: 17.484 x 11.25 in = back + 0.234 in spine + front + bleed; 104 pages, white paper)
+
+1) KDP bookshelf -> "+ Create" -> Paperback.  PAPERBACK DETAILS page
+
+  Language: English
+  Book Title:
+Bold & Easy Patterns
+
+  Subtitle:
+A Large Print Coloring Book for Adults and Seniors: 50 Simple Mandalas, Flowers, Waves and Geometric Designs with Thick Lines
+
+  Series: leave empty.   Edition number: leave empty.
+  Author, First name:
+Amber One
+  Author, Last name:
+Press
+  (a pen name: KDP allows one that stays the same on every book. Contributors: leave empty.)
+
+  Description (paste all paragraphs):
+Fifty bold, easy designs with thick black lines and big spaces to color. Made for relaxed coloring: mandalas, daisies, honeycombs, waves, bubbles, stars, hearts, butterflies, fish, mushrooms, hot-air balloons, cacti, snowflakes, gears and more, each on its own right-hand page with a blank back so markers never spoil the next design.
+
+Large print, 8.5 x 11 inches, printed on one side only. No tiny details and no clutter: the shapes are wide enough for crayons, markers and tired eyes alike, which makes the book a good fit for seniors, beginners and anyone who wants to unwind without squinting.
+
+What is inside: 50 single-sided designs and a short note on paper and pens with the copyright line. Every design in this book is an original drawing made for this edition.
+
+Paperback, 104 pages, white paper, black ink.
+
+  Publishing rights: "I own the copyright and I hold the necessary publishing rights"
+  Primary audience: Sexually explicit images or title? NO.  Reading age: leave empty (optional).
+
+  Keywords (7 boxes, one phrase each):
+large print coloring book for seniors
+bold and easy coloring book for adults
+simple mandala coloring book
+geometric patterns coloring book
+stress relief coloring thick lines
+easy coloring book for beginners
+relaxing coloring book single sided
+
+  Categories (choose from the picker; up to 3):
+Books > Crafts, Hobbies & Home > Crafts & Hobbies > Coloring Books for Grown-Ups > Flowers & Landscapes
+Books > Self-Help > Stress Management
+  (if a path is not offered exactly, pick the closest "Coloring Books for Grown-Ups" subcategory)
+
+  -> tap "Save as Draft", then "Save and Continue".
+
+2) PAPERBACK CONTENT page
+
+  Print ISBN: "Get a free KDP ISBN" -> "Assign ISBN"  (KDP then shows publisher "Independently published"; that is fixed for a free ISBN)
+  Publication date: leave empty.
+  Print options:
+    Interior and paper type: Black & white interior with white paper
+    Trim size: 8.5 x 11 in (21.59 x 27.94 cm)
+    Bleed settings: No Bleed
+    Paperback cover finish: Matte
+  Manuscript: "Upload paperback manuscript" -> bold-patterns-01-INTERIOR-v2.pdf
+  Book Cover: "Upload a cover you already have (print-ready PDF only)" -> bold-patterns-01-COVER-v2.pdf
+  Generative AI question (answer exactly this; it is what is true of this book; KDP defines "AI-generated" as content "created by an AI-based tool", even if edited):
+    Did you use AI-generated content?  YES
+      Text: YES - AI-generated: the title text, description and note page were drafted by an AI assistant (Claude, by Anthropic) and reviewed. Tool name if asked: Claude
+      Images: YES - AI-generated: the 50 designs and the cover artwork are vector drawings made by a program that an AI assistant (Claude) wrote; no image-generation model was run and nothing was copied or traced. Tool name if asked: Claude
+      Translations: NO
+  Book preview: "Launch Previewer". Wait for it to finish. It should say there are no errors. Tap through 6 or 7 pages (title page, note page, a few designs, back cover). Screenshot the result.
+  If the previewer shows warnings or errors: stop and send me the screenshot. If it is clean, tap "Approve", then "Save as Draft" and "Save and Continue".
+
+3) PAPERBACK RIGHTS & PRICING page
+
+  Territories: All territories (worldwide rights)
+  Primary marketplace: Amazon.com
+  Price (list): 9.99 USD  (the other marketplaces follow automatically)
+  Expanded Distribution: leave KDP's default for now; we decide before publishing (it pays a lower royalty)
+  What you earn at 9.99 on Amazon.com: 60% of 9.99 = 5.994, minus printing 2.84 = 3.154, which KDP shows as about 3.15 USD per copy. Nothing is earned until a copy sells.
+  -> tap "Save as Draft" ONLY. STOP HERE. Do NOT tap "Publish Your Paperback Book".
+
+4) SEND ME (so I can confirm the draft is in your account)
+  - a screenshot of the KDP Bookshelf showing "Bold & Easy Patterns" with status "Draft"
+  - a screenshot of the previewer result
+  - anything on screen that did not match this sheet
