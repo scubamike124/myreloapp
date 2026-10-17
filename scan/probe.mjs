@@ -42,7 +42,7 @@ async function get(url, { accept = "application/json, text/html;q=0.9, */*;q=0.5
     const text = await res.text().catch(() => "");
     let json = null;
     if (/^\s*[[{]/.test(text)) { try { json = JSON.parse(text); } catch { json = null; } }
-    return { status: res.status, url: res.url, text, json, type: res.headers.get("content-type") || "", sessionId: res.headers.get("mcp-session-id") || null };
+    return { status: res.status, url: res.url, text, json, type: res.headers.get("content-type") || "", sessionId: res.headers.get("mcp-session-id") || null, cookies: typeof res.headers.getSetCookie === "function" ? res.headers.getSetCookie() : [] };
   } catch (e) {
     return { status: 0, url, text: "", json: null, error: String(e?.message || e).slice(0, 120) };
   }
@@ -296,6 +296,20 @@ async function probeJson(t) {
 }
 
 
+// A form step of a posting wizard, read as the next page: the step-1 page is fetched for its session cookie, then the wizard's own choice
+// (a category id, `body` as application/x-www-form-urlencoded) is posted to `url` and the page that follows is kept for a hand review of
+// its fields. The body is never a registration, a login or an ad; reads only.
+async function probeForm(t) {
+  const html5 = "text/html,application/xhtml+xml,*/*;q=0.8";
+  const first = t.pageUrl ? await get(t.pageUrl, { accept: html5, ms: 20000 }) : null;
+  const cookie = first && Array.isArray(first.cookies) ? first.cookies.map((c) => String(c).split(";")[0]).filter(Boolean).join("; ") : "";
+  const headers = { "Content-Type": "application/x-www-form-urlencoded", ...(cookie ? { Cookie: cookie } : {}), ...(t.pageUrl ? { Referer: t.pageUrl } : {}) };
+  const page = await get(t.url, { method: "POST", body: String(t.body || ""), headers, accept: html5, ms: 20000 });
+  const text = page.text || "";
+  const cap = Number(t.bodyChars) > 0 ? Math.min(400000, Number(t.bodyChars)) : 60000;
+  return { reachable: page.status > 0, status: page.status, finalUrl: page.url, firstStatus: first ? first.status : null, cookieSent: Boolean(cookie), chars: text.length, body: text.slice(0, cap), error: page.error };
+}
+
 // MCP (streamable HTTP): initialize, then tools/list, both as JSON-RPC POSTs; an SSE answer is unwrapped from its data: lines.
 async function mcpPost(url, payload, session) {
   const headers = { "Content-Type": "application/json", "MCP-Protocol-Version": "2025-06-18" };
@@ -321,7 +335,7 @@ async function probeMcp(t) {
 }
 
 const PROBES = {
-  mcp: probeMcp, mastodon: probeMastodon, peertube: probePeertube, lemmy: probeLemmy, pixelfed: probePixelfed, misskey: probeMisskey, nostr: probeNostr, html: probeHtml, signup: probeSignup, task: probeTask, json: probeJson };
+  mcp: probeMcp, mastodon: probeMastodon, peertube: probePeertube, lemmy: probeLemmy, pixelfed: probePixelfed, misskey: probeMisskey, nostr: probeNostr, html: probeHtml, signup: probeSignup, task: probeTask, json: probeJson, form: probeForm };
 async function run() {
   let queue = [];
   for (const t of targets) {

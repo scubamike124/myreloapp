@@ -1,0 +1,35 @@
+[
+ {
+  "id": "r149:avisos-colombia:step2-servicios",
+  "kind": "form",
+  "pageUrl": "https://www.avisos-colombia.com/post/",
+  "url": "https://www.avisos-colombia.com/post/add/",
+  "body": "selector=90",
+  "country": "CO",
+  "site": "avisos-colombia posting step 2 for Servicios (fields, state/city, phone, captcha)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r149:avisos-colombia:step2-clases",
+  "kind": "form",
+  "pageUrl": "https://www.avisos-colombia.com/post/",
+  "url": "https://www.avisos-colombia.com/post/add/",
+  "body": "selector=83",
+  "country": "CO",
+  "site": "avisos-colombia posting step 2 for Clases y Cursos",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r149:avisos-chile:step2-servicios",
+  "kind": "form",
+  "pageUrl": "https://www.avisos-chile.com/post/",
+  "url": "https://www.avisos-chile.com/post/add/",
+  "body": "selector=90",
+  "country": "CL",
+  "site": "avisos-chile posting step 2 for Servicios",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
