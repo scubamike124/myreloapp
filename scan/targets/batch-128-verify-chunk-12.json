@@ -1,0 +1,506 @@
+[
+ {
+  "id": "ver128:olx.pt:home",
+  "kind": "signup",
+  "url": "https://olx.pt/",
+  "country": "PT",
+  "site": "olx.pt home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:bonsanuncios.pt:home",
+  "kind": "signup",
+  "url": "https://bonsanuncios.pt/",
+  "country": "PT",
+  "site": "bonsanuncios.pt home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:bonsanuncios.pt:found",
+  "kind": "signup",
+  "url": "https://www.bonsanuncios.pt/publicar-um-anuncio.html",
+  "country": "PT",
+  "site": "bonsanuncios.pt page the search found: Publicar um anúncio grátis sem registro - Bonsanun",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:anunciosparatodos.com:home",
+  "kind": "signup",
+  "url": "https://anunciosparatodos.com/",
+  "country": "PT",
+  "site": "anunciosparatodos.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:custojusto.pt:home",
+  "kind": "signup",
+  "url": "https://custojusto.pt/",
+  "country": "PT",
+  "site": "custojusto.pt home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:custojusto.pt:found",
+  "kind": "signup",
+  "url": "https://www.custojusto.pt/ai",
+  "country": "PT",
+  "site": "custojusto.pt page the search found: Inserir Anúncio - CustoJusto Portugal",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:doplim.pt:home",
+  "kind": "signup",
+  "url": "https://doplim.pt/",
+  "country": "PT",
+  "site": "doplim.pt home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:sivalai.com:home",
+  "kind": "signup",
+  "url": "https://sivalai.com/",
+  "country": "TH",
+  "site": "sivalai.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:sivalai.com:found",
+  "kind": "signup",
+  "url": "https://sivalai.com/sell",
+  "country": "TH",
+  "site": "sivalai.com page the search found: ลงประกาศขายบ้าน ที่ดิน คอนโด ฟรี — Sivalai",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:thaihometown.com:home",
+  "kind": "signup",
+  "url": "https://thaihometown.com/",
+  "country": "TH",
+  "site": "thaihometown.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:thaihometown.com:found",
+  "kind": "signup",
+  "url": "https://www.thaihometown.com/%E0%B8%A5%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A",
+  "country": "TH",
+  "site": "thaihometown.com page the search found: ลงประกาศฟรี - thaihometown.com",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:oho4sale.com:home",
+  "kind": "signup",
+  "url": "https://oho4sale.com/",
+  "country": "TH",
+  "site": "oho4sale.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:sengbiz.com:home",
+  "kind": "signup",
+  "url": "https://sengbiz.com/",
+  "country": "TH",
+  "site": "sengbiz.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:sengbiz.com:found",
+  "kind": "signup",
+  "url": "https://sengbiz.com/post",
+  "country": "TH",
+  "site": "sengbiz.com page the search found: ลงประกาศฟรี | SengBiz.com",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:smeleader.com:home",
+  "kind": "signup",
+  "url": "https://smeleader.com/",
+  "country": "TH",
+  "site": "smeleader.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:smeleader.com:found",
+  "kind": "signup",
+  "url": "https://smeleader.com/submit.php",
+  "country": "TH",
+  "site": "smeleader.com page the search found: ลงประกาศฟรี - เลือกประเภทประกาศ | SMELeader",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:taladx.com:home",
+  "kind": "signup",
+  "url": "https://taladx.com/",
+  "country": "TH",
+  "site": "taladx.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:taladx.com:found",
+  "kind": "signup",
+  "url": "https://www.taladx.com/index.php",
+  "country": "TH",
+  "site": "taladx.com page the search found: Talad X : ลงประกาศฟรี ลงโฆษณาฟรี โปรโมทสินค้าฟรี ซ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:homeland4sale.com:home",
+  "kind": "signup",
+  "url": "https://homeland4sale.com/",
+  "country": "TH",
+  "site": "homeland4sale.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:homeland4sale.com:found",
+  "kind": "signup",
+  "url": "https://www.homeland4sale.com/%E0%B8%A5%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%",
+  "country": "TH",
+  "site": "homeland4sale.com page the search found: ลงประกาศขายบ้าน ที่ดิน คอนโด ฟรี ไม่ต้องสมัครสมาชิ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:kleinanzeigen.de:home",
+  "kind": "signup",
+  "url": "https://kleinanzeigen.de/",
+  "country": "DE",
+  "site": "kleinanzeigen.de home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:kleinanzeigen.de:found",
+  "kind": "signup",
+  "url": "https://www.kleinanzeigen.de/s-ohne-anmeldung/k0",
+  "country": "DE",
+  "site": "kleinanzeigen.de page the search found: Ohne Anmeldung kleinanzeigen.de",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:studenteninserate.de:home",
+  "kind": "signup",
+  "url": "https://studenteninserate.de/",
+  "country": "DE",
+  "site": "studenteninserate.de home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:studenteninserate.com:home",
+  "kind": "signup",
+  "url": "https://studenteninserate.com/",
+  "country": "DE",
+  "site": "studenteninserate.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:lokale-kleinanzeigen.de:home",
+  "kind": "signup",
+  "url": "https://lokale-kleinanzeigen.de/",
+  "country": "DE",
+  "site": "lokale-kleinanzeigen.de home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:lokale-kleinanzeigen.de:found",
+  "kind": "signup",
+  "url": "https://www.lokale-kleinanzeigen.de/kostenlos-inserieren.html",
+  "country": "DE",
+  "site": "lokale-kleinanzeigen.de page the search found: Ohne Anmeldung kostenlos Kleinanzeigen aufgeben | ",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:minianzeigen.de:home",
+  "kind": "signup",
+  "url": "https://minianzeigen.de/",
+  "country": "DE",
+  "site": "minianzeigen.de home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:minianzeigen.de:found",
+  "kind": "signup",
+  "url": "https://www.minianzeigen.de/Studenten",
+  "country": "DE",
+  "site": "minianzeigen.de page the search found: Studenten Kleinanzeigen",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:annonces.net:home",
+  "kind": "signup",
+  "url": "https://annonces.net/",
+  "country": "FR",
+  "site": "annonces.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:annonces.net:found",
+  "kind": "signup",
+  "url": "https://www.annonces.net/fr/",
+  "country": "FR",
+  "site": "annonces.net page the search found: Annonces.net — Petites annonces gratuites, partout",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:bestofannonces.com:home",
+  "kind": "signup",
+  "url": "https://bestofannonces.com/",
+  "country": "FR",
+  "site": "bestofannonces.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:member.annonces.net:home",
+  "kind": "signup",
+  "url": "https://member.annonces.net/",
+  "country": "FR",
+  "site": "member.annonces.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:member.annonces.net:found",
+  "kind": "signup",
+  "url": "https://member.annonces.net/fr/mes-annonces",
+  "country": "FR",
+  "site": "member.annonces.net page the search found: Annonces.net — Petites annonces gratuites, partout",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:leboncoin.fr:home",
+  "kind": "signup",
+  "url": "https://leboncoin.fr/",
+  "country": "FR",
+  "site": "leboncoin.fr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:1001annonces.net:home",
+  "kind": "signup",
+  "url": "https://1001annonces.net/",
+  "country": "FR",
+  "site": "1001annonces.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:1001annonces.net:found",
+  "kind": "signup",
+  "url": "https://www.1001annonces.net/fr/",
+  "country": "FR",
+  "site": "1001annonces.net page the search found: Petites annonces gratuites en France | 1001 Annonc",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:topannonces.fr:home",
+  "kind": "signup",
+  "url": "https://topannonces.fr/",
+  "country": "FR",
+  "site": "topannonces.fr home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:topannonces.fr:found",
+  "kind": "signup",
+  "url": "https://www.topannonces.fr/depose/",
+  "country": "FR",
+  "site": "topannonces.fr page the search found: Déposer une annonce entre particuliers - Topannonc",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:tesannonces.com:home",
+  "kind": "signup",
+  "url": "https://tesannonces.com/",
+  "country": "FR",
+  "site": "tesannonces.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:1001annonces.com:home",
+  "kind": "signup",
+  "url": "https://1001annonces.com/",
+  "country": "FR",
+  "site": "1001annonces.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:placeducoin.com:home",
+  "kind": "signup",
+  "url": "https://placeducoin.com/",
+  "country": "FR",
+  "site": "placeducoin.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:ie.classi4u.com:home",
+  "kind": "signup",
+  "url": "https://ie.classi4u.com/",
+  "country": "IE",
+  "site": "ie.classi4u.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:locanto.ie:home",
+  "kind": "signup",
+  "url": "https://locanto.ie/",
+  "country": "IE",
+  "site": "locanto.ie home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:locanto.ie:found",
+  "kind": "signup",
+  "url": "https://www.locanto.ie/ireland/",
+  "country": "IE",
+  "site": "locanto.ie page the search found: Free Classifieds Ireland - Locanto™",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:buz.ie:home",
+  "kind": "signup",
+  "url": "https://buz.ie/",
+  "country": "IE",
+  "site": "buz.ie home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:ie.smailads.com:home",
+  "kind": "signup",
+  "url": "https://ie.smailads.com/",
+  "country": "IE",
+  "site": "ie.smailads.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:ie.smailads.com:found",
+  "kind": "signup",
+  "url": "https://ie.smailads.com/en/",
+  "country": "IE",
+  "site": "ie.smailads.com page the search found: SmailAds Ireland",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:cheerads.com:home",
+  "kind": "signup",
+  "url": "https://cheerads.com/",
+  "country": "IE",
+  "site": "cheerads.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:jaadz.com:home",
+  "kind": "signup",
+  "url": "https://jaadz.com/",
+  "country": "IE",
+  "site": "jaadz.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:iklanlah.com:home",
+  "kind": "signup",
+  "url": "https://iklanlah.com/",
+  "country": "MY",
+  "site": "iklanlah.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:iklanmalaysia.com:home",
+  "kind": "signup",
+  "url": "https://iklanmalaysia.com/",
+  "country": "MY",
+  "site": "iklanmalaysia.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:advertigo.net:home",
+  "kind": "signup",
+  "url": "https://advertigo.net/",
+  "country": "MY",
+  "site": "advertigo.net home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:advertigo.net:found",
+  "kind": "signup",
+  "url": "https://www.advertigo.net/my/marketplace",
+  "country": "MY",
+  "site": "advertigo.net page the search found: Iklan percuma Malaysia - Siarkan iklan percuma | A",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:iklanpercumamalaysia.club:home",
+  "kind": "signup",
+  "url": "https://iklanpercumamalaysia.club/",
+  "country": "MY",
+  "site": "iklanpercumamalaysia.club home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:aliklan.com:home",
+  "kind": "signup",
+  "url": "https://aliklan.com/",
+  "country": "MY",
+  "site": "aliklan.com home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "ver128:iklanpercuma.club:home",
+  "kind": "signup",
+  "url": "https://iklanpercuma.club/",
+  "country": "MY",
+  "site": "iklanpercuma.club home (registration form, markers)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ }
+]

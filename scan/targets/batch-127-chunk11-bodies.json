@@ -1,0 +1,182 @@
+[
+ {
+  "id": "r127:servidos.ar:0",
+  "kind": "json",
+  "url": "https://servidos.ar/registrar-proveedor",
+  "country": "AR",
+  "site": "servidos.ar page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:servidos.ar:1",
+  "kind": "json",
+  "url": "https://servidos.ar/",
+  "country": "AR",
+  "site": "servidos.ar page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:servidos.ar:2",
+  "kind": "json",
+  "url": "https://servidos.ar/clasificados/publicar-gratis",
+  "country": "AR",
+  "site": "servidos.ar page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:oyeanuncios.com:3",
+  "kind": "json",
+  "url": "https://oyeanuncios.com/home/es/mx",
+  "country": "MX",
+  "site": "oyeanuncios.com page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:oyeanuncios.com:4",
+  "kind": "json",
+  "url": "https://oyeanuncios.com/register/es/mx",
+  "country": "MX",
+  "site": "oyeanuncios.com page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:eanuncios.com:5",
+  "kind": "json",
+  "url": "https://www.eanuncios.com/",
+  "country": "ES",
+  "site": "eanuncios.com page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:eanuncios.com:6",
+  "kind": "json",
+  "url": "https://www.eanuncios.com/anuncios-gratis/",
+  "country": "ES",
+  "site": "eanuncios.com page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:annonsera.se:7",
+  "kind": "json",
+  "url": "https://annonsera.se/",
+  "country": "SE",
+  "site": "annonsera.se page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:aynify.pe:8",
+  "kind": "json",
+  "url": "https://aynify.pe/publicar",
+  "country": "PE",
+  "site": "aynify.pe page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:aynify.pe:9",
+  "kind": "json",
+  "url": "https://aynify.pe/",
+  "country": "PE",
+  "site": "aynify.pe page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:argentina.anunciar.co:10",
+  "kind": "json",
+  "url": "https://argentina.anunciar.co/register",
+  "country": "AR",
+  "site": "argentina.anunciar.co page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:sitioanuncios.com:11",
+  "kind": "json",
+  "url": "https://www.sitioanuncios.com/peru/",
+  "country": "PE",
+  "site": "sitioanuncios.com page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:argentina.tusavisos.com:12",
+  "kind": "json",
+  "url": "https://www.argentina.tusavisos.com/",
+  "country": "AR",
+  "site": "argentina.tusavisos.com page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:emponda.com:13",
+  "kind": "json",
+  "url": "https://emponda.com/",
+  "country": "AR",
+  "site": "emponda.com page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:anunciomx.com:14",
+  "kind": "json",
+  "url": "https://www.anunciomx.com/",
+  "country": "MX",
+  "site": "anunciomx.com page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:post.clasimexico.com:15",
+  "kind": "json",
+  "url": "https://post.clasimexico.com/ads/add",
+  "country": "MX",
+  "site": "post.clasimexico.com page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:klasificados.net:16",
+  "kind": "json",
+  "url": "https://klasificados.net/publicar",
+  "country": "ES",
+  "site": "klasificados.net page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:expoanuncios.es:17",
+  "kind": "json",
+  "url": "https://expoanuncios.es/poner-anuncio-gratis/",
+  "country": "ES",
+  "site": "expoanuncios.es page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:doplim.com.mx:18",
+  "kind": "json",
+  "url": "https://www.doplim.com.mx/post-ad.html",
+  "country": "MX",
+  "site": "doplim.com.mx page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r127:annonz.se:19",
+  "kind": "json",
+  "url": "https://annonz.se/",
+  "country": "SE",
+  "site": "annonz.se page body (rules links, registration or posting form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
