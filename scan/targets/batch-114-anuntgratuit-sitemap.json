@@ -1,0 +1,29 @@
+[
+ {
+  "id": "r114:anuntgratuit:sitemap-anunturi",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/sitemap-anunturi.xml",
+  "country": "RO",
+  "site": "anuntgratuit.ro listing sitemap (for one public listing's address, to learn the read-back format)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r114:anuntgratuit:sitemap-categories",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/sitemap-categories.xml",
+  "country": "RO",
+  "site": "anuntgratuit.ro category sitemap",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r114:anuntgratuit:servicii",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/anunturi/servicii-si-afaceri/cursuri-meditatii",
+  "country": "RO",
+  "site": "anuntgratuit.ro Cursuri & Meditații subcategory (public listing cards: addresses and shape)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ }
+]
