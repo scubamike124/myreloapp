@@ -116,7 +116,7 @@ Bookshelf showing "Draft".
 | interior.pdf | 443,028 | `20578482363365d91a283e592918c83d032e90274cc4ca50f7301c5c811e85d7` |
 | cover.pdf | 14,011 | `7a3619be0e330d411db684181a4b396e4e690846aa7cce5910d98665240786be` |
 
-The only differences from the earlier build are three printed lines (note page, two lines of the back-cover blurb): "colour/colours" became "color/colors"; all 50 design pages render identically.
+Merged as amberai #875 (`c2232554`, 14:57:53Z, all three checks green); a runner build of merged main (run 39042986067, 14:58Z) printed the same two hashes. The only differences from the earlier build are three printed lines (note page, two lines of the back-cover blurb): "colour/colours" became "color/colors"; all 50 design pages render identically.
 
 ## 4. The cloud assist browser (built and tested on a fake site only)
 
