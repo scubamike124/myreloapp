@@ -1,6 +1,6 @@
 # Report 12: the three named KDP tools, read against their source (and what was found beyond them)
 
-Written 2026-10-17 21:20Z for the owner's standing instruction: "Verify the repositories, licenses, dependencies, security, and actual capabilities. Do not assume a project works because its README says it does." Nothing here ran against Amazon, no amazon.* host was contacted, nothing was logged into, and no repository code was installed anywhere near production. Evidence tags: **[V]** I checked it myself in the source; **[A]** reported by the review agent from the source and its own local runs (full notes with file:line for every row are kept with the session; the repositories were read at the commits named below); **[U]** could not be verified.
+Written 2026-10-17 21:20Z for the owner's standing instruction: "Verify the repositories, licenses, dependencies, security, and actual capabilities. Do not assume a project works because its README says it does." Nothing here ran against Amazon, no amazon.* host was contacted, nothing was logged into, and no repository code was installed anywhere near production. Evidence tags: **[V]** I checked it myself in the source; **[A]** reported by the review agent from the source and its own local runs (the full notes with file:line for every row are in `evidence/REVIEW-NOTES-three-repos.md` and `evidence/REVIEW-NOTES-alternatives.md`; the repositories were read at the commits named below); **[U]** could not be verified.
 
 ## Answer
 
