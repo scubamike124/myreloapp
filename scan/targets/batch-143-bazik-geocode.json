@@ -1,0 +1,65 @@
+[
+ {
+  "id": "r143:bazik:geocode-0",
+  "kind": "json",
+  "url": "https://bazik.cz/pridat/geocode?q=%C4%8Cesk%C3%A1%20republika",
+  "country": "CZ",
+  "site": "Bazik's location geocoder for 'Česká republika' (does it offer the whole country as a place?)",
+  "category": "classified-board",
+  "bodyChars": 20000
+ },
+ {
+  "id": "r143:bazik:geocode-1",
+  "kind": "json",
+  "url": "https://bazik.cz/pridat/geocode?q=%C4%8Cesko",
+  "country": "CZ",
+  "site": "Bazik's location geocoder for 'Česko' (does it offer the whole country as a place?)",
+  "category": "classified-board",
+  "bodyChars": 20000
+ },
+ {
+  "id": "r143:bazik:geocode-2",
+  "kind": "json",
+  "url": "https://bazik.cz/pridat/geocode?q=cel%C3%A1%20%C4%8CR",
+  "country": "CZ",
+  "site": "Bazik's location geocoder for 'celá ČR' (does it offer the whole country as a place?)",
+  "category": "classified-board",
+  "bodyChars": 20000
+ },
+ {
+  "id": "r143:bazik:geocode-3",
+  "kind": "json",
+  "url": "https://bazik.cz/pridat/geocode?q=Czechia",
+  "country": "CZ",
+  "site": "Bazik's location geocoder for 'Czechia' (does it offer the whole country as a place?)",
+  "category": "classified-board",
+  "bodyChars": 20000
+ },
+ {
+  "id": "r143:bazik:geocode-4",
+  "kind": "json",
+  "url": "https://bazik.cz/pridat/geocode?q=online",
+  "country": "CZ",
+  "site": "Bazik's location geocoder for 'online' (does it offer the whole country as a place?)",
+  "category": "classified-board",
+  "bodyChars": 20000
+ },
+ {
+  "id": "r143:bazik:geocode-5",
+  "kind": "json",
+  "url": "https://bazik.cz/pridat/geocode?q=Praha",
+  "country": "CZ",
+  "site": "Bazik's location geocoder for 'Praha' (does it offer the whole country as a place?)",
+  "category": "classified-board",
+  "bodyChars": 20000
+ },
+ {
+  "id": "r143:bazik:pridat-head",
+  "kind": "json",
+  "url": "https://bazik.cz/pridat",
+  "country": "CZ",
+  "site": "Bazik posting page head (csrf meta, session cookie)",
+  "category": "classified-board",
+  "bodyChars": 4000
+ }
+]
