@@ -1,0 +1,56 @@
+[
+ {
+  "id": "a176:pd-help-amazon",
+  "kind": "json",
+  "url": "https://help.publishdrive.com/distributing-to-amazon-with-publishdrive",
+  "country": "GLOBAL",
+  "site": "PublishDrive help: how PublishDrive distributes to Amazon (public docs, no sign-up)",
+  "category": "diagnostic",
+  "bodyChars": 120000
+ },
+ {
+  "id": "a176:pd-stores-amazon",
+  "kind": "json",
+  "url": "https://publishdrive.com/stores-amazon.html",
+  "country": "GLOBAL",
+  "site": "PublishDrive: publish to Amazon page (public)",
+  "category": "diagnostic",
+  "bodyChars": 120000
+ },
+ {
+  "id": "a176:pd-api-docs",
+  "kind": "json",
+  "url": "https://api-docs.demo.dev.publishdrive.com/",
+  "country": "GLOBAL",
+  "site": "PublishDrive Distribution API docs, index (public demo docs host)",
+  "category": "diagnostic",
+  "bodyChars": 120000
+ },
+ {
+  "id": "a176:pd-api-pod",
+  "kind": "json",
+  "url": "https://api-docs.demo.dev.publishdrive.com/example-pod-upload",
+  "country": "GLOBAL",
+  "site": "PublishDrive Distribution API docs: print-on-demand upload example (public)",
+  "category": "diagnostic",
+  "bodyChars": 120000
+ },
+ {
+  "id": "a176:pd-pricing",
+  "kind": "json",
+  "url": "https://publishdrive.com/pricing.html",
+  "country": "GLOBAL",
+  "site": "PublishDrive pricing page (public)",
+  "category": "diagnostic",
+  "bodyChars": 120000
+ },
+ {
+  "id": "a176:pd-faq-amazon-pod",
+  "kind": "json",
+  "url": "https://help.publishdrive.com/how-to-upload-a-book",
+  "country": "GLOBAL",
+  "site": "PublishDrive help: how to upload a book (public)",
+  "category": "diagnostic",
+  "bodyChars": 120000
+ }
+]
