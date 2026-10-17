@@ -1,0 +1,20 @@
+[
+ {
+  "id": "g172:ghterms",
+  "kind": "json",
+  "url": "https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features",
+  "country": "GLOBAL",
+  "site": "GitHub Terms for Additional Products and Features (Actions section: prohibited uses of runners)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "g172:aup",
+  "kind": "json",
+  "url": "https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies",
+  "country": "GLOBAL",
+  "site": "GitHub Acceptable Use Policies",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ }
+]
