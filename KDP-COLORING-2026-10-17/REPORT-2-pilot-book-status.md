@@ -128,3 +128,28 @@ Imprint: KDP's own ISBN pages (runner read, batch 168, 13:51Z) are quoted in sec
 with a free KDP ISBN the imprint is fixed to *Independently published*; a brand name as imprint needs your own ISBN. "Amber One Press"
 is therefore the contributor (author) name on the listing, which KDP allows as a pen or brand name; the account's earlier e-books
 (author "Michael" in the 2026-08-28 script) stay as they are.
+
+## 7. KDP's own words on the ISBN, the imprint and AI content (runner read, batch 168, 2026-10-17 13:51:55Z, HTTP 200)
+
+- *What is an ISBN and Imprint Name?* (G7DMSKCM9DVS65TC): "if you're using KDP's free ISBN, we'll automatically assign your imprint as
+  'Independently published.'"
+- *What is an ISBN and Imprint?* (G201834170): "If you buy your own ISBN, you can list your own publishing imprint (such as your business
+  or brand name). If you use a free ISBN from KDP, the imprint will appear as 'Independently published.' If you use your own ISBN, KDP
+  will check whether your book's imprint matches what's on file with the ISBN agency (e.g. Bowker). If there's a mismatch, you won't be
+  able to publish."
+- *Get an ISBN* (GTJ8LBXL6Z4WV5QX): "Free ISBNs are only available for paperback and hardcover books. … Note: Low-content books are not
+  eligible for free ISBNs." (KDP's low-content page, read for Report 1, says coloring books are not generally low-content.)
+- *Content Guidelines* (G200672390): "We require you to inform us of AI-generated content (text, images, or translations) when you publish
+  a new book … AI-generated images include cover and interior images and artwork. You are not required to disclose AI-assisted content.
+  … If you used an AI-based tool to create the actual content (whether text, images, or translations), it is considered 'AI-generated,'
+  even if you applied substantial edits afterwards."
+
+What that means for Book 1, as the draft script answers it from `metadata.json`:
+
+| Question | Answer | Why |
+|---|---|---|
+| Imprint / publisher | *Independently published* (fixed by the free KDP ISBN) | "Amber One Press" cannot be the imprint without your own ISBN |
+| Contributor (author) | *Amber One Press* (provisional, the owner's call) | a brand or pen name as the contributor; the account's other titles keep their own author name |
+| AI-generated images? | **No** | every page is drawn by deterministic pattern code; no AI image tool was used |
+| AI-generated text? | **Yes** (description and the note page, drafted by an AI assistant and reviewed) | KDP's definition counts drafted text even when edited |
+| AI-generated translations? | No | none |
