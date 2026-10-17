@@ -596,3 +596,9 @@ Applied: doplim.com.mx (a required Mexican state, 33 options, none online), dopl
   build's (interior `e804d9b4…`, cover `3126683a…`) — Report 2 §6. Cover, sample pages 1–14 and the design thumbnails sent to the owner 13:5xZ.
 - Laptop path: no Amber component runs on the laptop unattended and no laptop Claude session is reachable; the existing KDP automation
   is the owner-run script in the saved Chromium profile (Report 2 §3). The draft needs that one local run; nothing uploaded yet.
+
+### Addendum 14:30Z (2026-10-17) — owner asks for a cloud KDP sign-in from the iPhone: no cloud access exists; Amazon's Agent Terms apply
+
+- Priority 1 result: no existing cloud KDP session or credential reference (code, workflows, BrowserSession providers, Browserless limits, Railway image checked; live Railway/vault not readable from here). Only the laptop profile of 2026-08-28.
+- Amazon's Conditions of Use (updated 2026-08-14, runner read batch 170) require any agent to send `Agent/[name]` in every request's user agent, not to conceal it, not to complete or circumvent CAPTCHAs, and allow Amazon to limit agents at its discretion. The research probe/renderer now send `Agent/AmberOne` (commit 87fe6ea); 94 earlier read-only Amazon requests (batches 165–170, renders 37–38) lacked the token and are disclosed in Report 3.
+- #874 merged `5e519c5e` 14:22Z; Book 1 files re-verified (interior `e804d9b4…`, cover `3126683a…`). Kit (two PDFs + copy sheet) sent to the owner 14:26Z for a by-hand draft on the iPhone. Path B (disclosed-agent runner session, owner signs in from the phone) designed in KDP-COLORING-2026-10-17/REPORT-3-cloud-access-and-amazon-agent-terms.md, build pending the owner's choice. Amber has not signed in to Amazon today; no draft exists yet.
