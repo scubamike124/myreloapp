@@ -1,0 +1,29 @@
+[
+ {
+  "id": "a170:cou",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM",
+  "country": "GLOBAL",
+  "site": "Amazon Conditions of Use (robots, data-gathering tools, Agent terms)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k170:terms",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/terms-and-conditions",
+  "country": "GLOBAL",
+  "site": "KDP Terms and Conditions (automation, accounts, program manipulation)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k170:G200634350b",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G200634350",
+  "country": "GLOBAL",
+  "site": "KDP help: Manage your KDP account (sign-in, two-step verification, identity), second read for the sign-in text",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ }
+]
