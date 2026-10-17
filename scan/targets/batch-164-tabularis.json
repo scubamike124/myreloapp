@@ -1,0 +1,29 @@
+[
+ {
+  "id": "r164:tabularis:bounties",
+  "kind": "html",
+  "url": "https://tabularis.dev/plugins/bounties",
+  "country": "GLOBAL",
+  "site": "Tabularis plugin bounty board (amounts, payment method, rules)",
+  "category": "diagnostic",
+  "bodyChars": 120000
+ },
+ {
+  "id": "r164:tabularis:firebird",
+  "kind": "html",
+  "url": "https://tabularis.dev/plugins/bounties/firebird",
+  "country": "GLOBAL",
+  "site": "Tabularis Firebird plugin bounty (amount, payment, acceptance)",
+  "category": "diagnostic",
+  "bodyChars": 120000
+ },
+ {
+  "id": "r164:tabularis:bounties-json",
+  "kind": "json",
+  "url": "https://tabularis.dev/plugins/bounties",
+  "country": "GLOBAL",
+  "site": "Tabularis bounty board, raw page for the amounts and payment words",
+  "category": "diagnostic",
+  "bodyChars": 120000
+ }
+]
