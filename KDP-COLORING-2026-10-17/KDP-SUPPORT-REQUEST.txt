@@ -1,0 +1,34 @@
+TEXT TO PASTE INTO THE KDP "CONTACT US" FORM  (prepared 2026-10-17 by Amber; only the account holder can send it)
+
+Subject:
+Question about using supervised software with my KDP account (Conditions of Use, "Agents")
+
+Message:
+Hello KDP Support,
+
+I publish paperbacks through my KDP account. Before I use any software that acts in my account, I want to check that it is allowed and to give Amazon notice.
+
+What I would like to do: use a software agent, an AI-based assistant that I operate, to fill in the details of draft paperbacks and upload the interior and cover files in my KDP account, on my own computer. It would save drafts only. I would review every book and click Publish myself.
+
+How it would behave, following the "Agents" section of the Conditions of Use (last updated August 14, 2026):
+- It sends "Agent/AmberOne" in the user agent of every request.
+- It does not hide that it is software, and it answers truthfully if asked whether it is a person or a computer.
+- It does not solve, complete or get around any CAPTCHA, verification or block. If it meets one, it stops and waits for me.
+- I sign in myself, including two-step verification. The software never receives, stores or types my password or verification codes.
+- It works only on my own drafts. It does not collect listing, price or customer data from Amazon, and it does not create accounts.
+
+[OPTIONAL, EDIT SO IT IS TRUE OR DELETE: For transparency, in August 2026 I also ran a browser script of my own on this account that filled in forms in a visible browser. It did not send an Agent identifier. I have not run it since.]
+
+My questions:
+1. Is this use permitted under the "Agents" section of the Conditions of Use and under KDP Terms section 4.3 ("You may not permit any third party to use the Program through your account")?
+2. Does Amazon require registration, approval or notice before an agent is used with a KDP account? If so, what is the process?
+3. Is there an approved way to create drafts programmatically, such as an API or a bulk upload?
+4. If you would rather I did not use software like this with KDP, please tell me, and I will not.
+
+Please reply in writing and include a case number so that I can keep the answer with my records. I am asking first so that I follow Amazon's rules.
+
+Thank you,
+[your name as it appears on your KDP account]
+
+----
+Do not add your password, verification codes, tax details or bank details. KDP does not ask for them by message.
