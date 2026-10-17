@@ -1,0 +1,32 @@
+[
+ {
+  "id": "r37:zgbs-11357541011",
+  "url": "https://www.amazon.com/gp/bestsellers/books/11357541011",
+  "site": "Amazon Best Sellers: Coloring Books for Grown-Ups",
+  "country": "US"
+ },
+ {
+  "id": "r37:zgbs-3374",
+  "url": "https://www.amazon.com/gp/bestsellers/books/3374",
+  "site": "Amazon Best Sellers: Children's Coloring Books",
+  "country": "US"
+ },
+ {
+  "id": "r37:zgbs-14279714011",
+  "url": "https://www.amazon.com/gp/bestsellers/books/14279714011",
+  "site": "Amazon Best Sellers: Fantasy & SF coloring",
+  "country": "US"
+ },
+ {
+  "id": "r37:new-releases-11357541011",
+  "url": "https://www.amazon.com/gp/new-releases/books/11357541011",
+  "site": "Amazon New Releases: Coloring Books for Grown-Ups",
+  "country": "US"
+ },
+ {
+  "id": "r37:movers-11357541011",
+  "url": "https://www.amazon.com/gp/movers-and-shakers/books/11357541011",
+  "site": "Amazon Movers & Shakers: Coloring Books for Grown-Ups",
+  "country": "US"
+ }
+]

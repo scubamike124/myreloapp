@@ -1,0 +1,164 @@
+[
+ {
+  "id": "k165:G201857950",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G201857950",
+  "country": "GLOBAL",
+  "site": "KDP help: trim size",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k165:G201834340",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G201834340",
+  "country": "GLOBAL",
+  "site": "KDP help: printing cost (paperback)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k165:G200672390",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G200672390",
+  "country": "GLOBAL",
+  "site": "KDP help: content guidelines (AI content section)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k165:GGE5T76TWKA85DJM",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/GGE5T76TWKA85DJM",
+  "country": "GLOBAL",
+  "site": "KDP help: low-content books",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k165:G201834560",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G201834560",
+  "country": "GLOBAL",
+  "site": "KDP help: (trim-size family) G201834560",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k165:G201834240",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G201834240",
+  "country": "GLOBAL",
+  "site": "KDP help: (trim-size family) G201834240",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k165:G201953020",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G201953020",
+  "country": "GLOBAL",
+  "site": "KDP help: cover guidelines? G201953020",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k165:G201834180",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G201834180",
+  "country": "GLOBAL",
+  "site": "KDP help: paperback submission? G201834180",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k165:GHT4U4VKFV7BQ24S",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/GHT4U4VKFV7BQ24S",
+  "country": "GLOBAL",
+  "site": "KDP help: GHT4U4VKFV7BQ24S (AI content?)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k165:G201834390",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/help/topic/G201834390",
+  "country": "GLOBAL",
+  "site": "KDP help: G201834390 (paperback options?)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k165:cover-calculator",
+  "kind": "json",
+  "url": "https://kdp.amazon.com/en_US/cover-calculator",
+  "country": "GLOBAL",
+  "site": "KDP cover calculator page",
+  "category": "diagnostic",
+  "bodyChars": 200000
+ },
+ {
+  "id": "k165:openai-pricing",
+  "kind": "json",
+  "url": "https://openai.com/api/pricing/",
+  "country": "GLOBAL",
+  "site": "OpenAI API pricing (image generation rows)",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "k165:openai-pricing-docs",
+  "kind": "json",
+  "url": "https://platform.openai.com/docs/pricing",
+  "country": "GLOBAL",
+  "site": "OpenAI platform pricing docs",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "a165:zgbs-11357541011",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/bestsellers/books/11357541011",
+  "country": "US",
+  "site": "Amazon Best Sellers: Coloring Books for Grown-Ups",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "a165:zgbs-3374",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/bestsellers/books/3374",
+  "country": "US",
+  "site": "Amazon Best Sellers: Children's Coloring Books",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "a165:zgbs-14279714011",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/bestsellers/books/14279714011",
+  "country": "US",
+  "site": "Amazon Best Sellers: Fantasy & SF coloring books for grown-ups",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "a165:new-releases-11357541011",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/new-releases/books/11357541011",
+  "country": "US",
+  "site": "Amazon New Releases: Coloring Books for Grown-Ups",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ },
+ {
+  "id": "a165:movers-11357541011",
+  "kind": "json",
+  "url": "https://www.amazon.com/gp/movers-and-shakers/books/11357541011",
+  "country": "US",
+  "site": "Amazon Movers & Shakers: Coloring Books for Grown-Ups",
+  "category": "diagnostic",
+  "bodyChars": 400000
+ }
+]
