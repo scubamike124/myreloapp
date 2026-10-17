@@ -64,5 +64,33 @@ Under $9.99 the rate drops to 50 %, so the $5.99 Christmas entrant earns about s
 ## 7. Decisions for the owner
 
 1. Approve candidate C as the next product (or pick B or D).
-2. Approve the six-scene sample (no cost).
+2. Judge the six-scene sample (section 8; made at no cost) and say whether the direction is right.
 3. Whether to remove the raw Amazon list files from this public repository (Report 5, section 6).
+
+## 8. The six-scene sample (made 2026-10-17, 15:0xZ to 15:2xZ; no Amazon requests, no cost)
+
+**Files:** `previews/winter-rooms-contact-sheet.png` and `previews/winter-rooms-sample-6-pages.pdf` (six pages, 8.5 × 8.5 in, vector, a 0.5 in rounded frame). **Code:** amberai branch `claude/kdp-winter-nooks`, commit `4c1b680f` (24 shape functions and six scenes). It is not merged, has no pull request, and is not connected to the book builder yet.
+
+**Scenes:** Cocoa by the Window, Fireside Stockings, Reading Corner, The Tree and the Presents, Gingerbread Table, The Snow Globe Shelf. No people, animals, brands or characters.
+
+**What I see (my judgment, not a test):** the pages read clearly as cozy winter rooms. Lines are 5.5 pt (0.076 in) and ink covers 13 to 17 percent of each page. The look is clean icon-style line art, not hand illustration. The leaders' pages are richer and more charming. Whether buyers accept this look is unknown, and nothing short of a live listing would tell.
+
+**What I measured:** I rendered each page at 90 dpi and counted the enclosed white regions, which are the cells a person would color.
+
+| Page | Large (0.1 sq in or more, about a 0.32 in square) | Medium (0.03 to 0.1) | Small (0.001 to 0.03) | Specks (under 0.001) |
+|---|---|---|---|---|
+| 1 Cocoa | 20 | 19 | 27 | 28 |
+| 2 Fireside | 21 | 15 | 66 | 16 |
+| 3 Reading Corner | 27 | 15 | 43 | 55 |
+| 4 Tree | 14 | 27 | 31 | 9 |
+| 5 Gingerbread | 13 | 22 | 63 | 21 |
+| 6 Shelf | 18 | 29 | 59 | 28 |
+
+**What this means.** "Bold and easy" needs fewer small cells than this sample has. The small cells come from leaf veins, brick lines, rug stripes, ornaments and mug details. A few specks are slivers where one outline nearly touches another, for example the rug against the frame on pages 1, 3 and 5. Before building 42 pages I would:
+
+1. Add a minimum-cell QA like the pilot's: flag every region under 0.03 sq in and fail a page that has more than a stated number.
+2. Drop leaf veins, rug stripes and brick lines, or enlarge them, and push objects away from the frame.
+3. Mix in single-object "hero" pages (one large tree, mug or house), which are bolder and easier than room scenes and add variety. Six room layouts are not enough for 42 pages.
+
+**If you approve the direction,** the next step is a revised sample of the same six pages that meets a stated cell limit, then the 42 pages with QA. If you do not, the geometric pilot kit (v2) is still ready and nothing else changes.
+
