@@ -34,11 +34,13 @@ Running the script again is safe. It finds the title on the Bookshelf and reopen
 
 The script was tested against a local copy of KDP built from the element ids a reviewed open-source tool uses. It has never touched Amazon's real pages. If the "Left for you" list is longer than expected, nothing is lost: the draft is saved as far as it went and Amber fixes the one file. Your screenshots are what let that happen in one round.
 
-## After the draft is confirmed
+## After the draft is confirmed: approval and publication
 
 1. Look at the draft in KDP once, end to end.
-2. Tell Amber in the chat: **approve Bold & Easy Patterns for publication**. Until then nothing publishes.
-3. Publication is your click on "Publish Your Paperback Book", or a one-command script Amber adds once the real Pricing page has been seen. After it, Amber reads the Bookshelf again. Expect `In review` first and `Live` within about 72 hours.
+2. Run `npx tsx scripts/kdp-publish-approved.ts --check-only`. It signs in the same way, reads back from KDP what is stored for the draft, and compares every field with the package you reviewed. It presses nothing and asks nothing. If anything differs, it lists exactly what.
+3. Tell Amber in the chat: **approve Bold & Easy Patterns for publication**. Until then nothing publishes. Your word in the chat is not what publishes the book. The step below is.
+4. Run `npx tsx scripts/kdp-publish-approved.ts`. It shows what is about to be submitted. Only if you type `PUBLISH` does it press the one "Publish Your Paperback Book" button, once. Then it reloads the Bookshelf and says whether the title shows In review. It needs a real terminal, so no one else can answer for you.
+5. Amazon reviews the book, usually within 72 hours. Check with `npx tsx scripts/kdp-connection-check.ts --title "Bold & Easy Patterns" --product`. When the Bookshelf says Live, the same command opens the product page once and says whether it can be bought. Send Amber a screenshot of the Bookshelf row and of the product page. Only then is the first book done.
 
 ## If you would rather not run anything
 

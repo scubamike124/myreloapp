@@ -19,11 +19,15 @@ How it would behave, following the "Agents" section of the Conditions of Use (la
 
 [OPTIONAL, EDIT SO IT IS TRUE OR DELETE: For transparency, in August 2026 I also ran a browser script of my own on this account that filled in forms in a visible browser. It did not send an Agent identifier. I have not run it since.]
 
+[OPTIONAL PART B. Include it only when you want Amazon's answer about unattended use now; otherwise delete it and send it after the first book has gone through, with what actually happened:
+Later I would like the same software to prepare drafts on a computer I control without me sitting at it, with me approving each publication in advance. I would sign in myself on that computer.]
+
 My questions:
 1. Is this use permitted under the "Agents" section of the Conditions of Use and under KDP Terms section 4.3 ("You may not permit any third party to use the Program through your account")?
 2. Does Amazon require registration, approval or notice before an agent is used with a KDP account? If so, what is the process?
 3. Is there an approved way to create drafts programmatically, such as an API or a bulk upload?
 4. If you would rather I did not use software like this with KDP, please tell me, and I will not.
+5. [Part B only] Is the same use permitted without a person present at the computer? Does Amazon offer a separate login or delegated access for an authorized agent, so that I never share my own credentials with it?
 
 Please reply in writing and include a case number so that I can keep the answer with my records. I am asking first so that I follow Amazon's rules.
 
