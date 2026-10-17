@@ -144,6 +144,18 @@ is therefore the contributor (author) name on the listing, which KDP allows as a
   … If you used an AI-based tool to create the actual content (whether text, images, or translations), it is considered 'AI-generated,'
   even if you applied substantial edits afterwards."
 
+- *Authors & Contributors* (G2BWJN2BY98T5PV2, batch 169, 13:58Z): "you can use a pen name as long as it is appropriate and stays
+  consistent throughout all of your work." … "Anything entered into the author field that is not part of your author name may be
+  rejected." … "When using a pen name your real name stays anonymous and is not published anywhere on our website. If you use a pen
+  name, make sure to enter your real name under your KDP account information".
+- *Metadata Guidelines for Books* (G201097560): "Author: Enter the name of your book's primary contributor here. You are free to use a
+  pen name, as long as it does not impair customers' ability to make good buying decisions." The publisher field is "eBook only" and
+  may hold "the name of your publishing company".
+
+So a brand name such as *Amber One Press* is allowed as the paperback's author (a pen name that is appropriate and used consistently);
+it cannot be the imprint without an owned ISBN, and the account keeps the owner's real name in its account details. The one caution in
+KDP's words is consistency: every later coloring book should carry the same contributor name, and the cover and title page already do.
+
 What that means for Book 1, as the draft script answers it from `metadata.json`:
 
 | Question | Answer | Why |
