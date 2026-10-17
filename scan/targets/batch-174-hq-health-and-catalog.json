@@ -1,0 +1,29 @@
+[
+ {
+  "id": "hq174:health",
+  "kind": "json",
+  "url": "https://hq.amberoneai.com/api/health/public",
+  "country": "GLOBAL",
+  "site": "Amber HQ public health: which commit production runs (the owner's own site, no credential)",
+  "category": "own-site-check",
+  "bodyChars": 4000
+ },
+ {
+  "id": "hq174:ebook-revenue-catalog",
+  "kind": "json",
+  "url": "https://hq.amberoneai.com/api/ebook-revenue/catalog",
+  "country": "GLOBAL",
+  "site": "Amber HQ public e-book catalog: whether the storefront is live and how many titles it lists (public, no credential)",
+  "category": "own-site-check",
+  "bodyChars": 30000
+ },
+ {
+  "id": "hq174:ebook-factory-catalog",
+  "kind": "json",
+  "url": "https://hq.amberoneai.com/api/ebook-factory/catalog",
+  "country": "GLOBAL",
+  "site": "Amber HQ older public e-book catalog (public, no credential)",
+  "category": "own-site-check",
+  "bodyChars": 30000
+ }
+]
