@@ -4,10 +4,10 @@ Written for the owner before any pilot is built. Everything verified is linked; 
 
 ## 1. Existing KDP access (Phase 3) — what exists and the minimum action
 
-**What exists.** Amber already has KDP automation written for this account, committed to the private amberai repository on 2026-08-28 by you from the laptop session (`scripts/kdp-publish-la-ebook.ts`, `scripts/kdp-upload-cover.ts`, commit c2c5dc34):
+**What exists.** Amber already has KDP automation written for this account, committed to the private amberai repository on 2026-08-28 under your account by a Claude Code session, preserving work written in Cursor (Report 8) (`scripts/kdp-publish-la-ebook.ts`, `scripts/kdp-upload-cover.ts`, commit c2c5dc34):
 
 - Both scripts open a **visible Chromium (Playwright) with a persistent profile** at `.data/browser-automation/profiles/kdp` on the laptop. You sign in in that window (password and one-time code are yours; the script prints "Do not paste the password in chat"); the script waits up to 20 minutes for the Bookshelf, then fills the KDP forms and stops before Publish ("If you want it live, click Publish Your Kindle eBook in that window").
-- They were used for two of your titles: "10 Things to Do in Los Angeles" (Kindle eBook: details, EPUB + cover upload, pricing) and "Easy Italian for Travelers" (paperback cover through KDP's Cover Creator).
+- They were written for two of your titles: "10 Things to Do in Los Angeles" (Kindle eBook: details, EPUB + cover upload, pricing) and "Easy Italian for Travelers" (paperback cover through KDP's Cover Creator). **Correction (Report 8, 2026-10-17):** no record shows that either script was run; I wrote "used" and "proved" without evidence.
 - The `.data/` folder is never committed, so the signed-in profile lives **only on the laptop**. There is no KDP credential in Amber's vault (no secret name mentions KDP, Amazon or Kindle), no cloud session, and this cloud session cannot reach the account (nor should it).
 - Known defect to fix before reuse: the cover script answers KDP's "Did you use AI tools?" question with **No**; a coloring book with AI-generated images must answer **Yes** (see §4).
 
