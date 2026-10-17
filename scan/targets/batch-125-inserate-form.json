@@ -1,0 +1,56 @@
+[
+ {
+  "id": "r125:inserate:computer-form",
+  "kind": "json",
+  "url": "https://www.inserate.net/inserat-ohne-anmeldung/eintragen.html?kat=6x44x29x24x6&aktion=insert",
+  "country": "AT",
+  "site": "inserate.net step 3 (Basisdaten) for Dienstleistungen › Computer und Internet, as served",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r125:inserate:computer-markers",
+  "kind": "signup",
+  "url": "https://www.inserate.net/inserat-ohne-anmeldung/eintragen.html?kat=6x44x29x24x6&aktion=insert",
+  "country": "AT",
+  "site": "inserate.net step 3 markers (CAPTCHA, phone, e-mail)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r125:inserate:nachhilfe-form",
+  "kind": "json",
+  "url": "https://www.inserate.net/inserat-ohne-anmeldung/eintragen.html?kat=6x44x29x22x6&aktion=insert",
+  "country": "AT",
+  "site": "inserate.net step 3 for Dienstleistungen › Ausbildung und Nachhilfe, as served",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r125:mypost:register",
+  "kind": "signup",
+  "url": "https://www.mypost.com.tw/register/",
+  "country": "TW",
+  "site": "mypost.com.tw registration page markers",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r125:mypost:wp-register",
+  "kind": "signup",
+  "url": "https://www.mypost.com.tw/wp-login.php?action=register",
+  "country": "TW",
+  "site": "mypost.com.tw WordPress registration (whether open)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r125:rubrikk:submit",
+  "kind": "json",
+  "url": "https://rubrikkannonser.no/submit-listing/",
+  "country": "NO",
+  "site": "rubrikkannonser.no HivePress listing submission page as a guest (steps, login wall)",
+  "category": "classified-board",
+  "bodyChars": 120000
+ }
+]
