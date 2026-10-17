@@ -1,3 +1,5 @@
+> Replaced on 2026-10-17 by `RUNBOOK-first-book.md`, which goes straight to the draft: the draft script starts with the same read-only sign-in and Bookshelf look as the check below.
+
 # Runbook: the first run on your laptop (read-only), then the first draft
 
 For the day you are at the laptop. Nothing here publishes, spends or creates anything on KDP until step 5, and step 5 only saves a draft. Amber does not run anything on your laptop; you do.
