@@ -1,0 +1,519 @@
+{
+ "bookId": "bold-patterns-01",
+ "seed": 20261017,
+ "author": "Amber One Press",
+ "reseeded": [],
+ "builtAt": "2026-10-17T13:43:49.571Z",
+ "buildSeconds": 1.95,
+ "pages": 104,
+ "designs": [
+  {
+   "page": 5,
+   "pattern": "daisies",
+   "seed": 1533203888
+  },
+  {
+   "page": 7,
+   "pattern": "fish",
+   "seed": 1533308524
+  },
+  {
+   "page": 9,
+   "pattern": "lotus",
+   "seed": 1533413284
+  },
+  {
+   "page": 11,
+   "pattern": "stars",
+   "seed": 1533518013
+  },
+  {
+   "page": 13,
+   "pattern": "waves",
+   "seed": 1533622742
+  },
+  {
+   "page": 15,
+   "pattern": "mosaic",
+   "seed": 1533727502
+  },
+  {
+   "page": 17,
+   "pattern": "weave",
+   "seed": 1533832200
+  },
+  {
+   "page": 19,
+   "pattern": "leaves",
+   "seed": 1533936960
+  },
+  {
+   "page": 21,
+   "pattern": "ladybugs",
+   "seed": 1534041751
+  },
+  {
+   "page": 23,
+   "pattern": "spiral",
+   "seed": 1534146418
+  },
+  {
+   "page": 25,
+   "pattern": "bubbles",
+   "seed": 1534251178
+  },
+  {
+   "page": 27,
+   "pattern": "hot-air-balloons",
+   "seed": 1534356186
+  },
+  {
+   "page": 29,
+   "pattern": "raindrops",
+   "seed": 1534460698
+  },
+  {
+   "page": 31,
+   "pattern": "balloons",
+   "seed": 1534565396
+  },
+  {
+   "page": 33,
+   "pattern": "gears",
+   "seed": 1534670032
+  },
+  {
+   "page": 35,
+   "pattern": "tulips",
+   "seed": 1534774792
+  },
+  {
+   "page": 37,
+   "pattern": "crescents",
+   "seed": 1534879614
+  },
+  {
+   "page": 39,
+   "pattern": "diamonds",
+   "seed": 1534984312
+  },
+  {
+   "page": 41,
+   "pattern": "steps",
+   "seed": 1535088948
+  },
+  {
+   "page": 43,
+   "pattern": "butterflies",
+   "seed": 1535193863
+  },
+  {
+   "page": 45,
+   "pattern": "paisley",
+   "seed": 1535298468
+  },
+  {
+   "page": 47,
+   "pattern": "mushrooms",
+   "seed": 1535403259
+  },
+  {
+   "page": 49,
+   "pattern": "chevrons",
+   "seed": 1535507957
+  },
+  {
+   "page": 51,
+   "pattern": "cacti",
+   "seed": 1535612593
+  },
+  {
+   "page": 53,
+   "pattern": "honeycomb",
+   "seed": 1535717446
+  },
+  {
+   "page": 55,
+   "pattern": "crosses",
+   "seed": 1535822113
+  },
+  {
+   "page": 57,
+   "pattern": "mandala",
+   "seed": 1535926842
+  },
+  {
+   "page": 59,
+   "pattern": "pinwheels",
+   "seed": 1536031633
+  },
+  {
+   "page": 61,
+   "pattern": "scallops",
+   "seed": 1536136331
+  },
+  {
+   "page": 63,
+   "pattern": "hearts",
+   "seed": 1536240998
+  },
+  {
+   "page": 65,
+   "pattern": "feather",
+   "seed": 1536345758
+  },
+  {
+   "page": 67,
+   "pattern": "arches",
+   "seed": 1536450456
+  },
+  {
+   "page": 69,
+   "pattern": "target",
+   "seed": 1536555185
+  },
+  {
+   "page": 71,
+   "pattern": "clouds",
+   "seed": 1536659914
+  },
+  {
+   "page": 73,
+   "pattern": "sun",
+   "seed": 1536764550
+  },
+  {
+   "page": 75,
+   "pattern": "snowflakes",
+   "seed": 1536869496
+  },
+  {
+   "page": 77,
+   "pattern": "bricks",
+   "seed": 1536974101
+  },
+  {
+   "page": 79,
+   "pattern": "daisies",
+   "seed": 1537078861
+  },
+  {
+   "page": 81,
+   "pattern": "fish",
+   "seed": 1537183497
+  },
+  {
+   "page": 83,
+   "pattern": "stars",
+   "seed": 1537288257
+  },
+  {
+   "page": 85,
+   "pattern": "waves",
+   "seed": 1537392986
+  },
+  {
+   "page": 87,
+   "pattern": "mosaic",
+   "seed": 1537497746
+  },
+  {
+   "page": 89,
+   "pattern": "weave",
+   "seed": 1537602444
+  },
+  {
+   "page": 91,
+   "pattern": "leaves",
+   "seed": 1537707204
+  },
+  {
+   "page": 93,
+   "pattern": "ladybugs",
+   "seed": 1537811995
+  },
+  {
+   "page": 95,
+   "pattern": "bubbles",
+   "seed": 1537916693
+  },
+  {
+   "page": 97,
+   "pattern": "hot-air-balloons",
+   "seed": 1538021701
+  },
+  {
+   "page": 99,
+   "pattern": "raindrops",
+   "seed": 1538126213
+  },
+  {
+   "page": 101,
+   "pattern": "balloons",
+   "seed": 1538230911
+  },
+  {
+   "page": 103,
+   "pattern": "gears",
+   "seed": 1538335547
+  }
+ ],
+ "cover": {
+  "widthIn": 17.484208000000002,
+  "heightIn": 11.25,
+  "spineIn": 0.234208
+ },
+ "qa": {
+  "ok": true,
+  "checks": [
+   {
+    "name": "page count",
+    "ok": true,
+    "detail": "104 pages (expected 104, even, at least 24)"
+   },
+   {
+    "name": "page size 8.5 x 11 in",
+    "ok": true,
+    "detail": "612 x 792 pt"
+   },
+   {
+    "name": "fonts embedded",
+    "ok": true,
+    "detail": "CZZZZZ+LilitaOne CID TrueType Identity-H yes yes yes 8 0 | DZZZZZ+Poppins-Regular CID TrueType Identity-H yes yes yes 9 0"
+   },
+   {
+    "name": "design pages carry ink (2%\u201345%)",
+    "ok": true,
+    "detail": "min 0.047, max 0.324; too light none; too dark none"
+   },
+   {
+    "name": "no near-duplicate designs (dHash distance > 10 of 256)",
+    "ok": true,
+    "detail": "closest pair: pages 27 and 97, distance 54 of 256"
+   },
+   {
+    "name": "versos blank",
+    "ok": true,
+    "detail": "max verso ink 0"
+   },
+   {
+    "name": "cover size matches KDP's formula",
+    "ok": true,
+    "detail": "1258.86 x 810 pt; KDP formula 1258.86 x 810.00 pt (spine 0.2342 in)"
+   }
+  ],
+  "pages": 104,
+  "pageSizePt": [
+   612,
+   792
+  ],
+  "fontsEmbedded": true,
+  "coverage": [
+   {
+    "page": 5,
+    "ink": 0.137
+   },
+   {
+    "page": 7,
+    "ink": 0.189
+   },
+   {
+    "page": 9,
+    "ink": 0.075
+   },
+   {
+    "page": 11,
+    "ink": 0.218
+   },
+   {
+    "page": 13,
+    "ink": 0.166
+   },
+   {
+    "page": 15,
+    "ink": 0.172
+   },
+   {
+    "page": 17,
+    "ink": 0.176
+   },
+   {
+    "page": 19,
+    "ink": 0.132
+   },
+   {
+    "page": 21,
+    "ink": 0.165
+   },
+   {
+    "page": 23,
+    "ink": 0.101
+   },
+   {
+    "page": 25,
+    "ink": 0.132
+   },
+   {
+    "page": 27,
+    "ink": 0.074
+   },
+   {
+    "page": 29,
+    "ink": 0.129
+   },
+   {
+    "page": 31,
+    "ink": 0.106
+   },
+   {
+    "page": 33,
+    "ink": 0.101
+   },
+   {
+    "page": 35,
+    "ink": 0.079
+   },
+   {
+    "page": 37,
+    "ink": 0.153
+   },
+   {
+    "page": 39,
+    "ink": 0.324
+   },
+   {
+    "page": 41,
+    "ink": 0.213
+   },
+   {
+    "page": 43,
+    "ink": 0.102
+   },
+   {
+    "page": 45,
+    "ink": 0.16
+   },
+   {
+    "page": 47,
+    "ink": 0.128
+   },
+   {
+    "page": 49,
+    "ink": 0.156
+   },
+   {
+    "page": 51,
+    "ink": 0.118
+   },
+   {
+    "page": 53,
+    "ink": 0.239
+   },
+   {
+    "page": 55,
+    "ink": 0.212
+   },
+   {
+    "page": 57,
+    "ink": 0.097
+   },
+   {
+    "page": 59,
+    "ink": 0.164
+   },
+   {
+    "page": 61,
+    "ink": 0.26
+   },
+   {
+    "page": 63,
+    "ink": 0.189
+   },
+   {
+    "page": 65,
+    "ink": 0.047
+   },
+   {
+    "page": 67,
+    "ink": 0.138
+   },
+   {
+    "page": 69,
+    "ink": 0.082
+   },
+   {
+    "page": 71,
+    "ink": 0.065
+   },
+   {
+    "page": 73,
+    "ink": 0.058
+   },
+   {
+    "page": 75,
+    "ink": 0.107
+   },
+   {
+    "page": 77,
+    "ink": 0.237
+   },
+   {
+    "page": 79,
+    "ink": 0.139
+   },
+   {
+    "page": 81,
+    "ink": 0.156
+   },
+   {
+    "page": 83,
+    "ink": 0.275
+   },
+   {
+    "page": 85,
+    "ink": 0.192
+   },
+   {
+    "page": 87,
+    "ink": 0.147
+   },
+   {
+    "page": 89,
+    "ink": 0.189
+   },
+   {
+    "page": 91,
+    "ink": 0.124
+   },
+   {
+    "page": 93,
+    "ink": 0.167
+   },
+   {
+    "page": 95,
+    "ink": 0.125
+   },
+   {
+    "page": 97,
+    "ink": 0.089
+   },
+   {
+    "page": 99,
+    "ink": 0.172
+   },
+   {
+    "page": 101,
+    "ink": 0.108
+   },
+   {
+    "page": 103,
+    "ink": 0.112
+   }
+  ],
+  "nearest": {
+   "a": 27,
+   "b": 97,
+   "distance": 54
+  }
+ }
+}
