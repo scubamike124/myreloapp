@@ -29,12 +29,12 @@
 
 I found no record that an upload happened. Two laptop scripts were written for it and committed on 2026-08-28 (commit `c2c5dc34`). They needed you at the keyboard, they held no credential, and no log, workflow or deployment shows a run. Details are in Report 8.
 
-## What was built (pull request amberai #880)
+## What was built (amberai pull requests #880, #881, #882)
 
-- The book package, process notes and a draft script that fills KDP's own fields, uploads both PDFs, saves with Save as Draft, and then reloads your Bookshelf to say whether the title is on it.
-- A helper where you record your own decision at a terminal.
-- 17 tests against a local copy of KDP: it never publishes, never duplicates a title, stops at any puzzle, block or sign-out, and leaves the AI-content choices and every confirmation to you.
-- Not tested: Amazon's real pages. The first run is the real test.
+- **#880, merged:** the book package, process notes and a draft script that fills KDP's own fields, uploads both PDFs, saves with Save as Draft, and then reloads your Bookshelf to say whether the title is on it; a helper where you record your own decision at a terminal.
+- **#881, in CI:** an independent check of the interior found one page (the spiral, page 23) 0.10 in from the page edge, against KDP's 0.25 in minimum. It is fixed, the QA now measures the margins of every page, and the book is rebuilt. The cover is byte-identical.
+- **#882, in CI:** the approved publication. It reads back what KDP stores, compares every field with the package, asks you at a terminal, presses Publish once, and reads the Bookshelf again. The connection check can also open a Live title's product page once and say whether it can be bought.
+- All tested against a local copy of KDP: it never publishes without your typed word, never duplicates a title, and stops at any puzzle, block or sign-out. **Not tested: Amazon's real pages.** The first run is the real test, and the scripts save a values-free digest of each KDP form so a wrong field can be fixed in one round.
 
 ## What I need from you
 

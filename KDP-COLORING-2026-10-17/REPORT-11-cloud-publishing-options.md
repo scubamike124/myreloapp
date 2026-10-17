@@ -37,6 +37,19 @@ Hosting, from GitHub's own terms read earlier (Report 5) **[V]**: a real sign-in
 2. Send KDP Support one written question before building route 3. The text is ready in `KDP-SUPPORT-REQUEST.txt`, with an optional part about unattended use and a separate login for an authorized agent. Sending it after the first run is stronger, because it can describe what actually happened.
 3. Choose route 4 only if routes 2 and 3 are refused or too fragile. It costs money and needs a new registration, so it needs your word.
 
+## After the first book
+
+If the first book goes through, the next steps are small and in this order.
+
+| Step | What it needs | Your time |
+| --- | --- | --- |
+| More coloring books | A new package folder per book, built by the same code, then the same four commands. No new software | About 20 minutes per book while you are present |
+| Amazon's written answer on unattended use | The support request, sent with what actually happened on the first run | A few minutes to send it |
+| Unattended coloring books, if Amazon agrees | A computer you control with a runner, your one-time sign-in there, and a per-book approval you type on that computer | Setup once, then a few seconds per book |
+| E-books | An EPUB step from the factory's PDFs and a Kindle draft flow with its own field ids. Neither exists yet, and neither should be built before the paperback has shown how KDP's real pages behave | Not before the first book is live |
+
+Nothing here starts before the first book is live and for sale.
+
 ## Exactly what I need from you
 
 For the first book, route 2:
