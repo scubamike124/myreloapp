@@ -3,7 +3,8 @@
 Written 2026-10-17 13:5xZ. Follows [REPORT-1](REPORT-1-research-tools-access-cost.md) (market research, tool review, access, cost).
 
 **In one line:** Book 1, *Bold & Easy Patterns* (8.5 × 11 in, 104 pages, 50 single-sided designs from 37 motif families), builds in
-2 seconds with every QA check passing. Nothing has been uploaded to KDP, nothing is published, $0 has been spent and $0 earned.
+2 seconds with every QA check passing, on this machine and on a GitHub runner, byte for byte the same files (section 6). Nothing has
+been uploaded to KDP, nothing is published, $0 has been spent and $0 earned. The owner's GO for the draft upload came at 13:5xZ.
 
 ## 1. What exists now (evidence)
 
@@ -96,3 +97,34 @@ Decisions needed before that run: (a) the author/imprint name (placeholder *Ambe
 3. The owner's laptop run (section 3) → the KDP draft → the owner's approval → publish.
 4. Phase 6: a `kdp/catalog.json` with one row per book (researched / built / QA / uploaded / published / cost / sales / royalties),
    duplicate prevention by book id and seed, and the sales and royalty reading from KDP Reports inside the signed-in session.
+
+## 6. Verified cloud builds (added 14:0xZ)
+
+amberai #873 went green at 13:52Z (both checks) and was squash-merged as `8be5432c` at 13:53:30Z. The follow-up pull request
+[#874](https://github.com/scubamike124/amberai/pull/874) (head `6fd69c69`: the 37 families, centred motifs never repeated,
+byte-reproducible PDFs through a fixed creation date) is open with CI running.
+
+Two runs of the *KDP coloring book build* workflow, inputs book `bold-patterns-01`, seed `20261017`, author `Amber One Press`:
+
+| Run | Ref | Job time | Result | Artifact (30-day retention) |
+|---|---|---|---|---|
+| [39038455158](https://github.com/scubamike124/amberai/actions/runs/39038455158) | `main` @ 8be5432c (the 10-family pilot as merged) | 13:53:58Z → 13:54:44Z (46 s, about 1 billed minute) | QA PASS | `bold-patterns-01-20261017` id 12103301168, 522,328 bytes |
+| [39038507273](https://github.com/scubamike124/amberai/actions/runs/39038507273) | `claude/kdp-coloring-patterns` @ 6fd69c69 (the 37-family book) | 13:54:42Z → 13:55:29Z (47 s, about 1 billed minute) | QA PASS | `bold-patterns-01-20261017` id 12103321153, 548,171 bytes, zip digest `110542f3…` |
+
+The runner's *Measure* step printed the same hashes as two independent local builds of the same commit:
+
+| File | SHA-256 (runner, run 39038507273) | Local (two builds, 13:5xZ) |
+|---|---|---|
+| interior.pdf | `e804d9b40e55c916c5429363bd9f552272ec3e8cedf3e962a97f52ee583c3b4b` | identical |
+| cover.pdf | `3126683afcee45bd826a5ea2f1cc92db59bc75588fcbf0eb7db4f543418c077c` | identical |
+
+So whoever builds this commit with these four inputs gets the same two PDFs, and the laptop step (section 3) can be checked against
+these hashes before anything is uploaded. The runner's QA line read exactly as the local one (104 pages, 612 × 792 pt, fonts
+embedded, ink 4.7–32.4 %, closest pair pages 27/97 at 54 of 256, versos blank, cover 1258.86 × 810 pt). The artifact zip could not be
+downloaded into this sandbox (the egress proxy refuses the Azure blob host), which is why the hashes come from the job log; the owner
+can download it from the run page.
+
+Imprint: KDP's own ISBN pages (runner read, batch 168, 13:51Z) are quoted in section 7 once extracted. What the search summary says:
+with a free KDP ISBN the imprint is fixed to *Independently published*; a brand name as imprint needs your own ISBN. "Amber One Press"
+is therefore the contributor (author) name on the listing, which KDP allows as a pen or brand name; the account's earlier e-books
+(author "Michael" in the 2026-08-28 script) stay as they are.

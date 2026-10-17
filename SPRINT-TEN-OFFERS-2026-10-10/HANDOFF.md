@@ -585,3 +585,14 @@ Applied: doplim.com.mx (a required Mexican state, 33 options, none online), dopl
   closest pair at 54/256 (was 11). Lives in the working tree; next PR after #873 merges.
 - [KDP-COLORING-2026-10-17/REPORT-2-pilot-book-status.md](../KDP-COLORING-2026-10-17/REPORT-2-pilot-book-status.md): files, QA, previews
   (contact sheets of all 50 designs), the owner's laptop command for the draft, decisions, cost ($0 spent) and revenue ($0, nothing published).
+
+### Addendum 14:00Z (2026-10-17) — owner's GO for Book 1's KDP draft (draft only); #873 merged; cloud builds verified; #874 open
+
+- Owner 13:5xZ: GO for Book 1's draft upload only; "Amber One Press" provisional, subject to fitting the existing KDP account; merge
+  only after all checks pass; verified artifacts; existing KDP automation only, no third-party publishing plugins; save as draft, never
+  Publish; send cover, sample pages, draft status, exact royalty, actions needed; no paid image generation for Book 2; lanes keep running.
+- #873: CI green 13:52Z → squash-merged `8be5432c` 13:53:30Z. #874 (37 families, reproducible PDFs) opened 13:54Z, CI running.
+- Cloud builds: run 39038455158 (main, 46 s) and 39038507273 (branch, 47 s), both QA PASS; the branch run's sha256 equal the local
+  build's (interior `e804d9b4…`, cover `3126683a…`) — Report 2 §6. Cover, sample pages 1–14 and the design thumbnails sent to the owner 13:5xZ.
+- Laptop path: no Amber component runs on the laptop unattended and no laptop Claude session is reachable; the existing KDP automation
+  is the owner-run script in the saved Chromium profile (Report 2 §3). The draft needs that one local run; nothing uploaded yet.
