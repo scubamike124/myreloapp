@@ -1,0 +1,146 @@
+[
+ {
+  "id": "r122:rubrikkannonser.no:1",
+  "kind": "json",
+  "url": "https://rubrikkannonser.no/",
+  "country": "NO",
+  "site": "rubrikkannonser.no page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:gratisannonse.com:2",
+  "kind": "json",
+  "url": "https://gratisannonse.com/",
+  "country": "NO",
+  "site": "gratisannonse.com page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:torg.adressa.no:3",
+  "kind": "json",
+  "url": "https://torg.adressa.no/",
+  "country": "NO",
+  "site": "torg.adressa.no page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:leggut.no:4",
+  "kind": "json",
+  "url": "https://www.leggut.no/annonseportal",
+  "country": "NO",
+  "site": "leggut.no page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:mercatinoannunci.it:5",
+  "kind": "json",
+  "url": "https://www.mercatinoannunci.it/inserisci.jsp?guest=s",
+  "country": "IT",
+  "site": "mercatinoannunci.it page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:mercatinoannunci.it:6",
+  "kind": "json",
+  "url": "https://www.mercatinoannunci.it/",
+  "country": "IT",
+  "site": "mercatinoannunci.it page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:adboom.it:7",
+  "kind": "json",
+  "url": "https://www.adboom.it/",
+  "country": "IT",
+  "site": "adboom.it page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:inserate.net:8",
+  "kind": "json",
+  "url": "https://www.inserate.net/inserat-ohne-anmeldung/eintragen.html?kat=6x44x9x3",
+  "country": "AT",
+  "site": "inserate.net page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:inserate.net:9",
+  "kind": "json",
+  "url": "https://www.inserate.net/",
+  "country": "AT",
+  "site": "inserate.net page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:flohmarkt.at:10",
+  "kind": "json",
+  "url": "https://www.flohmarkt.at/inserieren.php",
+  "country": "AT",
+  "site": "flohmarkt.at page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:dealplatz.at:11",
+  "kind": "json",
+  "url": "https://www.dealplatz.at/",
+  "country": "AT",
+  "site": "dealplatz.at page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:studenteninserate.at:12",
+  "kind": "json",
+  "url": "https://www.studenteninserate.at/",
+  "country": "AT",
+  "site": "studenteninserate.at page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:eladhatatlan.hu:13",
+  "kind": "json",
+  "url": "https://eladhatatlan.hu/",
+  "country": "HU",
+  "site": "eladhatatlan.hu page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:startapro.hu:14",
+  "kind": "json",
+  "url": "https://www.startapro.hu/",
+  "country": "HU",
+  "site": "startapro.hu page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:rewangiklan.my.id:15",
+  "kind": "json",
+  "url": "https://rewangiklan.my.id/pasang.html",
+  "country": "ID",
+  "site": "rewangiklan.my.id page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r122:mypost.com.tw:16",
+  "kind": "json",
+  "url": "https://www.mypost.com.tw/",
+  "country": "TW",
+  "site": "mypost.com.tw page body (links to the rules, the posting or registration form as served)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
