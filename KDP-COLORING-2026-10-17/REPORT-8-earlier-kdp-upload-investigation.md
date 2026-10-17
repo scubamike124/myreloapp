@@ -59,7 +59,7 @@ As written on 28 August, both scripts **fell short of two of those requirements*
 1. **Ask first** (the support text is in `KDP-SUPPORT-REQUEST.txt`). Lowest risk, costs a day or two.
 2. **Proceed without asking**, with your recorded decision: run the corrected script on the laptop, you present, one title, drafts only, and watch for any Amazon notice. The risk is Amazon's discretion; the account holds your published e-books.
 
-My recommendation is option 1 for the first run, because the cost is small and the downside is your account. The choice is yours; either way the corrected script is the one to run, not the 28 August versions. amberai **#879** (open) adds a read-only connection check as the very first run: it signs in, reads your Bookshelf, saves a screenshot and the visible text on your laptop, and changes nothing (`RUNBOOK-laptop-first-run.md`).
+My recommendation is option 1 for the first run, because the cost is small and the downside is your account. The choice is yours; either way the corrected script is the one to run, not the 28 August versions. amberai **#879** (checks green at 16:55Z; **merged 16:55:21Z as `03655986`**) adds a read-only connection check as the very first run: it signs in, reads your Bookshelf, saves a screenshot and the visible text on your laptop, and changes nothing (`RUNBOOK-laptop-first-run.md`).
 
 ## 5. What changed, exactly
 

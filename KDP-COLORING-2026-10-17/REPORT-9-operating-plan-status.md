@@ -5,7 +5,7 @@ Tags: **[T]** tested or demonstrated, with the evidence named; **[E]** exists in
 
 ## Bottom line
 
-1. **The KDP connection is not finished.** Your own sign-in works (Safari). Amber acting needs your decision on Amazon (ask first, or record your own decision) and the laptop; the corrected scripts are merged (#877, 16:41Z) and a read-only connection check is in pull request #879. Report 8 has the evidence on the earlier upload: two laptop scripts, no record of a run, not autonomous.
+1. **The KDP connection is not finished.** Your own sign-in works (Safari). Amber acting needs your decision on Amazon (ask first, or record your own decision) and the laptop; the corrected scripts are merged (#877, 16:41Z) and a read-only connection check is merged too (#879, 16:55Z). Report 8 has the evidence on the earlier upload: two laptop scripts, no record of a run, not autonomous.
 2. **The e-books are fewer than 100 and are PDFs, not EPUBs.** Production reads 36 ready for sale; the code's own note says "Blueprint cited 92"; the full count is being read by pull request #878 (section 1).
 3. **Coloring books: one full pipeline works [T]**, but its art is code-drawn icon style and the upload step has never run on KDP's real pages.
 4. **YouTube: uploading works [T]** (one Short a day, a library of 40 recorded Shorts all public), but only for StudyProofs, at one a day.
@@ -17,7 +17,7 @@ Tags: **[T]** tested or demonstrated, with the evidence named; **[E]** exists in
 | Question | Evidence | Tag |
 |---|---|---|
 | How many are ready for sale? | **36**, from the production worker's beacon, `ebookRevenue.ready` (tracker #105, comment 5737077514, rewritten 2026-10-17 16:08Z). The October 12 audit read the same 36. | [T] |
-| Is the total larger? | The factory's own dashboard note reads "Blueprint cited 92 books. Live factory inventory is N titles (M ready for sale)". N is not visible from here: the books live on amber-hq-web's volume. **amberai #878 (open) publishes N and every book as one #105 comment** (title, category, stage, sale status, short and long word counts, PDFs, cover, premium and technical QA, KDP record), plus the names of any Amazon or KDP credential. | [E] until #878 is merged and read |
+| Is the total larger? | The factory's own dashboard note reads "Blueprint cited 92 books. Live factory inventory is N titles (M ready for sale)". N is not visible from here: the books live on amber-hq-web's volume. **amberai #878 (merged 16:54:15Z as `bca55082`) publishes N and every book as one #105 comment once production has deployed it** (title, category, stage, sale status, short and long word counts, PDFs, cover, premium and technical QA, KDP record), plus the names of any Amazon or KDP credential. | [E] until #878 is merged and read |
 | Where are they stored? | `.data/ebook-factory/` on amber-hq-web's persistent volume (`books.json`, `manuscripts/`, `pdfs/`, `covers/`). **Not in git, not on your laptop, not on the worker.** The `data/ebook-factory/books.json` in the repository is five test books made on 2026-10-10. | [T] code; [?] volume contents |
 | Format? | **PDF only**, a short and a long edition per book (`fileFormat: "pdf"`). No EPUB exists in either repository (the one EPUB I know of, for the Los Angeles guide, is on your laptop). | [T] code |
 | Why do you remember about 100? | The code cites a "blueprint" of 92 books and says "Amber will not invent missing books". The factory's kill switch is on today and its latest tick researched and advanced nothing (beacon, 16:08Z); the October 12 audit places its activity before 11 September. | [T] |
@@ -85,8 +85,8 @@ Time is focused working time of mine, with continuous-integration waits and your
 
 | Work | Existing | New | Estimate | Cost |
 |---|---|---|---|---|
-| KDP connection, laptop route | assist browser (23 checks), corrected scripts (#877, merged), gate, read-only check (#879) | your decision; laptop runbook; first watched run; fixes from real pages | half a day of mine, plus your 30 to 60 minutes, **earliest tomorrow** | $0 |
-| E-book stock report | factory, revenue engine | #878 (written, tested, in checks) | merge, deploy and a worker tick: about an hour | $0 |
+| KDP connection, laptop route | assist browser (23 checks), corrected scripts (#877), gate, read-only check (#879), all merged; the check is tested only against a fake Bookshelf | your decision; laptop runbook; first watched run; fixes from real pages | half a day of mine, plus your 30 to 60 minutes, **earliest tomorrow** | $0 |
+| E-book stock report | factory, revenue engine | #878 (written, tested, merged 16:54Z) | deploy and a worker tick: under an hour | $0 |
 | EPUB build, validate, spellcheck, covers, manifest | PDFs, covers, QA scores | converter, EPUBCheck workflow, cover renderer | 2 to 3 days | $0 |
 | Review of the strongest e-books | premium QA scores | a read by you or me of the top few; originality and accuracy notes | 2 hours per book | $0 (outside plagiarism checks need approval) |
 | E-book KDP drafts | corrected older script | metadata-driven version, tested on a watched run | 1 day after the connection | $0 |
