@@ -1,0 +1,38 @@
+[
+ {
+  "id": "r115:anuntgratuit:listing-html",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/oferta/fotograf-nunta-bucuresti-adphoto-85",
+  "country": "RO",
+  "site": "anuntgratuit.ro one public service listing (HTML): how a description and its links are rendered, for the read-back",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r115:anuntgratuit:listing-md",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/oferta/fotograf-nunta-bucuresti-adphoto-85.md",
+  "country": "RO",
+  "site": "anuntgratuit.ro the same listing in the Markdown form the site offers",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r115:anuntgratuit:search",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/anunturi?keyword=StudyProofs",
+  "country": "RO",
+  "site": "anuntgratuit.ro keyword search (the shape of an empty result and of a hit, for the existing-listing check)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r115:anuntgratuit:servicii-top",
+  "kind": "json",
+  "url": "https://www.anuntgratuit.ro/anunturi/servicii-si-afaceri",
+  "country": "RO",
+  "site": "anuntgratuit.ro Servicii & Afaceri category page (listing cards)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ }
+]
