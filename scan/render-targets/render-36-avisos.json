@@ -1,0 +1,24 @@
+[
+ {
+  "id": "r36:avisos-colombia:post",
+  "url": "https://www.avisos-colombia.com/post/",
+  "country": "CO",
+  "site": "avisos-colombia posting wizard rendered (steps, city, phone, captcha)",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ },
+ {
+  "id": "r36:avisos-chile:post",
+  "url": "https://www.avisos-chile.com/post/",
+  "country": "CL",
+  "site": "avisos-chile posting wizard rendered",
+  "category": "classified-board",
+  "forms": true,
+  "links": true,
+  "fullText": true,
+  "excerptChars": 5000
+ }
+]

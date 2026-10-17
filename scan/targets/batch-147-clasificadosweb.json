@@ -1,0 +1,20 @@
+[
+ {
+  "id": "r147:clasificadosweb:legal-terms",
+  "kind": "json",
+  "url": "https://clasificadosweb.cl/legal/terms",
+  "country": "CL",
+  "site": "ClasificadosWeb terms of service",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r147:clasificadosweb:guias",
+  "kind": "json",
+  "url": "https://clasificadosweb.cl/guias",
+  "country": "CL",
+  "site": "ClasificadosWeb guides (how to post, place, phone)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
