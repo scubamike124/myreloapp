@@ -1,38 +1,47 @@
 [
- {
-  "when": "2026-10-15 23:47:13Z",
-  "platform": "PeerTube (stream.indieagora.com)",
-  "account": "StudyProofs (studyproofs, channel studyproofs_demos)",
-  "post": "quiz-graded: \"Cellular respiration: a 4-question quiz, graded with the reasons\"",
-  "url": "https://stream.indieagora.com/videos/watch/d552d5a1-e998-4c88-9153-838b4d6798ce",
-  "verified": "read back publicly by a GitHub runner at 23:56Z (privacy public, 1 video on the channel)",
-  "region": "Fediverse (video), global"
- },
- {
-  "when": "2026-10-16 07:19:40Z",
-  "platform": "Mastodon (101010.pl)",
-  "account": "StudyProofs (@studyproofs, bot-flagged, AI disclosure in the bio)",
-  "post": "notes-with-sources: \"From STAT 200 sample notes: 6 note sections, each with its source line, ending on the common mistakes.\"",
-  "url": "https://101010.pl/@studyproofs/117449371188624497",
-  "verified": "read back publicly by a GitHub runner at 07:26:13Z (visibility public, statuses_count 1)",
-  "region": "Central & Eastern Europe (Poland), fediverse-wide"
- },
- {
-  "when": "2026-10-16 20:00:36Z",
-  "platform": "PeerTube (stream.indieagora.com)",
-  "account": "StudyProofs (studyproofs, channel studyproofs_demos)",
-  "post": "bio-notes-with-sources: \"Cellular respiration: study notes with where each came from\"",
-  "url": "https://stream.indieagora.com/videos/watch/a8991332-c648-4aea-8865-17fc45df0825",
-  "verified": "read back publicly by a GitHub runner at 20:03:18Z (API: privacy Public, state Published; the watch page answers with the title; the channel lists 2 public videos)",
-  "region": "Fediverse (video), global"
- },
- {
-  "when": "2026-10-17 01:17:00Z",
-  "platform": "YouTube Shorts",
-  "account": "AmberOne (https://www.youtube.com/@AmberOne-i2t)",
-  "post": "bio-sample: \"Cellular respiration: notes in, flashcards and a quiz out\"",
-  "url": "https://www.youtube.com/shorts/dsbz_AhX74s",
-  "verified": "read back without a login by a GitHub runner at 01:29:54Z (YouTube oEmbed: the title and author_name AmberOne); the lane's ledger row reads live; batch 133",
-  "region": "YouTube, global"
- }
+  {
+    "when": "2026-10-15 23:47:13Z",
+    "platform": "PeerTube (stream.indieagora.com)",
+    "account": "StudyProofs (studyproofs, channel studyproofs_demos)",
+    "post": "quiz-graded: \"Cellular respiration: a 4-question quiz, graded with the reasons\"",
+    "url": "https://stream.indieagora.com/videos/watch/d552d5a1-e998-4c88-9153-838b4d6798ce",
+    "verified": "read back publicly by a GitHub runner at 23:56Z (privacy public, 1 video on the channel)",
+    "region": "Fediverse (video), global"
+  },
+  {
+    "when": "2026-10-16 07:19:40Z",
+    "platform": "Mastodon (101010.pl)",
+    "account": "StudyProofs (@studyproofs, bot-flagged, AI disclosure in the bio)",
+    "post": "notes-with-sources: \"From STAT 200 sample notes: 6 note sections, each with its source line, ending on the common mistakes.\"",
+    "url": "https://101010.pl/@studyproofs/117449371188624497",
+    "verified": "read back publicly by a GitHub runner at 07:26:13Z (visibility public, statuses_count 1)",
+    "region": "Central & Eastern Europe (Poland), fediverse-wide"
+  },
+  {
+    "when": "2026-10-16 20:00:36Z",
+    "platform": "PeerTube (stream.indieagora.com)",
+    "account": "StudyProofs (studyproofs, channel studyproofs_demos)",
+    "post": "bio-notes-with-sources: \"Cellular respiration: study notes with where each came from\"",
+    "url": "https://stream.indieagora.com/videos/watch/a8991332-c648-4aea-8865-17fc45df0825",
+    "verified": "read back publicly by a GitHub runner at 20:03:18Z (API: privacy Public, state Published; the watch page answers with the title; the channel lists 2 public videos)",
+    "region": "Fediverse (video), global"
+  },
+  {
+    "when": "2026-10-17 01:17:00Z",
+    "platform": "YouTube Shorts",
+    "account": "AmberOne (https://www.youtube.com/@AmberOne-i2t)",
+    "post": "bio-sample: \"Cellular respiration: notes in, flashcards and a quiz out\"",
+    "url": "https://www.youtube.com/shorts/dsbz_AhX74s",
+    "verified": "read back without a login by a GitHub runner at 01:29:54Z (YouTube oEmbed: the title and author_name AmberOne); the lane's ledger row reads live; batch 133",
+    "region": "YouTube, global"
+  },
+  {
+    "when": "2026-10-17 12:10:00Z",
+    "platform": "myproduct.co.il (free board, Israel)",
+    "account": "StudyProofs (the board's quick form; no account)",
+    "post": "free-plan: \"The free plan, stated plainly\"",
+    "url": "https://myproduct.co.il/reshut-harabim/item.php?id=8062",
+    "verified": "read back without a login by a GitHub runner at 12:14:39Z (HTTP 200; the page's title \"The free plan, stated plainly\"; final address /reshut-harabim/ad/8062-The-free-plan-stated-plainly); the lane's ledger row reads live; batch 162; a 12-hour listing, gone about 00:10Z 2026-10-18",
+    "region": "Middle East & North Africa, IL"
+  }
 ]
