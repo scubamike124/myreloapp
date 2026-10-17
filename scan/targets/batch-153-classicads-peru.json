@@ -1,0 +1,83 @@
+[
+ {
+  "id": "r153:agp:terms",
+  "kind": "json",
+  "url": "https://anunciosgratuitosperu.com/terms.php",
+  "country": "PE",
+  "site": "AnunciosGratuitosPeru terms",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r153:agp:register",
+  "kind": "json",
+  "url": "https://anunciosgratuitosperu.com/register.php",
+  "country": "PE",
+  "site": "AnunciosGratuitosPeru registration form (captcha, phone, place)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r153:agp:postnew",
+  "kind": "json",
+  "url": "https://anunciosgratuitosperu.com/postnew.php",
+  "country": "PE",
+  "site": "AnunciosGratuitosPeru posting page (login gate, fields)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r153:anuxi:register",
+  "kind": "json",
+  "url": "https://anuxi.pe/register.php",
+  "country": "PE",
+  "site": "anuxi.pe registration form",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r153:anuxi:postnew",
+  "kind": "json",
+  "url": "https://anuxi.pe/postnew.php",
+  "country": "PE",
+  "site": "anuxi.pe posting page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r153:anuxi:terms",
+  "kind": "json",
+  "url": "https://anuxi.pe/terms.php",
+  "country": "PE",
+  "site": "anuxi.pe terms (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r153:anunciope:register",
+  "kind": "json",
+  "url": "https://anuncio.com.pe/register.php",
+  "country": "PE",
+  "site": "anuncio.com.pe registration form",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r153:anunciope:postnew",
+  "kind": "json",
+  "url": "https://anuncio.com.pe/postnew.php",
+  "country": "PE",
+  "site": "anuncio.com.pe posting page",
+  "category": "classified-board",
+  "bodyChars": 200000
+ },
+ {
+  "id": "r153:anunciope:terms",
+  "kind": "json",
+  "url": "https://anuncio.com.pe/terms.php",
+  "country": "PE",
+  "site": "anuncio.com.pe terms (candidate path)",
+  "category": "classified-board",
+  "bodyChars": 200000
+ }
+]
