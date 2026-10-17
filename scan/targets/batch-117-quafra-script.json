@@ -1,0 +1,38 @@
+[
+ {
+  "id": "r117:quafra:account-js",
+  "kind": "json",
+  "url": "https://quafra.com/wp-content/plugins/directorist/assets/build/js/public/account.js",
+  "country": "GH",
+  "site": "quafra.com Directorist account script (the sign-up and sign-in requests it sends: action names and fields)",
+  "category": "classified-board",
+  "bodyChars": 250000
+ },
+ {
+  "id": "r117:quafra:add-listing",
+  "kind": "html",
+  "url": "https://quafra.com/add-listing/",
+  "country": "GH",
+  "site": "quafra.com add-listing page as a guest (the login prompt or the form)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r117:quafra:how-it-works",
+  "kind": "html",
+  "url": "https://quafra.com/how-it-works/",
+  "country": "GH",
+  "site": "quafra.com How It Works (approval and publishing words)",
+  "category": "classified-board",
+  "bodyChars": 60000
+ },
+ {
+  "id": "r117:quafra:dashboard",
+  "kind": "html",
+  "url": "https://quafra.com/dashboard/",
+  "country": "GH",
+  "site": "quafra.com dashboard as a guest",
+  "category": "classified-board",
+  "bodyChars": 40000
+ }
+]
