@@ -1,0 +1,56 @@
+[
+ {
+  "id": "disc116:AT",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=Kleinanzeigen%20%C3%96sterreich%20kostenlos%20inserieren%20ohne%20Registrierung%20Studenten",
+  "country": "AT",
+  "site": "DuckDuckGo: Kleinanzeigen Österreich kostenlos inserieren ohne Registrierung Studenten",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc116:HU",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=ingyenes%20apr%C3%B3hirdet%C3%A9s%20felad%C3%A1sa%20regisztr%C3%A1ci%C3%B3%20n%C3%A9lk%C3%BCl%20di%C3%A1k%20egyetem",
+  "country": "HU",
+  "site": "DuckDuckGo: ingyenes apróhirdetés feladása regisztráció nélkül diák egyetem",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc116:NO",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=gratis%20rubrikkannonser%20legg%20ut%20annonse%20uten%20registrering%20studenter",
+  "country": "NO",
+  "site": "DuckDuckGo: gratis rubrikkannonser legg ut annonse uten registrering studenter",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc116:TW",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=%E5%85%8D%E8%B2%BB%E5%88%8A%E7%99%BB%20%E5%88%86%E9%A1%9E%E5%BB%A3%E5%91%8A%20%E4%B8%8D%E7%94%A8%E8%A8%BB%E5%86%8A%20%E5%AD%B8%E7%94%9F%20%E5%8F%B0%E7%81%A3",
+  "country": "TW",
+  "site": "DuckDuckGo: 免費刊登 分類廣告 不用註冊 學生 台灣",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc116:ID",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=pasang%20iklan%20gratis%20tanpa%20daftar%20mahasiswa%20kampus",
+  "country": "ID",
+  "site": "DuckDuckGo: pasang iklan gratis tanpa daftar mahasiswa kampus",
+  "category": "discovery",
+  "bodyChars": 80000
+ },
+ {
+  "id": "disc116:IT",
+  "kind": "json",
+  "url": "https://html.duckduckgo.com/html/?q=annunci%20gratuiti%20inserisci%20annuncio%20senza%20registrazione%20studenti%20universit%C3%A0",
+  "country": "IT",
+  "site": "DuckDuckGo: annunci gratuiti inserisci annuncio senza registrazione studenti università",
+  "category": "discovery",
+  "bodyChars": 80000
+ }
+]
