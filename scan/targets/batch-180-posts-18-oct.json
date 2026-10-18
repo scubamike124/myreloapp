@@ -1,0 +1,38 @@
+[
+ {
+  "id": "r180:mastodon:api-quiz-graded",
+  "kind": "json",
+  "url": "https://101010.pl/api/v1/statuses/117463230647466515",
+  "country": "PL",
+  "site": "the Mastodon status the promotion lane posted at 2026-10-18T18:03Z (API: visibility, language, account bot flag, text)",
+  "category": "social",
+  "bodyChars": 20000
+ },
+ {
+  "id": "r180:mastodon:page-quiz-graded",
+  "kind": "json",
+  "url": "https://101010.pl/@studyproofs/117463230647466515",
+  "country": "PL",
+  "site": "the same status's public page (HTTP status)",
+  "category": "social",
+  "bodyChars": 20000
+ },
+ {
+  "id": "r180:peertube:api-stat-quiz-graded",
+  "kind": "json",
+  "url": "https://stream.indieagora.com/api/v1/videos/8a8a6087-0ae5-439a-b4be-450354de7911",
+  "country": "FR",
+  "site": "the PeerTube video the promotion lane posted at 2026-10-18T19:02Z (API: privacy, state, publishedAt, duration, description)",
+  "category": "video",
+  "bodyChars": 20000
+ },
+ {
+  "id": "r180:peertube:page-stat-quiz-graded",
+  "kind": "json",
+  "url": "https://stream.indieagora.com/videos/watch/8a8a6087-0ae5-439a-b4be-450354de7911",
+  "country": "FR",
+  "site": "the same video's public watch page (HTTP status)",
+  "category": "video",
+  "bodyChars": 20000
+ }
+]
