@@ -1,6 +1,6 @@
 # Voice and compliance: what the system refuses, and why
 
-Written 18 Oct 2026 (Pacific). Everything in this file describes code that exists and is tested (`src/lib/recruiting/voice.ts`, `compliance.ts`, `drafts.ts`, `actions.ts`, `state.ts`). It is research turned into rules, not legal advice; the points that need a lawyer are listed at the end.
+Written 18 Oct 2026 (Pacific), revised 19 Oct after an independent code review (see [10-review-and-limits.md](10-review-and-limits.md)). Everything in this file describes code that exists and is tested (`src/lib/recruiting/voice.ts`, `compliance.ts`, `drafts.ts`, `actions.ts`, `state.ts`, `optout.ts`, `scrub.ts`). It is research turned into rules, not legal advice; the points that need a lawyer are listed at the end.
 
 ## The owner's rules, and where each one is enforced
 
@@ -25,6 +25,7 @@ Every message is read by this before the owner sees it. A message with an error 
 - Text that gives away a machine reply: "as an AI", "here is your draft", "certainly!".
 - Claims nobody can check: guarantees, "100%", "risk-free", "track record", "years of experience", "we have placed", "our clients", "trusted by", numbers of candidates or clients, rankings ("top", "best", "leading", "number one"), a license, certification or exclusivity Amber does not have, "AI-ranked", "bias-free", false urgency ("act now", "limited time", "urgent"), "no obligation".
 - Closeness that was not earned: "I've been following your company", "big fan", "congratulations on", "as we discussed", "following up on our call". The sender has only read a careers page.
+- All of the above **in the footer too**. The part under the `--` line is read for stock phrases, claims and false closeness, not only checked for its required lines (a client list or a promise written under the signature is an error). The sender's own name, business name and address are taken out first, so a business called "Best Staffing" is not read as a ranking.
 - Emoji, unfilled placeholders (`{{name}}`, `[company]`, `TODO`, `undefined`), more than one exclamation mark, more than two long dashes, a subject that pretends to be a reply (`Re:`), shouting in a subject, more than two asks in one email, and a first email that does not name at least two things the reader can check (the company and the role, for example).
 
 **It warns about (warnings):** length outside 45 to 130 words for an email; long dashes; words in capitals; the "not just X but Y" pattern; more than one list of three; every sentence about the same length; very long sentences; a message about "we" more than "you"; more than three sentences that start with "I"; bullets or stray spacing in a first email; no question; no plain greeting; a vague subject; one exclamation mark.
@@ -47,8 +48,8 @@ A message is "ready" only if the gate says ok. A **hold** means something must b
 - The wording check found an error.
 - The service is not switched on in the settings.
 - The region forbids cold email, or needs the recipient's prior consent (Germany, Spain, Italy, Canada, Australia, Japan, South Korea, South Africa).
-- The address is not a role address on the company's own domain (`jobs@`, `careers@`, `hello@`, `info@`, `contact@`, `sales@`; never `first.last@`, `noreply@`, `privacy@`, `legal@`). The address on the draft differs from the one found on the company's page.
-- The footer lacks the sender's name, the business name, the postal address, the plain opt-out, the line saying how the address was found, the line saying it is a commercial message, or (unless the owner chose to omit it) the line saying an AI assistant is used.
+- The address is not a role address on the company's own domain (`jobs@`, `careers@`, `hello@`, `info@`, `contact@`, `sales@`; never `first.last@`, `noreply@`, `privacy@`, `legal@`). The address on the draft differs from the one found on the company's page. The address (or the contact form) is not on the company's own website as it stands now: when the owner corrects a website, the mailbox found on the old one is blocked at once and dropped on the next pass, and the new site is read afresh.
+- The footer lacks the sender's name, the business name, the postal address, the plain opt-out, the line saying how the address was found, the line saying it is a commercial message, or (unless the owner chose to omit it) the line saying an AI assistant is used. This holds for a note written into a company's contact form as much as for an email: a commercial message to a business is one either way.
 - A first message was already sent to them, or a follow-up was already sent.
 
 **Holds**
@@ -59,7 +60,7 @@ A message is "ready" only if the gate says ok. A **hold** means something must b
 - The company's roles are in New York, New Jersey, Massachusetts or Illinois, where agency licensing is strict, until the owner has cleared the state after taking advice.
 - No published address was found yet, or the page where it was printed is not recorded.
 - A setting is missing (name, business name, postal address, reply address).
-- A follow-up is less than 7 days after the first message.
+- A follow-up is not yet due. The clock counts whole days from the day typed when the first message was marked as sent: a message sent on the 12th can be followed up from the start of the 20th (UTC), so the gap is at least seven full days whatever hour it went out. A date typed when marking a message as sent cannot be earlier than the day before it was approved, so an invented old date cannot start the clock early.
 - The process has not been approved.
 
 **Notes** (shown, not stopping): a region's research is from public sources and a local lawyer should confirm before volume.
@@ -75,13 +76,20 @@ A message is "ready" only if the gate says ok. A **hold** means something must b
 
 ## Opt-outs
 
-An opt-out is permanent and takes effect the moment the owner records it on the page. It can be by business, domain or address. A reply that the reply classifier reads as "unsubscribe" suppresses automatically. The footer promises "I will not write again" and the system keeps that promise even if the owner forgets: a suppressed business can never appear in the queue, and a message that was already approved stops showing as approved and is shown as blocked.
+An opt-out is permanent and takes effect the moment the owner records it on the page. It can be by business, domain or address.
+
+- **One business is often several records.** A staffing firm with an office in each city is one record per office on the map data, with one website and one mailbox. The records of one website are treated as one business: an opt-out given for one of them stops all of them, a first message sent through one is the first message to the business, and only one note is queued for it. The button sends the record's website and address along with its name, so a record found again later under another name stays set aside.
+- **Spellings do not matter.** `www.`, a subdomain, a trailing dot, the scheme, upper case and plus-addressing (`jobs+spring@`) all match the same company; an opt-out from one mailbox is an opt-out of the whole company, because the person who answered speaks for the business.
+- **The reply reader is wider than the shared classifier.** "Take us off your list", "Stop contacting me", "Don't email me again", "No more emails", "No cold emails", "We do not work with agencies", "This is spam", and the two replies the footer invites ("no thanks" and "not interested") all count. Words allowed between a verb and its object come from a short list, so "Please don't hesitate to send the sample" and "Could you take a sample from your list" do not. A reply logged before the reader was improved is read again whenever the log is folded.
+- **A suppressed business is not even read.** The worker skips it when it looks for an address, and the sample list leaves it out.
+- The footer promises "I will not write again" and the system keeps that promise even if the owner forgets: a suppressed business can never appear in the queue, and a message that was already approved stops showing as approved and is shown as blocked.
+- **Approvals lapse when the ground moves.** Changing any setting that decides what a message says or whether it may go out (name, business, address, reply address, AI line, services, regions, cleared states) ends every approval; changing it back does not bring them back unseen. Withdrawing the process does the same. Changing the budget or the sources leaves approvals alone.
 
 ## What nothing here does
 
 - It does not score, rank, filter or reject a person. There are no people in the list.
 - It does not send, post, submit a form, create an account or message anyone on any network.
-- It does not keep named individuals: no recruiter, hiring manager or poster appears in any stored record.
+- It does not build a profile of any person. An email address or a phone number in a listing or a post, and the name written next to it ("Senior Recruiter - Maria Gonzalez +1 (212) 555-0147" is kept as "Senior Recruiter"), is cut out when the text is read. A name written alone in a title cannot always be told from a role, so the guarantee is that no person is sought out, listed or profiled, not that a stray name can never pass through a public title.
 - It does not claim a result. The ledger counts a dollar as revenue only with proof the owner has confirmed.
 
 ## What a lawyer should confirm before volume

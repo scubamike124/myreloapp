@@ -38,7 +38,7 @@ This is the workflow the owner runs. It is meant to take about 15 minutes a day.
 | Approve | Owner, per message | Approves the exact text. The approval is tied to a hash of the subject and body, so any later change cancels it | `approve-draft` with the text and its hash |
 | Send | Owner, by hand | Copies the approved message into their own mail (a "mailto" link is offered) and sends it. **Amber cannot send.** | Nothing |
 | Mark sent | Owner | Presses "I sent it" with the date | `mark-sent` |
-| Follow-up | Owner | One follow-up is prepared at least seven days later, showing one real row from the list. No third message exists | `approve-draft`, `mark-sent` |
+| Follow-up | Owner | One follow-up is prepared from the eighth day after the day the first message went out (at least seven full days), showing one real row from the list. No third message exists | `approve-draft`, `mark-sent` |
 | Record a reply | Owner | Pastes the reply. It is classified (interested, not interested, unsubscribe, question...). An unsubscribe suppresses the business for good | `log-reply` |
 | Record a conversation | Owner | A note in their own words | `log-conversation` |
 | Move it on | Owner | Proposal, won, lost, not a fit | `set-stage` |

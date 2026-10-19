@@ -21,11 +21,12 @@ An AI-assisted recruiting business based in Los Angeles, started on 18 Oct 2026 
 | [07-owner-approvals.md](07-owner-approvals.md) | Decisions and approvals for the owner |
 | [08-runbook.md](08-runbook.md) | Turning it on, the first live check, switches, troubleshooting, the checks that were run |
 | [09-viability.md](09-viability.md) | Commercial viability, legal and technical barriers, the verdict |
+| [10-review-and-limits.md](10-review-and-limits.md) | What an independent code review found, what was fixed and tested, and the limits that remain |
 | [research/](research/) | The three research reports as written by the research agents, with their evidence labels, plus the compliance matrix and the source assessments |
 
 ## The code
 
-`src/lib/recruiting/` (26 modules and 19 test files), `src/app/dashboard/recruiting/page.tsx`, `src/app/api/recruiting/`, the worker job `RECRUITING_TICK` in `src/lib/cloud/work-queue.ts`, and scripts under `scripts/recruiting-*.ts`. Run `npm run test:recruiting` for the tests.
+`src/lib/recruiting/` (29 modules and 20 test files), `src/app/dashboard/recruiting/page.tsx`, `src/app/api/recruiting/`, the worker job `RECRUITING_TICK` in `src/lib/cloud/work-queue.ts`, and scripts under `scripts/recruiting-*.ts`. Run `npm run test:recruiting` for the tests.
 
 ## Five facts to hold on to
 

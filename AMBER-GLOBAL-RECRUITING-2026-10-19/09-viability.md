@@ -41,7 +41,7 @@ Contacts needed for one paid pilot: about 1,250 (cautious), 330 (central), 130 (
 |---|---|---|
 | A fee tied to a hire, or introducing candidates, is employment-agency activity in many places | Legal | The first offer is a fixed-fee list with no candidate contact. The gate refuses placement and split-fee services everywhere and holds work tied to NY, NJ, MA and IL until the owner, advised, clears the state. |
 | Cold business email: CAN-SPAM has no B2B exception; California adds statutory damages; Canada, Germany, Spain, Italy, Australia and others need consent | Legal | First messages go only to US business addresses by default. A region needing consent cannot be cleared on the page. Every message has the sender's real name, postal address, how the address was found, a plain opt-out and a notice that it is a commercial message. An opt-out is honored at once and kept for good. |
-| Lists of named people can make a business a data broker (California Delete Act) and bring GDPR duties | Legal | Nothing in the list is about a person. Only a role mailbox that the company itself prints is kept, never a named person's address. |
+| Lists of named people can make a business a data broker (California Delete Act) and bring GDPR duties | Legal | The list is about companies and roles. Only a role mailbox that the company itself prints is kept, never a named person's address; an address or phone number found in a listing is cut out, with the name beside it. |
 | AI in hiring: New York City, Illinois, Colorado, California rules; EU AI Act; a vendor can be sued as an employer's agent | Legal | Nothing scores, ranks, filters or rejects a person. The candidate evidence sheet quotes what the candidate wrote and says "not stated" otherwise; it has no number and no order of fit. |
 | Scraping professional networks breaks their terms | Legal | No scraping of any network, and no automation on LinkedIn. Candidates come in on their own. |
 | Claims of clients, results or licenses that do not exist | Legal, honesty | The wording check refuses them. Revenue counts only with proof and the owner's confirmation. |
@@ -49,7 +49,7 @@ Contacts needed for one paid pilot: about 1,250 (cautious), 330 (central), 130 (
 | Response formats of the job feeds were recalled from documentation, not seen | Technical | Parsers tolerate missing fields; a response with entries but no readable role is reported as a changed format and skipped. Eleven readers parse the research agents' documented samples. The first live read on the worker settles it. |
 | The vendors give no list of their customers | Technical | Boards are learned from Hacker News posts and companies' own careers pages, and the owner can add any. Staffing businesses are also found on map data. |
 | The build environment could not reach any job-feed host | Technical | Nothing was read live tonight. All tests use fixtures. Live probing waits for the worker. |
-| GitHub Actions will not run (billing) | Technical | All 229 tests, the type check and the linter were run locally. A merge needs the owner's word. |
+| GitHub Actions will not run (billing) | Technical | All 280 tests, the type check and the linter were run locally. A merge needs the owner's word. |
 | The worker has no disk that survives a deploy | Technical | State is kept in the database, in two rows that two different writers never share. |
 
 ## What would change the verdict

@@ -73,15 +73,18 @@ Any one of these is enough. None deletes anything.
 | A message is "blocked" | The wording check or the gate refused it | The card shows the reason; edit and the checks run again |
 | Days open look too low for a feed role | The feed gives no posting date, so the count starts when Amber first saw it | Expected. The sheet says "first seen" for those rows |
 | A number on the page looks wrong | Check the decision log: every figure is folded from it | Ask Claude to read the `RECRUITING_DECISION` rows and the `RECRUITING_PROSPECTS` document |
+| The page says the record of your actions is full or nearly full | The log holds 20,000 entries; a full log refuses new actions instead of accepting ones that would never be read back | Tell Claude: the older entries can be archived (nothing is lost; a copy is kept) |
+| The page says N entries could not be read and were left out | A row of the log was damaged, written by hand, or written by another version of the code | Everything else is shown as recorded; ask Claude to read those rows before you send anything |
+| "Clients with proof" is lower than "Marked as won" | A click on "won" is your word, not evidence. A client is a business with a signed agreement or counted revenue recorded against it | Record the agreement or the payment under Money, and choose the business |
 
 ## Checks that were run, and how to run them again
 
 | Check | Command | Last result (18 Oct 2026, Pacific) |
 |---|---|---|
-| Unit and integration tests | `npm run test:recruiting` | all 229 pass |
+| Unit and integration tests | `npm run test:recruiting` | all 280 pass (includes the robots.txt matcher test that protects the worker from freezing) |
 | Type check | `npx tsc -p <a tsconfig that includes the recruiting folders>` | clean |
 | Lint | `npx eslint src/lib/recruiting src/app/dashboard/recruiting src/app/api/recruiting src/components/hq/hq-actions.ts scripts/recruiting-*.ts` | clean |
-| Offline rehearsal of the whole lane on the documented sample payloads | `npx tsx scripts/recruiting-rehearsal.ts` | 11 of 11 documented shapes read; 1 message composed and ready; 0 wording errors; 0 template-like pairs; revenue $0.00 |
+| Offline rehearsal of the whole lane on the documented sample payloads | `npx tsx scripts/recruiting-rehearsal.ts` | 11 of 11 documented shapes read; on the day of the first read no message is written (no role has been listed for 45 days, so there is no sample to offer); fifty days on, if the same roles are still listed, 1 message composed and ready; 0 wording errors; 0 template-like pairs; revenue $0.00 |
 | Revenue tables | `npx tsx scripts/recruiting-revenue-model.ts` | matches 05-revenue-plan |
 | Regenerate the marketing pages | `npx tsx scripts/recruiting-docs.ts` | matches `06-marketing/` |
 | The owner's page in a phone viewport | a local harness drove the whole flow in a headless browser: settings, process approval, message approval, "I sent it", reply, opt-out, sample list, money | worked; no console errors |
