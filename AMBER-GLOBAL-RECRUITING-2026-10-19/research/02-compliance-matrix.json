@@ -1,0 +1,599 @@
+{
+  "asOf": "2026-10-19",
+  "disclaimer": "Research to guide engineering and operating rules, not legal advice. Compiled 2026-10-19 from public web sources only (no one was contacted). The pages themselves could not be fetched in full in this session (the fetch tool failed and the search budget ran out), so entries rest on search-tool excerpts of the cited pages; items marked 'unverified' were not confirmed on a primary source. Laws change. A lawyer qualified in the relevant jurisdiction must confirm before Amber relies on any row.",
+  "regions": [
+    {
+      "code": "US",
+      "name": "United States",
+      "coldB2BEmail": "allowed-with-conditions",
+      "conditions": [
+        "CAN-SPAM applies to B2B email (FTC guide: no business-to-business exception). Required: accurate From/To/Reply-To and routing information; non-deceptive subject line; clear and conspicuous ad identification; valid physical postal address; clear opt-out; honour opt-outs within 10 business days; opt-out mechanism must work for at least 30 days after sending. Civil penalty up to $53,088 per violating email (figure on the FTC page when read).",
+        "California Business & Professions Code 17529.5: unlawful to advertise in commercial email with falsified header information, a third party's domain used without permission, or a misleading subject line. Statutory damages $1,000 per email up to $1,000,000 per incident (reduced to $100 / $100,000 with documented due-care practices). Attorney General, email service providers and recipients may sue. Text read: 2025 Justia copy.",
+        "Texts and calls (TCPA): marketing texts to mobile numbers need prior express written consent; autodialled or prerecorded calls need consent; consent is revocable in any reasonable way; the Do Not Call registry now covers texts (FCC consumer guide, n.d.). A B2B carve-out for autodialled marketing was not found: assume none. Policy: no cold SMS or calls.",
+        "LinkedIn and other DMs: manual, individual, role-relevant messages only; automated messaging is banned by LinkedIn's User Agreement."
+      ],
+      "sources": [
+        "https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business",
+        "https://law.justia.com/codes/california/code-bpc/division-7/part-3/chapter-1/article-1-8/section-17529-5/",
+        "https://www.fcc.gov/consumers/guides/stop-unwanted-robocalls-and-texts",
+        "https://www.linkedin.com/legal/user-agreement",
+        "https://www.linkedin.com/help/linkedin/answer/a1341387/prohibited-software-and-extensions?lang=en",
+        "https://law.justia.com/codes/california/code-civ/division-3/part-4/title-2-91/chapter-1/section-1812-501/",
+        "https://law.justia.com/codes/california/2018/code-civ/division-3/part-4/title-2.91/chapter-1/section-1812.502/",
+        "https://law.justia.com/codes/california/code-civ/division-3/part-4/title-2-91/chapter-2/section-1812-503/",
+        "https://bpd.cdn.sos.ca.gov/sf/forms/sf-sb-449.pdf",
+        "https://law.justia.com/codes/california/code-civ/division-3/part-4/title-2-91/chapter-3/section-1812-510/",
+        "https://www.dir.ca.gov/dlse/talent/talent_laws_relating_to_talent_agencies.pdf",
+        "https://dol.ny.gov/employment-agencies",
+        "https://www.nysenate.gov/legislation/laws/GBS/185",
+        "https://www.mass.gov/info-details/information-for-employment-agencies",
+        "https://www.njconsumeraffairs.gov/epservices",
+        "https://business.nj.gov/recent/new-requirements-for-temporary-help-service-firms-and-their-clients",
+        "https://www.ilga.gov/Legislation/ILCS/Articles?ActID=2417&ChapterID=68",
+        "https://labor.illinois.gov/content/dam/soi/en/web/idol/laws-rules/fls/dtlsa/DTLSA_06052025_final%20.pdf",
+        "https://www.osc.ny.gov/state-agencies/audits/2025/12/02/enforcement-local-law-144-automated-employment-decision-tools",
+        "https://www.dlapiper.com/en-au/insights/publications/2026/01/critical-audit-of-nyc-ai-hiring-law-signals-increased-risk-for-employers",
+        "https://www.ilga.gov/Legislation/publicacts/view/103-0804",
+        "https://hrc.illinois.gov/content/dam/soi/en/web/hrc/documents/20260617-lunch+learn-presentation-materials.pdf",
+        "https://nonimo.ai/en-us/resources/guides/colorado-ai-act/",
+        "https://aipolicytracker.org/jurisdictions/us-colorado",
+        "https://calcivilrights.ca.gov/2025/06/30/civil-rights-council-secures-approval-for-regulations-to-protect-against-employment-discrimination-related-to-artificial-intelligence/",
+        "https://www.hklaw.com/en/insights/publications/2025/05/federal-court-allows-collective-action-lawsuit-over-alleged",
+        "https://www.aigovernanceforhr.com/p/the-mobley-v-workday-case-didnt-end",
+        "https://www.linkedin.com/blog/member/trust-and-safety/update-hi-q-legal-proceeding"
+      ],
+      "agencyLicensing": "some-states",
+      "agencyLicensingNote": "No federal licence regime found (unverified). California: no licence, but Civil Code 1812.500 et seq. (Employment Agency, Employment Counseling, and Job Listing Services Act) requires a $3,000 surety bond filed with the Secretary of State (24-month minimum term, $30 filing fee) for employment agencies that charge job seekers; s.1812.502(a) says the title does not apply to a person who charges fees exclusively to employers (2018 text; current text unverified, California attorney to confirm). Labor Commissioner licensing covers talent agencies, not recruiters. New York: fee-charging agencies need a state DOL licence (NYC: DCWP) and an unlicensed agency cannot collect fees (GBL 185). Massachusetts: licence (employment agency) or registration (placement agency) through DLS. New Jersey: employment agency licence plus temp-help-firm certification (P.L. 2023 c.10; rules adopted 2024-09-16). Illinois: Private Employment Agency Act licence and Day and Temporary Labor Services Act registration. Texas and Pennsylvania: sources conflict (unverified). Other states not researched. Whether an out-of-state firm is caught when the job or candidate is in a licensing state: lawyer question.",
+      "jobseekerFees": "restricted",
+      "aiHiringRules": [
+        "NYC Local Law 144 (automated employment decision tools): annual independent bias audit with public summary and candidate notice (10 business days per secondary sources); penalties $500-$1,500 a day (secondary). State Comptroller audit of 2025-12-02 found DCWP enforcement ineffective, so enforcement risk is rising. Scope definition details unverified.",
+        "Illinois HB 3773 (Public Act 103-0804), effective 2026-01-01: unlawful to use AI with the effect of discriminating, or to use zip codes as a proxy; notice duty. IDHR proposed notice rules in May 2026 and postponed rulemaking on 2026-06-02 per a state presentation. Illinois AI Video Interview Act: unverified.",
+        "Colorado: SB 24-205 was repealed and re-enacted by SB 26-189 (signed 2026-05-14, effective 2027-01-01, narrower automated-decision framework, no duty of care) per secondary sources only; the earlier date had been delayed to 2026-06-30 by SB 25B-004. Verify on the legislature's site.",
+        "California Civil Rights Council automated-decision-system regulations, effective 2025-10-01: 'agent' includes third parties providing hiring services; employment agency includes persons procuring applicants through an ADS; employment and ADS data kept at least four years.",
+        "California CPPA automated-decision (ADMT) rules and Maryland interview-technology law: unverified, not researched this session.",
+        "Mobley v. Workday (N.D. Cal. 3:23-cv-00770-RFL): ADEA collective conditionally certified 2025-05-16; 2026 rulings kept key claims alive (secondary sources). Risk signal that an AI vendor can be sued as the employer's agent. EEOC position: unverified."
+      ],
+      "candidateDataNotes": [
+        "CCPA/CPRA covers applicant and B2B-contact data if the business meets thresholds; thresholds and California Delete Act data-broker registration (relevant if Amber sells candidate lists) are unverified, not researched.",
+        "FCRA: a business that assembles reports on individuals for employers may be a consumer reporting agency; unverified, ask counsel before producing dossiers or scores.",
+        "Do not scrape or automate LinkedIn or other platforms: LinkedIn User Agreement s.8.2 bans bots, scripts, crawlers and add-ons that scrape or send messages (https://www.linkedin.com/legal/user-agreement). Other platforms' terms unverified. In hiQ v. LinkedIn the court held the User Agreement prohibited scraping (LinkedIn's own account); do not rely on any 'public data' argument.",
+        "Safest data: what candidates submit or opt into; otherwise manual reading of public professional pages, with notice at first contact."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Most US risk is state-level: licensing if Amber places candidates in NY, NJ, MA or IL; California bond and contract rules if any fee is taken from job seekers; state AI-hiring laws; statutory-damages litigation over email headers (17529.5). Employer-paid, fixed-fee sourcing keeps Amber outside the California act (confirm)."
+    },
+    {
+      "code": "CA",
+      "name": "Canada",
+      "coldB2BEmail": "consent-required",
+      "conditions": [
+        "CASL needs express or implied consent for commercial electronic messages. Implied consent by conspicuous publication needs all three: the recipient published (or caused to be published) the address, there is no statement refusing unsolicited commercial messages, and the message relates to the person's business role, functions or duties (CRTC guidance).",
+        "Sender bears the burden of proof; keep a dated record or screenshot of the page, address and URL. Addresses copied by a third party (list sellers, directories) do not create implied consent (CRTC guidance; CRTC decisions 2016-428 Blackstone and 2017-368 CompuFinder rejected unsupported 'publicly available' claims).",
+        "Federal Court of Appeal (2020) upheld CASL's validity and said the exemption does not permit mining addresses from third-party directories or from sites with no-spam notices (BLG commentary, secondary).",
+        "Sender identification and a working unsubscribe honoured within 10 business days, and penalties (up to C$10M per violation for organisations): unverified in this session."
+      ],
+      "sources": [
+        "https://crtc.gc.ca/eng/com500/guide.htm",
+        "https://ised-isde.canada.ca/site/canada-anti-spam-legislation/en/getting-consent-send-email",
+        "https://crtc.gc.ca/eng/archive/2016/2016-428.htm",
+        "https://crtc.gc.ca/eng/archive/2017/2017-368.htm",
+        "https://www.blg.com/en/insights/2020/07/federal-court-of-appeal-rules-casl-constitutionally-valid-and-provides-interpretive-guidance",
+        "https://www.ontario.ca/page/licensing-temporary-help-agencies-and-recruiters",
+        "https://www.ontario.ca/laws/regulation/r24478",
+        "https://www.cnesst.gouv.qc.ca/fr/demarches-formulaires/agences-placement-personnel-recrutement/permis-agences",
+        "https://www.cnesst.gouv.qc.ca/fr/demarches-formulaires/agences-placement-personnel-recrutement/agences-recrutement-travailleurs-etrangers/permis-obligatoire-pour-agences-recrutement",
+        "https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/licensing/licensing-employment-agencies",
+        "https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/forms-resources/igm/esa-part-2-section-10"
+      ],
+      "agencyLicensing": "some-states",
+      "agencyLicensingNote": "Provincial. Ontario: since 2024-07-01 temporary help agencies and recruiters must hold a licence under the Employment Standards Act (ss.74.1.1-74.1.2; O. Reg. 478/24; $1,500 application fee from 2026-01-01, two-year term) and employers may not knowingly use an unlicensed recruiter; whether this reaches an out-of-province recruiter is unverified (lawyer). Quebec: CNESST permit for personnel placement agencies (bond required) and for temporary-foreign-worker recruitment agencies (2026 fee $1,087); whether pure domestic permanent recruitment needs a permit is unverified. British Columbia: licensing page for employment agencies (no licence if recruiting for one employer only); temporary-foreign-worker recruiters are covered by a separate act; excerpt ambiguous. Other provinces not researched (Manitoba, Saskatchewan, Nova Scotia and Alberta have worker-recruitment rules per background, unverified).",
+      "jobseekerFees": "restricted",
+      "aiHiringRules": [
+        "No federal AI-in-hiring statute found this session (unverified).",
+        "Ontario: reported duty to disclose AI use in screening in publicly advertised job postings from 2026-01-01 (Employment Standards Act amendments): unverified, not researched.",
+        "Quebec Law 25 automated-decision notice duty: unverified."
+      ],
+      "candidateDataNotes": [
+        "PIPEDA and provincial privacy laws (including Quebec Law 25): unverified, not researched.",
+        "CASL applies to messages to recipients in Canada; do not harvest addresses from directories or third-party lists.",
+        "BC Employment Standards Act s.10: no payment may be requested from a person seeking work for finding employment or for information about employers; payments are treated as wages owing (BC government guidance)."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Cold B2B email to Canada only where the three conspicuous-publication conditions can be proven for each address; otherwise inbound or express consent. Do not recruit for Ontario or Quebec clients before licensing is confirmed."
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "coldB2BEmail": "allowed-with-conditions",
+      "conditions": [
+        "PECR: the electronic-mail consent rule does not apply to corporate subscribers (companies, LLPs, Scottish partnerships, some public bodies); no PECR consent is needed for B2B email to them (ICO).",
+        "Must not disguise or conceal identity and must give a valid address for opt-out; PECR does not expressly require honouring a corporate opt-out but the ICO says you should (ICO).",
+        "Sole traders and some partnerships are individual subscribers: consent or the narrow soft opt-in only. If you cannot tell the type, treat the contact as an individual subscriber (ICO).",
+        "UK GDPR still applies when the address identifies a person (for example a named employee): lawful basis (legitimate interests), notice and objection handling (ICO). ICO pages carry search-metadata ages of roughly 2021-2023; check live. Data (Use and Access) Act 2025 changes to PECR: unverified."
+      ],
+      "sources": [
+        "https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/business-to-business-marketing/",
+        "https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guidance-on-direct-marketing-using-electronic-mail/how-do-we-comply-with-the-pecr-electronic-mail-marketing-rules/",
+        "https://www.legislation.gov.uk/uksi/2003/3319/pdfs/uksi_20033319_en.pdf",
+        "https://www.gov.uk/government/publications/conduct-regulations-2003-guidance-for-employment-agencies-and-employment-businesses/overview-of-the-conduct-regulations-2003",
+        "https://www.gov.uk/employment-agencies-and-businesses/licences-for-employment-agencies",
+        "https://www.gov.uk/guidance/the-fair-work-agency-licensing-standards-for-gangmasters",
+        "https://www.gov.uk/government/publications/eas-note-acting-as-an-intermediary-between-persons-seeking-work-and-a-hirer/acting-as-an-intermediary-between-persons-seeking-work-and-a-hirer"
+      ],
+      "agencyLicensing": "none",
+      "agencyLicensingNote": "No general licence for employment agencies or employment businesses found; gangmaster licensing (now run by the Fair Work Agency) applies to agriculture, horticulture, shellfish gathering, food processing and packaging, and care agencies have a separate regime. The Conduct of Employment Agencies and Employment Businesses Regulations 2003 apply (written terms, work-seeker protections). The excerpt did not state 'no licence' in terms, so confirm on the gov.uk page.",
+      "jobseekerFees": "prohibited",
+      "aiHiringRules": [
+        "No UK statute on AI in hiring found; UK GDPR Art. 22 as reformed by the Data (Use and Access) Act 2025, ICO recruitment-AI guidance and DSIT guidance: unverified, not researched this session."
+      ],
+      "candidateDataNotes": [
+        "UK GDPR: legitimate interests plus notice and objection for sourced data; ICO confirms UK GDPR applies to B2B marketing to named individuals.",
+        "International transfers (US storage): unverified.",
+        "Fee rules: work-finding fees to work-seekers are banned except Schedule 3 entertainment and modelling roles; optional separate services (CV help, training) need written notice before provision and must not be a condition of work-finding (Conduct Regulations, regulation numbers 13 and 26 as described in the gov.uk excerpt; check numbering)."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Safe lane for UK B2B email is company addresses with a relevant message, honest sender and a working opt-out; avoid sole traders and unknown contact types."
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "coldB2BEmail": "consent-required",
+      "conditions": [
+        "UWG s.7(2) no.2: email advertising without the addressee's prior express consent is an unreasonable nuisance. The statute says 'Adressat', not only consumers: treat as covering B2B (B2B scope not separately confirmed in the excerpt).",
+        "Existing-customer exception s.7(3): address obtained in connection with a sale, used for own similar offers, customer has not objected (further conditions such as notice of the right to object: background, unverified). Courts hold a concluded contract is needed; prospects do not qualify (OLG Duesseldorf I-20 U 155/16 via dejure summary).",
+        "The advertiser must be able to prove consent for each recipient; pre-ticked boxes are not valid consent (case-law summaries).",
+        "Policy: no cold B2B email to Germany; inbound or documented consent only."
+      ],
+      "sources": [
+        "https://www.gesetze-im-internet.de/uwg_2004/__7.html",
+        "https://dejure.org/dienste/vernetzung/rechtsprechung?Text=I-20+U+155%2F16",
+        "https://www.arbeitsagentur.de/unternehmen/personalfragen/pflichten-arbeitgeber/arbeitnehmerueberlassung/erlaubnis-arbeitnehmerueberlassung",
+        "https://www.gesetze-im-internet.de/a_g/BJNR113930972.html",
+        "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+        "https://www.technology.org/2026/10/13/eu-ai-act-deadlines-after-the-digital-omnibus-what-applies-from-december-2026-to-august-2028/"
+      ],
+      "agencyLicensing": "unclear",
+      "agencyLicensingNote": "Temporary agency work (Arbeitnehmerueberlassung) needs a Federal Employment Agency permit (BA page); permit must be in place before any lending of staff. Private placement and executive search: no permit believed (unverified, background). Fee rules for job seekers (SGB III s.296 written contract and fee limits): unverified.",
+      "jobseekerFees": "restricted",
+      "aiHiringRules": [
+        "EU AI Act: tools for recruitment, selection, filtering and evaluating candidates are classed high-risk (Annex III) per secondary sources only. The Digital Omnibus moved Annex III obligations to 2027-12-02 (reported as Regulation (EU) 2026/1744; provisional deal 2026-05-07, Council adoption 2026-06-29; sources differ on the in-force date). Verify in the Official Journal before relying.",
+        "AI Act Art. 50 transparency duties (tell people when they are interacting with an AI system) still apply from 2026-08-02 per secondary sources; a watermarking grace period to 2026-12-02 applies to existing generative systems.",
+        "GDPR Art. 22 (solely automated decisions with significant effects) and national works-council rules on AI in selection: unverified, not researched this session.",
+        "Works-council co-determination on AI in selection (Betriebsverfassungsgesetz): unverified."
+      ],
+      "candidateDataNotes": [
+        "GDPR applies; German employee/applicant data rules (BDSG s.26): unverified.",
+        "Sourcing from public profiles needs a legitimate-interests assessment and Art. 14 notice (unverified, background)."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Strictest cold-email regime in the list. Do not email Germany cold. German courts also treat DMs as electronic mail (OLG Hamm via dejure summary, unverified)."
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "coldB2BEmail": "allowed-with-conditions",
+      "conditions": [
+        "CNIL: B2B prospecting at professional email addresses needs no prior consent if the person is informed and can object (legitimate interest) (CNIL EN and FR pages).",
+        "The subject of the message must relate to the person's profession (CNIL example: software pitch to an IT director).",
+        "For data held or bought from third parties, make sure the person was told their address may be used for prospecting and can object; each message needs an easy opt-out; rights requests answered within one month (CNIL).",
+        "Generic company addresses (info@, contact@) fall outside these principles (CNIL). A CNIL telephone-prospecting page mentions rule changes from 2026-08-11 (scope unverified; phone not in scope for Amber)."
+      ],
+      "sources": [
+        "https://www.cnil.fr/fr/la-prospection-commerciale-par-courrier-electronique-sms-mms-et-automate-dappel",
+        "https://www.cnil.fr/en/node/14686",
+        "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000022517620",
+        "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072050/LEGISCTA000006178151/2019-01-01?idSecParent=LEGISCTA000006160809",
+        "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000022520917",
+        "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+        "https://www.technology.org/2026/10/13/eu-ai-act-deadlines-after-the-digital-omnibus-what-applies-from-december-2026-to-august-2028/",
+        "https://www.ilo.org/resource/other/c181-private-employment-agencies-convention-1997"
+      ],
+      "agencyLicensing": "unclear",
+      "agencyLicensingNote": "Code du travail L5321-1 defines placement as matching offers and requests without becoming party to the employment relationship and allows it for profit; no licence for pure placement was found in the excerpts. Temporary-work agencies have a separate regime (declaration and financial guarantee): unverified. France ratified ILO C181.",
+      "jobseekerFees": "prohibited",
+      "aiHiringRules": [
+        "EU AI Act: tools for recruitment, selection, filtering and evaluating candidates are classed high-risk (Annex III) per secondary sources only. The Digital Omnibus moved Annex III obligations to 2027-12-02 (reported as Regulation (EU) 2026/1744; provisional deal 2026-05-07, Council adoption 2026-06-29; sources differ on the in-force date). Verify in the Official Journal before relying.",
+        "AI Act Art. 50 transparency duties (tell people when they are interacting with an AI system) still apply from 2026-08-02 per secondary sources; a watermarking grace period to 2026-12-02 applies to existing generative systems.",
+        "GDPR Art. 22 (solely automated decisions with significant effects) and national works-council rules on AI in selection: unverified, not researched this session."
+      ],
+      "candidateDataNotes": [
+        "CNIL: data obtained from third parties requires ensuring the person was informed and can object; GDPR Art. 14 notice and balancing test (background, unverified)."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Fee ban: no direct or indirect payment from job seekers for placement (L5321-3; exceptions for performing artists and sport); exacting it is punishable by six months' prison and EUR 3,750 (L5324-1) per Legifrance excerpts."
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "coldB2BEmail": "consent-required",
+      "conditions": [
+        "LSSI art. 21(1): commercial email that the recipient has not requested or expressly authorised is prohibited (AEPD resolutions). No B2B carve-out found.",
+        "Exception art. 21(2): existing contractual relationship, contact data lawfully obtained, own similar products or services; the sender must be able to prove the relationship (AEPD).",
+        "Every message needs a simple, free opt-out with a valid email address (AEPD). Express consent must be free, informed, specific and unambiguous (official LSSI portal).",
+        "Infringement classed minor with fines up to EUR 30,000 in older AEPD resolutions; current amounts unverified."
+      ],
+      "sources": [
+        "https://lssi.digital.gob.es/lssi/la-ley/preguntas-frecuentes",
+        "https://www.aepd.es/documento/a-00008-2019.pdf",
+        "https://www.aepd.es/documento/a-00011-2019.pdf",
+        "https://www.boe.es/buscar/pdf/2023/BOE-A-2023-5365-consolidado.pdf",
+        "https://www.sepe.es/HomeSepe/en/encontrar-trabajo/agencias-colocacion.html",
+        "https://www.boe.es/eli/es/rd/2010/12/30/1796",
+        "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+        "https://www.technology.org/2026/10/13/eu-ai-act-deadlines-after-the-digital-omnibus-what-applies-from-december-2026-to-august-2028/",
+        "https://www.ilo.org/resource/other/c181-private-employment-agencies-convention-1997"
+      ],
+      "agencyLicensing": "licence-required",
+      "agencyLicensingNote": "Ley 3/2023 de Empleo art. 43: a placement agency files a declaracion responsable with the regional employment service where its main establishment is; valid nationally without time limit; agency number must be shown. Royal Decree 1796/2010 previously required prior authorisation (whether still in force: unverified). Whether a foreign firm without a Spanish establishment can file: unverified. Registration-type regime rather than a full licence.",
+      "jobseekerFees": "prohibited",
+      "aiHiringRules": [
+        "EU AI Act: tools for recruitment, selection, filtering and evaluating candidates are classed high-risk (Annex III) per secondary sources only. The Digital Omnibus moved Annex III obligations to 2027-12-02 (reported as Regulation (EU) 2026/1744; provisional deal 2026-05-07, Council adoption 2026-06-29; sources differ on the in-force date). Verify in the Official Journal before relying.",
+        "AI Act Art. 50 transparency duties (tell people when they are interacting with an AI system) still apply from 2026-08-02 per secondary sources; a watermarking grace period to 2026-12-02 applies to existing generative systems.",
+        "GDPR Art. 22 (solely automated decisions with significant effects) and national works-council rules on AI in selection: unverified, not researched this session.",
+        "Spanish rules on informing worker representatives about algorithms: unverified."
+      ],
+      "candidateDataNotes": [
+        "GDPR/LOPDGDD: legitimate interests with notice; unverified in detail."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Law 3/2023 guarantees free intermediation services for workers. Spain ratified ILO C181."
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "coldB2BEmail": "consent-required",
+      "conditions": [
+        "Garante: promotional email is allowed only with the recipient's consent, applied to legal persons and VAT-number holders as well as individuals (2017 decision and later).",
+        "Art. 130(4) 'soft spam' exception is read restrictively: email only, similar products or services already sold, opt-out available; no extensive interpretation (Garante).",
+        "A 2026 decision says commercial email cannot rest on contract or legitimate interest, only on consent, and applied the same to an institutional university address (Garante, 2026-02-26 decision as summarised in search results; read the decision)."
+      ],
+      "sources": [
+        "https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/10232565",
+        "https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/1580492",
+        "https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/1597146",
+        "https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/5986406",
+        "https://www.lavoro.gov.it/strumenti-e-servizi/pagine/albo-nazionale-delle-agenzie-il-lavoro",
+        "https://www.lavoro.gov.it/archivio-doc-pregressi/Strumenti_normativa/2003/20030910_DLGS_276.pdf",
+        "https://www.anpal.gov.it/web/new-anpal/faq",
+        "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+        "https://www.technology.org/2026/10/13/eu-ai-act-deadlines-after-the-digital-omnibus-what-applies-from-december-2026-to-august-2028/",
+        "https://www.ilo.org/resource/other/c181-private-employment-agencies-convention-1997"
+      ],
+      "agencyLicensing": "licence-required",
+      "agencyLicensingNote": "D.Lgs. 276/2003 art. 4: authorisation and entry in the ANPAL national register (albo) for temporary agency work, intermediation, personnel search and selection (ricerca e selezione del personale) and outplacement support. Requirements include a company form, an EU legal seat and qualified staff (DM 43/2018); minimum capital figures conflict between sources (EUR 50,000 versus EUR 25,000). Authorisation details must appear in job adverts. A US-only business cannot assume it may recruit for Italian clients or candidates.",
+      "jobseekerFees": "prohibited",
+      "aiHiringRules": [
+        "EU AI Act: tools for recruitment, selection, filtering and evaluating candidates are classed high-risk (Annex III) per secondary sources only. The Digital Omnibus moved Annex III obligations to 2027-12-02 (reported as Regulation (EU) 2026/1744; provisional deal 2026-05-07, Council adoption 2026-06-29; sources differ on the in-force date). Verify in the Official Journal before relying.",
+        "AI Act Art. 50 transparency duties (tell people when they are interacting with an AI system) still apply from 2026-08-02 per secondary sources; a watermarking grace period to 2026-12-02 applies to existing generative systems.",
+        "GDPR Art. 22 (solely automated decisions with significant effects) and national works-council rules on AI in selection: unverified, not researched this session.",
+        "Italy's national AI law and its employment provisions: unverified, not researched."
+      ],
+      "candidateDataNotes": [
+        "Garante enforcement on marketing consent is active (decisions dated 2023 to 2026 appeared in search); GDPR Art. 14 and balancing-test duties unverified in detail."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Italy ratified ILO C181. The fee ban for workers in D.Lgs. 276/2003 was not confirmed in the excerpts (unverified)."
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "coldB2BEmail": "restricted-unclear",
+      "conditions": [
+        "Telecommunicatiewet art. 11.7: opt-in for unsolicited commercial communication; a 2021 amendment (Staatsblad 2021, 103) is described in the EU notification as opt-in for communications aimed at natural persons.",
+        "Older ACM decisions state the consent rule applies to subscribers who are natural persons, which would leave B2B email to legal persons outside the consent rule; current ACM guidance was not found and commercial blogs conflict.",
+        "GDPR still applies to addresses that name a person; the existing-customer exception applies. Treat as consent-first until Dutch counsel confirms."
+      ],
+      "sources": [
+        "https://ec.europa.eu/internal_market/imi-net/repositories/services-directive-notifications/_docs/333451.pdf",
+        "https://www.acm.nl/sites/default/files/old_publication/publicaties/9484_200408%20handhavingsbeleid%20spam.pdf",
+        "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+        "https://www.technology.org/2026/10/13/eu-ai-act-deadlines-after-the-digital-omnibus-what-applies-from-december-2026-to-august-2028/",
+        "https://www.ilo.org/resource/other/c181-private-employment-agencies-convention-1997"
+      ],
+      "agencyLicensing": "unclear",
+      "agencyLicensingNote": "Not researched. The Netherlands ratified ILO C181. Dutch registration rules for temporary-work and intermediary firms: unverified.",
+      "jobseekerFees": "unclear",
+      "aiHiringRules": [
+        "EU AI Act: tools for recruitment, selection, filtering and evaluating candidates are classed high-risk (Annex III) per secondary sources only. The Digital Omnibus moved Annex III obligations to 2027-12-02 (reported as Regulation (EU) 2026/1744; provisional deal 2026-05-07, Council adoption 2026-06-29; sources differ on the in-force date). Verify in the Official Journal before relying.",
+        "AI Act Art. 50 transparency duties (tell people when they are interacting with an AI system) still apply from 2026-08-02 per secondary sources; a watermarking grace period to 2026-12-02 applies to existing generative systems.",
+        "GDPR Art. 22 (solely automated decisions with significant effects) and national works-council rules on AI in selection: unverified, not researched this session."
+      ],
+      "candidateDataNotes": [
+        "GDPR with Dutch Data Protection Authority guidance on direct marketing: not located, unverified."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Treat as do-not-email until confirmed. Reported fine levels (about EUR 900,000) are unverified."
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "coldB2BEmail": "restricted-unclear",
+      "conditions": [
+        "S.I. 336/2011 regulation 13: the DPC states the general rule for electronic direct marketing is affirmative consent.",
+        "DPC prosecution (Viking Direct) shows reg. 13(4) offence applies to business subscribers who notified the sender that they do not consent; fines up to EUR 5,000 per unsolicited email on summary conviction.",
+        "Existing-customer exception reg. 13(11): conditions include easy opt-out and sending within 12 months of the sale. Whether B2B email to corporate subscribers without prior consent is lawful: not confirmed in the excerpts."
+      ],
+      "sources": [
+        "https://www.dataprotection.ie/en/organisations/rules-electronic-and-direct-marketing",
+        "https://www.dataprotection.ie/en/faqs/direct-marketing/consent-explicitly-required-all-cases-electronic-direct-marketing",
+        "https://www.dataprotection.ie/en/news-media/data-protection-commission-welcomes-latest-successful-prosecution-of-marketing-offences",
+        "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+        "https://www.technology.org/2026/10/13/eu-ai-act-deadlines-after-the-digital-omnibus-what-applies-from-december-2026-to-august-2028/"
+      ],
+      "agencyLicensing": "licence-required",
+      "agencyLicensingNote": "Unverified, not researched this session: background knowledge is that Ireland licenses employment agencies under the Employment Agency Act 1971. Treat as licence-required until an Irish lawyer says otherwise.",
+      "jobseekerFees": "unclear",
+      "aiHiringRules": [
+        "EU AI Act: tools for recruitment, selection, filtering and evaluating candidates are classed high-risk (Annex III) per secondary sources only. The Digital Omnibus moved Annex III obligations to 2027-12-02 (reported as Regulation (EU) 2026/1744; provisional deal 2026-05-07, Council adoption 2026-06-29; sources differ on the in-force date). Verify in the Official Journal before relying.",
+        "AI Act Art. 50 transparency duties (tell people when they are interacting with an AI system) still apply from 2026-08-02 per secondary sources; a watermarking grace period to 2026-12-02 applies to existing generative systems.",
+        "GDPR Art. 22 (solely automated decisions with significant effects) and national works-council rules on AI in selection: unverified, not researched this session."
+      ],
+      "candidateDataNotes": [
+        "GDPR with DPC guidance; unverified in detail."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Treat as do-not-email until the corporate-subscriber position is confirmed."
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "coldB2BEmail": "consent-required",
+      "conditions": [
+        "Spam Act 2003 covers commercial electronic messages including B2B: consent (express or inferred) is required; the sender must prove it (ACMA).",
+        "Publication of an address is not consent by itself (Schedule 2 cl. 4(1)); exception cl. 4(2): conspicuously published work address of an employee, director or office-holder, where it is reasonable to assume publication was agreed, and the message is relevant to the role and no statement refuses unsolicited messages (ACMA self-regulation report; conditions (c)-(d) were cut off in the excerpt).",
+        "Accurate sender identification (s.17) and a functional unsubscribe facility (s.18) are required in every message; enforcement notices cite missing unsubscribe facilities.",
+        "Legislation link is an older compilation; confirm against the current compilation."
+      ],
+      "sources": [
+        "https://www.acma.gov.au/avoid-sending-spam",
+        "https://www.legislation.gov.au/Details/C2016C00614",
+        "https://business.gov.au/marketing-and-advertising/promoting-your-business-by-email-or-text-messages",
+        "https://www.labourhire.qld.gov.au/licensing",
+        "https://ablis.business.gov.au/service/sa/labour-hire-licence/44188",
+        "https://ablis.business.gov.au/service/act/labour-hire-licence/46228"
+      ],
+      "agencyLicensing": "some-states",
+      "agencyLicensingNote": "No national recruitment-agency licence found. Labour-hire licensing exists in Queensland (recruitment and permanent placement services are excluded; interstate and overseas providers supplying workers into Queensland need a licence), South Australia (five sectors first; all other industries from the 2026-07-29 deadline stated on the ABLIS page, confirm) and the ACT (WorkSafe ACT, annual licence). Victoria and Western Australia: not verified. Permanent placement is generally outside labour-hire schemes; supplying contractors or temps is not.",
+      "jobseekerFees": "unclear",
+      "aiHiringRules": [
+        "No Australian AI-in-hiring statute found (unverified). Privacy Act automated-decision transparency duties are due to start in December 2026 (unverified, background): check."
+      ],
+      "candidateDataNotes": [
+        "Privacy Act 1988 and the Australian Privacy Principles: unverified, not researched."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Consent-first. Only use inferred consent where the work address is conspicuously published, the message is relevant to the role and a dated record is kept."
+    },
+    {
+      "code": "SG",
+      "name": "Singapore",
+      "coldB2BEmail": "allowed-with-conditions",
+      "conditions": [
+        "Spam Control Act 2007 covers unsolicited commercial electronic messages sent in bulk with a Singapore link (bulk thresholds unverified). Every message needs an unsubscribe facility (for email, an address), a statement how to use it, working for at least 30 days at no extra cost; stop within 10 business days of a request (Second Schedule).",
+        "Publishing an email address is not consent (Act). The business-contact-information exclusion sits in the PDPA (most Parts), not in the Spam Control Act; PDPC says bulk spam is handled under the Spam Control Act.",
+        "PDPA Do Not Call rules apply to SMS and voice calls to Singapore numbers (not researched; unverified). Policy: no SMS or calls."
+      ],
+      "sources": [
+        "https://sso.agc.gov.sg/Act/SCA2007?ProvIds=Sc2-.",
+        "https://www.pdpc.gov.sg/complaints-and-reviews/before-you-lodge-a-complaint-with-us-3/spam",
+        "https://sso.agc.gov.sg/Act/PDPA2012?ViewType=Pdf",
+        "https://www.mom.gov.sg/employment-agencies/eligibility-and-requirements/who-needs-to-get-a-licence",
+        "https://www.mom.gov.sg/-/media/mom/documents/employment-agencies/guide-on-new-ea-regulatory-framework.pdf"
+      ],
+      "agencyLicensing": "licence-required",
+      "agencyLicensingNote": "Employment Agencies Act: MOM says organisations and individuals who place job seekers with employers need an Employment Agency licence, whether placements are in Singapore or overseas; activities include communicating with jobseekers about applications, collating resumes and helping place them. Exempt: wholly web-based job portals and bulletin boards that do no matching or placement, and in-house recruiters hiring only for their own company. Licence application $400 plus $100 on issue; EA personnel need the Certificate of Employment Intermediaries. Whether executive search is covered: unverified.",
+      "jobseekerFees": "restricted",
+      "aiHiringRules": [
+        "No binding hiring-AI statute found (unverified); voluntary governance frameworks: unverified."
+      ],
+      "candidateDataNotes": [
+        "PDPA: business contact information excluded from most Parts; personal data outside a business capacity is covered. Details unverified.",
+        "Fee cap for foreign workers: one month's salary per year of service, maximum two months (MOM fee guide). No equivalent cap found for local job seekers."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Email is lowest risk here, but placing job seekers with employers needs an EA licence. Do not run placement for Singapore clients without one."
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "coldB2BEmail": "restricted-unclear",
+      "conditions": [
+        "No email-specific anti-spam statute found (unverified). The Digital Personal Data Protection Act 2023 and DPDP Rules 2025 (notified 2025-11-14, 18-month phased compliance, full duties around May 2027 by my inference) are consent-led, with standalone notices and a contact point.",
+        "SMS and calls are regulated by the telecom regulator's do-not-disturb rules: not researched, unverified."
+      ],
+      "sources": [
+        "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2190014&reg=3&lang=2",
+        "https://www.meity.gov.in/static/uploads/2024/06/2bf1f0e9f04e6fb4f8fef35e82c42aa5.pdf"
+      ],
+      "agencyLicensing": "unclear",
+      "agencyLicensingNote": "Not researched. Background (unverified): overseas placement is regulated under the Emigration Act 1983 with recruiting-agent registration; the position for domestic placement is unclear. Treat as regulated until Indian counsel says otherwise.",
+      "jobseekerFees": "unclear",
+      "aiHiringRules": [
+        "No AI-in-hiring statute found (unverified)."
+      ],
+      "candidateDataNotes": [
+        "DPDP Act and Rules: consent notices, purpose limitation; phase-in dates per PIB. Cross-border transfer rules: unverified."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Do not cold email Indian recipients until counsel confirms; inbound only."
+    },
+    {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "coldB2BEmail": "restricted-unclear",
+      "conditions": [
+        "TDRA rules found cover marketing SMS: prior explicit opt-in (silence is not consent), free opt-out, evidence of consent kept, no marketing texts 9pm-7am. Email-specific rules not found.",
+        "Federal Decree-Law 45 of 2021 (personal data) and free-zone regimes (DIFC, ADGM): unverified, not researched."
+      ],
+      "sources": [
+        "https://tdra.gov.ae/en/FAQs",
+        "https://tdra.gov.ae/-/media/About/regulations-and-ruling/EN/Unsolicited-Elrctronic-Commuincations--pdf.ashx",
+        "https://tdra.gov.ae/en/initiatives/marketing-short-message-service"
+      ],
+      "agencyLicensing": "licence-required",
+      "agencyLicensingNote": "Unverified, not researched: background knowledge is that recruitment agencies are licensed (federal labour ministry and emirate or free-zone licensing). Treat as licence-required until a UAE lawyer says otherwise.",
+      "jobseekerFees": "prohibited",
+      "aiHiringRules": [
+        "No hiring-AI statute found (unverified)."
+      ],
+      "candidateDataNotes": [
+        "Federal personal data law and free-zone data laws: unverified."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Fee ban for workers is background knowledge (unverified). Do not market to the UAE until counsel confirms."
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "coldB2BEmail": "restricted-unclear",
+      "conditions": [
+        "LGPD art. 10: legitimate interest can support promotion of the controller's activities for non-sensitive data, with a three-part test, necessity, transparency and an easy opt-out; an impact assessment may be required for high risk (ANPD legitimate-interest guide). The guide's example is email to existing customers based on purchase history; cold B2B email is not addressed.",
+        "Consumer-protection and self-regulatory advertising rules: unverified, not researched."
+      ],
+      "sources": [
+        "https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes/guia_legitimo_interesse.pdf/@@display-file/file"
+      ],
+      "agencyLicensing": "unclear",
+      "agencyLicensingNote": "Not researched. Temporary-work firms are regulated separately in Brazil (unverified); no information on permanent placement.",
+      "jobseekerFees": "unclear",
+      "aiHiringRules": [
+        "LGPD right to review automated decisions (art. 20) and the pending AI bill: unverified, not researched."
+      ],
+      "candidateDataNotes": [
+        "LGPD: legal basis, art. 9 information duties, data-subject rights, international transfer rules (ANPD regulation): unverified in detail."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Do not cold email Brazil until counsel confirms the legitimate-interest balance for B2B contacts."
+    },
+    {
+      "code": "MX",
+      "name": "Mexico",
+      "coldB2BEmail": "restricted-unclear",
+      "conditions": [
+        "A new federal law on personal data held by private parties was published in the Diario Oficial on 2025-03-20 and replaced the 2010 law; privacy-notice duties (identity and address of the controller, data processed, how changes are communicated) apply (Camara de Diputados consolidated text, last reform 2025-11-14 per the page).",
+        "Email-specific marketing rules and the consumer 'do not advertise' registry: unverified, not researched."
+      ],
+      "sources": [
+        "https://www.diputados.gob.mx/LeyesBiblio/ref/lfpdppp.htm"
+      ],
+      "agencyLicensing": "unclear",
+      "agencyLicensingNote": "Not researched. Placement-agency registration and fee rules under the Federal Labour Law: unverified.",
+      "jobseekerFees": "unclear",
+      "aiHiringRules": [
+        "No hiring-AI statute found (unverified)."
+      ],
+      "candidateDataNotes": [
+        "Privacy notice required at collection; the authority that now enforces the law was not confirmed (unverified)."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Do not cold email Mexico until counsel confirms."
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "coldB2BEmail": "consent-required",
+      "conditions": [
+        "Act on Regulation of Transmission of Specified Electronic Mail: advertising email from businesses is 'specified electronic mail' and needs the recipient's prior consent or request (Japanese Law Translation).",
+        "A 2008-era translation lists exceptions including recipients who gave consent and organisations or business persons who have made their email address public, as set by a ministerial ordinance; whether a business card counts, and the current ordinance, were not confirmed.",
+        "A separate consent rule applies to email advertising under the Act on Specified Commercial Transactions (mail-order sales)."
+      ],
+      "sources": [
+        "https://www.japaneselawtranslation.go.jp/en/laws/view/3767/en",
+        "https://www.soumu.go.jp/main_sosiki/joho_tsusin/eng/Resources/laws/pdf/090204_4.pdf"
+      ],
+      "agencyLicensing": "licence-required",
+      "agencyLicensingNote": "Unverified, not researched: background knowledge is that fee-charging placement businesses need permission from the labour ministry. Treat as licence-required until a Japanese lawyer says otherwise. Japan ratified ILO C181.",
+      "jobseekerFees": "restricted",
+      "aiHiringRules": [
+        "No hiring-AI statute found (unverified); personal-information guidelines: unverified."
+      ],
+      "candidateDataNotes": [
+        "APPI (personal information protection act) duties and cross-border rules: unverified, not researched."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Opt-in regime; treat Japan as consent-only."
+    },
+    {
+      "code": "KR",
+      "name": "South Korea",
+      "coldB2BEmail": "consent-required",
+      "conditions": [
+        "Network Act art. 50(1): sending profit-making advertising through electronic media requires the addressee's express prior consent (KLRI translation). Exception: a person who directly collected contact details in a transaction and advertises the same kind of goods within the period set by decree.",
+        "Opt-out: sender must state name and contact details and provide a means to refuse or revoke consent at no cost; consent re-confirmed every two years; outcome of consent or refusal notified within 14 days.",
+        "Night-time (9pm-8am) consent rule: the decree appears to exempt email, but this reading is counter-intuitive and unverified; check the Korean text."
+      ],
+      "sources": [
+        "https://elaw.klri.re.kr/eng_mobile/viewer.do?hseq=64717&type=sogan&key=41",
+        "https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1000688185&lsId=000030&print=print"
+      ],
+      "agencyLicensing": "licence-required",
+      "agencyLicensingNote": "Unverified, not researched: background knowledge is that fee-charging employment placement requires registration or a report to the authorities. Treat as licence-required until a Korean lawyer says otherwise.",
+      "jobseekerFees": "restricted",
+      "aiHiringRules": [
+        "Korea's AI framework act (reported in force from January 2026, with hiring as a high-impact area): unverified, not researched."
+      ],
+      "candidateDataNotes": [
+        "PIPA duties and cross-border transfer rules: unverified, not researched."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Consent-only for email. The English translation may lag the Korean text."
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa",
+      "coldB2BEmail": "consent-required",
+      "conditions": [
+        "POPIA s.69: unsolicited electronic direct marketing to a non-customer needs prior consent; the first message may only request consent, and a person who has not refused may be approached for consent only once (Information Regulator guidance note).",
+        "Opt-out is not consent (POPIA Regulations amended 2025; Regulator enforcement notice against FT Rams Consulting found an opt-out link did not cure missing consent).",
+        "Existing-customer exception (s.69(3)): contact details obtained in the sale of a product or service, similar products, opt-out offered at collection and in each message. Every message must identify the sender and give a way to stop.",
+        "Whether companies (juristic persons) count as data subjects under s.69: not confirmed in the excerpts; treat as covered."
+      ],
+      "sources": [
+        "https://inforegulator.org.za/wp-content/uploads/2020/07/GUIDANCE-NOTE-ON-DIRECT-MARKETING-IN-TERMS-OF-THE-PROTECTION-OF-PERSONAL-INFORMATION-ACT-4-OF-2013-POPIA.pdf",
+        "https://inforegulator.org.za/wp-content/uploads/2020/07/FT-RAMS-CONSULTING-ENFORCEMENT-NOTICE-210224_Redacted.pdf",
+        "https://inforegulator.org.za/wp-content/uploads/2025/04/POPIA-2021-Regulations-FINAL-21-Jan-2025.pdf"
+      ],
+      "agencyLicensing": "licence-required",
+      "agencyLicensingNote": "Unverified, not researched: background knowledge is that private employment agencies must register with the labour department under the Employment Services Act. Treat as licence-required until a South African lawyer says otherwise.",
+      "jobseekerFees": "prohibited",
+      "aiHiringRules": [
+        "POPIA restrictions on solely automated decisions: unverified, not researched."
+      ],
+      "candidateDataNotes": [
+        "POPIA conditions for lawful processing, cross-border transfer rules: unverified in detail."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Fee ban for work seekers is background knowledge (unverified). Consent-only for email."
+    },
+    {
+      "code": "EU-other",
+      "name": "Other EU/EEA member states",
+      "coldB2BEmail": "restricted-unclear",
+      "conditions": [
+        "ePrivacy Directive 2002/58/EC art. 13: consent rules (paras 1 and 3) apply to subscribers who are natural persons; member states must ensure the legitimate interests of other subscribers (companies) are sufficiently protected, and may choose how (EUR-Lex; Article 29 Working Party Opinion 5/2004). The ban on disguising the sender's identity applies to all.",
+        "Result: rules differ by country (Germany, Spain and Italy require consent; France allows B2B with information and objection; Netherlands and Ireland unclear). Default for any other EU/EEA country: consent or inbound only until local advice.",
+        "GDPR applies whenever the address identifies a person."
+      ],
+      "sources": [
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32002L0058",
+        "https://ec.europa.eu/justice/article-29/documentation/opinion-recommendation/files/2004/wp90_en.pdf",
+        "https://normlex.ilo.org/dyn/nrmlx_en/f?p=NORMLEXPUB%3A11300%3A0%3A%3ANO%3A%3AP11300_INSTRUMENT_ID%3A312326",
+        "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+        "https://www.technology.org/2026/10/13/eu-ai-act-deadlines-after-the-digital-omnibus-what-applies-from-december-2026-to-august-2028/"
+      ],
+      "agencyLicensing": "unclear",
+      "agencyLicensingNote": "Many EU states license or register private employment and temporary-work agencies, and ILO C181 (about 40 ratifications; includes Belgium, Bulgaria, Czechia, Finland, Hungary, Lithuania, Poland, Portugal, Slovakia per the NORMLEX list I saw) requires states to run a licensing or certification system and bans worker fees. Country-by-country position not researched.",
+      "jobseekerFees": "unclear",
+      "aiHiringRules": [
+        "EU AI Act: tools for recruitment, selection, filtering and evaluating candidates are classed high-risk (Annex III) per secondary sources only. The Digital Omnibus moved Annex III obligations to 2027-12-02 (reported as Regulation (EU) 2026/1744; provisional deal 2026-05-07, Council adoption 2026-06-29; sources differ on the in-force date). Verify in the Official Journal before relying.",
+        "AI Act Art. 50 transparency duties (tell people when they are interacting with an AI system) still apply from 2026-08-02 per secondary sources; a watermarking grace period to 2026-12-02 applies to existing generative systems.",
+        "GDPR Art. 22 (solely automated decisions with significant effects) and national works-council rules on AI in selection: unverified, not researched this session."
+      ],
+      "candidateDataNotes": [
+        "GDPR Art. 6(1)(f), Art. 14 notice within one month for third-party data, Art. 21 objection, Art. 17 deletion, Art. 27 representative for non-EU firms, Chapter V transfers: background knowledge, not re-checked this session (unverified)."
+      ],
+      "needsLawyerReview": true,
+      "notes": "Treat every EU/EEA country as consent-first for cold email and as a possible licensing jurisdiction until local advice says otherwise."
+    }
+  ]
+}
