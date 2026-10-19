@@ -29,15 +29,16 @@ The branch is `claude/amber-global-recruiting` in the private `amberai` reposito
 
 | Kind | Rows | Written by |
 |---|---|---|
-| `RECRUITING_PROSPECTS` | one: businesses, their open roles, the board list, source health, run log | the worker, single-flight |
+| `RECRUITING_PROSPECTS` | one: the board list, source health, run log, tallies and the shard count | the worker, single-flight |
+| `RECRUITING_PROSPECT_SHARD` | up to 256: the businesses and their open roles, bucketed by a hash of the business id; only changed shards are written (a save is not atomic: a page read during a save can briefly show a half-updated set; it cannot lose a business) | the worker |
 | `RECRUITING_DECISION` | one per owner action, never changed after it is written (append-only; capped at 20,000 with a reserve for opt-outs, replies and withdrawals) | the page's API |
 
 | To undo | Do | What remains |
 |---|---|---|
 | Stop all reading, now | Unset `AMBER_RECRUITING_LANE` on the worker | Everything recorded; the next tick says "off; nothing read" |
 | Stop all messages | "Withdraw approval" on the page | Approvals stay on record but nothing shows as ready |
-| Take the code out | Revert the merge commit | The two kinds of row stay in `DevMemory`, unread; the generic memory API lists them again once the filter is reverted (they are then visible to every signed-in member: delete them first if that matters) |
-| Remove the lane's data | `DELETE FROM "DevMemory" WHERE kind IN ('RECRUITING_PROSPECTS','RECRUITING_DECISION');` | Nothing of the lane. Do this only after reading the next row: it removes every opt-out the owner has recorded |
+| Take the code out | Revert the merge commit | The lane's rows (prospects, shards, decisions, candidates) stay in `DevMemory`, unread; older code that meets a sharded record sees an empty business list and rediscovers from scratch, and rolling forward again reads the shards back; the generic memory API lists them again once the filter is reverted (they are then visible to every signed-in member: delete them first if that matters) |
+| Remove the lane's data | `DELETE FROM "DevMemory" WHERE kind IN ('RECRUITING_PROSPECTS','RECRUITING_PROSPECT_SHARD','RECRUITING_DECISION','RECRUITING_CANDIDATE');` | Nothing of the lane. Do this only after reading the next row: it removes every opt-out the owner has recorded |
 | Remove the dormant job | Delete the `RECRUITING_TICK` row from the job table, and the seed in `work-queue.ts` | Nothing |
 
 Rollback was exercised the only way it can be here: the tests run the lane against an in-memory store and against a real SQLite database through Prisma for the memory filter (the reviewer's check), the job answers "off" without the variable (test), and a decision log with damaged rows is read with the damaged rows counted and left out (test). It was **not** run against the production database, because nothing here can reach it.
@@ -62,7 +63,7 @@ All were run on the final code of this branch in the build environment (no datab
 
 | Check | Result |
 |---|---|
-| `npm run test:recruiting` (lane tests and the shared robots.txt matcher test) | **485 of 485 pass** in 30 files (29 lane files and the robots.txt wildcard file), about two minutes |
+| `npm run test:recruiting` (lane tests and the shared robots.txt matcher test) | **595 of 595 pass** in 38 files (37 lane files and the robots.txt wildcard file), about two minutes |
 | Shared tests that use the robots.txt code, the web-hazard ratchet (37 tests) and the work-queue scope test: 32 files, 615 tests, run on this branch and on `main` | identical file by file: 607 pass; the 8 that fail, all in `source-acquisition.test.ts`, fail on `main` too and need a database. The fifth reviewer's run of 76 other-lane files matched `main` as well |
 | Type check (`tsc`, the lane's folders and the page) | clean |
 | Lint (`eslint`, the lane, the page, the API, the tile, the scripts) | clean |
