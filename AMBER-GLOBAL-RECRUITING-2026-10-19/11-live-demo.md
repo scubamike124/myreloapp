@@ -40,7 +40,7 @@ npm install
 npm run demo:recruiting
 ```
 
-Add `-- --area="Denver, CO"` to look at another of the 20 map areas, or `-- --board=lever:somecompany` to include a company you know. The report is written to `recruiting-demo-output/report.md`. It needs no database and no keys, writes nothing else, and sends nothing.
+Add `-- --area="Denver, CO"` to look at another of the 48 map areas, or `-- --board=lever:somecompany` to include a company you know. The report is written to `recruiting-demo-output/report.md`. It needs no database and no keys, writes nothing else, and sends nothing.
 
 ## What the run does
 

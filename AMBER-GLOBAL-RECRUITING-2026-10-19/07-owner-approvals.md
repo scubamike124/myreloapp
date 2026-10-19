@@ -6,7 +6,8 @@ Written 18 Oct 2026 (Pacific). Nothing below was done. Each item says what, why,
 
 | # | Decision | Why it needs you | My recommendation | Cost |
 |---|---|---|---|---|
-| A1 | **Merge and deploy the code.** Private repo `amberai`, branch `claude/amber-global-recruiting`. No pull request is open. | Merges and deploys need your explicit word. GitHub Actions cannot start jobs (account billing), so no CI has run; I ran 368 tests (and 37 in the shared web-hazard ratchet), the type check and the linter locally. I did not bypass the block. | Ask me to open the pull request and read its summary; then say "merge". On merge the page `/dashboard/recruiting`, its API, an HQ tile and one new job kind appear. The job does nothing until A2. | $0 |
+| A1 | **Merge and deploy the code.** Private repo `amberai`, draft pull request #930 (branch `claude/amber-global-recruiting`). | Merges and deploys need your explicit word. GitHub Actions cannot start jobs (account billing), so no CI has run; I ran 485 lane tests, 32 shared test files (identical to `main`), the type check, the linter, a production build and a browser check locally. I did not bypass the block. | Read the pull request's summary and 12-production-readiness.md; then say "merge". On merge the page `/dashboard/recruiting`, its API, an HQ tile and one new job kind appear. The job does nothing until A2. Merge only after the live demonstration passes, or knowingly before it. | $0 |
+| A0 | **Open the 12 domains for the live demonstration** (the one action that unblocks everything else): Edit → Network access → Allowed domains: `hacker-news.firebaseio.com`, `hn.algolia.com`, `remotive.com`, `jobicy.com`, `boards-api.greenhouse.io`, `api.lever.co`, `api.ashbyhq.com`, `api.smartrecruiters.com`, `www.workable.com`, `overpass-api.de`, `lz4.overpass-api.de`, `z.overpass-api.de`; then say "go". | Only you can change the allow-list. | Do it; remove the names afterwards. | $0 |
 | A2 | **Switch the lane on.** Set `AMBER_RECRUITING_LANE=1` on the worker. | It makes the worker read public pages for the first time. | Do it right after A1, then I check the sources panel with you (08-runbook). | $0 |
 | A3 | **Which sources stay on**, and one terms check. | Job-feed terms are unclear for commercial reuse (03-lead-sources). Remotive says that showing its jobs to collect signups or emails is a breach; most vendors say nothing. | Keep company boards, Hacker News and maps on. Decide whether the four aggregators (Remote OK, Remotive, Arbeitnow, Jobicy) feed a sold list; the cautious choice is off for the sold list. Read Hacker News's terms once. | $0 |
 
@@ -44,6 +45,16 @@ One hour with a California attorney who knows employment-agency or marketing law
 | D1 | A **YouTube channel** for Amber Global Recruiting, created by you. Who speaks the scripts, and whether a synthetic voice or picture is used (it must be disclosed). | A new channel, your own voice or a voiceover with screen recordings. The existing AmberOne channel is for students. |
 | D2 | Posts on **LinkedIn or X**, by hand, from your own account. | A few of the seven posts in `06-marketing/05`, after step B3. No automation of either network. |
 | D3 | A **public page** for the offer. | Not needed to start: the scripts and posts end on "write to the address in the description". A plain page can follow. |
+
+## 5b. Decisions the reviews raised
+
+| # | Decision | As built |
+|---|---|---|
+| R1 | Hold policy for a sentence the reader is unsure of | Held until you read it and release it (soft); a sentence the reader is sure of is never releasable |
+| R2 | The generic memory API hides the lane's rows by a deny-list (shared code) | Deny-list; an allow-list is a bigger shared change (D6 in 10) |
+| R3 | Promises written in your voice ("I go through what it finds", "I open a few links before a sample goes out") | True only if you do them |
+| R4 | A hidden (Cloudflare) address cannot be typed in by you | Not decoded; the card says so |
+| R5 | Regions: France is "allowed with conditions" once cleared; Germany, Spain, Italy, Canada and others stay blocked | Lawyer's read in 02 before volume |
 
 ## 6. Later (not blocking)
 

@@ -8,9 +8,9 @@ The owner reads, edits if wanted, approves on the page, and sends from their own
 
 ### Employers whose job ads have stayed up 45+ days
 
-> Hi,
+> Hello to everyone at Hooli Staffing,
 >
-> Your careers page lists a Healthcare Recruiter role, which is how my software found Hooli Staffing. I should say up front that I place no one. I do research on employers for staffing agencies.
+> My software flagged the Healthcare Recruiter listing on your careers page, and that is why I am writing. I should say up front that I place no one. I do research on employers for staffing agencies.
 >
 > What I look for is simple: public job listings that have stayed up for 45 days or longer. The software does the reading and I go through what it keeps. For each employer there is the role, a link to the live ad, how long it has been up, and the address the company itself prints for hiring, if it prints one.
 >
@@ -28,13 +28,13 @@ The owner reads, edits if wanted, approves on the page, and sends from their own
 > I use an AI assistant for research and first drafts, and I read every message before it goes out.
 > If you would rather not hear from me, reply "no thanks" and I will not write again.
 
-*123 words before the footer. Wording check: 0 errors, 0 warnings.*
+*130 words before the footer. Wording check: 0 errors, 0 warnings.*
 
 ### Employers whose job ads have stayed up 45+ days
 
-> Hi,
+> Hello,
 >
-> While going through staffing firms' careers pages, my software flagged your Technical Recruiter listing, so I am writing to Initech Talent Partners. There's no candidate pitch here: I do research for agencies and place no one.
+> My software flagged your Technical Recruiter listing on your careers page, so I am writing to Initech Talent Partners. There's no candidate pitch here: I do research for agencies and place no one.
 >
 > I read employers' public job listings with a bit of software, and what I keep is the roles that haven't come down after 45 days. Each row gives the company, the role, the link, the date the ad went up (or the day I first saw it, when the ad shows no date), and a hiring address if the company publishes one.
 >
@@ -52,13 +52,13 @@ The owner reads, edits if wanted, approves on the page, and sends from their own
 > I use an AI assistant for research and first drafts, and I read every message before it goes out.
 > If you would rather not hear from me, reply "no thanks" and I will not write again.
 
-*129 words before the footer. Wording check: 0 errors, 0 warnings.*
+*126 words before the footer. Wording check: 0 errors, 0 warnings.*
 
 ### Your Light Industrial Recruiter listing at Cyberdyne Talent
 
-> Hello,
+> Hello Cyberdyne Talent team,
 >
-> You are hiring a Light Industrial Recruiter, and my software flagged the listing, which is why I am writing to Cyberdyne Talent. Roles still listed after 45 days are the ones I keep. They come from employers' own careers pages and the job boards that host them, read by my software.
+> I am writing because my software picked up the Light Industrial Recruiter listing on your careers page. Roles still listed after 45 days are the ones I keep. They come from employers' own careers pages and the job boards that host them, read by my software.
 >
 > What comes back is one line per employer: company, role, link, date posted, and a hiring address where one is printed.
 >
@@ -76,13 +76,13 @@ The owner reads, edits if wanted, approves on the page, and sends from their own
 > I use an AI assistant for research and first drafts, and I read every message before it goes out.
 > If you would rather not hear from me, reply "no thanks" and I will not write again.
 
-*114 words before the footer. Wording check: 0 errors, 0 warnings.*
+*112 words before the footer. Wording check: 0 errors, 0 warnings.*
 
 ### A free sample of employers with long-open job ads
 
-> Hello Wayne Workforce Solutions team,
+> Hello Wayne Workforce Solutions,
 >
-> My software flagged the Account Manager listing on your careers page, which is how Wayne Workforce Solutions came to my attention.
+> I am writing because my software read your careers page, where an Account Manager position is listed.
 >
 > The software goes through employers' public job pages and picks out roles that are still listed after 45 days.
 >
@@ -100,7 +100,7 @@ The owner reads, edits if wanted, approves on the page, and sends from their own
 > I use an AI assistant for research and first drafts, and I read every message before it goes out.
 > If you would rather not hear from me, reply "no thanks" and I will not write again.
 
-*115 words before the footer. Wording check: 0 errors, 0 warnings.*
+*110 words before the footer. Wording check: 0 errors, 0 warnings.*
 
 ### The one follow-up, seven or more days later
 

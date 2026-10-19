@@ -43,7 +43,7 @@ This is the workflow the owner runs. It is meant to take about 15 minutes a day.
 | Record a conversation | Owner | A note in their own words | `log-conversation` |
 | Move it on | Owner | Proposal, won, lost, not a fit | `set-stage` |
 | Do not contact | Owner, any time | Business, domain or address, permanent | `suppress` |
-| Deliver the list | Owner | Presses the sample or export button, checks two or three links, sends it | Nothing |
+| Deliver the list | Owner | Presses the sample or export button, reads the sample through, opens two or three of its links (the offer says so), sends it | Nothing |
 | Money | Owner | Records an agreed fee, a payment received, or an expense. Revenue counts only with proof and the owner's confirmation | `ledger` |
 
 **What the owner never has to do by hand:** find the companies, find the addresses, write the first draft, check the wording, check the region and state rules, keep the opt-out list, or count the funnel.

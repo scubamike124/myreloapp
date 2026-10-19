@@ -55,6 +55,7 @@ Any one of these is enough. None deletes anything.
 | All reading | Unset `AMBER_RECRUITING_LANE` on the worker. The next tick says "off; nothing read" |
 | One source | Untick it under Settings, "Sources Amber may read" |
 | One company | On its card, "Record something", then "Never contact them" (permanent) |
+| One company that was set aside by mistake | It is listed first, under "Waiting for you to read", if a reply was read as a request to stop or its website has a sentence the reader could not judge: "That was not an opt-out: allow contact again" or "That is not a notice: allow this business". Read the reply or the sentence first. A "Never contact them" entry you made by hand cannot be undone from the page |
 | All messages | "Withdraw approval" in the process panel. Every message goes back to waiting; approvals stay on record but nothing shows as ready |
 | A vendor's objection | Switch that source off at once and tell the vendor so; keep its terms text with the decision |
 | Everything, for good | Remove the job kind from `CLOUD_JOB_KINDS` and the seed in `work-queue.ts` (a code change) |
@@ -69,6 +70,7 @@ Any one of these is enough. None deletes anything.
 | A source shows `FAILED` | The host refused, timed out or rate-limited | The lane backs off and pauses a board for seven days after three failures; do not retry in a loop. Read the note under the source |
 | A source shows `FORMAT CHANGED` | The vendor changed its response | Run the probe for that source, fix the adapter from the shape, add a test |
 | Many businesses, no messages ready | No published address found yet, region not cleared, or the process is not approved | Open a business card: it says why. Contact lookups run six per pass in cleared regions only |
+| A business is held and its card quotes a sentence from its own website | The reader found a sentence that may mean "agencies and vendors, leave us alone" and could not tell | It waits under "Waiting for you to read (N)" at the top of the page. Read the sentence. If it is not such a request, press "That is not a notice: allow this business" (it names that sentence and that website, and frees every record of the site). If you are not sure, leave it. A sentence the reader is sure of is not releasable: correct the website instead, or leave the business out |
 | A message is "held" with a state named | Its roles are in New York, New Jersey, Massachusetts or Illinois | Leave it, or clear the state in Settings after taking advice |
 | A message is "blocked" | The wording check or the gate refused it | The card shows the reason; edit and the checks run again |
 | Days open look too low for a feed role | The feed gives no posting date, so the count starts when Amber first saw it | Expected. The sheet says "first seen" for those rows |
@@ -79,15 +81,17 @@ Any one of these is enough. None deletes anything.
 
 ## Checks that were run, and how to run them again
 
-| Check | Command | Last result (18 Oct 2026, Pacific) |
+| Check | Command | Last result (19 Oct 2026) |
 |---|---|---|
-| Unit and integration tests | `npm run test:recruiting` | all 368 pass (includes the robots.txt matcher test that protects the worker from freezing, and the demonstration script run offline) |
-| Type check | `npx tsc -p <a tsconfig that includes the recruiting folders>` | clean |
-| Lint | `npx eslint src/lib/recruiting src/app/dashboard/recruiting src/app/api/recruiting src/components/hq/hq-actions.ts scripts/recruiting-*.ts` | clean |
+| Unit and integration tests | `npm run test:recruiting` | all 485 pass in 30 files (includes the robots.txt matcher test that protects the worker from freezing, and the demonstration script run offline) |
+| Type check | `npx tsc --noEmit -p tsconfig.json` | clean (no output for the whole project) |
+| Lint | `npx eslint src/lib/recruiting src/app/dashboard/recruiting src/app/api/recruiting src/components/hq/hq-actions.ts src/lib/cloud/work-queue.ts src/lib/research/robots.ts src/lib/dev/memory-filter.ts src/app/api/dev/memory scripts/recruiting-*.ts` | clean |
+| Production build | `npx next build --webpack` (placeholder database and sign-in variables) | compiled in 2.2 minutes, 461 of 461 pages, the page and both API routes listed, exit 0 |
+| Shared tests that use the robots.txt code, the web-hazard ratchet and the work-queue scope test | 32 files, run on this branch and on `main` | identical file by file (615 tests, 607 pass; the 8 that fail are in `source-acquisition.test.ts` and fail on `main` too: they need a database) |
 | Offline rehearsal of the whole lane on the documented sample payloads | `npx tsx scripts/recruiting-rehearsal.ts` | 11 of 11 documented shapes read; on the day of the first read no message is written (no role has been listed for 45 days, so there is no sample to offer); fifty days on, if the same roles are still listed, 1 message composed and ready; 0 wording errors; 0 template-like pairs; revenue $0.00 |
 | Revenue tables | `npx tsx scripts/recruiting-revenue-model.ts` | matches 05-revenue-plan |
-| Regenerate the marketing pages | `npx tsx scripts/recruiting-docs.ts` | matches `06-marketing/` |
-| The owner's page in a phone viewport | a local harness drove the whole flow in a headless browser: settings, process approval, message approval, "I sent it", reply, opt-out, sample list, money | worked; no console errors |
+| Regenerate the marketing pages | `npx tsx scripts/recruiting-docs.ts` | matches `06-marketing/` (regenerated: no difference) |
+| The owner's page in a phone viewport | `scripts/recruiting-ui-check/` (the commands are at the top of each file) drove the whole flow in a headless browser against the real page, the real API layer and an in-memory record, and compared what the page shows with the API and with the raw record after each step: settings, process approval, message approval, "I sent it", reply, opt-out and its undo, a probable notice and its release, sample list, money, withdrawal, a phone viewport | 575 checks pass; no console errors |
 | GitHub Actions | not run: the account cannot start jobs (billing) | not a pass and not a fail |
 
 ## What has never been tested

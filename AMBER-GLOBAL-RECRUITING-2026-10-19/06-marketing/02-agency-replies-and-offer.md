@@ -129,13 +129,13 @@ Before it is used:
 >
 > What you do not get: names of people (I do not collect them on purpose), guessed email addresses, candidates, introductions, or any promise that a call turns into work. I am not placing anyone. I have no other clients yet, so there are no references to give you. The free sample is the way to judge whether the list is worth paying for.
 >
-> How it is made: the software reads job listings and company websites that anyone can open. On a company's own website it follows the site's rules for automated visitors, and it leaves the company off the list if a page there says it does not want approaches from agencies. It can miss a notice worded in a way it does not know, so look at a company's site before you write to it. Before a sample goes out I open a few of the links myself.
+> How it is made: the software reads job listings and company websites that anyone can open. On a company's own website it follows the site's rules for automated visitors, and it leaves the company off the list if a page there says it does not want approaches from agencies. It can miss a notice worded in a way it does not know, so look at a company's site before you write to it. Before a sample goes out I read it through myself and open a few of its links.
 >
 > What it costs: the first sample is free. A four-week trial of the weekly list is $99. After that it is $149 a month, agreed in writing before anything is billed, and you can stop at the end of any month without giving a reason.
 >
 > If you ever want to be left alone, one line from you is enough. Your address goes on a list of people I never write to, and I check that list before every message.
 
-*411 words. Wording check: 0 errors, 0 warnings.*
+*415 words. Wording check: 0 errors, 0 warnings.*
 
 
 ## Setting the price
