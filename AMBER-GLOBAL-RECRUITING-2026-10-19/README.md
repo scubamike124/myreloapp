@@ -39,3 +39,4 @@ An AI-assisted recruiting business based in Los Angeles, started on 18 Oct 2026 
 
 - [13-email-deliverability.md](13-email-deliverability.md): why mail may land in spam, what was built offline, and the proof required before any outreach.
 - [15-candidate-registration-and-read-path.md](15-candidate-registration-and-read-path.md): the candidate registration built and switched off (flag, limits, rollback), the lighter read path, trade-school parser, channel panel.
+- [16-owner-actions.md](16-owner-actions.md): exactly what only the owner can provide, and what each unlocks.

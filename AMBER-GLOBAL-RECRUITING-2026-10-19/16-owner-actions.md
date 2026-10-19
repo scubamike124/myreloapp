@@ -1,0 +1,13 @@
+# 16. What only the owner can provide, and what each unlocks
+
+Everything else is built and tested offline. Nothing here is urgent for the merge: the merge ships with every new feature switched off.
+
+| # | What | Why it is yours | Unlocks |
+|---|---|---|---|
+| 1 | **Open the 12 allowed domains in the environment's network settings** (Edit → Network access → Allowed domains: hacker-news.firebaseio.com, hn.algolia.com, remotive.com, jobicy.com, boards-api.greenhouse.io, api.lever.co, api.ashbyhq.com, api.smartrecruiters.com, www.workable.com, overpass-api.de, lz4.overpass-api.de, z.overpass-api.de) | Only the owner can edit the list; it is never bypassed | The live demonstration, a first real read of every source, the first real test of map discovery |
+| 2 | **A lawyer's reading** of placement and referral fees (employment-agency licensing by place), of automated candidate matching (NYC LL144, Illinois, Colorado, EU AI Act), of the candidate consent text and retention | Legal advice | Placement advertising; candidate matching; public candidate registration |
+| 3 | **Email sending authorisation** after the gate in doc 13: DNS access (or run `scripts/recruiting-deliverability-check.ts` from a laptop and paste the output) for the sending subdomain; the Resend domain settings and `MAIL_FROM`; the raw headers of one mail that landed in spam; authorised test mailboxes at Gmail, Outlook, Yahoo and one Google Workspace or Microsoft 365 mailbox (app passwords stored in the vault, never in chat); results recorded and judged by `seed-tests.ts` on three different days | Accounts and DNS are yours; sending is outward-facing | Turning on sending (still needs your separate authorisation) |
+| 4 | **Choose the recruiting mailbox address** (for example hello@ on the authenticated subdomain) and whether replies arrive through Resend inbound or another route | An address and a domain setting | Connecting incoming-mail automation |
+| 5 | **Candidate mail settings**: sender name, from address, reply-to, a postal address, the public https base URL; then say whether registration may go public | A postal address and a public decision | Candidate registration (after item 2) |
+| 6 | **Free API keys or registrations** if you want them: Adzuna, Jooble, Bundesagentur, France Travail, EURES | Each is an account in a name | More international job data. Not needed for the map discovery or the ATS boards |
+| 7 | **Final approval of the merge** if you want to give it again with the CI results in front of you | The standing rule was no merge without your word | Already given in your last message for reviewed changes with new features disabled |

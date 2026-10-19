@@ -58,3 +58,15 @@ Docs in this folder (start with 12-production-readiness.md, 07-owner-approvals.m
 - Dashboard panel for the four channels: businesses found are real counts; agreements, interviews, placements and invoices are zero because nothing records them yet.
 
 **Still disabled by design:** automatic email sending, candidate matching, placement advertising and fees. **No new spend; no network restrictions bypassed.** Rollback steps are in doc 15 and doc 12.
+
+---
+
+## Update 3 (2026-10-19, after the merge)
+
+**Merged to main as 3938cf57 (PR #930), every new feature switched off.** Reviewed before merge: a deploy-safety review and a second independent review (all confirmed findings fixed), 678 of 678 lane tests, 583 of 583 dashboard browser checks, type check, lint, build, and CI green on the merged code's final commit (recruiting, qa-engine, test, coloring).
+
+**Not verified:** the deploy itself (the production deploy and the post-merge CI run on main were still in progress when this was written; from this environment no production address can be reached), every live source, the map servers, email delivery, inbound mail, the real database at scale.
+
+**Still off:** the worker's discovery pass (`AMBER_RECRUITING_LANE`), public candidate registration and its mail, incoming-mail reading, automatic sending, candidate matching, placement advertising and fees.
+
+What only the owner can provide is listed in 16-owner-actions.md.

@@ -83,7 +83,7 @@ Any one of these is enough. None deletes anything.
 
 | Check | Command | Last result (19 Oct 2026) |
 |---|---|---|
-| Unit and integration tests | `npm run test:recruiting` | all 625 pass in 41 files (includes the robots.txt matcher test that protects the worker from freezing, and the demonstration script run offline) |
+| Unit and integration tests | `npm run test:recruiting` | all 678 pass in 48 files (includes the robots.txt matcher test that protects the worker from freezing, and the demonstration script run offline) |
 | Type check | `npx tsc --noEmit -p tsconfig.json` | clean (no output for the whole project) |
 | Lint | `npx eslint src/lib/recruiting src/app/dashboard/recruiting src/app/api/recruiting src/components/hq/hq-actions.ts src/lib/cloud/work-queue.ts src/lib/research/robots.ts src/lib/dev/memory-filter.ts src/app/api/dev/memory scripts/recruiting-*.ts` | clean |
 | Production build | `npx next build --webpack` (placeholder database and sign-in variables) | compiled in 2.2 minutes, 461 of 461 pages, the page and both API routes listed, exit 0 |

@@ -63,7 +63,7 @@ All were run on the final code of this branch in the build environment (no datab
 
 | Check | Result |
 |---|---|
-| `npm run test:recruiting` (lane tests and the shared robots.txt matcher test) | **625 of 625 pass** in 41 files (37 lane files and the robots.txt wildcard file), about two minutes |
+| `npm run test:recruiting` (lane tests and the shared robots.txt matcher test) | **678 of 678 pass** in 48 files (37 lane files and the robots.txt wildcard file), about two minutes |
 | Shared tests that use the robots.txt code, the web-hazard ratchet (37 tests) and the work-queue scope test: 32 files, 615 tests, run on this branch and on `main` | identical file by file: 607 pass; the 8 that fail, all in `source-acquisition.test.ts`, fail on `main` too and need a database. The fifth reviewer's run of 76 other-lane files matched `main` as well |
 | Type check (`tsc`, the lane's folders and the page) | clean |
 | Lint (`eslint`, the lane, the page, the API, the tile, the scripts) | clean |

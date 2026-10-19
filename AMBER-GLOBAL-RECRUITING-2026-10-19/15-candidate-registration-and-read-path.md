@@ -45,3 +45,32 @@ No new source was built, because none can be tested while the network is closed.
 
 ## The channel panel
 The dashboard shows the four channels side by side. Businesses found are real counts for agencies and employers; everything else (agreements, interviews, placements, invoices, collected) is zero and labelled "no events recorded", because nothing writes those events yet. Simulated figures are never mixed in. A found business is not a customer.
+
+## Added in the second round (all offline; nothing deployed or sent)
+
+| What | State | Flag |
+|---|---|---|
+| Candidate confirmation mail (`candidate-mail.ts`): confirm link, separate erase link, sender, postal address; a failed send keeps nothing | built, tested with an injected transport | `AMBER_CANDIDATE_MAIL=1` **and** `CANDIDATE_MAIL_FROM_NAME`, `CANDIDATE_MAIL_FROM`, `CANDIDATE_MAIL_REPLY_TO`, `CANDIDATE_MAIL_POSTAL`, `CANDIDATE_BASE_URL` (https) **and** a readable `RESEND_API_KEY`; otherwise the no-op mailer |
+| Expiry sweep (`candidate-sweep.ts`), run in the worker's recruiting pass | built, tested; runs only while `AMBER_CANDIDATE_INTAKE=1` | `AMBER_CANDIDATE_INTAKE` |
+| Incoming mail (`inbox-ingest.ts`): reads one message, files a reply or an unmatched-mail entry, prepares a draft reply for the owner, honours opt-outs, ignores automatic mail, files a message once | built, tested with fake messages; **no route, no mailbox, no webhook is connected** | `AMBER_RECRUITING_INBOX=1` |
+| Provider feedback (`feedback.ts`): hard bounce, block, complaint become suppression decisions | built, tested; **not connected to any webhook or sender** | none |
+| Judging the real inbox test (`seed-tests.ts`) | built, tested; it reads records someone enters, sends nothing | none |
+| Steps recorded by hand (interested, interview, agreement with a reference, placement), real and rehearsal kept in separate tables | built, tested in the browser; money stays in the ledger | none (owner page) |
+| Worldwide discovery by adaptive map boxes (`tiles.ts`): a full box is split, the queue is kept in the record, no cap on businesses found | built, tested offline; **never run against the real map servers** | the lane's `osm` source and `AMBER_RECRUITING_LANE=1` |
+| Worker pass reads the lane switch before loading any recruiting code | done (deploy-safety review finding) | |
+| `qa:typecheck` has a 4 GB heap | done (CI failure: the scripts project needs a little over 2 GB with the recruiting lane in its graph) | |
+
+### Rollback for these
+- Registration mail, sweep, inbox: unset the flags; nothing else changes. A `RECRUITING_CANDIDATE` row is erased by the sweep, or by the SQL in the section above.
+- Tiles: the queue lives in the main `RECRUITING_PROSPECTS` row as an optional `tiles` field; older code ignores it. To restart discovery from the country boxes, remove that field or revert; businesses already found stay.
+- Channel steps and unmatched mail are new decision types in the append-only log (`RECRUITING_DECISION`). Older code reading the log skips an entry type it does not know (it counts it as unreadable). To remove them: `DELETE FROM "DevMemory" WHERE kind = 'RECRUITING_DECISION' AND body LIKE '%"type":"channel-event"%'` (and the same for `unmatched-mail`), after looking at the count.
+
+### Review 13 (second round) and what it changed
+Independent review of ae432ceb..6a918cfb found nothing that blocks merging with the switches off. Fixed before the merge: a business found by a country box took that box's country (a Toronto agency was filed as US); inbox drafts skipped the fee/legal/complaint check; a display name could decide who wrote; a repeated message id skipped an opt-out; an unknown business that opted out was set aside by address only; a long subject could hide an escalation; a missing step mode meant "real"; the duplicate and evidence checks for steps were weak; map answers that the server cut short (a `remark`) counted as complete; a saved queue with a malformed box was trusted; mail settings accepted line breaks and odd base URLs; the inbox-test judge read passes inside comments and accepted a parent signing domain.
+
+Known and left, for the owner's information:
+- **Inbound mail is not authenticated.** Nothing checks that an inbound message really came from the address in its From line (no SPF/DKIM/DMARC result is read). A forged sender can file a reply against a business, or set an address aside. It cannot send anything or release a hold, and the owner reads everything before replying.
+- **Older code reading the log:** a build from before this change skips the new decision types, but its page shows the orange "N entries could not be read" banner until the new code is back. It also drops the saved map queue, which then restarts from the country boxes.
+- A placement recorded before its agreement is accepted but shows as zero until the agreement is recorded.
+- The candidate confirmation path sends through the provider directly, gated by `AMBER_CANDIDATE_INTAKE` and `AMBER_CANDIDATE_MAIL`, not by `AMBER_RECRUITING_SEND`. It sends to any address a visitor types (5 per hour per address and per connection) and does not check the do-not-contact list. A daily cap and a suppression check should be added before registration goes public.
+- The candidate sweep runs while `AMBER_CANDIDATE_INTAKE=1`, or while `AMBER_CANDIDATE_SWEEP=1` is left set after intake is switched off.
