@@ -41,9 +41,9 @@ Before it is used:
 
 > A program I run reads pages anyone can open: employers' careers pages, the job boards that host them, and a few open job feeds. The sheet says where each row was read.
 >
-> I take nothing from LinkedIn or other social networks, I do not buy data, and there are no names of people in the list. The only address in a row is one the company prints for hiring.
+> I take nothing from LinkedIn or other social networks and I do not buy data. I do not collect people's names on purpose, and the reader cuts out personal-looking addresses and phone numbers it recognizes; if you ever spot one in a row, tell me and I will take it out. The only address meant to be in a row is one the company prints for hiring.
 
-*69 words. Wording check: 0 errors, 0 warnings.*
+*99 words. Wording check: 0 errors, 0 warnings.*
 
 ### They asked if Amber places candidates
 
@@ -78,11 +78,11 @@ Before it is used:
 Before it is used:
 - the process is approved
 
-> I found your address on your own website, and the footer of my note says which page. My records hold the company name, the roles it lists, that address, and anything you write back to me. The list has no names of people in it, and I do not trade or sell any of it.
+> I found your address on your own website, and the footer of my note says which page. My records hold the company name, the roles it lists, that address, and anything you write back to me. I do not collect people's names on purpose, and I do not trade or sell any of it.
 >
 > If you want to be removed, tell me and it is done. I keep a note that you asked, so that I never write to you again.
 
-*82 words. Wording check: 0 errors, 0 warnings.*
+*81 words. Wording check: 0 errors, 0 warnings.*
 
 ### They asked if it covers their area
 
@@ -121,21 +121,21 @@ Before it is used:
 - the owner has chosen the price (the figures in the text are suggestions)
 - a sample the owner has checked
 
-> Amber Global Recruiting reads public job listings and keeps a list of employers whose roles have stayed open for 45 days or longer. This page says what you would get, what you would not, and how to stop.
+> Amber Global Recruiting reads public job listings and keeps a list of employers whose job ads were still up 45 days or more after they first appeared. This page says what you would get, what you would not, and how to stop.
 >
 > What you get: a spreadsheet once a week for the states and kinds of roles you choose. One row per company. Each row has the role, a link to the listing, the date it went up, and the hiring address the company publishes, where I found one. Recruiter jobs are left out, because a staffing firm's own openings are not what you are after. The sheet says where each row was read and which date it rests on.
 >
 > How the date works: if the job board gives a posting date, I use it. If it gives none, I count from the first day my software saw the listing and the sheet says so. A role may have been open longer than the sheet shows, and it may have been withdrawn since the page was read. Check the link before you call.
 >
-> What you do not get: no names of people, no guessed email addresses, no candidates, no introductions, and no promise that a call turns into work. I am not placing anyone. I have no other clients yet, so there are no references to give you. The free sample is the way to judge whether the list is worth paying for.
+> What you do not get: names of people (I do not collect them on purpose), guessed email addresses, candidates, introductions, or any promise that a call turns into work. I am not placing anyone. I have no other clients yet, so there are no references to give you. The free sample is the way to judge whether the list is worth paying for.
 >
-> How it is made: the software reads job listings and company websites that anyone can open. It checks a site's rules for automated visitors first, and it leaves a company alone if the site says so. I check the sample myself before it reaches you.
+> How it is made: the software reads job listings and company websites that anyone can open. On a company's own website it follows the site's rules for automated visitors, and it leaves the company off the list if a page there says it does not want approaches from agencies. It can miss a notice worded in a way it does not know, so look at a company's site before you write to it. Before a sample goes out I open a few of the links myself.
 >
 > What it costs: the first sample is free. A four-week trial of the weekly list is $99. After that it is $149 a month, agreed in writing before anything is billed, and you can stop at the end of any month without giving a reason.
 >
 > If you ever want to be left alone, one line from you is enough. Your address goes on a list of people I never write to, and I check that list before every message.
 
-*363 words. Wording check: 0 errors, 0 warnings.*
+*411 words. Wording check: 0 errors, 0 warnings.*
 
 
 ## Setting the price

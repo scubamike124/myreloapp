@@ -9,9 +9,9 @@ Posted by the owner by hand on LinkedIn or X. Amber does not log in to either ne
 Before it is used:
 - the process is approved
 
-> A listing that is still up after six weeks is a reason to look, not proof of a problem. Maybe the pay is off, maybe the team is too busy to interview, maybe the ad was simply forgotten. Any of those is worth a call, because you can say which role you saw and since when. A purchased list cannot give you that.
+> If a job ad is still up after six weeks, I would look at it. The pay might be low, the team might be swamped, or someone forgot to take it down. I can't tell which from the outside, but it is a reason to call, and you can say which role you saw and since when.
 
-*63 words. Wording check: 0 errors, 0 warnings.*
+*57 words. Wording check: 0 errors, 0 warnings.*
 
 ### Which date a row rests on
 
@@ -47,9 +47,9 @@ Before it is used:
 Before it is used:
 - the process is approved
 
-> Not legal advice, just the checklist I use before I send anything. If you send cold email to companies in the US, CAN-SPAM covers business addresses as well as personal ones. That means a real postal address in the message, an opt-out that works, a subject line that says what the message is, and no pretending to be someone you are not. Honor the opt-out quickly.
+> Not legal advice, just the checklist I am going to follow before I send anything. If you send cold email to companies in the US, CAN-SPAM covers business addresses as well as personal ones. That means a real postal address in the message, an opt-out that works, a subject line that says what the message is, and no pretending to be someone you are not. Honor the opt-out quickly.
 
-*66 words. Wording check: 0 errors, 0 warnings.*
+*69 words. Wording check: 0 errors, 0 warnings.*
 
 ### A question for small agency owners
 
@@ -69,13 +69,13 @@ Before it is used:
 Before it is used:
 - the process is approved
 
-> Why does my list have company names and no people? Because I do not want to hold anyone's personal details. Each row gives the company, the role and the hiring address the company prints itself, and you still have to find the person who decides. That is a real limit, and I would like to know whether it makes the list less useful to you.
+> Why does my list have company names and not people? Because I do not want to hold anyone's personal details. Each row gives the company, the role and the hiring address the company prints itself, and you still have to find the person who decides. That is a real limit, and I would like to know whether it makes the list less useful to you.
 
 *65 words. Wording check: 0 errors, 0 warnings.*
 
 ### What a useful applicant summary looks like
 
-*Status: can be used once the owner has approved the process.* For small employers. It states the principle Amber's own candidate sheet follows.
+*Status: can be used once the owner has approved the process.* For small employers. It states the principle a candidate summary would follow if Amber ever offers one; nothing like that exists yet.
 
 Before it is used:
 - the process is approved

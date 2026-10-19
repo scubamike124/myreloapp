@@ -6,17 +6,19 @@ The composer chooses among several hand-written versions of each sentence, picks
 
 The owner reads, edits if wanted, approves on the page, and sends from their own mail. Nothing is sent by Amber.
 
-### A weekly list of long-open roles for Hooli Staffing
+### Employers whose job ads have stayed up 45+ days
 
-> Hi Hooli Staffing team,
+> Hi,
 >
-> I saw on your careers page that Hooli Staffing is hiring a Healthcare Recruiter. I should say first that I do not place candidates. This is research for agencies.
+> Your careers page lists a Healthcare Recruiter role, which is how my software found Hooli Staffing. I should say up front that I place no one. I do research on employers for staffing agencies.
 >
-> My software reads employers' public job listings and careers pages, and I check what it finds. I pick out roles that have been listed for 45 days or more. The list has one line per role: who, what, the link, when I first saw it, and the hiring address from their own site. The sample is free; if you want more, I charge a flat fee that we settle in writing before I start.
+> What I look for is simple: public job listings that have stayed up for 45 days or longer. The software does the reading and I go through what it keeps. For each employer there is the role, a link to the live ad, how long it has been up, and the address the company itself prints for hiring, if it prints one.
 >
-> Would you like a sample of ten or so employers in healthcare?
+> A first look costs nothing: ten or so rows, each with its link, so you can check them yourself.
 >
-> Thanks,
+> Shall I send them over?
+>
+> Regards,
 > Maya
 >
 > --
@@ -26,19 +28,21 @@ The owner reads, edits if wanted, approves on the page, and sends from their own
 > I use an AI assistant for research and first drafts, and I read every message before it goes out.
 > If you would rather not hear from me, reply "no thanks" and I will not write again.
 
-*121 words before the footer. Wording check: 0 errors, 0 warnings.*
+*123 words before the footer. Wording check: 0 errors, 0 warnings.*
 
-### A weekly list of long-open roles for Initech Talent Partners
+### Employers whose job ads have stayed up 45+ days
 
-> Hi Initech Talent Partners team,
+> Hi,
 >
-> I noticed that Initech Talent Partners has a Technical Recruiter role open right now. I do not place candidates, so I am no competition for your desk.
+> While going through staffing firms' careers pages, my software flagged your Technical Recruiter listing, so I am writing to Initech Talent Partners. There's no candidate pitch here: I do research for agencies and place no one.
 >
-> The software I run reads public job listings every day, and I check the results before anything reaches you. When a role is still listed after 45 days, I make a note of it. Each line gives the company, the role, a link to the listing, when I first saw it, and the address the company itself prints for hiring. The sample is free; if you want more, I charge a flat fee that we settle in writing before I start.
+> I read employers' public job listings with a bit of software, and what I keep is the roles that haven't come down after 45 days. Each row gives the company, the role, the link, the date the ad went up (or the day I first saw it, when the ad shows no date), and a hiring address if the company publishes one.
 >
-> Is a sample in technology something you would want to see?
+> I would send ten or so rows first, free, and you can open each link to see whether the ad is still there.
 >
-> Thanks,
+> Shall I send them over?
+>
+> Regards,
 > Maya
 >
 > --
@@ -48,39 +52,19 @@ The owner reads, edits if wanted, approves on the page, and sends from their own
 > I use an AI assistant for research and first drafts, and I read every message before it goes out.
 > If you would rather not hear from me, reply "no thanks" and I will not write again.
 
-*126 words before the footer. Wording check: 0 errors, 0 warnings.*
+*129 words before the footer. Wording check: 0 errors, 0 warnings.*
 
-### A weekly list of long-open roles for Cyberdyne Talent
+### Your Light Industrial Recruiter listing at Cyberdyne Talent
 
-> Hello Cyberdyne Talent team,
+> Hello,
 >
-> I saw on your careers page that Cyberdyne Talent is hiring a Light Industrial Recruiter. Nothing here competes with you: I do not place candidates.
+> You are hiring a Light Industrial Recruiter, and my software flagged the listing, which is why I am writing to Cyberdyne Talent. Roles still listed after 45 days are the ones I keep. They come from employers' own careers pages and the job boards that host them, read by my software.
 >
-> I run a small program that reads employers' public job listings. I pick out roles that have been listed for 45 days or more. What I send is a plain list with the company, the role, the listing link, the first date I saw it, and the published hiring address. Nothing to pay for the sample. A regular list would be a flat fee, written down and agreed before I start.
+> What comes back is one line per employer: company, role, link, date posted, and a hiring address where one is printed.
 >
-> I can send ten or so rows for light industrial and trades so you can judge whether it saves you time. Should I?
+> To be clear, I'm not offering you candidates and I'm not a competitor.
 >
-> Thanks for reading,
-> Maya
->
-> --
-> Maya Chen
-> Amber Global Recruiting, 100 Example Street, Los Angeles, CA 90001
-> This is a commercial message, and I will send one follow-up at most. I found this address on your careers page.
-> I use an AI assistant for research and first drafts, and I read every message before it goes out.
-> If you would rather not hear from me, reply "no thanks" and I will not write again.
-
-*127 words before the footer. Wording check: 0 errors, 0 warnings.*
-
-### Your Account Manager listing at Wayne Workforce Solutions
-
-> Hello Wayne Workforce Solutions team,
->
-> I was reading Wayne Workforce Solutions' open positions and noticed the Account Manager listing. I am not a recruiter and I place no one; this is research for agencies.
->
-> I look at what employers publish about their open roles, with some software to do the reading. I pick out roles that have been listed for 45 days or more. Agencies get a short list: company, role, link, the date I first saw it, and the hiring address the company publishes. The sample is on me. If you want it weekly after that, it would be a flat monthly fee that we agree in writing.
->
-> Would a short sample for the roles you fill be worth a look?
+> A sample of about ten rows is free, so you can check them against the live ads. Does that sound useful for light industrial and trades?
 >
 > Best,
 > Maya
@@ -92,19 +76,43 @@ The owner reads, edits if wanted, approves on the page, and sends from their own
 > I use an AI assistant for research and first drafts, and I read every message before it goes out.
 > If you would rather not hear from me, reply "no thanks" and I will not write again.
 
-*124 words before the footer. Wording check: 0 errors, 0 warnings.*
+*114 words before the footer. Wording check: 0 errors, 0 warnings.*
+
+### A free sample of employers with long-open job ads
+
+> Hello Wayne Workforce Solutions team,
+>
+> My software flagged the Account Manager listing on your careers page, which is how Wayne Workforce Solutions came to my attention.
+>
+> The software goes through employers' public job pages and picks out roles that are still listed after 45 days.
+>
+> In the sheet you would see who is hiring, for what, where the ad is, and since when, with the company's own hiring address when it has one. You can look at ten rows for nothing and compare them with the live ads.
+>
+> I'm not selling candidates or placement. It's research on employers, for agencies to use. Want me to send ten rows for the roles you fill?
+>
+> Thanks,
+> Maya
+>
+> --
+> Maya Chen
+> Amber Global Recruiting, 100 Example Street, Los Angeles, CA 90001
+> This is a commercial message, and I will send one follow-up at most. I found this address on your careers page.
+> I use an AI assistant for research and first drafts, and I read every message before it goes out.
+> If you would rather not hear from me, reply "no thanks" and I will not write again.
+
+*115 words before the footer. Wording check: 0 errors, 0 warnings.*
 
 ### The one follow-up, seven or more days later
 
-> Hello Hooli Staffing team,
+> Hi,
 >
-> On October 12 I wrote about a list of long-open roles. This is one line from it, as an example:
+> Following my note of October 12 to Hooli Staffing, here is a single row from the list I described:
 >
 > Redwood Dental Group: Practice Manager, listed since late August. https://redwooddental.example/careers/12
 >
-> If you want more like it for your area, say so and I will send them. Otherwise this is my last message.
+> If you'd like a few more for your area, say so and I'll send them. Otherwise this is my last note.
 >
-> Thank you,
+> Regards,
 > Maya
 >
 > --

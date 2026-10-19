@@ -49,7 +49,7 @@ Contacts needed for one paid pilot: about 1,250 (cautious), 330 (central), 130 (
 | Response formats of the job feeds were recalled from documentation, not seen | Technical | Parsers tolerate missing fields; a response with entries but no readable role is reported as a changed format and skipped. Eleven readers parse the research agents' documented samples. The first live read on the worker settles it. |
 | The vendors give no list of their customers | Technical | Boards are learned from Hacker News posts and companies' own careers pages, and the owner can add any. Staffing businesses are also found on map data. |
 | The build environment could not reach any job-feed host | Technical | Nothing was read live tonight. All tests use fixtures. Live probing waits for the worker. |
-| GitHub Actions will not run (billing) | Technical | All 329 tests, the type check and the linter were run locally. A merge needs the owner's word. |
+| GitHub Actions will not run (billing) | Technical | All 363 tests, the type check and the linter were run locally. A merge needs the owner's word. |
 | The worker has no disk that survives a deploy | Technical | State is kept in the database, in two rows that two different writers never share. |
 
 ## What would change the verdict

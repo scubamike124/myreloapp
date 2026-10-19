@@ -12,15 +12,24 @@ The part that needs the internet **has not been run on real employers yet, and I
 
 What is missing is only the live read. Two ways to run it, either is free:
 
-## Option A: let this session reach the job sites (about two minutes of your time)
+## Option A: the cloud demonstration, with the smallest network change (the one chosen)
 
-In the Claude app, open the cloud environment menu in the session's title bar, choose **Edit**, and under **Network access** either:
+I cannot change the environment's network policy, and I do not try to get around it; you change it, once, in the Claude app: open the cloud environment menu in the session's title bar, choose **Edit**, and under **Network access** add the domains below to **Allowed domains**. Nothing broader is needed, no wildcard, and no change to the access level itself. The steps are at https://code.claude.com/docs/en/cloud-environments#network-access.
 
-- choose a broader access level for the length of the demonstration (the simplest, and the only one that also lets Amber read each staffing business's own site for the hiring address it prints), **or**
-- add these under **Allowed domains** (this shows the employers and the sample list, but not a staffing business's hiring address, because those sites cannot be listed in advance):
-  `hacker-news.firebaseio.com`, `hn.algolia.com`, `overpass-api.de`, `lz4.overpass-api.de`, `z.overpass-api.de`, `overpass.kumi.systems`, `overpass.private.coffee`, `remotive.com`, `jobicy.com`, `boards-api.greenhouse.io`, `api.lever.co`, `api.ashbyhq.com`, `api.smartrecruiters.com`, `www.workable.com`, `www.arbeitnow.com`, `remoteok.com`, and `*.jobs.personio.de`.
+**Round 1: twelve domains, every one read by a source reader at a low rate** (one request each per read, most only a few times in the whole run):
 
-Then tell me to run it. I run `npm run demo:recruiting` here, read you the report, and put it where you can open it. When it is done, set the access back. The steps are at https://code.claude.com/docs/en/cloud-environments#network-access.
+| Domain | What it is read for |
+|---|---|
+| `hacker-news.firebaseio.com`, `hn.algolia.com` | the latest "Who is hiring?" thread: companies post their own openings and the addresses of their job boards |
+| `remotive.com`, `jobicy.com` | two open job feeds that ask to be linked back to |
+| `boards-api.greenhouse.io`, `api.lever.co`, `api.ashbyhq.com`, `api.smartrecruiters.com`, `www.workable.com` | the public job-board interfaces of five vendors, for the companies found in the first two |
+| `overpass-api.de`, `lz4.overpass-api.de`, `z.overpass-api.de` | the map data (OpenStreetMap) that lists staffing businesses and their websites for one area |
+
+Then say "go". I run `npm run demo:recruiting -- --out=DIR --label=round1` here, read you the result, and keep the report outside the repositories (real company names do not belong in the public folder).
+
+**Round 2: only the staffing businesses' own websites.** Round 1 ends by writing `needed-domains.txt`: at most ten staffing businesses' own websites (each as itself and as `www.`, so about twenty names), which are the only places a hiring address can be read. Add those, say "go", and I run `-- --resume --label=round2`, which does not read the sources again. Without round 2 the demonstration still shows the employers, the opportunities and the sample list, but no staffing business's hiring address, and so no note.
+
+**When it is done,** remove the domains again. Nothing in the run sends anything, contacts anyone or writes anything except the report.
 
 ## Option B: run it on your own computer
 

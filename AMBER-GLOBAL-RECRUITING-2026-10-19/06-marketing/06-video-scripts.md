@@ -21,17 +21,17 @@ Before it is used:
 
 > Here is a way to find employers to call that needs only a notebook. It is the method behind a small research service I am starting.
 >
-> Open a company's careers page and write down one role. Come back in six weeks. If the same role is still there, somebody inside that company has a reason to want help. It might be a stretched recruiter, an offer that is too low, or an earlier agency that did not work out. You will not know which. But you do have a reason to call, and you know what to say.
+> Open a company's careers page and write down one role. Come back in six weeks. If the same role is still there, somebody inside that company probably has a reason to want help: a stretched recruiter, an offer that is too low, an agency that did not work out. You will not know which, but you do have a reason to call and something specific to say.
 >
-> Compare two openers. The first: "We provide staffing solutions." The second: "Your accounts payable role has been listed since early September, and I work with accounting candidates." Only the second shows the hiring manager you looked.
+> Take two ways to start the call. One is "We provide staffing solutions." The other is "Your accounts payable role has been listed since early September, and I work with accounting candidates." The second one tells the hiring manager you looked.
 >
-> A few habits make this work. Use pages anyone can open. Write down the date the page gives, and if it gives none, write the day you first saw the role and mark it that way. Never guess an email address. If the company prints a hiring address, use it. If it does not, use the contact form or the main phone line.
+> Some habits help. Use pages anyone can open. Write down the date the page gives; if it gives none, write the day you first saw the role and mark it as that. Never guess an email address. If the company prints a hiring address, use it, and if it does not, use the contact form or the main phone line.
 >
-> And a few things to leave out. Do not say the role is hard to fill, because you do not know that. All you know is that it is still listed. Do not write as if you know the owner. Do not promise anything about candidates you have not met.
+> Things I would leave out: saying the role is hard to fill, since all you know is that it is still listed; writing as if you know the owner; promising anything about candidates you have not met.
 >
-> I have built a small program that does this research and puts it in a weekly list for small agencies. It is new and I have no other clients yet, so the first sample is free, and the address is in the description. If it is not for you, the method still works with a notebook and an hour a week.
+> I have also built a small program that does this research and puts it in a weekly list for small agencies. It is new and I have no other clients yet, so the first sample is free, and the address is in the description. If it is not for you, the notebook method still works with an hour a week.
 
-*308 words. Wording check: 0 errors, 0 warnings.*
+*291 words. Wording check: 0 errors, 0 warnings.*
 
 **Video description:** A notebook method for finding employers worth calling: look for roles that stay posted. It cannot tell you why a role is still open, only that it is. A sample of the list is free; write to the address below.
 
@@ -51,11 +51,11 @@ Before it is used:
 
 > This is how the list I send to staffing agencies is made, including the parts that do not work yet.
 >
-> Every day a program reads the public job boards of the companies on its list. These are pages you could open yourself. It writes down each role it finds, with the date the page shows, or the day it first saw the role if the page shows none.
+> A program reads the public job boards of the companies on its list, on a schedule. These are pages you could open yourself. It writes down each role it finds, with the date the page shows, or the day it first saw the role if the page shows none.
 >
 > After 45 days, a role that is still listed goes on the long-open list. Recruiter jobs are left off, since a staffing firm's own openings are not what an agency wants to see.
 >
-> Then the program looks on the company's own website for a hiring address, something like jobs or careers, printed where anyone can read it. It checks the site's rules for automated visitors first, and it stops if the site asks not to be contacted. It does not guess addresses. It does not keep names of people.
+> For some companies the program then looks at the company's own website for a hiring address, something like jobs or careers, printed where anyone can read it. On those sites it follows the rules the site sets for automated visitors, and it leaves the company off if a page says it does not want approaches from agencies. It can miss a notice worded in a way it does not know. It does not guess addresses, and it does not collect names of people.
 >
 > Now the part that is not finished. I have only just started and I have no customers. Some job boards publish their data in formats I have only read about, so a few of them may fail in the first weeks. When one does, the program reports it instead of making something up.
 >
@@ -63,7 +63,7 @@ Before it is used:
 >
 > If you run a small agency and want to see what a row looks like, the sample is free.
 
-*264 words. Wording check: 0 errors, 0 warnings.*
+*292 words. Wording check: 0 errors, 0 warnings.*
 
 **Video description:** How the weekly list of long-open roles is made, step by step, with the limits. No customers yet. A sample is free; write to the address below.
 
@@ -92,11 +92,11 @@ Before it is used:
 >
 > Five. Check where the person is. The United States is the easy case. Outside it the rules differ, and in several countries they ask for consent first, so check before you write there.
 >
-> Everything else is about being decent. Send few messages, send them by hand, and write each one for the person who will read it.
+> Beyond the five checks, I try to send few messages, send them by hand, and write each one for the person who will read it.
 >
 > And before you use an address, ask where it came from, because you are the one who sends the message.
 
-*239 words. Wording check: 0 errors, 0 warnings.*
+*240 words. Wording check: 0 errors, 0 warnings.*
 
 **Video description:** A plain checklist for cold email to companies in the United States. It is not legal advice; ask a lawyer about your own case. The rules differ in other countries.
 
@@ -107,7 +107,7 @@ Before it is used:
 
 ### What software should and should not do with a resume
 
-*Status: can be used once the owner has approved the process.* A teaching video for small employers. It explains the principle behind Amber's own candidate sheet without selling anything.
+*Status: can be used once the owner has approved the process.* A teaching video for small employers. It explains the principle a candidate summary should follow, without selling anything; nothing like that exists at Amber yet.
 
 Before it is used:
 - the process is approved
@@ -153,9 +153,9 @@ Before it is used:
 >
 > What not to say: that you have the perfect candidate, that you can fill it in a week, or that nobody else could do it as well. You do not know any of that yet, and the person on the other end has heard it before.
 >
-> If the call goes well, offer one small thing you can do this week, and then do it. A reputation in a small market is made of small things done when you said you would do them.
+> If the call goes well, offer one small thing you can do this week, and then do it.
 
-*251 words. Wording check: 0 errors, 0 warnings.*
+*232 words. Wording check: 0 errors, 0 warnings.*
 
 **Video description:** A plain way to open a first call or email about a role you found posted for weeks. The speaker has not made these calls yet, so treat it as a place to start. The examples are invented.
 
@@ -184,9 +184,9 @@ Before it is used:
 >
 > Then the part I care about most. What broke, what I changed, and what I will try next week.
 >
-> If you are building something similar, the order matters. Count what you did before you count what you hope will happen.
+> If you are building something similar, count what you did before you count what you hope will happen.
 
-*215 words. Wording check: 0 errors, 0 warnings.*
+*212 words. Wording check: 0 errors, 0 warnings.*
 
 **Video description:** Weekly numbers for Amber Global Recruiting, read from the dashboard: what the software did, what I sent, what came back, what came in and went out.
 

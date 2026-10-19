@@ -13,31 +13,31 @@ What to notice:
 
 Prepared 2026-10-19. Roles open 45 days or more, United States. All names in this example are invented.
 
-| Company | Role | Where | Listed since | Days open | Listing | Where it was read | Hiring address the company publishes |
-|---|---|---|---|---|---|---|---|
-| Northfield Robotics | Controls Engineer | Austin, TX | 2026-07-19 | 92 | <https://northfieldrobotics.example/careers/100> | Greenhouse job board | none found |
-| Cedar \& Stone Construction | Project Estimator | Denver, CO | 2026-08-03 | 77 | <https://cedarandstone.example/careers/101> | Greenhouse job board | careers\@cedarandstone\.example (printed at <https://cedarandstone.example/careers>) |
-| Redwood Dental Group | Practice Manager | Sacramento, CA | 2026-08-09 | 71 | <https://redwooddental.example/careers/102> | Greenhouse job board | jobs\@redwooddental\.example (printed at <https://redwooddental.example/careers>) |
-| Brightwater Software | Senior Backend Engineer | Remote \(US\) | 2026-08-12 | 68 | <https://brightwatersoftware.example/careers/103> | Greenhouse job board | careers\@brightwatersoftware\.example (printed at <https://brightwatersoftware.example/careers>) |
-| Lakeside Logistics | Dispatch Supervisor | Columbus, OH | 2026-08-17 | 63 | <https://lakesidelogistics.example/careers/104> | Greenhouse job board | none found |
-| Birchwood Accounting Partners | Staff Accountant | Tampa, FL | 2026-08-22 (first seen) | 58 | <https://birchwoodaccounting.example/careers/105> | Greenhouse job board | hello\@birchwoodaccounting\.example (printed at <https://birchwoodaccounting.example/careers>) |
-| Maple Street Pharmacy Group | Pharmacy Technician | Phoenix, AZ | 2026-08-25 | 55 | <https://maplestreetpharmacy.example/careers/106> | Greenhouse job board | jobs\@maplestreetpharmacy\.example (printed at <https://maplestreetpharmacy.example/careers>) |
-| Harbor Light Home Health | Registered Nurse, Home Care | Portland, ME | 2026-08-31 | 49 | <https://harborlighthealth.example/careers/107> | Greenhouse job board | none found |
+| Company | Role | Where | Listed since | Days open | Last seen listed | Listing | Where it was read | Hiring address the company publishes |
+|---|---|---|---|---|---|---|---|---|
+| Northfield Robotics | Controls Engineer | Austin, TX | 2026-07-19 | 92 | 2026-10-19 | <https://northfieldrobotics.example/careers/100> | Greenhouse job board | not looked for (its site was not read) |
+| Cedar \& Stone Construction | Project Estimator | Denver, CO | 2026-08-03 | 77 | 2026-10-19 | <https://cedarandstone.example/careers/101> | Greenhouse job board | careers\@cedarandstone\.example (printed at <https://cedarandstone.example/careers>) |
+| Redwood Dental Group | Practice Manager | Sacramento, CA | 2026-08-09 | 71 | 2026-10-19 | <https://redwooddental.example/careers/102> | Greenhouse job board | jobs\@redwooddental\.example (printed at <https://redwooddental.example/careers>) |
+| Brightwater Software | Senior Backend Engineer | Remote \(US\) | 2026-08-12 | 68 | 2026-10-19 | <https://brightwatersoftware.example/careers/103> | Greenhouse job board | careers\@brightwatersoftware\.example (printed at <https://brightwatersoftware.example/careers>) |
+| Lakeside Logistics | Dispatch Supervisor | Columbus, OH | 2026-08-17 | 63 | 2026-10-19 | <https://lakesidelogistics.example/careers/104> | Greenhouse job board | not looked for (its site was not read) |
+| Birchwood Accounting Partners | Staff Accountant | Tampa, FL | 2026-08-22 (first seen) | 58 | 2026-10-19 | <https://birchwoodaccounting.example/careers/105> | Greenhouse job board | hello\@birchwoodaccounting\.example (printed at <https://birchwoodaccounting.example/careers>) |
+| Maple Street Pharmacy Group | Pharmacy Technician | Phoenix, AZ | 2026-08-25 | 55 | 2026-10-19 | <https://maplestreetpharmacy.example/careers/106> | Greenhouse job board | jobs\@maplestreetpharmacy\.example (printed at <https://maplestreetpharmacy.example/careers>) |
+| Harbor Light Home Health | Registered Nurse, Home Care | Portland, ME | 2026-08-31 | 49 | 2026-10-19 | <https://harborlighthealth.example/careers/107> | Greenhouse job board | not looked for (its site was not read) |
 
-Every row is taken from a public job listing: the company's own careers page or a job board that lists the role (the column "Where it was read" names it). The rows are about companies and roles: no person is named on purpose, and an address or phone number of an individual is cut out when a listing is read. "Days open" counts from the date the vendor gave for the listing, or from the first day Amber saw it listed; a role may have been open longer, or may have been withdrawn since the page was read.
+Every row is taken from a public job listing: the company's own careers page or a job board that lists the role (the column "Where it was read" names it). The rows are about companies and roles: no person is named on purpose, and an address or phone number of an individual is cut out when a listing is read. "Days open" counts from the date the vendor gave for the listing, or from the first day Amber saw it listed; a role may have been open longer. A role appears only if Amber's reading found it still listed within the last two weeks (the column "Last seen listed" gives the day), but it may have been withdrawn since. Where Amber could read a company's own website it looked there for a note saying the company does not want approaches from agencies and left those companies out; where the last column says the site was not read, that look has not been done, so check the company's site before you write to it.
 
 Listings were read from the public job-board pages of: Greenhouse job board.
 
 ## The same list as a spreadsheet file
 
 ```csv
-company,role,location,listed_since,since_basis,days_open,listing_url,hiring_address,address_printed_at,source
-Northfield Robotics,Controls Engineer,"Austin, TX",2026-07-19,published,92,https://northfieldrobotics.example/careers/100,,,greenhouse
-Cedar & Stone Construction,Project Estimator,"Denver, CO",2026-08-03,published,77,https://cedarandstone.example/careers/101,careers@cedarandstone.example,https://cedarandstone.example/careers,greenhouse
-Redwood Dental Group,Practice Manager,"Sacramento, CA",2026-08-09,published,71,https://redwooddental.example/careers/102,jobs@redwooddental.example,https://redwooddental.example/careers,greenhouse
-Brightwater Software,Senior Backend Engineer,Remote (US),2026-08-12,published,68,https://brightwatersoftware.example/careers/103,careers@brightwatersoftware.example,https://brightwatersoftware.example/careers,greenhouse
-Lakeside Logistics,Dispatch Supervisor,"Columbus, OH",2026-08-17,published,63,https://lakesidelogistics.example/careers/104,,,greenhouse
-Birchwood Accounting Partners,Staff Accountant,"Tampa, FL",2026-08-22,first seen,58,https://birchwoodaccounting.example/careers/105,hello@birchwoodaccounting.example,https://birchwoodaccounting.example/careers,greenhouse
-Maple Street Pharmacy Group,Pharmacy Technician,"Phoenix, AZ",2026-08-25,published,55,https://maplestreetpharmacy.example/careers/106,jobs@maplestreetpharmacy.example,https://maplestreetpharmacy.example/careers,greenhouse
-Harbor Light Home Health,"Registered Nurse, Home Care","Portland, ME",2026-08-31,published,49,https://harborlighthealth.example/careers/107,,,greenhouse
+company,role,location,listed_since,since_basis,days_open,last_seen_listed,listing_url,hiring_address,address_printed_at,company_site_read,source
+Northfield Robotics,Controls Engineer,"Austin, TX",2026-07-19,published,92,2026-10-19,https://northfieldrobotics.example/careers/100,,,no,greenhouse
+Cedar & Stone Construction,Project Estimator,"Denver, CO",2026-08-03,published,77,2026-10-19,https://cedarandstone.example/careers/101,careers@cedarandstone.example,https://cedarandstone.example/careers,no,greenhouse
+Redwood Dental Group,Practice Manager,"Sacramento, CA",2026-08-09,published,71,2026-10-19,https://redwooddental.example/careers/102,jobs@redwooddental.example,https://redwooddental.example/careers,no,greenhouse
+Brightwater Software,Senior Backend Engineer,Remote (US),2026-08-12,published,68,2026-10-19,https://brightwatersoftware.example/careers/103,careers@brightwatersoftware.example,https://brightwatersoftware.example/careers,no,greenhouse
+Lakeside Logistics,Dispatch Supervisor,"Columbus, OH",2026-08-17,published,63,2026-10-19,https://lakesidelogistics.example/careers/104,,,no,greenhouse
+Birchwood Accounting Partners,Staff Accountant,"Tampa, FL",2026-08-22,first seen,58,2026-10-19,https://birchwoodaccounting.example/careers/105,hello@birchwoodaccounting.example,https://birchwoodaccounting.example/careers,no,greenhouse
+Maple Street Pharmacy Group,Pharmacy Technician,"Phoenix, AZ",2026-08-25,published,55,2026-10-19,https://maplestreetpharmacy.example/careers/106,jobs@maplestreetpharmacy.example,https://maplestreetpharmacy.example/careers,no,greenhouse
+Harbor Light Home Health,"Registered Nurse, Home Care","Portland, ME",2026-08-31,published,49,2026-10-19,https://harborlighthealth.example/careers/107,,,no,greenhouse
 ```

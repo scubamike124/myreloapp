@@ -1,6 +1,6 @@
 # Amber Global Recruiting: a demonstration (OFFLINE DRY RUN ON DOCUMENTED SAMPLES, NOT REAL EMPLOYERS)
 
-Run on 2026-10-19 06:35 UTC. Nothing was sent, no one was contacted, nothing was written except this report. The sender in the notes is the made-up example sender.
+Run on 2026-10-19 10:31 UTC. Nothing was sent, no one was contacted, nothing was written except this report. The sender in the notes is the made-up example sender.
 
 ## Summary
 
@@ -56,12 +56,12 @@ Found 5 businesses: 3 employers and 2 staffing businesses; 16 open roles in all;
 
 Prepared 2026-12-08. Taken from the companies' own public careers pages and from open job feeds, on the dates shown.
 
-| Company | Role | Where | Listed since | Days open | Listing | Where it was read | Hiring address the company publishes |
-|---|---|---|---|---|---|---|---|
-| Example Co | Backend Developer | United States | 2026-10-01 | 68 | <https://apply.workable.com/j/GHI567JKL8> | Workable public jobs | none found |
-| Exampleco | Staff Data Engineer | Remote - US | 2026-10-08 | 60 | <https://jobs.ashbyhq.com/ExampleCo/00000000-0000-4000-8000-000000000001> | Ashby job board | none found |
+| Company | Role | Where | Listed since | Days open | Last seen listed | Listing | Where it was read | Hiring address the company publishes |
+|---|---|---|---|---|---|---|---|---|
+| Example Co | Backend Developer | United States | 2026-10-01 | 68 | 2026-12-08 | <https://apply.workable.com/j/GHI567JKL8> | Workable public jobs | not looked for (its site was not read) |
+| Exampleco | Staff Data Engineer | Remote - US | 2026-10-08 | 60 | 2026-12-08 | <https://jobs.ashbyhq.com/ExampleCo/00000000-0000-4000-8000-000000000001> | Ashby job board | not looked for (its site was not read) |
 
-Every row is taken from a public job listing: the company's own careers page or a job board that lists the role (the column "Where it was read" names it). The rows are about companies and roles: no person is named on purpose, and an address or phone number of an individual is cut out when a listing is read. "Days open" counts from the date the vendor gave for the listing, or from the first day Amber saw it listed; a role may have been open longer, or may have been withdrawn since the page was read.
+Every row is taken from a public job listing: the company's own careers page or a job board that lists the role (the column "Where it was read" names it). The rows are about companies and roles: no person is named on purpose, and an address or phone number of an individual is cut out when a listing is read. "Days open" counts from the date the vendor gave for the listing, or from the first day Amber saw it listed; a role may have been open longer. A role appears only if Amber's reading found it still listed within the last two weeks (the column "Last seen listed" gives the day), but it may have been withdrawn since. Where Amber could read a company's own website it looked there for a note saying the company does not want approaches from agencies and left those companies out; where the last column says the site was not read, that look has not been done, so check the company's site before you write to it.
 
 Listings were read from the public job-board pages of: Workable public jobs, Ashby job board.
 
@@ -74,17 +74,19 @@ Listings were read from the public job-board pages of: Workable public jobs, Ash
 - Hiring address: hello@initech.example (a role address, not a person), printed at https://initech.example/contact, found 2026-10-19 12:00 UTC after reading its robots.txt.
 - Note kept: contact check: found role-email on https://initech.example/contact
 
-**The note** (subject: A weekly list of long-open roles for Initech Staffing; 128 words before the footer):
+**The note** (subject: A free sample of employers with long-open job ads; 130 words before the footer):
 
 > Hello Initech Staffing team,
 >
-> Initech Staffing is looking for a Technical Recruiter, according to its careers page. I am not a recruiter and I place no one; this is research for agencies.
+> You are hiring a Technical Recruiter, and my software flagged the listing, which is why I am writing to Initech Staffing.
 >
-> The software I run reads public job listings every day, and I check the results before anything reaches you. The roles I keep are the ones that have been open for 45 days or more. Agencies get a short list: company, role, link, the date I first saw it, and the hiring address the company publishes. You pay nothing for the first sample. After that it would be a flat monthly fee that we put in writing first.
+> Roles still listed after 45 days are the ones I keep. They come from employers' own careers pages and the job boards that host them, read by my software.
 >
-> I could send two rows for technology as a first look. Would that help?
+> A row is one employer: the company, the role, a link to the listing, the date it went up, and the hiring address when the company prints one. A sample of two rows is free, so you can check them against the live ads.
 >
-> Thanks for reading,
+> I'm not a recruiter and I place no one. What I do is research on employers, for agencies. Could I send you two rows for technology as a first look?
+>
+> Regards,
 > Maya
 >
 > --
@@ -165,15 +167,17 @@ Everything above comes from documented sample payloads on made-up servers, not f
 
 **First note, as written for the invented firm that went on to become a client:**
 
-> Hello Harbor & Pine Staffing team,
+> Hi,
 >
-> I was reading through Harbor & Pine Staffing's open positions and saw the Healthcare Recruiter role. I am not a recruiter and I place no one; this is research for agencies.
+> Harbor & Pine Staffing showed up when my software went through staffing firms' careers pages, because of the Healthcare Recruiter role you have listed. I should say up front that I place no one. I do research on employers for staffing agencies.
 >
-> I look at what employers publish about their open roles, with some software to do the reading. I pick out roles that have been listed for 45 days or more. Agencies get a short list: company, role, link, the date I first saw it, and the hiring address the company publishes. The sample is on me. If you want it weekly after that, it would be a flat monthly fee that we agree in writing.
+> A program I run reads public job listings from employers' own pages and from the job boards that host them, and it keeps the roles that have been listed for 45 days or longer. In the sheet you would see who is hiring, for what, where the ad is, and since when, with the company's own hiring address when it has one.
 >
-> Would a short sample for the roles you fill be worth a look?
+> You can look at two rows for nothing and compare them with the live ads.
 >
-> Best,
+> Shall I send them over?
+>
+> Thanks,
 > Maya
 >
 > --
@@ -185,15 +189,15 @@ Everything above comes from documented sample payloads on made-up servers, not f
 
 **The one follow-up, for the invented firm that stayed silent (one row of the real sample list):**
 
-> Hello Summit Ridge Talent team,
+> Hi,
 >
-> I wrote on December 8 about a weekly list of long-open roles. Here is one row from it, so you can see what it looks like:
+> On December 8 I wrote to you at Summit Ridge Talent about a list of long-open roles. One row from it, so you can see what it looks like:
 >
 > Example Co: Backend Developer, listed since early October. https://apply.workable.com/j/GHI567JKL8
 >
-> I can send a few more in the same shape if you want them. If you do not, you will not hear from me again.
+> I can send more in the same shape if they'd help. If not, you won't hear from me again.
 >
-> Thanks,
+> Regards,
 > Maya
 >
 > --

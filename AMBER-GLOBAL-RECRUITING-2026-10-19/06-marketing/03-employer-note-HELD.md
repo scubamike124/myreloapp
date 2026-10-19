@@ -18,7 +18,7 @@ Before it is used:
 
 > Hello Northwind team,
 >
-> I saw on your careers page that the Senior Backend Engineer role in Austin has been listed since early August. A role that has been up that long sometimes has plenty of applicants and nobody with the time to read them properly.
+> My software flagged the Senior Backend Engineer role in Austin on your careers page, which has been listed since early August. A role that has been up that long sometimes has plenty of applicants and nobody with the time to read them properly.
 >
 > I read applications and write down, for each thing you told me matters, what the applicant wrote about it, in their own words. Nothing is scored and nobody is ranked. You read it and you decide who to call. The fee is flat per role, agreed before I start, and I take nothing that depends on a hire.
 >
@@ -34,7 +34,7 @@ Before it is used:
 > I use an AI assistant for research and first drafts, and I read every message before it goes out.
 > If you would rather not hear from me, reply "no thanks" and I will not write again.
 
-*196 words. Wording check: 0 errors, 0 warnings.*
+*197 words. Wording check: 0 errors, 0 warnings.*
 
 
 ## What would have to happen first
