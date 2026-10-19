@@ -27,7 +27,7 @@ An AI-assisted recruiting business based in Los Angeles, started on 18 Oct 2026 
 
 ## The code
 
-`src/lib/recruiting/` (30 modules and 22 test files), `src/app/dashboard/recruiting/page.tsx`, `src/app/api/recruiting/`, the worker job `RECRUITING_TICK` in `src/lib/cloud/work-queue.ts`, and scripts under `scripts/recruiting-*.ts`. Run `npm run test:recruiting` for the tests.
+`src/lib/recruiting/` (31 modules and 23 test files), `src/app/dashboard/recruiting/page.tsx`, `src/app/api/recruiting/`, the worker job `RECRUITING_TICK` in `src/lib/cloud/work-queue.ts`, and scripts under `scripts/recruiting-*.ts`. Run `npm run test:recruiting` for the tests.
 
 ## Five facts to hold on to
 
