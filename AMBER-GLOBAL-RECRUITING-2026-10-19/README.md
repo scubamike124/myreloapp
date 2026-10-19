@@ -38,3 +38,4 @@ An AI-assisted recruiting business based in Los Angeles, started on 18 Oct 2026 
 5. **This is a conditional go as a small, slow side business, and a no-go as a hands-off money machine** (09-viability).
 
 - [13-email-deliverability.md](13-email-deliverability.md): why mail may land in spam, what was built offline, and the proof required before any outreach.
+- [15-candidate-registration-and-read-path.md](15-candidate-registration-and-read-path.md): the candidate registration built and switched off (flag, limits, rollback), the lighter read path, trade-school parser, channel panel.

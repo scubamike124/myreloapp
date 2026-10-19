@@ -12,7 +12,7 @@ Written 18 Oct 2026 (Pacific). For the owner and for whoever works on this next.
 | What the owner writes | One `DevMemory` row of kind `RECRUITING_DECISION` per action (settings, approvals, sends, replies, opt-outs, money). Written only by the page's API; never changed afterwards |
 | Which organization | The oldest one, the same as the worker queue and the KDP desk |
 | Documents | `docs/recruiting/` (this folder); research in `docs/recruiting/research/`; marketing copy in `docs/recruiting/06-marketing/` |
-| Limits | No limit on businesses discovered: they are stored in up to 256 `RECRUITING_PROSPECT_SHARD` rows and only changed shards are written. A memory guard of 250,000 businesses (lowest score first, never one you acted on; the run says so) and 50,000 boards. 25 roles per business (the longest-open are kept), 40 run records, 30 days of tallies, 20,000 decisions. The page's practical ceiling is about 30,000 to 50,000 businesses (a click about 1.5 s at 30,000); past that the page needs a lighter read path |
+| Limits | No limit on businesses discovered: they are stored in up to 256 `RECRUITING_PROSPECT_SHARD` rows and only changed shards are written. A memory guard of 250,000 businesses (lowest score first, never one you acted on; the run says so) and 50,000 boards. 25 roles per business (the longest-open are kept), 40 run records, 30 days of tallies, 20,000 decisions. The page's practical ceiling is about 30,000 to 50,000 businesses (a click about 1.5 s at 30,000); past that the page is slow to rebuild; a lighter read path is built (doc 15) and measured offline only |
 
 ## Turning it on
 
@@ -83,7 +83,7 @@ Any one of these is enough. None deletes anything.
 
 | Check | Command | Last result (19 Oct 2026) |
 |---|---|---|
-| Unit and integration tests | `npm run test:recruiting` | all 595 pass in 38 files (includes the robots.txt matcher test that protects the worker from freezing, and the demonstration script run offline) |
+| Unit and integration tests | `npm run test:recruiting` | all 625 pass in 41 files (includes the robots.txt matcher test that protects the worker from freezing, and the demonstration script run offline) |
 | Type check | `npx tsc --noEmit -p tsconfig.json` | clean (no output for the whole project) |
 | Lint | `npx eslint src/lib/recruiting src/app/dashboard/recruiting src/app/api/recruiting src/components/hq/hq-actions.ts src/lib/cloud/work-queue.ts src/lib/research/robots.ts src/lib/dev/memory-filter.ts src/app/api/dev/memory scripts/recruiting-*.ts` | clean |
 | Production build | `npx next build --webpack` (placeholder database and sign-in variables) | compiled in 2.2 minutes, 461 of 461 pages, the page and both API routes listed, exit 0 |

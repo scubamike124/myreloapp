@@ -42,3 +42,19 @@ Merge/deploy and the switch; your name, business, postal and reply address; appr
 ## Where things are
 
 Docs in this folder (start with 12-production-readiness.md, 07-owner-approvals.md, 10-review-and-limits.md). Code: `amberai`, branch `claude/amber-global-recruiting`, PR #930 (draft). Browser check: `scripts/recruiting-ui-check/`. KDP work is untouched and as you left it.
+
+---
+
+## Update after the owner's latest message (tested / built offline / deployed, kept apart)
+
+**Deployed to production: nothing.** PR #930 is a draft; nothing is merged, sent or published. **Live network demonstration: not run** (0 of the 12 allowed hosts open at every check). **Email deliverability: not verified** (no real delivery, no DNS or mailbox access).
+
+**Tested offline (in-memory database, fixtures, headless browser against test data):** 625 of 625 lane tests, type check, lint, production build, 575 of 575 dashboard browser checks, 21 of 21 shared middleware tests.
+
+**Built offline and switched off:**
+- Public candidate registration (3 routes, 2 pages, 3 exact middleware entries): 404 unless `AMBER_CANDIDATE_INTAKE=1`, 503 without its secret, no mailer wired (registering keeps nothing), rate limits, size and type checks. Independent review found no critical or high issue; 5 medium and 6 low were fixed except two noted in doc 15. Still needs a real mailer, a sweeper schedule, privacy/legal reading and your decision.
+- Lighter read path for large stores: repeat page loads skip re-reading the businesses; a first build at 100,000 businesses is about 2.4 s (was 3.2 s) on test data. Not measured on the real database.
+- Trade-school discovery parser (OpenStreetMap), tested on a hand-written sample, not on a live answer, not connected to the lane.
+- Dashboard panel for the four channels: businesses found are real counts; agreements, interviews, placements and invoices are zero because nothing records them yet.
+
+**Still disabled by design:** automatic email sending, candidate matching, placement advertising and fees. **No new spend; no network restrictions bypassed.** Rollback steps are in doc 15 and doc 12.
