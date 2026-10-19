@@ -2,7 +2,7 @@
 
 Written the night of 18 Oct 2026 (Pacific). This is the memo the owner asked for before development: viability, then legal and technical barriers. It rests on three research reports (market and fees, legal and compliance, free lead sources) and on what was built and tested.
 
-**How much to trust the research.** The research agents could not open any web page (the page-fetch tool failed on every host) and their search allowance ran out part-way. Every fact in the three reports is what a search-result excerpt said a page says; none was read in full. Figures are labelled FACT (with a source), ESTIMATE (with the reasoning) or unverified. Treat the legal points as a map of what to ask a lawyer, not as advice.
+**How much to trust the research.** The research agents could not open any web page (the page-fetch tool failed on every host) and their search allowance ran out part-way. Every fact in the three reports is what a search-result excerpt said a page says; none was read in full. Figures are labeled FACT (with a source), ESTIMATE (with the reasoning) or unverified. Treat the legal points as a map of what to ask a lawyer, not as advice.
 
 ## The verdict
 
@@ -33,23 +33,23 @@ How to read it: add about three weeks between a message and a payment (reply, sa
 
 Contacts needed for one paid pilot: about 1,250 (cautious), 330 (central), 130 (good). Reaching $3,000 a month from lists alone takes 31 subscribers at $99, 21 at $149 or 16 at $199. The market report put the chance of $3,000 a month within a year at 10% to 20%, and of at least one paid pilot within 90 days of steady outreach at 40% to 50%. That chance counts more than the list product (sourcing support and, later, placement); on the list alone, even the good case at 50 messages a week reaches about $1,400 a month after a year.
 
-**Where the large numbers are, and why they are not available yet.** One $18,000 placement fee is more than seven times everything the list product takes in over its first year in the central case at 50 messages a week ($2,439). But the legal memo reads the line almost every regime uses as: a fee that depends on a hire is placement, and placement needs a licence or registration in New York, New Jersey, Massachusetts, Illinois, Ontario, Quebec, Italy, Spain and Singapore. California is the exception: its agency law does not apply to a person who charges fees only to employers (Civil Code 1812.502(a), read in a 2018 copy of the statute; a lawyer must confirm the current text). So the only path to large revenue is contingency placement for California employers, employer-paid only. It also needs candidates (who must come in on their own), recruiting skill, and references Amber does not have. It is stage three, after a lawyer and after proof.
+**Where the large numbers are, and why they are not available yet.** One $18,000 placement fee is more than seven times everything the list product takes in over its first year in the central case at 50 messages a week ($2,439). But the legal memo reads the line almost every regime uses as: a fee that depends on a hire is placement, and placement needs a license or registration in New York, New Jersey, Massachusetts, Illinois, Ontario, Quebec, Italy, Spain and Singapore. California is the exception: its agency law does not apply to a person who charges fees only to employers (Civil Code 1812.502(a), read in a 2018 copy of the statute; a lawyer must confirm the current text). So the only path to large revenue is contingency placement for California employers, employer-paid only. It also needs candidates (who must come in on their own), recruiting skill, and references Amber does not have. It is stage three, after a lawyer and after proof.
 
 ## Barriers, and what was done about each
 
 | Barrier | Kind | What was done |
 |---|---|---|
 | A fee tied to a hire, or introducing candidates, is employment-agency activity in many places | Legal | The first offer is a fixed-fee list with no candidate contact. The gate refuses placement and split-fee services everywhere and holds work tied to NY, NJ, MA and IL until the owner, advised, clears the state. |
-| Cold business email: CAN-SPAM has no B2B exception; California adds statutory damages; Canada, Germany, Spain, Italy, Australia and others need consent | Legal | First messages go only to US business addresses by default. A region needing consent cannot be cleared on the page. Every message has the sender's real name, postal address, how the address was found, a plain opt-out and a notice that it is a commercial message. An opt-out is honoured at once and kept for good. |
+| Cold business email: CAN-SPAM has no B2B exception; California adds statutory damages; Canada, Germany, Spain, Italy, Australia and others need consent | Legal | First messages go only to US business addresses by default. A region needing consent cannot be cleared on the page. Every message has the sender's real name, postal address, how the address was found, a plain opt-out and a notice that it is a commercial message. An opt-out is honored at once and kept for good. |
 | Lists of named people can make a business a data broker (California Delete Act) and bring GDPR duties | Legal | Nothing in the list is about a person. Only a role mailbox that the company itself prints is kept, never a named person's address. |
 | AI in hiring: New York City, Illinois, Colorado, California rules; EU AI Act; a vendor can be sued as an employer's agent | Legal | Nothing scores, ranks, filters or rejects a person. The candidate evidence sheet quotes what the candidate wrote and says "not stated" otherwise; it has no number and no order of fit. |
 | Scraping professional networks breaks their terms | Legal | No scraping of any network, and no automation on LinkedIn. Candidates come in on their own. |
-| Claims of clients, results or licences that do not exist | Legal, honesty | The wording check refuses them. Revenue counts only with proof and the owner's confirmation. |
+| Claims of clients, results or licenses that do not exist | Legal, honesty | The wording check refuses them. Revenue counts only with proof and the owner's confirmation. |
 | Terms of the job-board APIs are mostly "unclear" on commercial reuse | Legal | Volume is low, each read names the bot and a contact, each source has an on/off switch, rows from feeds carry the feed's attribution. The owner decides whether to read the terms and keep each source on. |
 | Response formats of the job feeds were recalled from documentation, not seen | Technical | Parsers tolerate missing fields; a response with entries but no readable role is reported as a changed format and skipped. Eleven readers parse the research agents' documented samples. The first live read on the worker settles it. |
 | The vendors give no list of their customers | Technical | Boards are learned from Hacker News posts and companies' own careers pages, and the owner can add any. Staffing businesses are also found on map data. |
 | The build environment could not reach any job-feed host | Technical | Nothing was read live tonight. All tests use fixtures. Live probing waits for the worker. |
-| GitHub Actions will not run (billing) | Technical | All 198 tests, the type check and the linter were run locally. A merge needs the owner's word. |
+| GitHub Actions will not run (billing) | Technical | All 229 tests, the type check and the linter were run locally. A merge needs the owner's word. |
 | The worker has no disk that survives a deploy | Technical | State is kept in the database, in two rows that two different writers never share. |
 
 ## What would change the verdict
@@ -60,7 +60,7 @@ Down: fewer than three positive conversations after about 300 targeted contacts 
 
 ## What I recommend
 
-1. Approve the code to be merged and deployed (no behaviour changes until the lane is switched on).
+1. Approve the code to be merged and deployed (no behavior changes until the lane is switched on).
 2. Fill in the settings on the page, read the process checklist, and approve the process if it is right.
 3. Switch the lane on for a week, read the sources panel, and fix any format that changed.
 4. Send a small first batch yourself (the page keeps up to twelve messages ready at a time; five to ten a day is a sensible pace), and keep the tally. Stop or change course at the tripwire.

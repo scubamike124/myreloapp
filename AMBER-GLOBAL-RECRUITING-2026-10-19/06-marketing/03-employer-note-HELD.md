@@ -30,11 +30,11 @@ Before it is used:
 > --
 > Maya Chen
 > Amber Global Recruiting, 100 Example Street, Los Angeles, CA 90001
-> This is a one-time commercial message. I found this address on your careers page.
+> This is a commercial message, and I will send one follow-up at most. I found this address on your careers page.
 > I use an AI assistant for research and first drafts, and I read every message before it goes out.
 > If you would rather not hear from me, reply "no thanks" and I will not write again.
 
-*189 words. Wording check: 0 errors, 0 warnings.*
+*196 words. Wording check: 0 errors, 0 warnings.*
 
 
 ## What would have to happen first

@@ -11,7 +11,7 @@ Written 18 Oct 2026 (Pacific). The brief asked for a workflow that discovers ope
 | 3. Employers and their applicants | Reads a small employer's own applicants and writes down what each wrote about the employer's requirements | **Designed. Evidence-sheet rules are in code (`candidates.ts`); no intake, no employer wording, no page.** Held for a lawyer. |
 | 4. Candidates and introductions | People send their own details for a role they choose; an introduction happens only with their agreement for that role | **Designed, not built, not wired.** Held until an employer has engaged Amber for a real role. |
 
-The reason for the order: stage 2 uses only company information, so it carries the least legal and privacy exposure, and it answers what small staffing agencies say they need most (new clients). Stages 3 and 4 involve people's details, automated-hiring-tool rules, and in many places a licence, so they wait for a lawyer and for a real client.
+The reason for the order: stage 2 uses only company information, so it carries the least legal and privacy exposure, and it answers what small staffing agencies say they need most (new clients). Stages 3 and 4 involve people's details, automated-hiring-tool rules, and in many places a license, so they wait for a lawyer and for a real client.
 
 ## Stage 1: discover openings (built)
 
@@ -84,7 +84,7 @@ Candidates are people who have a reason to write to Amber. Today they have none,
 | A manual, individual, role-relevant message by the owner to someone who has published a profile to be found by recruiters | **Not in the first 90 days, and never through this system** | Legal memo: only manual messages from the owner's own account, with notice at first contact; the gate blocks cold messages to candidates |
 | LinkedIn, GitHub, Indeed or any profile site scraped by software; bought lists; talent databases | **Never** | Terms of service, privacy law, brief |
 
-**The intake** (designed, not built): a plain page with a form. Fields: name, email, where they are (optional), a headline, skills, experience (title, organisation, years, a short summary), links (up to five), the roles they choose to be considered for, and a required box for the consent text below. The form is checked by `parseSubmission`, which refuses a submission without the agreement and a scope.
+**The intake** (designed, not built): a plain page with a form. Fields: name, email, where they are (optional), a headline, skills, experience (title, organization, years, a short summary), links (up to five), the roles they choose to be considered for, and a required box for the consent text below. The form is checked by `parseSubmission`, which refuses a submission without the agreement and a scope.
 
 **Consent wording** (version `2026-10-19-draft`, for a lawyer): "I am sending my details myself. I agree that Amber Global Recruiting may keep them for 12 months from my last contact, may share them with the employers for the roles I choose, and will delete them within 30 days if I ask. I understand I will never be charged anything."
 
@@ -102,14 +102,14 @@ Candidates are people who have a reason to write to Amber. Today they have none,
 |---|---|---|
 | Whether the process is approved | Owner | Holds everything until they say yes; records the date and scope |
 | Whether a message goes out | Owner | Refuses to mark it ready if the wording or the rules fail; never sends |
-| Whether a business is written to again | Owner and the business | Honours opt-outs for good; one first message and one follow-up at most |
+| Whether a business is written to again | Owner and the business | Honors opt-outs for good; one first message and one follow-up at most |
 | Which regions and states are open | Owner, advised by a lawyer | Defaults to the United States only; refuses regions that need consent |
 | Which services are offered | Owner | Defaults to the research list; refuses placement and split fees |
 | The price | Owner | Records what was agreed; counts nothing as revenue without proof |
 | Whether an employer's requirement is acceptable | The system refuses protected grounds; the employer decides the rest | `checkCriteria` |
 | Whether an applicant is interviewed | A named person at the employer | Shows the applicant's own words and "not stated"; no score, no rank |
 | Whether a candidate is introduced | The candidate first, then the owner | Shows only the details the candidate chose to share for that role |
-| Whether any of this is legal in a place | A lawyer | Holds work tied to places that need a licence or consent until cleared |
+| Whether any of this is legal in a place | A lawyer | Holds work tied to places that need a license or consent until cleared |
 
 ## Platform rules, in one place
 

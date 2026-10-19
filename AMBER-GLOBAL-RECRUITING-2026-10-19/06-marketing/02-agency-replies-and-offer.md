@@ -14,23 +14,23 @@ Before it is used:
 
 > Thanks for saying yes. The sample is attached as a spreadsheet.
 >
-> Each row is a company, the role, a link to the listing, the date it went up, and the hiring address the company publishes where I found one. Open two or three of the links before you read the rest. If the roles are still there and the dates match, the other rows were made the same way. If a row looks wrong, tell me, because I would rather fix the cause than the row.
+> Each row has the company, the role, a link to the listing, the date it went up, and the hiring address the company publishes where I found one. Open two or three of the links before you read the rest. If the roles are still there and the dates match, the other rows were built the same way. If one looks wrong, tell me what you saw, because I want to find what caused it.
 
 *86 words. Wording check: 0 errors, 0 warnings.*
 
 ### They asked what it costs
 
-*Status: can be used once the owner has approved the process.* Reply to "how much?" before a sample has gone out. Put the owner's chosen figure in after the second sentence once it is decided.
+*Status: can be used once the owner has approved the process.* Reply to "how much?" with a straight answer. The prices in the text ($99 for four weekly lists, then $149 a month) are the suggestions in 05-revenue-plan, not a market price. Change them to your own before it goes.
 
 Before it is used:
 - the process is approved
-- the owner has chosen a price (the revenue plan suggests where to start)
+- the owner has chosen a price (the figures in the text are suggestions)
 
-> The sample costs nothing, so you can look first. After that it would be a flat monthly fee for a weekly list in your area.
+> The sample is free. After that, a four-week trial of the weekly list is $99, then $149 a month, and you can stop at the end of any month without giving a reason.
 >
-> I would rather give you the figure once you have seen what you are paying for. Nothing gets billed until we have both agreed it in writing, and you can stop at the end of any month without giving a reason.
+> Nothing is billed until we have both agreed it in writing.
 
-*66 words. Wording check: 0 errors, 0 warnings.*
+*44 words. Wording check: 0 errors, 0 warnings.*
 
 ### They asked where the data comes from
 
@@ -39,11 +39,11 @@ Before it is used:
 Before it is used:
 - the process is approved
 
-> Everything comes from pages anyone can open: employers' own careers pages, the job boards that host them, and a few open job feeds. The sheet says where each row was read.
+> A program I run reads pages anyone can open: employers' careers pages, the job boards that host them, and a few open job feeds. The sheet says where each row was read.
 >
-> I do not buy data and I do not touch social networks. The only address in a row is one the company prints for hiring, and there are no names of people anywhere in the list.
+> I take nothing from LinkedIn or other social networks, I do not buy data, and there are no names of people in the list. The only address in a row is one the company prints for hiring.
 
-*67 words. Wording check: 0 errors, 0 warnings.*
+*69 words. Wording check: 0 errors, 0 warnings.*
 
 ### They asked if Amber places candidates
 
@@ -114,11 +114,11 @@ Before it is used:
 
 ### What an agency gets: the one-page offer
 
-*Status: can be used once the owner has approved the process.* Send after a yes, or paste into an email when someone asks for details. The owner puts the price in the last paragraph before it goes.
+*Status: can be used once the owner has approved the process.* Send after a yes, or paste into an email when someone asks for details. The prices in the text ($99 for four weekly lists, then $149 a month) are the suggestions in 05-revenue-plan, not a market price. Change them to your own before it goes.
 
 Before it is used:
 - the process is approved
-- the owner has chosen the price and filled it in
+- the owner has chosen the price (the figures in the text are suggestions)
 - a sample the owner has checked
 
 > Amber Global Recruiting reads public job listings and keeps a list of employers whose roles have stayed open for 45 days or longer. This page says what you would get, what you would not, and how to stop.
@@ -127,15 +127,15 @@ Before it is used:
 >
 > How the date works: if the job board gives a posting date, I use it. If it gives none, I count from the first day my software saw the listing and the sheet says so. A role may have been open longer than the sheet shows, and it may have been withdrawn since the page was read. Check the link before you call.
 >
-> What you do not get: no names of people, no guessed email addresses, no candidates, no introductions, and no promise that a call turns into work. I am not placing anyone. I am saving you a few hours of searching.
+> What you do not get: no names of people, no guessed email addresses, no candidates, no introductions, and no promise that a call turns into work. I am not placing anyone. I have no other clients yet, so there are no references to give you. The free sample is the way to judge whether the list is worth paying for.
 >
 > How it is made: the software reads job listings and company websites that anyone can open. It checks a site's rules for automated visitors first, and it leaves a company alone if the site says so. I check the sample myself before it reaches you.
 >
-> What it costs: the first sample is free. After that it is a flat monthly fee for the weekly list, agreed in writing before anything is billed. You can stop at the end of any month, and I will ask for no reason.
+> What it costs: the first sample is free. A four-week trial of the weekly list is $99. After that it is $149 a month, agreed in writing before anything is billed, and you can stop at the end of any month without giving a reason.
 >
 > If you ever want to be left alone, one line from you is enough. Your address goes on a list of people I never write to, and I check that list before every message.
 
-*341 words. Wording check: 0 errors, 0 warnings.*
+*363 words. Wording check: 0 errors, 0 warnings.*
 
 
 ## Setting the price

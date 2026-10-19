@@ -10,7 +10,7 @@ Written 18 Oct 2026 (Pacific). For the owner and for whoever works on this next.
 | The page | `/dashboard/recruiting` on HQ, owner and admin sessions only. Also a tile on the HQ home: "Amber Global Recruiting" |
 | What the worker writes | One `DevMemory` row of kind `RECRUITING_PROSPECTS` (prospects, open roles, board list, source health, run log). Written only by the worker |
 | What the owner writes | One `DevMemory` row of kind `RECRUITING_DECISION` per action (settings, approvals, sends, replies, opt-outs, money). Written only by the page's API; never changed afterwards |
-| Which organisation | The oldest one, the same as the worker queue and the KDP desk |
+| Which organization | The oldest one, the same as the worker queue and the KDP desk |
 | Documents | `docs/recruiting/` (this folder); research in `docs/recruiting/research/`; marketing copy in `docs/recruiting/06-marketing/` |
 | Limits | 3,000 prospects, 25 roles per prospect, 40 run records, 30 days of tallies, 3,000 boards, 20,000 decisions. The oldest roles drop first |
 
@@ -78,7 +78,7 @@ Any one of these is enough. None deletes anything.
 
 | Check | Command | Last result (18 Oct 2026, Pacific) |
 |---|---|---|
-| Unit and integration tests | `npm run test:recruiting` | all 198 pass |
+| Unit and integration tests | `npm run test:recruiting` | all 229 pass |
 | Type check | `npx tsc -p <a tsconfig that includes the recruiting folders>` | clean |
 | Lint | `npx eslint src/lib/recruiting src/app/dashboard/recruiting src/app/api/recruiting src/components/hq/hq-actions.ts scripts/recruiting-*.ts` | clean |
 | Offline rehearsal of the whole lane on the documented sample payloads | `npx tsx scripts/recruiting-rehearsal.ts` | 11 of 11 documented shapes read; 1 message composed and ready; 0 wording errors; 0 template-like pairs; revenue $0.00 |

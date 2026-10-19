@@ -9,38 +9,36 @@ Posted by the owner by hand on LinkedIn or X. Amber does not log in to either ne
 Before it is used:
 - the process is approved
 
-> A job that is still posted six weeks later tells you something. Maybe the pay is off, maybe the team is too busy to interview, maybe nobody has told the hiring manager what the market looks like. Whatever the reason, someone at that company is stuck.
->
-> For a small staffing agency that is a better reason to call than a purchased list, because you can say which role you saw and since when.
+> A listing that is still up after six weeks is a reason to look, not proof of a problem. Maybe the pay is off, maybe the team is too busy to interview, maybe the ad was simply forgotten. Any of those is worth a call, because you can say which role you saw and since when. A purchased list cannot give you that.
 
-*73 words. Wording check: 0 errors, 0 warnings.*
+*63 words. Wording check: 0 errors, 0 warnings.*
 
-### How I count the days a role has been open
+### Which date a row rests on
 
 *Status: wait until the system has run (conditions below).* A post that shows the care behind the list. Post after the first live read, when it is true.
 
 Before it is used:
 - the lane has made its first successful live read
 
-> How I decide a role has been open a long time: if the company's job board gives a posting date, I use it. If it does not, I count from the first day my software saw the listing, and the spreadsheet says that.
+> Each row in my list says which kind of date it rests on. If the job board gives a posting date, I use it. If it gives none, I count from the first day my software saw the listing, and the row says first seen.
 >
-> A role might have been open for longer than my list says. It might also have been pulled yesterday. I would rather show the date and where it comes from than hand over a number that looks more certain than it is.
+> The role may have been open longer than that, or taken down yesterday, so check the link before you call.
 
-*85 words. Wording check: 0 errors, 0 warnings.*
+*65 words. Wording check: 0 errors, 0 warnings.*
 
 ### Where Amber Global Recruiting actually stands
 
-*Status: wait until the system has run (conditions below).* The honest first post. Post it only while every number in it is still true.
+*Status: wait until the system has run (conditions below).* The honest first post. Post it only while every sentence in it is still true.
 
 Before it is used:
 - the lane has made its first successful live read
 - the owner is ready to publish the numbers every week
 
-> The start of Amber Global Recruiting, written for the record. Clients: none. Candidates: none. Revenue: $0.
+> I have just started Amber Global Recruiting. It has no clients and no revenue yet. What exists is software that reads public job listings and drafts short notes to staffing agencies, and I read every note before anything is sent.
 >
-> What exists is a tool that reads public job listings and drafts short notes to staffing agencies, and every note waits for me to read it before anything is sent. I will post the real numbers every week, including the weeks when they are zero.
+> I will post the real numbers every week, including the weeks when they are zero.
 
-*61 words. Wording check: 0 errors, 0 warnings.*
+*55 words. Wording check: 0 errors, 0 warnings.*
 
 ### A checklist for cold email in the US
 
@@ -49,11 +47,9 @@ Before it is used:
 Before it is used:
 - the process is approved
 
-> If you send cold email to companies in the US, the CAN-SPAM Act covers business addresses as well as personal ones. The basics: a real postal address in the message, an opt-out that works and is honoured quickly, a subject line that says what the message is, and no pretending to be someone you are not.
->
-> I am not a lawyer and this is not legal advice. It is the checklist I use before I send anything.
+> Not legal advice, just the checklist I use before I send anything. If you send cold email to companies in the US, CAN-SPAM covers business addresses as well as personal ones. That means a real postal address in the message, an opt-out that works, a subject line that says what the message is, and no pretending to be someone you are not. Honor the opt-out quickly.
 
-*77 words. Wording check: 0 errors, 0 warnings.*
+*66 words. Wording check: 0 errors, 0 warnings.*
 
 ### A question for small agency owners
 
@@ -62,24 +58,20 @@ Before it is used:
 Before it is used:
 - the process is approved
 
-> Question for small agency owners: how do you decide which employers to call on a Monday morning?
->
-> I am building a weekly list of employers whose roles have stayed open for 45 days or more, taken from public job listings. I would like to know what you would want in each row before I decide what to add. Replies and criticism both welcome.
+> Question for small agency owners: how do you decide which employers to call on a Monday morning? I am putting together a weekly list of employers whose roles have been open 45 days or more, from public job listings, and I would like to know what you would want in each row. Replies and criticism both welcome.
 
-*63 words. Wording check: 0 errors, 0 warnings.*
+*57 words. Wording check: 0 errors, 0 warnings.*
 
 ### Why the list has companies and no people
 
-*Status: can be used once the owner has approved the process.* Answers a question agencies ask, and shows the care taken.
+*Status: can be used once the owner has approved the process.* Answers a question agencies are likely to ask, and shows the care taken.
 
 Before it is used:
 - the process is approved
 
-> I get asked why my list has company names and no people. That is on purpose. A name next to an email address is personal data, and I would have to explain where I got it, keep it correct and delete it on request, in several countries.
->
-> A company's own published hiring address and the role it is trying to fill is enough to start a conversation, and it is a lot less to get wrong while I am small.
+> Why does my list have company names and no people? Because I do not want to hold anyone's personal details. Each row gives the company, the role and the hiring address the company prints itself, and you still have to find the person who decides. That is a real limit, and I would like to know whether it makes the list less useful to you.
 
-*80 words. Wording check: 0 errors, 0 warnings.*
+*65 words. Wording check: 0 errors, 0 warnings.*
 
 ### What a useful applicant summary looks like
 
@@ -90,7 +82,7 @@ Before it is used:
 
 > A useful summary of an applicant is a few lines per requirement: what they wrote about it, in their words, and whether they wrote anything at all. It is not a score and it is not a rank.
 >
-> If the summary cannot point to a sentence the applicant wrote, it should say "not stated". Whoever decides should be able to check every line against the CV in under a minute.
+> If the summary cannot point to a sentence the applicant wrote, it should say "not stated". Whoever decides should be able to check every line against the resume in under a minute.
 
 *70 words. Wording check: 0 errors, 0 warnings.*
 

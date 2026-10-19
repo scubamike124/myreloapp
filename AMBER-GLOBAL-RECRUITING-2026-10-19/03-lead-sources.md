@@ -44,7 +44,7 @@ The reading is polite by construction: a name and contact address in the request
 | Companies House free company data (UK recruitment and staffing firms) | The first messages go to US businesses only. It is the best next addition for a UK start, because it is a clearly licensed monthly file; it needs the UK rules cleared first. |
 | Himalayas, Teamtailor, Pinpoint | Same pattern as the sources already built; each adds a parser whose shape nobody has seen live. Add after the first week of real reads. |
 | US Department of Labor disclosure files, UK sponsor register, SEC EDGAR, Wikidata | Quarterly or monthly files with personal contact columns (which would have to be dropped on import) or thin coverage of small agencies. Not needed for the first list. |
-| The Muse, Jooble, USAJOBS, France Travail, JobTech, Canada Job Bank | Need a key or a licence line the owner must read, or cover a single country. Low priority for a US start. |
+| The Muse, Jooble, USAJOBS, France Travail, JobTech, Canada Job Bank | Need a key or a license line the owner must read, or cover a single country. Low priority for a US start. |
 | LinkedIn, Indeed, EURES, Bundesagentur, BambooHR, Breezy | Terms prohibit it or there is no official interface. Never. |
 | Adzuna, Careerjet, JazzHR, Common Crawl, Web Data Commons, trade-association directories | Terms restrict commercial use or the data belongs to the vendor's customer. Not used. |
 | Bought lists, data brokers, email finders and verifiers | Person-level data. Never. |
@@ -70,4 +70,4 @@ It cannot happen from the build environment, because the network proxy there ref
 
 ## What the owner may need to do
 
-(a) Read Hacker News's terms once (not checked here). (b) Decide whether aggregator rows stay in a paid list. (c) For any extra government or register source: read its licence line first. (d) Ask Adzuna for written consent only if its data is ever wanted. No sign-up, key or payment is needed for anything that is built.
+(a) Read Hacker News's terms once (not checked here). (b) Decide whether aggregator rows stay in a paid list. (c) For any extra government or register source: read its license line first. (d) Ask Adzuna for written consent only if its data is ever wanted. No sign-up, key or payment is needed for anything that is built.

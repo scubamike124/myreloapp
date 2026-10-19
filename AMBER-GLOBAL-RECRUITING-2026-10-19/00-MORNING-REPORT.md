@@ -1,10 +1,10 @@
 # Amber Global Recruiting: morning report
 
-Written overnight, Sunday 18 Oct 2026, about 9:45 PM Pacific (04:45 UTC Monday 19 Oct). The code is on branch `claude/amber-global-recruiting` in the private `amberai` repository (last commit 14c0b501, no pull request open). The written record is this folder.
+Written overnight, Sunday 18 Oct 2026, about 9:45 PM Pacific (04:45 UTC Monday 19 Oct). The code is on branch `claude/amber-global-recruiting` in the private `amberai` repository (last commit 5f906935, no pull request open). The written record is this folder.
 
 ## The short version
 
-- **Built and tested, not live.** The whole chain works on made-up data: find employers whose job listings have stayed open 45 days or more, find staffing businesses and the hiring address each one publishes, draft one short note per business, check the wording and the legal rules, you approve and send by hand, you record replies and money. Nothing has been read from the internet, sent, posted or promised to anyone.
+- **Built and tested, not live.** The whole chain works on made-up data: find employers whose job listings have stayed open 45 days or more, find staffing businesses and the hiring address each one publishes, draft one short note per business, check the wording and the legal rules, you approve and send by hand, you record replies and money. No job site has been read, and nothing has been sent, posted or promised to anyone.
 - **Cost: $0.00 new spend.** No purchase, no subscription, no sign-up, no paid service, no key.
 - **Clients: 0. Candidates: 0. Revenue: $0.00.** Nothing in the code, the page or the documents says otherwise.
 - **Verdict: conditional go** as a small, slow, owner-reviewed side business; **no-go** as a hands-off money machine. On the first product alone the central estimate is about $150 a month after six months and about $250 after a year, if you send 50 messages a week by hand. Placement fees are where the large numbers are, and they need a licence in many places and a lawyer first.
@@ -27,8 +27,8 @@ Everything else (payment route, business registration, YouTube channel, which so
 |---|---|---|
 | 1. A foundation reusing Amber's scouts, workers, cloud and Business Center, with no needless subscriptions | The recruiting lane runs on the existing cloud worker and job queue, stores its data in the existing database (no schema change), reuses the robots-check, opt-out list and reply sorter, and lives behind the existing owner-only page pattern. One new job kind that does nothing until switched on | [01](01-existing-infrastructure.md) |
 | 2. Worldwide market research, which services are realistic, how to get paid | Three research reports (market and fees; legal rules in 19 regions; 50 lead sources) and a viability memo. First product chosen: a weekly list of employers with long-open roles, sold to small staffing agencies | [research/](research/), [09](09-viability.md), [05](05-revenue-plan.md) |
-| 3. An automated client-acquisition system | Reads 12 kinds of public job source, the monthly Hacker News hiring thread and map data; finds employers and staffing businesses; finds the hiring address a company prints on its own site; scores; drafts a note; checks it; queues up to 12 for you. It cannot send | [03](03-lead-sources.md), [04](04-workflow.md) |
-| 4. Everything sounds naturally human, no robotic wording, no templates, no exaggeration | A wording check with explainable rules (stock phrases, hype, unearned closeness, unprovable claims, machine tells), a batch check that compares messages with each other, and a composer with many hand-written variants of every sentence. All marketing copy passes with zero errors and zero warnings | [02](02-voice-and-compliance.md) |
+| 3. An automated client-acquisition system | Reads 12 kinds of public job source (two of them off until their format is confirmed), the monthly Hacker News hiring thread and map data; finds employers and staffing businesses; finds the hiring address a company prints on its own site; scores; drafts a note; checks it; queues up to 12 for you. It cannot send | [03](03-lead-sources.md), [04](04-workflow.md) |
+| 4. Everything sounds naturally human, no robotic wording, no templates, no exaggeration | A wording check with explainable rules (stock phrases, hype, unearned closeness, unprovable claims, machine tells), a batch check that compares messages with each other, and a composer with many hand-written variants of every sentence. All marketing copy passes with zero errors and zero warnings, and a skeptical second reader's findings were applied | [02](02-voice-and-compliance.md) |
 | 5. A recruiting workflow plan | Four stages (discover, sell the list, employers' applicants, candidates), who decides what, permitted candidate sources, retention and deletion, evidence sheets that quote and never score | [04](04-workflow.md) |
 | 6. A revenue plan | Product ladder, prices, how you are paid at $0, a tested scenario model, referral arrangements, tripwires, first-dollar path | [05](05-revenue-plan.md) |
 | 7. Marketing materials | Four example first messages from the real composer, a follow-up, eight replies to likely questions, a one-page offer, seven public posts, six video scripts, plus employer and candidate notes that are written but **held** | [06-marketing/](06-marketing/README.md) |
@@ -38,12 +38,14 @@ Also built: a probe for the first live check (`scripts/recruiting-live-probe.ts`
 
 ## 2. What was tested
 
-- **198 automated tests in 17 files, all passing.** They cover the wording check, the legal gate, every job-source reader against the vendors' documented sample responses, discovery and scoring, the composer, the owner's decision log, the page model, the API, the lane, the candidate rules, the revenue model and the marketing copy.
+- **229 automated tests in 19 files, all passing.** They cover the wording check, the legal gate, every job-source reader against the vendors' documented sample responses, discovery and scoring, the composer, the owner's decision log, the page model, the API, the lane, the candidate rules, the revenue model and the marketing copy.
 - **Type check and lint: clean** on everything new.
 - **Offline rehearsal of the whole lane** on made-up servers: 11 of 11 documented response shapes read; 4 feeds, 1 Hacker News thread, 6 boards, 20 roles, 4 businesses found, 1 published address found; 1 message composed, ready, 0 wording errors, 0 look-alike pairs; revenue $0.00.
 - **The page in a phone-size browser**, driven end to end on made-up data: settings, approving the process, approving a message, "I sent it", a reply, an opt-out, the sample list, money, adding a board. No console errors.
 - **Wording across a batch:** in a 40-message test the median pair of messages shares under 12% of its wording and none reaches 40%.
-- **Independent review:** REVIEWSUMMARY
+- **A stress test found a real defect, now fixed.** Feeding the page and feed readers 200 KB of hostile text showed that the address finder took 23 seconds on a long unbroken run of letters (an inlined script on a company's page can contain one), and similar patterns elsewhere rescanned to the end of the text at every unclosed tag. A regular expression cannot be interrupted, and the worker also runs the KDP and coloring-book lanes, so one such page could have stalled them. The readers now run in time proportional to the text (slowest call about 20 ms on 21 kinds of hostile input), and a test keeps it that way.
+- **A skeptical second reader went through the messages and marketing copy** and found what a word list cannot: guesses about the reader's business, claims of experience and demand that do not exist yet, a footer calling a first message "one-time" when a follow-up exists, and an agency's area read from its own office staff. All fixed (see [06-marketing](06-marketing/README.md)).
+- **A code-safety review** (suppression and approval logic, the API, injection, request safety, storage races): CODEREVIEW
 - **Not tested, and not claimed:** any live read of any job source; the deployed worker job; the page against the production database; real mail; GitHub Actions (it cannot run). The build container's network refuses every job site, and the research agents' page-fetch tool could not open any page.
 
 ## 3. What is working
@@ -54,7 +56,7 @@ On test data, end to end: discovery from all supported source shapes; classifica
 
 ## 4. What is blocked
 
-1. **No live read was possible.** Fourteen response formats are partly or wholly unconfirmed (listed in [03](03-lead-sources.md) and [08](08-runbook.md)). The readers skip what they cannot read and report a changed format instead of showing zero, but only a live read settles it.
+1. **No live read was possible.** Of the 12 job-source readers, 3 follow response formats read from the vendor's own documentation, 7 follow formats confirmed only in part, and 2 (Recruitee and We Work Remotely) are unconfirmed and switched off ([03](03-lead-sources.md), [08](08-runbook.md)). The readers skip what they cannot read and report a changed format instead of showing zero, but only a live read settles it.
 2. **Merge and deploy** wait for your word; **CI cannot run** (account billing). I did not bypass either.
 3. **Your settings and approval** (items 3 and 4 above).
 4. **The research rests on search-result excerpts**, not full pages. Every figure is labelled fact (with source), estimate (with reasoning) or unverified. Legal points are a map for a lawyer, not advice.

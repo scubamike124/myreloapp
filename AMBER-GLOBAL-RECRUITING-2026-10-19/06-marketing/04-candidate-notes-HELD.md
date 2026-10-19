@@ -17,15 +17,15 @@ Before it is used:
 
 *72 words. Wording check: 0 errors, 0 warnings.*
 
-### Someone sends a CV without being asked
+### Someone sends a resume without being asked
 
-*Status: HELD: do not use.* Reply to a person who writes in on their own. The CV is not stored beyond the message until the person agrees.
+*Status: HELD: do not use.* Reply to a person who writes in on their own. The resume is not stored beyond the message until the person agrees.
 
 Before it is used:
 - the intake form and consent text are live
 - a lawyer has read them
 
-> Thanks for sending this. I have no role that fits it right now, and I am not keeping your CV unless you ask me to.
+> Thanks for sending this. I have no role that fits it right now, and I am not keeping your resume unless you ask me to.
 >
 > If you would like me to keep it for 12 months and tell you when a role comes up, reply "keep it" and I will send you the short form that says exactly what I keep. Otherwise it will be deleted within 30 days. I never charge candidates.
 
@@ -38,13 +38,13 @@ Before it is used:
 Before it is used:
 - the candidate side has opened
 
-> One rule for the candidate side of Amber Global Recruiting, written before it opens: candidates are never charged. Not for a CV review, not for a profile, not for an introduction to an employer.
+> One rule for the candidate side of Amber Global Recruiting, written before it opens: candidates are never charged. Not for a resume review, not for a profile, not for an introduction to an employer.
 >
 > If an employer ever pays a fee, it will be written down and the employer pays it. And if anyone asks you for money to find you a job, treat that as a warning sign, whoever they are.
 
 *72 words. Wording check: 0 errors, 0 warnings.*
 
-### What happens to a CV that is sent in
+### What happens to a resume that is sent in
 
 *Status: HELD: do not use.* Public post, or the first lines of the intake page.
 
@@ -52,7 +52,7 @@ Before it is used:
 - the intake form and consent text are live
 - a lawyer has read them
 
-> If you send me your CV, this is what happens. I read it. If you say yes in writing, I keep it for 12 months from your last message so I can tell you about a role that fits. I show it to an employer only for a role you have picked.
+> If you send me your resume, this is what happens. I read it. If you say yes in writing, I keep it for 12 months from your last message so I can tell you about a role that fits. I show it to an employer only for a role you have picked.
 >
 > If you want it deleted, say so, and it is gone within 30 days.
 

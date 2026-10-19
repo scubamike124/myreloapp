@@ -25,12 +25,12 @@ An AI-assisted recruiting business based in Los Angeles, started on 18 Oct 2026 
 
 ## The code
 
-`src/lib/recruiting/` (26 modules and 17 test files), `src/app/dashboard/recruiting/page.tsx`, `src/app/api/recruiting/`, the worker job `RECRUITING_TICK` in `src/lib/cloud/work-queue.ts`, and scripts under `scripts/recruiting-*.ts`. Run `npm run test:recruiting` for the tests.
+`src/lib/recruiting/` (26 modules and 19 test files), `src/app/dashboard/recruiting/page.tsx`, `src/app/api/recruiting/`, the worker job `RECRUITING_TICK` in `src/lib/cloud/work-queue.ts`, and scripts under `scripts/recruiting-*.ts`. Run `npm run test:recruiting` for the tests.
 
 ## Five facts to hold on to
 
 1. **Amber sends nothing.** There is no sending code. The owner reads, approves, sends from their own mail, and records it.
 2. **The first product is a list of employers whose public job listings have stayed open for 45 days or more, sold to small staffing agencies.** No candidates, no named people, no fee tied to a hire.
-3. **The research was done from search-result excerpts**, because the research environment could not open any web page. Every fact is labelled; none was read in full. Nothing was read from a live job source either.
+3. **The research was done from search-result excerpts**, because the research environment could not open any web page. Every fact is labeled; none was read in full. Nothing was read from a live job source either.
 4. **Money counts only with proof and the owner's confirmation.** Today: $0.00 confirmed, $0.00 spent.
 5. **This is a conditional go as a small, slow side business, and a no-go as a hands-off money machine** (09-viability).
