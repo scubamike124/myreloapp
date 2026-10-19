@@ -81,7 +81,7 @@ Any one of these is enough. None deletes anything.
 
 | Check | Command | Last result (18 Oct 2026, Pacific) |
 |---|---|---|
-| Unit and integration tests | `npm run test:recruiting` | all 367 pass (includes the robots.txt matcher test that protects the worker from freezing, and the demonstration script run offline) |
+| Unit and integration tests | `npm run test:recruiting` | all 368 pass (includes the robots.txt matcher test that protects the worker from freezing, and the demonstration script run offline) |
 | Type check | `npx tsc -p <a tsconfig that includes the recruiting folders>` | clean |
 | Lint | `npx eslint src/lib/recruiting src/app/dashboard/recruiting src/app/api/recruiting src/components/hq/hq-actions.ts scripts/recruiting-*.ts` | clean |
 | Offline rehearsal of the whole lane on the documented sample payloads | `npx tsx scripts/recruiting-rehearsal.ts` | 11 of 11 documented shapes read; on the day of the first read no message is written (no role has been listed for 45 days, so there is no sample to offer); fifty days on, if the same roles are still listed, 1 message composed and ready; 0 wording errors; 0 template-like pairs; revenue $0.00 |
