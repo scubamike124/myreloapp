@@ -1,6 +1,6 @@
 # Amber Global Recruiting: morning report
 
-Written overnight, Sunday 18 Oct 2026, about 9:45 PM Pacific (04:45 UTC Monday 19 Oct), and updated about 11:15 PM Pacific (06:15 UTC) after an independent code review's fixes. The code is on branch `claude/amber-global-recruiting` in the private `amberai` repository (last commit fbfabf81, no pull request open). The written record is this folder.
+Written overnight, Sunday 18 Oct 2026, about 9:45 PM Pacific (04:45 UTC Monday 19 Oct), and updated about 11:15 PM Pacific (06:15 UTC) after an independent code review's fixes. The code is on branch `claude/amber-global-recruiting` in the private `amberai` repository (last commit 312d730f, no pull request open). The written record is this folder.
 
 ## The short version
 
@@ -40,7 +40,7 @@ Also built: a probe for the first live check (`scripts/recruiting-live-probe.ts`
 
 ## 2. What was tested
 
-- **286 automated tests in 23 files, all passing** (`npm run test:recruiting`), plus the 37 tests of the repository's shared web-hazard check, which flagged one comment in the recruiting reader (reworded) and now passes. The tests cover the wording check, the legal gate, every job-source reader against the vendors' documented sample responses, discovery and scoring, the composer, the owner's decision log, the page model, the API, the lane, the candidate rules, the revenue model, the marketing copy, and one test group per finding of the code review below.
+- **290 automated tests in 23 files, all passing** (`npm run test:recruiting`), plus the 37 tests of the repository's shared web-hazard check, which flagged one comment in the recruiting reader (reworded) and now passes. The tests cover the wording check, the legal gate, every job-source reader against the vendors' documented sample responses, discovery and scoring, the composer, the owner's decision log, the page model, the API, the lane, the candidate rules, the revenue model, the marketing copy, and one test group per finding of the code review below.
 - **Type check and lint: clean** on everything new.
 - **Offline rehearsal of the whole lane** on made-up servers: 11 of 11 documented response shapes read; 4 feeds, 1 Hacker News thread, 6 boards, 20 roles, 4 businesses found, 1 published address found. On the first day no note is written, because no role has yet been listed for 45 days and a free sample that cannot be produced is a promise that cannot be kept; fifty days on, if the same roles are still listed, the list has 2 rows and 1 note is composed, ready, with 0 wording errors and 0 look-alike pairs; revenue $0.00.
 - **The page in a phone-size browser**, driven end to end on made-up data: settings, approving the process, approving a message, "I sent it", a reply, an opt-out, the sample list, money, adding a board. No console errors.
