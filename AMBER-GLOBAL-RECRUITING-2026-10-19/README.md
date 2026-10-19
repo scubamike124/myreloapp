@@ -36,3 +36,5 @@ An AI-assisted recruiting business based in Los Angeles, started on 18 Oct 2026 
 3. **The research was done from search-result excerpts**, because the research environment could not open any web page. Every fact is labeled; none was read in full. Nothing was read from a live job source either.
 4. **Money counts only with proof and the owner's confirmation.** Today: $0.00 confirmed, $0.00 spent.
 5. **This is a conditional go as a small, slow side business, and a no-go as a hands-off money machine** (09-viability).
+
+- [13-email-deliverability.md](13-email-deliverability.md): why mail may land in spam, what was built offline, and the proof required before any outreach.

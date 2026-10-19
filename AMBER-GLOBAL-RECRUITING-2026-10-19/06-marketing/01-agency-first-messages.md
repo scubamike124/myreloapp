@@ -6,17 +6,65 @@ The composer chooses among several hand-written versions of each sentence, picks
 
 The owner reads, edits if wanted, approves on the page, and sends from their own mail. Nothing is sent by Amber.
 
-### Employers whose job ads have stayed up 45+ days
+### A short list of long-open job ads for Hooli Staffing
 
-> Hello to everyone at Hooli Staffing,
+> Hello Hooli Staffing team,
 >
-> My software flagged the Healthcare Recruiter listing on your careers page, and that is why I am writing. I should say up front that I place no one. I do research on employers for staffing agencies.
+> I am writing because my software picked up the Healthcare Recruiter listing on your careers page. I use software to read employers' public job listings and careers pages. If the same role is still up after 45 days, it goes on the list.
 >
-> What I look for is simple: public job listings that have stayed up for 45 days or longer. The software does the reading and I go through what it keeps. For each employer there is the role, a link to the live ad, how long it has been up, and the address the company itself prints for hiring, if it prints one.
+> What comes back is one line per employer: company, role, link, date posted, and a hiring address where one is printed.
 >
-> A first look costs nothing: ten or so rows, each with its link, so you can check them yourself.
+> I'm not a recruiter and I place no one. What I do is research on employers, for agencies.
 >
-> Shall I send them over?
+> A sample of about ten rows is free, so you can check them against the live ads. If that sounds useful, shall I send them for healthcare?
+>
+> Best,
+> Maya
+>
+> --
+> Maya Chen
+> Amber Global Recruiting, 100 Example Street, Los Angeles, CA 90001
+> This is a commercial message, and I will send one follow-up at most. I found this address on your careers page.
+> I use an AI assistant for research and first drafts, and I read every message before it goes out.
+> If you would rather not hear from me, reply "no thanks" and I will not write again.
+
+*115 words before the footer. Wording check: 0 errors, 0 warnings.*
+
+### Long-open job ads, each with its link
+
+> Hello Initech Talent Partners,
+>
+> The Technical Recruiter listing on your careers page is what my software flagged, so I am writing to you.
+>
+> Roles still listed after 45 days are the ones I keep. They come from employers' own careers pages and the job boards that host them, read by my software.
+>
+> A line in the sheet has the company, the role, the link, the date, and, if the company publishes one, a hiring address. Ten or so rows are free to start, and you can check each one against the live ad.
+>
+> There's no candidate pitch here: I do research for agencies and place no one. Would a sample for technology be worth a look?
+>
+> Thanks for reading,
+> Maya
+>
+> --
+> Maya Chen
+> Amber Global Recruiting, 100 Example Street, Los Angeles, CA 90001
+> This is a commercial message, and I will send one follow-up at most. I found this address on your careers page.
+> I use an AI assistant for research and first drafts, and I read every message before it goes out.
+> If you would rather not hear from me, reply "no thanks" and I will not write again.
+
+*120 words before the footer. Wording check: 0 errors, 0 warnings.*
+
+### Ten employers with roles that stay open
+
+> Hello,
+>
+> My software flagged your Light Industrial Recruiter listing on your careers page, so I am writing to Cyberdyne Talent. This is research for agencies, not a candidate pitch: I place no one.
+>
+> A program I run reads public job listings from employers' own pages and from the job boards that host them, and it keeps the roles that have been listed for 45 days or longer. For each employer there is the role, a link to the live ad, how long it has been up, and the address the company itself prints for hiring, if it prints one.
+>
+> A first look costs nothing: ten rows, each with its link, so you can check them yourself.
+>
+> Would you like to see ten rows for light industrial and trades?
 >
 > Regards,
 > Maya
@@ -30,19 +78,19 @@ The owner reads, edits if wanted, approves on the page, and sends from their own
 
 *130 words before the footer. Wording check: 0 errors, 0 warnings.*
 
-### Employers whose job ads have stayed up 45+ days
+### A sample of employers with long-open job ads
 
-> Hello,
+> Hi Wayne Workforce Solutions team,
 >
-> My software flagged your Technical Recruiter listing on your careers page, so I am writing to Initech Talent Partners. There's no candidate pitch here: I do research for agencies and place no one.
+> Your careers page lists an Account Manager position, and my software flagged it while reading staffing firms' websites. The listings come from pages anyone can open: employers' careers pages and the job boards that host them. Only roles that have stayed listed for 45 days or longer make the list.
 >
-> I read employers' public job listings with a bit of software, and what I keep is the roles that haven't come down after 45 days. Each row gives the company, the role, the link, the date the ad went up (or the day I first saw it, when the ad shows no date), and a hiring address if the company publishes one.
+> Every row has the company, the role, the listing link and the date, and the hiring address when the company publishes one.
 >
-> I would send ten or so rows first, free, and you can open each link to see whether the ad is still there.
+> I don't place candidates. I find employers that agencies might want to call.
 >
-> Shall I send them over?
+> I would send ten rows first, free, and you can open each link to see whether the ad is still there. Shall I send them over?
 >
-> Regards,
+> Thank you,
 > Maya
 >
 > --
@@ -52,55 +100,7 @@ The owner reads, edits if wanted, approves on the page, and sends from their own
 > I use an AI assistant for research and first drafts, and I read every message before it goes out.
 > If you would rather not hear from me, reply "no thanks" and I will not write again.
 
-*126 words before the footer. Wording check: 0 errors, 0 warnings.*
-
-### Your Light Industrial Recruiter listing at Cyberdyne Talent
-
-> Hello Cyberdyne Talent team,
->
-> I am writing because my software picked up the Light Industrial Recruiter listing on your careers page. Roles still listed after 45 days are the ones I keep. They come from employers' own careers pages and the job boards that host them, read by my software.
->
-> What comes back is one line per employer: company, role, link, date posted, and a hiring address where one is printed.
->
-> To be clear, I'm not offering you candidates and I'm not a competitor.
->
-> A sample of about ten rows is free, so you can check them against the live ads. Does that sound useful for light industrial and trades?
->
-> Best,
-> Maya
->
-> --
-> Maya Chen
-> Amber Global Recruiting, 100 Example Street, Los Angeles, CA 90001
-> This is a commercial message, and I will send one follow-up at most. I found this address on your careers page.
-> I use an AI assistant for research and first drafts, and I read every message before it goes out.
-> If you would rather not hear from me, reply "no thanks" and I will not write again.
-
-*112 words before the footer. Wording check: 0 errors, 0 warnings.*
-
-### A free sample of employers with long-open job ads
-
-> Hello Wayne Workforce Solutions,
->
-> I am writing because my software read your careers page, where an Account Manager position is listed.
->
-> The software goes through employers' public job pages and picks out roles that are still listed after 45 days.
->
-> In the sheet you would see who is hiring, for what, where the ad is, and since when, with the company's own hiring address when it has one. You can look at ten rows for nothing and compare them with the live ads.
->
-> I'm not selling candidates or placement. It's research on employers, for agencies to use. Want me to send ten rows for the roles you fill?
->
-> Thanks,
-> Maya
->
-> --
-> Maya Chen
-> Amber Global Recruiting, 100 Example Street, Los Angeles, CA 90001
-> This is a commercial message, and I will send one follow-up at most. I found this address on your careers page.
-> I use an AI assistant for research and first drafts, and I read every message before it goes out.
-> If you would rather not hear from me, reply "no thanks" and I will not write again.
-
-*110 words before the footer. Wording check: 0 errors, 0 warnings.*
+*119 words before the footer. Wording check: 0 errors, 0 warnings.*
 
 ### The one follow-up, seven or more days later
 

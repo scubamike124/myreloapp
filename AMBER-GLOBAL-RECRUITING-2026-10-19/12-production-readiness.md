@@ -90,6 +90,8 @@ Round 1 then takes a few minutes and writes a list of at most twenty company-sit
 
 ## What remains before a first message can go out
 
+0. **Email deliverability proof (owner's requirement, 13-email-deliverability.md): not met.** No real inbox test has been run (0 deliveries), the sending domain's SPF/DKIM/DMARC has not been read (DNS is blocked here), and the shared mailer falls back to `onboarding@resend.dev` when `MAIL_FROM` is unset. No outreach, and no bulk sender, until that gate is passed and the owner authorizes sending.
+
 1. The live demonstration passes (network, above). The first live read will show which of the twelve source readers need a fix; nine were written from documentation or search excerpts.
 2. The merge, after you have read the pull request. Merge it dark; set `AMBER_RECRUITING_LANE=1` only after step 1.
 3. The decisions that are yours (07-owner-approvals): the hold policy for probable notices (soft, as built), the deny-list in shared code (D6), the promises written in your voice ("I go through what it finds", "I read every message"), and which regions to clear.
