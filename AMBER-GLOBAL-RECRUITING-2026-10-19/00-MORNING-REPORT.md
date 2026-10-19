@@ -1,6 +1,6 @@
 # Amber Global Recruiting: morning report
 
-Written overnight, Sunday 18 Oct 2026, about 9:45 PM Pacific (04:45 UTC Monday 19 Oct), and updated about 11:15 PM Pacific (06:15 UTC) after an independent code review's fixes. The code is on branch `claude/amber-global-recruiting` in the private `amberai` repository (last commit 867a19ec, no pull request open). The written record is this folder.
+Written overnight, Sunday 18 Oct 2026, about 9:45 PM Pacific (04:45 UTC Monday 19 Oct), and updated about 11:15 PM Pacific (06:15 UTC) after an independent code review's fixes. The code is on branch `claude/amber-global-recruiting` in the private `amberai` repository (last commit fbfabf81, no pull request open). The written record is this folder.
 
 ## The short version
 
@@ -18,6 +18,8 @@ Written overnight, Sunday 18 Oct 2026, about 9:45 PM Pacific (04:45 UTC Monday 1
 4. **Read the process checklist on the page and press "Approve the process".** Until you do, every message is held. You can withdraw it any time.
 5. **A price.** I suggest a free sample, a four-list pilot for $99, then $149 a month, stoppable any month. These are estimates, not a market price.
 6. **An hour with a California lawyer before volume.** Recommended, not spent. The three questions are in `07-owner-approvals.md`.
+
+7. **To see Amber work on real employers before launch** (your 11 PM request), let this session reach the job sites for a few minutes, or run one command on your own computer. The sandbox this was built in refuses every job host, so the live part has **not** been run, and nothing stands in for it. Everything else for the demonstration is built and tested: [11-live-demo.md](11-live-demo.md) has the two ways to run it, the host list, and what counts as a pass; [demo/offline-dry-run-report.md](demo/offline-dry-run-report.md) shows exactly what the live report will look like (it is built from documented sample payloads, not real employers, and says so).
 
 Everything else (payment route, business registration, YouTube channel, which sources stay on) is in [07-owner-approvals.md](07-owner-approvals.md).
 
@@ -38,7 +40,7 @@ Also built: a probe for the first live check (`scripts/recruiting-live-probe.ts`
 
 ## 2. What was tested
 
-- **280 automated tests in 21 files, all passing** (`npm run test:recruiting`), plus the 37 tests of the repository's shared web-hazard check, which flagged one comment in the recruiting reader (reworded) and now passes. The tests cover the wording check, the legal gate, every job-source reader against the vendors' documented sample responses, discovery and scoring, the composer, the owner's decision log, the page model, the API, the lane, the candidate rules, the revenue model, the marketing copy, and one test group per finding of the code review below.
+- **286 automated tests in 23 files, all passing** (`npm run test:recruiting`), plus the 37 tests of the repository's shared web-hazard check, which flagged one comment in the recruiting reader (reworded) and now passes. The tests cover the wording check, the legal gate, every job-source reader against the vendors' documented sample responses, discovery and scoring, the composer, the owner's decision log, the page model, the API, the lane, the candidate rules, the revenue model, the marketing copy, and one test group per finding of the code review below.
 - **Type check and lint: clean** on everything new.
 - **Offline rehearsal of the whole lane** on made-up servers: 11 of 11 documented response shapes read; 4 feeds, 1 Hacker News thread, 6 boards, 20 roles, 4 businesses found, 1 published address found. On the first day no note is written, because no role has yet been listed for 45 days and a free sample that cannot be produced is a promise that cannot be kept; fifty days on, if the same roles are still listed, the list has 2 rows and 1 note is composed, ready, with 0 wording errors and 0 look-alike pairs; revenue $0.00.
 - **The page in a phone-size browser**, driven end to end on made-up data: settings, approving the process, approving a message, "I sent it", a reply, an opt-out, the sample list, money, adding a board. No console errors.
@@ -56,7 +58,7 @@ On test data, end to end: discovery from all supported source shapes; classifica
 
 ## 4. What is blocked
 
-1. **No live read was possible.** Of the 12 job-source readers, 3 follow response formats read from the vendor's own documentation, 7 follow formats confirmed only in part, and 2 (Recruitee and We Work Remotely) are unconfirmed and switched off ([03](03-lead-sources.md), [08](08-runbook.md)). The readers skip what they cannot read and report a changed format instead of showing zero, but only a live read settles it.
+1. **No live read was possible.** The build environment's network policy refused all eight job hosts I tried (the proxy answered 403, and the session's page-fetch tool could not look them up either); I did not route around it. Of the 12 job-source readers, 3 follow response formats read from the vendor's own documentation, 7 follow formats confirmed only in part, and 2 (Recruitee and We Work Remotely) are unconfirmed and switched off ([03](03-lead-sources.md), [08](08-runbook.md)). The readers skip what they cannot read and report a changed format instead of showing zero, but only a live read settles it.
 2. **Merge and deploy** wait for your word; **CI cannot run** (account billing). I did not bypass either.
 3. **Your settings and approval** (items 3 and 4 above).
 4. **The research rests on search-result excerpts**, not full pages. Every figure is labelled fact (with source), estimate (with reasoning) or unverified. Legal points are a map for a lawyer, not advice.
