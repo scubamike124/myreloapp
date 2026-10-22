@@ -1,0 +1,31 @@
+1
+00:00:00,300 --> 00:00:03,073
+One equation sums up cellular respiration.
+
+2
+00:00:03,323 --> 00:00:04,561
+Here's how to read it.
+
+3
+00:00:05,011 --> 00:00:09,896
+Glucose plus 6 O2 gives 6 CO2, 6 H2O, and energy.
+
+4
+00:00:10,346 --> 00:00:12,138
+Cells use it to make ATP.
+
+5
+00:00:12,388 --> 00:00:16,271
+Eukaryotes get roughly 30 to 32 ATP per glucose.
+
+6
+00:00:16,721 --> 00:00:21,521
+And all 6 CO2 molecules are released along the way, per glucose.
+
+7
+00:00:21,971 --> 00:00:24,765
+Each card links to the line of the notes it came from.
+
+8
+00:00:25,015 --> 00:00:26,978
+Make cards like these from your own notes.

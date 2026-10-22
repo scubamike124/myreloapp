@@ -1,0 +1,27 @@
+1
+00:00:00,300 --> 00:00:04,375
+Month-end close stalls on missing receipts and amounts that don't match.
+
+2
+00:00:04,825 --> 00:00:11,161
+In this sample, nineteen card and bank transactions were checked against nineteen receipts and invoices.
+
+3
+00:00:11,411 --> 00:00:12,413
+Fourteen matched.
+
+4
+00:00:12,863 --> 00:00:15,189
+The rest are exceptions, each explained.
+
+5
+00:00:15,439 --> 00:00:21,604
+Here, a payment is $14.04 more than its receipt, which may be a tip, so the bookkeeper decides.
+
+6
+00:00:22,054 --> 00:00:27,963
+Nothing is categorized or changed in your books, and rows that can't be read are listed, never guessed.
+
+7
+00:00:28,413 --> 00:00:30,504
+The full sample is at the link below.

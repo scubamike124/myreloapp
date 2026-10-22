@@ -1,0 +1,27 @@
+1
+00:00:00,300 --> 00:00:03,159
+How the receipt and invoice matching pilot works.
+
+2
+00:00:03,609 --> 00:00:10,094
+You send a month of bank or card transactions, and your receipts and invoices as an export or a spreadsheet.
+
+3
+00:00:10,544 --> 00:00:16,496
+You get matched pairs, and every exception explained, with the question your bookkeeper needs to decide.
+
+4
+00:00:16,946 --> 00:00:22,962
+No tax advice, no decisions about how anything is treated, and no contact with your vendors.
+
+5
+00:00:23,412 --> 00:00:25,993
+One month, up to 300 transactions.
+
+6
+00:00:26,243 --> 00:00:28,099
+The price and terms are on the page.
+
+7
+00:00:28,549 --> 00:00:29,701
+The link is below.

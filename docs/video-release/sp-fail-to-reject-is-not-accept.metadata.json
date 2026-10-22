@@ -1,0 +1,64 @@
+{
+  "id": "sp-fail-to-reject-is-not-accept",
+  "business": "studyproofs",
+  "subject": "hypothesis-testing",
+  "title": "\"Fail to reject\" does not mean the null is true",
+  "description": "Why failing to reject H0 is not proof it is true, plus a common hypothesis-testing mistake, from sample STAT 200 notes.\n\nThe cards and questions come from sample STAT 200 statistics notes we wrote, as StudyProofs made them. Made by StudyProofs. AI can make mistakes, so check the cards against your notes. Narrated with a synthetic voice.\n\n#nullhypothesis #statistics #hypothesistesting\n\nSee the full example and try it free: https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing?src=youtube&campaign=sp-fail-to-reject-is-not-accept",
+  "tags": [
+    "statistics",
+    "null hypothesis",
+    "hypothesis testing",
+    "StudyProofs",
+    "flashcards",
+    "study tips",
+    "STAT 200"
+  ],
+  "hashtags": [
+    "#nullhypothesis",
+    "#statistics",
+    "#hypothesistesting"
+  ],
+  "link": "https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing?src=youtube&campaign=sp-fail-to-reject-is-not-accept",
+  "page_url": "https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "\"Fail to reject\" does not mean H0 is true.",
+    "It means you didn't find enough evidence against it. That's all.",
+    "And one mistake to avoid: choosing alpha after you've seen the p-value. You pick the cutoff before you look at the data.",
+    "StudyProofs made these cards from notes and shows where each one came from. Try it free on your own."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 23.04,
+    "bytes": 2008052,
+    "lufs": -14.48,
+    "true_peak_db": -4.45,
+    "wer": 0.031,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 7,
+    "thumbnail_bytes": 49692,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T14:05:48.331436+00:00"
+  },
+  "files": {
+    "sp-fail-to-reject-is-not-accept.mp4": {
+      "sha256": "856a47d5a0d6278d4f9fddbe485420d502102c9cd42fa32e19cb47c5cf96c41a",
+      "bytes": 2008052
+    },
+    "sp-fail-to-reject-is-not-accept-thumbnail.jpg": {
+      "sha256": "9384b98607ccb64be2e49f06fce9fd82abf00a47b7afba6e943a9b4ea2d709a5",
+      "bytes": 49692
+    },
+    "sp-fail-to-reject-is-not-accept.en.srt": {
+      "sha256": "f50d4f1c5cc6a3fc68cf7efc8ba58d641bee498779edb9663f43d0a2b6584806",
+      "bytes": 560
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

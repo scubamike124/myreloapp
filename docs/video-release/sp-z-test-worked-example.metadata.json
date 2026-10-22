@@ -1,0 +1,64 @@
+{
+  "id": "sp-z-test-worked-example",
+  "business": "studyproofs",
+  "subject": "hypothesis-testing",
+  "title": "A z-test worked example: mean 74 vs a claim of 70",
+  "description": "A worked z-test from sample STAT 200 notes: a claimed mean of 70, a sample mean of 74 from 36 students, z of 2.0 and the decision.\n\nThe cards and questions come from sample STAT 200 statistics notes we wrote, as StudyProofs made them. Made by StudyProofs. AI can make mistakes, so check the cards against your notes. Narrated with a synthetic voice.\n\n#ztest #statistics #pvalue\n\nSee the full example and try it free: https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing?src=youtube&campaign=sp-z-test-worked-example",
+  "tags": [
+    "statistics",
+    "z-test",
+    "worked example",
+    "StudyProofs",
+    "flashcards",
+    "study tips",
+    "STAT 200"
+  ],
+  "hashtags": [
+    "#ztest",
+    "#statistics",
+    "#pvalue"
+  ],
+  "link": "https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing?src=youtube&campaign=sp-z-test-worked-example",
+  "page_url": "https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "Let's run a z-test, start to finish.",
+    "The claim: the average exam score is 70. A sample of 36 students averages 74.",
+    "That gives z = 2.0, and a p-value of about 0.0455. That's below alpha of 0.05, so we reject H0.",
+    "The numbers come from notes, and each card shows its source line. Turn your own notes into practice like this."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 26.37,
+    "bytes": 2408352,
+    "lufs": -15.28,
+    "true_peak_db": -4.46,
+    "wer": 0.0,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 7,
+    "thumbnail_bytes": 44925,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T15:20:34.727388+00:00"
+  },
+  "files": {
+    "sp-z-test-worked-example.mp4": {
+      "sha256": "40897df7f9446269a83f83a09a95e7e94ab60b5b6415f223510a18d4893d7b3f",
+      "bytes": 2408352
+    },
+    "sp-z-test-worked-example-thumbnail.jpg": {
+      "sha256": "20b789829b456884fbb3b6768773c1e4cfa7ec1b9730251b4a4c1cb78760ec3d",
+      "bytes": 44925
+    },
+    "sp-z-test-worked-example.en.srt": {
+      "sha256": "0fa2ec4fcf4c15f4704bd4f435c0b06b9acb9f78c7629d3d573832da3f908328",
+      "bytes": 552
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

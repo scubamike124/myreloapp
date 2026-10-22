@@ -1,0 +1,64 @@
+{
+  "id": "sp-p-value-meaning",
+  "business": "studyproofs",
+  "subject": "hypothesis-testing",
+  "title": "What a p-value actually means (and the decision rule)",
+  "description": "The p-value and the decision rule, explained from sample STAT 200 notes, with the flashcards StudyProofs made from them.\n\nThe cards and questions come from sample STAT 200 statistics notes we wrote, as StudyProofs made them. Made by StudyProofs. AI can make mistakes, so check the cards against your notes. Narrated with a synthetic voice.\n\n#statistics #pvalue #studytips\n\nSee the full example and try it free: https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing?src=youtube&campaign=sp-p-value-meaning",
+  "tags": [
+    "statistics",
+    "p-value",
+    "hypothesis testing",
+    "StudyProofs",
+    "flashcards",
+    "study tips",
+    "STAT 200"
+  ],
+  "hashtags": [
+    "#statistics",
+    "#pvalue",
+    "#studytips"
+  ],
+  "link": "https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing?src=youtube&campaign=sp-p-value-meaning",
+  "page_url": "https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "What does a p-value actually tell you?",
+    "It's the probability of getting a result at least as extreme as yours, if the null hypothesis is true. Not the chance the null is true.",
+    "Then the rule is simple. If p ≤ alpha, reject H0. If p > alpha, fail to reject it.",
+    "Both cards were made from notes, and each one points to the line it came from, so you can check it. Try it on your own notes. The link is below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 29.44,
+    "bytes": 2434777,
+    "lufs": -14.88,
+    "true_peak_db": -4.47,
+    "wer": 0.0,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 9,
+    "thumbnail_bytes": 55824,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T14:37:00.181818+00:00"
+  },
+  "files": {
+    "sp-p-value-meaning.mp4": {
+      "sha256": "e520e663944317292de8bb2d512ce29d3578c7280002f151c2f9a645e00a51ce",
+      "bytes": 2434777
+    },
+    "sp-p-value-meaning-thumbnail.jpg": {
+      "sha256": "1e537078e9b513c97f2cdfbadd4958ed7206ae181226ba60a13e4c6f6f2e3606",
+      "bytes": 55824
+    },
+    "sp-p-value-meaning.en.srt": {
+      "sha256": "464630e7802180528319c3c65dcf8c168bbf01219fa3b3147abaec3a4f8e6617",
+      "bytes": 701
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

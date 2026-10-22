@@ -1,0 +1,27 @@
+1
+00:00:00,300 --> 00:00:02,391
+Let's run a z-test, start to finish.
+
+2
+00:00:02,841 --> 00:00:05,614
+The claim: the average exam score is 70.
+
+3
+00:00:05,864 --> 00:00:09,064
+A sample of 36 students averages 74.
+
+4
+00:00:09,514 --> 00:00:14,719
+That gives z = 2.0, and a p-value of about 0.0455.
+
+5
+00:00:14,969 --> 00:00:18,340
+That's below alpha of 0.05, so we reject H0.
+
+6
+00:00:18,790 --> 00:00:22,182
+The numbers come from notes, and each card shows its source line.
+
+7
+00:00:22,432 --> 00:00:24,565
+Turn your own notes into practice like this.

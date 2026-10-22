@@ -1,0 +1,31 @@
+1
+00:00:00,300 --> 00:00:04,865
+Overruns and miscoded costs often show up only when a job is closed.
+
+2
+00:00:05,315 --> 00:00:12,142
+This sample, for an invented builder, puts each job's budget, spending and percent complete side by side.
+
+3
+00:00:12,592 --> 00:00:20,080
+Then it lists exceptions for review: a cost code over budget, a possible duplicate bill, a cost on a closed job.
+
+4
+00:00:20,330 --> 00:00:22,890
+Each one names the transactions behind it.
+
+5
+00:00:23,340 --> 00:00:24,364
+It's read only.
+
+6
+00:00:24,614 --> 00:00:28,177
+Nothing in your books is changed, and it's not accounting advice.
+
+7
+00:00:28,427 --> 00:00:31,115
+It flags questions for you or your bookkeeper.
+
+8
+00:00:31,565 --> 00:00:34,061
+See the whole sample report at the link below.

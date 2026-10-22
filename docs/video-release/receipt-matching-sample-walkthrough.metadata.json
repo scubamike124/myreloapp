@@ -1,0 +1,62 @@
+{
+  "id": "receipt-matching-sample-walkthrough",
+  "business": "offer",
+  "subject": "receipt-invoice-matching",
+  "title": "Month-end receipts: what a matching review flags",
+  "description": "A walk through a sample receipt and invoice matching review for bookkeeping at an invented design studio: matched pairs, and every exception explained for the bookkeeper.\n\nReceipt and Invoice Match Review: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#bookkeeping #receipts\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/receipt-invoice-matching?src=youtube&utm_campaign=receipt-matching-sample-walkthrough",
+  "tags": [
+    "bookkeeping",
+    "receipts",
+    "month end",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#bookkeeping",
+    "#receipts"
+  ],
+  "link": "https://hq.amberoneai.com/offers/receipt-invoice-matching?src=youtube&utm_campaign=receipt-matching-sample-walkthrough",
+  "page_url": "https://hq.amberoneai.com/offers/receipt-invoice-matching",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 186,
+  "narration": [
+    "Month-end close stalls on missing receipts and amounts that don't match.",
+    "In this sample, nineteen card and bank transactions were checked against nineteen receipts and invoices. Fourteen matched.",
+    "The rest are exceptions, each explained. Here, a payment is $14.04 more than its receipt, which may be a tip, so the bookkeeper decides.",
+    "Nothing is categorized or changed in your books, and rows that can't be read are listed, never guessed.",
+    "The full sample is at the link below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 32.34,
+    "bytes": 2908351,
+    "lufs": -14.64,
+    "true_peak_db": -4.41,
+    "wer": 0.025,
+    "cer": 0.023,
+    "page_status": 200,
+    "caption_cues": 7,
+    "thumbnail_bytes": 94868,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T13:56:00.943898+00:00"
+  },
+  "files": {
+    "receipt-matching-sample-walkthrough.mp4": {
+      "sha256": "fd285de0fa8da756c67e7223f6d86a5a38797fb199a21564e1dd1ea4d972c675",
+      "bytes": 2908351
+    },
+    "receipt-matching-sample-walkthrough-thumbnail.jpg": {
+      "sha256": "bbbb8bcf3515f1dc332d0257a0e34a29f7047af014f30efd260fcd73ffaaf20b",
+      "bytes": 94868
+    },
+    "receipt-matching-sample-walkthrough.en.srt": {
+      "sha256": "bf653b59daff520c6ab3346b64737b57e2d9e279a32da6deb07499a2fb568072",
+      "bytes": 705
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

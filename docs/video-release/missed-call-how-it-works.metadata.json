@@ -1,0 +1,63 @@
+{
+  "id": "missed-call-how-it-works",
+  "business": "offer",
+  "subject": "missed-call-follow-up",
+  "title": "How a missed-call follow-up pilot works, start to finish",
+  "description": "What you send and what you get back in the two-week missed-call pilot: lead follow-up for home services businesses that lose leads to missed calls.\n\nMissed-Call and Web-Inquiry Follow-Up List: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#homeservices #leadfollowup\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/missed-call-follow-up?src=youtube&utm_campaign=missed-call-how-it-works",
+  "tags": [
+    "missed calls",
+    "home services",
+    "lead follow-up",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#homeservices",
+    "#leadfollowup"
+  ],
+  "link": "https://hq.amberoneai.com/offers/missed-call-follow-up?src=youtube&utm_campaign=missed-call-how-it-works",
+  "page_url": "https://hq.amberoneai.com/offers/missed-call-follow-up",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "Here's how the missed-call pilot works, start to finish.",
+    "You send a call log export from your phone provider, your website form submissions, and the replies you already made.",
+    "You get every unanswered lead, most urgent first, repeat callers grouped, and a draft reply for each, for you to send.",
+    "There's no connection to your phone system, and Amber never contacts your customers.",
+    "One location, your last 30 days of calls, then two weekly refreshes. The price and terms are on the page.",
+    "The link is below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 34.05,
+    "bytes": 3119995,
+    "lufs": -14.92,
+    "true_peak_db": -4.47,
+    "wer": 0.011,
+    "cer": 0.005,
+    "page_status": 200,
+    "caption_cues": 7,
+    "thumbnail_bytes": 76272,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T13:19:36.416717+00:00"
+  },
+  "files": {
+    "missed-call-how-it-works.mp4": {
+      "sha256": "49b586d51f9c6e6ad4ef0f8e53b7cecec7c0b8cec5c092d1982499bbe970983c",
+      "bytes": 3119995
+    },
+    "missed-call-how-it-works-thumbnail.jpg": {
+      "sha256": "ff44a804b98f13e691ebe2b630868206c6e3ee4a24c19415662a84b6ac0df6a6",
+      "bytes": 76272
+    },
+    "missed-call-how-it-works.en.srt": {
+      "sha256": "0bf321ae9828f392f7b34d78c8c1ed8ac3abd6260f7a4eb3466e3c62ee8ba765",
+      "bytes": 734
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "missed-call-sample-walkthrough",
+  "business": "offer",
+  "subject": "missed-call-follow-up",
+  "title": "Missed calls that never got a reply: what a follow-up list shows",
+  "description": "A walk through a sample missed-call follow-up list for an invented plumbing company, the kind of report the pilot makes for home services businesses: open leads ranked by urgency, and a draft reply for each.\n\nMissed-Call and Web-Inquiry Follow-Up List: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#plumbing #missedcalls\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/missed-call-follow-up?src=youtube&utm_campaign=missed-call-sample-walkthrough",
+  "tags": [
+    "missed calls",
+    "home services",
+    "plumbing",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#plumbing",
+    "#missedcalls"
+  ],
+  "link": "https://hq.amberoneai.com/offers/missed-call-follow-up?src=youtube&utm_campaign=missed-call-sample-walkthrough",
+  "page_url": "https://hq.amberoneai.com/offers/missed-call-follow-up",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 207,
+  "narration": [
+    "If you run a plumbing or heating business, how many missed calls never got a call back?",
+    "Here's a sample list for an invented plumbing company. Twelve missed calls and four web inquiries became seven open leads, ranked by urgency.",
+    "A message that mentions a gas smell gets no written draft. It goes to the top, for a person to call back now.",
+    "Every other open lead gets a draft reply, written for you to review and send yourself. Amber never calls or texts your customers.",
+    "See the full sample and the pilot terms at the link below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 35.73,
+    "bytes": 3154156,
+    "lufs": -15.22,
+    "true_peak_db": -4.47,
+    "wer": 0.01,
+    "cer": 0.002,
+    "page_status": 200,
+    "caption_cues": 8,
+    "thumbnail_bytes": 118738,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T13:46:38.197887+00:00"
+  },
+  "files": {
+    "missed-call-sample-walkthrough.mp4": {
+      "sha256": "4299fd582018ad2fd58e93f6912f093fc0043c5cb9d0fa91e57e96fc719cdec8",
+      "bytes": 3154156
+    },
+    "missed-call-sample-walkthrough-thumbnail.jpg": {
+      "sha256": "51823508b1a5fa75a555d5836d206e53fb367d2b15829352c1aa6703a4862b3d",
+      "bytes": 118738
+    },
+    "missed-call-sample-walkthrough.en.srt": {
+      "sha256": "5bc5cc33ff86b7f870db8f0bb9bd235ee024541e0733c000ff2effb0d4fcac07",
+      "bytes": 792
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

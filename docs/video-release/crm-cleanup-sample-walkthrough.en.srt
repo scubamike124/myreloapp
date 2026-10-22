@@ -1,0 +1,31 @@
+1
+00:00:00,300 --> 00:00:03,308
+Same customer, three records, three different owners.
+
+2
+00:00:03,558 --> 00:00:04,561
+Sound familiar?
+
+3
+00:00:05,011 --> 00:00:08,723
+In this sample, forty contacts held seven duplicate groups.
+
+4
+00:00:08,973 --> 00:00:11,639
+Each group says how sure the match is, and why.
+
+5
+00:00:12,089 --> 00:00:19,151
+Each group gets a suggested record to keep, and conflicts, like different owners, are flagged for a person to decide.
+
+6
+00:00:19,601 --> 00:00:23,163
+You get a proposed-changes sheet to review and apply yourself.
+
+7
+00:00:23,413 --> 00:00:25,973
+Nothing is merged or deleted by Amber.
+
+8
+00:00:26,423 --> 00:00:28,685
+See the full review sheet at the link below.

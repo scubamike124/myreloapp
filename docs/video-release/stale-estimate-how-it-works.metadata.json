@@ -1,0 +1,63 @@
+{
+  "id": "stale-estimate-how-it-works",
+  "business": "offer",
+  "subject": "stale-estimate-follow-up",
+  "title": "Four weekly lists of quiet estimates: how the pilot works",
+  "description": "What you send and what you get back: the four-week stale-estimate pilot, sales follow-up for contractors.\n\nStale Estimate Follow-Up List: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#contractors #salesfollowup\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/stale-estimate-follow-up?src=youtube&utm_campaign=stale-estimate-how-it-works",
+  "tags": [
+    "estimates",
+    "contractors",
+    "sales follow-up",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#contractors",
+    "#salesfollowup"
+  ],
+  "link": "https://hq.amberoneai.com/offers/stale-estimate-follow-up?src=youtube&utm_campaign=stale-estimate-how-it-works",
+  "page_url": "https://hq.amberoneai.com/offers/stale-estimate-follow-up",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "How the stale-estimate pilot works.",
+    "Each week you send an export of your open estimates, plus anyone who asked not to be contacted.",
+    "You get every estimate quiet for seven days or more, grouped by age with the dollars waiting, a next step, and a draft follow-up.",
+    "Drafts never change your price or offer a discount, and you send them yourself.",
+    "Up to 200 open estimates, four weekly lists. The price and terms are on the page.",
+    "The link is below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 31.21,
+    "bytes": 2760565,
+    "lufs": -14.55,
+    "true_peak_db": -4.46,
+    "wer": 0.0,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 7,
+    "thumbnail_bytes": 68398,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T15:26:50.201439+00:00"
+  },
+  "files": {
+    "stale-estimate-how-it-works.mp4": {
+      "sha256": "8706ef7696d204ca195f23211062fca324fcdb831a19710d41f49f8382b36825",
+      "bytes": 2760565
+    },
+    "stale-estimate-how-it-works-thumbnail.jpg": {
+      "sha256": "035fe7a99cea1d6b111f136a1e747261e1b55eebae1b886256a145aa4321edd1",
+      "bytes": 68398
+    },
+    "stale-estimate-how-it-works.en.srt": {
+      "sha256": "5ae308eee01a0883873b45bff011aef630aa91ab4504e4cee4409b5b20f993b7",
+      "bytes": 673
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

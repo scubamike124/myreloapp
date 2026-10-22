@@ -1,0 +1,63 @@
+{
+  "id": "job-cost-how-it-works",
+  "business": "offer",
+  "subject": "job-cost-exceptions",
+  "title": "Budget vs actual for 10 jobs: how the job-cost pilot works",
+  "description": "What you send and what you get back: the job costing exception report pilot for contractors and small construction firms.\n\nJob-Cost Exception Report: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#jobcosting #contractors\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/job-cost-exceptions?src=youtube&utm_campaign=job-cost-how-it-works",
+  "tags": [
+    "construction",
+    "job costing",
+    "budget",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#jobcosting",
+    "#contractors"
+  ],
+  "link": "https://hq.amberoneai.com/offers/job-cost-exceptions?src=youtube&utm_campaign=job-cost-how-it-works",
+  "page_url": "https://hq.amberoneai.com/offers/job-cost-exceptions",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "How the job-cost exception pilot works, for builders with a handful of active jobs.",
+    "You send job budgets by cost code, the month's cost transactions, and percent complete from your project manager.",
+    "You get budget against actual for each job and cost code, and a short list of exceptions, each with the transactions behind it.",
+    "No login to your accounting software, and nothing is posted or changed.",
+    "Up to 10 active jobs, one month of costs, then one refresh. The price and terms are on the page.",
+    "The link is below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 36.2,
+    "bytes": 2926571,
+    "lufs": -14.85,
+    "true_peak_db": -4.46,
+    "wer": 0.0,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 7,
+    "thumbnail_bytes": 65116,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T13:06:05.916400+00:00"
+  },
+  "files": {
+    "job-cost-how-it-works.mp4": {
+      "sha256": "e578c218cb1805d7b8e9fba35d55bb63afedac7d214f5b718ef1d6760f81bb59",
+      "bytes": 2926571
+    },
+    "job-cost-how-it-works-thumbnail.jpg": {
+      "sha256": "6677f881ade3a52065846441b8948ee08b05643d4f07f7b5586926e90960b7c1",
+      "bytes": 65116
+    },
+    "job-cost-how-it-works.en.srt": {
+      "sha256": "1f1fb430601928c722236689d2eabf9f745200e5e4626817e454bcbfc2586588",
+      "bytes": 744
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

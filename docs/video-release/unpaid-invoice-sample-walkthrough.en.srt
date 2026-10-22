@@ -1,0 +1,27 @@
+1
+00:00:00,300 --> 00:00:03,884
+Which unpaid invoices actually need a reminder this week?
+
+2
+00:00:04,334 --> 00:00:10,947
+This sample starts with an aging report: what's current, and what's thirty, sixty or ninety days past due.
+
+3
+00:00:11,397 --> 00:00:13,659
+Then the reminders due this week, and why.
+
+4
+00:00:13,909 --> 00:00:19,605
+One invoice, a hundred and seventeen days overdue, gets a firmer tone, with an offer to talk.
+
+5
+00:00:20,055 --> 00:00:24,983
+Each reminder is a draft with the exact invoice number and balance, for you to send.
+
+6
+00:00:25,233 --> 00:00:27,750
+No late fees and no legal language.
+
+7
+00:00:28,200 --> 00:00:30,205
+See the full sample at the link below.

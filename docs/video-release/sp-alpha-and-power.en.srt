@@ -1,0 +1,19 @@
+1
+00:00:00,300 --> 00:00:03,756
+Alpha and power sound alike, but they answer different questions.
+
+2
+00:00:04,206 --> 00:00:08,793
+Alpha is the cutoff you choose before looking at the data, commonly 0.05.
+
+3
+00:00:09,243 --> 00:00:13,424
+Power is the chance of correctly rejecting a false null hypothesis.
+
+4
+00:00:13,874 --> 00:00:17,181
+Each card and question shows the line of the notes behind it.
+
+5
+00:00:17,431 --> 00:00:19,735
+Check it against your own notes with StudyProofs.

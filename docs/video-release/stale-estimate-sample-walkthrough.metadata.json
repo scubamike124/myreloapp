@@ -1,0 +1,62 @@
+{
+  "id": "stale-estimate-sample-walkthrough",
+  "business": "offer",
+  "subject": "stale-estimate-follow-up",
+  "title": "Seven estimates gone quiet: what a follow-up list shows (sample)",
+  "description": "A walk through a sample stale-estimate list for an invented remodeling company, the report the pilot makes for contractors: quiet estimates grouped by days without contact, with a suggested next step for each.\n\nStale Estimate Follow-Up List: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#remodeling #estimates\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/stale-estimate-follow-up?src=youtube&utm_campaign=stale-estimate-sample-walkthrough",
+  "tags": [
+    "estimates",
+    "contractors",
+    "remodeling",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#remodeling",
+    "#estimates"
+  ],
+  "link": "https://hq.amberoneai.com/offers/stale-estimate-follow-up?src=youtube&utm_campaign=stale-estimate-sample-walkthrough",
+  "page_url": "https://hq.amberoneai.com/offers/stale-estimate-follow-up",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 178,
+  "narration": [
+    "Estimates go out, the crew gets busy, and nobody follows up.",
+    "In this sample, for an invented remodeling company, seven estimates had gone quiet, worth over $92,000.",
+    "Each one gets a suggested next step. An estimate sent seventy seven days ago is flagged to confirm whether to re-quote, with no draft.",
+    "The others get a follow-up draft naming the job and estimate number, for you to send. Drafts never change your price.",
+    "The full sample report is at the link below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 33.28,
+    "bytes": 3348931,
+    "lufs": -15.39,
+    "true_peak_db": -4.48,
+    "wer": 0.023,
+    "cer": 0.021,
+    "page_status": 200,
+    "caption_cues": 7,
+    "thumbnail_bytes": 119328,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T15:34:26.449564+00:00"
+  },
+  "files": {
+    "stale-estimate-sample-walkthrough.mp4": {
+      "sha256": "f99dc875bd5586dd0f7c9e82c41108fc46223184e2f39acc73f7a04b77f14bb7",
+      "bytes": 3348931
+    },
+    "stale-estimate-sample-walkthrough-thumbnail.jpg": {
+      "sha256": "4162b83baa0b318d9bd178d2fa6f27c45e7be9b238e61bd799868f2c448c9329",
+      "bytes": 119328
+    },
+    "stale-estimate-sample-walkthrough.en.srt": {
+      "sha256": "1cf87994ac13cb15b4b4fd0b96a8b576a8bc7ad486d90618e5b1071df7609bbd",
+      "bytes": 693
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

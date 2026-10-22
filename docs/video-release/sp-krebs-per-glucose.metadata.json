@@ -1,0 +1,65 @@
+{
+  "id": "sp-krebs-per-glucose",
+  "business": "studyproofs",
+  "subject": "cell-respiration",
+  "title": "Krebs cycle: what you get per glucose (2 turns)",
+  "description": "What the Krebs cycle produces per glucose, from sample BIO 101 notes, with a quiz question StudyProofs made from them.\n\nThe cards and questions come from sample BIO 101 biology notes we wrote, as StudyProofs made them. Made by StudyProofs. AI can make mistakes, so check the cards against your notes. Narrated with a synthetic voice.\n\n#krebscycle #biology #flashcards\n\nSee the full example and try it free: https://hq.amberoneai.com/studyproofs/examples/cell-respiration?src=youtube&campaign=sp-krebs-per-glucose",
+  "tags": [
+    "biology",
+    "krebs cycle",
+    "mitochondria",
+    "citrate",
+    "StudyProofs",
+    "flashcards",
+    "study tips",
+    "BIO 101"
+  ],
+  "hashtags": [
+    "#krebscycle",
+    "#biology",
+    "#flashcards"
+  ],
+  "link": "https://hq.amberoneai.com/studyproofs/examples/cell-respiration?src=youtube&campaign=sp-krebs-per-glucose",
+  "page_url": "https://hq.amberoneai.com/studyproofs/examples/cell-respiration",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "The Krebs cycle, per glucose. Remember, that's two turns of the cycle.",
+    "It runs in the mitochondrial matrix. Acetyl-CoA joins oxaloacetate to make citrate.",
+    "Quick quiz. What comes out per glucose? The answer: 2 ATP, 6 NADH, 2 FADH2 and 4 CO2.",
+    "StudyProofs made that question from notes, and the answer cites the line behind it. Upload your own notes and quiz yourself."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 28.67,
+    "bytes": 2548304,
+    "lufs": -15.31,
+    "true_peak_db": -4.44,
+    "wer": 0.139,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 9,
+    "thumbnail_bytes": 48200,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T14:17:31.133836+00:00"
+  },
+  "files": {
+    "sp-krebs-per-glucose.mp4": {
+      "sha256": "34c9f6a95d4609007e1a0d7355152d6ad2c1944d5fa741b0bb4a46fbfbedfcb6",
+      "bytes": 2548304
+    },
+    "sp-krebs-per-glucose-thumbnail.jpg": {
+      "sha256": "c29b7fdafab136456a51bac9737ac14e70125bbd30d0c1a08ab5f2fe575225c3",
+      "bytes": 48200
+    },
+    "sp-krebs-per-glucose.en.srt": {
+      "sha256": "6595f561f16d03f560fb5bad066e8b598075e25d891e2d899368e89807983653",
+      "bytes": 662
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

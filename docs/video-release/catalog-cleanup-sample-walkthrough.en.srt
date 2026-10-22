@@ -1,0 +1,31 @@
+1
+00:00:00,300 --> 00:00:02,625
+Selling on your own store and a marketplace?
+
+2
+00:00:02,875 --> 00:00:04,390
+Your listings drift apart.
+
+3
+00:00:04,840 --> 00:00:07,592
+In this sample, two stores' exports were compared.
+
+4
+00:00:07,842 --> 00:00:11,981
+Five differences turned up between them, like a price that doesn't match.
+
+5
+00:00:12,431 --> 00:00:18,468
+It also catches messy SKUs, missing fields, and barcodes that fail the check-digit test.
+
+6
+00:00:18,918 --> 00:00:21,713
+Every fix is a proposal you apply yourself.
+
+7
+00:00:21,963 --> 00:00:25,803
+Nothing is changed in your stores, and there are no pricing decisions.
+
+8
+00:00:26,253 --> 00:00:28,343
+The full sample is at the link below.

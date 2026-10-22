@@ -1,0 +1,23 @@
+1
+00:00:00,300 --> 00:00:04,631
+There's a step between glycolysis and the Krebs cycle that's easy to skip.
+
+2
+00:00:05,081 --> 00:00:07,790
+Pyruvate enters the mitochondrial matrix.
+
+3
+00:00:08,040 --> 00:00:10,451
+Each pyruvate becomes acetyl-CoA.
+
+4
+00:00:10,901 --> 00:00:16,106
+And per pyruvate, it releases 1 CO2 and makes 1 NADH.
+
+5
+00:00:16,556 --> 00:00:19,457
+That card came from notes and shows the exact line.
+
+6
+00:00:19,707 --> 00:00:21,286
+Make your own with StudyProofs.

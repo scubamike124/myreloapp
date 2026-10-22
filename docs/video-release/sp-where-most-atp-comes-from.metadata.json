@@ -1,0 +1,64 @@
+{
+  "id": "sp-where-most-atp-comes-from",
+  "business": "studyproofs",
+  "subject": "cell-respiration",
+  "title": "Where does most ATP come from? (common exam trap)",
+  "description": "Where most ATP is made in cellular respiration, from sample BIO 101 notes, including the exam traps section.\n\nThe cards and questions come from sample BIO 101 biology notes we wrote, as StudyProofs made them. Made by StudyProofs. AI can make mistakes, so check the cards against your notes. Narrated with a synthetic voice.\n\n#cellularrespiration #biology #atp\n\nSee the full example and try it free: https://hq.amberoneai.com/studyproofs/examples/cell-respiration?src=youtube&campaign=sp-where-most-atp-comes-from",
+  "tags": [
+    "biology",
+    "electron transport chain",
+    "ATP",
+    "StudyProofs",
+    "flashcards",
+    "study tips",
+    "BIO 101"
+  ],
+  "hashtags": [
+    "#cellularrespiration",
+    "#biology",
+    "#atp"
+  ],
+  "link": "https://hq.amberoneai.com/studyproofs/examples/cell-respiration?src=youtube&campaign=sp-where-most-atp-comes-from",
+  "page_url": "https://hq.amberoneai.com/studyproofs/examples/cell-respiration",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "Where does most ATP come from? Not glycolysis, and not the Krebs cycle.",
+    "It's the electron transport chain, on the inner mitochondrial membrane. H+ flows back through ATP synthase, which makes most of the ATP.",
+    "And the final electron acceptor at the end of that chain is oxygen.",
+    "These came from notes, each linked to its source line. Paste in your own lecture notes and check every card against them."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 28.2,
+    "bytes": 2653899,
+    "lufs": -14.69,
+    "true_peak_db": -4.48,
+    "wer": 0.042,
+    "cer": 0.015,
+    "page_status": 200,
+    "caption_cues": 7,
+    "thumbnail_bytes": 56092,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T15:16:04.461764+00:00"
+  },
+  "files": {
+    "sp-where-most-atp-comes-from.mp4": {
+      "sha256": "8c076ce00e0f9125e2b39e090de29c00993c24994d72a17e49cbbbc9f1638760",
+      "bytes": 2653899
+    },
+    "sp-where-most-atp-comes-from-thumbnail.jpg": {
+      "sha256": "e0173501a67b0ba98a854c1b5acd9226d9d551c25b67e0328b1600cb30914e73",
+      "bytes": 56092
+    },
+    "sp-where-most-atp-comes-from.en.srt": {
+      "sha256": "35d1c835350884dbb3190d6dab0dc0681dac930767df240e255e154316cfceb4",
+      "bytes": 629
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

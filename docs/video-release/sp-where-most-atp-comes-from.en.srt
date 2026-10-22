@@ -1,0 +1,27 @@
+1
+00:00:00,300 --> 00:00:02,113
+Where does most ATP come from?
+
+2
+00:00:02,363 --> 00:00:04,966
+Not glycolysis, and not the Krebs cycle.
+
+3
+00:00:05,416 --> 00:00:09,512
+It's the electron transport chain, on the inner mitochondrial membrane.
+
+4
+00:00:09,762 --> 00:00:15,074
+H+ flows back through ATP synthase, which makes most of the ATP.
+
+5
+00:00:15,524 --> 00:00:19,449
+And the final electron acceptor at the end of that chain is oxygen.
+
+6
+00:00:19,899 --> 00:00:22,651
+These came from notes, each linked to its source line.
+
+7
+00:00:22,901 --> 00:00:26,379
+Paste in your own lecture notes and check every card against them.

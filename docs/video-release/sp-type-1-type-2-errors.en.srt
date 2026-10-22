@@ -1,0 +1,31 @@
+1
+00:00:00,300 --> 00:00:02,177
+Type I versus Type II error.
+
+2
+00:00:02,427 --> 00:00:04,027
+Here's how to keep them apart.
+
+3
+00:00:04,477 --> 00:00:09,085
+A Type I error is rejecting H0 when it's actually true.
+
+4
+00:00:09,335 --> 00:00:12,279
+Its probability is alpha, the cutoff you chose.
+
+5
+00:00:12,729 --> 00:00:15,908
+A Type II error is failing to reject an H0 that's false.
+
+6
+00:00:16,158 --> 00:00:21,321
+Its probability is beta, and power, 1 − beta, is the chance of catching it.
+
+7
+00:00:21,771 --> 00:00:24,480
+Every card shows the line of the notes it came from.
+
+8
+00:00:24,730 --> 00:00:27,823
+Turn your own notes into cards like these with StudyProofs.

@@ -1,0 +1,62 @@
+{
+  "id": "job-cost-sample-walkthrough",
+  "business": "offer",
+  "subject": "job-cost-exceptions",
+  "title": "Which job costs need a second look? A sample exception report",
+  "description": "A walk through a sample job costing exception report for an invented construction company, made for contractors with several active jobs: budget against actual for each job, and the costs worth a second look.\n\nJob-Cost Exception Report: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#construction #jobcosting\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/job-cost-exceptions?src=youtube&utm_campaign=job-cost-sample-walkthrough",
+  "tags": [
+    "construction",
+    "job costing",
+    "contractors",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#construction",
+    "#jobcosting"
+  ],
+  "link": "https://hq.amberoneai.com/offers/job-cost-exceptions?src=youtube&utm_campaign=job-cost-sample-walkthrough",
+  "page_url": "https://hq.amberoneai.com/offers/job-cost-exceptions",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 200,
+  "narration": [
+    "Overruns and miscoded costs often show up only when a job is closed.",
+    "This sample, for an invented builder, puts each job's budget, spending and percent complete side by side.",
+    "Then it lists exceptions for review: a cost code over budget, a possible duplicate bill, a cost on a closed job. Each one names the transactions behind it.",
+    "It's read only. Nothing in your books is changed, and it's not accounting advice. It flags questions for you or your bookkeeper.",
+    "See the whole sample report at the link below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 35.88,
+    "bytes": 3095408,
+    "lufs": -15.28,
+    "true_peak_db": -4.48,
+    "wer": 0.022,
+    "cer": 0.01,
+    "page_status": 200,
+    "caption_cues": 8,
+    "thumbnail_bytes": 89312,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T13:40:58.520451+00:00"
+  },
+  "files": {
+    "job-cost-sample-walkthrough.mp4": {
+      "sha256": "0385f734e1b4f3af4f2d3ab35ce76415e8c83b2bf8300c9b5069bde6cdb3d81c",
+      "bytes": 3095408
+    },
+    "job-cost-sample-walkthrough-thumbnail.jpg": {
+      "sha256": "9a8410501a199083d134ccf9901c3cddafc58eaf3375ca0b3b0e392b874644c1",
+      "bytes": 89312
+    },
+    "job-cost-sample-walkthrough.en.srt": {
+      "sha256": "5587459231653bce9d18e8164c5816de96fb8c4412fcc264f3b9ef81ee74718d",
+      "bytes": 770
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

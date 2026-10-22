@@ -1,0 +1,65 @@
+{
+  "id": "sp-respiration-equation",
+  "business": "studyproofs",
+  "subject": "cell-respiration",
+  "title": "The cellular respiration equation, read in 30 seconds",
+  "description": "The overall equation for cellular respiration and the ATP it yields, from sample BIO 101 notes, with the flashcards StudyProofs made from them.\n\nThe cards and questions come from sample BIO 101 biology notes we wrote, as StudyProofs made them. Made by StudyProofs. AI can make mistakes, so check the cards against your notes. Narrated with a synthetic voice.\n\n#cellularrespiration #biology #glucose\n\nSee the full example and try it free: https://hq.amberoneai.com/studyproofs/examples/cell-respiration?src=youtube&campaign=sp-respiration-equation",
+  "tags": [
+    "biology",
+    "respiration equation",
+    "glucose",
+    "StudyProofs",
+    "flashcards",
+    "study tips",
+    "BIO 101"
+  ],
+  "hashtags": [
+    "#cellularrespiration",
+    "#biology",
+    "#glucose"
+  ],
+  "link": "https://hq.amberoneai.com/studyproofs/examples/cell-respiration?src=youtube&campaign=sp-respiration-equation",
+  "page_url": "https://hq.amberoneai.com/studyproofs/examples/cell-respiration",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "One equation sums up cellular respiration. Here's how to read it.",
+    "Glucose plus 6 O2 gives 6 CO2, 6 H2O, and energy.",
+    "Cells use it to make ATP. Eukaryotes get roughly 30 to 32 ATP per glucose.",
+    "And all 6 CO2 molecules are released along the way, per glucose.",
+    "Each card links to the line of the notes it came from. Make cards like these from your own notes."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 28.8,
+    "bytes": 2707730,
+    "lufs": -14.57,
+    "true_peak_db": -4.45,
+    "wer": 0.0,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 8,
+    "thumbnail_bytes": 49162,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T14:47:44.601005+00:00"
+  },
+  "files": {
+    "sp-respiration-equation.mp4": {
+      "sha256": "333c4317208c47bef507633e8fa480b462eb1257d2e8ef24ccd2c75a6c57a076",
+      "bytes": 2707730
+    },
+    "sp-respiration-equation-thumbnail.jpg": {
+      "sha256": "39c254be9e43c2fd6a1228f177349d30d33261552e540e9a2bfc95f7b8897534",
+      "bytes": 49162
+    },
+    "sp-respiration-equation.en.srt": {
+      "sha256": "cc12b0fb27cde9a1f6301b8b7862a5f62e08c4a0f22b319b8ae20bbe9972f64b",
+      "bytes": 617
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

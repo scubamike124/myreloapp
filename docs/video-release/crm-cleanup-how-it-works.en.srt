@@ -1,0 +1,31 @@
+1
+00:00:00,300 --> 00:00:02,497
+How the CRM cleanup pilot works.
+
+2
+00:00:02,947 --> 00:00:04,441
+You send a contacts export.
+
+3
+00:00:04,691 --> 00:00:09,491
+Before you do, we agree in writing how the data is handled and when it's deleted.
+
+4
+00:00:09,941 --> 00:00:16,597
+You get duplicate groups with a suggested record to keep, data-quality issues, and a proposed-changes sheet.
+
+5
+00:00:17,047 --> 00:00:21,591
+No CRM login, no emailing your contacts, and no list buying.
+
+6
+00:00:22,041 --> 00:00:25,411
+One export of up to 5,000 records, one report.
+
+7
+00:00:25,661 --> 00:00:27,517
+The price and terms are on the page.
+
+8
+00:00:27,967 --> 00:00:29,119
+The link is below.

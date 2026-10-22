@@ -1,0 +1,62 @@
+{
+  "id": "catalog-cleanup-sample-walkthrough",
+  "business": "offer",
+  "subject": "catalog-cleanup",
+  "title": "Same product, two prices: a sample two-store catalog check",
+  "description": "A walk through a sample two-store ecommerce catalog cleanup for an invented linen shop: issues by product, price and stock differences between stores, and proposed fixes.\n\nProduct Catalog Cleanup and Cross-Store Check: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#ecommerce #productcatalog\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/catalog-cleanup?src=youtube&utm_campaign=catalog-cleanup-sample-walkthrough",
+  "tags": [
+    "ecommerce",
+    "product catalog",
+    "online store",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#ecommerce",
+    "#productcatalog"
+  ],
+  "link": "https://hq.amberoneai.com/offers/catalog-cleanup?src=youtube&utm_campaign=catalog-cleanup-sample-walkthrough",
+  "page_url": "https://hq.amberoneai.com/offers/catalog-cleanup",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 186,
+  "narration": [
+    "Selling on your own store and a marketplace? Your listings drift apart.",
+    "In this sample, two stores' exports were compared. Five differences turned up between them, like a price that doesn't match.",
+    "It also catches messy SKUs, missing fields, and barcodes that fail the check-digit test.",
+    "Every fix is a proposal you apply yourself. Nothing is changed in your stores, and there are no pricing decisions.",
+    "The full sample is at the link below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 30.19,
+    "bytes": 2637065,
+    "lufs": -15.25,
+    "true_peak_db": -4.47,
+    "wer": 0.0,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 8,
+    "thumbnail_bytes": 80730,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T13:35:36.321883+00:00"
+  },
+  "files": {
+    "catalog-cleanup-sample-walkthrough.mp4": {
+      "sha256": "3854ada4409b884b2ae7bd26e3cf274961dc12baa9a1a7c78b2832a84f4934d5",
+      "bytes": 2637065
+    },
+    "catalog-cleanup-sample-walkthrough-thumbnail.jpg": {
+      "sha256": "f0fc2614ea974b87ab298b9c3223942349ea9267e3327712e06edcd8868fa7e2",
+      "bytes": 80730
+    },
+    "catalog-cleanup-sample-walkthrough.en.srt": {
+      "sha256": "1a9b74349125f32fa936920d67103841843e926dedabce954a485170422094eb",
+      "bytes": 702
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

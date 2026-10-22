@@ -1,0 +1,64 @@
+{
+  "id": "catalog-cleanup-how-it-works",
+  "business": "offer",
+  "subject": "catalog-cleanup",
+  "title": "Two stores, one catalog check: how the pilot works",
+  "description": "What you send and what you get back: the two-store catalog cleanup pilot for e-commerce sellers.\n\nProduct Catalog Cleanup and Cross-Store Check: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#ecommerce #marketplace\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/catalog-cleanup?src=youtube&utm_campaign=catalog-cleanup-how-it-works",
+  "tags": [
+    "ecommerce",
+    "marketplace",
+    "barcodes",
+    "SKUs",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#ecommerce",
+    "#marketplace"
+  ],
+  "link": "https://hq.amberoneai.com/offers/catalog-cleanup?src=youtube&utm_campaign=catalog-cleanup-how-it-works",
+  "page_url": "https://hq.amberoneai.com/offers/catalog-cleanup",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "How the two-store catalog cleanup pilot works.",
+    "You send a product export from each store. Your online store is the source of truth.",
+    "You get missing fields, failed barcodes, duplicate SKUs, price and stock differences, and a proposed-changes sheet.",
+    "No store login is needed, and nothing in your stores is changed.",
+    "Up to 1,000 SKUs across two stores, one report. The price and terms are on the page.",
+    "The link is below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 30.04,
+    "bytes": 2740961,
+    "lufs": -14.91,
+    "true_peak_db": -4.45,
+    "wer": 0.04,
+    "cer": 0.009,
+    "page_status": 200,
+    "caption_cues": 8,
+    "thumbnail_bytes": 80601,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T13:03:19.401251+00:00"
+  },
+  "files": {
+    "catalog-cleanup-how-it-works.mp4": {
+      "sha256": "75d8be4ddc3df5d7a62f901b3e32b93c40aa8d7d431fbfefe86ec17a421d5b6b",
+      "bytes": 2740961
+    },
+    "catalog-cleanup-how-it-works-thumbnail.jpg": {
+      "sha256": "b8194dea604595c260b75beef838d8a145d56a06340495ad128f4c9c2e73f26b",
+      "bytes": 80601
+    },
+    "catalog-cleanup-how-it-works.en.srt": {
+      "sha256": "92b46ccef3b728b7f66fa28e278cb58fe60a8a6b6e85df112a50e9b9c1f3dfc6",
+      "bytes": 680
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

@@ -1,0 +1,64 @@
+{
+  "id": "crm-cleanup-how-it-works",
+  "business": "offer",
+  "subject": "crm-cleanup",
+  "title": "A CRM duplicate review: how the pilot works",
+  "description": "What you send and what you get back: the CRM cleanup review sheet pilot for small sales teams.\n\nCRM Duplicate and Data-Quality Check: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#crm #dataquality\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/crm-cleanup?src=youtube&utm_campaign=crm-cleanup-how-it-works",
+  "tags": [
+    "CRM",
+    "CRM cleanup",
+    "data quality",
+    "duplicate groups",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#crm",
+    "#dataquality"
+  ],
+  "link": "https://hq.amberoneai.com/offers/crm-cleanup?src=youtube&utm_campaign=crm-cleanup-how-it-works",
+  "page_url": "https://hq.amberoneai.com/offers/crm-cleanup",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "How the CRM cleanup pilot works.",
+    "You send a contacts export. Before you do, we agree in writing how the data is handled and when it's deleted.",
+    "You get duplicate groups with a suggested record to keep, data-quality issues, and a proposed-changes sheet.",
+    "No CRM login, no emailing your contacts, and no list buying.",
+    "One export of up to 5,000 records, one report. The price and terms are on the page.",
+    "The link is below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 30.93,
+    "bytes": 2803043,
+    "lufs": -14.56,
+    "true_peak_db": -4.45,
+    "wer": 0.0,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 8,
+    "thumbnail_bytes": 81487,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T13:04:28.935997+00:00"
+  },
+  "files": {
+    "crm-cleanup-how-it-works.mp4": {
+      "sha256": "e7dd9c03e171149581dd2b42b70ae2e167617cbd3cb13051305cb9b37c5becbf",
+      "bytes": 2803043
+    },
+    "crm-cleanup-how-it-works-thumbnail.jpg": {
+      "sha256": "ee2d23165b3e8488c9568a49f715f8af8d11feb99a0294500e6120db4424ee70",
+      "bytes": 81487
+    },
+    "crm-cleanup-how-it-works.en.srt": {
+      "sha256": "56d529f5fcdc21d42ba446317d0a0c8d0798bd8e03dd282137f89157327adf23",
+      "bytes": 679
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

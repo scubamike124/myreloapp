@@ -1,0 +1,62 @@
+{
+  "id": "crm-cleanup-sample-walkthrough",
+  "business": "offer",
+  "subject": "crm-cleanup",
+  "title": "Three records for one customer: a sample CRM duplicate review",
+  "description": "A walk through a sample CRM data cleanup review sheet for an invented cleaning company, for small sales teams: duplicate groups with a suggested record to keep, and data-quality issues.\n\nCRM Duplicate and Data-Quality Check: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#crm #datacleanup\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/crm-cleanup?src=youtube&utm_campaign=crm-cleanup-sample-walkthrough",
+  "tags": [
+    "CRM",
+    "sales",
+    "data cleanup",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#crm",
+    "#datacleanup"
+  ],
+  "link": "https://hq.amberoneai.com/offers/crm-cleanup?src=youtube&utm_campaign=crm-cleanup-sample-walkthrough",
+  "page_url": "https://hq.amberoneai.com/offers/crm-cleanup",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 191,
+  "narration": [
+    "Same customer, three records, three different owners. Sound familiar?",
+    "In this sample, forty contacts held seven duplicate groups. Each group says how sure the match is, and why.",
+    "Each group gets a suggested record to keep, and conflicts, like different owners, are flagged for a person to decide.",
+    "You get a proposed-changes sheet to review and apply yourself. Nothing is merged or deleted by Amber.",
+    "See the full review sheet at the link below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 30.51,
+    "bytes": 2727815,
+    "lufs": -15.07,
+    "true_peak_db": -4.41,
+    "wer": 0.0,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 8,
+    "thumbnail_bytes": 84836,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T13:37:32.775025+00:00"
+  },
+  "files": {
+    "crm-cleanup-sample-walkthrough.mp4": {
+      "sha256": "5cc510eafb88315052a268c10fc1095ea8b0305903392d7771de92529f87bc3e",
+      "bytes": 2727815
+    },
+    "crm-cleanup-sample-walkthrough-thumbnail.jpg": {
+      "sha256": "5d85f4b58278fdf2f527c4b8a7cd3f71035c9cdd3f177e6d67de8ae0db9491b2",
+      "bytes": 84836
+    },
+    "crm-cleanup-sample-walkthrough.en.srt": {
+      "sha256": "2d3b2f97679e4838b5af281b3928aa029704349b53564a71e274b21e53067ebf",
+      "bytes": 706
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

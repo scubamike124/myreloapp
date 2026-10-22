@@ -1,0 +1,27 @@
+1
+00:00:00,300 --> 00:00:02,327
+How the unpaid-invoice pilot works.
+
+2
+00:00:02,777 --> 00:00:08,750
+Each week you send your open invoices export, your payment terms, and any disputed invoices.
+
+3
+00:00:09,200 --> 00:00:17,456
+You get an aging report, the invoices that need a reminder this week and why, and a draft for each, friendly first, firmer later.
+
+4
+00:00:17,906 --> 00:00:23,239
+Amber doesn't contact your customers, and there are no late fees or collections language.
+
+5
+00:00:23,689 --> 00:00:27,273
+Up to 200 open invoices, four weekly reports.
+
+6
+00:00:27,523 --> 00:00:29,379
+The price and terms are on the page.
+
+7
+00:00:29,829 --> 00:00:30,981
+The link is below.

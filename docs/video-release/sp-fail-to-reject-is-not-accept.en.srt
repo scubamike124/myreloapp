@@ -1,0 +1,27 @@
+1
+00:00:00,300 --> 00:00:03,927
+"Fail to reject" does not mean H0 is true.
+
+2
+00:00:04,377 --> 00:00:06,873
+It means you didn't find enough evidence against it.
+
+3
+00:00:07,123 --> 00:00:07,955
+That's all.
+
+4
+00:00:08,405 --> 00:00:12,650
+And one mistake to avoid: choosing alpha after you've seen the p-value.
+
+5
+00:00:12,900 --> 00:00:15,161
+You pick the cutoff before you look at the data.
+
+6
+00:00:15,611 --> 00:00:19,665
+StudyProofs made these cards from notes and shows where each one came from.
+
+7
+00:00:19,915 --> 00:00:21,216
+Try it free on your own.

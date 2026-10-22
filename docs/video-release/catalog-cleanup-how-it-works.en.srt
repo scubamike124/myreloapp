@@ -1,0 +1,31 @@
+1
+00:00:00,300 --> 00:00:02,881
+How the two-store catalog cleanup pilot works.
+
+2
+00:00:03,331 --> 00:00:05,529
+You send a product export from each store.
+
+3
+00:00:05,779 --> 00:00:07,997
+Your online store is the source of truth.
+
+4
+00:00:08,447 --> 00:00:16,042
+You get missing fields, failed barcodes, duplicate SKUs, price and stock differences, and a proposed-changes sheet.
+
+5
+00:00:16,492 --> 00:00:20,247
+No store login is needed, and nothing in your stores is changed.
+
+6
+00:00:20,697 --> 00:00:24,494
+Up to 1,000 SKUs across two stores, one report.
+
+7
+00:00:24,744 --> 00:00:26,600
+The price and terms are on the page.
+
+8
+00:00:27,050 --> 00:00:28,202
+The link is below.

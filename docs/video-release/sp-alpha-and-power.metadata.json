@@ -1,0 +1,64 @@
+{
+  "id": "sp-alpha-and-power",
+  "business": "studyproofs",
+  "subject": "hypothesis-testing",
+  "title": "Alpha and power: what each one controls",
+  "description": "The significance level and statistical power of a test, from sample STAT 200 notes, with the flashcards and a quiz question StudyProofs made from them.\n\nThe cards and questions come from sample STAT 200 statistics notes we wrote, as StudyProofs made them. Made by StudyProofs. AI can make mistakes, so check the cards against your notes. Narrated with a synthetic voice.\n\n#statisticalpower #statistics #flashcards\n\nSee the full example and try it free: https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing?src=youtube&campaign=sp-alpha-and-power",
+  "tags": [
+    "statistics",
+    "significance level",
+    "statistical power",
+    "StudyProofs",
+    "flashcards",
+    "study tips",
+    "STAT 200"
+  ],
+  "hashtags": [
+    "#statisticalpower",
+    "#statistics",
+    "#flashcards"
+  ],
+  "link": "https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing?src=youtube&campaign=sp-alpha-and-power",
+  "page_url": "https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "Alpha and power sound alike, but they answer different questions.",
+    "Alpha is the cutoff you choose before looking at the data, commonly 0.05.",
+    "Power is the chance of correctly rejecting a false null hypothesis.",
+    "Each card and question shows the line of the notes behind it. Check it against your own notes with StudyProofs."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 21.57,
+    "bytes": 2115975,
+    "lufs": -14.86,
+    "true_peak_db": -4.46,
+    "wer": 0.054,
+    "cer": 0.007,
+    "page_status": 200,
+    "caption_cues": 5,
+    "thumbnail_bytes": 50734,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T14:02:42.320212+00:00"
+  },
+  "files": {
+    "sp-alpha-and-power.mp4": {
+      "sha256": "ca303e437291197cf315cd40e667e35588d6daa3bd1e6e7d20078b162abce716",
+      "bytes": 2115975
+    },
+    "sp-alpha-and-power-thumbnail.jpg": {
+      "sha256": "2d38fdd170d4d67128cef9284d40ec18edbfdf813f3dade0af3111e3260a74b2",
+      "bytes": 50734
+    },
+    "sp-alpha-and-power.en.srt": {
+      "sha256": "76de7ad4e079edb64c86d6260c8a96713345deab11a1f44c6b1b217449cd6ee5",
+      "bytes": 484
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

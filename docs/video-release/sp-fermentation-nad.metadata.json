@@ -1,0 +1,65 @@
+{
+  "id": "sp-fermentation-nad",
+  "business": "studyproofs",
+  "subject": "cell-respiration",
+  "title": "Why fermentation exists: it keeps glycolysis going",
+  "description": "What fermentation does and where lactic acid and alcohol fermentation happen, from sample BIO 101 notes and the quiz StudyProofs made from them.\n\nThe cards and questions come from sample BIO 101 biology notes we wrote, as StudyProofs made them. Made by StudyProofs. AI can make mistakes, so check the cards against your notes. Narrated with a synthetic voice.\n\n#fermentation #biology #lacticacid\n\nSee the full example and try it free: https://hq.amberoneai.com/studyproofs/examples/cell-respiration?src=youtube&campaign=sp-fermentation-nad",
+  "tags": [
+    "biology",
+    "fermentation",
+    "lactic acid",
+    "StudyProofs",
+    "flashcards",
+    "study tips",
+    "BIO 101"
+  ],
+  "hashtags": [
+    "#fermentation",
+    "#biology",
+    "#lacticacid"
+  ],
+  "link": "https://hq.amberoneai.com/studyproofs/examples/cell-respiration?src=youtube&campaign=sp-fermentation-nad",
+  "page_url": "https://hq.amberoneai.com/studyproofs/examples/cell-respiration",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "Why do cells bother with fermentation?",
+    "It regenerates NAD+, so glycolysis can keep going.",
+    "Muscle cells turn pyruvate into lactate. Yeast turns it into ethanol and CO2. Either way, only the 2 ATP from glycolysis.",
+    "So which kind happens in muscle cells? Lactic acid fermentation.",
+    "Every card and question cites the notes it came from. Try StudyProofs on your own."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 28.37,
+    "bytes": 2715911,
+    "lufs": -14.81,
+    "true_peak_db": -4.49,
+    "wer": 0.109,
+    "cer": 0.02,
+    "page_status": 200,
+    "caption_cues": 9,
+    "thumbnail_bytes": 50064,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T14:13:06.188945+00:00"
+  },
+  "files": {
+    "sp-fermentation-nad.mp4": {
+      "sha256": "eb39f201e3fd1811e18d59eef2af8f571052b45bfd38914e667f883da0324718",
+      "bytes": 2715911
+    },
+    "sp-fermentation-nad-thumbnail.jpg": {
+      "sha256": "f256145acecc5974b8ec56ccafc2e1936dfb6f10bf87b29b6998044b4ac99bf6",
+      "bytes": 50064
+    },
+    "sp-fermentation-nad.en.srt": {
+      "sha256": "594b19cbd58186086e09ff2af6fd260462fbb60e77acec3ebc3f886a83bfca73",
+      "bytes": 656
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

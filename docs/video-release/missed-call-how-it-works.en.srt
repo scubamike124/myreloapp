@@ -1,0 +1,27 @@
+1
+00:00:00,300 --> 00:00:03,223
+Here's how the missed-call pilot works, start to finish.
+
+2
+00:00:03,673 --> 00:00:10,606
+You send a call log export from your phone provider, your website form submissions, and the replies you already made.
+
+3
+00:00:11,056 --> 00:00:18,395
+You get every unanswered lead, most urgent first, repeat callers grouped, and a draft reply for each, for you to send.
+
+4
+00:00:18,845 --> 00:00:23,389
+There's no connection to your phone system, and Amber never contacts your customers.
+
+5
+00:00:23,839 --> 00:00:28,511
+One location, your last 30 days of calls, then two weekly refreshes.
+
+6
+00:00:28,761 --> 00:00:30,617
+The price and terms are on the page.
+
+7
+00:00:31,067 --> 00:00:32,219
+The link is below.

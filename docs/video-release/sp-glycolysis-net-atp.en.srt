@@ -1,0 +1,27 @@
+1
+00:00:00,300 --> 00:00:02,305
+Glycolysis, in thirty seconds.
+
+2
+00:00:02,755 --> 00:00:06,297
+It happens in the cytoplasm, and it does not need oxygen.
+
+3
+00:00:06,547 --> 00:00:11,645
+One glucose, with six carbons, is split into two pyruvate, with three carbons each.
+
+4
+00:00:12,095 --> 00:00:14,122
+Here's the part exams like to test.
+
+5
+00:00:14,372 --> 00:00:20,815
+It spends two ATP early on and makes four, so the net gain is two ATP, plus two NADH.
+
+6
+00:00:21,265 --> 00:00:26,171
+That card and that question came from notes, and each one shows the line it came from.
+
+7
+00:00:26,421 --> 00:00:29,813
+Paste your own notes into StudyProofs and get the same, free.

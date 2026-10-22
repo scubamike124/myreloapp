@@ -1,0 +1,35 @@
+1
+00:00:00,300 --> 00:00:02,369
+What does a p-value actually tell you?
+
+2
+00:00:02,819 --> 00:00:08,771
+It's the probability of getting a result at least as extreme as yours, if the null hypothesis is true.
+
+3
+00:00:09,021 --> 00:00:10,685
+Not the chance the null is true.
+
+4
+00:00:11,135 --> 00:00:12,501
+Then the rule is simple.
+
+5
+00:00:12,751 --> 00:00:15,865
+If p ≤ alpha, reject H0.
+
+6
+00:00:16,115 --> 00:00:18,718
+If p > alpha, fail to reject it.
+
+7
+00:00:19,168 --> 00:00:24,501
+Both cards were made from notes, and each one points to the line it came from, so you can check it.
+
+8
+00:00:24,751 --> 00:00:26,159
+Try it on your own notes.
+
+9
+00:00:26,409 --> 00:00:27,625
+The link is below.

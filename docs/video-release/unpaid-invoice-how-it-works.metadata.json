@@ -1,0 +1,63 @@
+{
+  "id": "unpaid-invoice-how-it-works",
+  "business": "offer",
+  "subject": "unpaid-invoice-tracking",
+  "title": "A weekly aging report with reminder drafts: how it works",
+  "description": "What you send and what you get back in the four-week unpaid-invoice tracking pilot, for small service businesses that watch their cash flow.\n\nUnpaid Invoice Tracker with Draft Reminders: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#cashflow #invoices\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/unpaid-invoice-tracking?src=youtube&utm_campaign=unpaid-invoice-how-it-works",
+  "tags": [
+    "invoices",
+    "cash flow",
+    "aging report",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#cashflow",
+    "#invoices"
+  ],
+  "link": "https://hq.amberoneai.com/offers/unpaid-invoice-tracking?src=youtube&utm_campaign=unpaid-invoice-how-it-works",
+  "page_url": "https://hq.amberoneai.com/offers/unpaid-invoice-tracking",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "How the unpaid-invoice pilot works.",
+    "Each week you send your open invoices export, your payment terms, and any disputed invoices.",
+    "You get an aging report, the invoices that need a reminder this week and why, and a draft for each, friendly first, firmer later.",
+    "Amber doesn't contact your customers, and there are no late fees or collections language.",
+    "Up to 200 open invoices, four weekly reports. The price and terms are on the page.",
+    "The link is below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 32.81,
+    "bytes": 3108881,
+    "lufs": -14.95,
+    "true_peak_db": -4.46,
+    "wer": 0.0,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 7,
+    "thumbnail_bytes": 76354,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T15:35:34.573737+00:00"
+  },
+  "files": {
+    "unpaid-invoice-how-it-works.mp4": {
+      "sha256": "061ec403fa77432d0005a3dfcdd4967c6e5c17144c0aa55a486e75a615ad46c6",
+      "bytes": 3108881
+    },
+    "unpaid-invoice-how-it-works-thumbnail.jpg": {
+      "sha256": "8e6bf6d0970db4d21a8a8558a742e877d67cf54823f7b44ce2ab25b90cc32d8f",
+      "bytes": 76354
+    },
+    "unpaid-invoice-how-it-works.en.srt": {
+      "sha256": "cf93f70bfdbbf4e0e3c4ef8f748be5eceddd35b4fb0e180241c437c4469a78b7",
+      "bytes": 681
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

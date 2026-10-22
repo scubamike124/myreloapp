@@ -1,0 +1,62 @@
+{
+  "id": "unpaid-invoice-sample-walkthrough",
+  "business": "offer",
+  "subject": "unpaid-invoice-tracking",
+  "title": "Unpaid invoices: who to remind this week, and why",
+  "description": "A walk through a sample unpaid-invoice report for an invented design firm, for anyone chasing accounts receivable: an aging report, the invoices due a reminder this week, and draft payment reminders.\n\nUnpaid Invoice Tracker with Draft Reminders: a pilot offer from Amber One. The sample uses an invented business and invented data. A person reviews every report before it goes to you. Narrated with a synthetic voice.\n\n#invoices #smallbusiness\n\nSee the sample report and the pilot terms: https://hq.amberoneai.com/offers/unpaid-invoice-tracking?src=youtube&utm_campaign=unpaid-invoice-sample-walkthrough",
+  "tags": [
+    "invoices",
+    "accounts receivable",
+    "payment reminders",
+    "small business",
+    "Amber One"
+  ],
+  "hashtags": [
+    "#invoices",
+    "#smallbusiness"
+  ],
+  "link": "https://hq.amberoneai.com/offers/unpaid-invoice-tracking?src=youtube&utm_campaign=unpaid-invoice-sample-walkthrough",
+  "page_url": "https://hq.amberoneai.com/offers/unpaid-invoice-tracking",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 171,
+  "narration": [
+    "Which unpaid invoices actually need a reminder this week?",
+    "This sample starts with an aging report: what's current, and what's thirty, sixty or ninety days past due.",
+    "Then the reminders due this week, and why. One invoice, a hundred and seventeen days overdue, gets a firmer tone, with an offer to talk.",
+    "Each reminder is a draft with the exact invoice number and balance, for you to send. No late fees and no legal language.",
+    "See the full sample at the link below."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 32.04,
+    "bytes": 3034653,
+    "lufs": -15.02,
+    "true_peak_db": -4.45,
+    "wer": 0.036,
+    "cer": 0.022,
+    "page_status": 200,
+    "caption_cues": 7,
+    "thumbnail_bytes": 86940,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T15:36:25.693962+00:00"
+  },
+  "files": {
+    "unpaid-invoice-sample-walkthrough.mp4": {
+      "sha256": "5d8e79c2bda69cc4dbc6716bea1bb08a220febca3e70346f2452b38ec8a49b1e",
+      "bytes": 3034653
+    },
+    "unpaid-invoice-sample-walkthrough-thumbnail.jpg": {
+      "sha256": "f6496a9bd704d455df6d6edf09e0e0728b076ffb2547ed2294603d6c49680c18",
+      "bytes": 86940
+    },
+    "unpaid-invoice-sample-walkthrough.en.srt": {
+      "sha256": "1b79c34d22377d58466163111277a5ec4a2687c888dc6486082c5deba0087f4c",
+      "bytes": 692
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

@@ -1,0 +1,64 @@
+{
+  "id": "sp-null-hypothesis-basics",
+  "business": "studyproofs",
+  "subject": "hypothesis-testing",
+  "title": "Null vs alternative hypothesis, in plain words",
+  "description": "The null and alternative hypotheses, explained from sample STAT 200 notes, with a quiz question StudyProofs made from them.\n\nThe cards and questions come from sample STAT 200 statistics notes we wrote, as StudyProofs made them. Made by StudyProofs. AI can make mistakes, so check the cards against your notes. Narrated with a synthetic voice.\n\n#nullhypothesis #statistics #studytips\n\nSee the full example and try it free: https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing?src=youtube&campaign=sp-null-hypothesis-basics",
+  "tags": [
+    "statistics",
+    "null hypothesis",
+    "alternative hypothesis",
+    "StudyProofs",
+    "flashcards",
+    "study tips",
+    "STAT 200"
+  ],
+  "hashtags": [
+    "#nullhypothesis",
+    "#statistics",
+    "#studytips"
+  ],
+  "link": "https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing?src=youtube&campaign=sp-null-hypothesis-basics",
+  "page_url": "https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "Every hypothesis test starts with two claims.",
+    "The null hypothesis says nothing is happening. The alternative says there is a change or an effect.",
+    "Quick check. What is the null hypothesis? The claim that nothing is happening, for example, the mean score is 70.",
+    "StudyProofs wrote that question from notes and shows the line behind the answer. Quiz yourself on your own notes."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 25.71,
+    "bytes": 2538200,
+    "lufs": -14.63,
+    "true_peak_db": -4.46,
+    "wer": 0.032,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 8,
+    "thumbnail_bytes": 52499,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T14:20:25.602346+00:00"
+  },
+  "files": {
+    "sp-null-hypothesis-basics.mp4": {
+      "sha256": "33c6c216f58c4826a5b575aa857583c015a44a8675f00766e3fe42c71b246f3d",
+      "bytes": 2538200
+    },
+    "sp-null-hypothesis-basics-thumbnail.jpg": {
+      "sha256": "61a5958cf0c75afb290ef61259db356db12e42bd4fffa4eeaa0d20b72d7f4307",
+      "bytes": 52499
+    },
+    "sp-null-hypothesis-basics.en.srt": {
+      "sha256": "7b41b39151a08425d3a72c843ec13b71326357f5c937c2c8a72969c68abc1707",
+      "bytes": 637
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

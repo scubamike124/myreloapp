@@ -1,0 +1,35 @@
+1
+00:00:00,300 --> 00:00:02,433
+Why do cells bother with fermentation?
+
+2
+00:00:02,883 --> 00:00:06,681
+It regenerates NAD+, so glycolysis can keep going.
+
+3
+00:00:07,131 --> 00:00:09,669
+Muscle cells turn pyruvate into lactate.
+
+4
+00:00:09,919 --> 00:00:13,098
+Yeast turns it into ethanol and CO2.
+
+5
+00:00:13,348 --> 00:00:16,697
+Either way, only the 2 ATP from glycolysis.
+
+6
+00:00:17,147 --> 00:00:19,366
+So which kind happens in muscle cells?
+
+7
+00:00:19,616 --> 00:00:21,280
+Lactic acid fermentation.
+
+8
+00:00:21,730 --> 00:00:24,738
+Every card and question cites the notes it came from.
+
+9
+00:00:24,988 --> 00:00:26,545
+Try StudyProofs on your own.

@@ -1,0 +1,35 @@
+1
+00:00:00,300 --> 00:00:02,071
+The Krebs cycle, per glucose.
+
+2
+00:00:02,321 --> 00:00:04,497
+Remember, that's two turns of the cycle.
+
+3
+00:00:04,947 --> 00:00:07,144
+It runs in the mitochondrial matrix.
+
+4
+00:00:07,394 --> 00:00:10,679
+Acetyl-CoA joins oxaloacetate to make citrate.
+
+5
+00:00:11,129 --> 00:00:12,025
+Quick quiz.
+
+6
+00:00:12,275 --> 00:00:13,747
+What comes out per glucose?
+
+7
+00:00:13,997 --> 00:00:19,459
+The answer: 2 ATP, 6 NADH, 2 FADH2 and 4 CO2.
+
+8
+00:00:19,909 --> 00:00:24,495
+StudyProofs made that question from notes, and the answer cites the line behind it.
+
+9
+00:00:24,745 --> 00:00:26,857
+Upload your own notes and quiz yourself.

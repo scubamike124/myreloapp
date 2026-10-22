@@ -1,0 +1,64 @@
+{
+  "id": "sp-glycolysis-net-atp",
+  "business": "studyproofs",
+  "subject": "cell-respiration",
+  "title": "Glycolysis in 30 seconds: why the net gain is 2 ATP",
+  "description": "Glycolysis explained from sample BIO 101 notes: where it happens, why it needs no oxygen, and the net ATP gain exam questions ask about.\n\nThe cards and questions come from sample BIO 101 biology notes we wrote, as StudyProofs made them. Made by StudyProofs. AI can make mistakes, so check the cards against your notes. Narrated with a synthetic voice.\n\n#glycolysis #biology #studytips\n\nSee the full example and try it free: https://hq.amberoneai.com/studyproofs/examples/cell-respiration?src=youtube&campaign=sp-glycolysis-net-atp",
+  "tags": [
+    "biology",
+    "cellular respiration",
+    "glycolysis",
+    "StudyProofs",
+    "flashcards",
+    "study tips",
+    "BIO 101"
+  ],
+  "hashtags": [
+    "#glycolysis",
+    "#biology",
+    "#studytips"
+  ],
+  "link": "https://hq.amberoneai.com/studyproofs/examples/cell-respiration?src=youtube&campaign=sp-glycolysis-net-atp",
+  "page_url": "https://hq.amberoneai.com/studyproofs/examples/cell-respiration",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "Glycolysis, in thirty seconds.",
+    "It happens in the cytoplasm, and it does not need oxygen. One glucose, with six carbons, is split into two pyruvate, with three carbons each.",
+    "Here's the part exams like to test. It spends two ATP early on and makes four, so the net gain is two ATP, plus two NADH.",
+    "That card and that question came from notes, and each one shows the line it came from. Paste your own notes into StudyProofs and get the same, free."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 31.64,
+    "bytes": 2608596,
+    "lufs": -15.09,
+    "true_peak_db": -4.48,
+    "wer": 0.035,
+    "cer": 0.006,
+    "page_status": 200,
+    "caption_cues": 7,
+    "thumbnail_bytes": 50488,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T14:15:08.202949+00:00"
+  },
+  "files": {
+    "sp-glycolysis-net-atp.mp4": {
+      "sha256": "d1b6266b35a531da20633d47d34ed8704e41249969d6baa4112c44674b1e295c",
+      "bytes": 2608596
+    },
+    "sp-glycolysis-net-atp-thumbnail.jpg": {
+      "sha256": "85145f53deb04194d991e2adabeed3c2ddee5cb4a0cea1e04fa2d773a1855825",
+      "bytes": 50488
+    },
+    "sp-glycolysis-net-atp.en.srt": {
+      "sha256": "54da36ec94f1bf5d29594f1b9d51cd0cecb8bcdd2db3dcfcd3e307e878f23001",
+      "bytes": 674
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

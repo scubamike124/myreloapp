@@ -1,0 +1,31 @@
+1
+00:00:00,300 --> 00:00:02,945
+Every hypothesis test starts with two claims.
+
+2
+00:00:03,395 --> 00:00:06,041
+The null hypothesis says nothing is happening.
+
+3
+00:00:06,291 --> 00:00:09,213
+The alternative says there is a change or an effect.
+
+4
+00:00:09,663 --> 00:00:10,538
+Quick check.
+
+5
+00:00:10,788 --> 00:00:12,473
+What is the null hypothesis?
+
+6
+00:00:12,723 --> 00:00:17,011
+The claim that nothing is happening, for example, the mean score is 70.
+
+7
+00:00:17,461 --> 00:00:22,048
+StudyProofs wrote that question from notes and shows the line behind the answer.
+
+8
+00:00:22,298 --> 00:00:23,898
+Quiz yourself on your own notes.

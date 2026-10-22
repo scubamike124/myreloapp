@@ -1,0 +1,64 @@
+{
+  "id": "sp-type-1-type-2-errors",
+  "business": "studyproofs",
+  "subject": "hypothesis-testing",
+  "title": "Type I vs Type II error, without the confusion",
+  "description": "Type I and Type II errors and power, explained from sample STAT 200 notes, with the flashcards StudyProofs made from them.\n\nThe cards and questions come from sample STAT 200 statistics notes we wrote, as StudyProofs made them. Made by StudyProofs. AI can make mistakes, so check the cards against your notes. Narrated with a synthetic voice.\n\n#statistics #hypothesistesting #flashcards\n\nSee the full example and try it free: https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing?src=youtube&campaign=sp-type-1-type-2-errors",
+  "tags": [
+    "statistics",
+    "type I error",
+    "type II error",
+    "StudyProofs",
+    "flashcards",
+    "study tips",
+    "STAT 200"
+  ],
+  "hashtags": [
+    "#statistics",
+    "#hypothesistesting",
+    "#flashcards"
+  ],
+  "link": "https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing?src=youtube&campaign=sp-type-1-type-2-errors",
+  "page_url": "https://hq.amberoneai.com/studyproofs/examples/hypothesis-testing",
+  "category_id": "22",
+  "made_for_kids": false,
+  "language": "en",
+  "synthetic_voice": true,
+  "thumbnail_frame": 40,
+  "narration": [
+    "Type I versus Type II error. Here's how to keep them apart.",
+    "A Type I error is rejecting H0 when it's actually true. Its probability is alpha, the cutoff you chose.",
+    "A Type II error is failing to reject an H0 that's false. Its probability is beta, and power, 1 − beta, is the chance of catching it.",
+    "Every card shows the line of the notes it came from. Turn your own notes into cards like these with StudyProofs."
+  ],
+  "qa": {
+    "result": "PASS",
+    "duration_s": 29.65,
+    "bytes": 2389433,
+    "lufs": -14.65,
+    "true_peak_db": -4.45,
+    "wer": 0.025,
+    "cer": 0.0,
+    "page_status": 200,
+    "caption_cues": 8,
+    "thumbnail_bytes": 54137,
+    "tool": "video/studyproofs-shorts/narrate/qa.py (unchanged thresholds)",
+    "run_at": "2026-10-22T14:53:38.642331+00:00"
+  },
+  "files": {
+    "sp-type-1-type-2-errors.mp4": {
+      "sha256": "16a1ffd54e32364fbbf1d760126444471820f0c24fb56ee2bf552d0c6c899640",
+      "bytes": 2389433
+    },
+    "sp-type-1-type-2-errors-thumbnail.jpg": {
+      "sha256": "930c89521179c5ad7e4dba8102a85a898dd7c83fec9966e4433e09dbbf2463c8",
+      "bytes": 54137
+    },
+    "sp-type-1-type-2-errors.en.srt": {
+      "sha256": "67a38a102a57085d346cf17b1c65206fafe1b03ec5be9fec6e2d1daa5f18c5ae",
+      "bytes": 675
+    }
+  },
+  "publish_status": "awaiting owner approval",
+  "visibility_on_upload": "private until the owner approves"
+}

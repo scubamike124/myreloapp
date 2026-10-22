@@ -1,0 +1,27 @@
+1
+00:00:00,300 --> 00:00:05,719
+How the job-cost exception pilot works, for builders with a handful of active jobs.
+
+2
+00:00:06,169 --> 00:00:13,251
+You send job budgets by cost code, the month's cost transactions, and percent complete from your project manager.
+
+3
+00:00:13,701 --> 00:00:21,531
+You get budget against actual for each job and cost code, and a short list of exceptions, each with the transactions behind it.
+
+4
+00:00:21,981 --> 00:00:26,226
+No login to your accounting software, and nothing is posted or changed.
+
+5
+00:00:26,676 --> 00:00:30,687
+Up to 10 active jobs, one month of costs, then one refresh.
+
+6
+00:00:30,937 --> 00:00:32,793
+The price and terms are on the page.
+
+7
+00:00:33,243 --> 00:00:34,395
+The link is below.

@@ -1,0 +1,27 @@
+1
+00:00:00,300 --> 00:00:04,119
+Estimates go out, the crew gets busy, and nobody follows up.
+
+2
+00:00:04,569 --> 00:00:12,270
+In this sample, for an invented remodeling company, seven estimates had gone quiet, worth over $92,000.
+
+3
+00:00:12,720 --> 00:00:15,003
+Each one gets a suggested next step.
+
+4
+00:00:15,253 --> 00:00:21,183
+An estimate sent seventy seven days ago is flagged to confirm whether to re-quote, with no draft.
+
+5
+00:00:21,633 --> 00:00:26,604
+The others get a follow-up draft naming the job and estimate number, for you to send.
+
+6
+00:00:26,854 --> 00:00:28,454
+Drafts never change your price.
+
+7
+00:00:28,904 --> 00:00:31,443
+The full sample report is at the link below.

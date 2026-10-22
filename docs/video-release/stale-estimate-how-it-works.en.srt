@@ -1,0 +1,27 @@
+1
+00:00:00,300 --> 00:00:02,284
+How the stale-estimate pilot works.
+
+2
+00:00:02,734 --> 00:00:08,963
+Each week you send an export of your open estimates, plus anyone who asked not to be contacted.
+
+3
+00:00:09,413 --> 00:00:17,157
+You get every estimate quiet for seven days or more, grouped by age with the dollars waiting, a next step, and a draft follow-up.
+
+4
+00:00:17,607 --> 00:00:22,087
+Drafts never change your price or offer a discount, and you send them yourself.
+
+5
+00:00:22,537 --> 00:00:25,673
+Up to 200 open estimates, four weekly lists.
+
+6
+00:00:25,923 --> 00:00:27,779
+The price and terms are on the page.
+
+7
+00:00:28,229 --> 00:00:29,381
+The link is below.
