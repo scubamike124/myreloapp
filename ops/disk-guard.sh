@@ -1,66 +1,69 @@
 #!/bin/bash
-# Disk guard: keep free space above the 3 GB floor by removing only things that can be rebuilt or re-fetched.
-# Never touches: the scratchpad (assets, samples, leads, reports), /home/user/ops, backups, a worktree with
-# uncommitted or untracked files, unpushed commits, no upstream, recent activity, or one in PROTECT.
-# Usage: disk-guard.sh [loop]   (loop = check every 10 min for up to ~2 h; the hourly continuation restarts it)
-SOFT_KB=$((3700 * 1024))   # start cleaning below ~3.6 GB, before the 3 GB floor
-LOG=/home/user/ops/disk-guard.log
+# Disk guard, fail-closed. It removes only what it can prove is safe, and logs everything it keeps.
+#
+# Deletes:
+#   1. Package-manager download caches (npm, pip, uv). Re-downloaded from registries on demand. Nothing else.
+#   2. A worktree under /home/user/wt-* ONLY when ALL of these hold (any doubt = keep):
+#      - it is a git worktree, not in PROTECT
+#      - no tracked changes, no untracked files and no ignored files at all (git status --ignored is empty)
+#      - an upstream is set, and after fetch HEAD equals the upstream (nothing unpushed, nothing ahead or behind)
+#      - no stash entries in the repository
+#      - no file anywhere in the worktree (including ignored ones) changed in the last IDLE_MIN minutes
+# Never touches: /tmp (any pattern), build folders, the scratchpad, /home/user/ops, backups, credentials.
+#
+# Usage: disk-guard.sh            one pass, logs decisions
+#        disk-guard.sh loop       one pass every 10 min (takes a lock; a second copy exits)
+SOFT_KB=$((3700 * 1024))   # start cleaning below ~3.6 GB
+LOG=${DISK_GUARD_LOG:-/home/user/ops/disk-guard.log}
 PROTECT="wt-log wt-main wt-amberai"
-IDLE_MIN=1440              # a worktree must be untouched for 24 h
+IDLE_MIN=1440              # 24 h of no change anywhere in the worktree
 
 free_kb() { df -k --output=avail /home/user | tail -1 | tr -d ' '; }
 log() { echo "$(date -u +%FT%TZ) $*" >> "$LOG"; }
 
-sweep_tmp() {
-  # Test suites leak mkdtemp folders (prefix-XXXXXX) into /tmp by the tens of thousands (74k / 8 GB on 10-23).
-  # Every pass: remove those older than 6 h. Never the session scratchpad (/tmp/claude-*), never files or locks.
-  local n
-  n=$(find /tmp -maxdepth 1 -mindepth 1 -type d -mmin +360 -regextype posix-extended \
-        -regex '/tmp/[a-z0-9][a-z0-9-]*-[A-Za-z0-9]{6}' ! -name 'claude-*' -print -exec rm -rf {} + 2>/dev/null | wc -l)
-  [ "$n" -gt 0 ] && log "swept $n stale test temp dirs from /tmp"
+# Returns 0 only with positive proof that the worktree can be deleted. On any other outcome it prints a reason and returns 1.
+worktree_removable() {
+  local w=$1 n up common
+  n=$(basename "$w"); case " $PROTECT " in *" $n "*) echo "protected"; return 1;; esac
+  git -C "$w" rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "not a git worktree"; return 1; }
+  [ -z "$(git -C "$w" status --porcelain --ignored 2>/dev/null)" ] || { echo "has changed, untracked or ignored files"; return 1; }
+  up=$(git -C "$w" rev-parse --abbrev-ref '@{u}' 2>/dev/null) || { echo "no upstream"; return 1; }
+  git -C "$w" fetch -q origin "${up#origin/}" 2>/dev/null || { echo "fetch failed"; return 1; }
+  [ "$(git -C "$w" rev-parse HEAD)" = "$(git -C "$w" rev-parse '@{u}')" ] || { echo "HEAD differs from upstream"; return 1; }
+  common=$(git -C "$w" rev-parse --git-common-dir 2>/dev/null) || { echo "no common git dir"; return 1; }
+  [ -z "$(git --git-dir="$common" stash list 2>/dev/null)" ] || { echo "repository has stash entries"; return 1; }
+  [ -z "$(find "$w" -mmin -"$IDLE_MIN" -print -quit 2>/dev/null)" ] || { echo "changed within $IDLE_MIN minutes"; return 1; }
+  return 0
 }
 
 clean_once() {
-  sweep_tmp
-  local f; f=$(free_kb)
+  local f w reason
+  f=$(free_kb)
   [ "$f" -ge "$SOFT_KB" ] && return 0
   log "free $((f/1024)) MB < $((SOFT_KB/1024)) MB: cleaning"
-  # 1. Download caches (re-fetched on demand).
   for d in /root/.cache/pip /root/.cache/uv /root/.npm/_cacache; do
-    [ -d "$d" ] && { log "rm cache $d ($(du -sh "$d" | cut -f1))"; rm -rf "$d"; }
+    [ -d "$d" ] && [ ! -L "$d" ] && { log "rm package cache $d ($(du -sh "$d" | cut -f1))"; rm -rf -- "$d"; }
   done
-  # 2. Test temp dirs older than an hour.
-  find /tmp -maxdepth 1 \( -name 'mh-last-pass-*' -o -name 'tsx-*' -o -name 'next-*' \) -mmin +60 -exec rm -rf {} + 2>/dev/null
-  # 3. Build caches inside worktrees (.next, node_modules/.cache): rebuilt by the next build.
-  for w in /home/user/wt-*; do
-    for c in "$w/.next" "$w/node_modules/.cache"; do
-      [ -d "$c" ] && [ ! -L "$c" ] && [ -z "$(find "$c" -maxdepth 0 -mmin -60)" ] && { log "rm build cache $c"; rm -rf "$c"; }
-    done
-  done
-  [ "$(free_kb)" -ge "$SOFT_KB" ] && { log "ok after caches: $(( $(free_kb)/1024 )) MB"; return 0; }
-  # 4. Idle worktrees that are fully on GitHub (clean, upstream set, nothing ahead), oldest first.
+  [ "$(free_kb)" -ge "$SOFT_KB" ] && { log "ok after package caches: $(( $(free_kb)/1024 )) MB"; return 0; }
   for w in $(ls -dtr /home/user/wt-* 2>/dev/null); do
     [ "$(free_kb)" -ge "$SOFT_KB" ] && break
-    n=$(basename "$w"); case " $PROTECT " in *" $n "*) continue;; esac
-    [ -n "$(git -C "$w" status --porcelain 2>/dev/null)" ] && continue
-    # Ignored files (.env, local data, generated output) are not shown by status and are deleted with the worktree: keep any worktree that has one,
-    # except rebuildable dependency and build folders.
-    [ -n "$(git -C "$w" status --porcelain --ignored 2>/dev/null | grep '^!!' | grep -vE '!! (node_modules|\.next|\.turbo|dist|\.cache)/?$' | head -1)" ] && { log "keep $w: has ignored files"; continue; }
-    up=$(git -C "$w" rev-parse --abbrev-ref '@{u}' 2>/dev/null) || continue
-    git -C "$w" fetch -q origin "${up#origin/}" 2>/dev/null || continue
-    [ "$(git -C "$w" rev-list --count '@{u}..HEAD')" = 0 ] || continue
-    [ -n "$(find "$w" -maxdepth 2 -mmin -$IDLE_MIN -not -path '*/.git*' 2>/dev/null | head -1)" ] && continue
-    common=$(git -C "$w" rev-parse --git-common-dir) || continue
-    log "remove worktree $w ($(du -sh "$w" | cut -f1), branch ${up}, pushed and idle)"
-    (cd / && git --git-dir="$common" worktree remove "$w") || log "  could not remove $w"
+    if reason=$(worktree_removable "$w"); then
+      common=$(git -C "$w" rev-parse --git-common-dir)
+      log "remove worktree $w (proved clean, pushed, idle)"
+      (cd / && git --git-dir="$common" worktree remove "$w") || log "  git refused to remove $w"
+    else
+      log "keep $w: $reason"
+    fi
   done
   f=$(free_kb); log "after cleaning: $((f/1024)) MB free"
   [ "$f" -lt $((3072 * 1024)) ] && log "ALERT still under 3 GB floor: needs a manual look"
 }
 
-if [ "$1" = loop ]; then
-  exec 9>/tmp/amber-disk-guard.lock; flock -n 9 || { echo "ALREADY RUNNING"; exit 0; }
-  for _ in $(seq 1 11); do clean_once; sleep 600; done
-else
-  clean_once
+if [ "${BASH_SOURCE[0]}" = "$0" ]; then
+  if [ "$1" = loop ]; then
+    exec 9>/tmp/amber-disk-guard.lock; flock -n 9 || { echo "ALREADY RUNNING"; exit 0; }
+    for _ in $(seq 1 11); do clean_once; sleep 600; done
+  else
+    clean_once
+  fi
 fi
