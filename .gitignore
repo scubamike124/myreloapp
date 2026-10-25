@@ -68,3 +68,6 @@ next-env.d.ts
 
 # local SQLite database
 .data/
+
+# agent worktrees (isolated working copies; not repo content)
+.claude/worktrees/
