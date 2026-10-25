@@ -43,6 +43,9 @@ clean_once() {
     [ "$(free_kb)" -ge "$SOFT_KB" ] && break
     n=$(basename "$w"); case " $PROTECT " in *" $n "*) continue;; esac
     [ -n "$(git -C "$w" status --porcelain 2>/dev/null)" ] && continue
+    # Ignored files (.env, local data, generated output) are not shown by status and are deleted with the worktree: keep any worktree that has one,
+    # except rebuildable dependency and build folders.
+    [ -n "$(git -C "$w" status --porcelain --ignored 2>/dev/null | grep '^!!' | grep -vE '!! (node_modules|\.next|\.turbo|dist|\.cache)/?$' | head -1)" ] && { log "keep $w: has ignored files"; continue; }
     up=$(git -C "$w" rev-parse --abbrev-ref '@{u}' 2>/dev/null) || continue
     git -C "$w" fetch -q origin "${up#origin/}" 2>/dev/null || continue
     [ "$(git -C "$w" rev-list --count '@{u}..HEAD')" = 0 ] || continue
