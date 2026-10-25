@@ -1,0 +1,5 @@
+# App Factory dashboard checkpoint
+Works (18 tests pass: src/lib/app-factory/dashboard/__tests__/dashboard.test.ts; npm run test:app-factory-dashboard): state machine, provenance/mock labels, verified-revenue totals, authz 401/403, flag-off 404, CSRF/JSON checks, validation, title escaping, quality report (BLOCKED_FOR_RELEASE, NOT_VERIFIED never PASS, disabled release controls), import guard.
+Screens: screens/fixture-{board,detail}-{430,1280}.png (static SSR render of fixtures; detail includes quality report).
+Unfinished: QA worker's real quality schema not available (own adapter in quality.ts; map theirs when pushed); release-approval button is not wired to POST; real-store apps have no report source; page not run in a full Next server; tsc --noEmit not completed; lock-guard and ci-affected-suites tests fail only because of the sparse checkout (missing amber-builder/scout dirs); rerun in a full checkout. Not registered in CI.
+Resume: git checkout claude/app-factory-dashboard; APP_FACTORY_ENABLED=1 (and APP_FACTORY_FIXTURE_PREVIEW=1 for fixtures).
