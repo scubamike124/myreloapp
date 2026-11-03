@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { amberOrgBridgeConfigured, fetchOrganizationOverview } from "@/lib/amber/organization-bridge";
+import { amberOrgBridgeConfigured, fetchOrganizationOverview, fetchWorkforceDrilldown, fetchChildWorkforceReport } from "@/lib/amber/organization-bridge";
 import AmberOrganizationDashboard from "@/components/admin/AmberOrganizationDashboard";
+import ScoutChildWorkforcePanel from "@/components/admin/ScoutChildWorkforcePanel";
 
 export const metadata: Metadata = { title: "Amber's AI Earnings — Reelo Admin" };
 
@@ -29,6 +30,16 @@ export default async function AmberAiEarningsPage() {
     fetchError = e instanceof Error ? e.message : "unknown error";
   }
 
+  /**
+   * The drilldown and child-workforce sections degrade independently of the
+   * overview above and of each other -- one failing section must show a
+   * labelled gap, never blank the rest of the page.
+   */
+  const [drilldown, childWorkforce] = await Promise.all([
+    fetchWorkforceDrilldown().catch(() => null),
+    fetchChildWorkforceReport().catch(() => null),
+  ]);
+
   if (!overview) {
     return (
       <div className="rounded-2xl border border-white/10 bg-black/40 p-6">
@@ -38,5 +49,10 @@ export default async function AmberAiEarningsPage() {
     );
   }
 
-  return <AmberOrganizationDashboard initial={overview} />;
+  return (
+    <div className="space-y-6">
+      <AmberOrganizationDashboard initial={overview} />
+      <ScoutChildWorkforcePanel drilldown={drilldown} childWorkforce={childWorkforce} />
+    </div>
+  );
 }
