@@ -1,3 +1,4 @@
+// Verification pass on 2026-09-07 ran through the new live-feed workspace UI.
 // ---------------------------------------------------------------------------
 // The public web address the site is served from.
 //
