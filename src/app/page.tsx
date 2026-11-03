@@ -11,6 +11,7 @@ import Reveal from "@/components/Reveal";
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden">
+      {/* Amber Fix check: safe to remove */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-0"
