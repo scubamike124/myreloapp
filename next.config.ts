@@ -56,6 +56,9 @@ const buildSha = resolveBuildSha();
 const nextConfig: NextConfig = {
   ...(useStandalone ? { output: "standalone" as const } : {}),
 
+  // Do not advertise the framework in every response (x-powered-by: Next.js).
+  poweredByHeader: false,
+
   // Bake the commit into the Worker bundle so /api/health can prove which build
   // is live (Cloudflare runtime often omits CI SHA env vars).
   env: {
