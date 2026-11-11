@@ -27,7 +27,7 @@ function Skyline() {
 const STAT_ICONS: IconKey[] = ["film", "eye", "heart", "growth", "dollar"];
 
 const CARDS: { n: number; icon: IconKey; art: string; title: string; desc: string; badge?: string; href: string }[] = [
-  { n: 0, icon: "code", art: "hub-pro", title: "Amber Fix", desc: "Describe a fix or build. Amber codes, tests, and ships on Relo.", badge: "NEW", href: "/amber-builder" },
+  { n: 0, icon: "code", art: "hub-pro", title: "Amber Fix", desc: "Amber inspects the Relo repo, implements the change, tests, and runs the normal workflow.", badge: "NEW", href: "/amber-builder" },
   { n: 1, icon: "dollar", art: "revenue", title: "Amber Earnings", desc: "Owner income command center — platforms, jobs, Needs Mike.", badge: "NEW", href: "/business-center/amber-earnings" },
   { n: 2, icon: "chart", art: "analytics", title: "Amber Operations", desc: "Live production telemetry — is the pipeline working, and how many scouts and workers actually did real work. Admin only.", badge: "LIVE", href: "/admin/amber-operations" },
   { n: 3, icon: "growth", art: "hub-pro", title: "Amber's AI Earnings", desc: "Amber's 20-division AI organization — status, budgets, pause, emergency stop. Admin only.", badge: "NEW", href: "/admin/amber-ai-earnings" },
